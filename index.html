@@ -1729,7 +1729,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   </div>
 
   <div class="ai-quick-prompts">
-    <button class="ai-chip" onclick="sendQuickPrompt('1 similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.')">One more</button>
+    <button class="ai-chip" onclick="sendQuickPrompt('Give One similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.')">One more</button>
     <button class="ai-chip" onclick="sendQuickPrompt('A')">A</button>
     <button class="ai-chip" onclick="sendQuickPrompt('B')">B</button>
     <button class="ai-chip" onclick="sendQuickPrompt('C')">C</button>
@@ -2891,7 +2891,7 @@ let currentAutoScannedQ = -1;
 
 // ===== AI Quiz Card Mode (Additive Feature) =====
 // Only this exact prompt activates Quiz Card Mode. No other prompt should activate it.
-const QUIZ_CARD_TRIGGER_PROMPT = "1 similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
+const QUIZ_CARD_TRIGGER_PROMPT = "Give One similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
 // Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
 // normal AI chat / Gemini logic remains completely unchanged for every other message.
 const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Each string in \"options\" must contain ONLY the answer text — do NOT prefix it with A/B/C/D, a/b/c/d, 1/2/3/4, or labels like \"(a)\"/\"(b)\"; the app adds its own lettering. Keep this block hidden in intent — it is for the app, not for display purposes.]";
