@@ -2940,7 +2940,21 @@ STRICT FORMATTING RULES:
       signal: currentAbortController.signal
     });
 
-    if (!res.ok) throw new Error("Worker Response Error Status: " + res.status);
+    if (!res.ok) {
+      let serverErrorDetail = "";
+      try {
+        const errText = await res.text();
+        try {
+          const errJson = JSON.parse(errText);
+          serverErrorDetail = errJson.error || errJson.message || errText;
+        } catch (parseErr) {
+          serverErrorDetail = errText;
+        }
+      } catch (readErr) {
+        serverErrorDetail = "";
+      }
+      throw new Error(`Server Error (${res.status}): ${serverErrorDetail || res.statusText || "Unknown error"}`);
+    }
 
     const resData = await res.json();
     showAITyping(false);
@@ -2965,7 +2979,8 @@ STRICT FORMATTING RULES:
     showAITyping(false);
     if (err.name === 'AbortError') return;
     console.error(err);
-    appendAIMessage("bot", "⚠️ **Network Error:** Could not connect to the AI ​​server. Please check your internet connection and try again.");
+    const errorDetail = (err && err.message) ? err.message : "Unknown error occurred.";
+    appendAIMessage("bot", "⚠️ **Error:** " + errorDetail);
   } finally {
     isAIGenerating = false;
     currentAbortController = null;
