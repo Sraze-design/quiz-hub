@@ -3160,7 +3160,15 @@ STRICT FORMATTING RULES:
     quizCardPendingRequest = false;
 
     if (!renderedAsQuizCard) {
-      appendAIMessage("bot", replyText, true);
+      // Even outside quiz-card mode, replies can carry a trailing
+      // <<<QUIZDATA>>>...<<<END>>> block (e.g. the next question, appended
+      // after this answer's explanation). Never show that raw block to the
+      // user — only strip it from what's displayed; aiChatHistory above
+      // still keeps the untouched replyText so the model keeps full context.
+      const displayText = replyText
+        .replace(/<<<QUIZDATA>>>[\s\S]*?<<<END>>>/g, "")
+        .trim();
+      appendAIMessage("bot", displayText, true);
     }
 
   } catch (err) {
