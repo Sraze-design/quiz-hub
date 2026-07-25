@@ -3117,11 +3117,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // ===== AI Image Upload Logic =====
 
-const aiCameraInput = document.getElementById(“aiCameraInput”); const
-aiGalleryInput = document.getElementById(“aiGalleryInput”); const
-removeBtn = document.getElementById(“remove-ai-image”); const preview =
-document.getElementById(“ai-image-preview”); const previewImg =
-document.getElementById(“ai-preview-img”);
+const aiCameraInput = document.getElementById("aiCameraInput"); const
+aiGalleryInput = document.getElementById("aiGalleryInput"); const
+removeBtn = document.getElementById("remove-ai-image"); const preview =
+document.getElementById("ai-image-preview"); const previewImg =
+document.getElementById("ai-preview-img");
 
 function fileToBase64(file){ return new Promise((resolve,reject)=>{
 const reader=new FileReader(); reader.onload=()=>resolve(reader.result);
@@ -3131,20 +3131,20 @@ async function handleAIImage(file){ if(!file) return;
 selectedAIImage=file; selectedAIImageMime=file.type;
 
 const dataUrl=await fileToBase64(file);
-selectedAIImageBase64=dataUrl.split(“,”)[1];
+selectedAIImageBase64=dataUrl.split(",")[1];
 
-previewImg.src=dataUrl; preview.style.display=“block”; }
+previewImg.src=dataUrl; preview.style.display="block"; }
 
-if(aiCameraInput){ aiCameraInput.addEventListener(“change”,e=>{
+if(aiCameraInput){ aiCameraInput.addEventListener("change",e=>{
 handleAIImage(e.target.files[0]); }); }
 
-if(aiGalleryInput){ aiGalleryInput.addEventListener(“change”,e=>{
+if(aiGalleryInput){ aiGalleryInput.addEventListener("change",e=>{
 handleAIImage(e.target.files[0]); }); }
 
-if(removeBtn){ removeBtn.addEventListener(“click”,()=>{
-selectedAIImage=null; selectedAIImageBase64=““; selectedAIImageMime=”“;
-preview.style.display=”none”; previewImg.src=““; if(aiCameraInput)
-aiCameraInput.value=”“; if(aiGalleryInput) aiGalleryInput.value=”“; });
+if(removeBtn){ removeBtn.addEventListener("click",()=>{
+selectedAIImage=null; selectedAIImageBase64=""; selectedAIImageMime="";
+preview.style.display="none"; previewImg.src=""; if(aiCameraInput)
+aiCameraInput.value=""; if(aiGalleryInput) aiGalleryInput.value=""; });
 }
 
 // NOTE: // Connect your Camera button with: // aiCameraInput.click();
