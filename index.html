@@ -1302,7 +1302,36 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   background: #94a3b8;
   cursor: not-allowed;
 }
+/* ===== Image Preview ===== */
 
+#ai-image-preview{
+    display:none;
+    position:relative;
+    margin:10px 16px 0;
+    width:110px;
+}
+
+#ai-image-preview img{
+    width:100%;
+    border-radius:14px;
+    display:block;
+    border:1px solid #e2e8f0;
+}
+
+#remove-ai-image{
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    width:24px;
+    height:24px;
+    border:none;
+    border-radius:50%;
+    background:#ef4444;
+    color:#fff;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
 @media (min-width: 768px) {
   #ai-floating-btn {
     right: max(24px, calc((100vw - 980px) / 2 + 24px));
@@ -1636,6 +1665,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
   </div>
+  <div id="ai-image-preview">
+    <button id="remove-ai-image" type="button">✕</button>
+    <img id="ai-preview-img" src="" alt="Preview">
+</div>
 
   <div class="ai-input-area">
     <input type="text" id="aiInput" class="ai-input-field" placeholder="Ask your question here..." onkeydown="if(event.key==='Enter') sendUserMessage()">
@@ -2763,6 +2796,10 @@ function createMiniParticles(x,y){
 <script>
 const GEMINI_WORKER_URL = "https://gemini-proxy.trevoraxgaming9720.workers.dev/";
 
+// ===== AI Image Variables =====
+let selectedAIImage = null;
+let selectedAIImageBase64 = "";
+let selectedAIImageMime = "";
 let aiChatHistory = [];
 let isAIGenerating = false;
 let currentAbortController = null;
@@ -2881,15 +2918,32 @@ Current Question Details:
 function sendUserMessage() {
   const inputEl = document.getElementById('aiInput');
   const text = inputEl.value.trim();
-  if (!text || isAIGenerating) return;
+  if ((!text && !selectedAIImage) || isAIGenerating) return;
 
   inputEl.value = '';
   appendAIMessage("user", text);
 
-  aiChatHistory.push({
+const parts = [];
+
+if (selectedAIImageBase64) {
+    parts.push({
+        inlineData: {
+            mimeType: selectedAIImageMime,
+            data: selectedAIImageBase64
+        }
+    });
+}
+
+if (text) {
+    parts.push({
+        text: text
+    });
+}
+
+aiChatHistory.push({
     role: "user",
-    parts: [{ text: text }]
-  });
+    parts: parts
+});
 
   requestGeminiResponse();
 }
@@ -2960,6 +3014,15 @@ STRICT FORMATTING RULES:
     });
 
     appendAIMessage("bot", replyText, true);
+    selectedAIImage = null;
+selectedAIImageBase64 = "";
+selectedAIImageMime = "";
+
+const preview = document.getElementById("ai-image-preview");
+const previewImg = document.getElementById("ai-preview-img");
+
+if (preview) preview.style.display = "none";
+if (previewImg) previewImg.src = "";
 
   } catch (err) {
     showAITyping(false);
@@ -3052,7 +3115,53 @@ function onQuestionChangeAI() {
 document.addEventListener('DOMContentLoaded', () => {
   updateAIButtonVisibility();
 });
-</script>
+// ===== AI Image Upload Logic =====
 
+const aiCameraInput = document.getElementById(“aiCameraInput”); const
+aiGalleryInput = document.getElementById(“aiGalleryInput”); const
+removeBtn = document.getElementById(“remove-ai-image”); const preview =
+document.getElementById(“ai-image-preview”); const previewImg =
+document.getElementById(“ai-preview-img”);
+
+function fileToBase64(file){ return new Promise((resolve,reject)=>{
+const reader=new FileReader(); reader.onload=()=>resolve(reader.result);
+reader.onerror=reject; reader.readAsDataURL(file); }); }
+
+async function handleAIImage(file){ if(!file) return;
+selectedAIImage=file; selectedAIImageMime=file.type;
+
+const dataUrl=await fileToBase64(file);
+selectedAIImageBase64=dataUrl.split(“,”)[1];
+
+previewImg.src=dataUrl; preview.style.display=“block”; }
+
+if(aiCameraInput){ aiCameraInput.addEventListener(“change”,e=>{
+handleAIImage(e.target.files[0]); }); }
+
+if(aiGalleryInput){ aiGalleryInput.addEventListener(“change”,e=>{
+handleAIImage(e.target.files[0]); }); }
+
+if(removeBtn){ removeBtn.addEventListener(“click”,()=>{
+selectedAIImage=null; selectedAIImageBase64=““; selectedAIImageMime=”“;
+preview.style.display=”none”; previewImg.src=““; if(aiCameraInput)
+aiCameraInput.value=”“; if(aiGalleryInput) aiGalleryInput.value=”“; });
+}
+
+// NOTE: // Connect your Camera button with: // aiCameraInput.click();
+// // Connect your Gallery button with: // aiGalleryInput.click();
+
+</script>
+<input
+    type="file"
+    id="aiCameraInput"
+    accept="image/*"
+    capture="environment"
+    style="display:none">
+
+<input
+    type="file"
+    id="aiGalleryInput"
+    accept="image/*"
+    style="display:none">
 </body>
 </html>
