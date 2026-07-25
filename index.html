@@ -1756,9 +1756,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 <button class="ai-chip" onclick="sendQuickPrompt('इसी स्तर का 1 कठिन प्रश्न बनाओ, बिना समाधान।')">🔥 Hard</button>
 
-<button class="ai-chip" onclick="sendQuickPrompt('केवल 2-3 बिंदुओं में सामान्य गलतियाँ बताओ।')">❌ Mistakes</button>
+<button class="ai-chip" onclick="sendQuickPrompt('इस प्रश्न में विद्यार्थी कौन-कौन सी सामान्य गलतियाँ करते हैं? केवल 2-3 लाइन में संक्षेप में बताओ।')">❌ Mistakes</button>
 
-<button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में बताओ कि बाकी विकल्प गलत क्यों हैं।')">🔍 Options</button>
+<button class="ai-chip" onclick="sendQuickPrompt('केवल 2-3 लाइन में बताओ कि बाकी विकल्प गलत क्यों हैं।')">🔍 Options</button>
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
   </div>
@@ -3115,9 +3115,10 @@ async function requestGeminiResponse() {
           text: `Reply ONLY in plain Unicode text.
 
 Never use LaTeX or Markdown math.
-Never use $, $$, \\(...\\), \\[...\\], \\sqrt, \\text, \\times, \\div.
+Never use $, $$, \\(...\\), \\[...\\], \\sqrt, \\text, \\times, \\div, \\%.
 Use only plain Unicode symbols like × ÷ √ π ≤ ≥ ≠ ± °.
 Write standalone fractions as 3/4 (plain text, never wrap formulas in LaTeX).
+Write percent as a plain % sign only — never \\% and never wrap anything in $ signs. WRONG: "$20\\%=1/5$". RIGHT: "20% = 1/5".
 
 MIXED FRACTION EXCEPTION (the ONLY allowed use of \\frac):
 - A mixed fraction is a whole number combined with a fraction, e.g. "16 and two-thirds" or "16(2/3)".
@@ -3294,6 +3295,14 @@ function formatAIResponseText(txt) {
     /\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
     '<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$1</span><span class="ai-mixed-frac-den">$2</span></span>'
   );
+
+  // Safety net: the model sometimes ignores the "plain text only" instruction
+  // and wraps things in LaTeX-style "$...$" math delimiters, or writes "\%"
+  // instead of a plain percent sign. Clean these up so they never show as
+  // raw symbols even when the model slips up. This runs AFTER the \frac
+  // replacement above so it doesn't interfere with the stacked-fraction spans.
+  formatted = formatted.replace(/\\%/g, "%");
+  formatted = formatted.replace(/\$\$?([^$]*)\$\$?/g, "$1");
 
   formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
