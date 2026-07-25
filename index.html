@@ -1750,15 +1750,15 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
   <div class="ai-quick-prompts">
     <button class="ai-chip" onclick="sendQuickPrompt('Give One more similar question. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option, and place the correct option at a randomly varying position (A, B, C, or D) each time — do not always keep it as option A. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.')">One more</button>
-    <button class="ai-chip" onclick="sendQuickPrompt('केवल Hint दो, उत्तर मत बताओ')">💡 Hint</button>
+    <button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में Hint दो, उत्तर मत बताओ।')">💡 Hint</button>
 
-<button class="ai-chip" onclick="sendQuickPrompt('केवल शॉर्ट ट्रिक बताओ')">⚡ Trick</button>
+<button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में शॉर्ट ट्रिक बताओ।')">⚡ Trick</button>
 
-<button class="ai-chip" onclick="sendQuickPrompt('इससे कठिन एक नया प्रश्न बनाओ')">🔥 Hard</button>
+<button class="ai-chip" onclick="sendQuickPrompt('इसी स्तर का 1 कठिन प्रश्न बनाओ, बिना समाधान।')">🔥 Hard</button>
 
-<button class="ai-chip" onclick="sendQuickPrompt('इसी प्रकार का एक नया प्रश्न बनाओ')">📝 Similar</button>
+<button class="ai-chip" onclick="sendQuickPrompt('केवल 2-3 बिंदुओं में सामान्य गलतियाँ बताओ।')">❌ Mistakes</button>
 
-<button class="ai-chip" onclick="sendQuickPrompt('इस प्रश्न में विद्यार्थी कौन-कौन सी सामान्य गलतियाँ करते हैं?')">❌ Mistakes</button>
+<button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में बताओ कि बाकी विकल्प गलत क्यों हैं।')">🔍 Options</button>
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
   </div>
@@ -3311,6 +3311,12 @@ function formatAIResponseText(txt) {
 // the remaining options are still in "X:Y" ratio form. When that mismatch of
 // formats shows up, the option set is almost certainly broken/incoherent.
 function optionsLookConsistent(options) {
+  // Duplicate options (e.g. two options both ending up as "1" after some
+  // upstream mangling) — a well-formed MCQ never repeats an option verbatim.
+  // Mirrors the same check already done server-side in the worker.
+  const normalized = options.map((o) => o.trim().toLowerCase().replace(/\s+/g, " "));
+  if (new Set(normalized).size !== normalized.length) return false;
+
   const isRatio = (s) => /\d\s*:\s*\d/.test(s);
   const isPlainNumber = (s) => /^\d+(\.\d+)?$/.test(s.trim());
 
