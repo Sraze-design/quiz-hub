@@ -2894,7 +2894,7 @@ let currentAutoScannedQ = -1;
 const QUIZ_CARD_TRIGGER_PROMPT = "1 similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
 // Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
 // normal AI chat / Gemini logic remains completely unchanged for every other message.
-const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Keep this block hidden in intent — it is for the app, not for display purposes.]";
+const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Each string in \"options\" must contain ONLY the answer text — do NOT prefix it with A/B/C/D, a/b/c/d, 1/2/3/4, or labels like \"(a)\"/\"(b)\"; the app adds its own lettering. Keep this block hidden in intent — it is for the app, not for display purposes.]";
 // true only while we're waiting on the Gemini reply to the exact trigger prompt above.
 let quizCardPendingRequest = false;
 
@@ -3276,9 +3276,16 @@ function parseQuizCardData(rawReplyText) {
       parsed.options.every(o => typeof o === "string" && o.trim().length > 0) &&
       Number.isInteger(parsed.correctIndex) && parsed.correctIndex >= 0 && parsed.correctIndex <= 3
     ) {
+      // Some models (esp. lite) copy the original "(a)/(b)/A./1." style labels
+      // into the option text itself. The app already adds its own A/B/C/D
+      // prefix when rendering, so strip any leading label here to avoid
+      // showing it twice (e.g. "A. (a) केवल 1 और 2").
+      const stripLeadingLabel = (s) =>
+        s.replace(/^\s*[\(\[]?\s*[a-dA-D1-4]\s*[\)\].:]\s*/, '').trim();
+
       return {
         question: parsed.question,
-        options: parsed.options,
+        options: parsed.options.map(stripLeadingLabel),
         correctIndex: parsed.correctIndex,
         examTag: typeof parsed.examTag === "string" ? parsed.examTag : ""
       };
