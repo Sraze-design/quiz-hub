@@ -1192,6 +1192,13 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   margin-bottom: 8px;
 }
 
+/* Additive: AI Quiz Card Mode bubble sizing (reuses existing quiz classes inside) */
+.ai-msg.ai-quiz-card-msg {
+  max-width: 100%;
+  width: 100%;
+  padding: 14px;
+}
+
 .ai-msg-actions {
   display: flex;
   gap: 8px;
@@ -2882,6 +2889,15 @@ let isAIGenerating = false;
 let currentAbortController = null;
 let currentAutoScannedQ = -1;
 
+// ===== AI Quiz Card Mode (Additive Feature) =====
+// Only this exact prompt activates Quiz Card Mode. No other prompt should activate it.
+const QUIZ_CARD_TRIGGER_PROMPT = "1 similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
+// Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
+// normal AI chat / Gemini logic remains completely unchanged for every other message.
+const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Keep this block hidden in intent — it is for the app, not for display purposes.]";
+// true only while we're waiting on the Gemini reply to the exact trigger prompt above.
+let quizCardPendingRequest = false;
+
 function updateAIButtonVisibility() {
   const quizEngine = document.getElementById('quizEngineBox');
   const quizBox = document.getElementById('quiz-box');
@@ -3006,6 +3022,12 @@ function sendUserMessage() {
 
   appendAIMessage("user", text, false, imageForDisplay);
 
+// Quiz Card Mode only activates for this exact manually-sent special prompt.
+const isQuizCardTriggerMessage = (text === QUIZ_CARD_TRIGGER_PROMPT);
+if (isQuizCardTriggerMessage) {
+  quizCardPendingRequest = true;
+}
+
 const parts = [];
 
 if (selectedAIImageBase64) {
@@ -3019,7 +3041,9 @@ if (selectedAIImageBase64) {
 
 if (text) {
     parts.push({
-        text: text
+        // The hidden formatting instruction is appended only to the payload sent to Gemini,
+        // never to what's shown in the chat bubble, so normal AI chat stays exactly the same.
+        text: isQuizCardTriggerMessage ? (text + QUIZ_CARD_FORMAT_INSTRUCTION) : text
     });
 }
 
@@ -3109,7 +3133,19 @@ STRICT FORMATTING RULES:
       parts: [{ text: replyText }]
     });
 
-    appendAIMessage("bot", replyText, true);
+    let renderedAsQuizCard = false;
+    if (quizCardPendingRequest) {
+      const quizCardData = parseQuizCardData(replyText);
+      if (quizCardData) {
+        renderQuizCardMessage(quizCardData);
+        renderedAsQuizCard = true;
+      }
+    }
+    quizCardPendingRequest = false;
+
+    if (!renderedAsQuizCard) {
+      appendAIMessage("bot", replyText, true);
+    }
 
   } catch (err) {
     showAITyping(false);
@@ -3125,6 +3161,7 @@ STRICT FORMATTING RULES:
     clearTimeout(timeoutId);
     isAIGenerating = false;
     currentAbortController = null;
+    quizCardPendingRequest = false;
   }
 }
 
@@ -3195,6 +3232,98 @@ function formatAIResponseText(txt) {
   formatted = formatted.replace(/\n/g, '<br>');
 
   return formatted;
+}
+
+// ===== AI Quiz Card Mode helpers (Additive Feature) =====
+
+// Extracts and validates the hidden <<<QUIZDATA>>>...<<<END>>> block from a Gemini reply.
+// Returns null (triggering the normal-chat fallback) if the block is missing or invalid.
+function parseQuizCardData(rawReplyText) {
+  try {
+    if (!rawReplyText) return null;
+    const match = rawReplyText.match(/<<<QUIZDATA>>>([\s\S]*?)<<<END>>>/);
+    if (!match) return null;
+    const parsed = JSON.parse(match[1]);
+    if (
+      parsed &&
+      typeof parsed.question === "string" && parsed.question.trim().length > 0 &&
+      Array.isArray(parsed.options) && parsed.options.length === 4 &&
+      parsed.options.every(o => typeof o === "string" && o.trim().length > 0) &&
+      Number.isInteger(parsed.correctIndex) && parsed.correctIndex >= 0 && parsed.correctIndex <= 3
+    ) {
+      return {
+        question: parsed.question,
+        options: parsed.options,
+        correctIndex: parsed.correctIndex,
+        examTag: typeof parsed.examTag === "string" ? parsed.examTag : ""
+      };
+    }
+    return null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// Renders a real interactive Quiz Card inside the AI chat, reusing the existing quiz
+// question/option/explanation CSS classes instead of a plain chat bubble.
+function renderQuizCardMessage(quizCardData) {
+  const chatBody = document.getElementById('aiChatBody');
+  if (!chatBody) return;
+
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'ai-msg bot ai-quiz-card-msg';
+
+  const questionCard = document.createElement('div');
+  questionCard.className = 'premium-question-card';
+
+  const qText = document.createElement('div');
+  qText.className = 'question-text-style';
+  qText.innerHTML = formatAIResponseText(quizCardData.question);
+  questionCard.appendChild(qText);
+
+  if (quizCardData.examTag) {
+    const tagBox = document.createElement('div');
+    tagBox.className = 'exam-tag-badge';
+    tagBox.style.display = 'inline-block';
+    tagBox.innerHTML = formatAIResponseText(quizCardData.examTag);
+    questionCard.appendChild(tagBox);
+  }
+
+  msgDiv.appendChild(questionCard);
+
+  const optionsBox = document.createElement('div');
+  optionsBox.className = 'options-stack';
+  const letters = ['A', 'B', 'C', 'D'];
+
+  quizCardData.options.forEach((optionText, idx) => {
+    const btn = document.createElement('button');
+    btn.innerHTML = `<strong>${letters[idx]}.</strong> ` + formatAIResponseText(optionText);
+    btn.onclick = () => {
+      if (isAIGenerating) return;
+      const btns = optionsBox.getElementsByTagName('button');
+      for (const b of btns) b.disabled = true;
+
+      if (idx === quizCardData.correctIndex) {
+        btn.style.borderColor = "var(--success)";
+        btn.style.background = "var(--success-light)";
+      } else {
+        btn.style.borderColor = "var(--danger)";
+        btn.style.background = "var(--danger-light)";
+        btns[quizCardData.correctIndex].style.borderColor = "var(--success)";
+        btns[quizCardData.correctIndex].style.background = "var(--success-light)";
+      }
+
+      // Send ONLY the selected option (A/B/C/D) to Gemini, using the existing conversation
+      // history and existing send flow. The reply appears below this same Quiz Card.
+      sendQuickPrompt(letters[idx]);
+    };
+    optionsBox.appendChild(btn);
+  });
+
+  msgDiv.appendChild(optionsBox);
+
+  chatBody.appendChild(msgDiv);
+  chatBody.scrollTop = chatBody.scrollHeight;
 }
 
 function showAITyping(show) {
