@@ -52,6 +52,15 @@ input, textarea {
   -webkit-touch-callout: default;
 }
 
+button, a, [role="button"] {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus, a:focus, [role="button"]:focus,
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+  outline: none;
+}
+
 body {
   background-color: var(--bg-app);
   color: var(--dark);
@@ -532,6 +541,14 @@ body {
   color: var(--dark);
   cursor: pointer;
   transition: var(--transition);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.options-stack button:focus,
+.options-stack button:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 .options-stack button:hover:not(:disabled) {
   border-color: var(--primary);
