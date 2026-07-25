@@ -1184,20 +1184,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   font-family: monospace;
   font-size: 13px;
 }
-.ai-msg-img {
-  display: block;
-  max-width: 100%;
-  width: 160px;
-  border-radius: 12px;
-  margin-bottom: 8px;
-}
-
-/* Additive: AI Quiz Card Mode bubble sizing (reuses existing quiz classes inside) */
-.ai-msg.ai-quiz-card-msg {
-  max-width: 100%;
-  width: 100%;
-  padding: 14px;
-}
 
 .ai-msg-actions {
   display: flex;
@@ -1316,94 +1302,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   background: #94a3b8;
   cursor: not-allowed;
 }
-/* ===== Image Preview ===== */
 
-#ai-image-preview{
-    display:none;
-    position:relative;
-    margin:10px 16px 0;
-    width:110px;
-}
-
-#ai-image-preview img{
-    width:100%;
-    border-radius:14px;
-    display:block;
-    border:1px solid #e2e8f0;
-}
-
-#remove-ai-image{
-    position:absolute;
-    top:-8px;
-    right:-8px;
-    width:24px;
-    height:24px;
-    border:none;
-    border-radius:50%;
-    background:#ef4444;
-    color:#fff;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
-/* ===== Attach (Plus) Button & Menu ===== */
-.ai-attach-wrapper{
-    position:relative;
-    flex:0 0 auto;
-}
-.ai-plus-btn{
-    width:44px;
-    height:44px;
-    border-radius:14px;
-    background:var(--primary-light);
-    color:var(--primary);
-    border:1.5px solid #e2e8f0;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:var(--transition);
-    flex-shrink:0;
-}
-.ai-plus-btn:active{
-    transform:scale(0.92);
-}
-.ai-attach-menu{
-    position:absolute;
-    bottom:calc(100% + 10px);
-    left:0;
-    background:#ffffff;
-    border:1px solid #e2e8f0;
-    border-radius:16px;
-    box-shadow:var(--shadow-lg);
-    padding:8px;
-    display:none;
-    flex-direction:column;
-    gap:4px;
-    min-width:160px;
-    z-index:20;
-}
-.ai-attach-menu.active{
-    display:flex;
-}
-.ai-attach-option{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:none;
-    border:none;
-    padding:10px 12px;
-    border-radius:10px;
-    font-size:14px;
-    font-weight:600;
-    color:var(--dark);
-    cursor:pointer;
-    text-align:left;
-    transition:var(--transition);
-}
-.ai-attach-option:active{
-    background:var(--primary-light);
-}
 @media (min-width: 768px) {
   #ai-floating-btn {
     right: max(24px, calc((100vw - 980px) / 2 + 24px));
@@ -1737,24 +1636,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
   </div>
-  <div id="ai-image-preview">
-    <button id="remove-ai-image" type="button">✕</button>
-    <img id="ai-preview-img" src="" alt="Preview">
-</div>
-
-  <input type="file" id="aiCameraInput" accept="image/*" capture="environment" style="display:none">
-  <input type="file" id="aiGalleryInput" accept="image/*" style="display:none">
 
   <div class="ai-input-area">
-    <div class="ai-attach-wrapper">
-      <button id="aiPlusBtn" class="ai-plus-btn" type="button" onclick="toggleAttachMenu(event)" title="Attach Image">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
-      <div id="aiAttachMenu" class="ai-attach-menu">
-        <button type="button" class="ai-attach-option" onclick="triggerCameraInput(event)"><span>📷</span><span>Camera</span></button>
-        <button type="button" class="ai-attach-option" onclick="triggerGalleryInput(event)"><span>🖼️</span><span>Gallery</span></button>
-      </div>
-    </div>
     <input type="text" id="aiInput" class="ai-input-field" placeholder="Ask your question here..." onkeydown="if(event.key==='Enter') sendUserMessage()">
     <button id="aiSendBtn" class="ai-send-btn" onclick="sendUserMessage()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -2880,23 +2763,10 @@ function createMiniParticles(x,y){
 <script>
 const GEMINI_WORKER_URL = "https://gemini-proxy.trevoraxgaming9720.workers.dev/";
 
-// ===== AI Image Variables =====
-let selectedAIImage = null;
-let selectedAIImageBase64 = "";
-let selectedAIImageMime = "";
 let aiChatHistory = [];
 let isAIGenerating = false;
 let currentAbortController = null;
 let currentAutoScannedQ = -1;
-
-// ===== AI Quiz Card Mode (Additive Feature) =====
-// Only this exact prompt activates Quiz Card Mode. No other prompt should activate it.
-const QUIZ_CARD_TRIGGER_PROMPT = "1 similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
-// Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
-// normal AI chat / Gemini logic remains completely unchanged for every other message.
-const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Keep this block hidden in intent — it is for the app, not for display purposes.]";
-// true only while we're waiting on the Gemini reply to the exact trigger prompt above.
-let quizCardPendingRequest = false;
 
 function updateAIButtonVisibility() {
   const quizEngine = document.getElementById('quizEngineBox');
@@ -2938,7 +2808,6 @@ function closeAIPanel() {
   const overlay = document.getElementById('ai-overlay');
   if (sheet) sheet.classList.remove('active');
   if (overlay) overlay.classList.remove('active');
-  if (typeof closeAttachMenu === 'function') closeAttachMenu();
 }
 
 function resetAIChat() {
@@ -3012,53 +2881,15 @@ Current Question Details:
 function sendUserMessage() {
   const inputEl = document.getElementById('aiInput');
   const text = inputEl.value.trim();
-  if ((!text && !selectedAIImage) || isAIGenerating) return;
+  if (!text || isAIGenerating) return;
 
   inputEl.value = '';
+  appendAIMessage("user", text);
 
-  const imageForDisplay = selectedAIImageBase64
-    ? `data:${selectedAIImageMime};base64,${selectedAIImageBase64}`
-    : null;
-
-  appendAIMessage("user", text, false, imageForDisplay);
-
-// Quiz Card Mode only activates for this exact manually-sent special prompt.
-const isQuizCardTriggerMessage = (text === QUIZ_CARD_TRIGGER_PROMPT);
-if (isQuizCardTriggerMessage) {
-  quizCardPendingRequest = true;
-}
-
-const parts = [];
-
-if (selectedAIImageBase64) {
-    parts.push({
-        inlineData: {
-            mimeType: selectedAIImageMime,
-            data: selectedAIImageBase64
-        }
-    });
-}
-
-if (text) {
-    parts.push({
-        // The hidden formatting instruction is appended only to the payload sent to Gemini,
-        // never to what's shown in the chat bubble, so normal AI chat stays exactly the same.
-        text: isQuizCardTriggerMessage ? (text + QUIZ_CARD_FORMAT_INSTRUCTION) : text
-    });
-}
-
-aiChatHistory.push({
+  aiChatHistory.push({
     role: "user",
-    parts: parts
-});
-
-  selectedAIImage = null;
-  selectedAIImageBase64 = "";
-  selectedAIImageMime = "";
-  const preview = document.getElementById("ai-image-preview");
-  const previewImg = document.getElementById("ai-preview-img");
-  if (preview) preview.style.display = "none";
-  if (previewImg) previewImg.src = "";
+    parts: [{ text: text }]
+  });
 
   requestGeminiResponse();
 }
@@ -3076,11 +2907,6 @@ async function requestGeminiResponse() {
   showAITyping(true);
 
   currentAbortController = new AbortController();
-  let didTimeout = false;
-  const timeoutId = setTimeout(() => {
-    didTimeout = true;
-    if (currentAbortController) currentAbortController.abort();
-  }, 45000);
 
   try {
     const payload = {
@@ -3133,59 +2959,28 @@ STRICT FORMATTING RULES:
       parts: [{ text: replyText }]
     });
 
-    let renderedAsQuizCard = false;
-    if (quizCardPendingRequest) {
-      const quizCardData = parseQuizCardData(replyText);
-      if (quizCardData) {
-        renderQuizCardMessage(quizCardData);
-        renderedAsQuizCard = true;
-      }
-    }
-    quizCardPendingRequest = false;
-
-    if (!renderedAsQuizCard) {
-      appendAIMessage("bot", replyText, true);
-    }
+    appendAIMessage("bot", replyText, true);
 
   } catch (err) {
     showAITyping(false);
-    if (err.name === 'AbortError') {
-      if (didTimeout) {
-        appendAIMessage("bot", "⏱️ **Timeout:** Server ne samay par jawaab nahi diya. Kripya dobara try karein.");
-      }
-      return;
-    }
+    if (err.name === 'AbortError') return;
     console.error(err);
     appendAIMessage("bot", "⚠️ **Network Error:** Could not connect to the AI ​​server. Please check your internet connection and try again.");
   } finally {
-    clearTimeout(timeoutId);
     isAIGenerating = false;
     currentAbortController = null;
-    quizCardPendingRequest = false;
   }
 }
 
-function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null) {
+function appendAIMessage(sender, text, showCopy = false) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
   const msgDiv = document.createElement('div');
   msgDiv.className = `ai-msg ${sender}`;
 
-  if (imageDataUrl) {
-    const imgEl = document.createElement('img');
-    imgEl.className = 'ai-msg-img';
-    imgEl.src = imageDataUrl;
-    imgEl.alt = 'Sent image';
-    msgDiv.appendChild(imgEl);
-  }
-
   let formattedText = formatAIResponseText(text);
-  if (formattedText) {
-    const textDiv = document.createElement('div');
-    textDiv.innerHTML = formattedText;
-    msgDiv.appendChild(textDiv);
-  }
+  msgDiv.innerHTML = formattedText;
 
   if (sender === 'bot' && showCopy) {
     const actionsDiv = document.createElement('div');
@@ -3234,98 +3029,6 @@ function formatAIResponseText(txt) {
   return formatted;
 }
 
-// ===== AI Quiz Card Mode helpers (Additive Feature) =====
-
-// Extracts and validates the hidden <<<QUIZDATA>>>...<<<END>>> block from a Gemini reply.
-// Returns null (triggering the normal-chat fallback) if the block is missing or invalid.
-function parseQuizCardData(rawReplyText) {
-  try {
-    if (!rawReplyText) return null;
-    const match = rawReplyText.match(/<<<QUIZDATA>>>([\s\S]*?)<<<END>>>/);
-    if (!match) return null;
-    const parsed = JSON.parse(match[1]);
-    if (
-      parsed &&
-      typeof parsed.question === "string" && parsed.question.trim().length > 0 &&
-      Array.isArray(parsed.options) && parsed.options.length === 4 &&
-      parsed.options.every(o => typeof o === "string" && o.trim().length > 0) &&
-      Number.isInteger(parsed.correctIndex) && parsed.correctIndex >= 0 && parsed.correctIndex <= 3
-    ) {
-      return {
-        question: parsed.question,
-        options: parsed.options,
-        correctIndex: parsed.correctIndex,
-        examTag: typeof parsed.examTag === "string" ? parsed.examTag : ""
-      };
-    }
-    return null;
-  } catch (e) {
-    return null;
-  }
-}
-
-// Renders a real interactive Quiz Card inside the AI chat, reusing the existing quiz
-// question/option/explanation CSS classes instead of a plain chat bubble.
-function renderQuizCardMessage(quizCardData) {
-  const chatBody = document.getElementById('aiChatBody');
-  if (!chatBody) return;
-
-  const msgDiv = document.createElement('div');
-  msgDiv.className = 'ai-msg bot ai-quiz-card-msg';
-
-  const questionCard = document.createElement('div');
-  questionCard.className = 'premium-question-card';
-
-  const qText = document.createElement('div');
-  qText.className = 'question-text-style';
-  qText.innerHTML = formatAIResponseText(quizCardData.question);
-  questionCard.appendChild(qText);
-
-  if (quizCardData.examTag) {
-    const tagBox = document.createElement('div');
-    tagBox.className = 'exam-tag-badge';
-    tagBox.style.display = 'inline-block';
-    tagBox.innerHTML = formatAIResponseText(quizCardData.examTag);
-    questionCard.appendChild(tagBox);
-  }
-
-  msgDiv.appendChild(questionCard);
-
-  const optionsBox = document.createElement('div');
-  optionsBox.className = 'options-stack';
-  const letters = ['A', 'B', 'C', 'D'];
-
-  quizCardData.options.forEach((optionText, idx) => {
-    const btn = document.createElement('button');
-    btn.innerHTML = `<strong>${letters[idx]}.</strong> ` + formatAIResponseText(optionText);
-    btn.onclick = () => {
-      if (isAIGenerating) return;
-      const btns = optionsBox.getElementsByTagName('button');
-      for (const b of btns) b.disabled = true;
-
-      if (idx === quizCardData.correctIndex) {
-        btn.style.borderColor = "var(--success)";
-        btn.style.background = "var(--success-light)";
-      } else {
-        btn.style.borderColor = "var(--danger)";
-        btn.style.background = "var(--danger-light)";
-        btns[quizCardData.correctIndex].style.borderColor = "var(--success)";
-        btns[quizCardData.correctIndex].style.background = "var(--success-light)";
-      }
-
-      // Send ONLY the selected option (A/B/C/D) to Gemini, using the existing conversation
-      // history and existing send flow. The reply appears below this same Quiz Card.
-      sendQuickPrompt(letters[idx]);
-    };
-    optionsBox.appendChild(btn);
-  });
-
-  msgDiv.appendChild(optionsBox);
-
-  chatBody.appendChild(msgDiv);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
-
 function showAITyping(show) {
   const typing = document.getElementById('aiTyping');
   const chatBody = document.getElementById('aiChatBody');
@@ -3349,72 +3052,7 @@ function onQuestionChangeAI() {
 document.addEventListener('DOMContentLoaded', () => {
   updateAIButtonVisibility();
 });
-// ===== AI Image Upload Logic =====
-
-const aiCameraInput = document.getElementById("aiCameraInput"); const
-aiGalleryInput = document.getElementById("aiGalleryInput"); const
-removeBtn = document.getElementById("remove-ai-image"); const preview =
-document.getElementById("ai-image-preview"); const previewImg =
-document.getElementById("ai-preview-img");
-
-function fileToBase64(file){ return new Promise((resolve,reject)=>{
-const reader=new FileReader(); reader.onload=()=>resolve(reader.result);
-reader.onerror=reject; reader.readAsDataURL(file); }); }
-
-async function handleAIImage(file){ if(!file) return;
-selectedAIImage=file; selectedAIImageMime=file.type;
-
-const dataUrl=await fileToBase64(file);
-selectedAIImageBase64=dataUrl.split(",")[1];
-
-previewImg.src=dataUrl; preview.style.display="block"; }
-
-if(aiCameraInput){ aiCameraInput.addEventListener("change",e=>{
-handleAIImage(e.target.files[0]); }); }
-
-if(aiGalleryInput){ aiGalleryInput.addEventListener("change",e=>{
-handleAIImage(e.target.files[0]); }); }
-
-if(removeBtn){ removeBtn.addEventListener("click",()=>{
-selectedAIImage=null; selectedAIImageBase64=""; selectedAIImageMime="";
-preview.style.display="none"; previewImg.src=""; if(aiCameraInput)
-aiCameraInput.value=""; if(aiGalleryInput) aiGalleryInput.value=""; });
-}
-
-function toggleAttachMenu(e){
-  if(e){ e.stopPropagation(); }
-  const menu = document.getElementById('aiAttachMenu');
-  if(!menu) return;
-  menu.classList.toggle('active');
-}
-
-function closeAttachMenu(){
-  const menu = document.getElementById('aiAttachMenu');
-  if(menu) menu.classList.remove('active');
-}
-
-function triggerCameraInput(e){
-  if(e){ e.stopPropagation(); }
-  closeAttachMenu();
-  if(aiCameraInput) aiCameraInput.click();
-}
-
-function triggerGalleryInput(e){
-  if(e){ e.stopPropagation(); }
-  closeAttachMenu();
-  if(aiGalleryInput) aiGalleryInput.click();
-}
-
-document.addEventListener('click', (e)=>{
-  const menu = document.getElementById('aiAttachMenu');
-  const plusBtn = document.getElementById('aiPlusBtn');
-  if(menu && menu.classList.contains('active')){
-    if(!menu.contains(e.target) && e.target !== plusBtn && !plusBtn.contains(e.target)){
-      closeAttachMenu();
-    }
-  }
-});
-
 </script>
+
 </body>
 </html>
