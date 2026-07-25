@@ -1332,6 +1332,64 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     font-weight:bold;
     cursor:pointer;
 }
+/* ===== Attach (Plus) Button & Menu ===== */
+.ai-attach-wrapper{
+    position:relative;
+    flex:0 0 auto;
+}
+.ai-plus-btn{
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    background:var(--primary-light);
+    color:var(--primary);
+    border:1.5px solid #e2e8f0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:var(--transition);
+    flex-shrink:0;
+}
+.ai-plus-btn:active{
+    transform:scale(0.92);
+}
+.ai-attach-menu{
+    position:absolute;
+    bottom:calc(100% + 10px);
+    left:0;
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    box-shadow:var(--shadow-lg);
+    padding:8px;
+    display:none;
+    flex-direction:column;
+    gap:4px;
+    min-width:160px;
+    z-index:20;
+}
+.ai-attach-menu.active{
+    display:flex;
+}
+.ai-attach-option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:none;
+    border:none;
+    padding:10px 12px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--dark);
+    cursor:pointer;
+    text-align:left;
+    transition:var(--transition);
+}
+.ai-attach-option:active{
+    background:var(--primary-light);
+}
 @media (min-width: 768px) {
   #ai-floating-btn {
     right: max(24px, calc((100vw - 980px) / 2 + 24px));
@@ -1670,7 +1728,19 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     <img id="ai-preview-img" src="" alt="Preview">
 </div>
 
+  <input type="file" id="aiCameraInput" accept="image/*" capture="environment" style="display:none">
+  <input type="file" id="aiGalleryInput" accept="image/*" style="display:none">
+
   <div class="ai-input-area">
+    <div class="ai-attach-wrapper">
+      <button id="aiPlusBtn" class="ai-plus-btn" type="button" onclick="toggleAttachMenu(event)" title="Attach Image">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div id="aiAttachMenu" class="ai-attach-menu">
+        <button type="button" class="ai-attach-option" onclick="triggerCameraInput(event)"><span>📷</span><span>Camera</span></button>
+        <button type="button" class="ai-attach-option" onclick="triggerGalleryInput(event)"><span>🖼️</span><span>Gallery</span></button>
+      </div>
+    </div>
     <input type="text" id="aiInput" class="ai-input-field" placeholder="Ask your question here..." onkeydown="if(event.key==='Enter') sendUserMessage()">
     <button id="aiSendBtn" class="ai-send-btn" onclick="sendUserMessage()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -2845,6 +2915,7 @@ function closeAIPanel() {
   const overlay = document.getElementById('ai-overlay');
   if (sheet) sheet.classList.remove('active');
   if (overlay) overlay.classList.remove('active');
+  if (typeof closeAttachMenu === 'function') closeAttachMenu();
 }
 
 function resetAIChat() {
@@ -3147,21 +3218,40 @@ preview.style.display="none"; previewImg.src=""; if(aiCameraInput)
 aiCameraInput.value=""; if(aiGalleryInput) aiGalleryInput.value=""; });
 }
 
-// NOTE: // Connect your Camera button with: // aiCameraInput.click();
-// // Connect your Gallery button with: // aiGalleryInput.click();
+function toggleAttachMenu(e){
+  if(e){ e.stopPropagation(); }
+  const menu = document.getElementById('aiAttachMenu');
+  if(!menu) return;
+  menu.classList.toggle('active');
+}
+
+function closeAttachMenu(){
+  const menu = document.getElementById('aiAttachMenu');
+  if(menu) menu.classList.remove('active');
+}
+
+function triggerCameraInput(e){
+  if(e){ e.stopPropagation(); }
+  closeAttachMenu();
+  if(aiCameraInput) aiCameraInput.click();
+}
+
+function triggerGalleryInput(e){
+  if(e){ e.stopPropagation(); }
+  closeAttachMenu();
+  if(aiGalleryInput) aiGalleryInput.click();
+}
+
+document.addEventListener('click', (e)=>{
+  const menu = document.getElementById('aiAttachMenu');
+  const plusBtn = document.getElementById('aiPlusBtn');
+  if(menu && menu.classList.contains('active')){
+    if(!menu.contains(e.target) && e.target !== plusBtn && !plusBtn.contains(e.target)){
+      closeAttachMenu();
+    }
+  }
+});
 
 </script>
-<input
-    type="file"
-    id="aiCameraInput"
-    accept="image/*"
-    capture="environment"
-    style="display:none">
-
-<input
-    type="file"
-    id="aiGalleryInput"
-    accept="image/*"
-    style="display:none">
 </body>
 </html>
