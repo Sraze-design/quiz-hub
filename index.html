@@ -3261,6 +3261,26 @@ function formatAIResponseText(txt) {
 
 // ===== AI Quiz Card Mode helpers (Additive Feature) =====
 
+// Detects a specific model failure mode: a ratio-style answer like "3:2" gets
+// split across two separate options (e.g. one option is just "3" and another
+// is just "2") instead of staying together as a single "3:2" option, while
+// the remaining options are still in "X:Y" ratio form. When that mismatch of
+// formats shows up, the option set is almost certainly broken/incoherent.
+function optionsLookConsistent(options) {
+  const isRatio = (s) => /\d\s*:\s*\d/.test(s);
+  const isPlainNumber = (s) => /^\d+(\.\d+)?$/.test(s.trim());
+
+  const ratioFlags = options.map(isRatio);
+  const ratioCount = ratioFlags.filter(Boolean).length;
+
+  if (ratioCount > 0 && ratioCount < options.length) {
+    const strayPlainNumbers = options.filter((o, i) => !ratioFlags[i] && isPlainNumber(o));
+    if (strayPlainNumbers.length > 0) return false;
+  }
+
+  return true;
+}
+
 // Extracts and validates the hidden <<<QUIZDATA>>>...<<<END>>> block from a Gemini reply.
 // Returns null (triggering the normal-chat fallback) if the block is missing or invalid.
 function parseQuizCardData(rawReplyText) {
@@ -3274,7 +3294,8 @@ function parseQuizCardData(rawReplyText) {
       typeof parsed.question === "string" && parsed.question.trim().length > 0 &&
       Array.isArray(parsed.options) && parsed.options.length === 4 &&
       parsed.options.every(o => typeof o === "string" && o.trim().length > 0) &&
-      Number.isInteger(parsed.correctIndex) && parsed.correctIndex >= 0 && parsed.correctIndex <= 3
+      Number.isInteger(parsed.correctIndex) && parsed.correctIndex >= 0 && parsed.correctIndex <= 3 &&
+      optionsLookConsistent(parsed.options)
     ) {
       // Some models (esp. lite) copy the original "(a)/(b)/A./1." style labels
       // into the option text itself. The app already adds its own A/B/C/D
