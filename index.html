@@ -1184,6 +1184,13 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   font-family: monospace;
   font-size: 13px;
 }
+.ai-msg-img {
+  display: block;
+  max-width: 100%;
+  width: 160px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
 
 .ai-msg-actions {
   display: flex;
@@ -2992,7 +2999,12 @@ function sendUserMessage() {
   if ((!text && !selectedAIImage) || isAIGenerating) return;
 
   inputEl.value = '';
-  appendAIMessage("user", text);
+
+  const imageForDisplay = selectedAIImageBase64
+    ? `data:${selectedAIImageMime};base64,${selectedAIImageBase64}`
+    : null;
+
+  appendAIMessage("user", text, false, imageForDisplay);
 
 const parts = [];
 
@@ -3016,6 +3028,14 @@ aiChatHistory.push({
     parts: parts
 });
 
+  selectedAIImage = null;
+  selectedAIImageBase64 = "";
+  selectedAIImageMime = "";
+  const preview = document.getElementById("ai-image-preview");
+  const previewImg = document.getElementById("ai-preview-img");
+  if (preview) preview.style.display = "none";
+  if (previewImg) previewImg.src = "";
+
   requestGeminiResponse();
 }
 
@@ -3032,6 +3052,11 @@ async function requestGeminiResponse() {
   showAITyping(true);
 
   currentAbortController = new AbortController();
+  let didTimeout = false;
+  const timeoutId = setTimeout(() => {
+    didTimeout = true;
+    if (currentAbortController) currentAbortController.abort();
+  }, 45000);
 
   try {
     const payload = {
@@ -3085,36 +3110,45 @@ STRICT FORMATTING RULES:
     });
 
     appendAIMessage("bot", replyText, true);
-    selectedAIImage = null;
-selectedAIImageBase64 = "";
-selectedAIImageMime = "";
-
-const preview = document.getElementById("ai-image-preview");
-const previewImg = document.getElementById("ai-preview-img");
-
-if (preview) preview.style.display = "none";
-if (previewImg) previewImg.src = "";
 
   } catch (err) {
     showAITyping(false);
-    if (err.name === 'AbortError') return;
+    if (err.name === 'AbortError') {
+      if (didTimeout) {
+        appendAIMessage("bot", "⏱️ **Timeout:** Server ne samay par jawaab nahi diya. Kripya dobara try karein.");
+      }
+      return;
+    }
     console.error(err);
     appendAIMessage("bot", "⚠️ **Network Error:** Could not connect to the AI ​​server. Please check your internet connection and try again.");
   } finally {
+    clearTimeout(timeoutId);
     isAIGenerating = false;
     currentAbortController = null;
   }
 }
 
-function appendAIMessage(sender, text, showCopy = false) {
+function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
   const msgDiv = document.createElement('div');
   msgDiv.className = `ai-msg ${sender}`;
 
+  if (imageDataUrl) {
+    const imgEl = document.createElement('img');
+    imgEl.className = 'ai-msg-img';
+    imgEl.src = imageDataUrl;
+    imgEl.alt = 'Sent image';
+    msgDiv.appendChild(imgEl);
+  }
+
   let formattedText = formatAIResponseText(text);
-  msgDiv.innerHTML = formattedText;
+  if (formattedText) {
+    const textDiv = document.createElement('div');
+    textDiv.innerHTML = formattedText;
+    msgDiv.appendChild(textDiv);
+  }
 
   if (sender === 'bot' && showCopy) {
     const actionsDiv = document.createElement('div');
