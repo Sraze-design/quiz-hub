@@ -3165,6 +3165,9 @@ STRICT FORMATTING RULES:
       throw new Error(`Server Error (${res.status}): ${serverErrorDetail || res.statusText || "Unknown error"}`);
     }
 
+    const modelUsed = res.headers.get('X-Model-Used') || '';
+    if (modelUsed) console.log('[Gemini model used]:', modelUsed);
+
     const resData = await res.json();
     showAITyping(false);
 
@@ -3186,7 +3189,7 @@ STRICT FORMATTING RULES:
     if (quizCardPendingRequest) {
       const quizCardData = parseQuizCardData(replyText);
       if (quizCardData) {
-        renderQuizCardMessage(quizCardData);
+        renderQuizCardMessage(quizCardData, modelUsed);
         renderedAsQuizCard = true;
       }
     }
@@ -3201,7 +3204,7 @@ STRICT FORMATTING RULES:
       const displayText = replyText
         .replace(/<<<QUIZDATA>>>[\s\S]*?<<<END>>>/g, "")
         .trim();
-      appendAIMessage("bot", displayText, true);
+      appendAIMessage("bot", displayText, true, null, modelUsed);
     }
 
   } catch (err) {
@@ -3223,7 +3226,7 @@ STRICT FORMATTING RULES:
   }
 }
 
-function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null) {
+function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, modelUsed = null) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
@@ -3243,6 +3246,16 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null) {
     const textDiv = document.createElement('div');
     textDiv.innerHTML = formattedText;
     msgDiv.appendChild(textDiv);
+  }
+
+  // Small debug tag so it's visible at a glance which model actually
+  // answered (e.g. "gemini-3.5-flash" vs "gemini-3.5-flash-lite"), without
+  // needing devtools. Only shown when the caller passed a modelUsed value.
+  if (modelUsed) {
+    const modelTag = document.createElement('div');
+    modelTag.style.cssText = 'font-size:11px;color:#94a3b8;margin-top:4px;font-weight:500;';
+    modelTag.innerText = `via ${modelUsed}`;
+    msgDiv.appendChild(modelTag);
   }
 
   if (sender === 'bot' && showCopy) {
@@ -3390,7 +3403,7 @@ function parseQuizCardData(rawReplyText) {
 
 // Renders a real interactive Quiz Card inside the AI chat, reusing the existing quiz
 // question/option/explanation CSS classes instead of a plain chat bubble.
-function renderQuizCardMessage(quizCardData) {
+function renderQuizCardMessage(quizCardData, modelUsed = null) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
@@ -3445,6 +3458,13 @@ function renderQuizCardMessage(quizCardData) {
   });
 
   msgDiv.appendChild(optionsBox);
+
+  if (modelUsed) {
+    const modelTag = document.createElement('div');
+    modelTag.style.cssText = 'font-size:11px;color:#94a3b8;margin-top:4px;font-weight:500;';
+    modelTag.innerText = `via ${modelUsed}`;
+    msgDiv.appendChild(modelTag);
+  }
 
   chatBody.appendChild(msgDiv);
   chatBody.scrollTop = chatBody.scrollHeight;
