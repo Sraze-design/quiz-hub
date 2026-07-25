@@ -500,6 +500,26 @@ body {
   margin-bottom: 8px;
 }
 
+.ai-mixed-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 0.85em;
+  line-height: 1.1;
+  margin: 0 1px;
+  transform: translateY(0.05em);
+}
+.ai-mixed-frac-num {
+  display: block;
+  padding: 0 3px 1px;
+  border-bottom: 1.3px solid currentColor;
+}
+.ai-mixed-frac-den {
+  display: block;
+  padding: 1px 3px 0;
+}
+
 .options-stack {
   display: flex;
   flex-direction: column;
@@ -2894,7 +2914,7 @@ let currentAutoScannedQ = -1;
 const QUIZ_CARD_TRIGGER_PROMPT = "Give One more similar question. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option, and place the correct option at a randomly varying position (A, B, C, or D) each time — do not always keep it as option A. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
 // Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
 // normal AI chat / Gemini logic remains completely unchanged for every other message.
-const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":N,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Each string in \"options\" must contain ONLY the answer text — do NOT prefix it with A/B/C/D, a/b/c/d, 1/2/3/4, or labels like \"(a)\"/\"(b)\"; the app adds its own lettering. Keep this block hidden in intent — it is for the app, not for display purposes.]";
+const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":N,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Each string in \"options\" must contain ONLY the answer text — do NOT prefix it with A/B/C/D, a/b/c/d, 1/2/3/4, or labels like \"(a)\"/\"(b)\"; the app adds its own lettering. If the question or any option contains a mixed fraction (a whole number plus a fraction, e.g. 16 and two-thirds), write its fractional part using the frac-with-braces form described in the main instructions right after the whole number, and remember that every backslash you use must be doubled inside this JSON block so it still parses as valid JSON. A plain standalone fraction not attached to a whole number stays as ordinary text like \"2/3\". Keep this block hidden in intent — it is for the app, not for display purposes.]";
 // true only while we're waiting on the Gemini reply to the exact trigger prompt above.
 let quizCardPendingRequest = false;
 
@@ -3090,9 +3110,16 @@ async function requestGeminiResponse() {
           text: `Reply ONLY in plain Unicode text.
 
 Never use LaTeX or Markdown math.
-Never use $, $$, \\(...\\), \\[...\\], \\frac, \\sqrt, \\text, \\times, \\div.
+Never use $, $$, \\(...\\), \\[...\\], \\sqrt, \\text, \\times, \\div.
 Use only plain Unicode symbols like × ÷ √ π ≤ ≥ ≠ ± °.
-Write fractions as 3/4 and never wrap formulas in LaTeX.
+Write standalone fractions as 3/4 (plain text, never wrap formulas in LaTeX).
+
+MIXED FRACTION EXCEPTION (the ONLY allowed use of \\frac):
+- A mixed fraction is a whole number combined with a fraction, e.g. "16 and two-thirds" or "16(2/3)".
+- For a mixed fraction ONLY, write the fractional part as \\frac{numerator}{denominator} placed immediately after the whole number with no space, e.g. 16\\frac{2}{3}% or 14\\frac{2}{7}%.
+- Do NOT use \\frac for a plain standalone fraction that is not attached to a whole number — e.g. a lone 2/3 stays as plain "2/3", never \\frac{2}{3}.
+- Do NOT use \\frac, \\sqrt, or any other LaTeX command anywhere else in the reply.
+- This same mixed-fraction rule applies everywhere you write one — in the question, in each option, in the final answer, and in the explanation.
 
 STRICT FORMATTING RULES:
 - Use Markdown formatting.
@@ -3250,6 +3277,18 @@ function formatAIResponseText(txt) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+
+  // Mixed-fraction rendering: the model is instructed to write ONLY mixed
+  // fractions (whole number + fraction, e.g. "16" + "2/3") using \frac{a}{b}
+  // right after the whole number — everything else stays plain Unicode text
+  // per the system prompt. Render that specific pattern as a small stacked
+  // fraction (numerator over denominator) instead of showing raw "\frac{2}{3}".
+  // This intentionally only matches \frac{..}{..} — plain "2/3" text and any
+  // other LaTeX the model wasn't supposed to use are left untouched as text.
+  formatted = formatted.replace(
+    /\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
+    '<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$1</span><span class="ai-mixed-frac-den">$2</span></span>'
+  );
 
   formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
