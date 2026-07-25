@@ -2894,7 +2894,7 @@ let currentAutoScannedQ = -1;
 const QUIZ_CARD_TRIGGER_PROMPT = "1 similar question only. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
 // Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
 // normal AI chat / Gemini logic remains completely unchanged for every other message.
-const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Keep this block hidden in intent — it is for the app, not for display purposes.]";
+const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":0,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). IMPORTANT: Do not default to placing the correct answer in position B or C out of habit — randomly and uniformly pick which position (A, B, C, or D) holds the correct answer for THIS question, independent of any previous question's correctIndex, so that across many questions all four positions appear roughly equally often. Keep this block hidden in intent — it is for the app, not for display purposes.]";
 // true only while we're waiting on the Gemini reply to the exact trigger prompt above.
 let quizCardPendingRequest = false;
 
@@ -3261,6 +3261,21 @@ function formatAIResponseText(txt) {
 
 // ===== AI Quiz Card Mode helpers (Additive Feature) =====
 
+// Fisher-Yates shuffle of the 4 options, remapping correctIndex to match its
+// new position. Guarantees the correct answer lands on A/B/C/D with true
+// uniform randomness, regardless of whatever position the model itself chose
+// (models tend to default to B/C far more often than A/D if left to their own devices).
+function shuffleQuizOptions(options, correctIndex) {
+  const indices = [0, 1, 2, 3];
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  const shuffledOptions = indices.map((origIdx) => options[origIdx]);
+  const newCorrectIndex = indices.indexOf(correctIndex);
+  return { options: shuffledOptions, correctIndex: newCorrectIndex };
+}
+
 // Extracts and validates the hidden <<<QUIZDATA>>>...<<<END>>> block from a Gemini reply.
 // Returns null (triggering the normal-chat fallback) if the block is missing or invalid.
 function parseQuizCardData(rawReplyText) {
@@ -3276,10 +3291,12 @@ function parseQuizCardData(rawReplyText) {
       parsed.options.every(o => typeof o === "string" && o.trim().length > 0) &&
       Number.isInteger(parsed.correctIndex) && parsed.correctIndex >= 0 && parsed.correctIndex <= 3
     ) {
+      const { options: shuffledOptions, correctIndex: shuffledCorrectIndex } =
+        shuffleQuizOptions(parsed.options, parsed.correctIndex);
       return {
         question: parsed.question,
-        options: parsed.options,
-        correctIndex: parsed.correctIndex,
+        options: shuffledOptions,
+        correctIndex: shuffledCorrectIndex,
         examTag: typeof parsed.examTag === "string" ? parsed.examTag : ""
       };
     }
