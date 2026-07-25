@@ -2946,7 +2946,8 @@ STRICT FORMATTING RULES:
         const errText = await res.text();
         try {
           const errJson = JSON.parse(errText);
-          serverErrorDetail = errJson.error || errJson.message || errText;
+          const rawDetail = errJson.error || errJson.message || errText;
+          serverErrorDetail = (typeof rawDetail === "object") ? JSON.stringify(rawDetail) : rawDetail;
         } catch (parseErr) {
           serverErrorDetail = errText;
         }
