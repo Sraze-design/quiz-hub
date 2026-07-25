@@ -3301,8 +3301,20 @@ function parseQuizCardData(rawReplyText) {
       // into the option text itself. The app already adds its own A/B/C/D
       // prefix when rendering, so strip any leading label here to avoid
       // showing it twice (e.g. "A. (a) केवल 1 और 2").
-      const stripLeadingLabel = (s) =>
-        s.replace(/^\s*[\(\[]?\s*[a-dA-D1-4]\s*[\)\].:]\s*/, '').trim();
+      //
+      // BUG FIX: the label regex below treats a leading "1)" / "2." / "3:" etc.
+      // as a label to strip. But a genuine ratio-style answer like "3:1" or
+      // "1:2" ALSO starts with a digit followed by a colon — so this used to
+      // wrongly chop the option down to just the part after the colon
+      // (e.g. "3:1" became "1", "2:1" also became "1", producing duplicate
+      // options and mangling the real answer). Guard: if the whole option is
+      // itself a plain ratio (only digits and colons, nothing else), leave it
+      // untouched — that's answer content, not a label.
+      const isPureRatio = (s) => /^\d+(\s*:\s*\d+)+$/.test(s.trim());
+      const stripLeadingLabel = (s) => {
+        if (isPureRatio(s)) return s.trim();
+        return s.replace(/^\s*[\(\[]?\s*[a-dA-D1-4]\s*[\)\].:]\s*/, '').trim();
+      };
 
       return {
         question: parsed.question,
