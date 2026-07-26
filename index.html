@@ -3166,7 +3166,9 @@ STRICT FORMATTING RULES:
     }
 
     const modelUsed = res.headers.get('X-Model-Used') || '';
+    const modelAttempts = res.headers.get('X-Model-Attempts') || '';
     if (modelUsed) console.log('[Gemini model used]:', modelUsed);
+    if (modelAttempts) console.log('[Gemini attempts]:', modelAttempts);
 
     const resData = await res.json();
     showAITyping(false);
@@ -3189,7 +3191,7 @@ STRICT FORMATTING RULES:
     if (quizCardPendingRequest) {
       const quizCardData = parseQuizCardData(replyText);
       if (quizCardData) {
-        renderQuizCardMessage(quizCardData, modelUsed);
+        renderQuizCardMessage(quizCardData, modelUsed, modelAttempts);
         renderedAsQuizCard = true;
       }
     }
@@ -3204,7 +3206,7 @@ STRICT FORMATTING RULES:
       const displayText = replyText
         .replace(/<<<QUIZDATA>>>[\s\S]*?<<<END>>>/g, "")
         .trim();
-      appendAIMessage("bot", displayText, true, null, modelUsed);
+      appendAIMessage("bot", displayText, true, null, modelUsed, modelAttempts);
     }
 
   } catch (err) {
@@ -3226,7 +3228,26 @@ STRICT FORMATTING RULES:
   }
 }
 
-function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, modelUsed = null) {
+// Builds the small "via <model>" debug line. If more than one attempt shows
+// up in the log, it means earlier attempts failed (rate-limit/quota/error)
+// before this one succeeded — regardless of whether the failures were on
+// flash, lite, or the same model retried with a different API key. This is
+// intentionally tier-agnostic so a lite-key-1-failed-then-lite-key-2-worked
+// case shows up just as clearly as a flash-failed-then-lite-worked case.
+function buildModelTagText(modelUsed, modelAttempts) {
+  if (!modelUsed) return "";
+  let tag = `via ${modelUsed}`;
+  if (modelAttempts) {
+    const attempts = modelAttempts.split(",").filter(Boolean);
+    const failedCount = attempts.length - 1; // last entry is the one that succeeded
+    if (failedCount > 0) {
+      tag += ` ⚠️ ${failedCount} failed first`;
+    }
+  }
+  return tag;
+}
+
+function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, modelUsed = null, modelAttempts = null) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
@@ -3254,7 +3275,7 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
   if (modelUsed) {
     const modelTag = document.createElement('div');
     modelTag.style.cssText = 'font-size:11px;color:#94a3b8;margin-top:4px;font-weight:500;';
-    modelTag.innerText = `via ${modelUsed}`;
+    modelTag.innerText = buildModelTagText(modelUsed, modelAttempts);
     msgDiv.appendChild(modelTag);
   }
 
@@ -3403,7 +3424,7 @@ function parseQuizCardData(rawReplyText) {
 
 // Renders a real interactive Quiz Card inside the AI chat, reusing the existing quiz
 // question/option/explanation CSS classes instead of a plain chat bubble.
-function renderQuizCardMessage(quizCardData, modelUsed = null) {
+function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = null) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
@@ -3462,7 +3483,7 @@ function renderQuizCardMessage(quizCardData, modelUsed = null) {
   if (modelUsed) {
     const modelTag = document.createElement('div');
     modelTag.style.cssText = 'font-size:11px;color:#94a3b8;margin-top:4px;font-weight:500;';
-    modelTag.innerText = `via ${modelUsed}`;
+    modelTag.innerText = buildModelTagText(modelUsed, modelAttempts);
     msgDiv.appendChild(modelTag);
   }
 
