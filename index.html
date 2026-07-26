@@ -3241,7 +3241,7 @@ function buildModelTagText(modelUsed, modelAttempts) {
     const attempts = modelAttempts.split(",").filter(Boolean);
     const failedCount = attempts.length - 1; // last entry is the one that succeeded
     if (failedCount > 0) {
-      tag += `  ${failedCount}`;
+      tag += `  ${failedCount + 1}`;
     }
   }
   return tag;
