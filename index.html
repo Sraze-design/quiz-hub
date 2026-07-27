@@ -3581,5 +3581,50 @@ document.addEventListener('click', (e)=>{
 });
 
 </script>
+<script>
+// ===== Basic Copy/Inspect Deterrents (Personal Use Protection) =====
+// Note: these are soft deterrents only, not real security. Anyone using
+// browser dev tools directly (rather than shortcuts) can still bypass this.
+
+// Block right-click context menu
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+});
+
+// Block common copy / view-source / devtools keyboard shortcuts
+document.addEventListener('keydown', function (e) {
+  const key = e.key ? e.key.toUpperCase() : '';
+
+  // F12 - Dev Tools
+  if (e.key === 'F12') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl/Cmd + U - View Source
+  if ((e.ctrlKey || e.metaKey) && key === 'U') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl/Cmd + C - Copy
+  if ((e.ctrlKey || e.metaKey) && key === 'C') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl/Cmd + A - Select All
+  if ((e.ctrlKey || e.metaKey) && key === 'A') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl/Cmd + Shift + I / J - Dev Tools (Inspector / Console)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === 'I' || key === 'J')) {
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
 </body>
 </html>
