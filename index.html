@@ -37,6 +37,18 @@
   padding: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
   -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Keep inputs/textareas usable - typing still needs to work */
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 body {
@@ -3619,11 +3631,28 @@ document.addEventListener('keydown', function (e) {
     return false;
   }
 
-  // Ctrl/Cmd + Shift + I / J - Dev Tools (Inspector / Console)
-  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === 'I' || key === 'J')) {
+  // Ctrl/Cmd + Shift + I / J / C - Dev Tools (Inspector / Console / Element Picker)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === 'I' || key === 'J' || key === 'C')) {
     e.preventDefault();
     return false;
   }
+
+  // Ctrl/Cmd + S - Save Page
+  if ((e.ctrlKey || e.metaKey) && key === 'S') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl/Cmd + P - Print
+  if ((e.ctrlKey || e.metaKey) && key === 'P') {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// Block dragging images/elements (prevents drag-to-save)
+document.addEventListener('dragstart', function (e) {
+  e.preventDefault();
 });
 </script>
 </body>
