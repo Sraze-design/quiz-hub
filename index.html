@@ -540,9 +540,21 @@ body {
   cursor: pointer;
   transition: var(--transition);
 }
+@media (hover:hover) and (pointer:fine){
 .options-stack button:hover:not(:disabled) {
   border-color: var(--primary);
   background: var(--primary-light);
+}
+}
+
+.options-stack button{
+  -webkit-tap-highlight-color: transparent;
+}
+
+.options-stack button:focus,
+.options-stack button:focus-visible{
+  outline:none;
+  box-shadow:none;
 }
 
 .explanation-box-premium {
@@ -3581,5 +3593,15 @@ document.addEventListener('click', (e)=>{
 });
 
 </script>
+
+<script>
+document.addEventListener('click',function(e){
+  const btn=e.target.closest('.options-stack button');
+  if(btn){
+    setTimeout(()=>btn.blur(),0);
+  }
+});
+</script>
+
 </body>
 </html>
