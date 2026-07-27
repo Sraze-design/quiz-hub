@@ -3586,9 +3586,15 @@ document.addEventListener('click', (e)=>{
 // Note: these are soft deterrents only, not real security. Anyone using
 // browser dev tools directly (rather than shortcuts) can still bypass this.
 
-// Block right-click context menu everywhere (Ctrl+C still works for
-// legitimately copying question/AI-answer text, so this doesn't break that)
+// Block right-click context menu everywhere EXCEPT the AI chat area -
+// mobile users need long-press "Copy" there to copy their questions/AI
+// answers. Mobile's touch context menu only shows Copy/Select/Share
+// (it does not expose "Inspect Element" - that's a desktop-only risk,
+// already blocked separately via the keyboard shortcuts below).
 document.addEventListener('contextmenu', function (e) {
+  if (e.target.closest && e.target.closest('.ai-chat-body')) {
+    return true;
+  }
   e.preventDefault();
 });
 
