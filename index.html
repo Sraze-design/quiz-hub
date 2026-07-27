@@ -37,18 +37,6 @@
   padding: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Keep inputs/textareas usable - typing still needs to work */
-input, textarea {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 }
 
 body {
@@ -3600,6 +3588,9 @@ document.addEventListener('click', (e)=>{
 
 // Block right-click context menu
 document.addEventListener('contextmenu', function (e) {
+  if (e.target.closest && e.target.closest('.ai-chat-body')) {
+    return true;
+  }
   e.preventDefault();
 });
 
@@ -3619,11 +3610,9 @@ document.addEventListener('keydown', function (e) {
     return false;
   }
 
-  // Ctrl/Cmd + C - Copy
-  if ((e.ctrlKey || e.metaKey) && key === 'C') {
-    e.preventDefault();
-    return false;
-  }
+  // Note: Ctrl/Cmd + C (copy) is intentionally NOT blocked - users need to
+  // select and copy question text normally. Only actual code-viewing
+  // shortcuts (view-source, dev tools, save page) are blocked below.
 
   // Ctrl/Cmd + A - Select All
   if ((e.ctrlKey || e.metaKey) && key === 'A') {
