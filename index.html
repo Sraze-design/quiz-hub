@@ -1139,6 +1139,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   justify-content: space-between;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  touch-action: none;
+  cursor: grab;
 }
 .ai-sheet-title {
   display: flex;
@@ -3601,6 +3603,53 @@ document.addEventListener('click',function(e){
     setTimeout(()=>btn.blur(),0);
   }
 });
+</script>
+
+<script>
+(function(){
+  const header = document.querySelector('.ai-sheet-header');
+  const sheet = document.getElementById('ai-bottom-sheet');
+  if(!header || !sheet) return;
+
+  let startY = 0, currentY = 0, dragging = false;
+
+  function onStart(e){
+    if(e.target.closest('.ai-sheet-close')) return;
+    dragging = true;
+    startY = (e.touches ? e.touches[0].clientY : e.clientY);
+    currentY = startY;
+    sheet.style.transition = 'none';
+  }
+
+  function onMove(e){
+    if(!dragging) return;
+    currentY = (e.touches ? e.touches[0].clientY : e.clientY);
+    let diff = currentY - startY;
+    if(diff < 0) diff = 0;
+    sheet.style.transform = 'translateY(' + diff + 'px)';
+  }
+
+  function onEnd(){
+    if(!dragging) return;
+    dragging = false;
+    sheet.style.transition = '';
+    const diff = currentY - startY;
+    sheet.style.transform = '';
+    if(diff > 100){
+      if(typeof closeAIPanel === 'function') closeAIPanel();
+    }
+    startY = 0; currentY = 0;
+  }
+
+  header.addEventListener('touchstart', onStart, {passive:true});
+  header.addEventListener('touchmove', onMove, {passive:true});
+  header.addEventListener('touchend', onEnd);
+  header.addEventListener('touchcancel', onEnd);
+
+  header.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+})();
 </script>
 
 </body>
