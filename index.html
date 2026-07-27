@@ -3586,11 +3586,9 @@ document.addEventListener('click', (e)=>{
 // Note: these are soft deterrents only, not real security. Anyone using
 // browser dev tools directly (rather than shortcuts) can still bypass this.
 
-// Block right-click context menu
+// Block right-click context menu everywhere (Ctrl+C still works for
+// legitimately copying question/AI-answer text, so this doesn't break that)
 document.addEventListener('contextmenu', function (e) {
-  if (e.target.closest && e.target.closest('.ai-chat-body')) {
-    return true;
-  }
   e.preventDefault();
 });
 
