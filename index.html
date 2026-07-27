@@ -3581,65 +3581,43 @@ document.addEventListener('click', (e)=>{
 });
 
 </script>
-<script>
-// ===== Basic Copy/Inspect Deterrents (Personal Use Protection) =====
-// Note: these are soft deterrents only, not real security. Anyone using
-// browser dev tools directly (rather than shortcuts) can still bypass this.
 
-// Block right-click context menu everywhere (Ctrl+C still works for
-// legitimately copying question/AI-answer text, so this doesn't break that)
+<script>
+// ===== Basic DevTools / View-Source / Right-Click Blocker =====
+// NOTE: This is only a mild deterrent for casual users. It does NOT stop
+// anyone determined — browser menu still opens DevTools, and all HTML/CSS/JS
+// can still be seen via network requests. Kept intentionally simple.
+
 document.addEventListener('contextmenu', function (e) {
   e.preventDefault();
 });
 
-// Block common copy / view-source / devtools keyboard shortcuts
 document.addEventListener('keydown', function (e) {
   const key = e.key ? e.key.toUpperCase() : '';
 
-  // F12 - Dev Tools
-  if (e.key === 'F12') {
+  // F12 - DevTools
+  if (key === 'F12') {
     e.preventDefault();
     return false;
   }
 
-  // Ctrl/Cmd + U - View Source
-  if ((e.ctrlKey || e.metaKey) && key === 'U') {
+  // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C - DevTools variants
+  if (e.ctrlKey && e.shiftKey && (key === 'I' || key === 'J' || key === 'C')) {
     e.preventDefault();
     return false;
   }
 
-  // Note: Ctrl/Cmd + C (copy) is intentionally NOT blocked - users need to
-  // select and copy question text normally. Only actual code-viewing
-  // shortcuts (view-source, dev tools, save page) are blocked below.
-
-  // Ctrl/Cmd + A - Select All
-  if ((e.ctrlKey || e.metaKey) && key === 'A') {
+  // Ctrl+U - View Source
+  if (e.ctrlKey && key === 'U') {
     e.preventDefault();
     return false;
   }
 
-  // Ctrl/Cmd + Shift + I / J / C - Dev Tools (Inspector / Console / Element Picker)
-  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === 'I' || key === 'J' || key === 'C')) {
+  // Cmd variants for Mac (Cmd+Opt+I/J/C)
+  if (e.metaKey && e.altKey && (key === 'I' || key === 'J' || key === 'C')) {
     e.preventDefault();
     return false;
   }
-
-  // Ctrl/Cmd + S - Save Page
-  if ((e.ctrlKey || e.metaKey) && key === 'S') {
-    e.preventDefault();
-    return false;
-  }
-
-  // Ctrl/Cmd + P - Print
-  if ((e.ctrlKey || e.metaKey) && key === 'P') {
-    e.preventDefault();
-    return false;
-  }
-});
-
-// Block dragging images/elements (prevents drag-to-save)
-document.addEventListener('dragstart', function (e) {
-  e.preventDefault();
 });
 </script>
 </body>
