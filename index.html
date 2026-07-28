@@ -1832,6 +1832,7 @@ if(!browserId){
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  history.replaceState({ screen: 'subjects' }, '');
   buildGlobalQuizIndex();
 });
 
@@ -1841,6 +1842,7 @@ async function buildGlobalQuizIndex() {
     const response = await fetch('./index.json');
     if (!response.ok) throw new Error("Unable to load index.json");
     allFlattenedQuizzes = await response.json();
+    isHistoryNav = true; // initial render should not push a duplicate history entry
     renderSubjects();
   } catch (error) {
     showError("Network Error Occurred", "Kindly check your internet connection or verify index.json deployment.");
@@ -1848,6 +1850,49 @@ async function buildGlobalQuizIndex() {
     showLoader(false);
   }
 }
+
+// ===== Real browser/device back-button support =====
+// Every explorer navigation level pushes a history entry, so the phone's
+// hardware back button / gesture goes one step back instead of closing the app.
+let isHistoryNav = false;
+
+function pushExplorerHistory(state) {
+  if (isHistoryNav) { isHistoryNav = false; return; }
+  history.pushState(state, '');
+}
+
+window.addEventListener('popstate', (e) => {
+  isHistoryNav = true;
+  const state = e.state || { screen: 'subjects' };
+
+  // If currently inside the quiz engine, exit back to the explorer first
+  const quizEngine = document.getElementById('quizEngineBox');
+  if (quizEngine && quizEngine.style.display !== 'none') {
+    quizEngine.style.display = 'none';
+    document.getElementById('explorerScreen').style.display = 'flex';
+    document.getElementById('score-card').style.display = 'none';
+    clearInterval(timer);
+    updateAIButtonVisibility();
+  }
+
+  const searchInput = document.getElementById('explorerSearch');
+  if (searchInput && searchInput.value) searchInput.value = '';
+
+  switch (state.screen) {
+    case 'categories':
+      renderCategories(state.subject);
+      break;
+    case 'chapters':
+      renderChapters(state.subject, state.category);
+      break;
+    case 'quizlist':
+    case 'quiz':
+      renderQuizList(state.subject, state.category, state.chapter);
+      break;
+    default:
+      renderSubjects();
+  }
+});
 
 function cleanHumanReadableTitle(rawString) {
   if (!rawString) return '';
@@ -1864,7 +1909,8 @@ function renderSubjects() {
   currentSubject = null;
   currentCategory = null;
   currentChapter = null;
-  
+  pushExplorerHistory({ screen: 'subjects' });
+
   showLoader(false);
   hideError();
 
@@ -1926,6 +1972,7 @@ function renderCategories(subjectName) {
   currentSubject = subjectName;
   currentCategory = null;
   currentChapter = null;
+  pushExplorerHistory({ screen: 'categories', subject: subjectName });
 
   showLoader(false);
   hideError();
@@ -1984,6 +2031,7 @@ function renderChapters(subjectName, categoryName) {
   currentSubject = subjectName;
   currentCategory = categoryName || null;
   currentChapter = null;
+  pushExplorerHistory({ screen: 'chapters', subject: subjectName, category: categoryName || null });
 
   showLoader(false);
   hideError();
@@ -2047,6 +2095,7 @@ function renderQuizList(subjectName, categoryName, chapterName) {
   currentSubject = subjectName;
   currentCategory = categoryName || null;
   currentChapter = chapterName;
+  pushExplorerHistory({ screen: 'quizlist', subject: subjectName, category: categoryName || null, chapter: chapterName });
 
   showLoader(false);
   hideError();
@@ -2157,28 +2206,14 @@ function handleSearch(query) {
 }
 
 function handleExplorerBack() {
-  const searchInput = document.getElementById('explorerSearch');
-  if (searchInput.value) {
-    searchInput.value = "";
-  }
-
-  if (currentChapter) {
-    renderChapters(currentSubject, currentCategory);
-  } else if (currentCategory) {
-    renderCategories(currentSubject);
-  } else if (currentSubject) {
-    renderSubjects();
-  } else {
-    renderSubjects();
-  }
+  // Route through browser history so the on-screen arrow and the phone's
+  // hardware back button stay perfectly in sync (popstate does the actual render).
+  history.back();
 }
 
 function backToExplorer() {
-  document.getElementById('quizEngineBox').style.display = 'none';
-  document.getElementById('explorerScreen').style.display = 'flex';
-  document.getElementById('score-card').style.display = 'none';
-  clearInterval(timer);
-  updateAIButtonVisibility();
+  // Route through history so it stays in sync with the device back button.
+  history.back();
 }
 
 function showEmptyState() {
@@ -2233,7 +2268,8 @@ async function loadQuizData(quizPath) {
     document.getElementById('controls').style.display='flex';
     document.getElementById('jumpBox').style.display='flex';
     document.querySelector('.floating-quiz-header').style.display='flex';
-    
+    pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
+
     showQ();
     resetQuestionTimer();
     updateAIButtonVisibility();
