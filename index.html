@@ -2974,7 +2974,7 @@ let currentAutoScannedQ = -1;
 const QUIZ_CARD_TRIGGER_PROMPT = "Give One more similar question. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option, and place the correct option at a randomly varying position (A, B, C, or D) each time — do not always keep it as option A. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.";
 // Hidden instruction appended ONLY to the API payload (never shown in the chat bubble) so the
 // normal AI chat / Gemini logic remains completely unchanged for every other message.
-const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":N,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Each string in \"options\" must contain ONLY the answer text — do NOT prefix it with A/B/C/D, a/b/c/d, 1/2/3/4, or labels like \"(a)\"/\"(b)\"; the app adds its own lettering. If the question or any option contains a mixed fraction (a whole number plus a fraction, e.g. 16 and two-thirds), write it as plain text with a space right after the whole number, e.g. \"16 2/3\", per the main instructions — never use \\\\frac or any LaTeX. Remember that any backslash you do use must be doubled inside this JSON block so it still parses as valid JSON. A plain standalone fraction not attached to a whole number stays as ordinary text like \"2/3\". Keep this block hidden in intent — it is for the app, not for display purposes.]";
+const QUIZ_CARD_FORMAT_INSTRUCTION = "\n\n[Additional silent formatting instruction: In this same reply, also append (on a new line, after your normal answer) a hidden machine-readable block written EXACTLY like this, with no extra spaces or text inside it: <<<QUIZDATA>>>{\"question\":\"...\",\"options\":[\"...\",\"...\",\"...\",\"...\"],\"correctIndex\":N,\"examTag\":\"...\"}<<<END>>> Fill it accurately based on the question/options/correct option you generated (correctIndex: 0=A,1=B,2=C,3=D, examTag optional). Each string in \"options\" must contain ONLY the answer text — do NOT prefix it with A/B/C/D, a/b/c/d, 1/2/3/4, or labels like \"(a)\"/\"(b)\"; the app adds its own lettering. If the question or any option contains a mixed fraction (a whole number plus a fraction, e.g. 16 and two-thirds), write its fractional part using the frac-with-braces form described in the main instructions right after the whole number, and remember that every backslash you use must be doubled inside this JSON block so it still parses as valid JSON. A plain standalone fraction not attached to a whole number stays as ordinary text like \"2/3\". Keep this block hidden in intent — it is for the app, not for display purposes.]";
 // true only while we're waiting on the Gemini reply to the exact trigger prompt above.
 let quizCardPendingRequest = false;
 
@@ -3167,15 +3167,7 @@ async function requestGeminiResponse() {
       subject: currentSubject || "",
       systemInstruction: {
         parts: [{
-          text: `CRITICAL OUTPUT FORMATTING:
-Never use LaTeX.
-Never use Markdown math.
-Never output: \\(, \\), \\[, \\], $$, \\frac, \\times, \\sqrt, \\div, \\cdot, \\text.
-Use ONLY plain Unicode text.
-Correct examples: 350 × 13.6/100 = 47.6 | 16 2/3 | 45 5/6 | √25 = 5
-Wrong examples: \\(350 \\times \\frac{13.6}{100}\\) | $$x^2$$ | \\frac{2}{3}
-
-Reply ONLY in plain Unicode text.
+          text: `Reply ONLY in plain Unicode text.
 
 Never use LaTeX or Markdown math.
 Never use $, $$, \\(...\\), \\[...\\], \\sqrt, \\text, \\times, \\div, \\%.
@@ -3183,11 +3175,12 @@ Use only plain Unicode symbols like × ÷ √ π ≤ ≥ ≠ ± °.
 Write standalone fractions as 3/4 (plain text, never wrap formulas in LaTeX).
 Write percent as a plain % sign only — never \\% and never wrap anything in $ signs. WRONG: "$20\\%=1/5$". RIGHT: "20% = 1/5".
 
-MIXED FRACTIONS:
-- A mixed fraction is a whole number combined with a fraction, e.g. "16 and two-thirds".
-- Write mixed fractions as plain text with a space, e.g. 16 2/3 or 14 2/7% — NEVER as 16\\frac{2}{3}.
-- Never use \\frac, \\sqrt, or any other LaTeX command anywhere in the reply — not for mixed fractions, not for standalone fractions, not anywhere else.
-- This plain-text rule applies everywhere a fraction appears — in the question, in each option, in the final answer, and in the explanation.
+MIXED FRACTION EXCEPTION (the ONLY allowed use of \\frac):
+- A mixed fraction is a whole number combined with a fraction, e.g. "16 and two-thirds" or "16(2/3)".
+- For a mixed fraction ONLY, write the fractional part as \\frac{numerator}{denominator} placed immediately after the whole number with no space, e.g. 16\\frac{2}{3}% or 14\\frac{2}{7}%.
+- Do NOT use \\frac for a plain standalone fraction that is not attached to a whole number — e.g. a lone 2/3 stays as plain "2/3", never \\frac{2}{3}.
+- Do NOT use \\frac, \\sqrt, or any other LaTeX command anywhere else in the reply.
+- This same mixed-fraction rule applies everywhere you write one — in the question, in each option, in the final answer, and in the explanation.
 
 STRICT FORMATTING RULES:
 - Use Markdown formatting.
