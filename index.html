@@ -3160,7 +3160,7 @@ async function requestGeminiResponse() {
   const timeoutId = setTimeout(() => {
     didTimeout = true;
     if (currentAbortController) currentAbortController.abort();
-  }, 45000);
+  }, 75000); // was 45000 — too short for the worker's full multi-key/model retry chain
 
   try {
     const payload = {
