@@ -3160,7 +3160,7 @@ async function requestGeminiResponse() {
   const timeoutId = setTimeout(() => {
     didTimeout = true;
     if (currentAbortController) currentAbortController.abort();
-  }, 45000);
+  }, 60000); // matches worker's OVERALL_TIMEOUT (60s)
 
   try {
     const payload = {
