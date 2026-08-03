@@ -3070,12 +3070,6 @@ Rules:
 1. Always output answer in Hindi (Devanagari script) cleanly and politely.
 2. Formats supported: Math, Formulas, Short Tricks, Reasoning, GK, English doubts.
 3. Be concise and precise. Give short explanation by default unless requested for detail.
-4. IMPORTANT: The "Reference Explanation" below is only a rough internal note from the
-   question bank — it may be incomplete, poorly worded, or even wrong. Do NOT copy, translate,
-   or lightly paraphrase it. Independently work out (or recall) the correct solution/reasoning
-   yourself from scratch, cross-check it against the reference, and if the reference disagrees
-   with your own working, trust your own verified reasoning and mention the discrepancy briefly.
-   Write the final explanation entirely in your own words and steps.
 
 Current Question Details:
 - Question Number: ${qContext.questionNumber}/${qContext.totalQuestions}
@@ -3083,12 +3077,12 @@ Current Question Details:
 - Question: ${qContext.questionText}
 - Options: ${JSON.stringify(qContext.options)}
 - Correct Answer: ${qContext.correctAnswer}
-- Reference Explanation (internal note, verify before using): ${qContext.explanation}
+- Given Explanation: ${qContext.explanation}
 - User Choice: ${qContext.userSelected}
 `;
 
   aiChatHistory = [
-    { role: "user", parts: [{ text: systemInstruction + "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation (संक्षिप्त व्याख्या) for this question in Hindi. Do not just restate the reference explanation." }] }
+    { role: "user", parts: [{ text: systemInstruction + "\nTask: Please provide a clear, short explanation (संक्षिप्त व्याख्या) for this question in Hindi." }] }
   ];
 
   appendAIMessage("bot", "🔍 **Question scanned!** Answer is being prepared...");
