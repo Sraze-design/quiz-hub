@@ -2253,6 +2253,7 @@ async function loadQuizData(quizPath) {
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
+    shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
     ORIGINAL_DATA=quizQuestions.slice();
     ORIGINAL_TOTAL=data.length;
     currentQ=0; score=0; currentStreak=0; maxStreak=0; elapsed=0;
@@ -2411,6 +2412,41 @@ function formatContent(txt){
 }
 
 let data = [];
+
+// Strips a leading option label like "(A) ", "(b)", "1.", "C:" etc. so we can
+// re-label options fresh after shuffling their order.
+const OPTION_LABEL_REGEX = /^\s*[\(\[]?\s*[a-dA-D1-4]\s*[\)\].:]\s*/;
+
+// Shuffles the option order for ONE question in place (Fisher-Yates) and
+// updates item.a so it still points at the correct option after shuffling.
+// Nothing about correctness changes — only the on-screen position of each
+// option moves, and the (A)/(B)/(C)/(D) label text is regenerated to match
+// the new positions.
+function shuffleQuestionOptions(item) {
+  if (!item || !Array.isArray(item.o) || item.o.length < 2) return;
+
+  const stripped = item.o.map((opt) => opt.replace(OPTION_LABEL_REGEX, ''));
+  const n = stripped.length;
+
+  // order[i] = index (in the ORIGINAL array) of the option that should now sit at position i
+  const order = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+
+  const labels = ['(A) ', '(B) ', '(C) ', '(D) '];
+  item.o = order.map((origIdx, newPos) => (labels[newPos] || '') + stripped[origIdx]);
+
+  // Find where the originally-correct option (item.a) ended up.
+  item.a = order.indexOf(item.a);
+}
+
+// Shuffles options for every question in a quiz array, in place.
+function shuffleAllQuestionsOptions(quizArray) {
+  if (!Array.isArray(quizArray)) return;
+  quizArray.forEach(shuffleQuestionOptions);
+}
 let ORIGINAL_DATA = [];
 let ORIGINAL_TOTAL = 0;
 let elapsed=0,timerRunning=true,isPaused=false;
