@@ -2363,7 +2363,7 @@ function applyResultTheme(scorePercent){
 function formatContent(txt){
  if(txt==null) return "";
  txt=String(txt);
- txt=txt.replace(/\\n/g,"<br>");
+ txt=txt.replace(/\\n/g,"<br>").replace(/\n/g,"<br>");
  while(/\\text\{([^{}]*)\}/.test(txt)){ txt=txt.replace(/\\text\{([^{}]*)\}/g,"$1"); }
  txt=txt.replace(/\^\{([^}]+)\}/g,"<sup>$1</sup>");
  txt=txt.replace(/_\{([^}]+)\}/g,"<sub>$1</sub>");
