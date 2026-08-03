@@ -2253,6 +2253,7 @@ async function loadQuizData(quizPath) {
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
+    shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
     ORIGINAL_DATA=quizQuestions.slice();
     ORIGINAL_TOTAL=data.length;
     currentQ=0; score=0; currentStreak=0; maxStreak=0; elapsed=0;
@@ -2411,6 +2412,41 @@ function formatContent(txt){
 }
 
 let data = [];
+
+// Strips a leading option label like "(A) ", "(b)", "1.", "C:" etc. so we can
+// re-label options fresh after shuffling their order.
+const OPTION_LABEL_REGEX = /^\s*[\(\[]?\s*[a-dA-D1-4]\s*[\)\].:]\s*/;
+
+// Shuffles the option order for ONE question in place (Fisher-Yates) and
+// updates item.a so it still points at the correct option after shuffling.
+// Nothing about correctness changes — only the on-screen position of each
+// option moves, and the (A)/(B)/(C)/(D) label text is regenerated to match
+// the new positions.
+function shuffleQuestionOptions(item) {
+  if (!item || !Array.isArray(item.o) || item.o.length < 2) return;
+
+  const stripped = item.o.map((opt) => opt.replace(OPTION_LABEL_REGEX, ''));
+  const n = stripped.length;
+
+  // order[i] = index (in the ORIGINAL array) of the option that should now sit at position i
+  const order = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+
+  const labels = ['(A) ', '(B) ', '(C) ', '(D) '];
+  item.o = order.map((origIdx, newPos) => (labels[newPos] || '') + stripped[origIdx]);
+
+  // Find where the originally-correct option (item.a) ended up.
+  item.a = order.indexOf(item.a);
+}
+
+// Shuffles options for every question in a quiz array, in place.
+function shuffleAllQuestionsOptions(quizArray) {
+  if (!Array.isArray(quizArray)) return;
+  quizArray.forEach(shuffleQuestionOptions);
+}
 let ORIGINAL_DATA = [];
 let ORIGINAL_TOTAL = 0;
 let elapsed=0,timerRunning=true,isPaused=false;
@@ -3070,6 +3106,12 @@ Rules:
 1. Always output answer in Hindi (Devanagari script) cleanly and politely.
 2. Formats supported: Math, Formulas, Short Tricks, Reasoning, GK, English doubts.
 3. Be concise and precise. Give short explanation by default unless requested for detail.
+4. IMPORTANT: The "Reference Explanation" below is only a rough internal note from the
+   question bank — it may be incomplete, poorly worded, or even wrong. Do NOT copy, translate,
+   or lightly paraphrase it. Independently work out (or recall) the correct solution/reasoning
+   yourself from scratch, cross-check it against the reference, and if the reference disagrees
+   with your own working, trust your own verified reasoning and mention the discrepancy briefly.
+   Write the final explanation entirely in your own words and steps.
 
 Current Question Details:
 - Question Number: ${qContext.questionNumber}/${qContext.totalQuestions}
@@ -3077,12 +3119,12 @@ Current Question Details:
 - Question: ${qContext.questionText}
 - Options: ${JSON.stringify(qContext.options)}
 - Correct Answer: ${qContext.correctAnswer}
-- Given Explanation: ${qContext.explanation}
+- Reference Explanation (internal note, verify before using): ${qContext.explanation}
 - User Choice: ${qContext.userSelected}
 `;
 
   aiChatHistory = [
-    { role: "user", parts: [{ text: systemInstruction + "\nTask: Please provide a clear, short explanation (संक्षिप्त व्याख्या) for this question in Hindi." }] }
+    { role: "user", parts: [{ text: systemInstruction + "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation (संक्षिप्त व्याख्या) for this question in Hindi. Do not just restate the reference explanation." }] }
   ];
 
   appendAIMessage("bot", "🔍 **Question scanned!** Answer is being prepared...");
