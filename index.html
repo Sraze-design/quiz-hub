@@ -2417,13 +2417,48 @@ let data = [];
 // re-label options fresh after shuffling their order.
 const OPTION_LABEL_REGEX = /^\s*[\(\[]?\s*[a-dA-D1-4]\s*[\)\].:]\s*/;
 
+// Detects whether an option's text refers to other options by position/letter
+// (e.g. "All of the above", "Only B", "A and C", "उपरोक्त सभी", "केवल A"),
+// in which case shuffling would break the option's meaning.
+const POSITION_DEPENDENT_REGEX = new RegExp(
+  [
+    // English phrases
+    'all of the above',
+    'none of the above',
+    'both\\s*[a-dA-D]\\s*(?:and|&)\\s*[a-dA-D]',
+    'only\\s*[a-dA-D]\\b',
+    '\\b[a-dA-D]\\s*(?:,\\s*[a-dA-D]\\s*)*(?:and|&)\\s*[a-dA-D]\\b',
+    '\\b[a-dA-D]\\s*&\\s*[a-dA-D]\\b',
+    // Hindi phrases
+    'उपरोक्त सभी',
+    'इनमें से सभी',
+    'इनमें से कोई नहीं',
+    'उपरोक्त में से कोई नहीं',
+    '[a-dA-D]\\s*(?:और|तथा)\\s*[a-dA-D]',
+    'केवल\\s*[a-dA-D]'
+  ].join('|'),
+  'i'
+);
+
+function isPositionDependentQuestion(item) {
+  if (!item || !Array.isArray(item.o)) return false;
+  return item.o.some((opt) => {
+    const stripped = String(opt).replace(OPTION_LABEL_REGEX, '');
+    return POSITION_DEPENDENT_REGEX.test(stripped);
+  });
+}
+
 // Shuffles the option order for ONE question in place (Fisher-Yates) and
 // updates item.a so it still points at the correct option after shuffling.
 // Nothing about correctness changes — only the on-screen position of each
 // option moves, and the (A)/(B)/(C)/(D) label text is regenerated to match
 // the new positions.
+// Exception: if any option text references other options by position/letter
+// (e.g. "All of the above", "Only B", "उपरोक्त सभी"), shuffling is skipped
+// entirely so the option order (and its meaning) stays intact.
 function shuffleQuestionOptions(item) {
   if (!item || !Array.isArray(item.o) || item.o.length < 2) return;
+  if (isPositionDependentQuestion(item)) return;
 
   const stripped = item.o.map((opt) => opt.replace(OPTION_LABEL_REGEX, ''));
   const n = stripped.length;
