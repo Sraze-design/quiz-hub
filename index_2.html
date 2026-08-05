@@ -2253,6 +2253,7 @@ async function loadQuizData(quizPath) {
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
+    shuffleQuestionsOrder(data); // randomize question order every load
     shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
     ORIGINAL_DATA=quizQuestions.slice();
     ORIGINAL_TOTAL=data.length;
@@ -2481,6 +2482,20 @@ function shuffleQuestionOptions(item) {
 function shuffleAllQuestionsOptions(quizArray) {
   if (!Array.isArray(quizArray)) return;
   quizArray.forEach(shuffleQuestionOptions);
+}
+
+// Shuffles the ORDER of the questions themselves (Fisher-Yates), in place.
+// This is completely independent of shuffleAllQuestionsOptions above:
+// this one reorders which question comes 1st/2nd/3rd... ; the other one
+// only reorders the A/B/C/D options *inside* each question. Running both
+// means every quiz attempt gets a fresh question sequence AND a fresh
+// option order, without either one interfering with the other.
+function shuffleQuestionsOrder(quizArray) {
+  if (!Array.isArray(quizArray) || quizArray.length < 2) return;
+  for (let i = quizArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [quizArray[i], quizArray[j]] = [quizArray[j], quizArray[i]];
+  }
 }
 let ORIGINAL_DATA = [];
 let ORIGINAL_TOTAL = 0;
