@@ -2631,8 +2631,11 @@ async function generateMockTest() {
       );
     }
 
-    // Final shuffle across all subjects combined, then store.
-    shuffleQuestionsOrder(combinedPool);
+    // NOTE: No final shuffle across subjects here — each subject's questions
+    // were already shuffled internally above (subjectPool). Keeping
+    // combinedPool as-is preserves subject-wise block order (Maths, then
+    // Reasoning, then English, etc. — in the order rows appear in
+    // #mockSubjectList), instead of interleaving all subjects together.
     finalData = combinedPool;
 
     // Hand the generated pool to the existing quiz engine — same engine
