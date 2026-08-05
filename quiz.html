@@ -2113,7 +2113,12 @@ window.addEventListener('popstate', (e) => {
   if (quizEngine && quizEngine.style.display !== 'none') {
     quizEngine.style.display = 'none';
     document.getElementById('score-card').style.display = 'none';
-    clearInterval(timer);
+    // NOTE: `timer` is a single setInterval created once at page load (never
+    // recreated per-quiz). clearInterval(timer) here would permanently kill
+    // it, so the "total time" display would never tick again on any later
+    // quiz. Just pause it via the flag the interval already checks —
+    // startQuiz() sets timerRunning back to true when the next quiz begins.
+    timerRunning = false;
     updateAIButtonVisibility();
   }
 
