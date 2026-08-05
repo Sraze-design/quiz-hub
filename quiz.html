@@ -2095,18 +2095,18 @@ window.addEventListener('popstate', (e) => {
   if (state.screen === 'mockTest') {
     if (explorerScreenEl) explorerScreenEl.classList.remove('active');
     if (mockTestScreenEl) mockTestScreenEl.classList.add('active');
-    // Inline display is set directly by startQuiz()/openMockTestScreen() flows,
-    // which overrides the CSS class toggle above. Reset it here unconditionally
-    // (not just when the quiz engine happens to still be visible) so a 2nd
-    // consecutive back-press doesn't leave a stale display:none behind.
-    if (explorerScreenEl) explorerScreenEl.style.display = 'none';
-    if (mockTestScreenEl) mockTestScreenEl.style.display = 'flex';
   } else {
     if (mockTestScreenEl) mockTestScreenEl.classList.remove('active');
     if (explorerScreenEl) explorerScreenEl.classList.add('active');
-    if (mockTestScreenEl) mockTestScreenEl.style.display = 'none';
-    if (explorerScreenEl) explorerScreenEl.style.display = 'flex';
   }
+  // startQuiz() sets explorerScreen's inline display directly (bypassing the
+  // CSS class above) while a quiz is running. Clear that inline override here
+  // — on every popstate, not just when the quiz engine still happens to be
+  // visible — so the .active class fully controls visibility again and a
+  // later forward click (which only toggles classList) isn't fought by a
+  // stale inline style left over from a previous back-press.
+  if (explorerScreenEl) explorerScreenEl.style.display = '';
+  if (mockTestScreenEl) mockTestScreenEl.style.display = '';
 
   // If currently inside the quiz engine, exit back to the explorer first
   const quizEngine = document.getElementById('quizEngineBox');
