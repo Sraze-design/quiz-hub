@@ -1841,6 +1841,14 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       <div class="mock-subject-row">
         <div class="mock-subject-left">
           <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Maths SSC PYQ</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
           <span class="mock-subject-name">Reasoning</span>
         </div>
         <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
@@ -2595,7 +2603,13 @@ async function generateMockTest() {
   showMockTestLoader(true);
 
   try {
-    let combinedPool = [];
+    // Subjects in this set stay as fixed, separate blocks in row order
+    // (no mixing between them). Everything else gets pooled together and
+    // shuffled as one combined group, placed after these fixed blocks.
+    const FIXED_ORDER_SUBJECTS = new Set(['maths', 'maths ssc pyq', 'reasoning', 'english']);
+
+    let orderedPool = [];   // Maths, Maths SSC PYQ, Reasoning, English — kept in block order
+    let mixedGroupPool = []; // Computer, History, Polity, ... Static GK — combined & shuffled together
     const shortages = [];
 
     for (const selection of selections) {
@@ -2623,8 +2637,18 @@ async function generateMockTest() {
       // Shuffle this subject's merged pool, then randomly pick the requested count.
       shuffleQuestionsOrder(subjectPool);
       const picked = subjectPool.slice(0, Math.min(selection.qty, subjectPool.length));
-      combinedPool = combinedPool.concat(picked);
+
+      if (FIXED_ORDER_SUBJECTS.has(selection.name.trim().toLowerCase())) {
+        orderedPool = orderedPool.concat(picked);
+      } else {
+        mixedGroupPool = mixedGroupPool.concat(picked);
+      }
     }
+
+    // Shuffle the "mixed group" subjects together, then place them after
+    // the fixed-order blocks (Maths, Maths SSC PYQ, Reasoning, English).
+    shuffleQuestionsOrder(mixedGroupPool);
+    let combinedPool = orderedPool.concat(mixedGroupPool);
 
     if (!combinedPool.length) {
       alert("No matching quiz questions were found for the selected subjects.");
