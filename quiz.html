@@ -2061,6 +2061,11 @@ async function buildGlobalQuizIndex() {
     allFlattenedQuizzes = await response.json();
     isHistoryNav = true; // initial render should not push a duplicate history entry
     renderSubjects();
+    // Same history-floor protection as the popstate handler's default case:
+    // push one real extra "subjects" entry on top so that even the very
+    // first back-press (before the user has navigated anywhere) lands back
+    // on Home instead of exiting to a blank page.
+    history.pushState({ screen: 'subjects' }, '');
   } catch (error) {
     showError("Network Error Occurred", "Kindly check your internet connection or verify index.json deployment.");
   } finally {
@@ -2134,6 +2139,14 @@ window.addEventListener('popstate', (e) => {
       break;
     default:
       renderSubjects();
+      // Re-arm the history floor: renderSubjects() already reset the
+      // isHistoryNav flag (via its own internal pushExplorerHistory call,
+      // which no-ops during a back/forward nav like this one), so this call
+      // performs a REAL push. This means Home is never the true bottom of
+      // the browser's history — there's always one more "subjects" entry
+      // underneath it, so back/swipe-back can never exhaust past Home into
+      // a blank page. Pressing back while on Home simply re-lands on Home.
+      history.pushState({ screen: 'subjects' }, '');
   }
 });
 
