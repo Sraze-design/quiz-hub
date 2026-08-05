@@ -2099,7 +2099,12 @@ window.addEventListener('popstate', (e) => {
   const quizEngine = document.getElementById('quizEngineBox');
   if (quizEngine && quizEngine.style.display !== 'none') {
     quizEngine.style.display = 'none';
-    document.getElementById('explorerScreen').style.display = 'flex';
+    // Only force the Explorer screen visible if that's actually where we're
+    // headed — if we're returning to the Mock Test screen instead, leave
+    // this alone so it doesn't fight with the classList toggle above.
+    if (state.screen !== 'mockTest') {
+      document.getElementById('explorerScreen').style.display = 'flex';
+    }
     document.getElementById('score-card').style.display = 'none';
     clearInterval(timer);
     updateAIButtonVisibility();
