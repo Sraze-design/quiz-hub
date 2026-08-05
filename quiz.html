@@ -401,6 +401,75 @@ body {
   transition: var(--transition);
 }
 
+/* ===== Mock Test Screen (UI ONLY — no functionality) ===== */
+.mock-subject-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  border: 1px solid #edf2f7;
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+.mock-subject-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mock-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.mock-subject-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.mock-qty-input {
+  width: 68px;
+  padding: 10px 8px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  background: #f8fafc;
+  transition: var(--transition);
+}
+.mock-qty-input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+.mock-generate-bar {
+  position: sticky;
+  bottom: 0;
+  background: var(--card-bg);
+  padding: 18px 0 6px;
+  margin-top: 14px;
+}
+.mock-generate-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+  transition: var(--transition);
+}
+.mock-generate-btn:active {
+  transform: scale(0.97);
+}
+
 /* Quiz Screen Custom UI Overrides - SINGLE PREMIUM CARD LAYOUT */
 #quizEngineBox {
   background: var(--bg-app);
@@ -1733,6 +1802,138 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
   </div>
 
+  <!-- ===== NEW: MOCK TEST BUILDER SCREEN (UI ONLY, NO FUNCTIONALITY) ===== -->
+  <div id="mockTestScreen" class="explorer-screen">
+
+    <div class="action-bar" style="display:flex;">
+      <button class="back-circle-btn" onclick="closeMockTestScreen()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <h3 class="action-title">🎯 Mock Test</h3>
+    </div>
+
+    <div class="subject-hero-banner">
+      <div class="hero-icon-container">🎯</div>
+      <div class="hero-text-container">
+        <h4>Build Your Mock Test</h4>
+        <p>Tick the subjects you want and set how many questions from each.</p>
+      </div>
+    </div>
+
+    <!-- Mock Test generation loading indicator (reuses existing loader CSS/animation) -->
+    <div id="mockTestLoader" style="display:none;" class="premium-loader-screen">
+      <div class="premium-spinner-box">
+        <div class="premium-double-ring"></div>
+        <div class="premium-loading-text">Fetching quiz questions...</div>
+      </div>
+    </div>
+
+    <div class="list-container" id="mockSubjectList">
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Maths</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Reasoning</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">English</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Computer</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">History</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Polity</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Geography</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Economics</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Physics</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Chemistry</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Biology</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+      <div class="mock-subject-row">
+        <div class="mock-subject-left">
+          <input type="checkbox" class="mock-checkbox">
+          <span class="mock-subject-name">Current Affairs</span>
+        </div>
+        <input type="number" class="mock-qty-input" placeholder="Qty" min="0">
+      </div>
+
+    </div>
+
+    <div class="mock-generate-bar">
+      <button class="mock-generate-btn" type="button">🚀 Generate Mock Test</button>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- FLOATING AI ASSISTANT BUTTON & BOTTOM SHEET UI -->
@@ -1926,6 +2127,24 @@ function renderSubjects() {
   document.getElementById('mainExplorerSubline').innerText = "Select your subject and start practicing.";
 
   const subjects = [...new Set(allFlattenedQuizzes.map(q => q.subject))];
+
+  // NEW: Mock Test card — static UI entry, always shown alongside the
+  // dynamically loaded Subject cards. No functionality beyond opening
+  // the new Mock Test screen.
+  const mockTestCard = document.createElement('div');
+  mockTestCard.className = 'premium-card';
+  mockTestCard.innerHTML = `
+    <div class="card-meta-box">
+      <div class="card-icon-wrapper" style="background-color: var(--warning-light);">🎯</div>
+      <div class="card-details">
+        <span class="card-main-title">Mock Test</span>
+        <span class="card-subtitle-stats">Create a custom mock test</span>
+      </div>
+    </div>
+    <span class="premium-arrow-action">➜</span>
+  `;
+  mockTestCard.onclick = () => openMockTestScreen();
+  listEl.appendChild(mockTestCard);
 
   if (subjects.length === 0) {
     showEmptyState();
@@ -2216,6 +2435,229 @@ function backToExplorer() {
   history.back();
 }
 
+// ===== NEW: Mock Test screen open/close (UI ONLY — no functionality) =====
+function openMockTestScreen() {
+  document.getElementById('explorerScreen').classList.remove('active');
+  document.getElementById('mockTestScreen').classList.add('active');
+}
+
+function closeMockTestScreen() {
+  document.getElementById('mockTestScreen').classList.remove('active');
+  document.getElementById('explorerScreen').classList.add('active');
+}
+
+// ===== NEW: Mock Test generation logic =====
+// Stores the freshly generated mock test question pool. The quiz engine is
+// NOT started from here — this only builds and stores the data so a later
+// step can hand it to the existing engine (same shape as loadQuizData's
+// `data` array: objects with .o / .a etc.).
+let finalData = [];
+
+// Extracts the `const data = [...]` array from a fetched quiz file's source
+// text. This mirrors, line for line, the extraction approach already used
+// inside loadQuizData() — duplicated here (not refactored out of
+// loadQuizData) so the existing quiz engine loader is left untouched.
+function extractQuizArrayFromSource(source) {
+  let quizQuestions;
+  try {
+    quizQuestions = new Function(source + "\nreturn data;")();
+  } catch (e) {
+    const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+    if (!match) throw e;
+    quizQuestions = new Function("return " + match[1])();
+  }
+  if (!Array.isArray(quizQuestions) || !quizQuestions.length) {
+    throw new Error("Invalid quiz data structure");
+  }
+  return quizQuestions;
+}
+
+// Fetches a single quiz file and returns its parsed question array.
+// Reuses the exact same fetch pattern as loadQuizData (`fetch('./' + path)`).
+async function fetchQuizQuestions(quizPath) {
+  const response = await fetch(`./${quizPath}`);
+  if (!response.ok) throw new Error("File Download Failed: " + quizPath);
+  const source = await response.text();
+  return extractQuizArrayFromSource(source);
+}
+
+// Reads the (UI-only, unmodified) Mock Test screen checkboxes/qty inputs
+// and returns the user's selections, e.g. [{ name: "History", qty: 10 }, ...]
+function readMockTestSelections() {
+  const rows = document.querySelectorAll('#mockSubjectList .mock-subject-row');
+  const selections = [];
+  rows.forEach(row => {
+    const checkbox = row.querySelector('.mock-checkbox');
+    const nameEl = row.querySelector('.mock-subject-name');
+    const qtyEl = row.querySelector('.mock-qty-input');
+    if (!checkbox || !checkbox.checked) return;
+    const name = nameEl ? nameEl.textContent.trim() : '';
+    const qty = qtyEl ? parseInt(qtyEl.value, 10) : 0;
+    if (!name || !qty || qty <= 0) return;
+    selections.push({ name, qty });
+  });
+  return selections;
+}
+
+// Filters the existing global quiz index (allFlattenedQuizzes, loaded from
+// index.json by buildGlobalQuizIndex) for a given selected subject/category
+// name, matching against either the `subject` or `category` field.
+function collectQuizPathsForSelection(selectionName) {
+  const target = selectionName.trim().toLowerCase();
+  const matches = allFlattenedQuizzes.filter(q =>
+    (q.subject && q.subject.trim().toLowerCase() === target) ||
+    (q.category && q.category.trim().toLowerCase() === target)
+  );
+  return [...new Set(matches.map(q => q.path))];
+}
+
+// ===== NEW: Mock Test input validations =====
+// Validates the Mock Test screen's checkboxes/qty inputs BEFORE any fetching
+// begins. Returns { valid: true } on success, or { valid: false, message }
+// with a user-facing message describing the first problem found. Does not
+// touch the fetch/engine logic below — purely a pre-flight check.
+function validateMockTestInputs() {
+  const rows = document.querySelectorAll('#mockSubjectList .mock-subject-row');
+  const checkedRows = [];
+
+  rows.forEach(row => {
+    const checkbox = row.querySelector('.mock-checkbox');
+    if (checkbox && checkbox.checked) checkedRows.push(row);
+  });
+
+  // Validation: at least one subject must be selected.
+  if (!checkedRows.length) {
+    return { valid: false, message: "Please select at least one subject." };
+  }
+
+  for (const row of checkedRows) {
+    const nameEl = row.querySelector('.mock-subject-name');
+    const qtyEl = row.querySelector('.mock-qty-input');
+    const name = nameEl ? nameEl.textContent.trim() : "this subject";
+    const rawValue = qtyEl ? qtyEl.value.trim() : "";
+
+    // Validation: question count cannot be empty.
+    if (rawValue === "") {
+      return { valid: false, message: `Please enter the number of questions for ${name}.` };
+    }
+
+    const qty = Number(rawValue);
+
+    if (Number.isNaN(qty)) {
+      return { valid: false, message: `Please enter a valid number of questions for ${name}.` };
+    }
+
+    // Validation: question count cannot be negative.
+    if (qty < 0) {
+      return { valid: false, message: `Question count cannot be negative for ${name}.` };
+    }
+  }
+
+  return { valid: true };
+}
+
+// Shows/hides the Mock Test screen's own loading indicator (separate element
+// from the existing #explorerLoader, since that lives on a different screen
+// and would not be visible while the Mock Test screen is active).
+function showMockTestLoader(isVisible) {
+  const loader = document.getElementById('mockTestLoader');
+  if (loader) loader.style.display = isVisible ? "block" : "none";
+}
+
+// Main entry point wired to the existing "🚀 Generate Mock Test" button.
+// Builds `finalData`, then hands it to the existing quiz engine via
+// startQuiz(finalData) — same engine the normal per-quiz flow uses.
+async function generateMockTest() {
+  const validation = validateMockTestInputs();
+  if (!validation.valid) {
+    alert(validation.message);
+    return;
+  }
+
+  const selections = readMockTestSelections();
+  if (!selections.length) {
+    alert("Please tick at least one subject and enter a quantity greater than 0.");
+    return;
+  }
+
+  const btn = document.querySelector('.mock-generate-btn');
+  const originalBtnText = btn ? btn.textContent : null;
+  if (btn) { btn.disabled = true; btn.textContent = "Generating..."; }
+  showLoader(true);
+  showMockTestLoader(true);
+
+  try {
+    let combinedPool = [];
+    const shortages = [];
+
+    for (const selection of selections) {
+      const quizPaths = collectQuizPathsForSelection(selection.name);
+      if (!quizPaths.length) continue; // no matching quizzes for this subject
+
+      // Fetch every quiz file for this subject and merge all their questions.
+      let subjectPool = [];
+      for (const path of quizPaths) {
+        try {
+          const questions = await fetchQuizQuestions(path);
+          subjectPool = subjectPool.concat(questions);
+        } catch (err) {
+          console.error("Skipping quiz file due to error:", path, err);
+        }
+      }
+      if (!subjectPool.length) continue;
+
+      // Validation: if requested questions exceed what's available, remember
+      // it so we can show a proper message to the user after generation.
+      if (selection.qty > subjectPool.length) {
+        shortages.push(`${selection.name}: requested ${selection.qty}, only ${subjectPool.length} available`);
+      }
+
+      // Shuffle this subject's merged pool, then randomly pick the requested count.
+      shuffleQuestionsOrder(subjectPool);
+      const picked = subjectPool.slice(0, Math.min(selection.qty, subjectPool.length));
+      combinedPool = combinedPool.concat(picked);
+    }
+
+    if (!combinedPool.length) {
+      alert("No matching quiz questions were found for the selected subjects.");
+      return;
+    }
+
+    if (shortages.length) {
+      alert(
+        "Some subjects had fewer questions available than requested:\n" +
+        shortages.join("\n") +
+        "\n\nThe mock test will include all available questions for these subjects."
+      );
+    }
+
+    // Final shuffle across all subjects combined, then store.
+    shuffleQuestionsOrder(combinedPool);
+    finalData = combinedPool;
+
+    // Hand the generated pool to the existing quiz engine — same engine
+    // used by the normal per-file quiz flow, just fed a combined dataset.
+    currentQuizTitle = "Mock Test";
+    currentSubject = null;
+    currentCategory = null;
+    currentChapter = null;
+    closeMockTestScreen();
+    startQuiz(finalData);
+  } catch (err) {
+    console.error(err);
+    alert("Failed to generate mock test: " + err.message);
+  } finally {
+    showLoader(false);
+    showMockTestLoader(false);
+    if (btn) { btn.disabled = false; btn.textContent = originalBtnText; }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const generateBtn = document.querySelector('.mock-generate-btn');
+  if (generateBtn) generateBtn.addEventListener('click', generateMockTest);
+});
+
 function showEmptyState() {
   const listEl = document.getElementById('explorerList');
   listEl.innerHTML = `
@@ -2225,6 +2667,45 @@ function showEmptyState() {
       <div class="state-desc">Try modifying your search criteria or explore another system folder context category.</div>
     </div>
   `;
+}
+
+// ===== Shared Quiz Engine Starter =====
+// Single entry point that takes a finished question array (same shape the
+// parser already produces: objects with .o / .a etc.) and boots the
+// EXISTING quiz engine — state reset, screen swap, history entry, first
+// question render. This is the exact same logic loadQuizData already used
+// to kick off a quiz; it has been pulled out into its own function so the
+// engine itself is never duplicated. Both the normal per-file quiz flow
+// (loadQuizData) and the new Mock Test flow (generateMockTest) call this
+// same function to start a quiz.
+function startQuiz(quizQuestions, quizPath) {
+  if (!Array.isArray(quizQuestions) || !quizQuestions.length) {
+    throw new Error("Invalid quiz data structure arrays parameters context context");
+  }
+
+  data = quizQuestions;
+  shuffleQuestionsOrder(data); // randomize question order every load
+  shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
+  ORIGINAL_DATA = quizQuestions.slice();
+  ORIGINAL_TOTAL = data.length;
+  currentQ = 0; score = 0; currentStreak = 0; maxStreak = 0; elapsed = 0;
+  timerRunning = true; isPaused = false;
+  answered = new Array(data.length).fill(false);
+  selectedAnswers = new Array(data.length).fill(null);
+  answerCorrect = new Array(data.length).fill(null);
+  questionTimes = new Array(data.length).fill(0);
+
+  document.getElementById('explorerScreen').style.display='none';
+  document.getElementById('quizEngineBox').style.display='flex';
+  document.getElementById('quiz-box').style.display='flex';
+  document.getElementById('controls').style.display='flex';
+  document.getElementById('jumpBox').style.display='flex';
+  document.querySelector('.floating-quiz-header').style.display='flex';
+  pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath || null });
+
+  showQ();
+  resetQuestionTimer();
+  updateAIButtonVisibility();
 }
 
 async function loadQuizData(quizPath) {
@@ -2251,30 +2732,9 @@ async function loadQuizData(quizPath) {
       quizQuestions = new Function("return " + match[1])();
     }
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
-    
-    data=quizQuestions;
-    shuffleQuestionsOrder(data); // randomize question order every load
-    shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
-    ORIGINAL_DATA=quizQuestions.slice();
-    ORIGINAL_TOTAL=data.length;
-    currentQ=0; score=0; currentStreak=0; maxStreak=0; elapsed=0;
-    timerRunning=true; isPaused=false;
-    answered=new Array(data.length).fill(false);
-    selectedAnswers=new Array(data.length).fill(null);
-    answerCorrect=new Array(data.length).fill(null);
-    questionTimes=new Array(data.length).fill(0);
-    
-    document.getElementById('explorerScreen').style.display='none';
-    document.getElementById('quizEngineBox').style.display='flex';
-    document.getElementById('quiz-box').style.display='flex';
-    document.getElementById('controls').style.display='flex';
-    document.getElementById('jumpBox').style.display='flex';
-    document.querySelector('.floating-quiz-header').style.display='flex';
-    pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
 
-    showQ();
-    resetQuestionTimer();
-    updateAIButtonVisibility();
+    // Hand off the parsed questions to the shared quiz engine starter.
+    startQuiz(quizQuestions, quizPath);
   }catch(err){
     console.error(err);
     alert("System core failed loading target execution data streams cleanly parameters context variables: "+err.message);
