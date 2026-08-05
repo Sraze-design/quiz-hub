@@ -2645,7 +2645,7 @@ async function generateMockTest() {
     currentCategory = null;
     currentChapter = null;
     closeMockTestScreen();
-    startQuiz(finalData);
+    startQuiz(finalData, null, true); // true = skip global shuffle, keep subject-wise block order
   } catch (err) {
     console.error(err);
     alert("Failed to generate mock test: " + err.message);
@@ -2681,13 +2681,15 @@ function showEmptyState() {
 // engine itself is never duplicated. Both the normal per-file quiz flow
 // (loadQuizData) and the new Mock Test flow (generateMockTest) call this
 // same function to start a quiz.
-function startQuiz(quizQuestions, quizPath) {
+function startQuiz(quizQuestions, quizPath, skipShuffle) {
   if (!Array.isArray(quizQuestions) || !quizQuestions.length) {
     throw new Error("Invalid quiz data structure arrays parameters context context");
   }
 
   data = quizQuestions;
-  shuffleQuestionsOrder(data); // randomize question order every load
+  if (!skipShuffle) {
+    shuffleQuestionsOrder(data); // randomize question order every load
+  } // Mock Test flow passes skipShuffle=true to preserve its subject-wise block order
   shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
   ORIGINAL_DATA = quizQuestions.slice();
   ORIGINAL_TOTAL = data.length;
