@@ -3468,27 +3468,16 @@ async function requestGeminiResponse() {
   const timeoutId = setTimeout(() => {
     didTimeout = true;
     if (currentAbortController) currentAbortController.abort();
-  }, 60000); // matches worker's OVERALL_TIMEOUT (60s)
+  }, 75000); // matches worker's OVERALL_TIMEOUT (75s)
 
   try {
-    // Mirrors the worker's isMathOrReasoning check — math/reasoning subjects
-    // are the ones the worker routes to FLASH_MODELS first. Thinking is
-    // switched off only for those, since that's where we're testing the
-    // speed/accuracy tradeoff; other subjects are left untouched.
-    const normalizedSubjectClient = (currentSubject || "")
-      .trim().toLowerCase()
-      .replace(/[_\-/]+/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    const isMathSubjectClient =
-      ["maths", "math", "reasoning"].some((kw) => normalizedSubjectClient.includes(kw)) ||
-      normalizedSubjectClient.startsWith("previous year exam");
-
+    // Thinking is left at Gemini's default for ALL subjects (including
+    // Math/Reasoning) — the earlier thinkingBudget:0 override was disabled
+    // here because it was trading away accuracy for speed. The worker's
+    // adaptThinkingConfigForModel() is a no-op when no generationConfig.thinkingConfig
+    // is sent, so leaving that worker code in place is harmless.
     const payload = {
       subject: currentSubject || "",
-      ...(isMathSubjectClient
-        ? { generationConfig: { thinkingConfig: { thinkingBudget: 0 } } }
-        : {}),
       systemInstruction: {
         parts: [{
           text: `Reply ONLY in plain Unicode text.
