@@ -830,6 +830,115 @@ text-align:center;
   transform: scale(1.03);
 }
 
+/* ALL TIME BEST Leaderboard Card (added) */
+.all-time-best-card {
+  position: relative;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #f2c14e;
+  border-radius: 20px;
+  padding: 16px 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(217, 119, 6, 0.14);
+}
+
+.atb-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #92400e;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.atb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.atb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.atb-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.atb-icon.orange { background: #fef3c7; color: #d97706; }
+.atb-icon.blue { background: #dbeafe; color: #2563eb; }
+.atb-icon.green { background: #dcfce7; color: #16a34a; }
+.atb-icon.purple { background: #ede9fe; color: #7c3aed; }
+
+.atb-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #78716c;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.atb-value {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.3;
+  word-break: break-word;
+}
+.atb-value.gold { color: #d97706; }
+.atb-value.blue { color: #2563eb; }
+.atb-value.green { color: #16a34a; }
+
+.atb-new-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.7);
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  white-space: nowrap;
+  z-index: 5;
+}
+.atb-new-badge.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  animation: atbPulse 0.6s ease-in-out 2;
+}
+@keyframes atbPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.08); }
+}
+
+@media (max-width: 380px) {
+  .all-time-best-card { padding: 14px 8px; }
+  .atb-grid { gap: 3px; }
+  .atb-label { font-size: 8.5px; }
+  .atb-value { font-size: 11px; }
+  .atb-icon { width: 28px; height: 28px; }
+}
+
 /* Modern Analytics Grid */
 .stats-grid-dashboard {
   display: grid;
@@ -1661,6 +1770,42 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
         <!-- REDESIGNED PREMIUM RESULT SCREEN PAGE -->
         <div id="score-card" style="display:none;" class="premium-result-screen">
+          <!-- ALL TIME BEST Leaderboard Card (added) -->
+          <div class="all-time-best-card" id="allTimeBestCard">
+            <div class="atb-new-badge" id="atbNewBadge">🏆 NEW ALL TIME BEST!</div>
+            <div class="atb-title">🏆 ALL TIME BEST</div>
+            <div class="atb-grid">
+              <div class="atb-item">
+                <div class="atb-icon orange">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="6"/><path d="M9 14l-1.5 7L12 19l4.5 2L15 14"/></svg>
+                </div>
+                <span class="atb-label">Best Score</span>
+                <span class="atb-value gold" id="atbBestScore">--</span>
+              </div>
+              <div class="atb-item">
+                <div class="atb-icon blue">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <span class="atb-label">Avg Time / Q</span>
+                <span class="atb-value blue" id="atbAvgTime">--:--</span>
+              </div>
+              <div class="atb-item">
+                <div class="atb-icon green">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <span class="atb-label">Total Time</span>
+                <span class="atb-value green" id="atbTotalTime">--:--</span>
+              </div>
+              <div class="atb-item">
+                <div class="atb-icon purple">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <span class="atb-label">Last Updated</span>
+                <span class="atb-value" id="atbUpdated">--</span>
+              </div>
+            </div>
+          </div>
+
           <div class="result-hero-card">
             <!-- Premium Gold Trophy SVG -->
             <div class="trophy-wrapper">
@@ -2041,6 +2186,9 @@ let currentSubject = null;
 let currentCategory = null;
 let currentChapter = null;
 let currentQuizTitle = "";
+/* Leaderboard API integration (added) */
+const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
+let currentQuizPath = "";
 
 let browserId = localStorage.getItem("browserId");
 if(!browserId){
@@ -2765,6 +2913,7 @@ function startQuiz(quizQuestions, quizPath, skipShuffle) {
     throw new Error("Invalid quiz data structure arrays parameters context context");
   }
 
+  currentQuizPath = quizPath || "mock-test"; /* added: track path for leaderboard API */
   data = quizQuestions;
   if (!skipShuffle) {
     shuffleQuestionsOrder(data); // randomize question order every load
@@ -3306,6 +3455,84 @@ document.getElementById('score-card').style.background='var(--card-bg)';
 document.getElementById('score-card').style.display='block';
 document.querySelector('.floating-quiz-header').style.display='none';
 updateAIButtonVisibility();
+
+/* Leaderboard API integration (added) - uses only existing finalScore, avgSec, elapsed, currentQuizPath */
+if(currentQuizPath){
+  fetchAllTimeBest(currentQuizPath);
+  postQuizResultToLeaderboard(currentQuizPath, finalScore, avgSec, elapsed);
+}
+}
+
+/* Leaderboard API helper functions (added) */
+async function fetchAllTimeBest(quizPath){
+  try{
+    const res=await fetch(`${API_URL}/best?quiz=${encodeURIComponent(quizPath)}`);
+    if(!res.ok) throw new Error("Failed to fetch all-time best");
+    const record=await res.json();
+    renderAllTimeBest(record);
+  }catch(e){
+    console.error("All Time Best fetch failed:",e);
+  }
+}
+
+function renderAllTimeBest(record){
+  if(!record) return;
+  const bestScoreEl=document.getElementById('atbBestScore');
+  const avgTimeEl=document.getElementById('atbAvgTime');
+  const totalTimeEl=document.getElementById('atbTotalTime');
+  const updatedEl=document.getElementById('atbUpdated');
+  const totalPoints=document.getElementById('total')?document.getElementById('total').innerText:'';
+  if(bestScoreEl){
+    bestScoreEl.innerText=(record.bestScore!==undefined&&record.bestScore!==null)
+      ? `${Number(record.bestScore).toFixed(2)}${totalPoints?' / '+totalPoints:''}`
+      : '--';
+  }
+  if(avgTimeEl) avgTimeEl.innerText=formatMMSS(record.bestAvgTime);
+  if(totalTimeEl) totalTimeEl.innerText=formatMMSS(record.bestTotalTime);
+  if(updatedEl) updatedEl.innerText=record.updatedAt?formatUpdatedAt(record.updatedAt):'--';
+}
+
+function formatMMSS(sec){
+  sec=Math.round(Number(sec)||0);
+  const m=Math.floor(sec/60),s=sec%60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function formatUpdatedAt(iso){
+  try{
+    const d=new Date(iso);
+    if(isNaN(d.getTime())) return iso;
+    const datePart=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    const timePart=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    return `${datePart} ${timePart}`;
+  }catch(e){
+    return iso;
+  }
+}
+
+async function postQuizResultToLeaderboard(quizPath,finalScoreVal,avgTimeVal,totalTimeVal){
+  try{
+    const res=await fetch(`${API_URL}/update`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({quiz:quizPath,score:finalScoreVal,avgTime:avgTimeVal,totalTime:totalTimeVal})
+    });
+    if(!res.ok) throw new Error("Failed to update leaderboard");
+    const result=await res.json();
+    if(result&&result.updated&&result.record){
+      renderAllTimeBest(result.record);
+      showNewBestAnimation();
+    }
+  }catch(e){
+    console.error("Leaderboard update failed:",e);
+  }
+}
+
+function showNewBestAnimation(){
+  const badge=document.getElementById('atbNewBadge');
+  if(!badge) return;
+  badge.classList.add('show');
+  setTimeout(()=>badge.classList.remove('show'),3200);
 }
 
 function next() {
