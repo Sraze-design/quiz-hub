@@ -4041,7 +4041,7 @@ async function requestGeminiResponse() {
   const timeoutId = setTimeout(() => {
     didTimeout = true;
     if (currentAbortController) currentAbortController.abort();
-  }, 60000); // matches worker's OVERALL_TIMEOUT (60s)
+  }, 75000); // matches worker's OVERALL_TIMEOUT (75s)
 
   try {
     // Mirrors the worker's isMathOrReasoning check — math/reasoning subjects
