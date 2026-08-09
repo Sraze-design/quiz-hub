@@ -404,10 +404,20 @@ body {
 /* Quiz Screen Custom UI Overrides - SINGLE PREMIUM CARD LAYOUT */
 #quizEngineBox {
   background: var(--bg-app);
-  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 0;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  height: 100dvh;
+  height: calc(var(--real-vh, 1vh) * 100);
+  z-index: 50;
+  overflow: hidden;
 }
 
 /* Single Parent Quiz Card */
@@ -420,6 +430,7 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
 }
 
 .floating-quiz-header {
@@ -430,7 +441,9 @@ body {
   flex-direction: column;
   background: transparent;
   padding: 0;
+  padding-top: env(safe-area-inset-top);
   border-bottom: none;
+  flex-shrink: 0;
 }
 
 /* Light top bar (inverted): pause ring + big live timer + logo + menu */
@@ -561,6 +574,9 @@ body {
 .quiz-main-content-area {
   padding: 14px;
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
 }
@@ -673,6 +689,7 @@ body {
   align-items: center;
   gap: 8px;
   margin-top: 16px;
+  flex-shrink: 0;
 }
 .footer-nav-btn{
   flex:1;
@@ -2344,6 +2361,7 @@ window.addEventListener('popstate', (e) => {
     timerRunning = false;
     isPaused = true;
     updateAIButtonVisibility();
+    if (typeof lockPageScrollForQuiz === 'function') lockPageScrollForQuiz(false);
   }
 
   const searchInput = document.getElementById('explorerSearch');
@@ -2741,6 +2759,8 @@ async function loadQuizData(quizPath) {
     document.getElementById('controls').style.display='flex';
     document.getElementById('jumpBox').style.display='flex';
     document.querySelector('.floating-quiz-header').style.display='flex';
+    if (typeof setRealVh === 'function') setRealVh();
+    if (typeof lockPageScrollForQuiz === 'function') lockPageScrollForQuiz(true);
     pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
 
     showQ();
@@ -4276,6 +4296,38 @@ function onQuestionChangeAI() {
 document.addEventListener('DOMContentLoaded', () => {
   updateAIButtonVisibility();
 });
+
+// ===== Real viewport height fix (mobile address-bar safe) =====
+// window.visualViewport reflects the space actually visible on screen,
+// unlike 100vh/100dvh which can be inconsistent across mobile browsers.
+// This keeps the quiz header/footer from ever landing below the visible fold.
+function setRealVh() {
+  const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+  document.documentElement.style.setProperty('--real-vh', (h / 100) + 'px');
+}
+setRealVh();
+window.addEventListener('resize', setRealVh);
+window.addEventListener('orientationchange', setRealVh);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', setRealVh);
+  window.visualViewport.addEventListener('scroll', setRealVh);
+}
+
+// Lock background page scroll while the quiz screen is open, so the
+// browser's address bar can't show/hide mid-quiz and shift the layout.
+function lockPageScrollForQuiz(lock) {
+  if (lock) {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+  } else {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+  }
+}
 // ===== AI Image Upload Logic =====
 
 const aiCameraInput = document.getElementById("aiCameraInput"); const
