@@ -643,6 +643,213 @@ text-align:center;
   cursor: pointer;
 }
 
+/* Question Palette trigger (replaces the old jump-to-question input) */
+.palette-trigger-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--dark);
+}
+.palette-trigger-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.palette-trigger-text {
+  font-size: 13px;
+  font-weight: 700;
+  flex: 1;
+  text-align: left;
+}
+.palette-trigger-pill {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.palette-trigger-btn:disabled,
+.palette-trigger-btn[disabled] {
+  cursor: not-allowed;
+}
+
+/* Question Palette bottom sheet */
+#question-palette-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  transform: translateY(100%);
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  background: #ffffff;
+  box-shadow: 0 -10px 40px rgba(15, 23, 42, 0.2);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+#question-palette-sheet.active {
+  transform: translateY(0);
+}
+#palette-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#palette-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.palette-sheet-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  touch-action: none;
+  cursor: grab;
+}
+.palette-sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 800;
+}
+.palette-sheet-close {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+.palette-sheet-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.palette-sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 20px calc(18px + env(safe-area-inset-bottom));
+  background: #ffffff;
+}
+.palette-legend {
+  display: flex;
+  border: 1px solid #edf2f7;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.palette-legend-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px;
+}
+.palette-legend-item + .palette-legend-item {
+  border-left: 1px solid #edf2f7;
+}
+.palette-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.palette-legend-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  flex: 1;
+}
+.palette-legend-value {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+}
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.palette-q-btn {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #94a3b8;
+  transition: var(--transition);
+  position: relative;
+}
+.palette-q-btn:active {
+  transform: scale(0.92);
+}
+.palette-q-btn.pq-answered {
+  background: var(--success);
+}
+.palette-q-btn.pq-unanswered {
+  background: var(--danger);
+}
+.palette-q-btn.pq-current {
+  background: #ffffff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+.palette-sheet-footer {
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+.palette-submit-btn {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: var(--success);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
 /* Premium Metric Dashboard Result screen (REDESIGNED VIZ) */
 .premium-result-screen {
   padding: 12px 12px;
@@ -1652,8 +1859,13 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         
         <!-- Quick Navigation Jump Control Module Panel -->
         <div id="jumpBox" class="jump-box-premium">
-          <input id="jumpNo" type="number" class="jump-input-premium" placeholder="Jump to Question No...">
-          <button class="jump-btn-premium" onclick="goToQuestion(document.getElementById('jumpNo').value)">Go</button>
+          <button id="paletteOpenBtn" class="palette-trigger-btn" onclick="openQuestionPalette()">
+            <span class="palette-trigger-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            </span>
+            <span class="palette-trigger-text">Question Palette</span>
+            <span class="palette-trigger-pill" id="paletteTriggerPill">1/1</span>
+          </button>
         </div>
 
         <div id="quiz-box" style="position:relative; display:flex; flex-direction:column;">
@@ -1954,6 +2166,39 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     <button id="aiSendBtn" class="ai-send-btn" onclick="sendUserMessage()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
+  </div>
+</div>
+
+<!-- QUESTION PALETTE (Testbook-style navigator) -->
+<div id="palette-overlay" onclick="closeQuestionPalette()"></div>
+
+<div id="question-palette-sheet">
+  <div class="palette-sheet-header">
+    <div class="palette-sheet-title">
+      <span style="font-size: 18px;">🗂️</span>
+      <span>Question Palette</span>
+    </div>
+    <button class="palette-sheet-close" onclick="closeQuestionPalette()">✕</button>
+  </div>
+
+  <div class="palette-sheet-body">
+    <div class="palette-legend">
+      <div class="palette-legend-item">
+        <span class="palette-legend-dot" style="background:var(--success);"></span>
+        <span class="palette-legend-label">Answered</span>
+        <span class="palette-legend-value" id="paletteAnsweredCount">0</span>
+      </div>
+      <div class="palette-legend-item">
+        <span class="palette-legend-dot" style="background:var(--danger);"></span>
+        <span class="palette-legend-label">Not Answered</span>
+        <span class="palette-legend-value" id="paletteUnansweredCount">0</span>
+      </div>
+    </div>
+    <div class="palette-grid" id="paletteGrid"></div>
+  </div>
+
+  <div class="palette-sheet-footer">
+    <button class="palette-submit-btn" onclick="closeQuestionPalette(); confirmSubmit();">Submit Test</button>
   </div>
 </div>
 
@@ -2418,6 +2663,7 @@ async function loadQuizData(quizPath) {
     selectedAnswers=new Array(data.length).fill(null);
     answerCorrect=new Array(data.length).fill(null);
     questionTimes=new Array(data.length).fill(0);
+    visited=new Array(data.length).fill(false);
     
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -2702,7 +2948,7 @@ window.addEventListener('load',()=>{
         el.style.pointerEvents=isPaused?'none':'auto';
       }
    });
-   ['backBtn','nextBtn','jumpNo'].forEach(id=>{
+   ['backBtn','nextBtn','paletteOpenBtn'].forEach(id=>{
       const el=document.getElementById(id);
       if(el) el.disabled=isPaused;
    });
@@ -2717,9 +2963,12 @@ let currentStreak=0,maxStreak=0;
 let answered = [];
 let selectedAnswers=[];
 let answerCorrect=[];
+let visited=[];
 
 function showQ() {
 if(data.length === 0) return;
+visited[currentQ]=true;
+updatePaletteTriggerPill();
 document.getElementById('q-text').innerHTML = formatContent(data[currentQ].q);
 const tagBox=document.getElementById('exam-tag');
 if(data[currentQ].tag){tagBox.innerHTML=formatContent(data[currentQ].tag);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
@@ -3004,7 +3253,58 @@ function goToQuestion(qNo){
   currentQ=qNo-1;
   showQ();
   resetQuestionTimer();
-  var j=document.getElementById('jumpNo'); if(j) j.value='';
+}
+
+// ===== Question Palette (Testbook-style navigator) =====
+function updatePaletteTriggerPill(){
+  const pill=document.getElementById('paletteTriggerPill');
+  if(!pill || !data.length) return;
+  const attempted=answered.filter(Boolean).length;
+  pill.textContent = attempted + '/' + data.length;
+}
+
+function renderPaletteGrid(){
+  const grid=document.getElementById('paletteGrid');
+  if(!grid || !data.length) return;
+  grid.innerHTML='';
+  let answeredCount=0, unansweredCount=0;
+  data.forEach((_, i)=>{
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.textContent=i+1;
+    let cls='palette-q-btn';
+    if(answered[i]){
+      cls+=' pq-answered';
+      answeredCount++;
+    } else if(visited[i]){
+      cls+=' pq-unanswered';
+      unansweredCount++;
+    } else {
+      unansweredCount++;
+    }
+    if(i===currentQ) cls+=' pq-current';
+    btn.className=cls;
+    btn.onclick=()=>{
+      goToQuestion(i+1);
+      closeQuestionPalette();
+    };
+    grid.appendChild(btn);
+  });
+  document.getElementById('paletteAnsweredCount').textContent=answeredCount;
+  document.getElementById('paletteUnansweredCount').textContent=unansweredCount;
+  updatePaletteTriggerPill();
+}
+
+function openQuestionPalette(){
+  if(isPaused || !data.length) return;
+  renderPaletteGrid();
+  document.getElementById('question-palette-sheet').classList.add('active');
+  document.getElementById('palette-overlay').classList.add('active');
+}
+
+function closeQuestionPalette(){
+  document.getElementById('question-palette-sheet').classList.remove('active');
+  document.getElementById('palette-overlay').classList.remove('active');
 }
 
 document.getElementById('resumePopupBtn')?.addEventListener('click',()=>{
@@ -3042,7 +3342,7 @@ if(pauseBtn){
 document.getElementById('pauseModal')?.classList.remove('show');
 document.getElementById('pauseFade')?.classList.remove('show');
 
-['backBtn','nextBtn','jumpNo'].forEach(id=>{
+['backBtn','nextBtn','paletteOpenBtn'].forEach(id=>{
  const el=document.getElementById(id);
  if(el){
    el.disabled=false;
@@ -3065,6 +3365,7 @@ if(goBtn) goBtn.disabled=false;
    selectedAnswers=new Array(data.length).fill(null);
    answerCorrect=new Array(data.length).fill(null);
    questionTimes=new Array(data.length).fill(0);
+   visited=new Array(data.length).fill(false);
    document.getElementById('score-card').style.display='none';
    document.getElementById('quiz-box').style.display='flex';
    document.getElementById('controls').style.display='flex';
@@ -3099,6 +3400,7 @@ if(pt) pt.textContent='00:00';
  selectedAnswers=new Array(data.length).fill(null);
  answerCorrect=new Array(data.length).fill(null);
  questionTimes=new Array(data.length).fill(0);
+ visited=new Array(data.length).fill(false);
  document.getElementById('score-card').style.display='none';
  document.getElementById('quiz-box').style.display='flex';
  document.getElementById('controls').style.display='flex';
@@ -3997,6 +4299,53 @@ document.addEventListener('click',function(e){
     sheet.style.transform = '';
     if(diff > 100){
       if(typeof closeAIPanel === 'function') closeAIPanel();
+    }
+    startY = 0; currentY = 0;
+  }
+
+  header.addEventListener('touchstart', onStart, {passive:true});
+  header.addEventListener('touchmove', onMove, {passive:true});
+  header.addEventListener('touchend', onEnd);
+  header.addEventListener('touchcancel', onEnd);
+
+  header.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+})();
+</script>
+
+<script>
+(function(){
+  const header = document.querySelector('.palette-sheet-header');
+  const sheet = document.getElementById('question-palette-sheet');
+  if(!header || !sheet) return;
+
+  let startY = 0, currentY = 0, dragging = false;
+
+  function onStart(e){
+    if(e.target.closest('.palette-sheet-close')) return;
+    dragging = true;
+    startY = (e.touches ? e.touches[0].clientY : e.clientY);
+    currentY = startY;
+    sheet.style.transition = 'none';
+  }
+
+  function onMove(e){
+    if(!dragging) return;
+    currentY = (e.touches ? e.touches[0].clientY : e.clientY);
+    let diff = currentY - startY;
+    if(diff < 0) diff = 0;
+    sheet.style.transform = 'translateY(' + diff + 'px)';
+  }
+
+  function onEnd(){
+    if(!dragging) return;
+    dragging = false;
+    sheet.style.transition = '';
+    const diff = currentY - startY;
+    sheet.style.transform = '';
+    if(diff > 100){
+      if(typeof closeQuestionPalette === 'function') closeQuestionPalette();
     }
     startY = 0; currentY = 0;
   }
