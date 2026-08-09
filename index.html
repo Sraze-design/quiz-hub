@@ -3370,11 +3370,14 @@ function openQuestionPalette(){
   qpSwitchTab('symbols');
   document.getElementById('qp-overlay')?.classList.add('active');
   document.getElementById('qp-panel')?.classList.add('active');
+  const aiBtn = document.getElementById('ai-floating-btn');
+  if(aiBtn) aiBtn.style.display = 'none';
 }
 
 function closeQuestionPalette(){
   document.getElementById('qp-overlay')?.classList.remove('active');
   document.getElementById('qp-panel')?.classList.remove('active');
+  if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 }
 
 
