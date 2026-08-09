@@ -2450,6 +2450,18 @@ async function buildGlobalQuizIndex() {
 let isHistoryNav = false;
 let skipExitConfirmOnce = false;
 
+// True while a test is actively running (started, not yet submitted).
+function isTestInProgressNow() {
+  const activeQuizEngine = document.getElementById('quizEngineBox');
+  const activeQuizBox = document.getElementById('quiz-box');
+  const activeScoreCard = document.getElementById('score-card');
+  return !!(
+    activeQuizEngine && activeQuizEngine.style.display !== 'none' &&
+    activeQuizBox && activeQuizBox.style.display !== 'none' &&
+    (!activeScoreCard || activeScoreCard.style.display === 'none')
+  );
+}
+
 // Shows the styled "Are you sure you want to exit the test?" modal.
 // Calls onYes() only if the user taps Yes; does nothing on No/close.
 function showExitConfirmModal(onYes) {
@@ -2523,15 +2535,7 @@ window.addEventListener('popstate', (e) => {
   // away (so the address/back-stack looks untouched while the modal is
   // up), and only actually exit if the user confirms "Yes".
   if (!skipExitConfirmOnce) {
-    const activeQuizEngine = document.getElementById('quizEngineBox');
-    const activeQuizBox = document.getElementById('quiz-box');
-    const activeScoreCard = document.getElementById('score-card');
-    const testInProgress =
-      activeQuizEngine && activeQuizEngine.style.display !== 'none' &&
-      activeQuizBox && activeQuizBox.style.display !== 'none' &&
-      (!activeScoreCard || activeScoreCard.style.display === 'none');
-
-    if (testInProgress) {
+    if (isTestInProgressNow()) {
       // iOS/iPadOS Safari can get confused (and even fall back to a full
       // page reload — the "Loading items securely..." flash) if we call
       // pushState synchronously from inside a popstate handler that fired
@@ -2591,6 +2595,35 @@ window.addEventListener('popstate', (e) => {
       renderSubjects();
   }
 });
+
+// ===== Block the native edge-swipe-back gesture while a test is active =====
+// The popstate handler above already catches back-navigation after the fact,
+// but on iOS/iPadOS Safari the interactive swipe-back gesture can itself
+// force a full page reload mid-swipe (the "Loading items securely..." flash)
+// before popstate ever gets a chance to run its workaround. The only fully
+// reliable fix is to stop that native gesture from starting in the first
+// place: intercept touches that begin in the left-edge zone Safari uses for
+// the back gesture, and if a test is running, prevent the gesture and show
+// our own exit-confirmation modal immediately instead. history.back() is
+// only called after the user actually taps "Yes", as a normal (non-gesture)
+// navigation, which does not trigger the reload quirk.
+const EDGE_SWIPE_ZONE_PX = 24;
+
+document.addEventListener('touchstart', (e) => {
+  if (!isTestInProgressNow()) return;
+  if (document.getElementById('exitConfirmModal')?.classList.contains('show')) return;
+  if (!e.touches || !e.touches.length) return;
+
+  const touchX = e.touches[0].clientX;
+  if (touchX > EDGE_SWIPE_ZONE_PX) return;
+
+  e.preventDefault();
+
+  showExitConfirmModal(() => {
+    skipExitConfirmOnce = true;
+    history.back();
+  });
+}, { passive: false });
 
 function cleanHumanReadableTitle(rawString) {
   if (!rawString) return '';
