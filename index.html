@@ -2184,6 +2184,18 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         <span class="qp-stats-label">Unanswered Qs</span>
         <span class="qp-stats-value" id="qpUnansweredCount">0</span>
       </div>
+      <div class="qp-stats-sep"></div>
+      <div class="qp-stats-row">
+        <span class="qp-dot" style="background:#10b981;"></span>
+        <span class="qp-stats-label" style="color:#10b981;">Correct Qs</span>
+        <span class="qp-stats-value" id="qpCorrectCount" style="color:#10b981;">0</span>
+      </div>
+      <div class="qp-stats-sep"></div>
+      <div class="qp-stats-row">
+        <span class="qp-dot" style="background:#ef4444;"></span>
+        <span class="qp-stats-label" style="color:#ef4444;">Wrong Qs</span>
+        <span class="qp-stats-value" id="qpWrongCount" style="color:#ef4444;">0</span>
+      </div>
     </div>
 
     <div id="qpGrid" class="qp-grid"></div>
@@ -3325,11 +3337,15 @@ function renderQuestionPalette(){
   if(!grid || typeof data === 'undefined' || !data) return;
   grid.innerHTML = '';
   let answeredCount = 0;
+  let correctCount = 0;
+  let wrongCount = 0;
   for(let i = 0; i < data.length; i++){
     const btn = document.createElement('button');
     btn.textContent = (i + 1);
     const isAnswered = !!answered[i];
     if(isAnswered) answeredCount++;
+    if(isAnswered && answerCorrect[i] === true) correctCount++;
+    if(isAnswered && answerCorrect[i] === false) wrongCount++;
     if(i === currentQ){
       btn.className = 'qp-current';
     } else if(isAnswered && answerCorrect[i] === true){
@@ -3347,8 +3363,12 @@ function renderQuestionPalette(){
   }
   const ansEl = document.getElementById('qpAnsweredCount');
   const unansEl = document.getElementById('qpUnansweredCount');
+  const corrEl = document.getElementById('qpCorrectCount');
+  const wrongEl = document.getElementById('qpWrongCount');
   if(ansEl) ansEl.textContent = answeredCount;
   if(unansEl) unansEl.textContent = (data.length - answeredCount);
+  if(corrEl) corrEl.textContent = correctCount;
+  if(wrongEl) wrongEl.textContent = wrongCount;
   const titleEl = document.getElementById('qpSectionTitle');
   if(titleEl){
     const catLabel = document.getElementById('quizCategoryLabel');
