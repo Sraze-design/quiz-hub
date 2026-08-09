@@ -2427,6 +2427,15 @@ function pushExplorerHistory(state) {
 }
 
 window.addEventListener('popstate', (e) => {
+  // If the question palette is open, this back-navigation exists only to
+  // close it — consume it here and stop, so the quiz/explorer logic below
+  // (which would otherwise exit the whole quiz) never runs.
+  if (qpHistoryPushed) {
+    qpHistoryPushed = false;
+    hideQuestionPaletteUI();
+    return;
+  }
+
   isHistoryNav = true;
   const state = e.state || { screen: 'subjects' };
 
@@ -3524,6 +3533,8 @@ function unlockBodyScroll(){
   }
 }
 
+let qpHistoryPushed = false;
+
 function openQuestionPalette(){
   if(typeof data === 'undefined' || !data || data.length === 0) return;
   renderQuestionPalette();
@@ -3533,13 +3544,30 @@ function openQuestionPalette(){
   const aiBtn = document.getElementById('ai-floating-btn');
   if(aiBtn) aiBtn.style.display = 'none';
   lockBodyScroll();
+  history.pushState({ qpOpen: true }, '');
+  qpHistoryPushed = true;
 }
 
-function closeQuestionPalette(){
+// Hides the panel itself — no history side effects. Called directly by the
+// popstate handler (back button already consumed the history entry there).
+function hideQuestionPaletteUI(){
   document.getElementById('qp-overlay')?.classList.remove('active');
   document.getElementById('qp-panel')?.classList.remove('active');
   if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
   unlockBodyScroll();
+}
+
+// Public close, used by every UI trigger (overlay tap, swipe, question tap,
+// Submit Test button). Goes through history.back() so the pushState from
+// openQuestionPalette() gets consumed instead of lingering as a dead entry
+// that would otherwise absorb the user's next back press for nothing.
+function closeQuestionPalette(){
+  if(qpHistoryPushed){
+    qpHistoryPushed = false;
+    history.back();
+  } else {
+    hideQuestionPaletteUI();
+  }
 }
 
 
