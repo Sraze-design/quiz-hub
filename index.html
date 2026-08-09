@@ -3251,6 +3251,7 @@ window.addEventListener('load',()=>{
    });
    const goBtn=document.querySelector('#jumpBox button');
    if(goBtn) goBtn.disabled=isPaused;
+   updateAIButtonVisibility();
   };
  }
 });
@@ -4001,7 +4002,8 @@ function updateAIButtonVisibility() {
   if (
     quizEngine && quizEngine.style.display !== 'none' &&
     quizBox && quizBox.style.display !== 'none' &&
-    (!scoreCard || scoreCard.style.display === 'none')
+    (!scoreCard || scoreCard.style.display === 'none') &&
+    !isPaused
   ) {
     aiBtn.style.display = 'flex';
   } else {
