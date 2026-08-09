@@ -3473,6 +3473,21 @@ function renderQuestionPalette(){
 
 let _bodyScrollLockCount = 0;
 let _bodyScrollLockY = 0;
+
+// Extra safety net for iOS Safari: position:fixed on <body> alone sometimes
+// still lets a touch "leak" through to the underlying page content while a
+// panel (question palette / AI sheet) is open, causing the page behind to
+// scroll instead of (or in addition to) the panel. This hard-blocks any
+// touchmove that isn't happening inside a designated scrollable area while
+// a lock is active, so background content can never move.
+const SCROLL_LOCK_ALLOWED_SELECTOR = '.qp-body, .ai-chat-body';
+function _blockBackgroundTouchMove(e){
+  if(_bodyScrollLockCount <= 0) return;
+  if(e.target.closest(SCROLL_LOCK_ALLOWED_SELECTOR)) return;
+  e.preventDefault();
+}
+document.addEventListener('touchmove', _blockBackgroundTouchMove, { passive: false });
+
 function lockBodyScroll(){
   if(_bodyScrollLockCount === 0){
     _bodyScrollLockY = window.scrollY || document.documentElement.scrollTop || 0;
