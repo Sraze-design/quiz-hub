@@ -2427,6 +2427,14 @@ function pushExplorerHistory(state) {
 }
 
 window.addEventListener('popstate', (e) => {
+  // If the AI assistant panel is open, this back-navigation exists only to
+  // close it — consume it here and stop.
+  if (aiHistoryPushed) {
+    aiHistoryPushed = false;
+    hideAIPanelUI();
+    return;
+  }
+
   // If the question palette is open, this back-navigation exists only to
   // close it — consume it here and stop, so the quiz/explorer logic below
   // (which would otherwise exit the whole quiz) never runs.
@@ -3897,6 +3905,8 @@ function updateAIButtonVisibility() {
   }
 }
 
+let aiHistoryPushed = false;
+
 function toggleAIPanel() {
   const sheet = document.getElementById('ai-bottom-sheet');
   const overlay = document.getElementById('ai-overlay');
@@ -3908,6 +3918,8 @@ function toggleAIPanel() {
     sheet.classList.add('active');
     overlay.classList.add('active');
     lockBodyScroll();
+    history.pushState({ aiOpen: true }, '');
+    aiHistoryPushed = true;
     if (currentAutoScannedQ !== currentQ) {
       resetAIChat();
       autoScanAndExplain();
@@ -3915,13 +3927,28 @@ function toggleAIPanel() {
   }
 }
 
-function closeAIPanel() {
+// Hides the sheet itself — no history side effects. Called directly by the
+// popstate handler (back button already consumed the history entry there).
+function hideAIPanelUI() {
   const sheet = document.getElementById('ai-bottom-sheet');
   const overlay = document.getElementById('ai-overlay');
   if (sheet) sheet.classList.remove('active');
   if (overlay) overlay.classList.remove('active');
   if (typeof closeAttachMenu === 'function') closeAttachMenu();
   unlockBodyScroll();
+}
+
+// Public close, used by every UI trigger (✕ button, overlay tap, swipe-down,
+// or updateAIButtonVisibility force-closing it). Goes through history.back()
+// so the pushState from toggleAIPanel() gets consumed instead of lingering
+// as a dead entry that would otherwise absorb the user's next back press.
+function closeAIPanel() {
+  if (aiHistoryPushed) {
+    aiHistoryPushed = false;
+    history.back();
+  } else {
+    hideAIPanelUI();
+  }
 }
 
 function resetAIChat() {
