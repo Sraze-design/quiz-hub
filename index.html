@@ -1157,6 +1157,29 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   .options-stack button{font-size:16px;}
 }
 
+/* Submit Confirmation Modal */
+#submitConfirmFade {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease; z-index: 200000;
+}
+#submitConfirmFade.show { opacity: 1; pointer-events: auto; }
+#submitConfirmModal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 200001; padding: 20px; }
+#submitConfirmModal.show { display: flex; }
+#submitConfirmCard {
+  background: #ffffff; border-radius: 24px; padding: 26px 22px;
+  width: 100%; max-width: 380px;
+  box-shadow: var(--shadow-lg); animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.scm-row { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid #e2e8f0; }
+.scm-row:last-of-type{ border-bottom:none; }
+.scm-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+.scm-label { flex:1; font-size:16px; font-weight:600; color:var(--dark); }
+.scm-value { font-size:18px; font-weight:800; }
+.scm-question { text-align:center; font-size:17px; font-weight:700; color:var(--dark); margin:22px 0 18px; line-height:1.4; }
+.scm-btns { display:flex; gap:12px; }
+.scm-btns button { flex:1; padding:14px; border:none; border-radius:14px; font-weight:700; font-size:16px; cursor:pointer; color:#fff; }
+
 /* Retest Modal */
 #retestModal {
   position: fixed;
@@ -1926,6 +1949,32 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         <div id="quiz-box" style="position:relative; display:flex; flex-direction:column;">
           
           <!-- Premium Configured Pause View Modal Component Box Layer -->
+          <div id="submitConfirmFade"></div>
+          <div id="submitConfirmModal">
+            <div id="submitConfirmCard">
+              <div class="scm-row">
+                <div class="scm-icon" style="background:#dbeafe; color:#2563eb;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <span class="scm-label">Total Time</span>
+                <span class="scm-value" style="color:#2563eb;" id="scmTotalTime">00:00:00</span>
+              </div>
+              <div class="scm-row">
+                <div class="scm-icon" style="background:#d1fae5; color:#10b981;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span class="scm-label">Attempted</span>
+                <span class="scm-value" style="color:#10b981;" id="scmAttempted">0</span>
+              </div>
+              <div class="scm-row">
+                <div class="scm-icon" style="background:#ffedd5; color:#f97316;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+                <span class="scm-label">Unattempted</span>
+                <span class="scm-value" style="color:#f97316;" id="scmUnattempted">0</span>
+              </div>
+              <div class="scm-question">Are you sure you want to submit the test?</div>
+              <div class="scm-btns">
+                <button id="scmYesBtn" style="background:#2563eb;">Yes</button>
+                <button id="scmNoBtn" style="background:#94a3b8;">No</button>
+              </div>
+            </div>
+          </div>
+
           <div id="pauseModal">
             <div id="pauseCard">
               <div style="width:64px; height:64px; border-radius:22px; margin:0 auto 16px; background:var(--warning-light); display:flex; align-items:center; justify-content:center; font-size:28px; color:var(--warning)"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg></div>
@@ -3313,7 +3362,36 @@ function next() {
 function prevQ() {
  if(isPaused) return; if(currentQ > 0) { currentQ--;
  timerRunning=true; showQ(); resetQuestionTimer(); } }
-function confirmSubmit(){ if(confirm('Do you want to submit the test?')) showScore(); }
+function formatHHMMSS(sec){
+  sec=Math.max(0,Math.round(Number(sec)||0));
+  const h=Math.floor(sec/3600);
+  const m=Math.floor((sec%3600)/60);
+  const s=sec%60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function confirmSubmit(){
+  const attempted = answered.filter(Boolean).length;
+  const unattempted = data.length - attempted;
+  const totalTimeEl = document.getElementById('scmTotalTime');
+  const attEl = document.getElementById('scmAttempted');
+  const unattEl = document.getElementById('scmUnattempted');
+  if(totalTimeEl) totalTimeEl.textContent = formatHHMMSS(elapsed);
+  if(attEl) attEl.textContent = attempted;
+  if(unattEl) unattEl.textContent = String(unattempted).padStart(2,'0');
+  document.getElementById('submitConfirmFade')?.classList.add('show');
+  document.getElementById('submitConfirmModal')?.classList.add('show');
+}
+
+document.getElementById('scmYesBtn')?.addEventListener('click', ()=>{
+  document.getElementById('submitConfirmFade')?.classList.remove('show');
+  document.getElementById('submitConfirmModal')?.classList.remove('show');
+  showScore();
+});
+document.getElementById('scmNoBtn')?.addEventListener('click', ()=>{
+  document.getElementById('submitConfirmFade')?.classList.remove('show');
+  document.getElementById('submitConfirmModal')?.classList.remove('show');
+});
 
 /* ===== Question Palette (hamburger menu) ===== */
 function qpSwitchTab(which){
