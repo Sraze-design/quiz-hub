@@ -1207,6 +1207,22 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .scm-btns { display:flex; gap:12px; }
 .scm-btns button { flex:1; padding:14px; border:none; border-radius:14px; font-weight:700; font-size:16px; cursor:pointer; color:#fff; }
 
+/* Exit Test Confirmation Modal */
+#exitConfirmFade {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease; z-index: 200002;
+}
+#exitConfirmFade.show { opacity: 1; pointer-events: auto; }
+#exitConfirmModal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 200003; padding: 20px; }
+#exitConfirmModal.show { display: flex; }
+#exitConfirmCard {
+  background: #ffffff; border-radius: 24px; padding: 26px 22px;
+  width: 100%; max-width: 380px;
+  box-shadow: var(--shadow-lg); animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#exitConfirmCard .scm-question { margin: 0 0 20px; }
+
 /* Retest Modal */
 #retestModal {
   position: fixed;
@@ -2010,6 +2026,18 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
             </div>
           </div>
 
+          <!-- Exit Test Confirmation (shown on hardware/gesture back while test is in progress) -->
+          <div id="exitConfirmFade"></div>
+          <div id="exitConfirmModal">
+            <div id="exitConfirmCard">
+              <div class="scm-question">Are you sure you want to exit the test?</div>
+              <div class="scm-btns">
+                <button id="exitYesBtn" style="background:#2563eb;">Yes</button>
+                <button id="exitNoBtn" style="background:#94a3b8;">No</button>
+              </div>
+            </div>
+          </div>
+
           <div id="pauseModal">
             <div id="pauseCard">
               <div style="width:64px; height:64px; border-radius:22px; margin:0 auto 16px; background:var(--warning-light); display:flex; align-items:center; justify-content:center; font-size:28px; color:var(--warning)"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg></div>
@@ -2420,6 +2448,49 @@ async function buildGlobalQuizIndex() {
 // Every explorer navigation level pushes a history entry, so the phone's
 // hardware back button / gesture goes one step back instead of closing the app.
 let isHistoryNav = false;
+let skipExitConfirmOnce = false;
+
+// Shows the styled "Are you sure you want to exit the test?" modal.
+// Calls onYes() only if the user taps Yes; does nothing on No/close.
+function showExitConfirmModal(onYes) {
+  const fade = document.getElementById('exitConfirmFade');
+  const modal = document.getElementById('exitConfirmModal');
+  const yesBtn = document.getElementById('exitYesBtn');
+  const noBtn = document.getElementById('exitNoBtn');
+  if (!fade || !modal || !yesBtn || !noBtn) { onYes(); return; }
+
+  // Don't stack this on top of another blurred overlay (e.g. the pause
+  // screen) — hide it while this modal is open, and restore it if the
+  // user cancels the exit.
+  const pauseFade = document.getElementById('pauseFade');
+  const pauseModal = document.getElementById('pauseModal');
+  const wasPauseVisible = !!(pauseModal && pauseModal.classList.contains('show'));
+  if (wasPauseVisible) {
+    pauseFade?.classList.remove('show');
+    pauseModal.classList.remove('show');
+  }
+
+  fade.classList.add('show');
+  modal.classList.add('show');
+
+  function cleanup() {
+    fade.classList.remove('show');
+    modal.classList.remove('show');
+    yesBtn.removeEventListener('click', onYesClick);
+    noBtn.removeEventListener('click', onNoClick);
+  }
+  function onYesClick() { cleanup(); onYes(); }
+  function onNoClick() {
+    cleanup();
+    if (wasPauseVisible) {
+      pauseFade?.classList.add('show');
+      pauseModal.classList.add('show');
+    }
+  }
+
+  yesBtn.addEventListener('click', onYesClick);
+  noBtn.addEventListener('click', onNoClick);
+}
 
 function pushExplorerHistory(state) {
   if (isHistoryNav) { isHistoryNav = false; return; }
@@ -2446,9 +2517,10 @@ window.addEventListener('popstate', (e) => {
 
   // If the test is actively in progress (started, not yet submitted), a
   // back-navigation here means the user is about to lose their attempt —
-  // confirm first, and if they cancel, restore the history entry so the
-  // next back press works normally again.
-  {
+  // show a confirmation modal first. We restore the history entry right
+  // away (so the address/back-stack looks untouched while the modal is
+  // up), and only actually exit if the user confirms "Yes".
+  if (!skipExitConfirmOnce) {
     const activeQuizEngine = document.getElementById('quizEngineBox');
     const activeQuizBox = document.getElementById('quiz-box');
     const activeScoreCard = document.getElementById('score-card');
@@ -2458,13 +2530,15 @@ window.addEventListener('popstate', (e) => {
       (!activeScoreCard || activeScoreCard.style.display === 'none');
 
     if (testInProgress) {
-      const wantsToExit = confirm('Test abhi submit nahi hua hai. Exit karne par aapki progress save nahi hogi. Kya aap sach me exit karna chahte hain?');
-      if (!wantsToExit) {
-        history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
-        return;
-      }
+      history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
+      showExitConfirmModal(() => {
+        skipExitConfirmOnce = true;
+        history.back();
+      });
+      return;
     }
   }
+  skipExitConfirmOnce = false;
 
   isHistoryNav = true;
   const state = e.state || { screen: 'subjects' };
@@ -2479,6 +2553,15 @@ window.addEventListener('popstate', (e) => {
     timerRunning = false;
     isPaused = true;
     updateAIButtonVisibility();
+
+    // Clear any lingering paused/confirm overlays so their blurred
+    // backdrop doesn't stay stuck over the explorer after exiting.
+    document.getElementById('pauseFade')?.classList.remove('show');
+    document.getElementById('pauseModal')?.classList.remove('show');
+    document.getElementById('submitConfirmFade')?.classList.remove('show');
+    document.getElementById('submitConfirmModal')?.classList.remove('show');
+    document.getElementById('exitConfirmFade')?.classList.remove('show');
+    document.getElementById('exitConfirmModal')?.classList.remove('show');
   }
 
   const searchInput = document.getElementById('explorerSearch');
