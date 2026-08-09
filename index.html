@@ -2532,7 +2532,14 @@ window.addEventListener('popstate', (e) => {
       (!activeScoreCard || activeScoreCard.style.display === 'none');
 
     if (testInProgress) {
-      history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
+      // iOS/iPadOS Safari can get confused (and even fall back to a full
+      // page reload — the "Loading items securely..." flash) if we call
+      // pushState synchronously from inside a popstate handler that fired
+      // during an active swipe-back gesture. Deferring the pushState by a
+      // tick is the standard workaround for that WebKit quirk.
+      setTimeout(() => {
+        history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
+      }, 0);
       showExitConfirmModal(() => {
         skipExitConfirmOnce = true;
         history.back();
