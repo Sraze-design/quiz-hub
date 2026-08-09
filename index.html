@@ -426,30 +426,133 @@ body {
   position: relative;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid #e2e8f0;
-  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  padding: 0;
+  border-bottom: none;
+}
+
+/* Dark top bar: pause ring + big live timer + logo + menu */
+.quiz-top-bar {
+  background: #0a0a0a;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 6px;
+  gap: 14px;
 }
-.quiz-header-pill {
+.quiz-pause-ring-btn {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  border: 3px solid #2a2a2a;
+  border-top-color: #2f80ff;
+  border-right-color: #2f80ff;
+  background: transparent;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: rotate(-45deg);
+}
+.quiz-pause-ring-btn svg { transform: rotate(45deg); }
+.quiz-pause-ring-btn span { display: none; }
+.quiz-timer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.quiz-timer-big {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.quiz-timer-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+}
+.quiz-top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+.quiz-logo-badge {
+  display: flex;
+  align-items: center;
   background: #ffffff;
-  border: 1.5px solid #e2e8f0;
   border-radius: 10px;
-  padding: 4px 8px;
-  font-size: 12px;
+  overflow: hidden;
+  height: 34px;
+}
+.qlb-e {
+  color: #0a0a0a;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 0 9px;
+}
+.qlb-hi {
+  background: #0d9488;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 9px;
+}
+.quiz-menu-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+/* Sub-header row: Q number + per-question timer pill */
+.quiz-subheader-row {
+  background: #ffffff;
+  padding: 16px 16px 8px;
+}
+.quiz-qinfo-box {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid #6ee7b7;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+}
+.qinfo-segment {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--dark);
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
-.quiz-header-pill.timer-pill {
-  min-width: 65px;
-  justify-content: center;
+.qinfo-segment.qinfo-timer {
+  color: var(--text-secondary);
+}
+.qinfo-divider {
+  width: 1.5px;
+  align-self: stretch;
+  background: #e2e8f0;
+}
+#qBadge::first-letter {
+  color: #10b981;
+  font-weight: 800;
 }
 .quiz-header-title-text {
   font-weight: 800;
@@ -531,10 +634,10 @@ body {
 .options-stack button {
   display: block;
   width: 100%;
-  padding: 14px 16px;
+  padding: 18px 20px;
   background: var(--card-bg);
   border: 1.5px solid #e2e8f0;
-  border-radius: 14px;
+  border-radius: 16px;
   text-align: left;
   font-size: 16px;
   font-weight: 600;
@@ -641,213 +744,6 @@ text-align:center;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-}
-
-/* Question Palette trigger (replaces the old jump-to-question input) */
-.palette-trigger-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--dark);
-}
-.palette-trigger-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: var(--primary-light);
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.palette-trigger-text {
-  font-size: 13px;
-  font-weight: 700;
-  flex: 1;
-  text-align: left;
-}
-.palette-trigger-pill {
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--primary);
-  background: var(--primary-light);
-  padding: 4px 10px;
-  border-radius: 20px;
-}
-.palette-trigger-btn:disabled,
-.palette-trigger-btn[disabled] {
-  cursor: not-allowed;
-}
-
-/* Question Palette bottom sheet */
-#question-palette-sheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
-  transform: translateY(100%);
-  height: 100vh;
-  height: 100dvh;
-  max-height: 100vh;
-  max-height: 100dvh;
-  background: #ffffff;
-  box-shadow: 0 -10px 40px rgba(15, 23, 42, 0.2);
-  z-index: 10001;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-}
-#question-palette-sheet.active {
-  transform: translateY(0);
-}
-#palette-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.35);
-  z-index: 10000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-#palette-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.palette-sheet-header {
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  touch-action: none;
-  cursor: grab;
-}
-.palette-sheet-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 17px;
-  font-weight: 800;
-}
-.palette-sheet-close {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  color: #ffffff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 700;
-  transition: background 0.2s ease;
-}
-.palette-sheet-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-.palette-sheet-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 18px 20px calc(18px + env(safe-area-inset-bottom));
-  background: #ffffff;
-}
-.palette-legend {
-  display: flex;
-  border: 1px solid #edf2f7;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.palette-legend-item {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 14px;
-}
-.palette-legend-item + .palette-legend-item {
-  border-left: 1px solid #edf2f7;
-}
-.palette-legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.palette-legend-label {
-  font-size: 13px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  flex: 1;
-}
-.palette-legend-value {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--dark);
-}
-.palette-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-}
-.palette-q-btn {
-  aspect-ratio: 1;
-  border-radius: 12px;
-  border: none;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  background: #94a3b8;
-  transition: var(--transition);
-  position: relative;
-}
-.palette-q-btn:active {
-  transform: scale(0.92);
-}
-.palette-q-btn.pq-answered {
-  background: var(--success);
-}
-.palette-q-btn.pq-unanswered {
-  background: var(--danger);
-}
-.palette-q-btn.pq-current {
-  background: #ffffff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
-.palette-sheet-footer {
-  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
-  border-top: 1px solid #e2e8f0;
-  background: #ffffff;
-}
-.palette-submit-btn {
-  width: 100%;
-  height: 52px;
-  border: none;
-  border-radius: 14px;
-  background: var(--success);
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
 /* Premium Metric Dashboard Result screen (REDESIGNED VIZ) */
@@ -1842,30 +1738,46 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
       <!-- Premium Sticky Floating Header Panel Component -->
       <div class="floating-quiz-header">
-        <div class="quiz-header-pill">
-          <span id="qBadge">Q 1/1</span>
+        <!-- Dark top bar: pause ring, big live timer, category label, logo, menu -->
+        <div class="quiz-top-bar">
+          <button id="pauseBtn" class="quiz-pause-ring-btn" type="button" aria-label="Pause">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+          </button>
+          <div class="quiz-timer-block">
+            <div class="quiz-timer-big" id="liveTimer">00:00</div>
+            <div class="quiz-timer-label" id="quizCategoryLabel">DREAM TO DESTINY</div>
+          </div>
+          <div class="quiz-top-bar-right">
+            <div class="quiz-logo-badge">
+              <span class="qlb-e">E</span><span class="qlb-hi">अ</span>
+            </div>
+            <button class="quiz-menu-btn" type="button" aria-label="Menu">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+            </button>
+          </div>
         </div>
-        <div class="quiz-header-pill timer-pill">
-          <span style="color:var(--success); font-weight:800;" id="qTimer">00:00</span>
+
+        <!-- Question badge + per-question timer pill -->
+        <div class="quiz-subheader-row">
+          <div class="quiz-qinfo-box">
+            <div class="qinfo-segment qinfo-qno">
+              <span id="qBadge">Q 1/1</span>
+            </div>
+            <div class="qinfo-divider"></div>
+            <div class="qinfo-segment qinfo-timer">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span id="qTimer">00:00</span>
+            </div>
+          </div>
         </div>
-        <div class="quiz-header-title-text" style="color:#8B0000;">DREAM TO DESTINY</div>
-        <div class="quiz-header-pill timer-pill">
-          <span style="color:var(--text-secondary);" id="liveTimer">00:00</span>
-        </div>
-        <button id="pauseBtn" class="quiz-pause-btn-premium" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg> <span>Pause</span></button>
       </div>
 
       <div class="quiz-main-content-area">
         
         <!-- Quick Navigation Jump Control Module Panel -->
         <div id="jumpBox" class="jump-box-premium">
-          <button id="paletteOpenBtn" class="palette-trigger-btn" onclick="openQuestionPalette()">
-            <span class="palette-trigger-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-            </span>
-            <span class="palette-trigger-text">Question Palette</span>
-            <span class="palette-trigger-pill" id="paletteTriggerPill">1/1</span>
-          </button>
+          <input id="jumpNo" type="number" class="jump-input-premium" placeholder="Jump to Question No...">
+          <button class="jump-btn-premium" onclick="goToQuestion(document.getElementById('jumpNo').value)">Go</button>
         </div>
 
         <div id="quiz-box" style="position:relative; display:flex; flex-direction:column;">
@@ -2166,39 +2078,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     <button id="aiSendBtn" class="ai-send-btn" onclick="sendUserMessage()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
-  </div>
-</div>
-
-<!-- QUESTION PALETTE (Testbook-style navigator) -->
-<div id="palette-overlay" onclick="closeQuestionPalette()"></div>
-
-<div id="question-palette-sheet">
-  <div class="palette-sheet-header">
-    <div class="palette-sheet-title">
-      <span style="font-size: 18px;">🗂️</span>
-      <span>Question Palette</span>
-    </div>
-    <button class="palette-sheet-close" onclick="closeQuestionPalette()">✕</button>
-  </div>
-
-  <div class="palette-sheet-body">
-    <div class="palette-legend">
-      <div class="palette-legend-item">
-        <span class="palette-legend-dot" style="background:var(--success);"></span>
-        <span class="palette-legend-label">Answered</span>
-        <span class="palette-legend-value" id="paletteAnsweredCount">0</span>
-      </div>
-      <div class="palette-legend-item">
-        <span class="palette-legend-dot" style="background:var(--danger);"></span>
-        <span class="palette-legend-label">Not Answered</span>
-        <span class="palette-legend-value" id="paletteUnansweredCount">0</span>
-      </div>
-    </div>
-    <div class="palette-grid" id="paletteGrid"></div>
-  </div>
-
-  <div class="palette-sheet-footer">
-    <button class="palette-submit-btn" onclick="closeQuestionPalette(); confirmSubmit();">Submit Test</button>
   </div>
 </div>
 
@@ -2663,7 +2542,6 @@ async function loadQuizData(quizPath) {
     selectedAnswers=new Array(data.length).fill(null);
     answerCorrect=new Array(data.length).fill(null);
     questionTimes=new Array(data.length).fill(0);
-    visited=new Array(data.length).fill(false);
     
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -2948,7 +2826,7 @@ window.addEventListener('load',()=>{
         el.style.pointerEvents=isPaused?'none':'auto';
       }
    });
-   ['backBtn','nextBtn','paletteOpenBtn'].forEach(id=>{
+   ['backBtn','nextBtn','jumpNo'].forEach(id=>{
       const el=document.getElementById(id);
       if(el) el.disabled=isPaused;
    });
@@ -2963,12 +2841,9 @@ let currentStreak=0,maxStreak=0;
 let answered = [];
 let selectedAnswers=[];
 let answerCorrect=[];
-let visited=[];
 
 function showQ() {
 if(data.length === 0) return;
-visited[currentQ]=true;
-updatePaletteTriggerPill();
 document.getElementById('q-text').innerHTML = formatContent(data[currentQ].q);
 const tagBox=document.getElementById('exam-tag');
 if(data[currentQ].tag){tagBox.innerHTML=formatContent(data[currentQ].tag);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
@@ -3253,58 +3128,7 @@ function goToQuestion(qNo){
   currentQ=qNo-1;
   showQ();
   resetQuestionTimer();
-}
-
-// ===== Question Palette (Testbook-style navigator) =====
-function updatePaletteTriggerPill(){
-  const pill=document.getElementById('paletteTriggerPill');
-  if(!pill || !data.length) return;
-  const attempted=answered.filter(Boolean).length;
-  pill.textContent = attempted + '/' + data.length;
-}
-
-function renderPaletteGrid(){
-  const grid=document.getElementById('paletteGrid');
-  if(!grid || !data.length) return;
-  grid.innerHTML='';
-  let answeredCount=0, unansweredCount=0;
-  data.forEach((_, i)=>{
-    const btn=document.createElement('button');
-    btn.type='button';
-    btn.textContent=i+1;
-    let cls='palette-q-btn';
-    if(answered[i]){
-      cls+=' pq-answered';
-      answeredCount++;
-    } else if(visited[i]){
-      cls+=' pq-unanswered';
-      unansweredCount++;
-    } else {
-      unansweredCount++;
-    }
-    if(i===currentQ) cls+=' pq-current';
-    btn.className=cls;
-    btn.onclick=()=>{
-      goToQuestion(i+1);
-      closeQuestionPalette();
-    };
-    grid.appendChild(btn);
-  });
-  document.getElementById('paletteAnsweredCount').textContent=answeredCount;
-  document.getElementById('paletteUnansweredCount').textContent=unansweredCount;
-  updatePaletteTriggerPill();
-}
-
-function openQuestionPalette(){
-  if(isPaused || !data.length) return;
-  renderPaletteGrid();
-  document.getElementById('question-palette-sheet').classList.add('active');
-  document.getElementById('palette-overlay').classList.add('active');
-}
-
-function closeQuestionPalette(){
-  document.getElementById('question-palette-sheet').classList.remove('active');
-  document.getElementById('palette-overlay').classList.remove('active');
+  var j=document.getElementById('jumpNo'); if(j) j.value='';
 }
 
 document.getElementById('resumePopupBtn')?.addEventListener('click',()=>{
@@ -3342,7 +3166,7 @@ if(pauseBtn){
 document.getElementById('pauseModal')?.classList.remove('show');
 document.getElementById('pauseFade')?.classList.remove('show');
 
-['backBtn','nextBtn','paletteOpenBtn'].forEach(id=>{
+['backBtn','nextBtn','jumpNo'].forEach(id=>{
  const el=document.getElementById(id);
  if(el){
    el.disabled=false;
@@ -3365,7 +3189,6 @@ if(goBtn) goBtn.disabled=false;
    selectedAnswers=new Array(data.length).fill(null);
    answerCorrect=new Array(data.length).fill(null);
    questionTimes=new Array(data.length).fill(0);
-   visited=new Array(data.length).fill(false);
    document.getElementById('score-card').style.display='none';
    document.getElementById('quiz-box').style.display='flex';
    document.getElementById('controls').style.display='flex';
@@ -3400,7 +3223,6 @@ if(pt) pt.textContent='00:00';
  selectedAnswers=new Array(data.length).fill(null);
  answerCorrect=new Array(data.length).fill(null);
  questionTimes=new Array(data.length).fill(0);
- visited=new Array(data.length).fill(false);
  document.getElementById('score-card').style.display='none';
  document.getElementById('quiz-box').style.display='flex';
  document.getElementById('controls').style.display='flex';
@@ -4299,53 +4121,6 @@ document.addEventListener('click',function(e){
     sheet.style.transform = '';
     if(diff > 100){
       if(typeof closeAIPanel === 'function') closeAIPanel();
-    }
-    startY = 0; currentY = 0;
-  }
-
-  header.addEventListener('touchstart', onStart, {passive:true});
-  header.addEventListener('touchmove', onMove, {passive:true});
-  header.addEventListener('touchend', onEnd);
-  header.addEventListener('touchcancel', onEnd);
-
-  header.addEventListener('mousedown', onStart);
-  document.addEventListener('mousemove', onMove);
-  document.addEventListener('mouseup', onEnd);
-})();
-</script>
-
-<script>
-(function(){
-  const header = document.querySelector('.palette-sheet-header');
-  const sheet = document.getElementById('question-palette-sheet');
-  if(!header || !sheet) return;
-
-  let startY = 0, currentY = 0, dragging = false;
-
-  function onStart(e){
-    if(e.target.closest('.palette-sheet-close')) return;
-    dragging = true;
-    startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    currentY = startY;
-    sheet.style.transition = 'none';
-  }
-
-  function onMove(e){
-    if(!dragging) return;
-    currentY = (e.touches ? e.touches[0].clientY : e.clientY);
-    let diff = currentY - startY;
-    if(diff < 0) diff = 0;
-    sheet.style.transform = 'translateY(' + diff + 'px)';
-  }
-
-  function onEnd(){
-    if(!dragging) return;
-    dragging = false;
-    sheet.style.transition = '';
-    const diff = currentY - startY;
-    sheet.style.transform = '';
-    if(diff > 100){
-      if(typeof closeQuestionPalette === 'function') closeQuestionPalette();
     }
     startY = 0; currentY = 0;
   }
