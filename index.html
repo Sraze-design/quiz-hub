@@ -409,8 +409,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0;
-  height: 100vh;
-  height: 100dvh;
+  height: calc(var(--app-vh, 1vh) * 100);
   overflow: hidden;
 }
 
@@ -2357,6 +2356,24 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 <!-- RE-ENGINEERED DYNAMIC PREMIUM VIEW RENDERING CORE INTERFACE LAYER -->
 <script>
+
+// ===== Dynamic viewport height fix (Android reliability) =====
+// Plain 100vh/100dvh can end up taller than the actually-visible area on
+// several Android browsers/WebViews (the address bar isn't consistently
+// accounted for), which pushed the footer buttons out of view and then
+// left the page unable to scroll (since #quizEngineBox clips overflow).
+// Setting --app-vh from window.innerHeight — and keeping it updated — is
+// the standard cross-platform-safe fix.
+function setAppViewportHeight(){
+  const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+  document.documentElement.style.setProperty('--app-vh', (h * 0.01) + 'px');
+}
+setAppViewportHeight();
+window.addEventListener('resize', setAppViewportHeight);
+window.addEventListener('orientationchange', setAppViewportHeight);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', setAppViewportHeight);
+}
 
 async function sendTelegramResult(result){
   try{
