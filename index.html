@@ -4560,34 +4560,55 @@ document.addEventListener('click',function(e){
   const panel = document.getElementById('qp-panel');
   if(!panel) return;
 
-  let startX = 0, currentX = 0, dragging = false;
+  let startX = 0, currentX = 0, startY = 0, currentY = 0, dragging = false, gestureLocked = false, isHorizontalSwipe = false;
 
   function onStart(e){
     if(e.target.closest('button')) return;
     dragging = true;
+    gestureLocked = false;
+    isHorizontalSwipe = false;
     startX = (e.touches ? e.touches[0].clientX : e.clientX);
     currentX = startX;
-    panel.style.transition = 'none';
+    startY = (e.touches ? e.touches[0].clientY : e.clientY);
+    currentY = startY;
   }
 
   function onMove(e){
     if(!dragging) return;
     currentX = (e.touches ? e.touches[0].clientX : e.clientX);
-    let diff = currentX - startX;
-    if(diff < 0) diff = 0;
+    currentY = (e.touches ? e.touches[0].clientY : e.clientY);
+    const diffX = currentX - startX;
+    const diffY = currentY - startY;
+
+    if(!gestureLocked){
+      // Wait until the gesture direction is clear before deciding whether
+      // this is a horizontal swipe-to-close or a normal vertical scroll.
+      if(Math.abs(diffX) < 8 && Math.abs(diffY) < 8) return;
+      gestureLocked = true;
+      isHorizontalSwipe = Math.abs(diffX) > Math.abs(diffY);
+      if(isHorizontalSwipe) panel.style.transition = 'none';
+    }
+
+    if(!isHorizontalSwipe) return; // let the panel scroll normally
+
+    const diff = Math.max(0, diffX);
     panel.style.transform = 'translateX(' + diff + 'px)';
   }
 
   function onEnd(){
     if(!dragging) return;
     dragging = false;
-    panel.style.transition = '';
-    const diff = currentX - startX;
-    panel.style.transform = '';
-    if(diff > 80){
-      if(typeof closeQuestionPalette === 'function') closeQuestionPalette();
+    if(isHorizontalSwipe){
+      panel.style.transition = '';
+      const diff = currentX - startX;
+      panel.style.transform = '';
+      if(diff > 80){
+        if(typeof closeQuestionPalette === 'function') closeQuestionPalette();
+      }
     }
-    startX = 0; currentX = 0;
+    gestureLocked = false;
+    isHorizontalSwipe = false;
+    startX = 0; currentX = 0; startY = 0; currentY = 0;
   }
 
   panel.addEventListener('touchstart', onStart, {passive:true});
