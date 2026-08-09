@@ -2444,6 +2444,28 @@ window.addEventListener('popstate', (e) => {
     return;
   }
 
+  // If the test is actively in progress (started, not yet submitted), a
+  // back-navigation here means the user is about to lose their attempt —
+  // confirm first, and if they cancel, restore the history entry so the
+  // next back press works normally again.
+  {
+    const activeQuizEngine = document.getElementById('quizEngineBox');
+    const activeQuizBox = document.getElementById('quiz-box');
+    const activeScoreCard = document.getElementById('score-card');
+    const testInProgress =
+      activeQuizEngine && activeQuizEngine.style.display !== 'none' &&
+      activeQuizBox && activeQuizBox.style.display !== 'none' &&
+      (!activeScoreCard || activeScoreCard.style.display === 'none');
+
+    if (testInProgress) {
+      const wantsToExit = confirm('Test abhi submit nahi hua hai. Exit karne par aapki progress save nahi hogi. Kya aap sach me exit karna chahte hain?');
+      if (!wantsToExit) {
+        history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
+        return;
+      }
+    }
+  }
+
   isHistoryNav = true;
   const state = e.state || { screen: 'subjects' };
 
