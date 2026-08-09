@@ -480,6 +480,10 @@ body {
   font-size: 10px;
   font-weight: 600;
   color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 .quiz-top-bar-right {
   display: flex;
@@ -2809,7 +2813,13 @@ async function loadQuizData(quizPath) {
     document.getElementById('jumpBox').style.display='flex';
     document.querySelector('.floating-quiz-header').style.display='flex';
     const catLabelEl = document.getElementById('quizCategoryLabel');
-    if(catLabelEl) catLabelEl.textContent = currentChapter ? cleanHumanReadableTitle(currentChapter) : (currentQuizTitle || 'Quiz');
+    if(catLabelEl){
+      const chapterPart = currentChapter ? cleanHumanReadableTitle(currentChapter) : '';
+      const testPart = currentQuizTitle || '';
+      catLabelEl.textContent = chapterPart
+        ? (testPart ? `${chapterPart} (${testPart})` : chapterPart)
+        : (testPart || 'Quiz');
+    }
     pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
 
     showQ();
