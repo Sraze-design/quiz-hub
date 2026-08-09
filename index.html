@@ -404,19 +404,11 @@ body {
 
 /* Quiz Screen Custom UI Overrides - SINGLE PREMIUM CARD LAYOUT */
 #quizEngineBox {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 980px;
   background: var(--bg-app);
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 0;
-  overflow: hidden;
-  z-index: 40;
 }
 
 /* Single Parent Quiz Card */
@@ -435,7 +427,6 @@ body {
   position: relative;
   top: 0;
   z-index: 100;
-  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   background: transparent;
@@ -574,10 +565,6 @@ body {
 .quiz-main-content-area {
   padding: 14px;
   flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
 }
@@ -683,7 +670,6 @@ body {
 
 /* Premium Control Panel bar */
 .quiz-controls-footer {
-  flex: 0 0 auto;
   padding: 14px 16px;
   padding-bottom: calc(14px + env(safe-area-inset-bottom));
   background: #ffffff;
@@ -1143,9 +1129,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     min-height:100dvh;
     border-radius:0;
     box-shadow:none;
-  }
-  #quizEngineBox{
-    max-width:1024px;
+    overflow:hidden;
   }
   .premium-app-header{padding:40px 36px;}
   .floating-quiz-header{padding:0;}
@@ -2430,7 +2414,6 @@ window.addEventListener('popstate', (e) => {
   const quizEngine = document.getElementById('quizEngineBox');
   if (quizEngine && quizEngine.style.display !== 'none') {
     quizEngine.style.display = 'none';
-    if (typeof unlockBodyScroll === 'function') unlockBodyScroll();
     document.getElementById('explorerScreen').style.display = 'flex';
     document.getElementById('score-card').style.display = 'none';
     timerRunning = false;
@@ -2829,7 +2812,6 @@ async function loadQuizData(quizPath) {
     
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
-    if (typeof lockBodyScroll === 'function') lockBodyScroll();
     document.getElementById('quiz-box').style.display='flex';
     document.getElementById('controls').style.display='flex';
     document.getElementById('jumpBox').style.display='flex';
