@@ -3634,6 +3634,7 @@ if(pt) pt.textContent='00:00';
 function upd(){
  var b=document.getElementById('qBadge');
  if(!b)return;
+ var pill=b.parentElement;
  var total=(typeof data!=='undefined'&&data)?data.length:0;
  var cur=1;
  if(typeof currentQuestion!=='undefined')cur=currentQuestion+1;
@@ -3643,9 +3644,10 @@ function upd(){
  var idx=cur-1;
  var isAns=(typeof answered!=='undefined'&&answered)?!!answered[idx]:false;
  var isCorrect=(typeof answerCorrect!=='undefined'&&answerCorrect)?answerCorrect[idx]:null;
- if(isAns && isCorrect===true){ b.style.background='#10b981'; }
- else if(isAns && isCorrect===false){ b.style.background='#ef4444'; }
- else { b.style.background='#94a3b8'; }
+ var target=pill||b;
+ if(isAns && isCorrect===true){ target.style.background='#10b981'; }
+ else if(isAns && isCorrect===false){ target.style.background='#ef4444'; }
+ else { target.style.background='#94a3b8'; }
 }
 document.addEventListener('DOMContentLoaded',function(){
  upd();
