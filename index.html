@@ -2754,6 +2754,8 @@ async function loadQuizData(quizPath) {
     document.getElementById('controls').style.display='flex';
     document.getElementById('jumpBox').style.display='flex';
     document.querySelector('.floating-quiz-header').style.display='flex';
+    const catLabelEl = document.getElementById('quizCategoryLabel');
+    if(catLabelEl) catLabelEl.textContent = currentChapter ? cleanHumanReadableTitle(currentChapter) : (currentQuizTitle || 'Quiz');
     pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
 
     showQ();
