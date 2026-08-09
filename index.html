@@ -2472,12 +2472,14 @@ function showExitConfirmModal(onYes) {
 
   fade.classList.add('show');
   modal.classList.add('show');
+  if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 
   function cleanup() {
     fade.classList.remove('show');
     modal.classList.remove('show');
     yesBtn.removeEventListener('click', onYesClick);
     noBtn.removeEventListener('click', onNoClick);
+    if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
   }
   function onYesClick() { cleanup(); onYes(); }
   function onNoClick() {
@@ -3546,6 +3548,7 @@ function confirmSubmit(){
   if(unattEl) unattEl.textContent = String(unattempted).padStart(2,'0');
   document.getElementById('submitConfirmFade')?.classList.add('show');
   document.getElementById('submitConfirmModal')?.classList.add('show');
+  if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 }
 
 document.getElementById('scmYesBtn')?.addEventListener('click', ()=>{
@@ -3556,6 +3559,7 @@ document.getElementById('scmYesBtn')?.addEventListener('click', ()=>{
 document.getElementById('scmNoBtn')?.addEventListener('click', ()=>{
   document.getElementById('submitConfirmFade')?.classList.remove('show');
   document.getElementById('submitConfirmModal')?.classList.remove('show');
+  if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 });
 
 /* ===== Question Palette (hamburger menu) ===== */
@@ -3728,6 +3732,7 @@ e.style.opacity=x[1]?1:.45;
 e.style.pointerEvents=x[1]?'auto':'none';
 });
 document.getElementById('retestModal').style.display='flex';
+if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 return;
 }
 
@@ -3999,11 +4004,21 @@ function updateAIButtonVisibility() {
   const scoreCard = document.getElementById('score-card');
   const aiBtn = document.getElementById('ai-floating-btn');
 
+  // Any of these open on top of the quiz means the AI button should stay
+  // hidden — it would otherwise float above a modal/blur it can't be used
+  // through anyway.
+  const submitConfirmOpen = document.getElementById('submitConfirmModal')?.classList.contains('show');
+  const exitConfirmOpen = document.getElementById('exitConfirmModal')?.classList.contains('show');
+  const retestModalOpen = document.getElementById('retestModal')?.style.display === 'flex';
+
   if (
     quizEngine && quizEngine.style.display !== 'none' &&
     quizBox && quizBox.style.display !== 'none' &&
     (!scoreCard || scoreCard.style.display === 'none') &&
-    !isPaused
+    !isPaused &&
+    !submitConfirmOpen &&
+    !exitConfirmOpen &&
+    !retestModalOpen
   ) {
     aiBtn.style.display = 'flex';
   } else {
