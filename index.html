@@ -3356,6 +3356,31 @@ function renderQuestionPalette(){
   }
 }
 
+let _bodyScrollLockCount = 0;
+let _bodyScrollLockY = 0;
+function lockBodyScroll(){
+  if(_bodyScrollLockCount === 0){
+    _bodyScrollLockY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-_bodyScrollLockY) + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+  _bodyScrollLockCount++;
+}
+function unlockBodyScroll(){
+  if(_bodyScrollLockCount > 0) _bodyScrollLockCount--;
+  if(_bodyScrollLockCount === 0){
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, _bodyScrollLockY);
+  }
+}
+
 function openQuestionPalette(){
   if(typeof data === 'undefined' || !data || data.length === 0) return;
   renderQuestionPalette();
@@ -3364,12 +3389,14 @@ function openQuestionPalette(){
   document.getElementById('qp-panel')?.classList.add('active');
   const aiBtn = document.getElementById('ai-floating-btn');
   if(aiBtn) aiBtn.style.display = 'none';
+  lockBodyScroll();
 }
 
 function closeQuestionPalette(){
   document.getElementById('qp-overlay')?.classList.remove('active');
   document.getElementById('qp-panel')?.classList.remove('active');
   if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
+  unlockBodyScroll();
 }
 
 
@@ -3700,6 +3727,7 @@ function toggleAIPanel() {
   } else {
     sheet.classList.add('active');
     overlay.classList.add('active');
+    lockBodyScroll();
     if (currentAutoScannedQ !== currentQ) {
       resetAIChat();
       autoScanAndExplain();
@@ -3713,6 +3741,7 @@ function closeAIPanel() {
   if (sheet) sheet.classList.remove('active');
   if (overlay) overlay.classList.remove('active');
   if (typeof closeAttachMenu === 'function') closeAttachMenu();
+  unlockBodyScroll();
 }
 
 function resetAIChat() {
