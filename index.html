@@ -523,7 +523,7 @@ body {
   color: var(--dark);
 }
 .qinfo-segment.qinfo-qno {
-  background: #10b981;
+  background: #94a3b8;
   color: #ffffff;
   border-radius: 8px;
   padding: 6px 10px;
@@ -2001,8 +2001,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
               </div>
               
               <div class="btns">
-                <button id="resumePopupBtn" style="background:var(--primary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M8 5v14l11-7z"/></svg> <span>Resume</span></button>
                 <button id="submitPopupBtn" style="background:var(--success)">Submit Test</button>
+                <button id="resumePopupBtn" style="background:var(--primary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M8 5v14l11-7z"/></svg> <span>Resume</span></button>
               </div>
             </div>
           </div>
@@ -3156,6 +3156,7 @@ currentStreak=0;
 selectedAnswers[currentQ]=idx;
 answerCorrect[currentQ]=(idx===data[currentQ].a);
 answered[currentQ] = true;
+if(typeof updateQBadge==='function') updateQBadge();
 timerRunning=false;
 document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
 document.getElementById('feedback').style.display = "block";
@@ -3637,10 +3638,17 @@ function upd(){
  else if(typeof currentQ!=='undefined')cur=currentQ+1;
  else if(typeof index!=='undefined')cur=index+1;
  b.textContent='Q '+cur+'/'+total;
+ var idx=cur-1;
+ var isAns=(typeof answered!=='undefined'&&answered)?!!answered[idx]:false;
+ var isCorrect=(typeof answerCorrect!=='undefined'&&answerCorrect)?answerCorrect[idx]:null;
+ if(isAns && isCorrect===true){ b.style.background='#10b981'; }
+ else if(isAns && isCorrect===false){ b.style.background='#ef4444'; }
+ else { b.style.background='#94a3b8'; }
 }
 document.addEventListener('DOMContentLoaded',function(){
  upd();
 });
+window.updateQBadge = upd;
 const __oldShowQ=showQ;
 showQ=function(){
   __oldShowQ();
