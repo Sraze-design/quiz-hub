@@ -2642,13 +2642,20 @@ window.addEventListener('popstate', (e) => {
 // only called after the user actually taps "Yes", as a normal (non-gesture)
 // navigation, which does not trigger the reload quirk.
 const EDGE_SWIPE_ZONE_PX = 24;
+// Minimum finger movement (px) before we decide whether this touch is a
+// real horizontal back-swipe or just a tap/vertical scroll that happened to
+// start near the edge. Kept small so the real gesture is still intercepted
+// well before the native swipe-back animation commits (which is what would
+// otherwise cause a double "back": once from the OS gesture, once from our
+// own history.back() after the user taps "Yes").
+const EDGE_SWIPE_MOVE_THRESHOLD_PX = 10;
 
-document.addEventListener('touchstart', (e) => {
-  if (!e.touches || !e.touches.length) return;
+let edgeSwipeTracking = false;
+let edgeSwipeStartX = 0;
+let edgeSwipeStartY = 0;
+let edgeSwipeDecided = false;
 
-  const touchX = e.touches[0].clientX;
-  if (touchX > EDGE_SWIPE_ZONE_PX) return;
-
+function handleEdgeBackGesture(e) {
   // Mirror the popstate handler's priority order: if the AI panel or the
   // question palette is open, a back-gesture here should just close that
   // panel (like Android's back button does) — not jump straight to the
@@ -2681,7 +2688,56 @@ document.addEventListener('touchstart', (e) => {
     skipExitConfirmOnce = true;
     history.back();
   });
+}
+
+document.addEventListener('touchstart', (e) => {
+  if (!e.touches || !e.touches.length) { edgeSwipeTracking = false; return; }
+
+  const touchX = e.touches[0].clientX;
+  if (touchX > EDGE_SWIPE_ZONE_PX) { edgeSwipeTracking = false; return; }
+
+  // Just remember where the touch started — do NOT act yet. A plain tap
+  // also starts here, so acting on touchstart alone treats every tap near
+  // the edge as a back-gesture, which is the bug this replaces.
+  edgeSwipeTracking = true;
+  edgeSwipeDecided = false;
+  edgeSwipeStartX = touchX;
+  edgeSwipeStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+  if (!edgeSwipeTracking || edgeSwipeDecided) return;
+  if (!e.touches || !e.touches.length) return;
+
+  const dx = e.touches[0].clientX - edgeSwipeStartX;
+  const dy = e.touches[0].clientY - edgeSwipeStartY;
+
+  if (Math.abs(dx) < EDGE_SWIPE_MOVE_THRESHOLD_PX && Math.abs(dy) < EDGE_SWIPE_MOVE_THRESHOLD_PX) {
+    // Not enough movement yet to tell a tap from a swipe — keep waiting.
+    return;
+  }
+
+  edgeSwipeDecided = true;
+
+  // Only a rightward horizontal drag that clearly beats vertical movement
+  // is the back-swipe gesture. Anything else (vertical scroll, leftward
+  // move) is left alone so normal scrolling still works.
+  if (dx > 0 && Math.abs(dx) > Math.abs(dy)) {
+    handleEdgeBackGesture(e);
+  } else {
+    edgeSwipeTracking = false;
+  }
 }, { passive: false });
+
+document.addEventListener('touchend', () => {
+  edgeSwipeTracking = false;
+  edgeSwipeDecided = false;
+}, { passive: true });
+
+document.addEventListener('touchcancel', () => {
+  edgeSwipeTracking = false;
+  edgeSwipeDecided = false;
+}, { passive: true });
 
 function cleanHumanReadableTitle(rawString) {
   if (!rawString) return '';
