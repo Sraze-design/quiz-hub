@@ -2399,6 +2399,16 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 <!-- RE-ENGINEERED DYNAMIC PREMIUM VIEW RENDERING CORE INTERFACE LAYER -->
 <script>
 
+// Move blur-overlay modals to <body> so they escape #quizEngineBox's
+// position:fixed + overflow:hidden wrapper — iOS Safari fails to render
+// backdrop-filter blur on elements nested inside such a container.
+(function relocateFadeOverlaysForIOSBlurFix(){
+  ['submitConfirmFade','submitConfirmModal','exitConfirmFade','exitConfirmModal','pauseFade','pauseModal'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) document.body.appendChild(el);
+  });
+})();
+
 async function sendTelegramResult(result){
   try{
     await fetch("https://lucky-lake-f3ca.trevoraxgaming9720.workers.dev/",{
