@@ -1930,6 +1930,50 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 </head>
 <body>
 
+<!-- ===== Google Translate: 1-click EN/HI switch ===== -->
+<div id="google_translate_element" style="display:none;"></div>
+<div id="langSwitchBtn" onclick="toggleAppLanguage()" style="position:fixed; top:14px; right:14px; z-index:99999; background:#ffffff; color:#1e3a8a; font-weight:700; font-size:13px; padding:8px 14px; border-radius:20px; box-shadow:0 4px 14px rgba(15,23,42,0.18); cursor:pointer; display:flex; align-items:center; gap:6px; font-family:'Plus Jakarta Sans', sans-serif;">
+  <span style="font-size:15px;">🌐</span><span id="langSwitchLabel">EN</span>
+</div>
+<script>
+  // Reads current state from the googtrans cookie so the button always
+  // shows the language you'd switch TO next.
+  function getGoogTransCookie() {
+    const m = document.cookie.match(/(?:^|; )googtrans=([^;]*)/);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function setGoogTransCookie(value) {
+    const domainPart = location.hostname.indexOf('.') !== -1 ? '; domain=' + location.hostname : '';
+    document.cookie = 'googtrans=' + value + '; path=/' + domainPart;
+    document.cookie = 'googtrans=' + value + '; path=/'; // also without domain, for localhost/file testing
+  }
+  function toggleAppLanguage() {
+    const current = getGoogTransCookie();
+    if (current === '/hi/en') {
+      // switch back to original Hindi
+      setGoogTransCookie('/hi/hi');
+    } else {
+      // switch to English
+      setGoogTransCookie('/hi/en');
+    }
+    location.reload();
+  }
+  function refreshLangButtonLabel() {
+    const current = getGoogTransCookie();
+    document.getElementById('langSwitchLabel').innerText = (current === '/hi/en') ? 'हिं' : 'EN';
+  }
+  refreshLangButtonLabel();
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'hi', includedLanguages: 'en', autoDisplay: false },
+      'google_translate_element'
+    );
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- ===== end Google Translate block ===== -->
+
 <div id="streakPopup"><div id="streakCard"><div id="streakTitle" style="font-size:16px"></div><div id="streakSub" style="font-size:11px; opacity:0.9; margin-top:2px;">Keep Going!</div></div></div>
 
 <div class="container">
