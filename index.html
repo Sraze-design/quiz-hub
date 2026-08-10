@@ -2462,6 +2462,27 @@ function isTestInProgressNow() {
   );
 }
 
+// If the Pause overlay or the Submit-confirmation overlay is open, close it
+// and report that we did (so the caller treats this back-action as "close
+// the overlay", not "exit the test" — same one-step-at-a-time behavior
+// Android's hardware back button already has). Returns false if neither
+// overlay was open, so the caller can fall through to its normal logic.
+function closeAnyBlockingOverlay() {
+  const pauseModal = document.getElementById('pauseModal');
+  if (pauseModal && pauseModal.classList.contains('show')) {
+    document.getElementById('pauseBtn')?.click();
+    return true;
+  }
+  const submitConfirmModal = document.getElementById('submitConfirmModal');
+  if (submitConfirmModal && submitConfirmModal.classList.contains('show')) {
+    document.getElementById('submitConfirmFade')?.classList.remove('show');
+    submitConfirmModal.classList.remove('show');
+    if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
+    return true;
+  }
+  return false;
+}
+
 // Shows the styled "Are you sure you want to exit the test?" modal.
 // Calls onYes() only if the user taps Yes; does nothing on No/close.
 function showExitConfirmModal(onYes) {
@@ -2535,6 +2556,19 @@ window.addEventListener('popstate', (e) => {
   // away (so the address/back-stack looks untouched while the modal is
   // up), and only actually exit if the user confirms "Yes".
   if (!skipExitConfirmOnce) {
+    // If the Pause or Submit-confirm overlay is open, this back-action
+    // should just close that overlay (one step at a time), matching
+    // Android's hardware back button behavior — not jump straight to the
+    // exit-confirmation modal. Restore the history entry right away so the
+    // back-stack looks untouched, same technique used below for the actual
+    // exit-confirm case.
+    if (closeAnyBlockingOverlay()) {
+      setTimeout(() => {
+        history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
+      }, 0);
+      return;
+    }
+
     if (isTestInProgressNow()) {
       // iOS/iPadOS Safari can get confused (and even fall back to a full
       // page reload — the "Loading items securely..." flash) if we call
@@ -2629,6 +2663,11 @@ document.addEventListener('touchstart', (e) => {
     e.preventDefault();
     qpHistoryPushed = false;
     hideQuestionPaletteUI();
+    return;
+  }
+
+  if (closeAnyBlockingOverlay()) {
+    e.preventDefault();
     return;
   }
 
