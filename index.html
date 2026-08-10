@@ -2468,16 +2468,16 @@ function isTestInProgressNow() {
 // Android's hardware back button already has). Returns false if neither
 // overlay was open, so the caller can fall through to its normal logic.
 function closeAnyBlockingOverlay() {
-  const pauseModal = document.getElementById('pauseModal');
-  if (pauseModal && pauseModal.classList.contains('show')) {
-    document.getElementById('pauseBtn')?.click();
-    return true;
-  }
   const submitConfirmModal = document.getElementById('submitConfirmModal');
   if (submitConfirmModal && submitConfirmModal.classList.contains('show')) {
     document.getElementById('submitConfirmFade')?.classList.remove('show');
     submitConfirmModal.classList.remove('show');
     if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
+    return true;
+  }
+  const pauseModal = document.getElementById('pauseModal');
+  if (pauseModal && pauseModal.classList.contains('show')) {
+    document.getElementById('pauseBtn')?.click();
     return true;
   }
   return false;
