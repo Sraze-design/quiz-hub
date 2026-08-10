@@ -758,132 +758,49 @@ text-align:center;
 }
 
 /* Premium Metric Dashboard Result screen (REDESIGNED VIZ) */
+/* ============================================================
+   REDESIGNED PREMIUM RESULT SCREEN — DARK "TROPHY" THEME
+   Fixed full-viewport overlay so it always fits one screen,
+   no scrolling, on any device. Sizes scale with clamp()/vh so
+   the layout compresses gracefully on short screens instead of
+   overflowing. Grade colour logic (JS) is untouched — it still
+   sets inline styles on #perfBadge / #scoreRingCircle / #score,
+   this CSS only supplies the base look.
+   ============================================================ */
+
 .premium-result-screen {
-  padding: 12px 12px;
-  background: #ffffff;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  animation: fadeIn 0.35s ease-out;
-}
-
-.result-hero-card {
-  background: #ffffff;
-  border-radius: 28px;
-  padding: 18px 16px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border: 1px solid #f1f5f9;
-  margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.trophy-wrapper {
-  margin-bottom: 12px;
-  filter: drop-shadow(0 8px 16px rgba(234, 179, 8, 0.25));
-  animation: trophyFloat 3s ease-in-out infinite;
-}
-
-@keyframes trophyFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.result-hero-title {
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #64748b;
-  margin-bottom: 20px;
-}
-
-/* Circular Score Ring */
-.score-ring-container {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.score-ring-svg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
   width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.score-ring-bg {
-  fill: none;
-  stroke: #fee2e2;
-  stroke-width: 10;
-}
-
-.score-ring-progress {
-  fill: none;
-  stroke: #ef4444;
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-dasharray: 440;
-  stroke-dashoffset: 100;
-  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.score-ring-content {
-  position: absolute;
+  max-width: 980px;
+  z-index: 46;
+  background:
+    radial-gradient(120% 55% at 50% -5%, #17245e 0%, #0b1230 48%, #04060f 100%);
+  padding:
+    max(10px, env(safe-area-inset-top))
+    clamp(10px, 3.2vw, 20px)
+    max(10px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: clamp(8px, 1.6vh, 14px);
+  overflow: hidden;
+  animation: fadeIn 0.35s ease-out;
+  box-sizing: border-box;
 }
 
-.score-big-display {
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.1;
-  color: #0f172a !important;
-  letter-spacing: -0.5px;
-}
-
-.score-sub-text {
-  font-size: 13px;
-  color: #64748b;
-  font-weight: 700;
-  margin-top: 2px;
-}
-
-.perf-badge-premium {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 20px;
-  border-radius: 50px;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-  background: var(--danger);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.perf-badge-premium:hover {
-  transform: scale(1.03);
-}
-
-/* ALL TIME BEST Leaderboard Card (added) */
+/* ---------- ALL TIME BEST card ---------- */
 .all-time-best-card {
   position: relative;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-  border: 2px solid #f2c14e;
+  flex: 0 0 auto;
+  background: linear-gradient(155deg, #142352 0%, #0b1638 100%);
+  border: 1.5px solid rgba(245, 183, 66, 0.45);
   border-radius: 20px;
-  padding: 16px 12px;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 24px rgba(217, 119, 6, 0.14);
+  padding: clamp(10px, 2vh, 16px) clamp(8px, 3vw, 14px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .atb-title {
@@ -891,12 +808,13 @@ text-align:center;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: clamp(11px, 1.9vh, 14px);
   font-weight: 800;
   letter-spacing: 0.5px;
-  color: #92400e;
-  margin-bottom: 14px;
+  color: #fbbf24;
+  margin-bottom: clamp(8px, 1.6vh, 14px);
   text-transform: uppercase;
+  text-shadow: 0 0 14px rgba(251, 191, 36, 0.35);
 }
 
 .atb-grid {
@@ -910,43 +828,43 @@ text-align:center;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 6px;
+  gap: clamp(4px, 0.9vh, 6px);
   min-width: 0;
 }
 
 .atb-icon {
-  width: 34px;
-  height: 34px;
+  width: clamp(24px, 5vh, 34px);
+  height: clamp(24px, 5vh, 34px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.atb-icon.orange { background: #fef3c7; color: #d97706; }
-.atb-icon.blue { background: #dbeafe; color: #2563eb; }
-.atb-icon.green { background: #dcfce7; color: #16a34a; }
-.atb-icon.purple { background: #ede9fe; color: #7c3aed; }
+.atb-icon.orange { background: rgba(245, 158, 11, 0.18); color: #fbbf24; }
+.atb-icon.blue   { background: rgba(59, 130, 246, 0.18); color: #60a5fa; }
+.atb-icon.green  { background: rgba(34, 197, 94, 0.18);  color: #4ade80; }
+.atb-icon.purple { background: rgba(168, 85, 247, 0.18); color: #c084fc; }
 
 .atb-label {
-  font-size: 10px;
+  font-size: clamp(7.5px, 1.35vh, 10px);
   font-weight: 700;
-  color: #78716c;
+  color: #8ea0c9;
   text-transform: uppercase;
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
 
 .atb-value {
-  font-size: 13px;
+  font-size: clamp(10px, 1.9vh, 13px);
   font-weight: 800;
-  color: #1f2937;
+  color: #e5eaf5;
   line-height: 1.3;
   word-break: break-word;
 }
-.atb-value.gold { color: #d97706; }
-.atb-value.blue { color: #2563eb; }
-.atb-value.green { color: #16a34a; }
+.atb-value.gold  { color: #fbbf24; }
+.atb-value.blue  { color: #60a5fa; }
+.atb-value.green { color: #4ade80; }
 
 .atb-new-badge {
   position: absolute;
@@ -954,7 +872,7 @@ text-align:center;
   left: 50%;
   transform: translateX(-50%) scale(0.7);
   background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #ffffff;
+  color: #1a1200;
   font-weight: 800;
   font-size: 12px;
   padding: 6px 16px;
@@ -976,95 +894,232 @@ text-align:center;
   50% { transform: translateX(-50%) scale(1.08); }
 }
 
-@media (max-width: 380px) {
-  .all-time-best-card { padding: 14px 8px; }
-  .atb-grid { gap: 3px; }
-  .atb-label { font-size: 8.5px; }
-  .atb-value { font-size: 11px; }
-  .atb-icon { width: 28px; height: 28px; }
+/* ---------- Hero / trophy card ---------- */
+.result-hero-card {
+  flex: 0 0 auto;
+  background: linear-gradient(155deg, #142352 0%, #0b1638 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: clamp(10px, 2vh, 20px) 16px;
+  text-align: center;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
 }
 
-/* Modern Analytics Grid */
+.trophy-wrapper {
+  margin-bottom: clamp(4px, 1vh, 12px);
+  filter: drop-shadow(0 8px 16px rgba(234, 179, 8, 0.35));
+  animation: trophyFloat 3s ease-in-out infinite;
+}
+.trophy-wrapper svg {
+  width: clamp(38px, 8vh, 68px);
+  height: clamp(38px, 8vh, 68px);
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.result-hero-title {
+  font-size: clamp(10px, 1.6vh, 13px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #93a5c9;
+  margin-bottom: clamp(8px, 1.6vh, 20px);
+  position: relative;
+}
+.result-hero-title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: clamp(6px, 1vh, 10px) auto 0;
+  background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+  border-radius: 2px;
+}
+
+/* Circular Score Ring */
+.score-ring-container {
+  position: relative;
+  width: clamp(92px, 18vh, 140px);
+  height: clamp(92px, 18vh, 140px);
+  margin-bottom: clamp(6px, 1.6vh, 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.score-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 10;
+}
+
+.score-ring-progress {
+  fill: none;
+  stroke: #ef4444;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.score-ring-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-big-display {
+  font-size: clamp(20px, 4.2vh, 30px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff !important;
+  letter-spacing: -0.5px;
+}
+
+.score-sub-text {
+  font-size: clamp(10px, 1.7vh, 13px);
+  color: #93a5c9;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.perf-badge-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(5px, 1vh, 6px) clamp(14px, 3.5vw, 20px);
+  border-radius: 50px;
+  font-size: clamp(11px, 1.8vh, 13px);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  background: var(--danger);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.perf-badge-premium:hover {
+  transform: scale(1.03);
+}
+
+/* ---------- Stats panel (single card, divided rows) ---------- */
 .stats-grid-dashboard {
+  flex: 1 1 auto;
+  min-height: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  background: linear-gradient(155deg, #142352 0%, #0b1638 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2px clamp(8px, 3vw, 16px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
 }
 
 .stat-mini-card {
-  background: #f8fafc;
-  border: 1px solid #f1f5f9;
-  padding: 12px 10px;
-  border-radius: 20px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: clamp(5px, 1.6vh, 12px) clamp(4px, 1.6vw, 8px);
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: clamp(8px, 2vw, 12px);
+  min-height: 0;
+  box-shadow: none;
+  transition: none;
 }
-
+.stat-mini-card:nth-child(odd) {
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+}
+.stat-mini-card:nth-child(7),
+.stat-mini-card:nth-child(8) {
+  border-bottom: none;
+}
 .stat-mini-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  transform: none;
+  box-shadow: none;
 }
 
 .stat-icon-bg {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: clamp(24px, 5.2vh, 40px);
+  height: clamp(24px, 5.2vh, 40px);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
+.stat-icon-bg svg { width: 60%; height: 60%; }
 
-/* Custom Card Theming */
-.card-green .stat-icon-bg { background: #ecfdf5; color: #10b981; }
-.card-red .stat-icon-bg { background: #fef2f2; color: #ef4444; }
-.card-blue .stat-icon-bg { background: #eff6ff; color: #2563eb; }
-.card-orange .stat-icon-bg { background: #fffbeb; color: #f59e0b; }
-.card-purple .stat-icon-bg { background: #faf5ff; color: #a855f7; }
-.card-teal .stat-icon-bg { background: #f0fdfa; color: #14b8a6; }
-.card-cyan .stat-icon-bg { background: #ecfeff; color: #06b6d4; }
+/* Custom Card Theming — dark-mode tints */
+.card-green .stat-icon-bg  { background: rgba(16, 185, 129, 0.16); color: #34d399; }
+.card-red .stat-icon-bg    { background: rgba(239, 68, 68, 0.16);  color: #f87171; }
+.card-blue .stat-icon-bg   { background: rgba(59, 130, 246, 0.16); color: #60a5fa; }
+.card-orange .stat-icon-bg { background: rgba(245, 158, 11, 0.16); color: #fbbf24; }
+.card-purple .stat-icon-bg { background: rgba(168, 85, 247, 0.16); color: #c084fc; }
+.card-teal .stat-icon-bg   { background: rgba(20, 184, 166, 0.16); color: #2dd4bf; }
+.card-cyan .stat-icon-bg   { background: rgba(6, 182, 212, 0.16);  color: #22d3ee; }
 
 .stat-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .stat-mini-title {
-  font-size: 11px;
+  font-size: clamp(7.5px, 1.4vh, 11px);
   font-weight: 700;
-  color: #64748b;
+  color: #8ea0c9;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stat-mini-value {
-  font-size: 18px;
+  font-size: clamp(12px, 2.4vh, 18px);
   font-weight: 800;
-  color: #0f172a;
-  margin-top: 2px;
+  color: #f8fafc;
+  margin-top: 1px;
 }
 
+/* ---------- Reattempt button ---------- */
 .restart-actions-container {
-  margin-top: auto;
-  padding-bottom: 12px;
+  flex: 0 0 auto;
 }
 
 .full-width-restart-btn {
   width: 100%;
-  padding: 14px;
+  padding: clamp(10px, 1.9vh, 14px);
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: white;
   border: none;
-  border-radius: 20px;
-  font-size: 16px;
+  border-radius: 18px;
+  font-size: clamp(13px, 2.2vh, 16px);
   font-weight: 800;
   letter-spacing: 0.5px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
   display: flex;
   align-items: center;
@@ -1073,13 +1128,22 @@ text-align:center;
 }
 
 .full-width-restart-btn:hover {
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.4);
   transform: translateY(-1px);
 }
 
 .full-width-restart-btn:active {
   transform: scale(0.98);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Guarantee fit on very short viewports: shed the least-critical
+   block first (leaderboard card) instead of ever scrolling. */
+@media (max-height: 560px) {
+  .all-time-best-card { display: none; }
+}
+@media (max-height: 430px) {
+  .result-hero-title { display: none; }
 }
 
 /* Modals System Custom Redesigns */
@@ -3733,8 +3797,6 @@ function confirmSubmit(){
 document.getElementById('scmYesBtn')?.addEventListener('click', ()=>{
   document.getElementById('submitConfirmFade')?.classList.remove('show');
   document.getElementById('submitConfirmModal')?.classList.remove('show');
-  document.getElementById('pauseFade')?.classList.remove('show');
-  document.getElementById('pauseModal')?.classList.remove('show');
   showScore();
 });
 document.getElementById('scmNoBtn')?.addEventListener('click', ()=>{
