@@ -2610,13 +2610,32 @@ window.addEventListener('popstate', (e) => {
 const EDGE_SWIPE_ZONE_PX = 24;
 
 document.addEventListener('touchstart', (e) => {
-  if (!isTestInProgressNow()) return;
-  if (document.getElementById('exitConfirmModal')?.classList.contains('show')) return;
   if (!e.touches || !e.touches.length) return;
 
   const touchX = e.touches[0].clientX;
   if (touchX > EDGE_SWIPE_ZONE_PX) return;
 
+  // Mirror the popstate handler's priority order: if the AI panel or the
+  // question palette is open, a back-gesture here should just close that
+  // panel (like Android's back button does) — not jump straight to the
+  // exit-confirmation modal.
+  if (aiHistoryPushed) {
+    e.preventDefault();
+    aiHistoryPushed = false;
+    hideAIPanelUI();
+    return;
+  }
+  if (qpHistoryPushed) {
+    e.preventDefault();
+    qpHistoryPushed = false;
+    hideQuestionPaletteUI();
+    return;
+  }
+
+  if (!isTestInProgressNow()) return;
+  if (document.getElementById('exitConfirmModal')?.classList.contains('show')) return;
+
+  // Stop the native interactive back gesture from starting at all.
   e.preventDefault();
 
   showExitConfirmModal(() => {
