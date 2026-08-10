@@ -2649,22 +2649,13 @@ document.addEventListener('touchstart', (e) => {
   const touchX = e.touches[0].clientX;
   if (touchX > EDGE_SWIPE_ZONE_PX) return;
 
-  // Mirror the popstate handler's priority order: if the AI panel or the
-  // question palette is open, a back-gesture here should just close that
-  // panel (like Android's back button does) — not jump straight to the
-  // exit-confirmation modal.
-  if (aiHistoryPushed) {
-    e.preventDefault();
-    aiHistoryPushed = false;
-    hideAIPanelUI();
-    return;
-  }
-  if (qpHistoryPushed) {
-    e.preventDefault();
-    qpHistoryPushed = false;
-    hideQuestionPaletteUI();
-    return;
-  }
+  // If the AI panel or question palette is open, they already have their
+  // own real history entry (pushed when they opened) and the popstate
+  // handler above closes them safely with no re-push involved — so there's
+  // no WebKit reload risk to work around here. Let the native gesture
+  // proceed normally; intercepting it ourselves would leave that history
+  // entry un-consumed and desync the back-stack from our panel-open flags.
+  if (aiHistoryPushed || qpHistoryPushed) return;
 
   if (closeAnyBlockingOverlay()) {
     e.preventDefault();
