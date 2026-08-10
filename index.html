@@ -780,10 +780,19 @@ text-align:center;
   align-items: center;
 }
 
+.result-hero-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 .trophy-wrapper {
-  margin-bottom: 12px;
+  margin-bottom: 0;
   filter: drop-shadow(0 8px 16px rgba(234, 179, 8, 0.25));
   animation: trophyFloat 3s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @keyframes trophyFloat {
@@ -797,7 +806,7 @@ text-align:center;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: #64748b;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 /* Circular Score Ring */
@@ -805,10 +814,11 @@ text-align:center;
   position: relative;
   width: 140px;
   height: 140px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .score-ring-svg {
@@ -2123,33 +2133,35 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
           </div>
 
           <div class="result-hero-card">
-            <!-- Premium Gold Trophy SVG -->
-            <div class="trophy-wrapper">
-              <svg width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 21H16M12 17V21M6 4C6 3.44772 6.44772 3 7 3H17C17.5523 3 18 3.44772 18 4V9C18 12.3137 15.3137 15 12 15C8.68629 15 6 12.3137 6 9V4Z" stroke="url(#trophy_grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6 5H4C2.89543 5 2 5.89543 2 7V8C2 9.65685 3.34315 11 5 11H6" stroke="url(#trophy_grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M18 5H20C21.1046 5 22 5.89543 22 7V8C22 9.65685 20.6569 11 19 11H18" stroke="url(#trophy_grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <defs>
-                  <linearGradient id="trophy_grad" x1="2" y1="3" x2="22" y2="21" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#F59E0B"/>
-                    <stop offset="0.5" stop-color="#FBBF24"/>
-                    <stop offset="1" stop-color="#D97706"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
             <div class="result-hero-title">ASSESSMENT COMPLETED</div>
 
-            <!-- Large Circular Score Ring -->
-            <div class="score-ring-container">
-              <svg class="score-ring-svg" viewBox="0 0 160 160">
-                <circle class="score-ring-bg" cx="80" cy="80" r="70" />
-                <circle class="score-ring-progress" id="scoreRingCircle" cx="80" cy="80" r="70" />
-              </svg>
-              <div class="score-ring-content">
-                <div class="score-big-display" id="score">0.00</div>
-                <div class="score-sub-text">/<span id="total">0</span> Points</div>
+            <div class="result-hero-row">
+              <!-- Premium Gold Trophy SVG -->
+              <div class="trophy-wrapper">
+                <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 21H16M12 17V21M6 4C6 3.44772 6.44772 3 7 3H17C17.5523 3 18 3.44772 18 4V9C18 12.3137 15.3137 15 12 15C8.68629 15 6 12.3137 6 9V4Z" stroke="url(#trophy_grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 5H4C2.89543 5 2 5.89543 2 7V8C2 9.65685 3.34315 11 5 11H6" stroke="url(#trophy_grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18 5H20C21.1046 5 22 5.89543 22 7V8C22 9.65685 20.6569 11 19 11H18" stroke="url(#trophy_grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="trophy_grad" x1="2" y1="3" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F59E0B"/>
+                      <stop offset="0.5" stop-color="#FBBF24"/>
+                      <stop offset="1" stop-color="#D97706"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+
+              <!-- Large Circular Score Ring -->
+              <div class="score-ring-container">
+                <svg class="score-ring-svg" viewBox="0 0 160 160">
+                  <circle class="score-ring-bg" cx="80" cy="80" r="70" />
+                  <circle class="score-ring-progress" id="scoreRingCircle" cx="80" cy="80" r="70" />
+                </svg>
+                <div class="score-ring-content">
+                  <div class="score-big-display" id="score">0.00</div>
+                  <div class="score-sub-text">/<span id="total">0</span> Points</div>
+                </div>
               </div>
             </div>
 
