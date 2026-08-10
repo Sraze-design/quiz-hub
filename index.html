@@ -3355,7 +3355,7 @@ function shuffleAllQuestionsOptions(quizArray) {
 let ORIGINAL_DATA = [];
 let ORIGINAL_TOTAL = 0;
 let elapsed=0,timerRunning=true,isPaused=false;
-const timer=setInterval(()=>{if(timerRunning && data.length > 0){elapsed++;const m=String(Math.floor(elapsed/60)).padStart(2,'0');const s=String(elapsed%60).padStart(2,'0');const t=document.getElementById('liveTimer');if(t)t.textContent=m+':'+s;const pt=document.getElementById('popupTime');if(pt)pt.textContent=m+':'+s;}},1000);
+const timer=setInterval(()=>{if(timerRunning && data.length > 0){elapsed++;const m=String(Math.floor(elapsed/60)).padStart(2,'0');const s=String(elapsed%60).padStart(2,'0');const t=document.getElementById('liveTimer');if(t)t.textContent=m+':'+s;const pt=document.getElementById('popupTime');if(pt)pt.textContent=m+':'+s;const scmT=document.getElementById('scmTotalTime');if(scmT && typeof formatHHMMSS==='function')scmT.textContent=formatHHMMSS(elapsed);}},1000);
 
 let qElapsed=0;
 let questionTimes = [];
