@@ -53,7 +53,7 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
 </div>
 </div>
 
-<canvas id="pipCanvas" width="520" height="170"></canvas>
+<canvas id="pipCanvas" width="700" height="220"></canvas>
 <video id="pipVideo" playsinline autoplay muted></video>
 
 <script>
@@ -133,22 +133,22 @@ function render(){
 
 function drawPiP(){
   ctx.fillStyle="#111";
-  ctx.fillRect(0,0,520,170);
+  ctx.fillRect(0,0,700,220);
 
   ctx.fillStyle="#aaa";
-  ctx.font='600 17px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.font='600 21px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
   ctx.textAlign="left";
-  ctx.fillText("STUDY",22,32);
-  ctx.fillText("AWAKE",22,120);
+  ctx.fillText("STUDY",28,40);
+  ctx.fillText("AWAKE",28,142);
 
   ctx.fillStyle="#fff";
-  ctx.font='600 34px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.font='600 46px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
   ctx.textAlign="right";
-  ctx.fillText(fmt(elapsed(state.study)),500,38);
-  ctx.fillText(fmt(elapsed(state.wake)),500,126);
+  ctx.fillText(fmt(elapsed(state.study)),672,48);
+  ctx.fillText(fmt(elapsed(state.wake)),672,150);
 
   ctx.fillStyle="#777";
-  ctx.fillRect(22,78,478,2);
+  ctx.fillRect(28,91,644,2);
 }
 
 let streamReady=false;
