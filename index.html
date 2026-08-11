@@ -2109,6 +2109,27 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     });
   }
 
+  // Force Google Translate to re-scan only the dynamic quiz targets.
+  // Google can ignore a repeated "en" change event when the language is
+  // already English, so briefly reset the hidden translator and apply English
+  // again. All other page elements remain notranslate.
+  async function forceTranslateQuizTargets() {
+    if (appLang !== 'en' || langSwitchBusy) return;
+    setQuizTranslationScope();
+    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
+    if (!combo) return;
+
+    combo.value = '';
+    combo.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 120));
+
+    if (appLang !== 'en' || langSwitchBusy) return;
+    setQuizOriginalLanguageMode(false);
+    combo.value = 'en';
+    combo.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 350));
+  }
+
   async function toggleAppLanguage() {
     if (langSwitchBusy) return;
     langSwitchBusy = true;
@@ -3388,6 +3409,19 @@ async function loadQuizData(quizPath) {
     data=quizQuestions;
     shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
     ORIGINAL_DATA=quizQuestions.slice();
+
+    // Every newly opened test must ALWAYS start in the original language (Hindi).
+    // Do not carry the previous test/result page's English translation state into a new test.
+    appLang = 'hi';
+    langSwitchBusy = false;
+    clearGoogleTranslationCookie();
+    setQuizOriginalLanguageMode(true);
+    const langComboOnOpen = document.querySelector('#google_translate_element select.goog-te-combo');
+    if (langComboOnOpen) {
+      langComboOnOpen.value = '';
+      langComboOnOpen.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    updateLangIconState();
     ORIGINAL_TOTAL=data.length;
     currentQ=0; score=0; currentStreak=0; maxStreak=0; elapsed=0;
     timerRunning=true; isPaused=false;
@@ -3767,6 +3801,12 @@ if(typeof updateQBadge==='function') updateQBadge();
 timerRunning=false;
 document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
 document.getElementById('feedback').style.display = "block";
+
+// Explanation is inserted after the original Google Translate scan. If the
+// quiz is currently in English mode, immediately re-scan the new explanation.
+if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+  setTimeout(() => forceTranslateQuizTargets(), 30);
+}
 };
 oBox.appendChild(btn);
 });
@@ -3781,6 +3821,9 @@ if(prevSel!==null && prevSel!==undefined){
  }
  document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
  document.getElementById('feedback').style.display="block";
+ if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+   setTimeout(() => forceTranslateQuizTargets(), 30);
+ }
 }
 
 if(typeof setQuizTranslationScope === 'function'){
@@ -3791,14 +3834,14 @@ if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageS
   onQuestionChangeAI();
 }
 
-// Google Translate needs a nudge after showQ() replaces the question DOM.
-// Do this only when English mode is active; Hindi mode stays untouched.
-if (appLang === 'en') {
+// When Next/Back creates a fresh question DOM, Google Translate must scan
+// the new question/options again while English mode is active.
+if (appLang === 'en' && !langSwitchBusy) {
   setTimeout(() => {
-    if (appLang !== 'en' || langSwitchBusy) return;
-    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
-    if (combo && combo.value !== 'en') setGoogleTranslateLanguage('en');
-  }, 180);
+    if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+      forceTranslateQuizTargets();
+    }
+  }, 60);
 }
 }
 
