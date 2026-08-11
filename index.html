@@ -2208,9 +2208,16 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const combo = document.querySelector('#google_translate_element select.goog-te-combo');
     if (!feedback || !combo) return;
 
-    // Lock question + options in their current (already English) state.
-    [qText, options].forEach(el => {
-      if (!el) return;
+    // Preserve the already-English question/options exactly as they are.
+    // Google Translate's language-change event is global, so we protect these
+    // two blocks and restore their English DOM immediately after the event.
+    const keepEnglish = [qText, options].map(el => el ? ({
+      el,
+      html: el.innerHTML,
+      text: el.textContent
+    }) : null).filter(Boolean);
+
+    keepEnglish.forEach(({el}) => {
       el.classList.add('notranslate');
       el.setAttribute('translate', 'no');
       el.querySelectorAll('*').forEach(child => {
@@ -2219,7 +2226,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       });
     });
 
-    // Only the fresh explanation is eligible for Google Translate.
+    // Only explanation is eligible for translation.
     feedback.classList.remove('notranslate');
     feedback.setAttribute('translate', 'yes');
     feedback.querySelectorAll('*').forEach(child => {
@@ -2227,11 +2234,24 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       child.setAttribute('translate', 'yes');
     });
 
-    // No language reset and no full quiz re-scan. Ask the already-active English
-    // translator to process the newly inserted explanation node only.
+    // Do not reset to Hindi or run a second translation cycle. Keep the active
+    // English state and kick Google's existing translator once.
     combo.value = 'en';
     combo.dispatchEvent(new Event('change', { bubbles: true }));
-    await new Promise(r => setTimeout(r, 80));
+
+    // Restore question/options in the same JavaScript turn, before the browser
+    // can paint a Hindi intermediate frame. Explanation is left for Google.
+    keepEnglish.forEach(({el, html}) => {
+      el.innerHTML = html;
+      el.classList.add('notranslate');
+      el.setAttribute('translate', 'no');
+      el.querySelectorAll('*').forEach(child => {
+        child.classList.add('notranslate');
+        child.setAttribute('translate', 'no');
+      });
+    });
+
+    await new Promise(r => setTimeout(r, 100));
   }
 
   async function toggleAppLanguage() {
