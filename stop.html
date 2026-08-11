@@ -12,13 +12,24 @@ h1{text-align:center;font-size:22px;margin:0 0 18px}
 .box{background:#1b1b1b;border:1px solid #333;border-radius:18px;padding:18px;margin:12px 0}
 .title{font-size:17px;font-weight:600;margin-bottom:8px}
 .time{font-variant-numeric:tabular-nums;font-size:42px;font-weight:600;letter-spacing:-1px;margin:8px 0 14px}
-.row{display:flex;gap:8px;flex-wrap:wrap}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
 button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:600;min-width:92px}
+.toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.toggle svg{width:18px;height:18px;display:block;fill:currentColor}
 .start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111}.pip{background:#4ade80;color:#111;width:100%;margin-top:12px}
 .status{text-align:center;color:#aaa;font-size:13px;min-height:20px;margin-top:10px}
 .hint{text-align:center;color:#999;font-size:12px;line-height:1.45;margin-top:14px}
 #pipCanvas{position:fixed;left:4px;bottom:4px;width:2px;height:1px;opacity:.02;pointer-events:none}
 #pipVideo{position:fixed;left:8px;bottom:8px;width:2px;height:1px;opacity:.02;pointer-events:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
+.modal.show{display:flex}
+.modalBox{width:min(360px,92vw);background:#1b1b1b;border:1px solid #3a3a3a;border-radius:18px;padding:22px;box-shadow:0 16px 50px rgba(0,0,0,.45)}
+.modalTitle{font-size:20px;font-weight:700;margin-bottom:8px}
+.modalText{font-size:15px;color:#bbb;line-height:1.4;margin-bottom:20px}
+.modalActions{display:flex;gap:10px}
+.modalActions button{flex:1;min-width:0}
+.modalNo{background:#ddd;color:#111}
+.modalYes{background:#ff6868;color:#111}
 </style>
 </head>
 <body>
@@ -29,8 +40,11 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">📚 Study Time</div>
   <div id="studyTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="studyToggle" class="start">Start</button>
     <button id="studyReset" class="reset">Reset</button>
+    <button id="studyToggle" class="start toggle">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.2-6.86a1.02 1.02 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg>
+      <span>Start</span>
+    </button>
   </div>
 </div>
 
@@ -38,8 +52,11 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">🌅 Awake Time</div>
   <div id="wakeTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="wakeToggle" class="start">Start</button>
     <button id="wakeReset" class="reset">Reset</button>
+    <button id="wakeToggle" class="start toggle">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.2-6.86a1.02 1.02 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg>
+      <span>Start</span>
+    </button>
   </div>
 </div>
 
@@ -71,7 +88,9 @@ const wakeTime=$("wakeTime"),studyTime=$("studyTime");
 const wakeToggle=$("wakeToggle"),wakeReset=$("wakeReset");
 const studyToggle=$("studyToggle"),studyReset=$("studyReset");
 const pipBtn=$("pip"),statusEl=$("status"),canvas=$("pipCanvas"),video=$("pipVideo");
+const resetModal=$("resetModal"),resetCancel=$("resetCancel"),resetConfirm=$("resetConfirm");
 const ctx=canvas.getContext("2d");
+let pendingReset=null;
 
 function save(){localStorage.setItem(KEY,JSON.stringify(state));}
 
@@ -114,24 +133,54 @@ wakeToggle.addEventListener("click",()=>{
   else startTimer(state.wake);
   render();
 });
-wakeReset.addEventListener("click",()=>{resetTimer("wake");render();});
+wakeReset.addEventListener("click",()=>{
+  pendingReset="wake";
+  resetModal.classList.add("show");
+  resetModal.setAttribute("aria-hidden","false");
+});
 
 studyToggle.addEventListener("click",()=>{
   if(state.study.running) stopTimer(state.study);
   else startTimer(state.study);
   render();
 });
-studyReset.addEventListener("click",()=>{resetTimer("study");render();});
+studyReset.addEventListener("click",()=>{
+  pendingReset="study";
+  resetModal.classList.add("show");
+  resetModal.setAttribute("aria-hidden","false");
+});
+
+function closeResetModal(){
+  pendingReset=null;
+  resetModal.classList.remove("show");
+  resetModal.setAttribute("aria-hidden","true");
+}
+
+resetCancel.addEventListener("click",closeResetModal);
+
+resetConfirm.addEventListener("click",()=>{
+  if(pendingReset) resetTimer(pendingReset);
+  closeResetModal();
+  render();
+});
+
+resetModal.addEventListener("click",(e)=>{
+  if(e.target===resetModal) closeResetModal();
+});
+
+function setToggleButton(btn,running){
+  btn.className=(running?"stop":"start")+" toggle";
+  btn.innerHTML=running
+    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5.5A1.5 1.5 0 0 1 8.5 4h2A1.5 1.5 0 0 1 12 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-2A1.5 1.5 0 0 1 7 18.5v-13zm5 0A1.5 1.5 0 0 1 13.5 4h2A1.5 1.5 0 0 1 17 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-2a1.5 1.5 0 0 1-1.5-1.5v-13z"/></svg><span>Stop</span>'
+    : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.2-6.86a1.02 1.02 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg><span>Start</span>';
+}
 
 function render(){
   wakeTime.textContent=fmt(elapsed(state.wake));
   studyTime.textContent=fmt(elapsed(state.study));
 
-  wakeToggle.textContent=state.wake.running?"Stop":"Start";
-  wakeToggle.className=state.wake.running?"stop":"start";
-
-  studyToggle.textContent=state.study.running?"Stop":"Start";
-  studyToggle.className=state.study.running?"stop":"start";
+  setToggleButton(wakeToggle,state.wake.running);
+  setToggleButton(studyToggle,state.study.running);
 
   drawPiP();
 }
