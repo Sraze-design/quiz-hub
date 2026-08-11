@@ -1994,15 +1994,21 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     // old shallow body-children check).
     // IMPORTANT: never touch anything *inside* #google_translate_element —
     // Google's actual <select class="goog-te-combo"> and its supporting
-    // internal nodes live in there and often get auto-generated ids that
-    // also start with ":". Removing those broke translation entirely
-    // (clicking the button did nothing). We only strip stray ":"-id
-    // elements that Google drops elsewhere in the document.
+    // internal nodes live in there.
+    // Also important: for stray ":"-id elements elsewhere in the page, we
+    // now only HIDE them (never el.remove()). Deleting them was too
+    // aggressive — some of those nodes are things Google's script itself
+    // still needs internally to actually perform the translation, and
+    // ripping them out silently broke translate entirely (clicking did
+    // nothing, page stayed in the original language). Hiding is visually
+    // identical but non-destructive.
     const gte = document.getElementById('google_translate_element');
     document.querySelectorAll('[id^=":"]').forEach(el => {
       if (el.id === 'google_translate_element') return;
       if (gte && gte.contains(el)) return;
-      el.remove();
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('visibility', 'hidden', 'important');
+      el.style.setProperty('pointer-events', 'none', 'important');
     });
     if (document.body && document.body.style.top && document.body.style.top !== '0px') {
       document.body.style.top = '0px';
