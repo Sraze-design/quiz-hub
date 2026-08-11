@@ -2043,8 +2043,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       if (combo) {
         combo.value = targetLangCode;
         combo.dispatchEvent(new Event('change', { bubbles: true }));
-        // Give Google's DOM translator a moment to finish its mutation cycle.
-        setTimeout(resolve, 350);
+        // Short settle time; dynamic targets are translated by Google's active DOM observer.
+        setTimeout(resolve, 120);
       } else if (attemptsLeft > 0) {
         setTimeout(() => setGoogleTranslateLanguage(targetLangCode, attemptsLeft - 1).then(resolve), 250);
       } else {
@@ -2181,64 +2181,19 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     }
   }
 
-  // Prevent the original-language flash while Google Translate processes dynamic content.
-  // This is presentation-only; quiz/AI logic is not changed.
-  function hideDynamicTranslationFlash() {
-    if (!isLiveQuestionScreen() || appLang !== 'en') return;
-    ['q-text','options','feedback'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.dataset.translationFlashHidden = '1';
-        el.style.visibility = 'hidden';
-      }
-    });
-  }
-
-  function revealDynamicTranslationContent() {
-    ['q-text','options','feedback'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.dataset.translationFlashHidden === '1') {
-        el.style.visibility = '';
-        delete el.dataset.translationFlashHidden;
-      }
-    });
-  }
-
-  async function translateDynamicContentAndReveal() {
-    if (!isLiveQuestionScreen() || appLang !== 'en') {
-      revealDynamicTranslationContent();
-      return;
-    }
-    hideDynamicTranslationFlash();
-    try {
-      await forceTranslateQuizTargets();
-      // Allow Google's final DOM mutation cycle to settle before revealing.
-      await new Promise(r => setTimeout(r, 80));
-    } finally {
-      if (appLang === 'en') revealDynamicTranslationContent();
-      else revealDynamicTranslationContent();
-    }
-  }
-
-  // Force Google Translate to re-scan only the dynamic quiz targets and AI messages.
-  // Google can ignore a repeated "en" change event when the language is
-  // already English, so briefly reset the hidden translator and apply English
-  // again. All other page elements remain notranslate.
+  // Fast re-scan for newly inserted dynamic content.
+  // Do NOT reset Google Translate to '' here: that adds a visible translation
+  // round-trip and is the main source of the Hindi -> English flash/delay.
+  // Keep the existing English state and simply poke the active translator.
   async function forceTranslateQuizTargets() {
     if (!isLiveQuestionScreen() || appLang !== 'en' || langSwitchBusy) return;
     setQuizTranslationScope();
     const combo = document.querySelector('#google_translate_element select.goog-te-combo');
     if (!combo) return;
 
-    combo.value = '';
-    combo.dispatchEvent(new Event('change', { bubbles: true }));
-    await new Promise(r => setTimeout(r, 120));
-
-    if (appLang !== 'en' || langSwitchBusy) return;
-    setQuizOriginalLanguageMode(false);
     combo.value = 'en';
     combo.dispatchEvent(new Event('change', { bubbles: true }));
-    await new Promise(r => setTimeout(r, 350));
+    await new Promise(r => setTimeout(r, 120));
   }
 
   async function toggleAppLanguage() {
@@ -3863,7 +3818,6 @@ let answerCorrect=[];
 
 function showQ() {
 if(data.length === 0) return;
-if (typeof hideDynamicTranslationFlash === 'function' && appLang === 'en' && !langSwitchBusy) hideDynamicTranslationFlash();
 document.getElementById('q-text').innerHTML = formatContent(data[currentQ].q);
 const tagBox=document.getElementById('exam-tag');
 if(data[currentQ].tag){tagBox.innerHTML=formatContent(data[currentQ].tag);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
@@ -3925,10 +3879,10 @@ timerRunning=false;
 document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
 document.getElementById('feedback').style.display = "block";
 
-// Explanation is dynamic. In English mode keep it invisible until the
-// targeted translation finishes, so the original Hindi never flashes.
-if (appLang === 'en' && !langSwitchBusy && typeof translateDynamicContentAndReveal === 'function') {
-  setTimeout(() => translateDynamicContentAndReveal(), 20);
+// Explanation is inserted after the original Google Translate scan. If the
+// quiz is currently in English mode, immediately re-scan the new explanation.
+if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+  setTimeout(() => forceTranslateQuizTargets(), 30);
 }
 };
 oBox.appendChild(btn);
@@ -3944,8 +3898,8 @@ if(prevSel!==null && prevSel!==undefined){
  }
  document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
  document.getElementById('feedback').style.display="block";
- if (appLang === 'en' && !langSwitchBusy && typeof translateDynamicContentAndReveal === 'function') {
-   setTimeout(() => translateDynamicContentAndReveal(), 20);
+ if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+   setTimeout(() => forceTranslateQuizTargets(), 30);
  }
 }
 
@@ -3957,10 +3911,14 @@ if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageS
   onQuestionChangeAI();
 }
 
-// When Next/Back creates fresh question DOM, translate it before revealing
-// it in English mode. Hindi mode remains immediate.
-if (appLang === 'en' && !langSwitchBusy && typeof translateDynamicContentAndReveal === 'function') {
-  setTimeout(() => translateDynamicContentAndReveal(), 20);
+// When Next/Back creates a fresh question DOM, Google Translate must scan
+// the new question/options again while English mode is active.
+if (appLang === 'en' && !langSwitchBusy) {
+  setTimeout(() => {
+    if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+      forceTranslateQuizTargets();
+    }
+  }, 60);
 }
 }
 
@@ -5031,10 +4989,6 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
     textDiv.setAttribute('data-original-ai-html', formattedText);
     textDiv.classList.add('notranslate');
     textDiv.setAttribute('translate','no');
-    if (appLang === 'en' && isLiveQuestionScreen()) {
-      textDiv.dataset.translationFlashHidden = '1';
-      textDiv.style.visibility = 'hidden';
-    }
     msgDiv.appendChild(textDiv);
   }
 
@@ -5080,14 +5034,7 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
   chatBody.scrollTop = chatBody.scrollHeight;
   if (typeof setQuizTranslationScope === 'function') setQuizTranslationScope();
   if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
-    setTimeout(async () => {
-      await forceTranslateQuizTargets();
-      await new Promise(r => setTimeout(r, 80));
-      chatBody.querySelectorAll('[data-translation-flash-hidden=\"1\"]').forEach(el => {
-        el.style.visibility = '';
-        delete el.dataset.translationFlashHidden;
-      });
-    }, 40);
+    setTimeout(() => forceTranslateQuizTargets(), 40);
   }
 }
 
