@@ -2196,6 +2196,44 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     await new Promise(r => setTimeout(r, 120));
   }
 
+  // Answer-click optimization: translate ONLY the newly inserted explanation.
+  // Question and options are deliberately kept outside Google's translation pass
+  // so they cannot flash back to Hindi while the explanation is being translated.
+  async function forceTranslateExplanationOnly() {
+    if (!isLiveQuestionScreen() || appLang !== 'en' || langSwitchBusy) return;
+
+    const qText = document.getElementById('q-text');
+    const options = document.getElementById('options');
+    const feedback = document.getElementById('feedback');
+    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
+    if (!feedback || !combo) return;
+
+    // Lock question + options in their current (already English) state.
+    [qText, options].forEach(el => {
+      if (!el) return;
+      el.classList.add('notranslate');
+      el.setAttribute('translate', 'no');
+      el.querySelectorAll('*').forEach(child => {
+        child.classList.add('notranslate');
+        child.setAttribute('translate', 'no');
+      });
+    });
+
+    // Only the fresh explanation is eligible for Google Translate.
+    feedback.classList.remove('notranslate');
+    feedback.setAttribute('translate', 'yes');
+    feedback.querySelectorAll('*').forEach(child => {
+      child.classList.remove('notranslate');
+      child.setAttribute('translate', 'yes');
+    });
+
+    // No language reset and no full quiz re-scan. Ask the already-active English
+    // translator to process the newly inserted explanation node only.
+    combo.value = 'en';
+    combo.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 80));
+  }
+
   async function toggleAppLanguage() {
     if (!isLiveQuestionScreen() || langSwitchBusy) return;
     langSwitchBusy = true;
@@ -3882,7 +3920,7 @@ document.getElementById('feedback').style.display = "block";
 // Explanation is inserted after the original Google Translate scan. If the
 // quiz is currently in English mode, immediately re-scan the new explanation.
 if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
-  setTimeout(() => forceTranslateQuizTargets(), 30);
+  setTimeout(() => forceTranslateExplanationOnly(), 0);
 }
 };
 oBox.appendChild(btn);
@@ -3899,7 +3937,7 @@ if(prevSel!==null && prevSel!==undefined){
  document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
  document.getElementById('feedback').style.display="block";
  if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
-   setTimeout(() => forceTranslateQuizTargets(), 30);
+   setTimeout(() => forceTranslateExplanationOnly(), 0);
  }
 }
 
