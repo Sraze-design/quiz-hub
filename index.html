@@ -2103,8 +2103,17 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         msg.setAttribute('translate','yes');
 
         msg.querySelectorAll('[data-original-ai-html]').forEach(el => {
+          // The AI formatter creates <strong>/<b> and other nested elements.
+          // Google Translate was skipping those nested nodes because the
+          // blanket AI-shell rule had already marked every descendant
+          // `notranslate`. Make the complete original-text subtree
+          // translatable, not just its root element.
           el.classList.remove('notranslate');
           el.setAttribute('translate','yes');
+          el.querySelectorAll('*').forEach(child => {
+            child.classList.remove('notranslate');
+            child.setAttribute('translate','yes');
+          });
         });
 
         msg.querySelectorAll('.ai-msg-actions, .ai-msg-actions *, .ai-msg-img, .ai-msg > div[style]').forEach(el => {
