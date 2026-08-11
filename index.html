@@ -1938,13 +1938,15 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   .goog-te-ftab, iframe.goog-te-ftab,
   .goog-te-balloon-frame, iframe.goog-te-balloon-frame,
   .goog-te-menu-frame, iframe.goog-te-menu-frame,
+  iframe[src*="translate.google"], iframe[src*="translate.googleusercontent"],
   .goog-te-gadget-icon, .goog-te-gadget-simple,
   .goog-tooltip, .goog-tooltip:hover,
   .goog-text-highlight,
   .goog-te-spinner-pos, .goog-te-spinner-animation, .goog-te-spinner,
   #goog-gt-tt, .goog-te-balloon,
+  [class*="VIpgJd"], [id*="VIpgJd"],
   body > .skiptranslate,
-  body > [id^=":"] { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; box-shadow: none !important; background: none !important; }
+  body > [id^=":"] { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; max-width: 0 !important; max-height: 0 !important; overflow: hidden !important; box-shadow: none !important; background: none !important; pointer-events: none !important; }
   body { top: 0px !important; position: static !important; }
   /* IMPORTANT: do NOT use display:none here — Google's script needs the
      container to be actually rendered (just off-screen) to properly build
@@ -2005,8 +2007,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   </div>
 </div>
 <script>
-  let appLang = 'hi'; // currently displayed language
-
   function googleTranslateElementInit() {
     new google.translate.TranslateElement(
       { pageLanguage: 'hi', includedLanguages: 'en', autoDisplay: false },
@@ -2017,28 +2017,65 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   // Waits for Google's hidden <select class="goog-te-combo"> to appear,
   // then switches it programmatically. This translates in place —
   // no page reload, no banner shown.
+  let appLang = 'hi'; // currently displayed language
+  let langSwitchBusy = false;
+  let langSwitchToken = 0;
+
   function setGoogleTranslateLanguage(targetLangCode, attemptsLeft) {
     attemptsLeft = attemptsLeft === undefined ? 40 : attemptsLeft;
-    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
-    if (combo) {
-      combo.value = targetLangCode;
-      combo.dispatchEvent(new Event('change'));
-    } else if (attemptsLeft > 0) {
-      setTimeout(() => setGoogleTranslateLanguage(targetLangCode, attemptsLeft - 1), 250);
-    }
+    return new Promise((resolve) => {
+      const combo = document.querySelector('#google_translate_element select.goog-te-combo');
+      if (combo) {
+        combo.value = targetLangCode;
+        combo.dispatchEvent(new Event('change', { bubbles: true }));
+        // Give Google's DOM translator a moment to finish its mutation cycle.
+        setTimeout(resolve, 350);
+      } else if (attemptsLeft > 0) {
+        setTimeout(() => setGoogleTranslateLanguage(targetLangCode, attemptsLeft - 1).then(resolve), 250);
+      } else {
+        resolve();
+      }
+    });
   }
 
-  function toggleAppLanguage() {
+  function clearGoogleTranslationCookie() {
+    // Google Translate uses this cookie to remember the active language.
+    // Clearing it prevents the next toggle from getting stuck in English.
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + location.hostname;
+  }
+
+  async function toggleAppLanguage() {
+    if (langSwitchBusy) return;
+    langSwitchBusy = true;
+    const token = ++langSwitchToken;
+    const btn = document.getElementById('langSwitchBtn');
+    if (btn) btn.style.pointerEvents = 'none';
+
     if (appLang === 'hi') {
-      setGoogleTranslateLanguage('en');
+      await setGoogleTranslateLanguage('en');
+      if (token !== langSwitchToken) return;
       appLang = 'en';
     } else {
-      // Empty string is Google's actual "restore original text" value —
-      // setting 'hi' again does NOT revert a translated page reliably.
-      setGoogleTranslateLanguage('');
+      // Do NOT ask Google to translate to "hi". Empty-string restore is
+      // unreliable after the quiz DOM has been rebuilt. Restore the current
+      // question directly from the original data, which is always Hindi.
+      clearGoogleTranslationCookie();
+      await setGoogleTranslateLanguage('');
+      if (token !== langSwitchToken) return;
       appLang = 'hi';
+
+      // Re-render only the quiz content from data. This restores the exact
+      // original Hindi question/options without reloading the page.
+      if (typeof showQ === 'function' && data && data.length) {
+        showQ();
+        if (typeof resetQuestionTimer === 'function') resetQuestionTimer();
+      }
     }
+
     updateLangIconState();
+    langSwitchBusy = false;
+    if (btn) btn.style.pointerEvents = 'auto';
   }
 
   function updateLangIconState() {
@@ -3679,6 +3716,16 @@ if(prevSel!==null && prevSel!==undefined){
 
 if(typeof onQuestionChangeAI === 'function'){
   onQuestionChangeAI();
+}
+
+// Google Translate needs a nudge after showQ() replaces the question DOM.
+// Do this only when English mode is active; Hindi mode stays untouched.
+if (appLang === 'en') {
+  setTimeout(() => {
+    if (appLang !== 'en' || langSwitchBusy) return;
+    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
+    if (combo && combo.value !== 'en') setGoogleTranslateLanguage('en');
+  }, 180);
 }
 }
 
