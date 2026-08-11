@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Wake & Study Stopwatch</title>
 <style>
 *{box-sizing:border-box}
@@ -12,28 +12,13 @@ h1{text-align:center;font-size:22px;margin:0 0 18px}
 .box{background:#1b1b1b;border:1px solid #333;border-radius:18px;padding:18px;margin:12px 0}
 .title{font-size:17px;font-weight:600;margin-bottom:8px}
 .time{font-variant-numeric:tabular-nums;font-size:42px;font-weight:600;letter-spacing:-1px;margin:8px 0 14px}
-.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.row{display:flex;gap:8px;flex-wrap:wrap}
 button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:600;min-width:92px}
-.toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.toggle svg{width:18px;height:18px;display:block;flex:0 0 18px;fill:currentColor}
-.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-.reset svg{width:18px;height:18px;display:block;flex:0 0 18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.reset.resetting svg{animation:resetSpin .45s ease}
-@keyframes resetSpin{0%{transform:rotate(0deg)}60%{transform:rotate(-150deg) scale(.92)}100%{transform:rotate(-360deg) scale(1)}}
-.pip{background:#4ade80;color:#111;width:100%;margin-top:12px}
+.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111}.pip{background:#4ade80;color:#111;width:100%;margin-top:12px}
 .status{text-align:center;color:#aaa;font-size:13px;min-height:20px;margin-top:10px}
 .hint{text-align:center;color:#999;font-size:12px;line-height:1.45;margin-top:14px}
 #pipCanvas{position:fixed;left:4px;bottom:4px;width:2px;height:1px;opacity:.02;pointer-events:none}
 #pipVideo{position:fixed;left:8px;bottom:8px;width:2px;height:1px;opacity:.02;pointer-events:none}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
-.modal.show{display:flex}
-.modalBox{width:min(360px,92vw);background:#1b1b1b;border:1px solid #3a3a3a;border-radius:18px;padding:22px;box-shadow:0 16px 50px rgba(0,0,0,.45)}
-.modalTitle{font-size:20px;font-weight:700;margin-bottom:8px}
-.modalText{font-size:15px;color:#bbb;line-height:1.4;margin-bottom:20px}
-.modalActions{display:flex;gap:10px}
-.modalActions button{flex:1;min-width:0}
-.modalNo{background:#ddd;color:#111}
-.modalYes{background:#ff6868;color:#111}
 </style>
 </head>
 <body>
@@ -44,14 +29,9 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">📚 Study Time</div>
   <div id="studyTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="studyReset" class="reset">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10A7.5 7.5 0 1 1 6.7 16"/><path d="M4.5 10V5.5"/><path d="M4.5 10H9"/></svg>
-      <span>Reset</span>
-    </button>
-    <button id="studyToggle" class="start toggle">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"/></svg>
-      <span>Start</span>
-    </button>
+    <button id="studyStart" class="start">Start</button>
+    <button id="studyStop" class="stop" disabled>Stop</button>
+    <button id="studyReset" class="reset">Reset</button>
   </div>
 </div>
 
@@ -59,14 +39,9 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">🌅 Awake Time</div>
   <div id="wakeTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="wakeReset" class="reset">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10A7.5 7.5 0 1 1 6.7 16"/><path d="M4.5 10V5.5"/><path d="M4.5 10H9"/></svg>
-      <span>Reset</span>
-    </button>
-    <button id="wakeToggle" class="start toggle">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"/></svg>
-      <span>Start</span>
-    </button>
+    <button id="wakeStart" class="start">Start</button>
+    <button id="wakeStop" class="stop" disabled>Stop</button>
+    <button id="wakeReset" class="reset">Reset</button>
   </div>
 </div>
 
@@ -95,12 +70,10 @@ if(!state){
 
 const $=id=>document.getElementById(id);
 const wakeTime=$("wakeTime"),studyTime=$("studyTime");
-const wakeToggle=$("wakeToggle"),wakeReset=$("wakeReset");
-const studyToggle=$("studyToggle"),studyReset=$("studyReset");
+const wakeStart=$("wakeStart"),wakeStop=$("wakeStop"),wakeReset=$("wakeReset");
+const studyStart=$("studyStart"),studyStop=$("studyStop"),studyReset=$("studyReset");
 const pipBtn=$("pip"),statusEl=$("status"),canvas=$("pipCanvas"),video=$("pipVideo");
-const resetModal=$("resetModal"),resetCancel=$("resetCancel"),resetConfirm=$("resetConfirm");
 const ctx=canvas.getContext("2d");
-let pendingReset=null;
 
 function save(){localStorage.setItem(KEY,JSON.stringify(state));}
 
@@ -136,67 +109,24 @@ function stopTimer(t){
 function resetTimer(name){
   state[name]={running:false,startTime:null,elapsed:0};
   save();
-
-  const btn=name==="wake"?wakeReset:studyReset;
-  btn.classList.remove("resetting");
-  void btn.offsetWidth;
-  btn.classList.add("resetting");
-  setTimeout(()=>btn.classList.remove("resetting"),500);
 }
 
-wakeToggle.addEventListener("click",()=>{
-  if(state.wake.running) stopTimer(state.wake);
-  else startTimer(state.wake);
-  render();
-});
-wakeReset.addEventListener("click",()=>{
-  pendingReset="wake";
-  resetModal.classList.add("show");
-  resetModal.setAttribute("aria-hidden","false");
-});
+wakeStart.addEventListener("click",()=>{startTimer(state.wake);render();});
+wakeStop.addEventListener("click",()=>{stopTimer(state.wake);render();});
+wakeReset.addEventListener("click",()=>{resetTimer("wake");render();});
 
-studyToggle.addEventListener("click",()=>{
-  if(state.study.running) stopTimer(state.study);
-  else startTimer(state.study);
-  render();
-});
-studyReset.addEventListener("click",()=>{
-  pendingReset="study";
-  resetModal.classList.add("show");
-  resetModal.setAttribute("aria-hidden","false");
-});
-
-function closeResetModal(){
-  pendingReset=null;
-  resetModal.classList.remove("show");
-  resetModal.setAttribute("aria-hidden","true");
-}
-
-resetCancel.addEventListener("click",closeResetModal);
-
-resetConfirm.addEventListener("click",()=>{
-  if(pendingReset) resetTimer(pendingReset);
-  closeResetModal();
-  render();
-});
-
-resetModal.addEventListener("click",(e)=>{
-  if(e.target===resetModal) closeResetModal();
-});
-
-function setToggleButton(btn,running){
-  btn.className=(running?"stop":"start")+" toggle";
-  btn.innerHTML=running
-    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5.5h3.5v13H7zM13.5 5.5H17v13h-3.5z"/></svg><span>Stop</span>'
-    : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"/></svg><span>Start</span>';
-}
+studyStart.addEventListener("click",()=>{startTimer(state.study);render();});
+studyStop.addEventListener("click",()=>{stopTimer(state.study);render();});
+studyReset.addEventListener("click",()=>{resetTimer("study");render();});
 
 function render(){
   wakeTime.textContent=fmt(elapsed(state.wake));
   studyTime.textContent=fmt(elapsed(state.study));
 
-  setToggleButton(wakeToggle,state.wake.running);
-  setToggleButton(studyToggle,state.study.running);
+  wakeStart.disabled=state.wake.running;
+  wakeStop.disabled=!state.wake.running;
+  studyStart.disabled=state.study.running;
+  studyStop.disabled=!state.study.running;
 
   drawPiP();
 }
