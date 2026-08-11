@@ -3,164 +3,179 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Floating Stopwatch</title>
+<title>Wake & Study Stopwatch</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;
-  min-height:100vh;display:flex;align-items:center;justify-content:center
-}
-.card{width:min(430px,92vw);text-align:center;padding:28px 18px}
-h1{font-size:22px;margin:0 0 22px}
-#time{
-  font-variant-numeric:tabular-nums;font-size:52px;font-weight:600;
-  letter-spacing:-1px;margin:10px 0 26px
-}
-button{
-  border:0;border-radius:14px;padding:13px 18px;margin:5px;
-  font-size:16px;font-weight:600;min-width:92px
-}
-.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}
-.reset{background:#ddd;color:#111}.pip{background:#4ade80;color:#111}
-button:disabled{opacity:.4}
-#status{margin-top:14px;font-size:13px;color:#aaa;min-height:20px}
-.hint{font-size:13px;line-height:1.5;color:#999;margin-top:18px}
-
-/* Keep the source rendered on-screen. Some iPadOS Safari builds give a
-   blank PiP stream when the canvas/video is completely off-screen/display:none. */
-#pipCanvas{
-  position:fixed;left:4px;bottom:4px;width:2px;height:1px;
-  opacity:.02;pointer-events:none
-}
-#pipVideo{
-  position:fixed;left:8px;bottom:8px;width:2px;height:1px;
-  opacity:.02;pointer-events:none
-}
+body{margin:0;background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.wrap{width:min(470px,94vw);padding:24px 14px}
+h1{text-align:center;font-size:22px;margin:0 0 18px}
+.box{background:#1b1b1b;border:1px solid #333;border-radius:18px;padding:18px;margin:12px 0}
+.title{font-size:17px;font-weight:600;margin-bottom:8px}
+.time{font-variant-numeric:tabular-nums;font-size:42px;font-weight:600;letter-spacing:-1px;margin:8px 0 14px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:600;min-width:92px}
+.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111}.pip{background:#4ade80;color:#111;width:100%;margin-top:12px}
+.status{text-align:center;color:#aaa;font-size:13px;min-height:20px;margin-top:10px}
+.hint{text-align:center;color:#999;font-size:12px;line-height:1.45;margin-top:14px}
+#pipCanvas{position:fixed;left:4px;bottom:4px;width:2px;height:1px;opacity:.02;pointer-events:none}
+#pipVideo{position:fixed;left:8px;bottom:8px;width:2px;height:1px;opacity:.02;pointer-events:none}
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>Floating Stopwatch</h1>
-  <div id="time">00:00:00</div>
+<div class="wrap">
+<h1>Wake & Study Stopwatch</h1>
 
-  <div>
-    <button id="start" class="start">Start</button>
-    <button id="stop" class="stop" disabled>Stop</button>
-    <button id="reset" class="reset">Reset</button>
-  </div>
-
-  <button id="pip" class="pip">Open PiP</button>
-  <div id="status"></div>
-
-  <div class="hint">
-    Start once. Removing PiP, leaving Safari, or closing the page does not
-    stop the stopwatch. It stops only when you press Stop.
+<div class="box">
+  <div class="title">🌅 Awake Time</div>
+  <div id="wakeTime" class="time">00:00:00</div>
+  <div class="row">
+    <button id="wakeStart" class="start">Start</button>
+    <button id="wakeStop" class="stop" disabled>Stop</button>
+    <button id="wakeReset" class="reset">Reset</button>
   </div>
 </div>
 
-<canvas id="pipCanvas" width="960" height="240"></canvas>
+<div class="box">
+  <div class="title">📚 Study Time</div>
+  <div id="studyTime" class="time">00:00:00</div>
+  <div class="row">
+    <button id="studyStart" class="start">Start</button>
+    <button id="studyStop" class="stop" disabled>Stop</button>
+    <button id="studyReset" class="reset">Reset</button>
+  </div>
+</div>
+
+<button id="pip" class="pip">Open PiP</button>
+<div id="status" class="status"></div>
+<div class="hint">
+  Awake Time can run continuously from the moment you wake up.<br>
+  Study Time can be started/stopped for each study session and accumulates total study time.
+</div>
+</div>
+
+<canvas id="pipCanvas" width="960" height="360"></canvas>
 <video id="pipVideo" playsinline autoplay muted></video>
 
 <script>
-const KEY="floating_stopwatch_v4";
+const KEY="wake_study_stopwatch_v1";
 
 let state;
 try { state=JSON.parse(localStorage.getItem(KEY)||"null"); } catch(e) {}
 if(!state){
-  state={status:"stopped",startTime:null,elapsed:0};
+  state={
+    wake:{running:false,startTime:null,elapsed:0},
+    study:{running:false,startTime:null,elapsed:0}
+  };
 }
 
 const $=id=>document.getElementById(id);
-const timeEl=$("time");
-const startBtn=$("start");
-const stopBtn=$("stop");
-const resetBtn=$("reset");
-const pipBtn=$("pip");
-const statusEl=$("status");
-const canvas=$("pipCanvas");
-const video=$("pipVideo");
+const wakeTime=$("wakeTime"),studyTime=$("studyTime");
+const wakeStart=$("wakeStart"),wakeStop=$("wakeStop"),wakeReset=$("wakeReset");
+const studyStart=$("studyStart"),studyStop=$("studyStop"),studyReset=$("studyReset");
+const pipBtn=$("pip"),statusEl=$("status"),canvas=$("pipCanvas"),video=$("pipVideo");
 const ctx=canvas.getContext("2d");
 
-function save(){
-  localStorage.setItem(KEY,JSON.stringify(state));
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+
+function elapsed(t){
+  if(t.running && t.startTime) return t.elapsed+(Date.now()-t.startTime);
+  return t.elapsed;
 }
 
-function elapsed(){
-  if(state.status==="running" && state.startTime){
-    return state.elapsed + (Date.now()-state.startTime);
-  }
-  return state.elapsed;
-}
-
-/* HH:MM:SS */
 function fmt(ms){
-  let totalSeconds=Math.floor(ms/1000);
-  const h=Math.floor(totalSeconds/3600);
-  totalSeconds%=3600;
-  const m=Math.floor(totalSeconds/60);
-  const s=totalSeconds%60;
-
-  return String(h).padStart(2,"0")+":"+
-         String(m).padStart(2,"0")+":"+
-         String(s).padStart(2,"0");
+  let s=Math.floor(ms/1000);
+  const h=Math.floor(s/3600); s%=3600;
+  const m=Math.floor(s/60), sec=s%60;
+  return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(sec).padStart(2,"0");
 }
 
-function draw(text){
-  /* Large source canvas so the PiP window has a clean readable frame. */
-  ctx.fillStyle="#111";
-  ctx.fillRect(0,0,960,240);
-
-  ctx.fillStyle="#fff";
-  ctx.font='600 132px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-  ctx.fillText(text,480,120);
+function startTimer(t){
+  if(!t.running){
+    t.running=true;
+    t.startTime=Date.now();
+    save();
+  }
 }
+
+function stopTimer(t){
+  if(t.running){
+    t.elapsed=elapsed(t);
+    t.running=false;
+    t.startTime=null;
+    save();
+  }
+}
+
+function resetTimer(name){
+  state[name]={running:false,startTime:null,elapsed:0};
+  save();
+}
+
+wakeStart.addEventListener("click",()=>{startTimer(state.wake);render();});
+wakeStop.addEventListener("click",()=>{stopTimer(state.wake);render();});
+wakeReset.addEventListener("click",()=>{resetTimer("wake");render();});
+
+studyStart.addEventListener("click",()=>{startTimer(state.study);render();});
+studyStop.addEventListener("click",()=>{stopTimer(state.study);render();});
+studyReset.addEventListener("click",()=>{resetTimer("study");render();});
 
 function render(){
-  const t=fmt(elapsed());
-  timeEl.textContent=t;
-  draw(t);
+  wakeTime.textContent=fmt(elapsed(state.wake));
+  studyTime.textContent=fmt(elapsed(state.study));
 
-  startBtn.disabled=state.status==="running";
-  stopBtn.disabled=state.status!=="running";
+  wakeStart.disabled=state.wake.running;
+  wakeStop.disabled=!state.wake.running;
+  studyStart.disabled=state.study.running;
+  studyStop.disabled=!state.study.running;
+
+  drawPiP();
 }
 
-startBtn.onclick=()=>{
-  if(state.status!=="running"){
-    state.status="running";
-    state.startTime=Date.now();
-    save();
-    render();
-  }
-};
+function drawPiP(){
+  ctx.fillStyle="#111";
+  ctx.fillRect(0,0,960,360);
 
-stopBtn.onclick=()=>{
-  if(state.status==="running"){
-    state.elapsed=elapsed();
-    state.startTime=null;
-    state.status="stopped";
-    save();
-    render();
-  }
-};
+  ctx.fillStyle="#aaa";
+  ctx.font='600 36px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.textAlign="left";
+  ctx.fillText("AWAKE",55,65);
+  ctx.fillText("STUDY",55,215);
 
-resetBtn.onclick=()=>{
-  state={status:"stopped",startTime:null,elapsed:0};
-  save();
-  render();
-};
+  ctx.fillStyle="#fff";
+  ctx.font='600 90px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.textAlign="right";
+  ctx.fillText(fmt(elapsed(state.wake)),905,75);
+  ctx.fillText(fmt(elapsed(state.study)),905,225);
+
+  ctx.fillStyle="#777";
+  ctx.fillRect(55,125,850,2);
+}
 
 let streamReady=false;
+let syncingVideo=false;
+
+/*
+ Native PiP center Play/Pause controls STUDY TIME.
+ Both timers remain visible in the PiP display.
+ The two timers can always be independently controlled from the webpage.
+*/
+video.addEventListener("pause",()=>{
+  if(syncingVideo)return;
+  stopTimer(state.study);
+  render();
+});
+
+video.addEventListener("play",()=>{
+  if(syncingVideo)return;
+  startTimer(state.study);
+  render();
+});
 
 async function preparePiP(){
   render();
 
   if(!streamReady){
-    if(!canvas.captureStream){
-      throw new Error("Canvas captureStream is not supported");
-    }
-
+    if(!canvas.captureStream)throw new Error("Canvas captureStream is not supported");
     const stream=canvas.captureStream(10);
     video.srcObject=stream;
     video.muted=true;
@@ -168,15 +183,13 @@ async function preparePiP(){
     video.setAttribute("playsinline","");
     video.setAttribute("autoplay","");
 
-    await video.play();
+    syncingVideo=true;
+    try{await video.play();}finally{syncingVideo=false;}
 
-    /* iPadOS Safari needs a little time to receive the first frames. */
-    await new Promise(resolve=>setTimeout(resolve,1000));
-
+    await new Promise(r=>setTimeout(r,1000));
     streamReady=true;
   }
 
-  /* WebKit/iPadOS route */
   if(video.webkitSupportsPresentationMode &&
      video.webkitSupportsPresentationMode("picture-in-picture") &&
      typeof video.webkitSetPresentationMode==="function"){
@@ -184,7 +197,6 @@ async function preparePiP(){
     return;
   }
 
-  /* Standard route */
   if(document.pictureInPictureEnabled &&
      typeof video.requestPictureInPicture==="function"){
     await video.requestPictureInPicture();
@@ -194,18 +206,17 @@ async function preparePiP(){
   throw new Error("PiP is not available in this browser");
 }
 
-pipBtn.onclick=async()=>{
+pipBtn.addEventListener("click",async()=>{
   statusEl.textContent="Opening PiP…";
   try{
     await preparePiP();
-    statusEl.textContent="PiP opened";
+    statusEl.textContent="PiP opened • center button controls Study";
   }catch(e){
     console.error(e);
     statusEl.textContent="PiP failed: "+(e.message||e.name);
   }
-};
+});
 
-/* Keep the stopwatch display and PiP source frame updated. */
 setInterval(render,250);
 render();
 </script>
