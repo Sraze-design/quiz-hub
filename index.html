@@ -1994,6 +1994,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const scoreCard = document.getElementById('score-card');
     const qpPanel = document.getElementById('qp-panel');
     const qpOverlay = document.getElementById('qp-overlay');
+    const aiSheet = document.getElementById('ai-bottom-sheet');
+    const aiPanelOpen = aiSheet && aiSheet.classList.contains('active');
     const btn = document.getElementById('langSwitchBtn');
     if (btn) {
       const quizVisible = quizBox && getComputedStyle(quizBox).display !== 'none';
@@ -2001,7 +2003,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       const resultVisible = scoreCard && getComputedStyle(scoreCard).display !== 'none';
       const paletteOpen = (qpPanel && qpPanel.classList.contains('active')) ||
                           (qpOverlay && qpOverlay.classList.contains('active'));
-      const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen;
+      const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen && !aiPanelOpen;
       btn.style.display = shouldShow ? 'flex' : 'none';
       if (!shouldShow) btn.style.pointerEvents = 'none';
       else if (!langSwitchBusy) btn.style.pointerEvents = 'auto';
@@ -2065,9 +2067,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const quizEngine = document.getElementById('quizEngineBox');
     if (!quizEngine) return;
 
-    const targets = ['q-text','options','feedback'];
-    const targetSet = new Set(targets.map(id => document.getElementById(id)).filter(Boolean));
+    const targets = ['q-text','options','feedback','aiChatBody'];
+    const targetRoots = targets.map(id => document.getElementById(id)).filter(Boolean);
 
+    // Keep the whole quiz UI and AI shell out of Google's translation scope.
     quizEngine.querySelectorAll('*').forEach(el => {
       const insideTarget = !!el.closest('#q-text, #options, #feedback');
       if (insideTarget) {
@@ -2079,14 +2082,57 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       }
     });
 
-    // The target roots themselves must remain translatable.
-    targetSet.forEach(el => {
+    targetRoots.forEach(el => {
       el.classList.remove('notranslate');
       el.setAttribute('translate','yes');
     });
 
-    // These are outside quizEngineBox but must also never be translated.
-    ['ai-floating-btn','ai-overlay','ai-bottom-sheet','langSwitchBtn'].forEach(id => {
+    // AI assistant: only message text is translatable. The AI shell/header,
+    // buttons, images and controls stay unchanged.
+    const aiSheet = document.getElementById('ai-bottom-sheet');
+    if (aiSheet) {
+      aiSheet.classList.remove('notranslate');
+      aiSheet.setAttribute('translate','yes');
+      aiSheet.querySelectorAll('*').forEach(el => {
+        el.classList.add('notranslate');
+        el.setAttribute('translate','no');
+      });
+
+      aiSheet.querySelectorAll('.ai-msg').forEach(msg => {
+        msg.classList.remove('notranslate');
+        msg.setAttribute('translate','yes');
+
+        msg.querySelectorAll('[data-original-ai-html]').forEach(el => {
+          el.classList.remove('notranslate');
+          el.setAttribute('translate','yes');
+        });
+
+        msg.querySelectorAll('.ai-msg-actions, .ai-msg-actions *, .ai-msg-img, .ai-msg > div[style]').forEach(el => {
+          el.classList.add('notranslate');
+          el.setAttribute('translate','no');
+        });
+
+        // Quiz-card option buttons remain translatable for their option text,
+        // while the A/B/C/D letter itself stays unchanged.
+        msg.querySelectorAll('.ai-quiz-card-msg button').forEach(btn => {
+          btn.classList.remove('notranslate');
+          btn.setAttribute('translate','yes');
+        });
+        msg.querySelectorAll('.ai-quiz-card-msg button > strong').forEach(el => {
+          el.classList.add('notranslate');
+          el.setAttribute('translate','no');
+        });
+      });
+
+      const chatBody = document.getElementById('aiChatBody');
+      if (chatBody) {
+        chatBody.classList.add('notranslate');
+        chatBody.setAttribute('translate','no');
+      }
+    }
+
+    // These controls/overlays must never be translated.
+    ['ai-floating-btn','ai-overlay','langSwitchBtn'].forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       el.classList.add('notranslate');
@@ -2107,9 +2153,19 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         el.setAttribute('translate','yes');
       }
     });
+    const aiChatBody = document.getElementById('aiChatBody');
+    if (aiChatBody) {
+      aiChatBody.classList.add('notranslate');
+      aiChatBody.setAttribute('translate', 'no');
+      if (isOriginal) {
+        aiChatBody.querySelectorAll('[data-original-ai-html]').forEach(el => {
+          try { el.innerHTML = el.getAttribute('data-original-ai-html') || el.innerHTML; } catch(e) {}
+        });
+      }
+    }
   }
 
-  // Force Google Translate to re-scan only the dynamic quiz targets.
+  // Force Google Translate to re-scan only the dynamic quiz targets and AI messages.
   // Google can ignore a repeated "en" change event when the language is
   // already English, so briefly reset the hidden translator and apply English
   // again. All other page elements remain notranslate.
@@ -3410,17 +3466,24 @@ async function loadQuizData(quizPath) {
     shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
     ORIGINAL_DATA=quizQuestions.slice();
 
-    // Every newly opened test must ALWAYS start in the original language (Hindi).
-    // Do not carry the previous test/result page's English translation state into a new test.
+    // Every newly opened test MUST start fresh in the original Hindi language.
+    // Never carry the previous test's English translation state into another test.
+    // First stop Google Translate, then render the new question so Google cannot
+    // immediately translate the newly opened test before the user taps E.
     appLang = 'hi';
-    langSwitchBusy = false;
+    langSwitchBusy = true;
+    langSwitchToken++;
+    suppressAIRefreshDuringLanguageSwitch = true;
     clearGoogleTranslationCookie();
     setQuizOriginalLanguageMode(true);
     const langComboOnOpen = document.querySelector('#google_translate_element select.goog-te-combo');
     if (langComboOnOpen) {
       langComboOnOpen.value = '';
       langComboOnOpen.dispatchEvent(new Event('change', { bubbles: true }));
+      await new Promise(r => setTimeout(r, 450));
     }
+    // Clear any stale Google-translated markup/classes from the previous test.
+    setQuizOriginalLanguageMode(true);
     updateLangIconState();
     ORIGINAL_TOTAL=data.length;
     currentQ=0; score=0; currentStreak=0; maxStreak=0; elapsed=0;
@@ -3448,6 +3511,10 @@ async function loadQuizData(quizPath) {
     pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
 
     showQ();
+    setQuizOriginalLanguageMode(true);
+    suppressAIRefreshDuringLanguageSwitch = false;
+    langSwitchBusy = false;
+    updateLangIconState();
     resetQuestionTimer();
     updateAIButtonVisibility();
   }catch(err){
@@ -4548,9 +4615,12 @@ function toggleAIPanel() {
   if (isActive) {
     closeAIPanel();
   } else {
-    sheet.classList.add('active', 'notranslate');
-    sheet.setAttribute('translate','no');
+    sheet.classList.add('active');
+    sheet.classList.remove('notranslate');
+    sheet.setAttribute('translate','yes');
     overlay.classList.add('active');
+    if (typeof setQuizTranslationScope === 'function') setQuizTranslationScope();
+    if (typeof killGoogleUI === 'function') killGoogleUI();
     lockBodyScroll();
     history.pushState({ aiOpen: true }, '');
     aiHistoryPushed = true;
@@ -4898,6 +4968,9 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
   if (formattedText) {
     const textDiv = document.createElement('div');
     textDiv.innerHTML = formattedText;
+    textDiv.setAttribute('data-original-ai-html', formattedText);
+    textDiv.classList.add('notranslate');
+    textDiv.setAttribute('translate','no');
     msgDiv.appendChild(textDiv);
   }
 
@@ -4941,6 +5014,10 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
 
   chatBody.appendChild(msgDiv);
   chatBody.scrollTop = chatBody.scrollHeight;
+  if (typeof setQuizTranslationScope === 'function') setQuizTranslationScope();
+  if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+    setTimeout(() => forceTranslateQuizTargets(), 40);
+  }
 }
 
 function formatAIResponseText(txt) {
@@ -5067,8 +5144,10 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
   questionCard.className = 'premium-question-card';
 
   const qText = document.createElement('div');
-  qText.className = 'question-text-style';
+  qText.className = 'question-text-style notranslate';
   qText.innerHTML = formatAIResponseText(quizCardData.question);
+  qText.setAttribute('data-original-ai-html', qText.innerHTML);
+  qText.setAttribute('translate','no');
   questionCard.appendChild(qText);
 
   if (quizCardData.examTag) {
@@ -5076,6 +5155,9 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
     tagBox.className = 'exam-tag-badge';
     tagBox.style.display = 'inline-block';
     tagBox.innerHTML = formatAIResponseText(quizCardData.examTag);
+    tagBox.setAttribute('data-original-ai-html', tagBox.innerHTML);
+    tagBox.classList.add('notranslate');
+    tagBox.setAttribute('translate','no');
     questionCard.appendChild(tagBox);
   }
 
@@ -5087,7 +5169,18 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
 
   quizCardData.options.forEach((optionText, idx) => {
     const btn = document.createElement('button');
-    btn.innerHTML = `<strong>${letters[idx]}.</strong> ` + formatAIResponseText(optionText);
+    const letterSpan = document.createElement('strong');
+    letterSpan.textContent = letters[idx] + '.';
+    letterSpan.className = 'notranslate';
+    letterSpan.setAttribute('translate','no');
+    btn.appendChild(letterSpan);
+    btn.appendChild(document.createTextNode(' '));
+    const optSpan = document.createElement('span');
+    optSpan.innerHTML = formatAIResponseText(optionText);
+    optSpan.setAttribute('data-original-ai-html', optSpan.innerHTML);
+    optSpan.classList.add('notranslate');
+    optSpan.setAttribute('translate','no');
+    btn.appendChild(optSpan);
     btn.onclick = () => {
       if (isAIGenerating) return;
       const btns = optionsBox.getElementsByTagName('button');
@@ -5121,6 +5214,10 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
 
   chatBody.appendChild(msgDiv);
   chatBody.scrollTop = chatBody.scrollHeight;
+  if (typeof setQuizTranslationScope === 'function') setQuizTranslationScope();
+  if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
+    setTimeout(() => forceTranslateQuizTargets(), 40);
+  }
 }
 
 function showAITyping(show) {
@@ -5141,9 +5238,10 @@ function onQuestionChangeAI() {
   updateAIButtonVisibility();
   const sheet = document.getElementById('ai-bottom-sheet');
   if (sheet) {
-    sheet.classList.add('notranslate');
-    sheet.setAttribute('translate','no');
+    sheet.classList.remove('notranslate');
+    sheet.setAttribute('translate','yes');
   }
+  if (typeof setQuizTranslationScope === 'function') setQuizTranslationScope();
   if (sheet && sheet.classList.contains('active')) {
     autoScanAndExplain();
   }
