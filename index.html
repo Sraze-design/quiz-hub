@@ -1987,12 +1987,24 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     if (document.body && document.body.style.top && document.body.style.top !== '0px') {
       document.body.style.top = '0px';
     }
-    // Show the language button only while the quiz screen is open
+    // Show the language button ONLY on the actual question screen.
+    // It must stay hidden above question-palette/modals and on the result page.
     const quizBox = document.getElementById('quizEngineBox');
+    const quizBody = document.getElementById('quiz-box');
+    const scoreCard = document.getElementById('score-card');
+    const qpPanel = document.getElementById('qp-panel');
+    const qpOverlay = document.getElementById('qp-overlay');
     const btn = document.getElementById('langSwitchBtn');
     if (btn) {
       const quizVisible = quizBox && getComputedStyle(quizBox).display !== 'none';
-      btn.style.display = quizVisible ? 'flex' : 'none';
+      const questionsVisible = quizBody && getComputedStyle(quizBody).display !== 'none';
+      const resultVisible = scoreCard && getComputedStyle(scoreCard).display !== 'none';
+      const paletteOpen = (qpPanel && qpPanel.classList.contains('active')) ||
+                          (qpOverlay && qpOverlay.classList.contains('active'));
+      const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen;
+      btn.style.display = shouldShow ? 'flex' : 'none';
+      if (!shouldShow) btn.style.pointerEvents = 'none';
+      else if (!langSwitchBusy) btn.style.pointerEvents = 'auto';
     }
   }
   new MutationObserver(killGoogleUI).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
@@ -2020,6 +2032,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   let appLang = 'hi'; // currently displayed language
   let langSwitchBusy = false;
   let langSwitchToken = 0;
+  let suppressAIRefreshDuringLanguageSwitch = false;
 
   function setGoogleTranslateLanguage(targetLangCode, attemptsLeft) {
     attemptsLeft = attemptsLeft === undefined ? 40 : attemptsLeft;
@@ -2045,9 +2058,45 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + location.hostname;
   }
 
+  // Google Translate should touch ONLY the question, options and explanation.
+  // Everything else in the quiz UI (header, timer, buttons, palette, result,
+  // AI assistant, etc.) is explicitly kept outside the translation scope.
+  function setQuizTranslationScope() {
+    const quizEngine = document.getElementById('quizEngineBox');
+    if (!quizEngine) return;
+
+    const targets = ['q-text','options','feedback'];
+    const targetSet = new Set(targets.map(id => document.getElementById(id)).filter(Boolean));
+
+    quizEngine.querySelectorAll('*').forEach(el => {
+      const insideTarget = !!el.closest('#q-text, #options, #feedback');
+      if (insideTarget) {
+        el.classList.remove('notranslate');
+        el.setAttribute('translate','yes');
+      } else {
+        el.classList.add('notranslate');
+        el.setAttribute('translate','no');
+      }
+    });
+
+    // The target roots themselves must remain translatable.
+    targetSet.forEach(el => {
+      el.classList.remove('notranslate');
+      el.setAttribute('translate','yes');
+    });
+
+    // These are outside quizEngineBox but must also never be translated.
+    ['ai-floating-btn','ai-overlay','ai-bottom-sheet','langSwitchBtn'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('notranslate');
+      el.setAttribute('translate','no');
+    });
+  }
+
   function setQuizOriginalLanguageMode(isOriginal) {
-    const ids = ['q-text','exam-tag','options','feedback','quizCategoryLabel'];
-    ids.forEach(id => {
+    setQuizTranslationScope();
+    ['q-text','options','feedback'].forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       if (isOriginal) {
@@ -2055,7 +2104,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         el.setAttribute('translate','no');
       } else {
         el.classList.remove('notranslate');
-        el.removeAttribute('translate');
+        el.setAttribute('translate','yes');
       }
     });
   }
@@ -2067,6 +2116,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const btn = document.getElementById('langSwitchBtn');
     if (btn) btn.style.pointerEvents = 'none';
 
+    // Language switching must never reset or re-scan an already-open AI chat.
+    suppressAIRefreshDuringLanguageSwitch = true;
+
     try {
       if (appLang === 'hi') {
         setQuizOriginalLanguageMode(false);
@@ -2074,8 +2126,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         if (token !== langSwitchToken) return;
         appLang = 'en';
       } else {
-        // Never use Google's empty-string restore. It briefly restores Hindi
-        // and then Google can re-translate it back to English.
+        // Do not call Google's empty-string restore. Rebuild only the target
+        // question/option/explanation DOM from the original quiz data.
         clearGoogleTranslationCookie();
         appLang = 'hi';
         setQuizOriginalLanguageMode(true);
@@ -2084,12 +2136,14 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
           showQ();
           setQuizOriginalLanguageMode(true);
         }
-        if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
       }
       updateLangIconState();
     } finally {
+      suppressAIRefreshDuringLanguageSwitch = false;
       langSwitchBusy = false;
       if (btn) btn.style.pointerEvents = 'auto';
+      if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
+      if (typeof killGoogleUI === 'function') killGoogleUI();
     }
   }
 
@@ -2294,16 +2348,16 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
           <!-- Question Number • Exam Tag • Badge / Question -->
           <div class="premium-question-card">
-            <div id="q-text" class="question-text-style"></div>
-            <div id="exam-tag" class="exam-tag-badge"></div>
+            <div id="q-text" class="question-text-style" translate="yes"></div>
+            <div id="exam-tag" class="exam-tag-badge" translate="no"></div>
           </div>
           
           <!-- Options Dynamic Cards Stack -->
-          <div id="options" class="options-stack"></div>
+          <div id="options" class="options-stack" translate="yes"></div>
           <div id="toggleExplanation" style="display:none;cursor:pointer;font-size:13px;font-weight:700;color:#2563eb;margin:6px 0 8px 0;text-align:left;">▼ Show Explanation</div>
           
           <!-- Premium Solution Explanation Layout Box Panel Module Component -->
-          <div id="feedback" class="explanation-box-premium" style="display:none;"></div>
+          <div id="feedback" class="explanation-box-premium" translate="yes" style="display:none;"></div>
         </div>
 
         <!-- REDESIGNED PREMIUM RESULT SCREEN PAGE -->
@@ -2543,9 +2597,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   </svg>
 </button>
 
-<div id="ai-overlay" onclick="toggleAIPanel()"></div>
+<div id="ai-overlay" class="notranslate" translate="no" onclick="toggleAIPanel()"></div>
 
-<div id="ai-bottom-sheet">
+<div id="ai-bottom-sheet" class="notranslate" translate="no">
   <div class="ai-sheet-header">
     <div class="ai-sheet-title">
       <span style="font-size: 20px;">🤖</span>
@@ -3729,7 +3783,11 @@ if(prevSel!==null && prevSel!==undefined){
  document.getElementById('feedback').style.display="block";
 }
 
-if(typeof onQuestionChangeAI === 'function'){
+if(typeof setQuizTranslationScope === 'function'){
+  setQuizTranslationScope();
+}
+
+if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageSwitch){
   onQuestionChangeAI();
 }
 
@@ -3831,6 +3889,12 @@ pb.innerText=badge;pb.style.background=bg;
 document.getElementById('score-card').style.background='var(--card-bg)';
 document.getElementById('score-card').style.display='block';
 document.querySelector('.floating-quiz-header').style.display='none';
+// Language switch belongs only to the live question screen.
+const langBtnOnResult = document.getElementById('langSwitchBtn');
+if(langBtnOnResult){
+  langBtnOnResult.style.display='none';
+  langBtnOnResult.style.pointerEvents='none';
+}
 updateAIButtonVisibility();
 
 /* Leaderboard API integration (added) - uses only existing finalScore, avgSec, elapsed, currentQuizPath */
@@ -4060,6 +4124,11 @@ function openQuestionPalette(){
   document.getElementById('qp-panel')?.classList.add('active');
   const aiBtn = document.getElementById('ai-floating-btn');
   if(aiBtn) aiBtn.style.display = 'none';
+  const langBtn = document.getElementById('langSwitchBtn');
+  if(langBtn){
+    langBtn.style.display = 'none';
+    langBtn.style.pointerEvents = 'none';
+  }
   lockBodyScroll();
   history.pushState({ qpOpen: true }, '');
   qpHistoryPushed = true;
@@ -4070,6 +4139,7 @@ function openQuestionPalette(){
 function hideQuestionPaletteUI(){
   document.getElementById('qp-overlay')?.classList.remove('active');
   document.getElementById('qp-panel')?.classList.remove('active');
+  if(typeof killGoogleUI === 'function') killGoogleUI();
   if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
   unlockBodyScroll();
 }
@@ -4435,7 +4505,8 @@ function toggleAIPanel() {
   if (isActive) {
     closeAIPanel();
   } else {
-    sheet.classList.add('active');
+    sheet.classList.add('active', 'notranslate');
+    sheet.setAttribute('translate','no');
     overlay.classList.add('active');
     lockBodyScroll();
     history.pushState({ aiOpen: true }, '');
@@ -5021,16 +5092,22 @@ function showAITyping(show) {
 }
 
 function onQuestionChangeAI() {
+  if (suppressAIRefreshDuringLanguageSwitch) return;
   resetAIChat();
   currentAutoScannedQ = -1;
   updateAIButtonVisibility();
   const sheet = document.getElementById('ai-bottom-sheet');
+  if (sheet) {
+    sheet.classList.add('notranslate');
+    sheet.setAttribute('translate','no');
+  }
   if (sheet && sheet.classList.contains('active')) {
     autoScanAndExplain();
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (typeof setQuizTranslationScope === 'function') setQuizTranslationScope();
   updateAIButtonVisibility();
 });
 // ===== AI Image Upload Logic =====
