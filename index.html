@@ -2045,6 +2045,21 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + location.hostname;
   }
 
+  function setQuizOriginalLanguageMode(isOriginal) {
+    const ids = ['q-text','exam-tag','options','feedback','quizCategoryLabel'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (isOriginal) {
+        el.classList.add('notranslate');
+        el.setAttribute('translate','no');
+      } else {
+        el.classList.remove('notranslate');
+        el.removeAttribute('translate');
+      }
+    });
+  }
+
   async function toggleAppLanguage() {
     if (langSwitchBusy) return;
     langSwitchBusy = true;
@@ -2052,30 +2067,30 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const btn = document.getElementById('langSwitchBtn');
     if (btn) btn.style.pointerEvents = 'none';
 
-    if (appLang === 'hi') {
-      await setGoogleTranslateLanguage('en');
-      if (token !== langSwitchToken) return;
-      appLang = 'en';
-    } else {
-      // Do NOT ask Google to translate to "hi". Empty-string restore is
-      // unreliable after the quiz DOM has been rebuilt. Restore the current
-      // question directly from the original data, which is always Hindi.
-      clearGoogleTranslationCookie();
-      await setGoogleTranslateLanguage('');
-      if (token !== langSwitchToken) return;
-      appLang = 'hi';
+    try {
+      if (appLang === 'hi') {
+        setQuizOriginalLanguageMode(false);
+        await setGoogleTranslateLanguage('en');
+        if (token !== langSwitchToken) return;
+        appLang = 'en';
+      } else {
+        // Never use Google's empty-string restore. It briefly restores Hindi
+        // and then Google can re-translate it back to English.
+        clearGoogleTranslationCookie();
+        appLang = 'hi';
+        setQuizOriginalLanguageMode(true);
 
-      // Re-render only the quiz content from data. This restores the exact
-      // original Hindi question/options without reloading the page.
-      if (typeof showQ === 'function' && data && data.length) {
-        showQ();
-        if (typeof resetQuestionTimer === 'function') resetQuestionTimer();
+        if (typeof showQ === 'function' && data && data.length) {
+          showQ();
+          setQuizOriginalLanguageMode(true);
+        }
+        if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
       }
+      updateLangIconState();
+    } finally {
+      langSwitchBusy = false;
+      if (btn) btn.style.pointerEvents = 'auto';
     }
-
-    updateLangIconState();
-    langSwitchBusy = false;
-    if (btn) btn.style.pointerEvents = 'auto';
   }
 
   function updateLangIconState() {
