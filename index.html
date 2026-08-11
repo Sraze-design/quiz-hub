@@ -2075,13 +2075,52 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       setGoogleTranslateLanguage('en');
       appLang = 'en';
     } else {
-      // Empty string is Google's actual "restore original text" value —
-      // setting 'hi' again does NOT revert a translated page reliably.
-      clearGoogTransCookie();
-      setGoogleTranslateLanguage('');
+      // Don't rely on Google's own "restore original" (empty-value)
+      // trick — it's flaky once state gets tangled. Instead, hard-reset:
+      // wipe Google's translate state completely and rebuild the current
+      // question straight from our own untouched data, which is
+      // guaranteed to be the true original text every time.
+      hardResetToOriginal();
       appLang = 'hi';
     }
     updateLangIconState();
+  }
+
+  // Fully tears down Google's translate widget/state and rebuilds the
+  // visible question from our own data (never touched by Google), then
+  // quietly re-creates a fresh widget in the background so the next
+  // translate click still works normally.
+  function hardResetToOriginal() {
+    // 1) Forget any translation state Google remembers via cookies.
+    clearGoogTransCookie();
+
+    // 2) Empty out Google's widget container completely.
+    const gte = document.getElementById('google_translate_element');
+    if (gte) gte.innerHTML = '';
+
+    // 3) Remove any classes/attributes Google stamped onto the page while
+    //    translating.
+    document.documentElement.classList.remove('translated-ltr', 'translated-rtl');
+    document.body.classList.remove('translated-ltr', 'translated-rtl');
+    document.documentElement.removeAttribute('lang');
+
+    // 4) Re-render the current screen directly from our own data. This is
+    //    the actual fix: it guarantees the real original text, instead of
+    //    trusting Google to correctly revert its own DOM edits.
+    const quizBox = document.getElementById('quizEngineBox');
+    if (quizBox && getComputedStyle(quizBox).display !== 'none' && typeof showQ === 'function') {
+      showQ();
+    }
+
+    // 5) Rebuild a fresh Google Translate instance in the now-empty
+    //    container, so the user can translate again if they toggle once
+    //    more. No network reload needed — the google.translate API is
+    //    already loaded on the page.
+    setTimeout(() => {
+      if (window.google && google.translate && google.translate.TranslateElement) {
+        googleTranslateElementInit();
+      }
+    }, 50);
   }
 
   function updateLangIconState() {
