@@ -113,11 +113,15 @@ function resetTimer(name){
 
 wakeStart.addEventListener("click",()=>{startTimer(state.wake);render();});
 wakeStop.addEventListener("click",()=>{stopTimer(state.wake);render();});
-wakeReset.addEventListener("click",()=>{resetTimer("wake");render();});
+wakeReset.addEventListener("click",()=>{
+  if(confirm("You want to reset?")){resetTimer("wake");render();}
+});
 
 studyStart.addEventListener("click",()=>{startTimer(state.study);render();});
 studyStop.addEventListener("click",()=>{stopTimer(state.study);render();});
-studyReset.addEventListener("click",()=>{resetTimer("study");render();});
+studyReset.addEventListener("click",()=>{
+  if(confirm("You want to reset?")){resetTimer("study");render();}
+});
 
 function render(){
   wakeTime.textContent=fmt(elapsed(state.wake));
