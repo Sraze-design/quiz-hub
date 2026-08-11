@@ -1992,8 +1992,17 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     // causing the spinning "wheel" icon to flash near the pause button when
     // switching questions (it was landing inside quizEngineBox, outside the
     // old shallow body-children check).
+    // IMPORTANT: never touch anything *inside* #google_translate_element —
+    // Google's actual <select class="goog-te-combo"> and its supporting
+    // internal nodes live in there and often get auto-generated ids that
+    // also start with ":". Removing those broke translation entirely
+    // (clicking the button did nothing). We only strip stray ":"-id
+    // elements that Google drops elsewhere in the document.
+    const gte = document.getElementById('google_translate_element');
     document.querySelectorAll('[id^=":"]').forEach(el => {
-      if (el.id !== 'google_translate_element') el.remove();
+      if (el.id === 'google_translate_element') return;
+      if (gte && gte.contains(el)) return;
+      el.remove();
     });
     if (document.body && document.body.style.top && document.body.style.top !== '0px') {
       document.body.style.top = '0px';
