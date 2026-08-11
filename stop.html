@@ -26,22 +26,22 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
 <h1>Wake & Study Stopwatch</h1>
 
 <div class="box">
-  <div class="title">🌅 Awake Time</div>
-  <div id="wakeTime" class="time">00:00:00</div>
-  <div class="row">
-    <button id="wakeStart" class="start">Start</button>
-    <button id="wakeStop" class="stop" disabled>Stop</button>
-    <button id="wakeReset" class="reset">Reset</button>
-  </div>
-</div>
-
-<div class="box">
   <div class="title">📚 Study Time</div>
   <div id="studyTime" class="time">00:00:00</div>
   <div class="row">
     <button id="studyStart" class="start">Start</button>
     <button id="studyStop" class="stop" disabled>Stop</button>
     <button id="studyReset" class="reset">Reset</button>
+  </div>
+</div>
+
+<div class="box">
+  <div class="title">🌅 Awake Time</div>
+  <div id="wakeTime" class="time">00:00:00</div>
+  <div class="row">
+    <button id="wakeStart" class="start">Start</button>
+    <button id="wakeStop" class="stop" disabled>Stop</button>
+    <button id="wakeReset" class="reset">Reset</button>
   </div>
 </div>
 
@@ -53,7 +53,7 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
 </div>
 </div>
 
-<canvas id="pipCanvas" width="720" height="270"></canvas>
+<canvas id="pipCanvas" width="700" height="220"></canvas>
 <video id="pipVideo" playsinline autoplay muted></video>
 
 <script>
@@ -133,22 +133,22 @@ function render(){
 
 function drawPiP(){
   ctx.fillStyle="#111";
-  ctx.fillRect(0,0,960,360);
+  ctx.fillRect(0,0,700,220);
 
   ctx.fillStyle="#aaa";
-  ctx.font='600 28px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.font='600 21px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
   ctx.textAlign="left";
-  ctx.fillText("STUDY",40,48);
-  ctx.fillText("AWAKE",40,165);
+  ctx.fillText("STUDY",28,40);
+  ctx.fillText("AWAKE",28,142);
 
   ctx.fillStyle="#fff";
-  ctx.font='600 64px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.font='600 46px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
   ctx.textAlign="right";
-  ctx.fillText(fmt(elapsed(state.study)),680,58);
-  ctx.fillText(fmt(elapsed(state.wake)),680,175);
+  ctx.fillText(fmt(elapsed(state.study)),672,48);
+  ctx.fillText(fmt(elapsed(state.wake)),672,150);
 
   ctx.fillStyle="#777";
-  ctx.fillRect(40,105,640,2);
+  ctx.fillRect(28,91,644,2);
 }
 
 let streamReady=false;
