@@ -1930,20 +1930,48 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 </head>
 <body>
 
-<!-- ===== Google Translate: 1-click EN/HI switch (in-place, no reload, banner hidden) ===== -->
+<!-- ===== Google Translate: 1-click EN/HI switch (in-place, no reload, ALL Google UI hidden) ===== -->
 <style>
-  /* Hide Google's own translate banner + all the visual clutter it injects */
-  .goog-te-banner-frame.skiptranslate,
-  iframe.goog-te-banner-frame,
-  .goog-te-gadget-icon,
-  .goog-te-balloon-frame,
+  /* Nuke every visible trace of Google's translate UI — banner, floating
+     feedback tab, tooltips, highlight boxes, spinner, everything. */
+  .goog-te-banner-frame, iframe.goog-te-banner-frame,
+  .goog-te-ftab, iframe.goog-te-ftab,
+  .goog-te-balloon-frame, iframe.goog-te-balloon-frame,
+  .goog-te-menu-frame, iframe.goog-te-menu-frame,
+  .goog-te-gadget-icon, .goog-te-gadget-simple,
   .goog-tooltip, .goog-tooltip:hover,
-  .goog-text-highlight { display: none !important; box-shadow: none !important; background: none !important; }
+  .goog-text-highlight,
+  .goog-te-spinner-pos,
+  #goog-gt-tt, .goog-te-balloon,
+  body > .skiptranslate { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; box-shadow: none !important; background: none !important; }
   body { top: 0px !important; position: static !important; }
   #google_translate_element { display: none !important; }
 </style>
 <div id="google_translate_element"></div>
-<div id="langSwitchBtn" onclick="toggleAppLanguage()" style="position:fixed; top:14px; right:14px; z-index:99999; background:#ffffff; color:#1e3a8a; font-weight:700; font-size:13px; padding:8px 14px; border-radius:20px; box-shadow:0 4px 14px rgba(15,23,42,0.18); cursor:pointer; display:flex; align-items:center; gap:6px; font-family:'Plus Jakarta Sans', sans-serif;">
+<script>
+  // Google injects several floating iframes (banner, feedback tab, tooltip)
+  // directly as siblings of <body> content, and shoves the page down via
+  // an inline body.style.top — all done with JS *after* our CSS runs, so
+  // CSS alone can't reliably beat it. This watcher forcibly removes
+  // anything Google adds, continuously, so nothing ever becomes visible.
+  function killGoogleUI() {
+    document.querySelectorAll(
+      'iframe.goog-te-banner-frame, .goog-te-banner-frame,' +
+      'iframe.goog-te-ftab, .goog-te-ftab,' +
+      'iframe.goog-te-balloon-frame, .goog-te-balloon-frame,' +
+      'iframe.goog-te-menu-frame, .goog-te-menu-frame,' +
+      'iframe[src*="translate.google"],' +
+      '#goog-gt-tt, .goog-tooltip'
+    ).forEach(el => el.remove());
+    if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+      document.body.style.top = '0px';
+    }
+  }
+  new MutationObserver(killGoogleUI).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+  setInterval(killGoogleUI, 300);
+</script>
+<!-- Our own button — marked notranslate so Google never rewrites its icon/label -->
+<div id="langSwitchBtn" class="notranslate" translate="no" onclick="toggleAppLanguage()" style="position:fixed; top:14px; right:14px; z-index:99999; background:#ffffff; color:#1e3a8a; font-weight:700; font-size:13px; padding:8px 14px; border-radius:20px; box-shadow:0 4px 14px rgba(15,23,42,0.18); cursor:pointer; display:flex; align-items:center; gap:6px; font-family:'Plus Jakarta Sans', sans-serif;">
   <span style="font-size:15px;">🌐</span><span id="langSwitchLabel">EN</span>
 </div>
 <script>
