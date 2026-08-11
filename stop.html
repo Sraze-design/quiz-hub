@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Wake & Study Stopwatch</title>
 <style>
 *{box-sizing:border-box}
@@ -15,8 +15,12 @@ h1{text-align:center;font-size:22px;margin:0 0 18px}
 .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
 button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:600;min-width:92px}
 .toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.toggle svg{width:18px;height:18px;display:block;fill:currentColor}
-.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111}.pip{background:#4ade80;color:#111;width:100%;margin-top:12px}
+.toggle svg{width:18px;height:18px;display:block;flex:0 0 18px;fill:currentColor}
+.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.reset svg{width:18px;height:18px;display:block;flex:0 0 18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.reset.resetting svg{animation:resetSpin .45s ease}
+@keyframes resetSpin{0%{transform:rotate(0deg)}60%{transform:rotate(-150deg) scale(.92)}100%{transform:rotate(-360deg) scale(1)}}
+.pip{background:#4ade80;color:#111;width:100%;margin-top:12px}
 .status{text-align:center;color:#aaa;font-size:13px;min-height:20px;margin-top:10px}
 .hint{text-align:center;color:#999;font-size:12px;line-height:1.45;margin-top:14px}
 #pipCanvas{position:fixed;left:4px;bottom:4px;width:2px;height:1px;opacity:.02;pointer-events:none}
@@ -40,9 +44,12 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">📚 Study Time</div>
   <div id="studyTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="studyReset" class="reset">Reset</button>
+    <button id="studyReset" class="reset">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10A7.5 7.5 0 1 1 6.7 16"/><path d="M4.5 10V5.5"/><path d="M4.5 10H9"/></svg>
+      <span>Reset</span>
+    </button>
     <button id="studyToggle" class="start toggle">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.2-6.86a1.02 1.02 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"/></svg>
       <span>Start</span>
     </button>
   </div>
@@ -52,9 +59,12 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">🌅 Awake Time</div>
   <div id="wakeTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="wakeReset" class="reset">Reset</button>
+    <button id="wakeReset" class="reset">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10A7.5 7.5 0 1 1 6.7 16"/><path d="M4.5 10V5.5"/><path d="M4.5 10H9"/></svg>
+      <span>Reset</span>
+    </button>
     <button id="wakeToggle" class="start toggle">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.2-6.86a1.02 1.02 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"/></svg>
       <span>Start</span>
     </button>
   </div>
@@ -126,6 +136,12 @@ function stopTimer(t){
 function resetTimer(name){
   state[name]={running:false,startTime:null,elapsed:0};
   save();
+
+  const btn=name==="wake"?wakeReset:studyReset;
+  btn.classList.remove("resetting");
+  void btn.offsetWidth;
+  btn.classList.add("resetting");
+  setTimeout(()=>btn.classList.remove("resetting"),500);
 }
 
 wakeToggle.addEventListener("click",()=>{
@@ -171,8 +187,8 @@ resetModal.addEventListener("click",(e)=>{
 function setToggleButton(btn,running){
   btn.className=(running?"stop":"start")+" toggle";
   btn.innerHTML=running
-    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5.5A1.5 1.5 0 0 1 8.5 4h2A1.5 1.5 0 0 1 12 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-2A1.5 1.5 0 0 1 7 18.5v-13zm5 0A1.5 1.5 0 0 1 13.5 4h2A1.5 1.5 0 0 1 17 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-2a1.5 1.5 0 0 1-1.5-1.5v-13z"/></svg><span>Stop</span>'
-    : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.2-6.86a1.02 1.02 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg><span>Start</span>';
+    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5.5h3.5v13H7zM13.5 5.5H17v13h-3.5z"/></svg><span>Stop</span>'
+    : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5z"/></svg><span>Start</span>';
 }
 
 function render(){
