@@ -29,8 +29,7 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">📚 Study Time</div>
   <div id="studyTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="studyStart" class="start">Start</button>
-    <button id="studyStop" class="stop" disabled>Stop</button>
+    <button id="studyToggle" class="start">Start</button>
     <button id="studyReset" class="reset">Reset</button>
   </div>
 </div>
@@ -39,8 +38,7 @@ button{border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:
   <div class="title">🌅 Awake Time</div>
   <div id="wakeTime" class="time">00:00:00</div>
   <div class="row">
-    <button id="wakeStart" class="start">Start</button>
-    <button id="wakeStop" class="stop" disabled>Stop</button>
+    <button id="wakeToggle" class="start">Start</button>
     <button id="wakeReset" class="reset">Reset</button>
   </div>
 </div>
@@ -70,8 +68,8 @@ if(!state){
 
 const $=id=>document.getElementById(id);
 const wakeTime=$("wakeTime"),studyTime=$("studyTime");
-const wakeStart=$("wakeStart"),wakeStop=$("wakeStop"),wakeReset=$("wakeReset");
-const studyStart=$("studyStart"),studyStop=$("studyStop"),studyReset=$("studyReset");
+const wakeToggle=$("wakeToggle"),wakeReset=$("wakeReset");
+const studyToggle=$("studyToggle"),studyReset=$("studyReset");
 const pipBtn=$("pip"),statusEl=$("status"),canvas=$("pipCanvas"),video=$("pipVideo");
 const ctx=canvas.getContext("2d");
 
@@ -111,22 +109,29 @@ function resetTimer(name){
   save();
 }
 
-wakeStart.addEventListener("click",()=>{startTimer(state.wake);render();});
-wakeStop.addEventListener("click",()=>{stopTimer(state.wake);render();});
+wakeToggle.addEventListener("click",()=>{
+  if(state.wake.running) stopTimer(state.wake);
+  else startTimer(state.wake);
+  render();
+});
 wakeReset.addEventListener("click",()=>{resetTimer("wake");render();});
 
-studyStart.addEventListener("click",()=>{startTimer(state.study);render();});
-studyStop.addEventListener("click",()=>{stopTimer(state.study);render();});
+studyToggle.addEventListener("click",()=>{
+  if(state.study.running) stopTimer(state.study);
+  else startTimer(state.study);
+  render();
+});
 studyReset.addEventListener("click",()=>{resetTimer("study");render();});
 
 function render(){
   wakeTime.textContent=fmt(elapsed(state.wake));
   studyTime.textContent=fmt(elapsed(state.study));
 
-  wakeStart.disabled=state.wake.running;
-  wakeStop.disabled=!state.wake.running;
-  studyStart.disabled=state.study.running;
-  studyStop.disabled=!state.study.running;
+  wakeToggle.textContent=state.wake.running?"Stop":"Start";
+  wakeToggle.className=state.wake.running?"stop":"start";
+
+  studyToggle.textContent=state.study.running?"Stop":"Start";
+  studyToggle.className=state.study.running?"stop":"start";
 
   drawPiP();
 }
