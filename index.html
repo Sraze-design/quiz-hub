@@ -1941,7 +1941,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   .goog-te-gadget-icon, .goog-te-gadget-simple,
   .goog-tooltip, .goog-tooltip:hover,
   .goog-text-highlight,
-  .goog-te-spinner-pos,
+  .goog-te-spinner-pos, .goog-te-spinner-animation, .goog-te-spinner,
   #goog-gt-tt, .goog-te-balloon,
   body > .skiptranslate { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; box-shadow: none !important; background: none !important; }
   body { top: 0px !important; position: static !important; }
@@ -1961,18 +1961,30 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       'iframe.goog-te-balloon-frame, .goog-te-balloon-frame,' +
       'iframe.goog-te-menu-frame, .goog-te-menu-frame,' +
       'iframe[src*="translate.google"],' +
-      '#goog-gt-tt, .goog-tooltip'
+      '#goog-gt-tt, .goog-tooltip,' +
+      '.goog-te-spinner-pos, .goog-te-spinner-animation, .goog-te-spinner'
     ).forEach(el => el.remove());
     if (document.body && document.body.style.top && document.body.style.top !== '0px') {
       document.body.style.top = '0px';
+    }
+    // Show the language button only while the quiz screen is open
+    const quizBox = document.getElementById('quizEngineBox');
+    const btn = document.getElementById('langSwitchBtn');
+    if (btn) {
+      const quizVisible = quizBox && getComputedStyle(quizBox).display !== 'none';
+      btn.style.display = quizVisible ? 'flex' : 'none';
     }
   }
   new MutationObserver(killGoogleUI).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
   setInterval(killGoogleUI, 300);
 </script>
 <!-- Our own button — marked notranslate so Google never rewrites its icon/label -->
-<div id="langSwitchBtn" class="notranslate" translate="no" onclick="toggleAppLanguage()" style="position:fixed; top:14px; right:14px; z-index:99999; background:#ffffff; color:#1e3a8a; font-weight:700; font-size:13px; padding:8px 14px; border-radius:20px; box-shadow:0 4px 14px rgba(15,23,42,0.18); cursor:pointer; display:flex; align-items:center; gap:6px; font-family:'Plus Jakarta Sans', sans-serif;">
-  <span style="font-size:15px;">🌐</span><span id="langSwitchLabel">EN</span>
+<div id="langSwitchBtn" class="notranslate" translate="no" onclick="toggleAppLanguage()" style="display:none; position:fixed; top:14px; right:62px; z-index:99999; width:46px; height:38px; background:#0f172a; border-radius:11px; box-shadow:0 4px 14px rgba(15,23,42,0.28); cursor:pointer; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans', sans-serif; overflow:hidden;">
+  <div style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; position:relative;">
+    <span id="langHalfEn" style="flex:1; text-align:center; font-weight:700; font-size:15px; color:#ffffff; transition:var(--transition,all .2s); padding:2px 0;">E</span>
+    <span style="width:1px; height:60%; background:rgba(255,255,255,0.28);"></span>
+    <span id="langHalfHi" style="flex:1; text-align:center; font-weight:700; font-size:15px; color:rgba(255,255,255,0.45); transition:var(--transition,all .2s); padding:2px 0;">अ</span>
+  </div>
 </div>
 <script>
   let appLang = 'hi'; // currently displayed language
@@ -2006,7 +2018,20 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       setGoogleTranslateLanguage('hi'); // 'hi' restores the original text
       appLang = 'hi';
     }
-    document.getElementById('langSwitchLabel').innerText = (appLang === 'en') ? 'हिं' : 'EN';
+    updateLangIconState();
+  }
+
+  function updateLangIconState() {
+    const en = document.getElementById('langHalfEn');
+    const hi = document.getElementById('langHalfHi');
+    if (!en || !hi) return;
+    if (appLang === 'en') {
+      en.style.color = '#ffffff';
+      hi.style.color = 'rgba(255,255,255,0.45)';
+    } else {
+      en.style.color = 'rgba(255,255,255,0.45)';
+      hi.style.color = '#ffffff';
+    }
   }
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
