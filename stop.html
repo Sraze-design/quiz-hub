@@ -199,6 +199,23 @@ function resetTimer(name){
   save();
 }
 
+/* When this page is closed/navigated away:
+   - Study Time is frozen at the exact value reached before leaving.
+   - It is saved as STOPPED, so the next visit starts from the same value
+     only after pressing Start.
+   - Awake Time is intentionally left unchanged. */
+function freezeStudyOnExit(){
+  if(state.study && state.study.running){
+    state.study.elapsed=elapsed(state.study);
+    state.study.running=false;
+    state.study.startTime=null;
+    save();
+  }
+}
+
+window.addEventListener("pagehide",freezeStudyOnExit);
+window.addEventListener("beforeunload",freezeStudyOnExit);
+
 const resetModal=$("resetModal");
 const resetYes=$("resetYes");
 const resetNo=$("resetNo");
