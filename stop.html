@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Floating Stopwatch</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.card{width:min(430px,92vw);text-align:center;padding:28px 18px}
+h1{font-size:22px;margin:0 0 22px}
+#time{font-variant-numeric:tabular-nums;font-size:54px;font-weight:600;letter-spacing:-2px;margin:10px 0 26px}
+button{border:0;border-radius:14px;padding:13px 18px;margin:5px;font-size:16px;font-weight:600;min-width:92px}
+.start{background:#fff;color:#111}.stop{background:#ff6868;color:#111}.reset{background:#ddd;color:#111}.pip{background:#4ade80;color:#111}
+button:disabled{opacity:.4}
+#status{margin-top:14px;font-size:13px;color:#aaa;min-height:20px}
+.hint{font-size:13px;line-height:1.5;color:#999;margin-top:18px}
+/* IMPORTANT: canvas must remain rendered; display:none makes Safari's captured stream blank. */
+#pipCanvas{position:fixed;left:-10000px;top:-10000px;width:320px;height:100px;opacity:.01;pointer-events:none}
+#pipVideo{position:fixed;left:-10000px;top:-10000px;width:320px;height:100px;opacity:.01}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Floating Stopwatch</h1>
+<div id="time">00:00</div>
+<div>
+<button id="start" class="start">Start</button>
+<button id="stop" class="stop" disabled>Stop</button>
+<button id="reset" class="reset">Reset</button>
+</div>
+<button id="pip" class="pip">Open PiP</button>
+<div id="status"></div>
+<div class="hint">The stopwatch keeps its saved start time. Removing PiP or closing Safari does not stop it; only Stop does.</div>
+</div>
+
+<canvas id="pipCanvas" width="640" height="200"></canvas>
+<video id="pipVideo" playsinline autoplay muted></video>
+
+<script>
+const KEY="floating_stopwatch_v3";
+let state;
+try { state=JSON.parse(localStorage.getItem(KEY)||"null"); } catch(e) {}
+if(!state) state={status:"stopped",startTime:null,elapsed:0};
+
+const $=id=>document.getElementById(id);
+const timeEl=$("time"), startBtn=$("start"), stopBtn=$("stop"), resetBtn=$("reset");
+const pipBtn=$("pip"), statusEl=$("status"), canvas=$("pipCanvas"), video=$("pipVideo");
+const ctx=canvas.getContext("2d");
+
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function elapsed(){
+  return state.status==="running" && state.startTime
+    ? state.elapsed + (Date.now()-state.startTime)
+    : state.elapsed;
+}
+function fmt(ms){
+  let s=Math.floor(ms/1000),h=Math.floor(s/3600);s%=3600;
+  let m=Math.floor(s/60);s%=60;
+  return h?`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`
+          :`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+function draw(text){
+  ctx.fillStyle="#111";ctx.fillRect(0,0,640,200);
+  ctx.fillStyle="#fff";
+  ctx.font='600 78px -apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif';
+  ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.fillText(text,320,100);
+}
+function render(){
+  const t=fmt(elapsed());
+  timeEl.textContent=t;
+  draw(t);
+  startBtn.disabled=state.status==="running";
+  stopBtn.disabled=state.status!=="running";
+}
+function status(s){statusEl.textContent=s;}
+
+startBtn.onclick=()=>{
+  if(state.status!=="running"){
+    state.status="running";state.startTime=Date.now();save();render();
+  }
+};
+stopBtn.onclick=()=>{
+  if(state.status==="running"){
+    state.elapsed=elapsed();state.startTime=null;state.status="stopped";save();render();
+  }
+};
+resetBtn.onclick=()=>{
+  state={status:"stopped",startTime:null,elapsed:0};save();render();
+};
+
+let streamReady=false;
+async function openPiP(){
+  // Draw BEFORE captureStream so Safari has a real first frame.
+  render();
+  if(!streamReady){
+    if(!canvas.captureStream) throw new Error("captureStream unavailable");
+    const stream=canvas.captureStream(10);
+    video.srcObject=stream;
+    video.muted=true;
+    video.playsInline=true;
+    await video.play();
+    // Wait for decoded/rendered video data.
+    await new Promise(r=>setTimeout(r,500));
+    streamReady=true;
+  }
+
+  if(video.webkitSupportsPresentationMode &&
+     video.webkitSupportsPresentationMode("picture-in-picture") &&
+     video.webkitSetPresentationMode){
+    video.webkitSetPresentationMode("picture-in-picture");
+    return;
+  }
+  if(document.pictureInPictureEnabled && video.requestPictureInPicture){
+    await video.requestPictureInPicture();
+    return;
+  }
+  throw new Error("PiP API unavailable");
+}
+
+pipBtn.onclick=async()=>{
+  status("Opening PiP…");
+  try{await openPiP();status("PiP opened");}
+  catch(e){console.error(e);status("PiP failed: "+(e.message||e.name));}
+};
+
+// Keep the captured canvas stream alive and update it frequently.
+setInterval(render,250);
+render();
+</script>
+</body>
+</html>
