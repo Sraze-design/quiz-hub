@@ -4440,6 +4440,19 @@ return;
 
 function startRetest(mode){
 document.getElementById('retestModal').style.display='none';
+
+/* Every reattempt/retest always starts in original Hindi mode. */
+if(typeof langSwitchToken !== 'undefined') langSwitchToken++;
+if(typeof langSwitchBusy !== 'undefined') langSwitchBusy=false;
+if(typeof suppressAIRefreshDuringLanguageSwitch !== 'undefined') suppressAIRefreshDuringLanguageSwitch=false;
+if(typeof appLang !== 'undefined') appLang='hi';
+if(typeof clearGoogleTranslationCookie === 'function') clearGoogleTranslationCookie();
+const __retTestCombo = document.querySelector('#google_translate_element select.goog-te-combo');
+if(__retTestCombo){
+  __retTestCombo.value='';
+  __retTestCombo.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
 isPaused=false;
 timerRunning=true;
 
@@ -4513,6 +4526,7 @@ if(pt) pt.textContent='00:00';
  document.getElementById('jumpBox').style.display='flex';
  document.querySelector('.floating-quiz-header').style.display='flex';
  showQ();
+ if(typeof setQuizOriginalLanguageMode === 'function') setQuizOriginalLanguageMode(true);
  resetQuestionTimer();
  updateAIButtonVisibility();
 }
