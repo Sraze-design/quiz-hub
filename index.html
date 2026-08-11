@@ -1968,19 +1968,32 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   // CSS alone can't reliably beat it. This watcher forcibly removes
   // anything Google adds, continuously, so nothing ever becomes visible.
   function killGoogleUI() {
+    // NOTE: we deliberately do NOT remove the core translate.google iframe.
+    // The old code also matched the generic 'iframe[src*="translate.google"]'
+    // selector, which caught Google's *internal* state-tracking iframe too —
+    // deleting that iframe on every 100ms poll destroyed Google's session
+    // state. That's why "show original language" stopped working the second
+    // time you toggled the button (Bug 2). Only the known junk/UI iframes
+    // are removed below, each matched by its specific class, never the
+    // generic translate.google iframe.
     document.querySelectorAll(
       'iframe.goog-te-banner-frame, .goog-te-banner-frame,' +
       'iframe.goog-te-ftab, .goog-te-ftab,' +
       'iframe.goog-te-balloon-frame, .goog-te-balloon-frame,' +
       'iframe.goog-te-menu-frame, .goog-te-menu-frame,' +
-      'iframe[src*="translate.google"],' +
       '#goog-gt-tt, .goog-tooltip,' +
       '[class*="goog-te-spinner"]'
     ).forEach(el => el.remove());
-    // Google also injects loose elements with ids like ":1", ":2" directly
-    // as children of <body> (its internal spinner/overlay widgets).
-    Array.from(document.body.children).forEach(el => {
-      if (el.id && /^:/.test(el.id) && el.id !== 'google_translate_element') el.remove();
+    // Google also injects loose elements with ids like ":1", ":2" — not
+    // always as direct children of <body>. Sometimes it drops them inside
+    // whatever container is currently mutating (e.g. the quiz box while a
+    // question is being re-rendered). Searching the WHOLE document instead
+    // of just body's direct children catches those too — this is what was
+    // causing the spinning "wheel" icon to flash near the pause button when
+    // switching questions (it was landing inside quizEngineBox, outside the
+    // old shallow body-children check).
+    document.querySelectorAll('[id^=":"]').forEach(el => {
+      if (el.id !== 'google_translate_element') el.remove();
     });
     if (document.body && document.body.style.top && document.body.style.top !== '0px') {
       document.body.style.top = '0px';
@@ -1994,7 +2007,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     }
   }
   new MutationObserver(killGoogleUI).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
-  setInterval(killGoogleUI, 100);
+  // Polled more tightly (30ms instead of 100ms) so any spinner/icon Google
+  // injects gets ripped out before it's on screen long enough to notice.
+  setInterval(killGoogleUI, 30);
 </script>
 <!-- Our own button — marked notranslate so Google never rewrites its icon/label -->
 <div id="langSwitchBtn" class="notranslate" translate="no" onclick="toggleAppLanguage()" style="display:none; position:fixed; top:14px; right:62px; z-index:99999; width:46px; height:38px; background:#0f172a; border-radius:11px; box-shadow:0 4px 14px rgba(15,23,42,0.28); cursor:pointer; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans', sans-serif; overflow:hidden;">
@@ -2028,6 +2043,18 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     }
   }
 
+  // Google also tracks the active translation in a "googtrans" cookie.
+  // If that cookie is left over from a previous switch, telling the combo
+  // to restore ('') can silently no-op because Google thinks it's already
+  // showing the original. Wiping the cookie first makes the restore step
+  // reliable every time, not just the first time (Bug 2 fix).
+  function clearGoogTransCookie() {
+    const host = window.location.hostname;
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + host + ';';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + host + ';';
+  }
+
   function toggleAppLanguage() {
     if (appLang === 'hi') {
       setGoogleTranslateLanguage('en');
@@ -2035,6 +2062,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     } else {
       // Empty string is Google's actual "restore original text" value —
       // setting 'hi' again does NOT revert a translated page reliably.
+      clearGoogTransCookie();
       setGoogleTranslateLanguage('');
       appLang = 'hi';
     }
@@ -3680,6 +3708,11 @@ if(prevSel!==null && prevSel!==undefined){
 if(typeof onQuestionChangeAI === 'function'){
   onQuestionChangeAI();
 }
+// Question text/options were just swapped in, which makes Google's
+// translate script rescan the page and briefly show its spinner/icon.
+// Cleaning up right here (instead of waiting for the next 30ms poll)
+// closes that gap so the spinner doesn't flash near the pause button.
+if (typeof killGoogleUI === 'function') killGoogleUI();
 }
 
 function celebrate(msg,sub){
