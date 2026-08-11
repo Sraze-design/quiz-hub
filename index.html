@@ -1968,47 +1968,19 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   // CSS alone can't reliably beat it. This watcher forcibly removes
   // anything Google adds, continuously, so nothing ever becomes visible.
   function killGoogleUI() {
-    // NOTE: we deliberately do NOT remove the core translate.google iframe.
-    // The old code also matched the generic 'iframe[src*="translate.google"]'
-    // selector, which caught Google's *internal* state-tracking iframe too —
-    // deleting that iframe on every 100ms poll destroyed Google's session
-    // state. That's why "show original language" stopped working the second
-    // time you toggled the button (Bug 2). Only the known junk/UI iframes
-    // are removed below, each matched by its specific class, never the
-    // generic translate.google iframe.
     document.querySelectorAll(
       'iframe.goog-te-banner-frame, .goog-te-banner-frame,' +
       'iframe.goog-te-ftab, .goog-te-ftab,' +
       'iframe.goog-te-balloon-frame, .goog-te-balloon-frame,' +
       'iframe.goog-te-menu-frame, .goog-te-menu-frame,' +
+      'iframe[src*="translate.google"],' +
       '#goog-gt-tt, .goog-tooltip,' +
       '[class*="goog-te-spinner"]'
     ).forEach(el => el.remove());
-    // Google also injects loose elements with ids like ":1", ":2" — not
-    // always as direct children of <body>. Sometimes it drops them inside
-    // whatever container is currently mutating (e.g. the quiz box while a
-    // question is being re-rendered). Searching the WHOLE document instead
-    // of just body's direct children catches those too — this is what was
-    // causing the spinning "wheel" icon to flash near the pause button when
-    // switching questions (it was landing inside quizEngineBox, outside the
-    // old shallow body-children check).
-    // IMPORTANT: never touch anything *inside* #google_translate_element —
-    // Google's actual <select class="goog-te-combo"> and its supporting
-    // internal nodes live in there.
-    // Also important: for stray ":"-id elements elsewhere in the page, we
-    // now only HIDE them (never el.remove()). Deleting them was too
-    // aggressive — some of those nodes are things Google's script itself
-    // still needs internally to actually perform the translation, and
-    // ripping them out silently broke translate entirely (clicking did
-    // nothing, page stayed in the original language). Hiding is visually
-    // identical but non-destructive.
-    const gte = document.getElementById('google_translate_element');
-    document.querySelectorAll('[id^=":"]').forEach(el => {
-      if (el.id === 'google_translate_element') return;
-      if (gte && gte.contains(el)) return;
-      el.style.setProperty('display', 'none', 'important');
-      el.style.setProperty('visibility', 'hidden', 'important');
-      el.style.setProperty('pointer-events', 'none', 'important');
+    // Google also injects loose elements with ids like ":1", ":2" directly
+    // as children of <body> (its internal spinner/overlay widgets).
+    Array.from(document.body.children).forEach(el => {
+      if (el.id && /^:/.test(el.id) && el.id !== 'google_translate_element') el.remove();
     });
     if (document.body && document.body.style.top && document.body.style.top !== '0px') {
       document.body.style.top = '0px';
@@ -2022,9 +1994,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     }
   }
   new MutationObserver(killGoogleUI).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
-  // Polled more tightly (30ms instead of 100ms) so any spinner/icon Google
-  // injects gets ripped out before it's on screen long enough to notice.
-  setInterval(killGoogleUI, 30);
+  setInterval(killGoogleUI, 100);
 </script>
 <!-- Our own button — marked notranslate so Google never rewrites its icon/label -->
 <div id="langSwitchBtn" class="notranslate" translate="no" onclick="toggleAppLanguage()" style="display:none; position:fixed; top:14px; right:62px; z-index:99999; width:46px; height:38px; background:#0f172a; border-radius:11px; box-shadow:0 4px 14px rgba(15,23,42,0.28); cursor:pointer; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans', sans-serif; overflow:hidden;">
@@ -2058,69 +2028,17 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     }
   }
 
-  // Google also tracks the active translation in a "googtrans" cookie.
-  // If that cookie is left over from a previous switch, telling the combo
-  // to restore ('') can silently no-op because Google thinks it's already
-  // showing the original. Wiping the cookie first makes the restore step
-  // reliable every time, not just the first time (Bug 2 fix).
-  function clearGoogTransCookie() {
-    const host = window.location.hostname;
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + host + ';';
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + host + ';';
-  }
-
   function toggleAppLanguage() {
     if (appLang === 'hi') {
       setGoogleTranslateLanguage('en');
       appLang = 'en';
     } else {
-      // Don't rely on Google's own "restore original" (empty-value)
-      // trick — it's flaky once state gets tangled. Instead, hard-reset:
-      // wipe Google's translate state completely and rebuild the current
-      // question straight from our own untouched data, which is
-      // guaranteed to be the true original text every time.
-      hardResetToOriginal();
+      // Empty string is Google's actual "restore original text" value —
+      // setting 'hi' again does NOT revert a translated page reliably.
+      setGoogleTranslateLanguage('');
       appLang = 'hi';
     }
     updateLangIconState();
-  }
-
-  // Fully tears down Google's translate widget/state and rebuilds the
-  // visible question from our own data (never touched by Google), then
-  // quietly re-creates a fresh widget in the background so the next
-  // translate click still works normally.
-  function hardResetToOriginal() {
-    // 1) Forget any translation state Google remembers via cookies.
-    clearGoogTransCookie();
-
-    // 2) Empty out Google's widget container completely.
-    const gte = document.getElementById('google_translate_element');
-    if (gte) gte.innerHTML = '';
-
-    // 3) Remove any classes/attributes Google stamped onto the page while
-    //    translating.
-    document.documentElement.classList.remove('translated-ltr', 'translated-rtl');
-    document.body.classList.remove('translated-ltr', 'translated-rtl');
-    document.documentElement.removeAttribute('lang');
-
-    // 4) Re-render the current screen directly from our own data. This is
-    //    the actual fix: it guarantees the real original text, instead of
-    //    trusting Google to correctly revert its own DOM edits.
-    const quizBox = document.getElementById('quizEngineBox');
-    if (quizBox && getComputedStyle(quizBox).display !== 'none' && typeof showQ === 'function') {
-      showQ();
-    }
-
-    // 5) Rebuild a fresh Google Translate instance in the now-empty
-    //    container, so the user can translate again if they toggle once
-    //    more. No network reload needed — the google.translate API is
-    //    already loaded on the page.
-    setTimeout(() => {
-      if (window.google && google.translate && google.translate.TranslateElement) {
-        googleTranslateElementInit();
-      }
-    }, 50);
   }
 
   function updateLangIconState() {
@@ -3762,11 +3680,6 @@ if(prevSel!==null && prevSel!==undefined){
 if(typeof onQuestionChangeAI === 'function'){
   onQuestionChangeAI();
 }
-// Question text/options were just swapped in, which makes Google's
-// translate script rescan the page and briefly show its spinner/icon.
-// Cleaning up right here (instead of waiting for the next 30ms poll)
-// closes that gap so the spinner doesn't flash near the pause button.
-if (typeof killGoogleUI === 'function') killGoogleUI();
 }
 
 function celebrate(msg,sub){
