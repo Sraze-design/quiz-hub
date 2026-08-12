@@ -4009,7 +4009,9 @@ if(prevSel!==null && prevSel!==undefined){
  }
 }
 
-if(typeof setQuizTranslationScope === 'function'){
+// Hindi mode does not need Google Translate's DOM translation scope.
+// Avoid unnecessary translate/attribute mutations on every question change.
+if(typeof setQuizTranslationScope === 'function' && appLang === 'en'){
   setQuizTranslationScope();
 }
 
@@ -4025,6 +4027,21 @@ if (appLang === 'en' && !langSwitchBusy) {
       forceTranslateQuizTargets();
     }
   }, 60);
+}
+
+// iOS/WebKit repaint safeguard after dynamically rebuilding the question DOM.
+// This changes only rendering; quiz state/logic remains untouched.
+const __iosQuizPaint = document.getElementById('quiz-box');
+if (__iosQuizPaint) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      void __iosQuizPaint.offsetHeight;
+      __iosQuizPaint.style.transform = 'translateZ(0)';
+      requestAnimationFrame(() => {
+        __iosQuizPaint.style.transform = '';
+      });
+    });
+  });
 }
 }
 
