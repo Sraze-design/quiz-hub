@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q81. एक कंपनी में सभी कर्मचारियों को समान वेतन मिल रहा है। यदि कर्मचारियों की संख्या 20% बढ़ जाती है और प्रति व्यक्ति उनका वेतन 18% कम हो जाता है, तो कुल वेतन में कितने प्रतिशत की कमी होगी?",
+    q_en: "Q81. All employees in a company are getting equal salary. If the number of employees increases by 20% and their salary per person decreases by 18%, then by what percentage will the total salary decrease?",
+    tag: "SSC CGL 17/09/2024 (Shift-01)",
+    o_hi: [
+      "(a) 2.4%",
+      "(b) 1%",
+      "(c) 1.6%",
+      "(d) 1.4%"
+    ],
+    o_en: [
+      "(a) 2.4%",
+      "(b) 1%",
+      "(c) 1.6%",
+      "(d) 1.4%"
+    ],
+    a: 2,
+    e_hi: "कर्मचारियों की संख्या का गुणक = 120/100<br>प्रति व्यक्ति वेतन का गुणक = 82/100<br>कुल वेतन का गुणक = 120/100 × 82/100 = 98.4/100<br>कमी = 100% - 98.4% = 1.6%",
+    e_en: "Multiplier for number of employees = 120/100<br>Multiplier for salary per person = 82/100<br>Multiplier for total salary = 120/100 × 82/100 = 98.4/100<br>Decrease = 100% - 98.4% = 1.6%"
+  },
+  {
+    q_hi: "Q82. यदि किसी वस्तु के मूल्य में क्रमागत रूप से 15% और 10% की वृद्धि होती है, तो उस वस्तु की एकल मूल्य वृद्धि के समतुल्य प्रतिशत क्या है?",
+    q_en: "Q82. If the price of an article increases successively by 15% and 10%, what is the single equivalent percentage price increase of that article?",
+    tag: "SSC CHSL 02/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 26.5%",
+      "(b) 25%",
+      "(c) 23.5%",
+      "(d) 12.5%"
+    ],
+    o_en: [
+      "(a) 26.5%",
+      "(b) 25%",
+      "(c) 23.5%",
+      "(d) 12.5%"
+    ],
+    a: 0,
+    e_hi: "समतुल्य वृद्धि = 15% + 10% + (15 × 10)/100<br>= 25% + 1.5%<br>= 26.5%",
+    e_en: "Equivalent increase = 15% + 10% + (15 × 10)/100<br>= 25% + 1.5%<br>= 26.5%"
+  },
+  {
+    q_hi: "Q83. बेहतर नौकरी के अवसरों के लिए बड़े शहर में प्रवास के कारण पहले एक कस्बे की जनसंख्या में 16% की कमी आई। अगले वर्ष, नौकरियों के लिए बेहतर सुविधाएँ होने के कारण कस्बे की जनसंख्या में 21% की वृद्धि हुई। जनसंख्या में शुद्ध प्रतिशत परिवर्तन (2 दशमलव स्थानों तक सही) क्या है?",
+    q_en: "Q83. Due to migration to a big city for better job opportunities, the population of a town first decreased by 16%. In the next year, due to better job facilities, the population of the town increased by 21%. What is the net percentage change in the population (correct to 2 decimal places)?",
+    tag: "SSC CHSL 05/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 2.54% कमी",
+      "(b) 2.54% वृद्धि",
+      "(c) 1.64% वृद्धि",
+      "(d) 1.64% कमी"
+    ],
+    o_en: [
+      "(a) 2.54% decrease",
+      "(b) 2.54% increase",
+      "(c) 1.64% increase",
+      "(d) 1.64% decrease"
+    ],
+    a: 2,
+    e_hi: "मान लें प्रारंभिक जनसंख्या = 100<br>पहली कमी के बाद = 100 × 84/100 = 84<br>दूसरी वृद्धि के बाद = 84 × 121/100 = 101.64<br>शुद्ध वृद्धि = 101.64 - 100 = 1.64%",
+    e_en: "Let initial population = 100<br>After 1st decrease = 100 × 84/100 = 84<br>After 2nd increase = 84 × 121/100 = 101.64<br>Net increase = 101.64 - 100 = 1.64%"
+  },
+  {
+    q_hi: "Q84. एक संख्या में पहले 44% की वृद्धि की जाती है और फिर उसमें 30% की कमी की जाती है। मूल संख्या में निवल प्रतिशत परिवर्तन (निकटतम पूर्णांक तक सन्निकटित) कितना है?",
+    q_en: "Q84. A number is first increased by 44% and then decreased by 30%. What is the net percentage change in the original number (rounded off to the nearest integer)?",
+    tag: "SSC CHSL 05/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 1% वृद्धि",
+      "(b) 4% कमी",
+      "(c) 4% वृद्धि",
+      "(d) 1% कमी"
+    ],
+    o_en: [
+      "(a) 1% increase",
+      "(b) 4% decrease",
+      "(c) 4% increase",
+      "(d) 1% decrease"
+    ],
+    a: 0,
+    e_hi: "मान लें संख्या = 100<br>44% वृद्धि के बाद = 144<br>30% कमी के बाद = 144 × 70/100 = 100.8<br>शुद्ध वृद्धि = 0.8%<br>निकटतम पूर्णांक = 1% वृद्धि",
+    e_en: "Let the number = 100<br>After 44% increase = 144<br>After 30% decrease = 144 × 70/100 = 100.8<br>Net increase = 0.8%<br>Nearest integer = 1% increase"
+  },
+  {
+    q_hi: "Q85. किसी वस्तु की कीमत में पहले 40% की वृद्धि की जाती है और फिर बिक्री में कमी होने के कारण, 45% की कमी की जाती है। वस्तु के अंतिम मूल्य में कुल प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q85. The price of an article is first increased by 40% and then due to a decline in sales, it is decreased by 45%. Find the total percentage change in the final price of the article.",
+    tag: "SSC CHSL 02/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) −13%",
+      "(b) 13%",
+      "(c) −23%",
+      "(d) 23%"
+    ],
+    o_en: [
+      "(a) −13%",
+      "(b) 13%",
+      "(c) −23%",
+      "(d) 23%"
+    ],
+    a: 2,
+    e_hi: "मान लें प्रारंभिक मूल्य = 100<br>40% वृद्धि के बाद = 140<br>45% कमी के बाद = 140 × 55/100 = 77<br>कुल कमी = 100 - 77 = 23%",
+    e_en: "Let initial price = 100<br>After 40% increase = 140<br>After 45% decrease = 140 × 55/100 = 77<br>Total decrease = 100 - 77 = 23%"
+  },
+  {
+    q_hi: "Q86. एक संख्या में पहले 18% की कमी की जाती है और फिर परिणामी संख्या में 25% की वृद्धि की जाती है। मूल संख्या में कुल प्रतिशत परिवर्तन कितना है?",
+    q_en: "Q86. A number is first decreased by 18% and then the resulting number is increased by 25%. What is the total percentage change in the original number?",
+    tag: "SSC CHSL 09/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 2.5% कमी",
+      "(b) 3.5% वृद्धि",
+      "(c) 2.5% वृद्धि",
+      "(d) 3.5% कमी"
+    ],
+    o_en: [
+      "(a) 2.5% decrease",
+      "(b) 3.5% increase",
+      "(c) 2.5% increase",
+      "(d) 3.5% decrease"
+    ],
+    a: 2,
+    e_hi: "मान लें संख्या = 100<br>18% कमी के बाद = 82<br>25% वृद्धि के बाद = 82 × 125/100 = 102.5<br>शुद्ध वृद्धि = 2.5%",
+    e_en: "Let the number = 100<br>After 18% decrease = 82<br>After 25% increase = 82 × 125/100 = 102.5<br>Net increase = 2.5%"
+  },
+  {
+    q_hi: "Q87. एक उत्पाद के मूल्य में पहले वर्ष में 10% और दूसरे वर्ष में 20% की वृद्धि होती है। दो वर्षों में उत्पाद के मूल्य में कुल प्रतिशत वृद्धि कितनी है?",
+    q_en: "Q87. The price of a product increases by 10% in the first year and by 20% in the second year. What is the total percentage increase in the price of the product over two years?",
+    tag: "SSC CHSL 11/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 28%",
+      "(b) 32%",
+      "(c) 30%",
+      "(d) 36%"
+    ],
+    o_en: [
+      "(a) 28%",
+      "(b) 32%",
+      "(c) 30%",
+      "(d) 36%"
+    ],
+    a: 1,
+    e_hi: "समतुल्य वृद्धि = 10% + 20% + (10 × 20)/100<br>= 30% + 2%<br>= 32%",
+    e_en: "Equivalent increase = 10% + 20% + (10 × 20)/100<br>= 30% + 2%<br>= 32%"
+  },
+  {
+    q_hi: "Q88. रमेश की पॉकेट मनी में 25% की कमी की गई और फिर कम की गई पॉकेट मनी में 20% की वृद्धि की गई। उसकी मूल पॉकेट मनी में शुद्ध वृद्धि या कमी का प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q88. Ramesh's pocket money was decreased by 25% and then the reduced pocket money was increased by 20%. Find the net percentage increase or decrease in his original pocket money.",
+    tag: "SSC CHSL 08/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 12% कमी",
+      "(b) 12% वृद्धि",
+      "(c) 10% वृद्धि",
+      "(d) 10% कमी"
+    ],
+    o_en: [
+      "(a) 12% decrease",
+      "(b) 12% increase",
+      "(c) 10% increase",
+      "(d) 10% decrease"
+    ],
+    a: 3,
+    e_hi: "मान लें मूल पॉकेट मनी = 100<br>25% कमी के बाद = 75<br>20% वृद्धि के बाद = 75 × 120/100 = 90<br>शुद्ध कमी = 10%",
+    e_en: "Let original pocket money = 100<br>After 25% decrease = 75<br>After 20% increase = 75 × 120/100 = 90<br>Net decrease = 10%"
+  },
+  {
+    q_hi: "Q89. किसी कार का मूल्य दो क्रमागत वर्षों में क्रमशः 15% और 20% कम हो जाता है। दो वर्ष बाद कार के मूल्य में कितने प्रतिशत की कमी हुई?",
+    q_en: "Q89. The price of a car decreases by 15% and 20% respectively in two consecutive years. By what percentage did the price of the car decrease after two years?",
+    tag: "SSC CHSL 08/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 32%",
+      "(b) 15%",
+      "(c) 46%",
+      "(d) 25%"
+    ],
+    o_en: [
+      "(a) 32%",
+      "(b) 15%",
+      "(c) 46%",
+      "(d) 25%"
+    ],
+    a: 0,
+    e_hi: "मान लें प्रारंभिक मूल्य = 100<br>15% कमी के बाद = 85<br>20% कमी के बाद = 85 × 80/100 = 68<br>कुल कमी = 100 - 68 = 32%",
+    e_en: "Let initial price = 100<br>After 15% decrease = 85<br>After 20% decrease = 85 × 80/100 = 68<br>Total decrease = 100 - 68 = 32%"
+  },
+  {
+    q_hi: "Q90. एक संख्या में पहले 40% की वृद्धि की जाती है और फिर 30% की कमी की जाती है। शुद्ध प्रतिशत परिवर्तन क्या है?",
+    q_en: "Q90. A number is first increased by 40% and then decreased by 30%. What is the net percentage change?",
+    tag: "SSC CHSL 21/11/2025 (Shift-03)",
+    o_hi: [
+      "(a) 2% की वृद्धि",
+      "(b) 2% की कमी",
+      "(c) 8% की वृद्धि",
+      "(d) 8% की कमी"
+    ],
+    o_en: [
+      "(a) 2% increase",
+      "(b) 2% decrease",
+      "(c) 8% increase",
+      "(d) 8% decrease"
+    ],
+    a: 1,
+    e_hi: "मान लें संख्या = 100<br>40% वृद्धि के बाद = 140<br>30% कमी के बाद = 140 × 70/100 = 98<br>शुद्ध कमी = 2%",
+    e_en: "Let the number = 100<br>After 40% increase = 140<br>After 30% decrease = 140 × 70/100 = 98<br>Net decrease = 2%"
+  },
+  {
+    q_hi: "Q91. एक कार की कीमत में पहले 35% की वृद्धि की जाती है और उसके बाद बिक्री में कमी के कारण कीमत में 25% की कमी की जाती है। कार के अंतिम मूल्य में शुद्ध प्रतिशत परिवर्तन कितना है?",
+    q_en: "Q91. The price of a car is first increased by 35% and then, due to a decrease in sales, the price is decreased by 25%. What is the net percentage change in the final price of the car?",
+    tag: "SSC CPO 11/11/2022 (Shift-02)",
+    o_hi: [
+      "(a) 2\\frac{1}{5}% की कमी",
+      "(b) 2\\frac{1}{3}% की वृद्धि",
+      "(c) 1\\frac{3}{5}% की कमी",
+      "(d) 1\\frac{1}{4}% की वृद्धि"
+    ],
+    o_en: [
+      "(a) 2\\frac{1}{5}% decrease",
+      "(b) 2\\frac{1}{3}% increase",
+      "(c) 1\\frac{3}{5}% decrease",
+      "(d) 1\\frac{1}{4}% increase"
+    ],
+    a: 3,
+    e_hi: "मान लें प्रारंभिक कीमत = 100<br>35% वृद्धि के बाद = 135<br>25% कमी के बाद = 135 × 75/100 = 101.25<br>शुद्ध वृद्धि = 1.25% = 1\\frac{1}{4}%",
+    e_en: "Let initial price = 100<br>After 35% increase = 135<br>After 25% decrease = 135 × 75/100 = 101.25<br>Net increase = 1.25% = 1\\frac{1}{4}%"
+  },
+  {
+    q_hi: "Q92. एक स्कूटर के मूल्य में क्रमिक तौर पर 10%, 5% और 15% की वृद्धि होती है। स्कूटर की कीमत में कुल कितने प्रतिशत की वृद्धि हुई है?",
+    q_en: "Q92. The price of a scooter increases successively by 10%, 5%, and 15%. By what total percentage has the price of the scooter increased?",
+    tag: "SSC CGL 01/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 32\\frac{33}{40}%",
+      "(b) 34\\frac{21}{40}%",
+      "(c) 30\\frac{11}{40}%",
+      "(d) 36\\frac{31}{40}%"
+    ],
+    o_en: [
+      "(a) 32\\frac{33}{40}%",
+      "(b) 34\\frac{21}{40}%",
+      "(c) 30\\frac{11}{40}%",
+      "(d) 36\\frac{31}{40}%"
+    ],
+    a: 0,
+    e_hi: "मान लें प्रारंभिक मूल्य = 100<br>10% वृद्धि के बाद = 110<br>5% वृद्धि के बाद = 115.5<br>15% वृद्धि के बाद = 132.825<br>कुल वृद्धि = 32.825%<br>= 32\\frac{33}{40}%",
+    e_en: "Let initial price = 100<br>After 10% increase = 110<br>After 5% increase = 115.5<br>After 15% increase = 132.825<br>Total increase = 32.825%<br>= 32\\frac{33}{40}%"
+  },
+  {
+    q_hi: "Q93. एक संख्या को क्रमिक रूप से 20% और 30% बढ़ाने के स्थान पर इसे 22% घटा दिया जाता है। परिणामी मान आवश्यक सही मान का कितना प्रतिशत है?",
+    q_en: "Q93. Instead of successively increasing a number by 20% and 30%, it is decreased by 22%. What percentage of the required correct value is the resulting value?",
+    tag: "SSC CHSL 09/03/2023 (Shift-04)",
+    o_hi: [
+      "(a) 55%",
+      "(b) 60%",
+      "(c) 48%",
+      "(d) 50%"
+    ],
+    o_en: [
+      "(a) 55%",
+      "(b) 60%",
+      "(c) 48%",
+      "(d) 50%"
+    ],
+    a: 3,
+    e_hi: "मान लें संख्या = 100<br>सही मान = 100 × 120/100 × 130/100 = 156<br>गलत मान = 100 × 78/100 = 78<br>गलत मान, सही मान का = 78/156 × 100 = 50%",
+    e_en: "Let number = 100<br>Correct value = 100 × 120/100 × 130/100 = 156<br>Incorrect value = 100 × 78/100 = 78<br>Incorrect value as % of correct value = 78/156 × 100 = 50%"
+  },
+  {
+    q_hi: "Q94. एक AC की कीमत प्रत्येक एकांतर वर्ष में 1\\frac{3}{5}% बढ़ती है और घटती है। इसकी शुरुआत 2004 में वृद्धि के साथ हुई। 2004 की तुलना में 2007 में AC की कीमत में हुई। (दशमलव के दो स्थान तक सही)",
+    q_en: "Q94. The price of an AC increases and decreases by 1\\frac{3}{5}% in alternate years. It started with an increase in 2004. Compared to 2004, what was the change in the price of the AC in 2007? (Correct to two decimal places)",
+    tag: "SSC Phase XII 21/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 2.57% की कमी",
+      "(b) 1.57% की कमी",
+      "(c) 1.57% की वृद्धि",
+      "(d) 2.57% की वृद्धि"
+    ],
+    o_en: [
+      "(a) 2.57% decrease",
+      "(b) 1.57% decrease",
+      "(c) 1.57% increase",
+      "(d) 2.57% increase"
+    ],
+    a: 2,
+    e_hi: "2004 से 2007 तक परिवर्तन = 1.016 × 0.984 × 1.016<br>परिणामी गुणक लगभग = 1.0157<br>अतः शुद्ध वृद्धि = 1.57%",
+    e_en: "Change from 2004 to 2007 = 1.016 × 0.984 × 1.016<br>Resulting multiplier approx = 1.0157<br>Hence net increase = 1.57%"
+  },
+  {
+    q_hi: "Q95. 25% प्रत्येक की दो क्रमिक प्रतिशत कमी, 25% प्रत्येक की दो क्रमिक प्रतिशत वृद्धि से कितने प्रतिशत कम है? (दशमलव के दो स्थानों तक पूर्णांकित करें।)",
+    q_en: "Q95. Two successive percentage decreases of 25% each are what percentage less than two successive percentage increases of 25% each? (Round off to two decimal places.)",
+    tag: "SSC CGL 26/09/2024 (Shift-01)",
+    o_hi: [
+      "(a) 50%",
+      "(b) 43.75%",
+      "(c) 22.22%",
+      "(d) 56.25%"
+    ],
+    o_en: [
+      "(a) 50%",
+      "(b) 43.75%",
+      "(c) 22.22%",
+      "(d) 56.25%"
+    ],
+    a: 2,
+    e_hi: "दो 25% की कमी के बाद मान = 100 × 75/100 × 75/100 = 56.25<br>कमी = 43.75%<br>दो 25% की वृद्धि के बाद मान = 100 × 125/100 × 125/100 = 156.25<br>वृद्धि = 56.25%<br>अंतर = 56.25% - 43.75% = 12.5%<br>43.75, 56.25 से कम है = 12.5/56.25 × 100 = 22.22%",
+    e_en: "Value after two 25% decreases = 100 × 75/100 × 75/100 = 56.25<br>Decrease = 43.75%<br>Value after two 25% increases = 100 × 125/100 × 125/100 = 156.25<br>Increase = 56.25%<br>Difference = 56.25% - 43.75% = 12.5%<br>Percentage less = 12.5/56.25 × 100 = 22.22%"
+  },
+  {
+    q_hi: "Q96. दो क्रमिक वेतन वृद्धि के बाद, एक व्यक्ति का वेतन मूल वेतन का 156.25% हो गया। यदि दूसरी वेतन वृद्धि में प्रतिशत वृद्धि पहली वेतन वृद्धि के बराबर थी, तो प्रत्येक वेतन वृद्धि का प्रतिशत क्या था?",
+    q_en: "Q96. After two successive salary increases, a person's salary became 156.25% of the original salary. If the percentage increase in the second salary hike was equal to the first salary hike, what was the percentage of each salary increase?",
+    tag: "SSC CHSL 19/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 20%",
+      "(b) 22%",
+      "(c) 25%",
+      "(d) 30%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 22%",
+      "(c) 25%",
+      "(d) 30%"
+    ],
+    a: 2,
+    e_hi: "मान लें प्रत्येक वृद्धि = r%<br>दो समान वृद्धि के बाद गुणक = 156.25/100 = 1.5625<br>अतः (1 + r/100)² = 1.5625<br>1.25² = 1.5625<br>अतः r = 25%",
+    e_en: "Let each increase = r%<br>Multiplier after two equal increases = 156.25/100 = 1.5625<br>Thus (1 + r/100)² = 1.5625<br>1.25² = 1.5625<br>Hence r = 25%"
+  },
+  {
+    q_hi: "Q97. एक निवेशक ने शेयरों में ₹2,00,000 का निवेश किया। पहले दिन शेयर 18% बढ़े, दूसरे दिन 15% गिरे और फिर तीसरे दिन 3% गिरे। निवेशक के शेयरों के मूल्य में निवल प्रतिशत वृद्धि या कमी क्या है? (एक दशमलव स्थान तक पूर्णांकित)",
+    q_en: "Q97. An investor invested ₹2,00,000 in shares. On the first day the shares rose by 18%, on the second day fell by 15%, and then on the third day fell by 3%. What is the net percentage increase or decrease in the value of the investor's shares? (Rounded to one decimal place)",
+    tag: "SSC CGL 18/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 2.2% वृद्धि",
+      "(b) 2.7% वृद्धि",
+      "(c) 2.7% कमी",
+      "(d) 2.2% कमी"
+    ],
+    o_en: [
+      "(a) 2.2% increase",
+      "(b) 2.7% increase",
+      "(c) 2.7% decrease",
+      "(d) 2.2% decrease"
+    ],
+    a: 2,
+    e_hi: "मूल्य का गुणक = 1.18 × 0.85 × 0.97<br>= 0.97291<br>कमी = 1 - 0.97291 = 0.02709<br>अर्थात लगभग 2.7% कमी",
+    e_en: "Multiplier for price = 1.18 × 0.85 × 0.97<br>= 0.97291<br>Decrease = 1 - 0.97291 = 0.02709<br>i.e. approximately 2.7% decrease"
+  },
+  {
+    q_hi: "Q98. किसी कर्मचारी को उसके वेतन में दो क्रमागत वेतन-वृद्धि मिलती है, जिसके परिणामस्वरूप उसका वेतन प्रारंभिक वेतन का 2.5 गुना हो जाता है। उसकी पहली प्रतिशत वेतन-वृद्धि ज्ञात करें, यदि दूसरी प्रतिशत वेतन-वृद्धि पहले की तुलना में 4 गुना अधिक है?",
+    q_en: "Q98. An employee gets two consecutive salary increases, resulting in his salary becoming 2.5 times the initial salary. Find his first percentage salary increase, if the second percentage salary increase is 4 times higher than the first?",
+    tag: "SSC MTS 18/10/2021 (Shift-02)",
+    o_hi: [
+      "(a) 25%",
+      "(b) 50%",
+      "(c) 12%",
+      "(d) 10%"
+    ],
+    o_en: [
+      "(a) 25%",
+      "(b) 50%",
+      "(c) 12%",
+      "(d) 10%"
+    ],
+    a: 0,
+    e_hi: "पहली वृद्धि = r%<br>दूसरी वृद्धि = 4r%<br>कुल गुणक = 2.5<br>अतः (1 + r/100)(1 + 4r/100) = 2.5<br>हल करने पर r = 25%<br>अतः पहली वेतन-वृद्धि = 25%",
+    e_en: "First increase = r%<br>Second increase = 4r%<br>Total multiplier = 2.5<br>Thus (1 + r/100)(1 + 4r/100) = 2.5<br>Solving gives r = 25%<br>Hence first salary increase = 25%"
+  },
+  {
+    q_hi: "Q99. यदि पेट्रोल की कीमत में 7% की वृद्धि होती है, तो उपभोक्ता द्वारा पेट्रोल पर व्यय को अपरिवर्तित रखने के लिए खपत में कितने प्रतिशत की कमी की जानी चाहिए?",
+    q_en: "Q99. If the price of petrol increases by 7%, by what percentage should the consumption be decreased by a consumer so that the expenditure on petrol remains unchanged?",
+    tag: "SSC CGL 19/07/2023 (Shift-04)",
+    o_hi: [
+      "(a) 6\\frac{58}{107}%",
+      "(b) 5\\frac{11}{107}%",
+      "(c) 3\\frac{49}{107}%",
+      "(d) 4\\frac{99}{107}%"
+    ],
+    o_en: [
+      "(a) 6\\frac{58}{107}%",
+      "(b) 5\\frac{11}{107}%",
+      "(c) 3\\frac{49}{107}%",
+      "(d) 4\\frac{99}{107}%"
+    ],
+    a: 0,
+    e_hi: "कीमत में वृद्धि = 7%<br>खपत में कमी = 7/(100 + 7) × 100<br>= 7/107 × 100<br>= 6\\frac{58}{107}%",
+    e_en: "Increase in price = 7%<br>Decrease in consumption = 7/(100 + 7) × 100<br>= 7/107 × 100<br>= 6\\frac{58}{107}%"
+  },
+  {
+    q_hi: "Q100. यदि कीमत में 25% की कमी की जाती है, तो खपत में कितने प्रतिशत की वृद्धि की जानी चाहिए, ताकि व्यय अपरिवर्तित रहे?",
+    q_en: "Q100. If the price is decreased by 25%, by what percentage should consumption be increased so that the expenditure remains unchanged?",
+    tag: "SSC MTS 11/05/2023 (Shift-01)",
+    o_hi: [
+      "(a) 20%",
+      "(b) 40%",
+      "(c) 37.5%",
+      "(d) 33.33%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 40%",
+      "(c) 37.5%",
+      "(d) 33.33%"
+    ],
+    a: 3,
+    e_hi: "नई कीमत = मूल कीमत का 75%<br>व्यय समान रखने के लिए खपत का गुणक = 100/75<br>वृद्धि = 100/75 - 1 = 1/3<br>अर्थात 33.33% वृद्धि",
+    e_en: "New price = 75% of original price<br>Multiplier for consumption to keep expenditure same = 100/75<br>Increase = 100/75 - 1 = 1/3<br>i.e. 33.33% increase"
+  },
+  {
+    q_hi: "Q101. यदि चाय की कीमतों में 40% की वृद्धि होती है, तो चाय की खपत को कितने प्रतिशत कम किया जाना चाहिए ताकि व्यय में कोई वृद्धि न हो?",
+    q_en: "Q101. If the price of tea increases by 40%, by what percentage should the consumption of tea be reduced so that there is no increase in expenditure?",
+    tag: "SSC CHSL 04/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 31\\frac{2}{9}%",
+      "(b) 31\\frac{3}{5}%",
+      "(c) 35\\frac{9}{2}%",
+      "(d) 28\\frac{4}{7}%"
+    ],
+    o_en: [
+      "(a) 31\\frac{2}{9}%",
+      "(b) 31\\frac{3}{5}%",
+      "(c) 35\\frac{9}{2}%",
+      "(d) 28\\frac{4}{7}%"
+    ],
+    a: 3,
+    e_hi: "कीमत का नया गुणक = 140/100<br>खपत में कमी = 40/140 × 100<br>= 28\\frac{4}{7}%",
+    e_en: "New price multiplier = 140/100<br>Decrease in consumption = 40/140 × 100<br>= 28\\frac{4}{7}%"
+  },
+  {
+    q_hi: "Q102. एक निर्माण परियोजना को 180 दिनों में पूरा होने का अनुमान था। बारिश के कारण, केवल 60% दिन ही उत्पादक थे। यदि प्रत्येक उत्पादक दिन में किया गया कार्य स्थिर है, तो परियोजना को समय पर पूरा करने के लिए दैनिक उत्पादन में कितने प्रतिशत की वृद्धि करनी होगी?",
+    q_en: "Q102. A construction project was estimated to be completed in 180 days. Due to rain, only 60% of the days were productive. If the work done on each productive day is constant, by what percentage must the daily output be increased to complete the project on time?",
+    tag: "SSC CHSL 17/11/2025 (Shift-01)",
+    o_hi: [
+      "(a) 60.65%",
+      "(b) 65%",
+      "(c) 70.43%",
+      "(d) 66.67%"
+    ],
+    o_en: [
+      "(a) 60.65%",
+      "(b) 65%",
+      "(c) 70.43%",
+      "(d) 66.67%"
+    ],
+    a: 3,
+    e_hi: "उत्पादक दिन = 180 × 60/100 = 108<br>समय पर कार्य पूरा करने के लिए दैनिक कार्य का गुणक = 180/108 = 5/3<br>वृद्धि = 5/3 - 1 = 2/3<br>अर्थात 66.67% वृद्धि",
+    e_en: "Productive days = 180 × 60/100 = 108<br>Multiplier for daily work to complete on time = 180/108 = 5/3<br>Increase = 5/3 - 1 = 2/3<br>i.e. 66.67% increase"
+  },
+  {
+    q_hi: "Q103. संपीड़ित प्राकृतिक गैस (CNG) का मूल्य प्रति लीटर 65% बढ़ गया है। मनुष्य को CNG का उपभोग कितने प्रतिशत कम करना चाहिए, ताकि उसका व्यय न बढ़े? (दो दशमलव स्थानों तक)",
+    q_en: "Q103. The price per litre of Compressed Natural Gas (CNG) has increased by 65%. By what percentage should a person reduce the consumption of CNG so that their expenditure does not increase? (Up to two decimal places)",
+    tag: "SSC CPO 28/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 39.39%",
+      "(b) 30.13%",
+      "(c) 45.13%",
+      "(d) 25.39%"
+    ],
+    o_en: [
+      "(a) 39.39%",
+      "(b) 30.13%",
+      "(c) 45.13%",
+      "(d) 25.39%"
+    ],
+    a: 0,
+    e_hi: "कीमत में वृद्धि = 65%<br>खपत में कमी = 65/165 × 100<br>= 39.39%",
+    e_en: "Increase in price = 65%<br>Decrease in consumption = 65/165 × 100<br>= 39.39%"
+  },
+  {
+    q_hi: "Q104. यदि किसी मूवी टिकट की कीमत में 12\\frac{1}{2}% वृद्धि हुई और टिकटों की बिक्री में भी 8\\frac{1}{2}% की वृद्धि हुई, तो आय में % परिवर्तन ज्ञात करो।",
+    q_en: "Q104. If the price of a movie ticket increased by 12\\frac{1}{2}% and the sale of tickets also increased by 8\\frac{1}{2}%, find the % change in revenue.",
+    tag: "SSC CHSL 02/08/2023 Shift-02",
+    o_hi: [
+      "(a) 21.875%",
+      "(b) 22.6750%",
+      "(c) 20.675%",
+      "(d) 22.0625%"
+    ],
+    o_en: [
+      "(a) 21.875%",
+      "(b) 22.6750%",
+      "(c) 20.675%",
+      "(d) 22.0625%"
+    ],
+    a: 3,
+    e_hi: "टिकट की कीमत का गुणक = 1.125<br>बिक्री का गुणक = 1.085<br>आय का गुणक = 1.125 × 1.085 = 1.220625<br>अतः आय में वृद्धि = 22.0625%",
+    e_en: "Multiplier for ticket price = 1.125<br>Multiplier for sales = 1.085<br>Multiplier for revenue = 1.125 × 1.085 = 1.220625<br>Hence increase in revenue = 22.0625%"
+  },
+  {
+    q_hi: "Q105. एक संग्रहालय में प्रवेश शुल्क में 25% की कमी करने पर, संग्रहालय में आने वाले लोगों की संख्या में 50% की वृद्धि हुई। प्रवेश शुल्क संग्रहण में प्रतिशत वृद्धि या कमी की गणना करो।",
+    q_en: "Q105. On reducing the entry fee of a museum by 25%, the number of visitors increased by 50%. Calculate the percentage increase or decrease in entry fee collection.",
+    tag: "SSC Phase-XI 28/06/2023 (Shift-02)",
+    o_hi: [
+      "(a) 10% की कमी",
+      "(b) 12.5% की कमी",
+      "(c) 10% की वृद्धि",
+      "(d) 12.5% की वृद्धि"
+    ],
+    o_en: [
+      "(a) 10% decrease",
+      "(b) 12.5% decrease",
+      "(c) 10% increase",
+      "(d) 12.5% increase"
+    ],
+    a: 3,
+    e_hi: "शुल्क का गुणक = 75/100<br>लोगों की संख्या का गुणक = 150/100<br>कुल संग्रहण का गुणक = 75/100 × 150/100 = 112.5/100<br>अतः संग्रहण में 12.5% की वृद्धि",
+    e_en: "Multiplier for fee = 75/100<br>Multiplier for number of visitors = 150/100<br>Multiplier for total collection = 75/100 × 150/100 = 112.5/100<br>Hence 12.5% increase in collection"
+  },
+  {
+    q_hi: "Q106. दिसंबर 2020 में जित्विक का मासिक वेतन ₹24,800 था। हर वर्ष उनके वेतन में जनवरी के महीने से 5% की वृद्धि होती है। फरवरी 2022 के महीने में उसका वेतन (₹ में) कितना था?",
+    q_en: "Q106. In December 2020, JITVIK's monthly salary was ₹24,800. Every year, his salary increases by 5% starting from the month of January. What was his salary (in ₹) in the month of February 2022?",
+    tag: "SSC CHSL 05/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 27342",
+      "(b) 27180",
+      "(c) 27486",
+      "(d) 26485"
+    ],
+    o_en: [
+      "(a) 27342",
+      "(b) 27180",
+      "(c) 27486",
+      "(d) 26485"
+    ],
+    a: 0,
+    e_hi: "दिसंबर 2020 का वेतन = ₹24,800<br>जनवरी 2021 में 5% वृद्धि के बाद = 24,800 × 1.05<br>जनवरी 2022 में फिर 5% वृद्धि<br>वेतन = 24,800 × 1.05 × 1.05<br>= ₹27,342",
+    e_en: "Salary in December 2020 = ₹24,800<br>After 5% increase in January 2021 = 24,800 × 1.05<br>Another 5% increase in January 2022<br>Salary = 24,800 × 1.05 × 1.05<br>= ₹27,342"
+  },
+  {
+    q_hi: "Q107. एक शहर की जनसंख्या में 5% की वार्षिक दर से वृद्धि होती है। यदि शहर की जनसंख्या 16000 है, तो 2 वर्ष बाद जनसंख्या कितनी होगी?",
+    q_en: "Q107. The population of a city increases at the annual rate of 5%. If the population of the city is 16,000, what will be the population after 2 years?",
+    tag: "SSC CPO 28/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 17640",
+      "(b) 17000",
+      "(c) 17700",
+      "(d) 17600"
+    ],
+    o_en: [
+      "(a) 17640",
+      "(b) 17000",
+      "(c) 17700",
+      "(d) 17600"
+    ],
+    a: 0,
+    e_hi: "2 वर्ष बाद जनसंख्या = 16000 × 1.05 × 1.05<br>= 16000 × 1.1025<br>= 17640",
+    e_en: "Population after 2 years = 16000 × 1.05 × 1.05<br>= 16000 × 1.1025<br>= 17640"
+  },
+  {
+    q_hi: "Q108. रामनारायण के वेतन में 3\\frac{1}{8}% की कमी की गई, और फिर, कम किए गए वेतन में 7\\frac{2}{5}% की वृद्धि की गई। उसका नया वेतन उसके मूल वेतन की तुलना में कितने प्रतिशत (दशमलव के दो स्थानों तक पूर्णांकित) अधिक या कम है?",
+    q_en: "Q108. Ramnarayan's salary was decreased by 3\\frac{1}{8}%, and then the reduced salary was increased by 7\\frac{2}{5}%. By what percentage (rounded off to two decimal places) is his new salary more or less than his original salary?",
+    tag: "SSC CPO 28/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 3.03% कम",
+      "(b) 4.04% अधिक",
+      "(c) 4.04% कम",
+      "(d) 3.03% अधिक"
+    ],
+    o_en: [
+      "(a) 3.03% less",
+      "(b) 4.04% more",
+      "(c) 4.04% less",
+      "(d) 3.03% more"
+    ],
+    a: 1,
+    e_hi: "पहली कमी के बाद गुणक = 96.875/100<br>दूसरी वृद्धि के बाद गुणक = 107.4/100<br>कुल गुणक = 0.96875 × 1.074 = 1.0404375<br>अतः शुद्ध वृद्धि = 4.04%",
+    e_en: "Multiplier after 1st decrease = 96.875/100<br>Multiplier after 2nd increase = 107.4/100<br>Total multiplier = 0.96875 × 1.074 = 1.0404375<br>Hence net increase = 4.04%"
+  },
+  {
+    q_hi: "Q109. एक महिला श्रमिक की मजदूरी दर में प्रति घंटे 12\\frac{1}{2}% की वृद्धि होती है लेकिन प्रति सप्ताह काम किए गए घंटों की संख्या में 10% की गिरावट होती है। यदि 40 घंटे के एक सप्ताह के लिए उसकी मूल साप्ताहिक मजदूरी ₹38,400 है, तो उसके कुल साप्ताहिक वेतन में प्रतिशत वृद्धि है?",
+    q_en: "Q109. A female worker's wage rate per hour increases by 12\\frac{1}{2}% but the number of hours worked per week drops by 10%. If her original weekly wage for a 40-hour week is ₹38,400, what is the percentage increase in her total weekly salary?",
+    tag: "SSC Phase-IX 2022",
+    o_hi: [
+      "(a) 1.25%",
+      "(b) 2%",
+      "(c) 2.25%",
+      "(d) 1.15%"
+    ],
+    o_en: [
+      "(a) 1.25%",
+      "(b) 2%",
+      "(c) 2.25%",
+      "(d) 1.15%"
+    ],
+    a: 0,
+    e_hi: "मजदूरी दर का गुणक = 1.125<br>काम के घंटों का गुणक = 0.90<br>साप्ताहिक वेतन का गुणक = 1.125 × 0.90 = 1.0125<br>अतः वृद्धि = 1.25%",
+    e_en: "Multiplier for wage rate = 1.125<br>Multiplier for working hours = 0.90<br>Multiplier for weekly salary = 1.125 × 0.90 = 1.0125<br>Hence increase = 1.25%"
+  },
+  {
+    q_hi: "Q110. जब किसी वस्तु के मूल्य में 20% की कमी की गई, तो उसकी बिक्री में x% की वृद्धि हुई। यदि राजस्व प्राप्ति में 25% की वृद्धि होती है, तो x का मान है:",
+    q_en: "Q110. When the price of an article was reduced by 20%, its sales increased by x%. If there is a 25% increase in revenue receipt, then the value of x is:",
+    tag: "SSC CGL TIER-II 29/01/2022",
+    o_hi: [
+      "(a) 55.35",
+      "(b) 57.75",
+      "(c) 56.25",
+      "(d) 54.35"
+    ],
+    o_en: [
+      "(a) 55.35",
+      "(b) 57.75",
+      "(c) 56.25",
+      "(d) 54.35"
+    ],
+    a: 2,
+    e_hi: "मूल्य का गुणक = 80/100<br>राजस्व का गुणक = 125/100<br>अतः 0.8 × (1 + x/100) = 1.25<br>1 + x/100 = 1.25/0.8 = 1.5625<br>x = 56.25%",
+    e_en: "Multiplier for price = 80/100<br>Multiplier for revenue = 125/100<br>Thus 0.8 × (1 + x/100) = 1.25<br>1 + x/100 = 1.25/0.8 = 1.5625<br>x = 56.25%"
+  },
+  {
+    q_hi: "Q111. A की आय, B की आय की 80% है और A का व्यय, B के व्यय का 60% है। यदि A की आय B के व्यय के 90% के बराबर है, तो A की बचत, B की बचत से कितने प्रतिशत अधिक है?",
+    q_en: "Q111. The income of A is 80% of the income of B and the expenditure of A is 60% of the expenditure of B. If the income of A is equal to 90% of the expenditure of B, then by what percentage is the savings of A more than the savings of B?",
+    tag: "SSC CGL TIER-II 29/01/2022",
+    o_hi: [
+      "(a) 100%",
+      "(b) 140%",
+      "(c) 125%",
+      "(d) 150%"
+    ],
+    o_en: [
+      "(a) 100%",
+      "(b) 140%",
+      "(c) 125%",
+      "(d) 150%"
+    ],
+    a: 1,
+    e_hi: "मान लें B का व्यय = 100<br>A की आय = 90<br>A का व्यय = 60<br>A की बचत = 90 - 60 = 30<br>A की आय, B की आय की 80% है<br>B की आय = 90/0.8 = 112.5<br>B की बचत = 112.5 - 100 = 12.5<br>अधिकता = (30 - 12.5)/12.5 × 100 = 140%",
+    e_en: "Let B's expenditure = 100<br>A's income = 90<br>A's expenditure = 60<br>A's savings = 90 - 60 = 30<br>A's income is 80% of B's income<br>B's income = 90/0.8 = 112.5<br>B's savings = 112.5 - 100 = 12.5<br>Excess % = (30 - 12.5)/12.5 × 100 = 140%"
+  },
+  {
+    q_hi: "Q112. A की आय B की आय के 125% के बराबर है, जबकि B की बचत A की बचत का 120% है। यदि B का व्यय A के व्यय का 75% है, तो B की बचत उसके व्यय के प्रतिशत के रूप में कितनी है?",
+    q_en: "Q112. The income of A is equal to 125% of B's income, while the savings of B is 120% of A's savings. If B's expenditure is 75% of A's expenditure, then what is B's savings as a percentage of B's expenditure?",
+    tag: "SSC CHSL 08/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 20%",
+      "(b) 22\\frac{1}{2}%",
+      "(c) 18\\frac{3}{4}%",
+      "(d) 16\\frac{2}{3}%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 22\\frac{1}{2}%",
+      "(c) 18\\frac{3}{4}%",
+      "(d) 16\\frac{2}{3}%"
+    ],
+    a: 0,
+    e_hi: "मान लें A का व्यय = 100<br>B का व्यय = 75<br>A की बचत = x<br>B की बचत = 1.2x<br>A की आय = 100 + x<br>B की आय = 75 + 1.2x<br>A की आय = B की आय का 125%<br>समीकरण हल करने पर x = 12.5<br>B की बचत = 15<br>B की बचत का B के व्यय से प्रतिशत = 15/75 × 100 = 20%",
+    e_en: "Let A's expenditure = 100<br>B's expenditure = 75<br>A's savings = x<br>B's savings = 1.2x<br>A's income = 100 + x<br>B's income = 75 + 1.2x<br>A's income = 125% of B's income<br>Solving equation gives x = 12.5<br>B's savings = 15<br>B's savings as % of B's expenditure = 15/75 × 100 = 20%"
+  },
+  {
+    q_hi: "Q113. एक स्कूल में विद्यार्थियों की संख्या प्रत्येक एकांतर वर्ष में 20% बढ़ती और घटती है। यह 2018 में वृद्धि के साथ शुरू होता है। 2018 की तुलना में 2021 की शुरुआत में स्कूल में विद्यार्थियों की संख्या कितनी है?",
+    q_en: "Q113. The number of students in a school increases and decreases by 20% in alternate years. It starts with an increase in 2018. Compared to 2018, what is the number of students in the school at the beginning of 2021?",
+    tag: "SSC Phase XII 25/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 16.2% की कमी",
+      "(b) 15.2% की वृद्धि",
+      "(c) 15.2% की कमी",
+      "(d) 16.2% की वृद्धि"
+    ],
+    o_en: [
+      "(a) 16.2% decrease",
+      "(b) 15.2% increase",
+      "(c) 15.2% decrease",
+      "(d) 16.2% increase"
+    ],
+    a: 1,
+    e_hi: "मान लें 2018 की शुरुआत में विद्यार्थी = 100<br>20% वृद्धि के बाद = 120<br>20% कमी के बाद = 96<br>20% वृद्धि के बाद = 115.2<br>शुद्ध वृद्धि = 15.2%",
+    e_en: "Let students at the beginning of 2018 = 100<br>After 20% increase = 120<br>After 20% decrease = 96<br>After 20% increase = 115.2<br>Net increase = 15.2%"
+  },
+  {
+    q_hi: "Q114. एक स्कूल की छात्र संख्या प्रत्येक एकांतर वर्ष में 15% बढ़ती और घटती है। यदि वृद्धि की शुरुआत 2012 में हुई, तो 2012 की तुलना में, 2015 की शुरुआत में स्कूल की छात्र संख्या क्या (दो दशमलव स्थान तक सही) हुई।",
+    q_en: "Q114. The student strength of a school increases and decreases by 15% in alternate years. If the increase started in 2012, then compared to 2012, what was the change in student strength at the beginning of 2015 (correct to two decimal places)?",
+    tag: "SSC CPO 27/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 12.41% की कमी",
+      "(b) 12.41% की वृद्धि",
+      "(c) 13.85% की कमी",
+      "(d) 13.85% की वृद्धि"
+    ],
+    o_en: [
+      "(a) 12.41% decrease",
+      "(b) 12.41% increase",
+      "(c) 13.85% decrease",
+      "(d) 13.85% increase"
+    ],
+    a: 1,
+    e_hi: "मान लें 2012 की शुरुआत में छात्र = 100<br>15% वृद्धि के बाद = 115<br>15% कमी के बाद = 97.75<br>15% वृद्धि के बाद = 112.4125<br>शुद्ध वृद्धि = 12.41%",
+    e_en: "Let students at the beginning of 2012 = 100<br>After 15% increase = 115<br>After 15% decrease = 97.75<br>After 15% increase = 112.4125<br>Net increase = 12.41%"
+  },
+  {
+    q_hi: "Q115. एक संख्या पहले 10% घटाई जाती है, फिर 30% बढ़ाई जाती है और फिर 20% घटाई जाती है। संख्या में शुद्ध कमी प्रतिशत कितना है?",
+    q_en: "Q115. A number is first decreased by 10%, then increased by 30%, and then decreased by 20%. What is the net percentage decrease in the number?",
+    tag: "SSC CPO 28/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 4\\frac{1}{5}%",
+      "(b) 6\\frac{2}{5}%",
+      "(c) 5\\frac{3}{5}%",
+      "(d) 3\\frac{4}{5}%"
+    ],
+    o_en: [
+      "(a) 4\\frac{1}{5}%",
+      "(b) 6\\frac{2}{5}%",
+      "(c) 5\\frac{3}{5}%",
+      "(d) 3\\frac{4}{5}%"
+    ],
+    a: 1,
+    e_hi: "मान लें संख्या = 100<br>10% कमी के बाद = 90<br>30% वृद्धि के बाद = 117<br>20% कमी के बाद = 93.6<br>शुद्ध कमी = 100 - 93.6 = 6.4%<br>= 6\\frac{2}{5}%",
+    e_en: "Let the number = 100<br>After 10% decrease = 90<br>After 30% increase = 117<br>After 20% decrease = 93.6<br>Net decrease = 100 - 93.6 = 6.4%<br>= 6\\frac{2}{5}%"
+  },
+  {
+    q_hi: "Q116. एक संख्या में पहले 12% की वृद्धि की जाती है और फिर 23% की वृद्धि की जाती है। इस प्रकार प्राप्त संख्या में अब 34% की कमी की जाती है। मूल संख्या में कुल वृद्धि या कमी प्रतिशत (निकटतम पूर्णांक में) ज्ञात कीजिए।",
+    q_en: "Q116. A number is first increased by 12% and then increased by 23%. The number so obtained is now decreased by 34%. Find the overall percentage increase or decrease in the original number (to the nearest integer).",
+    tag: "SSC CGL 09/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 10% वृद्धि",
+      "(b) 9% कमी",
+      "(c) 10% कमी",
+      "(d) 9% वृद्धि"
+    ],
+    o_en: [
+      "(a) 10% increase",
+      "(b) 9% decrease",
+      "(c) 10% decrease",
+      "(d) 9% increase"
+    ],
+    a: 1,
+    e_hi: "मान लें संख्या = 100<br>12% वृद्धि के बाद = 112<br>23% वृद्धि के बाद = 112 × 1.23 = 137.76<br>34% कमी के बाद = 137.76 × 0.66 = 90.9216<br>कुल कमी = 9.0784%<br>निकटतम पूर्णांक = 9% कमी",
+    e_en: "Let number = 100<br>After 12% increase = 112<br>After 23% increase = 112 × 1.23 = 137.76<br>After 34% decrease = 137.76 × 0.66 = 90.9216<br>Total decrease = 9.0784%<br>Nearest integer = 9% decrease"
+  },
+  {
+    q_hi: "Q117. एक वॉशिंग मशीन का मूल्य 3 वर्षों में ₹40,960 से घटकर ₹21,970 हो गया। मूल्यह्रास की वार्षिक दर ज्ञात कीजिए।",
+    q_en: "Q117. The price of a washing machine depreciated from ₹40,960 to ₹21,970 in 3 years. Find the annual rate of depreciation.",
+    tag: "SSC CPO 05/10/2023 (Shift-03)",
+    o_hi: [
+      "(a) 18.75%",
+      "(b) 16.25%",
+      "(c) 20%",
+      "(d) 25%"
+    ],
+    o_en: [
+      "(a) 18.75%",
+      "(b) 16.25%",
+      "(c) 20%",
+      "(d) 25%"
+    ],
+    a: 0,
+    e_hi: "3 वर्षों का गुणक = 21970/40960<br>= 0.8125³<br>अतः वार्षिक मूल्यह्रास गुणक = 0.8125<br>वार्षिक कमी = 1 - 0.8125 = 0.1875<br>अर्थात 18.75%",
+    e_en: "Multiplier for 3 years = 21970/40960<br>= 0.8125³<br>Thus annual depreciation multiplier = 0.8125<br>Annual decrease = 1 - 0.8125 = 0.1875<br>i.e. 18.75%"
+  },
+  {
+    q_hi: "Q118. एक नगर की आबादी 5 वर्षों में 100000 से 250000 हो जाती है। प्रति वर्ष आबादी की अनुमानित चक्रवृद्धि संयोजित प्रतिशत वृद्धि कितनी है?",
+    q_en: "Q118. The population of a town increases from 100,000 to 250,000 in 5 years. What is the approximate compounded annual percentage increase in population per year?",
+    tag: "SSC CHSL 13/03/2023 (Shift-03)",
+    o_hi: [
+      "(a) 20%",
+      "(b) 30%",
+      "(c) 10%",
+      "(d) 40%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 30%",
+      "(c) 10%",
+      "(d) 40%"
+    ],
+    a: 0,
+    e_hi: "जनसंख्या का कुल गुणक = 250000/100000 = 2.5<br>5 वर्षों के लिए वार्षिक गुणक लगभग 1.2 है<br>अतः अनुमानित वार्षिक चक्रवृद्धि वृद्धि = 20%",
+    e_en: "Total multiplier for population = 250000/100000 = 2.5<br>Annual multiplier for 5 years is approx 1.2<br>Hence approximate compounded annual increase = 20%"
+  },
+  {
+    q_hi: "Q119. 30% की कमी करने के बाद, किसी वस्तु का मूल्य ₹3,500 होता है। इसका वास्तविक मूल्य ज्ञात कीजिए।",
+    q_en: "Q119. After a reduction of 30%, the price of an article becomes ₹3,500. Find its original price.",
+    tag: "SSC CHSL 09/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) ₹5,000",
+      "(b) ₹4,500",
+      "(c) ₹5,500",
+      "(d) ₹6,500"
+    ],
+    o_en: [
+      "(a) ₹5,000",
+      "(b) ₹4,500",
+      "(c) ₹5,500",
+      "(d) ₹6,500"
+    ],
+    a: 0,
+    e_hi: "30% कमी के बाद मूल्य = मूल मूल्य का 70%<br>70% = ₹3,500<br>मूल मूल्य = 3500 × 100/70<br>= ₹5,000",
+    e_en: "Price after 30% reduction = 70% of original price<br>70% = ₹3,500<br>Original price = 3500 × 100/70<br>= ₹5,000"
+  },
+  {
+    q_hi: "Q120. पिछले वर्ष एक इलेक्ट्रिक बाइक का मूल्य ₹1,25,000 था। इस वर्ष इसके मूल्य में 30% की कमी आई है। इस वर्ष इलेक्ट्रिक बाइक का मूल्य (₹ में) क्या है?",
+    q_en: "Q120. Last year the price of an electric bike was ₹1,25,000. This year its price decreased by 30%. What is the price (in ₹) of the electric bike this year?",
+    tag: "SSC CHSL 01/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 87,000",
+      "(b) 86,000",
+      "(c) 87,500",
+      "(d) 86,500"
+    ],
+    o_en: [
+      "(a) 87,000",
+      "(b) 86,000",
+      "(c) 87,500",
+      "(d) 86,500"
+    ],
+    a: 2,
+    e_hi: "मूल्य = ₹1,25,000<br>30% कमी = ₹37,500<br>नया मूल्य = ₹1,25,000 - ₹37,500<br>= ₹87,500",
+    e_en: "Price = ₹1,25,000<br>30% decrease = ₹37,500<br>New price = ₹1,25,000 - ₹37,500<br>= ₹87,500"
+  }
+];
