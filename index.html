@@ -1977,65 +1977,44 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 </head>
 <body>
 
-<!-- ===== Google Translate: 1-click EN/HI switch (in-place, no reload, ALL Google UI hidden) ===== -->
-<style>
-  /* Nuke every visible trace of Google's translate UI — banner, floating
-     feedback tab, tooltips, highlight boxes, spinner, everything. */
-  .goog-te-banner-frame, iframe.goog-te-banner-frame,
-  .goog-te-ftab, iframe.goog-te-ftab,
-  .goog-te-balloon-frame, iframe.goog-te-balloon-frame,
-  .goog-te-menu-frame, iframe.goog-te-menu-frame,
-  iframe[src*="translate.google"], iframe[src*="translate.googleusercontent"],
-  .goog-te-gadget-icon, .goog-te-gadget-simple,
-  .goog-tooltip, .goog-tooltip:hover,
-  .goog-text-highlight,
-  .goog-te-spinner-pos, .goog-te-spinner-animation, .goog-te-spinner,
-  #goog-gt-tt, .goog-te-balloon,
-  [class*="VIpgJd"], [id*="VIpgJd"],
-  body > .skiptranslate,
-  body > [id^=":"] { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; max-width: 0 !important; max-height: 0 !important; overflow: hidden !important; box-shadow: none !important; background: none !important; pointer-events: none !important; }
-  body { top: 0px !important; position: static !important; }
-  /* IMPORTANT: do NOT use display:none here — Google's script needs the
-     container to be actually rendered (just off-screen) to properly build
-     its internal <select> and translation engine. display:none breaks the
-     "translate back to original" behaviour and causes the spinner to get
-     stuck, because Google never finishes initializing. */
-  #google_translate_element {
-    position: fixed !important;
-    top: 0 !important;
-    left: -9999px !important;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-  }
-</style>
-<div id="google_translate_element"></div>
+<!-- ===== Bilingual EN/HI switch (data-driven — questions are stored in both
+     languages inside the quiz data files; no external translation service
+     is used) ===== -->
 <script>
-  // Google injects several floating iframes (banner, feedback tab, tooltip)
-  // directly as siblings of <body> content, and shoves the page down via
-  // an inline body.style.top — all done with JS *after* our CSS runs, so
-  // CSS alone can't reliably beat it. This watcher forcibly removes
-  // anything Google adds, continuously, so nothing ever becomes visible.
-  function killGoogleUI() {
-    document.querySelectorAll(
-      'iframe.goog-te-banner-frame, .goog-te-banner-frame,' +
-      'iframe.goog-te-ftab, .goog-te-ftab,' +
-      'iframe.goog-te-balloon-frame, .goog-te-balloon-frame,' +
-      'iframe.goog-te-menu-frame, .goog-te-menu-frame,' +
-      'iframe[src*="translate.google"],' +
-      '#goog-gt-tt, .goog-tooltip,' +
-      '[class*="goog-te-spinner"]'
-    ).forEach(el => el.remove());
-    // Google also injects loose elements with ids like ":1", ":2" directly
-    // as children of <body> (its internal spinner/overlay widgets).
-    Array.from(document.body.children).forEach(el => {
-      if (el.id && /^:/.test(el.id) && el.id !== 'google_translate_element') el.remove();
-    });
-    if (document.body && document.body.style.top && document.body.style.top !== '0px') {
-      document.body.style.top = '0px';
-    }
-    // Show the language button ONLY on the actual question screen.
-    // It must stay hidden above question-palette/modals and on the result page.
+  // ----- Language state -----
+  let appLang = 'hi'; // currently displayed language: 'hi' or 'en'
+  let langSwitchBusy = false;
+  let langSwitchToken = 0;
+  let suppressAIRefreshDuringLanguageSwitch = false;
+
+  // Reads a bilingual field off a quiz-data item. T(item,'q') looks for
+  // item.q_hi / item.q_en depending on appLang, then falls back to item.q_hi,
+  // then to the old plain item.q so single-language quiz files keep working
+  // unchanged.
+  function T(item, field) {
+    if (!item) return '';
+    const langVal = item[field + '_' + appLang];
+    if (langVal !== undefined && langVal !== null) return langVal;
+    const hiVal = item[field + '_hi'];
+    if (hiVal !== undefined && hiVal !== null) return hiVal;
+    return item[field];
+  }
+
+  function isLiveQuestionScreen() {
+    const quizBox = document.getElementById('quizEngineBox');
+    const quizBody = document.getElementById('quiz-box');
+    const scoreCard = document.getElementById('score-card');
+    const qpPanel = document.getElementById('qp-panel');
+    const qpOverlay = document.getElementById('qp-overlay');
+    if (!quizBox || getComputedStyle(quizBox).display === 'none') return false;
+    if (!quizBody || getComputedStyle(quizBody).display === 'none') return false;
+    if (scoreCard && getComputedStyle(scoreCard).display !== 'none') return false;
+    if (qpPanel?.classList.contains('active') || qpOverlay?.classList.contains('active')) return false;
+    return true;
+  }
+
+  // Shows/hides the E/अ button — only visible on the live question screen.
+  function updateLangButtonVisibility() {
     const quizBox = document.getElementById('quizEngineBox');
     const quizBody = document.getElementById('quiz-box');
     const scoreCard = document.getElementById('score-card');
@@ -2044,298 +2023,46 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const aiSheet = document.getElementById('ai-bottom-sheet');
     const aiPanelOpen = aiSheet && aiSheet.classList.contains('active');
     const btn = document.getElementById('langSwitchBtn');
-    if (btn) {
-      const quizVisible = quizBox && getComputedStyle(quizBox).display !== 'none';
-      const questionsVisible = quizBody && getComputedStyle(quizBody).display !== 'none';
-      const resultVisible = scoreCard && getComputedStyle(scoreCard).display !== 'none';
-      const paletteOpen = (qpPanel && qpPanel.classList.contains('active')) ||
-                          (qpOverlay && qpOverlay.classList.contains('active'));
-      const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen && !aiPanelOpen;
-      btn.style.display = shouldShow ? 'flex' : 'none';
-      if (!shouldShow) btn.style.pointerEvents = 'none';
-      else if (!langSwitchBusy) btn.style.pointerEvents = 'auto';
-    }
+    if (!btn) return;
+    const quizVisible = quizBox && getComputedStyle(quizBox).display !== 'none';
+    const questionsVisible = quizBody && getComputedStyle(quizBody).display !== 'none';
+    const resultVisible = scoreCard && getComputedStyle(scoreCard).display !== 'none';
+    const paletteOpen = (qpPanel && qpPanel.classList.contains('active')) || (qpOverlay && qpOverlay.classList.contains('active'));
+    const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen && !aiPanelOpen;
+    btn.style.display = shouldShow ? 'flex' : 'none';
+    btn.style.pointerEvents = (shouldShow && !langSwitchBusy) ? 'auto' : 'none';
   }
-  new MutationObserver(killGoogleUI).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
-  setInterval(killGoogleUI, 100);
-</script>
-<!-- Our own button — marked notranslate so Google never rewrites its icon/label -->
-<div id="langSwitchBtn" class="notranslate quiz-header-lang-btn" translate="no" onclick="toggleAppLanguage()" aria-label="Language">
-  <div class="quiz-header-lang-inner">
-    <span id="langHalfEn">E</span>
-    <span class="quiz-header-lang-divider"></span>
-    <span id="langHalfHi">अ</span>
-  </div>
-</div>
-<script>
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      { pageLanguage: 'hi', includedLanguages: 'en', autoDisplay: false },
-      'google_translate_element'
-    );
-  }
+  // Old name kept as an alias so existing call sites elsewhere in the file
+  // keep working untouched.
+  function killGoogleUI() { updateLangButtonVisibility(); }
+  new MutationObserver(updateLangButtonVisibility).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style','class'] });
 
-  // Waits for Google's hidden <select class="goog-te-combo"> to appear,
-  // then switches it programmatically. This translates in place —
-  // no page reload, no banner shown.
-  let appLang = 'hi'; // currently displayed language
-  let langSwitchBusy = false;
-  let langSwitchToken = 0;
-  let suppressAIRefreshDuringLanguageSwitch = false;
-
-  function setGoogleTranslateLanguage(targetLangCode, attemptsLeft) {
-    attemptsLeft = attemptsLeft === undefined ? 40 : attemptsLeft;
-    return new Promise((resolve) => {
-      const combo = document.querySelector('#google_translate_element select.goog-te-combo');
-      if (combo) {
-        combo.value = targetLangCode;
-        combo.dispatchEvent(new Event('change', { bubbles: true }));
-        // Short settle time; dynamic targets are translated by Google's active DOM observer.
-        setTimeout(resolve, 120);
-      } else if (attemptsLeft > 0) {
-        setTimeout(() => setGoogleTranslateLanguage(targetLangCode, attemptsLeft - 1).then(resolve), 250);
-      } else {
-        resolve();
-      }
-    });
-  }
-
-  function clearGoogleTranslationCookie() {
-    // Google Translate uses this cookie to remember the active language.
-    // Clearing it prevents the next toggle from getting stuck in English.
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + location.hostname;
-  }
-
-  // Translation is intentionally limited to the LIVE TEST question screen.
-  // Allowed targets:
-  //   1) Question + options + explanation
-  //   2) AI assistant's BOT reply text only
-  // Everything else on every other page is permanently outside the scope.
-  function isLiveQuestionScreen() {
-    const quizBox = document.getElementById('quizEngineBox');
-    const quizBody = document.getElementById('quiz-box');
-    const scoreCard = document.getElementById('score-card');
-    const qpPanel = document.getElementById('qp-panel');
-    const qpOverlay = document.getElementById('qp-overlay');
-    const aiSheet = document.getElementById('ai-bottom-sheet');
-    if (!quizBox || getComputedStyle(quizBox).display === 'none') return false;
-    if (!quizBody || getComputedStyle(quizBody).display === 'none') return false;
-    if (scoreCard && getComputedStyle(scoreCard).display !== 'none') return false;
-    if (qpPanel?.classList.contains('active') || qpOverlay?.classList.contains('active')) return false;
-    // AI panel itself is allowed to remain open while the language state is active,
-    // but the switch button is hidden there. Translation still applies only to bot text.
-    return true;
-  }
-
-  function setQuizTranslationScope() {
-    // Never allow translation to operate on non-test pages.
-    if (!isLiveQuestionScreen()) {
-      const all = document.querySelectorAll('#quizEngineBox, #ai-bottom-sheet, #ai-floating-btn, #ai-overlay, #langSwitchBtn');
-      all.forEach(el => {
-        el.classList.add('notranslate');
-        el.setAttribute('translate','no');
-      });
-      return;
-    }
-
-    const quizEngine = document.getElementById('quizEngineBox');
-    if (!quizEngine) return;
-
-    // First, make the complete quiz UI non-translatable.
-    quizEngine.querySelectorAll('*').forEach(el => {
-      el.classList.add('notranslate');
-      el.setAttribute('translate','no');
-    });
-
-    // Only these three quiz targets may be translated.
-    ['q-text','options','feedback'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.classList.remove('notranslate');
-      el.setAttribute('translate','yes');
-      el.querySelectorAll('*').forEach(child => {
-        child.classList.remove('notranslate');
-        child.setAttribute('translate','yes');
-      });
-    });
-
-    // AI: the SHELL is never translated. Only actual BOT reply text is allowed.
-    const aiSheet = document.getElementById('ai-bottom-sheet');
-    if (aiSheet) {
-      aiSheet.classList.add('notranslate');
-      aiSheet.setAttribute('translate','no');
-
-      // Keep every AI element protected first.
-      aiSheet.querySelectorAll('*').forEach(el => {
-        el.classList.add('notranslate');
-        el.setAttribute('translate','no');
-      });
-
-      // Only the AI bot's actual response text is translatable.
-      aiSheet.querySelectorAll('.ai-msg.bot').forEach(msg => {
-        // Do not translate buttons, images, model tag, quiz controls, etc.
-        msg.querySelectorAll('.ai-msg-actions, .ai-msg-actions *, .ai-msg-img, .ai-quiz-card-msg button, .ai-quiz-card-msg button *, .exam-tag-badge').forEach(el => {
-          el.classList.add('notranslate');
-          el.setAttribute('translate','no');
-        });
-
-        msg.querySelectorAll('[data-original-ai-html]').forEach(textEl => {
-          // Only genuine AI reply text nodes are enabled.
-          textEl.classList.remove('notranslate');
-          textEl.setAttribute('translate','yes');
-          textEl.querySelectorAll('*').forEach(child => {
-            child.classList.remove('notranslate');
-            child.setAttribute('translate','yes');
-          });
-        });
-      });
-    }
-
-    // Language switch + AI launcher/overlay are never translated.
-    ['ai-floating-btn','ai-overlay','langSwitchBtn'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.classList.add('notranslate');
-      el.setAttribute('translate','no');
-    });
-  }
-
-  function setQuizOriginalLanguageMode(isOriginal) {
-    setQuizTranslationScope();
-    ['q-text','options','feedback'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (isOriginal) {
-        el.classList.add('notranslate');
-        el.setAttribute('translate','no');
-      } else {
-        el.classList.remove('notranslate');
-        el.setAttribute('translate','yes');
-      }
-    });
-    // AI reply text follows the same language state, but its shell/controls do not.
-    const aiChatBody = document.getElementById('aiChatBody');
-    if (aiChatBody && isLiveQuestionScreen()) {
-      if (isOriginal) {
-        aiChatBody.querySelectorAll('[data-original-ai-html]').forEach(el => {
-          try {
-            el.innerHTML = el.getAttribute('data-original-ai-html') || el.innerHTML;
-          } catch(e) {}
-        });
-      }
-      setQuizTranslationScope();
-    }
-  }
-
-  // Fast re-scan for newly inserted dynamic content.
-  // Do NOT reset Google Translate to '' here: that adds a visible translation
-  // round-trip and is the main source of the Hindi -> English flash/delay.
-  // Keep the existing English state and simply poke the active translator.
-  async function forceTranslateQuizTargets() {
-    if (!isLiveQuestionScreen() || appLang !== 'en' || langSwitchBusy) return;
-    setQuizTranslationScope();
-    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
-    if (!combo) return;
-
-    combo.value = 'en';
-    combo.dispatchEvent(new Event('change', { bubbles: true }));
-    await new Promise(r => setTimeout(r, 120));
-  }
-
-  // Answer-click optimization: translate ONLY the newly inserted explanation.
-  // Question and options are deliberately kept outside Google's translation pass
-  // so they cannot flash back to Hindi while the explanation is being translated.
-  async function forceTranslateExplanationOnly() {
-    if (!isLiveQuestionScreen() || appLang !== 'en' || langSwitchBusy) return;
-
-    const qText = document.getElementById('q-text');
-    const options = document.getElementById('options');
-    const feedback = document.getElementById('feedback');
-    const combo = document.querySelector('#google_translate_element select.goog-te-combo');
-    if (!feedback || !combo) return;
-
-    // Preserve the already-English question/options exactly as they are.
-    // Google Translate's language-change event is global, so we protect these
-    // two blocks and restore their English DOM immediately after the event.
-    const keepEnglish = [qText, options].map(el => el ? ({
-      el,
-      html: el.innerHTML,
-      text: el.textContent
-    }) : null).filter(Boolean);
-
-    keepEnglish.forEach(({el}) => {
-      el.classList.add('notranslate');
-      el.setAttribute('translate', 'no');
-      el.querySelectorAll('*').forEach(child => {
-        child.classList.add('notranslate');
-        child.setAttribute('translate', 'no');
-      });
-    });
-
-    // Only explanation is eligible for translation.
-    feedback.classList.remove('notranslate');
-    feedback.setAttribute('translate', 'yes');
-    feedback.querySelectorAll('*').forEach(child => {
-      child.classList.remove('notranslate');
-      child.setAttribute('translate', 'yes');
-    });
-
-    // Do not reset to Hindi or run a second translation cycle. Keep the active
-    // English state and kick Google's existing translator once.
-    combo.value = 'en';
-    combo.dispatchEvent(new Event('change', { bubbles: true }));
-
-    // Restore question/options in the same JavaScript turn, before the browser
-    // can paint a Hindi intermediate frame. Explanation is left for Google.
-    keepEnglish.forEach(({el, html}) => {
-      el.innerHTML = html;
-      el.classList.add('notranslate');
-      el.setAttribute('translate', 'no');
-      el.querySelectorAll('*').forEach(child => {
-        child.classList.add('notranslate');
-        child.setAttribute('translate', 'no');
-      });
-    });
-
-    await new Promise(r => setTimeout(r, 100));
-  }
+  // Legacy no-ops: these used to drive Google's DOM translator. Bilingual
+  // data is now rendered straight from `data` via T(), so no DOM-scanning is
+  // needed — kept as harmless no-ops because other parts of the file still
+  // call them defensively.
+  function clearGoogleTranslationCookie() {}
+  function setQuizTranslationScope() {}
+  function setQuizOriginalLanguageMode() {}
+  function forceTranslateQuizTargets() {}
+  function forceTranslateExplanationOnly() {}
 
   async function toggleAppLanguage() {
     if (!isLiveQuestionScreen() || langSwitchBusy) return;
     langSwitchBusy = true;
-    const token = ++langSwitchToken;
+    langSwitchToken++;
     const btn = document.getElementById('langSwitchBtn');
     if (btn) btn.style.pointerEvents = 'none';
-
-    // Language switching must never reset or re-scan an already-open AI chat.
     suppressAIRefreshDuringLanguageSwitch = true;
-
     try {
-      if (appLang === 'hi') {
-        setQuizOriginalLanguageMode(false);
-        await setGoogleTranslateLanguage('en');
-        if (token !== langSwitchToken) return;
-        appLang = 'en';
-      } else {
-        // Do not call Google's empty-string restore. Rebuild only the target
-        // question/option/explanation DOM from the original quiz data.
-        clearGoogleTranslationCookie();
-        appLang = 'hi';
-        setQuizOriginalLanguageMode(true);
-
-        if (typeof showQ === 'function' && data && data.length) {
-          showQ();
-          setQuizOriginalLanguageMode(true);
-        }
-      }
+      appLang = (appLang === 'hi') ? 'en' : 'hi';
+      if (typeof showQ === 'function' && data && data.length) showQ();
       updateLangIconState();
     } finally {
       suppressAIRefreshDuringLanguageSwitch = false;
       langSwitchBusy = false;
-      if (btn) btn.style.pointerEvents = 'auto';
       if (typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
-      if (typeof killGoogleUI === 'function') killGoogleUI();
+      updateLangButtonVisibility();
     }
   }
 
@@ -2352,8 +2079,14 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     }
   }
 </script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- ===== end Google Translate block ===== -->
+<div id="langSwitchBtn" class="quiz-header-lang-btn" onclick="toggleAppLanguage()" aria-label="Language">
+  <div class="quiz-header-lang-inner">
+    <span id="langHalfEn">E</span>
+    <span class="quiz-header-lang-divider"></span>
+    <span id="langHalfHi">अ</span>
+  </div>
+</div>
+<!-- ===== end bilingual language switch ===== -->
 
 <div id="streakPopup"><div id="streakCard"><div id="streakTitle" style="font-size:16px"></div><div id="streakSub" style="font-size:11px; opacity:0.9; margin-top:2px;">Keep Going!</div></div></div>
 
@@ -3583,23 +3316,11 @@ async function loadQuizData(quizPath) {
     ORIGINAL_DATA=quizQuestions.slice();
 
     // Every newly opened test MUST start fresh in the original Hindi language.
-    // Never carry the previous test's English translation state into another test.
-    // First stop Google Translate, then render the new question so Google cannot
-    // immediately translate the newly opened test before the user taps E.
+    // Never carry the previous test's English toggle state into another test.
     appLang = 'hi';
     langSwitchBusy = true;
     langSwitchToken++;
     suppressAIRefreshDuringLanguageSwitch = true;
-    clearGoogleTranslationCookie();
-    setQuizOriginalLanguageMode(true);
-    const langComboOnOpen = document.querySelector('#google_translate_element select.goog-te-combo');
-    if (langComboOnOpen) {
-      langComboOnOpen.value = '';
-      langComboOnOpen.dispatchEvent(new Event('change', { bubbles: true }));
-      await new Promise(r => setTimeout(r, 450));
-    }
-    // Clear any stale Google-translated markup/classes from the previous test.
-    setQuizOriginalLanguageMode(true);
     updateLangIconState();
     ORIGINAL_TOTAL=data.length;
     currentQ=0; score=0; currentStreak=0; maxStreak=0; elapsed=0;
@@ -3799,28 +3520,39 @@ const POSITION_DEPENDENT_REGEX = new RegExp(
   'i'
 );
 
+// A quiz item may store options as a single `o` array (old single-language
+// files) or as bilingual `o_hi` / `o_en` arrays (new bilingual files). This
+// returns the keys of every options array actually present on the item, so
+// shuffling can keep every language variant in sync with the same order.
+function optionArrayKeys(item) {
+  return ['o_hi', 'o_en', 'o'].filter((k) => Array.isArray(item[k]));
+}
+
 function isPositionDependentQuestion(item) {
-  if (!item || !Array.isArray(item.o)) return false;
-  return item.o.some((opt) => {
+  if (!item) return false;
+  const keys = optionArrayKeys(item);
+  return keys.some((key) => item[key].some((opt) => {
     const stripped = String(opt).replace(OPTION_LABEL_REGEX, '');
     return POSITION_DEPENDENT_REGEX.test(stripped);
-  });
+  }));
 }
 
 // Shuffles the option order for ONE question in place (Fisher-Yates) and
 // updates item.a so it still points at the correct option after shuffling.
 // Nothing about correctness changes — only the on-screen position of each
 // option moves, and the (A)/(B)/(C)/(D) label text is regenerated to match
-// the new positions.
+// the new positions. When the item has bilingual option arrays (o_hi/o_en),
+// BOTH are shuffled with the exact same order so item.a stays correct for
+// whichever language is currently displayed.
 // Exception: if any option text references other options by position/letter
 // (e.g. "All of the above", "Only B", "उपरोक्त सभी"), shuffling is skipped
 // entirely so the option order (and its meaning) stays intact.
 function shuffleQuestionOptions(item) {
-  if (!item || !Array.isArray(item.o) || item.o.length < 2) return;
+  const keys = optionArrayKeys(item);
+  if (!item || !keys.length || item[keys[0]].length < 2) return;
   if (isPositionDependentQuestion(item)) return;
 
-  const stripped = item.o.map((opt) => opt.replace(OPTION_LABEL_REGEX, ''));
-  const n = stripped.length;
+  const n = item[keys[0]].length;
 
   // order[i] = index (in the ORIGINAL array) of the option that should now sit at position i
   const order = Array.from({ length: n }, (_, i) => i);
@@ -3830,7 +3562,10 @@ function shuffleQuestionOptions(item) {
   }
 
   const labels = ['(A) ', '(B) ', '(C) ', '(D) '];
-  item.o = order.map((origIdx, newPos) => (labels[newPos] || '') + stripped[origIdx]);
+  keys.forEach((key) => {
+    const stripped = item[key].map((opt) => String(opt).replace(OPTION_LABEL_REGEX, ''));
+    item[key] = order.map((origIdx, newPos) => (labels[newPos] || '') + stripped[origIdx]);
+  });
 
   // Find where the originally-correct option (item.a) ended up.
   item.a = order.indexOf(item.a);
@@ -3924,32 +3659,35 @@ let answerCorrect=[];
 
 function showQ() {
 if(data.length === 0) return;
-document.getElementById('q-text').innerHTML = formatContent(data[currentQ].q);
+const item = data[currentQ];
+const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>व्याख्या:</b> ";
+document.getElementById('q-text').innerHTML = formatContent(T(item, 'q'));
 const tagBox=document.getElementById('exam-tag');
-if(data[currentQ].tag){tagBox.innerHTML=formatContent(data[currentQ].tag);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
+const tagText = T(item, 'tag');
+if(tagText){tagBox.innerHTML=formatContent(tagText);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
 let oBox = document.getElementById('options');
 oBox.innerHTML = "";
 document.getElementById('feedback').style.display = "none";
 const prevSel=selectedAnswers[currentQ];
-data[currentQ].o.forEach((opt, idx) => {
+T(item, 'o').forEach((opt, idx) => {
 let btn = document.createElement("button");
 btn.innerHTML = formatContent(opt);
 btn.onclick = () => {
 if(isPaused) return;
 let btns = oBox.getElementsByTagName("button");
 for(let b of btns) b.disabled = true;
-if(idx === data[currentQ].a) {
+if(idx === item.a) {
 btn.style.borderColor = "var(--success)";
 btn.style.background = "var(--success-light)";
 if(!answered[currentQ]) score += 1;
 } else {
 btn.style.borderColor = "var(--danger)";
 btn.style.background = "var(--danger-light)";
-btns[data[currentQ].a].style.borderColor = "var(--success)";
-btns[data[currentQ].a].style.background = "var(--success-light)";
+btns[item.a].style.borderColor = "var(--success)";
+btns[item.a].style.background = "var(--success-light)";
 if(!answered[currentQ]) score -= (1/3);
 }
-if(idx === data[currentQ].a){
+if(idx === item.a){
 currentStreak++;
 if(currentStreak>maxStreak) maxStreak=currentStreak;
 let msg="";
@@ -3978,55 +3716,30 @@ currentStreak===50?'Super Legend!':
 currentStreak=0;
 }
 selectedAnswers[currentQ]=idx;
-answerCorrect[currentQ]=(idx===data[currentQ].a);
+answerCorrect[currentQ]=(idx===item.a);
 answered[currentQ] = true;
 if(typeof updateQBadge==='function') updateQBadge();
 timerRunning=false;
-document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
+document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
 document.getElementById('feedback').style.display = "block";
-
-// Explanation is inserted after the original Google Translate scan. If the
-// quiz is currently in English mode, immediately re-scan the new explanation.
-if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
-  setTimeout(() => forceTranslateExplanationOnly(), 0);
-}
 };
 oBox.appendChild(btn);
 });
 if(prevSel!==null && prevSel!==undefined){
  const btns=oBox.getElementsByTagName("button");
  for(let b of btns) b.disabled=true;
- btns[data[currentQ].a].style.borderColor="var(--success)";
- btns[data[currentQ].a].style.background="var(--success-light)";
- if(prevSel!==data[currentQ].a){
+ btns[item.a].style.borderColor="var(--success)";
+ btns[item.a].style.background="var(--success-light)";
+ if(prevSel!==item.a){
    btns[prevSel].style.borderColor="var(--danger)";
    btns[prevSel].style.background="var(--danger-light)";
  }
- document.getElementById("feedback").innerHTML="<b>Explanation / व्याख्या:</b> "+formatContent(data[currentQ].e);
+ document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
  document.getElementById('feedback').style.display="block";
- if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
-   setTimeout(() => forceTranslateExplanationOnly(), 0);
- }
-}
-
-// Hindi mode does not need Google Translate's DOM translation scope.
-// Avoid unnecessary translate/attribute mutations on every question change.
-if(typeof setQuizTranslationScope === 'function' && appLang === 'en'){
-  setQuizTranslationScope();
 }
 
 if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageSwitch){
   onQuestionChangeAI();
-}
-
-// When Next/Back creates a fresh question DOM, Google Translate must scan
-// the new question/options again while English mode is active.
-if (appLang === 'en' && !langSwitchBusy) {
-  setTimeout(() => {
-    if (appLang === 'en' && !langSwitchBusy && typeof forceTranslateQuizTargets === 'function') {
-      forceTranslateQuizTargets();
-    }
-  }, 60);
 }
 
 // iOS/WebKit repaint safeguard after dynamically rebuilding the question DOM.
@@ -4138,14 +3851,8 @@ if(langBtnOnResult){
   langBtnOnResult.style.display='none';
   langBtnOnResult.style.pointerEvents='none';
 }
-// Result page is never translatable. Reset translator state after leaving the live test.
+// Result page always resets back to Hindi for the next test.
 appLang = 'hi';
-clearGoogleTranslationCookie();
-const resultTranslateCombo = document.querySelector('#google_translate_element select.goog-te-combo');
-if(resultTranslateCombo){
-  resultTranslateCombo.value = '';
-  resultTranslateCombo.dispatchEvent(new Event('change', { bubbles:true }));
-}
 updateAIButtonVisibility();
 
 /* Leaderboard API integration (added) - uses only existing finalScore, avgSec, elapsed, currentQuizPath */
@@ -4825,25 +4532,26 @@ function resetAIChat() {
 function getCurrentQuestionContext() {
   if (!data || !data[currentQ]) return null;
   const item = data[currentQ];
+  const opts = T(item, 'o') || [];
 
   let selectedOptText = "Not Selected Yet";
   if (selectedAnswers[currentQ] !== null && selectedAnswers[currentQ] !== undefined) {
-    selectedOptText = item.o[selectedAnswers[currentQ]] || "Selected Option Index: " + selectedAnswers[currentQ];
+    selectedOptText = opts[selectedAnswers[currentQ]] || "Selected Option Index: " + selectedAnswers[currentQ];
   }
 
   let correctOptText = "Unknown";
-  if (item.a !== undefined && item.o && item.o[item.a]) {
-    correctOptText = item.o[item.a];
+  if (item.a !== undefined && opts && opts[item.a]) {
+    correctOptText = opts[item.a];
   }
 
   return {
     questionNumber: currentQ + 1,
     totalQuestions: data.length,
-    questionText: item.q || "",
-    options: item.o || [],
-    examTag: item.tag || "",
+    questionText: T(item, 'q') || "",
+    options: opts,
+    examTag: T(item, 'tag') || "",
     correctAnswer: correctOptText,
-    explanation: item.e || "",
+    explanation: T(item, 'e') || "",
     userSelected: selectedOptText
   };
 }
@@ -4853,11 +4561,15 @@ function autoScanAndExplain() {
   const qContext = getCurrentQuestionContext();
   if (!qContext) return;
 
+  const langRule = (appLang === 'en')
+    ? "1. Output in clear, simple ENGLISH — do not switch to Hindi. Technical terms (Ratio, Percentage, Unitary Method) stay in English as usual."
+    : "1. Output SHUDH HINDI (Devanagari) mein ho — koi English label nahi (jaise \"Sahi Uttar\" nahi, \"सही उत्तर\" likho). Sirf technical terms (Ratio, Percentage, Unitary Method) English me rakh sakte ho.";
+
   const systemInstruction = `
 Role: Aap ek Expert SSC/RRB Exam Teacher hain, 10+ saal coaching experience. Style: friendly, motivating, to-the-point — real classroom teacher jaisa.
 
 Rules:
-1. Output SHUDH HINDI (Devanagari) mein ho — koi English label nahi (jaise "Sahi Uttar" nahi, "सही उत्तर" likho). Sirf technical terms (Ratio, Percentage, Unitary Method) English me rakh sakte ho.
+${langRule}
 2. Subjects: Math, Formulas, Tricks, Reasoning, GK, English.
 3. Concise/precise — short explanation by default, detail sirf tabhi jab maanga jaaye.
 4. Reference Explanation sirf rough internal note hai — copy/paraphrase mat karo. Khud independently solve karo, cross-check karo, apni verified reasoning trust karo, discrepancy ho to briefly mention karo. Poora explanation apne words me likho.
@@ -4865,8 +4577,8 @@ Rules:
 6. SIRF EK solution do, dono ek saath mat dikhao. "Vistrit/Basic Method" sirf explicitly maange jaane par. Response crisp rakho, extra verification steps mat dikhao.
 7. Solution ke end mein 1-2 lines: a) Trick ka naam (jaise "Ye Unitary Method Trick hai") b) General Formula/Shortcut (agar possible ho) is TYPE ke sabhi similar questions ke liye.
 8. GK/Current Affairs/English/Science/History/Polity: Expert GS Teacher ki tarah direct, factual, exam-focused jawab do. Core answer chhota (Rule 3). OPTIONAL bonus (sirf jo genuinely useful ho, max 1 line each, sab ek saath mat thopo): a) Mnemonic (agar naturally bane) b) 1 closely-related fact c) Confusing options ka fark (agar options similar ho) d) Current affairs caution (agar time-sensitive ho) e) English grammar rule ka naam.
-9. Har answer ke SABSE UPAR question+options Hindi mein repeat karo:
-   **प्रश्न:** [question]
+9. Har answer ke SABSE UPAR question+options ${appLang === 'en' ? 'English' : 'Hindi'} mein repeat karo:
+   **${appLang === 'en' ? 'Question:' : 'प्रश्न:'}** [question]
    (A) [opt1]  (B) [opt2]  (C) [opt3]  (D) [opt4]
    Uske turant baad solution shuru karo. Ye SABHI subjects pe apply hoga.
 
@@ -4879,8 +4591,12 @@ Current Question:
 - User Choice: ${qContext.userSelected}
 `;
 
+  const taskLine = (appLang === 'en')
+    ? "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation for this question in English. Do not just restate the reference explanation."
+    : "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation (संक्षिप्त व्याख्या) for this question in Hindi. Do not just restate the reference explanation.";
+
   aiChatHistory = [
-    { role: "user", parts: [{ text: systemInstruction + "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation (संक्षिप्त व्याख्या) for this question in Hindi. Do not just restate the reference explanation." }] }
+    { role: "user", parts: [{ text: systemInstruction + taskLine }] }
   ];
 
   appendAIMessage("bot", "🔍 **Question scanned!** Answer is being prepared...");
