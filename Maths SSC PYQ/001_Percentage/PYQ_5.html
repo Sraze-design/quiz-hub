@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q161. यदि किसी वस्तु के मूल्य में 36% की वृद्धि की जाती है, तो उसके उपभोग में कितने प्रतिशत (दशमलव के 1 स्थान तक सन्निकटित) की कमी करनी होगी ताकि वस्तु का व्यय समान रहे?",
+    q_en: "Q161. If the price of an article is increased by 36%, by what percentage (rounded off to 1 decimal place) should its consumption be reduced so that the expenditure on the article remains the same?",
+    tag: "SSC CHSL 11/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 32%",
+      "(b) 29.5%",
+      "(c) 36%",
+      "(d) 26.5%"
+    ],
+    o_en: [
+      "(a) 32%",
+      "(b) 29.5%",
+      "(c) 36%",
+      "(d) 26.5%"
+    ],
+    a: 3,
+    e_hi: "माना वस्तु का प्रारंभिक मूल्य = 100<br>नया मूल्य = 100 + 36 = 136<br>व्यय समान रखने के लिए उपभोग में कमी = 36/136 × 100<br>= 26.47%<br>≈ 26.5%<br>अतः सही उत्तर (d) 26.5% है।",
+    e_en: "Let initial price = 100<br>New price = 100 + 36 = 136<br>Reduction in consumption to keep expenditure same = 36/136 × 100<br>= 26.47%<br>≈ 26.5%<br>Hence, the correct answer is (d) 26.5%."
+  },
+  {
+    q_hi: "Q162. प्रति किलोग्राम टमाटर के मूल्य में 300% की वृद्धि होती है, तो एक गृहिणी टमाटर का उपभोग 70% कम कर देती है। इस प्रकार टमाटर पर उसका व्यय कितने प्रतिशत बढ़ा या घटा है?",
+    q_en: "Q162. The price of tomatoes per kg increases by 300%, then a housewife reduces the consumption of tomatoes by 70%. By what percentage has her expenditure on tomatoes increased or decreased?",
+    tag: "SSC CGL 19/09/2024 (Shift-01)",
+    o_hi: [
+      "(a) 30% कमी",
+      "(b) 20% कमी",
+      "(c) 30% वृद्धि",
+      "(d) 20% वृद्धि"
+    ],
+    o_en: [
+      "(a) 30% decrease",
+      "(b) 20% decrease",
+      "(c) 30% increase",
+      "(d) 20% increase"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक मूल्य = 100<br>300% वृद्धि के बाद नया मूल्य = 400<br>माना प्रारंभिक उपभोग = 100<br>70% कमी के बाद नया उपभोग = 30<br>प्रारंभिक व्यय = 100 × 100 = 10000<br>नया व्यय = 400 × 30 = 12000<br>व्यय में वृद्धि = 2000/10000 × 100<br>= 20%<br>अतः सही उत्तर (d) 20% वृद्धि है।",
+    e_en: "Let initial price = 100<br>New price after 300% increase = 400<br>Let initial consumption = 100<br>New consumption after 70% decrease = 30<br>Initial expenditure = 100 × 100 = 10000<br>New expenditure = 400 × 30 = 12000<br>Increase in expenditure = 2000/10000 × 100<br>= 20%<br>Hence, the correct answer is (d) 20% increase."
+  },
+  {
+    q_hi: "Q163. चावल के मूल्य में 25% की वृद्धि की जाती है लेकिन इसकी खपत में 30% की कमी हो जाती है। धन के व्यय में प्रतिशत वृद्धि या कमी ज्ञात कीजिए।",
+    q_en: "Q163. The price of rice increases by 25% but its consumption decreases by 30%. Find the percentage increase or decrease in the expenditure.",
+    tag: "SSC CHSL 04/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 12\\frac{1}{2}% वृद्धि",
+      "(b) 13\\frac{1}{3}% वृद्धि",
+      "(c) 12\\frac{1}{2}% कमी",
+      "(d) 13\\frac{1}{3}% कमी"
+    ],
+    o_en: [
+      "(a) 12\\frac{1}{2}% increase",
+      "(b) 13\\frac{1}{3}% increase",
+      "(c) 12\\frac{1}{2}% decrease",
+      "(d) 13\\frac{1}{3}% decrease"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक मूल्य = 100<br>माना प्रारंभिक खपत = 100<br>नया मूल्य = 125<br>नई खपत = 70<br>प्रारंभिक व्यय = 100 × 100 = 10000<br>नया व्यय = 125 × 70 = 8750<br>व्यय में कमी = 1250/10000 × 100<br>= 12.5%<br>अतः सही उत्तर (c) 12\\frac{1}{2}% कमी है।",
+    e_en: "Let initial price = 100<br>Let initial consumption = 100<br>New price = 125<br>New consumption = 70<br>Initial expenditure = 100 × 100 = 10000<br>New expenditure = 125 × 70 = 8750<br>Decrease in expenditure = 1250/10000 × 100<br>= 12.5%<br>Hence, the correct answer is (c) 12\\frac{1}{2}% decrease."
+  },
+  {
+    q_hi: "Q164. जब एक वस्तु की कीमत में 23% की वृद्धि हुई, तो एक परिवार ने इसकी खपत को इस प्रकार कम कर दिया कि उस पर होने वाला व्यय केवल 5% अधिक था। परिवार ने वस्तु की खपत में कितने प्रतिशत की कमी की है (एक दशमलव स्थान तक सही)?",
+    q_en: "Q164. When the price of an item increased by 23%, a family reduced its consumption in such a way that the expenditure on it was only 5% more. By what percentage did the family reduce the consumption of the item (correct to one decimal place)?",
+    tag: "SSC PHASE-IX 2022",
+    o_hi: [
+      "(a) 14.20%",
+      "(b) 15.8%",
+      "(c) 14.6%",
+      "(d) 15.2%"
+    ],
+    o_en: [
+      "(a) 14.20%",
+      "(b) 15.8%",
+      "(c) 14.6%",
+      "(d) 15.2%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक मूल्य = 100<br>माना प्रारंभिक खपत = 100<br>प्रारंभिक व्यय = 10000<br>नया मूल्य = 123<br>नया व्यय = 10500<br>नई खपत = 10500/123<br>= 85.37<br>खपत में कमी = 100 - 85.37<br>= 14.63%<br>≈ 14.6%<br>अतः सही उत्तर (c) 14.6% है।",
+    e_en: "Let initial price = 100<br>Let initial consumption = 100<br>Initial expenditure = 10000<br>New price = 123<br>New expenditure = 10500<br>New consumption = 10500/123<br>= 85.37<br>Reduction in consumption = 100 - 85.37<br>= 14.63%<br>≈ 14.6%<br>Hence, the correct answer is (c) 14.6%."
+  },
+  {
+    q_hi: "Q165. डीजल की कीमत में 26% की वृद्धि होती है। एक व्यक्ति अपने डीजल के व्यय में केवल 15% की वृद्धि करना चाहता है। उसे अपनी खपत को कितने प्रतिशत (दशमलव के एक स्थान तक शुद्ध) कम करना होगा?",
+    q_en: "Q165. The price of diesel increases by 26%. A person wants to increase his diesel expenditure by only 15%. By what percentage (correct to one decimal place) should he reduce his consumption?",
+    tag: "SSC CPO 25/11/2020 (Shift-01)",
+    o_hi: [
+      "(a) 7.2%",
+      "(b) 6.5%",
+      "(c) 8.7%",
+      "(d) 9.5%"
+    ],
+    o_en: [
+      "(a) 7.2%",
+      "(b) 6.5%",
+      "(c) 8.7%",
+      "(d) 9.5%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक मूल्य = 100<br>माना प्रारंभिक खपत = 100<br>नई कीमत = 126<br>नया व्यय = 11500<br>नई खपत = 11500/126<br>= 91.27<br>खपत में कमी = 100 - 91.27<br>= 8.73%<br>≈ 8.7%<br>अतः सही उत्तर (c) 8.7% है।",
+    e_en: "Let initial price = 100<br>Let initial consumption = 100<br>New price = 126<br>New expenditure = 11500<br>New consumption = 11500/126<br>= 91.27<br>Reduction in consumption = 100 - 91.27<br>= 8.73%<br>≈ 8.7%<br>Hence, the correct answer is (c) 8.7%."
+  },
+  {
+    q_hi: "Q166. एक वस्तु के मूल्य में 25% की कमी की जाती है और इसलिए व्यय को समान रखने के लिए एक परिवार ने उस वस्तु की खपत में 20 किग्रा की वृद्धि की। परिवार की पहले खपत कितनी थी?",
+    q_en: "Q166. The price of an article is reduced by 25% and therefore, to keep the expenditure same, a family increased the consumption of that article by 20 kg. What was the family's initial consumption?",
+    tag: "SSC CHSL 13/03/2023 (Shift-01)",
+    o_hi: [
+      "(a) 60 किग्रा",
+      "(b) 55 किग्रा",
+      "(c) 75 किग्रा",
+      "(d) 45 किग्रा"
+    ],
+    o_en: [
+      "(a) 60 kg",
+      "(b) 55 kg",
+      "(c) 75 kg",
+      "(d) 45 kg"
+    ],
+    a: 0,
+    e_hi: "माना पहले खपत = x किग्रा<br>मूल्य में 25% कमी के बाद नया मूल्य = 75%<br>व्यय समान है।<br>75/100 × (x + 20) = x<br>75x + 1500 = 100x<br>25x = 1500<br>x = 60 किग्रा<br>अतः सही उत्तर (a) 60 किग्रा है।",
+    e_en: "Let initial consumption = x kg<br>New price after 25% reduction = 75%<br>Expenditure is same.<br>75/100 × (x + 20) = x<br>75x + 1500 = 100x<br>25x = 1500<br>x = 60 kg<br>Hence, the correct answer is (a) 60 kg."
+  },
+  {
+    q_hi: "Q167. यदि चावल की कीमत में 24% की कमी होती है, तो इससे आलोक ₹2,500 में 10 किग्रा चावल अधिक खरीद पाता है। चावल की प्रति किग्रा घटी हुई दर क्या है?",
+    q_en: "Q167. If the price of rice is reduced by 24%, it enables Alok to buy 10 kg more rice for ₹2,500. What is the reduced rate of rice per kg?",
+    tag: "SSC CHSL 08/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) ₹25",
+      "(b) ₹50",
+      "(c) ₹60",
+      "(d) ₹75"
+    ],
+    o_en: [
+      "(a) ₹25",
+      "(b) ₹50",
+      "(c) ₹60",
+      "(d) ₹75"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक कीमत = ₹x प्रति किग्रा<br>नई कीमत = 76x/100<br>₹2500 में 10 किग्रा अधिक चावल मिलता है।<br>2500/(0.76x) - 2500/x = 10<br>x = 78.95<br>नई कीमत = 78.95 × 76/100<br>≈ ₹60<br>अतः सही उत्तर (c) ₹60 है।",
+    e_en: "Let initial price = ₹x per kg<br>New price = 76x/100<br>Gets 10 kg more rice for ₹2500.<br>2500/(0.76x) - 2500/x = 10<br>x = 78.95<br>New price = 78.95 × 76/100<br>≈ ₹60<br>Hence, the correct answer is (c) ₹60."
+  },
+  {
+    q_hi: "Q168. एक वाशिंग पाउडर की कीमत में 15% की कमी एक खरीदार को ₹1,275 में 5 किग्रा अधिक वाशिंग पाउडर प्राप्त करने में सक्षम बनाती है। वाशिंग पाउडर का मूल्य प्रति किग्रा ज्ञात करें।",
+    q_en: "Q168. A reduction of 15% in the price of a washing powder enables a buyer to get 5 kg more washing powder for ₹1,275. Find the original price of washing powder per kg.",
+    tag: "SSC Phase-XI 30/06/2023 (Shift-03)",
+    o_hi: [
+      "(a) ₹40",
+      "(b) ₹35",
+      "(c) ₹45",
+      "(d) ₹50"
+    ],
+    o_en: [
+      "(a) ₹40",
+      "(b) ₹35",
+      "(c) ₹45",
+      "(d) ₹50"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक मूल्य = ₹x प्रति किग्रा<br>नई कीमत = 85x/100<br>₹1275 में 5 किग्रा अधिक पाउडर मिलता है।<br>1275/(0.85x) - 1275/x = 5<br>x = ₹45<br>अतः सही उत्तर (c) ₹45 है।",
+    e_en: "Let initial price = ₹x per kg<br>New price = 85x/100<br>Gets 5 kg more powder for ₹1275.<br>1275/(0.85x) - 1275/x = 5<br>x = ₹45<br>Hence, the correct answer is (c) ₹45."
+  },
+  {
+    q_hi: "Q169. चीनी की कीमत में 20% की कमी से एक व्यक्ति ₹200 में 5 किग्रा अधिक चीनी खरीद सकता है। प्रति किग्रा मूल कीमत क्या है?",
+    q_en: "Q169. A reduction of 20% in the price of sugar enables a person to buy 5 kg more sugar for ₹200. What is the original price per kg?",
+    tag: "SSC CGL 26/09/2025 (Shift-02)",
+    o_hi: [
+      "(a) ₹20",
+      "(b) ₹10",
+      "(c) ₹5",
+      "(d) ₹15"
+    ],
+    o_en: [
+      "(a) ₹20",
+      "(b) ₹10",
+      "(c) ₹5",
+      "(d) ₹15"
+    ],
+    a: 1,
+    e_hi: "माना मूल कीमत = ₹x प्रति किग्रा<br>नई कीमत = 80x/100<br>₹200 में मात्रा का अंतर = 5 किग्रा<br>200/(0.8x) - 200/x = 5<br>x = ₹10<br>अतः सही उत्तर (b) ₹10 है।",
+    e_en: "Let original price = ₹x per kg<br>New price = 80x/100<br>Difference in quantity for ₹200 = 5 kg<br>200/(0.8x) - 200/x = 5<br>x = ₹10<br>Hence, the correct answer is (b) ₹10."
+  },
+  {
+    q_hi: "Q170. यदि एक नोटबुक की कीमत 25% कम हो जाती है, तो एक आदमी ₹200 में 5 और नोटबुक खरीद सकता है। प्रत्येक नोटबुक की नई कीमत (₹ में) क्या है?",
+    q_en: "Q170. If the price of a notebook decreases by 25%, a man can buy 5 more notebooks for ₹200. What is the new price (in ₹) of each notebook?",
+    tag: "SSC CHSL 14/11/2025 (Shift-03)",
+    o_hi: [
+      "(a) 20",
+      "(b) 30",
+      "(c) 10",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 20",
+      "(b) 30",
+      "(c) 10",
+      "(d) 15"
+    ],
+    a: 2,
+    e_hi: "माना मूल कीमत = ₹x<br>नई कीमत = 75x/100<br>₹200 में 5 नोटबुक अधिक मिलती हैं।<br>200/(0.75x) - 200/x = 5<br>x = 13\\frac{1}{3}<br>नई कीमत = 13\\frac{1}{3} × 75/100<br>= ₹10<br>अतः सही उत्तर (c) ₹10 है।",
+    e_en: "Let original price = ₹x<br>New price = 75x/100<br>Gets 5 more notebooks for ₹200.<br>200/(0.75x) - 200/x = 5<br>x = 13\\frac{1}{3}<br>New price = 13\\frac{1}{3} × 75/100<br>= ₹10<br>Hence, the correct answer is (c) ₹10."
+  },
+  {
+    q_hi: "Q171. आटे की कीमत में 25% की कमी से उपभोक्ता ₹360 में 3 किग्रा अतिरिक्त आटा खरीद सकता है। आटे की प्रति किग्रा शुरुआती कीमत क्या थी?",
+    q_en: "Q171. A reduction of 25% in the price of flour enables a consumer to buy 3 kg additional flour for ₹360. What was the initial price of flour per kg?",
+    tag: "SSC PHASE XIII 28/07/2025 (Shift-03)",
+    o_hi: [
+      "(a) 30",
+      "(b) 36",
+      "(c) 40",
+      "(d) 45"
+    ],
+    o_en: [
+      "(a) 30",
+      "(b) 36",
+      "(c) 40",
+      "(d) 45"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक कीमत = ₹x प्रति किग्रा<br>नई कीमत = 75x/100<br>₹360 में मात्रा का अंतर = 3 किग्रा<br>360/(0.75x) - 360/x = 3<br>x = ₹40<br>अतः सही उत्तर (c) ₹40 है।",
+    e_en: "Let initial price = ₹x per kg<br>New price = 75x/100<br>Difference in quantity for ₹360 = 3 kg<br>360/(0.75x) - 360/x = 3<br>x = ₹40<br>Hence, the correct answer is (c) ₹40."
+  },
+  {
+    q_hi: "Q172. नमक की कीमत में 15% की कमी, एक व्यक्ति को ₹272 में 2 किग्रा अधिक नमक खरीदने में सक्षम बनाती है। नमक की घटी हुई कीमत प्रति किग्रा (₹ में) कितनी है?",
+    q_en: "Q172. A reduction of 15% in the price of salt enables a person to buy 2 kg more salt for ₹272. What is the reduced price of salt per kg (in ₹)?",
+    tag: "SSC CGL 11/04/2023 (Shift-03)",
+    o_hi: [
+      "(a) 20.40",
+      "(b) 22.16",
+      "(c) 24.25",
+      "(d) 25.00"
+    ],
+    o_en: [
+      "(a) 20.40",
+      "(b) 22.16",
+      "(c) 24.25",
+      "(d) 25.00"
+    ],
+    a: 0,
+    e_hi: "माना मूल कीमत = ₹x प्रति किग्रा<br>नई कीमत = 85x/100<br>₹272 में मात्रा का अंतर = 2 किग्रा<br>272/(0.85x) - 272/x = 2<br>x = ₹24<br>नई कीमत = 24 × 85/100<br>= ₹20.40<br>अतः सही उत्तर (a) ₹20.40 है।",
+    e_en: "Let original price = ₹x per kg<br>New price = 85x/100<br>Difference in quantity for ₹272 = 2 kg<br>272/(0.85x) - 272/x = 2<br>x = ₹24<br>New price = 24 × 85/100<br>= ₹20.40<br>Hence, the correct answer is (a) ₹20.40."
+  },
+  {
+    q_hi: "Q173. केले के मूल्य में 20% की कमी होने पर ग्राहक ₹80 में 6 केले अधिक खरीद सकता है। केले के प्रति दर्जन नए मूल्य (₹ में) ज्ञात कीजिए?",
+    q_en: "Q173. A reduction of 20% in the price of bananas enables a customer to buy 6 more bananas for ₹80. Find the new price of bananas per dozen (in ₹)?",
+    tag: "SSC CGL 20/04/2022 (Shift-03)",
+    o_hi: [
+      "(a) ₹32",
+      "(b) ₹36",
+      "(c) ₹35",
+      "(d) ₹40"
+    ],
+    o_en: [
+      "(a) ₹32",
+      "(b) ₹36",
+      "(c) ₹35",
+      "(d) ₹40"
+    ],
+    a: 0,
+    e_hi: "माना केले का प्रारंभिक मूल्य = ₹x प्रति दर्जन<br>20% कमी के बाद नया मूल्य = 80x/100<br>₹80 में 6 केले अधिक मिलते हैं।<br>80/(0.8x) - 80/x = 6<br>x = ₹40<br>नया मूल्य = 40 × 80/100<br>= ₹32 प्रति दर्जन<br>अतः सही उत्तर (a) ₹32 है।",
+    e_en: "Let initial price of bananas = ₹x per dozen<br>New price after 20% reduction = 80x/100<br>Gets 6 more bananas for ₹80.<br>80/(0.8x) - 80/x = 6<br>x = ₹40<br>New price = 40 × 80/100<br>= ₹32 per dozen<br>Hence, the correct answer is (a) ₹32."
+  },
+  {
+    q_hi: "Q174. चीनी की कीमत में 20% की कमी से एक व्यक्ति ₹200 में 5 किग्रा अधिक चीनी खरीद सकता है। प्रति किग्रा मूल कीमत क्या है?",
+    q_en: "Q174. A reduction of 20% in the price of sugar enables a person to buy 5 kg more sugar for ₹200. What is the original price per kg?",
+    tag: "SSC CPO 10/12/2025 (Shift-02)",
+    o_hi: [
+      "(a) ₹20",
+      "(b) ₹10",
+      "(c) ₹5",
+      "(d) ₹15"
+    ],
+    o_en: [
+      "(a) ₹20",
+      "(b) ₹10",
+      "(c) ₹5",
+      "(d) ₹15"
+    ],
+    a: 1,
+    e_hi: "माना मूल कीमत = ₹x प्रति किग्रा<br>नई कीमत = 80x/100<br>₹200 में 5 किग्रा अधिक चीनी मिलती है।<br>200/(0.8x) - 200/x = 5<br>x = ₹10<br>अतः सही उत्तर (b) ₹10 है।",
+    e_en: "Let original price = ₹x per kg<br>New price = 80x/100<br>Gets 5 kg more sugar for ₹200.<br>200/(0.8x) - 200/x = 5<br>x = ₹10<br>Hence, the correct answer is (b) ₹10."
+  },
+  {
+    q_hi: "Q175. यदि किसी कर्मचारी का वेतन ₹72,000 है, वह जो राशि खर्च करता है वह उसकी बचत से 40% अधिक है। इसलिए, उसकी बचत (₹ में) कितनी है?",
+    q_en: "Q175. If the salary of an employee is ₹72,000, the amount he spends is 40% more than his savings. Therefore, how much is his savings (in ₹)?",
+    tag: "SSC CGL 23/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 30000",
+      "(b) 34000",
+      "(c) 32000",
+      "(d) 28000"
+    ],
+    o_en: [
+      "(a) 30000",
+      "(b) 34000",
+      "(c) 32000",
+      "(d) 28000"
+    ],
+    a: 0,
+    e_hi: "माना बचत = 100<br>व्यय = 140<br>कुल वेतन = 240<br>240 भाग = ₹72000<br>100 भाग = 72000/240 × 100<br>= ₹30000<br>अतः सही उत्तर (a) 30000 है।",
+    e_en: "Let savings = 100<br>Expenditure = 140<br>Total salary = 240<br>240 parts = ₹72000<br>100 parts = 72000/240 × 100<br>= ₹30000<br>Hence, the correct answer is (a) 30000."
+  },
+  {
+    q_hi: "Q176. X और Y की कुल बचत उनकी कुल आय की 40% है। उनका औसत व्यय ₹21,000 है। X और Y का कुल वेतन कितना है?",
+    q_en: "Q176. The total savings of X and Y is 40% of their total income. Their average expenditure is ₹21,000. What is the total salary of X and Y?",
+    tag: "SSC Phase-XI 28/06/2023 (Shift-04)",
+    o_hi: [
+      "(a) ₹55,000",
+      "(b) ₹65,000",
+      "(c) ₹60,000",
+      "(d) ₹70,000"
+    ],
+    o_en: [
+      "(a) ₹55,000",
+      "(b) ₹65,000",
+      "(c) ₹60,000",
+      "(d) ₹70,000"
+    ],
+    a: 3,
+    e_hi: "X और Y का कुल व्यय = 21000 × 2<br>= ₹42000<br>कुल बचत = कुल आय का 40%<br>अतः कुल व्यय = कुल आय का 60%<br>कुल आय = 42000/60 × 100<br>= ₹70000<br>अतः सही उत्तर (d) ₹70,000 है।",
+    e_en: "Total expenditure of X and Y = 21000 × 2<br>= ₹42000<br>Total savings = 40% of total income<br>Therefore, total expenditure = 60% of total income<br>Total income = 42000/60 × 100<br>= ₹70000<br>Hence, the correct answer is (d) ₹70,000."
+  },
+  {
+    q_hi: "Q177. रमेश अपने मासिक वेतन में से 26\\frac{2}{3}% बचाता है। खर्च 20% बढ़ जाने पर वह प्रति माह ₹4,080 की बचत कर पाता है। उसका मासिक वेतन ............ है।",
+    q_en: "Q177. Ramesh saves 26\\frac{2}{3}% of his monthly salary. When expenses increase by 20%, he is able to save ₹4,080 per month. His monthly salary is ............",
+    tag: "SSC CHSL 09/08/2021 (Shift-02)",
+    o_hi: [
+      "(a) ₹30,000",
+      "(b) ₹34,000",
+      "(c) ₹35,000",
+      "(d) ₹38,000"
+    ],
+    o_en: [
+      "(a) ₹30,000",
+      "(b) ₹34,000",
+      "(c) ₹35,000",
+      "(d) ₹38,000"
+    ],
+    a: 1,
+    e_hi: "माना मासिक वेतन = 100<br>प्रारंभिक बचत = 26\\frac{2}{3}%<br>प्रारंभिक खर्च = 73\\frac{1}{3}%<br>खर्च में 20% वृद्धि के बाद नया खर्च = 73\\frac{1}{3} × 120/100<br>= 88%<br>नई बचत = 100 - 88<br>= 12%<br>प्रश्नानुसार 12% = ₹4080<br>मासिक वेतन = 4080/12 × 100<br>= ₹34000<br>अतः सही उत्तर (b) ₹34,000 है।",
+    e_en: "Let monthly salary = 100<br>Initial savings = 26\\frac{2}{3}%<br>Initial expenditure = 73\\frac{1}{3}%<br>New expenditure after 20% increase in expenses = 73\\frac{1}{3} × 120/100<br>= 88%<br>New savings = 100 - 88<br>= 12%<br>According to question, 12% = ₹4080<br>Monthly salary = 4080/12 × 100<br>= ₹34000<br>Hence, the correct answer is (b) ₹34,000."
+  },
+  {
+    q_hi: "Q178. राजू की आय, मंजू की आय से 25% अधिक है। राजू की आय में 25% की वृद्धि हुई, और मंजू की आय में 40% की वृद्धि हुई। उनकी संयुक्त आय में कितने प्रतिशत वृद्धि हुई?",
+    q_en: "Q178. Raju's income is 25% more than Manju's income. Raju's income increased by 25%, and Manju's income increased by 40%. By what percentage did their combined income increase?",
+    tag: "SSC CPO 11/11/2022 (Shift-01)",
+    o_hi: [
+      "(a) 51.72%",
+      "(b) 31.67%",
+      "(c) 22.43%",
+      "(d) 41.26%"
+    ],
+    o_en: [
+      "(a) 51.72%",
+      "(b) 31.67%",
+      "(c) 22.43%",
+      "(d) 41.26%"
+    ],
+    a: 1,
+    e_hi: "माना मंजू की आय = 100<br>राजू की आय = 125<br>प्रारंभिक संयुक्त आय = 225<br>राजू की नई आय = 125 × 125/100<br>= 156.25<br>मंजू की नई आय = 100 × 140/100<br>= 140<br>नई संयुक्त आय = 296.25<br>वृद्धि = 296.25 - 225<br>= 71.25<br>प्रतिशत वृद्धि = 71.25/225 × 100<br>= 31.67%<br>अतः सही उत्तर (b) 31.67% है।",
+    e_en: "Let Manju's income = 100<br>Raju's income = 125<br>Initial combined income = 225<br>Raju's new income = 125 × 125/100<br>= 156.25<br>Manju's new income = 100 × 140/100<br>= 140<br>New combined income = 296.25<br>Increase = 296.25 - 225<br>= 71.25<br>Percentage increase = 71.25/225 × 100<br>= 31.67%<br>Hence, the correct answer is (b) 31.67%."
+  },
+  {
+    q_hi: "Q179. रमन अपनी आय का 75% खर्च करता है। यदि उसकी आय 20% बढ़ जाती है और व्यय भी 10% बढ़ जाता है, तो रमन की बचत में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q179. Raman spends 75% of his income. If his income increases by 20% and expenditure also increases by 10%, by what percentage will Raman's savings increase?",
+    tag: "SSC CHSL 08/08/2023 (Shift-04)",
+    o_hi: [
+      "(a) 35%",
+      "(b) 40%",
+      "(c) 50%",
+      "(d) 45%"
+    ],
+    o_en: [
+      "(a) 35%",
+      "(b) 40%",
+      "(c) 50%",
+      "(d) 45%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 75<br>प्रारंभिक बचत = 25<br>नई आय = 120<br>नया व्यय = 75 × 110/100<br>= 82.5<br>नई बचत = 120 - 82.5<br>= 37.5<br>बचत में वृद्धि = 37.5 - 25<br>= 12.5<br>प्रतिशत वृद्धि = 12.5/25 × 100<br>= 50%<br>अतः सही उत्तर (c) 50% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 75<br>Initial savings = 25<br>New income = 120<br>New expenditure = 75 × 110/100<br>= 82.5<br>New savings = 120 - 82.5<br>= 37.5<br>Increase in savings = 37.5 - 25<br>= 12.5<br>Percentage increase = 12.5/25 × 100<br>= 50%<br>Hence, the correct answer is (c) 50%."
+  },
+  {
+    q_hi: "Q180. ऋचा के व्यय और बचत का अनुपात 2 : 1 है। यदि उसकी आय और व्यय में क्रमशः 20% और 15% की वृद्धि होती है, तो उसकी बचत में प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q180. The ratio of Richa's expenditure and savings is 2 : 1. If her income and expenditure increase by 20% and 15% respectively, find the percentage increase in her savings.",
+    tag: "SSC CHSL TIER-II 10/01/2024",
+    o_hi: [
+      "(a) 20%",
+      "(b) 35%",
+      "(c) 25%",
+      "(d) 30%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 35%",
+      "(c) 25%",
+      "(d) 30%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक व्यय = 2<br>प्रारंभिक बचत = 1<br>प्रारंभिक आय = 3<br>नई आय = 3 × 120/100<br>= 3.6<br>नया व्यय = 2 × 115/100<br>= 2.3<br>नई बचत = 3.6 - 2.3<br>= 1.3<br>बचत में वृद्धि = 1.3 - 1<br>= 0.3<br>प्रतिशत वृद्धि = 0.3/1 × 100<br>= 30%<br>अतः सही उत्तर (d) 30% है।",
+    e_en: "Let initial expenditure = 2<br>Initial savings = 1<br>Initial income = 3<br>New income = 3 × 120/100<br>= 3.6<br>New expenditure = 2 × 115/100<br>= 2.3<br>New savings = 3.6 - 2.3<br>= 1.3<br>Increase in savings = 1.3 - 1<br>= 0.3<br>Percentage increase = 0.3/1 × 100<br>= 30%<br>Hence, the correct answer is (d) 30%."
+  },
+  {
+    q_hi: "Q181. एक महिला अपनी आय का 2/3 व्यय करती है। यदि उसकी आय में 18% की वृद्धि होती है और व्यय में 24% की वृद्धि होती है, तो उसकी बचत में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q181. A woman spends 2/3 of her income. If her income increases by 18% and expenditure increases by 24%, by what percentage will her savings increase?",
+    tag: "SSC CGL 11/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 6%",
+      "(b) 3%",
+      "(c) 5%",
+      "(d) 4%"
+    ],
+    o_en: [
+      "(a) 6%",
+      "(b) 3%",
+      "(c) 5%",
+      "(d) 4%"
+    ],
+    a: 0,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 2/3 × 100<br>= 66\\frac{2}{3}<br>प्रारंभिक बचत = 33\\frac{1}{3}<br>नई आय = 118<br>नया व्यय = 66\\frac{2}{3} × 124/100<br>= 82\\frac{2}{3}<br>नई बचत = 118 - 82\\frac{2}{3}<br>= 35\\frac{1}{3}<br>बचत में वृद्धि = 35\\frac{1}{3} - 33\\frac{1}{3}<br>= 2<br>प्रतिशत वृद्धि = 2/(33\\frac{1}{3}) × 100<br>= 6%<br>अतः सही उत्तर (a) 6% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 2/3 × 100<br>= 66\\frac{2}{3}<br>Initial savings = 33\\frac{1}{3}<br>New income = 118<br>New expenditure = 66\\frac{2}{3} × 124/100<br>= 82\\frac{2}{3}<br>New savings = 118 - 82\\frac{2}{3}<br>= 35\\frac{1}{3}<br>Increase in savings = 35\\frac{1}{3} - 33\\frac{1}{3}<br>= 2<br>Percentage increase = 2/(33\\frac{1}{3}) × 100<br>= 6%<br>Hence, the correct answer is (a) 6%."
+  },
+  {
+    q_hi: "Q182. सुरेश के खर्च और बचत का अनुपात 3:1 है। उसका वेतन 25% बढ़ जाता है। यदि उसकी बचत 10% बढ़ जाए तो उसके खर्च में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q182. The ratio of Suresh's expenditure and savings is 3:1. His salary increases by 25%. If his savings increase by 10%, by what percentage will his expenditure increase?",
+    tag: "SSC CGL 12/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 40%",
+      "(b) 20%",
+      "(c) 10%",
+      "(d) 30%"
+    ],
+    o_en: [
+      "(a) 40%",
+      "(b) 20%",
+      "(c) 10%",
+      "(d) 30%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक खर्च = 3<br>प्रारंभिक बचत = 1<br>प्रारंभिक आय = 4<br>नई आय = 4 × 125/100<br>= 5<br>नई बचत = 1 × 110/100<br>= 1.1<br>नया खर्च = 5 - 1.1<br>= 3.9<br>खर्च में वृद्धि = 3.9 - 3<br>= 0.9<br>प्रतिशत वृद्धि = 0.9/3 × 100<br>= 30%<br>अतः सही उत्तर (d) 30% है।",
+    e_en: "Let initial expenditure = 3<br>Initial savings = 1<br>Initial income = 4<br>New income = 4 × 125/100<br>= 5<br>New savings = 1 × 110/100<br>= 1.1<br>New expenditure = 5 - 1.1<br>= 3.9<br>Increase in expenditure = 3.9 - 3<br>= 0.9<br>Percentage increase = 0.9/3 × 100<br>= 30%<br>Hence, the correct answer is (d) 30%."
+  },
+  {
+    q_hi: "Q183. कल्याण अपनी आय का 80% खर्च करता है। उसकी आय 15% बढ़ जाती है और उसका व्यय भी 5% बढ़ जाता है। उसकी बचत में वृद्धि का प्रतिशत क्या है?",
+    q_en: "Q183. Kalyan spends 80% of his income. His income increases by 15% and his expenditure also increases by 5%. What is the percentage increase in his savings?",
+    tag: "SSC CGL 13/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 50%",
+      "(b) 20%",
+      "(c) 55%",
+      "(d) 40%"
+    ],
+    o_en: [
+      "(a) 50%",
+      "(b) 20%",
+      "(c) 55%",
+      "(d) 40%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 80<br>प्रारंभिक बचत = 20<br>नई आय = 115<br>नया व्यय = 80 × 105/100<br>= 84<br>नई बचत = 115 - 84<br>= 31<br>बचत में वृद्धि = 31 - 20<br>= 11<br>प्रतिशत वृद्धि = 11/20 × 100<br>= 55%<br>अतः सही उत्तर (c) 55% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 80<br>Initial savings = 20<br>New income = 115<br>New expenditure = 80 × 105/100<br>= 84<br>New savings = 115 - 84<br>= 31<br>Increase in savings = 31 - 20<br>= 11<br>Percentage increase = 11/20 × 100<br>= 55%<br>Hence, the correct answer is (c) 55%."
+  },
+  {
+    q_hi: "Q184. राहुल अपनी आय का 70% खर्च करता है। उसकी आय में 15% की वृद्धि हुई और उसके व्यय में 7.5% की वृद्धि हुई। उसकी बचत में प्रतिशत वृद्धि कितनी है?",
+    q_en: "Q184. Rahul spends 70% of his income. His income increased by 15% and his expenditure increased by 7.5%. What is the percentage increase in his savings?",
+    tag: "SSC CHSL 04/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 50%",
+      "(b) 30.5%",
+      "(c) 25.5%",
+      "(d) 32.5%"
+    ],
+    o_en: [
+      "(a) 50%",
+      "(b) 30.5%",
+      "(c) 25.5%",
+      "(d) 32.5%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 70<br>प्रारंभिक बचत = 30<br>नई आय = 115<br>नया व्यय = 70 × 107.5/100<br>= 75.25<br>नई बचत = 115 - 75.25<br>= 39.75<br>बचत में वृद्धि = 39.75 - 30<br>= 9.75<br>प्रतिशत वृद्धि = 9.75/30 × 100<br>= 32.5%<br>अतः सही उत्तर (d) 32.5% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 70<br>Initial savings = 30<br>New income = 115<br>New expenditure = 70 × 107.5/100<br>= 75.25<br>New savings = 115 - 75.25<br>= 39.75<br>Increase in savings = 39.75 - 30<br>= 9.75<br>Percentage increase = 9.75/30 × 100<br>= 32.5%<br>Hence, the correct answer is (d) 32.5%."
+  },
+  {
+    q_hi: "Q185. रमण अपनी आय का 75% खर्च करता है। उसकी आय में 25% की वृद्धि होती है और वह अपने व्यय में 10% की वृद्धि करता है। उसकी बचत में कितने प्रतिशत की वृद्धि हुई है?",
+    q_en: "Q185. Raman spends 75% of his income. His income increases by 25% and he increases his expenditure by 10%. By what percentage did his savings increase?",
+    tag: "SSC CHSL 03/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 70%",
+      "(b) 40%",
+      "(c) 60%",
+      "(d) 50%"
+    ],
+    o_en: [
+      "(a) 70%",
+      "(b) 40%",
+      "(c) 60%",
+      "(d) 50%"
+    ],
+    a: 0,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 75<br>प्रारंभिक बचत = 25<br>नई आय = 125<br>नया व्यय = 75 × 110/100<br>= 82.5<br>नई बचत = 125 - 82.5<br>= 42.5<br>बचत में वृद्धि = 42.5 - 25<br>= 17.5<br>प्रतिशत वृद्धि = 17.5/25 × 100<br>= 70%<br>अतः सही उत्तर (a) 70% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 75<br>Initial savings = 25<br>New income = 125<br>New expenditure = 75 × 110/100<br>= 82.5<br>New savings = 125 - 82.5<br>= 42.5<br>Increase in savings = 42.5 - 25<br>= 17.5<br>Percentage increase = 17.5/25 × 100<br>= 70%<br>Hence, the correct answer is (a) 70%."
+  },
+  {
+    q_hi: "Q186. राजू अपनी आय का 80% खर्च करता है। उसकी आय में 20% की वृद्धि हुई, जबकि उसके खर्च में 10% की वृद्धि हुई। उसकी बचत में वृद्धि का प्रतिशत क्या है?",
+    q_en: "Q186. Raju spends 80% of his income. His income increased by 20%, while his expenditure increased by 10%. What is the percentage increase in his savings?",
+    tag: "SSC CHSL 05/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 30%",
+      "(b) 48%",
+      "(c) 40%",
+      "(d) 60%"
+    ],
+    o_en: [
+      "(a) 30%",
+      "(b) 48%",
+      "(c) 40%",
+      "(d) 60%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 80<br>प्रारंभिक बचत = 20<br>नई आय = 120<br>नया व्यय = 80 × 110/100<br>= 88<br>नई बचत = 120 - 88<br>= 32<br>बचत में वृद्धि = 32 - 20<br>= 12<br>प्रतिशत वृद्धि = 12/20 × 100<br>= 60%<br>अतः सही उत्तर (d) 60% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 80<br>Initial savings = 20<br>New income = 120<br>New expenditure = 80 × 110/100<br>= 88<br>New savings = 120 - 88<br>= 32<br>Increase in savings = 32 - 20<br>= 12<br>Percentage increase = 12/20 × 100<br>= 60%<br>Hence, the correct answer is (d) 60%."
+  },
+  {
+    q_hi: "Q187. भवानी अपनी आय का 68% खर्च करती है। उसकी आय में 15% की वृद्धि होती है और उसके व्यय में 10% की वृद्धि होती है। उसकी बचत में कितने प्रतिशत की वृद्धि हुई? (दो दशमलव अंकों तक ज्ञात कीजिए)",
+    q_en: "Q187. Bhavani spends 68% of her income. Her income increases by 15% and her expenditure increases by 10%. By what percentage did her savings increase? (Find up to two decimal places)",
+    tag: "SSC CPO 28/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 20.57%",
+      "(b) 25.62%",
+      "(c) 28.42%",
+      "(d) 24.80%"
+    ],
+    o_en: [
+      "(a) 20.57%",
+      "(b) 25.62%",
+      "(c) 28.42%",
+      "(d) 24.80%"
+    ],
+    a: 1,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 68<br>प्रारंभिक बचत = 32<br>नई आय = 115<br>नया व्यय = 68 × 110/100<br>= 74.8<br>नई बचत = 115 - 74.8<br>= 40.2<br>बचत में वृद्धि = 40.2 - 32<br>= 8.2<br>प्रतिशत वृद्धि = 8.2/32 × 100<br>= 25.625%<br>≈ 25.62%<br>अतः सही उत्तर (b) 25.62% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 68<br>Initial savings = 32<br>New income = 115<br>New expenditure = 68 × 110/100<br>= 74.8<br>New savings = 115 - 74.8<br>= 40.2<br>Increase in savings = 40.2 - 32<br>= 8.2<br>Percentage increase = 8.2/32 × 100<br>= 25.625%<br>≈ 25.62%<br>Hence, the correct answer is (b) 25.62%."
+  },
+  {
+    q_hi: "Q188. रमेश अपनी आय का 60% व्यय करता है। यदि उसकी आय 30% बढ़ती है और उसका व्यय 20% बढ़ता है, तो रमेश की बचत में प्रतिशत वृद्धि कितनी होगी?",
+    q_en: "Q188. Ramesh spends 60% of his income. If his income increases by 30% and his expenditure increases by 20%, what will be the percentage increase in Ramesh's savings?",
+    tag: "SSC Phase XII 20/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 35%",
+      "(b) 30%",
+      "(c) 45%",
+      "(d) 50%"
+    ],
+    o_en: [
+      "(a) 35%",
+      "(b) 30%",
+      "(c) 45%",
+      "(d) 50%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 60<br>प्रारंभिक बचत = 40<br>नई आय = 130<br>नया व्यय = 60 × 120/100<br>= 72<br>नई बचत = 130 - 72<br>= 58<br>बचत में वृद्धि = 58 - 40<br>= 18<br>प्रतिशत वृद्धि = 18/40 × 100<br>= 45%<br>अतः सही उत्तर (c) 45% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 60<br>Initial savings = 40<br>New income = 130<br>New expenditure = 60 × 120/100<br>= 72<br>New savings = 130 - 72<br>= 58<br>Increase in savings = 58 - 40<br>= 18<br>Percentage increase = 18/40 × 100<br>= 45%<br>Hence, the correct answer is (c) 45%."
+  },
+  {
+    q_hi: "Q189. अनीता अपनी आय का 20% बचाती है। यदि उसकी आय में 30% की वृद्धि होती है और वह अपनी नई आय का 25% बचाती है, तो उसकी वास्तविक बचत में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q189. Anita saves 20% of her income. If her income increases by 30% and she saves 25% of her new income, by what percentage will her actual savings increase?",
+    tag: "SSC Phase XII 20/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 83%",
+      "(b) 62.50%",
+      "(c) 65.20%",
+      "(d) 70%"
+    ],
+    o_en: [
+      "(a) 83%",
+      "(b) 62.50%",
+      "(c) 65.20%",
+      "(d) 70%"
+    ],
+    a: 1,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक बचत = 20<br>नई आय = 130<br>नई बचत = 25% × 130<br>= 32.5<br>बचत में वृद्धि = 32.5 - 20<br>= 12.5<br>प्रतिशत वृद्धि = 12.5/20 × 100<br>= 62.5%<br>अतः सही उत्तर (b) 62.50% है।",
+    e_en: "Let initial income = 100<br>Initial savings = 20<br>New income = 130<br>New savings = 25% × 130<br>= 32.5<br>Increase in savings = 32.5 - 20<br>= 12.5<br>Percentage increase = 12.5/20 × 100<br>= 62.5%<br>Hence, the correct answer is (b) 62.50%."
+  },
+  {
+    q_hi: "Q190. सुरेश अपनी आय का 20% बचा सकता है। लेकिन 4 वर्ष बाद, जब उसकी आय में 40% की वृद्धि होती है तब भी वह पहले जितनी ही धनराशि बचा सका। उसके व्यय में हुई प्रतिशत वृद्धि कितनी है?",
+    q_en: "Q190. Suresh could save 20% of his income. But after 4 years, when his income increased by 40%, he could still save the same amount as before. What is the percentage increase in his expenditure?",
+    tag: "SSC MTS 14/09/2023 (Shift-02)",
+    o_hi: [
+      "(a) 22%",
+      "(b) 23%",
+      "(c) 50%",
+      "(d) 45%"
+    ],
+    o_en: [
+      "(a) 22%",
+      "(b) 23%",
+      "(c) 50%",
+      "(d) 45%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक बचत = 20<br>प्रारंभिक व्यय = 80<br>नई आय = 140<br>नई बचत = 20<br>नया व्यय = 140 - 20<br>= 120<br>व्यय में वृद्धि = 120 - 80<br>= 40<br>प्रतिशत वृद्धि = 40/80 × 100<br>= 50%<br>अतः सही उत्तर (c) 50% है।",
+    e_en: "Let initial income = 100<br>Initial savings = 20<br>Initial expenditure = 80<br>New income = 140<br>New savings = 20<br>New expenditure = 140 - 20<br>= 120<br>Increase in expenditure = 120 - 80<br>= 40<br>Percentage increase = 40/80 × 100<br>= 50%<br>Hence, the correct answer is (c) 50%."
+  },
+  {
+    q_hi: "Q191. अजय अपनी आय का 66\\frac{2}{3}% विभिन्न घरेलू मदों पर खर्च करता है। यदि उसकी आय 25% बढ़ जाती है और व्यय 20% बढ़ जाता है, तो उसकी बचत पर कितना प्रभाव पड़ेगा?",
+    q_en: "Q191. Ajay spends 66\\frac{2}{3}% of his income on various household items. If his income increases by 25% and expenditure increases by 20%, how will his savings be affected?",
+    tag: "SSC CGL 17/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 28%",
+      "(b) 61%",
+      "(c) 49%",
+      "(d) 35%"
+    ],
+    o_en: [
+      "(a) 28%",
+      "(b) 61%",
+      "(c) 49%",
+      "(d) 35%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 66\\frac{2}{3}<br>प्रारंभिक बचत = 33\\frac{1}{3}<br>नई आय = 125<br>नया व्यय = 66\\frac{2}{3} × 120/100<br>= 80<br>नई बचत = 125 - 80<br>= 45<br>बचत में वृद्धि = 45 - 33\\frac{1}{3}<br>= 11\\frac{2}{3}<br>प्रतिशत वृद्धि = 11\\frac{2}{3}/33\\frac{1}{3} × 100<br>= 35%<br>अतः सही उत्तर (d) 35% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 66\\frac{2}{3}<br>Initial savings = 33\\frac{1}{3}<br>New income = 125<br>New expenditure = 66\\frac{2}{3} × 120/100<br>= 80<br>New savings = 125 - 80<br>= 45<br>Increase in savings = 45 - 33\\frac{1}{3}<br>= 11\\frac{2}{3}<br>Percentage increase = 11\\frac{2}{3}/33\\frac{1}{3} × 100<br>= 35%<br>Hence, the correct answer is (d) 35%."
+  },
+  {
+    q_hi: "Q192. एक व्यक्ति की आय ₹16,500 है और उसका व्यय ₹12,000 है। अगले वर्ष उसकी आय 24% बढ़ती है लेकिन उसका व्यय 10% कम हो जाता है, तो उसकी बचत में प्रतिशत वृद्धि (निकटतम पूर्णांक तक पूर्णांकित) कितनी होगी?",
+    q_en: "Q192. A person's income is ₹16,500 and his expenditure is ₹12,000. Next year, his income increases by 24% but his expenditure decreases by 10%. What will be the percentage increase in his savings (rounded off to nearest integer)?",
+    tag: "SSC CGL 24/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 90%",
+      "(b) 120%",
+      "(c) 115%",
+      "(d) 95%"
+    ],
+    o_en: [
+      "(a) 90%",
+      "(b) 120%",
+      "(c) 115%",
+      "(d) 95%"
+    ],
+    a: 2,
+    e_hi: "प्रारंभिक बचत = 16500 - 12000<br>= ₹4500<br>नई आय = 16500 × 124/100<br>= ₹20460<br>नया व्यय = 12000 × 90/100<br>= ₹10800<br>नई बचत = 20460 - 10800<br>= ₹9660<br>बचत में वृद्धि = 9660 - 4500<br>= ₹5160<br>प्रतिशत वृद्धि = 5160/4500 × 100<br>= 114.67%<br>≈ 115%<br>अतः सही उत्तर (c) 115% है।",
+    e_en: "Initial savings = 16500 - 12000<br>= ₹4500<br>New income = 16500 × 124/100<br>= ₹20460<br>New expenditure = 12000 × 90/100<br>= ₹10800<br>New savings = 20460 - 10800<br>= ₹9660<br>Increase in savings = 9660 - 4500<br>= ₹5160<br>Percentage increase = 5160/4500 × 100<br>= 114.67%<br>≈ 115%<br>Hence, the correct answer is (c) 115%."
+  },
+  {
+    q_hi: "Q193. एक महिला के व्यय और बचत का अनुपात 4 : 1 है। यदि उसकी आय और व्यय में क्रमशः 20% और 10% की वृद्धि होती है, तो उसकी बचत में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q193. The ratio of a woman's expenditure and savings is 4 : 1. If her income and expenditure increase by 20% and 10% respectively, find the percentage change in her savings.",
+    tag: "SSC CGL 25/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 40%",
+      "(b) 50%",
+      "(c) 60%",
+      "(d) 30%"
+    ],
+    o_en: [
+      "(a) 40%",
+      "(b) 50%",
+      "(c) 60%",
+      "(d) 30%"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक व्यय = 4<br>प्रारंभिक बचत = 1<br>प्रारंभिक आय = 5<br>नई आय = 5 × 120/100<br>= 6<br>नया व्यय = 4 × 110/100<br>= 4.4<br>नई बचत = 6 - 4.4<br>= 1.6<br>बचत में वृद्धि = 1.6 - 1<br>= 0.6<br>प्रतिशत वृद्धि = 0.6/1 × 100<br>= 60%<br>अतः सही उत्तर (c) 60% है।",
+    e_en: "Let initial expenditure = 4<br>Initial savings = 1<br>Initial income = 5<br>New income = 5 × 120/100<br>= 6<br>New expenditure = 4 × 110/100<br>= 4.4<br>New savings = 6 - 4.4<br>= 1.6<br>Increase in savings = 1.6 - 1<br>= 0.6<br>Percentage increase = 0.6/1 × 100<br>= 60%<br>Hence, the correct answer is (c) 60%."
+  },
+  {
+    q_hi: "Q194. वर्ष 2021 में रमेश की मासिक आय ₹18,600 थी और उसका मासिक खर्च ₹12,400 था। वर्ष 2022 में उसकी आय 15% और खर्च 8% बढ़ गया। उसकी बचत में प्रतिशत वृद्धि ज्ञात करो।",
+    q_en: "Q194. In the year 2021, Ramesh's monthly income was ₹18,600 and his monthly expenditure was ₹12,400. In the year 2022, his income increased by 15% and expenditure increased by 8%. Find the percentage increase in his savings.",
+    tag: "SSC CGL 25/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 29%",
+      "(b) 32%",
+      "(c) 25%",
+      "(d) 27%"
+    ],
+    o_en: [
+      "(a) 29%",
+      "(b) 32%",
+      "(c) 25%",
+      "(d) 27%"
+    ],
+    a: 0,
+    e_hi: "2021 में बचत = 18600 - 12400<br>= ₹6200<br>2022 में आय = 18600 × 115/100<br>= ₹21390<br>2022 में खर्च = 12400 × 108/100<br>= ₹13392<br>2022 में बचत = 21390 - 13392<br>= ₹7998<br>बचत में वृद्धि = 7998 - 6200<br>= ₹1798<br>प्रतिशत वृद्धि = 1798/6200 × 100<br>= 29%<br>अतः सही उत्तर (a) 29% है।",
+    e_en: "Savings in 2021 = 18600 - 12400<br>= ₹6200<br>Income in 2022 = 18600 × 115/100<br>= ₹21390<br>Expenditure in 2022 = 12400 × 108/100<br>= ₹13392<br>Savings in 2022 = 21390 - 13392<br>= ₹7998<br>Increase in savings = 7998 - 6200<br>= ₹1798<br>Percentage increase = 1798/6200 × 100<br>= 29%<br>Hence, the correct answer is (a) 29%."
+  },
+  {
+    q_hi: "Q195. सुरेश के खर्च और बचत का अनुपात 3 : 1 है। उसका वेतन 25% बढ़ जाता है। यदि उसकी बचत 20% बढ़ जाए, तो उसका खर्च कितने प्रतिशत बढ़ेगा?",
+    q_en: "Q195. The ratio of Suresh's expenditure and savings is 3 : 1. His salary increases by 25%. If his savings increase by 20%, by what percentage will his expenditure increase?",
+    tag: "SSC CGL 26/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 27\\frac{2}{3}%",
+      "(b) 25\\frac{2}{3}%",
+      "(c) 28\\frac{2}{3}%",
+      "(d) 26\\frac{2}{3}%"
+    ],
+    o_en: [
+      "(a) 27\\frac{2}{3}%",
+      "(b) 25\\frac{2}{3}%",
+      "(c) 28\\frac{2}{3}%",
+      "(d) 26\\frac{2}{3}%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक खर्च = 3<br>प्रारंभिक बचत = 1<br>प्रारंभिक वेतन = 4<br>नया वेतन = 4 × 125/100<br>= 5<br>नई बचत = 1 × 120/100<br>= 1.2<br>नया खर्च = 5 - 1.2<br>= 3.8<br>खर्च में वृद्धि = 3.8 - 3<br>= 0.8<br>प्रतिशत वृद्धि = 0.8/3 × 100<br>= 26\\frac{2}{3}%<br>अतः सही उत्तर (d) 26\\frac{2}{3}% है।",
+    e_en: "Let initial expenditure = 3<br>Initial savings = 1<br>Initial salary = 4<br>New salary = 4 × 125/100<br>= 5<br>New savings = 1 × 120/100<br>= 1.2<br>New expenditure = 5 - 1.2<br>= 3.8<br>Increase in expenditure = 3.8 - 3<br>= 0.8<br>Percentage increase = 0.8/3 × 100<br>= 26\\frac{2}{3}%<br>Hence, the correct answer is (d) 26\\frac{2}{3}%."
+  },
+  {
+    q_hi: "Q196. एक व्यक्ति का मासिक व्यय उसकी मासिक बचत से 40% अधिक है। यदि उसकी मासिक आय में 40% की वृद्धि होती है और मासिक व्यय में 60% की वृद्धि होती है, तो वह एक महीने में ₹2,070 अधिक बचाता है। उसका प्रारंभिक मासिक खर्च (₹ में) क्या है?",
+    q_en: "Q196. A person's monthly expenditure is 40% more than his monthly savings. If his monthly income increases by 40% and monthly expenditure increases by 60%, he saves ₹2,070 more in a month. What is his initial monthly expenditure (in ₹)?",
+    tag: "SSC PHASE-IX 2022",
+    o_hi: [
+      "(a) 20,250",
+      "(b) 19,320",
+      "(c) 24,150",
+      "(d) 22,425"
+    ],
+    o_en: [
+      "(a) 20,250",
+      "(b) 19,320",
+      "(c) 24,150",
+      "(d) 22,425"
+    ],
+    a: 2,
+    e_hi: "माना प्रारंभिक बचत = 100<br>प्रारंभिक व्यय = 140<br>प्रारंभिक आय = 240<br>नई आय = 240 × 140/100<br>= 336<br>नया व्यय = 140 × 160/100<br>= 224<br>नई बचत = 336 - 224<br>= 112<br>बचत में वृद्धि = 112 - 100<br>= 12<br>12 भाग = ₹2070<br>100 भाग = 2070/12 × 100<br>= ₹17250<br>प्रारंभिक व्यय = 17250 × 140/100<br>= ₹24150<br>अतः सही उत्तर (c) ₹24,150 है।",
+    e_en: "Let initial savings = 100<br>Initial expenditure = 140<br>Initial income = 240<br>New income = 240 × 140/100<br>= 336<br>New expenditure = 140 × 160/100<br>= 224<br>New savings = 336 - 224<br>= 112<br>Increase in savings = 112 - 100<br>= 12<br>12 parts = ₹2070<br>100 parts = 2070/12 × 100<br>= ₹17250<br>Initial expenditure = 17250 × 140/100<br>= ₹24150<br>Hence, the correct answer is (c) ₹24,150."
+  },
+  {
+    q_hi: "Q197. रामू अपनी आय का 72% खर्च करता है। उसकी आय में 12% की वृद्धि होती है, और वह अपने खर्च में 5% की वृद्धि करता है। यदि रामू पहले y बचत करता था और वृद्धि के बाद अब वह x बचत करता है, तो ((x-y)/y × 100)% का मान क्या है?",
+    q_en: "Q197. Ramu spends 72% of his income. His income increases by 12%, and he increases his expenditure by 5%. If Ramu saved y initially and now saves x after the increase, what is the value of ((x-y)/y × 100)%?",
+    tag: "SSC CHSL 04/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 25%",
+      "(b) 22%",
+      "(c) 27%",
+      "(d) 30%"
+    ],
+    o_en: [
+      "(a) 25%",
+      "(b) 22%",
+      "(c) 27%",
+      "(d) 30%"
+    ],
+    a: 3,
+    e_hi: "माना प्रारंभिक आय = 100<br>प्रारंभिक व्यय = 72<br>प्रारंभिक बचत = 28<br>नई आय = 112<br>नया व्यय = 72 × 105/100<br>= 75.6<br>नई बचत = 112 - 75.6<br>= 36.4<br>बचत में वृद्धि = 36.4 - 28<br>= 8.4<br>प्रतिशत वृद्धि = 8.4/28 × 100<br>= 30%<br>अतः सही उत्तर (d) 30% है।",
+    e_en: "Let initial income = 100<br>Initial expenditure = 72<br>Initial savings = 28<br>New income = 112<br>New expenditure = 72 × 105/100<br>= 75.6<br>New savings = 112 - 75.6<br>= 36.4<br>Increase in savings = 36.4 - 28<br>= 8.4<br>Percentage increase = 8.4/28 × 100<br>= 30%<br>Hence, the correct answer is (d) 30%."
+  },
+  {
+    q_hi: "Q198. एक व्यक्ति अपनी आय का 45% बचाता है। अगले वर्ष, उसकी आय में 200% की वृद्धि होती है। वह अपनी बचत को पिछले वर्ष की बचत के पाँच गुना बढ़ा देता है। उसने अपने व्यय में कितने प्रतिशत (दशमलव के एक स्थान तक सही) की वृद्धि/कमी की है?",
+    q_en: "Q198. A person saves 45% of his income. Next year, his income increases by 200%. He increases his savings to five times the previous year's savings. By what percentage (correct to one decimal place) has he increased/decreased his expenditure?",
+    tag: "SSC CHSL 09/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 63.4% कमी",
+      "(b) 36.4% कमी",
+      "(c) 63.4% वृद्धि",
+      "(d) 36.4% वृद्धि"
+    ],
+    o_en: [
+      "(a) 63.4% decrease",
+      "(b) 36.4% decrease",
+      "(c) 63.4% increase",
+      "(d) 36.4% increase"
+    ],
+    a: 3,
+    e_hi: "माना पिछले वर्ष आय = 100<br>बचत = 45<br>व्यय = 55<br>अगले वर्ष आय = 300<br>नई बचत = 45 × 5<br>= 225<br>नया व्यय = 300 - 225<br>= 75<br>व्यय में वृद्धि = 75 - 55<br>= 20<br>प्रतिशत वृद्धि = 20/55 × 100<br>= 36.36%<br>≈ 36.4%<br>अतः सही उत्तर (d) 36.4% वृद्धि है।",
+    e_en: "Let previous year's income = 100<br>Savings = 45<br>Expenditure = 55<br>Next year's income = 300<br>New savings = 45 × 5<br>= 225<br>New expenditure = 300 - 225<br>= 75<br>Increase in expenditure = 75 - 55<br>= 20<br>Percentage increase = 20/55 × 100<br>= 36.36%<br>≈ 36.4%<br>Hence, the correct answer is (d) 36.4% increase."
+  },
+  {
+    q_hi: "Q199. रूमी अपनी आय का 20% बचाती थी। यदि उसकी आय 30% बढ़ गई, जबकि उसका व्यय 40% बढ़ गया, तो उसकी बचत ₹750 कम हो गई। रूमी की प्रारंभिक आय (₹ में) ज्ञात कीजिए।",
+    q_en: "Q199. Rumi used to save 20% of her income. If her income increased by 30% while her expenditure increased by 40%, her savings decreased by ₹750. Find Rumi's initial income (in ₹).",
+    tag: "SSC CHSL 07/08/2023 (Shift-02)",
+    o_hi: [
+      "(a) 36,000",
+      "(b) 37,500",
+      "(c) 35,000",
+      "(d) 38,500"
+    ],
+    o_en: [
+      "(a) 36,000",
+      "(b) 37,500",
+      "(c) 35,000",
+      "(d) 38,500"
+    ],
+    a: 1,
+    e_hi: "माना प्रारंभिक आय = ₹x<br>प्रारंभिक बचत = 20% of x = 0.20x<br>प्रारंभिक व्यय = 80% of x = 0.80x<br>नई आय = 1.30x<br>नया व्यय = 1.40 × 0.80x<br>= 1.12x<br>नई बचत = 1.30x - 1.12x<br>= 0.18x<br>बचत में कमी = 0.20x - 0.18x<br>= 0.02x<br>0.02x = 750<br>x = ₹37,500<br>अतः सही उत्तर (b) ₹37,500 है।",
+    e_en: "Let initial income = ₹x<br>Initial savings = 20% of x = 0.20x<br>Initial expenditure = 80% of x = 0.80x<br>New income = 1.30x<br>New expenditure = 1.40 × 0.80x<br>= 1.12x<br>New savings = 1.30x - 1.12x<br>= 0.18x<br>Decrease in savings = 0.20x - 0.18x<br>= 0.02x<br>0.02x = 750<br>x = ₹37,500<br>Hence, the correct answer is (b) ₹37,500."
+  },
+  {
+    q_hi: "Q200. एक व्यक्ति प्रति माह ₹16,000 कमाता है और अपनी आय का 80% खर्च करता है और शेष राशि की बचत करता है। यदि उसकी आय में 20% और खर्च में 10% की वृद्धि हो जाती है, तो उसकी बचत में प्रतिशत वृद्धि ज्ञात करो।",
+    q_en: "Q200. A person earns ₹16,000 per month and spends 80% of his income, saving the rest. If his income increases by 20% and expenditure increases by 10%, find the percentage increase in his savings.",
+    tag: "SSC CGL 09/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 140%",
+      "(b) 90%",
+      "(c) 120%",
+      "(d) 60%"
+    ],
+    o_en: [
+      "(a) 140%",
+      "(b) 90%",
+      "(c) 120%",
+      "(d) 60%"
+    ],
+    a: 3,
+    e_hi: "प्रारंभिक आय = ₹16000<br>प्रारंभिक व्यय = 80% × 16000<br>= ₹12800<br>प्रारंभिक बचत = 16000 - 12800<br>= ₹3200<br>नई आय = 120% × 16000<br>= ₹19200<br>नया व्यय = 110% × 12800<br>= ₹14080<br>नई बचत = 19200 - 14080<br>= ₹5120<br>बचत में वृद्धि = 5120 - 3200<br>= ₹1920<br>प्रतिशत वृद्धि = 1920/3200 × 100<br>= 60%<br>अतः सही उत्तर (d) 60% है।",
+    e_en: "Initial income = ₹16000<br>Initial expenditure = 80% × 16000<br>= ₹12800<br>Initial savings = 16000 - 12800<br>= ₹3200<br>New income = 120% × 16000<br>= ₹19200<br>New expenditure = 110% × 12800<br>= ₹14080<br>New savings = 19200 - 14080<br>= ₹5120<br>Increase in savings = 5120 - 3200<br>= ₹1920<br>Percentage increase = 1920/3200 × 100<br>= 60%<br>Hence, the correct answer is (d) 60%."
+  }
+];
