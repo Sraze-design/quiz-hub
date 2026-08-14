@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q41. यदि किसी भिन्न के अंश में 50% की वृद्धि की जाए और उसके हर में 28% की कमी की जाए, तो भिन्न का मान 25/36 हो जाता है। मूल भिन्न ज्ञात करें।",
+    q_en: "Q41. If the numerator of a fraction is increased by 50% and its denominator is decreased by 28%, the value of the fraction becomes 25/36. Find the original fraction.",
+    tag: "SSC CHSL 24/05/2022 (Shift-03)",
+    o_hi: [
+      "(a) 1/5",
+      "(b) 2/3",
+      "(c) 2/5",
+      "(d) 1/3"
+    ],
+    o_en: [
+      "(a) 1/5",
+      "(b) 2/3",
+      "(c) 2/5",
+      "(d) 1/3"
+    ],
+    a: 3,
+    e_hi: "माना मूल भिन्न = x<br>नया अंश = 150% = 1.5<br>नया हर = 72% = 0.72<br>नई भिन्न = x × 1.5/0.72 = 25/36<br>x = 25/36 × 0.72/1.5<br>x = 1/3",
+    e_en: "Let original fraction = x<br>New numerator = 150% = 1.5<br>New denominator = 72% = 0.72<br>New fraction = x × 1.5/0.72 = 25/36<br>x = 25/36 × 0.72/1.5<br>x = 1/3"
+  },
+  {
+    q_hi: "Q42. यदि किसी भिन्न के अंश में 60% की वृद्धि और हर में 40% की वृद्धि होती है, तो परिणामी भिन्न 16/63 हो जाता है। मूल भिन्न ज्ञात करें।",
+    q_en: "Q42. If the numerator of a fraction is increased by 60% and the denominator is increased by 40%, the resulting fraction becomes 16/63. Find the original fraction.",
+    tag: "SSC CPO 25/11/2020 (Shift-02)",
+    o_hi: [
+      "(a) 2/9",
+      "(b) 5/9",
+      "(c) 2/11",
+      "(d) 4/9"
+    ],
+    o_en: [
+      "(a) 2/9",
+      "(b) 5/9",
+      "(c) 2/11",
+      "(d) 4/9"
+    ],
+    a: 0,
+    e_hi: "माना मूल भिन्न = x<br>नया अंश = 1.6 गुना<br>नया हर = 1.4 गुना<br>नई भिन्न = x × 1.6/1.4 = 16/63<br>x = 16/63 × 1.4/1.6<br>x = 2/9",
+    e_en: "Let original fraction = x<br>New numerator = 1.6 times<br>New denominator = 1.4 times<br>New fraction = x × 1.6/1.4 = 16/63<br>x = 16/63 × 1.4/1.6<br>x = 2/9"
+  },
+  {
+    q_hi: "Q43. यदि किसी उत्पाद की कीमत में 25% की वृद्धि होती है, तो व्यय को समान रखने के लिए खपत में कितने प्रतिशत की कमी की जानी चाहिए?",
+    q_en: "Q43. If the price of a product increases by 25%, by what percentage should consumption be reduced to keep the expenditure the same?",
+    tag: "SSC CHSL 28/11/2025 (Shift-01)",
+    o_hi: [
+      "(a) 10%",
+      "(b) 15%",
+      "(c) 21%",
+      "(d) 20%"
+    ],
+    o_en: [
+      "(a) 10%",
+      "(b) 15%",
+      "(c) 21%",
+      "(d) 20%"
+    ],
+    a: 3,
+    e_hi: "मूल कीमत = 100<br>नई कीमत = 125<br>समान व्यय के लिए नई खपत = 100/125 = 80%<br>कमी = 100% - 80% = 20%",
+    e_en: "Original price = 100<br>New price = 125<br>New consumption for same expenditure = 100/125 = 80%<br>Reduction = 100% - 80% = 20%"
+  },
+  {
+    q_hi: "Q44. दालों के मूल्य में 45% की बढ़ोतरी हुई है। दालों के बढ़े हुए मूल्य में कितने प्रतिशत (निकटतम पूर्णांक तक सन्निकटित) की कमी की जानी चाहिए ताकि दालों का मूल्य अपरिवर्तित रहे?",
+    q_en: "Q44. The price of pulses has increased by 45%. By what percentage (rounded off to the nearest integer) should the increased price of pulses be reduced so that the price of pulses remains unchanged?",
+    tag: "SSC CHSL 04/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 35%",
+      "(b) 41%",
+      "(c) 31%",
+      "(d) 45%"
+    ],
+    o_en: [
+      "(a) 35%",
+      "(b) 41%",
+      "(c) 31%",
+      "(d) 45%"
+    ],
+    a: 2,
+    e_hi: "मूल मूल्य = 100<br>बढ़ा हुआ मूल्य = 145<br>कमी = 45/145 × 100<br>= 31.03%<br>निकटतम पूर्णांक = 31%",
+    e_en: "Original price = 100<br>Increased price = 145<br>Reduction = 45/145 × 100<br>= 31.03%<br>Nearest integer = 31%"
+  },
+  {
+    q_hi: "Q45. प्रथम वर्ष में, किसी जनसंख्या में 12% की कमी होती है। दूसरे वर्ष में इसमें कितने प्रतिशत की वृद्धि होनी चाहिए, ताकि दूसरे वर्ष के अंत में जनसंख्या, मूल जनसंख्या के बिल्कुल बराबर हो जाए?",
+    q_en: "Q45. In the first year, a population decreases by 12%. By what percentage should it increase in the second year so that at the end of the second year the population becomes exactly equal to the original population?",
+    tag: "SSC CHSL 18/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 10.6%",
+      "(b) 11.6%",
+      "(c) 13.6%",
+      "(d) 14.6%"
+    ],
+    o_en: [
+      "(a) 10.6%",
+      "(b) 11.6%",
+      "(c) 13.6%",
+      "(d) 14.6%"
+    ],
+    a: 2,
+    e_hi: "मूल जनसंख्या = 100<br>पहले वर्ष के बाद = 88<br>दूसरे वर्ष में 100 करने के लिए वृद्धि = 12<br>वृद्धि प्रतिशत = 12/88 × 100<br>= 13.6%",
+    e_en: "Original population = 100<br>After 1st year = 88<br>Increase needed in 2nd year to make it 100 = 12<br>Percentage increase = 12/88 × 100<br>= 13.6%"
+  },
+  {
+    q_hi: "Q46. आर्थिक संकट के कारण एक कारखाने में कर्मचारियों के वेतन में 20% की कमी कर दी जाती है। उनके वेतन को मूल राशि पर वापस लाने के लिए, उसमें कितनी वृद्धि की जानी चाहिए?",
+    q_en: "Q46. Due to an economic crisis, the salary of employees in a factory is reduced by 20%. By how much should their salary be increased to bring it back to the original amount?",
+    tag: "SSC CHSL 11/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 40%",
+      "(d) 12.5%"
+    ],
+    o_en: [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 40%",
+      "(d) 12.5%"
+    ],
+    a: 0,
+    e_hi: "मूल वेतन = 100<br>कमी के बाद वेतन = 80<br>वापस 100 करने के लिए वृद्धि = 20<br>वृद्धि प्रतिशत = 20/80 × 100<br>= 25%",
+    e_en: "Original salary = 100<br>Salary after reduction = 80<br>Increase to bring back to 100 = 20<br>Percentage increase = 20/80 × 100<br>= 25%"
+  },
+  {
+    q_hi: "Q47. यदि रामू का वेतन सोमू के वेतन से 30% कम है, तो सोमू का वेतन रामू के वेतन से कितने प्रतिशत अधिक है?",
+    q_en: "Q47. If Ramu's salary is 30% less than Somu's salary, then Somu's salary is what percentage more than Ramu's salary?",
+    tag: "SSC CHSL 09/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 45.47%",
+      "(b) 42.86%",
+      "(c) 42.67%",
+      "(d) 34.56%"
+    ],
+    o_en: [
+      "(a) 45.47%",
+      "(b) 42.86%",
+      "(c) 42.67%",
+      "(d) 34.56%"
+    ],
+    a: 1,
+    e_hi: "मान लें सोमू का वेतन = 100<br>रामू का वेतन = 70<br>अंतर = 30<br>रामू के वेतन के सापेक्ष वृद्धि = 30/70 × 100<br>= 42.86%",
+    e_en: "Let Somu's salary = 100<br>Ramu's salary = 70<br>Difference = 30<br>Increase relative to Ramu's salary = 30/70 × 100<br>= 42.86%"
+  },
+  {
+    q_hi: "Q48. श्याम की आय, राम की आय से 20% कम है। प्रतिशत के पदों में राम की आय, श्याम की आय से कितनी अधिक है?",
+    q_en: "Q48. Shyam's income is 20% less than Ram's income. In terms of percentage, by how much is Ram's income more than Shyam's income?",
+    tag: "SSC CHSL 11/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 80%",
+      "(d) 30%"
+    ],
+    o_en: [
+      "(a) 25%",
+      "(b) 20%",
+      "(c) 80%",
+      "(d) 30%"
+    ],
+    a: 0,
+    e_hi: "राम की आय = 100<br>श्याम की आय = 80<br>अंतर = 20<br>श्याम की आय के सापेक्ष अधिकता = 20/80 × 100<br>= 25%",
+    e_en: "Ram's income = 100<br>Shyam's income = 80<br>Difference = 20<br>Excess relative to Shyam's income = 20/80 × 100<br>= 25%"
+  },
+  {
+    q_hi: "Q49. यदि A की आय B से 20% अधिक है और B की आय ₹50,000 है, तो B की आय A से कितने प्रतिशत कम है?",
+    q_en: "Q49. If A's income is 20% more than B's and B's income is ₹50,000, by what percentage is B's income less than A's?",
+    tag: "SSC CHSL 24/11/2025 (Shift-1)",
+    o_hi: [
+      "(a) 16.66%",
+      "(b) 20%",
+      "(c) 18%",
+      "(d) 25%"
+    ],
+    o_en: [
+      "(a) 16.66%",
+      "(b) 20%",
+      "(c) 18%",
+      "(d) 25%"
+    ],
+    a: 0,
+    e_hi: "B की आय = ₹50,000<br>A की आय = 120% of ₹50,000 = ₹60,000<br>अंतर = ₹10,000<br>कमी प्रतिशत = 10,000/60,000 × 100<br>= 16.66%",
+    e_en: "B's income = ₹50,000<br>A's income = 120% of ₹50,000 = ₹60,000<br>Difference = ₹10,000<br>Percentage reduction = 10,000/60,000 × 100<br>= 16.66%"
+  },
+  {
+    q_hi: "Q50. किसी मान को 30% बढ़ाया जाता है और फिर मूल मान पर वापस लाने के लिए एक अज्ञात प्रतिशत से घटाया जाता है। कितने प्रतिशत की कमी आवश्यक है?",
+    q_en: "Q50. A value is increased by 30% and then decreased by an unknown percentage to bring it back to the original value. What percentage decrease is required?",
+    tag: "SSC CGL 23/09/2025 (Shift-02)",
+    o_hi: [
+      "(a) 23.08%",
+      "(b) 26.92%",
+      "(c) 30.26%",
+      "(d) 20.22%"
+    ],
+    o_en: [
+      "(a) 23.08%",
+      "(b) 26.92%",
+      "(c) 30.26%",
+      "(d) 20.22%"
+    ],
+    a: 0,
+    e_hi: "मूल मान = 100<br>बढ़ाने के बाद = 130<br>मूल मान पर वापस लाने के लिए कमी = 30<br>कमी प्रतिशत = 30/130 × 100<br>= 23.08%",
+    e_en: "Original value = 100<br>After increase = 130<br>Decrease to restore original value = 30<br>Percentage decrease = 30/130 × 100<br>= 23.08%"
+  },
+  {
+    q_hi: "Q51. एक निश्चित दूरी को तय करने में लगने वाले समय को 25% कम करने के लिए एक धावक को अपनी चाल में कितने प्रतिशत की वृद्धि करनी चाहिए?",
+    q_en: "Q51. By what percentage should a runner increase his speed in order to reduce the time taken to cover a certain distance by 25%?",
+    tag: "SSC CHSL 11/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 33\\frac{1}{3}%",
+      "(b) 37\\frac{1}{3}%",
+      "(c) 41%",
+      "(d) 31%"
+    ],
+    o_en: [
+      "(a) 33\\frac{1}{3}%",
+      "(b) 37\\frac{1}{3}%",
+      "(c) 41%",
+      "(d) 31%"
+    ],
+    a: 0,
+    e_hi: "समय = 75% रह जाता है।<br>दूरी समान है, इसलिए चाल = 100/75 = 4/3<br>चाल में वृद्धि = 4/3 - 1<br>= 1/3<br>= 33\\frac{1}{3}%",
+    e_en: "Time becomes 75%.<br>Distance is constant, so speed = 100/75 = 4/3<br>Increase in speed = 4/3 - 1<br>= 1/3<br>= 33\\frac{1}{3}%"
+  },
+  {
+    q_hi: "Q52. 24 सेमी त्रिज्या वाली एक वृत्ताकार लोहे की प्लेट को गर्म किया जाता है, और इसकी त्रिज्या 1.8% बढ़ जाती है। इसके क्षेत्रफल में लगभग कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q52. A circular iron plate of radius 24 cm is heated, and its radius increases by 1.8%. By approximately what percentage will its area increase?",
+    tag: "SSC CHSL 17/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 1.8%",
+      "(b) 2.2%",
+      "(c) 3.64%",
+      "(d) 4.3%"
+    ],
+    o_en: [
+      "(a) 1.8%",
+      "(b) 2.2%",
+      "(c) 3.64%",
+      "(d) 4.3%"
+    ],
+    a: 2,
+    e_hi: "क्षेत्रफल ∝ (त्रिज्या)²<br>वृद्धि = 2 × 1.8 + (1.8)²/100<br>= 3.6 + 0.0324<br>= 3.6324%<br>लगभग = 3.64%",
+    e_en: "Area ∝ (radius)²<br>Increase = 2 × 1.8 + (1.8)²/100<br>= 3.6 + 0.0324<br>= 3.6324%<br>Approximately = 3.64%"
+  },
+  {
+    q_hi: "Q53. यदि किसी गोले का पृष्ठीय क्षेत्रफल 44% बढ़ जाता है, तो त्रिज्या में लगभग कितने प्रतिशत की वृद्धि होती है?",
+    q_en: "Q53. If the surface area of a sphere increases by 44%, by approximately what percentage does its radius increase?",
+    tag: "SSC CHSL 27/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 20%",
+      "(b) 21%",
+      "(c) 22%",
+      "(d) 24%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 21%",
+      "(c) 22%",
+      "(d) 24%"
+    ],
+    a: 0,
+    e_hi: "पृष्ठीय क्षेत्रफल ∝ त्रिज्या²<br>नई त्रिज्या/पुरानी त्रिज्या = √1.44 = 1.2<br>वृद्धि = 20%",
+    e_en: "Surface Area ∝ Radius²<br>New radius/Old radius = √1.44 = 1.2<br>Increase = 20%"
+  },
+  {
+    q_hi: "Q54. यदि एक गोले की त्रिज्या में 5% की वृद्धि की जाती है, तो गोले के पृष्ठीय क्षेत्रफल में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q54. If the radius of a sphere is increased by 5%, by what percentage will the surface area of the sphere increase?",
+    tag: "SSC CHSL 08/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 10.25%",
+      "(b) 15.25%",
+      "(c) 13.25%",
+      "(d) 11.25%"
+    ],
+    o_en: [
+      "(a) 10.25%",
+      "(b) 15.25%",
+      "(c) 13.25%",
+      "(d) 11.25%"
+    ],
+    a: 0,
+    e_hi: "पृष्ठीय क्षेत्रफल ∝ r²<br>वृद्धि = 2 × 5 + 5²/100<br>= 10.25%",
+    e_en: "Surface area ∝ r²<br>Increase = 2 × 5 + 5²/100<br>= 10.25%"
+  },
+  {
+    q_hi: "Q55. एक गोले की त्रिज्या में 25% की वृद्धि की जाती है। पृष्ठीय क्षेत्रफल में वृद्धि प्रतिशत क्या है?",
+    q_en: "Q55. The radius of a sphere is increased by 25%. What is the percentage increase in its surface area?",
+    tag: "SSC CHSL 04/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 15.55%",
+      "(b) 56.25%",
+      "(c) 25.25%",
+      "(d) 36.45%"
+    ],
+    o_en: [
+      "(a) 15.55%",
+      "(b) 56.25%",
+      "(c) 25.25%",
+      "(d) 36.45%"
+    ],
+    a: 1,
+    e_hi: "पृष्ठीय क्षेत्रफल ∝ r²<br>वृद्धि = 2 × 25 + 25²/100<br>= 50 + 6.25<br>= 56.25%",
+    e_en: "Surface area ∝ r²<br>Increase = 2 × 25 + 25²/100<br>= 50 + 6.25<br>= 56.25%"
+  },
+  {
+    q_hi: "Q56. यदि किसी वर्ग की भुजा में 5% की वृद्धि की जाती है, तो उसके क्षेत्रफल में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q56. If the side of a square is increased by 5%, by what percentage will its area increase?",
+    tag: "SSC CHSL 02/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 10.25%",
+      "(b) 11%",
+      "(c) 10%",
+      "(d) 10.5%"
+    ],
+    o_en: [
+      "(a) 10.25%",
+      "(b) 11%",
+      "(c) 10%",
+      "(d) 10.5%"
+    ],
+    a: 0,
+    e_hi: "क्षेत्रफल ∝ (भुजा)²<br>वृद्धि = 2 × 5 + 5²/100<br>= 10.25%",
+    e_en: "Area ∝ (Side)²<br>Increase = 2 × 5 + 5²/100<br>= 10.25%"
+  },
+  {
+    q_hi: "Q57. एक आयताकार लॉन की चौड़ाई 8% कम की जाती है और इसकी लंबाई में 15% की वृद्धि की जाती है। लॉन के क्षेत्रफल में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q57. The width of a rectangular lawn is decreased by 8% and its length is increased by 15%. Find the percentage change in the area of the lawn.",
+    tag: "SSC CPO 29/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 8.5% वृद्धि",
+      "(b) 8.5% कमी",
+      "(c) 5.8% कमी",
+      "(d) 5.8% वृद्धि"
+    ],
+    o_en: [
+      "(a) 8.5% increase",
+      "(b) 8.5% decrease",
+      "(c) 5.8% decrease",
+      "(d) 5.8% increase"
+    ],
+    a: 3,
+    e_hi: "नया क्षेत्रफल = 92% × 115%<br>= 105.8%<br>अतः वृद्धि = 5.8%",
+    e_en: "New Area = 92% × 115%<br>= 105.8%<br>Hence Increase = 5.8%"
+  },
+  {
+    q_hi: "Q58. एक वृत्त की त्रिज्या में इस प्रकार वृद्धि की जाती है कि उसकी परिधि में 7% की वृद्धि हो जाती है। परिणामस्वरूप, वृत्त के क्षेत्रफल में भी ____ की वृद्धि होती है।",
+    q_en: "Q58. The radius of a circle is increased in such a way that its circumference increases by 7%. As a result, the area of the circle also increases by ____.",
+    tag: "SSC Phase XII 20/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 12.20%",
+      "(b) 10.28%",
+      "(c) 14.49%",
+      "(d) 18.69%"
+    ],
+    o_en: [
+      "(a) 12.20%",
+      "(b) 10.28%",
+      "(c) 14.49%",
+      "(d) 18.69%"
+    ],
+    a: 2,
+    e_hi: "परिधि ∝ त्रिज्या<br>नई त्रिज्या = 107%<br>क्षेत्रफल = (107/100)²<br>= 114.49%<br>वृद्धि = 14.49%",
+    e_en: "Circumference ∝ Radius<br>New radius = 107%<br>Area = (107/100)²<br>= 114.49%<br>Increase = 14.49%"
+  },
+  {
+    q_hi: "Q59. एक वर्गाकार भूखंड का विस्तार इस प्रकार किया जाता है कि उसका क्षेत्रफल मूल क्षेत्रफल का 225% हो जाए। प्रत्येक भुजा में कितने प्रतिशत की वृद्धि करनी होगी?",
+    q_en: "Q59. A square plot is expanded such that its area becomes 225% of the original area. By what percentage must each side be increased?",
+    tag: "SSC CPO 09/12/2025 (Shift-02)",
+    o_hi: [
+      "(a) 50%",
+      "(b) 100%",
+      "(c) 25%",
+      "(d) 50.5%"
+    ],
+    o_en: [
+      "(a) 50%",
+      "(b) 100%",
+      "(c) 25%",
+      "(d) 50.5%"
+    ],
+    a: 0,
+    e_hi: "नया क्षेत्रफल = 225%<br>नई भुजा = √225% = 150%<br>भुजा में वृद्धि = 50%",
+    e_en: "New Area = 225%<br>New Side = √225% = 150%<br>Increase in Side = 50%"
+  },
+  {
+    q_hi: "Q60. एक वृत्ताकार डिस्क की त्रिज्या 10% कम जाती है। इसके क्षेत्रफल में कितने प्रतिशत कमी हुई है?",
+    q_en: "Q60. The radius of a circular disc is decreased by 10%. By what percentage does its area decrease?",
+    tag: "SSC CGL 12/09/2025 (Shift-03)",
+    o_hi: [
+      "(a) 10%",
+      "(b) 19%",
+      "(c) 18%",
+      "(d) 15%"
+    ],
+    o_en: [
+      "(a) 10%",
+      "(b) 19%",
+      "(c) 18%",
+      "(d) 15%"
+    ],
+    a: 1,
+    e_hi: "नई त्रिज्या = 90%<br>नया क्षेत्रफल = 90²/100 = 81%<br>कमी = 100 - 81<br>= 19%",
+    e_en: "New Radius = 90%<br>New Area = 90²/100 = 81%<br>Decrease = 100 - 81<br>= 19%"
+  },
+  {
+    q_hi: "Q61. एक आयत की लंबाई और चौड़ाई में क्रमशः 8% और 5% की वृद्धि की जाती है। आयत के क्षेत्रफल में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q61. The length and breadth of a rectangle are increased by 8% and 5% respectively. By what percentage will the area of the rectangle increase?",
+    tag: "SSC CGL 01/12/2022 (Shift-01)",
+    o_hi: [
+      "(a) 13.4%",
+      "(b) 15.4%",
+      "(c) 12.4%",
+      "(d) 16.4%"
+    ],
+    o_en: [
+      "(a) 13.4%",
+      "(b) 15.4%",
+      "(c) 12.4%",
+      "(d) 16.4%"
+    ],
+    a: 0,
+    e_hi: "नया क्षेत्रफल = 108% × 105%<br>= 113.4%<br>वृद्धि = 13.4%",
+    e_en: "New Area = 108% × 105%<br>= 113.4%<br>Increase = 13.4%"
+  },
+  {
+    q_hi: "Q62. यदि घनाभ के सभी तीन आयामों को 10% बढ़ाया जाता है, तो आयतन कितने प्रतिशत बढ़ेगा?",
+    q_en: "Q62. If all three dimensions of a cuboid are increased by 10%, by what percentage will its volume increase?",
+    tag: "SSC CGL 18/09/2025 (Shift-02)",
+    o_hi: [
+      "(a) 10%",
+      "(b) 21%",
+      "(c) 30%",
+      "(d) 33.1%"
+    ],
+    o_en: [
+      "(a) 10%",
+      "(b) 21%",
+      "(c) 30%",
+      "(d) 33.1%"
+    ],
+    a: 3,
+    e_hi: "नया आयतन = 110% × 110% × 110%<br>= 133.1%<br>वृद्धि = 33.1%",
+    e_en: "New Volume = 110% × 110% × 110%<br>= 133.1%<br>Increase = 33.1%"
+  },
+  {
+    q_hi: "Q63. एक त्रिभुज के आधार में 40% की वृद्धि की गई। इसकी ऊँचाई कितने प्रतिशत (दो दशमलव स्थानों तक सही) बढ़ाई जानी चाहिए ताकि क्षेत्रफल में 60% की वृद्धि हो जाए?",
+    q_en: "Q63. The base of a triangle is increased by 40%. By what percentage (correct to two decimal places) should its height be increased so that the area increases by 60%?",
+    tag: "SSC CGL 13/04/2022 (Shift-03)",
+    o_hi: [
+      "(a) 15.54%",
+      "(b) 20.01%",
+      "(c) 14.28%",
+      "(d) 18.62%"
+    ],
+    o_en: [
+      "(a) 15.54%",
+      "(b) 20.01%",
+      "(c) 14.28%",
+      "(d) 18.62%"
+    ],
+    a: 2,
+    e_hi: "क्षेत्रफल ∝ आधार × ऊँचाई<br>नया आधार = 140%<br>नया क्षेत्रफल = 160%<br>नई ऊँचाई = 160/140 × 100<br>= 114.28%<br>अतः वृद्धि = 14.28%",
+    e_en: "Area ∝ Base × Height<br>New Base = 140%<br>New Area = 160%<br>New Height = 160/140 × 100<br>= 114.28%<br>Hence Increase = 14.28%"
+  },
+  {
+    q_hi: "Q64. यदि किसी गोले की त्रिज्या में 16\\frac{2}{3}% की वृद्धि होती है, तो इसके पृष्ठीय क्षेत्रफल में हुई प्रतिशत वृद्धि (ठीक एक दशमलव स्थान तक) ज्ञात करें।",
+    q_en: "Q64. If the radius of a sphere is increased by 16\\frac{2}{3}%, find the percentage increase in its surface area (correct to one decimal place).",
+    tag: "SSC MTS 27/10/2021 (Shift-02)",
+    o_hi: [
+      "(a) 33.9%",
+      "(b) 35.6%",
+      "(c) 34.8%",
+      "(d) 36.1%"
+    ],
+    o_en: [
+      "(a) 33.9%",
+      "(b) 35.6%",
+      "(c) 34.8%",
+      "(d) 36.1%"
+    ],
+    a: 3,
+    e_hi: "16\\frac{2}{3}% = 1/6<br>नई त्रिज्या = 7/6 गुना<br>पृष्ठीय क्षेत्रफल = (7/6)² = 49/36<br>वृद्धि = 13/36 × 100<br>= 36.1%",
+    e_en: "16\\frac{2}{3}% = 1/6<br>New radius = 7/6 times<br>Surface Area = (7/6)² = 49/36<br>Increase = 13/36 × 100<br>= 36.1%"
+  },
+  {
+    q_hi: "Q65. यदि किसी घन की भुजा को तिगुना कर दिया जाए, तो उस घन के पृष्ठीय क्षेत्रफल में प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q65. If the side of a cube is tripled, find the percentage increase in the surface area of the cube.",
+    tag: "SSC CHSL 05/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 800%",
+      "(b) 500%",
+      "(c) 700%",
+      "(d) 650%"
+    ],
+    o_en: [
+      "(a) 800%",
+      "(b) 500%",
+      "(c) 700%",
+      "(d) 650%"
+    ],
+    a: 0,
+    e_hi: "पृष्ठीय क्षेत्रफल ∝ भुजा²<br>नई भुजा = 3 गुना<br>नया क्षेत्रफल = 3² = 9 गुना<br>वृद्धि = 9 - 1 = 8 गुना<br>= 800%",
+    e_en: "Surface Area ∝ Side²<br>New side = 3 times<br>New area = 3² = 9 times<br>Increase = 9 - 1 = 8 times<br>= 800%"
+  },
+  {
+    q_hi: "Q66. यदि किसी गोले की त्रिज्या दोगुनी कर दी जाए, तो उसका पृष्ठीय क्षेत्रफल बढ़ जाएगा:",
+    q_en: "Q66. If the radius of a sphere is doubled, its surface area will increase by:",
+    tag: "SSC CPO 03/10/2023 (Shift-03)",
+    o_hi: [
+      "(a) 200%",
+      "(b) 100%",
+      "(c) 300%",
+      "(d) 400%"
+    ],
+    o_en: [
+      "(a) 200%",
+      "(b) 100%",
+      "(c) 300%",
+      "(d) 400%"
+    ],
+    a: 2,
+    e_hi: "पृष्ठीय क्षेत्रफल ∝ r²<br>नई त्रिज्या = 2r<br>नया क्षेत्रफल = 4r²<br>वृद्धि = 4 - 1 = 3 गुना<br>= 300%",
+    e_en: "Surface Area ∝ r²<br>New radius = 2r<br>New area = 4r²<br>Increase = 4 - 1 = 3 times<br>= 300%"
+  },
+  {
+    q_hi: "Q67. यदि किसी वर्ग के क्षेत्रफल में 19% की कमी हुई, तो वर्ग के विकर्ण में हुई कमी ज्ञात करें।",
+    q_en: "Q67. If the area of a square is decreased by 19%, find the decrease in the diagonal of the square.",
+    tag: "SSC CPO 23/11/2020 (Shift-02)",
+    o_hi: [
+      "(a) 15%",
+      "(b) 12%",
+      "(c) 10%",
+      "(d) 5%"
+    ],
+    o_en: [
+      "(a) 15%",
+      "(b) 12%",
+      "(c) 10%",
+      "(d) 5%"
+    ],
+    a: 2,
+    e_hi: "क्षेत्रफल 19% कम होने पर नया क्षेत्रफल = 81%<br>वर्ग की भुजा = √81% = 90%<br>विकर्ण भी 90% रह जाएगा।<br>कमी = 10%",
+    e_en: "When area is decreased by 19%, new area = 81%<br>Side of square = √81% = 90%<br>Diagonal will also become 90%.<br>Decrease = 10%"
+  },
+  {
+    q_hi: "Q68. यदि किसी गोले की त्रिज्या में 12% की वृद्धि की जाती है, तो आयतन में लगभग कितनी वृद्धि होगी?",
+    q_en: "Q68. If the radius of a sphere is increased by 12%, approximately by what percentage will its volume increase?",
+    tag: "SSC CHSL 03/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 42.5%",
+      "(b) 45.49%",
+      "(c) 40.49%",
+      "(d) 41.49%"
+    ],
+    o_en: [
+      "(a) 42.5%",
+      "(b) 45.49%",
+      "(c) 40.49%",
+      "(d) 41.49%"
+    ],
+    a: 2,
+    e_hi: "आयतन ∝ r³<br>नया आयतन = 1.12³<br>= 1.404928<br>वृद्धि = 40.4928%<br>लगभग = 40.49%",
+    e_en: "Volume ∝ r³<br>New volume = 1.12³<br>= 1.404928<br>Increase = 40.4928%<br>Approximately = 40.49%"
+  },
+  {
+    q_hi: "Q69. यदि एक गोले की त्रिज्या में 20% की वृद्धि कर दी जाती है, तो इसके आयतन में प्रतिशत वृद्धि ज्ञात करें।",
+    q_en: "Q69. If the radius of a sphere is increased by 20%, find the percentage increase in its volume.",
+    tag: "SSC CPO 29/06/2024 (Shift-03); SSC CHSL 13/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 70.6%",
+      "(b) 75.5%",
+      "(c) 72.8%",
+      "(d) 68.5%"
+    ],
+    o_en: [
+      "(a) 70.6%",
+      "(b) 75.5%",
+      "(c) 72.8%",
+      "(d) 68.5%"
+    ],
+    a: 2,
+    e_hi: "आयतन ∝ r³<br>नया आयतन = 1.2³ = 1.728<br>वृद्धि = 72.8%",
+    e_en: "Volume ∝ r³<br>New volume = 1.2³ = 1.728<br>Increase = 72.8%"
+  },
+  {
+    q_hi: "Q70. यदि किसी घनाभ की लंबाई और चौड़ाई में क्रमशः 6% और 8% की वृद्धि की जाती है, तो इसके आयतन में प्रतिशत वृद्धि (दो दशमलव स्थान तक पूर्णांकित) है:",
+    q_en: "Q70. If the length and breadth of a cuboid are increased by 6% and 8% respectively, the percentage increase in its volume (rounded to two decimal places) is:",
+    tag: "SSC CPO 29/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 13.96%",
+      "(b) 12.96%",
+      "(c) 14.48%",
+      "(d) 11.48%"
+    ],
+    o_en: [
+      "(a) 13.96%",
+      "(b) 12.96%",
+      "(c) 14.48%",
+      "(d) 11.48%"
+    ],
+    a: 2,
+    e_hi: "आयतन में परिवर्तन = 1.06 × 1.08<br>= 1.1448<br>वृद्धि = 14.48%",
+    e_en: "Change in volume = 1.06 × 1.08<br>= 1.1448<br>Increase = 14.48%"
+  },
+  {
+    q_hi: "Q71. एक धातु का शंक्वाकार कटोरा है, जिसकी आधार त्रिज्या 10 सेमी और ऊँचाई 24 सेमी है। इसे समान रूप से गर्म किया जाता है, जिससे इसके सभी आयामों में 10% की वृद्धि हो जाती है। आयतन में कितनी वृद्धि होगी?",
+    q_en: "Q71. A conical metallic bowl has a base radius of 10 cm and height of 24 cm. It is heated uniformly such that all its dimensions increase by 10%. What will be the percentage increase in volume?",
+    tag: "SSC CPO 04/10/2023 (Shift-03); SSC CHSL 30/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 10%",
+      "(b) 21%",
+      "(c) 33.1%",
+      "(d) 35%"
+    ],
+    o_en: [
+      "(a) 10%",
+      "(b) 21%",
+      "(c) 33.1%",
+      "(d) 35%"
+    ],
+    a: 2,
+    e_hi: "आयतन ∝ सभी रैखिक आयामों के गुणनफल<br>नया आयतन = 1.1³<br>= 1.331<br>वृद्धि = 33.1%",
+    e_en: "Volume ∝ Product of all linear dimensions<br>New volume = 1.1³<br>= 1.331<br>Increase = 33.1%"
+  },
+  {
+    q_hi: "Q72. राकेश एक आयताकार खेत का मालिक है। उसके खेत के पास एक एक्सप्रेसवे के निर्माण के कारण, उसके खेत की लंबाई और चौड़ाई क्रमशः 30% और 10% कम कर दी जाती हैं। उसके खेत के क्षेत्रफल में कितने प्रतिशत की कमी हुई?",
+    q_en: "Q72. Rakesh owns a rectangular field. Due to the construction of an expressway near his field, the length and breadth of his field are reduced by 30% and 10% respectively. What is the percentage decrease in the area of his field?",
+    tag: "SSC CHSL 03/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 40%",
+      "(b) 33%",
+      "(c) 37%",
+      "(d) 35%"
+    ],
+    o_en: [
+      "(a) 40%",
+      "(b) 33%",
+      "(c) 37%",
+      "(d) 35%"
+    ],
+    a: 2,
+    e_hi: "नई लंबाई = 70%<br>नई चौड़ाई = 90%<br>नया क्षेत्रफल = 70% × 90% = 63%<br>कमी = 100% - 63%<br>= 37%",
+    e_en: "New length = 70%<br>New breadth = 90%<br>New area = 70% × 90% = 63%<br>Decrease = 100% - 63%<br>= 37%"
+  },
+  {
+    q_hi: "Q73. एक घनाभ की लंबाई और चौड़ाई में क्रमशः 20% और 25% की वृद्धि की जाती है, जबकि इसकी ऊँचाई में 30% की कमी की जाती है। घनाभ के आयतन में कुल प्रतिशत वृद्धि/कमी कितनी होनी चाहिए?",
+    q_en: "Q73. The length and breadth of a cuboid are increased by 20% and 25% respectively, while its height is decreased by 30%. What should be the overall percentage increase/decrease in the volume of the cuboid?",
+    tag: "SSC CGL 07/12/2022 (Shift-03)",
+    o_hi: [
+      "(a) 5% की वृद्धि",
+      "(b) 3% की वृद्धि",
+      "(c) 2% की कमी",
+      "(d) 4% की कमी"
+    ],
+    o_en: [
+      "(a) 5% increase",
+      "(b) 3% increase",
+      "(c) 2% decrease",
+      "(d) 4% decrease"
+    ],
+    a: 0,
+    e_hi: "नया आयतन = 1.2 × 1.25 × 0.7<br>= 1.05<br>अतः आयतन में वृद्धि = 5%",
+    e_en: "New volume = 1.2 × 1.25 × 0.7<br>= 1.05<br>Hence increase in volume = 5%"
+  },
+  {
+    q_hi: "Q74. एक घनाभ के आयतन में कुल प्रतिशत परिवर्तन क्या है, यदि इसकी लंबाई और चौड़ाई में क्रमशः 15% और 25% की कमी की जाती है, जबकि इसकी ऊँचाई में 60% की वृद्धि की जाती है?",
+    q_en: "Q74. What is the total percentage change in the volume of a cuboid if its length and breadth are decreased by 15% and 25% respectively, while its height is increased by 60%?",
+    tag: "SSC CPO 29/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 5% कमी",
+      "(b) 2% कमी",
+      "(c) 5% वृद्धि",
+      "(d) 2% वृद्धि"
+    ],
+    o_en: [
+      "(a) 5% decrease",
+      "(b) 2% decrease",
+      "(c) 5% increase",
+      "(d) 2% increase"
+    ],
+    a: 3,
+    e_hi: "नया आयतन = 0.85 × 0.75 × 1.6<br>= 1.02<br>अतः आयतन में वृद्धि = 2%",
+    e_en: "New volume = 0.85 × 0.75 × 1.6<br>= 1.02<br>Hence increase in volume = 2%"
+  },
+  {
+    q_hi: "Q75. यदि अरुण के वेतन में 50% की कमी की जाती है और बाद में 50% की वृद्धि की जाती है, तो उसे कितने प्रतिशत की हानि हुई?",
+    q_en: "Q75. If Arun's salary is decreased by 50% and subsequently increased by 50%, what is his loss percentage?",
+    tag: "SSC CHSL 01/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 36%",
+      "(b) 10%",
+      "(c) 40%",
+      "(d) 25%"
+    ],
+    o_en: [
+      "(a) 36%",
+      "(b) 10%",
+      "(c) 40%",
+      "(d) 25%"
+    ],
+    a: 3,
+    e_hi: "मूल वेतन = 100<br>50% कमी के बाद = 50<br>50% वृद्धि के बाद = 75<br>हानि = 100 - 75<br>= 25%",
+    e_en: "Original salary = 100<br>After 50% decrease = 50<br>After 50% increase = 75<br>Loss = 100 - 75<br>= 25%"
+  },
+  {
+    q_hi: "Q76. किसी वस्तु की 25% और 25% की दो क्रमिक मूल्य वृद्धि निम्नलिखित में से किस एकल मूल्य वृद्धि के बराबर है?",
+    q_en: "Q76. Two successive price increases of 25% and 25% of an article are equivalent to a single price increase of which of the following?",
+    tag: "SSC CPO 29/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 52.25%",
+      "(b) 50.25%",
+      "(c) 56.25%",
+      "(d) 48.50%"
+    ],
+    o_en: [
+      "(a) 52.25%",
+      "(b) 50.25%",
+      "(c) 56.25%",
+      "(d) 48.50%"
+    ],
+    a: 2,
+    e_hi: "क्रमिक वृद्धि = 25 + 25 + (25 × 25)/100<br>= 50 + 6.25<br>= 56.25%",
+    e_en: "Successive increase = 25 + 25 + (25 × 25)/100<br>= 50 + 6.25<br>= 56.25%"
+  },
+  {
+    q_hi: "Q77. रवि के वेतन में 50% की वृद्धि की गई। कुछ समय बाद उसके नए वेतन में भी 50% की वृद्धि कर दी गई। उसके वेतन का लाभ-प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q77. Ravi's salary was increased by 50%. After some time, his new salary was again increased by 50%. Find the profit percentage in his salary.",
+    tag: "SSC CGL 10/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 125%",
+      "(b) 100%",
+      "(c) 200%",
+      "(d) 150%"
+    ],
+    o_en: [
+      "(a) 125%",
+      "(b) 100%",
+      "(c) 200%",
+      "(d) 150%"
+    ],
+    a: 0,
+    e_hi: "मूल वेतन = 100<br>पहली वृद्धि के बाद = 150<br>दूसरी वृद्धि = 50% of 150 = 75<br>नया वेतन = 225<br>लाभ = 225 - 100 = 125%<br>अतः लाभ = 125%",
+    e_en: "Original salary = 100<br>After 1st increase = 150<br>2nd increase = 50% of 150 = 75<br>New salary = 225<br>Gain = 225 - 100 = 125%<br>Hence gain = 125%"
+  },
+  {
+    q_hi: "Q78. एक कर्मचारी के वेतन में 10% की वृद्धि की जाती है और फिर बढ़ा हुआ वेतन 10% कम कर दिया जाता है। कर्मचारी के वेतन में कितने प्रतिशत की कमी होती है?",
+    q_en: "Q78. An employee's salary is increased by 10% and then the increased salary is reduced by 10%. What is the percentage decrease in the employee's salary?",
+    tag: "SSC Phase XII 25/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 1%",
+      "(b) 3%",
+      "(c) 2%",
+      "(d) 4%"
+    ],
+    o_en: [
+      "(a) 1%",
+      "(b) 3%",
+      "(c) 2%",
+      "(d) 4%"
+    ],
+    a: 0,
+    e_hi: "मूल वेतन = 100<br>10% वृद्धि के बाद = 110<br>10% कमी के बाद = 99<br>कमी = 100 - 99<br>= 1%",
+    e_en: "Original salary = 100<br>After 10% increase = 110<br>After 10% decrease = 99<br>Decrease = 100 - 99<br>= 1%"
+  },
+  {
+    q_hi: "Q79. एक शर्ट की कीमत में 20% की वृद्धि की जाती है और फिर 10% की वृद्धि की जाती है। कीमत में शुद्ध प्रतिशत वृद्धि क्या है?",
+    q_en: "Q79. The price of a shirt is increased by 20% and then increased by 10%. What is the net percentage increase in price?",
+    tag: "SSC CHSL 12/11/2025 (Shift-02)",
+    o_hi: [
+      "(a) 30%",
+      "(b) 32%",
+      "(c) 31%",
+      "(d) 33%"
+    ],
+    o_en: [
+      "(a) 30%",
+      "(b) 32%",
+      "(c) 31%",
+      "(d) 33%"
+    ],
+    a: 1,
+    e_hi: "क्रमिक वृद्धि = 20 + 10 + (20 × 10)/100<br>= 20 + 10 + 2<br>= 32%",
+    e_en: "Successive increase = 20 + 10 + (20 × 10)/100<br>= 20 + 10 + 2<br>= 32%"
+  },
+  {
+    q_hi: "Q80. एक संख्या को गलती से 20% घटाने के बजाय 25% बढ़ा दिया गया। अंतिम परिणाम सही मान से कितने प्रतिशत अधिक है?",
+    q_en: "Q80. A number was mistakenly increased by 25% instead of being decreased by 20%. By what percentage is the final result greater than the correct value?",
+    tag: "SSC CGL 21/09/2025 (Shift-03)",
+    o_hi: [
+      "(a) 56.25%",
+      "(b) 50.5%",
+      "(c) 45%",
+      "(d) 60.25%"
+    ],
+    o_en: [
+      "(a) 56.25%",
+      "(b) 50.5%",
+      "(c) 45%",
+      "(d) 60.25%"
+    ],
+    a: 0,
+    e_hi: "सही परिणाम = 80% of मूल मान<br>गलत परिणाम = 125% of मूल मान<br>अधिकता = 125 - 80 = 45<br>सही मान के सापेक्ष अधिकता = 45/80 × 100<br>= 56.25%",
+    e_en: "Correct result = 80% of original value<br>Wrong result = 125% of original value<br>Excess = 125 - 80 = 45<br>Excess relative to correct value = 45/80 × 100<br>= 56.25%"
+  }
+];
