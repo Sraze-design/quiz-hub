@@ -6242,6 +6242,7 @@ function showAITyping(show) {
 function onQuestionChangeAI() {
   if (suppressAIRefreshDuringLanguageSwitch) return;
   resetAIChat();
+  if (typeof window.__aiPencilClearForNewQuestion === 'function') window.__aiPencilClearForNewQuestion();
   currentAutoScannedQ = -1;
   updateAIButtonVisibility();
   const sheet = document.getElementById('ai-bottom-sheet');
@@ -6865,6 +6866,15 @@ if ('serviceWorker' in navigator) {
   // toolbar, toggle button, all hidden/reset) the moment the sheet closes —
   // so it never stays on in the background for the next time it's opened.
   window.__aiPencilForceDisable=function(){ if(enabled) setEnabled(false); };
+  // Exposed so switching to a different quiz question wipes any ink drawn
+  // on the AI sheet for the previous question — otherwise the same strokes
+  // (drawn on a canvas that's a sibling of the chat body, so clearing the
+  // chat's innerHTML doesn't touch it) kept showing on top of the next
+  // question's chat. Pencil on/off state itself is left untouched.
+  window.__aiPencilClearForNewQuestion=function(){
+    strokes=[]; redoStack=[]; currentStroke=null;
+    if(ctx) redraw();
+  };
 
   document.addEventListener('pointerdown', start, {capture:true, passive:false});
   document.addEventListener('pointermove', move, {capture:true, passive:false});
