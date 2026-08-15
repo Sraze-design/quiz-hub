@@ -4377,7 +4377,16 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
         ? (testPart ? `${chapterPart} (${testPart})` : chapterPart)
         : (testPart || 'Quiz');
     }
-    pushExplorerHistory({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath });
+    // Always keep the immediate history parent as the current Test List.
+    // This prevents the device/browser Back action from skipping the list and
+    // jumping directly to the Chapter page.
+    const __hist = history.state || {};
+    if (__hist.screen === 'quizlist' && __hist.subject === currentSubject && __hist.chapter === currentChapter) {
+      history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath }, '');
+    } else {
+      history.pushState({ screen: 'quizlist', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
+      history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath }, '');
+    }
 
     showQ();
     setQuizOriginalLanguageMode(true);
