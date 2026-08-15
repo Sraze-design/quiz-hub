@@ -3345,6 +3345,8 @@ function showEmptyState() {
   let enabled=false, drawing=false, activePointerId=null, tool='pen';
   let strokes=[], redoStack=[], currentStroke=null;
   let dpr=1;
+  let lastX=0,lastY=0,lastTime=0;
+  let rafPending=false, rafEvents=[];
 
   function qKey(){
     const quiz=currentQuizPath || currentQuizTitle || 'quiz';
@@ -3398,6 +3400,7 @@ function showEmptyState() {
     if(!enabled || e.pointerType!=='pen' || isPaused) return;
     e.preventDefault(); e.stopPropagation();
     drawing=true; activePointerId=e.pointerId; currentStroke={tool,points:[point(e)]};
+    rafEvents=[]; rafPending=false; lastX=e.clientX; lastY=e.clientY; lastTime=e.timeStamp||performance.now();
     // Paint the first Pencil contact immediately instead of waiting for the
     // first pointermove event. This removes the 'first letter doesn't appear'
     // feeling on fast handwriting.
@@ -3419,25 +3422,64 @@ function showEmptyState() {
     ctx.stroke();
     ctx.globalCompositeOperation='source-over';
   }
-  function move(e){
-    if(!enabled || !drawing || e.pointerId!==activePointerId || e.pointerType!=='pen') return;
-    e.preventDefault(); e.stopPropagation();
-    const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[e];
+  function paintMoveEvents(events){
+    if(!drawing || !currentStroke || !events.length) return;
     let prev=currentStroke.points[currentStroke.points.length-1];
     for(const ev of events){
       const next=point(ev);
-      // Draw only the new segment. The old implementation redrew the entire
-      // full-screen canvas on every Pencil event, which can cause visible
-      // input lag on iPad Safari. Incremental drawing keeps the stroke
-      // responsive while the complete stroke is still saved only on release.
+      // Ignore duplicate samples that Safari/WebKit can occasionally emit.
+      if(next.x===lastX && next.y===lastY && ev.timeStamp===lastTime) continue;
       drawPointOrSegment(prev,next);
       currentStroke.points.push(next);
+      lastX=next.x; lastY=next.y; lastTime=ev.timeStamp || performance.now();
       prev=next;
+    }
+  }
+  function move(e){
+    if(!enabled || !drawing || e.pointerId!==activePointerId || e.pointerType!=='pen') return;
+    e.preventDefault();
+    const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[e];
+    // Queue the latest high-frequency samples into one animation-frame paint.
+    // This avoids Safari main-thread contention while still consuming every
+    // coalesced Pencil sample instead of waiting for a visible gap.
+    rafEvents.push(...events);
+    if(!rafPending){
+      rafPending=true;
+      requestAnimationFrame(()=>{
+        rafPending=false;
+        const batch=rafEvents;
+        rafEvents=[];
+        paintMoveEvents(batch);
+      });
+    }
+  }
+  function rawMove(e){
+    // pointerrawupdate is available on some WebKit builds and can arrive
+    // earlier/more frequently than pointermove. Use it as an additional
+    // source, but only while a Pencil stroke is active.
+    if(!enabled || !drawing || e.pointerId!==activePointerId || e.pointerType!=='pen') return;
+    e.preventDefault();
+    if(typeof e.getCoalescedEvents==='function'){
+      rafEvents.push(...e.getCoalescedEvents());
+    }else{
+      rafEvents.push(e);
+    }
+    if(!rafPending){
+      rafPending=true;
+      requestAnimationFrame(()=>{
+        rafPending=false;
+        const batch=rafEvents;
+        rafEvents=[];
+        paintMoveEvents(batch);
+      });
     }
   }
   function end(e){
     if(!drawing || e.pointerId!==activePointerId) return;
     e.preventDefault(); e.stopPropagation();
+    // Flush any queued Pencil samples before committing the stroke.
+    if(rafEvents.length) paintMoveEvents(rafEvents);
+    rafEvents=[]; rafPending=false;
     drawing=false;activePointerId=null;
     if(currentStroke && currentStroke.points.length){strokes.push(currentStroke);redoStack=[];save();}
     currentStroke=null;
@@ -3477,6 +3519,7 @@ function showEmptyState() {
     document.getElementById('pencilClearBtn').addEventListener('click',clearAll);
     document.addEventListener('pointerdown',start,{capture:true,passive:false});
     document.addEventListener('pointermove',move,{capture:true,passive:false});
+    document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
     document.addEventListener('contextmenu',preventSelection,{capture:true});
