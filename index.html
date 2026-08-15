@@ -3596,6 +3596,19 @@ function showEmptyState() {
     document.addEventListener('contextmenu',blockOptionAndSelection,{capture:true,passive:false});
     document.addEventListener('selectstart',blockOptionAndSelection,{capture:true,passive:false});
     document.addEventListener('selectionchange',clearNativeSelection,{capture:true,passive:true});
+
+    // Palm-rejection fix: while pencil mode is active, suppress the browser's
+    // own touch handling for EVERY touch (including a resting palm), not just
+    // the pen. If we don't do this, WebKit sometimes treats the extra palm
+    // touch as a gesture candidate and pauses/cancels the pen's pointer
+    // stream mid-stroke until the pen is lifted and put down again.
+    function blockAllTouch(e){
+      if(!enabled) return;
+      e.preventDefault();
+    }
+    document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
+    document.addEventListener('touchmove',blockAllTouch,{capture:true,passive:false});
+    document.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
     window.addEventListener('resize',resize,{passive:true});
     window.addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});
   }
