@@ -541,6 +541,12 @@ body {
   display:none;
   touch-action:none;
 }
+#pencilStarCanvas{
+  position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;
+  z-index:9998;pointer-events:none;
+  display:none;
+  touch-action:none;
+}
 body.pencil-mode,body.pencil-mode *{
   -webkit-user-select:none !important;
   user-select:none !important;
@@ -567,6 +573,8 @@ body.pencil-mode{
 }
 #pencilTools button.active{background:#fee2e2;color:#dc2626;}
 #pencilTools button.clear{color:#dc2626;}
+#pencilTools button.clear.confirm-1{background:#fecaca;transform:scale(1.08);}
+#pencilTools button.clear.confirm-2{background:#fca5a5;transform:scale(1.16);}
 #pencilTools button.pencil-color-btn{
   border:2px solid transparent;border-radius:50%;padding:0;width:26px;height:26px;
   min-width:26px;background-clip:padding-box;
@@ -2516,6 +2524,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 <!-- Apple Pencil full-screen annotation layer: pointer-events stay off the canvas so normal UI remains usable with touch. -->
 <canvas id="pencilCanvas" aria-hidden="true"></canvas>
+<canvas id="pencilStarCanvas" aria-hidden="true"></canvas>
 <div id="pencilEraserCursor" aria-hidden="true"></div>
 <div id="pencilTools" aria-hidden="true">
   <button type="button" id="pencilPenBtn" class="active" title="Pen">✎</button>
@@ -3369,7 +3378,7 @@ function showEmptyState() {
    segment painting, coalesced samples when available, and raw samples only
    as a fallback/primary stream (never both at once). */
 (function initApplePencilLayer(){
-  let canvas, ctx, toggle, tools;
+  let canvas, ctx, starCanvas, starCtx, toggle, tools;
   let enabled=false, drawing=false, activePointerId=null, tool='pen', penColor='#dc2626';
   let starTapStart=null;
   const TAP_THRESHOLD=10; // px of finger/pencil drift still counted as a tap
@@ -3399,6 +3408,14 @@ function showEmptyState() {
     canvas.style.height=h+'px';
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(starCanvas){
+      starCanvas.width=Math.round(w*dpr);
+      starCanvas.height=Math.round(h*dpr);
+      starCanvas.style.width=w+'px';
+      starCanvas.style.height=h+'px';
+      starCtx=starCanvas.getContext('2d',{alpha:true,desynchronized:true});
+      starCtx.setTransform(dpr,0,0,dpr,0,0);
+    }
     redraw();
   }
 
@@ -3452,23 +3469,23 @@ function showEmptyState() {
   // the pen/eraser stroke rendering path since it's a single tap-placed
   // shape rather than a dragged line.
   function drawStar(cx,cy,color){
-    if(!ctx) return;
+    if(!starCtx) return;
     const outerR=9, innerR=3.6, spikes=5;
     let rot=-Math.PI/2;
     const step=Math.PI/spikes;
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+    starCtx.save();
+    starCtx.beginPath();
+    starCtx.moveTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
     for(let i=0;i<spikes;i++){
       rot+=step;
-      ctx.lineTo(cx+Math.cos(rot)*innerR, cy+Math.sin(rot)*innerR);
+      starCtx.lineTo(cx+Math.cos(rot)*innerR, cy+Math.sin(rot)*innerR);
       rot+=step;
-      ctx.lineTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+      starCtx.lineTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
     }
-    ctx.closePath();
-    ctx.fillStyle=color||penColor;
-    ctx.fill();
-    ctx.restore();
+    starCtx.closePath();
+    starCtx.fillStyle=color||penColor;
+    starCtx.fill();
+    starCtx.restore();
   }
 
   // Renders a finished/loaded stroke exactly the way it was drawn live:
@@ -3507,6 +3524,7 @@ function showEmptyState() {
   function redraw(){
     if(!ctx) return;
     ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+    if(starCtx) starCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
     for(const st of strokes) drawStroke(st);
     if(currentStroke) drawStroke(currentStroke);
   }
@@ -3528,6 +3546,31 @@ function showEmptyState() {
   function clearAll(){
     strokes=[]; redoStack=[]; currentStroke=null;
     redraw(); save();
+  }
+
+  // Clear needs 3 taps within a short window before it actually wipes the
+  // page — cheap insurance against an accidental tap deleting stars/notes.
+  // Each tap nudges the button so there's visible feedback that it registered.
+  let clearClickCount=0, clearClickTimer=null;
+
+  function resetClearConfirm(){
+    clearClickCount=0;
+    if(clearClickTimer){ clearTimeout(clearClickTimer); clearClickTimer=null; }
+    document.getElementById('pencilClearBtn')?.classList.remove('confirm-1','confirm-2');
+  }
+
+  function handleClearClick(){
+    clearClickCount++;
+    if(clearClickTimer) clearTimeout(clearClickTimer);
+    const btn=document.getElementById('pencilClearBtn');
+    if(clearClickCount>=3){
+      resetClearConfirm();
+      clearAll();
+      return;
+    }
+    btn?.classList.toggle('confirm-1',clearClickCount===1);
+    btn?.classList.toggle('confirm-2',clearClickCount===2);
+    clearClickTimer=setTimeout(resetClearConfirm,1200);
   }
 
   function setTool(nextTool){
@@ -3742,10 +3785,11 @@ function showEmptyState() {
     enabled=!enabled;
     document.body.classList.toggle('pencil-mode',enabled);
     canvas.style.display=enabled?'block':'none';
+    if(starCanvas) starCanvas.style.display=enabled?'block':'none';
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
-    else { drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); }
+    else { drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); resetClearConfirm(); }
   }
 
   function undo(){
@@ -3766,9 +3810,11 @@ function showEmptyState() {
     drawing=false; activePointerId=null; usingRawStream=false; currentStroke=null;
     document.body.classList.remove('pencil-mode');
     if(canvas) canvas.style.display='none';
+    if(starCanvas) starCanvas.style.display='none';
     if(tools) tools.style.display='none';
     if(toggle) toggle.classList.remove('active');
     hideEraserCursor();
+    resetClearConfirm();
   }
 
   window.__pencilOnQuestionChange=function(){ if(enabled) load(); };
@@ -3798,10 +3844,12 @@ function showEmptyState() {
 
   function init(){
     canvas=document.getElementById('pencilCanvas');
+    starCanvas=document.getElementById('pencilStarCanvas');
     toggle=document.getElementById('pencilToggleBtn');
     tools=document.getElementById('pencilTools');
     if(!canvas||!toggle||!tools) return;
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+    if(starCanvas) starCtx=starCanvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
 
     toggle.addEventListener('click',toggleMode);
@@ -3812,7 +3860,7 @@ function showEmptyState() {
     document.getElementById('pencilStarBtn')?.addEventListener('click',()=>setTool('star'));
     document.getElementById('pencilUndoBtn')?.addEventListener('click',undo);
     document.getElementById('pencilRedoBtn')?.addEventListener('click',redo);
-    document.getElementById('pencilClearBtn')?.addEventListener('click',clearAll);
+    document.getElementById('pencilClearBtn')?.addEventListener('click',handleClearClick);
 
     // Pencil input is handled at document level because the transparent canvas
     // intentionally does not receive pointer events. No RAF queue here: the
