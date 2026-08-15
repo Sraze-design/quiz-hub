@@ -6163,20 +6163,56 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
-// AI chat pencil: a small, self-contained drawing layer scoped to just the
-// message area (#aiChatBody) of the AI assistant sheet. Deliberately
-// separate from the main quiz-question pencil engine — different toggle,
-// different canvas, no shared state. The canvas only ever covers the chat
-// body element, so the header (drag/close) and the bottom input area sit
-// outside its bounds and are never intercepted, on or off.
+// AI chat pencil: same drawing engine/quality as the main quiz-question
+// pencil (smoothing, pressure-based width, low-latency raw-pointer
+// handling, self-healing watchdog, palm/gesture-cancel mitigation) —
+// ported over so writing feels identical — but scoped to just the message
+// area (#aiChatBody) of the AI assistant sheet, with its own independent
+// toggle. Canvas is positioned via JS to match the chat body's live
+// viewport rect (not appended as a scrolling child of it), so it stays
+// correctly aligned even while the chat auto-scrolls during a streaming
+// response — a fixed sibling, not a scrolling passenger.
 (function(){
   let enabled=false, drawing=false, activePointerId=null;
   let canvas=null, ctx=null, dpr=1;
-  let lastX=0,lastY=0,smoothX=0,smoothY=0;
-  const ALPHA=0.35, LINE_WIDTH=3.2;
+  let strokes=[], currentStroke=null;
+  let lastX=0,lastY=0,lastTime=0,lastPenEventTime=0;
+  let smoothX=0,smoothY=0;
+  const penColor='#dc2626';
+  const SMOOTH_ALPHA=0.4;
+  const BASE_WIDTH=3.9, MIN_WIDTH=2.6, MAX_WIDTH=5.8;
 
   function chatBody(){ return document.getElementById('aiChatBody'); }
   function sheet(){ return document.getElementById('ai-bottom-sheet'); }
+
+  function point(e){
+    const r=canvas.getBoundingClientRect();
+    return {x:e.clientX-r.left, y:e.clientY-r.top};
+  }
+  function mid(a,b){ return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
+  function widthFor(pressure){
+    const p=(typeof pressure==='number' && pressure>0) ? pressure : 0.5;
+    return Math.max(MIN_WIDTH,Math.min(MAX_WIDTH, BASE_WIDTH-0.7+p*1.9));
+  }
+  function avgW(a,b){
+    const wa=(typeof a.w==='number')?a.w:BASE_WIDTH;
+    const wb=(typeof b.w==='number')?b.w:BASE_WIDTH;
+    return (wa+wb)/2;
+  }
+  function applyStyle(width,color){
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.lineWidth=width!=null?width:BASE_WIDTH;
+    ctx.strokeStyle=color||penColor;
+    ctx.globalCompositeOperation='source-over';
+  }
+  function drawDot(a,width,color){
+    applyStyle(width,color);
+    ctx.beginPath();
+    ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
+    ctx.fillStyle=ctx.strokeStyle;
+    ctx.fill();
+  }
 
   function ensureCanvas(){
     if(canvas) return canvas;
@@ -6184,11 +6220,6 @@ if ('serviceWorker' in navigator) {
     if(!sh) return null;
     canvas=document.createElement('canvas');
     canvas.id='aiPencilCanvas';
-    // Appended to the sheet itself, not into #aiChatBody. #aiChatBody is
-    // the scrolling element — a child of it would scroll away from its
-    // own backing surface as messages grow/auto-scroll. Positioning this
-    // as a sibling and syncing its rect via JS keeps it pinned over
-    // whatever's currently visible, independent of chat scroll position.
     sh.appendChild(canvas);
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
@@ -6201,68 +6232,157 @@ if ('serviceWorker' in navigator) {
     if(!body||!sh) return;
     const bodyRect=body.getBoundingClientRect();
     const sheetRect=sh.getBoundingClientRect();
-    const left=bodyRect.left-sheetRect.left;
-    const top=bodyRect.top-sheetRect.top;
+    canvas.style.left=(bodyRect.left-sheetRect.left)+'px';
+    canvas.style.top=(bodyRect.top-sheetRect.top)+'px';
     const w=Math.max(1,Math.round(bodyRect.width));
     const h=Math.max(1,Math.round(bodyRect.height));
-    dpr=Math.min(window.devicePixelRatio||1,2);
-    // Preserve whatever's already drawn across a resize (e.g. keyboard
-    // opening/closing, orientation change) instead of wiping it.
-    let snapshot=null;
-    if(canvas.width>0 && canvas.height>0){
-      try{ snapshot=ctx.getImageData(0,0,canvas.width,canvas.height); }catch(_){ }
-    }
-    canvas.style.left=left+'px';
-    canvas.style.top=top+'px';
     canvas.style.width=w+'px';
     canvas.style.height=h+'px';
+    dpr=Math.min(window.devicePixelRatio||1,2);
     canvas.width=Math.round(w*dpr);
     canvas.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.lineCap='round';
-    ctx.lineJoin='round';
-    ctx.strokeStyle='#dc2626';
-    ctx.lineWidth=LINE_WIDTH;
-    if(snapshot){
-      try{ ctx.putImageData(snapshot,0,0); }catch(_){ }
+    redraw(); // full clean redraw from stroke data, same as main engine
+  }
+
+  function redraw(){
+    if(!ctx||!canvas) return;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const s of strokes) drawStroke(s);
+  }
+
+  function drawStroke(s){
+    const pts=s.points;
+    if(!pts||!pts.length) return;
+    if(pts.length===1){ drawDot(pts[0], pts[0].w||BASE_WIDTH, s.color); return; }
+    applyStyle(pts[0].w||BASE_WIDTH, s.color);
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x,pts[0].y);
+    if(pts.length===2){
+      ctx.lineTo(pts[1].x,pts[1].y);
+      ctx.stroke();
+      return;
     }
+    for(let i=1;i<pts.length-1;i++){
+      const m=mid(pts[i],pts[i+1]);
+      applyStyle(avgW(pts[i],pts[i+1]), s.color);
+      ctx.quadraticCurveTo(pts[i].x,pts[i].y,m.x,m.y);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(m.x,m.y);
+    }
+    ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
+    ctx.stroke();
+  }
+
+  function notePenEvent(e){
+    if(e.pointerType==='pen') lastPenEventTime=performance.now();
   }
 
   function isPen(e){ return e.pointerType==='pen'; }
 
+  function forceEndStroke(){
+    if(!drawing) return;
+    drawing=false; activePointerId=null;
+    if(currentStroke&&currentStroke.points.length) strokes.push(currentStroke);
+    currentStroke=null;
+    redraw();
+  }
+
+  // Same self-healing watchdog as the main engine: if the pointer stream
+  // ever silently stops (no event at all, not even a duplicate), finalize
+  // the stroke automatically rather than requiring the pencil to be
+  // physically lifted and replaced.
+  setInterval(function(){
+    if(!drawing) return;
+    if(performance.now()-lastPenEventTime>500) forceEndStroke();
+  },200);
+
   function start(e){
     if(!enabled||!canvas||e.target!==canvas||!isPen(e)) return;
     e.preventDefault();
+    notePenEvent(e);
+    if(drawing) forceEndStroke();
+
     drawing=true;
     activePointerId=e.pointerId;
-    const r=canvas.getBoundingClientRect();
-    smoothX=lastX=e.clientX-r.left;
-    smoothY=lastY=e.clientY-r.top;
-    // Immediate dot so a tap/short mark is visible even with no movement.
-    ctx.beginPath();
-    ctx.arc(smoothX,smoothY,LINE_WIDTH/2,0,Math.PI*2);
-    ctx.fillStyle=ctx.strokeStyle;
-    ctx.fill();
+    const p=point(e);
+    p.w=widthFor(e.pressure);
+    smoothX=p.x; smoothY=p.y;
+    currentStroke={color:penColor,points:[p]};
+    lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
+    drawDot(p,p.w,penColor);
   }
 
+  function appendSample(ev){
+    if(!drawing||!currentStroke||ev.pointerId!==activePointerId||!isPen(ev)) return;
+    const r=canvas.getBoundingClientRect();
+    const rawX=ev.clientX-r.left, rawY=ev.clientY-r.top, t=ev.timeStamp||performance.now();
+    if(rawX===lastX && rawY===lastY) return;
+    lastX=rawX; lastY=rawY; lastTime=t;
+
+    smoothX += SMOOTH_ALPHA*(rawX-smoothX);
+    smoothY += SMOOTH_ALPHA*(rawY-smoothY);
+    const next={x:smoothX,y:smoothY,w:widthFor(ev.pressure)};
+    currentStroke.points.push(next);
+
+    const pts=currentStroke.points, n=pts.length;
+    if(n===2){
+      const m=mid(pts[0],pts[1]);
+      applyStyle(avgW(pts[0],pts[1]),currentStroke.color);
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x,pts[0].y);
+      ctx.lineTo(m.x,m.y);
+      ctx.stroke();
+    } else if(n>=3){
+      const p0=pts[n-3], p1=pts[n-2], p2=pts[n-1];
+      const m1=mid(p0,p1), m2=mid(p1,p2);
+      applyStyle(avgW(p1,p2),currentStroke.color);
+      ctx.beginPath();
+      ctx.moveTo(m1.x,m1.y);
+      ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
+      // Live tip stub, matching the main engine's latency fix: extend to
+      // the raw point so ink visibly reaches the actual pen position each
+      // sample instead of always trailing at the midpoint.
+      ctx.lineTo(p2.x,p2.y);
+      ctx.stroke();
+    }
+  }
+  function appendEvents(events){ for(const ev of events) appendSample(ev); }
+
+  const supportsRawUpdate = 'onpointerrawupdate' in window;
+
   function move(e){
+    notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
-    const r=canvas.getBoundingClientRect();
-    const x=e.clientX-r.left, y=e.clientY-r.top;
-    smoothX += ALPHA*(x-smoothX);
-    smoothY += ALPHA*(y-smoothY);
-    ctx.beginPath();
-    ctx.moveTo(lastX,lastY);
-    ctx.lineTo(smoothX,smoothY);
-    ctx.stroke();
-    lastX=smoothX; lastY=smoothY;
+    const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    appendEvents(events.length?events:[e]);
+  }
+  function rawMove(e){
+    notePenEvent(e);
+    if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
+    e.preventDefault();
+    const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    appendEvents(events.length?events:[e]);
   }
 
   function end(e){
     if(!drawing||e.pointerId!==activePointerId) return;
+    e.preventDefault();
     drawing=false;
     activePointerId=null;
+    if(currentStroke&&currentStroke.points.length) strokes.push(currentStroke);
+    currentStroke=null;
+  }
+
+  // Palm/second-touch gesture-cancel mitigation, same as the main engine:
+  // block Safari's native pinch/gesture recognizer while this pencil mode
+  // is on, so a resting palm can't make WebKit cancel the pen's stream.
+  function blockGesture(e){
+    if(!enabled) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area')) return;
+    e.preventDefault();
   }
 
   function setEnabled(v){
@@ -6279,11 +6399,16 @@ if ('serviceWorker' in navigator) {
 
   document.addEventListener('pointerdown', start, {capture:true, passive:false});
   document.addEventListener('pointermove', move, {capture:true, passive:false});
+  if(supportsRawUpdate) document.addEventListener('pointerrawupdate', rawMove, {capture:true, passive:false});
   document.addEventListener('pointerup', end, {capture:true, passive:false});
   document.addEventListener('pointercancel', end, {capture:true, passive:false});
+  document.addEventListener('gesturestart', blockGesture, {capture:true, passive:false});
+  document.addEventListener('gesturechange', blockGesture, {capture:true, passive:false});
+  document.addEventListener('gestureend', blockGesture, {capture:true, passive:false});
   window.addEventListener('resize', function(){ if(enabled) resize(); }, {passive:true});
 })();
 </script>
 </body>
 
 </html>
+
