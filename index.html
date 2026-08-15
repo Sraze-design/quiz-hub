@@ -3385,6 +3385,7 @@ function showEmptyState() {
   let strokes=[], redoStack=[], currentStroke=null;
   let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
+  let lastPenEventTime=0; // updated on every raw pen event, independent of sample dedup — see notePenEvent()
   let smoothX=0,smoothY=0;
   const SMOOTH_ALPHA=0.4; // lower = smoother/more like ink, higher = more responsive
   const BASE_WIDTH=3.9;    // pen stroke thickness
@@ -3662,7 +3663,11 @@ function showEmptyState() {
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
     const rawX=ev.clientX, rawY=ev.clientY, t=ev.timeStamp||performance.now();
-    if(rawX===lastX && rawY===lastY && t===lastTime) return;
+    // Keyed off coordinates only, not timestamp: pointermove and
+    // pointerrawupdate can both report the exact same physical sample with
+    // slightly different timeStamp values, so this also dedupes across the
+    // two fallback streams, not just repeats within one stream.
+    if(rawX===lastX && rawY===lastY) return;
     lastX=rawX; lastY=rawY; lastTime=t;
 
     // Low-pass filter the raw touch position: softens hand-tremor jitter so
@@ -3711,6 +3716,7 @@ function showEmptyState() {
     if(isInExcludedZone(e.target)) return;
     e.preventDefault();
     e.stopPropagation();
+    notePenEvent(e);
 
     // Defensive cleanup: if a previous stroke never got a proper end (the
     // rare stream hiccup discussed above), finalize it now instead of just
@@ -3727,8 +3733,11 @@ function showEmptyState() {
       // Star is a tap-to-place stamp, not a dragged stroke: just remember
       // where the pencil first touched down and decide on release whether
       // it was a tap (place the star) or a drag (cancel, no star).
+      // No setPointerCapture here: our listeners are already on document
+      // at the capture phase, so they see every pen event regardless of
+      // target — capture isn't needed to keep receiving them, and holding
+      // it adds a failure mode if release ever gets skipped.
       starTapStart=point(e);
-      try{document.documentElement.setPointerCapture?.(e.pointerId);}catch(_){ }
       return;
     }
 
@@ -3739,9 +3748,12 @@ function showEmptyState() {
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
     drawDot(p,tool,p.w,penColor); // immediate first contact
 
-    // Capture on the document rather than the transparent canvas. The canvas
-    // intentionally has pointer-events:none so the normal page remains usable.
-    try{document.documentElement.setPointerCapture?.(e.pointerId);}catch(_){ }
+    // No setPointerCapture here (removed): our pointerdown/move/up/cancel
+    // listeners are all on document at the capture phase already, so they
+    // receive every pen event regardless of which element it targets or
+    // where on screen it moves — capture was redundant for that purpose,
+    // and holding it opened a failure mode (a capture that never gets
+    // released cleanly can block delivery for that pointerId).
   }
 
   // Safari on newer iPadOS delivers Apple Pencil samples via a dedicated
@@ -3749,10 +3761,19 @@ function showEmptyState() {
   // queue 'pointermove' goes through — noticeably lower latency for ink.
   // Feature-detected: falls back to plain pointermove wherever it's not
   // supported, so nothing changes on older Safari/other browsers.
+  //
+  // IMPORTANT: pointermove is NOT discarded even when rawupdate is
+  // supported. Both streams feed the same appendSample() path as a
+  // fallback pair. If pointerrawupdate ever silently stops delivering
+  // mid-stroke (a real possibility — no cancel/up fires either), the
+  // ordinary pointermove stream keeps ink flowing instead of drawing
+  // going dead until the pencil is physically lifted. appendSample()
+  // dedupes identical coordinates so having both sources active doesn't
+  // double-draw.
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
-    if(supportsRawUpdate && e.pointerType==='pen') return; // handled by rawMove instead
+    notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
     if(tool==='star') return; // no live drag-preview for the star stamp
@@ -3761,6 +3782,7 @@ function showEmptyState() {
   }
 
   function rawMove(e){
+    notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
     if(tool==='star') return;
@@ -3916,19 +3938,30 @@ function showEmptyState() {
     redraw();
   }
 
+  // Records that *some* pen event arrived, independent of whether it ended
+  // up producing a new drawn sample (appendSample dedupes identical
+  // coordinates). Used by the watchdog below so a run of duplicate-looking
+  // events isn't mistaken for a dead stream.
+  function notePenEvent(e){
+    if(e.pointerType==='pen') lastPenEventTime=performance.now();
+  }
+
   // Extra safety net, independent of blur/visibilitychange: sometimes
   // WebKit's pointer stream can silently stop delivering events mid-stroke
   // with no blur, no tab-hide, and no palm/second-touch involved at all —
   // just a rare stream hiccup. Previously the only way out was physically
   // lifting the pencil and touching down again (which produces a fresh
   // pointerdown that resets state). This watchdog checks periodically
-  // whether a stroke has gone stale (no new sample in a while despite
-  // drawing=true) and force-finalizes it on its own, so a fresh touch is
-  // never blocked waiting for a stuck stroke to be cleaned up.
+  // whether the stream has gone stale (no pen event at all in a while,
+  // despite drawing=true) and force-finalizes it on its own, so a fresh
+  // touch is never blocked waiting for a stuck stroke to be cleaned up.
+  // Keyed off lastPenEventTime (any event) rather than lastTime (only
+  // accepted/deduped samples) so a legitimate run of same-position events
+  // — pen held still — doesn't get mistaken for the stream dying.
   setInterval(function(){
     if(!drawing) return;
-    const idle=(performance.now()-lastTime);
-    if(idle>350) forceEndStroke();
+    const idle=(performance.now()-lastPenEventTime);
+    if(idle>500) forceEndStroke();
   },200);
 
   function init(){
