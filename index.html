@@ -3444,7 +3444,7 @@ function showEmptyState() {
   // These areas remain normal UI zones even while Pencil mode is enabled.
   function isPencilBlockedZone(target){
     if(!target || !target.closest) return false;
-    return !!target.closest('.floating-quiz-header, #controls, #pencilTools, #ai-floating-btn, #ai-bottom-sheet, #ai-overlay, #qp-panel, #qp-overlay');
+    return !!target.closest('.floating-quiz-header, #controls, #pencilTools, #ai-floating-btn, #ai-bottom-sheet, #ai-overlay, #qp-panel, #qp-overlay, #q-text, #exam-tag, .premium-question-card, #options, .options-stack');
   }
 
   function appendSample(ev){
@@ -3463,7 +3463,7 @@ function showEmptyState() {
 
   function start(e){
     if(!isPencil(e)) return;
-    // Header/footer and other interactive overlays are never drawing zones.
+    // Header/footer, question, options, and other interactive overlays are never drawing zones.
     if(isPencilBlockedZone(e.target)) return;
     e.preventDefault();
     e.stopPropagation();
@@ -3504,7 +3504,7 @@ function showEmptyState() {
 
   function blockOptionAndSelection(e){
     if(!enabled) return;
-    const optionTarget=e.target&&e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
+    const optionTarget=e.target&&e.target.closest ? e.target.closest('#options, #options button, #options [role=button], .options-stack, .options-stack button') : null;
 
     // In Pencil mode, never let a Pencil or palm/finger contact activate an
     // answer option. Other touches elsewhere remain available for scrolling.
