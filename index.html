@@ -3087,6 +3087,9 @@ async function buildGlobalQuizIndex() {
 let isHistoryNav = false;
 let skipExitConfirmOnce = false;
 let isBookmarkOnlyQuiz = false;
+// Wrong/Skipped/Mixed retests are practice attempts and must not overwrite
+// the All Time Best of the original full test.
+let isRetestAttempt = false;
 
 // True while a test is actively running (started, not yet submitted).
 function isTestInProgressNow() {
@@ -5025,7 +5028,10 @@ updateAIButtonVisibility();
 /* Leaderboard API integration (added) - uses only existing finalScore, avgSec, elapsed, currentQuizPath */
 if(currentQuizPath){
   fetchAllTimeBest(currentQuizPath);
-  postQuizResultToLeaderboard(currentQuizPath, finalScore, avgSec, elapsed);
+  // Only a full/original test can establish a new All Time Best.
+  if(!isRetestAttempt){
+    postQuizResultToLeaderboard(currentQuizPath, finalScore, avgSec, elapsed);
+  }
 }
 }
 
@@ -5047,10 +5053,16 @@ function renderAllTimeBest(record){
   const avgTimeEl=document.getElementById('atbAvgTime');
   const totalTimeEl=document.getElementById('atbTotalTime');
   const updatedEl=document.getElementById('atbUpdated');
-  const totalPoints=document.getElementById('total')?document.getElementById('total').innerText:'';
+  // All Time Best is for the original/full test. Retest modes intentionally
+  // shrink data to only the selected questions, so data.length must NEVER be
+  // used as the denominator here. ORIGINAL_TOTAL stores the real test size.
+  const originalTotal = (typeof ORIGINAL_TOTAL !== 'undefined' && Number(ORIGINAL_TOTAL) > 0)
+    ? Number(ORIGINAL_TOTAL)
+    : (typeof ORIGINAL_DATA !== 'undefined' && Array.isArray(ORIGINAL_DATA) && ORIGINAL_DATA.length > 0
+        ? ORIGINAL_DATA.length : data.length);
   if(bestScoreEl){
     bestScoreEl.innerText=(record.bestScore!==undefined&&record.bestScore!==null)
-      ? `${Number(record.bestScore).toFixed(2)}${totalPoints?' / '+totalPoints:''}`
+      ? `${Number(record.bestScore).toFixed(2)} / ${originalTotal}`
       : '--';
   }
   if(avgTimeEl) avgTimeEl.innerText=formatMMSS(record.bestAvgTime);
@@ -5331,6 +5343,8 @@ return;
 
 function startRetest(mode){
 document.getElementById('retestModal').style.display='none';
+// Mode 1 = full original test; modes 2-4 = reduced-question retests.
+isRetestAttempt = (mode !== 1);
 
 // Every Reattempt/Retest must always start in the original Hindi mode.
 // Do not carry the previous test's E/English state into the new attempt.
