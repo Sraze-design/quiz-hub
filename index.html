@@ -2818,9 +2818,79 @@ function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.c
 function openBookmarksFromMenu(){closeAppSideDrawer();renderBookmarkSubjects()}
 function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError()}
 function restoreNormalExplorerSearch(){const e=document.querySelector('.search-container');if(e)e.style.display='block'}
-function renderBookmarkSubjects(){pushExplorerHistory({screen:'bookmarks'});prepareBookmarkExplorer('Bookmarks');const l=document.getElementById('explorerList');l.innerHTML='';const bs=getBookmarks();if(!bs.length){showBookmarkEmptyState();return}const g=new Map();bs.forEach(b=>{const k=b.subject||'Other';if(!g.has(k))g.set(k,[]);g.get(k).push(b)});g.forEach((items,s)=>{const c=document.createElement('div');c.className='premium-card';c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper">📘</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(s)}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;c.onclick=()=>renderBookmarkTests(s);l.appendChild(c)})}
-function renderBookmarkTests(subject){pushExplorerHistory({screen:'bookmarkTests',subject:subject});prepareBookmarkExplorer(cleanHumanReadableTitle(subject));const l=document.getElementById('explorerList');l.innerHTML='';const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject);const g=new Map();bs.forEach(b=>{const k=b.path||b.testTitle||'Quiz';if(!g.has(k))g.set(k,[]);g.get(k).push(b)});g.forEach((items,path)=>{const b=items[0],c=document.createElement('div');c.className='premium-card';c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--warning-light);color:var(--warning);">🔖</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(b.testTitle||b.path||'Quiz')}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;c.onclick=()=>renderBookmarkQuestions(subject,path);l.appendChild(c)})}
-function renderBookmarkQuestions(subject,path){pushExplorerHistory({screen:'bookmarkQuestions',subject:subject,path:path});const l=document.getElementById('explorerList');const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&b.path===path).sort((a,b)=>a.questionIndex-b.questionIndex);prepareBookmarkExplorer(cleanHumanReadableTitle(items[0]?.testTitle||'Bookmarked Questions'));l.innerHTML='';items.forEach(b=>{const c=document.createElement('div');c.className='premium-card bookmark-question-card';c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><span class="bookmark-star">★</span>`;c.onclick=()=>loadQuizData(b.path,b.questionIndex);l.appendChild(c)})}
+function groupBookmarks(items, keyFn){
+  const g=new Map();
+  items.forEach(b=>{const k=keyFn(b);if(!g.has(k))g.set(k,[]);g.get(k).push(b)});
+  return g;
+}
+function renderBookmarkSubjects(){
+  pushExplorerHistory({screen:'bookmarks'});
+  prepareBookmarkExplorer('Bookmarks');
+  const l=document.getElementById('explorerList'); l.innerHTML='';
+  const bs=getBookmarks();
+  if(!bs.length){showBookmarkEmptyState();return;}
+  groupBookmarks(bs,b=>b.subject||'Other').forEach((items,s)=>{
+    const c=document.createElement('div'); c.className='premium-card';
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper">📘</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(s)}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
+    c.onclick=()=>renderBookmarkLevel2(s); l.appendChild(c);
+  });
+}
+function renderBookmarkLevel2(subject){
+  const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject);
+  const hasCategory=bs.some(b=>b.category);
+  pushExplorerHistory({screen:'bookmarkLevel2',subject:subject});
+  prepareBookmarkExplorer(cleanHumanReadableTitle(subject));
+  const l=document.getElementById('explorerList'); l.innerHTML='';
+  if(hasCategory){
+    groupBookmarks(bs,b=>b.category||'Direct').forEach((items,category)=>{
+      const c=document.createElement('div'); c.className='premium-card';
+      c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--primary-light);color:var(--primary);">🗂️</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(category)}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
+      c.onclick=()=>category==='Direct'?renderBookmarkDirectTests(subject):renderBookmarkChapters(subject,category); l.appendChild(c);
+    });
+  }else{
+    renderBookmarkChapters(subject,null);
+  }
+}
+function renderBookmarkChapters(subject,category){
+  const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject&&(!category||b.category===category));
+  const hasChapter=bs.some(b=>b.chapter);
+  if(!hasChapter){ renderBookmarkTests(subject,category,null); return; }
+  pushExplorerHistory({screen:'bookmarkChapters',subject:subject,category:category||null});
+  prepareBookmarkExplorer(cleanHumanReadableTitle(category||subject));
+  const l=document.getElementById('explorerList'); l.innerHTML='';
+  groupBookmarks(bs,b=>b.chapter||'Direct').forEach((items,chapter)=>{
+    const c=document.createElement('div'); c.className='premium-card';
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--success-light);color:var(--success);">📁</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(chapter)}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
+    c.onclick=()=>renderBookmarkTests(subject,category,chapter); l.appendChild(c);
+  });
+}
+function renderBookmarkDirectTests(subject){ return renderBookmarkTests(subject,null,null,true); }
+function renderBookmarkTests(subject,category,chapter,directOnly=false){
+  let bs=getBookmarks().filter(b=>(b.subject||'Other')===subject);
+  if(category) bs=bs.filter(b=>b.category===category);
+  else if(directOnly) bs=bs.filter(b=>!b.category);
+  if(chapter) bs=bs.filter(b=>b.chapter===chapter);
+  else if(!directOnly && category===null) bs=bs.filter(b=>!b.chapter);
+  pushExplorerHistory({screen:'bookmarkTests',subject:subject,category:category||null,chapter:chapter||null,directOnly:!!directOnly});
+  prepareBookmarkExplorer(cleanHumanReadableTitle(chapter||category||subject));
+  const l=document.getElementById('explorerList'); l.innerHTML='';
+  groupBookmarks(bs,b=>b.path||b.testTitle||'Quiz').forEach((items,path)=>{
+    const b=items[0],c=document.createElement('div'); c.className='premium-card';
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--warning-light);color:var(--warning);">🔖</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(b.testTitle||b.path||'Quiz')}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
+    c.onclick=()=>renderBookmarkQuestions(subject,path); l.appendChild(c);
+  });
+}
+function renderBookmarkQuestions(subject,path){
+  pushExplorerHistory({screen:'bookmarkQuestions',subject:subject,path:path});
+  const l=document.getElementById('explorerList');
+  const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&b.path===path).sort((a,b)=>a.questionIndex-b.questionIndex);
+  prepareBookmarkExplorer(cleanHumanReadableTitle(items[0]?.testTitle||'Bookmarked Questions')); l.innerHTML='';
+  items.forEach(b=>{
+    const c=document.createElement('div'); c.className='premium-card bookmark-question-card';
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><span class="bookmark-star">★</span>`;
+    c.onclick=()=>loadQuizData(b.path,b.questionIndex); l.appendChild(c);
+  });
+}
 function showBookmarkEmptyState(){document.getElementById('explorerList').innerHTML=`<div class="premium-state-view"><div class="state-illustration">🔖</div><div class="state-title">No Bookmarks Yet</div><div class="state-desc">Quiz में किसी question के ऊपर bookmark icon दबाएँ। Saved questions यहाँ subject और test के हिसाब से मिलेंगे.</div></div>`}
 
 let browserId = localStorage.getItem("browserId");
@@ -3024,7 +3094,9 @@ window.addEventListener('popstate', (e) => {
 
   switch (state.screen) {
     case 'bookmarks': renderBookmarkSubjects(); break;
-    case 'bookmarkTests': renderBookmarkTests(state.subject); break;
+    case 'bookmarkLevel2': renderBookmarkLevel2(state.subject); break;
+    case 'bookmarkChapters': renderBookmarkChapters(state.subject,state.category); break;
+    case 'bookmarkTests': renderBookmarkTests(state.subject,state.category,state.chapter,state.directOnly); break;
     case 'bookmarkQuestions': renderBookmarkQuestions(state.subject, state.path); break;
     case 'categories':
       renderCategories(state.subject);
