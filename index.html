@@ -3378,17 +3378,20 @@ function showEmptyState() {
 
   function point(e){ return {x:e.clientX,y:e.clientY}; }
 
-  function applyStyle(){
+  function mid(a,b){ return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
+
+  function applyStyle(forTool){
+    const useTool=forTool||tool;
     ctx.lineCap='round';
     ctx.lineJoin='round';
-    ctx.lineWidth=tool==='eraser' ? 24 : 3;
-    ctx.strokeStyle=tool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
-    ctx.globalCompositeOperation=tool==='eraser' ? 'destination-out' : 'source-over';
+    ctx.lineWidth=useTool==='eraser' ? 24 : 3;
+    ctx.strokeStyle=useTool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
+    ctx.globalCompositeOperation=useTool==='eraser' ? 'destination-out' : 'source-over';
   }
 
-  function drawSegment(a,b){
+  function drawSegment(a,b,forTool){
     if(!ctx||!a||!b) return;
-    applyStyle();
+    applyStyle(forTool);
     ctx.beginPath();
     ctx.moveTo(a.x,a.y);
     ctx.lineTo(b.x,b.y);
@@ -3396,9 +3399,9 @@ function showEmptyState() {
     ctx.globalCompositeOperation='source-over';
   }
 
-  function drawDot(a){
+  function drawDot(a,forTool){
     if(!ctx||!a) return;
-    applyStyle();
+    applyStyle(forTool);
     ctx.beginPath();
     ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
     ctx.fillStyle=ctx.strokeStyle;
@@ -3406,10 +3409,29 @@ function showEmptyState() {
     ctx.globalCompositeOperation='source-over';
   }
 
+  // Renders a finished/loaded stroke as a single smoothed path: consecutive
+  // raw points are connected through their midpoints with quadratic curves,
+  // which softens small hand-tremor jitter without changing the actual
+  // trajectory. Used for redraw on question switch, resize, undo/redo, and
+  // loading saved strokes.
   function drawStroke(st){
-    if(!st||!st.points.length) return;
-    if(st.points.length===1){ drawDot(st.points[0]); return; }
-    for(let i=1;i<st.points.length;i++) drawSegment(st.points[i-1],st.points[i]);
+    if(!st||!st.points||!st.points.length) return;
+    const pts=st.points, strokeTool=st.tool||'pen';
+    if(pts.length===1){ drawDot(pts[0],strokeTool); return; }
+    applyStyle(strokeTool);
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x,pts[0].y);
+    if(pts.length===2){
+      ctx.lineTo(pts[1].x,pts[1].y);
+    } else {
+      for(let i=1;i<pts.length-1;i++){
+        const m=mid(pts[i],pts[i+1]);
+        ctx.quadraticCurveTo(pts[i].x,pts[i].y,m.x,m.y);
+      }
+      ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
+    }
+    ctx.stroke();
+    ctx.globalCompositeOperation='source-over';
   }
 
   function redraw(){
@@ -3459,9 +3481,33 @@ function showEmptyState() {
     const x=ev.clientX, y=ev.clientY, t=ev.timeStamp||performance.now();
     if(x===lastX && y===lastY && t===lastTime) return;
     const next={x,y};
-    drawSegment({x:lastX,y:lastY},next);
     currentStroke.points.push(next);
     lastX=x; lastY=y; lastTime=t;
+
+    const pts=currentStroke.points, n=pts.length;
+    if(n===2){
+      // First raw segment: draw a straight stub up to the midpoint, the
+      // quadratic segments below pick up from there.
+      const m=mid(pts[0],pts[1]);
+      applyStyle();
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x,pts[0].y);
+      ctx.lineTo(m.x,m.y);
+      ctx.stroke();
+      ctx.globalCompositeOperation='source-over';
+    } else if(n>=3){
+      // Smooth the newest segment through the midpoints of the last three
+      // raw samples. Only touches the newest bit of the path, so it stays
+      // O(1) per sample with no added input latency.
+      const p0=pts[n-3], p1=pts[n-2], p2=pts[n-1];
+      const m1=mid(p0,p1), m2=mid(p1,p2);
+      applyStyle();
+      ctx.beginPath();
+      ctx.moveTo(m1.x,m1.y);
+      ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
+      ctx.stroke();
+      ctx.globalCompositeOperation='source-over';
+    }
   }
 
   function appendEvents(events){
@@ -3512,6 +3558,20 @@ function showEmptyState() {
     usingRawStream=false;
     try{document.documentElement.releasePointerCapture?.(e.pointerId);}catch(_){ }
     if(currentStroke&&currentStroke.points.length){
+      const pts=currentStroke.points;
+      if(pts.length>=3){
+        // Cap the smoothed live curve with a short straight tail so it
+        // actually reaches the final raw point instead of stopping short
+        // at the last midpoint.
+        const p1=pts[pts.length-2], p2=pts[pts.length-1];
+        const m=mid(p1,p2);
+        applyStyle();
+        ctx.beginPath();
+        ctx.moveTo(m.x,m.y);
+        ctx.lineTo(p2.x,p2.y);
+        ctx.stroke();
+        ctx.globalCompositeOperation='source-over';
+      }
       strokes.push(currentStroke);
       redoStack=[];
       save();
