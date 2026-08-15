@@ -639,6 +639,55 @@ body {
   margin-bottom: 6px;
   border: none;
 }
+
+/* ===== Apple Pencil Question Overlay (additive, safe) ===== */
+#pencilToggleBtn{
+  display:none;
+  width:38px;height:38px;flex:0 0 38px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:11px;background:#0f172a;color:#fff;
+  align-items:center;justify-content:center;
+  cursor:pointer;padding:0;
+  order:0;
+  -webkit-user-select:none;user-select:none;
+  touch-action:manipulation;
+}
+#pencilToggleBtn svg{width:20px;height:20px;display:block}
+#pencilToggleBtn.active{
+  background:#fee2e2;color:#dc2626;border-color:#fca5a5;
+  box-shadow:0 0 0 2px rgba(239,68,68,.12);
+}
+#pencilTools{
+  position:absolute;right:8px;top:8px;z-index:8;
+  display:none;align-items:center;gap:4px;
+  padding:4px;border-radius:12px;
+  background:rgba(255,255,255,.96);
+  border:1px solid #fecaca;
+  box-shadow:0 5px 16px rgba(15,23,42,.12);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+#pencilTools.show{display:flex}
+#pencilTools button{
+  width:30px;height:30px;border:0;border-radius:8px;
+  background:transparent;color:#475569;display:flex;
+  align-items:center;justify-content:center;padding:0;
+  cursor:pointer;
+}
+#pencilTools button:active{background:#fee2e2;color:#dc2626}
+#pencilCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:6;display:none;
+  touch-action:pan-y;
+  -webkit-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
+}
+#pencilCanvas.active{display:block}
+#q-text.pencil-active{
+  -webkit-user-select:none!important;user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+#pencilCanvas.eraser{cursor:crosshair}
+
 .question-text-style {
   font-size: 18px;
   font-weight: 700;
@@ -1421,23 +1470,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .quiz-pause-btn-premium svg,.btns button svg{flex-shrink:0}
 
 /* ==================================================
-   APPLE PENCIL QUESTION OVERLAY (SAFE ADD-ON)
-   ================================================== */
-#pencilToggleBtn{width:42px;height:38px;flex:0 0 42px;border:1px solid rgba(255,255,255,.16);border-radius:11px;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-#pencilToggleBtn svg{width:20px;height:20px}
-#pencilToggleBtn.active{background:#2563eb;border-color:#60a5fa;box-shadow:0 0 0 2px rgba(96,165,250,.18)}
-#pencilToggleBtn:disabled{opacity:.45;cursor:not-allowed}
-#pencilQuestionOverlay{display:none;position:absolute;inset:0;z-index:20;pointer-events:none;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-#quizEngineBox.pencil-mode #pencilQuestionOverlay{display:block;pointer-events:auto}
-#pencilQuestionCanvas{display:block;width:100%;height:100%;background:transparent;cursor:crosshair;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-#pencilQuestionToolbar{position:absolute;top:8px;right:8px;display:none;align-items:center;gap:5px;padding:5px 6px;background:rgba(255,255,255,.96);border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 4px 14px rgba(15,23,42,.10);pointer-events:auto;z-index:22}
-#quizEngineBox.pencil-mode #pencilQuestionToolbar{display:flex}
-.pencil-tool-btn{width:32px;height:32px;border:1px solid #dbe3ee;border-radius:9px;background:#fff;color:#334155;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;font-size:15px}
-.pencil-tool-btn.active{background:#fff1f2;color:#dc2626;border-color:#fca5a5}
-.pencil-tool-btn.danger{color:#dc2626}
-@media (max-width:767px){#pencilQuestionToolbar{top:5px;right:5px;padding:4px;gap:3px}.pencil-tool-btn{width:29px;height:29px;border-radius:8px;font-size:14px}}
-
-/* ==================================================
    FLOATING AI ASSISTANT & BOTTOM SHEET STYLES
    ================================================== */
 #ai-floating-btn {
@@ -2040,6 +2072,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const aiSheet = document.getElementById('ai-bottom-sheet');
     const aiPanelOpen = aiSheet && aiSheet.classList.contains('active');
     const btn = document.getElementById('langSwitchBtn');
+    const pencilBtn = document.getElementById('pencilToggleBtn');
     if (!btn) return;
     const quizVisible = quizBox && getComputedStyle(quizBox).display !== 'none';
     const questionsVisible = quizBody && getComputedStyle(quizBody).display !== 'none';
@@ -2048,6 +2081,11 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen && !aiPanelOpen;
     btn.style.display = shouldShow ? 'flex' : 'none';
     btn.style.pointerEvents = (shouldShow && !langSwitchBusy) ? 'auto' : 'none';
+    if (pencilBtn) {
+      pencilBtn.style.display = shouldShow ? 'flex' : 'none';
+      pencilBtn.style.pointerEvents = shouldShow ? 'auto' : 'none';
+      if (!shouldShow && typeof setPencilVisibility === 'function') setPencilVisibility(false);
+    }
   }
   // Old name kept as an alias so existing call sites elsewhere in the file
   // keep working untouched.
@@ -2185,8 +2223,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
             <div class="quiz-timer-label" id="quizCategoryLabel">DREAM TO DESTINY</div>
           </div>
           <div class="quiz-top-bar-right">
-            <button id="pencilToggleBtn" type="button" aria-label="Pencil" aria-pressed="false" title="Pencil" onclick="togglePencilMode(event)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
+            <button id="pencilToggleBtn" type="button" aria-label="Apple Pencil" title="Pencil" onclick="togglePencilMode(event)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+              </svg>
             </button>
             <div id="langSwitchHeaderSlot"></div>
             <button class="quiz-menu-btn" type="button" aria-label="Menu" onclick="openQuestionPalette()">
@@ -2218,7 +2258,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
           <button class="jump-btn-premium" onclick="goToQuestion(document.getElementById('jumpNo').value)">Go</button>
         </div>
 
-        <div id="quizWorkspace">
         <div id="quiz-box" style="position:relative; display:flex; flex-direction:column;">
           
           <!-- Premium Configured Pause View Modal Component Box Layer -->
@@ -2294,20 +2333,15 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
           </div>
 
           <!-- Question Number • Exam Tag • Badge / Question -->
-          <div class="premium-question-card">
-            <div id="q-text-wrap" style="position:relative;">
-              <div id="q-text" class="question-text-style" translate="yes"></div>
-              <div id="pencilQuestionOverlay" aria-hidden="true">
-                <canvas id="pencilQuestionCanvas"></canvas>
-                <div id="pencilQuestionToolbar">
-                  <button type="button" class="pencil-tool-btn active" id="pencilPenBtn" title="Red Pen" aria-label="Red Pen" onclick="setPencilTool('pen')">✎</button>
-                  <button type="button" class="pencil-tool-btn" id="pencilEraserBtn" title="Eraser" aria-label="Eraser" onclick="setPencilTool('eraser')">⌫</button>
-                  <button type="button" class="pencil-tool-btn" title="Undo" aria-label="Undo" onclick="pencilUndo()">↶</button>
-                  <button type="button" class="pencil-tool-btn" title="Redo" aria-label="Redo" onclick="pencilRedo()">↷</button>
-                  <button type="button" class="pencil-tool-btn danger" title="Clear" aria-label="Clear" onclick="clearPencilDrawing()">✕</button>
-                </div>
-              </div>
+          <div class="premium-question-card" id="questionDrawingArea" style="position:relative;">
+            <canvas id="pencilCanvas" aria-hidden="true"></canvas>
+            <div id="pencilTools" aria-label="Pencil tools">
+              <button type="button" title="Undo" onclick="pencilUndo(event)">↶</button>
+              <button type="button" title="Redo" onclick="pencilRedo(event)">↷</button>
+              <button type="button" title="Eraser" onclick="pencilToggleEraser(event)">⌫</button>
+              <button type="button" title="Clear" onclick="pencilClear(event)">✕</button>
             </div>
+            <div id="q-text" class="question-text-style" translate="yes"></div>
             <div id="exam-tag" class="exam-tag-badge" translate="no"></div>
           </div>
           
@@ -3362,7 +3396,6 @@ async function loadQuizData(quizPath) {
     selectedAnswers=new Array(data.length).fill(null);
     answerCorrect=new Array(data.length).fill(null);
     questionTimes=new Array(data.length).fill(0);
-    resetPencilModeForNewQuiz();
     
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -3691,51 +3724,199 @@ let answered = [];
 let selectedAnswers=[];
 let answerCorrect=[];
 
-/* ===== Apple Pencil Question Overlay State ===== */
-let pencilMode=false,pencilTool='pen',pencilCanvas=null,pencilCtx=null,pencilStrokes=[],pencilRedoStack=[],pencilDrawing=false,pencilActivePointerId=null,pencilCurrentStroke=null,pencilCanvasResizeObserver=null;
-const PENCIL_STORAGE_PREFIX='dd_pencil_v2:';
-function pencilStorageKey(){const quizKey=String(currentQuizPath||currentQuizTitle||'quiz').replace(/[^a-zA-Z0-9._-]/g,'_');return PENCIL_STORAGE_PREFIX+quizKey+':'+String(currentQ)}
-function safePencilLoad(){try{const raw=localStorage.getItem(pencilStorageKey());const parsed=raw?JSON.parse(raw):[];return Array.isArray(parsed)?parsed:[]}catch(e){return[]}}
-function safePencilSave(){try{localStorage.setItem(pencilStorageKey(),JSON.stringify(pencilStrokes))}catch(e){console.warn('Pencil drawing save skipped:',e)}}
-function installPencilPalmGuard(){
-  if(window.__pencilPalmGuardInstalled)return;
-  window.__pencilPalmGuardInstalled=true;
-  document.addEventListener('selectstart',function(e){if(!pencilMode)return;const w=document.getElementById('q-text-wrap');if(w&&w.contains(e.target))e.preventDefault()},{passive:false});
-  document.addEventListener('contextmenu',function(e){if(!pencilMode)return;const w=document.getElementById('q-text-wrap');if(w&&w.contains(e.target))e.preventDefault()},{passive:false});
-  document.addEventListener('dragstart',function(e){if(!pencilMode)return;const w=document.getElementById('q-text-wrap');if(w&&w.contains(e.target))e.preventDefault()},{passive:false});
+
+/* ===== Apple Pencil Question Overlay Engine =====
+   Additive only: quiz scoring/navigation/AI remain untouched. */
+let pencilEnabled = false;
+let pencilDrawing = false;
+let pencilEraser = false;
+let pencilLastX = 0, pencilLastY = 0;
+let pencilHistory = [], pencilHistoryIndex = -1;
+let pencilSaveTimer = null;
+
+function pencilStorageKey(){
+  const quizKey = (typeof currentQuizPath === 'string' && currentQuizPath) ? currentQuizPath :
+                  (typeof currentQuizTitle === 'string' && currentQuizTitle) ? currentQuizTitle : 'quiz';
+  return 'applePencilQ:' + quizKey + ':' + String(currentQ);
 }
-installPencilPalmGuard();
-function setupPencilCanvas(){
-  pencilCanvas=document.getElementById('pencilQuestionCanvas');if(!pencilCanvas)return;pencilCtx=pencilCanvas.getContext('2d');if(!pencilCtx)return;
-  if(pencilCanvasResizeObserver)pencilCanvasResizeObserver.disconnect();
-  const resize=()=>resizePencilCanvas();
-  if(window.ResizeObserver)pencilCanvasResizeObserver=new ResizeObserver(resize),pencilCanvasResizeObserver.observe(document.getElementById('q-text-wrap')||pencilCanvas);
-  resize();
-  if(!pencilCanvas.dataset.bound){
-    pencilCanvas.addEventListener('pointerdown',pencilPointerDown,{passive:false});pencilCanvas.addEventListener('pointermove',pencilPointerMove,{passive:false});pencilCanvas.addEventListener('pointerup',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('pointercancel',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('lostpointercapture',pencilPointerUp,{passive:false});pencilCanvas.dataset.bound='1';
+function pencilCanvas(){ return document.getElementById('pencilCanvas'); }
+function pencilArea(){ return document.getElementById('questionDrawingArea'); }
+
+function pencilResizeCanvas(preserve=true){
+  const c=pencilCanvas(), area=pencilArea();
+  if(!c || !area) return;
+  const rect=area.getBoundingClientRect();
+  const dpr=Math.min(window.devicePixelRatio||1, 2);
+  const old=document.createElement('canvas');
+  if(preserve && c.width && c.height){
+    old.width=c.width; old.height=c.height;
+    const ox=old.getContext('2d');
+    ox.drawImage(c,0,0);
+  }
+  c.width=Math.max(1,Math.round(rect.width*dpr));
+  c.height=Math.max(1,Math.round(rect.height*dpr));
+  c.style.width=rect.width+'px'; c.style.height=rect.height+'px';
+  const ctx=c.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  if(preserve && old.width){
+    ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);
   }
 }
-function resizePencilCanvas(){if(!pencilCanvas||!pencilCtx)return;const r=pencilCanvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(1,Math.round(r.width*dpr)),h=Math.max(1,Math.round(r.height*dpr));if(pencilCanvas.width===w&&pencilCanvas.height===h){redrawPencil();return}pencilCanvas.width=w;pencilCanvas.height=h;pencilCtx.setTransform(dpr,0,0,dpr,0,0);pencilCtx.lineCap='round';pencilCtx.lineJoin='round';redrawPencil()}
-function pencilPoint(e){const r=pencilCanvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top,p:typeof e.pressure==='number'&&e.pressure>0?e.pressure:.5}}
-function pencilPointerDown(e){if(!pencilMode||isPaused)return;if(e.pointerType!=='pen'){if(e.cancelable)e.preventDefault();return}if(e.cancelable)e.preventDefault();pencilDrawing=true;pencilActivePointerId=e.pointerId;pencilCurrentStroke={tool:pencilTool,points:[pencilPoint(e)]};try{pencilCanvas.setPointerCapture(e.pointerId)}catch(_){}
+function pencilCtx(){
+  const c=pencilCanvas(); if(!c) return null;
+  const ctx=c.getContext('2d');
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  return ctx;
 }
-function drawPencilStroke(stroke, fromIndex=0){if(!pencilCtx||!stroke?.points?.length)return;const pts=stroke.points;const start=Math.max(0,Math.min(fromIndex,pts.length-1));const p0=pts[start];pencilCtx.save();pencilCtx.lineCap='round';pencilCtx.lineJoin='round';pencilCtx.lineWidth=stroke.tool==='eraser'?18:Math.max(1.5,2.2+(p0.p||.5)*2.2);pencilCtx.strokeStyle=stroke.tool==='eraser'?'rgba(0,0,0,1)':'#dc2626';pencilCtx.globalCompositeOperation=stroke.tool==='eraser'?'destination-out':'source-over';pencilCtx.beginPath();if(start===0){pencilCtx.moveTo(p0.x,p0.y);if(pts.length===1){pencilCtx.lineTo(p0.x+0.01,p0.y+0.01)}}else{const prev=pts[start-1];pencilCtx.moveTo(prev.x,prev.y);pencilCtx.lineTo(p0.x,p0.y)}for(let i=start+1;i<pts.length;i++)pencilCtx.lineTo(pts[i].x,pts[i].y);pencilCtx.stroke();pencilCtx.restore()}
-function pencilPointerMove(e){if(!pencilDrawing||e.pointerId!==pencilActivePointerId)return;if(e.cancelable)e.preventDefault();const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[e];for(const ev of events){pencilCurrentStroke.points.push(pencilPoint(ev));}drawPencilStroke(pencilCurrentStroke,Math.max(0,pencilCurrentStroke.points.length-events.length-1))}
-function pencilPointerUp(e){if(!pencilDrawing||e.pointerId!==undefined&&e.pointerId!==pencilActivePointerId)return;if(e.cancelable)e.preventDefault();pencilDrawing=false;pencilActivePointerId=null;if(pencilCurrentStroke&&pencilCurrentStroke.points.length){pencilStrokes.push(pencilCurrentStroke);pencilRedoStack=[];safePencilSave()}pencilCurrentStroke=null}
-function redrawPencil(){if(!pencilCanvas||!pencilCtx)return;const r=pencilCanvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);pencilCtx.setTransform(dpr,0,0,dpr,0,0);pencilCtx.clearRect(0,0,Math.max(1,r.width),Math.max(1,r.height));pencilStrokes.forEach(drawPencilStroke);if(pencilCurrentStroke)drawPencilStroke(pencilCurrentStroke)}
-function loadPencilForCurrentQuestion(){pencilStrokes=safePencilLoad();pencilRedoStack=[];setupPencilCanvas();requestAnimationFrame(()=>{resizePencilCanvas();redrawPencil()})}
-function setPencilTool(tool){pencilTool=tool==='eraser'?'eraser':'pen';document.getElementById('pencilPenBtn')?.classList.toggle('active',pencilTool==='pen');document.getElementById('pencilEraserBtn')?.classList.toggle('active',pencilTool==='eraser')}
-function pencilUndo(){if(!pencilStrokes.length)return;pencilRedoStack.push(pencilStrokes.pop());safePencilSave();redrawPencil()}
-function pencilRedo(){if(!pencilRedoStack.length)return;pencilStrokes.push(pencilRedoStack.pop());safePencilSave();redrawPencil()}
-function clearPencilDrawing(){if(!pencilStrokes.length)return;pencilStrokes=[];pencilRedoStack=[];safePencilSave();redrawPencil()}
-function togglePencilMode(e){if(e)e.preventDefault();if(!data||!data.length||isPaused)return;pencilMode=!pencilMode;document.getElementById('quizEngineBox')?.classList.toggle('pencil-mode',pencilMode);const btn=document.getElementById('pencilToggleBtn');if(btn){btn.classList.toggle('active',pencilMode);btn.setAttribute('aria-pressed',String(pencilMode))}document.getElementById('pencilQuestionOverlay')?.setAttribute('aria-hidden',String(!pencilMode));if(pencilMode){loadPencilForCurrentQuestion();requestAnimationFrame(resizePencilCanvas)}}
-function resetPencilModeForNewQuiz(){pencilMode=false;pencilTool='pen';pencilStrokes=[];pencilRedoStack=[];document.getElementById('quizEngineBox')?.classList.remove('pencil-mode');const btn=document.getElementById('pencilToggleBtn');if(btn){btn.classList.remove('active');btn.setAttribute('aria-pressed','false')}document.getElementById('pencilQuestionOverlay')?.setAttribute('aria-hidden','true');setPencilTool('pen')}
+function pencilSnapshot(){
+  const c=pencilCanvas(); return c ? c.toDataURL('image/png') : '';
+}
+function pencilRestoreSnapshot(dataUrl){
+  const c=pencilCanvas(); if(!c) return;
+  const ctx=pencilCtx(); if(!ctx) return;
+  ctx.clearRect(0,0,c.clientWidth,c.clientHeight);
+  if(!dataUrl) return;
+  const img=new Image();
+  img.onload=()=>{
+    const ctx2=pencilCtx();
+    ctx2.clearRect(0,0,c.clientWidth,c.clientHeight);
+    ctx2.drawImage(img,0,0,c.clientWidth,c.clientHeight);
+  };
+  img.src=dataUrl;
+}
+function pencilSaveNow(){
+  try{
+    const snap=pencilSnapshot();
+    if(snap) localStorage.setItem(pencilStorageKey(),snap);
+    else localStorage.removeItem(pencilStorageKey());
+  }catch(e){ console.warn('Pencil save skipped:',e); }
+}
+function pencilLoad(){
+  pencilHistory=[]; pencilHistoryIndex=-1;
+  let saved='';
+  try{ saved=localStorage.getItem(pencilStorageKey())||''; }catch(e){}
+  pencilRestoreSnapshot(saved);
+  if(saved){ pencilHistory=[saved]; pencilHistoryIndex=0; }
+}
+function pencilCommitHistory(){
+  const snap=pencilSnapshot();
+  if(!snap) return;
+  pencilHistory=pencilHistory.slice(0,pencilHistoryIndex+1);
+  pencilHistory.push(snap);
+  if(pencilHistory.length>20) pencilHistory.shift();
+  pencilHistoryIndex=pencilHistory.length-1;
+  if(pencilSaveTimer) clearTimeout(pencilSaveTimer);
+  pencilSaveTimer=setTimeout(pencilSaveNow,80);
+}
+function pencilBegin(e){
+  if(!pencilEnabled || e.pointerType==='touch' || e.pointerType==='mouse') return;
+  const c=pencilCanvas();
+  if(!c) return;
+  e.preventDefault();
+  pencilDrawing=true;
+  try{ c.setPointerCapture(e.pointerId); }catch(_){}
+  const r=c.getBoundingClientRect();
+  pencilLastX=e.clientX-r.left; pencilLastY=e.clientY-r.top;
+  const ctx=pencilCtx();
+  ctx.beginPath(); ctx.moveTo(pencilLastX,pencilLastY);
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.strokeStyle='#dc2626';ctx.lineWidth=3.2;
+}
+function pencilMove(e){
+  if(!pencilDrawing || e.pointerType==='touch' || e.pointerType==='mouse') return;
+  e.preventDefault();
+  const c=pencilCanvas(), r=c.getBoundingClientRect(), ctx=pencilCtx();
+  const events=(typeof e.getCoalescedEvents==='function') ? e.getCoalescedEvents() : [e];
+  for(const ev of events){
+    const x=ev.clientX-r.left,y=ev.clientY-r.top;
+    ctx.globalCompositeOperation=pencilEraser?'destination-out':'source-over';
+    ctx.lineWidth=pencilEraser?18:3.2;
+    ctx.strokeStyle='#dc2626';
+    ctx.beginPath();ctx.moveTo(pencilLastX,pencilLastY);ctx.lineTo(x,y);ctx.stroke();
+    pencilLastX=x;pencilLastY=y;
+  }
+}
+function pencilEnd(e){
+  if(!pencilDrawing) return;
+  if(e) e.preventDefault();
+  pencilDrawing=false;
+  pencilCtx().globalCompositeOperation='source-over';
+  pencilCommitHistory();
+}
+function pencilUndo(e){
+  if(e)e.preventDefault();
+  if(pencilHistoryIndex<=0){ pencilClearCanvasOnly(); return; }
+  pencilHistoryIndex--;
+  pencilRestoreSnapshot(pencilHistory[pencilHistoryIndex]);
+  pencilSaveNow();
+}
+function pencilRedo(e){
+  if(e)e.preventDefault();
+  if(pencilHistoryIndex>=pencilHistory.length-1)return;
+  pencilHistoryIndex++;
+  pencilRestoreSnapshot(pencilHistory[pencilHistoryIndex]);
+  pencilSaveNow();
+}
+function pencilClearCanvasOnly(){
+  const c=pencilCanvas(); if(!c)return;
+  const ctx=pencilCtx();ctx.clearRect(0,0,c.clientWidth,c.clientHeight);
+}
+function pencilClear(e){
+  if(e)e.preventDefault();
+  pencilClearCanvasOnly();
+  pencilHistory=[pencilSnapshot()];pencilHistoryIndex=0;
+  try{localStorage.removeItem(pencilStorageKey());}catch(_){}
+}
+function pencilToggleEraser(e){
+  if(e)e.preventDefault();
+  pencilEraser=!pencilEraser;
+  const tools=document.getElementById('pencilTools');
+  if(tools) tools.classList.toggle('eraser-on',pencilEraser);
+}
+function setPencilVisibility(show){
+  const btn=document.getElementById('pencilToggleBtn');
+  const c=pencilCanvas(), tools=document.getElementById('pencilTools'), q=document.getElementById('q-text');
+  if(!btn||!c||!tools||!q)return;
+  pencilEnabled=!!show;
+  btn.classList.toggle('active',pencilEnabled);
+  c.classList.toggle('active',pencilEnabled);
+  tools.classList.toggle('show',pencilEnabled);
+  q.classList.toggle('pencil-active',pencilEnabled);
+  if(pencilEnabled){
+    requestAnimationFrame(()=>{ pencilResizeCanvas(false); pencilLoad(); });
+  }
+}
+function togglePencilMode(e){
+  if(e)e.preventDefault();
+  setPencilVisibility(!pencilEnabled);
+}
+function pencilPrepareForQuestion(){
+  const c=pencilCanvas();
+  if(!c)return;
+  pencilDrawing=false;
+  requestAnimationFrame(()=>{
+    pencilResizeCanvas(false);
+    if(pencilEnabled) pencilLoad();
+  });
+}
+(function initPencilEngine(){
+  const c=pencilCanvas();
+  if(!c)return;
+  c.addEventListener('pointerdown',pencilBegin,{passive:false});
+  c.addEventListener('pointermove',pencilMove,{passive:false});
+  c.addEventListener('pointerup',pencilEnd,{passive:false});
+  c.addEventListener('pointercancel',pencilEnd,{passive:false});
+  c.addEventListener('pointerleave',e=>{ if(pencilDrawing) pencilEnd(e); },{passive:false});
+  window.addEventListener('resize',()=>{ if(pencilEnabled) pencilPrepareForQuestion(); });
+})();
 
 function showQ() {
 if(data.length === 0) return;
 const item = data[currentQ];
 const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>व्याख्या:</b> ";
 document.getElementById('q-text').innerHTML = formatContent(T(item, 'q'));
+pencilPrepareForQuestion();
 const tagBox=document.getElementById('exam-tag');
 const tagText = T(item, 'tag');
 if(tagText){tagBox.innerHTML=formatContent(tagText);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
@@ -3812,8 +3993,6 @@ if(prevSel!==null && prevSel!==undefined){
  document.getElementById('feedback').style.display="block";
 }
 
-if(pencilMode){loadPencilForCurrentQuestion()}
-
 if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageSwitch){
   onQuestionChangeAI();
 }
@@ -3849,9 +4028,6 @@ const __fade=document.getElementById('pauseFade');
 if(__fade){__fade.classList.remove('show');}
 timerRunning=true;
 
-pencilMode=false;
-document.getElementById('quizEngineBox')?.classList.remove('pencil-mode');
-document.getElementById('pencilToggleBtn')?.classList.remove('active');
 document.getElementById('quiz-box').style.display='none';
 document.getElementById('controls').style.display='none';
 document.getElementById('jumpBox').style.display='none';
