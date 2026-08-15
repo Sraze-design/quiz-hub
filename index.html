@@ -574,6 +574,14 @@ body.pencil-mode{
 #pencilTools button.pencil-color-btn.active{
   border-color:#0f172a;box-shadow:0 0 0 1px #fff inset;
 }
+#pencilEraserCursor{
+  position:fixed;top:0;left:0;width:24px;height:24px;
+  margin-left:-12px;margin-top:-12px;
+  border-radius:50%;border:1.5px solid #64748b;
+  background:rgba(148,163,184,.25);
+  pointer-events:none;z-index:10000;
+  display:none;
+}
 @media(max-width:767px){#pencilTools{right:70px;top:54px;}}
 #langSwitchBtn.quiz-header-lang-btn .quiz-header-lang-inner {
   display: flex;
@@ -2508,6 +2516,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 <!-- Apple Pencil full-screen annotation layer: pointer-events stay off the canvas so normal UI remains usable with touch. -->
 <canvas id="pencilCanvas" aria-hidden="true"></canvas>
+<div id="pencilEraserCursor" aria-hidden="true"></div>
 <div id="pencilTools" aria-hidden="true">
   <button type="button" id="pencilPenBtn" class="active" title="Pen">✎</button>
   <button type="button" id="pencilColorRedBtn" class="pencil-color-btn active" data-color="#dc2626" title="Red" style="background:#dc2626;"></button>
@@ -3498,6 +3507,23 @@ function showEmptyState() {
     tool=nextTool;
     document.getElementById('pencilPenBtn')?.classList.toggle('active',tool==='pen');
     document.getElementById('pencilEraserBtn')?.classList.toggle('active',tool==='eraser');
+    if(tool!=='eraser') hideEraserCursor();
+  }
+
+  let eraserCursorEl=null;
+
+  function updateEraserCursor(e){
+    if(!enabled||tool!=='eraser'||isPaused||e.pointerType!=='pen'){ hideEraserCursor(); return; }
+    if(!eraserCursorEl) eraserCursorEl=document.getElementById('pencilEraserCursor');
+    if(!eraserCursorEl) return;
+    eraserCursorEl.style.left=e.clientX+'px';
+    eraserCursorEl.style.top=e.clientY+'px';
+    eraserCursorEl.style.display='block';
+  }
+
+  function hideEraserCursor(){
+    if(!eraserCursorEl) eraserCursorEl=document.getElementById('pencilEraserCursor');
+    if(eraserCursorEl) eraserCursorEl.style.display='none';
   }
 
   function setColor(nextColor){
@@ -3666,7 +3692,7 @@ function showEmptyState() {
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
-    else { drawing=false; activePointerId=null; usingRawStream=false; }
+    else { drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); }
   }
 
   function undo(){
@@ -3689,6 +3715,7 @@ function showEmptyState() {
     if(canvas) canvas.style.display='none';
     if(tools) tools.style.display='none';
     if(toggle) toggle.classList.remove('active');
+    hideEraserCursor();
   }
 
   window.__pencilOnQuestionChange=function(){ if(enabled) load(); };
@@ -3740,6 +3767,14 @@ function showEmptyState() {
     document.addEventListener('pointermove',move,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
+
+    // Independent of drawing state, so the eraser indicator follows the
+    // pencil on hover too (not just while actively erasing), and disappears
+    // the moment the pen lifts or leaves the screen.
+    document.addEventListener('pointermove',updateEraserCursor,{capture:true,passive:true});
+    document.addEventListener('pointerup',hideEraserCursor,{capture:true,passive:true});
+    document.addEventListener('pointercancel',hideEraserCursor,{capture:true,passive:true});
+    document.addEventListener('pointerleave',hideEraserCursor,{capture:true,passive:true});
 
     // While Pencil mode is active, prevent accidental option selection and
     // Safari text selection/context menus. Pencil mode can be turned OFF to
