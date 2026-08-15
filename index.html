@@ -1825,6 +1825,15 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 #ai-bottom-sheet.ai-pencil-on #aiPencilCanvas {
   pointer-events: auto;
 }
+/* Star markers are a persistent marker on the chat, not scratch ink — this
+   canvas is sized/positioned in JS exactly like #aiPencilCanvas, but stays
+   visible and non-interactive at all times, independent of pencil mode. */
+#aiPencilStarCanvas {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  touch-action: none;
+}
 /* Same protection as the main quiz pencil (body.pencil-mode): while this
    pencil mode is on, kill native text-selection/callout across the sheet
    so a long-press on message text never opens the selection UI instead of
@@ -3953,7 +3962,8 @@ function showEmptyState() {
     enabled=!enabled;
     document.body.classList.toggle('pencil-mode',enabled);
     canvas.style.display=enabled?'block':'none';
-    if(starCanvas) starCanvas.style.display=enabled?'block':'none';
+    // starCanvas intentionally NOT toggled here — stars stay visible on the
+    // question whether pencil mode is on or off.
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
@@ -3978,7 +3988,7 @@ function showEmptyState() {
     drawing=false; activePointerId=null; usingRawStream=false; currentStroke=null;
     document.body.classList.remove('pencil-mode');
     if(canvas) canvas.style.display='none';
-    if(starCanvas) starCanvas.style.display='none';
+    // starCanvas intentionally left visible — see init().
     if(tools) tools.style.display='none';
     if(toggle) toggle.classList.remove('active');
     hideEraserCursor();
@@ -4065,6 +4075,10 @@ function showEmptyState() {
     if(!canvas||!toggle||!tools) return;
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     if(starCanvas) starCtx=starCanvas.getContext('2d',{alpha:true,desynchronized:true});
+    // Stars are a persistent marker on the question, not scratch ink — keep
+    // this canvas visible always, independent of whether pencil mode is on.
+    // Only the ink canvas (drawing/erasing) is gated by pencil mode below.
+    if(starCanvas) starCanvas.style.display='block';
     resize();
 
     toggle.addEventListener('click',toggleMode);
@@ -6231,7 +6245,7 @@ if ('serviceWorker' in navigator) {
 // scrolling passenger.
 (function(){
   let enabled=false, drawing=false, activePointerId=null;
-  let canvas=null, ctx=null, dpr=1;
+  let canvas=null, ctx=null, starCanvas=null, starCtx=null, dpr=1;
   let tool='pen', penColor='#dc2626';
   let strokes=[], redoStack=[], currentStroke=null;
   let starTapStart=null;
@@ -6276,23 +6290,24 @@ if ('serviceWorker' in navigator) {
     ctx.globalCompositeOperation='source-over';
   }
   function drawStar(cx,cy,color){
+    if(!starCtx) return;
     const outerR=9, innerR=3.6, spikes=5;
     let rot=-Math.PI/2;
     const step=Math.PI/spikes;
-    ctx.save();
-    ctx.globalCompositeOperation='source-over';
-    ctx.beginPath();
-    ctx.moveTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+    starCtx.save();
+    starCtx.globalCompositeOperation='source-over';
+    starCtx.beginPath();
+    starCtx.moveTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
     for(let i=0;i<spikes;i++){
       rot+=step;
-      ctx.lineTo(cx+Math.cos(rot)*innerR, cy+Math.sin(rot)*innerR);
+      starCtx.lineTo(cx+Math.cos(rot)*innerR, cy+Math.sin(rot)*innerR);
       rot+=step;
-      ctx.lineTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+      starCtx.lineTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
     }
-    ctx.closePath();
-    ctx.fillStyle=color||penColor;
-    ctx.fill();
-    ctx.restore();
+    starCtx.closePath();
+    starCtx.fillStyle=color||penColor;
+    starCtx.fill();
+    starCtx.restore();
   }
 
   function ensureCanvas(){
@@ -6303,6 +6318,12 @@ if ('serviceWorker' in navigator) {
     canvas.id='aiPencilCanvas';
     sh.appendChild(canvas);
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+    // Star markers live on their own canvas, separate from ink, so they can
+    // stay visible on the chat even while ink is hidden (pencil mode off).
+    starCanvas=document.createElement('canvas');
+    starCanvas.id='aiPencilStarCanvas';
+    sh.appendChild(starCanvas);
+    starCtx=starCanvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
     // Keep the canvas glued to the chat body's actual on-screen rect for
     // any layout shift, not just a window resize event. A stale rect here
@@ -6332,7 +6353,8 @@ if ('serviceWorker' in navigator) {
     const bodyRect=body.getBoundingClientRect();
     const sheetRect=sh.getBoundingClientRect();
     const top=bodyRect.top-sheetRect.top;
-    canvas.style.left=(bodyRect.left-sheetRect.left)+'px';
+    const left=bodyRect.left-sheetRect.left;
+    canvas.style.left=left+'px';
     canvas.style.top=top+'px';
     const w=Math.max(1,Math.round(bodyRect.width));
     const h=Math.max(1,Math.round(bodyRect.height));
@@ -6342,6 +6364,15 @@ if ('serviceWorker' in navigator) {
     canvas.width=Math.round(w*dpr);
     canvas.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(starCanvas){
+      starCanvas.style.left=left+'px';
+      starCanvas.style.top=top+'px';
+      starCanvas.style.width=w+'px';
+      starCanvas.style.height=h+'px';
+      starCanvas.width=Math.round(w*dpr);
+      starCanvas.height=Math.round(h*dpr);
+      if(starCtx) starCtx.setTransform(dpr,0,0,dpr,0,0);
+    }
     const tb=toolbar();
     if(tb) tb.style.top=(top+8)+'px';
     redraw(); // full clean redraw from stroke data, same as main engine
@@ -6351,6 +6382,7 @@ if ('serviceWorker' in navigator) {
   function redraw(){
     if(!ctx||!canvas) return;
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(starCtx&&starCanvas) starCtx.clearRect(0,0,starCanvas.width,starCanvas.height);
     for(const s of strokes) drawStroke(s);
   }
 
@@ -6599,6 +6631,10 @@ if ('serviceWorker' in navigator) {
     enabled=!!v;
     ensureCanvas();
     resize();
+    // Ink hides when pencil mode is off, matching the main quiz page.
+    // starCanvas is intentionally never touched here — stars stay visible
+    // on the chat whether AI pencil mode is on or off.
+    if(canvas) canvas.style.display = enabled ? 'block' : 'none';
     const sh=sheet();
     if(sh) sh.classList.toggle('ai-pencil-on', enabled);
     const btn=document.getElementById('aiPencilToggleBtn');
