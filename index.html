@@ -6853,6 +6853,7 @@ if ('serviceWorker' in navigator) {
     enabled=!!v;
     ensureCanvas();
     resize();
+    if(canvas) canvas.style.display=enabled?'block':'none';
     const sh=sheet();
     if(sh) sh.classList.toggle('ai-pencil-on', enabled);
     const btn=document.getElementById('aiPencilToggleBtn');
