@@ -1431,7 +1431,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 #quizWorkspace #quiz-box{width:100%;min-width:0;transition:width .22s ease}
 #pencilScratchPanel{display:none;position:relative;flex:0 0 45%;min-width:0;margin-left:14px;border:1px solid #dbe3ee;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 4px 18px rgba(15,23,42,.06);min-height:420px}
 #quizEngineBox.pencil-mode #pencilScratchPanel{display:flex;flex-direction:column}
-#quizEngineBox.pencil-mode #quizWorkspace #quiz-box{width:55%}
+#quizEngineBox.pencil-mode #quizWorkspace #quiz-box{width:55%;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#quizEngineBox.pencil-mode #quizWorkspace #quiz-box *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#quizEngineBox.pencil-mode #quizWorkspace #quiz-box button{-webkit-user-select:none;user-select:none;}
+
 .pencil-scratch-toolbar{display:flex;align-items:center;gap:6px;padding:8px 9px;border-bottom:1px solid #e2e8f0;background:#f8fafc;flex:0 0 auto}
 .pencil-tool-btn{width:34px;height:34px;border:1px solid #dbe3ee;border-radius:10px;background:#fff;color:#334155;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .pencil-tool-btn.active{background:#eff6ff;color:#2563eb;border-color:#93c5fd}
@@ -3703,6 +3706,25 @@ const PENCIL_STORAGE_PREFIX='dd_pencil_v1:';
 function pencilStorageKey(){const quizKey=String(currentQuizPath||currentQuizTitle||'quiz').replace(/[^a-zA-Z0-9._-]/g,'_');return PENCIL_STORAGE_PREFIX+quizKey+':'+String(currentQ);}
 function safePencilLoad(){try{const raw=localStorage.getItem(pencilStorageKey());const parsed=raw?JSON.parse(raw):[];return Array.isArray(parsed)?parsed:[]}catch(e){return[]}}
 function safePencilSave(){try{localStorage.setItem(pencilStorageKey(),JSON.stringify(pencilStrokes))}catch(e){console.warn('Pencil drawing save skipped:',e)}}
+function installPencilPalmGuard(){
+  if(window.__pencilPalmGuardInstalled)return;
+  window.__pencilPalmGuardInstalled=true;
+  // iPad Safari can open text-selection/callout UI when the palm/finger rests
+  // over quiz text while Apple Pencil is being used. Block only selection
+  // gestures; do NOT block touch/click events, so answer buttons remain usable.
+  document.addEventListener('selectstart',function(e){
+    if(!pencilMode)return;
+    const quizBox=document.getElementById('quiz-box');
+    if(quizBox && quizBox.contains(e.target)) e.preventDefault();
+  },{passive:false});
+  document.addEventListener('contextmenu',function(e){
+    if(!pencilMode)return;
+    const quizBox=document.getElementById('quiz-box');
+    if(quizBox && quizBox.contains(e.target)) e.preventDefault();
+  },{passive:false});
+}
+installPencilPalmGuard();
+
 function setupPencilCanvas(){pencilCanvas=document.getElementById('pencilScratchCanvas');if(!pencilCanvas)return;pencilCtx=pencilCanvas.getContext('2d');if(!pencilCtx)return;if(pencilCanvasResizeObserver)pencilCanvasResizeObserver.disconnect();const resize=()=>resizePencilCanvas();if(window.ResizeObserver){pencilCanvasResizeObserver=new ResizeObserver(resize);pencilCanvasResizeObserver.observe(pencilCanvas.parentElement||pencilCanvas)}resize();if(!pencilCanvas.dataset.bound){pencilCanvas.addEventListener('pointerdown',pencilPointerDown,{passive:false});pencilCanvas.addEventListener('pointermove',pencilPointerMove,{passive:false});pencilCanvas.addEventListener('pointerup',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('pointercancel',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('lostpointercapture',pencilPointerUp,{passive:false});pencilCanvas.dataset.bound='1'}}
 function resizePencilCanvas(){if(!pencilCanvas||!pencilCtx)return;const r=pencilCanvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(1,Math.round(r.width*dpr)),h=Math.max(1,Math.round(r.height*dpr));if(pencilCanvas.width===w&&pencilCanvas.height===h){redrawPencil();return}pencilCanvas.width=w;pencilCanvas.height=h;pencilCtx.setTransform(dpr,0,0,dpr,0,0);pencilCtx.lineCap='round';pencilCtx.lineJoin='round';redrawPencil()}
 function pencilPoint(e){const r=pencilCanvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top,p:typeof e.pressure==='number'&&e.pressure>0?e.pressure:.5}}
