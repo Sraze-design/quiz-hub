@@ -1421,30 +1421,21 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .quiz-pause-btn-premium svg,.btns button svg{flex-shrink:0}
 
 /* ==================================================
-   APPLE PENCIL SCRATCHPAD (SAFE ADD-ON)
+   APPLE PENCIL QUESTION OVERLAY (SAFE ADD-ON)
    ================================================== */
 #pencilToggleBtn{width:42px;height:38px;flex:0 0 42px;border:1px solid rgba(255,255,255,.16);border-radius:11px;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 #pencilToggleBtn svg{width:20px;height:20px}
 #pencilToggleBtn.active{background:#2563eb;border-color:#60a5fa;box-shadow:0 0 0 2px rgba(96,165,250,.18)}
 #pencilToggleBtn:disabled{opacity:.45;cursor:not-allowed}
-#quizWorkspace{position:relative;display:flex;flex:0 0 auto;width:100%;min-width:0}
-#quizWorkspace #quiz-box{width:100%;min-width:0;transition:width .22s ease}
-#pencilScratchPanel{display:none;position:relative;flex:0 0 45%;min-width:0;margin-left:14px;border:1px solid #dbe3ee;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 4px 18px rgba(15,23,42,.06);min-height:420px}
-#quizEngineBox.pencil-mode #pencilScratchPanel{display:flex;flex-direction:column}
-#quizEngineBox.pencil-mode #quizWorkspace #quiz-box{width:55%;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
-#quizEngineBox.pencil-mode #quizWorkspace #quiz-box *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
-#quizEngineBox.pencil-mode #quizWorkspace #quiz-box button{-webkit-user-select:none;user-select:none;}
-
-.pencil-scratch-toolbar{display:flex;align-items:center;gap:6px;padding:8px 9px;border-bottom:1px solid #e2e8f0;background:#f8fafc;flex:0 0 auto}
-.pencil-tool-btn{width:34px;height:34px;border:1px solid #dbe3ee;border-radius:10px;background:#fff;color:#334155;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.pencil-tool-btn.active{background:#eff6ff;color:#2563eb;border-color:#93c5fd}
+#pencilQuestionOverlay{display:none;position:absolute;inset:0;z-index:20;pointer-events:none;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#quizEngineBox.pencil-mode #pencilQuestionOverlay{display:block;pointer-events:auto}
+#pencilQuestionCanvas{display:block;width:100%;height:100%;background:transparent;cursor:crosshair;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#pencilQuestionToolbar{position:absolute;top:8px;right:8px;display:none;align-items:center;gap:5px;padding:5px 6px;background:rgba(255,255,255,.96);border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 4px 14px rgba(15,23,42,.10);pointer-events:auto;z-index:22}
+#quizEngineBox.pencil-mode #pencilQuestionToolbar{display:flex}
+.pencil-tool-btn{width:32px;height:32px;border:1px solid #dbe3ee;border-radius:9px;background:#fff;color:#334155;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;font-size:15px}
+.pencil-tool-btn.active{background:#fff1f2;color:#dc2626;border-color:#fca5a5}
 .pencil-tool-btn.danger{color:#dc2626}
-.pencil-tool-spacer{flex:1}
-.pencil-scratch-wrap{position:relative;flex:1 1 auto;min-height:0}
-#pencilScratchCanvas{display:block;width:100%;height:100%;background:#fff;cursor:crosshair;touch-action:none;-webkit-user-select:none;user-select:none}
-.pencil-scratch-hint{position:absolute;left:14px;bottom:10px;font-size:10px;color:#94a3b8;pointer-events:none}
-@media (max-width:767px){#quizEngineBox.pencil-mode #quizWorkspace #quiz-box{width:55%}#pencilScratchPanel{flex-basis:45%;margin-left:8px;border-radius:14px}.pencil-tool-btn{width:30px;height:30px;border-radius:8px}.pencil-scratch-toolbar{padding:6px;gap:4px}}
-@media (prefers-reduced-motion:reduce){#quizWorkspace #quiz-box{transition:none}}
+@media (max-width:767px){#pencilQuestionToolbar{top:5px;right:5px;padding:4px;gap:3px}.pencil-tool-btn{width:29px;height:29px;border-radius:8px;font-size:14px}}
 
 /* ==================================================
    FLOATING AI ASSISTANT & BOTTOM SHEET STYLES
@@ -2194,7 +2185,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
             <div class="quiz-timer-label" id="quizCategoryLabel">DREAM TO DESTINY</div>
           </div>
           <div class="quiz-top-bar-right">
-            <button id="pencilToggleBtn" type="button" aria-label="Pencil scratchpad" aria-pressed="false" title="Pencil" onclick="togglePencilMode(event)">
+            <button id="pencilToggleBtn" type="button" aria-label="Pencil" aria-pressed="false" title="Pencil" onclick="togglePencilMode(event)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
             </button>
             <div id="langSwitchHeaderSlot"></div>
@@ -2304,7 +2295,19 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
           <!-- Question Number • Exam Tag • Badge / Question -->
           <div class="premium-question-card">
-            <div id="q-text" class="question-text-style" translate="yes"></div>
+            <div id="q-text-wrap" style="position:relative;">
+              <div id="q-text" class="question-text-style" translate="yes"></div>
+              <div id="pencilQuestionOverlay" aria-hidden="true">
+                <canvas id="pencilQuestionCanvas"></canvas>
+                <div id="pencilQuestionToolbar">
+                  <button type="button" class="pencil-tool-btn active" id="pencilPenBtn" title="Red Pen" aria-label="Red Pen" onclick="setPencilTool('pen')">✎</button>
+                  <button type="button" class="pencil-tool-btn" id="pencilEraserBtn" title="Eraser" aria-label="Eraser" onclick="setPencilTool('eraser')">⌫</button>
+                  <button type="button" class="pencil-tool-btn" title="Undo" aria-label="Undo" onclick="pencilUndo()">↶</button>
+                  <button type="button" class="pencil-tool-btn" title="Redo" aria-label="Redo" onclick="pencilRedo()">↷</button>
+                  <button type="button" class="pencil-tool-btn danger" title="Clear" aria-label="Clear" onclick="clearPencilDrawing()">✕</button>
+                </div>
+              </div>
+            </div>
             <div id="exam-tag" class="exam-tag-badge" translate="no"></div>
           </div>
           
@@ -2314,18 +2317,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
           
           <!-- Premium Solution Explanation Layout Box Panel Module Component -->
           <div id="feedback" class="explanation-box-premium" translate="yes" style="display:none;"></div>
-        </div>
-        <div id="pencilScratchPanel" aria-hidden="true">
-          <div class="pencil-scratch-toolbar">
-            <button type="button" class="pencil-tool-btn active" id="pencilPenBtn" title="Pen" aria-label="Pen" onclick="setPencilTool('pen')">✎</button>
-            <button type="button" class="pencil-tool-btn" id="pencilEraserBtn" title="Eraser" aria-label="Eraser" onclick="setPencilTool('eraser')">⌫</button>
-            <button type="button" class="pencil-tool-btn" title="Undo" aria-label="Undo" onclick="pencilUndo()">↶</button>
-            <button type="button" class="pencil-tool-btn" title="Redo" aria-label="Redo" onclick="pencilRedo()">↷</button>
-            <span class="pencil-tool-spacer"></span>
-            <button type="button" class="pencil-tool-btn danger" title="Clear" aria-label="Clear" onclick="clearPencilDrawing()">✕</button>
-          </div>
-          <div class="pencil-scratch-wrap"><canvas id="pencilScratchCanvas"></canvas><div class="pencil-scratch-hint">Apple Pencil से यहाँ calculation करें</div></div>
-        </div>
         </div>
 
         <!-- REDESIGNED PREMIUM RESULT SCREEN PAGE -->
@@ -3700,46 +3691,45 @@ let answered = [];
 let selectedAnswers=[];
 let answerCorrect=[];
 
-/* ===== Apple Pencil Scratchpad State ===== */
+/* ===== Apple Pencil Question Overlay State ===== */
 let pencilMode=false,pencilTool='pen',pencilCanvas=null,pencilCtx=null,pencilStrokes=[],pencilRedoStack=[],pencilDrawing=false,pencilActivePointerId=null,pencilCurrentStroke=null,pencilCanvasResizeObserver=null;
-const PENCIL_STORAGE_PREFIX='dd_pencil_v1:';
-function pencilStorageKey(){const quizKey=String(currentQuizPath||currentQuizTitle||'quiz').replace(/[^a-zA-Z0-9._-]/g,'_');return PENCIL_STORAGE_PREFIX+quizKey+':'+String(currentQ);}
+const PENCIL_STORAGE_PREFIX='dd_pencil_v2:';
+function pencilStorageKey(){const quizKey=String(currentQuizPath||currentQuizTitle||'quiz').replace(/[^a-zA-Z0-9._-]/g,'_');return PENCIL_STORAGE_PREFIX+quizKey+':'+String(currentQ)}
 function safePencilLoad(){try{const raw=localStorage.getItem(pencilStorageKey());const parsed=raw?JSON.parse(raw):[];return Array.isArray(parsed)?parsed:[]}catch(e){return[]}}
 function safePencilSave(){try{localStorage.setItem(pencilStorageKey(),JSON.stringify(pencilStrokes))}catch(e){console.warn('Pencil drawing save skipped:',e)}}
 function installPencilPalmGuard(){
   if(window.__pencilPalmGuardInstalled)return;
   window.__pencilPalmGuardInstalled=true;
-  // iPad Safari can open text-selection/callout UI when the palm/finger rests
-  // over quiz text while Apple Pencil is being used. Block only selection
-  // gestures; do NOT block touch/click events, so answer buttons remain usable.
-  document.addEventListener('selectstart',function(e){
-    if(!pencilMode)return;
-    const quizBox=document.getElementById('quiz-box');
-    if(quizBox && quizBox.contains(e.target)) e.preventDefault();
-  },{passive:false});
-  document.addEventListener('contextmenu',function(e){
-    if(!pencilMode)return;
-    const quizBox=document.getElementById('quiz-box');
-    if(quizBox && quizBox.contains(e.target)) e.preventDefault();
-  },{passive:false});
+  document.addEventListener('selectstart',function(e){if(!pencilMode)return;const w=document.getElementById('q-text-wrap');if(w&&w.contains(e.target))e.preventDefault()},{passive:false});
+  document.addEventListener('contextmenu',function(e){if(!pencilMode)return;const w=document.getElementById('q-text-wrap');if(w&&w.contains(e.target))e.preventDefault()},{passive:false});
+  document.addEventListener('dragstart',function(e){if(!pencilMode)return;const w=document.getElementById('q-text-wrap');if(w&&w.contains(e.target))e.preventDefault()},{passive:false});
 }
 installPencilPalmGuard();
-
-function setupPencilCanvas(){pencilCanvas=document.getElementById('pencilScratchCanvas');if(!pencilCanvas)return;pencilCtx=pencilCanvas.getContext('2d');if(!pencilCtx)return;if(pencilCanvasResizeObserver)pencilCanvasResizeObserver.disconnect();const resize=()=>resizePencilCanvas();if(window.ResizeObserver){pencilCanvasResizeObserver=new ResizeObserver(resize);pencilCanvasResizeObserver.observe(pencilCanvas.parentElement||pencilCanvas)}resize();if(!pencilCanvas.dataset.bound){pencilCanvas.addEventListener('pointerdown',pencilPointerDown,{passive:false});pencilCanvas.addEventListener('pointermove',pencilPointerMove,{passive:false});pencilCanvas.addEventListener('pointerup',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('pointercancel',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('lostpointercapture',pencilPointerUp,{passive:false});pencilCanvas.dataset.bound='1'}}
+function setupPencilCanvas(){
+  pencilCanvas=document.getElementById('pencilQuestionCanvas');if(!pencilCanvas)return;pencilCtx=pencilCanvas.getContext('2d');if(!pencilCtx)return;
+  if(pencilCanvasResizeObserver)pencilCanvasResizeObserver.disconnect();
+  const resize=()=>resizePencilCanvas();
+  if(window.ResizeObserver)pencilCanvasResizeObserver=new ResizeObserver(resize),pencilCanvasResizeObserver.observe(document.getElementById('q-text-wrap')||pencilCanvas);
+  resize();
+  if(!pencilCanvas.dataset.bound){
+    pencilCanvas.addEventListener('pointerdown',pencilPointerDown,{passive:false});pencilCanvas.addEventListener('pointermove',pencilPointerMove,{passive:false});pencilCanvas.addEventListener('pointerup',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('pointercancel',pencilPointerUp,{passive:false});pencilCanvas.addEventListener('lostpointercapture',pencilPointerUp,{passive:false});pencilCanvas.dataset.bound='1';
+  }
+}
 function resizePencilCanvas(){if(!pencilCanvas||!pencilCtx)return;const r=pencilCanvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(1,Math.round(r.width*dpr)),h=Math.max(1,Math.round(r.height*dpr));if(pencilCanvas.width===w&&pencilCanvas.height===h){redrawPencil();return}pencilCanvas.width=w;pencilCanvas.height=h;pencilCtx.setTransform(dpr,0,0,dpr,0,0);pencilCtx.lineCap='round';pencilCtx.lineJoin='round';redrawPencil()}
 function pencilPoint(e){const r=pencilCanvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top,p:typeof e.pressure==='number'&&e.pressure>0?e.pressure:.5}}
-function pencilPointerDown(e){if(!pencilMode||isPaused)return;if(e.pointerType!=='pen'&&e.pointerType!=='mouse')return;e.preventDefault();pencilDrawing=true;pencilActivePointerId=e.pointerId;pencilCurrentStroke={tool:pencilTool,points:[pencilPoint(e)]};try{pencilCanvas.setPointerCapture(e.pointerId)}catch(_){}}
-function pencilPointerMove(e){if(!pencilDrawing||e.pointerId!==pencilActivePointerId)return;e.preventDefault();pencilCurrentStroke.points.push(pencilPoint(e));redrawPencil()}
-function pencilPointerUp(e){if(!pencilDrawing||e.pointerId!==undefined&&e.pointerId!==pencilActivePointerId)return;if(e.cancelable)e.preventDefault();pencilDrawing=false;pencilActivePointerId=null;if(pencilCurrentStroke&&pencilCurrentStroke.points.length){pencilStrokes.push(pencilCurrentStroke);pencilRedoStack=[];safePencilSave()}pencilCurrentStroke=null;redrawPencil()}
-function drawPencilStroke(stroke){if(!pencilCtx||!stroke?.points?.length)return;const pts=stroke.points;pencilCtx.save();pencilCtx.lineWidth=stroke.tool==='eraser'?18:Math.max(1.5,2.2+(pts[0].p||.5)*2.2);pencilCtx.strokeStyle='#0f172a';pencilCtx.globalCompositeOperation=stroke.tool==='eraser'?'destination-out':'source-over';pencilCtx.beginPath();pencilCtx.moveTo(pts[0].x,pts[0].y);for(let i=1;i<pts.length;i++)pencilCtx.lineTo(pts[i].x,pts[i].y);pencilCtx.stroke();pencilCtx.restore()}
+function pencilPointerDown(e){if(!pencilMode||isPaused)return;if(e.pointerType!=='pen'){if(e.cancelable)e.preventDefault();return}if(e.cancelable)e.preventDefault();pencilDrawing=true;pencilActivePointerId=e.pointerId;pencilCurrentStroke={tool:pencilTool,points:[pencilPoint(e)]};try{pencilCanvas.setPointerCapture(e.pointerId)}catch(_){}
+}
+function drawPencilStroke(stroke, fromIndex=0){if(!pencilCtx||!stroke?.points?.length)return;const pts=stroke.points;const start=Math.max(0,Math.min(fromIndex,pts.length-1));const p0=pts[start];pencilCtx.save();pencilCtx.lineCap='round';pencilCtx.lineJoin='round';pencilCtx.lineWidth=stroke.tool==='eraser'?18:Math.max(1.5,2.2+(p0.p||.5)*2.2);pencilCtx.strokeStyle=stroke.tool==='eraser'?'rgba(0,0,0,1)':'#dc2626';pencilCtx.globalCompositeOperation=stroke.tool==='eraser'?'destination-out':'source-over';pencilCtx.beginPath();if(start===0){pencilCtx.moveTo(p0.x,p0.y);if(pts.length===1){pencilCtx.lineTo(p0.x+0.01,p0.y+0.01)}}else{const prev=pts[start-1];pencilCtx.moveTo(prev.x,prev.y);pencilCtx.lineTo(p0.x,p0.y)}for(let i=start+1;i<pts.length;i++)pencilCtx.lineTo(pts[i].x,pts[i].y);pencilCtx.stroke();pencilCtx.restore()}
+function pencilPointerMove(e){if(!pencilDrawing||e.pointerId!==pencilActivePointerId)return;if(e.cancelable)e.preventDefault();const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[e];for(const ev of events){pencilCurrentStroke.points.push(pencilPoint(ev));}drawPencilStroke(pencilCurrentStroke,Math.max(0,pencilCurrentStroke.points.length-events.length-1))}
+function pencilPointerUp(e){if(!pencilDrawing||e.pointerId!==undefined&&e.pointerId!==pencilActivePointerId)return;if(e.cancelable)e.preventDefault();pencilDrawing=false;pencilActivePointerId=null;if(pencilCurrentStroke&&pencilCurrentStroke.points.length){pencilStrokes.push(pencilCurrentStroke);pencilRedoStack=[];safePencilSave()}pencilCurrentStroke=null}
 function redrawPencil(){if(!pencilCanvas||!pencilCtx)return;const r=pencilCanvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);pencilCtx.setTransform(dpr,0,0,dpr,0,0);pencilCtx.clearRect(0,0,Math.max(1,r.width),Math.max(1,r.height));pencilStrokes.forEach(drawPencilStroke);if(pencilCurrentStroke)drawPencilStroke(pencilCurrentStroke)}
-function loadPencilForCurrentQuestion(){pencilStrokes=safePencilLoad();pencilRedoStack=[];setupPencilCanvas();requestAnimationFrame(redrawPencil)}
+function loadPencilForCurrentQuestion(){pencilStrokes=safePencilLoad();pencilRedoStack=[];setupPencilCanvas();requestAnimationFrame(()=>{resizePencilCanvas();redrawPencil()})}
 function setPencilTool(tool){pencilTool=tool==='eraser'?'eraser':'pen';document.getElementById('pencilPenBtn')?.classList.toggle('active',pencilTool==='pen');document.getElementById('pencilEraserBtn')?.classList.toggle('active',pencilTool==='eraser')}
 function pencilUndo(){if(!pencilStrokes.length)return;pencilRedoStack.push(pencilStrokes.pop());safePencilSave();redrawPencil()}
 function pencilRedo(){if(!pencilRedoStack.length)return;pencilStrokes.push(pencilRedoStack.pop());safePencilSave();redrawPencil()}
 function clearPencilDrawing(){if(!pencilStrokes.length)return;pencilStrokes=[];pencilRedoStack=[];safePencilSave();redrawPencil()}
-function togglePencilMode(e){if(e)e.preventDefault();if(!data||!data.length||isPaused)return;pencilMode=!pencilMode;document.getElementById('quizEngineBox')?.classList.toggle('pencil-mode',pencilMode);const btn=document.getElementById('pencilToggleBtn');if(btn){btn.classList.toggle('active',pencilMode);btn.setAttribute('aria-pressed',String(pencilMode))}document.getElementById('pencilScratchPanel')?.setAttribute('aria-hidden',String(!pencilMode));if(pencilMode){loadPencilForCurrentQuestion();requestAnimationFrame(resizePencilCanvas)}}
-function resetPencilModeForNewQuiz(){pencilMode=false;pencilTool='pen';pencilStrokes=[];pencilRedoStack=[];document.getElementById('quizEngineBox')?.classList.remove('pencil-mode');const btn=document.getElementById('pencilToggleBtn');if(btn){btn.classList.remove('active');btn.setAttribute('aria-pressed','false')}document.getElementById('pencilScratchPanel')?.setAttribute('aria-hidden','true');setPencilTool('pen')}
+function togglePencilMode(e){if(e)e.preventDefault();if(!data||!data.length||isPaused)return;pencilMode=!pencilMode;document.getElementById('quizEngineBox')?.classList.toggle('pencil-mode',pencilMode);const btn=document.getElementById('pencilToggleBtn');if(btn){btn.classList.toggle('active',pencilMode);btn.setAttribute('aria-pressed',String(pencilMode))}document.getElementById('pencilQuestionOverlay')?.setAttribute('aria-hidden',String(!pencilMode));if(pencilMode){loadPencilForCurrentQuestion();requestAnimationFrame(resizePencilCanvas)}}
+function resetPencilModeForNewQuiz(){pencilMode=false;pencilTool='pen';pencilStrokes=[];pencilRedoStack=[];document.getElementById('quizEngineBox')?.classList.remove('pencil-mode');const btn=document.getElementById('pencilToggleBtn');if(btn){btn.classList.remove('active');btn.setAttribute('aria-pressed','false')}document.getElementById('pencilQuestionOverlay')?.setAttribute('aria-hidden','true');setPencilTool('pen')}
 
 function showQ() {
 if(data.length === 0) return;
@@ -3861,7 +3851,6 @@ timerRunning=true;
 
 pencilMode=false;
 document.getElementById('quizEngineBox')?.classList.remove('pencil-mode');
-document.getElementById('pencilScratchPanel')?.setAttribute('aria-hidden','true');
 document.getElementById('pencilToggleBtn')?.classList.remove('active');
 document.getElementById('quiz-box').style.display='none';
 document.getElementById('controls').style.display='none';
