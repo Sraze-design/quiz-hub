@@ -2990,6 +2990,8 @@ async function buildGlobalQuizIndex() {
     const response = await fetch('./index.json?v=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) throw new Error("Unable to load index.json");
     allFlattenedQuizzes = await response.json();
+    // Establish a stable in-app root so Back can always unwind: Subject -> Home.
+    history.replaceState({ screen: 'subjects', appRoot: true }, '');
     isHistoryNav = true; // initial render should not push a duplicate history entry
     renderSubjects();
   } catch (error) {
@@ -3154,7 +3156,13 @@ window.addEventListener('popstate', (e) => {
   skipExitConfirmOnce = false;
 
   isHistoryNav = true;
-  const state = e.state || { screen: 'subjects' };
+  const state = e.state || { screen: 'subjects', appRoot: true };
+
+  // If the browser reaches the app root, render Home/Subjects instead of leaving the app.
+  if (state.appRoot || state.screen === 'subjects') {
+    renderSubjects();
+    return;
+  }
 
   // If currently inside the quiz engine, exit back to the explorer first
   const quizEngine = document.getElementById('quizEngineBox');
@@ -3650,8 +3658,62 @@ function handleSearch(query) {
 }
 
 function handleExplorerBack() {
-  // Route through browser history so the on-screen arrow and the phone's
-  // hardware back button stay perfectly in sync (popstate does the actual render).
+  // Use the explicit explorer hierarchy for the on-screen back button.
+  // This also works when the browser history stack has no usable previous
+  // entry (for example after opening the HTML directly or after a history
+  // restoration). Hardware/system back continues to use popstate below.
+  const s = history.state || {};
+  const screen = s.screen || '';
+  try {
+    if (screen === 'quizlist') {
+      renderChapters(s.subject, s.category || null);
+      history.replaceState({screen:'chapters',subject:s.subject,category:s.category||null}, '');
+      return;
+    }
+    if (screen === 'chapters') {
+      if (s.category) {
+        renderCategories(s.subject);
+        history.replaceState({screen:'categories',subject:s.subject}, '');
+      } else {
+        renderSubjects();
+        history.replaceState({screen:'subjects'}, '');
+      }
+      return;
+    }
+    if (screen === 'categories') {
+      renderSubjects();
+      history.replaceState({screen:'subjects'}, '');
+      return;
+    }
+    if (screen === 'bookmarkQuestions') {
+      renderBookmarkTests(s.subject, s.category || null, s.chapter || null, !!s.directOnly);
+      history.replaceState({screen:'bookmarkTests',subject:s.subject,category:s.category||null,chapter:s.chapter||null,directOnly:!!s.directOnly}, '');
+      return;
+    }
+    if (screen === 'bookmarkTests') {
+      if (s.chapter) {
+        renderBookmarkChapters(s.subject, s.category || null);
+        history.replaceState({screen:'bookmarkChapters',subject:s.subject,category:s.category||null}, '');
+      } else if (s.category) {
+        renderBookmarkLevel2(s.subject);
+        history.replaceState({screen:'bookmarkLevel2',subject:s.subject}, '');
+      } else {
+        renderBookmarkSubjects();
+        history.replaceState({screen:'bookmarks'}, '');
+      }
+      return;
+    }
+    if (screen === 'bookmarkChapters' || screen === 'bookmarkLevel2') {
+      renderBookmarkSubjects();
+      history.replaceState({screen:'bookmarks'}, '');
+      return;
+    }
+    if (screen === 'bookmarks') {
+      renderSubjects();
+      history.replaceState({screen:'subjects'}, '');
+      return;
+    }
+  } catch (_) {}
   history.back();
 }
 
