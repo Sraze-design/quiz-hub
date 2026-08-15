@@ -3548,9 +3548,27 @@ function showEmptyState() {
     redraw(); save();
   }
 
-  // Clear needs 3 taps within a short window before it actually wipes the
-  // page — cheap insurance against an accidental tap deleting stars/notes.
-  // Each tap nudges the button so there's visible feedback that it registered.
+  // Regular pen/eraser ink wipes on the very first tap. Stars are protected
+  // separately: they only clear once the cross has been tapped 3 times in a
+  // row, so an accidental tap (or the tap that just cleared the ink) can't
+  // also take the stars out.
+  function clearInkOnly(){
+    if(!strokes.some(function(s){return s.tool!=='star';})) return;
+    strokes=strokes.filter(function(s){return s.tool==='star';});
+    redoStack=[]; currentStroke=null;
+    redraw(); save();
+  }
+
+  function clearStarsOnly(){
+    if(!strokes.some(function(s){return s.tool==='star';})) return;
+    strokes=strokes.filter(function(s){return s.tool!=='star';});
+    redoStack=[]; currentStroke=null;
+    redraw(); save();
+  }
+
+  // Clear button: 1st tap wipes normal writing immediately. Stars only go
+  // away after 3 taps within a short window — cheap insurance against an
+  // accidental tap deleting them. Each tap nudges the button for feedback.
   let clearClickCount=0, clearClickTimer=null;
 
   function resetClearConfirm(){
@@ -3563,9 +3581,12 @@ function showEmptyState() {
     clearClickCount++;
     if(clearClickTimer) clearTimeout(clearClickTimer);
     const btn=document.getElementById('pencilClearBtn');
+
+    if(clearClickCount===1) clearInkOnly();
+
     if(clearClickCount>=3){
       resetClearConfirm();
-      clearAll();
+      clearStarsOnly();
       return;
     }
     btn?.classList.toggle('confirm-1',clearClickCount===1);
