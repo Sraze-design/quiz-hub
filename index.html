@@ -3486,10 +3486,38 @@ function showEmptyState() {
   }
   function preventSelection(e){
     if(!enabled) return;
+
+    // While Pencil mode is ON, never let an Apple Pencil tap/long-press OR a
+    // resting palm/finger accidentally activate an MCQ option. The quiz can
+    // still be answered normally after Pencil mode is turned OFF.
+    const optionTarget = e.target && e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
+    if(optionTarget){
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
     // Never allow Safari's text-selection/context menu while Pencil mode is active.
-    // Touch is intentionally NOT blocked here so scrolling and normal buttons still work.
     if(e.type==='contextmenu' || e.type==='selectstart') {e.preventDefault();e.stopPropagation();}
     if(e.pointerType==='pen'){e.preventDefault();e.stopPropagation();}
+  }
+
+  function blockOptionActivationWhilePencil(e){
+    if(!enabled) return;
+    const optionTarget = e.target && e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
+    if(!optionTarget) return;
+    e.preventDefault();
+    e.stopPropagation();
+    // Stop the event at capture phase so neither inline handlers nor delegated
+    // option handlers can mark an answer while Pencil mode is active.
+  }
+
+  function clearNativeSelection(){
+    if(!enabled) return;
+    try{
+      const sel=window.getSelection ? window.getSelection() : null;
+      if(sel && sel.rangeCount) sel.removeAllRanges();
+    }catch(_){ }
   }
   function toggleMode(){
     enabled=!enabled;
@@ -3522,8 +3550,13 @@ function showEmptyState() {
     document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
+    // Safety guard: no option can be activated by Pencil, finger, or palm
+    // while Pencil mode is enabled.
+    document.addEventListener('pointerdown',blockOptionActivationWhilePencil,{capture:true,passive:false});
+    document.addEventListener('click',blockOptionActivationWhilePencil,{capture:true,passive:false});
     document.addEventListener('contextmenu',preventSelection,{capture:true});
     document.addEventListener('selectstart',preventSelection,{capture:true});
+    document.addEventListener('selectionchange',clearNativeSelection,{capture:true,passive:true});
     window.addEventListener('resize',resize,{passive:true});
     window.addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});
   }
