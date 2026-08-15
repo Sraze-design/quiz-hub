@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q321. आयकर की दर बढ़ जाती है, परिणामस्वरूप किसी व्यक्ति की कर देयता 12% बढ़ जाती है, जबकि उसकी नेट आय 3% कम हो जाती है। आयकर की नई दर क्या है?",
+    q_en: "Q321. The income tax rate increases, as a result of which a person's tax liability increases by 12%, while his net income decreases by 3%. What is the new income tax rate?",
+    tag: "",
+    o_hi: [
+      "(a) 22.4%",
+      "(b) 21.6%",
+      "(c) 20.8%",
+      "(d) 24.8%"
+    ],
+    o_en: [
+      "(a) 22.4%",
+      "(b) 21.6%",
+      "(c) 20.8%",
+      "(d) 24.8%"
+    ],
+    a: 0,
+    e_hi: "मान लेते हैं प्रारंभिक आय = 100 और प्रारंभिक आयकर दर = r%।<br>कर देयता में 12% वृद्धि होने पर नई कर देयता = 1.12r%।<br>नेट आय में 3% कमी हुई है, इसलिए नई नेट आय = पुरानी नेट आय का 97%।<br>अतः 1 - 1.12r/100 = 0.97(1 - r/100)<br>0.03 = 0.15r/100<br>r = 20%<br>नई कर दर = 20% × 112/100 = 22.4%<br>अतः सही उत्तर 22.4% है।",
+    e_en: "Let the initial income = 100 and the initial income tax rate = r%.<br>When tax liability increases by 12%, new tax liability = 1.12r%.<br>Net income decreases by 3%, so new net income = 97% of the old net income.<br>Therefore, 1 - 1.12r/100 = 0.97(1 - r/100)<br>0.03 = 0.15r/100<br>r = 20%<br>New tax rate = 20% × 112/100 = 22.4%<br>Hence, the correct answer is 22.4%."
+  },
+  {
+    q_hi: "Q322. एक व्यक्ति की आय में ₹1800 की वृद्धि हुई तथा देय कर 18% से घटकर 15% हो गया। दोनों मामलों में 29.95% आय कर मुक्त है। यदि दोनों मामलों में देय कर समान है तो प्रारंभिक आय ज्ञात कीजिए।",
+    q_en: "Q322. A person's income increased by ₹1800 and the tax payable decreased from 18% to 15%. In both cases, 29.95% of the income is tax-free. If the tax payable is the same in both cases, find the initial income.",
+    tag: "",
+    o_hi: [
+      "(a) ₹9000",
+      "(b) ₹15000",
+      "(c) ₹12000",
+      "(d) ₹10000"
+    ],
+    o_en: [
+      "(a) ₹9000",
+      "(b) ₹15000",
+      "(c) ₹12000",
+      "(d) ₹10000"
+    ],
+    a: 0,
+    e_hi: "मान लीजिए प्रारंभिक आय = ₹x।<br>कर योग्य आय = 100% - 29.95% = 70.05%<br>पहली स्थिति में देय कर = x × 70.05% × 18%<br>दूसरी स्थिति में आय = ₹(x + 1800)<br>दूसरी स्थिति में देय कर = (x + 1800) × 70.05% × 15%<br>दोनों मामलों में देय कर समान है।<br>x × 18 = (x + 1800) × 15<br>18x = 15x + 27000<br>3x = 27000<br>x = 9000<br>अतः प्रारंभिक आय = ₹9000।",
+    e_en: "Let the initial income = ₹x.<br>Taxable income = 100% - 29.95% = 70.05%<br>Tax payable in the first case = x × 70.05% × 18%<br>Income in the second case = ₹(x + 1800)<br>Tax payable in the second case = (x + 1800) × 70.05% × 15%<br>The tax payable is the same in both cases.<br>x × 18 = (x + 1800) × 15<br>18x = 15x + 27000<br>3x = 27000<br>x = 9000<br>Hence, the initial income = ₹9000."
+  },
+  {
+    q_hi: "Q323. किसी व्यक्ति की आय में ₹2000 की वृद्धि हुई है। कर की दर 14% से घटकर 12% हो गई है। यदि दोनों मामलों में देय कर समान है। यदि पहली और दूसरी स्थिति में आय का 20% और 30% कर मुक्त है। उसकी वर्तमान आय ज्ञात कीजिए।",
+    q_en: "Q323. A person's income increased by ₹2000. The tax rate decreased from 14% to 12%. If the tax payable is the same in both cases, and 20% and 30% of the income are tax-free in the first and second cases respectively, find his present income.",
+    tag: "",
+    o_hi: [
+      "(a) ₹6000",
+      "(b) ₹8000",
+      "(c) ₹5000",
+      "(d) ₹9000"
+    ],
+    o_en: [
+      "(a) ₹6000",
+      "(b) ₹8000",
+      "(c) ₹5000",
+      "(d) ₹9000"
+    ],
+    a: 1,
+    e_hi: "मान लीजिए प्रारंभिक आय = ₹x।<br>पहली स्थिति में कर योग्य आय = 80%।<br>पहली स्थिति में कर = x × 80% × 14%<br>वर्तमान आय = ₹(x + 2000)।<br>दूसरी स्थिति में कर योग्य आय = 70%।<br>दूसरी स्थिति में कर = (x + 2000) × 70% × 12%<br>दोनों मामलों में कर समान है।<br>x × 80 × 14 = (x + 2000) × 70 × 12<br>1120x = 840x + 1680000<br>280x = 1680000<br>x = 6000<br>वर्तमान आय = 6000 + 2000 = ₹8000<br>अतः सही उत्तर ₹8000 है।",
+    e_en: "Let the initial income = ₹x.<br>Taxable income in the first case = 80%.<br>Tax in the first case = x × 80% × 14%<br>Present income = ₹(x + 2000).<br>Taxable income in the second case = 70%.<br>Tax in the second case = (x + 2000) × 70% × 12%<br>The tax is the same in both cases.<br>x × 80 × 14 = (x + 2000) × 70 × 12<br>1120x = 840x + 1680000<br>280x = 1680000<br>x = 6000<br>Present income = 6000 + 2000 = ₹8000<br>Hence, the correct answer is ₹8000."
+  },
+  {
+    q_hi: "Q324. एक आदमी की वार्षिक आय में ₹x की वृद्धि हुई है और उसकी आय ₹28,800 थी लेकिन आय पर कर जो उसे 12% से घटाकर 10% करना पड़ता है, जबकि दोनों ही स्थिति में 27% आय कर मुक्त होती है। आय में वृद्धि ज्ञात कीजिए, यदि दोनों मामलों में समान कर का भुगतान किया जाता है?",
+    q_en: "Q324. A man's annual income increased by ₹x and his income was ₹28,800, but the tax on income had to be reduced from 12% to 10%, while 27% of income is tax-free in both cases. Find the increase in income if the tax paid is the same in both cases.",
+    tag: "",
+    o_hi: [
+      "(a) ₹1440",
+      "(b) ₹5760",
+      "(c) ₹6000",
+      "(d) ₹6500"
+    ],
+    o_en: [
+      "(a) ₹1440",
+      "(b) ₹5760",
+      "(c) ₹6000",
+      "(d) ₹6500"
+    ],
+    a: 1,
+    e_hi: "कर योग्य आय = 100% - 27% = 73%<br>पहली स्थिति में कर = ₹28800 × 73% × 12%<br>दूसरी स्थिति में आय = ₹(28800 + x)।<br>दूसरी स्थिति में कर = ₹(28800 + x) × 73% × 10%<br>दोनों मामलों में कर समान है।<br>28800 × 12 = (28800 + x) × 10<br>345600 = 288000 + 10x<br>10x = 57600<br>x = ₹5760<br>अतः आय में वृद्धि = ₹5760।",
+    e_en: "Taxable income = 100% - 27% = 73%<br>Tax in the first case = ₹28800 × 73% × 12%<br>Income in the second case = ₹(28800 + x).<br>Tax in the second case = ₹(28800 + x) × 73% × 10%<br>The tax is the same in both cases.<br>28800 × 12 = (28800 + x) × 10<br>345600 = 288000 + 10x<br>10x = 57600<br>x = ₹5760<br>Hence, the increase in income = ₹5760."
+  },
+  {
+    q_hi: "Q325. किसी व्यक्ति की आय में ₹3000 की कमी आती है तथा आयकर की दर 15% से बढ़कर 18% हो जाती है। भुगतान किए गए कर का अनुपात 3 : 2 है। यदि 29% आय कर मुक्त है। प्रारंभिक आय ज्ञात कीजिए।",
+    q_en: "Q325. A person's income decreases by ₹3000 and the income tax rate increases from 15% to 18%. The ratio of taxes paid is 3 : 2. If 29% of the income is tax-free, find the initial income.",
+    tag: "",
+    o_hi: [
+      "(a) ₹6750",
+      "(b) ₹5550",
+      "(c) ₹7750",
+      "(d) ₹6250"
+    ],
+    o_en: [
+      "(a) ₹6750",
+      "(b) ₹5550",
+      "(c) ₹7750",
+      "(d) ₹6250"
+    ],
+    a: 0,
+    e_hi: "कर योग्य आय = 100% - 29% = 71%<br>प्रारंभिक आय = x मानते हैं।<br>नई आय = x - 3000।<br>पहले और बाद के करों का अनुपात 3 : 2 है।<br>[x × 71% × 15%] / [(x - 3000) × 71% × 18%] = 3/2<br>15x/[18(x - 3000)] = 3/2<br>30x = 54(x - 3000)<br>x = 6750<br>अतः प्रारंभिक आय = ₹6750।",
+    e_en: "Taxable income = 100% - 29% = 71%<br>Let the initial income = x.<br>New income = x - 3000.<br>The ratio of the taxes before and after is 3 : 2.<br>[x × 71% × 15%] / [(x - 3000) × 71% × 18%] = 3/2<br>15x/[18(x - 3000)] = 3/2<br>30x = 54(x - 3000)<br>x = 6750<br>Hence, the initial income = ₹6750."
+  },
+  {
+    q_hi: "Q326. एक व्यक्ति अपनी आय का 35% म्यूचुअल फंड में, 25% फिक्स्ड डिपॉजिट में और शेष आवर्ती जमा में निवेश करता है। 2 वर्षों के बाद, म्यूचुअल फंड में 20%, फिक्स्ड डिपॉजिट में 10% और आवर्ती जमा में 15% की वृद्धि होती है। यदि उसकी कुल आय ₹1,60,000 है, तो 2 वर्षों के बाद उसके पूरे निवेश पोर्टफोलियो पर कुल प्रतिशत रिटर्न क्या होगा?",
+    q_en: "Q326. A person invests 35% of his income in mutual funds, 25% in fixed deposits and the remaining in recurring deposits. After 2 years, the mutual fund, fixed deposit and recurring deposit increase by 20%, 10% and 15% respectively. If his total income is ₹1,60,000, what is the total percentage return on his entire investment portfolio after 2 years?",
+    tag: "SSC CHSL 17/11/2025 (Shift-03)",
+    o_hi: [
+      "(a) 15.5%",
+      "(b) 15.25%",
+      "(c) 14.75%",
+      "(d) 16%"
+    ],
+    o_en: [
+      "(a) 15.5%",
+      "(b) 15.25%",
+      "(c) 14.75%",
+      "(d) 16%"
+    ],
+    a: 0,
+    e_hi: "म्यूचुअल फंड में निवेश = 35% और वृद्धि = 20%<br>योगदान = 35% × 20% = 7%<br>फिक्स्ड डिपॉजिट में निवेश = 25% और वृद्धि = 10%<br>योगदान = 25% × 10% = 2.5%<br>आवर्ती जमा में निवेश = 100% - 35% - 25% = 40%<br>योगदान = 40% × 15% = 6%<br>कुल रिटर्न = 7% + 2.5% + 6% = 15.5%<br>अतः सही उत्तर 15.5% है।",
+    e_en: "Investment in mutual funds = 35% and increase = 20%<br>Contribution = 35% × 20% = 7%<br>Investment in fixed deposits = 25% and increase = 10%<br>Contribution = 25% × 10% = 2.5%<br>Investment in recurring deposits = 100% - 35% - 25% = 40%<br>Contribution = 40% × 15% = 6%<br>Total return = 7% + 2.5% + 6% = 15.5%<br>Hence, the correct answer is 15.5%."
+  },
+  {
+    q_hi: "Q327. एक गुणवत्ता नियंत्रण अधिकारी एक कपड़ा कारखाने में 4 अलग-अलग मशीनों में दोष दर पर नज़र रखता है। पहली मशीन 1.8%, दूसरी 2.4% और तीसरी 1.6% की औसत दोष दर वाले कपड़े बनाती है। चौथी मशीन, पहली तीन मशीनों के औसत संचालन समय से 5 घंटे कम समय तक चली, फिर भी उसका कुल दोषपूर्ण उत्पादन 0.92 इकाई था। अगर चारों मशीनों में दोषपूर्ण इकाइयों की कुल संख्या 4.12 है, और प्रत्येक मशीन का कुल उत्पादन समान था, तो चौथी मशीन का दोष प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q327. A quality control officer monitors the defect rate in 4 different machines in a textile factory. The first machine, second machine and third machine produce fabric with average defect rates of 1.8%, 2.4% and 1.6% respectively. The fourth machine operated for 5 hours less than the average operating time of the first three machines, yet its total defective output was 0.92 units. If the total number of defective units in all four machines is 4.12, and the total production of each machine was equal, find the defect percentage of the fourth machine.",
+    tag: "SSC CHSL 21/11/2025 (Shift-01)",
+    o_hi: [
+      "(a) 1.52%",
+      "(b) 1.58%",
+      "(c) 1.667%",
+      "(d) 1.73%"
+    ],
+    o_en: [
+      "(a) 1.52%",
+      "(b) 1.58%",
+      "(c) 1.667%",
+      "(d) 1.73%"
+    ],
+    a: 2,
+    e_hi: "पहली तीन मशीनों की दोष दर का योग = 1.8% + 2.4% + 1.6% = 5.8%<br>तीनों मशीनों का कुल दोषपूर्ण उत्पादन = 4.12 - 0.92 = 3.20 इकाई<br>यदि प्रत्येक मशीन का कुल उत्पादन x है, तो 5.8% of x = 3.20<br>x = 3.20/0.058<br>चौथी मशीन की दोष दर = 0.92/x × 100<br>= 1.667%<br>अतः सही उत्तर 1.667% है।",
+    e_en: "Sum of the defect rates of the first three machines = 1.8% + 2.4% + 1.6% = 5.8%<br>Total defective production of the first three machines = 4.12 - 0.92 = 3.20 units<br>If the total production of each machine is x, then 5.8% of x = 3.20<br>x = 3.20/0.058<br>Defect rate of the fourth machine = 0.92/x × 100<br>= 1.667%<br>Hence, the correct answer is 1.667%."
+  },
+  {
+    q_hi: "Q328. खाना पकाने के तेल की कीमत में 8% की वृद्धि हुई। एक परिवार प्रति माह 12 लीटर खाना पकाने के तेल का उपयोग करता है। यदि मूल कीमत ₹150 प्रति लीटर थी, तो मूल्य वृद्धि के कारण परिवार के लिए अतिरिक्त वार्षिक व्यय (निकटतम रु. में) क्या है?",
+    q_en: "Q328. The price of cooking oil increased by 8%. A family uses 12 litres of cooking oil per month. If the original price was ₹150 per litre, what is the additional annual expenditure for the family due to the price increase, to the nearest rupee?",
+    tag: "SSC PHASE XIII 25/07/2025 (Shift-03)",
+    o_hi: [
+      "(a) ₹1,789",
+      "(b) ₹1,700",
+      "(c) ₹1,728",
+      "(d) ₹1,765"
+    ],
+    o_en: [
+      "(a) ₹1,789",
+      "(b) ₹1,700",
+      "(c) ₹1,728",
+      "(d) ₹1,765"
+    ],
+    a: 2,
+    e_hi: "मूल कीमत = ₹150 प्रति लीटर<br>कीमत में वृद्धि = ₹150 × 8% = ₹12 प्रति लीटर<br>मासिक अतिरिक्त व्यय = 12 × ₹12 = ₹144<br>वार्षिक अतिरिक्त व्यय = ₹144 × 12 = ₹1728<br>अतः सही उत्तर ₹1728 है।",
+    e_en: "Original price = ₹150 per litre<br>Price increase = ₹150 × 8% = ₹12 per litre<br>Monthly additional expenditure = 12 × ₹12 = ₹144<br>Annual additional expenditure = ₹144 × 12 = ₹1728<br>Hence, the correct answer is ₹1728."
+  },
+  {
+    q_hi: "Q329. एक स्कूल में लड़कों और लड़कियों की संख्या का अनुपात क्रमशः 3 : 4 है। यदि लड़कों की संख्या में 10% की वृद्धि होती है तथा लड़कियों की संख्या में 15% की वृद्धि होती है तो लड़कों की संख्या और लड़कियों की संख्या का नया अनुपात क्या होगा?",
+    q_en: "Q329. In a school, the ratio of the number of boys to girls is 3 : 4 respectively. If the number of boys increases by 10% and the number of girls increases by 15%, what will be the new ratio of boys to girls?",
+    tag: "SSC CPO 09/11/2022 (Shift-01)",
+    o_hi: [
+      "(a) 33/45",
+      "(b) 35/46",
+      "(c) 33/46",
+      "(d) 46/33"
+    ],
+    o_en: [
+      "(a) 33/45",
+      "(b) 35/46",
+      "(c) 33/46",
+      "(d) 46/33"
+    ],
+    a: 2,
+    e_hi: "लड़कों की संख्या = 3 इकाई और लड़कियों की संख्या = 4 इकाई।<br>नई लड़कों की संख्या = 3 × 110/100 = 3.3<br>नई लड़कियों की संख्या = 4 × 115/100 = 4.6<br>नया अनुपात = 3.3 : 4.6 = 33 : 46<br>अतः सही उत्तर 33/46 है।",
+    e_en: "Number of boys = 3 units and number of girls = 4 units.<br>New number of boys = 3 × 110/100 = 3.3<br>New number of girls = 4 × 115/100 = 4.6<br>New ratio = 3.3 : 4.6 = 33 : 46<br>Hence, the correct answer is 33/46."
+  },
+  {
+    q_hi: "Q330. एक संस्थान में, 35% लड़के हैं और शेष लड़कियां हैं। यदि किसी परीक्षा में 30% लड़के अनुत्तीर्ण हो जाते हैं और 60% लड़कियां उत्तीर्ण हो जाती हैं, तो परीक्षा में अनुत्तीर्ण होने वाले छात्रों का प्रतिशत है:",
+    q_en: "Q330. In an institution, 35% are boys and the rest are girls. If 30% of the boys fail in an examination and 60% of the girls pass, what is the percentage of students who fail the examination?",
+    tag: "SSC PHASE-IX 2022",
+    o_hi: [
+      "(a) 35.5%",
+      "(b) 36.5%",
+      "(c) 35%",
+      "(d) 40%"
+    ],
+    o_en: [
+      "(a) 35.5%",
+      "(b) 36.5%",
+      "(c) 35%",
+      "(d) 40%"
+    ],
+    a: 1,
+    e_hi: "लड़के = 35% और लड़कियां = 65%<br>अनुत्तीर्ण लड़के = 30% × 35% = 10.5%<br>उत्तीर्ण लड़कियां = 60%, इसलिए अनुत्तीर्ण लड़कियां = 40%<br>अनुत्तीर्ण लड़कियां = 40% × 65% = 26%<br>कुल अनुत्तीर्ण = 10.5% + 26% = 36.5%<br>अतः सही उत्तर 36.5% है।",
+    e_en: "Boys = 35% and girls = 65%<br>Failed boys = 30% × 35% = 10.5%<br>Passed girls = 60%, so failed girls = 40%<br>Failed girls = 40% × 65% = 26%<br>Total failed = 10.5% + 26% = 36.5%<br>Hence, the correct answer is 36.5%."
+  },
+  {
+    q_hi: "Q331. किसी परीक्षा में उपस्थित होने वाले सभी छात्रों में से 45% छात्र, लड़के हैं और शेष लड़कियां हैं। यदि 60% लड़के और 70% लड़कियां उत्तीर्ण हुई हों, तो अनुत्तीर्ण होने वाले छात्रों का प्रतिशत ज्ञात करें।",
+    q_en: "Q331. Of all the students appearing in an examination, 45% are boys and the rest are girls. If 60% of the boys and 70% of the girls pass, find the percentage of students who fail.",
+    tag: "SSC CGL 18/08/2021 (Shift-01)",
+    o_hi: [
+      "(a) 36",
+      "(b) 35.4",
+      "(c) 40",
+      "(d) 34.5"
+    ],
+    o_en: [
+      "(a) 36",
+      "(b) 35.4",
+      "(c) 40",
+      "(d) 34.5"
+    ],
+    a: 3,
+    e_hi: "लड़के = 45% और लड़कियां = 55%<br>अनुत्तीर्ण लड़के = 40% × 45% = 18%<br>अनुत्तीर्ण लड़कियां = 30% × 55% = 16.5%<br>कुल अनुत्तीर्ण = 18% + 16.5% = 34.5%<br>अतः सही उत्तर 34.5 है।",
+    e_en: "Boys = 45% and girls = 55%<br>Failed boys = 40% × 45% = 18%<br>Failed girls = 30% × 55% = 16.5%<br>Total failed = 18% + 16.5% = 34.5%<br>Hence, the correct answer is 34.5."
+  },
+  {
+    q_hi: "Q332. किसी कक्षा में, 60% छात्र लड़कियां हैं और शेष लड़के हैं। किसी परीक्षा में 45% लड़कियां उत्तीर्ण होती हैं और 40% लड़के अनुत्तीर्ण होते हैं। यदि अनुत्तीर्ण होने वाली लड़कियों की संख्या 66 है, तो परीक्षा में उत्तीर्ण होने वाले लड़कों की संख्या ज्ञात करें।",
+    q_en: "Q332. In a class, 60% of the students are girls and the rest are boys. In an examination, 45% of the girls pass and 40% of the boys fail. If the number of girls who fail is 66, find the number of boys who pass the examination.",
+    tag: "SSC CHSL 15/04/2021 (Shift-01)",
+    o_hi: [
+      "(a) 36",
+      "(b) 48",
+      "(c) 54",
+      "(d) 60"
+    ],
+    o_en: [
+      "(a) 36",
+      "(b) 48",
+      "(c) 54",
+      "(d) 60"
+    ],
+    a: 1,
+    e_hi: "लड़कियां = 60% और लड़के = 40%<br>अनुत्तीर्ण लड़कियां = 100% - 45% = 55%<br>अनुत्तीर्ण लड़कियां = 55% × 60% = 33%<br>33% = 66, इसलिए कुल छात्र = 200<br>लड़कों की संख्या = 40% × 200 = 80<br>लड़कों के 40% अनुत्तीर्ण हैं, इसलिए 60% उत्तीर्ण हैं।<br>उत्तीर्ण लड़के = 60% × 80 = 48<br>अतः सही उत्तर 48 है।",
+    e_en: "Girls = 60% and boys = 40%<br>Failed girls = 100% - 45% = 55%<br>Failed girls = 55% × 60% = 33%<br>33% = 66, so total students = 200<br>Number of boys = 40% × 200 = 80<br>40% of the boys fail, so 60% pass.<br>Passed boys = 60% × 80 = 48<br>Hence, the correct answer is 48."
+  },
+  {
+    q_hi: "Q333. एक कक्षा में, छात्रों की कुल संख्या में से 83\\frac{1}{3}% लड़कियाँ हैं तथा शेष लड़के हैं। यदि 60% लड़के और 80% लड़कियाँ उपस्थित हैं, तो कक्षा के कुल छात्रों का कितना प्रतिशत अनुपस्थित है?",
+    q_en: "Q333. In a class, 83\\frac{1}{3}% of the total students are girls and the rest are boys. If 60% of the boys and 80% of the girls are present, what percentage of the total students are absent?",
+    tag: "SSC CGL TIER-II 12/09/2019",
+    o_hi: [
+      "(a) 26\\frac{2}{3}",
+      "(b) 22\\frac{2}{3}",
+      "(c) 23\\frac{1}{3}",
+      "(d) 12\\frac{1}{3}"
+    ],
+    o_en: [
+      "(a) 26\\frac{2}{3}",
+      "(b) 22\\frac{2}{3}",
+      "(c) 23\\frac{1}{3}",
+      "(d) 12\\frac{1}{3}"
+    ],
+    a: 2,
+    e_hi: "लड़कियां = 83\\frac{1}{3}% और लड़के = 16\\frac{2}{3}%<br>लड़कियों की अनुपस्थिति = 20% × 83\\frac{1}{3}% = 16\\frac{2}{3}%<br>लड़कों की अनुपस्थिति = 40% × 16\\frac{2}{3}% = 6\\frac{2}{3}%<br>कुल अनुपस्थिति = 16\\frac{2}{3}% + 6\\frac{2}{3}% = 23\\frac{1}{3}%<br>अतः सही उत्तर 23\\frac{1}{3} है।",
+    e_en: "Girls = 83\\frac{1}{3}% and boys = 16\\frac{2}{3}%<br>Absence of girls = 20% × 83\\frac{1}{3}% = 16\\frac{2}{3}%<br>Absence of boys = 40% × 16\\frac{2}{3}% = 6\\frac{2}{3}%<br>Total absence = 16\\frac{2}{3}% + 6\\frac{2}{3}% = 23\\frac{1}{3}%<br>Hence, the correct answer is 23\\frac{1}{3}."
+  },
+  {
+    q_hi: "Q334. जनवरी 2022 में कृति ने EMI का भुगतान किया, जो उनके मासिक वेतन का 22% था। उसने शेष वेतन किराने के सामान और कपड़ों की खरीदारी पर 7 : 5 के अनुपात में खर्च किया। उसने कपड़ों की खरीदारी पर 18,200 रुपये खर्च किए। यदि फरवरी 2022 में उसके वेतन में 16% की वृद्धि हुई, तो फरवरी में उसका वेतन (रुपये में) क्या था?",
+    q_en: "Q334. In January 2022, Kriti paid an EMI which was 22% of her monthly salary. She spent the remaining salary on groceries and clothes in the ratio 7 : 5. She spent ₹18,200 on clothes. If her salary increased by 16% in February 2022, what was her salary in February (in rupees)?",
+    tag: "SSC CGL 24/07/2023 (Shift-01)",
+    o_hi: [
+      "(a) 66,350",
+      "(b) 68,520",
+      "(c) 70,250",
+      "(d) 64,960"
+    ],
+    o_en: [
+      "(a) 66,350",
+      "(b) 68,520",
+      "(c) 70,250",
+      "(d) 64,960"
+    ],
+    a: 3,
+    e_hi: "EMI = वेतन का 22%<br>शेष वेतन = 78%<br>कपड़ों पर व्यय = 78% × 5/12 = 32.5%<br>32.5% वेतन = ₹18,200<br>मासिक वेतन = ₹56,000<br>फरवरी का वेतन = ₹56,000 × 116/100 = ₹64,960<br>अतः सही उत्तर ₹64,960 है।",
+    e_en: "EMI = 22% of salary<br>Remaining salary = 78%<br>Expenditure on clothes = 78% × 5/12 = 32.5%<br>32.5% of salary = ₹18,200<br>Monthly salary = ₹56,000<br>February salary = ₹56,000 × 116/100 = ₹64,960<br>Hence, the correct answer is ₹64,960."
+  },
+  {
+    q_hi: "Q335. एक परीक्षा में एक परीक्षार्थी को तीन पेपर A, B और C में बैठना था। परीक्षार्थी ने पेपर A में 75% अंक, पेपर B में 80% अंक और पेपर C में 60% अंक प्राप्त किए। यदि पेपर A, B और C को क्रमशः 40%, 50% और 10% भारांश दिए गए थे, तो तीनों पेपरों में एकसाथ परीक्षार्थी द्वारा प्राप्त अंकों का भारित प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q335. In an examination, a candidate had to appear for three papers A, B and C. The candidate scored 75% marks in paper A, 80% in paper B and 60% in paper C. If papers A, B and C were given weights of 40%, 50% and 10% respectively, find the weighted percentage of marks obtained by the candidate in all three papers together.",
+    tag: "SSC CGL 24/07/2023 (Shift-04)",
+    o_hi: [
+      "(a) 77%",
+      "(b) 74%",
+      "(c) 72%",
+      "(d) 76%"
+    ],
+    o_en: [
+      "(a) 77%",
+      "(b) 74%",
+      "(c) 72%",
+      "(d) 76%"
+    ],
+    a: 3,
+    e_hi: "पेपर A का भारित योगदान = 75% × 40% = 30%<br>पेपर B का भारित योगदान = 80% × 50% = 40%<br>पेपर C का भारित योगदान = 60% × 10% = 6%<br>कुल भारित प्रतिशत = 30% + 40% + 6% = 76%<br>अतः सही उत्तर 76% है।",
+    e_en: "Weighted contribution of paper A = 75% × 40% = 30%<br>Weighted contribution of paper B = 80% × 50% = 40%<br>Weighted contribution of paper C = 60% × 10% = 6%<br>Total weighted percentage = 30% + 40% + 6% = 76%<br>Hence, the correct answer is 76%."
+  },
+  {
+    q_hi: "Q336. A, B से 25% अधिक है और B, C से 30% कम है। यदि C, D से 20% अधिक हो, तो A, D से कितना प्रतिशत अधिक है?",
+    q_en: "Q336. A is 25% more than B and B is 30% less than C. If C is 20% more than D, by what percentage is A more than D?",
+    tag: "SSC CPO 29/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 3%",
+      "(b) 6%",
+      "(c) 5%",
+      "(d) 2%"
+    ],
+    o_en: [
+      "(a) 3%",
+      "(b) 6%",
+      "(c) 5%",
+      "(d) 2%"
+    ],
+    a: 2,
+    e_hi: "A = 125% of B<br>B = 70% of C<br>C = 120% of D<br>A = 1.25 × 0.70 × 1.20 × D<br>A = 1.05D<br>इसलिए A, D से 5% अधिक है।<br>अतः सही उत्तर 5% है।",
+    e_en: "A = 125% of B<br>B = 70% of C<br>C = 120% of D<br>A = 1.25 × 0.70 × 1.20 × D<br>A = 1.05D<br>Therefore, A is 5% more than D.<br>Hence, the correct answer is 5%."
+  },
+  {
+    q_hi: "Q337. दो संख्याओं का योग 450 है। यदि बड़ी संख्या को 4% कम कर दिया जाए और छोटी संख्या को 20% बढ़ा दिया जाए, तो प्राप्त संख्याएँ बराबर हो जाती हैं। छोटी संख्या ज्ञात करें।",
+    q_en: "Q337. The sum of two numbers is 450. If the larger number is decreased by 4% and the smaller number is increased by 20%, the resulting numbers become equal. Find the smaller number.",
+    tag: "SSC Phase XII 24/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 144",
+      "(b) 164",
+      "(c) 200",
+      "(d) 176"
+    ],
+    o_en: [
+      "(a) 144",
+      "(b) 164",
+      "(c) 200",
+      "(d) 176"
+    ],
+    a: 2,
+    e_hi: "बड़ी संख्या = B और छोटी संख्या = S मानते हैं।<br>0.96B = 1.20S<br>B : S = 1.20 : 0.96 = 5 : 4<br>कुल = 9 इकाई = 450<br>1 इकाई = 50<br>छोटी संख्या = 4 × 50 = 200<br>अतः सही उत्तर 200 है।",
+    e_en: "Let the larger number = B and the smaller number = S.<br>0.96B = 1.20S<br>B : S = 1.20 : 0.96 = 5 : 4<br>Total = 9 units = 450<br>1 unit = 50<br>Smaller number = 4 × 50 = 200<br>Hence, the correct answer is 200."
+  },
+  {
+    q_hi: "Q338. A, B से 25% अधिक है, और B, C से 40% कम है। यदि C, D से 20% अधिक है, तो A, D से कितने प्रतिशत कम है?",
+    q_en: "Q338. A is 25% more than B, and B is 40% less than C. If C is 20% more than D, by what percentage is A less than D?",
+    tag: "SSC MTS 06/09/2023 (Shift-02)",
+    o_hi: [
+      "(a) 5%",
+      "(b) 15%",
+      "(c) 10%",
+      "(d) 12%"
+    ],
+    o_en: [
+      "(a) 5%",
+      "(b) 15%",
+      "(c) 10%",
+      "(d) 12%"
+    ],
+    a: 2,
+    e_hi: "A = 125% of B<br>B = 60% of C<br>C = 120% of D<br>A = 1.25 × 0.60 × 1.20 × D<br>A = 0.90D<br>इसलिए A, D से 10% कम है।<br>अतः सही उत्तर 10% है।",
+    e_en: "A = 125% of B<br>B = 60% of C<br>C = 120% of D<br>A = 1.25 × 0.60 × 1.20 × D<br>A = 0.90D<br>Therefore, A is 10% less than D.<br>Hence, the correct answer is 10%."
+  },
+  {
+    q_hi: "Q339. यदि किसी संख्या में पहले 15% की वृद्धि होती है, फिर 15% की कमी होती है, तो इसका परिणाम 782 होगा। यदि उसी संख्या में पहले 25% की कमी हो, फिर 25% की वृद्धि हो और फिर से 20% की कमी हो, तो परिणामी संख्या ज्ञात करें।",
+    q_en: "Q339. If a number is first increased by 15% and then decreased by 15%, the result is 782. If the same number is first decreased by 25%, then increased by 25%, and then decreased again by 20%, find the resulting number.",
+    tag: "SSC CGL 16/08/2021 (Shift-03)",
+    o_hi: [
+      "(a) 712",
+      "(b) 150",
+      "(c) 750",
+      "(d) 600"
+    ],
+    o_en: [
+      "(a) 712",
+      "(b) 150",
+      "(c) 750",
+      "(d) 600"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं संख्या = x।<br>पहली स्थिति में परिणामी संख्या = x × 115/100 × 85/100 = 782<br>x = 800<br>दूसरी स्थिति में परिणामी संख्या = 800 × 75/100 × 125/100 × 80/100<br>= 600<br>अतः सही उत्तर 600 है।",
+    e_en: "Let the number = x.<br>In the first case, resulting number = x × 115/100 × 85/100 = 782<br>x = 800<br>In the second case, resulting number = 800 × 75/100 × 125/100 × 80/100<br>= 600<br>Hence, the correct answer is 600."
+  },
+  {
+    q_hi: "Q340. यदि किसी संख्या के 20% को, दूसरी संख्या से घटाया जाता है तो दूसरी संख्या घटकर 70% हो जाती है, तो पहली संख्या और दूसरी संख्या का अनुपात क्या होगा?",
+    q_en: "Q340. If 20% of one number is subtracted from another number, the second number becomes 70% of itself. What is the ratio of the first number to the second number?",
+    tag: "SSC Phase-XI 27/06/2023 (Shift-01)",
+    o_hi: [
+      "(a) 3 : 2",
+      "(b) 4 : 3",
+      "(c) 2 : 3",
+      "(d) 3 : 4"
+    ],
+    o_en: [
+      "(a) 3 : 2",
+      "(b) 4 : 3",
+      "(c) 2 : 3",
+      "(d) 3 : 4"
+    ],
+    a: 0,
+    e_hi: "पहली संख्या = A और दूसरी संख्या = B मानते हैं।<br>दूसरी संख्या में पहली संख्या का 20% घटाने पर दूसरी संख्या का 70% बचता है।<br>B - 20%A = 70%B<br>20%A = 30%B<br>A : B = 30 : 20 = 3 : 2<br>अतः सही उत्तर 3 : 2 है।",
+    e_en: "Let the first number = A and the second number = B.<br>After subtracting 20% of the first number from the second number, 70% of the second number remains.<br>B - 20%A = 70%B<br>20%A = 30%B<br>A : B = 30 : 20 = 3 : 2<br>Hence, the correct answer is 3 : 2."
+  },
+  {
+    q_hi: "Q341. दो संख्याओं का योग 680 है। यदि बड़ी संख्या में 15% की कमी की जाती है और छोटी संख्या में 15% की वृद्धि की जाती है, तो परिणामी संख्याएँ बराबर होती हैं। छोटी संख्या ज्ञात कीजिए।",
+    q_en: "Q341. The sum of two numbers is 680. If the larger number is decreased by 15% and the smaller number is increased by 15%, the resulting numbers become equal. Find the smaller number.",
+    tag: "SSC CGL 13/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 307",
+      "(b) 285",
+      "(c) 289",
+      "(d) 304"
+    ],
+    o_en: [
+      "(a) 307",
+      "(b) 285",
+      "(c) 289",
+      "(d) 304"
+    ],
+    a: 2,
+    e_hi: "बड़ी संख्या = B और छोटी संख्या = S<br>85% of B = 115% of S<br>B : S = 115 : 85 = 23 : 17<br>कुल = 23 + 17 = 40 इकाई<br>40 इकाई = 680<br>1 इकाई = 17<br>छोटी संख्या = 17 × 17 = 289<br>अतः सही उत्तर 289 है।",
+    e_en: "Let the larger number = B and the smaller number = S.<br>85% of B = 115% of S<br>B : S = 115 : 85 = 23 : 17<br>Total = 23 + 17 = 40 units<br>40 units = 680<br>1 unit = 17<br>Smaller number = 17 × 17 = 289<br>Hence, the correct answer is 289."
+  },
+  {
+    q_hi: "Q342. A ने B से 30% अधिक निवेश किया, B ने C से 40% कम निवेश किया, जिसमें ₹8,000 का निवेश किया। उन सभी द्वारा एक साथ किए गए निवेश की गई कुल राशि का औसत (निकटतम रु. में) कितना है?",
+    q_en: "Q342. A invested 30% more than B, and B invested 40% less than C, who invested ₹8,000. What is the average of the total amount invested by all of them together, to the nearest rupee?",
+    tag: "SSC CGL 19/04/2022 (Shift-01)",
+    o_hi: [
+      "(a) 6,347",
+      "(b) 6,417",
+      "(c) 6,215",
+      "(d) 6,143"
+    ],
+    o_en: [
+      "(a) 6,347",
+      "(b) 6,417",
+      "(c) 6,215",
+      "(d) 6,143"
+    ],
+    a: 0,
+    e_hi: "C का निवेश = ₹8000<br>B ने C से 40% कम निवेश किया = ₹8000 × 60/100 = ₹4800<br>A ने B से 30% अधिक निवेश किया = ₹4800 × 130/100 = ₹6240<br>औसत = (₹6240 + ₹4800 + ₹8000)/3<br>= ₹19040/3 ≈ ₹6347<br>अतः सही उत्तर ₹6347 है।",
+    e_en: "C's investment = ₹8000<br>B invested 40% less than C = ₹8000 × 60/100 = ₹4800<br>A invested 30% more than B = ₹4800 × 130/100 = ₹6240<br>Average = (₹6240 + ₹4800 + ₹8000)/3<br>= ₹19040/3 ≈ ₹6347<br>Hence, the correct answer is ₹6347."
+  },
+  {
+    q_hi: "Q343. एक कर्मचारी अपने वेतन का 20% दान में देता है। शेष राशि में से 40% निवेश में लगा दिया जाता है। शेष राशि को शिक्षा और यात्रा में 7 : 5 के अनुपात में बांटा जाता है। यदि यात्रा पर व्यय ₹6,000 है, तो कर्मचारी का कुल वेतन कितना है?",
+    q_en: "Q343. An employee donates 20% of his salary. Of the remaining amount, 40% is invested. The remaining amount is divided between education and travel in the ratio 7 : 5. If the expenditure on travel is ₹6,000, what is the employee's total salary?",
+    tag: "SSC CGL 20/09/2025 (Shift-02)",
+    o_hi: [
+      "(a) ₹28,000",
+      "(b) ₹30,000",
+      "(c) ₹32,000",
+      "(d) ₹35,000"
+    ],
+    o_en: [
+      "(a) ₹28,000",
+      "(b) ₹30,000",
+      "(c) ₹32,000",
+      "(d) ₹35,000"
+    ],
+    a: 1,
+    e_hi: "दान के बाद शेष = 80%<br>निवेश = 40% × 80% = 32%<br>शिक्षा और यात्रा के लिए शेष = 48%<br>यात्रा का हिस्सा = 5/12 × 48% = 20%<br>20% वेतन = ₹6000<br>कुल वेतन = ₹6000 × 100/20 = ₹30,000<br>अतः सही उत्तर ₹30,000 है।",
+    e_en: "Remaining after donation = 80%<br>Investment = 40% × 80% = 32%<br>Remaining for education and travel = 48%<br>Travel share = 5/12 × 48% = 20%<br>20% of salary = ₹6000<br>Total salary = ₹6000 × 100/20 = ₹30,000<br>Hence, the correct answer is ₹30,000."
+  },
+  {
+    q_hi: "Q344. A, B और C, किसी निश्चित राशि को आपस में वितरित करते हैं। उनके पास की राशियों का औसत ₹4520 है। A का हिस्सा, B के हिस्से से 10\\frac{2}{3}% अधिक है और C के हिस्से से 33\\frac{1}{3}% कम है। B का हिस्सा (₹ में) ज्ञात करें।",
+    q_en: "Q344. A, B and C distribute a certain amount among themselves. The average of the amounts they have is ₹4520. A's share is 10\\frac{2}{3}% more than B's share and 33\\frac{1}{3}% less than C's share. Find B's share (in ₹).",
+    tag: "SSC CGL 13/08/2021 (Shift-03)",
+    o_hi: [
+      "(a) 3500",
+      "(b) 5976",
+      "(c) 3600",
+      "(d) 9384"
+    ],
+    o_en: [
+      "(a) 3500",
+      "(b) 5976",
+      "(c) 3600",
+      "(d) 9384"
+    ],
+    a: 2,
+    e_hi: "A, B से 10\\frac{2}{3}% अधिक है।<br>A = 83/75 B<br>A, C से 33\\frac{1}{3}% कम है।<br>A = 2/3 C ⇒ C = 3/2 A<br>इसलिए A : B : C = 83 : 75 : 249/2<br>इनका औसत ₹4520 है।<br>समीकरण हल करने पर B = ₹3600 प्राप्त होता है।<br>अतः सही उत्तर ₹3600 है।",
+    e_en: "A is 10\\frac{2}{3}% more than B.<br>A = 83/75 B<br>A is 33\\frac{1}{3}% less than C.<br>A = 2/3 C ⇒ C = 3/2 A<br>Therefore, A : B : C = 83 : 75 : 249/2<br>Their average is ₹4520.<br>On solving the equation, B = ₹3600 is obtained.<br>Hence, the correct answer is ₹3600."
+  },
+  {
+    q_hi: "Q345. A, B से 80% अधिक है और C, A और B के योग से 48\\frac{4}{7}% कम है। C, A से कितना प्रतिशत कम है?",
+    q_en: "Q345. A is 80% more than B and C is 48\\frac{4}{7}% less than the sum of A and B. By what percentage is C less than A?",
+    tag: "SSC CGL TIER-II 15/11/2020",
+    o_hi: [
+      "(a) 15%",
+      "(b) 25%",
+      "(c) 30%",
+      "(d) 20%"
+    ],
+    o_en: [
+      "(a) 15%",
+      "(b) 25%",
+      "(c) 30%",
+      "(d) 20%"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं B = 100।<br>A = 180।<br>A + B = 280।<br>C, A + B से 48\\frac{4}{7}% कम है।<br>C = 280 × 51\\frac{3}{7}/100 = 144।<br>A = 180 और C = 144।<br>कमी = 36/180 × 100 = 20%<br>अतः सही उत्तर 20% है।",
+    e_en: "Let B = 100.<br>A = 180.<br>A + B = 280.<br>C is 48\\frac{4}{7}% less than A + B.<br>C = 280 × 51\\frac{3}{7}/100 = 144.<br>A = 180 and C = 144.<br>Decrease = 36/180 × 100 = 20%<br>Hence, the correct answer is 20%."
+  },
+  {
+    q_hi: "Q346. एक संख्या को, दूसरी संख्या प्राप्त करने के लिए 20% कम किया जाता है। तीसरी संख्या प्राप्त करने के लिए, प्राप्त संख्या में 200% की वृद्धि की जाती है। तीसरी संख्या और मूल संख्या का अंतर, दूसरी और तीसरी संख्या के अंतर से कितने प्रतिशत अधिक या कम है?",
+    q_en: "Q346. A number is decreased by 20% to obtain a second number. To obtain a third number, the second number is increased by 200%. By what percentage is the difference between the third number and the original number more or less than the difference between the second and third numbers?",
+    tag: "SSC CGL 12/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 15.7% अधिक",
+      "(b) 15.7% कम",
+      "(c) 12.5% अधिक",
+      "(d) 12.5% कम"
+    ],
+    o_en: [
+      "(a) 15.7% more",
+      "(b) 15.7% less",
+      "(c) 12.5% more",
+      "(d) 12.5% less"
+    ],
+    a: 3,
+    e_hi: "मूल संख्या = 100 मानते हैं।<br>दूसरी संख्या = 100 - 20 = 80<br>तीसरी संख्या = 80 + 200% of 80 = 240<br>तीसरी और मूल संख्या का अंतर = 240 - 100 = 140<br>दूसरी और तीसरी संख्या का अंतर = 240 - 80 = 160<br>अंतर = 20<br>प्रतिशत = 20/160 × 100 = 12.5%<br>अतः पहला अंतर दूसरे अंतर से 12.5% कम है।",
+    e_en: "Let the original number = 100.<br>Second number = 100 - 20 = 80<br>Third number = 80 + 200% of 80 = 240<br>Difference between the third and original number = 240 - 100 = 140<br>Difference between the second and third numbers = 240 - 80 = 160<br>Difference = 20<br>Percentage = 20/160 × 100 = 12.5%<br>Hence, the first difference is 12.5% less than the second difference."
+  },
+  {
+    q_hi: "Q347. एक संख्या A का 11/5, संख्या B के 22% के बराबर है। संख्या B, तीसरी संख्या C के 2.5% के बराबर है। यदि C का मान 5500 है, तो A के 80% और B के 40% का योग कितना होगा?",
+    q_en: "Q347. 11/5 of a number A is equal to 22% of number B. Number B is equal to 2.5% of a third number C. If C = 5500, what is the sum of 80% of A and 40% of B?",
+    tag: "SSC CGL 12/04/2022 (Shift-02)",
+    o_hi: [
+      "(a) 88",
+      "(b) 75",
+      "(c) 48",
+      "(d) 66"
+    ],
+    o_en: [
+      "(a) 88",
+      "(b) 75",
+      "(c) 48",
+      "(d) 66"
+    ],
+    a: 3,
+    e_hi: "C = 5500<br>B = 2.5% × 5500 = 137.5<br>11/5 A = 22% × B<br>A = 0.1B = 13.75<br>A का 80% = 11<br>B का 40% = 55<br>योग = 11 + 55 = 66<br>अतः सही उत्तर 66 है।",
+    e_en: "C = 5500<br>B = 2.5% × 5500 = 137.5<br>11/5 A = 22% × B<br>A = 0.1B = 13.75<br>80% of A = 11<br>40% of B = 55<br>Sum = 11 + 55 = 66<br>Hence, the correct answer is 66."
+  },
+  {
+    q_hi: "Q348. छात्र A को छात्र B से 25 अंक अधिक मिले और A के अंक उन दोनों के अंकों के योग के 60% के बराबर थे। A और B द्वारा अलग-अलग कितने अंक प्राप्त किए गए?",
+    q_en: "Q348. Student A scored 25 marks more than student B, and A's marks were equal to 60% of the sum of their marks. How many marks were obtained separately by A and B?",
+    tag: "SSC CHSL 14/03/2023 (Shift-03)",
+    o_hi: [
+      "(a) 75, 100",
+      "(b) 75, 50",
+      "(c) 45, 120",
+      "(d) 55, 80"
+    ],
+    o_en: [
+      "(a) 75, 100",
+      "(b) 75, 50",
+      "(c) 45, 120",
+      "(d) 55, 80"
+    ],
+    a: 1,
+    e_hi: "A = B + 25<br>A = 60% of (A + B)<br>A = 0.6(A + B)<br>0.4A = 0.6B<br>A : B = 3 : 2<br>अंतर = 1 भाग = 25<br>A = 75 और B = 50<br>अतः सही उत्तर 75, 50 है।",
+    e_en: "A = B + 25<br>A = 60% of (A + B)<br>A = 0.6(A + B)<br>0.4A = 0.6B<br>A : B = 3 : 2<br>Difference = 1 part = 25<br>A = 75 and B = 50<br>Hence, the correct answer is 75, 50."
+  },
+  {
+    q_hi: "Q349. यदि राम की आय श्याम की आय से 70% अधिक है और श्याम की आय मोहन की आय से 30% कम है, तो राम और मोहन की आय का अनुपात ज्ञात कीजिए।",
+    q_en: "Q349. If Ram's income is 70% more than Shyam's income and Shyam's income is 30% less than Mohan's income, find the ratio of Ram's income to Mohan's income.",
+    tag: "SSC CPO 10/11/2022 (Shift-01)",
+    o_hi: [
+      "(a) 119 : 100",
+      "(b) 121 : 102",
+      "(c) 120 : 101",
+      "(d) 118 : 99"
+    ],
+    o_en: [
+      "(a) 119 : 100",
+      "(b) 121 : 102",
+      "(c) 120 : 101",
+      "(d) 118 : 99"
+    ],
+    a: 0,
+    e_hi: "मोहन की आय = 100 मानते हैं।<br>श्याम की आय = 70% of 100 = 70<br>राम की आय = 170% of 70 = 119<br>राम : मोहन = 119 : 100<br>अतः सही उत्तर 119 : 100 है।",
+    e_en: "Let Mohan's income = 100.<br>Shyam's income = 70% of 100 = 70<br>Ram's income = 170% of 70 = 119<br>Ram : Mohan = 119 : 100<br>Hence, the correct answer is 119 : 100."
+  },
+  {
+    q_hi: "Q350. पेट्रोल की कीमत में 5% की बढ़ोतरी हुई। बढ़ोतरी से पहले, कीमत ₹82 प्रति लीटर थी। एक आदमी हर महीने 3045 किमी की यात्रा करता है और उसकी कार 15 किमी प्रति लीटर का माइलेज देती है। पेट्रोल की कीमतों में वृद्धि के कारण आदमी की यात्रा पर मासिक खर्च (निकटतम ₹ में) कितनी वृद्धि हुई है?",
+    q_en: "Q350. The price of petrol increased by 5%. Before the increase, the price was ₹82 per litre. A man travels 3045 km every month and his car gives a mileage of 15 km per litre. By how much did his monthly travel expenditure increase due to the increase in petrol prices, to the nearest ₹?",
+    tag: "SSC CGL 12/04/2022 (Shift-01); SSC CGL 12/09/2025 (Shift-02)",
+    o_hi: [
+      "(a) ₹820",
+      "(b) ₹832",
+      "(c) ₹845",
+      "(d) ₹850"
+    ],
+    o_en: [
+      "(a) ₹820",
+      "(b) ₹832",
+      "(c) ₹845",
+      "(d) ₹850"
+    ],
+    a: 1,
+    e_hi: "मासिक पेट्रोल खपत = 3045/15 = 203 लीटर<br>कीमत में वृद्धि = 5% of ₹82 = ₹4.10 प्रति लीटर<br>मासिक अतिरिक्त खर्च = 203 × ₹4.10 = ₹832.30<br>निकटतम रुपये में = ₹832<br>अतः सही उत्तर ₹832 है।",
+    e_en: "Monthly petrol consumption = 3045/15 = 203 litres<br>Price increase = 5% of ₹82 = ₹4.10 per litre<br>Monthly additional expenditure = 203 × ₹4.10 = ₹832.30<br>To the nearest rupee = ₹832<br>Hence, the correct answer is ₹832."
+  },
+  {
+    q_hi: "Q351. कुल टॉफियों में से 1/10 खराब हो जाती हैं। शेष का 35%, S को दिया जाता है और कुल टॉफियों का 1/8, N को दिया जाता है। यदि N के पास टॉफियाँ खराब टॉफियों से 10 अधिक हैं, तो S को कितनी टॉफियाँ दी गई?",
+    q_en: "Q351. 1/10 of the total candies become spoiled. 35% of the remaining candies are given to S and 1/8 of the total candies are given to N. If N has 10 more candies than the spoiled candies, how many candies are given to S?",
+    tag: "SSC CGL 25/07/2023 (Shift-01)",
+    o_hi: [
+      "(a) 126",
+      "(b) 150",
+      "(c) 110",
+      "(d) 135"
+    ],
+    o_en: [
+      "(a) 126",
+      "(b) 150",
+      "(c) 110",
+      "(d) 135"
+    ],
+    a: 0,
+    e_hi: "मान लेते हैं कुल टॉफियां = x।<br>खराब टॉफियां = x/10<br>N को टॉफियां = x/8<br>N और खराब टॉफियों का अंतर = 10<br>x/8 - x/10 = 10<br>x/40 = 10<br>x = 400<br>खराब टॉफियों के बाद शेष = 360<br>S को = 35% × 360 = 126<br>अतः सही उत्तर 126 है।",
+    e_en: "Let the total candies = x.<br>Spoiled candies = x/10<br>Candies given to N = x/8<br>Difference between N's candies and spoiled candies = 10<br>x/8 - x/10 = 10<br>x/40 = 10<br>x = 400<br>Remaining after spoiled candies = 360<br>Given to S = 35% × 360 = 126<br>Hence, the correct answer is 126."
+  },
+  {
+    q_hi: "Q352. रवि के पास शुरू में एक निश्चित संख्या में चॉकलेट थीं, जबकि भानु के पास शुरू में रवि के पास मौजूद चॉकलेट की संख्या का 80% थी। रवि ने अपनी चॉकलेट का 10% अपनी बहन को दे दिया, जबकि भानु को अपने चाचा से शुरू में मिली चॉकलेट की संख्या का 35% और प्राप्त हुआ। यदि भानु के पास अंततः 54 चॉकलेट थीं, तो रवि ने अपनी बहन को कितनी चॉकलेट दी?",
+    q_en: "Q352. Ravi initially had a certain number of chocolates, while Bhanu initially had 80% of the number of chocolates Ravi had. Ravi gave 10% of his chocolates to his sister, while Bhanu received another 35% of the number of chocolates he initially received from his uncle. If Bhanu finally had 54 chocolates, how many chocolates did Ravi give to his sister?",
+    tag: "SSC CHSL 09/08/2023 (Shift-02)",
+    o_hi: [
+      "(a) 3",
+      "(b) 6",
+      "(c) 5",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 6",
+      "(c) 5",
+      "(d) 4"
+    ],
+    a: 2,
+    e_hi: "रवि की प्रारंभिक चॉकलेट = x<br>भानु की प्रारंभिक चॉकलेट = 80% of x = 0.8x<br>भानु को अतिरिक्त = 35% of 0.8x = 0.28x<br>अंतिम चॉकलेट = 0.8x + 0.28x = 1.08x<br>1.08x = 54<br>x = 50<br>रवि ने अपनी चॉकलेट का 10% बहन को दिया = 5<br>अतः सही उत्तर 5 है।",
+    e_en: "Ravi's initial chocolates = x<br>Bhanu's initial chocolates = 80% of x = 0.8x<br>Additional received by Bhanu = 35% of 0.8x = 0.28x<br>Final chocolates = 0.8x + 0.28x = 1.08x<br>1.08x = 54<br>x = 50<br>Ravi gave 10% of his chocolates to his sister = 5<br>Hence, the correct answer is 5."
+  },
+  {
+    q_hi: "Q353. मृदुला एक निश्चित मासिक वेतन के साथ अपनी नौकरी शुरू करती है और प्रत्येक वर्ष एक निश्चित वेतन वृद्धि अर्जित करती है। यदि उसका वेतन छह वर्ष की सेवा के बाद ₹28,400 था और पंद्रह वर्ष की सेवा के बाद ₹52,997 था, तो उसकी वार्षिक वेतन वृद्धि ज्ञात कीजिए।",
+    q_en: "Q353. Mridula starts her job with a certain monthly salary and earns a fixed salary increment every year. If her salary was ₹28,400 after six years of service and ₹52,997 after fifteen years of service, find her annual salary increment.",
+    tag: "SSC CGL 11/09/2024 (Shift-01)",
+    o_hi: [
+      "(a) ₹12002",
+      "(b) ₹1200",
+      "(c) ₹2733",
+      "(d) ₹1824"
+    ],
+    o_en: [
+      "(a) ₹12002",
+      "(b) ₹1200",
+      "(c) ₹2733",
+      "(d) ₹1824"
+    ],
+    a: 2,
+    e_hi: "6 वर्ष और 15 वर्ष के वेतन का अंतर = ₹52,997 - ₹28,400 = ₹24,597<br>सेवा अवधि का अंतर = 15 - 6 = 9 वर्ष<br>वार्षिक वेतन वृद्धि = ₹24,597/9 = ₹2733<br>अतः सही उत्तर ₹2733 है।",
+    e_en: "Difference between the salaries after 6 years and 15 years = ₹52,997 - ₹28,400 = ₹24,597<br>Difference in service periods = 15 - 6 = 9 years<br>Annual salary increment = ₹24,597/9 = ₹2733<br>Hence, the correct answer is ₹2733."
+  },
+  {
+    q_hi: "Q354. 250 लोगों के एक समूह में, 40% पुरुष और 60% महिलाएँ हैं। यदि समूह में 30 और महिलाएँ शामिल हो जाती हैं, तो नए समूह में महिलाओं का प्रतिशत कितना होगा? (दशमलव के 2 स्थान तक सही)",
+    q_en: "Q354. In a group of 250 people, 40% are men and 60% are women. If 30 more women join the group, what will be the percentage of women in the new group? (Correct to 2 decimal places)",
+    tag: "SSC CHSL 02/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 72.25%",
+      "(b) 90.25%",
+      "(c) 64.29%",
+      "(d) 62.58%"
+    ],
+    o_en: [
+      "(a) 72.25%",
+      "(b) 90.25%",
+      "(c) 64.29%",
+      "(d) 62.58%"
+    ],
+    a: 2,
+    e_hi: "प्रारंभिक महिलाएं = 60% of 250 = 150<br>30 महिलाएं और शामिल होने पर महिलाएं = 180<br>नए समूह की कुल संख्या = 250 + 30 = 280<br>महिलाओं का प्रतिशत = 180/280 × 100 = 64.285...%<br>दो दशमलव तक = 64.29%<br>अतः सही उत्तर 64.29% है।",
+    e_en: "Initial women = 60% of 250 = 150<br>After 30 more women join, women = 180<br>New total group size = 250 + 30 = 280<br>Percentage of women = 180/280 × 100 = 64.285...%<br>Correct to two decimal places = 64.29%<br>Hence, the correct answer is 64.29%."
+  },
+  {
+    q_hi: "Q355. किसी वस्तु की कीमत लगातार दो बार बढ़ाई जाती है। अंतिम कीमत ₹2295 है और प्रारंभिक कीमत ₹1000 थी। दूसरी बार प्रतिशत वृद्धि, पहली बार प्रतिशत वृद्धि से दोगुनी थी। दूसरी बार कीमत में कितने प्रतिशत की वृद्धि की गई?",
+    q_en: "Q355. The price of an item is increased twice consecutively. The final price is ₹2295 and the initial price was ₹1000. The percentage increase the second time was twice the percentage increase the first time. By what percentage was the price increased the second time?",
+    tag: "SSC CGL 19/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 35%",
+      "(b) 65%",
+      "(c) 70%",
+      "(d) 25%"
+    ],
+    o_en: [
+      "(a) 35%",
+      "(b) 65%",
+      "(c) 70%",
+      "(d) 25%"
+    ],
+    a: 2,
+    e_hi: "पहली वृद्धि को x% मानते हैं।<br>दूसरी वृद्धि = 2x%<br>1000 × (1 + x/100) × (1 + 2x/100) = 2295<br>समीकरण हल करने पर x = 35% प्राप्त होता है।<br>दूसरी वृद्धि = 2 × 35% = 70%<br>अतः सही उत्तर 70% है।",
+    e_en: "Let the first increase be x%.<br>Second increase = 2x%<br>1000 × (1 + x/100) × (1 + 2x/100) = 2295<br>On solving the equation, x = 35%.<br>Second increase = 2 × 35% = 70%<br>Hence, the correct answer is 70%."
+  },
+  {
+    q_hi: "Q356. प्रत्येक वर्ष किसी वस्तु के मूल्य में 20% की वृद्धि होती है। यदि तीसरे और चौथे वर्ष के अंत में, वस्तु के मूल्य के बीच अंतर ₹324 है, तो दूसरे वर्ष के अंत में उस वस्तु का मूल्य कितना था?",
+    q_en: "Q356. The value of an item increases by 20% every year. If the difference between the value of the item at the end of the third and fourth years is ₹324, what was the value of the item at the end of the second year?",
+    tag: "SSC MTS 08/10/2021 (Shift-02)",
+    o_hi: [
+      "(a) ₹1350",
+      "(b) ₹1250",
+      "(c) ₹1260",
+      "(d) ₹1180"
+    ],
+    o_en: [
+      "(a) ₹1350",
+      "(b) ₹1250",
+      "(c) ₹1260",
+      "(d) ₹1180"
+    ],
+    a: 0,
+    e_hi: "दूसरे वर्ष के अंत का मूल्य = x मानते हैं।<br>तीसरे वर्ष के अंत का मूल्य = 1.20x<br>चौथे वर्ष के अंत का मूल्य = 1.20 × 1.20x = 1.44x<br>अंतर = 1.44x - 1.20x = 0.24x<br>0.24x = 324<br>x = 324/0.24 = ₹1350<br>अतः सही उत्तर ₹1350 है।",
+    e_en: "Let the value at the end of the second year = x.<br>Value at the end of the third year = 1.20x<br>Value at the end of the fourth year = 1.20 × 1.20x = 1.44x<br>Difference = 1.44x - 1.20x = 0.24x<br>0.24x = 324<br>x = 324/0.24 = ₹1350<br>Hence, the correct answer is ₹1350."
+  },
+  {
+    q_hi: "Q357. एक व्यक्ति 10 कुर्सियां खरीदना चाहता है। 10 कुर्सियों का कुल मूल्य ₹4,500 है। सौदेबाजी के बाद, दुकानदार प्रत्येक कुर्सी के मूल्य में 20% की कमी करने के लिए सहमत होता है जिसके बाद व्यक्ति ने 10% कुर्सियां अधिक खरीदीं। उसके द्वारा खरीदी गई कुर्सियों का मूल्य क्या होगा?",
+    q_en: "Q357. A person wants to buy 10 chairs. The total price of 10 chairs is ₹4,500. After bargaining, the shopkeeper agrees to reduce the price of each chair by 20%, after which the person buys 10% more chairs. What is the price of the chairs bought by him?",
+    tag: "SSC CHSL 03/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) ₹3,260",
+      "(b) ₹3,960",
+      "(c) ₹4,100",
+      "(d) ₹3,900"
+    ],
+    o_en: [
+      "(a) ₹3,260",
+      "(b) ₹3,960",
+      "(c) ₹4,100",
+      "(d) ₹3,900"
+    ],
+    a: 1,
+    e_hi: "10 कुर्सियों का मूल्य = ₹4500<br>प्रति कुर्सी मूल्य = ₹450<br>20% कमी के बाद प्रति कुर्सी मूल्य = ₹450 × 80/100 = ₹360<br>10% अधिक कुर्सियां = 10 + 1 = 11 कुर्सियां<br>कुल मूल्य = 11 × ₹360 = ₹3960<br>अतः सही उत्तर ₹3960 है।",
+    e_en: "Price of 10 chairs = ₹4500<br>Price per chair = ₹450<br>Price per chair after 20% reduction = ₹450 × 80/100 = ₹360<br>10% more chairs = 10 + 1 = 11 chairs<br>Total price = 11 × ₹360 = ₹3960<br>Hence, the correct answer is ₹3960."
+  },
+  {
+    q_hi: "Q358. एक शहर की जनसंख्या में प्रति वर्ष 20% की वृद्धि होती है। यदि उसकी वर्तमान जनसंख्या 80 लाख हो, तो 3 वर्ष पूर्व की और 2 वर्ष पूर्व की जनसंख्या के बीच का अंतर ज्ञात कीजिए।",
+    q_en: "Q358. The population of a city increases by 20% every year. If its present population is 80 lakh, find the difference between the population 3 years ago and 2 years ago.",
+    tag: "SSC CPO 29/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 75592.6",
+      "(b) 85592.6",
+      "(c) 65592.6",
+      "(d) 925925.93"
+    ],
+    o_en: [
+      "(a) 75592.6",
+      "(b) 85592.6",
+      "(c) 65592.6",
+      "(d) 925925.93"
+    ],
+    a: 3,
+    e_hi: "3 वर्ष पूर्व की जनसंख्या = 80,00,000/(1.2)³<br>2 वर्ष पूर्व की जनसंख्या = 80,00,000/(1.2)²<br>अंतर = 80,00,000/(1.2)² - 80,00,000/(1.2)³<br>= 9,25,925.93<br>अतः सही उत्तर 925925.93 है।",
+    e_en: "Population 3 years ago = 80,00,000/(1.2)³<br>Population 2 years ago = 80,00,000/(1.2)²<br>Difference = 80,00,000/(1.2)² - 80,00,000/(1.2)³<br>= 9,25,925.93<br>Hence, the correct answer is 925925.93."
+  },
+  {
+    q_hi: "Q359. एक व्यक्ति किसी विशेष कंपनी के शेयरों का क्रय-विक्रय (ट्रेडिंग) करते समय देखता है कि इसका मूल्य पिछले दिन से 10% कम हो गया है। अगले दिन वृद्धि की प्रत्याशा में, वह इसे अगले दिन के लिए रखता है। लेकिन शेयर का मूल्य पिछले दिन की तुलना में 8% और कम हो जाता है। फिर वह अपने शेयर बेचता है और उसे ₹12,420 प्राप्त होते हैं। यदि उसने इसे पिछले दिन बेचा होता तो वह कितना बचा सकता था?",
+    q_en: "Q359. While trading shares of a particular company, a person observes that its value has decreased by 10% from the previous day. Expecting an increase the next day, he holds it for the next day. But the share value decreases by another 8% compared with the previous day. He then sells his shares and receives ₹12,420. How much could he have saved if he had sold it the previous day?",
+    tag: "SSC Phase XII 21/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) ₹1,080",
+      "(b) ₹1,220",
+      "(c) ₹1,260",
+      "(d) ₹1,140"
+    ],
+    o_en: [
+      "(a) ₹1,080",
+      "(b) ₹1,220",
+      "(c) ₹1,260",
+      "(d) ₹1,140"
+    ],
+    a: 0,
+    e_hi: "पिछले दिन का मूल्य = 100% मानते हैं।<br>बाद में शेयर का मूल्य = 92%<br>92% मूल्य = ₹12,420<br>100% मूल्य = ₹12,420 × 100/92 = ₹13,500<br>बचाई जा सकने वाली राशि = ₹13,500 - ₹12,420 = ₹1,080<br>अतः सही उत्तर ₹1,080 है।",
+    e_en: "Let the previous day's value = 100%.<br>Later, the share value = 92%<br>92% value = ₹12,420<br>100% value = ₹12,420 × 100/92 = ₹13,500<br>Amount that could have been saved = ₹13,500 - ₹12,420 = ₹1,080<br>Hence, the correct answer is ₹1,080."
+  },
+  {
+    q_hi: "Q360. ताश खेलते समय, एक व्यक्ति अपने पैसे का 75% पहले राउंड में, शेष का 75% दूसरे राउंड में और शेष का 75% तीसरे राउंड में हार जाता है। यदि उसके पास ₹100 बचे हैं, तो शुरू में उसके पास कितने पैसे थे?",
+    q_en: "Q360. While playing cards, a person loses 75% of his money in the first round, 75% of the remaining money in the second round and 75% of the remaining money in the third round. If he has ₹100 left, how much money did he have initially?",
+    tag: "SSC Phase-XI 27/06/2023 (Shift-02)",
+    o_hi: [
+      "(a) ₹6,400",
+      "(b) ₹2,400",
+      "(c) ₹1,600",
+      "(d) ₹3,200"
+    ],
+    o_en: [
+      "(a) ₹6,400",
+      "(b) ₹2,400",
+      "(c) ₹1,600",
+      "(d) ₹3,200"
+    ],
+    a: 0,
+    e_hi: "प्रत्येक राउंड में 75% हारने पर 25% राशि बचती है।<br>3 राउंड के बाद बची राशि = प्रारंभिक राशि × 25/100 × 25/100 × 25/100<br>= प्रारंभिक राशि/64<br>प्रारंभिक राशि/64 = ₹100<br>प्रारंभिक राशि = ₹6400<br>अतः सही उत्तर ₹6400 है।",
+    e_en: "After losing 75% in each round, 25% of the amount remains.<br>Amount remaining after 3 rounds = initial amount × 25/100 × 25/100 × 25/100<br>= initial amount/64<br>Initial amount/64 = ₹100<br>Initial amount = ₹6400<br>Hence, the correct answer is ₹6400."
+  }
+];
