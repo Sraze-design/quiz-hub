@@ -3031,14 +3031,17 @@ function renderBookmarkQuestions(subject,path){
     const qBadge=b.aiGenerated?'🤖':`Q${b.questionIndex+1}`;
     c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">${qBadge}</div><div class="card-details"><span class="card-main-title">${qLabel}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
     const removeBtn=c.querySelector('.bookmark-toggle-btn');
-    removeBtn.addEventListener('click',(e)=>{
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      removeBookmarkFromList(b.id,subject,path);
-    },{capture:true});
+    // The bookmark button is a REMOVE action only. Keep the card click handler
+    // as the single navigation handler so touch/click on the icon can never
+    // fall through and open the bookmarked test/question.
     c.onclick=(e)=>{
-      if(e.target.closest('.bookmark-toggle-btn')) return;
+      const clickedBookmark = e.target && e.target.closest ? e.target.closest('.bookmark-toggle-btn') : null;
+      if(clickedBookmark){
+        e.preventDefault();
+        e.stopPropagation();
+        removeBookmarkFromList(b.id,subject,path);
+        return false;
+      }
       openBookmarkedQuestion(b);
     };
     l.appendChild(c);
