@@ -6512,6 +6512,23 @@ if ('serviceWorker' in navigator) {
     e.preventDefault();
   }
 
+  // Same palm-rejection fix as the main engine, previously missing here:
+  // suppress the browser's own touch handling for EVERY touch (including a
+  // finger placed on screen BEFORE the pencil touches down), not just the
+  // pen. Without this, WebKit can treat that earlier finger touch as a
+  // gesture candidate and hold/cancel the pencil's pointer stream so
+  // nothing gets written until the pencil is lifted and put down again —
+  // this was the specific "finger first, then pencil doesn't write" bug in
+  // the AI sheet (the main quiz page already had this layer).
+  function blockAllTouch(e){
+    if(!enabled) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
+    e.preventDefault();
+  }
+  document.addEventListener('touchstart', blockAllTouch, {capture:true, passive:false});
+  document.addEventListener('touchmove', blockAllTouch, {capture:true, passive:false});
+  document.addEventListener('touchend', blockAllTouch, {capture:true, passive:false});
+
   // ---- Toolbar wiring: pen/color/eraser/star/undo/redo/clear ----
   function setTool(next){
     tool=next;
