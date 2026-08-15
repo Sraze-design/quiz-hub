@@ -3354,6 +3354,10 @@ function showEmptyState() {
   let strokes=[], redoStack=[], currentStroke=null;
   let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
+  let smoothX=0,smoothY=0;
+  const SMOOTH_ALPHA=0.35; // lower = smoother/more like ink, higher = more responsive
+  const BASE_WIDTH=2.2;    // thinner default stroke, closer to a real pen tip
+  const MIN_WIDTH=1.4, MAX_WIDTH=3.6;
 
   function qKey(){
     const quiz=currentQuizPath || currentQuizTitle || 'quiz';
@@ -3380,18 +3384,31 @@ function showEmptyState() {
 
   function mid(a,b){ return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
 
-  function applyStyle(forTool){
+  // Apple Pencil reports real analog pressure (0-1). Vary stroke width with
+  // it, like a real pen, instead of one flat width for every point.
+  function widthFor(pressure){
+    const p=(typeof pressure==='number' && pressure>0) ? pressure : 0.5;
+    return Math.max(MIN_WIDTH,Math.min(MAX_WIDTH, BASE_WIDTH-0.7+p*1.9));
+  }
+
+  function avgW(a,b){
+    const wa=(typeof a.w==='number')?a.w:BASE_WIDTH;
+    const wb=(typeof b.w==='number')?b.w:BASE_WIDTH;
+    return (wa+wb)/2;
+  }
+
+  function applyStyle(forTool,width){
     const useTool=forTool||tool;
     ctx.lineCap='round';
     ctx.lineJoin='round';
-    ctx.lineWidth=useTool==='eraser' ? 24 : 3;
-    ctx.strokeStyle=useTool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
-    ctx.globalCompositeOperation=useTool==='eraser' ? 'destination-out' : 'source-over';
+    ctx.lineWidth= useTool==='eraser' ? 24 : (width!=null ? width : BASE_WIDTH);
+    ctx.strokeStyle= useTool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
+    ctx.globalCompositeOperation= useTool==='eraser' ? 'destination-out' : 'source-over';
   }
 
-  function drawSegment(a,b,forTool){
+  function drawSegment(a,b,forTool,width){
     if(!ctx||!a||!b) return;
-    applyStyle(forTool);
+    applyStyle(forTool,width);
     ctx.beginPath();
     ctx.moveTo(a.x,a.y);
     ctx.lineTo(b.x,b.y);
@@ -3399,9 +3416,9 @@ function showEmptyState() {
     ctx.globalCompositeOperation='source-over';
   }
 
-  function drawDot(a,forTool){
+  function drawDot(a,forTool,width){
     if(!ctx||!a) return;
-    applyStyle(forTool);
+    applyStyle(forTool,width);
     ctx.beginPath();
     ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
     ctx.fillStyle=ctx.strokeStyle;
@@ -3409,29 +3426,36 @@ function showEmptyState() {
     ctx.globalCompositeOperation='source-over';
   }
 
-  // Renders a finished/loaded stroke as a single smoothed path: consecutive
-  // raw points are connected through their midpoints with quadratic curves,
-  // which softens small hand-tremor jitter without changing the actual
-  // trajectory. Used for redraw on question switch, resize, undo/redo, and
-  // loading saved strokes.
+  // Renders a finished/loaded stroke exactly the way it was drawn live:
+  // same midpoint-smoothed quadratic segments, same per-segment pressure
+  // width. Used for redraw on question switch, resize, undo/redo, and
+  // loading saved strokes, so it always matches what was drawn on screen.
   function drawStroke(st){
     if(!st||!st.points||!st.points.length) return;
     const pts=st.points, strokeTool=st.tool||'pen';
-    if(pts.length===1){ drawDot(pts[0],strokeTool); return; }
-    applyStyle(strokeTool);
-    ctx.beginPath();
-    ctx.moveTo(pts[0].x,pts[0].y);
+    if(pts.length===1){ drawDot(pts[0],strokeTool,pts[0].w); return; }
     if(pts.length===2){
-      ctx.lineTo(pts[1].x,pts[1].y);
-    } else {
-      for(let i=1;i<pts.length-1;i++){
-        const m=mid(pts[i],pts[i+1]);
-        ctx.quadraticCurveTo(pts[i].x,pts[i].y,m.x,m.y);
-      }
-      ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
+      drawSegment(pts[0],pts[1],strokeTool,avgW(pts[0],pts[1]));
+      return;
     }
-    ctx.stroke();
-    ctx.globalCompositeOperation='source-over';
+    // Entry stub: first point to the midpoint of the first two points.
+    const m01=mid(pts[0],pts[1]);
+    drawSegment(pts[0],m01,strokeTool,avgW(pts[0],pts[1]));
+    // Body: quadratic curve through each midpoint pair.
+    for(let i=1;i<pts.length-1;i++){
+      const p0=pts[i-1],p1=pts[i],p2=pts[i+1];
+      const m1=mid(p0,p1), m2=mid(p1,p2);
+      applyStyle(strokeTool,avgW(p1,p2));
+      ctx.beginPath();
+      ctx.moveTo(m1.x,m1.y);
+      ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
+      ctx.stroke();
+      ctx.globalCompositeOperation='source-over';
+    }
+    // Tail: last midpoint to the final actual point.
+    const last1=pts[pts.length-2], last2=pts[pts.length-1];
+    const mTail=mid(last1,last2);
+    drawSegment(mTail,last2,strokeTool,avgW(last1,last2));
   }
 
   function redraw(){
@@ -3501,30 +3525,31 @@ function showEmptyState() {
 
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
-    const x=ev.clientX, y=ev.clientY, t=ev.timeStamp||performance.now();
-    if(x===lastX && y===lastY && t===lastTime) return;
-    const next={x,y};
+    const rawX=ev.clientX, rawY=ev.clientY, t=ev.timeStamp||performance.now();
+    if(rawX===lastX && rawY===lastY && t===lastTime) return;
+    lastX=rawX; lastY=rawY; lastTime=t;
+
+    // Low-pass filter the raw touch position: softens hand-tremor jitter so
+    // the ink comes out steady/rounded like Apple Notes, instead of tracking
+    // every tiny wobble of the raw sensor data 1:1.
+    smoothX += SMOOTH_ALPHA*(rawX-smoothX);
+    smoothY += SMOOTH_ALPHA*(rawY-smoothY);
+    const next={x:smoothX,y:smoothY,w:widthFor(ev.pressure)};
     currentStroke.points.push(next);
-    lastX=x; lastY=y; lastTime=t;
 
     const pts=currentStroke.points, n=pts.length;
     if(n===2){
       // First raw segment: draw a straight stub up to the midpoint, the
       // quadratic segments below pick up from there.
       const m=mid(pts[0],pts[1]);
-      applyStyle();
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x,pts[0].y);
-      ctx.lineTo(m.x,m.y);
-      ctx.stroke();
-      ctx.globalCompositeOperation='source-over';
+      drawSegment(pts[0],m,tool,avgW(pts[0],pts[1]));
     } else if(n>=3){
       // Smooth the newest segment through the midpoints of the last three
       // raw samples. Only touches the newest bit of the path, so it stays
       // O(1) per sample with no added input latency.
       const p0=pts[n-3], p1=pts[n-2], p2=pts[n-1];
       const m1=mid(p0,p1), m2=mid(p1,p2);
-      applyStyle();
+      applyStyle(tool,avgW(p1,p2));
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
@@ -3546,9 +3571,11 @@ function showEmptyState() {
     activePointerId=e.pointerId;
     usingRawStream=false;
     const p=point(e);
+    p.w=widthFor(e.pressure);
+    smoothX=p.x; smoothY=p.y; // start smoothing exactly at first touch, no lag-in
     currentStroke={tool,points:[p]};
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
-    drawDot(p); // immediate first contact
+    drawDot(p,tool,p.w); // immediate first contact
 
     // Capture on the document rather than the transparent canvas. The canvas
     // intentionally has pointer-events:none so the normal page remains usable.
@@ -3578,12 +3605,7 @@ function showEmptyState() {
         // at the last midpoint.
         const p1=pts[pts.length-2], p2=pts[pts.length-1];
         const m=mid(p1,p2);
-        applyStyle();
-        ctx.beginPath();
-        ctx.moveTo(m.x,m.y);
-        ctx.lineTo(p2.x,p2.y);
-        ctx.stroke();
-        ctx.globalCompositeOperation='source-over';
+        drawSegment(m,p2,tool,avgW(p1,p2));
       }
       strokes.push(currentStroke);
       redoStack=[];
