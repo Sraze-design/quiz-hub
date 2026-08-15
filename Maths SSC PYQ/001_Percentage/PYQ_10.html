@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q361. एक आदमी और उसके परिवार का निर्वाह व्यय, उसके वेतन का 60% है। वह अपने वेतन में 30% और 60% की दो वृद्धि प्राप्त करता है। यदि उसकी बचत उसकी प्रारंभिक बचत के 250% से बढ़ जाती है, तो नया निर्वाह व्यय, बढ़े हुए वेतन का कितना प्रतिशत (निकटतम पूर्णांक तक पूर्णांकित) है?",
+    q_en: "Q361. The subsistence expenditure of a man and his family is 60% of his salary. He receives two successive increases of 30% and 60% in his salary. If his savings increase by 250% of his initial savings, then the new subsistence expenditure is what percentage of the increased salary (rounded off to the nearest integer)?",
+    tag: "SSC CGL 12/12/2022 (Shift-04)",
+    o_hi: [
+      "(a) 32.7%",
+      "(b) 43.6%",
+      "(c) 29.5%",
+      "(d) 36.6%"
+    ],
+    o_en: [
+      "(a) 32.7%",
+      "(b) 43.6%",
+      "(c) 29.5%",
+      "(d) 36.6%"
+    ],
+    a: 0,
+    e_hi: "प्रारंभिक वेतन = 100<br>प्रारंभिक निर्वाह व्यय = 60<br>प्रारंभिक बचत = 40<br>दो क्रमिक वृद्धि के बाद नया वेतन = 100 × 130/100 × 160/100 = 208<br>बचत में 250% वृद्धि का अर्थ है नई बचत = 40 × 350/100 = 140<br>नया निर्वाह व्यय = 208 - 140 = 68<br>नए निर्वाह व्यय का प्रतिशत = 68/208 × 100 = 32.69% ≈ 32.7%<br>अतः सही उत्तर (a) है।",
+    e_en: "Initial salary = 100<br>Initial subsistence expenditure = 60<br>Initial savings = 40<br>New salary after two successive increases = 100 × 130/100 × 160/100 = 208<br>An increase of 250% in savings means new savings = 40 × 350/100 = 140<br>New subsistence expenditure = 208 - 140 = 68<br>Percentage of new subsistence expenditure = 68/208 × 100 = 32.69% ≈ 32.7%<br>Hence, the correct answer is (a)."
+  },
+  {
+    q_hi: "Q362. एक कंपनी A द्वारा निर्मित इकाइयों की संख्या 2019 में 12500 इकाई और 2020 में 10625 इकाई थी। जबकि कंपनी B में, उत्पादन 2019 में 34000 इकाई से गिरकर 2020 में 30600 इकाई हो गया। यदि X और Y कंपनी A और B द्वारा क्रमशः 2019 से 2020 तक निर्मित इकाइयों की संख्या में प्रतिशत कमी है, तो X और Y का अनुपात क्या होगा?",
+    q_en: "Q362. The number of units manufactured by company A was 12500 units in 2019 and 10625 units in 2020. Whereas in company B, production fell from 34000 units in 2019 to 30600 units in 2020. If X and Y are the percentage decreases in the number of units manufactured by companies A and B respectively from 2019 to 2020, what will be the ratio of X and Y?",
+    tag: "SSC CGL 13/12/2022 (Shift-01)",
+    o_hi: [
+      "(a) 5 : 3",
+      "(b) 3 : 4",
+      "(c) 3 : 2",
+      "(d) 8 : 5"
+    ],
+    o_en: [
+      "(a) 5 : 3",
+      "(b) 3 : 4",
+      "(c) 3 : 2",
+      "(d) 8 : 5"
+    ],
+    a: 2,
+    e_hi: "कंपनी A में कमी = 12500 - 10625 = 1875<br>X = 1875/12500 × 100 = 15%<br>कंपनी B में कमी = 34000 - 30600 = 3400<br>Y = 3400/34000 × 100 = 10%<br>अतः X : Y = 15 : 10 = 3 : 2<br>सही उत्तर (c) है।",
+    e_en: "Decrease in company A = 12500 - 10625 = 1875<br>X = 1875/12500 × 100 = 15%<br>Decrease in company B = 34000 - 30600 = 3400<br>Y = 3400/34000 × 100 = 10%<br>Hence, X : Y = 15 : 10 = 3 : 2<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q363. एक निर्माण इकाई में, यह देखा गया कि कच्चे माल की कीमत में 25% की वृद्धि हुई है और श्रम लागत कच्चे माल की लागत के 30% से बढ़कर कच्चे माल की लागत का 38% हो गई है। कच्चे माल की खपत कितने प्रतिशत कम की जाए ताकि लागत को वृद्धि से पहले की लागत के बराबर रखा जा सके?",
+    q_en: "Q363. In a manufacturing unit, it was observed that the price of raw material increased by 25% and the labour cost increased from 30% of the raw material cost to 38% of the raw material cost. By what percentage should the consumption of raw material be reduced so that the cost remains equal to the cost before the increase?",
+    tag: "SSC CGL 11/04/2022 (Shift-03)",
+    o_hi: [
+      "(a) 20.7%",
+      "(b) 30.2%",
+      "(c) 24.6%",
+      "(d) 25.5%"
+    ],
+    o_en: [
+      "(a) 20.7%",
+      "(b) 30.2%",
+      "(c) 24.6%",
+      "(d) 25.5%"
+    ],
+    a: 2,
+    e_hi: "मान लेते हैं प्रारंभिक कच्चे माल की लागत = 100<br>प्रारंभिक श्रम लागत = 30<br>प्रारंभिक कुल लागत = 130<br>नई कच्चे माल की कीमत = 125<br>नई श्रम लागत = 125 का 38% = 47.5<br>नई कुल लागत = 125 + 47.5 = 172.5<br>नई खपत का अनुपात = 130/172.5 × 100 = 75.36%<br>खपत में कमी = 100 - 75.36 = 24.64% ≈ 24.6%<br>सही उत्तर (c) है।",
+    e_en: "Let the initial cost of raw material = 100<br>Initial labour cost = 30<br>Initial total cost = 130<br>New price of raw material = 125<br>New labour cost = 38% of 125 = 47.5<br>New total cost = 125 + 47.5 = 172.5<br>Ratio of new consumption = 130/172.5 × 100 = 75.36%<br>Reduction in consumption = 100 - 75.36 = 24.64% ≈ 24.6%<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q364. भोजन, कपड़े और मनोरंजन पर एक परिवार का खर्च 2 : 4 : 4 के अनुपात में है। आने वाले वर्ष में, भोजन की लागत में 10% की गिरावट, कपड़ों की लागत में 5% की वृद्धि और मनोरंजन में 15% की गिरावट की उम्मीद है। कुल घरेलू व्यय में प्रतिशत परिवर्तन (वृद्धि या कमी) क्या होगी?",
+    q_en: "Q364. The expenditure of a family on food, clothing and entertainment is in the ratio 2 : 4 : 4. In the coming year, the cost of food is expected to decrease by 10%, the cost of clothing to increase by 5%, and entertainment expenditure to decrease by 15%. What will be the percentage change (increase or decrease) in the total household expenditure?",
+    tag: "SSC CGL 12/09/2025 (Shift-03)",
+    o_hi: [
+      "(a) 5% कमी",
+      "(b) 6% वृद्धि",
+      "(c) 6% कमी",
+      "(d) 5% वृद्धि"
+    ],
+    o_en: [
+      "(a) 5% decrease",
+      "(b) 6% increase",
+      "(c) 6% decrease",
+      "(d) 5% increase"
+    ],
+    a: 2,
+    e_hi: "कुल प्रारंभिक व्यय = 2 + 4 + 4 = 10 भाग<br>भोजन का नया व्यय = 2 × 90/100 = 1.8 भाग<br>कपड़ों का नया व्यय = 4 × 105/100 = 4.2 भाग<br>मनोरंजन का नया व्यय = 4 × 85/100 = 3.4 भाग<br>नया कुल व्यय = 1.8 + 4.2 + 3.4 = 9.4 भाग<br>कमी = 10 - 9.4 = 0.6 भाग<br>प्रतिशत कमी = 0.6/10 × 100 = 6%<br>सही उत्तर (c) है।",
+    e_en: "Total initial expenditure = 2 + 4 + 4 = 10 parts<br>New expenditure on food = 2 × 90/100 = 1.8 parts<br>New expenditure on clothing = 4 × 105/100 = 4.2 parts<br>New expenditure on entertainment = 4 × 85/100 = 3.4 parts<br>New total expenditure = 1.8 + 4.2 + 3.4 = 9.4 parts<br>Decrease = 10 - 9.4 = 0.6 parts<br>Percentage decrease = 0.6/10 × 100 = 6%<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q365. एक व्यक्ति ने एक निश्चित पूंजी राशि के साथ एक व्यवसाय शुरू किया। पहले वर्ष में, उसने 60% लाभ अर्जित किया और कुल पूंजी (प्रारंभिक राशि + लाभ) का 50% दान कर दिया। उन्होंने दूसरे और तीसरे वर्ष के बाद शेष पूंजी के साथ भी यही प्रक्रिया अपनाई। यदि तीन वर्ष के अंत में, उसके पास ₹15360 शेष बचते हैं, तो उस व्यक्ति ने अपना व्यवसाय कितनी प्रारंभिक राशि (₹ में) के साथ शुरू किया था?",
+    q_en: "Q365. A person started a business with a certain amount of capital. In the first year, he earned a profit of 60% and donated 50% of the total capital (initial amount + profit). He followed the same process with the remaining capital after the second and third years. If he has ₹15360 left at the end of three years, with what initial amount (in ₹) did the person start his business?",
+    tag: "SSC CGL 19/04/2022 (Shift-01)",
+    o_hi: [
+      "(a) 20000",
+      "(b) 30000",
+      "(c) 25000",
+      "(d) 32000"
+    ],
+    o_en: [
+      "(a) 20000",
+      "(b) 30000",
+      "(c) 25000",
+      "(d) 32000"
+    ],
+    a: 1,
+    e_hi: "प्रारंभिक पूंजी = x<br>60% लाभ के बाद राशि = 1.6x<br>इसका 50% दान करने के बाद शेष = 0.8x<br>तीन वर्षों के बाद शेष राशि = x × 0.8 × 0.8 × 0.8<br>0.512x = 15360<br>x = 15360/0.512 = 30000<br>सही उत्तर (b) है।",
+    e_en: "Initial capital = x<br>Amount after 60% profit = 1.6x<br>Remaining after donating 50% of this = 0.8x<br>Amount remaining after three years = x × 0.8 × 0.8 × 0.8<br>0.512x = 15360<br>x = 15360/0.512 = 30000<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q366. एक फल विक्रेता अपने पास मौजूद कुल संतरा में से 45% और एक संतरा बेचता है। फिर वह शेष संतरे के 20% और 2 और संतरे दूसरे ग्राहक को बेचता है। फिर वह अब बचे हुए संतरे का 90% संतरे तीसरे ग्राहक को बेचता है और उसके पास अभी भी 5 संतरे बचे हैं। फल विक्रेता के पास आरंभ में कितने संतरे थे?",
+    q_en: "Q366. A fruit seller sells 45% of the total oranges he has and one orange. Then he sells 20% of the remaining oranges and 2 more oranges to a second customer. Then he sells 90% of the oranges now remaining to a third customer and still has 5 oranges left. How many oranges did the fruit seller have initially?",
+    tag: "SSC CGL 19/04/2022 (Shift-03)",
+    o_hi: [
+      "(a) 100",
+      "(b) 120",
+      "(c) 111",
+      "(d) 121"
+    ],
+    o_en: [
+      "(a) 100",
+      "(b) 120",
+      "(c) 111",
+      "(d) 121"
+    ],
+    a: 1,
+    e_hi: "प्रारंभिक संतरे = x<br>पहली बिक्री के बाद शेष = 55x/100 - 1<br>दूसरी बिक्री के बाद शेष = 80/100 × (55x/100 - 1) - 2<br>तीसरी बिक्री के बाद 10% शेष रहता है।<br>10/100 × [80/100 × (55x/100 - 1) - 2] = 5<br>हल करने पर x = 120<br>सही उत्तर (b) है।",
+    e_en: "Initial oranges = x<br>Remaining after the first sale = 55x/100 - 1<br>Remaining after the second sale = 80/100 × (55x/100 - 1) - 2<br>10% remains after the third sale.<br>10/100 × [80/100 × (55x/100 - 1) - 2] = 5<br>On solving, x = 120<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q367. विपुल अपनी मासिक आय का 30% किराए पर, शेष का 60% किराने के सामान पर और शेष का 40% अन्य पर खर्च करता है। यदि वह एक महीने में 7,056 रुपये बचाता है, तो वह किराने के सामान पर कितना (रुपये में) खर्च करता है?",
+    q_en: "Q367. Vipul spends 30% of his monthly income on rent, 60% of the remainder on groceries and 40% of the remainder on other expenses. If he saves 7,056 rupees in a month, how much does he spend on groceries (in rupees)?",
+    tag: "SSC CGL 24/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 18323",
+      "(b) 15230",
+      "(c) 17640",
+      "(d) 22386"
+    ],
+    o_en: [
+      "(a) 18323",
+      "(b) 15230",
+      "(c) 17640",
+      "(d) 22386"
+    ],
+    a: 2,
+    e_hi: "मान लेते हैं कुल आय = 100%<br>किराए पर खर्च = 30%<br>किराए के बाद शेष = 100% - 30% = 70%<br>किराने के सामान पर खर्च = 70% का 60% = 42%<br>किराने के बाद शेष = 70% - 42% = 28%<br>अन्य पर खर्च = 28% का 40% = 11.2%<br>बचत = 28% - 11.2% = 16.8%<br>16.8% आय = ₹7056<br>आय = 7056 × 100/16.8 = ₹42000<br>किराने के सामान पर खर्च = 42% × 42000 = ₹17640<br>सही उत्तर (c) है।",
+    e_en: "Let total income = 100%<br>Expenditure on rent = 30%<br>Remaining after rent = 100% - 30% = 70%<br>Expenditure on groceries = 60% of 70% = 42%<br>Remaining after groceries = 70% - 42% = 28%<br>Expenditure on other items = 40% of 28% = 11.2%<br>Savings = 28% - 11.2% = 16.8%<br>16.8% of income = ₹7056<br>Income = 7056 × 100/16.8 = ₹42000<br>Expenditure on groceries = 42% × 42000 = ₹17640<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q368. एक व्यक्ति अपनी आय का 10% किराने के सामान पर, 10% दवाओं पर, 20% बच्चों की शिक्षा पर, 15% घर के किराए पर खर्च करता है, और वह शेष राशि बचाता है। यदि उसकी मासिक आय 30,000 रुपये है, तो उसकी बचत ज्ञात कीजिए।",
+    q_en: "Q368. A person spends 10% of his income on groceries, 10% on medicines, 20% on children's education, and 15% on house rent, and saves the remaining amount. If his monthly income is 30,000 rupees, find his savings.",
+    tag: "SSC CHSL 04/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) ₹15500",
+      "(b) ₹13500",
+      "(c) ₹16500",
+      "(d) ₹12500"
+    ],
+    o_en: [
+      "(a) ₹15500",
+      "(b) ₹13500",
+      "(c) ₹16500",
+      "(d) ₹12500"
+    ],
+    a: 1,
+    e_hi: "कुल खर्च = 10% + 10% + 20% + 15% = 55%<br>बचत = 100% - 55% = 45%<br>बचत = 30000 × 45/100 = ₹13500<br>सही उत्तर (b) है।",
+    e_en: "Total expenditure = 10% + 10% + 20% + 15% = 55%<br>Savings = 100% - 55% = 45%<br>Savings = 30000 × 45/100 = ₹13500<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q369. राम अपने वेतन का 30% भोजन पर, 10% घर के किराए पर, 7% मनोरंजन पर और 6% परिवहन पर खर्च करता है। यदि एक महीने के अंत में उसकी बचत ₹1880 है, तो उसका मासिक वेतन ज्ञात करें।",
+    q_en: "Q369. Ram spends 30% of his salary on food, 10% on house rent, 7% on entertainment and 6% on transport. If his savings at the end of a month are ₹1880, find his monthly salary.",
+    tag: "SSC CHSL 10/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) ₹4000",
+      "(b) ₹4450",
+      "(c) ₹5000",
+      "(d) ₹5500"
+    ],
+    o_en: [
+      "(a) ₹4000",
+      "(b) ₹4450",
+      "(c) ₹5000",
+      "(d) ₹5500"
+    ],
+    a: 0,
+    e_hi: "कुल खर्च = 30% + 10% + 7% + 6% = 53%<br>बचत = 47%<br>47% वेतन = ₹1880<br>वेतन = 1880 × 100/47 = ₹4000<br>सही उत्तर (a) है।",
+    e_en: "Total expenditure = 30% + 10% + 7% + 6% = 53%<br>Savings = 47%<br>47% of salary = ₹1880<br>Salary = 1880 × 100/47 = ₹4000<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q370. एक सॉफ्टवेयर इंजीनियर के वेतन में से, यदि 15% मकान के किराए पर खर्च किया जाता है, शेष का 25% घरेलू सामान पर, शेष का 25% आयकर के रूप में, और शेष का 15% कपड़ों पर खर्च किया जाता है, तो उसके पास ₹10,404 शेष बचते हैं। उसका कुल वेतन ज्ञात कीजिए।",
+    q_en: "Q370. Of a software engineer's salary, 15% is spent on house rent, 25% of the remainder on household goods, 25% of the remainder as income tax, and 15% of the remainder on clothes. If ₹10,404 remains with him, find his total salary.",
+    tag: "SSC CHSL 02/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) ₹22600",
+      "(b) ₹24600",
+      "(c) ₹25600",
+      "(d) ₹23600"
+    ],
+    o_en: [
+      "(a) ₹22600",
+      "(b) ₹24600",
+      "(c) ₹25600",
+      "(d) ₹23600"
+    ],
+    a: 2,
+    e_hi: "प्रारंभिक वेतन = 100%<br>किराए के बाद शेष = 85%<br>घरेलू सामान के बाद शेष = 85% × 75/100 = 63.75%<br>आयकर के बाद शेष = 63.75% × 75/100 = 47.8125%<br>कपड़ों के बाद शेष = 47.8125% × 85/100 = 40.640625%<br>40.640625% वेतन = ₹10404<br>वेतन = ₹25600<br>सही उत्तर (c) है।",
+    e_en: "Initial salary = 100%<br>Remaining after rent = 85%<br>Remaining after household goods = 85% × 75/100 = 63.75%<br>Remaining after income tax = 63.75% × 75/100 = 47.8125%<br>Remaining after clothes = 47.8125% × 85/100 = 40.640625%<br>40.640625% of salary = ₹10404<br>Salary = ₹25600<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q371. प्रणय ने अपने पास मौजूद धन का 30% अपनी पत्नी को दिया, और शेष का 86% अपने दो बच्चों को दिया। बची हुई राशि का आधा हिस्सा अन्य चीजों पर खर्च किया गया और शेष ₹98,000 बैंक में जमा किया गया। शुरुआत में उसके पास कितना धन था?",
+    q_en: "Q371. Pranay gave 30% of the money he had to his wife, and 86% of the remainder to his two children. Half of the remaining amount was spent on other things and the remaining ₹98,000 was deposited in the bank. How much money did he have initially?",
+    tag: "SSC CHSL 08/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) ₹20,00,000",
+      "(b) ₹40,00,000",
+      "(c) ₹10,00,000",
+      "(d) ₹30,00,000"
+    ],
+    o_en: [
+      "(a) ₹20,00,000",
+      "(b) ₹40,00,000",
+      "(c) ₹10,00,000",
+      "(d) ₹30,00,000"
+    ],
+    a: 0,
+    e_hi: "प्रारंभिक धन = x<br>पत्नी को देने के बाद = 70% x<br>बच्चों को देने के बाद = 70% × 14/100 = 9.8% x<br>इसका आधा बैंक में जमा किया गया = 4.9% x<br>4.9% x = 98000<br>x = 98000 × 100/4.9 = ₹2000000<br>सही उत्तर (a) है।",
+    e_en: "Initial money = x<br>After giving to wife = 70% x<br>After giving to children = 70% × 14/100 = 9.8% x<br>Half of this was deposited in the bank = 4.9% x<br>4.9% x = 98000<br>x = 98000 × 100/4.9 = ₹2000000<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q372. एक आदमी अपनी आय का 35% भोजन पर और शेष आय का 4/13 भाग परिवहन पर खर्च करता है। वह कुछ अन्य खर्च करता है, लेकिन प्रति माह ₹6300 बचाता है, जो कि भोजन और परिवहन पर खर्च करने के बाद शेष राशि के 20% के बराबर है। उसकी मासिक आय (₹ में) कितनी है?",
+    q_en: "Q372. A man spends 35% of his income on food and 4/13 of the remaining income on transport. He incurs some other expenses, but saves ₹6300 per month, which is equal to 20% of the amount remaining after spending on food and transport. What is his monthly income (in ₹)?",
+    tag: "SSC CHSL 02/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 67500",
+      "(b) 72000",
+      "(c) 63000",
+      "(d) 70000"
+    ],
+    o_en: [
+      "(a) 67500",
+      "(b) 72000",
+      "(c) 63000",
+      "(d) 70000"
+    ],
+    a: 3,
+    e_hi: "भोजन पर खर्च = 35%<br>भोजन के बाद शेष = 65%<br>परिवहन पर खर्च = 65% × 4/13 = 20%<br>भोजन और परिवहन के बाद शेष = 100% - 35% - 20% = 45%<br>बचत = 45% का 20% = 9%<br>9% आय = ₹6300<br>आय = ₹70000<br>सही उत्तर (d) है।",
+    e_en: "Expenditure on food = 35%<br>Remaining after food = 65%<br>Expenditure on transport = 65% × 4/13 = 20%<br>Remaining after food and transport = 100% - 35% - 20% = 45%<br>Savings = 20% of 45% = 9%<br>9% of income = ₹6300<br>Income = ₹70000<br>The correct answer is (d)."
+  },
+  {
+    q_hi: "Q373. स्वाति ₹40,000 कमाती है, जिसमें से वह 25% बचाती है। बची हुई राशि भोजन और शिक्षा पर 3 : 2 के अनुपात में खर्च करती हैं। उसकी कुल आय में शिक्षा पर किए गए व्यय का प्रतिशत कितना है?",
+    q_en: "Q373. Swati earns ₹40,000, of which she saves 25%. She spends the remaining amount on food and education in the ratio 3 : 2. What percentage of her total income is spent on education?",
+    tag: "SSC CPO 29/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 30%",
+      "(b) 20%",
+      "(c) 60%",
+      "(d) 40%"
+    ],
+    o_en: [
+      "(a) 30%",
+      "(b) 20%",
+      "(c) 60%",
+      "(d) 40%"
+    ],
+    a: 0,
+    e_hi: "बचत = 25%<br>खर्च = 75%<br>शिक्षा का हिस्सा = 75% × 2/5 = 30%<br>अतः शिक्षा पर कुल आय का 30% खर्च होता है।<br>सही उत्तर (a) है।",
+    e_en: "Savings = 25%<br>Expenditure = 75%<br>Share of education = 75% × 2/5 = 30%<br>Hence, 30% of the total income is spent on education.<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q374. एक व्यक्ति अपने वेतन का 40% खाद्य पदार्थों पर, शेष का 50% परिवहन पर और शेष का 30% कपड़ों पर खर्च करता है। भोजन, परिवहन और कपड़ों पर खर्च करने के बाद, वह हर महीने ₹1260 बचाता है। उसका मासिक वेतन कितना है?",
+    q_en: "Q374. A person spends 40% of his salary on food items, 50% of the remainder on transport and 30% of the remainder on clothes. After spending on food, transport and clothes, he saves ₹1260 every month. What is his monthly salary?",
+    tag: "SSC Phase XII 26/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) ₹10000",
+      "(b) ₹6000",
+      "(c) ₹7000",
+      "(d) ₹8000"
+    ],
+    o_en: [
+      "(a) ₹10000",
+      "(b) ₹6000",
+      "(c) ₹7000",
+      "(d) ₹8000"
+    ],
+    a: 1,
+    e_hi: "भोजन के बाद शेष = 60%<br>परिवहन के बाद शेष = 60% × 50% = 30%<br>कपड़ों के बाद शेष = 30% × 70% = 21%<br>21% वेतन = ₹1260<br>वेतन = ₹6000<br>सही उत्तर (b) है।",
+    e_en: "Remaining after food = 60%<br>Remaining after transport = 60% × 50% = 30%<br>Remaining after clothes = 30% × 70% = 21%<br>21% of salary = ₹1260<br>Salary = ₹6000<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q375. स्वास्तिक अपनी आय का 20% बचाता है, जबकि शेष राशि भोजन, किराया, शिक्षा और खरीदारी पर खर्च करता है। आय का 15% भोजन पर खर्च किया जाता है, जबकि ₹12800 किराए पर, ₹32000 शिक्षा पर और ₹7200 खरीदारी पर खर्च किए जाते हैं। खरीदारी पर खर्च की गई राशि, कुल खर्च की 11.25% है। भोजन पर कितना धन (₹ में) खर्च किया जाता है?",
+    q_en: "Q375. Swastik saves 20% of his income, while the remaining amount is spent on food, rent, education and shopping. 15% of the income is spent on food, while ₹12800 is spent on rent, ₹32000 on education and ₹7200 on shopping. The amount spent on shopping is 11.25% of the total expenditure. How much money (in ₹) is spent on food?",
+    tag: "SSC CPO 03/10/2023 (Shift-02)",
+    o_hi: [
+      "(a) 9600",
+      "(b) 12000",
+      "(c) 15000",
+      "(d) 10800"
+    ],
+    o_en: [
+      "(a) 9600",
+      "(b) 12000",
+      "(c) 15000",
+      "(d) 10800"
+    ],
+    a: 1,
+    e_hi: "खरीदारी का खर्च = ₹7200<br>यह कुल खर्च का 11.25% है।<br>कुल खर्च = 7200 × 100/11.25 = ₹64000<br>आय का 20% बचता है, इसलिए कुल खर्च = आय का 80%।<br>आय = 64000 × 100/80 = ₹80000<br>भोजन पर खर्च = 15% × 80000 = ₹12000<br>सही उत्तर (b) है।",
+    e_en: "Expenditure on shopping = ₹7200<br>This is 11.25% of total expenditure.<br>Total expenditure = 7200 × 100/11.25 = ₹64000<br>20% of income is saved, so total expenditure = 80% of income.<br>Income = 64000 × 100/80 = ₹80000<br>Expenditure on food = 15% × 80000 = ₹12000<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q376. एक परिवार ₹75,000 कमाता है, जिसमें से 10% बचा लिया जाता है। 30% खर्च शिक्षा पर किया जाता है, जबकि ₹30,375 स्वास्थ्य पर खर्च किया जाता है और शेष राशि भोजन पर खर्च की जाती है। कुल आय में भोजन व्यय का प्रतिशत कितना है?",
+    q_en: "Q376. A family earns ₹75,000, of which 10% is saved. 30% is spent on education, while ₹30,375 is spent on health and the remaining amount is spent on food. What percentage of the total income is spent on food?",
+    tag: "SSC CPO 05/10/2023 (Shift-02)",
+    o_hi: [
+      "(a) 20%",
+      "(b) 21.5%",
+      "(c) 22.5%",
+      "(d) 32.5%"
+    ],
+    o_en: [
+      "(a) 20%",
+      "(b) 21.5%",
+      "(c) 22.5%",
+      "(d) 32.5%"
+    ],
+    a: -1,
+    e_hi: "Ans: कोई विकल्प सही नहीं है (सही मान 19.5%)<br><br>कुल आय = ₹75000<br>बचत = 10% = ₹7500<br>शिक्षा पर खर्च = 30% = ₹22500<br>स्वास्थ्य पर खर्च = ₹30375<br>भोजन पर खर्च = 75000 - 7500 - 22500 - 30375 = ₹14625<br>भोजन व्यय का प्रतिशत = 14625/75000 × 100 = 19.5%<br>अतः दिए गए विकल्पों में कोई सही विकल्प नहीं है।",
+    e_en: "Ans: No option is correct (correct value is 19.5%)<br><br>Total income = ₹75000<br>Savings = 10% = ₹7500<br>Expenditure on education = 30% = ₹22500<br>Expenditure on health = ₹30375<br>Expenditure on food = 75000 - 7500 - 22500 - 30375 = ₹14625<br>Percentage of expenditure on food = 14625/75000 × 100 = 19.5%<br>Therefore, none of the given options is correct."
+  },
+  {
+    q_hi: "Q377. एक आदमी अपने वेतन का 30% किराये पर, 20% किराने के सामान पर और 25% अन्य खर्चों पर खर्च करता है। यदि वह ₹9,000 बचाता है, तो उसका वेतन क्या है?",
+    q_en: "Q377. A man spends 30% of his salary on rent, 20% on groceries and 25% on other expenses. If he saves ₹9,000, what is his salary?",
+    tag: "SSC CPO 11/12/2025 (Shift-01)",
+    o_hi: [
+      "(a) ₹24,000",
+      "(b) ₹27,000",
+      "(c) ₹30,000",
+      "(d) ₹36,000"
+    ],
+    o_en: [
+      "(a) ₹24,000",
+      "(b) ₹27,000",
+      "(c) ₹30,000",
+      "(d) ₹36,000"
+    ],
+    a: 3,
+    e_hi: "कुल खर्च = 30% + 20% + 25% = 75%<br>बचत = 25%<br>25% वेतन = ₹9000<br>वेतन = 9000 × 100/25 = ₹36000<br>सही उत्तर (d) है।",
+    e_en: "Total expenditure = 30% + 20% + 25% = 75%<br>Savings = 25%<br>25% of salary = ₹9000<br>Salary = 9000 × 100/25 = ₹36000<br>The correct answer is (d)."
+  },
+  {
+    q_hi: "Q378. एक परिवार अपनी कुल आय में से 15% की बचत करता है और शेष राशि तीन प्रकार के व्यय - स्वास्थ्य, शिक्षा और भोजन पर 17 : 34 : 34 के अनुपात में व्यय करता है। आय, शिक्षा पर किए गए व्यय के तीन गुने से ₹300 कम है। बचत और स्वास्थ्य पर किए गए व्यय में कितना अंतर है?",
+    q_en: "Q378. A family saves 15% of its total income and spends the remaining amount on three types of expenditure - health, education and food in the ratio 17 : 34 : 34. The income is ₹300 less than three times the expenditure on education. What is the difference between savings and expenditure on health?",
+    tag: "SSC Phase-XI 27/06/2023 (Shift-04)",
+    o_hi: [
+      "(a) ₹300",
+      "(b) ₹350",
+      "(c) ₹2250",
+      "(d) ₹500"
+    ],
+    o_en: [
+      "(a) ₹300",
+      "(b) ₹350",
+      "(c) ₹2250",
+      "(d) ₹500"
+    ],
+    a: 0,
+    e_hi: "आय = x<br>बचत = 15% x<br>कुल व्यय = 85% x<br>स्वास्थ्य : शिक्षा : भोजन = 17 : 34 : 34<br>कुल अनुपात = 85<br>शिक्षा पर व्यय = 34/85 × 85% x = 34% x<br>प्रश्नानुसार, आय शिक्षा पर व्यय के तीन गुने से ₹300 कम है।<br>x = 3 × 34% x - 300<br>x = 1.02x - 300<br>0.02x = 300<br>x = ₹15000<br>बचत = 15% × 15000 = ₹2250<br>स्वास्थ्य पर व्यय = 17/85 × 85% × 15000 = ₹2550<br>अंतर = 2550 - 2250 = ₹300<br>सही उत्तर (a) है।",
+    e_en: "Income = x<br>Savings = 15% x<br>Total expenditure = 85% x<br>Health : Education : Food = 17 : 34 : 34<br>Total ratio = 85<br>Expenditure on education = 34/85 × 85% x = 34% x<br>According to the question, income is ₹300 less than three times the expenditure on education.<br>x = 3 × 34% x - 300<br>x = 1.02x - 300<br>0.02x = 300<br>x = ₹15000<br>Savings = 15% × 15000 = ₹2250<br>Expenditure on health = 17/85 × 85% × 15000 = ₹2550<br>Difference = 2550 - 2250 = ₹300<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q379. गीता एक अपार्टमेंट खरीदती है और उसके लिए EMI का भुगतान करती है। उसकी मासिक आय ₹80,000 है। वह अपने बच्चों की शिक्षा पर 15% और मकान पर 40% खर्च करती है, GPF में 10% भेजती है, बचत बैंक खाते में 15% जमा करती है और शेष राशि का भुगतान EMI के रूप में करती है। वह EMI के रूप में कितनी राशि का भुगतान करती है?",
+    q_en: "Q379. Geeta buys an apartment and pays EMI for it. Her monthly income is ₹80,000. She spends 15% on her children's education and 40% on the house, sends 10% to GPF, deposits 15% in a savings bank account and pays the remaining amount as EMI. How much does she pay as EMI?",
+    tag: "SSC CHSL TIER-II 26/06/2023",
+    o_hi: [
+      "(a) ₹14,000",
+      "(b) ₹16,000",
+      "(c) ₹20,000",
+      "(d) ₹18,000"
+    ],
+    o_en: [
+      "(a) ₹14,000",
+      "(b) ₹16,000",
+      "(c) ₹20,000",
+      "(d) ₹18,000"
+    ],
+    a: 1,
+    e_hi: "कुल खर्च = 15% + 40% + 10% + 15% = 80%<br>EMI के लिए शेष = 20%<br>EMI = 20% × 80000 = ₹16000<br>सही उत्तर (b) है।",
+    e_en: "Total expenditure = 15% + 40% + 10% + 15% = 80%<br>Remaining for EMI = 20%<br>EMI = 20% × 80000 = ₹16000<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q380. भवानी ने अपनी मासिक आय का 15% बच्चों की शिक्षा पर और 20% भोजन पर खर्च किया। शेष का 40% उसने खेल पर और 30% परिवहन पर खर्च किया। इन सभी खर्चों के बाद उसके पास ₹10257 की राशि शेष बची। भवानी की मासिक आय क्या है?",
+    q_en: "Q380. Bhawani spent 15% of her monthly income on children's education and 20% on food. She spent 40% of the remainder on sports and 30% on transport. After all these expenses, ₹10257 remained with her. What is Bhawani's monthly income?",
+    tag: "SSC CPO 09/11/2022 (Shift-02)",
+    o_hi: [
+      "(a) ₹45,800",
+      "(b) ₹48,000",
+      "(c) ₹52,600",
+      "(d) ₹81,965"
+    ],
+    o_en: [
+      "(a) ₹45,800",
+      "(b) ₹48,000",
+      "(c) ₹52,600",
+      "(d) ₹81,965"
+    ],
+    a: 2,
+    e_hi: "शिक्षा और भोजन पर खर्च = 15% + 20% = 35%<br>शेष = 65%<br>खेल पर खर्च = 65% का 40% = 26%<br>परिवहन पर खर्च = 65% का 30% = 19.5%<br>अंतिम बचत = 65% - 26% - 19.5% = 19.5%<br>19.5% आय = ₹10257<br>आय = ₹52600<br>सही उत्तर (c) है।",
+    e_en: "Expenditure on education and food = 15% + 20% = 35%<br>Remaining = 65%<br>Expenditure on sports = 40% of 65% = 26%<br>Expenditure on transport = 30% of 65% = 19.5%<br>Final savings = 65% - 26% - 19.5% = 19.5%<br>19.5% of income = ₹10257<br>Income = ₹52600<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q381. शिव का मासिक वेतन ₹75,000 है। वह घरेलू सामानों पर ₹12,000, एलआईसी और म्यूचुअल फंड पर ₹14,000, अपने बच्चों की शिक्षा पर ₹15,000 खर्च करता है और फुटकर खर्चों के लिए ₹10,000 रखता है। उसकी बचत ₹21,000 प्रति माह है। वह शेष राशि एक अनाथालय को दान कर देता है। उसकी आय का प्रतिशत, जो वह दान करता है वह है:",
+    q_en: "Q381. Shiv's monthly salary is ₹75,000. He spends ₹12,000 on household goods, ₹14,000 on LIC and mutual funds, ₹15,000 on his children's education and keeps ₹10,000 for miscellaneous expenses. His savings are ₹21,000 per month. He donates the remaining amount to an orphanage. What percentage of his income does he donate?",
+    tag: "SSC CGL 13/12/2022 (Shift-03)",
+    o_hi: [
+      "(a) 3%",
+      "(b) 6%",
+      "(c) 8%",
+      "(d) 4%"
+    ],
+    o_en: [
+      "(a) 3%",
+      "(b) 6%",
+      "(c) 8%",
+      "(d) 4%"
+    ],
+    a: 3,
+    e_hi: "कुल खर्च और बचत = 12000 + 14000 + 15000 + 10000 + 21000 = ₹72000<br>दान = 75000 - 72000 = ₹3000<br>दान का प्रतिशत = 3000/75000 × 100 = 4%<br>सही उत्तर (d) है।",
+    e_en: "Total expenditure and savings = 12000 + 14000 + 15000 + 10000 + 21000 = ₹72000<br>Donation = 75000 - 72000 = ₹3000<br>Percentage of donation = 3000/75000 × 100 = 4%<br>The correct answer is (d)."
+  },
+  {
+    q_hi: "Q382. एक आदमी अपने वेतन का 30% किराए पर, 20% किराने के सामान पर और 25% अन्य खर्चों पर खर्च करता है। यदि वह ₹9,000 बचाता है, तो उसका वेतन क्या है?",
+    q_en: "Q382. A man spends 30% of his salary on rent, 20% on groceries and 25% on other expenses. If he saves ₹9,000, what is his salary?",
+    tag: "SSC CGL 26/09/2025 (Shift-03)",
+    o_hi: [
+      "(a) ₹24,000",
+      "(b) ₹27,000",
+      "(c) ₹30,000",
+      "(d) ₹36,000"
+    ],
+    o_en: [
+      "(a) ₹24,000",
+      "(b) ₹27,000",
+      "(c) ₹30,000",
+      "(d) ₹36,000"
+    ],
+    a: 3,
+    e_hi: "कुल खर्च = 30% + 20% + 25% = 75%<br>बचत = 25%<br>25% वेतन = ₹9000<br>वेतन = 9000 × 100/25 = ₹36000<br>सही उत्तर (d) है।",
+    e_en: "Total expenditure = 30% + 20% + 25% = 75%<br>Savings = 25%<br>25% of salary = ₹9000<br>Salary = 9000 × 100/25 = ₹36000<br>The correct answer is (d)."
+  },
+  {
+    q_hi: "Q383. एक परिवार कुल आय का 30% बचाता है और बचत राशि, व्यय के आधे से भी ₹600 कम है। यदि स्वास्थ्य, भोजन और शिक्षा पर कुल व्यय 3 : 5 : 6 के अनुपात में है, तो शिक्षा पर कितना व्यय किया जाता है?",
+    q_en: "Q383. A family saves 30% of its total income and the savings amount is ₹600 less than half of the expenditure. If the total expenditure on health, food and education is in the ratio 3 : 5 : 6, how much is spent on education?",
+    tag: "SSC Phase-X 02/08/2022 (Shift-02)",
+    o_hi: [
+      "(a) ₹3,600",
+      "(b) ₹1,800",
+      "(c) ₹7,200",
+      "(d) ₹8,400"
+    ],
+    o_en: [
+      "(a) ₹3,600",
+      "(b) ₹1,800",
+      "(c) ₹7,200",
+      "(d) ₹8,400"
+    ],
+    a: 0,
+    e_hi: "बचत = 30%<br>व्यय = 70%<br>बचत = व्यय का आधा - ₹600<br>30% आय = 35% आय - 600<br>5% आय = 600<br>आय = ₹12000<br>व्यय = 70% × 12000 = ₹8400<br>शिक्षा का हिस्सा = 6/(3 + 5 + 6) = 6/14<br>शिक्षा पर व्यय = 8400 × 6/14 = ₹3600<br>सही उत्तर (a) है।",
+    e_en: "Savings = 30%<br>Expenditure = 70%<br>Savings = half of expenditure - ₹600<br>30% of income = 35% of income - 600<br>5% of income = 600<br>Income = ₹12000<br>Expenditure = 70% × 12000 = ₹8400<br>Share of education = 6/(3 + 5 + 6) = 6/14<br>Expenditure on education = 8400 × 6/14 = ₹3600<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q384. मिस्टर स्टार्क ने अपने पास मौजूद धनराशि का 30% ब्रूस को दे दिया। बची हुई धनराशि का 30% नताशा, कैप्टन और विजन में से प्रत्येक को दिया। उसके बाद बची हुई धनराशि के आधे से उन्होंने अन्य जरूरत के विभिन्न सामान खरीदे और शेष ₹14000 की धनराशि मार्वल कोष में जमा कर दी। मिस्टर स्टार्क के पास आरंभ में कितनी धनराशि थी?",
+    q_en: "Q384. Mr. Stark gave 30% of the money he had to Bruce. He gave 30% of the remaining amount to each of Natasha, Captain and Vision. After that, he bought various items of other needs with half of the remaining amount and deposited the remaining ₹14000 in the Marvel fund. How much money did Mr. Stark have initially?",
+    tag: "SSC MTS 20/07/2022 (Shift-02)",
+    o_hi: [
+      "(a) ₹3,90,000",
+      "(b) ₹4,00,000",
+      "(c) ₹3,70,000",
+      "(d) ₹3,00,000"
+    ],
+    o_en: [
+      "(a) ₹3,90,000",
+      "(b) ₹4,00,000",
+      "(c) ₹3,70,000",
+      "(d) ₹3,00,000"
+    ],
+    a: 1,
+    e_hi: "प्रारंभिक राशि = x<br>ब्रूस को 30% देने के बाद = 70% x<br>नताशा, कैप्टन और विजन को शेष राशि का 30%-30%-30% देने के बाद = 10% × 70% x = 7% x<br>इस बची राशि का आधा सामान खरीदने में खर्च हुआ।<br>अतः शेष = 7% x का 50% = 3.5% x<br>3.5% x = ₹14000<br>x = 14000 × 100/3.5 = ₹400000<br>सही उत्तर (b) है।",
+    e_en: "Initial amount = x<br>After giving 30% to Bruce = 70% x<br>After giving 30%-30%-30% of the remaining amount to Natasha, Captain and Vision = 10% × 70% x = 7% x<br>Half of this remaining amount was spent on various items.<br>Therefore, remaining = 50% of 7% x = 3.5% x<br>3.5% x = ₹14000<br>x = 14000 × 100/3.5 = ₹400000<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q385. अमन अपनी मासिक आय का 30% अपने पिता को और शेष आय का 30% अपनी बेटी को और 25% अपनी पत्नी को देता है। उसने अपनी मासिक आय में से शेष राशि को तीन योजनाओं में समान रूप से निवेश किया। यदि उसने प्रत्येक योजना में ₹42000 का निवेश किया है, तो उसकी मासिक आय (₹ हजार में) ज्ञात कीजिए।",
+    q_en: "Q385. Aman gives 30% of his monthly income to his father, and 30% of the remaining income to his daughter and 25% to his wife. He invests the remaining amount of his monthly income equally in three schemes. If he invested ₹42000 in each scheme, find his monthly income (in ₹ thousands).",
+    tag: "SSC MTS 25/07/2022 (Shift-03)",
+    o_hi: [
+      "(a) 300",
+      "(b) 400",
+      "(c) 500",
+      "(d) 200"
+    ],
+    o_en: [
+      "(a) 300",
+      "(b) 400",
+      "(c) 500",
+      "(d) 200"
+    ],
+    a: 1,
+    e_hi: "मासिक आय = 100%<br>पिता को देने के बाद = 70%<br>बेटी को = 70% का 30% = 21%<br>पत्नी को = 70% का 25% = 17.5%<br>शेष = 70% - 21% - 17.5% = 31.5%<br>तीन योजनाओं में कुल निवेश = 42000 × 3 = ₹126000<br>31.5% आय = ₹126000<br>आय = ₹400000<br>₹ हजार में = 400<br>सही उत्तर (b) है।",
+    e_en: "Monthly income = 100%<br>After giving to father = 70%<br>To daughter = 30% of 70% = 21%<br>To wife = 25% of 70% = 17.5%<br>Remaining = 70% - 21% - 17.5% = 31.5%<br>Total investment in three schemes = 42000 × 3 = ₹126000<br>31.5% of income = ₹126000<br>Income = ₹400000<br>In ₹ thousands = 400<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q386. रमेश अपनी मासिक आय का 40% खाद्य पर, 18% मकान के किराये पर, 12% मनोरंजन पर और 5% वाहन पर खर्च करता है। लेकिन एक पारिवारिक समारोह के कारण, उसे ₹20,000 के खर्च को पूरा करने के लिए किसी ऋणदाता से ₹16,000 उधार लेना पड़ता है। उसका मासिक वेतन ज्ञात करें।",
+    q_en: "Q386. Ramesh spends 40% of his monthly income on food, 18% on house rent, 12% on entertainment and 5% on vehicle. However, due to a family function, he has to borrow ₹16,000 from a lender to meet an expense of ₹20,000. Find his monthly salary.",
+    tag: "SSC CPO 25/11/2020 (Shift-02)",
+    o_hi: [
+      "(a) ₹18,000",
+      "(b) ₹16,500",
+      "(c) ₹16,000",
+      "(d) ₹15,000"
+    ],
+    o_en: [
+      "(a) ₹18,000",
+      "(b) ₹16,500",
+      "(c) ₹16,000",
+      "(d) ₹15,000"
+    ],
+    a: 2,
+    e_hi: "कुल नियमित खर्च = 40% + 18% + 12% + 5% = 75%<br>बचत = 25%<br>पारिवारिक समारोह का खर्च = ₹20000<br>उधार = ₹16000<br>अर्थात अपनी बचत से खर्च = 20000 - 16000 = ₹4000<br>25% मासिक आय = ₹4000<br>मासिक आय = ₹16000<br>सही उत्तर (c) है।",
+    e_en: "Total regular expenditure = 40% + 18% + 12% + 5% = 75%<br>Savings = 25%<br>Family function expense = ₹20000<br>Borrowed amount = ₹16000<br>Therefore, amount spent from his savings = 20000 - 16000 = ₹4000<br>25% of monthly income = ₹4000<br>Monthly income = ₹16000<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q387. एक परिवार की मासिक आय ₹35,000 है। परिवार आय को विभिन्न व्ययों जैसे कि भोजन, स्वास्थ्य, शिक्षा, मनोरंजन और किराए पर खर्च करता है। सभी व्यय के बाद, हर महीने 8% की बचत होती है। स्वास्थ्य पर भोजन की तुलना में 50% अधिक व्यय होता है, जबकि भोजन पर व्यय मनोरंजन व्यय का तीन गुना होता है, वहीं स्वास्थ्य पर होने वाला व्यय शिक्षा पर होने वाले व्यय का आधा है। किराए पर व्यय भोजन, स्वास्थ्य और शिक्षा पर संयुक्त व्यय का एक तिहाई है। शिक्षा पर कितना व्यय (रुपये में) किया जाता है?",
+    q_en: "Q387. A family's monthly income is ₹35,000. The family spends its income on various expenses such as food, health, education, entertainment and rent. After all expenses, it saves 8% every month. Expenditure on health is 50% more than that on food, while expenditure on food is three times the expenditure on entertainment, and expenditure on health is half the expenditure on education. Expenditure on rent is one-third of the combined expenditure on food, health and education. How much is spent on education (in rupees)?",
+    tag: "SSC CGL 25/07/2023 (Shift-02)",
+    o_hi: [
+      "(a) 12600",
+      "(b) 8400",
+      "(c) 13200",
+      "(d) 7700"
+    ],
+    o_en: [
+      "(a) 12600",
+      "(b) 8400",
+      "(c) 13200",
+      "(d) 7700"
+    ],
+    a: 0,
+    e_hi: "कुल आय = ₹35000<br>बचत = 8%<br>कुल व्यय = 92% × 35000 = ₹32200<br>भोजन का व्यय = x मानते हैं।<br>स्वास्थ्य = 150% x = 1.5x<br>मनोरंजन = x/3<br>स्वास्थ्य शिक्षा का आधा है, इसलिए शिक्षा = 3x<br>किराया = (x + 1.5x + 3x)/3 = 11x/6<br>कुल व्यय = x + 1.5x + 3x + x/3 + 11x/6 = 23x/3<br>23x/3 = 32200<br>x = 4200<br>शिक्षा पर व्यय = 3 × 4200 = ₹12600<br>सही उत्तर (a) है।",
+    e_en: "Total income = ₹35000<br>Savings = 8%<br>Total expenditure = 92% × 35000 = ₹32200<br>Let expenditure on food = x.<br>Health = 150% x = 1.5x<br>Entertainment = x/3<br>Health is half of education, so education = 3x<br>Rent = (x + 1.5x + 3x)/3 = 11x/6<br>Total expenditure = x + 1.5x + 3x + x/3 + 11x/6 = 23x/3<br>23x/3 = 32200<br>x = 4200<br>Expenditure on education = 3 × 4200 = ₹12600<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q388. एक विद्यालय में 80 अंकों की परीक्षा आयोजित की गई जिसमें 32 उत्तीर्ण अंक थे। निम्नलिखित में से किसने न्यूनतम अंक प्राप्त किए? नोट: केवल एक दशमलव स्थान तक पूर्णांकित करें।",
+    q_en: "Q388. An examination of 80 marks was conducted in a school in which the passing marks were 32. Who among the following obtained the minimum marks? Note: Round off only to one decimal place.",
+    tag: "",
+    o_hi: [
+      "(a) D जिसे कुल अंकों का 12/19 प्राप्त हुआ है।",
+      "(b) B जिसे कुल अंकों का 7/11 प्राप्त हुआ है।",
+      "(c) A, जिसे परीक्षा में 72% अंक प्राप्त हुए हैं।",
+      "(d) C जिसे उत्तीर्ण अंक का 160% प्राप्त हुआ है।"
+    ],
+    o_en: [
+      "(a) D who obtained 12/19 of the total marks.",
+      "(b) B who obtained 7/11 of the total marks.",
+      "(c) A, who obtained 72% marks in the examination.",
+      "(d) C who obtained 160% of the passing marks."
+    ],
+    a: 0,
+    e_hi: "D के अंक = 80 × 12/19 = 50.5 लगभग<br>B के अंक = 80 × 7/11 = 50.9 लगभग<br>A के अंक = 80 × 72/100 = 57.6<br>C के अंक = 32 × 160/100 = 51.2<br>सबसे कम अंक D के हैं।<br>सही उत्तर (a) है।",
+    e_en: "Marks of D = 80 × 12/19 = 50.5 approximately<br>Marks of B = 80 × 7/11 = 50.9 approximately<br>Marks of A = 80 × 72/100 = 57.6<br>Marks of C = 32 × 160/100 = 51.2<br>D obtained the minimum marks.<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q389. किसी परीक्षा में विद्यालय X से निश्चित संख्या में छात्र उपस्थित हुए और 20% छात्र अनुत्तीर्ण हो गए। उसी परीक्षा में विद्यालय X की तुलना में विद्यालय Y से 130% अधिक छात्र उपस्थित हुए। यदि दोनों विद्यालयों से उपस्थित हुए कुल छात्रों में से 90% छात्र उत्तीर्ण हुए, तो विद्यालय Y के अनुत्तीर्ण छात्रों का प्रतिशत (एक दशमलव स्थान तक) ज्ञात करें।",
+    q_en: "Q389. A certain number of students from school X appeared in an examination and 20% of the students failed. In the same examination, 130% more students from school Y appeared than from school X. If 90% of the total students who appeared from both schools passed, find the percentage of students from school Y who failed (up to one decimal place).",
+    tag: "SSC CGL 17/08/2021 (Shift-01)",
+    o_hi: [
+      "(a) 8.3%",
+      "(b) 10%",
+      "(c) 6.4%",
+      "(d) 5.7%"
+    ],
+    o_en: [
+      "(a) 8.3%",
+      "(b) 10%",
+      "(c) 6.4%",
+      "(d) 5.7%"
+    ],
+    a: 3,
+    e_hi: "विद्यालय X की उपस्थिति = 100 मानते हैं।<br>विद्यालय Y की उपस्थिति = 100 + 130 = 230<br>कुल उपस्थिति = 330<br>कुल अनुत्तीर्ण = 10% × 330 = 33<br>X के अनुत्तीर्ण = 20% × 100 = 20<br>Y के अनुत्तीर्ण = 33 - 20 = 13<br>Y के अनुत्तीर्ण छात्रों का प्रतिशत = 13/230 × 100 = 5.65% ≈ 5.7%<br>सही उत्तर (d) है।",
+    e_en: "Assume the attendance of school X = 100.<br>Attendance of school Y = 100 + 130 = 230<br>Total attendance = 330<br>Total failed = 10% × 330 = 33<br>Failed from X = 20% × 100 = 20<br>Failed from Y = 33 - 20 = 13<br>Percentage of failed students from Y = 13/230 × 100 = 5.65% ≈ 5.7%<br>The correct answer is (d)."
+  },
+  {
+    q_hi: "Q390. एक परीक्षा में दो पेपर A और B थे और दोनों पेपरों में से प्रत्येक में अधिकतम अंक 10 थे। हालाँकि, पेपर A और B के निर्धारित भारांक क्रमशः 2 : 1 के अनुपात में थे। ऋषभ ने पेपर B में 10 में से 8 अंक प्राप्त किए और परीक्षा में कुल मिलाकर 70% अंक प्राप्त किए। उसे पेपर A में 10 में से कितने अंक प्राप्त हुए?",
+    q_en: "Q390. There were two papers A and B in an examination and the maximum marks in each paper were 10. However, the prescribed weights of papers A and B were in the ratio 2 : 1 respectively. Rishabh scored 8 out of 10 in paper B and obtained 70% marks overall in the examination. How many marks out of 10 did he obtain in paper A?",
+    tag: "SSC Phase XII 25/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 6.5",
+      "(b) 5.5",
+      "(c) 6",
+      "(d) 5"
+    ],
+    o_en: [
+      "(a) 6.5",
+      "(b) 5.5",
+      "(c) 6",
+      "(d) 5"
+    ],
+    a: 0,
+    e_hi: "पेपर A के अंक = x<br>भारांकित औसत = 70%<br>(2x + 8)/3 = 7<br>2x + 8 = 21<br>2x = 13<br>x = 6.5<br>सही उत्तर (a) है।",
+    e_en: "Marks in paper A = x<br>Weighted average = 70%<br>(2x + 8)/3 = 7<br>2x + 8 = 21<br>2x = 13<br>x = 6.5<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q391. विकास ने 3 परीक्षाएँ दीं। उसके द्वारा तीन परीक्षाओं में प्राप्त अंकों का क्रमशः अनुपात 3 : 5 : 6 है। तीन परीक्षाओं के अधिकतम अंकों का क्रमशः अनुपात 7 : 11 : 10 है। यदि उसने कुल मिलाकर 50 प्रतिशत अंक प्राप्त किए हैं, तो कितनी परीक्षाओं में उसने 50 प्रतिशत से अधिक अंक प्राप्त किए हैं?",
+    q_en: "Q391. Vikas appeared in 3 examinations. The ratio of the marks obtained by him in the three examinations is 3 : 5 : 6 respectively. The ratio of the maximum marks in the three examinations is 7 : 11 : 10 respectively. If he obtained 50 percent marks overall, in how many examinations did he obtain more than 50 percent marks?",
+    tag: "SSC MTS 13/06/2023 (Shift-02)",
+    o_hi: [
+      "(a) किसी में नहीं",
+      "(b) 1",
+      "(c) 3",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) None",
+      "(b) 1",
+      "(c) 3",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "प्राप्त अंक = 3x, 5x, 6x<br>अधिकतम अंक = 7y, 11y, 10y<br>कुल प्राप्त अंक = 14x<br>कुल अधिकतम अंक = 28y<br>कुल प्रतिशत 50% है, इसलिए 14x/28y = 50/100<br>x = y<br>पहली परीक्षा का प्रतिशत = 3/7 × 100 = 42.86%<br>दूसरी परीक्षा का प्रतिशत = 5/11 × 100 = 45.45%<br>तीसरी परीक्षा का प्रतिशत = 6/10 × 100 = 60%<br>केवल 1 परीक्षा में 50% से अधिक अंक हैं।<br>सही उत्तर (b) है।",
+    e_en: "Marks obtained = 3x, 5x, 6x<br>Maximum marks = 7y, 11y, 10y<br>Total marks obtained = 14x<br>Total maximum marks = 28y<br>Overall percentage is 50%, so 14x/28y = 50/100<br>x = y<br>Percentage in the first examination = 3/7 × 100 = 42.86%<br>Percentage in the second examination = 5/11 × 100 = 45.45%<br>Percentage in the third examination = 6/10 × 100 = 60%<br>Only 1 examination has more than 50% marks.<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q392. 120 प्रश्नों वाली एक प्रतियोगी परीक्षा में तीन खंड हैं; सामान्य ज्ञान (20 प्रश्न), तर्क (50 प्रश्न), और अंग्रेजी (50 प्रश्न)। एक उम्मीदवार ने सामान्य ज्ञान के 70%, तर्क के 50% और अंग्रेजी के 30% प्रश्नों का सही उत्तर दिया। यदि न्यूनतम उत्तीर्ण अंक 60% हैं, तो उम्मीदवार को उत्तीर्ण होने के लिए कितने और प्रश्नों का सही उत्तर देने की आवश्यकता है?",
+    q_en: "Q392. A competitive examination has 120 questions divided into three sections; General Knowledge (20 questions), Reasoning (50 questions), and English (50 questions). A candidate correctly answered 70% of General Knowledge, 50% of Reasoning and 30% of English questions. If the minimum passing marks are 60%, how many more questions does the candidate need to answer correctly to pass?",
+    tag: "SSC CGL 15/09/2025 (Shift-03)",
+    o_hi: [
+      "(a) 2",
+      "(b) 15",
+      "(c) 18",
+      "(d) 20"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 15",
+      "(c) 18",
+      "(d) 20"
+    ],
+    a: 2,
+    e_hi: "सामान्य ज्ञान में सही उत्तर = 20 × 70/100 = 14<br>तर्क में सही उत्तर = 50 × 50/100 = 25<br>अंग्रेजी में सही उत्तर = 50 × 30/100 = 15<br>कुल सही उत्तर = 14 + 25 + 15 = 54<br>उत्तीर्ण होने के लिए सही उत्तर = 120 × 60/100 = 72<br>अतिरिक्त सही उत्तर = 72 - 54 = 18<br>सही उत्तर (c) है।",
+    e_en: "Correct answers in General Knowledge = 20 × 70/100 = 14<br>Correct answers in Reasoning = 50 × 50/100 = 25<br>Correct answers in English = 50 × 30/100 = 15<br>Total correct answers = 14 + 25 + 15 = 54<br>Correct answers required to pass = 120 × 60/100 = 72<br>Additional correct answers = 72 - 54 = 18<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q393. विभिन्न स्कूलों के कुछ विद्यार्थी (केवल लड़के और लड़कियाँ) ओलंपियाड परीक्षा में शामिल हुए। 20% लड़के और 15% लड़कियाँ परीक्षा में अनुत्तीर्ण हो गए। परीक्षा उत्तीर्ण करने वाले लड़कों की संख्या, परीक्षा उत्तीर्ण करने वाली लड़कियों की संख्या से 70 अधिक थी। कुल 90 विद्यार्थी अनुत्तीर्ण हुए। परीक्षा में शामिल होने वाले विद्यार्थियों की संख्या ज्ञात कीजिए।",
+    q_en: "Q393. Some students from different schools (only boys and girls) appeared in an Olympiad examination. 20% of the boys and 15% of the girls failed the examination. The number of boys who passed the examination was 70 more than the number of girls who passed. A total of 90 students failed. Find the number of students who appeared for the examination.",
+    tag: "SSC CGL 11/04/2022 (Shift-01)",
+    o_hi: [
+      "(a) 420",
+      "(b) 400",
+      "(c) 500",
+      "(d) 350"
+    ],
+    o_en: [
+      "(a) 420",
+      "(b) 400",
+      "(c) 500",
+      "(d) 350"
+    ],
+    a: 2,
+    e_hi: "लड़कों की संख्या = B और लड़कियों की संख्या = G<br>अनुत्तीर्ण लड़के = 20%B<br>अनुत्तीर्ण लड़कियाँ = 15%G<br>0.2B + 0.15G = 90<br>उत्तीर्ण लड़के = 0.8B<br>उत्तीर्ण लड़कियाँ = 0.85G<br>0.8B - 0.85G = 70<br>दोनों समीकरण हल करने पर B = 300 और G = 200<br>कुल विद्यार्थी = 300 + 200 = 500<br>सही उत्तर (c) है।",
+    e_en: "Number of boys = B and number of girls = G<br>Failed boys = 20%B<br>Failed girls = 15%G<br>0.2B + 0.15G = 90<br>Passed boys = 0.8B<br>Passed girls = 0.85G<br>0.8B - 0.85G = 70<br>Solving both equations gives B = 300 and G = 200<br>Total students = 300 + 200 = 500<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q394. A, B से 20% अधिक है। B, C से 30% अधिक है। C, D से 10% कम है। D, E से 30% कम है। A, E से कितने प्रतिशत अधिक/कम है?",
+    q_en: "Q394. A is 20% more than B. B is 30% more than C. C is 10% less than D. D is 30% less than E. By what percentage is A more or less than E?",
+    tag: "SSC CHSL 25/11/2025 (Shift-03)",
+    o_hi: [
+      "(a) 1.72% कम",
+      "(b) 1.72% अधिक",
+      "(c) 1.86% कम",
+      "(d) 1.86% अधिक"
+    ],
+    o_en: [
+      "(a) 1.72% less",
+      "(b) 1.72% more",
+      "(c) 1.86% less",
+      "(d) 1.86% more"
+    ],
+    a: 0,
+    e_hi: "E = 100 मानते हैं।<br>D = 70% of 100 = 70<br>C = 90% of 70 = 63<br>B = 130% of 63 = 81.9<br>A = 120% of 81.9 = 98.28<br>A, E से 100 - 98.28 = 1.72% कम है।<br>सही उत्तर (a) है।",
+    e_en: "Assume E = 100.<br>D = 70% of 100 = 70<br>C = 90% of 70 = 63<br>B = 130% of 63 = 81.9<br>A = 120% of 81.9 = 98.28<br>A is 100 - 98.28 = 1.72% less than E.<br>The correct answer is (a)."
+  },
+  {
+    q_hi: "Q395. किसी कक्षा में 5 वर्ग हैं, जिनमें क्रमशः 25, 30, 40, 45 और 60 छात्र हैं। इन वर्गों की उत्तीर्ण-प्रतिशतता क्रमशः 20%, 30%, 35%, 40% और 100% है। पूरी कक्षा की उत्तीर्ण-प्रतिशतता ज्ञात करें।",
+    q_en: "Q395. There are 5 classes in a school, having 25, 30, 40, 45 and 60 students respectively. The pass percentages of these classes are 20%, 30%, 35%, 40% and 100% respectively. Find the pass percentage of the entire class.",
+    tag: "SSC CPO 24/11/2020 (Shift-02)",
+    o_hi: [
+      "(a) 87%",
+      "(b) 63%",
+      "(c) 53%",
+      "(d) 79%"
+    ],
+    o_en: [
+      "(a) 87%",
+      "(b) 63%",
+      "(c) 53%",
+      "(d) 79%"
+    ],
+    a: 2,
+    e_hi: "पहले वर्ग में उत्तीर्ण = 25 × 20/100 = 5<br>दूसरे वर्ग में उत्तीर्ण = 30 × 30/100 = 9<br>तीसरे वर्ग में उत्तीर्ण = 40 × 35/100 = 14<br>चौथे वर्ग में उत्तीर्ण = 45 × 40/100 = 18<br>पाँचवें वर्ग में उत्तीर्ण = 60 × 100/100 = 60<br>कुल उत्तीर्ण = 5 + 9 + 14 + 18 + 60 = 106<br>कुल विद्यार्थी = 25 + 30 + 40 + 45 + 60 = 200<br>उत्तीर्ण प्रतिशत = 106/200 × 100 = 53%<br>सही उत्तर (c) है।",
+    e_en: "Passed in the first class = 25 × 20/100 = 5<br>Passed in the second class = 30 × 30/100 = 9<br>Passed in the third class = 40 × 35/100 = 14<br>Passed in the fourth class = 45 × 40/100 = 18<br>Passed in the fifth class = 60 × 100/100 = 60<br>Total passed = 5 + 9 + 14 + 18 + 60 = 106<br>Total students = 25 + 30 + 40 + 45 + 60 = 200<br>Pass percentage = 106/200 × 100 = 53%<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q396. एक परीक्षा में स्कूल X के कुछ छात्र उपस्थित हुए और 30% छात्र फेल हो गए। स्कूल X के छात्रों की तुलना में 150% अधिक छात्र स्कूल Y से उसी परीक्षा में उपस्थित हुए। यदि X और Y से उपस्थित होने वाले छात्रों की कुल संख्या का 80% उत्तीर्ण हो गया तो Y से फेल हुए छात्रों का प्रतिशत क्या है?",
+    q_en: "Q396. Some students from school X appeared in an examination and 30% of the students failed. 150% more students from school Y appeared in the same examination compared with the students from school X. If 80% of the total number of students appearing from X and Y passed, what is the percentage of students from Y who failed?",
+    tag: "SSC CGL TIER-II 15/11/2020",
+    o_hi: [
+      "(a) 18%",
+      "(b) 20%",
+      "(c) 16%",
+      "(d) 24%"
+    ],
+    o_en: [
+      "(a) 18%",
+      "(b) 20%",
+      "(c) 16%",
+      "(d) 24%"
+    ],
+    a: 2,
+    e_hi: "स्कूल X की उपस्थिति = 100 मानते हैं।<br>स्कूल Y की उपस्थिति = 100 + 150 = 250<br>कुल उपस्थिति = 350<br>कुल अनुत्तीर्ण = 20% × 350 = 70<br>X के अनुत्तीर्ण = 30% × 100 = 30<br>Y के अनुत्तीर्ण = 70 - 30 = 40<br>Y के अनुत्तीर्ण छात्रों का प्रतिशत = 40/250 × 100 = 16%<br>सही उत्तर (c) है।",
+    e_en: "Assume the attendance of school X = 100.<br>Attendance of school Y = 100 + 150 = 250<br>Total attendance = 350<br>Total failed = 20% × 350 = 70<br>Failed from X = 30% × 100 = 30<br>Failed from Y = 70 - 30 = 40<br>Percentage of failed students from Y = 40/250 × 100 = 16%<br>The correct answer is (c)."
+  },
+  {
+    q_hi: "Q397. A और B का योग C और D के योग से 100% अधिक है। C, D से 20% अधिक है। यदि A, B से 200% अधिक है और D = 500 है, तो A का मान क्या है?",
+    q_en: "Q397. The sum of A and B is 100% more than the sum of C and D. C is 20% more than D. If A is 200% more than B and D = 500, what is the value of A?",
+    tag: "SSC CHSL 24/11/2025 (Shift-3)",
+    o_hi: [
+      "(a) 1200",
+      "(b) 1650",
+      "(c) 1700",
+      "(d) 1450"
+    ],
+    o_en: [
+      "(a) 1200",
+      "(b) 1650",
+      "(c) 1700",
+      "(d) 1450"
+    ],
+    a: 1,
+    e_hi: "D = 500<br>C = 120% of 500 = 600<br>C + D = 1100<br>A + B, C + D से 100% अधिक है।<br>A + B = 2200<br>A, B से 200% अधिक है, इसलिए A = 3B<br>3B + B = 2200<br>4B = 2200<br>B = 550<br>A = 3 × 550 = 1650<br>सही उत्तर (b) है।",
+    e_en: "D = 500<br>C = 120% of 500 = 600<br>C + D = 1100<br>A + B is 100% more than C + D.<br>A + B = 2200<br>A is 200% more than B, so A = 3B<br>3B + B = 2200<br>4B = 2200<br>B = 550<br>A = 3 × 550 = 1650<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q398. तीन व्यक्ति A, B और C अपने मासिक वेतन का क्रमशः 10%, 7% और 9% भाग एक धर्मार्थ ट्रस्ट को दान करते हैं। A और B का मासिक वेतन बराबर है और A और B के दान के बीच अंतर 900 रुपये है। यदि C की तुलना में A और B द्वारा किया गया कुल दान 600 रुपये अधिक है, तो C का मासिक वेतन (रुपये में) ज्ञात करें।",
+    q_en: "Q398. Three persons A, B and C donate 10%, 7% and 9% respectively of their monthly salaries to a charitable trust. The monthly salaries of A and B are equal and the difference between the donations of A and B is 900 rupees. If the total donation made by A and B is 600 rupees more than that of C, find C's monthly salary (in rupees).",
+    tag: "SSC CGL 23/08/2021 (Shift-02)",
+    o_hi: [
+      "(a) 60000",
+      "(b) 50000",
+      "(c) 45000",
+      "(d) 55000"
+    ],
+    o_en: [
+      "(a) 60000",
+      "(b) 50000",
+      "(c) 45000",
+      "(d) 55000"
+    ],
+    a: 1,
+    e_hi: "A और B का मासिक वेतन = x<br>दान में अंतर = 10% - 7% = 3%<br>3% x = 900<br>x = ₹30000<br>A और B का कुल दान = 10% × 30000 + 7% × 30000 = ₹5100<br>C का दान = 5100 - 600 = ₹4500<br>C का वेतन = 4500 × 100/9 = ₹50000<br>सही उत्तर (b) है।",
+    e_en: "Monthly salary of A and B = x<br>Difference in donations = 10% - 7% = 3%<br>3% x = 900<br>x = ₹30000<br>Total donation by A and B = 10% × 30000 + 7% × 30000 = ₹5100<br>Donation by C = 5100 - 600 = ₹4500<br>Salary of C = 4500 × 100/9 = ₹50000<br>The correct answer is (b)."
+  },
+  {
+    q_hi: "Q399. 80 छात्रों और 10 संसाधन व्यक्तियों वाली कार्यशाला में, कार्यशाला के अंत में मिठाई वितरित की गई। प्रत्येक छात्र को मिठाई वितरित करने के लिए खर्च की गई राशि छात्रों की कुल संख्या का 30% थी और प्रत्येक संसाधन व्यक्ति के लिए खर्च की गई राशि कुल छात्रों की संख्या का 40% थी। कार्यशाला में मिठाई वितरण के लिए खर्च की गई कुल राशि ज्ञात करें।",
+    q_en: "Q399. In a workshop with 80 students and 10 resource persons, sweets were distributed at the end of the workshop. The amount spent on distributing sweets to each student was 30% of the total number of students and the amount spent for each resource person was 40% of the total number of students. Find the total amount spent on distributing sweets in the workshop.",
+    tag: "SSC CHSL 10/08/2021 (Shift-02)",
+    o_hi: [
+      "(a) ₹2,420",
+      "(b) ₹2,440",
+      "(c) ₹2,400",
+      "(d) ₹2,240"
+    ],
+    o_en: [
+      "(a) ₹2,420",
+      "(b) ₹2,440",
+      "(c) ₹2,400",
+      "(d) ₹2,240"
+    ],
+    a: 3,
+    e_hi: "छात्रों की संख्या = 80<br>प्रति छात्र खर्च = 80 का 30% = ₹24<br>80 छात्रों पर खर्च = 80 × 24 = ₹1920<br>प्रति संसाधन व्यक्ति खर्च = 80 का 40% = ₹32<br>10 संसाधन व्यक्तियों पर खर्च = 10 × 32 = ₹320<br>कुल खर्च = 1920 + 320 = ₹2240<br>सही उत्तर (d) है।",
+    e_en: "Number of students = 80<br>Expenditure per student = 30% of 80 = ₹24<br>Expenditure on 80 students = 80 × 24 = ₹1920<br>Expenditure per resource person = 40% of 80 = ₹32<br>Expenditure on 10 resource persons = 10 × 32 = ₹320<br>Total expenditure = 1920 + 320 = ₹2240<br>The correct answer is (d)."
+  },
+  {
+    q_hi: "Q400. गत वर्ष, गीता का मासिक वेतन ₹12,000 था और सीता का मासिक वेतन ₹10,000 था। इस वर्ष, गीता का मासिक वेतन ₹14,400 है, जबकि सीता का मासिक वेतन ₹12,500 है। यदि इस वर्ष सीता के मासिक वेतन में पिछले वर्ष के मासिक वेतन की तुलना में प्रतिशत वृद्धि को x% से निरुपित किया जाता है, और इस वर्ष गीता के मासिक वेतन में पिछले वर्ष के मासिक वेतन की तुलना में प्रतिशत वृद्धि को y% से निरुपित किया जाता है, तो ((x-y)/y × 100)% का मान क्या है?",
+    q_en: "Q400. Last year, Geeta's monthly salary was ₹12,000 and Sita's monthly salary was ₹10,000. This year, Geeta's monthly salary is ₹14,400, while Sita's monthly salary is ₹12,500. If the percentage increase in Sita's monthly salary this year compared with last year's monthly salary is denoted by x%, and the percentage increase in Geeta's monthly salary this year compared with last year's monthly salary is denoted by y%, then what is the value of ((x-y)/y × 100)%?",
+    tag: "SSC CHSL 04/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 24",
+      "(b) 20",
+      "(c) 22",
+      "(d) 25"
+    ],
+    o_en: [
+      "(a) 24",
+      "(b) 20",
+      "(c) 22",
+      "(d) 25"
+    ],
+    a: 3,
+    e_hi: "सीता के वेतन में वृद्धि = 12500 - 10000 = ₹2500<br>x = 2500/10000 × 100 = 25%<br>गीता के वेतन में वृद्धि = 14400 - 12000 = ₹2400<br>y = 2400/12000 × 100 = 20%<br>दिया गया मान = (25 - 20)/20 × 100 = 25<br>सही उत्तर (d) है।",
+    e_en: "Increase in Sita's salary = 12500 - 10000 = ₹2500<br>x = 2500/10000 × 100 = 25%<br>Increase in Geeta's salary = 14400 - 12000 = ₹2400<br>y = 2400/12000 × 100 = 20%<br>Required value = (25 - 20)/20 × 100 = 25<br>The correct answer is (d)."
+  }
+];
