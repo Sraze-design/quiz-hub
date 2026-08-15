@@ -3390,9 +3390,9 @@ function showEmptyState() {
   const BASE_WIDTH=3.9;    // pen stroke thickness
   const MIN_WIDTH=2.6, MAX_WIDTH=5.8;
 
-  function qKey(){
+  function qKey(qIndex){
     const quiz=currentQuizPath || currentQuizTitle || 'quiz';
-    return 'devssc:pencil:v3:' + quiz + ':q:' + String(currentQ);
+    return 'devssc:pencil:v3:' + quiz + ':q:' + String(qIndex!=null?qIndex:currentQ);
   }
 
   function resize(){
@@ -3862,8 +3862,29 @@ function showEmptyState() {
     resetClearConfirm();
   }
 
+  // Wipes saved ink (pen strokes) for every question in the quiz that's
+  // about to be (re)opened, keeping star markers untouched. Only called
+  // once, right when a test is freshly opened/reopened from the explorer —
+  // NOT when moving between questions within the same session (that path
+  // goes through __pencilOnQuestionChange/load() instead, which is
+  // untouched and keeps working exactly as before).
+  function purgeInkKeepStars(totalQuestions){
+    if(!totalQuestions||totalQuestions<1) return;
+    for(let i=0;i<totalQuestions;i++){
+      const key=qKey(i);
+      try{
+        const saved=JSON.parse(localStorage.getItem(key)||'[]');
+        if(!Array.isArray(saved)||!saved.length) continue;
+        const starsOnly=saved.filter(function(s){return s&&s.tool==='star';});
+        if(starsOnly.length) localStorage.setItem(key,JSON.stringify(starsOnly));
+        else localStorage.removeItem(key);
+      }catch(_){ }
+    }
+  }
+
   window.__pencilOnQuestionChange=function(){ if(enabled) load(); };
-  window.__pencilResetForQuiz=function(){
+  window.__pencilResetForQuiz=function(totalQuestions){
+    purgeInkKeepStars(totalQuestions);
     strokes=[]; redoStack=[]; currentStroke=null;
     if(ctx) redraw();
   };
@@ -4024,7 +4045,7 @@ async function loadQuizData(quizPath) {
     document.getElementById('quizEngineBox').style.display='flex';
     if (typeof lockBodyScroll === 'function') lockBodyScroll();
     document.getElementById('quiz-box').style.display='flex';
-    if(typeof window.__pencilResetForQuiz==='function') window.__pencilResetForQuiz();
+    if(typeof window.__pencilResetForQuiz==='function') window.__pencilResetForQuiz(data.length);
     const __pencilBtn=document.getElementById('pencilToggleBtn');
     const __pencilCanvas=document.getElementById('pencilCanvas');
     const __pencilTools=document.getElementById('pencilTools');
