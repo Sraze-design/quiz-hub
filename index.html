@@ -110,19 +110,8 @@ body {
   overflow-x: hidden;
 }
 
-/* On tablets/iPads (especially landscape), the fixed 500px phone width
-   leaves large empty grey margins on both sides. Widen the container on
-   larger viewports while leaving phone-sized screens untouched. */
-@media (min-width: 768px) {
-  .container {
-    max-width: min(92vw, 1100px);
-  }
-}
-@media (min-width: 1024px) {
-  .container {
-    max-width: min(94vw, 1300px);
-  }
-}
+/* Note: tablet/landscape container width is controlled further down in the
+   "Universal Responsive Upgrade" section — see there for the active rules. */
 
 /* Base Screens Setup */
 .explorer-screen {
@@ -1360,21 +1349,20 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 /* ===== Universal Responsive Upgrade ===== */
 .container{
-  width:min(100%,980px);
-  max-width:980px;
+  width:100%;
   margin:0 auto;
 }
 @media (min-width:768px){
   body{padding:0;background:var(--bg-app);}
   .container{
-    max-width:1024px;
+    max-width:100%;
     min-height:100vh;
     min-height:100dvh;
     border-radius:0;
     box-shadow:none;
   }
   #quizEngineBox{
-    max-width:1024px;
+    max-width:100%;
   }
   .premium-app-header{padding:40px 36px;}
   .floating-quiz-header{padding:0;}
@@ -1403,7 +1391,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   .stats-grid-dashboard{grid-template-columns:repeat(2,1fr);gap:18px;}
 }
 @media (min-width:1024px){
-  .container{max-width:1280px;}
+  .container{max-width:100%;}
   .question-text-style{font-size:20px;}
   .options-stack button{font-size:16px;}
 }
