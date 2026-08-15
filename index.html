@@ -3728,10 +3728,26 @@ function showEmptyState() {
     try{document.documentElement.setPointerCapture?.(e.pointerId);}catch(_){ }
   }
 
+  // Safari on newer iPadOS delivers Apple Pencil samples via a dedicated
+  // 'pointerrawupdate' event that skips the normal compositor/frame-sync
+  // queue 'pointermove' goes through — noticeably lower latency for ink.
+  // Feature-detected: falls back to plain pointermove wherever it's not
+  // supported, so nothing changes on older Safari/other browsers.
+  const supportsRawUpdate = 'onpointerrawupdate' in window;
+
   function move(e){
+    if(supportsRawUpdate && e.pointerType==='pen') return; // handled by rawMove instead
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
     if(tool==='star') return; // no live drag-preview for the star stamp
+    const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    appendEvents(events.length?events:[e]);
+  }
+
+  function rawMove(e){
+    if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
+    e.preventDefault();
+    if(tool==='star') return;
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
     appendEvents(events.length?events:[e]);
   }
@@ -3888,6 +3904,7 @@ function showEmptyState() {
     // stroke is painted synchronously for the lowest possible input latency.
     document.addEventListener('pointerdown',start,{capture:true,passive:false});
     document.addEventListener('pointermove',move,{capture:true,passive:false});
+    if(supportsRawUpdate) document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
 
