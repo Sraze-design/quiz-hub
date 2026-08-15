@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q281. दो उम्मीदवारों के बीच एक चुनाव में, पराजित उम्मीदवार ने डाले गए वैध मतों का 42% हासिल किया और 2545800 मतों से चुनाव हार गया। यदि 365500 मतों को अवैध घोषित कर दिया गया और 30% लोगों ने अपना मत नहीं डाला, तो मतदाताओं में मत न डालने वाले लोगों की लगभग संख्या (मिलियन में) कितनी थी?",
+    q_en: "Q281. In an election between two candidates, the defeated candidate secured 42% of the valid votes polled and lost the election by 2545800 votes. If 365500 votes were declared invalid and 30% of people did not cast their vote, then what was the approximate number of people (in millions) who did not cast their vote among the voters?",
+    tag: "SSC CHSL 03/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 5",
+      "(b) 7",
+      "(c) 6",
+      "(d) 8"
+    ],
+    o_en: [
+      "(a) 5",
+      "(b) 7",
+      "(c) 6",
+      "(d) 8"
+    ],
+    a: 1,
+    e_hi: "जीत का अंतर = 58% - 42% = 16%<br>16% वैध मत = 2545800<br>वैध मत = 15911250<br>कुल डाले गए मत = 15911250 + 365500 = 16276750<br>कुल मतदाता = 16276750 × 100/70 = 23252500<br>मत न डालने वाले = 30% of 23252500 = 6975750<br>लगभग = 7 मिलियन",
+    e_en: "Winning margin = 58% - 42% = 16%<br>16% valid votes = 2545800<br>Valid votes = 15911250<br>Total votes polled = 15911250 + 365500 = 16276750<br>Total voters = 16276750 × 100/70 = 23252500<br>Non-voters = 30% of 23252500 = 6975750<br>Approximately = 7 million"
+  },
+  {
+    q_hi: "Q282. एक चुनाव में सूची में सभी मतदाताओं के 46% द्वारा विजेता का समर्थन किया गया था और उसे अपने एकमात्र प्रतिद्वंद्वी से 410 वोट अधिक मिले। मतदाता सूची के 10% मतदाताओं ने वोट नहीं डाले और 60 मतदाताओं ने अपने मतपत्र खाली डाल दिए। सूची में कितने मतदाता थे?",
+    q_en: "Q282. In an election, 46% of all voters in the list supported the winner, and he received 410 votes more than his only opponent. 10% of voters in the voter list did not cast their votes, and 60 voters cast blank ballots. How many voters were in the list?",
+    tag: "SSC CPO 27/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 17445",
+      "(b) 16550",
+      "(c) 17500",
+      "(d) 15750"
+    ],
+    o_en: [
+      "(a) 17445",
+      "(b) 16550",
+      "(c) 17500",
+      "(d) 15750"
+    ],
+    a: 2,
+    e_hi: "मान लेते हैं कुल मतदाता = x<br>विजेता के मत = 46%x<br>डाले गए मत = 90%x<br>प्रतिद्वंद्वी के मत = 90%x - 46%x - 60 = 44%x - 60<br>अंतर = 46%x - (44%x - 60) = 410<br>2%x + 60 = 410<br>x = 17500",
+    e_en: "Let total voters = x<br>Winner's votes = 46%x<br>Votes polled = 90%x<br>Opponent's votes = 90%x - 46%x - 60 = 44%x - 60<br>Difference = 46%x - (44%x - 60) = 410<br>2%x + 60 = 410<br>x = 17500"
+  },
+  {
+    q_hi: "Q283. एक चुनाव में, मतदाता सूची में शामिल 12% मतदाताओं ने अपना वोट नहीं डाला, जबकि 84 मतदाताओं ने अपने मतपत्र खाली डाले। केवल दो उम्मीदवार, रामाज्ञा और श्रवण थे। विजेता रामाज्ञा को सूची के सभी मतदाताओं में से 54% का समर्थन प्राप्त हुआ। उसे अपने प्रतिद्वंदी श्रवण से 1456 वोट अधिक मिले। सूची में मतदाताओं की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q283. In an election, 12% of voters on the voter list did not cast their vote, while 84 voters cast blank ballots. There were only two candidates, Ramagya and Shravan. The winner Ramagya received the support of 54% of all voters on the list. He received 1456 votes more than his opponent Shravan. Find the total number of voters on the list.",
+    tag: "SSC CPO 27/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 5690",
+      "(b) 6670",
+      "(c) 7860",
+      "(d) 6860"
+    ],
+    o_en: [
+      "(a) 5690",
+      "(b) 6670",
+      "(c) 7860",
+      "(d) 6860"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं कुल मतदाता = x<br>मतदान करने वाले = 88%x<br>रामाज्ञा के मत = 54%x<br>श्रवण के मत = 88%x - 54%x - 84 = 34%x - 84<br>अंतर = 54%x - (34%x - 84) = 1456<br>20%x + 84 = 1456<br>x = 6860",
+    e_en: "Let total voters = x<br>Voters who polled = 88%x<br>Ramagya's votes = 54%x<br>Shravan's votes = 88%x - 54%x - 84 = 34%x - 84<br>Difference = 54%x - (34%x - 84) = 1456<br>20%x + 84 = 1456<br>x = 6860"
+  },
+  {
+    q_hi: "Q284. दो उम्मीदवारों के बीच एक चुनाव में 10% मतदाताओं ने वोट नहीं डाले और 75 वोट अमान्य पाए गए। विजेता को अपेक्षित कुल वोटों के 50% वोट मिले और वह 170 वोटों से जीत गया। मतदाता सूची में कितने मतदाताओं का नाम दर्ज हैं?",
+    q_en: "Q284. In an election between two candidates, 10% of voters did not cast their votes and 75 votes were found invalid. The winner got 50% of the total expected votes and won by 170 votes. How many voters are registered in the voter list?",
+    tag: "SSC CPO 27/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 800",
+      "(b) 855",
+      "(c) 850",
+      "(d) 950"
+    ],
+    o_en: [
+      "(a) 800",
+      "(b) 855",
+      "(c) 850",
+      "(d) 950"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं कुल मतदाता = x<br>डाले गए मत = 90%x<br>विजेता के मत = 50%x<br>प्रतिद्वंद्वी के मत = 40%x - 75<br>अंतर = 50%x - (40%x - 75) = 170<br>10%x + 75 = 170<br>x = 950",
+    e_en: "Let total voters = x<br>Votes polled = 90%x<br>Winner's votes = 50%x<br>Opponent's votes = 40%x - 75<br>Difference = 50%x - (40%x - 75) = 170<br>10%x + 75 = 170<br>x = 950"
+  },
+  {
+    q_hi: "Q285. दो उम्मीदवारों के बीच हुए एक चुनाव में, मतदाता सूची के 20% मतदाताओं ने मतदान नहीं किया, और 80 मतदाताओं ने अपने मतपत्र खाली छोड़ दिए। विजेता उम्मीदवार ने मतदाता सूची में दर्ज कुल मतदाताओं के 45% मत प्राप्त किए, और उसे अपने विरोधी उम्मीदवार से 280 मत अधिक मिले। सूची में मतदाताओं की संख्या कितनी थी?",
+    q_en: "Q285. In an election held between two candidates, 20% of voters on the voter list did not vote, and 80 voters left their ballot papers blank. The winning candidate secured 45% of total voters registered in the voter list, and received 280 votes more than his opposing candidate. What was the number of voters in the list?",
+    tag: "SSC CPO 05/10/2023 (Shift-01)",
+    o_hi: [
+      "(a) 2000",
+      "(b) 2800",
+      "(c) 2500",
+      "(d) 1500"
+    ],
+    o_en: [
+      "(a) 2000",
+      "(b) 2800",
+      "(c) 2500",
+      "(d) 1500"
+    ],
+    a: 0,
+    e_hi: "मान लेते हैं कुल मतदाता = x<br>मतदान करने वाले = 80%x<br>विजेता के मत = 45%x<br>प्रतिद्वंद्वी के मत = 80%x - 45%x - 80 = 35%x - 80<br>अंतर = 45%x - (35%x - 80) = 280<br>10%x + 80 = 280<br>x = 2000",
+    e_en: "Let total voters = x<br>Voters who polled = 80%x<br>Winner's votes = 45%x<br>Opponent's votes = 80%x - 45%x - 80 = 35%x - 80<br>Difference = 45%x - (35%x - 80) = 280<br>10%x + 80 = 280<br>x = 2000"
+  },
+  {
+    q_hi: "Q286. A और B के बीच एक चुनाव में, डाले गए प्रत्येक पांचवें मत को मशीन द्वारा अमान्य के रूप में चिह्नित किया गया। शेष मतों में, A, 2500 मतों के अंतर से या डाले गए कुल मतों के 10% के अंतर से B से चुनाव जीत जाता है। यदि अमान्य मतों में से 90%, B के पक्ष में होते, तो निम्नलिखित में से कौन सा विकल्प चुनाव का नतीजा होता?",
+    q_en: "Q286. In an election between A and B, every fifth vote cast was marked as invalid by the machine. Out of the remaining votes, A wins the election against B by a margin of 2500 votes or by a margin of 10% of total votes cast. If 90% of the invalid votes were in favour of B, which of the following options would be the result of the election?",
+    tag: "SSC CPO 28/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) A, 3% से जीत जाता",
+      "(b) A, 8% से जीत जाता",
+      "(c) B, 8% से जीत जाता",
+      "(d) B, 3% से जीत जाता"
+    ],
+    o_en: [
+      "(a) A wins by 3%",
+      "(b) A wins by 8%",
+      "(c) B wins by 8%",
+      "(d) B wins by 3%"
+    ],
+    a: 2,
+    e_hi: "कुल डाले गए मत = 2500 × 100/10 = 25000<br>अमान्य मत = 20% of 25000 = 5000<br>वैध मत = 25000 - 5000 = 20000<br>A के वैध मत = 55% of 20000 = 11000<br>B के वैध मत = 45% of 20000 = 9000<br>अमान्य मतों में B के मत = 90% of 5000 = 4500<br>अमान्य मतों में A के मत = 500<br>अंतिम A के मत = 11000 + 500 = 11500<br>अंतिम B के मत = 9000 + 4500 = 13500<br>B की बढ़त = 2000<br>2000/25000 × 100 = 8%",
+    e_en: "Total votes polled = 2500 × 100/10 = 25000<br>Invalid votes = 20% of 25000 = 5000<br>Valid votes = 25000 - 5000 = 20000<br>A's valid votes = 55% of 20000 = 11000<br>B's valid votes = 45% of 20000 = 9000<br>B's share in invalid votes = 90% of 5000 = 4500<br>A's share in invalid votes = 500<br>Final votes of A = 11000 + 500 = 11500<br>Final votes of B = 9000 + 4500 = 13500<br>Lead for B = 2000<br>2000/25000 × 100 = 8%"
+  },
+  {
+    q_hi: "Q287. दो उम्मीदवारों के बीच हुए चुनाव में 64% मतदाताओं ने मत डाले, जिनमें से 4% मत अवैध घोषित कर दिए गए। एक उम्मीदवार को 12288 मत मिले जो कुल वैध मतों का 64% हैं। उस चुनाव में नामांकित मतों की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q287. In an election between two candidates, 64% of voters cast their votes, out of which 4% votes were declared invalid. A candidate got 12288 votes which is 64% of the total valid votes. Find the total number of enrolled voters in that election.",
+    tag: "SSC CHSL TIER-II 02/11/2023",
+    o_hi: [
+      "(a) 31,250",
+      "(b) 30,250",
+      "(c) 32,152",
+      "(d) 20,152"
+    ],
+    o_en: [
+      "(a) 31,250",
+      "(b) 30,250",
+      "(c) 32,152",
+      "(d) 20,152"
+    ],
+    a: 0,
+    e_hi: "वैध मत = 12288 × 100/64 = 19200<br>डाले गए मत = 19200 × 100/96 = 20000<br>कुल मतदाता = 20000 × 100/64 = 31250",
+    e_en: "Valid votes = 12288 × 100/64 = 19200<br>Votes polled = 19200 × 100/96 = 20000<br>Total voters = 20000 × 100/64 = 31250"
+  },
+  {
+    q_hi: "Q288. एक चुनाव में, मतदाता सूची के 15% मतदाताओं ने अपना मत नहीं डाला और 100 मतदाताओं ने अपना मतपत्र खाली छोड़ दिया। राम और श्याम केवल दो ही प्रत्याशी थे। विजेता राम को सूची के सभी मतदाताओं के 69% का समर्थन प्राप्त हुआ और उसे श्याम से 630 मत अधिक मिले। सूची में मतदाताओं की संख्या ज्ञात कीजिए।",
+    q_en: "Q288. In an election, 15% of voters on the voter list did not cast their vote and 100 voters left their ballot papers blank. Ram and Shyam were the only two candidates. The winner Ram received support of 69% of all voters on the list and got 630 votes more than Shyam. Find the number of voters on the list.",
+    tag: "SSC Phase-XI 30/06/2023 (Shift-03)",
+    o_hi: [
+      "(a) 1200",
+      "(b) 1000",
+      "(c) 1100",
+      "(d) 1300"
+    ],
+    o_en: [
+      "(a) 1200",
+      "(b) 1000",
+      "(c) 1100",
+      "(d) 1300"
+    ],
+    a: 1,
+    e_hi: "मान लेते हैं कुल मतदाता = x<br>मतदान करने वाले = 85%x<br>राम के मत = 69%x<br>श्याम के मत = 85%x - 69%x - 100 = 16%x - 100<br>अंतर = 69%x - (16%x - 100) = 630<br>53%x + 100 = 630<br>x = 1000",
+    e_en: "Let total voters = x<br>Voters who polled = 85%x<br>Ram's votes = 69%x<br>Shyam's votes = 85%x - 69%x - 100 = 16%x - 100<br>Difference = 69%x - (16%x - 100) = 630<br>53%x + 100 = 630<br>x = 1000"
+  },
+  {
+    q_hi: "Q289. दो उम्मीदवारों के बीच एक चुनाव में, पराजित उम्मीदवार ने पड़े हुए वैध मतों का 42% हासिल किया और वह 768400 मतों से चुनाव हार गया। यदि 82560 मतों को अमान्य घोषित कर दिया गया था और 20% लोगों ने अपना मत नहीं डाला, तो अमान्य मत, लोगों द्वारा नहीं डाले गए मतों के कितने प्रतिशत (दशमलव के बाद एक अंक तक) थे?",
+    q_en: "Q289. In an election between two candidates, the defeated candidate obtained 42% of the valid votes polled and lost the election by 768400 votes. If 82560 votes were declared invalid and 20% of people did not cast their vote, then invalid votes were what percentage (correct to one decimal place) of the votes not cast by people?",
+    tag: "SSC CGL 02/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 10.6%",
+      "(b) 9.8%",
+      "(c) 12.9%",
+      "(d) 6.7%"
+    ],
+    o_en: [
+      "(a) 10.6%",
+      "(b) 9.8%",
+      "(c) 12.9%",
+      "(d) 6.7%"
+    ],
+    a: 3,
+    e_hi: "विजेता और पराजित के वैध मतों का अंतर = 58% - 42% = 16%<br>16% वैध मत = 768400<br>वैध मत = 4802500<br>कुल डाले गए मत = 4802500 + 82560 = 4885060<br>कुल मतदाता = 4885060 × 100/80 = 6106325<br>मत न डालने वाले = 20% of 6106325 = 1221265<br>प्रतिशत = 82560/1221265 × 100 ≈ 6.7%",
+    e_en: "Difference between winner and defeated in valid votes = 58% - 42% = 16%<br>16% valid votes = 768400<br>Valid votes = 4802500<br>Total votes polled = 4802500 + 82560 = 4885060<br>Total voters = 4885060 × 100/80 = 6106325<br>Non-voters = 20% of 6106325 = 1221265<br>Percentage = 82560/1221265 × 100 ≈ 6.7%"
+  },
+  {
+    q_hi: "Q290. दो उम्मीदवारों के बीच लड़े गए चुनाव में, कुल मतदाताओं में से 15% ने मत नहीं डाला और 100 मत अयोग्य हो गए। चुनाव जीतने वाले उम्मीदवार ने कुल मतों का 45% प्राप्त किया और 400 मतों के अंतर से जीता। मतदाताओं की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q290. In an election contested between two candidates, 15% of total voters did not cast their vote and 100 votes became invalid. The candidate who won the election obtained 45% of the total votes and won by a margin of 400 votes. Find the total number of voters.",
+    tag: "SSC CGL 09/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 6,000",
+      "(b) 3,600",
+      "(c) 10,000",
+      "(d) 3,500"
+    ],
+    o_en: [
+      "(a) 6,000",
+      "(b) 3,600",
+      "(c) 10,000",
+      "(d) 3,500"
+    ],
+    a: 0,
+    e_hi: "मान लेते हैं कुल मतदाता = x<br>डाले गए मत = 85%x<br>विजेता के मत = 45%x<br>पराजित के मत = 40%x - 100<br>अंतर = 45%x - (40%x - 100) = 400<br>5%x + 100 = 400<br>x = 6000",
+    e_en: "Let total voters = x<br>Votes polled = 85%x<br>Winner's votes = 45%x<br>Defeated candidate's votes = 40%x - 100<br>Difference = 45%x - (40%x - 100) = 400<br>5%x + 100 = 400<br>x = 6000"
+  },
+  {
+    q_hi: "Q291. रजत, पूजा और आभा चुनाव में भाग लेते हैं। रजत को वैध मतों का 36% और पूजा को वैध मतों का 40% प्राप्त होता है। यदि डाले गए कुल मत 40,000 हैं और 10% मत अवैध हैं, तो आभा को प्राप्त मतों की संख्या ज्ञात कीजिए।",
+    q_en: "Q291. Rajat, Pooja and Aabha participate in an election. Rajat receives 36% of the valid votes and Pooja receives 40% of the valid votes. If total votes polled are 40,000 and 10% votes are invalid, find the number of votes received by Aabha.",
+    tag: "SSC CHSL 14/08/2023 (Shift-01)",
+    o_hi: [
+      "(a) 9245",
+      "(b) 1024",
+      "(c) 8640",
+      "(d) 5760"
+    ],
+    o_en: [
+      "(a) 9245",
+      "(b) 1024",
+      "(c) 8640",
+      "(d) 5760"
+    ],
+    a: 2,
+    e_hi: "वैध मत = 90% of 40000 = 36000<br>रजत और पूजा के मत = 36% + 40% = 76% of 36000<br>आभा के मत = 24% of 36000 = 8640",
+    e_en: "Valid votes = 90% of 40000 = 36000<br>Votes of Rajat and Pooja = 36% + 40% = 76% of 36000<br>Votes of Aabha = 24% of 36000 = 8640"
+  },
+  {
+    q_hi: "Q292. दो दलों के बीच एक राज्य के चुनाव में, 83% मतदाताओं ने अपने मत डाले, जिनमें से 4% मतों को अवैध घोषित कर दिया गया। दल A को 156611 मत मिले जो कुल वैध मतों का 83% था। उस चुनाव में नामांकित मतों की कुल संख्या ज्ञात कीजिए। (केवल पूर्णांक भाग पर विचार कीजिए)",
+    q_en: "Q292. In a state election between two parties, 83% of voters cast their votes, out of which 4% votes were declared invalid. Party A got 156611 votes which was 83% of total valid votes. Find the total number of enrolled voters in that election. (Consider integer part only)",
+    tag: "SSC CHSL 04/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 23,46,807",
+      "(b) 2,58,233",
+      "(c) 2,34,888",
+      "(d) 2,36,807"
+    ],
+    o_en: [
+      "(a) 23,46,807",
+      "(b) 2,58,233",
+      "(c) 2,34,888",
+      "(d) 2,36,807"
+    ],
+    a: 3,
+    e_hi: "वैध मत = 156611 × 100/83 = 188688<br>डाले गए मत = 188688 × 100/96 = 196550<br>कुल मतदाता = 196550 × 100/83 ≈ 236807",
+    e_en: "Valid votes = 156611 × 100/83 = 188688<br>Votes polled = 188688 × 100/96 = 196550<br>Total voters = 196550 × 100/83 ≈ 236807"
+  },
+  {
+    q_hi: "Q293. P, R और S के बीच एक चुनाव में डाले गए कुल मतों में से 10% मत अमान्य हैं। R और S के पक्ष में डाले गए मत कुल डाले गए मतों के आधे हैं, और उन्हें बराबर मत मिलते हैं। मशीन में खराबी के कारण, S के आधे मत और अमान्य मतों के आधे अतिरिक्त रूप से R के पक्ष में गिने जाते हैं। गलती के कारण R द्वारा प्राप्त मतों का कुल प्रतिशत कितना है?",
+    q_en: "Q293. In an election among P, R and S, 10% of total votes polled are invalid. The votes polled in favour of R and S are half of the total votes polled, and they get equal votes. Due to a machine fault, half of S's votes and half of the invalid votes are additionally counted in favour of R. What is the total percentage of votes received by R due to the error?",
+    tag: "SSC CPO 28/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 37.55%",
+      "(b) 41.55%",
+      "(c) 42.5%",
+      "(d) 38.5%"
+    ],
+    o_en: [
+      "(a) 37.55%",
+      "(b) 41.55%",
+      "(c) 42.5%",
+      "(d) 38.5%"
+    ],
+    a: 2,
+    e_hi: "मान लेते हैं कुल मत = 100<br>अमान्य मत = 10<br>R और S के कुल मत = 50<br>R के मूल मत = 25<br>S के मूल मत = 25<br>S के आधे मत R को = 12.5<br>अमान्य मतों के आधे मत R को = 5<br>R के अंतिम मत = 25 + 12.5 + 5 = 42.5<br>कुल प्रतिशत = 42.5%",
+    e_en: "Let total votes = 100<br>Invalid votes = 10<br>Total votes for R and S = 50<br>Original votes for R = 25<br>Original votes for S = 25<br>Half of S's votes to R = 12.5<br>Half of invalid votes to R = 5<br>Final votes for R = 25 + 12.5 + 5 = 42.5<br>Total percentage = 42.5%"
+  },
+  {
+    q_hi: "Q294. हरि, कमल और ललित ने एक चुनाव लड़ा जिसमें 6050 वोट पड़े और कोई भी वोट अवैध नहीं था। कमल को हरि और ललित द्वारा प्राप्त कुल वोटों से 42% अधिक वोट प्राप्त हुए। यदि ललित को डाले गए कुल वोटों में से केवल 8% वोट प्राप्त हुए, तो हरि को प्राप्त वोटों की संख्या ज्ञात कीजिए।",
+    q_en: "Q294. Hari, Kamal and Lalit contested an election in which 6050 votes were cast and no vote was invalid. Kamal received 42% more votes than the total votes received by Hari and Lalit. If Lalit received only 8% of total votes cast, find the number of votes received by Hari.",
+    tag: "SSC CGL TIER-II 26/10/2023",
+    o_hi: [
+      "(a) 2016",
+      "(b) 1556",
+      "(c) 1912",
+      "(d) 1668"
+    ],
+    o_en: [
+      "(a) 2016",
+      "(b) 1556",
+      "(c) 1912",
+      "(d) 1668"
+    ],
+    a: 0,
+    e_hi: "ललित के मत = 8% of 6050 = 484<br>हरि और ललित के कुल मत = 6050/2.42 = 2500<br>हरि के मत = 2500 - 484 = 2016",
+    e_en: "Lalit's votes = 8% of 6050 = 484<br>Total votes of Hari and Lalit = 6050/2.42 = 2500<br>Hari's votes = 2500 - 484 = 2016"
+  },
+  {
+    q_hi: "Q295. तीन प्रत्याशियों के बीच हुए चुनाव में, अर्जुन, भास्कर और सरल ने एक पद के लिए चुनाव लड़ा। अर्जुन को सरल से 50% अधिक वोट मिले, और सरल को भास्कर से 2% कम वोट मिले। भास्कर और सरल के मतों के बीच का अंतर 1296 है। अर्जुन और भास्कर के मतों के बीच के अंतर का आधा कितना है?",
+    q_en: "Q295. In an election held among three candidates, Arjun, Bhaskar and Saral contested for a post. Arjun got 50% more votes than Saral, and Saral got 2% less votes than Bhaskar. The difference between votes of Bhaskar and Saral is 1296. What is half of the difference between votes of Arjun and Bhaskar?",
+    tag: "SSC CGL 14/07/2023 (Shift-03)",
+    o_hi: [
+      "(a) 3888",
+      "(b) 13988",
+      "(c) 7766",
+      "(d) 15228"
+    ],
+    o_en: [
+      "(a) 3888",
+      "(b) 13988",
+      "(c) 7766",
+      "(d) 15228"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं भास्कर के मत = 100x<br>सरल के मत = 98x<br>2x = 1296<br>x = 648<br>अर्जुन के मत = 147x<br>अर्जुन और भास्कर का अंतर = 47x = 30456<br>आधा = 15228",
+    e_en: "Let Bhaskar's votes = 100x<br>Saral's votes = 98x<br>2x = 1296<br>x = 648<br>Arjun's votes = 147x<br>Difference between Arjun and Bhaskar = 47x = 30456<br>Half = 15228"
+  },
+  {
+    q_hi: "Q296. दो उम्मीदवार P और Q ने एक चुनाव लड़ा। पंजीकृत मतदाताओं में से 70% मतदाता P के समर्थक हैं। यदि P के 60% समर्थकों और Q के 30% समर्थकों से उम्मीद की जाती है कि वे उम्मीदवार P को वोट देंगे, तो कितने प्रतिशत पंजीकृत मतदाताओं से उम्मीदवार P को वोट देने की उम्मीद है?",
+    q_en: "Q296. Two candidates P and Q contested an election. 70% of registered voters are supporters of P. If 60% of P's supporters and 30% of Q's supporters are expected to vote for candidate P, what percentage of registered voters are expected to vote for candidate P?",
+    tag: "SSC CGL 06/12/2022 (Shift-01)",
+    o_hi: [
+      "(a) 30%",
+      "(b) 51%",
+      "(c) 26%",
+      "(d) 47%"
+    ],
+    o_en: [
+      "(a) 30%",
+      "(b) 51%",
+      "(c) 26%",
+      "(d) 47%"
+    ],
+    a: 1,
+    e_hi: "P के समर्थक = 70%<br>P को इनके मत = 60% of 70% = 42%<br>Q के समर्थक = 30%<br>P को इनके मत = 30% of 30% = 9%<br>कुल अपेक्षित मत = 42% + 9% = 51%",
+    e_en: "Supporters of P = 70%<br>Votes for P from them = 60% of 70% = 42%<br>Supporters of Q = 30%<br>Votes for P from them = 30% of 30% = 9%<br>Total expected votes = 42% + 9% = 51%"
+  },
+  {
+    q_hi: "Q297. एक चुनाव में, मतदाताओं के पास तीन उम्मीदवारों में से एक उम्मीदवार को वोट देने का विकल्प है। उनके पास सभी उम्मीदवारों को अस्वीकार करने के लिए 'उपरोक्त में से कोई नहीं' (नोटा) के चयन का भी विकल्प है। तीनों उम्मीदवारों को नोटा के 6 गुना वोट मिलते हैं। विजेता को दूसरे उपविजेता के वोटों के दोगुने वोट मिलते हैं। पहले उपविजेता को नोटा से 900 वोट अधिक मिलते हैं और वह दूसरे उपविजेता को 150 वोट से हरा देता है। डाले गए मतों की कुल संख्या ज्ञात करें।",
+    q_en: "Q297. In an election, voters have the option to vote for one of the three candidates. They also have the option to select 'None of the Above' (NOTA) to reject all candidates. All three candidates together receive 6 times the NOTA votes. The winner gets twice the votes of the second runner-up. The first runner-up receives 900 votes more than NOTA and defeats the second runner-up by 150 votes. Find the total number of votes polled.",
+    tag: "SSC CHSL 05/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 17715",
+      "(b) 15177",
+      "(c) 11025",
+      "(d) 11577"
+    ],
+    o_en: [
+      "(a) 17715",
+      "(b) 15177",
+      "(c) 11025",
+      "(d) 11577"
+    ],
+    a: 2,
+    e_hi: "मान लेते हैं नोटा के मत = x<br>तीनों उम्मीदवारों के कुल मत = 6x<br>पहले उपविजेता के मत = x + 900<br>दूसरे उपविजेता के मत = x + 750<br>विजेता के मत = 2x + 1500<br>तीनों उम्मीदवारों के कुल मत = 4x + 3150<br>4x + 3150 = 6x<br>x = 1575<br>डाले गए कुल मत = 6x + x = 7x = 11025",
+    e_en: "Let NOTA votes = x<br>Total votes of three candidates = 6x<br>First runner-up votes = x + 900<br>Second runner-up votes = x + 750<br>Winner votes = 2x + 1500<br>Total votes of three candidates = 4x + 3150<br>4x + 3150 = 6x<br>x = 1575<br>Total votes polled = 6x + x = 7x = 11025"
+  },
+  {
+    q_hi: "Q298. तीन प्रत्याशियों P, Q और R ने एक चुनाव में भाग लिया। P ने Q से 35% अधिक मत प्राप्त किए और R को Q से 15% अधिक मत प्राप्त हुए। P ने R को 2412 मतों से पीछे छोड़ दिया। यदि 90% मतदाताओं ने मतदान किया हो और कोई अमान्य या अवैध मत न डाला गया हो, तो मतदान सूची में मतदाताओं की संख्या कितनी थी?",
+    q_en: "Q298. Three candidates P, Q and R participated in an election. P received 35% more votes than Q and R received 15% more votes than Q. P left R behind by 2412 votes. If 90% of voters voted and no invalid or illegal votes were cast, what was the number of voters in the polling list?",
+    tag: "SSC CGL 09/12/2022 (Shift-01)",
+    o_hi: [
+      "(a) 46,900",
+      "(b) 42,800",
+      "(c) 42,210",
+      "(d) 48,500"
+    ],
+    o_en: [
+      "(a) 46,900",
+      "(b) 42,800",
+      "(c) 42,210",
+      "(d) 48,500"
+    ],
+    a: 0,
+    e_hi: "मान लेते हैं Q के मत = x<br>P के मत = 1.35x<br>R के मत = 1.15x<br>P और R का अंतर = 0.20x = 2412<br>x = 12060<br>कुल डाले गए मत = 3.5x = 42210<br>कुल मतदाता = 42210 × 100/90 = 46900",
+    e_en: "Let Q's votes = x<br>P's votes = 1.35x<br>R's votes = 1.15x<br>Difference between P and R = 0.20x = 2412<br>x = 12060<br>Total votes polled = 3.5x = 42210<br>Total voters = 42210 × 100/90 = 46900"
+  },
+  {
+    q_hi: "Q299. मतदान करने के लिए पर्याप्त लोगों में से 28% लोग 20 से 25 वर्ष के बीच के हैं। एक चुनाव में मतदान करने के लिए पात्र 20 से 25 वर्ष की उम्र वाले लोगों में से 75% ने वास्तव में मतदान किया। उस चुनाव में 20 से 25 वर्ष के बीच के व्यक्तियों की संख्या, जिन्होंने वास्तव में मतदान किया था, मतदान हेतु पात्र लोगों की संख्या का कितना प्रतिशत थी?",
+    q_en: "Q299. Out of the eligible voters, 28% are between 20 and 25 years of age. In an election, 75% of eligible voters aged between 20 and 25 years actually voted. What percentage of the total eligible voters were the persons aged between 20 and 25 who actually voted in that election?",
+    tag: "SSC Phase-X 01/08/2022 (Shift-03)",
+    o_hi: [
+      "(a) 25%",
+      "(b) 21%",
+      "(c) 28%",
+      "(d) 22%"
+    ],
+    o_en: [
+      "(a) 25%",
+      "(b) 21%",
+      "(c) 28%",
+      "(d) 22%"
+    ],
+    a: 1,
+    e_hi: "20 से 25 वर्ष के पात्र लोग = 28%<br>इनमें मतदान करने वाले = 75% of 28% = 21%<br>अतः उत्तर = 21%",
+    e_en: "Eligible people between 20 and 25 years = 28%<br>Voters among them = 75% of 28% = 21%<br>Hence answer = 21%"
+  },
+  {
+    q_hi: "Q300. एक चुनाव में, 35% मतदाताओं ने उम्मीदवार P के लिए मतदान किया जबकि शेष में से 50% मतदाताओं ने उम्मीदवार Q के लिए मतदान किया। शेष मतदाताओं ने मतदान नहीं किया। यदि उम्मीदवार P को मत देने वालों और मत न देने वालों के बीच का अंतर 1000 था, तो उस चुनाव में मतदान करने के लिए योग्य व्यक्तियों की संख्या कितनी थी?",
+    q_en: "Q300. In an election, 35% of voters voted for candidate P while 50% of the remaining voters voted for candidate Q. The remaining voters did not vote. If the difference between voters who voted for candidate P and those who did not vote was 1000, what was the number of persons eligible to vote in that election?",
+    tag: "SSC Phase-X 01/08/2022 (Shift-03)",
+    o_hi: [
+      "(a) 40000",
+      "(b) 60000",
+      "(c) 75000",
+      "(d) 55000"
+    ],
+    o_en: [
+      "(a) 40000",
+      "(b) 60000",
+      "(c) 75000",
+      "(d) 55000"
+    ],
+    a: 0,
+    e_hi: "P को मत = 35%<br>शेष = 65%<br>Q को मत = 50% of 65% = 32.5%<br>मत न देने वाले = 32.5%<br>अंतर = 35% - 32.5% = 2.5%<br>2.5% = 1000<br>कुल मतदाता = 40000",
+    e_en: "Votes for P = 35%<br>Remaining = 65%<br>Votes for Q = 50% of 65% = 32.5%<br>Non-voters = 32.5%<br>Difference = 35% - 32.5% = 2.5%<br>2.5% = 1000<br>Total voters = 40000"
+  },
+  {
+    q_hi: "Q301. किसी सर्वेक्षण में यह पाया गया कि किसी निर्वाचन क्षेत्र में, 55% मतदाता पुरुष हैं और शेष महिलाएं हैं। 40% पुरुष मतदाता शिक्षित हैं और 33\\frac{1}{3}% महिला मतदाता अशिक्षित हैं। कितने प्रतिशत मतदाता शिक्षित हैं?",
+    q_en: "Q301. In a survey, it was found that in a constituency, 55% of voters are male and the rest are female. 40% of male voters are educated and 33\\frac{1}{3}% of female voters are uneducated. What percentage of voters are educated?",
+    tag: "SSC CHSL 13/04/2021 (Shift-02)",
+    o_hi: [
+      "(a) 52%",
+      "(b) 48%",
+      "(c) 54%",
+      "(d) 37%"
+    ],
+    o_en: [
+      "(a) 52%",
+      "(b) 48%",
+      "(c) 54%",
+      "(d) 37%"
+    ],
+    a: 0,
+    e_hi: "शिक्षित पुरुष = 40% of 55% = 22%<br>अशिक्षित महिला = 33\\frac{1}{3}% of 45% = 15%<br>शिक्षित महिला = 45% - 15% = 30%<br>कुल शिक्षित = 22% + 30% = 52%",
+    e_en: "Educated males = 40% of 55% = 22%<br>Uneducated females = 33\\frac{1}{3}% of 45% = 15%<br>Educated females = 45% - 15% = 30%<br>Total educated = 22% + 30% = 52%"
+  },
+  {
+    q_hi: "Q302. एक निर्वाचन क्षेत्र में, कुल मतदाताओं में से 55% पुरुष और शेष महिलाएं हैं। यदि 40% पुरुष अशिक्षित तथा 40% महिलाएं शिक्षित हैं, तो अशिक्षित महिलाओं की संख्या, अशिक्षित पुरुषों की संख्या से कितने प्रतिशत (दशमलव के एक स्थान तक सही) अधिक है?",
+    q_en: "Q302. In a constituency, 55% of the total voters are male and the rest are female. If 40% of males are uneducated and 40% of females are educated, then the number of uneducated females is what percentage (correct to one decimal place) more than the number of uneducated males?",
+    tag: "SSC CHSL 04/08/2021 (Shift-03)",
+    o_hi: [
+      "(a) 21.5%",
+      "(b) 20.8%",
+      "(c) 16.4%",
+      "(d) 22.7%"
+    ],
+    o_en: [
+      "(a) 21.5%",
+      "(b) 20.8%",
+      "(c) 16.4%",
+      "(d) 22.7%"
+    ],
+    a: 3,
+    e_hi: "अशिक्षित पुरुष = 40% of 55% = 22%<br>अशिक्षित महिला = 60% of 45% = 27%<br>अधिकता = 5%<br>प्रतिशत अधिकता = 5/22 × 100 = 22.7%",
+    e_en: "Uneducated males = 40% of 55% = 22%<br>Uneducated females = 60% of 45% = 27%<br>Excess = 5%<br>Percentage excess = 5/22 × 100 = 22.7%"
+  },
+  {
+    q_hi: "Q303. एक निर्वाचन क्षेत्र में कुल मतदाताओं में से 45% पुरुष हैं और शेष महिलाएं हैं। यदि 60% पुरुष निरक्षर हैं और 60% महिलाएं साक्षर हैं, तो निरक्षर महिलाओं की संख्या साक्षर पुरुषों की तुलना में कितने प्रतिशत अधिक है? (दशमलव के दो स्थानों तक पूर्णांकित)",
+    q_en: "Q303. In a constituency, 45% of total voters are male and the rest are female. If 60% of males are illiterate and 60% of females are literate, then by what percentage is the number of illiterate females more than literate males? (rounded to two decimal places)",
+    tag: "SSC CGL 18/09/2024 (Shift-01)",
+    o_hi: [
+      "(a) 19.11%",
+      "(b) 27.23%",
+      "(c) 30.24%",
+      "(d) 22.22%"
+    ],
+    o_en: [
+      "(a) 19.11%",
+      "(b) 27.23%",
+      "(c) 30.24%",
+      "(d) 22.22%"
+    ],
+    a: 3,
+    e_hi: "निरक्षर महिलाएं = 40% of 55% = 22%<br>साक्षर पुरुष = 40% of 45% = 18%<br>अधिकता = 4%<br>प्रतिशत अधिकता = 4/18 × 100 = 22.22%",
+    e_en: "Illiterate females = 40% of 55% = 22%<br>Literate males = 40% of 45% = 18%<br>Excess = 4%<br>Percentage excess = 4/18 × 100 = 22.22%"
+  },
+  {
+    q_hi: "Q304. एक स्कूल ने छात्रवृत्ति परीक्षा आयोजित की जिसमें 60% छात्र अंग्रेजी में, 70% गणित में और 45% दोनों में उत्तीर्ण हुए। कम से कम एक विषय में उत्तीर्ण होने वाले छात्रों का प्रतिशत कितना है?",
+    q_en: "Q304. A school conducted a scholarship test in which 60% students passed in English, 70% in Mathematics and 45% in both. What is the percentage of students passing in at least one subject?",
+    tag: "SSC CHSL 15/11/2025 (Shift-01)",
+    o_hi: [
+      "(a) 90%",
+      "(b) 75%",
+      "(c) 85%",
+      "(d) 80%"
+    ],
+    o_en: [
+      "(a) 90%",
+      "(b) 75%",
+      "(c) 85%",
+      "(d) 80%"
+    ],
+    a: 2,
+    e_hi: "कम से कम एक विषय में उत्तीर्ण = 60% + 70% - 45% = 85%",
+    e_en: "Passing in at least one subject = 60% + 70% - 45% = 85%"
+  },
+  {
+    q_hi: "Q305. एक स्कूल में, टेनिस और क्रिकेट दोनों वाले छात्रों की कुल संख्या 180 है। स्कूल में कुल छात्रों में से 70% टेनिस हैं और कुल छात्रों में से 60% क्रिकेट हैं। यदि कोई खेल न खेलने वाले छात्रों का प्रतिशत क्रिकेट खेलने वाले छात्रों के 25% का है, तो छात्रों की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q305. In a school, the total number of students playing both tennis and cricket is 180. 70% of total students in the school play tennis and 60% of total students play cricket. If the percentage of students who do not play any game is 25% of students playing cricket, find the total number of students.",
+    tag: "",
+    o_hi: [
+      "(a) 500",
+      "(b) 600",
+      "(c) 400",
+      "(d) 480"
+    ],
+    o_en: [
+      "(a) 500",
+      "(b) 600",
+      "(c) 400",
+      "(d) 480"
+    ],
+    a: 2,
+    e_hi: "यदि कुल छात्र = x<br>टेनिस = 70%x<br>क्रिकेट = 60%x<br>कोई खेल नहीं = 25% of 60%x = 15%x<br>कम से कम एक खेल = 85%x<br>दोनों खेल = 70%x + 60%x - 85%x = 45%x<br>45%x = 180<br>x = 400",
+    e_en: "If total students = x<br>Tennis = 70%x<br>Cricket = 60%x<br>No game = 25% of 60%x = 15%x<br>At least one game = 85%x<br>Both games = 70%x + 60%x - 85%x = 45%x<br>45%x = 180<br>x = 400"
+  },
+  {
+    q_hi: "Q306. एक विश्वविद्यालय में किए गए एक सर्वेक्षण में पाया गया कि 55% छात्रों को गणित, 45% को भौतिकी और 30% को गणित और भौतिकी दोनों पसंद हैं। शेष छात्रों में से, 25% को कंप्यूटर विज्ञान पसंद है, जबकि बाकी को पसंद नहीं है। यदि सर्वेक्षण में शामिल छात्रों की कुल संख्या 800 है, तो कितने छात्रों को तीनों विषयों में से किसी में भी पसंद नहीं है?",
+    q_en: "Q306. In a survey conducted at a university, it was found that 55% of students like Mathematics, 45% like Physics and 30% like both Mathematics and Physics. Of the remaining students, 25% like Computer Science, while the rest do not. If total number of students surveyed is 800, how many students do not like any of the three subjects?",
+    tag: "SSC CHSL 17/11/2025 (Shift-01)",
+    o_hi: [
+      "(a) 160",
+      "(b) 200",
+      "(c) 220",
+      "(d) 180"
+    ],
+    o_en: [
+      "(a) 160",
+      "(b) 200",
+      "(c) 220",
+      "(d) 180"
+    ],
+    a: 3,
+    e_hi: "गणित या भौतिकी पसंद करने वाले = 55% + 45% - 30% = 70%<br>दोनों में से किसी को न पसंद करने वाले = 30%<br>इनमें कंप्यूटर विज्ञान पसंद करने वाले = 25% of 30% = 7.5%<br>किसी भी विषय को पसंद न करने वाले = 30% - 7.5% = 22.5%<br>संख्या = 22.5% of 800 = 180",
+    e_en: "Liking Mathematics or Physics = 55% + 45% - 30% = 70%<br>Liking neither = 30%<br>Liking Computer Science among them = 25% of 30% = 7.5%<br>Liking none of the subjects = 30% - 7.5% = 22.5%<br>Number = 22.5% of 800 = 180"
+  },
+  {
+    q_hi: "Q307. 800 लोगों के एक गांव में, 60% हिंदी बोलते हैं, 20% केवल अंग्रेजी बोलते हैं। यदि कोई भी भाषा न बोलने वाले छात्रों की संख्या दोनों भाषा बोलने वाले छात्रों की संख्या के बराबर है, तो दोनों भाषा बोलने वाले छात्रों की संख्या ज्ञात कीजिए।",
+    q_en: "Q307. In a village of 800 people, 60% speak Hindi, 20% speak only English. If the number of persons speaking no language is equal to the number of persons speaking both languages, find the number of persons who speak both languages.",
+    tag: "",
+    o_hi: [
+      "(a) 320",
+      "(b) 160",
+      "(c) 200",
+      "(d) 180"
+    ],
+    o_en: [
+      "(a) 320",
+      "(b) 160",
+      "(c) 200",
+      "(d) 180"
+    ],
+    a: 1,
+    e_hi: "हिंदी बोलने वाले = 60% of 800 = 480<br>केवल अंग्रेजी बोलने वाले = 20% of 800 = 160<br>मान लेते हैं दोनों भाषा बोलने वाले = x<br>कोई भाषा न बोलने वाले = x<br>केवल हिंदी बोलने वाले = 480 - x<br>कुल = (480 - x) + 160 + x + x = 800<br>x = 160",
+    e_en: "Hindi speakers = 60% of 800 = 480<br>Only English speakers = 20% of 800 = 160<br>Let both language speakers = x<br>No language speakers = x<br>Only Hindi speakers = 480 - x<br>Total = (480 - x) + 160 + x + x = 800<br>x = 160"
+  },
+  {
+    q_hi: "Q308. एक कंपनी ने THE HINDU और TIMES OF INDIA के लिए एक सर्वेक्षण किया। सर्वेक्षण से पता चला कि दोनों को पसंद करने वाले लोगों की संख्या उन लोगों के बराबर है जिन्हें कोई भी पसंद नहीं है। 630 लोगों को केवल TIMES OF INDIA पसंद है और 48% को TIMES OF INDIA पसंद है। यदि सर्वेक्षण में कुल 1750 लोग हैं, तो केवल THE HINDU को पसंद करने वाले लोगों का प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q308. A company conducted a survey for THE HINDU and TIMES OF INDIA. The survey showed that the number of people who like both is equal to those who like neither. 630 people like only TIMES OF INDIA and 48% like TIMES OF INDIA. If there are 1750 people in total in the survey, find the percentage of people who like only THE HINDU.",
+    tag: "",
+    o_hi: [
+      "(a) 40",
+      "(b) 25",
+      "(c) 30",
+      "(d) 60"
+    ],
+    o_en: [
+      "(a) 40",
+      "(b) 25",
+      "(c) 30",
+      "(d) 60"
+    ],
+    a: 0,
+    e_hi: "TIMES OF INDIA पसंद करने वाले = 48% of 1750 = 840<br>केवल TIMES OF INDIA = 630<br>दोनों पसंद करने वाले = 840 - 630 = 210<br>कोई भी पसंद न करने वाले = 210<br>केवल THE HINDU = 1750 - 630 - 210 - 210 = 700<br>प्रतिशत = 700/1750 × 100 = 40",
+    e_en: "Liking TIMES OF INDIA = 48% of 1750 = 840<br>Only TIMES OF INDIA = 630<br>Liking both = 840 - 630 = 210<br>Liking neither = 210<br>Only THE HINDU = 1750 - 630 - 210 - 210 = 700<br>Percentage = 700/1750 × 100 = 40"
+  },
+  {
+    q_hi: "Q309. एक परीक्षा में, 50% छात्र भौतिक विज्ञान में, 37.5% छात्र रसायन विज्ञान में और 12.5% छात्र दोनों में उत्तीर्ण हुए। यदि उस परीक्षा में लड़कियों की संख्या अनुत्तीर्ण छात्रों की संख्या के बराबर है और 25% अनुत्तीर्ण छात्र लड़कियां हैं, जो 20 हैं, तो ज्ञात कीजिए कि कितने प्रतिशत लड़के अनुत्तीर्ण हुए?",
+    q_en: "Q309. In an examination, 50% students passed in Physics, 37.5% students in Chemistry and 12.5% students in both. If the number of girls in that examination is equal to the number of failed students and 25% of failed students are girls, which is 20, then find what percentage of boys failed?",
+    tag: "",
+    o_hi: [
+      "(a) 16%",
+      "(b) 25%",
+      "(c) 20%",
+      "(d) 24%"
+    ],
+    o_en: [
+      "(a) 16%",
+      "(b) 25%",
+      "(c) 20%",
+      "(d) 24%"
+    ],
+    a: 1,
+    e_hi: "कम से कम एक विषय में उत्तीर्ण = 50% + 37.5% - 12.5% = 75%<br>अनुत्तीर्ण = 25%<br>25% अनुत्तीर्ण छात्र = 20<br>कुल अनुत्तीर्ण छात्र = 80<br>लड़कियों की संख्या = 80<br>कुल छात्र = 80/25% = 320<br>लड़के = 320 - 80 = 240<br>अनुत्तीर्ण लड़कियां = 20<br>अनुत्तीर्ण लड़के = 80 - 20 = 60<br>प्रतिशत = 60/240 × 100 = 25%",
+    e_en: "Passed in at least one subject = 50% + 37.5% - 12.5% = 75%<br>Failed = 25%<br>25% of failed students = 20<br>Total failed students = 80<br>Number of girls = 80<br>Total students = 80/25% = 320<br>Boys = 320 - 80 = 240<br>Failed girls = 20<br>Failed boys = 80 - 20 = 60<br>Percentage = 60/240 × 100 = 25%"
+  },
+  {
+    q_hi: "Q310. एक कॉलेज की परीक्षा में, 43 अकाउंट्स में उत्तीर्ण हुए, 42 डिजिटल मार्केटिंग में उत्तीर्ण हुए और 40 सामाजिक विज्ञान में उत्तीर्ण हुए हैं। सभी तीन परीक्षाओं में 10 को उत्तीर्ण हुए। 22 अकाउंट्स और डिजिटल मार्केटिंग में उत्तीर्ण हुए, 23 अकाउंट्स और सामाजिक विज्ञान में उत्तीर्ण हुए, 16 डिजिटल मार्केटिंग और सामाजिक विज्ञान में उत्तीर्ण हुए हैं। केवल एक विषय में उत्तीर्ण छात्रों की संख्या की तुलना में केवल दो विषयों में उत्तीर्ण छात्रों की संख्या का प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q310. In a college examination, 43 passed in Accounts, 42 passed in Digital Marketing and 40 passed in Social Science. 10 passed in all three subjects. 22 passed in Accounts and Digital Marketing, 23 passed in Accounts and Social Science, 16 passed in Digital Marketing and Social Science. Find the percentage of students passing in only two subjects compared to the number of students passing in only one subject.",
+    tag: "",
+    o_hi: [
+      "(a) 93.94%",
+      "(b) 9.3%",
+      "(c) 11.11%",
+      "(d) 95%"
+    ],
+    o_en: [
+      "(a) 93.94%",
+      "(b) 9.3%",
+      "(c) 11.11%",
+      "(d) 95%"
+    ],
+    a: 0,
+    e_hi: "केवल दो विषय = (22 + 23 + 16) - 3 × 10 = 31<br>केवल एक विषय = (43 + 42 + 40) - 2 × (22 + 23 + 16) + 3 × 10 = 33<br>प्रतिशत = 31/33 × 100 ≈ 93.94%",
+    e_en: "Only two subjects = (22 + 23 + 16) - 3 × 10 = 31<br>Only one subject = (43 + 42 + 40) - 2 × (22 + 23 + 16) + 3 × 10 = 33<br>Percentage = 31/33 × 100 ≈ 93.94%"
+  },
+  {
+    q_hi: "Q311. एक परीक्षा में, गणित में 53% छात्र, भौतिकी में 61%, रसायन विज्ञान में 60%, गणित और भौतिकी में 24%, भौतिकी और रसायन विज्ञान में 35%, गणित और रसायन विज्ञान में 27% उत्तीर्ण हुए और 5% किसी में पास नहीं होते। गणित और रसायन विज्ञान में उत्तीर्ण लेकिन भौतिकी में नहीं, होने वालों के % का अनुपात भौतिकी और रसायन विज्ञान में उत्तीर्ण होने वाले लेकिन गणित में फेल विद्यार्थियों से क्या है?",
+    q_en: "Q311. In an examination, 53% students passed in Mathematics, 61% in Physics, 60% in Chemistry, 24% in Mathematics and Physics, 35% in Physics and Chemistry, 27% in Mathematics and Chemistry and 5% did not pass in any. What is the ratio of percentage of students passing in Mathematics and Chemistry but not Physics to students passing in Physics and Chemistry but failing in Mathematics?",
+    tag: "",
+    o_hi: [
+      "(a) 7 : 5",
+      "(b) 5 : 7",
+      "(c) 4 : 5",
+      "(d) 5 : 4"
+    ],
+    o_en: [
+      "(a) 7 : 5",
+      "(b) 5 : 7",
+      "(c) 4 : 5",
+      "(d) 5 : 4"
+    ],
+    a: 1,
+    e_hi: "कम से कम एक विषय में उत्तीर्ण = 100% - 5% = 95%<br>Inclusion-Exclusion सूत्र:<br>|A∪B∪C| = |A|+|B|+|C| - |A∩B| - |B∩C| - |A∩C| + |A∩B∩C|<br>95 = (53+61+60) - (24+35+27) + x<br>95 = 174 - 86 + x<br>95 = 88 + x<br>x (तीनों विषयों में उत्तीर्ण) = 7%<br>गणित और रसायन विज्ञान में उत्तीर्ण लेकिन भौतिकी में नहीं = (गणित∩रसायन) - तीनों = 27% - 7% = 20%<br>भौतिकी और रसायन विज्ञान में उत्तीर्ण लेकिन गणित में नहीं = (भौतिकी∩रसायन) - तीनों = 35% - 7% = 28%<br>अनुपात = 20% : 28% = 5 : 7",
+    e_en: "Passed in at least one subject = 100% - 5% = 95%<br>Inclusion-Exclusion formula:<br>|A∪B∪C| = |A|+|B|+|C| - |A∩B| - |B∩C| - |A∩C| + |A∩B∩C|<br>95 = (53+61+60) - (24+35+27) + x<br>95 = 174 - 86 + x<br>95 = 88 + x<br>x (passed in all three subjects) = 7%<br>Passed in Math and Chemistry but not Physics = (Math∩Chem) - all three = 27% - 7% = 20%<br>Passed in Physics and Chemistry but not Math = (Physics∩Chem) - all three = 35% - 7% = 28%<br>Ratio = 20% : 28% = 5 : 7"
+  },
+  {
+    q_hi: "Q312. 50 छात्रों की एक कक्षा में 20 छात्र हॉकी, 15 छात्र क्रिकेट और 11 छात्र फुटबॉल खेलते हैं। 7 छात्र हॉकी तथा क्रिकेट दोनों खेलते हैं। 4 छात्र क्रिकेट और फुटबॉल दोनों खेलते हैं। 5 छात्र हॉकी और फुटबॉल दोनों खेलते हैं। यदि 18 छात्र ऐसे हैं जो कोई भी खेल नहीं खेलते तो उन छात्रों का अनुपात ज्ञात कीजिए जो सभी खेल खेलते हैं तथा जो केवल दो खेल खेलते हैं?",
+    q_en: "Q312. In a class of 50 students, 20 students play Hockey, 15 play Cricket and 11 play Football. 7 students play both Hockey and Cricket. 4 play both Cricket and Football. 5 play both Hockey and Football. If 18 students do not play any game, find the ratio of students playing all games to those playing only two games.",
+    tag: "",
+    o_hi: [
+      "(a) 1 : 3",
+      "(b) 1 : 7",
+      "(c) 1 : 5",
+      "(d) 4 : 3"
+    ],
+    o_en: [
+      "(a) 1 : 3",
+      "(b) 1 : 7",
+      "(c) 1 : 5",
+      "(d) 4 : 3"
+    ],
+    a: 2,
+    e_hi: "मान लेते हैं तीनों खेल खेलने वाले = x<br>20 + 15 + 11 - 7 - 4 - 5 + x = 50 - 18<br>30 + x = 32<br>x = 2<br>केवल दो खेल = (7 - 2) + (4 - 2) + (5 - 2) = 10<br>अनुपात = 2 : 10 = 1 : 5",
+    e_en: "Let students playing all three games = x<br>20 + 15 + 11 - 7 - 4 - 5 + x = 50 - 18<br>30 + x = 32<br>x = 2<br>Only two games = (7 - 2) + (4 - 2) + (5 - 2) = 10<br>Ratio = 2 : 10 = 1 : 5"
+  },
+  {
+    q_hi: "Q313. एक एजेंट को ₹10000 तक की सभी बिक्री पर 5% कमीशन मिलता है और इससे अधिक की सभी बिक्री पर 4% कमीशन मिलता है। वह अपनी बिक्री से कमीशन काटने के बाद ₹28700 अपनी कंपनी को देता है। उसकी कुल बिक्री ज्ञात कीजिए।",
+    q_en: "Q313. An agent gets 5% commission on all sales up to ₹10000 and 4% commission on all sales above this. After deducting his commission from his sales, he pays ₹28700 to his company. Find his total sales.",
+    tag: "",
+    o_hi: [
+      "(a) ₹30,000",
+      "(b) ₹24,000",
+      "(c) ₹28,000",
+      "(d) ₹32,000"
+    ],
+    o_en: [
+      "(a) ₹30,000",
+      "(b) ₹24,000",
+      "(c) ₹28,000",
+      "(d) ₹32,000"
+    ],
+    a: 0,
+    e_hi: "पहले ₹10000 पर कमीशन = 5% of 10000 = ₹500<br>शेष बिक्री = x - 10000<br>शेष बिक्री पर कमीशन = 4%(x - 10000)<br>कंपनी को दी गई राशि = 10000 - 500 + 0.96(x - 10000) = 28700<br>x = ₹30000",
+    e_en: "Commission on first ₹10000 = 5% of 10000 = ₹500<br>Remaining sales = x - 10000<br>Commission on remaining sales = 4%(x - 10000)<br>Amount paid to company = 10000 - 500 + 0.96(x - 10000) = 28700<br>x = ₹30000"
+  },
+  {
+    q_hi: "Q314. एक सेल्समैन को ₹15000 तक की बिक्री पर 12% कमीशन और ₹15000 से अधिक की बिक्री पर 1% का अतिरिक्त बोनस दिया जाता है। यदि उसकी कुल कमाई ₹7650 है, तो उसके द्वारा की गई कुल बिक्री ज्ञात कीजिए।",
+    q_en: "Q314. A salesman is given 12% commission on sales up to ₹15000 and an extra bonus of 1% on sales above ₹15000. If his total earning is ₹7650, find the total sales made by him.",
+    tag: "",
+    o_hi: [
+      "(a) ₹56000",
+      "(b) ₹50000",
+      "(c) ₹60000",
+      "(d) ₹64000"
+    ],
+    o_en: [
+      "(a) ₹56000",
+      "(b) ₹50000",
+      "(c) ₹60000",
+      "(d) ₹64000"
+    ],
+    a: 2,
+    e_hi: "पहले ₹15000 पर कमीशन = 12% of 15000 = ₹1800<br>अतिरिक्त बिक्री की कमाई = ₹7650 - ₹1800 = ₹5850<br>अतिरिक्त बिक्री = ₹5850/13% = ₹45000<br>कुल बिक्री = ₹15000 + ₹45000 = ₹60000",
+    e_en: "Commission on first ₹15000 = 12% of 15000 = ₹1800<br>Earnings from excess sales = ₹7650 - ₹1800 = ₹5850<br>Excess sales = ₹5850/13% = ₹45000<br>Total sales = ₹15000 + ₹45000 = ₹60000"
+  },
+  {
+    q_hi: "Q315. एक कंपनी कुल बिक्री पर 7% कमीशन देती है। यदि सेल्समैन को ₹3000 के निश्चित वेतन पर नियुक्त किया जाता है और ₹10000 से अधिक की बिक्री पर 4% कमीशन दिया जाता है, तो सेल्समैन को ₹800 अधिक मिलते हैं। सेल्समैन द्वारा की गई कुल बिक्री ज्ञात कीजिए।",
+    q_en: "Q315. A company gives 7% commission on total sales. If a salesman is appointed at a fixed salary of ₹3000 and 4% commission on sales exceeding ₹10000, the salesman gets ₹800 more. Find total sales made by the salesman.",
+    tag: "",
+    o_hi: [
+      "(a) ₹60000",
+      "(b) ₹50000",
+      "(c) ₹56000",
+      "(d) ₹64000"
+    ],
+    o_en: [
+      "(a) ₹60000",
+      "(b) ₹50000",
+      "(c) ₹56000",
+      "(d) ₹64000"
+    ],
+    a: 0,
+    e_hi: "मान लेते हैं कुल बिक्री = x<br>पहली व्यवस्था की कमाई = 7%x<br>दूसरी व्यवस्था की कमाई = 3000 + 4%(x - 10000)<br>दूसरी व्यवस्था की कमाई पहली व्यवस्था से ₹800 अधिक है<br>3000 + 0.04(x - 10000) = 0.07x + 800<br>0.03x = 1800<br>x = ₹60000",
+    e_en: "Let total sales = x<br>Earnings from 1st scheme = 7%x<br>Earnings from 2nd scheme = 3000 + 4%(x - 10000)<br>2nd scheme gives ₹800 more than 1st scheme<br>3000 + 0.04(x - 10000) = 0.07x + 800<br>0.03x = 1800<br>x = ₹60000"
+  },
+  {
+    q_hi: "Q316. एक कंपनी कुल बिक्री पर 13% कमीशन की अनुमति देती है। लेकिन यदि सेल्समैन को ₹4700 के निश्चित वेतन पर नियुक्त किया जाता है और ₹12000 से अधिक की बिक्री पर और 7% कमीशन दिया जाए, तो सेल्समैन को ₹620 अधिक मिलते हैं। सेल्समैन द्वारा की गई कुल बिक्री ज्ञात कीजिए।",
+    q_en: "Q316. A company allows 13% commission on total sales. But if the salesman is appointed at a fixed salary of ₹4700 and 7% commission on sales exceeding ₹12000, the salesman gets ₹620 more. Find total sales made by the salesman.",
+    tag: "",
+    o_hi: [
+      "(a) ₹50,000",
+      "(b) ₹52,000",
+      "(c) ₹57,000",
+      "(d) ₹54,000"
+    ],
+    o_en: [
+      "(a) ₹50,000",
+      "(b) ₹52,000",
+      "(c) ₹57,000",
+      "(d) ₹54,000"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं कुल बिक्री = x<br>पहली व्यवस्था = 13%x<br>दूसरी व्यवस्था = 4700 + 7%(x - 12000)<br>दूसरी व्यवस्था 620 अधिक है<br>4700 + 0.07(x - 12000) = 0.13x + 620<br>0.06x = 3240<br>x = ₹54000",
+    e_en: "Let total sales = x<br>1st scheme = 13%x<br>2nd scheme = 4700 + 7%(x - 12000)<br>2nd scheme is ₹620 more<br>4700 + 0.07(x - 12000) = 0.13x + 620<br>0.06x = 3240<br>x = ₹54000"
+  },
+  {
+    q_hi: "Q317. किसी मार्केटिंग एजेंट को एक माह में पहले ₹200000 की बिक्री पर 2%, अगले ₹200000 की बिक्री पर 1.5% तथा बिक्री की शेष राशि पर 1% कमीशन मिलता है। यदि अप्रैल 2018 माह में उस एजेंट ने ₹568000 की बिक्री की है, तो उसके द्वारा प्राप्त कमीशन ज्ञात करें।",
+    q_en: "Q317. A marketing agent gets 2% commission on the first ₹200000 sales in a month, 1.5% on the next ₹200000 sales, and 1% on the remaining amount of sales. If in April 2018 the agent made sales of ₹568000, find the commission received by him.",
+    tag: "SSC CPO 15/03/2019 (Shift-01)",
+    o_hi: [
+      "(a) ₹8680",
+      "(b) ₹7730",
+      "(c) ₹8240",
+      "(d) ₹7105"
+    ],
+    o_en: [
+      "(a) ₹8680",
+      "(b) ₹7730",
+      "(c) ₹8240",
+      "(d) ₹7105"
+    ],
+    a: 0,
+    e_hi: "पहले ₹200000 पर 2% = ₹4000<br>अगले ₹200000 पर 1.5% = ₹3000<br>शेष ₹168000 पर 1% = ₹1680<br>कुल कमीशन = ₹8680",
+    e_en: "2% on first ₹200000 = ₹4000<br>1.5% on next ₹200000 = ₹3000<br>1% on remaining ₹168000 = ₹1680<br>Total commission = ₹8680"
+  },
+  {
+    q_hi: "Q318. दो सेल्समेन कविता और कल्याणी को उनके द्वारा की गई कुल बिक्री पर क्रमश: 12% और 15% कमीशन प्राप्त होता है। ₹20000 से अधिक की बिक्री पर कविता को 3% और कल्याणी को 5% अतिरिक्त बोनस मिलता है। यदि कविता और कल्याणी दोनों की कुल आय में अंतर ₹7600 है, तो कविता की कुल आय कितनी है?",
+    q_en: "Q318. Two saleswomen Kavita and Kalyani get 12% and 15% commission respectively on total sales made by them. On sales exceeding ₹20000, Kavita gets an extra bonus of 3% and Kalyani gets 5%. If the difference in total income of both Kavita and Kalyani is ₹7600, then what is the total income of Kavita?",
+    tag: "ICAR Mains, 08/07/2023 (Shift-2)",
+    o_hi: [
+      "(a) ₹19200",
+      "(b) ₹21600",
+      "(c) ₹17800",
+      "(d) ₹23400"
+    ],
+    o_en: [
+      "(a) ₹19200",
+      "(b) ₹21600",
+      "(c) ₹17800",
+      "(d) ₹23400"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं दोनों की बिक्री = x<br>कविता की कुल आय = 12%x + 3%(x - 20000)<br>कल्याणी की कुल आय = 15%x + 5%(x - 20000)<br>अंतर = 7600<br>3% + 5% - 12% - 15% के अनुसार नहीं, बल्कि दिए गए बोनस की शर्त के अनुसार समीकरण बनाकर x = ₹160000 आता है<br>कविता की कुल आय = 12% of 160000 + 3% of 140000 = ₹23400",
+    e_en: "Let sales for both = x<br>Kavita's total income = 12%x + 3%(x - 20000)<br>Kalyani's total income = 15%x + 5%(x - 20000)<br>Difference = 7600<br>Solving the equation according to bonus condition gives x = ₹160000<br>Kavita's total income = 12% of 160000 + 3% of 140000 = ₹23400"
+  },
+  {
+    q_hi: "Q319. एक सेल्समैन पहले ₹3000 की बिक्री पर a% कमीशन और आगे की बिक्री पर b% कमीशन कमाता है। जनवरी के महीने में वह ₹7000 की कुल बिक्री से ₹960 कमाता है और फरवरी के दौरान ₹8000 की कुल बिक्री से ₹1110 कमाता है। a और b का मान ज्ञात कीजिए।",
+    q_en: "Q319. A salesman earns a% commission on the first ₹3000 sales and b% commission on further sales. In the month of January, he earns ₹960 from a total sales of ₹7000 and during February he earns ₹1110 from a total sales of ₹8000. Find the values of a and b.",
+    tag: "",
+    o_hi: [
+      "(a) 12%, 15%",
+      "(b) 15%, 12%",
+      "(c) 10%, 15%",
+      "(d) 12%, 10%"
+    ],
+    o_en: [
+      "(a) 12%, 15%",
+      "(b) 15%, 12%",
+      "(c) 10%, 15%",
+      "(d) 12%, 10%"
+    ],
+    a: 0,
+    e_hi: "जनवरी: 3000a% + 4000b% = 960<br>फरवरी: 3000a% + 5000b% = 1110<br>घटाने पर 1000b% = 150<br>b = 15%<br>3000a% + 4000 × 15% = 960<br>a = 12%",
+    e_en: "January: 3000a% + 4000b% = 960<br>February: 3000a% + 5000b% = 1110<br>Subtracting gives 1000b% = 150<br>b = 15%<br>3000a% + 4000 × 15% = 960<br>a = 12%"
+  },
+  {
+    q_hi: "Q320. यदि आयकर में 27% की वृद्धि की जाती है और नेट आय में 3% की कमी की जाती है, तो आयकर की दर क्या है?",
+    q_en: "Q320. If income tax is increased by 27% and net income is decreased by 3%, then what is the rate of income tax?",
+    tag: "",
+    o_hi: [
+      "(a) 6%",
+      "(b) 8%",
+      "(c) 12%",
+      "(d) 10%"
+    ],
+    o_en: [
+      "(a) 6%",
+      "(b) 8%",
+      "(c) 12%",
+      "(d) 10%"
+    ],
+    a: 3,
+    e_hi: "मान लेते हैं प्रारंभिक आय = 100 और आयकर दर = r<br>प्रारंभिक नेट आय = 100(1 - r)<br>नई कर राशि = 127r<br>नई नेट आय = 97(1 - r)<br>97(1 - r) = 100 - 127r<br>97 - 97r = 100 - 127r<br>30r = 3<br>r = 10%",
+    e_en: "Let initial income = 100 and income tax rate = r<br>Initial net income = 100(1 - r)<br>New tax amount = 127r<br>New net income = 97(1 - r)<br>97(1 - r) = 100 - 127r<br>97 - 97r = 100 - 127r<br>30r = 3<br>r = 10%"
+  }
+];
