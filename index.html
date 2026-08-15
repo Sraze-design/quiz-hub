@@ -110,6 +110,20 @@ body {
   overflow-x: hidden;
 }
 
+/* On tablets/iPads (especially landscape), the fixed 500px phone width
+   leaves large empty grey margins on both sides. Widen the container on
+   larger viewports while leaving phone-sized screens untouched. */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 860px;
+  }
+}
+
 /* Base Screens Setup */
 .explorer-screen {
   display: none;
