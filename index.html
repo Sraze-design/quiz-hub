@@ -3253,28 +3253,26 @@ window.addEventListener('popstate', (e) => {
   // up), and only actually exit if the user confirms "Yes".
   if (!skipExitConfirmOnce) {
     // A bookmarked question is a single-question viewer, not an active test.
-    // Back should return to the Bookmark list without showing the test-exit confirmation.
+    // Back should return to the Bookmark list without showing the test-exit
+    // confirmation. The browser has already moved history to the previous
+    // (bookmark list) entry by the time this popstate fires, so we simply
+    // let execution fall through to the normal state-render logic below
+    // instead of calling history.back() again (which would skip past the
+    // bookmark list entry to whatever came before it).
     if (isBookmarkOnlyQuiz) {
       isBookmarkOnlyQuiz = false;
-      skipExitConfirmOnce = true;
-      history.back();
-      return;
-    }
-
-    // If the Pause or Submit-confirm overlay is open, this back-action
-    // should just close that overlay (one step at a time), matching
-    // Android's hardware back button behavior — not jump straight to the
-    // exit-confirmation modal. Restore the history entry right away so the
-    // back-stack looks untouched, same technique used below for the actual
-    // exit-confirm case.
-    if (closeAnyBlockingOverlay()) {
+    } else if (closeAnyBlockingOverlay()) {
+      // If the Pause or Submit-confirm overlay is open, this back-action
+      // should just close that overlay (one step at a time), matching
+      // Android's hardware back button behavior — not jump straight to the
+      // exit-confirmation modal. Restore the history entry right away so the
+      // back-stack looks untouched, same technique used below for the actual
+      // exit-confirm case.
       setTimeout(() => {
         history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
       }, 0);
       return;
-    }
-
-    if (isTestInProgressNow()) {
+    } else if (isTestInProgressNow()) {
       // iOS/iPadOS Safari can get confused (and even fall back to a full
       // page reload — the "Loading items securely..." flash) if we call
       // pushState synchronously from inside a popstate handler that fired
