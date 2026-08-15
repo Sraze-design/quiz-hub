@@ -3689,6 +3689,14 @@ function showEmptyState() {
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
+      // Live tip stub: the smoothed curve above always stops at the
+      // midpoint, one half-sample behind the real pen position. Extend
+      // the same stroke with a short straight segment out to the raw
+      // point p2 so the ink visibly reaches wherever the pen actually is
+      // right now instead of trailing behind. The next sample's curve
+      // starts fresh from this same midpoint, so it simply overlays this
+      // stub with the properly smoothed version — no visual glitch.
+      ctx.lineTo(p2.x,p2.y);
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
