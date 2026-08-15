@@ -3444,7 +3444,7 @@ function showEmptyState() {
   // These areas remain normal UI zones even while Pencil mode is enabled.
   function isPencilBlockedZone(target){
     if(!target || !target.closest) return false;
-    return !!target.closest('.floating-quiz-header, #controls, #pencilTools, #ai-floating-btn, #ai-bottom-sheet, #ai-overlay, #qp-panel, #qp-overlay, #q-text, #exam-tag, .premium-question-card, #options, .options-stack');
+    return !!target.closest('.floating-quiz-header, #controls, #pencilTools, #ai-floating-btn, #ai-bottom-sheet, #ai-overlay, #qp-panel, #qp-overlay');
   }
 
   function appendSample(ev){
@@ -3508,7 +3508,7 @@ function showEmptyState() {
 
     // In Pencil mode, never let a Pencil or palm/finger contact activate an
     // answer option. Other touches elsewhere remain available for scrolling.
-    if(optionTarget && (e.pointerType==='pen' || e.pointerType==='touch')){
+    if(optionTarget && e.pointerType==='touch'){
       e.preventDefault();
       e.stopPropagation();
       clearNativeSelection();
@@ -3538,7 +3538,7 @@ function showEmptyState() {
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
-    else { drawing=false; activePointerId=null; usingRawStream=false; }
+    else { drawing=false; activePointerId=null; }
   }
 
   function undo(){
