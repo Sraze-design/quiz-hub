@@ -567,6 +567,13 @@ body.pencil-mode{
 }
 #pencilTools button.active{background:#fee2e2;color:#dc2626;}
 #pencilTools button.clear{color:#dc2626;}
+#pencilTools button.pencil-color-btn{
+  border:2px solid transparent;border-radius:50%;padding:0;width:26px;height:26px;
+  min-width:26px;background-clip:padding-box;
+}
+#pencilTools button.pencil-color-btn.active{
+  border-color:#0f172a;box-shadow:0 0 0 1px #fff inset;
+}
 @media(max-width:767px){#pencilTools{right:70px;top:54px;}}
 #langSwitchBtn.quiz-header-lang-btn .quiz-header-lang-inner {
   display: flex;
@@ -2503,6 +2510,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 <canvas id="pencilCanvas" aria-hidden="true"></canvas>
 <div id="pencilTools" aria-hidden="true">
   <button type="button" id="pencilPenBtn" class="active" title="Pen">✎</button>
+  <button type="button" id="pencilColorRedBtn" class="pencil-color-btn active" data-color="#dc2626" title="Red" style="background:#dc2626;"></button>
+  <button type="button" id="pencilColorBlueBtn" class="pencil-color-btn" data-color="#2563eb" title="Blue" style="background:#2563eb;"></button>
   <button type="button" id="pencilEraserBtn" title="Eraser">⌫</button>
   <button type="button" id="pencilUndoBtn" title="Undo">↶</button>
   <button type="button" id="pencilRedoBtn" title="Redo">↷</button>
@@ -3351,7 +3360,7 @@ function showEmptyState() {
    as a fallback/primary stream (never both at once). */
 (function initApplePencilLayer(){
   let canvas, ctx, toggle, tools;
-  let enabled=false, drawing=false, activePointerId=null, tool='pen';
+  let enabled=false, drawing=false, activePointerId=null, tool='pen', penColor='#dc2626';
   let strokes=[], redoStack=[], currentStroke=null;
   let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
@@ -3398,18 +3407,18 @@ function showEmptyState() {
     return (wa+wb)/2;
   }
 
-  function applyStyle(forTool,width){
+  function applyStyle(forTool,width,color){
     const useTool=forTool||tool;
     ctx.lineCap='round';
     ctx.lineJoin='round';
     ctx.lineWidth= useTool==='eraser' ? 24 : (width!=null ? width : BASE_WIDTH);
-    ctx.strokeStyle= useTool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
+    ctx.strokeStyle= useTool==='eraser' ? 'rgba(0,0,0,1)' : (color||penColor);
     ctx.globalCompositeOperation= useTool==='eraser' ? 'destination-out' : 'source-over';
   }
 
-  function drawSegment(a,b,forTool,width){
+  function drawSegment(a,b,forTool,width,color){
     if(!ctx||!a||!b) return;
-    applyStyle(forTool,width);
+    applyStyle(forTool,width,color);
     ctx.beginPath();
     ctx.moveTo(a.x,a.y);
     ctx.lineTo(b.x,b.y);
@@ -3417,9 +3426,9 @@ function showEmptyState() {
     ctx.globalCompositeOperation='source-over';
   }
 
-  function drawDot(a,forTool,width){
+  function drawDot(a,forTool,width,color){
     if(!ctx||!a) return;
-    applyStyle(forTool,width);
+    applyStyle(forTool,width,color);
     ctx.beginPath();
     ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
     ctx.fillStyle=ctx.strokeStyle;
@@ -3433,20 +3442,20 @@ function showEmptyState() {
   // loading saved strokes, so it always matches what was drawn on screen.
   function drawStroke(st){
     if(!st||!st.points||!st.points.length) return;
-    const pts=st.points, strokeTool=st.tool||'pen';
-    if(pts.length===1){ drawDot(pts[0],strokeTool,pts[0].w); return; }
+    const pts=st.points, strokeTool=st.tool||'pen', strokeColor=st.color||'#dc2626';
+    if(pts.length===1){ drawDot(pts[0],strokeTool,pts[0].w,strokeColor); return; }
     if(pts.length===2){
-      drawSegment(pts[0],pts[1],strokeTool,avgW(pts[0],pts[1]));
+      drawSegment(pts[0],pts[1],strokeTool,avgW(pts[0],pts[1]),strokeColor);
       return;
     }
     // Entry stub: first point to the midpoint of the first two points.
     const m01=mid(pts[0],pts[1]);
-    drawSegment(pts[0],m01,strokeTool,avgW(pts[0],pts[1]));
+    drawSegment(pts[0],m01,strokeTool,avgW(pts[0],pts[1]),strokeColor);
     // Body: quadratic curve through each midpoint pair.
     for(let i=1;i<pts.length-1;i++){
       const p0=pts[i-1],p1=pts[i],p2=pts[i+1];
       const m1=mid(p0,p1), m2=mid(p1,p2);
-      applyStyle(strokeTool,avgW(p1,p2));
+      applyStyle(strokeTool,avgW(p1,p2),strokeColor);
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
@@ -3456,7 +3465,7 @@ function showEmptyState() {
     // Tail: last midpoint to the final actual point.
     const last1=pts[pts.length-2], last2=pts[pts.length-1];
     const mTail=mid(last1,last2);
-    drawSegment(mTail,last2,strokeTool,avgW(last1,last2));
+    drawSegment(mTail,last2,strokeTool,avgW(last1,last2),strokeColor);
   }
 
   function redraw(){
@@ -3489,6 +3498,14 @@ function showEmptyState() {
     tool=nextTool;
     document.getElementById('pencilPenBtn')?.classList.toggle('active',tool==='pen');
     document.getElementById('pencilEraserBtn')?.classList.toggle('active',tool==='eraser');
+  }
+
+  function setColor(nextColor){
+    penColor=nextColor;
+    document.querySelectorAll('#pencilTools .pencil-color-btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.color===nextColor);
+    });
+    if(tool!=='pen') setTool('pen');
   }
 
   function isPencil(e){ return enabled && e.pointerType==='pen' && !isPaused; }
@@ -3543,14 +3560,14 @@ function showEmptyState() {
       // First raw segment: draw a straight stub up to the midpoint, the
       // quadratic segments below pick up from there.
       const m=mid(pts[0],pts[1]);
-      drawSegment(pts[0],m,tool,avgW(pts[0],pts[1]));
+      drawSegment(pts[0],m,tool,avgW(pts[0],pts[1]),currentStroke.color);
     } else if(n>=3){
       // Smooth the newest segment through the midpoints of the last three
       // raw samples. Only touches the newest bit of the path, so it stays
       // O(1) per sample with no added input latency.
       const p0=pts[n-3], p1=pts[n-2], p2=pts[n-1];
       const m1=mid(p0,p1), m2=mid(p1,p2);
-      applyStyle(tool,avgW(p1,p2));
+      applyStyle(tool,avgW(p1,p2),currentStroke.color);
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
@@ -3574,9 +3591,9 @@ function showEmptyState() {
     const p=point(e);
     p.w=widthFor(e.pressure);
     smoothX=p.x; smoothY=p.y; // start smoothing exactly at first touch, no lag-in
-    currentStroke={tool,points:[p]};
+    currentStroke={tool,color:penColor,points:[p]};
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
-    drawDot(p,tool,p.w); // immediate first contact
+    drawDot(p,tool,p.w,penColor); // immediate first contact
 
     // Capture on the document rather than the transparent canvas. The canvas
     // intentionally has pointer-events:none so the normal page remains usable.
@@ -3606,7 +3623,7 @@ function showEmptyState() {
         // at the last midpoint.
         const p1=pts[pts.length-2], p2=pts[pts.length-1];
         const m=mid(p1,p2);
-        drawSegment(m,p2,tool,avgW(p1,p2));
+        drawSegment(m,p2,tool,avgW(p1,p2),currentStroke.color);
       }
       strokes.push(currentStroke);
       redoStack=[];
@@ -3709,6 +3726,8 @@ function showEmptyState() {
 
     toggle.addEventListener('click',toggleMode);
     document.getElementById('pencilPenBtn')?.addEventListener('click',()=>setTool('pen'));
+    document.getElementById('pencilColorRedBtn')?.addEventListener('click',()=>setColor('#dc2626'));
+    document.getElementById('pencilColorBlueBtn')?.addEventListener('click',()=>setColor('#2563eb'));
     document.getElementById('pencilEraserBtn')?.addEventListener('click',()=>setTool('eraser'));
     document.getElementById('pencilUndoBtn')?.addEventListener('click',undo);
     document.getElementById('pencilRedoBtn')?.addEventListener('click',redo);
