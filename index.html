@@ -3031,24 +3031,16 @@ function renderBookmarkQuestions(subject,path){
     const qBadge=b.aiGenerated?'🤖':`Q${b.questionIndex+1}`;
     c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">${qBadge}</div><div class="card-details"><span class="card-main-title">${qLabel}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
     const removeBtn=c.querySelector('.bookmark-toggle-btn');
-    // IMPORTANT: keep navigation off the card itself. The remove button gets
-    // its own isolated click handler, while only the question content opens.
-    // This prevents touch/click event bubbling from ever opening the test when
-    // the user taps the bookmark icon.
     removeBtn.addEventListener('click',(e)=>{
       e.preventDefault();
       e.stopPropagation();
-      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+      e.stopImmediatePropagation();
       removeBookmarkFromList(b.id,subject,path);
-    }, true);
-    const cardContent=c.querySelector('.card-meta-box');
-    if(cardContent){
-      cardContent.addEventListener('click',(e)=>{
-        e.preventDefault();
-        e.stopPropagation();
-        openBookmarkedQuestion(b);
-      });
-    }
+    },{capture:true});
+    c.onclick=(e)=>{
+      if(e.target.closest('.bookmark-toggle-btn')) return;
+      openBookmarkedQuestion(b);
+    };
     l.appendChild(c);
   });
 }
