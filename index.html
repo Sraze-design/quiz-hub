@@ -3490,7 +3490,13 @@ function showEmptyState() {
   ].join(', ');
 
   function isInExcludedZone(target){
-    return !!(target && target.closest && target.closest(EXCLUDED_ZONE_SELECTOR));
+    if(!target || !target.closest) return false;
+    // Answer options are always drawable (mark/underline/scribble on them),
+    // even though they are <button> elements. Accidental option-selection
+    // while pencil mode is on is separately prevented in
+    // blockOptionAndSelection, so this doesn't risk mis-taps.
+    if(target.closest('#options button, #options [role="button"], .options-stack button')) return false;
+    return !!target.closest(EXCLUDED_ZONE_SELECTOR);
   }
 
   function appendSample(ev){
