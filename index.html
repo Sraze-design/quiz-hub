@@ -5352,6 +5352,9 @@ function toggleAIPanel() {
   if (isActive) {
     closeAIPanel();
   } else {
+    // Opening the AI sheet on top of the quiz: turn off the main quiz's
+    // own pencil mode first, so both pencils are never left on at once.
+    if (typeof window.__pencilForceDisable === 'function') window.__pencilForceDisable();
     sheet.classList.add('active');
     sheet.classList.add('notranslate');
     sheet.setAttribute('translate','no');
@@ -5377,6 +5380,11 @@ function hideAIPanelUI() {
   if (overlay) overlay.classList.remove('active');
   if (typeof closeAttachMenu === 'function') closeAttachMenu();
   unlockBodyScroll();
+  // This is the single real point every close path (✕, overlay tap,
+  // swipe-down, back button) funnels through, so turning the AI sheet's
+  // own pencil mode off here — instead of in closeAIPanel() — guarantees
+  // it never stays on in the background after the sheet is gone.
+  if (typeof window.__aiPencilForceDisable === 'function') window.__aiPencilForceDisable();
 }
 
 // Public close, used by every UI trigger (✕ button, overlay tap, swipe-down,
@@ -6598,6 +6606,10 @@ if ('serviceWorker' in navigator) {
   }
 
   window.toggleAIPencil=function(){ setEnabled(!enabled); };
+  // Exposed so the app can turn AI-sheet pencil mode fully off (canvas,
+  // toolbar, toggle button, all hidden/reset) the moment the sheet closes —
+  // so it never stays on in the background for the next time it's opened.
+  window.__aiPencilForceDisable=function(){ if(enabled) setEnabled(false); };
 
   document.addEventListener('pointerdown', start, {capture:true, passive:false});
   document.addEventListener('pointermove', move, {capture:true, passive:false});
