@@ -2522,6 +2522,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   <button type="button" id="pencilColorRedBtn" class="pencil-color-btn active" data-color="#dc2626" title="Red" style="background:#dc2626;"></button>
   <button type="button" id="pencilColorBlueBtn" class="pencil-color-btn" data-color="#2563eb" title="Blue" style="background:#2563eb;"></button>
   <button type="button" id="pencilEraserBtn" title="Eraser">⌫</button>
+  <button type="button" id="pencilStarBtn" title="Star">★</button>
   <button type="button" id="pencilUndoBtn" title="Undo">↶</button>
   <button type="button" id="pencilRedoBtn" title="Redo">↷</button>
   <button type="button" id="pencilClearBtn" class="clear" title="Clear">✕</button>
@@ -3370,6 +3371,8 @@ function showEmptyState() {
 (function initApplePencilLayer(){
   let canvas, ctx, toggle, tools;
   let enabled=false, drawing=false, activePointerId=null, tool='pen', penColor='#dc2626';
+  let starTapStart=null;
+  const TAP_THRESHOLD=10; // px of finger/pencil drift still counted as a tap
   let strokes=[], redoStack=[], currentStroke=null;
   let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
@@ -3445,6 +3448,29 @@ function showEmptyState() {
     ctx.globalCompositeOperation='source-over';
   }
 
+  // Small filled 5-point star, used by the star stamp tool. Independent of
+  // the pen/eraser stroke rendering path since it's a single tap-placed
+  // shape rather than a dragged line.
+  function drawStar(cx,cy,color){
+    if(!ctx) return;
+    const outerR=9, innerR=3.6, spikes=5;
+    let rot=-Math.PI/2;
+    const step=Math.PI/spikes;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+    for(let i=0;i<spikes;i++){
+      rot+=step;
+      ctx.lineTo(cx+Math.cos(rot)*innerR, cy+Math.sin(rot)*innerR);
+      rot+=step;
+      ctx.lineTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+    }
+    ctx.closePath();
+    ctx.fillStyle=color||penColor;
+    ctx.fill();
+    ctx.restore();
+  }
+
   // Renders a finished/loaded stroke exactly the way it was drawn live:
   // same midpoint-smoothed quadratic segments, same per-segment pressure
   // width. Used for redraw on question switch, resize, undo/redo, and
@@ -3452,6 +3478,7 @@ function showEmptyState() {
   function drawStroke(st){
     if(!st||!st.points||!st.points.length) return;
     const pts=st.points, strokeTool=st.tool||'pen', strokeColor=st.color||'#dc2626';
+    if(strokeTool==='star'){ drawStar(pts[0].x,pts[0].y,strokeColor); return; }
     if(pts.length===1){ drawDot(pts[0],strokeTool,pts[0].w,strokeColor); return; }
     if(pts.length===2){
       drawSegment(pts[0],pts[1],strokeTool,avgW(pts[0],pts[1]),strokeColor);
@@ -3507,6 +3534,7 @@ function showEmptyState() {
     tool=nextTool;
     document.getElementById('pencilPenBtn')?.classList.toggle('active',tool==='pen');
     document.getElementById('pencilEraserBtn')?.classList.toggle('active',tool==='eraser');
+    document.getElementById('pencilStarBtn')?.classList.toggle('active',tool==='star');
     if(tool!=='eraser') hideEraserCursor();
   }
 
@@ -3614,6 +3642,16 @@ function showEmptyState() {
     drawing=true;
     activePointerId=e.pointerId;
     usingRawStream=false;
+
+    if(tool==='star'){
+      // Star is a tap-to-place stamp, not a dragged stroke: just remember
+      // where the pencil first touched down and decide on release whether
+      // it was a tap (place the star) or a drag (cancel, no star).
+      starTapStart=point(e);
+      try{document.documentElement.setPointerCapture?.(e.pointerId);}catch(_){ }
+      return;
+    }
+
     const p=point(e);
     p.w=widthFor(e.pressure);
     smoothX=p.x; smoothY=p.y; // start smoothing exactly at first touch, no lag-in
@@ -3629,6 +3667,7 @@ function showEmptyState() {
   function move(e){
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
+    if(tool==='star') return; // no live drag-preview for the star stamp
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
     appendEvents(events.length?events:[e]);
   }
@@ -3641,6 +3680,20 @@ function showEmptyState() {
     activePointerId=null;
     usingRawStream=false;
     try{document.documentElement.releasePointerCapture?.(e.pointerId);}catch(_){ }
+
+    if(tool==='star'){
+      const p=point(e);
+      if(starTapStart && Math.hypot(p.x-starTapStart.x,p.y-starTapStart.y)<TAP_THRESHOLD){
+        const st={tool:'star',color:penColor,points:[{x:starTapStart.x,y:starTapStart.y}]};
+        strokes.push(st);
+        redoStack=[];
+        drawStroke(st);
+        save();
+      }
+      starTapStart=null;
+      return;
+    }
+
     if(currentStroke&&currentStroke.points.length){
       const pts=currentStroke.points;
       if(pts.length>=3){
@@ -3733,7 +3786,7 @@ function showEmptyState() {
   // stroke so drawing state can never stay stuck until the pen is re-lifted.
   function forceEndStroke(){
     if(!drawing) return;
-    drawing=false; activePointerId=null; usingRawStream=false;
+    drawing=false; activePointerId=null; usingRawStream=false; starTapStart=null;
     if(currentStroke&&currentStroke.points.length){
       strokes.push(currentStroke);
       redoStack=[];
@@ -3756,6 +3809,7 @@ function showEmptyState() {
     document.getElementById('pencilColorRedBtn')?.addEventListener('click',()=>setColor('#dc2626'));
     document.getElementById('pencilColorBlueBtn')?.addEventListener('click',()=>setColor('#2563eb'));
     document.getElementById('pencilEraserBtn')?.addEventListener('click',()=>setTool('eraser'));
+    document.getElementById('pencilStarBtn')?.addEventListener('click',()=>setTool('star'));
     document.getElementById('pencilUndoBtn')?.addEventListener('click',undo);
     document.getElementById('pencilRedoBtn')?.addEventListener('click',redo);
     document.getElementById('pencilClearBtn')?.addEventListener('click',clearAll);
