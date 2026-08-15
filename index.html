@@ -3034,9 +3034,14 @@ function renderBookmarkQuestions(subject,path){
     removeBtn.addEventListener('click',(e)=>{
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
       removeBookmarkFromList(b.id,subject,path);
-    });
-    c.onclick=()=>openBookmarkedQuestion(b); l.appendChild(c);
+    },{capture:true});
+    c.onclick=(e)=>{
+      if(e.target.closest('.bookmark-toggle-btn')) return;
+      openBookmarkedQuestion(b);
+    };
+    l.appendChild(c);
   });
 }
 async function openBookmarkedQuestion(bookmark){
