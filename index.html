@@ -3446,6 +3446,14 @@ function showEmptyState() {
 
   function isPencil(e){ return enabled && e.pointerType==='pen' && !isPaused; }
 
+  // Header (timer/pause/pencil-toggle/menu bar) and the bottom Back/Submit/Next
+  // control bar are excluded from the drawing layer entirely. Touching or
+  // tapping them with the Apple Pencil (or a finger) behaves like a normal
+  // tap/click there, never starts a stroke, and is never blocked.
+  function isInExcludedZone(target){
+    return !!(target && target.closest && target.closest('.floating-quiz-header, #controls, #pencilTools'));
+  }
+
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
     const x=ev.clientX, y=ev.clientY, t=ev.timeStamp||performance.now();
@@ -3462,6 +3470,7 @@ function showEmptyState() {
 
   function start(e){
     if(!isPencil(e)) return;
+    if(isInExcludedZone(e.target)) return;
     e.preventDefault();
     e.stopPropagation();
     drawing=true;
@@ -3512,6 +3521,7 @@ function showEmptyState() {
 
   function blockOptionAndSelection(e){
     if(!enabled) return;
+    if(isInExcludedZone(e.target)) return;
     const optionTarget=e.target&&e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
     if(optionTarget){
       e.preventDefault();
@@ -3604,6 +3614,7 @@ function showEmptyState() {
     // stream mid-stroke until the pen is lifted and put down again.
     function blockAllTouch(e){
       if(!enabled) return;
+      if(isInExcludedZone(e.target)) return;
       e.preventDefault();
     }
     document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
