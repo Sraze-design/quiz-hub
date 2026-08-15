@@ -101,7 +101,7 @@ body {
 #appSideDrawerOverlay{position:fixed;inset:0;background:rgba(15,23,42,.42);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:100000}#appSideDrawerOverlay.active{opacity:1;pointer-events:auto}
 #appSideDrawer{position:fixed;left:0;top:0;bottom:0;width:min(84vw,360px);background:#fff;transform:translateX(-105%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:100001;box-shadow:18px 0 45px rgba(15,23,42,.18);display:flex;flex-direction:column;padding:22px 16px calc(22px + env(safe-area-inset-bottom))}#appSideDrawer.active{transform:translateX(0)}
 .side-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 18px;border-bottom:1px solid #e2e8f0}.side-drawer-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--dark)}.side-drawer-brand-icon{width:40px;height:40px;border-radius:13px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:20px}.side-drawer-close{width:38px;height:38px;border:0;border-radius:12px;background:#f1f5f9;color:#475569;font-size:22px;cursor:pointer}.side-drawer-section{margin-top:20px}.side-drawer-label{font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;padding:0 10px 8px}.side-drawer-item{width:100%;border:0;background:#fff;border-radius:16px;padding:14px 12px;display:flex;align-items:center;gap:12px;text-align:left;color:var(--dark);font-size:15px;font-weight:700;cursor:pointer}.side-drawer-item:active{background:var(--primary-light)}.side-drawer-item-icon{width:42px;height:42px;border-radius:13px;background:#fff7ed;color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:21px;flex:0 0 auto}.side-drawer-item-text{display:flex;flex-direction:column;gap:2px}.side-drawer-item-text small{font-size:11px;color:#64748b;font-weight:600}
-.quiz-subheader-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.bookmark-toggle-btn{width:40px;height:40px;min-width:40px;border:0;border-radius:12px;background:#f8fafc;color:#64748b;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition)}.bookmark-toggle-btn svg{width:21px;height:21px}.bookmark-toggle-btn.active{background:#fff7ed;color:#f59e0b}.bookmark-toggle-btn:active{transform:scale(.92)}.bookmark-question-card{align-items:flex-start}.bookmark-question-preview{font-size:13px;line-height:1.5;color:#334155;font-weight:600;margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.bookmark-test-name{font-size:11px;color:#64748b;font-weight:600;margin-top:5px}.bookmark-star{color:#f59e0b;font-size:20px;flex:0 0 auto}
+.quiz-subheader-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.bookmark-toggle-btn{width:40px;height:40px;min-width:40px;border:0;border-radius:12px;background:#f8fafc;color:#64748b;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition)}.bookmark-toggle-btn svg{width:21px;height:21px}.bookmark-toggle-btn.active{background:#fff7ed;color:#f59e0b}.bookmark-toggle-btn:active{transform:scale(.92)}.bookmark-question-card{align-items:flex-start}.bookmark-question-preview{font-size:13px;line-height:1.5;color:#334155;font-weight:600;margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.bookmark-test-name{font-size:11px;color:#64748b;font-weight:600;margin-top:5px}.bookmark-star{color:#f59e0b;font-size:20px;flex:0 0 auto}; .ai-quiz-card-msg .bookmark-toggle-btn{margin-left:auto;flex:0 0 auto}
 .premium-logo-circle {
   width: 36px;
   height: 36px;
@@ -2804,6 +2804,7 @@ let currentQuizTitle = "";
 const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
 let currentQuizPath = "";
 let currentBookmarkQuestionIndex = null;
+let currentBookmarkIdOverride = null;
 
 /* ===== Persistent Question Bookmarks ===== */
 const BOOKMARK_STORAGE_KEY='devssc:bookmarks:v1';
@@ -2813,9 +2814,87 @@ function migrateBookmarkKeys(){const list=getBookmarks();if(!list.length)return;
 function bookmarkGroupKey(subject,category,chapter,testTitle){return [subject||'',category||'',chapter||'',testTitle||''].map(v=>String(v).trim().toLowerCase()).join('::')}
 function bookmarkId(path,index){const key=bookmarkGroupKey(currentSubject,currentCategory,currentChapter,currentQuizTitle)||String(path||'');return key+'::q::'+String(index)}
 function getBookmarkTargetIndex(){return Number.isInteger(currentBookmarkQuestionIndex)?currentBookmarkQuestionIndex:currentQ}
-function isQuestionBookmarked(path,index){const id=bookmarkId(path,index);return getBookmarks().some(b=>b.id===id)}
-function updateBookmarkButton(){const b=document.getElementById('bookmarkToggleBtn');if(!b)return;const on=isQuestionBookmarked(currentQuizPath,getBookmarkTargetIndex());b.classList.toggle('active',on);b.title=on?'Remove bookmark':'Bookmark question';b.innerHTML=on?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>'}
-function toggleCurrentBookmark(){if(!Array.isArray(data)||!data.length)return;const item=data[currentQ];if(!item)return;const targetIndex=getBookmarkTargetIndex();const id=bookmarkId(currentQuizPath,targetIndex);const list=getBookmarks();const at=list.findIndex(b=>b.id===id);if(at>=0)list.splice(at,1);else{const q=item.q_hi!==undefined?item.q_hi:item.q;const o=Array.isArray(item.o_hi)?item.o_hi:(Array.isArray(item.o)?item.o:[]);const tag=item.tag_hi!==undefined?item.tag_hi:item.tag;list.push({id:id,path:currentQuizPath,questionIndex:targetIndex,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:q||'',tag:tag||'',options:o,questionData:JSON.parse(JSON.stringify(item)),savedAt:Date.now()})}setBookmarks(list);updateBookmarkButton()}
+function isQuestionBookmarked(path,index){
+  const id=currentBookmarkIdOverride || bookmarkId(path,index);
+  return getBookmarks().some(b=>b.id===id);
+}
+function updateBookmarkButton(){
+  const b=document.getElementById('bookmarkToggleBtn');if(!b)return;
+  const on=isQuestionBookmarked(currentQuizPath,getBookmarkTargetIndex());
+  b.classList.toggle('active',on);b.title=on?'Remove bookmark':'Bookmark question';
+  b.innerHTML=on?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>';
+}
+function toggleCurrentBookmark(){
+  if(currentBookmarkIdOverride){
+    const list=getBookmarks().filter(b=>b.id!==currentBookmarkIdOverride);
+    setBookmarks(list); currentBookmarkIdOverride=null; updateBookmarkButton(); return;
+  }
+  if(!Array.isArray(data)||!data.length)return;
+  const item=data[currentQ];if(!item)return;
+  const targetIndex=getBookmarkTargetIndex();const id=bookmarkId(currentQuizPath,targetIndex);const list=getBookmarks();
+  const at=list.findIndex(b=>b.id===id);
+  if(at>=0)list.splice(at,1);
+  else{
+    const q=item.q_hi!==undefined?item.q_hi:item.q;
+    const o=Array.isArray(item.o_hi)?item.o_hi:(Array.isArray(item.o)?item.o:[]);
+    const tag=item.tag_hi!==undefined?item.tag_hi:item.tag;
+    list.push({id:id,path:currentQuizPath,questionIndex:targetIndex,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:q||'',tag:tag||'',options:o,questionData:JSON.parse(JSON.stringify(item)),savedAt:Date.now()});
+  }
+  setBookmarks(list);updateBookmarkButton();
+}
+function makeAIBookmarkId(quizCardData){
+  const base=bookmarkGroupKey(currentSubject,currentCategory,currentChapter,currentQuizTitle)||String(currentQuizPath||'');
+  const raw=[quizCardData.question||'',...(quizCardData.options||[]),quizCardData.examTag||''].join('|');
+  let h=2166136261;
+  for(let i=0;i<raw.length;i++){h^=raw.charCodeAt(i);h=Math.imul(h,16777619);}
+  return base+'::ai::'+(h>>>0).toString(36);
+}
+function isAICardBookmarked(quizCardData){
+  const id=makeAIBookmarkId(quizCardData);
+  return getBookmarks().some(b=>b.id===id);
+}
+function updateAICardBookmarkButton(btn,quizCardData){
+  if(!btn)return;
+  const on=isAICardBookmarked(quizCardData);
+  btn.classList.toggle('active',on);
+  btn.title=on?'Remove bookmark':'Save question';
+  btn.setAttribute('aria-label',on?'Remove bookmark':'Save question');
+  btn.innerHTML=on
+    ?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 21V4.5A2.5 2.5 0 0 0 15.5 2h-7A2.5 2.5 0 0 0 6 4.5V21l6-4 6 4V4.5Z"/></svg>'
+    :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>';
+}
+function toggleAICardBookmark(quizCardData,btn){
+  const id=makeAIBookmarkId(quizCardData), list=getBookmarks();
+  const at=list.findIndex(b=>b.id===id);
+  if(at>=0){
+    list.splice(at,1);
+  }else{
+    const item={
+      q:quizCardData.question||'',
+      o:Array.isArray(quizCardData.options)?quizCardData.options.slice():[],
+      a:Number.isInteger(quizCardData.correctIndex)?quizCardData.correctIndex:0,
+      tag:quizCardData.examTag||'',
+      e:''
+    };
+    list.push({
+      id:id,
+      path:currentQuizPath||'',
+      questionIndex:-1,
+      subject:currentSubject||'',
+      category:currentCategory||null,
+      chapter:currentChapter||'',
+      testTitle:currentQuizTitle||'',
+      q:item.q,
+      tag:item.tag,
+      options:item.o,
+      questionData:item,
+      aiGenerated:true,
+      savedAt:Date.now()
+    });
+  }
+  setBookmarks(list);
+  updateAICardBookmarkButton(btn,quizCardData);
+}
 function updateBookmarkDrawerCount(){const e=document.getElementById('drawerBookmarkCount');if(e){const n=getBookmarks().length;e.textContent=n?`${n} Saved Question${n===1?'':'s'}`:'No saved questions'}}
 function openAppSideDrawer(){updateBookmarkDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
 function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.classList.remove('active');document.getElementById('appSideDrawer')?.classList.remove('active')}
@@ -2900,7 +2979,9 @@ function renderBookmarkQuestions(subject,path){
   }
   items.forEach(b=>{
     const c=document.createElement('div'); c.className='premium-card bookmark-question-card';
-    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
+    const qLabel=b.aiGenerated?'AI Question':`Question ${b.questionIndex+1}`;
+    const qBadge=b.aiGenerated?'🤖':`Q${b.questionIndex+1}`;
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">${qBadge}</div><div class="card-details"><span class="card-main-title">${qLabel}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
     const removeBtn=c.querySelector('.bookmark-toggle-btn');
     removeBtn.addEventListener('click',(e)=>{
       e.preventDefault();
@@ -2941,6 +3022,7 @@ async function openBookmarkedQuestion(bookmark){
     ORIGINAL_TOTAL=1;
     currentQ=0;
     currentBookmarkQuestionIndex=Number.isInteger(bookmark.questionIndex)?bookmark.questionIndex:parseInt(bookmark.questionIndex,10);
+    currentBookmarkIdOverride=bookmark.aiGenerated?bookmark.id:null;
     score=0; currentStreak=0; maxStreak=0; elapsed=0;
     timerRunning=true; isPaused=false;
     answered=[false]; selectedAnswers=[null]; answerCorrect=[null]; questionTimes=[0];
@@ -2990,8 +3072,6 @@ async function buildGlobalQuizIndex() {
     const response = await fetch('./index.json?v=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) throw new Error("Unable to load index.json");
     allFlattenedQuizzes = await response.json();
-    // Establish a stable in-app root so Back can always unwind: Subject -> Home.
-    history.replaceState({ screen: 'subjects', appRoot: true }, '');
     isHistoryNav = true; // initial render should not push a duplicate history entry
     renderSubjects();
   } catch (error) {
@@ -3156,13 +3236,7 @@ window.addEventListener('popstate', (e) => {
   skipExitConfirmOnce = false;
 
   isHistoryNav = true;
-  const state = e.state || { screen: 'subjects', appRoot: true };
-
-  // If the browser reaches the app root, render Home/Subjects instead of leaving the app.
-  if (state.appRoot || state.screen === 'subjects') {
-    renderSubjects();
-    return;
-  }
+  const state = e.state || { screen: 'subjects' };
 
   // If currently inside the quiz engine, exit back to the explorer first
   const quizEngine = document.getElementById('quizEngineBox');
@@ -3658,62 +3732,8 @@ function handleSearch(query) {
 }
 
 function handleExplorerBack() {
-  // Use the explicit explorer hierarchy for the on-screen back button.
-  // This also works when the browser history stack has no usable previous
-  // entry (for example after opening the HTML directly or after a history
-  // restoration). Hardware/system back continues to use popstate below.
-  const s = history.state || {};
-  const screen = s.screen || '';
-  try {
-    if (screen === 'quizlist') {
-      renderChapters(s.subject, s.category || null);
-      history.replaceState({screen:'chapters',subject:s.subject,category:s.category||null}, '');
-      return;
-    }
-    if (screen === 'chapters') {
-      if (s.category) {
-        renderCategories(s.subject);
-        history.replaceState({screen:'categories',subject:s.subject}, '');
-      } else {
-        renderSubjects();
-        history.replaceState({screen:'subjects'}, '');
-      }
-      return;
-    }
-    if (screen === 'categories') {
-      renderSubjects();
-      history.replaceState({screen:'subjects'}, '');
-      return;
-    }
-    if (screen === 'bookmarkQuestions') {
-      renderBookmarkTests(s.subject, s.category || null, s.chapter || null, !!s.directOnly);
-      history.replaceState({screen:'bookmarkTests',subject:s.subject,category:s.category||null,chapter:s.chapter||null,directOnly:!!s.directOnly}, '');
-      return;
-    }
-    if (screen === 'bookmarkTests') {
-      if (s.chapter) {
-        renderBookmarkChapters(s.subject, s.category || null);
-        history.replaceState({screen:'bookmarkChapters',subject:s.subject,category:s.category||null}, '');
-      } else if (s.category) {
-        renderBookmarkLevel2(s.subject);
-        history.replaceState({screen:'bookmarkLevel2',subject:s.subject}, '');
-      } else {
-        renderBookmarkSubjects();
-        history.replaceState({screen:'bookmarks'}, '');
-      }
-      return;
-    }
-    if (screen === 'bookmarkChapters' || screen === 'bookmarkLevel2') {
-      renderBookmarkSubjects();
-      history.replaceState({screen:'bookmarks'}, '');
-      return;
-    }
-    if (screen === 'bookmarks') {
-      renderSubjects();
-      history.replaceState({screen:'subjects'}, '');
-      return;
-    }
-  } catch (_) {}
+  // Route through browser history so the on-screen arrow and the phone's
+  // hardware back button stay perfectly in sync (popstate does the actual render).
   history.back();
 }
 
@@ -4416,6 +4436,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   showLoader(true);
   isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
+  currentBookmarkIdOverride = null;
   currentQuizPath = quizPath; /* added: track path for leaderboard API */
   try {
     const quizInfo = allFlattenedQuizzes.find(q=>q.path===quizPath);
@@ -6230,6 +6251,21 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
   });
 
   msgDiv.appendChild(optionsBox);
+
+  const aiBookmarkRow = document.createElement('div');
+  aiBookmarkRow.style.cssText = 'display:flex;justify-content:flex-end;align-items:center;margin:8px 0 2px;';
+  const aiBookmarkBtn = document.createElement('button');
+  aiBookmarkBtn.type = 'button';
+  aiBookmarkBtn.className = 'bookmark-toggle-btn';
+  aiBookmarkBtn.style.cssText += 'width:42px;height:42px;';
+  aiBookmarkBtn.onclick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleAICardBookmark(quizCardData, aiBookmarkBtn);
+  };
+  aiBookmarkRow.appendChild(aiBookmarkBtn);
+  msgDiv.appendChild(aiBookmarkRow);
+  updateAICardBookmarkButton(aiBookmarkBtn, quizCardData);
 
   if (modelUsed) {
     const modelTag = document.createElement('div');
