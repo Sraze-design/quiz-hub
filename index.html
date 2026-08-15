@@ -1756,8 +1756,50 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .ai-sheet-close:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+.ai-pencil-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+.ai-pencil-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.ai-pencil-toggle.active {
+  background: #ffffff;
+  color: #2563eb;
+}
+.ai-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Pencil canvas is scoped to the message area only — the header
+   (draggable/close button) and the bottom input area sit outside this
+   element entirely, so they're never covered and always behave normally
+   whether or not AI-chat pencil mode is on. */
+#aiPencilCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  touch-action: none;
+}
+#ai-bottom-sheet.ai-pencil-on #aiPencilCanvas {
+  pointer-events: auto;
+}
 
 .ai-chat-body {
+  position: relative;
   flex: 1;
   padding: 16px;
   overflow-y: auto;
@@ -2617,7 +2659,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       <span style="font-size: 20px;">🤖</span>
       <span>AI Assistant</span>
     </div>
-    <button class="ai-sheet-close" onclick="toggleAIPanel()">✕</button>
+    <div class="ai-header-actions">
+      <button class="ai-pencil-toggle" id="aiPencilToggleBtn" type="button" onclick="toggleAIPencil()" title="Pencil">✏️</button>
+      <button class="ai-sheet-close" onclick="toggleAIPanel()">✕</button>
+    </div>
   </div>
 
   <div class="ai-chat-body" id="aiChatBody">
@@ -6116,5 +6161,117 @@ if ('serviceWorker' in navigator) {
   else place();
 })();
 </script>
+
+<script>
+// AI chat pencil: a small, self-contained drawing layer scoped to just the
+// message area (#aiChatBody) of the AI assistant sheet. Deliberately
+// separate from the main quiz-question pencil engine — different toggle,
+// different canvas, no shared state. The canvas only ever covers the chat
+// body element, so the header (drag/close) and the bottom input area sit
+// outside its bounds and are never intercepted, on or off.
+(function(){
+  let enabled=false, drawing=false, activePointerId=null;
+  let canvas=null, ctx=null, dpr=1;
+  let lastX=0,lastY=0,smoothX=0,smoothY=0;
+  const ALPHA=0.35, LINE_WIDTH=3.2;
+
+  function chatBody(){ return document.getElementById('aiChatBody'); }
+  function sheet(){ return document.getElementById('ai-bottom-sheet'); }
+
+  function ensureCanvas(){
+    if(canvas) return canvas;
+    const body=chatBody();
+    if(!body) return null;
+    canvas=document.createElement('canvas');
+    canvas.id='aiPencilCanvas';
+    body.appendChild(canvas);
+    ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+    resize();
+    return canvas;
+  }
+
+  function resize(){
+    if(!canvas) return;
+    const body=chatBody();
+    if(!body) return;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    const w=Math.max(1,body.clientWidth), h=Math.max(1,body.clientHeight);
+    // Preserve whatever's already drawn across a resize (e.g. keyboard
+    // opening/closing, orientation change) instead of wiping it.
+    let snapshot=null;
+    if(canvas.width>0 && canvas.height>0){
+      try{ snapshot=ctx.getImageData(0,0,canvas.width,canvas.height); }catch(_){ }
+    }
+    canvas.width=Math.round(w*dpr);
+    canvas.height=Math.round(h*dpr);
+    canvas.style.width=w+'px';
+    canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.strokeStyle='#dc2626';
+    ctx.lineWidth=LINE_WIDTH;
+    if(snapshot){
+      try{ ctx.putImageData(snapshot,0,0); }catch(_){ }
+    }
+  }
+
+  function isPen(e){ return e.pointerType==='pen'; }
+
+  function start(e){
+    if(!enabled||!canvas||e.target!==canvas||!isPen(e)) return;
+    e.preventDefault();
+    drawing=true;
+    activePointerId=e.pointerId;
+    const r=canvas.getBoundingClientRect();
+    smoothX=lastX=e.clientX-r.left;
+    smoothY=lastY=e.clientY-r.top;
+    // Immediate dot so a tap/short mark is visible even with no movement.
+    ctx.beginPath();
+    ctx.arc(smoothX,smoothY,LINE_WIDTH/2,0,Math.PI*2);
+    ctx.fillStyle=ctx.strokeStyle;
+    ctx.fill();
+  }
+
+  function move(e){
+    if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
+    e.preventDefault();
+    const r=canvas.getBoundingClientRect();
+    const x=e.clientX-r.left, y=e.clientY-r.top;
+    smoothX += ALPHA*(x-smoothX);
+    smoothY += ALPHA*(y-smoothY);
+    ctx.beginPath();
+    ctx.moveTo(lastX,lastY);
+    ctx.lineTo(smoothX,smoothY);
+    ctx.stroke();
+    lastX=smoothX; lastY=smoothY;
+  }
+
+  function end(e){
+    if(!drawing||e.pointerId!==activePointerId) return;
+    drawing=false;
+    activePointerId=null;
+  }
+
+  function setEnabled(v){
+    enabled=!!v;
+    ensureCanvas();
+    resize();
+    const sh=sheet();
+    if(sh) sh.classList.toggle('ai-pencil-on', enabled);
+    const btn=document.getElementById('aiPencilToggleBtn');
+    if(btn) btn.classList.toggle('active', enabled);
+  }
+
+  window.toggleAIPencil=function(){ setEnabled(!enabled); };
+
+  document.addEventListener('pointerdown', start, {capture:true, passive:false});
+  document.addEventListener('pointermove', move, {capture:true, passive:false});
+  document.addEventListener('pointerup', end, {capture:true, passive:false});
+  document.addEventListener('pointercancel', end, {capture:true, passive:false});
+  window.addEventListener('resize', function(){ if(enabled) resize(); }, {passive:true});
+})();
+</script>
 </body>
+
 </html>
