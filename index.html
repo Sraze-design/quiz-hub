@@ -3550,17 +3550,7 @@ function showEmptyState() {
   }
 
   function move(e){
-    if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen'||usingRawStream) return;
-    e.preventDefault();
-    const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
-    appendEvents(events.length?events:[e]);
-  }
-
-  function rawMove(e){
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
-    // Once raw samples arrive, use that stream exclusively for this stroke.
-    // This prevents pointermove + pointerrawupdate from fighting each other.
-    usingRawStream=true;
     e.preventDefault();
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
     appendEvents(events.length?events:[e]);
@@ -3651,6 +3641,21 @@ function showEmptyState() {
     if(ctx) redraw();
   };
 
+  // Safety net: if a pointerup/pointercancel ever gets missed (e.g. the app
+  // is backgrounded or the OS eats the event mid-stroke), force-finalize the
+  // stroke so drawing state can never stay stuck until the pen is re-lifted.
+  function forceEndStroke(){
+    if(!drawing) return;
+    drawing=false; activePointerId=null; usingRawStream=false;
+    if(currentStroke&&currentStroke.points.length){
+      strokes.push(currentStroke);
+      redoStack=[];
+      save();
+    }
+    currentStroke=null;
+    redraw();
+  }
+
   function init(){
     canvas=document.getElementById('pencilCanvas');
     toggle=document.getElementById('pencilToggleBtn');
@@ -3671,7 +3676,6 @@ function showEmptyState() {
     // stroke is painted synchronously for the lowest possible input latency.
     document.addEventListener('pointerdown',start,{capture:true,passive:false});
     document.addEventListener('pointermove',move,{capture:true,passive:false});
-    document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
 
@@ -3699,6 +3703,8 @@ function showEmptyState() {
     document.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
     window.addEventListener('resize',resize,{passive:true});
     window.addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});
+    window.addEventListener('blur',forceEndStroke,{passive:true});
+    document.addEventListener('visibilitychange',()=>{ if(document.hidden) forceEndStroke(); },{passive:true});
   }
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
