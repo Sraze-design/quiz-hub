@@ -3723,19 +3723,23 @@ function showEmptyState() {
 
   function isPencil(e){ return enabled && e.pointerType==='pen' && !isPaused; }
 
-  // Header (timer/pause/pencil-toggle/menu bar) and the bottom Back/Submit/Next
-  // control bar are excluded from the drawing layer entirely. Touching or
-  // tapping them with the Apple Pencil (or a finger) behaves like a normal
-  // tap/click there, never starts a stroke, and is never blocked.
-  // Header/footer/toolbar, every actual button/link/input, and every modal
-  // or popup overlay in the app (exit-confirm, submit-confirm, pause,
-  // retest, streak, AI sheet, question palette, etc.) are excluded from the
-  // drawing layer entirely. Whenever a button is enabled/visible on screen,
-  // touching it with the Apple Pencil (or a finger) behaves like a normal
-  // tap/click there — it never starts a stroke and is never blocked.
+  // Only the named real control zones are excluded from the drawing layer:
+  // the header (timer/pause/pencil-toggle/menu bar), the bottom Back/Submit/
+  // Next control bar, the pencil toolbar itself, and modal/popup overlays
+  // (exit-confirm, submit-confirm, pause, retest, streak, AI sheet, question
+  // palette, etc.). Touching or tapping inside these with the Apple Pencil
+  // (or a finger) behaves like a normal tap/click, never starts a stroke,
+  // and is never blocked.
+  //
+  // Deliberately NOT excluded: generic 'button'/'a'/'input'/'select'/
+  // 'textarea'/'label' tags anywhere else on the page. Excluding those
+  // globally used to silently stop a new stroke from starting whenever the
+  // pencil happened to land on some incidental tag inside the question/
+  // content area — that's what caused writing to "atak jaana" (get stuck)
+  // mid-word when shifting to the next letter. Now the pencil can write
+  // anywhere outside the named control zones, without interruption.
   var EXCLUDED_ZONE_SELECTOR = [
     '.floating-quiz-header', '#controls', '#pencilTools',
-    'button', '[role="button"]', 'a', 'input', 'select', 'textarea', 'label',
     '#exitConfirmModal', '#exitConfirmFade',
     '#pauseModal', '#pauseFade',
     '#submitConfirmModal', '#submitConfirmFade',
@@ -3746,11 +3750,6 @@ function showEmptyState() {
 
   function isInExcludedZone(target){
     if(!target || !target.closest) return false;
-    // Answer options are always drawable (mark/underline/scribble on them),
-    // even though they are <button> elements. Accidental option-selection
-    // while pencil mode is on is separately prevented in
-    // blockOptionAndSelection, so this doesn't risk mis-taps.
-    if(target.closest('#options button, #options [role="button"], .options-stack button')) return false;
     return !!target.closest(EXCLUDED_ZONE_SELECTOR);
   }
 
@@ -6297,6 +6296,24 @@ if ('serviceWorker' in navigator) {
     sh.appendChild(canvas);
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
+    // Keep the canvas glued to the chat body's actual on-screen rect for
+    // any layout shift, not just a window resize event. A stale rect here
+    // is what let a pen touch land on the underlying message content
+    // instead of the canvas (e.target!==canvas → stroke silently doesn't
+    // start), which is what made writing appear to "atak jaana" mid-word.
+    // window 'resize' alone misses: mobile keyboard open/close, the input
+    // area growing/shrinking, or the header changing height — none of
+    // those reliably fire a window resize event.
+    if(typeof ResizeObserver!=='undefined'){
+      const ro=new ResizeObserver(function(){ if(enabled) resize(); });
+      ro.observe(sh);
+      const body=chatBody();
+      if(body) ro.observe(body);
+    }
+    if(window.visualViewport){
+      window.visualViewport.addEventListener('resize', function(){ if(enabled) resize(); }, {passive:true});
+      window.visualViewport.addEventListener('scroll', function(){ if(enabled) resize(); }, {passive:true});
+    }
     return canvas;
   }
 
@@ -6321,6 +6338,7 @@ if ('serviceWorker' in navigator) {
     if(tb) tb.style.top=(top+8)+'px';
     redraw(); // full clean redraw from stroke data, same as main engine
   }
+
 
   function redraw(){
     if(!ctx||!canvas) return;
