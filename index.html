@@ -3339,19 +3339,22 @@ function showEmptyState() {
 }
 
 /* ===== Apple Pencil full-screen annotation engine =====
-   Additive only: no quiz scoring/navigation/AI code is replaced. */
+   Additive only: quiz scoring/navigation/AI code remains untouched.
+   Input path is intentionally simple: one active Pencil stream, synchronous
+   segment painting, coalesced samples when available, and raw samples only
+   as a fallback/primary stream (never both at once). */
 (function initApplePencilLayer(){
   let canvas, ctx, toggle, tools;
   let enabled=false, drawing=false, activePointerId=null, tool='pen';
   let strokes=[], redoStack=[], currentStroke=null;
-  let dpr=1;
+  let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
-  let rafPending=false, rafEvents=[];
 
   function qKey(){
     const quiz=currentQuizPath || currentQuizTitle || 'quiz';
-    return 'devssc:pencil:v2:' + quiz + ':q:' + String(currentQ);
+    return 'devssc:pencil:v3:' + quiz + ':q:' + String(currentQ);
   }
+
   function resize(){
     if(!canvas) return;
     const w=Math.max(1,window.innerWidth), h=Math.max(1,window.innerHeight);
@@ -3359,208 +3362,241 @@ function showEmptyState() {
     const old=document.createElement('canvas');
     old.width=canvas.width; old.height=canvas.height;
     if(old.width&&old.height) old.getContext('2d').drawImage(canvas,0,0);
-    canvas.width=Math.round(w*dpr); canvas.height=Math.round(h*dpr);
-    canvas.style.width=w+'px'; canvas.style.height=h+'px';
+    canvas.width=Math.round(w*dpr);
+    canvas.height=Math.round(h*dpr);
+    canvas.style.width=w+'px';
+    canvas.style.height=h+'px';
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     ctx.setTransform(dpr,0,0,dpr,0,0);
     redraw();
   }
-  function point(e){return {x:e.clientX,y:e.clientY};}
+
+  function point(e){ return {x:e.clientX,y:e.clientY}; }
+
   function applyStyle(){
-    ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.lineWidth = tool==='eraser' ? 24 : 3;
-    ctx.strokeStyle = tool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
-    ctx.globalCompositeOperation = tool==='eraser' ? 'destination-out' : 'source-over';
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.lineWidth=tool==='eraser' ? 24 : 3;
+    ctx.strokeStyle=tool==='eraser' ? 'rgba(0,0,0,1)' : '#dc2626';
+    ctx.globalCompositeOperation=tool==='eraser' ? 'destination-out' : 'source-over';
   }
-  function drawStroke(st){
-    if(!st || st.points.length<2) return;
+
+  function drawSegment(a,b){
+    if(!ctx||!a||!b) return;
     applyStyle();
     ctx.beginPath();
-    ctx.moveTo(st.points[0].x,st.points[0].y);
-    for(let i=1;i<st.points.length;i++) ctx.lineTo(st.points[i].x,st.points[i].y);
+    ctx.moveTo(a.x,a.y);
+    ctx.lineTo(b.x,b.y);
     ctx.stroke();
     ctx.globalCompositeOperation='source-over';
   }
+
+  function drawDot(a){
+    if(!ctx||!a) return;
+    applyStyle();
+    ctx.beginPath();
+    ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
+    ctx.fillStyle=ctx.strokeStyle;
+    ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+  }
+
+  function drawStroke(st){
+    if(!st||!st.points.length) return;
+    if(st.points.length===1){ drawDot(st.points[0]); return; }
+    for(let i=1;i<st.points.length;i++) drawSegment(st.points[i-1],st.points[i]);
+  }
+
   function redraw(){
     if(!ctx) return;
     ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
     for(const st of strokes) drawStroke(st);
     if(currentStroke) drawStroke(currentStroke);
   }
+
   function save(){
-    try{localStorage.setItem(qKey(),JSON.stringify(strokes));}catch(e){/* storage is optional */}
+    try{localStorage.setItem(qKey(),JSON.stringify(strokes));}catch(_){ }
   }
+
   function load(){
-    try{strokes=JSON.parse(localStorage.getItem(qKey())||'[]'); if(!Array.isArray(strokes)) strokes=[];}catch(e){strokes=[];}
-    redoStack=[]; currentStroke=null; redraw();
+    try{
+      strokes=JSON.parse(localStorage.getItem(qKey())||'[]');
+      if(!Array.isArray(strokes)) strokes=[];
+    }catch(_){ strokes=[]; }
+    redoStack=[];
+    currentStroke=null;
+    redraw();
   }
-  function clearAll(){strokes=[];redoStack=[];currentStroke=null;redraw();save();}
-  function setTool(nextTool){tool=nextTool;document.getElementById('pencilPenBtn')?.classList.toggle('active',tool==='pen');document.getElementById('pencilEraserBtn')?.classList.toggle('active',tool==='eraser');}
+
+  function clearAll(){
+    strokes=[]; redoStack=[]; currentStroke=null;
+    redraw(); save();
+  }
+
+  function setTool(nextTool){
+    tool=nextTool;
+    document.getElementById('pencilPenBtn')?.classList.toggle('active',tool==='pen');
+    document.getElementById('pencilEraserBtn')?.classList.toggle('active',tool==='eraser');
+  }
+
+  function isPencil(e){ return enabled && e.pointerType==='pen' && !isPaused; }
+
+  function appendSample(ev){
+    if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
+    const x=ev.clientX, y=ev.clientY, t=ev.timeStamp||performance.now();
+    if(x===lastX && y===lastY && t===lastTime) return;
+    const next={x,y};
+    drawSegment({x:lastX,y:lastY},next);
+    currentStroke.points.push(next);
+    lastX=x; lastY=y; lastTime=t;
+  }
+
+  function appendEvents(events){
+    for(const ev of events) appendSample(ev);
+  }
+
   function start(e){
-    if(!enabled || e.pointerType!=='pen' || isPaused) return;
-    e.preventDefault(); e.stopPropagation();
-    drawing=true; activePointerId=e.pointerId; currentStroke={tool,points:[point(e)]};
-    rafEvents=[]; rafPending=false; lastX=e.clientX; lastY=e.clientY; lastTime=e.timeStamp||performance.now();
-    // Paint the first Pencil contact immediately instead of waiting for the
-    // first pointermove event. This removes the 'first letter doesn't appear'
-    // feeling on fast handwriting.
-    drawPointOrSegment(currentStroke.points[0],null);
-    try{canvas.setPointerCapture(e.pointerId);}catch(_){ }
+    if(!isPencil(e)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    drawing=true;
+    activePointerId=e.pointerId;
+    usingRawStream=false;
+    const p=point(e);
+    currentStroke={tool,points:[p]};
+    lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
+    drawDot(p); // immediate first contact
+
+    // Capture on the document rather than the transparent canvas. The canvas
+    // intentionally has pointer-events:none so the normal page remains usable.
+    try{document.documentElement.setPointerCapture?.(e.pointerId);}catch(_){ }
   }
-  function drawPointOrSegment(a,b){
-    if(!ctx || !a) return;
-    applyStyle();
-    ctx.beginPath();
-    if(b){
-      ctx.moveTo(a.x,a.y);
-      ctx.lineTo(b.x,b.y);
-    }else{
-      // Draw the very first Pencil contact immediately so a short tap/dot
-      // never feels like it was ignored.
-      ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
-    }
-    ctx.stroke();
-    ctx.globalCompositeOperation='source-over';
-  }
-  function paintMoveEvents(events){
-    if(!drawing || !currentStroke || !events.length) return;
-    let prev=currentStroke.points[currentStroke.points.length-1];
-    for(const ev of events){
-      const next=point(ev);
-      // Ignore duplicate samples that Safari/WebKit can occasionally emit.
-      if(next.x===lastX && next.y===lastY && ev.timeStamp===lastTime) continue;
-      drawPointOrSegment(prev,next);
-      currentStroke.points.push(next);
-      lastX=next.x; lastY=next.y; lastTime=ev.timeStamp || performance.now();
-      prev=next;
-    }
-  }
+
   function move(e){
-    if(!enabled || !drawing || e.pointerId!==activePointerId || e.pointerType!=='pen') return;
+    if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen'||usingRawStream) return;
     e.preventDefault();
-    const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[e];
-    // Queue the latest high-frequency samples into one animation-frame paint.
-    // This avoids Safari main-thread contention while still consuming every
-    // coalesced Pencil sample instead of waiting for a visible gap.
-    rafEvents.push(...events);
-    if(!rafPending){
-      rafPending=true;
-      requestAnimationFrame(()=>{
-        rafPending=false;
-        const batch=rafEvents;
-        rafEvents=[];
-        paintMoveEvents(batch);
-      });
-    }
+    const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    appendEvents(events.length?events:[e]);
   }
+
   function rawMove(e){
-    // pointerrawupdate is available on some WebKit builds and can arrive
-    // earlier/more frequently than pointermove. Use it as an additional
-    // source, but only while a Pencil stroke is active.
-    if(!enabled || !drawing || e.pointerId!==activePointerId || e.pointerType!=='pen') return;
+    if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
+    // Once raw samples arrive, use that stream exclusively for this stroke.
+    // This prevents pointermove + pointerrawupdate from fighting each other.
+    usingRawStream=true;
     e.preventDefault();
-    if(typeof e.getCoalescedEvents==='function'){
-      rafEvents.push(...e.getCoalescedEvents());
-    }else{
-      rafEvents.push(e);
-    }
-    if(!rafPending){
-      rafPending=true;
-      requestAnimationFrame(()=>{
-        rafPending=false;
-        const batch=rafEvents;
-        rafEvents=[];
-        paintMoveEvents(batch);
-      });
-    }
+    const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    appendEvents(events.length?events:[e]);
   }
+
   function end(e){
-    if(!drawing || e.pointerId!==activePointerId) return;
-    e.preventDefault(); e.stopPropagation();
-    // Flush any queued Pencil samples before committing the stroke.
-    if(rafEvents.length) paintMoveEvents(rafEvents);
-    rafEvents=[]; rafPending=false;
-    drawing=false;activePointerId=null;
-    if(currentStroke && currentStroke.points.length){strokes.push(currentStroke);redoStack=[];save();}
+    if(!drawing||e.pointerId!==activePointerId) return;
+    e.preventDefault();
+    e.stopPropagation();
+    drawing=false;
+    activePointerId=null;
+    usingRawStream=false;
+    try{document.documentElement.releasePointerCapture?.(e.pointerId);}catch(_){ }
+    if(currentStroke&&currentStroke.points.length){
+      strokes.push(currentStroke);
+      redoStack=[];
+      save();
+    }
     currentStroke=null;
   }
-  function preventSelection(e){
-    if(!enabled) return;
 
-    // While Pencil mode is ON, never let an Apple Pencil tap/long-press OR a
-    // resting palm/finger accidentally activate an MCQ option. The quiz can
-    // still be answered normally after Pencil mode is turned OFF.
-    const optionTarget = e.target && e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
+  function blockOptionAndSelection(e){
+    if(!enabled) return;
+    const optionTarget=e.target&&e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
     if(optionTarget){
       e.preventDefault();
       e.stopPropagation();
       return;
     }
-
-    // Never allow Safari's text-selection/context menu while Pencil mode is active.
-    if(e.type==='contextmenu' || e.type==='selectstart') {e.preventDefault();e.stopPropagation();}
-    if(e.pointerType==='pen'){e.preventDefault();e.stopPropagation();}
-  }
-
-  function blockOptionActivationWhilePencil(e){
-    if(!enabled) return;
-    const optionTarget = e.target && e.target.closest ? e.target.closest('#options button, #options [role=button], .options-stack button') : null;
-    if(!optionTarget) return;
-    e.preventDefault();
-    e.stopPropagation();
-    // Stop the event at capture phase so neither inline handlers nor delegated
-    // option handlers can mark an answer while Pencil mode is active.
+    if(e.type==='contextmenu'||e.type==='selectstart'){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if(e.pointerType==='pen'){
+      e.preventDefault();
+      e.stopPropagation();
+    }
   }
 
   function clearNativeSelection(){
     if(!enabled) return;
     try{
-      const sel=window.getSelection ? window.getSelection() : null;
-      if(sel && sel.rangeCount) sel.removeAllRanges();
+      const sel=window.getSelection?.();
+      if(sel&&sel.rangeCount) sel.removeAllRanges();
     }catch(_){ }
   }
+
   function toggleMode(){
     enabled=!enabled;
     document.body.classList.toggle('pencil-mode',enabled);
     canvas.style.display=enabled?'block':'none';
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
-    if(enabled){load();}
-    else {drawing=false;activePointerId=null;}
+    if(enabled) load();
+    else { drawing=false; activePointerId=null; usingRawStream=false; }
   }
-  function undo(){if(!strokes.length)return;redoStack.push(strokes.pop());redraw();save();}
-  function redo(){if(!redoStack.length)return;strokes.push(redoStack.pop());redraw();save();}
 
-  window.__pencilOnQuestionChange=function(){if(enabled) load();};
-  window.__pencilResetForQuiz=function(){strokes=[];redoStack=[];currentStroke=null;if(ctx)redraw();};
+  function undo(){
+    if(!strokes.length) return;
+    redoStack.push(strokes.pop());
+    redraw(); save();
+  }
+
+  function redo(){
+    if(!redoStack.length) return;
+    strokes.push(redoStack.pop());
+    redraw(); save();
+  }
+
+  window.__pencilOnQuestionChange=function(){ if(enabled) load(); };
+  window.__pencilResetForQuiz=function(){
+    strokes=[]; redoStack=[]; currentStroke=null;
+    if(ctx) redraw();
+  };
 
   function init(){
-    canvas=document.getElementById('pencilCanvas');toggle=document.getElementById('pencilToggleBtn');tools=document.getElementById('pencilTools');
-    if(!canvas||!toggle||!tools)return;
+    canvas=document.getElementById('pencilCanvas');
+    toggle=document.getElementById('pencilToggleBtn');
+    tools=document.getElementById('pencilTools');
+    if(!canvas||!toggle||!tools) return;
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
+
     toggle.addEventListener('click',toggleMode);
-    document.getElementById('pencilPenBtn').addEventListener('click',()=>setTool('pen'));
-    document.getElementById('pencilEraserBtn').addEventListener('click',()=>setTool('eraser'));
-    document.getElementById('pencilUndoBtn').addEventListener('click',undo);
-    document.getElementById('pencilRedoBtn').addEventListener('click',redo);
-    document.getElementById('pencilClearBtn').addEventListener('click',clearAll);
+    document.getElementById('pencilPenBtn')?.addEventListener('click',()=>setTool('pen'));
+    document.getElementById('pencilEraserBtn')?.addEventListener('click',()=>setTool('eraser'));
+    document.getElementById('pencilUndoBtn')?.addEventListener('click',undo);
+    document.getElementById('pencilRedoBtn')?.addEventListener('click',redo);
+    document.getElementById('pencilClearBtn')?.addEventListener('click',clearAll);
+
+    // Pencil input is handled at document level because the transparent canvas
+    // intentionally does not receive pointer events. No RAF queue here: the
+    // stroke is painted synchronously for the lowest possible input latency.
     document.addEventListener('pointerdown',start,{capture:true,passive:false});
     document.addEventListener('pointermove',move,{capture:true,passive:false});
     document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
-    // Safety guard: no option can be activated by Pencil, finger, or palm
-    // while Pencil mode is enabled.
-    document.addEventListener('pointerdown',blockOptionActivationWhilePencil,{capture:true,passive:false});
-    document.addEventListener('click',blockOptionActivationWhilePencil,{capture:true,passive:false});
-    document.addEventListener('contextmenu',preventSelection,{capture:true});
-    document.addEventListener('selectstart',preventSelection,{capture:true});
+
+    // While Pencil mode is active, prevent accidental option selection and
+    // Safari text selection/context menus. Pencil mode can be turned OFF to
+    // restore the original quiz interaction exactly.
+    document.addEventListener('pointerdown',blockOptionAndSelection,{capture:true,passive:false});
+    document.addEventListener('click',blockOptionAndSelection,{capture:true,passive:false});
+    document.addEventListener('contextmenu',blockOptionAndSelection,{capture:true,passive:false});
+    document.addEventListener('selectstart',blockOptionAndSelection,{capture:true,passive:false});
     document.addEventListener('selectionchange',clearNativeSelection,{capture:true,passive:true});
     window.addEventListener('resize',resize,{passive:true});
     window.addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
 })();
 
 async function loadQuizData(quizPath) {
