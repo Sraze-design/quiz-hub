@@ -2813,11 +2813,7 @@ function bookmarkId(path,index){return String(path||'')+'::q::'+String(index)}
 function getBookmarkTargetIndex(){return Number.isInteger(currentBookmarkQuestionIndex)?currentBookmarkQuestionIndex:currentQ}
 function isQuestionBookmarked(path,index){const id=bookmarkId(path,index);return getBookmarks().some(b=>b.id===id)}
 function updateBookmarkButton(){const b=document.getElementById('bookmarkToggleBtn');if(!b)return;const on=isQuestionBookmarked(currentQuizPath,getBookmarkTargetIndex());b.classList.toggle('active',on);b.title=on?'Remove bookmark':'Bookmark question';b.innerHTML=on?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>'}
-function getBookmarkQuestionText(item){if(!item)return'';return item.q_hi!==undefined?item.q_hi:(item.q!==undefined?item.q:'')}
-function getBookmarkOptions(item){if(!item)return[];if(Array.isArray(item.o_hi))return item.o_hi;if(Array.isArray(item.o))return item.o;return[]}
-function getBookmarkTag(item){if(!item)return'';return item.tag_hi!==undefined?item.tag_hi:(item.tag!==undefined?item.tag:'')}
-function getBookmarkExplanation(item){if(!item)return'';return item.e_hi!==undefined?item.e_hi:(item.e!==undefined?item.e:'')}
-function toggleCurrentBookmark(){if(!Array.isArray(data)||!data.length)return;const item=data[currentQ];if(!item)return;const targetIndex=getBookmarkTargetIndex();const id=bookmarkId(currentQuizPath,targetIndex);const list=getBookmarks();const at=list.findIndex(b=>b.id===id);if(at>=0)list.splice(at,1);else{list.push({id:id,path:currentQuizPath,questionIndex:targetIndex,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:getBookmarkQuestionText(item),tag:getBookmarkTag(item),options:getBookmarkOptions(item),explanation:getBookmarkExplanation(item),questionData:JSON.parse(JSON.stringify(item)),savedAt:Date.now()})}setBookmarks(list);updateBookmarkButton()}
+function toggleCurrentBookmark(){if(!Array.isArray(data)||!data.length)return;const item=data[currentQ];if(!item)return;const targetIndex=getBookmarkTargetIndex();const id=bookmarkId(currentQuizPath,targetIndex);const list=getBookmarks();const at=list.findIndex(b=>b.id===id);if(at>=0)list.splice(at,1);else{const q=item.q_hi!==undefined?item.q_hi:item.q;const o=Array.isArray(item.o_hi)?item.o_hi:(Array.isArray(item.o)?item.o:[]);const tag=item.tag_hi!==undefined?item.tag_hi:item.tag;list.push({id:id,path:currentQuizPath,questionIndex:targetIndex,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:q||'',tag:tag||'',options:o,questionData:JSON.parse(JSON.stringify(item)),savedAt:Date.now()})}setBookmarks(list);updateBookmarkButton()}
 function updateBookmarkDrawerCount(){const e=document.getElementById('drawerBookmarkCount');if(e){const n=getBookmarks().length;e.textContent=n?`${n} Saved Question${n===1?'':'s'}`:'No saved questions'}}
 function openAppSideDrawer(){updateBookmarkDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
 function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.classList.remove('active');document.getElementById('appSideDrawer')?.classList.remove('active')}
@@ -2902,7 +2898,7 @@ function renderBookmarkQuestions(subject,path){
   }
   items.forEach(b=>{
     const c=document.createElement('div'); c.className='premium-card bookmark-question-card';
-    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q || (b.questionData ? getBookmarkQuestionText(b.questionData) : ''))}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
     const removeBtn=c.querySelector('.bookmark-toggle-btn');
     removeBtn.addEventListener('click',(e)=>{
       e.preventDefault();
@@ -2914,6 +2910,7 @@ function renderBookmarkQuestions(subject,path){
 }
 async function openBookmarkedQuestion(bookmark){
   if(!bookmark) return;
+  isBookmarkOnlyQuiz = true;
   showLoader(true);
   try{
     currentQuizPath = bookmark.path || '';
@@ -3004,6 +3001,7 @@ async function buildGlobalQuizIndex() {
 // hardware back button / gesture goes one step back instead of closing the app.
 let isHistoryNav = false;
 let skipExitConfirmOnce = false;
+let isBookmarkOnlyQuiz = false;
 
 // True while a test is actively running (started, not yet submitted).
 function isTestInProgressNow() {
@@ -3112,6 +3110,15 @@ window.addEventListener('popstate', (e) => {
   // away (so the address/back-stack looks untouched while the modal is
   // up), and only actually exit if the user confirms "Yes".
   if (!skipExitConfirmOnce) {
+    // A bookmarked question is a single-question viewer, not an active test.
+    // Back should return to the Bookmark list without showing the test-exit confirmation.
+    if (isBookmarkOnlyQuiz) {
+      isBookmarkOnlyQuiz = false;
+      skipExitConfirmOnce = true;
+      history.back();
+      return;
+    }
+
     // If the Pause or Submit-confirm overlay is open, this back-action
     // should just close that overlay (one step at a time), matching
     // Android's hardware back button behavior — not jump straight to the
@@ -3150,6 +3157,7 @@ window.addEventListener('popstate', (e) => {
   const quizEngine = document.getElementById('quizEngineBox');
   if (quizEngine && quizEngine.style.display !== 'none') {
     quizEngine.style.display = 'none';
+    if (state.screen !== 'quiz' || !e.state?.bookmarkOnly) isBookmarkOnlyQuiz = false;
     if (typeof unlockBodyScroll === 'function') unlockBodyScroll();
     document.getElementById('explorerScreen').style.display = 'flex';
     document.getElementById('score-card').style.display = 'none';
@@ -3254,6 +3262,13 @@ function handleEdgeBackGesture(e) {
   }
 
   if (!isTestInProgressNow()) return;
+  if (isBookmarkOnlyQuiz) {
+    e.preventDefault();
+    isBookmarkOnlyQuiz = false;
+    skipExitConfirmOnce = true;
+    history.back();
+    return;
+  }
   if (document.getElementById('exitConfirmModal')?.classList.contains('show')) return;
 
   // Stop the native interactive back gesture from starting at all.
@@ -4334,6 +4349,7 @@ function showEmptyState() {
 
 async function loadQuizData(quizPath, requestedQuestionIndex) {
   showLoader(true);
+  isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
   currentQuizPath = quizPath; /* added: track path for leaderboard API */
   try {
