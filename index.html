@@ -3398,21 +3398,49 @@ function showEmptyState() {
     if(!enabled || e.pointerType!=='pen' || isPaused) return;
     e.preventDefault(); e.stopPropagation();
     drawing=true; activePointerId=e.pointerId; currentStroke={tool,points:[point(e)]};
+    // Paint the first Pencil contact immediately instead of waiting for the
+    // first pointermove event. This removes the 'first letter doesn't appear'
+    // feeling on fast handwriting.
+    drawPointOrSegment(currentStroke.points[0],null);
     try{canvas.setPointerCapture(e.pointerId);}catch(_){ }
+  }
+  function drawPointOrSegment(a,b){
+    if(!ctx || !a) return;
+    applyStyle();
+    ctx.beginPath();
+    if(b){
+      ctx.moveTo(a.x,a.y);
+      ctx.lineTo(b.x,b.y);
+    }else{
+      // Draw the very first Pencil contact immediately so a short tap/dot
+      // never feels like it was ignored.
+      ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
+    }
+    ctx.stroke();
+    ctx.globalCompositeOperation='source-over';
   }
   function move(e){
     if(!enabled || !drawing || e.pointerId!==activePointerId || e.pointerType!=='pen') return;
     e.preventDefault(); e.stopPropagation();
     const events=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():[e];
-    for(const ev of events) currentStroke.points.push(point(ev));
-    redraw();
+    let prev=currentStroke.points[currentStroke.points.length-1];
+    for(const ev of events){
+      const next=point(ev);
+      // Draw only the new segment. The old implementation redrew the entire
+      // full-screen canvas on every Pencil event, which can cause visible
+      // input lag on iPad Safari. Incremental drawing keeps the stroke
+      // responsive while the complete stroke is still saved only on release.
+      drawPointOrSegment(prev,next);
+      currentStroke.points.push(next);
+      prev=next;
+    }
   }
   function end(e){
     if(!drawing || e.pointerId!==activePointerId) return;
     e.preventDefault(); e.stopPropagation();
     drawing=false;activePointerId=null;
-    if(currentStroke && currentStroke.points.length>1){strokes.push(currentStroke);redoStack=[];save();}
-    currentStroke=null;redraw();
+    if(currentStroke && currentStroke.points.length){strokes.push(currentStroke);redoStack=[];save();}
+    currentStroke=null;
   }
   function preventSelection(e){
     if(!enabled) return;
