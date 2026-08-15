@@ -3921,6 +3921,25 @@ function showEmptyState() {
     document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
     document.addEventListener('touchmove',blockAllTouch,{capture:true,passive:false});
     document.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
+
+    // Second half of the palm-rejection fix: touch-action:none stops the
+    // *page* from scrolling/zooming on a second touch, but Safari's native
+    // pinch/two-finger gesture recognizer (gesturestart/gesturechange) sits
+    // a layer below that and fires independently whenever 2+ touch points
+    // land on screen — pen + resting palm counts. Left unblocked, WebKit
+    // still treats that as a gesture candidate and cancels the pen's
+    // in-progress pointer stream until it's physically lifted and replaced,
+    // even though touch-action is already none. Blocking these three events
+    // whenever pencil mode is on closes that gap.
+    function blockGesture(e){
+      if(!enabled) return;
+      if(isInExcludedZone(e.target)) return;
+      e.preventDefault();
+    }
+    document.addEventListener('gesturestart',blockGesture,{capture:true,passive:false});
+    document.addEventListener('gesturechange',blockGesture,{capture:true,passive:false});
+    document.addEventListener('gestureend',blockGesture,{capture:true,passive:false});
+
     window.addEventListener('resize',resize,{passive:true});
     window.addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});
     window.addEventListener('blur',forceEndStroke,{passive:true});
