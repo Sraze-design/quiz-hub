@@ -3711,6 +3711,14 @@ function showEmptyState() {
     if(isInExcludedZone(e.target)) return;
     e.preventDefault();
     e.stopPropagation();
+
+    // Defensive cleanup: if a previous stroke never got a proper end (the
+    // rare stream hiccup discussed above), finalize it now instead of just
+    // discarding it, and drop any stale pointer capture from that old
+    // pointerId so it can't interfere with this new touch.
+    if(drawing) forceEndStroke();
+    try{document.documentElement.releasePointerCapture?.(e.pointerId);}catch(_){ }
+
     drawing=true;
     activePointerId=e.pointerId;
     usingRawStream=false;
@@ -3907,6 +3915,21 @@ function showEmptyState() {
     currentStroke=null;
     redraw();
   }
+
+  // Extra safety net, independent of blur/visibilitychange: sometimes
+  // WebKit's pointer stream can silently stop delivering events mid-stroke
+  // with no blur, no tab-hide, and no palm/second-touch involved at all —
+  // just a rare stream hiccup. Previously the only way out was physically
+  // lifting the pencil and touching down again (which produces a fresh
+  // pointerdown that resets state). This watchdog checks periodically
+  // whether a stroke has gone stale (no new sample in a while despite
+  // drawing=true) and force-finalizes it on its own, so a fresh touch is
+  // never blocked waiting for a stuck stroke to be cleaned up.
+  setInterval(function(){
+    if(!drawing) return;
+    const idle=(performance.now()-lastTime);
+    if(idle>350) forceEndStroke();
+  },200);
 
   function init(){
     canvas=document.getElementById('pencilCanvas');
