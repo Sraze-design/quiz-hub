@@ -3386,7 +3386,7 @@ function showEmptyState() {
   let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
   let smoothX=0,smoothY=0;
-  const SMOOTH_ALPHA=0.35; // lower = smoother/more like ink, higher = more responsive
+  const SMOOTH_ALPHA=0.22; // lower = smoother/more like ink, higher = more responsive
   const BASE_WIDTH=4.6;    // pen stroke thickness
   const MIN_WIDTH=3.2, MAX_WIDTH=6.8;
 
@@ -3734,23 +3734,6 @@ function showEmptyState() {
     if(tool==='star') return; // no live drag-preview for the star stamp
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
     appendEvents(events.length?events:[e]);
-
-    // Predicted-event preview: draw one short speculative segment from the
-    // latest confirmed point toward where the OS predicts the pencil will
-    // be a few ms from now. This is the trick that makes ink feel like it's
-    // keeping up with the tip instead of trailing behind it (like Apple
-    // Notes). It's never written into currentStroke.points, so it can't
-    // corrupt the saved stroke, undo/redo, or eraser — the very next real
-    // move event simply redraws the confirmed segment over this same short
-    // stretch.
-    if(tool==='pen' && currentStroke && currentStroke.points.length && typeof e.getPredictedEvents==='function'){
-      const predicted=e.getPredictedEvents();
-      if(predicted && predicted.length){
-        const last=currentStroke.points[currentStroke.points.length-1];
-        const pe=predicted[predicted.length-1];
-        drawSegment(last,{x:pe.clientX,y:pe.clientY},tool,last.w,currentStroke.color);
-      }
-    }
   }
 
   function end(e){
