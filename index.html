@@ -1783,6 +1783,33 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   gap: 8px;
 }
 
+/* AI-chat pencil toolbar — same look as the main page's #pencilTools,
+   scoped to this sheet. Position (top) is synced via JS in resize() to
+   sit just under the header, right above the chat body. */
+#aiPencilTools{
+  position:absolute;right:8px;z-index:20;
+  display:none;align-items:center;gap:4px;padding:5px;
+  background:rgba(255,255,255,.96);border:1px solid #e2e8f0;
+  border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,.12);
+}
+#ai-bottom-sheet.ai-pencil-on #aiPencilTools{ display:flex; }
+#aiPencilTools button{
+  width:34px;height:30px;border:0;border-radius:8px;background:transparent;
+  color:#475569;display:flex;align-items:center;justify-content:center;
+  font-size:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+#aiPencilTools button.active{background:#fee2e2;color:#dc2626;}
+#aiPencilTools button.clear{color:#dc2626;}
+#aiPencilTools button.clear.confirm-1{background:#fecaca;transform:scale(1.08);}
+#aiPencilTools button.clear.confirm-2{background:#fca5a5;transform:scale(1.16);}
+#aiPencilTools button.pencil-color-btn{
+  border:2px solid transparent;border-radius:50%;padding:0;width:26px;height:26px;
+  min-width:26px;background-clip:padding-box;
+}
+#aiPencilTools button.pencil-color-btn.active{
+  border-color:#0f172a;box-shadow:0 0 0 1px #fff inset;
+}
+
 /* Pencil canvas is positioned (via JS) to exactly match the visible rect
    of the message area — but lives as a sibling of it, NOT a scrolling
    child, so it stays correctly aligned even while the chat auto-scrolls
@@ -1797,6 +1824,17 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 #ai-bottom-sheet.ai-pencil-on #aiPencilCanvas {
   pointer-events: auto;
+}
+/* Same protection as the main quiz pencil (body.pencil-mode): while this
+   pencil mode is on, kill native text-selection/callout across the sheet
+   so a long-press on message text never opens the selection UI instead of
+   drawing. The input area is explicitly excluded so typing/selecting in
+   the text field is completely unaffected either way. */
+#ai-bottom-sheet.ai-pencil-on,
+#ai-bottom-sheet.ai-pencil-on *:not(.ai-input-area):not(.ai-input-area *) {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
 }
 
 .ai-chat-body {
@@ -2667,6 +2705,17 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
   <div class="ai-chat-body" id="aiChatBody">
     <!-- Messages inserted dynamically -->
+  </div>
+
+  <div id="aiPencilTools" aria-hidden="true">
+    <button type="button" id="aiPencilPenBtn" class="active" title="Pen">✎</button>
+    <button type="button" id="aiPencilColorRedBtn" class="pencil-color-btn active" data-color="#dc2626" title="Red" style="background:#dc2626;"></button>
+    <button type="button" id="aiPencilColorBlueBtn" class="pencil-color-btn" data-color="#2563eb" title="Blue" style="background:#2563eb;"></button>
+    <button type="button" id="aiPencilEraserBtn" title="Eraser">⌫</button>
+    <button type="button" id="aiPencilStarBtn" title="Star">★</button>
+    <button type="button" id="aiPencilUndoBtn" title="Undo">↶</button>
+    <button type="button" id="aiPencilRedoBtn" title="Redo">↷</button>
+    <button type="button" id="aiPencilClearBtn" class="clear" title="Clear">✕</button>
   </div>
 
   <div class="ai-typing-indicator" id="aiTyping">
@@ -6165,25 +6214,29 @@ if ('serviceWorker' in navigator) {
 <script>
 // AI chat pencil: same drawing engine/quality as the main quiz-question
 // pencil (smoothing, pressure-based width, low-latency raw-pointer
-// handling, self-healing watchdog, palm/gesture-cancel mitigation) —
-// ported over so writing feels identical — but scoped to just the message
-// area (#aiChatBody) of the AI assistant sheet, with its own independent
-// toggle. Canvas is positioned via JS to match the chat body's live
-// viewport rect (not appended as a scrolling child of it), so it stays
-// correctly aligned even while the chat auto-scrolls during a streaming
-// response — a fixed sibling, not a scrolling passenger.
+// handling, self-healing watchdog, palm/gesture-cancel mitigation), plus
+// the same toolbar (pen, red/blue color, eraser, star, undo, redo, clear)
+// — but scoped to just the message area (#aiChatBody) of the AI assistant
+// sheet, with its own independent toggle/state. Canvas is positioned via
+// JS to match the chat body's live viewport rect (not appended as a
+// scrolling child of it), so it stays correctly aligned even while the
+// chat auto-scrolls during a streaming response — a fixed sibling, not a
+// scrolling passenger.
 (function(){
   let enabled=false, drawing=false, activePointerId=null;
   let canvas=null, ctx=null, dpr=1;
-  let strokes=[], currentStroke=null;
+  let tool='pen', penColor='#dc2626';
+  let strokes=[], redoStack=[], currentStroke=null;
+  let starTapStart=null;
+  const TAP_THRESHOLD=10;
   let lastX=0,lastY=0,lastTime=0,lastPenEventTime=0;
   let smoothX=0,smoothY=0;
-  const penColor='#dc2626';
   const SMOOTH_ALPHA=0.4;
   const BASE_WIDTH=3.9, MIN_WIDTH=2.6, MAX_WIDTH=5.8;
 
   function chatBody(){ return document.getElementById('aiChatBody'); }
   function sheet(){ return document.getElementById('ai-bottom-sheet'); }
+  function toolbar(){ return document.getElementById('aiPencilTools'); }
 
   function point(e){
     const r=canvas.getBoundingClientRect();
@@ -6199,19 +6252,40 @@ if ('serviceWorker' in navigator) {
     const wb=(typeof b.w==='number')?b.w:BASE_WIDTH;
     return (wa+wb)/2;
   }
-  function applyStyle(width,color){
+  function applyStyle(forTool,width,color){
+    const useTool=forTool||tool;
     ctx.lineCap='round';
     ctx.lineJoin='round';
-    ctx.lineWidth=width!=null?width:BASE_WIDTH;
-    ctx.strokeStyle=color||penColor;
-    ctx.globalCompositeOperation='source-over';
+    ctx.lineWidth= useTool==='eraser' ? 24 : (width!=null?width:BASE_WIDTH);
+    ctx.strokeStyle= useTool==='eraser' ? 'rgba(0,0,0,1)' : (color||penColor);
+    ctx.globalCompositeOperation= useTool==='eraser' ? 'destination-out' : 'source-over';
   }
-  function drawDot(a,width,color){
-    applyStyle(width,color);
+  function drawDot(a,forTool,width,color){
+    applyStyle(forTool,width,color);
     ctx.beginPath();
     ctx.arc(a.x,a.y,Math.max(1.5,ctx.lineWidth/2),0,Math.PI*2);
     ctx.fillStyle=ctx.strokeStyle;
     ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+  }
+  function drawStar(cx,cy,color){
+    const outerR=9, innerR=3.6, spikes=5;
+    let rot=-Math.PI/2;
+    const step=Math.PI/spikes;
+    ctx.save();
+    ctx.globalCompositeOperation='source-over';
+    ctx.beginPath();
+    ctx.moveTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+    for(let i=0;i<spikes;i++){
+      rot+=step;
+      ctx.lineTo(cx+Math.cos(rot)*innerR, cy+Math.sin(rot)*innerR);
+      rot+=step;
+      ctx.lineTo(cx+Math.cos(rot)*outerR, cy+Math.sin(rot)*outerR);
+    }
+    ctx.closePath();
+    ctx.fillStyle=color||penColor;
+    ctx.fill();
+    ctx.restore();
   }
 
   function ensureCanvas(){
@@ -6232,8 +6306,9 @@ if ('serviceWorker' in navigator) {
     if(!body||!sh) return;
     const bodyRect=body.getBoundingClientRect();
     const sheetRect=sh.getBoundingClientRect();
+    const top=bodyRect.top-sheetRect.top;
     canvas.style.left=(bodyRect.left-sheetRect.left)+'px';
-    canvas.style.top=(bodyRect.top-sheetRect.top)+'px';
+    canvas.style.top=top+'px';
     const w=Math.max(1,Math.round(bodyRect.width));
     const h=Math.max(1,Math.round(bodyRect.height));
     canvas.style.width=w+'px';
@@ -6242,6 +6317,8 @@ if ('serviceWorker' in navigator) {
     canvas.width=Math.round(w*dpr);
     canvas.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    const tb=toolbar();
+    if(tb) tb.style.top=(top+8)+'px';
     redraw(); // full clean redraw from stroke data, same as main engine
   }
 
@@ -6252,20 +6329,22 @@ if ('serviceWorker' in navigator) {
   }
 
   function drawStroke(s){
-    const pts=s.points;
+    const pts=s.points, strokeTool=s.tool||'pen', color=s.color||'#dc2626';
     if(!pts||!pts.length) return;
-    if(pts.length===1){ drawDot(pts[0], pts[0].w||BASE_WIDTH, s.color); return; }
-    applyStyle(pts[0].w||BASE_WIDTH, s.color);
+    if(strokeTool==='star'){ drawStar(pts[0].x,pts[0].y,color); return; }
+    if(pts.length===1){ drawDot(pts[0],strokeTool,pts[0].w||BASE_WIDTH,color); return; }
+    applyStyle(strokeTool,pts[0].w||BASE_WIDTH,color);
     ctx.beginPath();
     ctx.moveTo(pts[0].x,pts[0].y);
     if(pts.length===2){
       ctx.lineTo(pts[1].x,pts[1].y);
       ctx.stroke();
+      ctx.globalCompositeOperation='source-over';
       return;
     }
     for(let i=1;i<pts.length-1;i++){
       const m=mid(pts[i],pts[i+1]);
-      applyStyle(avgW(pts[i],pts[i+1]), s.color);
+      applyStyle(strokeTool,avgW(pts[i],pts[i+1]),color);
       ctx.quadraticCurveTo(pts[i].x,pts[i].y,m.x,m.y);
       ctx.stroke();
       ctx.beginPath();
@@ -6273,6 +6352,7 @@ if ('serviceWorker' in navigator) {
     }
     ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
     ctx.stroke();
+    ctx.globalCompositeOperation='source-over';
   }
 
   function notePenEvent(e){
@@ -6283,8 +6363,11 @@ if ('serviceWorker' in navigator) {
 
   function forceEndStroke(){
     if(!drawing) return;
-    drawing=false; activePointerId=null;
-    if(currentStroke&&currentStroke.points.length) strokes.push(currentStroke);
+    drawing=false; activePointerId=null; starTapStart=null;
+    if(currentStroke&&currentStroke.points.length){
+      strokes.push(currentStroke);
+      redoStack=[];
+    }
     currentStroke=null;
     redraw();
   }
@@ -6306,16 +6389,23 @@ if ('serviceWorker' in navigator) {
 
     drawing=true;
     activePointerId=e.pointerId;
+
+    if(tool==='star'){
+      starTapStart=point(e);
+      return;
+    }
+
     const p=point(e);
     p.w=widthFor(e.pressure);
     smoothX=p.x; smoothY=p.y;
-    currentStroke={color:penColor,points:[p]};
+    currentStroke={tool,color:penColor,points:[p]};
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
-    drawDot(p,p.w,penColor);
+    drawDot(p,tool,p.w,penColor);
   }
 
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||!isPen(ev)) return;
+    if(tool==='star') return;
     const r=canvas.getBoundingClientRect();
     const rawX=ev.clientX-r.left, rawY=ev.clientY-r.top, t=ev.timeStamp||performance.now();
     if(rawX===lastX && rawY===lastY) return;
@@ -6329,15 +6419,16 @@ if ('serviceWorker' in navigator) {
     const pts=currentStroke.points, n=pts.length;
     if(n===2){
       const m=mid(pts[0],pts[1]);
-      applyStyle(avgW(pts[0],pts[1]),currentStroke.color);
+      applyStyle(tool,avgW(pts[0],pts[1]),currentStroke.color);
       ctx.beginPath();
       ctx.moveTo(pts[0].x,pts[0].y);
       ctx.lineTo(m.x,m.y);
       ctx.stroke();
+      ctx.globalCompositeOperation='source-over';
     } else if(n>=3){
       const p0=pts[n-3], p1=pts[n-2], p2=pts[n-1];
       const m1=mid(p0,p1), m2=mid(p1,p2);
-      applyStyle(avgW(p1,p2),currentStroke.color);
+      applyStyle(tool,avgW(p1,p2),currentStroke.color);
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
@@ -6346,6 +6437,7 @@ if ('serviceWorker' in navigator) {
       // sample instead of always trailing at the midpoint.
       ctx.lineTo(p2.x,p2.y);
       ctx.stroke();
+      ctx.globalCompositeOperation='source-over';
     }
   }
   function appendEvents(events){ for(const ev of events) appendSample(ev); }
@@ -6356,6 +6448,7 @@ if ('serviceWorker' in navigator) {
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
+    if(tool==='star') return;
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
     appendEvents(events.length?events:[e]);
   }
@@ -6363,6 +6456,7 @@ if ('serviceWorker' in navigator) {
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
+    if(tool==='star') return;
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
     appendEvents(events.length?events:[e]);
   }
@@ -6372,7 +6466,22 @@ if ('serviceWorker' in navigator) {
     e.preventDefault();
     drawing=false;
     activePointerId=null;
-    if(currentStroke&&currentStroke.points.length) strokes.push(currentStroke);
+
+    if(tool==='star'){
+      const p=point(e);
+      if(starTapStart && Math.hypot(p.x-starTapStart.x,p.y-starTapStart.y)<TAP_THRESHOLD){
+        strokes.push({tool:'star',color:penColor,points:[{x:starTapStart.x,y:starTapStart.y}]});
+        redoStack=[];
+        redraw();
+      }
+      starTapStart=null;
+      return;
+    }
+
+    if(currentStroke&&currentStroke.points.length){
+      strokes.push(currentStroke);
+      redoStack=[];
+    }
     currentStroke=null;
   }
 
@@ -6381,8 +6490,66 @@ if ('serviceWorker' in navigator) {
   // is on, so a resting palm can't make WebKit cancel the pen's stream.
   function blockGesture(e){
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area')) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
     e.preventDefault();
+  }
+
+  // ---- Toolbar wiring: pen/color/eraser/star/undo/redo/clear ----
+  function setTool(next){
+    tool=next;
+    document.getElementById('aiPencilPenBtn')?.classList.toggle('active',tool==='pen');
+    document.getElementById('aiPencilEraserBtn')?.classList.toggle('active',tool==='eraser');
+    document.getElementById('aiPencilStarBtn')?.classList.toggle('active',tool==='star');
+  }
+  function setColor(c){
+    penColor=c;
+    document.getElementById('aiPencilColorRedBtn')?.classList.toggle('active',c==='#dc2626');
+    document.getElementById('aiPencilColorBlueBtn')?.classList.toggle('active',c==='#2563eb');
+  }
+  function undo(){
+    if(!strokes.length) return;
+    redoStack.push(strokes.pop());
+    redraw();
+  }
+  function redo(){
+    if(!redoStack.length) return;
+    strokes.push(redoStack.pop());
+    redraw();
+  }
+
+  // Clear: first tap wipes pen/eraser ink immediately; stars only clear
+  // after 3 taps in a row, same accidental-tap protection as the main page.
+  let clearClickCount=0, clearClickTimer=null;
+  function resetClearConfirm(){
+    clearClickCount=0;
+    if(clearClickTimer){ clearTimeout(clearClickTimer); clearClickTimer=null; }
+    document.getElementById('aiPencilClearBtn')?.classList.remove('confirm-1','confirm-2');
+  }
+  function clearInkOnly(){
+    if(!strokes.some(function(s){return s.tool!=='star';})) return;
+    strokes=strokes.filter(function(s){return s.tool==='star';});
+    redoStack=[]; currentStroke=null;
+    redraw();
+  }
+  function clearStarsOnly(){
+    if(!strokes.some(function(s){return s.tool==='star';})) return;
+    strokes=strokes.filter(function(s){return s.tool!=='star';});
+    redoStack=[]; currentStroke=null;
+    redraw();
+  }
+  function handleClearClick(){
+    clearClickCount++;
+    if(clearClickTimer) clearTimeout(clearClickTimer);
+    const btn=document.getElementById('aiPencilClearBtn');
+    if(clearClickCount===1) clearInkOnly();
+    if(clearClickCount>=3){
+      resetClearConfirm();
+      clearStarsOnly();
+      return;
+    }
+    btn?.classList.toggle('confirm-1',clearClickCount===1);
+    btn?.classList.toggle('confirm-2',clearClickCount===2);
+    clearClickTimer=setTimeout(resetClearConfirm,1200);
   }
 
   function setEnabled(v){
@@ -6406,9 +6573,19 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('gesturechange', blockGesture, {capture:true, passive:false});
   document.addEventListener('gestureend', blockGesture, {capture:true, passive:false});
   window.addEventListener('resize', function(){ if(enabled) resize(); }, {passive:true});
+
+  document.getElementById('aiPencilPenBtn')?.addEventListener('click',()=>setTool('pen'));
+  document.getElementById('aiPencilColorRedBtn')?.addEventListener('click',()=>setColor('#dc2626'));
+  document.getElementById('aiPencilColorBlueBtn')?.addEventListener('click',()=>setColor('#2563eb'));
+  document.getElementById('aiPencilEraserBtn')?.addEventListener('click',()=>setTool('eraser'));
+  document.getElementById('aiPencilStarBtn')?.addEventListener('click',()=>setTool('star'));
+  document.getElementById('aiPencilUndoBtn')?.addEventListener('click',undo);
+  document.getElementById('aiPencilRedoBtn')?.addEventListener('click',redo);
+  document.getElementById('aiPencilClearBtn')?.addEventListener('click',handleClearClick);
 })();
 </script>
 </body>
 
 </html>
+
 
