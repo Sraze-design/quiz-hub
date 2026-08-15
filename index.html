@@ -3472,8 +3472,25 @@ function showEmptyState() {
   // control bar are excluded from the drawing layer entirely. Touching or
   // tapping them with the Apple Pencil (or a finger) behaves like a normal
   // tap/click there, never starts a stroke, and is never blocked.
+  // Header/footer/toolbar, every actual button/link/input, and every modal
+  // or popup overlay in the app (exit-confirm, submit-confirm, pause,
+  // retest, streak, AI sheet, question palette, etc.) are excluded from the
+  // drawing layer entirely. Whenever a button is enabled/visible on screen,
+  // touching it with the Apple Pencil (or a finger) behaves like a normal
+  // tap/click there — it never starts a stroke and is never blocked.
+  var EXCLUDED_ZONE_SELECTOR = [
+    '.floating-quiz-header', '#controls', '#pencilTools',
+    'button', '[role="button"]', 'a', 'input', 'select', 'textarea', 'label',
+    '#exitConfirmModal', '#exitConfirmFade',
+    '#pauseModal', '#pauseFade',
+    '#submitConfirmModal', '#submitConfirmFade',
+    '#retestModal', '#streakPopup',
+    '#ai-bottom-sheet', '#ai-overlay',
+    '#qp-panel', '#qp-overlay'
+  ].join(', ');
+
   function isInExcludedZone(target){
-    return !!(target && target.closest && target.closest('.floating-quiz-header, #controls, #pencilTools'));
+    return !!(target && target.closest && target.closest(EXCLUDED_ZONE_SELECTOR));
   }
 
   function appendSample(ev){
