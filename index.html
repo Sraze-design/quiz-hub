@@ -3,7 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<style>html,body{touch-action:manipulation;overscroll-behavior:none;}</style>
+<style>html,body{touch-action:manipulation;overscroll-behavior:none;}
+/* ===== Universal Pull-to-Refresh (iPhone/iPad/Android/touch devices) ===== */
+#pullToRefreshIndicator{
+  position:fixed;
+  top:0;
+  left:50%;
+  width:46px;
+  height:46px;
+  margin-left:-23px;
+  margin-top:-54px;
+  border-radius:50%;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 6px 20px rgba(15,23,42,.16);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000000;
+  color:#2563eb;
+  font-size:22px;
+  font-weight:800;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(0) scale(.88);
+  transition:opacity .15s ease, transform .15s ease;
+  will-change:transform,opacity;
+}
+#pullToRefreshIndicator.ready{
+  color:#16a34a;
+}
+#pullToRefreshIndicator.refreshing{
+  opacity:1!important;
+  transform:translateY(68px) scale(1);
+}
+#pullToRefreshIndicator.refreshing::before{
+  content:'';
+  width:22px;
+  height:22px;
+  border:3px solid #dbeafe;
+  border-top-color:#2563eb;
+  border-radius:50%;
+  animation:ptrSpin .7s linear infinite;
+}
+#pullToRefreshIndicator.refreshing .ptr-arrow{display:none}
+.ptr-arrow{line-height:1;display:block;transform:rotate(0deg);transition:transform .12s ease}
+#pullToRefreshIndicator.ready .ptr-arrow{transform:rotate(180deg)}
+@keyframes ptrSpin{to{transform:rotate(360deg)}}
+html.ptr-active, body.ptr-active{overscroll-behavior-y:none;}
+</style>
 <title>PREMIUM ONLINE ASSESSMENT PLATFORM</title>
 <!-- Google Fonts for Professional Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2131,6 +2178,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 </head>
 <body>
+<div id="pullToRefreshIndicator" aria-hidden="true"><span class="ptr-arrow">↓</span></div>
 
 <!-- ===== Bilingual EN/HI switch (data-driven — questions are stored in both
      languages inside the quiz data files; no external translation service
@@ -6831,7 +6879,118 @@ if ('serviceWorker' in navigator) {
   document.getElementById('aiPencilClearBtn')?.addEventListener('click',handleClearClick);
 })();
 </script>
-</body>
+\n<script>
+/* ===== Universal Pull-to-Refresh =====
+   Works on iPhone/iPad Safari, Android Chrome/WebView and other touch browsers.
+   It only arms when the current scroll container is already at its top, so
+   normal upward/downward scrolling continues to behave normally. */
+(function(){
+  let startX=0,startY=0,lastY=0,tracking=false,ready=false,refreshing=false;
+  const PULL_DISTANCE=82;
+  const MAX_HORIZONTAL_DRIFT=55;
+  const indicator=()=>document.getElementById('pullToRefreshIndicator');
+
+  function isBlockedTarget(el){
+    if(!el) return false;
+    const tag=(el.tagName||'').toLowerCase();
+    if(tag==='input'||tag==='textarea'||tag==='select'||tag==='button'||el.isContentEditable) return true;
+    if(el.closest && (el.closest('#ai-bottom-sheet') || el.closest('#appSideDrawer') || el.closest('#qp-panel') || el.closest('#pencilTools') || el.closest('#aiPencilTools'))) return true;
+    return false;
+  }
+
+  function scrollParentAtTop(el){
+    let node=el;
+    while(node && node!==document.body && node!==document.documentElement){
+      if(node.scrollHeight > node.clientHeight + 2){
+        const cs=getComputedStyle(node);
+        const oy=cs.overflowY;
+        if((oy==='auto'||oy==='scroll') && node.scrollTop > 1) return false;
+        if((oy==='auto'||oy==='scroll') && node.scrollTop <= 1) return true;
+      }
+      node=node.parentElement;
+    }
+    return (window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0) <= 1;
+  }
+
+  function canStart(target){
+    if(refreshing || document.body.classList.contains('pencil-mode')) return false;
+    if(isBlockedTarget(target)) return false;
+    // Don't interfere while overlays/panels that have their own touch scrolling are open.
+    const ai=document.getElementById('ai-bottom-sheet');
+    const drawer=document.getElementById('appSideDrawer');
+    const qp=document.getElementById('qp-panel');
+    if(ai?.classList.contains('active') || drawer?.classList.contains('active') || qp?.classList.contains('active')) return false;
+    return scrollParentAtTop(target);
+  }
+
+  function setPull(px){
+    const el=indicator(); if(!el) return;
+    const dist=Math.min(px,120);
+    const reveal=Math.max(0,dist-10);
+    const progress=Math.min(1,reveal/PULL_DISTANCE);
+    el.style.opacity=String(Math.min(1,.18 + progress*.82));
+    el.style.transform=`translateY(${Math.min(72,reveal*.72)}px) scale(${.88+progress*.12})`;
+    el.classList.toggle('ready',dist>=PULL_DISTANCE);
+  }
+
+  function resetIndicator(){
+    const el=indicator(); if(!el) return;
+    el.classList.remove('ready','refreshing');
+    el.style.opacity='0';
+    el.style.transform='translateY(0) scale(.88)';
+  }
+
+  function onStart(e){
+    if(e.touches?.length!==1) return;
+    const t=e.touches[0];
+    if(!canStart(e.target)) return;
+    startX=lastY=t.clientX; // overwritten below for clarity
+    startY=lastY=t.clientY;
+    startX=t.clientX;
+    tracking=true; ready=false;
+    document.documentElement.classList.add('ptr-active');
+  }
+
+  function onMove(e){
+    if(!tracking || refreshing || !e.touches?.length) return;
+    const t=e.touches[0];
+    const dx=t.clientX-startX;
+    const dy=t.clientY-startY;
+    lastY=t.clientY;
+    if(dy<=0 || Math.abs(dx)>MAX_HORIZONTAL_DRIFT || Math.abs(dx)>Math.abs(dy)*1.25){
+      tracking=false; ready=false; resetIndicator();
+      document.documentElement.classList.remove('ptr-active');
+      return;
+    }
+    const pull=dy*.82;
+    ready=pull>=PULL_DISTANCE;
+    setPull(pull);
+    // Once the gesture is clearly a pull, stop the browser from competing with it.
+    if(dy>14) e.preventDefault();
+  }
+
+  function onEnd(){
+    if(!tracking) return;
+    tracking=false;
+    document.documentElement.classList.remove('ptr-active');
+    if(ready){
+      refreshing=true;
+      const el=indicator();
+      if(el){ el.classList.add('refreshing'); el.classList.remove('ready'); el.style.opacity='1'; }
+      // Small delay lets the refresh indicator be visible before the document reloads.
+      setTimeout(()=>window.location.reload(),180);
+    }else{
+      resetIndicator();
+    }
+    ready=false;
+  }
+
+  document.addEventListener('touchstart',onStart,{passive:true,capture:true});
+  document.addEventListener('touchmove',onMove,{passive:false,capture:true});
+  document.addEventListener('touchend',onEnd,{passive:true,capture:true});
+  document.addEventListener('touchcancel',onEnd,{passive:true,capture:true});
+})();
+</script>\n</body>
 
 </html>
 
