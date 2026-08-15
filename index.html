@@ -1783,13 +1783,14 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   gap: 8px;
 }
 
-/* Pencil canvas is scoped to the message area only — the header
-   (draggable/close button) and the bottom input area sit outside this
-   element entirely, so they're never covered and always behave normally
-   whether or not AI-chat pencil mode is on. */
+/* Pencil canvas is positioned (via JS) to exactly match the visible rect
+   of the message area — but lives as a sibling of it, NOT a scrolling
+   child, so it stays correctly aligned even while the chat auto-scrolls
+   during a streaming AI response. The header and bottom input area sit
+   outside this rect entirely, so they're never covered and always behave
+   normally whether or not AI-chat pencil mode is on. */
 #aiPencilCanvas {
   position: absolute;
-  inset: 0;
   z-index: 5;
   pointer-events: none;
   touch-action: none;
@@ -1799,7 +1800,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 
 .ai-chat-body {
-  position: relative;
   flex: 1;
   padding: 16px;
   overflow-y: auto;
@@ -6035,7 +6035,7 @@ document.addEventListener('click',function(e){
   let startY = 0, currentY = 0, dragging = false;
 
   function onStart(e){
-    if(e.target.closest('.ai-sheet-close')) return;
+    if(e.target.closest('.ai-sheet-close, .ai-pencil-toggle')) return;
     dragging = true;
     startY = (e.touches ? e.touches[0].clientY : e.clientY);
     currentY = startY;
@@ -6180,11 +6180,16 @@ if ('serviceWorker' in navigator) {
 
   function ensureCanvas(){
     if(canvas) return canvas;
-    const body=chatBody();
-    if(!body) return null;
+    const sh=sheet();
+    if(!sh) return null;
     canvas=document.createElement('canvas');
     canvas.id='aiPencilCanvas';
-    body.appendChild(canvas);
+    // Appended to the sheet itself, not into #aiChatBody. #aiChatBody is
+    // the scrolling element — a child of it would scroll away from its
+    // own backing surface as messages grow/auto-scroll. Positioning this
+    // as a sibling and syncing its rect via JS keeps it pinned over
+    // whatever's currently visible, independent of chat scroll position.
+    sh.appendChild(canvas);
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
     return canvas;
@@ -6192,20 +6197,27 @@ if ('serviceWorker' in navigator) {
 
   function resize(){
     if(!canvas) return;
-    const body=chatBody();
-    if(!body) return;
+    const body=chatBody(), sh=sheet();
+    if(!body||!sh) return;
+    const bodyRect=body.getBoundingClientRect();
+    const sheetRect=sh.getBoundingClientRect();
+    const left=bodyRect.left-sheetRect.left;
+    const top=bodyRect.top-sheetRect.top;
+    const w=Math.max(1,Math.round(bodyRect.width));
+    const h=Math.max(1,Math.round(bodyRect.height));
     dpr=Math.min(window.devicePixelRatio||1,2);
-    const w=Math.max(1,body.clientWidth), h=Math.max(1,body.clientHeight);
     // Preserve whatever's already drawn across a resize (e.g. keyboard
     // opening/closing, orientation change) instead of wiping it.
     let snapshot=null;
     if(canvas.width>0 && canvas.height>0){
       try{ snapshot=ctx.getImageData(0,0,canvas.width,canvas.height); }catch(_){ }
     }
-    canvas.width=Math.round(w*dpr);
-    canvas.height=Math.round(h*dpr);
+    canvas.style.left=left+'px';
+    canvas.style.top=top+'px';
     canvas.style.width=w+'px';
     canvas.style.height=h+'px';
+    canvas.width=Math.round(w*dpr);
+    canvas.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.lineCap='round';
     ctx.lineJoin='round';
