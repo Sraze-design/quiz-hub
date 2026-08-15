@@ -2803,15 +2803,21 @@ let currentQuizTitle = "";
 /* Leaderboard API integration (added) */
 const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
 let currentQuizPath = "";
+let currentBookmarkQuestionIndex = null;
 
 /* ===== Persistent Question Bookmarks ===== */
 const BOOKMARK_STORAGE_KEY='devssc:bookmarks:v1';
 function getBookmarks(){try{const x=JSON.parse(localStorage.getItem(BOOKMARK_STORAGE_KEY)||'[]');return Array.isArray(x)?x:[]}catch(_){return[]}}
 function setBookmarks(x){try{localStorage.setItem(BOOKMARK_STORAGE_KEY,JSON.stringify(x))}catch(_){}updateBookmarkDrawerCount()}
 function bookmarkId(path,index){return String(path||'')+'::q::'+String(index)}
+function getBookmarkTargetIndex(){return Number.isInteger(currentBookmarkQuestionIndex)?currentBookmarkQuestionIndex:currentQ}
 function isQuestionBookmarked(path,index){const id=bookmarkId(path,index);return getBookmarks().some(b=>b.id===id)}
-function updateBookmarkButton(){const b=document.getElementById('bookmarkToggleBtn');if(!b)return;const on=isQuestionBookmarked(currentQuizPath,currentQ);b.classList.toggle('active',on);b.title=on?'Remove bookmark':'Bookmark question';b.innerHTML=on?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>'}
-function toggleCurrentBookmark(){if(!Array.isArray(data)||!data.length)return;const item=data[currentQ];if(!item)return;const id=bookmarkId(currentQuizPath,currentQ);const list=getBookmarks();const at=list.findIndex(b=>b.id===id);if(at>=0)list.splice(at,1);else{const q=item.q_hi!==undefined?item.q_hi:item.q;const o=Array.isArray(item.o_hi)?item.o_hi:(Array.isArray(item.o)?item.o:[]);const tag=item.tag_hi!==undefined?item.tag_hi:item.tag;list.push({id:id,path:currentQuizPath,questionIndex:currentQ,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:q||'',tag:tag||'',options:o,savedAt:Date.now()})}setBookmarks(list);updateBookmarkButton()}
+function updateBookmarkButton(){const b=document.getElementById('bookmarkToggleBtn');if(!b)return;const on=isQuestionBookmarked(currentQuizPath,getBookmarkTargetIndex());b.classList.toggle('active',on);b.title=on?'Remove bookmark':'Bookmark question';b.innerHTML=on?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>'}
+function getBookmarkQuestionText(item){if(!item)return'';return item.q_hi!==undefined?item.q_hi:(item.q!==undefined?item.q:'')}
+function getBookmarkOptions(item){if(!item)return[];if(Array.isArray(item.o_hi))return item.o_hi;if(Array.isArray(item.o))return item.o;return[]}
+function getBookmarkTag(item){if(!item)return'';return item.tag_hi!==undefined?item.tag_hi:(item.tag!==undefined?item.tag:'')}
+function getBookmarkExplanation(item){if(!item)return'';return item.e_hi!==undefined?item.e_hi:(item.e!==undefined?item.e:'')}
+function toggleCurrentBookmark(){if(!Array.isArray(data)||!data.length)return;const item=data[currentQ];if(!item)return;const targetIndex=getBookmarkTargetIndex();const id=bookmarkId(currentQuizPath,targetIndex);const list=getBookmarks();const at=list.findIndex(b=>b.id===id);if(at>=0)list.splice(at,1);else{list.push({id:id,path:currentQuizPath,questionIndex:targetIndex,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:getBookmarkQuestionText(item),tag:getBookmarkTag(item),options:getBookmarkOptions(item),explanation:getBookmarkExplanation(item),questionData:JSON.parse(JSON.stringify(item)),savedAt:Date.now()})}setBookmarks(list);updateBookmarkButton()}
 function updateBookmarkDrawerCount(){const e=document.getElementById('drawerBookmarkCount');if(e){const n=getBookmarks().length;e.textContent=n?`${n} Saved Question${n===1?'':'s'}`:'No saved questions'}}
 function openAppSideDrawer(){updateBookmarkDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
 function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.classList.remove('active');document.getElementById('appSideDrawer')?.classList.remove('active')}
@@ -2880,17 +2886,90 @@ function renderBookmarkTests(subject,category,chapter,directOnly=false){
     c.onclick=()=>renderBookmarkQuestions(subject,path); l.appendChild(c);
   });
 }
+function removeBookmarkFromList(bookmarkId,subject,path){
+  const list=getBookmarks().filter(b=>b.id!==bookmarkId);
+  setBookmarks(list);
+  renderBookmarkQuestions(subject,path);
+}
 function renderBookmarkQuestions(subject,path){
   pushExplorerHistory({screen:'bookmarkQuestions',subject:subject,path:path});
   const l=document.getElementById('explorerList');
   const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&b.path===path).sort((a,b)=>a.questionIndex-b.questionIndex);
   prepareBookmarkExplorer(cleanHumanReadableTitle(items[0]?.testTitle||'Bookmarked Questions')); l.innerHTML='';
+  if(!items.length){
+    showBookmarkEmptyState();
+    return;
+  }
   items.forEach(b=>{
     const c=document.createElement('div'); c.className='premium-card bookmark-question-card';
-    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q||'')}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><span class="bookmark-star">★</span>`;
-    c.onclick=()=>loadQuizData(b.path,b.questionIndex); l.appendChild(c);
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:#fff7ed;color:#f59e0b;">Q${b.questionIndex+1}</div><div class="card-details"><span class="card-main-title">Question ${b.questionIndex+1}</span><div class="bookmark-question-preview">${formatContent(b.q || (b.questionData ? getBookmarkQuestionText(b.questionData) : ''))}</div><div class="bookmark-test-name">Test: ${cleanHumanReadableTitle(b.testTitle||'Quiz')}</div></div></div><button type="button" class="bookmark-toggle-btn active" aria-label="Remove bookmark" title="Remove bookmark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>`;
+    const removeBtn=c.querySelector('.bookmark-toggle-btn');
+    removeBtn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      removeBookmarkFromList(b.id,subject,path);
+    });
+    c.onclick=()=>openBookmarkedQuestion(b); l.appendChild(c);
   });
 }
+async function openBookmarkedQuestion(bookmark){
+  if(!bookmark) return;
+  showLoader(true);
+  try{
+    currentQuizPath = bookmark.path || '';
+    currentSubject = bookmark.subject || null;
+    currentCategory = bookmark.category || null;
+    currentChapter = bookmark.chapter || null;
+    currentQuizTitle = bookmark.testTitle || 'Quiz';
+    let item = bookmark.questionData ? JSON.parse(JSON.stringify(bookmark.questionData)) : null;
+    if(!item){
+      const response = await fetch(`./${bookmark.path}`);
+      if(!response.ok) throw new Error('File Download Failed');
+      const source = await response.text();
+      let quizQuestions;
+      try{ quizQuestions = new Function(source + "\nreturn data;")(); }
+      catch(e){
+        const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+        if(!match) throw e;
+        quizQuestions = new Function('return ' + match[1])();
+      }
+      if(!Array.isArray(quizQuestions) || !quizQuestions[bookmark.questionIndex]) throw new Error('Saved question not found');
+      item = JSON.parse(JSON.stringify(quizQuestions[bookmark.questionIndex]));
+    }
+    data=[item];
+    ORIGINAL_DATA=data.slice();
+    appLang='hi';
+    ORIGINAL_TOTAL=1;
+    currentQ=0;
+    currentBookmarkQuestionIndex=Number.isInteger(bookmark.questionIndex)?bookmark.questionIndex:parseInt(bookmark.questionIndex,10);
+    score=0; currentStreak=0; maxStreak=0; elapsed=0;
+    timerRunning=true; isPaused=false;
+    answered=[false]; selectedAnswers=[null]; answerCorrect=[null]; questionTimes=[0];
+    document.getElementById('explorerScreen').style.display='none';
+    document.getElementById('quizEngineBox').style.display='flex';
+    if (typeof lockBodyScroll === 'function') lockBodyScroll();
+    document.getElementById('quiz-box').style.display='flex';
+    if(typeof window.__pencilResetForQuiz==='function') window.__pencilResetForQuiz(1);
+    document.getElementById('controls').style.display='flex';
+    document.getElementById('jumpBox').style.display='none';
+    document.querySelector('.floating-quiz-header').style.display='flex';
+    const catLabelEl=document.getElementById('quizCategoryLabel');
+    if(catLabelEl){
+      const chapterPart=currentChapter?cleanHumanReadableTitle(currentChapter):'';
+      catLabelEl.textContent=chapterPart?(currentQuizTitle?`${chapterPart} (${currentQuizTitle})`:chapterPart):(currentQuizTitle||'Quiz');
+    }
+    pushExplorerHistory({screen:'quiz',subject:currentSubject,category:currentCategory,chapter:currentChapter,path:currentQuizPath,bookmarkOnly:true});
+    showQ();
+    updateBookmarkButton();
+    setQuizOriginalLanguageMode(true);
+    resetQuestionTimer();
+    updateAIButtonVisibility();
+  }catch(err){
+    console.error(err);
+    alert('Saved question could not be opened: '+err.message);
+  }finally{ showLoader(false); }
+}
+
 function showBookmarkEmptyState(){document.getElementById('explorerList').innerHTML=`<div class="premium-state-view"><div class="state-illustration">🔖</div><div class="state-title">No Bookmarks Yet</div><div class="state-desc">Quiz में किसी question के ऊपर bookmark icon दबाएँ। Saved questions यहाँ subject और test के हिसाब से मिलेंगे.</div></div>`}
 
 let browserId = localStorage.getItem("browserId");
@@ -4255,6 +4334,7 @@ function showEmptyState() {
 
 async function loadQuizData(quizPath, requestedQuestionIndex) {
   showLoader(true);
+  currentBookmarkQuestionIndex = null;
   currentQuizPath = quizPath; /* added: track path for leaderboard API */
   try {
     const quizInfo = allFlattenedQuizzes.find(q=>q.path===quizPath);
