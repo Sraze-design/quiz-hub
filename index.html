@@ -2353,7 +2353,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
   <!-- Bookmark navigation drawer -->
   <div id="appSideDrawerOverlay" onclick="closeAppSideDrawer()"></div>
-  <aside id="appSideDrawer" aria-label="App menu"><div class="side-drawer-head"><div class="side-drawer-brand"><span class="side-drawer-brand-icon">📚</span><span>Dream To Destiny</span></div><button class="side-drawer-close" type="button" onclick="closeAppSideDrawer()" aria-label="Close menu">×</button></div><div class="side-drawer-section"><div class="side-drawer-label">Library</div><button class="side-drawer-item" type="button" onclick="openBookmarksFromMenu()"><span class="side-drawer-item-icon">🔖</span><span class="side-drawer-item-text"><span>Bookmarks</span><small id="drawerBookmarkCount">Saved Questions</small></span></button></div></aside>
+  <aside id="appSideDrawer" aria-label="App menu"><div class="side-drawer-head"><div class="side-drawer-brand"><span class="side-drawer-brand-icon">📚</span><span>Dream To Destiny</span></div><button class="side-drawer-close" type="button" onclick="closeAppSideDrawer()" aria-label="Close menu">×</button></div><div class="side-drawer-section"><div class="side-drawer-label">Library</div><button class="side-drawer-item" type="button" onclick="openBookmarksFromMenu()"><span class="side-drawer-item-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></span><span class="side-drawer-item-text"><span>Bookmarks</span><small id="drawerBookmarkCount">Saved Questions</small></span></button></div></aside>
 
   <!-- EXISTING ASSESSMENT INTERACTIVE APPLICATION ENGINE BOX -->
 
@@ -3008,7 +3008,7 @@ function renderBookmarkTests(subject,category,chapter,directOnly=false){
   const l=document.getElementById('explorerList'); l.innerHTML='';
   groupBookmarks(bs,b=>bookmarkGroupKey(b.subject,b.category,b.chapter,b.testTitle)||b.path||b.testTitle||'Quiz').forEach((items,path)=>{
     const b=items[0],c=document.createElement('div'); c.className='premium-card';
-    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--warning-light);color:var(--warning);">🔖</div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(b.testTitle||b.path||'Quiz')}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
+    c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--warning-light);color:var(--warning);"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(b.testTitle||b.path||'Quiz')}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
     c.onclick=()=>renderBookmarkQuestions(subject,path); l.appendChild(c);
   });
 }
