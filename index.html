@@ -2856,6 +2856,7 @@ window.addEventListener('popstate', (e) => {
     timerRunning = false;
     isPaused = true;
     updateAIButtonVisibility();
+    if (typeof window.__pencilForceDisable === 'function') window.__pencilForceDisable();
 
     // Clear any lingering paused/confirm overlays so their blurred
     // backdrop doesn't stay stuck over the explorer after exiting.
@@ -3663,11 +3664,25 @@ function showEmptyState() {
     redraw(); save();
   }
 
+  function forceDisable(){
+    if(!enabled) return;
+    enabled=false;
+    drawing=false; activePointerId=null; usingRawStream=false; currentStroke=null;
+    document.body.classList.remove('pencil-mode');
+    if(canvas) canvas.style.display='none';
+    if(tools) tools.style.display='none';
+    if(toggle) toggle.classList.remove('active');
+  }
+
   window.__pencilOnQuestionChange=function(){ if(enabled) load(); };
   window.__pencilResetForQuiz=function(){
     strokes=[]; redoStack=[]; currentStroke=null;
     if(ctx) redraw();
   };
+  // Exposed so the app can turn pencil mode fully off (canvas, toolbar,
+  // toggle button, all hidden/reset) when leaving the quiz screen — so it
+  // never stays stuck showing on the dashboard/home screen after Back/Exit.
+  window.__pencilForceDisable=forceDisable;
 
   // Safety net: if a pointerup/pointercancel ever gets missed (e.g. the app
   // is backgrounded or the OS eats the event mid-stroke), force-finalize the
@@ -4309,6 +4324,10 @@ pb.innerText=badge;pb.style.background=bg;
 document.getElementById('score-card').style.background='var(--card-bg)';
 document.getElementById('score-card').style.display='block';
 document.querySelector('.floating-quiz-header').style.display='none';
+// Result screen has no quiz content to annotate and hides the toggle button
+// itself — always turn pencil mode fully off here so canvas/toolbar can't
+// stay stuck showing on top of the results.
+if(typeof window.__pencilForceDisable === 'function') window.__pencilForceDisable();
 // Language switch belongs only to the live question screen.
 const langBtnOnResult = document.getElementById('langSwitchBtn');
 if(langBtnOnResult){
