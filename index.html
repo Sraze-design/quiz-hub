@@ -4388,7 +4388,6 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
-    shuffleAllQuestionsOptions(data); // randomize option order every load; correctness (item.a) stays accurate
     ORIGINAL_DATA=quizQuestions.slice();
 
     // Every newly opened test MUST start fresh in the original Hindi language.
@@ -4702,46 +4701,6 @@ function isStatementBasedQuestion(item) {
   }));
 }
 
-// Shuffles the option order for ONE question in place (Fisher-Yates) and
-// updates item.a so it still points at the correct option after shuffling.
-// Nothing about correctness changes — only the on-screen position of each
-// option moves, and the (A)/(B)/(C)/(D) label text is regenerated to match
-// the new positions. When the item has bilingual option arrays (o_hi/o_en),
-// BOTH are shuffled with the exact same order so item.a stays correct for
-// whichever language is currently displayed.
-// Exception: if any option text references other options by position/letter
-// (e.g. "All of the above", "Only B", "उपरोक्त सभी"), shuffling is skipped
-// entirely so the option order (and its meaning) stays intact.
-function shuffleQuestionOptions(item) {
-  const keys = optionArrayKeys(item);
-  if (!item || !keys.length || item[keys[0]].length < 2) return;
-  if (isPositionDependentQuestion(item)) return;
-  if (isStatementBasedQuestion(item)) return;
-
-  const n = item[keys[0]].length;
-
-  // order[i] = index (in the ORIGINAL array) of the option that should now sit at position i
-  const order = Array.from({ length: n }, (_, i) => i);
-  for (let i = n - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
-
-  const labels = ['(A) ', '(B) ', '(C) ', '(D) '];
-  keys.forEach((key) => {
-    const stripped = item[key].map((opt) => String(opt).replace(OPTION_LABEL_REGEX, ''));
-    item[key] = order.map((origIdx, newPos) => (labels[newPos] || '') + stripped[origIdx]);
-  });
-
-  // Find where the originally-correct option (item.a) ended up.
-  item.a = order.indexOf(item.a);
-}
-
-// Shuffles options for every question in a quiz array, in place.
-function shuffleAllQuestionsOptions(quizArray) {
-  if (!Array.isArray(quizArray)) return;
-  quizArray.forEach(shuffleQuestionOptions);
-}
 let ORIGINAL_DATA = [];
 let ORIGINAL_TOTAL = 0;
 let elapsed=0,timerRunning=true,isPaused=false;
