@@ -2348,6 +2348,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       </button>
       <h3 id="explorerTitle" class="action-title">Choose Your Test</h3>
+      <button id="playBookmarkedTestBtn" type="button" class="back-circle-btn" style="display:none;margin-left:auto;background:var(--warning-light,#fff7ed);color:var(--warning,#f59e0b);" title="Play saved questions as a test" aria-label="Play saved questions as a test" onclick="playCurrentBookmarkedTest()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
     </div>
     
     <!-- Modern Filter Input Component Box -->
@@ -2993,7 +2996,7 @@ function updateBookmarkDrawerCount(){const e=document.getElementById('drawerBook
 function openAppSideDrawer(){updateBookmarkDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
 function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.classList.remove('active');document.getElementById('appSideDrawer')?.classList.remove('active')}
 function openBookmarksFromMenu(){closeAppSideDrawer();renderBookmarkSubjects()}
-function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError()}
+function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError();const __playBtn=document.getElementById('playBookmarkedTestBtn');if(__playBtn){__playBtn.style.display='none';__playBtn.dataset.subject='';__playBtn.dataset.path='';}}
 function restoreNormalExplorerSearch(){const e=document.querySelector('.search-container');if(e)e.style.display='block'}
 function groupBookmarks(items, keyFn){
   const g=new Map();
@@ -3071,6 +3074,8 @@ function renderBookmarkQuestions(subject,path){
     showBookmarkEmptyState();
     return;
   }
+  const __playBtn=document.getElementById('playBookmarkedTestBtn');
+  if(__playBtn){__playBtn.style.display='flex';__playBtn.dataset.subject=subject;__playBtn.dataset.path=path;}
   items.forEach(b=>{
     const c=document.createElement('div'); c.className='premium-card bookmark-question-card';
     const qLabel=b.aiGenerated?'AI Question':`Question ${b.questionIndex+1}`;
@@ -3147,6 +3152,106 @@ async function openBookmarkedQuestion(bookmark){
   }catch(err){
     console.error(err);
     alert('Saved question could not be opened: '+err.message);
+  }finally{ showLoader(false); }
+}
+
+function playCurrentBookmarkedTest(){
+  const btn=document.getElementById('playBookmarkedTestBtn');
+  if(!btn) return;
+  const subject=btn.dataset.subject, path=btn.dataset.path;
+  if(!subject || !path) return;
+  const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&bookmarkTestKeyOf(b)===path).sort((a,b)=>a.questionIndex-b.questionIndex);
+  startBookmarkedTestQuiz(items);
+}
+/* Build a real, full quiz session (score, timer, jump-box, submit, results —
+   same as any normal test) but sourced ONLY from the questions saved as
+   bookmarks for this particular test. This is intentionally NOT treated as
+   isBookmarkOnlyQuiz (that flag is for the single-question viewer and skips
+   the exit-confirmation dialog) — here the person can lose real progress
+   across multiple questions, so it should behave like any other in-progress test. */
+async function startBookmarkedTestQuiz(bookmarks){
+  if(!Array.isArray(bookmarks) || !bookmarks.length) return;
+  showLoader(true);
+  isBookmarkOnlyQuiz = false;
+  currentBookmarkQuestionIndex = null;
+  currentBookmarkIdOverride = null;
+  try{
+    const first=bookmarks[0];
+    currentQuizPath = first.path || '';
+    currentSubject = first.subject || null;
+    currentCategory = first.category || null;
+    currentChapter = first.chapter || null;
+    currentQuizTitle = first.testTitle || 'Saved Questions';
+
+    const fileCache={};
+    const items=[];
+    for(const b of bookmarks){
+      let item = b.questionData ? JSON.parse(JSON.stringify(b.questionData)) : null;
+      if(!item && b.path){
+        try{
+          if(!(b.path in fileCache)){
+            const response = await fetch(`./${b.path}`);
+            if(!response.ok) throw new Error('File Download Failed');
+            const source = await response.text();
+            let quizQuestions;
+            try{ quizQuestions = new Function(source + "\nreturn data;")(); }
+            catch(e){
+              const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+              if(!match) throw e;
+              quizQuestions = new Function('return ' + match[1])();
+            }
+            fileCache[b.path]=Array.isArray(quizQuestions)?quizQuestions:[];
+          }
+          const quizQuestions=fileCache[b.path];
+          if(quizQuestions[b.questionIndex]) item=JSON.parse(JSON.stringify(quizQuestions[b.questionIndex]));
+        }catch(_){ /* skip this one question, keep going with the rest */ }
+      }
+      if(item) items.push(item);
+    }
+    if(!items.length) throw new Error('Saved questions not found');
+
+    data=items;
+    ORIGINAL_DATA=items.slice();
+    appLang='hi';
+    ORIGINAL_TOTAL=items.length;
+    currentQ=0;
+    score=0; currentStreak=0; maxStreak=0; elapsed=0;
+    timerRunning=true; isPaused=false;
+    answered=new Array(items.length).fill(false);
+    selectedAnswers=new Array(items.length).fill(null);
+    answerCorrect=new Array(items.length).fill(null);
+    questionTimes=new Array(items.length).fill(0);
+
+    document.getElementById('explorerScreen').style.display='none';
+    document.getElementById('quizEngineBox').style.display='flex';
+    if (typeof lockBodyScroll === 'function') lockBodyScroll();
+    document.getElementById('quiz-box').style.display='flex';
+    if(typeof window.__pencilResetForQuiz==='function') window.__pencilResetForQuiz(items.length);
+    const __pencilBtn=document.getElementById('pencilToggleBtn');
+    const __pencilCanvas=document.getElementById('pencilCanvas');
+    const __pencilTools=document.getElementById('pencilTools');
+    if(__pencilBtn) __pencilBtn.classList.remove('active');
+    if(__pencilCanvas) __pencilCanvas.style.display='none';
+    if(__pencilTools) __pencilTools.style.display='none';
+    document.body.classList.remove('pencil-mode');
+    document.getElementById('controls').style.display='flex';
+    document.getElementById('jumpBox').style.display='flex';
+    document.querySelector('.floating-quiz-header').style.display='flex';
+    const catLabelEl=document.getElementById('quizCategoryLabel');
+    if(catLabelEl){
+      const chapterPart=currentChapter?cleanHumanReadableTitle(currentChapter):'';
+      const testPart=currentQuizTitle||'';
+      catLabelEl.textContent=chapterPart?(testPart?`${chapterPart} (${testPart})`:chapterPart):(testPart||'Saved Questions');
+    }
+    pushExplorerHistory({screen:'quiz',subject:currentSubject,category:currentCategory,chapter:currentChapter,path:currentQuizPath,bookmarkOnly:false});
+    showQ();
+    updateBookmarkButton();
+    setQuizOriginalLanguageMode(true);
+    resetQuestionTimer();
+    updateAIButtonVisibility();
+  }catch(err){
+    console.error(err);
+    alert('Saved questions could not be opened: '+err.message);
   }finally{ showLoader(false); }
 }
 
