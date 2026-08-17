@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q1. यदि तैराक की गति स्थिर जल में 9 किमी/घंटा है और धारा की गति 5 किमी/घंटा है तो धारा के प्रतिकूल और धारा के अनुकूल तैराक की गति ज्ञात कीजिए?",
+    q_en: "Q1. If the speed of a swimmer in still water is 9 km/h and the speed of the stream is 5 km/h, find the swimmer's speed upstream and downstream?",
+    tag: "",
+    o_hi: [
+      "(a) 3, 12",
+      "(b) 2, 10",
+      "(c) 4, 14",
+      "(d) 1, 8"
+    ],
+    o_en: [
+      "(a) 3, 12",
+      "(b) 2, 10",
+      "(c) 4, 14",
+      "(d) 1, 8"
+    ],
+    a: 2,
+    e_hi: "धारा के प्रतिकूल तैराक की गति = 9 - 5 = 4 किमी/घंटा<br>धारा के अनुकूल तैराक की गति = 9 + 5 = 14 किमी/घंटा<br>अतः धारा के प्रतिकूल और अनुकूल गति क्रमशः 4, 14 है।",
+    e_en: "Swimmer's speed upstream = 9 - 5 = 4 km/h<br>Swimmer's speed downstream = 9 + 5 = 14 km/h<br>Hence, the upstream and downstream speeds are 4 and 14 respectively."
+  },
+  {
+    q_hi: "Q2. यदि स्थिर जल में एक नाव की चाल 3 किमी/घंटा है और यदि धारा के प्रतिकूल इसकी चाल 1 किमी/घंटा है, तो धारा की चाल ज्ञात कीजिए।",
+    q_en: "Q2. If the speed of a boat in still water is 3 km/h and its upstream speed is 1 km/h, find the speed of the stream.",
+    tag: "SSC CHSL 11/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 0.5 किमी/घंटा",
+      "(b) 1 किमी/घंटा",
+      "(c) 0.25 किमी/घंटा",
+      "(d) 2 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 0.5 km/h",
+      "(b) 1 km/h",
+      "(c) 0.25 km/h",
+      "(d) 2 km/h"
+    ],
+    a: 3,
+    e_hi: "धारा के प्रतिकूल नाव की चाल = स्थिर जल में नाव की चाल - धारा की चाल<br>1 = 3 - धारा की चाल<br>धारा की चाल = 3 - 1 = 2 किमी/घंटा",
+    e_en: "Upstream speed of the boat = Speed of the boat in still water - Speed of the stream<br>1 = 3 - Speed of the stream<br>Speed of the stream = 3 - 1 = 2 km/h"
+  },
+  {
+    q_hi: "Q3. एक नाविक धारा के अनुकूल 10 मिनट में 2 किमी और धारा के प्रतिकूल 2 घंटे में 12 किमी नाव चलाता है। धारा की चाल ज्ञात कीजिए।",
+    q_en: "Q3. A boatman travels 2 km downstream in 10 minutes and 12 km upstream in 2 hours. Find the speed of the stream.",
+    tag: "SSC CPO 28/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 3 किमी/घंटा",
+      "(b) 2.5 किमी/घंटा",
+      "(c) 4 किमी/घंटा",
+      "(d) 3.5 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 3 km/h",
+      "(b) 2.5 km/h",
+      "(c) 4 km/h",
+      "(d) 3.5 km/h"
+    ],
+    a: 0,
+    e_hi: "धारा के अनुकूल चाल = 2 किमी / (10/60 घंटे) = 12 किमी/घंटा<br>धारा के प्रतिकूल चाल = 12 किमी / 2 घंटे = 6 किमी/घंटा<br>धारा की चाल = (अनुकूल चाल - प्रतिकूल चाल) / 2<br>धारा की चाल = (12 - 6) / 2 = 6 / 2 = 3 किमी/घंटा",
+    e_en: "Downstream speed = 2 km / (10/60 hours) = 12 km/h<br>Upstream speed = 12 km / 2 hours = 6 km/h<br>Speed of the stream = (Downstream speed - Upstream speed) / 2<br>Speed of the stream = (12 - 6) / 2 = 6 / 2 = 3 km/h"
+  },
+  {
+    q_hi: "Q4. एक नाव धारा की दिशा में 55 किमी की दूरी 5 घंटे में तय करती है जबकि धारा के विपरीत दिशा में समान दूरी को तय करने में उसे 11 घंटे लगते हैं। नाव की चाल क्या है?",
+    q_en: "Q4. A boat covers a distance of 55 km downstream in 5 hours, while it takes 11 hours to cover the same distance upstream. What is the speed of the boat in still water?",
+    tag: "SSC CGL 23/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 8 किमी/घंटा",
+      "(b) 9 किमी/घंटा",
+      "(c) 11 किमी/घंटा",
+      "(d) 7 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 8 km/h",
+      "(b) 9 km/h",
+      "(c) 11 km/h",
+      "(d) 7 km/h"
+    ],
+    a: 0,
+    e_hi: "धारा की दिशा में (अनुकूल) चाल = 55 / 5 = 11 किमी/घंटा<br>धारा के विपरीत (प्रतिकूल) चाल = 55 / 11 = 5 किमी/घंटा<br>शांत जल में नाव की चाल = (11 + 5) / 2 = 16 / 2 = 8 किमी/घंटा",
+    e_en: "Downstream speed = 55 / 5 = 11 km/h<br>Upstream speed = 55 / 11 = 5 km/h<br>Speed of the boat in still water = (11 + 5) / 2 = 16 / 2 = 8 km/h"
+  },
+  {
+    q_hi: "Q5. धारा की दिशा में यात्रा करते समय एक नाव की गति 33 किमी/घंटा है, जबकि धारा के प्रतिकूल दिशा में यात्रा करते समय यह 27 किमी/घंटा है। शांत जल में नाव की गति क्या है?",
+    q_en: "Q5. While travelling downstream, a boat has a speed of 33 km/h, whereas while travelling upstream, its speed is 27 km/h. What is the speed of the boat in still water?",
+    tag: "SSC CPO 29/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 6 किमी/घंटा",
+      "(b) 60 किमी/घंटा",
+      "(c) 12 किमी/घंटा",
+      "(d) 30 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 6 km/h",
+      "(b) 60 km/h",
+      "(c) 12 km/h",
+      "(d) 30 km/h"
+    ],
+    a: 3,
+    e_hi: "शांत जल में नाव की गति = (धारा की दिशा में गति + धारा के प्रतिकूल गति) / 2<br>नाव की गति = (33 + 27) / 2 = 60 / 2 = 30 किमी/घंटा",
+    e_en: "Speed of the boat in still water = (Downstream speed + Upstream speed) / 2<br>Speed of the boat = (33 + 27) / 2 = 60 / 2 = 30 km/h"
+  },
+  {
+    q_hi: "Q6. धारा की दिशा में जा रही एक नौका की चाल 48 किमी/घंटा है, जबकि धारा के विपरीत जाने में उसकी चाल 32 किमी/घंटा है। स्थिर जल में नौका की चाल क्या है?",
+    q_en: "Q6. A boat travelling downstream has a speed of 48 km/h, while its speed upstream is 32 km/h. What is the speed of the boat in still water?",
+    tag: "SSC Phase-XI 28/06/2023 (Shift-02)",
+    o_hi: [
+      "(a) 80 किमी/घंटा",
+      "(b) 30 किमी/घंटा",
+      "(c) 40 किमी/घंटा",
+      "(d) 20 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 80 km/h",
+      "(b) 30 km/h",
+      "(c) 40 km/h",
+      "(d) 20 km/h"
+    ],
+    a: 2,
+    e_hi: "स्थिर जल में नौका की चाल = (अनुकूल चाल + प्रतिकूल चाल) / 2<br>नौका की चाल = (48 + 32) / 2 = 80 / 2 = 40 किमी/घंटा",
+    e_en: "Speed of the boat in still water = (Downstream speed + Upstream speed) / 2<br>Speed of the boat = (48 + 32) / 2 = 80 / 2 = 40 km/h"
+  },
+  {
+    q_hi: "Q7. दो नाव एक नदी में धारा के अनुकूल 35 किमी/घंटा और 25 किमी/घंटा की चाल से चलती हैं। धारा की चाल 4 किमी/घंटा है। प्रारंभ में दोनों नावों के बीच की दूरी 60 किमी है। यदि दोनों नाव धारा के अनुकूल गति कर रही हैं, तो वे एक-दूसरे से कितने समय में मिलेंगी?",
+    q_en: "Q7. Two boats move downstream in a river at speeds of 35 km/h and 25 km/h. The speed of the stream is 4 km/h. Initially, the distance between the two boats is 60 km. If both boats are moving downstream, in how much time will they meet each other?",
+    tag: "SSC MTS 15/05/2023 (Shift-03)",
+    o_hi: [
+      "(a) 10 घंटे",
+      "(b) 13 घंटे",
+      "(c) 6 घंटे",
+      "(d) 8 घंटे"
+    ],
+    o_en: [
+      "(a) 10 hours",
+      "(b) 13 hours",
+      "(c) 6 hours",
+      "(d) 8 hours"
+    ],
+    a: 2,
+    e_hi: "चूँकि दोनों नाव एक ही दिशा (धारा के अनुकूल) में गति कर रही हैं:<br>नावों की सापेक्ष चाल = 35 - 25 = 10 किमी/घंटा<br>मिलने में लगा समय = दूरी / सापेक्ष चाल<br>समय = 60 / 10 = 6 घंटे",
+    e_en: "Since both boats are moving in the same direction (downstream):<br>Relative speed of the boats = 35 - 25 = 10 km/h<br>Time taken to meet = Distance / Relative speed<br>Time = 60 / 10 = 6 hours"
+  },
+  {
+    q_hi: "Q8. एक नाव की धारा के प्रतिकूल और धारा के अनुकूल जाने की चाल का अनुपात 2 : 3 है और इन दोनों चालों का योग 15 किमी/घंटा है। धारा की चाल क्या है?",
+    q_en: "Q8. The ratio of the upstream and downstream speeds of a boat is 2 : 3 and the sum of these two speeds is 15 km/h. What is the speed of the stream?",
+    tag: "SSC CHSL 08/07/2024 (Shift-02)",
+    o_hi: [
+      "(a) 3.5 किमी/घंटा",
+      "(b) 1.5 किमी/घंटा",
+      "(c) 3 किमी/घंटा",
+      "(d) 2.5 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 3.5 km/h",
+      "(b) 1.5 km/h",
+      "(c) 3 km/h",
+      "(d) 2.5 km/h"
+    ],
+    a: 1,
+    e_hi: "धारा के प्रतिकूल चाल = (2 / 5) × 15 = 6 किमी/घंटा<br>धारा के अनुकूल चाल = (3 / 5) × 15 = 9 किमी/घंटा<br>धारा की चाल = (अनुकूल चाल - प्रतिकूल चाल) / 2<br>धारा की चाल = (9 - 6) / 2 = 3 / 2 = 1.5 किमी/घंटा",
+    e_en: "Upstream speed = (2 / 5) × 15 = 6 km/h<br>Downstream speed = (3 / 5) × 15 = 9 km/h<br>Speed of the stream = (Downstream speed - Upstream speed) / 2<br>Speed of the stream = (9 - 6) / 2 = 3 / 2 = 1.5 km/h"
+  },
+  {
+    q_hi: "Q9. एक नाव धारा की विपरीत दिशा में एक निश्चित दूरी तय करने में 10 घंटे का समय लेती है, जबकि धारा की दिशा में उसी दूरी को तय करने में 7 घंटे का समय लेती है। नाव की चाल और धारा की चाल के बीच क्रमशः अनुपात क्या होगा?",
+    q_en: "Q9. A boat takes 10 hours to cover a certain distance upstream, while it takes 7 hours to cover the same distance downstream. What is the ratio of the speed of the boat to the speed of the stream respectively?",
+    tag: "SSC CGL 25/07/2023 (Shift-03)",
+    o_hi: [
+      "(a) 17 : 5",
+      "(b) 3 : 17",
+      "(c) 2 : 17",
+      "(d) 17 : 3"
+    ],
+    o_en: [
+      "(a) 17 : 5",
+      "(b) 3 : 17",
+      "(c) 2 : 17",
+      "(d) 17 : 3"
+    ],
+    a: 3,
+    e_hi: "प्रतिकूल और अनुकूल समय का अनुपात = 10 : 7<br>समान दूरी के लिए चालों का अनुपात (प्रतिकूल : अनुकूल) = 7 : 10<br>माना प्रतिकूल चाल = 7x तथा अनुकूल चाल = 10x<br>नाव की चाल = (10x + 7x) / 2 = 17x / 2<br>धारा की चाल = (10x - 7x) / 2 = 3x / 2<br>नाव की चाल : धारा की चाल = (17x / 2) : (3x / 2) = 17 : 3",
+    e_en: "Ratio of upstream and downstream time = 10 : 7<br>For the same distance, ratio of speeds (upstream : downstream) = 7 : 10<br>Let upstream speed = 7x and downstream speed = 10x<br>Speed of the boat = (10x + 7x) / 2 = 17x / 2<br>Speed of the stream = (10x - 7x) / 2 = 3x / 2<br>Speed of the boat : Speed of the stream = (17x / 2) : (3x / 2) = 17 : 3"
+  },
+  {
+    q_hi: "Q10. शांत जल में एक नाव की चाल 5\\frac{1}{3} किमी/घंटा है। यह पाया गया है कि नाव को धारा की विपरीत दिशा में एक निश्चित दूरी तय करने में लगने वाला समय, धारा की दिशा में वही दूरी तय करने में लगने वाले समय का तीन गुना है। नदी की धारा की चाल ज्ञात कीजिए।",
+    q_en: "Q10. The speed of a boat in still water is 5\\frac{1}{3} km/h. It is found that the time taken by the boat to cover a certain distance upstream is three times the time taken to cover the same distance downstream. Find the speed of the stream.",
+    tag: "SSC CGL 05/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 23/27 मी/सेकंड",
+      "(b) 22/27 मी/सेकंड",
+      "(c) 20/27 मी/सेकंड",
+      "(d) 19/27 मी/सेकंड"
+    ],
+    o_en: [
+      "(a) 23/27 m/s",
+      "(b) 22/27 m/s",
+      "(c) 20/27 m/s",
+      "(d) 19/27 m/s"
+    ],
+    a: 2,
+    e_hi: "शांत जल में नाव की चाल (v) = 5\\frac{1}{3} = 16/3 किमी/घंटा<br>प्रतिकूल समय = 3 × अनुकूल समय<br>(v + u) / (v - u) = 3 / 1<br>v + u = 3v - 3u<br>4u = 2v ⇒ u = v / 2<br>धारा की चाल (u) = (16/3) / 2 = 8/3 किमी/घंटा<br>मी/सेकंड में बदलने के लिए: (8/3) × (5/18) = 20/27 मी/सेकंड",
+    e_en: "Speed of the boat in still water (v) = 5\\frac{1}{3} = 16/3 km/h<br>Upstream time = 3 × downstream time<br>(v + u) / (v - u) = 3 / 1<br>v + u = 3v - 3u<br>4u = 2v ⇒ u = v / 2<br>Speed of the stream (u) = (16/3) / 2 = 8/3 km/h<br>To convert into m/s: (8/3) × (5/18) = 20/27 m/s"
+  },
+  {
+    q_hi: "Q11. एक आदमी स्थिर जल में 18 किमी/घंटा की चाल से नाव चला सकता है। उसी नदी में धारा के प्रतिकूल नाव चलाने में, धारा के अनुकूल नाव चलाने में लगने वाले समय से दोगुना समय लगता है। धारा की चाल ज्ञात कीजिए।",
+    q_en: "Q11. A man can row a boat at 18 km/h in still water. In the same river, it takes him twice as much time to travel upstream as it takes to travel downstream. Find the speed of the stream.",
+    tag: "SSC CHSL 01/07/2024 (Shift-03)",
+    o_hi: [
+      "(a) 12 किमी/घंटा",
+      "(b) 6 किमी/घंटा",
+      "(c) 24 किमी/घंटा",
+      "(d) 9 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 12 km/h",
+      "(b) 6 km/h",
+      "(c) 24 km/h",
+      "(d) 9 km/h"
+    ],
+    a: 1,
+    e_hi: "माना स्थिर जल में नाव की चाल v = 18 किमी/घंटा तथा धारा की चाल = u किमी/घंटा<br>प्रतिकूल समय / अनुकूल समय = 2 / 1<br>(v + u) / (v - u) = 2 / 1<br>18 + u = 2(18 - u)<br>18 + u = 36 - 2u<br>3u = 18<br>u = 6 किमी/घंटा",
+    e_en: "Let the speed of the boat in still water be v = 18 km/h and the speed of the stream = u km/h<br>Upstream time / Downstream time = 2 / 1<br>(v + u) / (v - u) = 2 / 1<br>18 + u = 2(18 - u)<br>18 + u = 36 - 2u<br>3u = 18<br>u = 6 km/h"
+  },
+  {
+    q_hi: "Q12. एक आदमी स्थिर जल में 8 किमी/घंटा की चाल से नाव चला सकता है। यदि उसे धारा के प्रतिकूल जाने में धारा के अनुकूल जाने में लगने वाले समय से तीन गुना समय लगता है तो धारा की चाल (किमी/घंटा में) ज्ञात कीजिए।",
+    q_en: "Q12. A man can row a boat at 8 km/h in still water. If it takes him three times as much time to travel upstream as it takes to travel downstream, find the speed of the stream in km/h.",
+    tag: "SSC CHSL 08/07/2024 (Shift-04)",
+    o_hi: [
+      "(a) 4",
+      "(b) 6",
+      "(c) 5",
+      "(d) 3"
+    ],
+    o_en: [
+      "(a) 4",
+      "(b) 6",
+      "(c) 5",
+      "(d) 3"
+    ],
+    a: 0,
+    e_hi: "स्थिर जल में नाव की चाल (v) = 8 किमी/घंटा<br>(v + u) / (v - u) = 3 / 1<br>8 + u = 3(8 - u)<br>8 + u = 24 - 3u<br>4u = 16<br>u = 4 किमी/घंटा",
+    e_en: "Speed of the boat in still water (v) = 8 km/h<br>(v + u) / (v - u) = 3 / 1<br>8 + u = 3(8 - u)<br>8 + u = 24 - 3u<br>4u = 16<br>u = 4 km/h"
+  },
+  {
+    q_hi: "Q13. एक नाव द्वारा धारा के प्रतिकूल x किमी की दूरी तय करने में लिया गया समय उसी नाव द्वारा धारा के अनुकूल समान दूरी तय करने में लिए गए समय का दोगुना है। नाव और धारा की चालों का योग 90 किमी/घंटा है। धारा की चाल _____ किमी/घंटा है।",
+    q_en: "Q13. The time taken by a boat to cover x km upstream is twice the time taken by the same boat to cover the same distance downstream. The sum of the speeds of the boat and the stream is 90 km/h. The speed of the stream is _____ km/h.",
+    tag: "SSC MTS 12/09/2023 (Shift-03)",
+    o_hi: [
+      "(a) 22.5",
+      "(b) 33.5",
+      "(c) 27.5",
+      "(d) 37.5"
+    ],
+    o_en: [
+      "(a) 22.5",
+      "(b) 33.5",
+      "(c) 27.5",
+      "(d) 37.5"
+    ],
+    a: 0,
+    e_hi: "(नाव की चाल + धारा की चाल) / (नाव की चाल - धारा की चाल) = 2 / 1<br>v + u = 2(v - u)<br>v + u = 2v - 2u ⇒ v = 3u<br>दिया गया है: v + u = 90<br>3u + u = 90<br>4u = 90<br>u = 22.5 किमी/घंटा",
+    e_en: "(Speed of the boat + Speed of the stream) / (Speed of the boat - Speed of the stream) = 2 / 1<br>v + u = 2(v - u)<br>v + u = 2v - 2u ⇒ v = 3u<br>Given: v + u = 90<br>3u + u = 90<br>4u = 90<br>u = 22.5 km/h"
+  },
+  {
+    q_hi: "Q14. एक आदमी 48 किमी दूर एक स्थान पर नाव चलाकर जाता है और 14 घंटे में वापस आता है। वह पाता है कि वह धारा के साथ 4 किमी की दूरी तय कर सकता है, जबकि उसी समय में धारा के विपरीत वह 3 किमी की दूरी तय कर सकता है। धारा की चाल है।",
+    q_en: "Q14. A man travels by boat to a place 48 km away and returns in 14 hours. He finds that in the same time in which he can travel 4 km downstream, he can travel 3 km upstream. The speed of the stream is:",
+    tag: "SSC CGL 07/12/2022 (Shift-02)",
+    o_hi: [
+      "(a) 1.5 किमी/घंटा",
+      "(b) 3.5 किमी/घंटा",
+      "(c) 1.8 किमी/घंटा",
+      "(d) 1 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 1.5 km/h",
+      "(b) 3.5 km/h",
+      "(c) 1.8 km/h",
+      "(d) 1 km/h"
+    ],
+    a: 3,
+    e_hi: "समान समय में दूरी का अनुपात = चालों का अनुपात<br>अनुकूल चाल (D) : प्रतिकूल चाल (U) = 4 : 3<br>माना D = 4k तथा U = 3k<br>48 / 4k + 48 / 3k = 14<br>12/k + 16/k = 14<br>28/k = 14 ⇒ k = 2<br>अनुकूल चाल D = 8 किमी/घंटा, प्रतिकूल चाल U = 6 किमी/घंटा<br>धारा की चाल = (8 - 6) / 2 = 1 किमी/घंटा",
+    e_en: "For the same time, ratio of distances = ratio of speeds<br>Downstream speed (D) : Upstream speed (U) = 4 : 3<br>Let D = 4k and U = 3k<br>48 / 4k + 48 / 3k = 14<br>12/k + 16/k = 14<br>28/k = 14 ⇒ k = 2<br>Downstream speed D = 8 km/h, Upstream speed U = 6 km/h<br>Speed of the stream = (8 - 6) / 2 = 1 km/h"
+  },
+  {
+    q_hi: "Q15. धारा की दिशा में किसी नाव की चाल धारा की विपरीत दिशा में जाने की चाल से 2.5 गुना है। यदि नाव द्वारा धारा की दिशा में 30 किमी और धारा की विपरीत दिशा में समान दूरी तय करने में 7 घंटे लगते हैं, तो धारा की दिशा में नाव की चाल (किमी/घंटा) ज्ञात करें।",
+    q_en: "Q15. The downstream speed of a boat is 2.5 times its upstream speed. If the boat takes 7 hours to cover 30 km downstream and the same distance upstream, find its downstream speed in km/h.",
+    tag: "SSC MTS 27/10/2021 (Shift-02)",
+    o_hi: [
+      "(a) 9",
+      "(b) 12.5",
+      "(c) 15",
+      "(d) 7.5"
+    ],
+    o_en: [
+      "(a) 9",
+      "(b) 12.5",
+      "(c) 15",
+      "(d) 7.5"
+    ],
+    a: 2,
+    e_hi: "अनुकूल चाल (D) = 2.5 × प्रतिकूल चाल (U)<br>D : U = 5 : 2<br>माना D = 5k तथा U = 2k<br>30 / 5k + 30 / 2k = 7<br>6/k + 15/k = 7<br>21/k = 7 ⇒ k = 3<br>धारा की दिशा में नाव की चाल (D) = 5 × 3 = 15 किमी/घंटा",
+    e_en: "Downstream speed (D) = 2.5 × Upstream speed (U)<br>D : U = 5 : 2<br>Let D = 5k and U = 2k<br>30 / 5k + 30 / 2k = 7<br>6/k + 15/k = 7<br>21/k = 7 ⇒ k = 3<br>Downstream speed of the boat (D) = 5 × 3 = 15 km/h"
+  },
+  {
+    q_hi: "Q16. धारा की दिशा में, किसी नाव की चाल धारा की विपरीत दिशा की चाल से 150% अधिक है। यदि धारा की दिशा में 80 किमी और धारा के विपरीत दिशा में 50 किमी की दूरी तय करने में लगा समय 8.2 घंटे है, तो धारा की दिशा में नाव की चाल (किमी/घंटा में) ज्ञात करें।",
+    q_en: "Q16. The downstream speed of a boat is 150% more than its upstream speed. If the time taken to cover 80 km downstream and 50 km upstream is 8.2 hours, find the downstream speed of the boat in km/h.",
+    tag: "SSC CHSL 12/08/2021 (Shift-01)",
+    o_hi: [
+      "(a) 16",
+      "(b) 30",
+      "(c) 25",
+      "(d) 24"
+    ],
+    o_en: [
+      "(a) 16",
+      "(b) 30",
+      "(c) 25",
+      "(d) 24"
+    ],
+    a: 2,
+    e_hi: "अनुकूल चाल (D) = U + 1.5U = 2.5U<br>D : U = 5 : 2<br>माना D = 5k तथा U = 2k<br>80 / 5k + 50 / 2k = 8.2<br>16/k + 25/k = 8.2<br>41/k = 8.2 ⇒ k = 5<br>धारा की दिशा में नाव की चाल (D) = 5 × 5 = 25 किमी/घंटा",
+    e_en: "Downstream speed (D) = U + 1.5U = 2.5U<br>D : U = 5 : 2<br>Let D = 5k and U = 2k<br>80 / 5k + 50 / 2k = 8.2<br>16/k + 25/k = 8.2<br>41/k = 8.2 ⇒ k = 5<br>Downstream speed of the boat (D) = 5 × 5 = 25 km/h"
+  },
+  {
+    q_hi: "Q17. धारा की दिशा में नाव की चाल, स्थिर जल में नाव की चाल की 125% है। यदि स्थिर जल में नाव को 20 किमी की दूरी तय करने में 30 मिनट का समय लगता है, तो बताइए कि उसे धारा के विपरीत दिशा में 15 किमी की दूरी तय करने में कितना समय (घंटे में) लगेगा?",
+    q_en: "Q17. The downstream speed of a boat is 125% of its speed in still water. If the boat takes 30 minutes to cover 20 km in still water, find the time in hours required to cover 15 km upstream.",
+    tag: "SSC CGL 19/07/2023 (Shift-03)",
+    o_hi: [
+      "(a) 3/4",
+      "(b) 1/2",
+      "(c) 1/4",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 3/4",
+      "(b) 1/2",
+      "(c) 1/4",
+      "(d) 1"
+    ],
+    a: 1,
+    e_hi: "स्थिर जल में नाव की चाल (v) = 20 / (30/60) = 40 किमी/घंटा<br>धारा की दिशा में चाल (D) = 40 का 125% = 50 किमी/घंटा<br>धारा की चाल (u) = D - v = 50 - 40 = 10 किमी/घंटा<br>धारा के विपरीत चाल (U) = v - u = 40 - 10 = 30 किमी/घंटा<br>विपरीत दिशा में 15 किमी तय करने में समय = 15 / 30 = 1/2 घंटा",
+    e_en: "Speed of the boat in still water (v) = 20 / (30/60) = 40 km/h<br>Downstream speed (D) = 125% of 40 = 50 km/h<br>Speed of the stream (u) = D - v = 50 - 40 = 10 km/h<br>Upstream speed (U) = v - u = 40 - 10 = 30 km/h<br>Time to cover 15 km upstream = 15 / 30 = 1/2 hour"
+  },
+  {
+    q_hi: "Q18. स्थिर जल में नाव की चाल और धारा की चाल का अनुपात 8 : 3 है और नाव धारा के अनुकूल 24 मिनट में 22 किमी की दूरी तय कर सकती है। तो नाव को धारा के प्रतिकूल 50 किमी की दूरी तय करने में कितना समय लगेगा?",
+    q_en: "Q18. The ratio of the speed of a boat in still water to the speed of the stream is 8 : 3, and the boat can cover 22 km downstream in 24 minutes. How much time will the boat take to cover 50 km upstream?",
+    tag: "SSC CHSL 13/03/2023 (Shift-02)",
+    o_hi: [
+      "(a) 4 घंटे",
+      "(b) 2.5 घंटे",
+      "(c) 3 घंटे",
+      "(d) 2 घंटे"
+    ],
+    o_en: [
+      "(a) 4 hours",
+      "(b) 2.5 hours",
+      "(c) 3 hours",
+      "(d) 2 hours"
+    ],
+    a: 3,
+    e_hi: "धारा के अनुकूल चाल (D) = 22 / (24/60) = 55 किमी/घंटा<br>v : u = 8 : 3 ⇒ D = v + u = 11 इकाई<br>11 इकाई = 55 किमी/घंटा ⇒ 1 इकाई = 5 किमी/घंटा<br>धारा के प्रतिकूल चाल (U) = v - u = (8 - 3) = 5 इकाई<br>U = 5 × 5 = 25 किमी/घंटा<br>धारा के प्रतिकूल 50 किमी तय करने में समय = 50 / 25 = 2 घंटे",
+    e_en: "Downstream speed (D) = 22 / (24/60) = 55 km/h<br>v : u = 8 : 3 ⇒ D = v + u = 11 units<br>11 units = 55 km/h ⇒ 1 unit = 5 km/h<br>Upstream speed (U) = v - u = (8 - 3) = 5 units<br>U = 5 × 5 = 25 km/h<br>Time to cover 50 km upstream = 50 / 25 = 2 hours"
+  },
+  {
+    q_hi: "Q19. एक नाव धारा के प्रतिकूल 15 मिनट में 5 किमी की यात्रा करती है। यदि शांत जल में नाव की गति का धारा की गति से अनुपात 6 : 1 है, तो नाव को धारा के अनुकूल 19.6 किमी की दूरी तय करने में कितना समय लगेगा? (मिनट में)",
+    q_en: "Q19. A boat travels 5 km upstream in 15 minutes. If the ratio of the speed of the boat in still water to the speed of the stream is 6 : 1, how much time will the boat take to cover 19.6 km downstream? (in minutes)",
+    tag: "SSC MTS 13/07/2022 (Shift-01)",
+    o_hi: [
+      "(a) 54",
+      "(b) 26",
+      "(c) 42",
+      "(d) 31"
+    ],
+    o_en: [
+      "(a) 54",
+      "(b) 26",
+      "(c) 42",
+      "(d) 31"
+    ],
+    a: 2,
+    e_hi: "धारा के प्रतिकूल चाल = 5 / (15/60) = 20 किमी/घंटा<br>शांत जल में नाव की चाल : धारा की चाल = 6 : 1<br>प्रतिकूल चाल = 6 - 1 = 5 इकाई = 20 किमी/घंटा<br>1 इकाई = 4 किमी/घंटा<br>नाव की चाल = 6 × 4 = 24 किमी/घंटा<br>धारा की चाल = 1 × 4 = 4 किमी/घंटा<br>धारा के अनुकूल चाल = 24 + 4 = 28 किमी/घंटा<br>समय = 19.6 / 28 = 0.7 घंटे = 0.7 × 60 = 42 मिनट",
+    e_en: "Upstream speed = 5 / (15/60) = 20 km/h<br>Speed of the boat in still water : Speed of the stream = 6 : 1<br>Upstream speed = 6 - 1 = 5 units = 20 km/h<br>1 unit = 4 km/h<br>Speed of the boat = 6 × 4 = 24 km/h<br>Speed of the stream = 1 × 4 = 4 km/h<br>Downstream speed = 24 + 4 = 28 km/h<br>Time = 19.6 / 28 = 0.7 hours = 0.7 × 60 = 42 minutes"
+  },
+  {
+    q_hi: "Q20. शांत जल में एक नाव की चाल 25 किमी/घंटा है। शांत जल में एक निश्चित दूरी को तय करने में धारा के अनुकूल उतनी ही दूरी तय करने की तुलना में 33\\frac{1}{3}% अधिक समय लगता है। नाव को धारा के अनुकूल 75 किमी जाने में कितना समय (घंटे में) लगेगा?",
+    q_en: "Q20. The speed of a boat in still water is 25 km/h. It takes 33\\frac{1}{3}% more time to cover a certain distance in still water than to cover the same distance downstream. How much time in hours will the boat take to travel 75 km downstream?",
+    tag: "SSC Phase-IX 2022",
+    o_hi: [
+      "(a) 3",
+      "(b) 2.25",
+      "(c) 2",
+      "(d) 18"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 2.25",
+      "(c) 2",
+      "(d) 18"
+    ],
+    a: 1,
+    e_hi: "शांत जल में नाव की चाल (b) = 25 किमी/घंटा<br>शांत जल में समय, अनुकूल समय से 33\\frac{1}{3}% (1/3) अधिक है।<br>समय का अनुपात (शांत जल : अनुकूल) = 4 : 3<br>चाल का अनुपात (शांत जल : अनुकूल) = 3 : 4<br>3 इकाई = 25 किमी/घंटा => अनुकूल चाल = (4/3) × 25 = 100/3 किमी/घंटा<br>75 किमी जाने में लगा समय = 75 / (100/3) = 225 / 100 = 2.25 घंटे",
+    e_en: "Speed of the boat in still water (b) = 25 km/h<br>Time in still water is 33\\frac{1}{3}% (1/3) more than downstream time.<br>Ratio of time (still water : downstream) = 4 : 3<br>Ratio of speed (still water : downstream) = 3 : 4<br>3 units = 25 km/h => downstream speed = (4/3) × 25 = 100/3 km/h<br>Time to travel 75 km = 75 / (100/3) = 225 / 100 = 2.25 hours"
+  },
+  {
+    q_hi: "Q21. एक नाविक को नाव से 30 किमी की दूरी तक जाने और वापस आने में 14 घंटे का समय लगता है। वह पाता है कि वह जितने समय में धारा की दिशा में 10 किमी नाव चला सकता है, उतने ही समय में धारा के विपरीत दिशा में 4 किमी नाव चला सकता है। धारा की चाल (किमी/घंटा में) ज्ञात कीजिए।",
+    q_en: "Q21. A boatman takes 14 hours to travel 30 km by boat and return. He finds that in the same time in which he can travel 10 km downstream, he can travel 4 km upstream. Find the speed of the stream in km/h.",
+    tag: "SSC CGL 13/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 9/2",
+      "(b) 9/4",
+      "(c) 2/9",
+      "(d) 4/9"
+    ],
+    o_en: [
+      "(a) 9/2",
+      "(b) 9/4",
+      "(c) 2/9",
+      "(d) 4/9"
+    ],
+    a: 1,
+    e_hi: "धारा की दिशा में दूरी = 10 किमी, विपरीत दिशा में दूरी = 4 किमी<br>अनुकूल चाल (D) और प्रतिकूल चाल (U) का अनुपात = 10 : 4 = 5 : 2<br>माना D = 5k और U = 2k<br>कुल समय = 30/D + 30/U = 14<br>30/(5k) + 30/(2k) = 14<br>6/k + 15/k = 14<br>21/k = 14 => k = 3/2<br>D = 15/2 किमी/घंटा, U = 3 किमी/घंटा<br>धारा की चाल = (D - U)/2 = (15/2 - 3)/2 = 9/4 किमी/घंटा",
+    e_en: "Downstream distance = 10 km, upstream distance = 4 km<br>Ratio of downstream speed (D) and upstream speed (U) = 10 : 4 = 5 : 2<br>Let D = 5k and U = 2k<br>Total time = 30/D + 30/U = 14<br>30/(5k) + 30/(2k) = 14<br>6/k + 15/k = 14<br>21/k = 14 => k = 3/2<br>D = 15/2 km/h, U = 3 km/h<br>Speed of the stream = (D - U)/2 = (15/2 - 3)/2 = 9/4 km/h"
+  },
+  {
+    q_hi: "Q22. एक आदमी 48 घंटे में 48 किमी की दूरी तय करता है और वापस आता है। वह धारा के अनुकूल 4 किमी की दूरी उतने ही समय में तय कर सकता है, जितने समय में वह धारा के विपरीत 3 किमी की दूरी तय कर सकता है। धारा की चाल (किमी/घंटा में) कितनी है?",
+    q_en: "Q22. A man covers a distance of 48 km and returns in 48 hours. He can cover 4 km downstream in the same time in which he can cover 3 km upstream. What is the speed of the stream in km/h?",
+    tag: "SSC CPO 29/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 5/21",
+      "(b) 7/21",
+      "(c) 7/24",
+      "(d) 3/29"
+    ],
+    o_en: [
+      "(a) 5/21",
+      "(b) 7/21",
+      "(c) 7/24",
+      "(d) 3/29"
+    ],
+    a: 2,
+    e_hi: "अनुकूल चाल (D) और प्रतिकूल चाल (U) का अनुपात = 4 : 3<br>माना D = 4k, U = 3k<br>कुल समय = 48/D + 48/U = 48<br>1/(4k) + 1/(3k) = 1<br>7/(12k) = 1 => k = 7/12<br>D = 7/3 किमी/घंटा, U = 7/4 किमी/घंटा<br>धारा की चाल = (D - U)/2 = (7/3 - 7/4)/2 = (7/12)/2 = 7/24 किमी/घंटा",
+    e_en: "Ratio of downstream speed (D) and upstream speed (U) = 4 : 3<br>Let D = 4k, U = 3k<br>Total time = 48/D + 48/U = 48<br>1/(4k) + 1/(3k) = 1<br>7/(12k) = 1 => k = 7/12<br>D = 7/3 km/h, U = 7/4 km/h<br>Speed of the stream = (D - U)/2 = (7/3 - 7/4)/2 = (7/12)/2 = 7/24 km/h"
+  },
+  {
+    q_hi: "Q23. आशु शांत जल में 7.5 किमी प्रति घंटा की गति से नाव चला सकता है। वह पाता है कि उसे धारा के प्रतिकूल नाव चलाने में, धारा के अनुकूल नाव चलाने में लगने वाले समय से चार गुना अधिक समय लगता है। धारा की गति ज्ञात कीजिए।",
+    q_en: "Q23. Ashu can row a boat at 7.5 km/h in still water. He finds that it takes him four times as much time to travel upstream as it takes to travel downstream. Find the speed of the stream.",
+    tag: "SSC CPO 27/06/2024 (Shift-02)",
+    o_hi: [
+      "(a) 3.5 किमी/घंटा",
+      "(b) 1.5 किमी/घंटा",
+      "(c) 4.5 किमी/घंटा",
+      "(d) 2.5 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 3.5 km/h",
+      "(b) 1.5 km/h",
+      "(c) 4.5 km/h",
+      "(d) 2.5 km/h"
+    ],
+    a: 2,
+    e_hi: "शांत जल में चाल (b) = 7.5 किमी/घंटा<br>प्रतिकूल समय = 4 × अनुकूल समय<br>अनुकूल चाल (D) = 4 × प्रतिकूल चाल (U)<br>b + s = 4(b - s)<br>5s = 3b<br>धारा की गति (s) = (3/5) × 7.5 = 4.5 किमी/घंटा",
+    e_en: "Speed in still water (b) = 7.5 km/h<br>Upstream time = 4 × downstream time<br>Downstream speed (D) = 4 × upstream speed (U)<br>b + s = 4(b - s)<br>5s = 3b<br>Speed of the stream (s) = (3/5) × 7.5 = 4.5 km/h"
+  },
+  {
+    q_hi: "Q24. एक पुरुष नदी के पानी में 1 किमी की दूरी तय करना चाहता है। शांत जल में इस दूरी को तय करने में उसे 12 मिनट लगते हैं। लेकिन बहती नदी में 13 मिनट लगते हैं। नदी के बहते पानी की चाल ज्ञात करें।",
+    q_en: "Q24. A man wants to cover a distance of 1 km in a river. He takes 12 minutes to cover this distance in still water, but takes 13 minutes in the flowing river. Find the speed of the flowing water of the river.",
+    tag: "SSC CPO 27/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 25 किमी/घंटा",
+      "(b) 5/13 किमी/घंटा",
+      "(c) 22 किमी/घंटा",
+      "(d) 7/12 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 25 km/h",
+      "(b) 5/13 km/h",
+      "(c) 22 km/h",
+      "(d) 7/12 km/h"
+    ],
+    a: 1,
+    e_hi: "शांत जल में समय = 12 मिनट = 12/60 = 1/5 घंटा<br>शांत जल में चाल (b) = 1 / (1/5) = 5 किमी/घंटा<br>प्रतिकूल समय = 13 मिनट = 13/60 घंटा<br>प्रतिकूल चाल (U) = 1 / (13/60) = 60/13 किमी/घंटा<br>धारा की चाल = b - U = 5 - 60/13 = 5/13 किमी/घंटा",
+    e_en: "Time in still water = 12 minutes = 12/60 = 1/5 hour<br>Speed in still water (b) = 1 / (1/5) = 5 km/h<br>Upstream time = 13 minutes = 13/60 hour<br>Upstream speed (U) = 1 / (13/60) = 60/13 km/h<br>Speed of the stream = b - U = 5 - 60/13 = 5/13 km/h"
+  },
+  {
+    q_hi: "Q25. एक नाव धारा के अनुकूल 60 किमी की यात्रा 4 घंटे में कर सकती है। यदि स्थिर जल में नौका की चाल 13 किमी/घंटा है, तो धारा के प्रतिकूल 30 किमी की यात्रा यह कितने समय में तय करेगी?",
+    q_en: "Q25. A boat can travel 60 km downstream in 4 hours. If the speed of the boat in still water is 13 km/h, in how much time will it cover 30 km upstream?",
+    tag: "SSC CHSL 02/07/2024 (Shift-01)",
+    o_hi: [
+      "(a) 2\\frac{8}{11} घंटे",
+      "(b) 3\\frac{4}{7} घंटे",
+      "(c) 2\\frac{4}{7} घंटे",
+      "(d) 3\\frac{5}{7} घंटे"
+    ],
+    o_en: [
+      "(a) 2\\frac{8}{11} hours",
+      "(b) 3\\frac{4}{7} hours",
+      "(c) 2\\frac{4}{7} hours",
+      "(d) 3\\frac{5}{7} hours"
+    ],
+    a: 0,
+    e_hi: "अनुकूल चाल (D) = 60 / 4 = 15 किमी/घंटा<br>शांत जल में चाल (b) = 13 किमी/घंटा<br>धारा की चाल (s) = 15 - 13 = 2 किमी/घंटा<br>प्रतिकूल चाल (U) = 13 - 2 = 11 किमी/घंटा<br>30 किमी प्रतिकूल जाने में समय = 30 / 11 = 2\\frac{8}{11} घंटे",
+    e_en: "Downstream speed (D) = 60 / 4 = 15 km/h<br>Speed in still water (b) = 13 km/h<br>Speed of the stream (s) = 15 - 13 = 2 km/h<br>Upstream speed (U) = 13 - 2 = 11 km/h<br>Time to travel 30 km upstream = 30 / 11 = 2\\frac{8}{11} hours"
+  },
+  {
+    q_hi: "Q26. एक नाव स्थिर जल में 19 किमी/घंटा की चाल से चल सकती है। यदि धारा की चाल 3 किमी/घंटा है तो नाव द्वारा 88 किमी धारा की दिशा में और 24 किमी धारा की विपरीत दिशा में जाने में कुल कितना समय (घंटे में) लगेगा?",
+    q_en: "Q26. A boat can travel at 19 km/h in still water. If the speed of the stream is 3 km/h, how much total time in hours will the boat take to travel 88 km downstream and 24 km upstream?",
+    tag: "SSC CHSL 04/08/2021 (Shift-01)",
+    o_hi: [
+      "(a) 4.5",
+      "(b) 5",
+      "(c) 4",
+      "(d) 5.5"
+    ],
+    o_en: [
+      "(a) 4.5",
+      "(b) 5",
+      "(c) 4",
+      "(d) 5.5"
+    ],
+    a: 3,
+    e_hi: "नाव की चाल (b) = 19 किमी/घंटा, धारा की चाल (s) = 3 किमी/घंटा<br>अनुकूल चाल = 19 + 3 = 22 किमी/घंटा<br>प्रतिकूल चाल = 19 - 3 = 16 किमी/घंटा<br>कुल समय = (88 / 22) + (24 / 16) = 4 + 1.5 = 5.5 घंटे",
+    e_en: "Speed of the boat (b) = 19 km/h, speed of the stream (s) = 3 km/h<br>Downstream speed = 19 + 3 = 22 km/h<br>Upstream speed = 19 - 3 = 16 km/h<br>Total time = (88 / 22) + (24 / 16) = 4 + 1.5 = 5.5 hours"
+  },
+  {
+    q_hi: "Q27. कोई व्यक्ति, शांत जल में 5 मी/सेकंड की चाल से नाव चला सकता है। धारा की चाल 6 किमी/घंटा है। उसके द्वारा धारा की दिशा में 76 किमी की दूरी तय करने में लगने वाला समय (घंटे में) ज्ञात करें।",
+    q_en: "Q27. A person can row a boat at 5 m/s in still water. The speed of the stream is 6 km/h. Find the time in hours taken by him to cover a distance of 76 km downstream.",
+    tag: "SSC MTS 05/10/2021 (Shift-02)",
+    o_hi: [
+      "(a) 3.5",
+      "(b) 2.8",
+      "(c) 3.2",
+      "(d) 2.4"
+    ],
+    o_en: [
+      "(a) 3.5",
+      "(b) 2.8",
+      "(c) 3.2",
+      "(d) 2.4"
+    ],
+    a: 2,
+    e_hi: "शांत जल में नाव की चाल = 5 मी/सेकंड = 5 × (18/5) = 18 किमी/घंटा<br>धारा की चाल = 6 किमी/घंटा<br>अनुकूल चाल = 18 + 6 = 24 किमी/घंटा<br>समय = 76 / 24 = 3.166... ≈ 3.2 घंटे",
+    e_en: "Speed of the boat in still water = 5 m/s = 5 × (18/5) = 18 km/h<br>Speed of the stream = 6 km/h<br>Downstream speed = 18 + 6 = 24 km/h<br>Time = 76 / 24 = 3.166... ≈ 3.2 hours"
+  },
+  {
+    q_hi: "Q28. सुनील, नाव को धारा के विपरीत 1 घंटे 15 मिनट में 20 किमी तक ले जा सकता है। यदि नदी की धारा की चाल 2 किमी/घंटा है तो धारा की दिशा में नाव को 30 किमी ले जाने में उसे कुल कितना समय लगेगा?",
+    q_en: "Q28. Sunil can take a boat 20 km upstream in 1 hour 15 minutes. If the speed of the stream is 2 km/h, how much total time will he take to take the boat 30 km downstream?",
+    tag: "SSC CHSL 10/08/2021 (Shift-01)",
+    o_hi: [
+      "(a) 1 घंटा 10 मिनट",
+      "(b) 1 घंटा 45 मिनट",
+      "(c) 1 घंटा 30 मिनट",
+      "(d) 1 घंटा 20 मिनट"
+    ],
+    o_en: [
+      "(a) 1 hour 10 minutes",
+      "(b) 1 hour 45 minutes",
+      "(c) 1 hour 30 minutes",
+      "(d) 1 hour 20 minutes"
+    ],
+    a: 2,
+    e_hi: "प्रतिकूल समय = 1 घंटा 15 मिनट = 5/4 घंटे<br>प्रतिकूल चाल = 20 / (5/4) = 16 किमी/घंटा<br>धारा की चाल = 2 किमी/घंटा<br>शांत जल में नाव की चाल = 16 + 2 = 18 किमी/घंटा<br>अनुकूल चाल = 18 + 2 = 20 किमी/घंटा<br>30 किमी अनुकूल जाने में समय = 30 / 20 = 1.5 घंटे = 1 घंटा 30 मिनट",
+    e_en: "Upstream time = 1 hour 15 minutes = 5/4 hours<br>Upstream speed = 20 / (5/4) = 16 km/h<br>Speed of the stream = 2 km/h<br>Speed of the boat in still water = 16 + 2 = 18 km/h<br>Downstream speed = 18 + 2 = 20 km/h<br>Time to travel 30 km downstream = 30 / 20 = 1.5 hours = 1 hour 30 minutes"
+  },
+  {
+    q_hi: "Q29. एक नाव धारा के विपरीत दिशा में 54 किमी की दूरी 6 घंटे में तय कर सकती है। यदि धारा की चाल 4.8 किमी/घंटा है, तो नाव को धारा की दिशा में 279 किमी की दूरी तय करने में कितना समय (घंटे में) लगेगा?",
+    q_en: "Q29. A boat can cover a distance of 54 km upstream in 6 hours. If the speed of the stream is 4.8 km/h, how much time in hours will the boat take to cover 279 km downstream?",
+    tag: "SSC CGL 11/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 20",
+      "(b) 15",
+      "(c) 18",
+      "(d) 16"
+    ],
+    o_en: [
+      "(a) 20",
+      "(b) 15",
+      "(c) 18",
+      "(d) 16"
+    ],
+    a: 1,
+    e_hi: "प्रतिकूल चाल = 54 / 6 = 9 किमी/घंटा<br>धारा की चाल = 4.8 किमी/घंटा<br>शांत जल में चाल = 9 + 4.8 = 13.8 किमी/घंटा<br>अनुकूल चाल = 13.8 + 4.8 = 18.6 किमी/घंटा<br>समय = 279 / 18.6 = 15 घंटे",
+    e_en: "Upstream speed = 54 / 6 = 9 km/h<br>Speed of the stream = 4.8 km/h<br>Speed in still water = 9 + 4.8 = 13.8 km/h<br>Downstream speed = 13.8 + 4.8 = 18.6 km/h<br>Time = 279 / 18.6 = 15 hours"
+  },
+  {
+    q_hi: "Q30. एक नाव 52 मिनट में धारा के अनुकूल 16.9 किमी की यात्रा कर सकती है। यदि धारा की गति 3 किमी/घंटा है, तो नाव को धारा के प्रतिकूल 84 किमी की दूरी तय करने में कितना समय (घंटे में) लगेगा?",
+    q_en: "Q30. A boat can travel 16.9 km downstream in 52 minutes. If the speed of the stream is 3 km/h, how much time in hours will the boat take to cover 84 km upstream?",
+    tag: "SSC CPO 29/06/2024 (Shift-01)",
+    o_hi: [
+      "(a) 6",
+      "(b) 13.5",
+      "(c) 6.22",
+      "(d) 7.5"
+    ],
+    o_en: [
+      "(a) 6",
+      "(b) 13.5",
+      "(c) 6.22",
+      "(d) 7.5"
+    ],
+    a: 2,
+    e_hi: "अनुकूल समय = 52 मिनट = 52/60 = 13/15 घंटे<br>अनुकूल चाल (D) = 16.9 / (13/15) = 19.5 किमी/घंटा<br>धारा की गति = 3 किमी/घंटा<br>शांत जल में चाल (b) = 19.5 - 3 = 16.5 किमी/घंटा<br>प्रतिकूल चाल (U) = 16.5 - 3 = 13.5 किमी/घंटा<br>84 किमी प्रतिकूल जाने में समय = 84 / 13.5 = 6.22 घंटे",
+    e_en: "Downstream time = 52 minutes = 52/60 = 13/15 hours<br>Downstream speed (D) = 16.9 / (13/15) = 19.5 km/h<br>Speed of the stream = 3 km/h<br>Speed in still water (b) = 19.5 - 3 = 16.5 km/h<br>Upstream speed (U) = 16.5 - 3 = 13.5 km/h<br>Time to travel 84 km upstream = 84 / 13.5 = 6.22 hours"
+  },
+  {
+    q_hi: "Q31. एक नाविक धारा के प्रतिकूल 1 घंटे में 2 किमी जाता है और धारा के अनुकूल 10 मिनट में 1 किमी जाता है। उसे स्थिर जल में 6 किमी जाने में कितना समय लगेगा?",
+    q_en: "Q31. A boatman travels 2 km upstream in 1 hour and 1 km downstream in 10 minutes. How much time will he take to travel 6 km in still water?",
+    tag: "SSC CGL 12/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 1 घंटा 30 मिनट",
+      "(b) 1 घंटा 15 मिनट",
+      "(c) 2 घंटे 30 मिनट",
+      "(d) 1 घंटा 45 मिनट"
+    ],
+    o_en: [
+      "(a) 1 hour 30 minutes",
+      "(b) 1 hour 15 minutes",
+      "(c) 2 hours 30 minutes",
+      "(d) 1 hour 45 minutes"
+    ],
+    a: 0,
+    e_hi: "प्रतिकूल चाल (U) = 2 / 1 = 2 किमी/घंटा<br>अनुकूल चाल (D) = 1 / (10/60) = 6 किमी/घंटा<br>स्थिर जल में चाल = (D + U)/2 = (6 + 2)/2 = 4 किमी/घंटा<br>6 किमी जाने में समय = 6 / 4 = 1.5 घंटे = 1 घंटा 30 मिनट",
+    e_en: "Upstream speed (U) = 2 / 1 = 2 km/h<br>Downstream speed (D) = 1 / (10/60) = 6 km/h<br>Speed in still water = (D + U)/2 = (6 + 2)/2 = 4 km/h<br>Time to travel 6 km = 6 / 4 = 1.5 hours = 1 hour 30 minutes"
+  },
+  {
+    q_hi: "Q32. एक नाव द्वारा धारा के प्रतिकूल एक निश्चित दूरी तय करने में लिया गया समय, धारा के अनुकूल समान दूरी तय करने में लिए गए समय का दोगुना है। यदि धारा की गति 3 किमी/घंटा है, तो नाव को धारा के प्रतिकूल 52 किमी जाने में कितने घंटे लगेंगे?",
+    q_en: "Q32. The time taken by a boat to cover a certain distance upstream is twice the time taken to cover the same distance downstream. If the speed of the stream is 3 km/h, how many hours will the boat take to travel 52 km upstream?",
+    tag: "SSC Phase-IX 2022",
+    o_hi: [
+      "(a) 4\\frac{1}{3}",
+      "(b) 5\\frac{1}{5}",
+      "(c) 5\\frac{7}{9}",
+      "(d) 8\\frac{2}{3}"
+    ],
+    o_en: [
+      "(a) 4\\frac{1}{3}",
+      "(b) 5\\frac{1}{5}",
+      "(c) 5\\frac{7}{9}",
+      "(d) 8\\frac{2}{3}"
+    ],
+    a: 3,
+    e_hi: "प्रतिकूल समय : अनुकूल समय = 2 : 1<br>अनुकूल चाल (D) : प्रतिकूल चाल (U) = 2 : 1<br>b + s = 2(b - s) => b = 3s<br>s = 3 किमी/घंटा => b = 9 किमी/घंटा<br>प्रतिकूल चाल (U) = 9 - 3 = 6 किमी/घंटा<br>52 किमी प्रतिकूल जाने में समय = 52 / 6 = 8\\frac{2}{3} घंटे",
+    e_en: "Upstream time : Downstream time = 2 : 1<br>Downstream speed (D) : Upstream speed (U) = 2 : 1<br>b + s = 2(b - s) => b = 3s<br>s = 3 km/h => b = 9 km/h<br>Upstream speed (U) = 9 - 3 = 6 km/h<br>Time to travel 52 km upstream = 52 / 6 = 8\\frac{2}{3} hours"
+  },
+  {
+    q_hi: "Q33. एक व्यक्ति स्थिर जल में 6 किमी की दूरी 1 घंटे में तय कर सकता है। उतनी ही दूरी को वह धारा के अनुकूल 45 मिनट में तय कर सकता है। धारा के अनुकूल 16 किमी की दूरी तय करने और प्रारंभिक बिंदु पर लौटने में उसके द्वारा लिया गया कुल समय ज्ञात कीजिए।",
+    q_en: "Q33. A person can cover a distance of 6 km in 1 hour in still water. He can cover the same distance downstream in 45 minutes. Find the total time taken by him to travel 16 km downstream and return to the starting point.",
+    tag: "SSC CGL 18/09/2024 (Shift-03)",
+    o_hi: [
+      "(a) 4 घंटे 40 मिनट",
+      "(b) 6 घंटे",
+      "(c) 4 घंटे",
+      "(d) 6 घंटे 40 मिनट"
+    ],
+    o_en: [
+      "(a) 4 hours 40 minutes",
+      "(b) 6 hours",
+      "(c) 4 hours",
+      "(d) 6 hours 40 minutes"
+    ],
+    a: 1,
+    e_hi: "स्थिर जल में चाल = 6 किमी/घंटा<br>अनुकूल चाल = 6 / (45/60) = 8 किमी/घंटा<br>धारा की चाल = 8 - 6 = 2 किमी/घंटा<br>प्रतिकूल चाल = 6 - 2 = 4 किमी/घंटा<br>16 किमी जाने और लौटने में समय = (16 / 8) + (16 / 4) = 2 + 4 = 6 घंटे",
+    e_en: "Speed in still water = 6 km/h<br>Downstream speed = 6 / (45/60) = 8 km/h<br>Speed of the stream = 8 - 6 = 2 km/h<br>Upstream speed = 6 - 2 = 4 km/h<br>Time to travel 16 km and return = (16 / 8) + (16 / 4) = 2 + 4 = 6 hours"
+  },
+  {
+    q_hi: "Q34. एक व्यक्ति को धारा की दिशा में 16 किमी नाव चलाने में 15 मिनट लगते हैं, जो धारा के विपरीत दिशा में समान दूरी तय करने के लिए गए समय से 25% कम है। व्यक्ति स्थिर जल में एक घंटे में कितने किलोमीटर नाव चला सकता है? (निकटतम पूर्ण संख्या तक पूर्णांकित)",
+    q_en: "Q34. A person takes 15 minutes to row a boat 16 km downstream, which is 25% less than the time taken to cover the same distance upstream. How many kilometres can the person row in still water in one hour? (Round to the nearest whole number)",
+    tag: "SSC CGL 14/07/2023 (Shift-04)",
+    o_hi: [
+      "(a) 56",
+      "(b) 60",
+      "(c) 58",
+      "(d) 54"
+    ],
+    o_en: [
+      "(a) 56",
+      "(b) 60",
+      "(c) 58",
+      "(d) 54"
+    ],
+    a: 0,
+    e_hi: "अनुकूल समय = 15 मिनट = 1/4 घंटा<br>अनुकूल चाल (D) = 16 / (1/4) = 64 किमी/घंटा<br>प्रतिकूल समय = 15 / 0.75 = 20 मिनट = 1/3 घंटा<br>प्रतिकूल चाल (U) = 16 / (1/3) = 48 किमी/घंटा<br>स्थिर जल में चाल = (64 + 48) / 2 = 56 किमी/घंटा<br>1 घंटे में तय दूरी = 56 किमी",
+    e_en: "Downstream time = 15 minutes = 1/4 hour<br>Downstream speed (D) = 16 / (1/4) = 64 km/h<br>Upstream time = 15 / 0.75 = 20 minutes = 1/3 hour<br>Upstream speed (U) = 16 / (1/3) = 48 km/h<br>Speed in still water = (64 + 48) / 2 = 56 km/h<br>Distance covered in 1 hour = 56 km"
+  },
+  {
+    q_hi: "Q35. धारा के प्रतिकूल x किमी की दूरी तय करने में नाव द्वारा लिया गया समय धारा के अनुकूल समान दूरी तय करने में नाव द्वारा लिए गए समय से 3 घंटे अधिक है। धारा के प्रतिकूल नाव की गति 8 किमी/घंटा है। निम्नलिखित में से कौन सा कथन सही है/हैं?<br>I. यदि x का मान 48 किमी है, तो धारा के अनुकूल नाव की गति 16 किमी/घंटा है।<br>II. यदि धारा के अनुकूल नाव की गति 12 किमी/घंटा है, तो x का मान 48 किमी है।",
+    q_en: "Q35. The time taken by a boat to cover x km upstream is 3 hours more than the time taken to cover the same distance downstream. The upstream speed of the boat is 8 km/h. Which of the following statement(s) is/are correct?<br>I. If x is 48 km, then the downstream speed of the boat is 16 km/h.<br>II. If the downstream speed of the boat is 12 km/h, then x is 48 km.",
+    tag: "SSC MTS 12/05/2023 (Shift-02)",
+    o_hi: [
+      "(a) ना तो I सही और ना II ही",
+      "(b) केवल II",
+      "(c) केवल I",
+      "(d) I और II दोनों"
+    ],
+    o_en: [
+      "(a) Neither I nor II",
+      "(b) Only II",
+      "(c) Only I",
+      "(d) Both I and II"
+    ],
+    a: 2,
+    e_hi: "कथन I: यदि x = 48 किमी, प्रतिकूल समय = 48 / 8 = 6 घंटे<br>अनुकूल समय = 6 - 3 = 3 घंटे<br>अनुकूल चाल = 48 / 3 = 16 किमी/घंटा (कथन I सही है)<br>कथन II: यदि अनुकूल चाल = 12 किमी/घंटा, तो x/8 - x/12 = 3 => x/24 = 3 => x = 72 किमी (कथन II गलत है)<br>अतः केवल कथन I सही है।",
+    e_en: "Statement I: If x = 48 km, upstream time = 48 / 8 = 6 hours<br>Downstream time = 6 - 3 = 3 hours<br>Downstream speed = 48 / 3 = 16 km/h (Statement I is correct)<br>Statement II: If downstream speed = 12 km/h, then x/8 - x/12 = 3 => x/24 = 3 => x = 72 km (Statement II is incorrect)<br>Hence, only Statement I is correct."
+  },
+  {
+    q_hi: "Q36. एक नाव धारा के अनुकूल एक निश्चित दूरी 2 घंटे में तय करती है, जबकि वह 2\\frac{1}{2} घंटे में वापस आती है। यदि धारा की चाल 3 किमी/घंटा है, तो स्थिर जल में नाव की चाल क्या है?",
+    q_en: "Q36. A boat covers a certain distance downstream in 2 hours, while it takes 2\\frac{1}{2} hours to return. If the speed of the stream is 3 km/h, what is the speed of the boat in still water?",
+    tag: "SSC Phase-XII 24/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 29 किमी/घंटा",
+      "(b) 25 किमी/घंटा",
+      "(c) 20 किमी/घंटा",
+      "(d) 27 किमी/घंटा"
+    ],
+    o_en: [
+      "(a) 29 km/h",
+      "(b) 25 km/h",
+      "(c) 20 km/h",
+      "(d) 27 km/h"
+    ],
+    a: 3,
+    e_hi: "अनुकूल समय (T₁) = 2 घंटे<br>प्रतिकूल समय (T₂) = 2\\frac{1}{2} घंटे = 2.5 घंटे<br>धारा की चाल (s) = 3 किमी/घंटा<br>नाव की चाल (b) = s × (T₂ + T₁) / (T₂ - T₁)<br>b = 3 × (2.5 + 2) / (2.5 - 2) = 3 × 4.5 / 0.5 = 27 किमी/घंटा",
+    e_en: "Downstream time (T₁) = 2 hours<br>Upstream time (T₂) = 2\\frac{1}{2} hours = 2.5 hours<br>Speed of the stream (s) = 3 km/h<br>Speed of the boat (b) = s × (T₂ + T₁) / (T₂ - T₁)<br>b = 3 × (2.5 + 2) / (2.5 - 2) = 3 × 4.5 / 0.5 = 27 km/h"
+  },
+  {
+    q_hi: "Q37. एक मोटरबोट को धारा के अनुकूल जाने में 18 घंटे लगते हैं, और समान दूरी तक वापस आने में 36 घंटे लगते हैं। नाव की, स्थिर जल में चाल और धारा की चाल का अनुपात ज्ञात कीजिए।",
+    q_en: "Q37. A motorboat takes 18 hours to travel downstream and 36 hours to return the same distance. Find the ratio of the speed of the boat in still water to the speed of the stream.",
+    tag: "SSC CGL 17/09/2024 (Shift-02)",
+    o_hi: [
+      "(a) 3 : 1",
+      "(b) 2 : 3",
+      "(c) 2 : 1",
+      "(d) 3 : 2"
+    ],
+    o_en: [
+      "(a) 3 : 1",
+      "(b) 2 : 3",
+      "(c) 2 : 1",
+      "(d) 3 : 2"
+    ],
+    a: 0,
+    e_hi: "माना स्थिर जल में नाव की चाल = x किमी/घंटा<br>धारा की चाल = y किमी/घंटा<br>धारा के अनुकूल चाल = x + y<br>धारा के प्रतिकूल चाल = x - y<br>दूरी समान है, इसलिए:<br>18 × (x + y) = 36 × (x - y)<br>x + y = 2(x - y)<br>x + y = 2x - 2y<br>x = 3y<br>x / y = 3 / 1<br>नाव की स्थिर जल में चाल और धारा की चाल का अनुपात = 3 : 1",
+    e_en: "Let the speed of the boat in still water = x km/h<br>Speed of the stream = y km/h<br>Downstream speed = x + y<br>Upstream speed = x - y<br>Since the distance is the same:<br>18 × (x + y) = 36 × (x - y)<br>x + y = 2(x - y)<br>x + y = 2x - 2y<br>x = 3y<br>x / y = 3 / 1<br>Ratio of the speed of the boat in still water to the speed of the stream = 3 : 1"
+  },
+  {
+    q_hi: "Q38. एक नाव को धारा के प्रतिकूल दूरी तय करने में 11 घंटे लगते हैं और धारा के अनुकूल समान दूरी तय करने में 5 घंटे लगते हैं। यदि शांत पानी में नाव की गति 2\\frac{2}{9} मी/सेकंड है, तो धारा की गति (किमी/घंटा में) है:",
+    q_en: "Q38. A boat takes 11 hours to cover a distance upstream and 5 hours to cover the same distance downstream. If the speed of the boat in still water is 2\\frac{2}{9} m/s, then the speed of the stream in km/h is:",
+    tag: "SSC CHSL 04/08/2023 (Shift-04)",
+    o_hi: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 1",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 1",
+      "(d) 4"
+    ],
+    a: 1,
+    e_hi: "शांत पानी में नाव की चाल (x) = 2\\frac{2}{9} मी/सेकंड = 20/9 मी/सेकंड<br>किमी/घंटा में बदलने के लिए:<br>x = (20/9) × (18/5) = 8 किमी/घंटा<br>माना धारा की गति = y किमी/घंटा<br>दूरी समान है, इसलिए:<br>धारा के प्रतिकूल दूरी = धारा के अनुकूल दूरी<br>(x - y) × 11 = (x + y) × 5<br>11(8 - y) = 5(8 + y)<br>88 - 11y = 40 + 5y<br>16y = 48<br>y = 3 किमी/घंटा",
+    e_en: "Speed of the boat in still water (x) = 2\\frac{2}{9} m/s = 20/9 m/s<br>To convert into km/h:<br>x = (20/9) × (18/5) = 8 km/h<br>Let the speed of the stream = y km/h<br>Since the distance is the same:<br>Upstream distance = Downstream distance<br>(x - y) × 11 = (x + y) × 5<br>11(8 - y) = 5(8 + y)<br>88 - 11y = 40 + 5y<br>16y = 48<br>y = 3 km/h"
+  },
+  {
+    q_hi: "Q39. एक नाव की गति और धारा की गति का अनुपात 35 : 8 है। नाव धारा के अनुकूल 5 घंटे 10 मिनट में जाती है। नाव को वापस आने में कितना समय लगेगा?",
+    q_en: "Q39. The ratio of the speed of a boat to the speed of the stream is 35 : 8. The boat travels downstream in 5 hours 10 minutes. How much time will it take to return?",
+    tag: "SSC CPO 29/06/2024 (Shift-03)",
+    o_hi: [
+      "(a) 5 घंटे 15 मिनट 58 सेकंड",
+      "(b) 6 घंटे 45 मिनट 10 सेकंड",
+      "(c) 8 घंटे 13 मिनट 42 सेकंड",
+      "(d) 9 घंटे 30 मिनट 49 सेकंड"
+    ],
+    o_en: [
+      "(a) 5 hours 15 minutes 58 seconds",
+      "(b) 6 hours 45 minutes 10 seconds",
+      "(c) 8 hours 13 minutes 42 seconds",
+      "(d) 9 hours 30 minutes 49 seconds"
+    ],
+    a: 2,
+    e_hi: "माना नाव की गति = 35k और धारा की गति = 8k<br>धारा के अनुकूल गति = 35k + 8k = 43k<br>धारा के प्रतिकूल गति = 35k - 8k = 27k<br>धारा के अनुकूल लगा समय = 5 घंटे 10 मिनट = 31/6 घंटे<br>दूरी = चाल × समय = 43k × (31/6)<br>वापस आने (धारा के प्रतिकूल) में लगा समय = दूरी / चाल<br>समय = [43k × (31/6)] / 27k = 1333 / 162 घंटे<br>1333 / 162 = 8.228395... घंटे<br>= 8 घंटे 13 मिनट 42.22 सेकंड<br>≈ 8 घंटे 13 मिनट 42 सेकंड",
+    e_en: "Let the speed of the boat = 35k and the speed of the stream = 8k<br>Downstream speed = 35k + 8k = 43k<br>Upstream speed = 35k - 8k = 27k<br>Downstream time = 5 hours 10 minutes = 31/6 hours<br>Distance = Speed × Time = 43k × (31/6)<br>Time to return upstream = Distance / Speed<br>Time = [43k × (31/6)] / 27k = 1333 / 162 hours<br>1333 / 162 = 8.228395... hours<br>= 8 hours 13 minutes 42.22 seconds<br>≈ 8 hours 13 minutes 42 seconds"
+  },
+  {
+    q_hi: "Q40. एक मोटरबोट की चाल और जल की धारा की चाल का अनुपात 31 : 6 है। मोटरबोट एक बिंदु से शुरू होती है और 4 घंटे 10 मिनट में धारा के अनुदिश एक निश्चित दूरी तय करती है। मोटरबोट द्वारा अपने प्रारंभिक बिंदु पर वापस आने में लगने वाला समय ज्ञात कीजिए।",
+    q_en: "Q40. The ratio of the speed of a motorboat to the speed of the current is 31 : 6. The motorboat starts from a point and travels a certain distance downstream in 4 hours 10 minutes. Find the time taken by the motorboat to return to its starting point.",
+    tag: "SSC CGL 20/07/2023 (Shift-04)",
+    o_hi: [
+      "(a) 4 घंटे 10 मिनट",
+      "(b) 5 घंटे 10 मिनट",
+      "(c) 5 घंटे 50 मिनट",
+      "(d) 6 घंटे 10 मिनट"
+    ],
+    o_en: [
+      "(a) 4 hours 10 minutes",
+      "(b) 5 hours 10 minutes",
+      "(c) 5 hours 50 minutes",
+      "(d) 6 hours 10 minutes"
+    ],
+    a: 3,
+    e_hi: "माना नाव की चाल = 31k, धारा की चाल = 6k<br>धारा के अनुदिश चाल = 31k + 6k = 37k<br>धारा के विपरीत चाल = 31k - 6k = 25k<br>अनुदिश लगा समय = 4 घंटे 10 मिनट = 4 + 1/6 = 25/6 घंटे<br>दूरी = 37k × (25/6)<br>वापस आने में लगा समय = [37k × (25/6)] / 25k = 37/6 घंटे<br>37/6 घंटे = 6 घंटे 1/6 घंटा = 6 घंटे 10 मिनट",
+    e_en: "Let the speed of the boat = 31k and the speed of the stream = 6k<br>Downstream speed = 31k + 6k = 37k<br>Upstream speed = 31k - 6k = 25k<br>Downstream time = 4 hours 10 minutes = 4 + 1/6 = 25/6 hours<br>Distance = 37k × (25/6)<br>Time to return = [37k × (25/6)] / 25k = 37/6 hours<br>37/6 hours = 6 hours 1/6 hour = 6 hours 10 minutes"
+  }
+];
