@@ -2891,9 +2891,22 @@ let currentBookmarkIdOverride = null;
 const BOOKMARK_STORAGE_KEY='devssc:bookmarks:v1';
 function getBookmarks(){try{const x=JSON.parse(localStorage.getItem(BOOKMARK_STORAGE_KEY)||'[]');return Array.isArray(x)?x:[]}catch(_){return[]}}
 function setBookmarks(x){try{localStorage.setItem(BOOKMARK_STORAGE_KEY,JSON.stringify(x))}catch(_){}updateBookmarkDrawerCount()}
-function migrateBookmarkKeys(){const list=getBookmarks();if(!list.length)return;const seen=new Set();const migrated=list.map(b=>{const key=bookmarkGroupKey(b.subject,b.category,b.chapter,b.testTitle);const id=(key||String(b.path||''))+'::q::'+String(b.questionIndex);const n={...b,id:id};if(seen.has(id))return null;seen.add(id);return n}).filter(Boolean);if(JSON.stringify(migrated)!==JSON.stringify(list)){try{localStorage.setItem(BOOKMARK_STORAGE_KEY,JSON.stringify(migrated))}catch(_){} }}
+function migrateBookmarkKeys(){const list=getBookmarks();if(!list.length)return;const seen=new Set();const migrated=list.map(b=>{
+  if(b.aiGenerated){ if(seen.has(b.id))return null; seen.add(b.id); return b; }
+  const key=bookmarkTestKeyOf(b);
+  const id=(key||String(b.path||''))+'::q::'+String(b.questionIndex);
+  const n=(id===b.id)?b:{...b,id:id};
+  if(seen.has(id))return null;seen.add(id);return n
+}).filter(Boolean);if(JSON.stringify(migrated)!==JSON.stringify(list)){try{localStorage.setItem(BOOKMARK_STORAGE_KEY,JSON.stringify(migrated))}catch(_){} }}
 function bookmarkGroupKey(subject,category,chapter,testTitle){return [subject||'',category||'',chapter||'',testTitle||''].map(v=>String(v).trim().toLowerCase()).join('::')}
-function bookmarkId(path,index){const key=bookmarkGroupKey(currentSubject,currentCategory,currentChapter,currentQuizTitle)||String(path||'');return key+'::q::'+String(index)}
+/* Same physical test/quiz file (path) should always group together in bookmarks,
+   even if subject/category/chapter differ because the user reached it via a
+   different navigation route, and even if the bookmark came from an AI-generated
+   question vs a normal question. Path is the one thing that's always identical
+   for a given test, so prefer it over the subject/category/chapter/testTitle combo. */
+function bookmarkTestKey(subject,category,chapter,testTitle,path){const p=String(path||'').trim().toLowerCase();return p?('path::'+p):bookmarkGroupKey(subject,category,chapter,testTitle)}
+function bookmarkTestKeyOf(b){return bookmarkTestKey(b&&b.subject,b&&b.category,b&&b.chapter,b&&b.testTitle,b&&b.path)}
+function bookmarkId(path,index){const key=bookmarkTestKey(currentSubject,currentCategory,currentChapter,currentQuizTitle,path)||String(path||'');return key+'::q::'+String(index)}
 function getBookmarkTargetIndex(){return Number.isInteger(currentBookmarkQuestionIndex)?currentBookmarkQuestionIndex:currentQ}
 function isQuestionBookmarked(path,index){
   const id=currentBookmarkIdOverride || bookmarkId(path,index);
@@ -2924,7 +2937,7 @@ function toggleCurrentBookmark(){
   setBookmarks(list);updateBookmarkButton();
 }
 function makeAIBookmarkId(quizCardData){
-  const base=bookmarkGroupKey(currentSubject,currentCategory,currentChapter,currentQuizTitle)||String(currentQuizPath||'');
+  const base=bookmarkTestKey(currentSubject,currentCategory,currentChapter,currentQuizTitle,currentQuizPath)||String(currentQuizPath||'');
   const raw=[quizCardData.question||'',...(quizCardData.options||[]),quizCardData.examTag||''].join('|');
   let h=2166136261;
   for(let i=0;i<raw.length;i++){h^=raw.charCodeAt(i);h=Math.imul(h,16777619);}
@@ -3038,7 +3051,7 @@ function renderBookmarkTests(subject,category,chapter,directOnly=false){
   pushExplorerHistory({screen:'bookmarkTests',subject:subject,category:category||null,chapter:chapter||null,directOnly:!!directOnly});
   prepareBookmarkExplorer(cleanHumanReadableTitle(chapter||category||subject));
   const l=document.getElementById('explorerList'); l.innerHTML='';
-  groupBookmarks(bs,b=>bookmarkGroupKey(b.subject,b.category,b.chapter,b.testTitle)||b.path||b.testTitle||'Quiz').forEach((items,path)=>{
+  groupBookmarks(bs,b=>bookmarkTestKeyOf(b)||b.testTitle||'Quiz').forEach((items,path)=>{
     const b=items[0],c=document.createElement('div'); c.className='premium-card';
     c.innerHTML=`<div class="card-meta-box"><div class="card-icon-wrapper" style="background:var(--warning-light);color:var(--warning);"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></div><div class="card-details"><span class="card-main-title">${cleanHumanReadableTitle(b.testTitle||b.path||'Quiz')}</span><span class="card-subtitle-stats">${items.length} Saved Question${items.length===1?'':'s'}</span></div></div><span class="premium-arrow-action">➜</span>`;
     c.onclick=()=>renderBookmarkQuestions(subject,path); l.appendChild(c);
@@ -3052,7 +3065,7 @@ function removeBookmarkFromList(bookmarkId,subject,path){
 function renderBookmarkQuestions(subject,path){
   pushExplorerHistory({screen:'bookmarkQuestions',subject:subject,path:path});
   const l=document.getElementById('explorerList');
-  const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&((bookmarkGroupKey(b.subject,b.category,b.chapter,b.testTitle)===path)||b.path===path)).sort((a,b)=>a.questionIndex-b.questionIndex);
+  const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&bookmarkTestKeyOf(b)===path).sort((a,b)=>a.questionIndex-b.questionIndex);
   prepareBookmarkExplorer(cleanHumanReadableTitle(items[0]?.testTitle||'Bookmarked Questions')); l.innerHTML='';
   if(!items.length){
     showBookmarkEmptyState();
