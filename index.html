@@ -604,7 +604,6 @@ body {
   -webkit-user-select:none !important;
   -webkit-touch-callout:none !important;
 }
-#pencilPredictCanvas{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;z-index:9999;pointer-events:none;display:none;touch-action:none !important;overscroll-behavior:none !important;-webkit-user-select:none !important;-webkit-touch-callout:none !important;}
 #pencilStarCanvas{
   position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;
   z-index:9998;pointer-events:none;
@@ -1888,9 +1887,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   -webkit-user-select: none !important;
   -webkit-touch-callout: none !important;
 }
-#aiPencilPredictCanvas{position:absolute;z-index:6;pointer-events:none;touch-action:none !important;overscroll-behavior:none !important;-webkit-user-select:none !important;-webkit-touch-callout:none !important;}
-#ai-bottom-sheet.ai-pencil-on #aiPencilCanvas{pointer-events:auto;}
-#ai-bottom-sheet.ai-pencil-on #aiPencilPredictCanvas{pointer-events:none;}
+#ai-bottom-sheet.ai-pencil-on #aiPencilCanvas {
+  pointer-events: auto;
+}
 /* Same protection as the main quiz pencil (body.pencil-mode): while this
    pencil mode is on, kill native text-selection/callout across the sheet
    so a long-press on message text never opens the selection UI instead of
@@ -3698,16 +3697,14 @@ function showEmptyState() {
    segment painting, coalesced samples when available, and raw samples only
    as a fallback/primary stream (never both at once). */
 (function initApplePencilLayer(){
-  let canvas, ctx, starCanvas, starCtx, predictCanvas, predictCtx, toggle, tools;
+  let canvas, ctx, starCanvas, starCtx, toggle, tools;
   let enabled=false, drawing=false, activePointerId=null, tool='pen', penColor='#dc2626';
   let starTapStart=null;
   const TAP_THRESHOLD=10; // px of finger/pencil drift still counted as a tap
   let strokes=[], redoStack=[], currentStroke=null;
   let dpr=1, usingRawStream=false;
   let lastX=0,lastY=0,lastTime=0;
-  let prevRawX=0,prevRawY=0,prevRawT=0;
   let lastPenEventTime=0; // updated on every raw pen event, independent of sample dedup — see notePenEvent()
-  const PREDICT_HORIZON_MS=18, PREDICT_MAX_PX=14;
   let smoothX=0,smoothY=0;
   const SMOOTH_ALPHA=0.7; // lower = smoother/more like ink, higher = more responsive
   const BASE_WIDTH=3.9;    // pen stroke thickness
@@ -3731,12 +3728,6 @@ function showEmptyState() {
     canvas.style.height=h+'px';
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(predictCanvas){
-      predictCanvas.width=Math.round(w*dpr); predictCanvas.height=Math.round(h*dpr);
-      predictCanvas.style.width=w+'px'; predictCanvas.style.height=h+'px';
-      predictCtx=predictCanvas.getContext('2d',{alpha:true,desynchronized:true});
-      predictCtx.setTransform(dpr,0,0,dpr,0,0); clearPredict();
-    }
     if(starCanvas){
       starCanvas.width=Math.round(w*dpr);
       starCanvas.height=Math.round(h*dpr);
@@ -3792,21 +3783,6 @@ function showEmptyState() {
     ctx.fillStyle=ctx.strokeStyle;
     ctx.fill();
     ctx.globalCompositeOperation='source-over';
-  }
-
-  function clearPredict(){
-    if(predictCtx&&predictCanvas) predictCtx.clearRect(0,0,predictCanvas.width,predictCanvas.height);
-  }
-  function drawPredictStub(rawX,rawY,vx,vy,width,color){
-    if(!predictCtx||tool!=='pen') return;
-    const speed=Math.hypot(vx,vy); if(!isFinite(speed)||speed<0.03) return;
-    let dx=vx*PREDICT_HORIZON_MS, dy=vy*PREDICT_HORIZON_MS;
-    const len=Math.hypot(dx,dy); if(len>PREDICT_MAX_PX){const k=PREDICT_MAX_PX/len;dx*=k;dy*=k;}
-    if(Math.hypot(dx,dy)<1) return;
-    predictCtx.save(); predictCtx.lineCap='round'; predictCtx.lineJoin='round';
-    predictCtx.lineWidth=width||BASE_WIDTH; predictCtx.strokeStyle=color||penColor;
-    predictCtx.globalCompositeOperation='source-over'; predictCtx.beginPath();
-    predictCtx.moveTo(rawX,rawY); predictCtx.lineTo(rawX+dx,rawY+dy); predictCtx.stroke(); predictCtx.restore();
   }
 
   // Small filled 5-point star, used by the star stamp tool. Independent of
@@ -4005,7 +3981,6 @@ function showEmptyState() {
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
     const rawX=ev.clientX, rawY=ev.clientY, t=ev.timeStamp||performance.now();
-    const prevRawX=lastX, prevRawY=lastY, prevRawT=lastTime;
     // Keyed off coordinates only, not timestamp: pointermove and
     // pointerrawupdate can both report the exact same physical sample with
     // slightly different timeStamp values, so this also dedupes across the
@@ -4049,9 +4024,6 @@ function showEmptyState() {
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
-    clearPredict();
-    const dt=t-prevRawT;
-    if(prevRawT>0 && dt>0) drawPredictStub(rawX,rawY,(rawX-prevRawX)/dt,(rawY-prevRawY)/dt,widthFor(ev.pressure),currentStroke.color);
   }
 
   function appendEvents(events){
@@ -4091,7 +4063,6 @@ function showEmptyState() {
     const p=point(e);
     p.w=widthFor(e.pressure);
     smoothX=p.x; smoothY=p.y; // start smoothing exactly at first touch, no lag-in
-    prevRawX=p.x; prevRawY=p.y; prevRawT=e.timeStamp||performance.now(); clearPredict();
     currentStroke={tool,color:penColor,points:[p]};
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
     drawDot(p,tool,p.w,penColor); // immediate first contact
@@ -4140,7 +4111,7 @@ function showEmptyState() {
 
   function end(e){
     if(!drawing||e.pointerId!==activePointerId) return;
-    clearPredict(); e.preventDefault();
+    e.preventDefault();
     e.stopPropagation();
     drawing=false;
     activePointerId=null;
@@ -4212,7 +4183,7 @@ function showEmptyState() {
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
-    else { drawing=false; activePointerId=null; usingRawStream=false; clearPredict(); hideEraserCursor(); resetClearConfirm(); }
+    else { drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); resetClearConfirm(); }
   }
 
   function undo(){
@@ -4231,7 +4202,7 @@ function showEmptyState() {
     if(!enabled) return;
     enabled=false;
     drawing=false; activePointerId=null; usingRawStream=false; currentStroke=null;
-    clearPredict(); document.body.classList.remove('pencil-mode');
+    document.body.classList.remove('pencil-mode');
     if(canvas) canvas.style.display='none';
     if(starCanvas) starCanvas.style.display='none';
     if(tools) tools.style.display='none';
@@ -4276,7 +4247,7 @@ function showEmptyState() {
   // stroke so drawing state can never stay stuck until the pen is re-lifted.
   function forceEndStroke(){
     if(!drawing) return;
-    clearPredict(); drawing=false; activePointerId=null; usingRawStream=false; starTapStart=null;
+    drawing=false; activePointerId=null; usingRawStream=false; starTapStart=null;
     if(currentStroke&&currentStroke.points.length){
       strokes.push(currentStroke);
       redoStack=[];
@@ -4315,7 +4286,6 @@ function showEmptyState() {
   function init(){
     canvas=document.getElementById('pencilCanvas');
     starCanvas=document.getElementById('pencilStarCanvas');
-    predictCanvas=document.createElement('canvas'); predictCanvas.id='pencilPredictCanvas'; document.body.appendChild(predictCanvas);
     toggle=document.getElementById('pencilToggleBtn');
     tools=document.getElementById('pencilTools');
     if(!canvas||!toggle||!tools) return;
@@ -6445,16 +6415,14 @@ if ('serviceWorker' in navigator) {
 // scrolling passenger.
 (function(){
   let enabled=false, drawing=false, activePointerId=null;
-  let canvas=null, ctx=null, predictCanvas=null, predictCtx=null, dpr=1;
+  let canvas=null, ctx=null, dpr=1;
   let tool='pen', penColor='#dc2626';
   let strokes=[], redoStack=[], currentStroke=null;
   let starTapStart=null;
   const TAP_THRESHOLD=10;
   let lastX=0,lastY=0,lastTime=0,lastPenEventTime=0;
-  let prevRawX=0,prevRawY=0,prevRawT=0;
   let smoothX=0,smoothY=0;
   const SMOOTH_ALPHA=0.7;
-  const PREDICT_HORIZON_MS=18, PREDICT_MAX_PX=14;
   const BASE_WIDTH=3.9, MIN_WIDTH=2.6, MAX_WIDTH=5.8;
 
   function chatBody(){ return document.getElementById('aiChatBody'); }
@@ -6518,9 +6486,7 @@ if ('serviceWorker' in navigator) {
     canvas=document.createElement('canvas');
     canvas.id='aiPencilCanvas';
     sh.appendChild(canvas);
-    predictCanvas=document.createElement('canvas'); predictCanvas.id='aiPencilPredictCanvas'; sh.appendChild(predictCanvas);
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
-    predictCtx=predictCanvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
     // Keep the canvas glued to the chat body's actual on-screen rect for
     // any layout shift, not just a window resize event. A stale rect here
@@ -6560,12 +6526,6 @@ if ('serviceWorker' in navigator) {
     canvas.width=Math.round(w*dpr);
     canvas.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(predictCanvas){
-      predictCanvas.style.left=(bodyRect.left-sheetRect.left)+'px'; predictCanvas.style.top=top+'px';
-      predictCanvas.style.width=w+'px'; predictCanvas.style.height=h+'px';
-      predictCanvas.width=Math.round(w*dpr); predictCanvas.height=Math.round(h*dpr);
-      predictCtx=predictCanvas.getContext('2d',{alpha:true,desynchronized:true}); predictCtx.setTransform(dpr,0,0,dpr,0,0); clearPredict();
-    }
     const tb=toolbar();
     if(tb) tb.style.top=(top+8)+'px';
     redraw(); // full clean redraw from stroke data, same as main engine
@@ -6605,20 +6565,6 @@ if ('serviceWorker' in navigator) {
     ctx.globalCompositeOperation='source-over';
   }
 
-  function clearPredict(){
-    if(predictCtx&&predictCanvas) predictCtx.clearRect(0,0,predictCanvas.width,predictCanvas.height);
-  }
-  function drawPredictStub(rawX,rawY,vx,vy,width,color){
-    if(!predictCtx||tool!=='pen') return;
-    const speed=Math.hypot(vx,vy); if(!isFinite(speed)||speed<0.03) return;
-    let dx=vx*PREDICT_HORIZON_MS,dy=vy*PREDICT_HORIZON_MS;
-    const len=Math.hypot(dx,dy); if(len>PREDICT_MAX_PX){const k=PREDICT_MAX_PX/len;dx*=k;dy*=k;}
-    if(Math.hypot(dx,dy)<1) return;
-    predictCtx.save(); predictCtx.lineCap='round'; predictCtx.lineJoin='round'; predictCtx.lineWidth=width||BASE_WIDTH;
-    predictCtx.strokeStyle=color||penColor; predictCtx.globalCompositeOperation='source-over'; predictCtx.beginPath();
-    predictCtx.moveTo(rawX,rawY); predictCtx.lineTo(rawX+dx,rawY+dy); predictCtx.stroke(); predictCtx.restore();
-  }
-
   function notePenEvent(e){
     if(e.pointerType==='pen') lastPenEventTime=performance.now();
   }
@@ -6627,7 +6573,6 @@ if ('serviceWorker' in navigator) {
 
   function forceEndStroke(){
     if(!drawing) return;
-    clearPredict();
     drawing=false; activePointerId=null; starTapStart=null;
     if(currentStroke&&currentStroke.points.length){
       strokes.push(currentStroke);
@@ -6654,7 +6599,6 @@ if ('serviceWorker' in navigator) {
 
     drawing=true;
     activePointerId=e.pointerId;
-    clearPredict();
 
     if(tool==='star'){
       starTapStart=point(e);
@@ -6664,7 +6608,6 @@ if ('serviceWorker' in navigator) {
     const p=point(e);
     p.w=widthFor(e.pressure);
     smoothX=p.x; smoothY=p.y;
-    prevRawX=p.x; prevRawY=p.y; prevRawT=e.timeStamp||performance.now(); clearPredict();
     currentStroke={tool,color:penColor,points:[p]};
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
     drawDot(p,tool,p.w,penColor);
@@ -6675,7 +6618,6 @@ if ('serviceWorker' in navigator) {
     if(tool==='star') return;
     const r=canvas.getBoundingClientRect();
     const rawX=ev.clientX-r.left, rawY=ev.clientY-r.top, t=ev.timeStamp||performance.now();
-    const prevRawX=lastX, prevRawY=lastY, prevRawT=lastTime;
     if(rawX===lastX && rawY===lastY) return;
     lastX=rawX; lastY=rawY; lastTime=t;
 
@@ -6708,11 +6650,8 @@ if ('serviceWorker' in navigator) {
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
-    clearPredict();
-    const dt=t-prevRawT;
-    if(prevRawT>0 && dt>0) drawPredictStub(rawX,rawY,(rawX-prevRawX)/dt,(rawY-prevRawY)/dt,widthFor(ev.pressure),currentStroke.color);
   }
- function appendEvents(events){ for(const ev of events) appendSample(ev); }
+  function appendEvents(events){ for(const ev of events) appendSample(ev); }
 
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
@@ -6736,7 +6675,6 @@ if ('serviceWorker' in navigator) {
   function end(e){
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
-    clearPredict();
     drawing=false;
     activePointerId=null;
 
@@ -6847,8 +6785,6 @@ if ('serviceWorker' in navigator) {
     ensureCanvas();
     resize();
     if(canvas) canvas.style.display=enabled?'block':'none';
-    if(predictCanvas) predictCanvas.style.display=enabled?'block':'none';
-    if(!enabled) clearPredict();
     const sh=sheet();
     if(sh) sh.classList.toggle('ai-pencil-on', enabled);
     const btn=document.getElementById('aiPencilToggleBtn');
