@@ -4310,7 +4310,6 @@ function showEmptyState() {
     if(supportsRawUpdate) document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
-    document.addEventListener('pointerout',end,{capture:true,passive:false});
 
     // Independent of drawing state, so the eraser indicator follows the
     // pencil on hover too (not just while actively erasing), and disappears
@@ -6810,7 +6809,6 @@ if ('serviceWorker' in navigator) {
   if(supportsRawUpdate) document.addEventListener('pointerrawupdate', rawMove, {capture:true, passive:false});
   document.addEventListener('pointerup', end, {capture:true, passive:false});
   document.addEventListener('pointercancel', end, {capture:true, passive:false});
-  document.addEventListener('pointerout', end, {capture:true, passive:false});
   document.addEventListener('gesturestart', blockGesture, {capture:true, passive:false});
   document.addEventListener('gesturechange', blockGesture, {capture:true, passive:false});
   document.addEventListener('gestureend', blockGesture, {capture:true, passive:false});
