@@ -4014,12 +4014,13 @@ function showEmptyState() {
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
       // Live tip stub: the smoothed curve above always stops at the
       // midpoint, one half-sample behind the real pen position. Extend
-      // the same stroke with a short straight segment out to the raw
-      // point p2 so the ink visibly reaches wherever the pen actually is
-      // right now instead of trailing behind. The next sample's curve
-      // starts fresh from this same midpoint, so it simply overlays this
-      // stub with the properly smoothed version — no visual glitch.
-      ctx.lineTo(p2.x,p2.y);
+      // the same stroke with a short straight segment out to the RAW
+      // pen position (rawX/rawY — not the smoothed p2) so the ink
+      // visibly reaches wherever the pen actually is right now instead
+      // of trailing behind it. The next sample's curve starts fresh
+      // from this same midpoint, so it simply overlays this stub with
+      // the properly smoothed version — no visual glitch.
+      ctx.lineTo(rawX,rawY);
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
@@ -6642,9 +6643,10 @@ if ('serviceWorker' in navigator) {
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
       // Live tip stub, matching the main engine's latency fix: extend to
-      // the raw point so ink visibly reaches the actual pen position each
-      // sample instead of always trailing at the midpoint.
-      ctx.lineTo(p2.x,p2.y);
+      // the RAW pen position (rawX/rawY) so ink visibly reaches the
+      // actual pen position each sample instead of trailing behind at
+      // the smoothed point.
+      ctx.lineTo(rawX,rawY);
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
