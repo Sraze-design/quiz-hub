@@ -4369,9 +4369,9 @@ function showEmptyState() {
       if(isInExcludedZone(e.target)) return;
       e.preventDefault();
     }
-    document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
-    document.addEventListener('touchmove',blockAllTouch,{capture:true,passive:false});
-    document.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
+    window.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
+    window.addEventListener('touchmove',blockAllTouch,{capture:true,passive:false});
+    window.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
 
     // Finger rejection: treat touch pointers exactly like palm contact while
     // Pencil mode is active. Only real pen pointers are allowed to reach the
@@ -4380,6 +4380,9 @@ function showEmptyState() {
     // candidate that interferes with an active Apple Pencil stroke.
     function rejectFingerPointer(e){
       if(!enabled || e.pointerType!=='touch') return;
+      // Finger is rejected like palm ONLY in the drawing/content area.
+      // Keep the quiz header, bottom navigation/control bar, pencil toolbar,
+      // and modal controls fully usable with a finger.
       if(isInExcludedZone(e.target)) return;
       e.preventDefault();
       e.stopPropagation();
@@ -6796,9 +6799,9 @@ if ('serviceWorker' in navigator) {
     if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
     e.preventDefault();
   }
-  document.addEventListener('touchstart', blockAllTouch, {capture:true, passive:false});
-  document.addEventListener('touchmove', blockAllTouch, {capture:true, passive:false});
-  document.addEventListener('touchend', blockAllTouch, {capture:true, passive:false});
+  window.addEventListener('touchstart', blockAllTouch, {capture:true, passive:false});
+  window.addEventListener('touchmove', blockAllTouch, {capture:true, passive:false});
+  window.addEventListener('touchend', blockAllTouch, {capture:true, passive:false});
 
   // Finger rejection: while AI Pencil mode is active, touch pointers are
   // treated as palm contact. They never enter the drawing engine and cannot
@@ -6806,6 +6809,8 @@ if ('serviceWorker' in navigator) {
   // named header/input/toolbar zones are deliberately excluded above.
   function rejectFingerPointer(e){
     if(!enabled || e.pointerType!=='touch') return;
+    // Finger is rejected like palm ONLY in the AI sheet drawing/content area.
+    // Keep the AI header, input area, and pencil toolbar usable with a finger.
     if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
     e.preventDefault();
     e.stopPropagation();
