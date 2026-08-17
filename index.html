@@ -1896,6 +1896,15 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 #ai-bottom-sheet.ai-pencil-on #aiPencilCanvas {
   pointer-events: auto;
 }
+#aiPencilLaserCanvas {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
 /* Same protection as the main quiz pencil (body.pencil-mode): while this
    pencil mode is on, kill native text-selection/callout across the sheet
    so a long-press on message text never opens the selection UI instead of
@@ -2792,6 +2801,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
     <button type="button" id="aiPencilColorBlueBtn" class="pencil-color-btn" data-color="#2563eb" title="Blue" style="background:#2563eb;"></button>
     <button type="button" id="aiPencilEraserBtn" title="Eraser">⌫</button>
     <button type="button" id="aiPencilStarBtn" title="Star">★</button>
+    <button type="button" id="aiPencilLaserBtn" title="Laser Pen">☄</button>
     <button type="button" id="aiPencilUndoBtn" title="Undo">↶</button>
     <button type="button" id="aiPencilRedoBtn" title="Redo">↷</button>
     <button type="button" id="aiPencilClearBtn" class="clear" title="Clear">✕</button>
@@ -3719,8 +3729,8 @@ function showEmptyState() {
   // fades out over LASER_FADE_MS once the pencil lifts. Never saved to
   // strokes[]/localStorage and has no undo/redo — it's meant to vanish.
   const LASER_COLOR='#ef4444', LASER_CORE='#ffffff';
-  const LASER_FADE_MS=1000, LASER_WIDTH=6, LASER_CORE_WIDTH=2.4;
-  let laserStrokes=[]; // {points:[{x,y}], releasedAt:number}
+  const LASER_FADE_MS=1000, LASER_WIDTH=9, LASER_CORE_WIDTH=3.6;
+  let laserStrokes=[]; // {points:[{x,y}]} — the whole group fades together, see scheduleLaserIdleFade
   let currentLaserPts=null;
   let laserRAFId=null;
   let smoothLX=0, smoothLY=0;
@@ -3870,8 +3880,30 @@ function showEmptyState() {
     laserCtx.restore();
   }
 
+  // All finished laser strokes fade out TOGETHER, as one group, only once a
+  // full second has passed with the pencil not laser-writing at all. Lifting
+  // the pencil between letters and touching back down again within that
+  // second cancels the pending fade, so a whole word stays lit while it's
+  // being written and only disappears once writing actually stops.
+  let laserIdleTimer=null, laserGroupFadeStart=null;
+
+  function cancelLaserIdleFade(){
+    if(laserIdleTimer){ clearTimeout(laserIdleTimer); laserIdleTimer=null; }
+    laserGroupFadeStart=null;
+  }
+
+  function scheduleLaserIdleFade(){
+    if(laserIdleTimer) clearTimeout(laserIdleTimer);
+    laserIdleTimer=setTimeout(function(){
+      laserIdleTimer=null;
+      if(!laserStrokes.length) return;
+      laserGroupFadeStart=performance.now();
+      ensureLaserLoop();
+    },LASER_FADE_MS);
+  }
+
   // Runs only while there's something to show: the live in-progress stroke
-  // and/or strokes that are mid-fade after release. Stops itself the
+  // and/or a group mid-fade after the idle timeout. Stops itself the
   // instant nothing is left, instead of ticking forever in the background.
   function ensureLaserLoop(){
     if(laserRAFId!=null) return;
@@ -3883,17 +3915,21 @@ function showEmptyState() {
     if(!laserCtx) return;
     laserCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
     let stillActive=false;
+    let groupAlpha=1;
+    if(laserGroupFadeStart!=null){
+      const elapsed=now-laserGroupFadeStart;
+      groupAlpha=1-(elapsed/LASER_FADE_MS);
+      if(groupAlpha<=0){
+        laserStrokes=[]; laserGroupFadeStart=null;
+      }
+    }
     if(currentLaserPts&&currentLaserPts.length){
       drawLaserPath(currentLaserPts,1); // stays fully visible while the pencil is down
       stillActive=true;
     }
-    for(let i=laserStrokes.length-1;i>=0;i--){
-      const s=laserStrokes[i];
-      const elapsed=now-s.releasedAt;
-      const alpha=1-(elapsed/LASER_FADE_MS);
-      if(alpha<=0){ laserStrokes.splice(i,1); continue; }
-      drawLaserPath(s.points,alpha);
-      stillActive=true;
+    if(laserStrokes.length){
+      for(const s of laserStrokes) drawLaserPath(s.points,groupAlpha);
+      if(groupAlpha>0) stillActive=true;
     }
     if(stillActive) laserRAFId=requestAnimationFrame(laserFrame);
   }
@@ -3911,6 +3947,7 @@ function showEmptyState() {
 
   function clearLaser(){
     laserStrokes=[]; currentLaserPts=null;
+    cancelLaserIdleFade();
     if(laserCtx) laserCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
   }
 
@@ -4172,6 +4209,7 @@ function showEmptyState() {
       smoothLX=lp.x; smoothLY=lp.y;
       currentLaserPts=[lp];
       lastX=lp.x; lastY=lp.y; lastTime=e.timeStamp||performance.now();
+      cancelLaserIdleFade(); // still writing — earlier letters must stay lit
       ensureLaserLoop();
       return;
     }
@@ -4250,10 +4288,13 @@ function showEmptyState() {
     }
 
     if(tool==='laser'){
-      // Not saved anywhere: hand it to laserStrokes with a release timestamp
-      // so the animation loop fades it out over LASER_FADE_MS, then forget it.
+      // Not saved to strokes[]/localStorage. Joins the currently-visible
+      // laser group at full opacity; the group only starts fading once a
+      // full second passes with no new laser stroke touching down (see
+      // scheduleLaserIdleFade / cancelLaserIdleFade in start()).
       if(currentLaserPts&&currentLaserPts.length){
-        laserStrokes.push({points:currentLaserPts,releasedAt:performance.now()});
+        laserStrokes.push({points:currentLaserPts});
+        scheduleLaserIdleFade();
         ensureLaserLoop();
       }
       currentLaserPts=null;
@@ -4387,7 +4428,8 @@ function showEmptyState() {
     }
     currentStroke=null;
     if(currentLaserPts&&currentLaserPts.length){
-      laserStrokes.push({points:currentLaserPts,releasedAt:performance.now()});
+      laserStrokes.push({points:currentLaserPts});
+      scheduleLaserIdleFade();
       ensureLaserLoop();
     }
     currentLaserPts=null;
@@ -6564,6 +6606,15 @@ if ('serviceWorker' in navigator) {
   let smoothX=0,smoothY=0;
   const SMOOTH_ALPHA=0.7;
   const BASE_WIDTH=3.9, MIN_WIDTH=2.6, MAX_WIDTH=5.8;
+  // ===== Laser Pen ===== same idea as the main quiz engine: a
+  // non-persistent pointer stroke, full-opacity while the pencil is down,
+  // then fades the whole stroke out over LASER_FADE_MS once it lifts.
+  // Never saved to strokes[] and has no undo/redo.
+  const LASER_COLOR='#ef4444', LASER_CORE='#ffffff';
+  const LASER_FADE_MS=1000, LASER_WIDTH=9, LASER_CORE_WIDTH=3.6;
+  let laserCanvas=null, laserCtx=null;
+  let laserStrokes=[], currentLaserPts=null, laserRAFId=null;
+  let smoothLX=0, smoothLY=0;
 
   function chatBody(){ return document.getElementById('aiChatBody'); }
   function sheet(){ return document.getElementById('ai-bottom-sheet'); }
@@ -6619,6 +6670,97 @@ if ('serviceWorker' in navigator) {
     ctx.restore();
   }
 
+  // ---- Laser pen: glow trail on its own canvas, fades out after release ----
+  function strokeLaserPath(pts,width){
+    if(pts.length===1){
+      laserCtx.beginPath();
+      laserCtx.arc(pts[0].x,pts[0].y,width/2,0,Math.PI*2);
+      laserCtx.fillStyle=laserCtx.strokeStyle;
+      laserCtx.fill();
+      return;
+    }
+    laserCtx.lineWidth=width;
+    laserCtx.beginPath();
+    laserCtx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length;i++) laserCtx.lineTo(pts[i].x,pts[i].y);
+    laserCtx.stroke();
+  }
+  function drawLaserPath(pts,alpha){
+    if(!laserCtx||!pts||!pts.length||alpha<=0) return;
+    laserCtx.save();
+    laserCtx.globalAlpha=Math.max(0,Math.min(1,alpha));
+    laserCtx.lineCap='round';
+    laserCtx.lineJoin='round';
+    laserCtx.shadowColor=LASER_COLOR;
+    laserCtx.shadowBlur=18;
+    laserCtx.strokeStyle=LASER_COLOR;
+    strokeLaserPath(pts,LASER_WIDTH);
+    laserCtx.shadowBlur=6;
+    laserCtx.strokeStyle=LASER_CORE;
+    strokeLaserPath(pts,LASER_CORE_WIDTH);
+    laserCtx.restore();
+  }
+  function ensureLaserLoop(){
+    if(laserRAFId!=null) return;
+    laserRAFId=requestAnimationFrame(laserFrame);
+  }
+  // Same group-fade idea as the main engine: finished laser strokes stay
+  // fully lit and only fade out TOGETHER once a full second passes with no
+  // new laser stroke starting. Touching back down within that second (e.g.
+  // starting the next letter) cancels the pending fade.
+  let laserIdleTimer=null, laserGroupFadeStart=null;
+  function cancelLaserIdleFade(){
+    if(laserIdleTimer){ clearTimeout(laserIdleTimer); laserIdleTimer=null; }
+    laserGroupFadeStart=null;
+  }
+  function scheduleLaserIdleFade(){
+    if(laserIdleTimer) clearTimeout(laserIdleTimer);
+    laserIdleTimer=setTimeout(function(){
+      laserIdleTimer=null;
+      if(!laserStrokes.length) return;
+      laserGroupFadeStart=performance.now();
+      ensureLaserLoop();
+    },LASER_FADE_MS);
+  }
+  function laserFrame(now){
+    laserRAFId=null;
+    if(!laserCtx||!laserCanvas) return;
+    laserCtx.clearRect(0,0,laserCanvas.width,laserCanvas.height);
+    let stillActive=false;
+    let groupAlpha=1;
+    if(laserGroupFadeStart!=null){
+      const elapsed=now-laserGroupFadeStart;
+      groupAlpha=1-(elapsed/LASER_FADE_MS);
+      if(groupAlpha<=0){
+        laserStrokes=[]; laserGroupFadeStart=null;
+      }
+    }
+    if(currentLaserPts&&currentLaserPts.length){
+      drawLaserPath(currentLaserPts,1); // stays fully visible while the pencil is down
+      stillActive=true;
+    }
+    if(laserStrokes.length){
+      for(const s of laserStrokes) drawLaserPath(s.points,groupAlpha);
+      if(groupAlpha>0) stillActive=true;
+    }
+    if(stillActive) laserRAFId=requestAnimationFrame(laserFrame);
+  }
+  function appendLaserSample(ev){
+    if(!drawing||!currentLaserPts||ev.pointerId!==activePointerId||!isPen(ev)) return;
+    const p=point(ev);
+    if(p.x===lastX&&p.y===lastY) return;
+    lastX=p.x; lastY=p.y; lastTime=ev.timeStamp||performance.now();
+    smoothLX+=SMOOTH_ALPHA*(p.x-smoothLX);
+    smoothLY+=SMOOTH_ALPHA*(p.y-smoothLY);
+    currentLaserPts.push({x:smoothLX,y:smoothLY});
+    ensureLaserLoop();
+  }
+  function clearLaser(){
+    laserStrokes=[]; currentLaserPts=null;
+    cancelLaserIdleFade();
+    if(laserCtx&&laserCanvas) laserCtx.clearRect(0,0,laserCanvas.width,laserCanvas.height);
+  }
+
   function ensureCanvas(){
     if(canvas) return canvas;
     const sh=sheet();
@@ -6627,6 +6769,10 @@ if ('serviceWorker' in navigator) {
     canvas.id='aiPencilCanvas';
     sh.appendChild(canvas);
     ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+    laserCanvas=document.createElement('canvas');
+    laserCanvas.id='aiPencilLaserCanvas';
+    sh.appendChild(laserCanvas);
+    laserCtx=laserCanvas.getContext('2d',{alpha:true,desynchronized:true});
     resize();
     // Keep the canvas glued to the chat body's actual on-screen rect for
     // any layout shift, not just a window resize event. A stale rect here
@@ -6656,7 +6802,8 @@ if ('serviceWorker' in navigator) {
     const bodyRect=body.getBoundingClientRect();
     const sheetRect=sh.getBoundingClientRect();
     const top=bodyRect.top-sheetRect.top;
-    canvas.style.left=(bodyRect.left-sheetRect.left)+'px';
+    const left=bodyRect.left-sheetRect.left;
+    canvas.style.left=left+'px';
     canvas.style.top=top+'px';
     const w=Math.max(1,Math.round(bodyRect.width));
     const h=Math.max(1,Math.round(bodyRect.height));
@@ -6666,6 +6813,15 @@ if ('serviceWorker' in navigator) {
     canvas.width=Math.round(w*dpr);
     canvas.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(laserCanvas){
+      laserCanvas.style.left=left+'px';
+      laserCanvas.style.top=top+'px';
+      laserCanvas.style.width=w+'px';
+      laserCanvas.style.height=h+'px';
+      laserCanvas.width=Math.round(w*dpr);
+      laserCanvas.height=Math.round(h*dpr);
+      laserCtx.setTransform(dpr,0,0,dpr,0,0);
+    }
     const tb=toolbar();
     if(tb) tb.style.top=(top+8)+'px';
     redraw(); // full clean redraw from stroke data, same as main engine
@@ -6719,6 +6875,12 @@ if ('serviceWorker' in navigator) {
       redoStack=[];
     }
     currentStroke=null;
+    if(currentLaserPts&&currentLaserPts.length){
+      laserStrokes.push({points:currentLaserPts});
+      scheduleLaserIdleFade();
+      ensureLaserLoop();
+    }
+    currentLaserPts=null;
     redraw();
   }
 
@@ -6742,6 +6904,16 @@ if ('serviceWorker' in navigator) {
 
     if(tool==='star'){
       starTapStart=point(e);
+      return;
+    }
+
+    if(tool==='laser'){
+      const lp=point(e);
+      smoothLX=lp.x; smoothLY=lp.y;
+      currentLaserPts=[lp];
+      lastX=lp.x; lastY=lp.y; lastTime=e.timeStamp||performance.now();
+      cancelLaserIdleFade(); // still writing — earlier letters must stay lit
+      ensureLaserLoop();
       return;
     }
 
@@ -6801,6 +6973,7 @@ if ('serviceWorker' in navigator) {
     e.preventDefault();
     if(tool==='star') return;
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    if(tool==='laser'){ for(const ev of (events.length?events:[e])) appendLaserSample(ev); return; }
     appendEvents(events.length?events:[e]);
   }
   function rawMove(e){
@@ -6809,6 +6982,7 @@ if ('serviceWorker' in navigator) {
     e.preventDefault();
     if(tool==='star') return;
     const events=typeof e.getCoalescedEvents==='function' ? e.getCoalescedEvents() : [e];
+    if(tool==='laser'){ for(const ev of (events.length?events:[e])) appendLaserSample(ev); return; }
     appendEvents(events.length?events:[e]);
   }
 
@@ -6826,6 +7000,16 @@ if ('serviceWorker' in navigator) {
         redraw();
       }
       starTapStart=null;
+      return;
+    }
+
+    if(tool==='laser'){
+      if(currentLaserPts&&currentLaserPts.length){
+        laserStrokes.push({points:currentLaserPts});
+        scheduleLaserIdleFade();
+        ensureLaserLoop();
+      }
+      currentLaserPts=null;
       return;
     }
 
@@ -6868,6 +7052,7 @@ if ('serviceWorker' in navigator) {
     document.getElementById('aiPencilPenBtn')?.classList.toggle('active',tool==='pen');
     document.getElementById('aiPencilEraserBtn')?.classList.toggle('active',tool==='eraser');
     document.getElementById('aiPencilStarBtn')?.classList.toggle('active',tool==='star');
+    document.getElementById('aiPencilLaserBtn')?.classList.toggle('active',tool==='laser');
   }
   function setColor(c){
     penColor=c;
@@ -6925,6 +7110,8 @@ if ('serviceWorker' in navigator) {
     ensureCanvas();
     resize();
     if(canvas) canvas.style.display=enabled?'block':'none';
+    if(laserCanvas) laserCanvas.style.display=enabled?'block':'none';
+    if(!enabled) clearLaser();
     const sh=sheet();
     if(sh) sh.classList.toggle('ai-pencil-on', enabled);
     const btn=document.getElementById('aiPencilToggleBtn');
@@ -6943,6 +7130,7 @@ if ('serviceWorker' in navigator) {
   // question's chat. Pencil on/off state itself is left untouched.
   window.__aiPencilClearForNewQuestion=function(){
     strokes=[]; redoStack=[]; currentStroke=null;
+    clearLaser();
     if(ctx) redraw();
   };
 
@@ -6961,6 +7149,7 @@ if ('serviceWorker' in navigator) {
   document.getElementById('aiPencilColorBlueBtn')?.addEventListener('click',()=>setColor('#2563eb'));
   document.getElementById('aiPencilEraserBtn')?.addEventListener('click',()=>setTool('eraser'));
   document.getElementById('aiPencilStarBtn')?.addEventListener('click',()=>setTool('star'));
+  document.getElementById('aiPencilLaserBtn')?.addEventListener('click',()=>setTool('laser'));
   document.getElementById('aiPencilUndoBtn')?.addEventListener('click',undo);
   document.getElementById('aiPencilRedoBtn')?.addEventListener('click',redo);
   document.getElementById('aiPencilClearBtn')?.addEventListener('click',handleClearClick);
