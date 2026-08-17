@@ -599,7 +599,10 @@ body {
   position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;
   z-index:9998;pointer-events:none;
   display:none;
-  touch-action:none;
+  touch-action:none !important;
+  overscroll-behavior:none !important;
+  -webkit-user-select:none !important;
+  -webkit-touch-callout:none !important;
 }
 #pencilStarCanvas{
   position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;
@@ -617,7 +620,7 @@ body.pencil-mode #quizEngineBox{
   -webkit-user-select:none !important;user-select:none !important;
 }
 body.pencil-mode{
-  overscroll-behavior:none;
+  overscroll-behavior:none !important;
   overflow:hidden;
 }
 #pencilTools{
@@ -1879,7 +1882,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   position: absolute;
   z-index: 5;
   pointer-events: none;
-  touch-action: none;
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
 }
 #ai-bottom-sheet.ai-pencil-on #aiPencilCanvas {
   pointer-events: auto;
@@ -1894,6 +1900,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   -webkit-user-select: none !important;
   user-select: none !important;
   -webkit-touch-callout: none !important;
+}
+#ai-bottom-sheet.ai-pencil-on {
+  touch-action: none !important;
+  overscroll-behavior: none !important;
 }
 
 .ai-chat-body {
@@ -4300,6 +4310,7 @@ function showEmptyState() {
     if(supportsRawUpdate) document.addEventListener('pointerrawupdate',rawMove,{capture:true,passive:false});
     document.addEventListener('pointerup',end,{capture:true,passive:false});
     document.addEventListener('pointercancel',end,{capture:true,passive:false});
+    document.addEventListener('pointerout',end,{capture:true,passive:false});
 
     // Independent of drawing state, so the eraser indicator follows the
     // pencil on hover too (not just while actively erasing), and disappears
@@ -6799,6 +6810,7 @@ if ('serviceWorker' in navigator) {
   if(supportsRawUpdate) document.addEventListener('pointerrawupdate', rawMove, {capture:true, passive:false});
   document.addEventListener('pointerup', end, {capture:true, passive:false});
   document.addEventListener('pointercancel', end, {capture:true, passive:false});
+  document.addEventListener('pointerout', end, {capture:true, passive:false});
   document.addEventListener('gesturestart', blockGesture, {capture:true, passive:false});
   document.addEventListener('gesturechange', blockGesture, {capture:true, passive:false});
   document.addEventListener('gestureend', blockGesture, {capture:true, passive:false});
