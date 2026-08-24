@@ -2889,6 +2889,11 @@ const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
 let currentQuizPath = "";
 let currentBookmarkQuestionIndex = null;
 let currentBookmarkIdOverride = null;
+/* During a Wrong/Unattempted/Mixed retest, `data` gets filtered down to a
+   subset and currentQ restarts from 0, so it no longer matches the original
+   question's index. retestIndexMap[i] stores the ORIGINAL index for position
+   i in the filtered subset, so bookmarks keep pointing at the right question. */
+let retestIndexMap = null;
 
 /* ===== Persistent Question Bookmarks ===== */
 const BOOKMARK_STORAGE_KEY='devssc:bookmarks:v1';
@@ -2910,7 +2915,11 @@ function bookmarkGroupKey(subject,category,chapter,testTitle){return [subject||'
 function bookmarkTestKey(subject,category,chapter,testTitle,path){const p=String(path||'').trim().toLowerCase();return p?('path::'+p):bookmarkGroupKey(subject,category,chapter,testTitle)}
 function bookmarkTestKeyOf(b){return bookmarkTestKey(b&&b.subject,b&&b.category,b&&b.chapter,b&&b.testTitle,b&&b.path)}
 function bookmarkId(path,index){const key=bookmarkTestKey(currentSubject,currentCategory,currentChapter,currentQuizTitle,path)||String(path||'');return key+'::q::'+String(index)}
-function getBookmarkTargetIndex(){return Number.isInteger(currentBookmarkQuestionIndex)?currentBookmarkQuestionIndex:currentQ}
+function getBookmarkTargetIndex(){
+  if(Number.isInteger(currentBookmarkQuestionIndex)) return currentBookmarkQuestionIndex;
+  if(Array.isArray(retestIndexMap) && Number.isInteger(retestIndexMap[currentQ])) return retestIndexMap[currentQ];
+  return currentQ;
+}
 function isQuestionBookmarked(path,index){
   const id=currentBookmarkIdOverride || bookmarkId(path,index);
   return getBookmarks().some(b=>b.id===id);
@@ -3175,6 +3184,7 @@ async function startBookmarkedTestQuiz(bookmarks){
   isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
   currentBookmarkIdOverride = null;
+  retestIndexMap = null;
   try{
     const first=bookmarks[0];
     currentQuizPath = first.path || '';
@@ -4676,6 +4686,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
   currentBookmarkIdOverride = null;
+  retestIndexMap = null;
   currentQuizPath = quizPath; /* added: track path for leaderboard API */
   try {
     const quizInfo = allFlattenedQuizzes.find(q=>q.path===quizPath);
@@ -5544,6 +5555,7 @@ if(goBtn) goBtn.disabled=false;
    else if(answerCorrect[i]===false) wrong.push(i);
  }
  if(mode===1){
+   retestIndexMap=null;
    data=ORIGINAL_DATA.slice();
    score=0;elapsed=0;currentStreak=0;maxStreak=0;currentQ=0;
    answered=new Array(data.length).fill(false);
@@ -5569,6 +5581,7 @@ if(goBtn) goBtn.disabled=false;
  else return;
  if(arr.length===0){alert("No questions available for this selection setup parameter context variables.");return;}
  const newData=arr.map(i=>data[i]);
+ retestIndexMap=arr.slice();
  data.length=0;
  newData.forEach(q=>data.push(q));
  currentQ=0;
