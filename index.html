@@ -3184,7 +3184,13 @@ async function startBookmarkedTestQuiz(bookmarks){
   isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
   currentBookmarkIdOverride = null;
-  retestIndexMap = null;
+  // Keep the original question index for every saved question in this
+  // compacted quiz, so bookmark state/removal always points to the real
+  // saved bookmark even when the saved questions are not consecutive.
+  retestIndexMap = bookmarks.map(b => {
+    const n = Number(b && b.questionIndex);
+    return Number.isInteger(n) ? n : -1;
+  });
   try{
     const first=bookmarks[0];
     currentQuizPath = first.path || '';
@@ -5517,6 +5523,11 @@ function startRetest(mode){
 document.getElementById('retestModal').style.display='none';
 // Mode 1 = full original test; modes 2-4 = reduced-question retests.
 isRetestAttempt = (mode !== 1);
+
+// Clear any bookmark-only question state left by a previously opened
+// saved question. Retests must use retestIndexMap for bookmark identity.
+currentBookmarkQuestionIndex = null;
+currentBookmarkIdOverride = null;
 
 // Every Reattempt/Retest must always start in the original Hindi mode.
 // Do not carry the previous test's E/English state into the new attempt.
