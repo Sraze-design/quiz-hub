@@ -2916,8 +2916,13 @@ function bookmarkTestKey(subject,category,chapter,testTitle,path){const p=String
 function bookmarkTestKeyOf(b){return bookmarkTestKey(b&&b.subject,b&&b.category,b&&b.chapter,b&&b.testTitle,b&&b.path)}
 function bookmarkId(path,index){const key=bookmarkTestKey(currentSubject,currentCategory,currentChapter,currentQuizTitle,path)||String(path||'');return key+'::q::'+String(index)}
 function getBookmarkTargetIndex(){
+  // In a reduced/retest quiz, currentQ is an index into the reduced array.
+  // Always translate it back to the original quiz question first.
+  if(Array.isArray(retestIndexMap) && Number.isInteger(retestIndexMap[currentQ])){
+    return retestIndexMap[currentQ];
+  }
+  // This is used only by the single saved-question viewer.
   if(Number.isInteger(currentBookmarkQuestionIndex)) return currentBookmarkQuestionIndex;
-  if(Array.isArray(retestIndexMap) && Number.isInteger(retestIndexMap[currentQ])) return retestIndexMap[currentQ];
   return currentQ;
 }
 function isQuestionBookmarked(path,index){
@@ -5592,7 +5597,14 @@ if(goBtn) goBtn.disabled=false;
  else return;
  if(arr.length===0){alert("No questions available for this selection setup parameter context variables.");return;}
  const newData=arr.map(i=>data[i]);
- retestIndexMap=arr.slice();
+
+ // Preserve the original-question mapping even when a retest is started
+ // from another reduced/retest quiz.
+ const previousRetestMap = Array.isArray(retestIndexMap) ? retestIndexMap.slice() : null;
+ retestIndexMap = arr.map(i=>{
+   if(previousRetestMap && Number.isInteger(previousRetestMap[i])) return previousRetestMap[i];
+   return i;
+ });
  data.length=0;
  newData.forEach(q=>data.push(q));
  currentQ=0;
