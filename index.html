@@ -7345,6 +7345,12 @@ if ('serviceWorker' in navigator) {
   function canStart(target){
     if(refreshing || document.body.classList.contains('pencil-mode')) return false;
     if(isBlockedTarget(target)) return false;
+
+    // Pull-to-refresh is disabled for the entire quiz engine, including the
+    // live test and the result screen. It remains enabled everywhere else.
+    const quizEngine=document.getElementById('quizEngineBox');
+    if(quizEngine && quizEngine.style.display !== 'none') return false;
+
     // Don't interfere while overlays/panels that have their own touch scrolling are open.
     const ai=document.getElementById('ai-bottom-sheet');
     const drawer=document.getElementById('appSideDrawer');
