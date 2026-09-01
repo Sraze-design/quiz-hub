@@ -1,0 +1,743 @@
+const data = [
+  {
+    q_hi: "Q51. 10⁻¹⁵ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q51. What is the prefix used for 10⁻¹⁵ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) फेम्टो (femto), f",
+      "(b) एटो (atto), a",
+      "(c) पिको (pico), p",
+      "(d) नैनो (nano), n"
+    ],
+    o_en: [
+      "(a) femto, f",
+      "(b) atto, a",
+      "(c) pico, p",
+      "(d) nano, n"
+    ],
+    a: 0,
+    e_hi: "10⁻¹⁵ के लिए फेम्टो (femto) पूर्व प्रत्यय तथा f प्रतीक है।",
+    e_en: "For 10⁻¹⁵, the prefix used is femto and its symbol is f."
+  },
+  {
+    q_hi: "Q52. 10⁹ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q52. What is the prefix used for 10⁹ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) मेगा (mega), M",
+      "(b) टेरा (tera), T",
+      "(c) किलो (kilo), k",
+      "(d) गीगा (giga), G"
+    ],
+    o_en: [
+      "(a) mega, M",
+      "(b) tera, T",
+      "(c) kilo, k",
+      "(d) giga, G"
+    ],
+    a: 3,
+    e_hi: "10⁹ के लिए गीगा (giga) पूर्व प्रत्यय तथा G प्रतीक है।",
+    e_en: "For 10⁹, the prefix used is giga and its symbol is G."
+  },
+  {
+    q_hi: "Q53. 10⁻¹² के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q53. What is the prefix used for 10⁻¹² and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) नैनो (nano), n",
+      "(b) पिको (pico), p",
+      "(c) फेम्टो (femto), f",
+      "(d) माइक्रो (micro), μ"
+    ],
+    o_en: [
+      "(a) nano, n",
+      "(b) pico, p",
+      "(c) femto, f",
+      "(d) micro, μ"
+    ],
+    a: 1,
+    e_hi: "10⁻¹² के लिए पिको (pico) पूर्व प्रत्यय तथा p प्रतीक है।",
+    e_en: "For 10⁻¹², the prefix used is pico and its symbol is p."
+  },
+  {
+    q_hi: "Q54. 10⁶ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q54. What is the prefix used for 10⁶ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) किलो (kilo), k",
+      "(b) गीगा (giga), G",
+      "(c) मेगा (mega), M",
+      "(d) हेक्टो (hecto), h"
+    ],
+    o_en: [
+      "(a) kilo, k",
+      "(b) giga, G",
+      "(c) mega, M",
+      "(d) hecto, h"
+    ],
+    a: 2,
+    e_hi: "10⁶ के लिए मेगा (mega) पूर्व प्रत्यय तथा M प्रतीक है।",
+    e_en: "For 10⁶, the prefix used is mega and its symbol is M."
+  },
+  {
+    q_hi: "Q55. 10⁻⁹ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q55. What is the prefix used for 10⁻⁹ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) माइक्रो (micro), μ",
+      "(b) नैनो (nano), n",
+      "(c) मिली (milli), m",
+      "(d) पिको (pico), p"
+    ],
+    o_en: [
+      "(a) micro, μ",
+      "(b) nano, n",
+      "(c) milli, m",
+      "(d) pico, p"
+    ],
+    a: 1,
+    e_hi: "10⁻⁹ के लिए नैनो (nano) पूर्व प्रत्यय तथा n प्रतीक है।",
+    e_en: "For 10⁻⁹, the prefix used is nano and its symbol is n."
+  },
+  {
+    q_hi: "Q56. 10³ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q56. What is the prefix used for 10³ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) किलो (kilo), k",
+      "(b) हेक्टो (hecto), h",
+      "(c) डेका (deca), da",
+      "(d) मेगा (mega), M"
+    ],
+    o_en: [
+      "(a) kilo, k",
+      "(b) hecto, h",
+      "(c) deca, da",
+      "(d) mega, M"
+    ],
+    a: 0,
+    e_hi: "10³ के लिए किलो (kilo) पूर्व प्रत्यय तथा k प्रतीक है।",
+    e_en: "For 10³, the prefix used is kilo and its symbol is k."
+  },
+  {
+    q_hi: "Q57. 10⁻⁶ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q57. What is the prefix used for 10⁻⁶ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) मिली (milli), m",
+      "(b) नैनो (nano), n",
+      "(c) माइक्रो (micro), μ",
+      "(d) सेंटी (centi), c"
+    ],
+    o_en: [
+      "(a) milli, m",
+      "(b) nano, n",
+      "(c) micro, μ",
+      "(d) centi, c"
+    ],
+    a: 2,
+    e_hi: "10⁻⁶ के लिए माइक्रो (micro) पूर्व प्रत्यय तथा μ प्रतीक है।",
+    e_en: "For 10⁻⁶, the prefix used is micro and its symbol is μ."
+  },
+  {
+    q_hi: "Q58. 10² के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q58. What is the prefix used for 10² and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) हेक्टो (hecto), h",
+      "(b) डेका (deca), da",
+      "(c) किलो (kilo), k",
+      "(d) सेंटी (centi), c"
+    ],
+    o_en: [
+      "(a) hecto, h",
+      "(b) deca, da",
+      "(c) kilo, k",
+      "(d) centi, c"
+    ],
+    a: 0,
+    e_hi: "10² के लिए हेक्टो (hecto) पूर्व प्रत्यय तथा h प्रतीक है।",
+    e_en: "For 10², the prefix used is hecto and its symbol is h."
+  },
+  {
+    q_hi: "Q59. 10⁻³ के लिए प्रयुक्त पूर्व प्रत्यय और उसका प्रतीक क्या है?",
+    q_en: "Q59. What is the prefix used for 10⁻³ and its symbol?",
+    tag: "",
+    o_hi: [
+      "(a) सेंटी (centi), c",
+      "(b) मिली (milli), m",
+      "(c) माइक्रो (micro), μ",
+      "(d) डेसी (deci), d"
+    ],
+    o_en: [
+      "(a) centi, c",
+      "(b) milli, m",
+      "(c) micro, μ",
+      "(d) deci, d"
+    ],
+    a: 1,
+    e_hi: "10⁻³ के लिए मिली (milli) पूर्व प्रत्यय तथा m प्रतीक है।",
+    e_en: "For 10⁻³, the prefix used is milli and its symbol is m."
+  },
+  {
+    q_hi: "Q60. किसी भौतिक राशि की विमाएँ किसे कहते हैं?",
+    q_en: "Q60. What are the dimensions of a physical quantity?",
+    tag: "",
+    o_hi: [
+      "(a) राशि के संख्यात्मक मान को",
+      "(b) राशि के मात्रक को",
+      "(c) उन घातों को जिन्हें उस राशि को व्यक्त करने के लिए मूल राशियों पर चढ़ाना पड़ता है",
+      "(d) राशि और मात्रक के अनुपात को"
+    ],
+    o_en: [
+      "(a) The numerical value of the quantity",
+      "(b) The unit of the quantity",
+      "(c) The powers to which the base quantities must be raised to express that quantity",
+      "(d) The ratio of the quantity and unit"
+    ],
+    a: 2,
+    e_hi: "किसी भौतिक राशि की विमाएँ वे घात हैं जिन्हें उस राशि को व्यक्त करने के लिए मूल राशियों पर चढ़ाना पड़ता है।",
+    e_en: "The dimensions of a physical quantity are the powers to which the base quantities must be raised to express that quantity."
+  },
+  {
+    q_hi: "Q61. वेग की विमीय सूत्र (Dimensional Formula) क्या है?",
+    q_en: "Q61. What is the dimensional formula of velocity?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻¹]",
+      "(b) [LT⁻¹]",
+      "(c) [ML²T⁻²]",
+      "(d) [LT⁻²]"
+    ],
+    o_en: [
+      "(a) [MLT⁻¹]",
+      "(b) [LT⁻¹]",
+      "(c) [ML²T⁻²]",
+      "(d) [LT⁻²]"
+    ],
+    a: 1,
+    e_hi: "वेग का विमीय सूत्र [LT⁻¹] है।",
+    e_en: "The dimensional formula of velocity is [LT⁻¹]."
+  },
+  {
+    q_hi: "Q62. विमीय सूत्र किसे कहते हैं?",
+    q_en: "Q62. What is meant by dimensional formula?",
+    tag: "",
+    o_hi: [
+      "(a) किसी राशि के मात्रक को",
+      "(b) किसी राशि के संख्यात्मक मान को",
+      "(c) यह व्यक्त करने वाला सूत्र कि मूल राशियों में कौन-सी राशि किस प्रकार सम्मिलित है",
+      "(d) केवल लंबाई और समय के संबंध को"
+    ],
+    o_en: [
+      "(a) The unit of a quantity",
+      "(b) The numerical value of a quantity",
+      "(c) An expression showing which base quantities are included and how",
+      "(d) Only the relationship between length and time"
+    ],
+    a: 2,
+    e_hi: "विमीय सूत्र वह व्यंजक है जो दर्शाता है कि मूल राशियों में कौन-सी राशि किस प्रकार सम्मिलित है।",
+    e_en: "A dimensional formula is an expression that shows which base quantities are included and how."
+  },
+  {
+    q_hi: "Q63. कार्य का विमीय सूत्र क्या है?",
+    q_en: "Q63. What is the dimensional formula of work?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻¹]",
+      "(b) [ML²T⁻²]",
+      "(c) [MLT⁻²]",
+      "(d) [ML²T⁻³]"
+    ],
+    o_en: [
+      "(a) [MLT⁻¹]",
+      "(b) [ML²T⁻²]",
+      "(c) [MLT⁻²]",
+      "(d) [ML²T⁻³]"
+    ],
+    a: 1,
+    e_hi: "कार्य का विमीय सूत्र [ML²T⁻²] है।",
+    e_en: "The dimensional formula of work is [ML²T⁻²]."
+  },
+  {
+    q_hi: "Q64. वेग और चाल का विमीय सूत्र क्या है?",
+    q_en: "Q64. What is the dimensional formula of velocity and speed?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻¹]",
+      "(b) [LT⁻¹]",
+      "(c) [LT⁻²]",
+      "(d) [MLT⁻²]"
+    ],
+    o_en: [
+      "(a) [MLT⁻¹]",
+      "(b) [LT⁻¹]",
+      "(c) [LT⁻²]",
+      "(d) [MLT⁻²]"
+    ],
+    a: 1,
+    e_hi: "वेग और चाल का विमीय सूत्र [LT⁻¹] है।",
+    e_en: "The dimensional formula of velocity and speed is [LT⁻¹]."
+  },
+  {
+    q_hi: "Q65. बल का विमीय सूत्र क्या है?",
+    q_en: "Q65. What is the dimensional formula of force?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻²]",
+      "(b) [ML²T⁻²]",
+      "(c) [LT⁻¹]",
+      "(d) [MLT⁻¹]"
+    ],
+    o_en: [
+      "(a) [MLT⁻²]",
+      "(b) [ML²T⁻²]",
+      "(c) [LT⁻¹]",
+      "(d) [MLT⁻¹]"
+    ],
+    a: 0,
+    e_hi: "बल का विमीय सूत्र [MLT⁻²] है।",
+    e_en: "The dimensional formula of force is [MLT⁻²]."
+  },
+  {
+    q_hi: "Q66. कार्य और ऊर्जा का विमीय सूत्र क्या है?",
+    q_en: "Q66. What is the dimensional formula of work and energy?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻²]",
+      "(b) [MLT⁻¹]",
+      "(c) [ML²T⁻²]",
+      "(d) [ML²T⁻³]"
+    ],
+    o_en: [
+      "(a) [MLT⁻²]",
+      "(b) [MLT⁻¹]",
+      "(c) [ML²T⁻²]",
+      "(d) [ML²T⁻³]"
+    ],
+    a: 2,
+    e_hi: "कार्य और ऊर्जा का विमीय सूत्र [ML²T⁻²] है।",
+    e_en: "The dimensional formula of work and energy is [ML²T⁻²]."
+  },
+  {
+    q_hi: "Q67. संवेग का विमीय सूत्र क्या है?",
+    q_en: "Q67. What is the dimensional formula of momentum?",
+    tag: "",
+    o_hi: [
+      "(a) [ML²T⁻²]",
+      "(b) [MLT⁻¹]",
+      "(c) [MLT⁻²]",
+      "(d) [ML²T⁻³]"
+    ],
+    o_en: [
+      "(a) [ML²T⁻²]",
+      "(b) [MLT⁻¹]",
+      "(c) [MLT⁻²]",
+      "(d) [ML²T⁻³]"
+    ],
+    a: 1,
+    e_hi: "संवेग का विमीय सूत्र [MLT⁻¹] है।",
+    e_en: "The dimensional formula of momentum is [MLT⁻¹]."
+  },
+  {
+    q_hi: "Q68. प्रत्यास्थता गुणांक का विमीय सूत्र क्या है?",
+    q_en: "Q68. What is the dimensional formula of coefficient of elasticity?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻²]",
+      "(b) [ML²T⁻²]",
+      "(c) [ML⁻¹T⁻²]",
+      "(d) [ML⁻¹T⁻¹]"
+    ],
+    o_en: [
+      "(a) [MLT⁻²]",
+      "(b) [ML²T⁻²]",
+      "(c) [ML⁻¹T⁻²]",
+      "(d) [ML⁻¹T⁻¹]"
+    ],
+    a: 2,
+    e_hi: "प्रत्यास्थता गुणांक का विमीय सूत्र [ML⁻¹T⁻²] है।",
+    e_en: "The dimensional formula of coefficient of elasticity is [ML⁻¹T⁻²]."
+  },
+  {
+    q_hi: "Q69. वेग प्रवाहता का विमीय सूत्र क्या है?",
+    q_en: "Q69. What is the dimensional formula of velocity gradient?",
+    tag: "",
+    o_hi: [
+      "(a) [M⁰L⁰T⁻¹]",
+      "(b) [MLT⁻¹]",
+      "(c) [ML⁻¹T⁻¹]",
+      "(d) [LT⁻¹]"
+    ],
+    o_en: [
+      "(a) [M⁰L⁰T⁻¹]",
+      "(b) [MLT⁻¹]",
+      "(c) [ML⁻¹T⁻¹]",
+      "(d) [LT⁻¹]"
+    ],
+    a: 0,
+    e_hi: "वेग प्रवाहता का विमीय सूत्र [M⁰L⁰T⁻¹] है।",
+    e_en: "The dimensional formula of velocity gradient is [M⁰L⁰T⁻¹]."
+  },
+  {
+    q_hi: "Q70. घनत्व का विमीय सूत्र क्या है?",
+    q_en: "Q70. What is the dimensional formula of density?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻¹]",
+      "(b) [ML⁻¹T⁻²]",
+      "(c) [ML⁻³T⁰]",
+      "(d) [M⁰L⁰T⁻¹]"
+    ],
+    o_en: [
+      "(a) [MLT⁻¹]",
+      "(b) [ML⁻¹T⁻²]",
+      "(c) [ML⁻³T⁰]",
+      "(d) [M⁰L⁰T⁻¹]"
+    ],
+    a: 2,
+    e_hi: "घनत्व का विमीय सूत्र [ML⁻³T⁰] है।",
+    e_en: "The dimensional formula of density is [ML⁻³T⁰]."
+  },
+  {
+    q_hi: "Q71. आवेग का विमीय सूत्र क्या है?",
+    q_en: "Q71. What is the dimensional formula of impulse?",
+    tag: "",
+    o_hi: [
+      "(a) [ML²T⁻²]",
+      "(b) [MLT⁻¹]",
+      "(c) [MLT⁻²]",
+      "(d) [ML⁻¹T⁻²]"
+    ],
+    o_en: [
+      "(a) [ML²T⁻²]",
+      "(b) [MLT⁻¹]",
+      "(c) [MLT⁻²]",
+      "(d) [ML⁻¹T⁻²]"
+    ],
+    a: 1,
+    e_hi: "आवेग का विमीय सूत्र [MLT⁻¹] है।",
+    e_en: "The dimensional formula of impulse is [MLT⁻¹]."
+  },
+  {
+    q_hi: "Q72. शक्ति का विमीय सूत्र क्या है?",
+    q_en: "Q72. What is the dimensional formula of power?",
+    tag: "",
+    o_hi: [
+      "(a) [ML²T⁻³]",
+      "(b) [ML²T⁻²]",
+      "(c) [MLT⁻²]",
+      "(d) [MLT⁻¹]"
+    ],
+    o_en: [
+      "(a) [ML²T⁻³]",
+      "(b) [ML²T⁻²]",
+      "(c) [MLT⁻²]",
+      "(d) [MLT⁻¹]"
+    ],
+    a: 0,
+    e_hi: "शक्ति का विमीय सूत्र [ML²T⁻³] है।",
+    e_en: "The dimensional formula of power is [ML²T⁻³]."
+  },
+  {
+    q_hi: "Q73. दाब और प्रतिबल का विमीय सूत्र क्या है?",
+    q_en: "Q73. What is the dimensional formula of pressure and stress?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻²]",
+      "(b) [ML⁻¹T⁻²]",
+      "(c) [ML²T⁻³]",
+      "(d) [ML⁰T⁻²]"
+    ],
+    o_en: [
+      "(a) [MLT⁻²]",
+      "(b) [ML⁻¹T⁻²]",
+      "(c) [ML²T⁻³]",
+      "(d) [ML⁰T⁻²]"
+    ],
+    a: 1,
+    e_hi: "दाब और प्रतिबल का विमीय सूत्र [ML⁻¹T⁻²] है।",
+    e_en: "The dimensional formula of pressure and stress is [ML⁻¹T⁻²]."
+  },
+  {
+    q_hi: "Q74. पृष्ठ तनाव का विमीय सूत्र क्या है?",
+    q_en: "Q74. What is the dimensional formula of surface tension?",
+    tag: "",
+    o_hi: [
+      "(a) [ML⁻¹T⁻¹]",
+      "(b) [MLT⁻²]",
+      "(c) [ML⁰T⁻²]",
+      "(d) [ML⁻¹T⁻²]"
+    ],
+    o_en: [
+      "(a) [ML⁻¹T⁻¹]",
+      "(b) [MLT⁻²]",
+      "(c) [ML⁰T⁻²]",
+      "(d) [ML⁻¹T⁻²]"
+    ],
+    a: 2,
+    e_hi: "पृष्ठ तनाव का विमीय सूत्र [ML⁰T⁻²] है।",
+    e_en: "The dimensional formula of surface tension is [ML⁰T⁻²]."
+  },
+  {
+    q_hi: "Q75. श्यानता गुणांक का विमीय सूत्र क्या है?",
+    q_en: "Q75. What is the dimensional formula of coefficient of viscosity?",
+    tag: "",
+    o_hi: [
+      "(a) [ML⁻¹T⁻¹]",
+      "(b) [ML⁻¹T⁻²]",
+      "(c) [MLT⁻¹]",
+      "(d) [ML²T⁻³]"
+    ],
+    o_en: [
+      "(a) [ML⁻¹T⁻¹]",
+      "(b) [ML⁻¹T⁻²]",
+      "(c) [MLT⁻¹]",
+      "(d) [ML²T⁻³]"
+    ],
+    a: 0,
+    e_hi: "श्यानता गुणांक का विमीय सूत्र [ML⁻¹T⁻¹] है।",
+    e_en: "The dimensional formula of coefficient of viscosity is [ML⁻¹T⁻¹]."
+  },
+  {
+    q_hi: "Q76. त्वरण का विमीय सूत्र क्या है?",
+    q_en: "Q76. What is the dimensional formula of acceleration?",
+    tag: "",
+    o_hi: [
+      "(a) [MLT⁻²]",
+      "(b) [LT⁻¹]",
+      "(c) [LT⁻²]",
+      "(d) [ML²T⁻²]"
+    ],
+    o_en: [
+      "(a) [MLT⁻²]",
+      "(b) [LT⁻¹]",
+      "(c) [LT⁻²]",
+      "(d) [ML²T⁻²]"
+    ],
+    a: 2,
+    e_hi: "त्वरण का विमीय सूत्र [LT⁻²] है।",
+    e_en: "The dimensional formula of acceleration is [LT⁻²]."
+  },
+  {
+    q_hi: "Q77. कोणीय वेग का विमीय सूत्र क्या है?",
+    q_en: "Q77. What is the dimensional formula of angular velocity?",
+    tag: "",
+    o_hi: [
+      "A) [M^0 L^0 T^-1]",
+      "B) [M L^2 T^-1]",
+      "C) [M L^-1 T^-2]",
+      "D) [M L^2 T^0]"
+    ],
+    o_en: [
+      "A) [M^0 L^0 T^-1]",
+      "B) [M L^2 T^-1]",
+      "C) [M L^-1 T^-2]",
+      "D) [M L^2 T^0]"
+    ],
+    a: 0,
+    e_hi: "कोणीय वेग का विमीय सूत्र [M^0 L^0 T^-1] होता है।",
+    e_en: "The dimensional formula of angular velocity is [M^0 L^0 T^-1]."
+  },
+  {
+    q_hi: "Q78. जड़त्व आघूर्ण का विमीय सूत्र निम्नलिखित में से कौन सा है?",
+    q_en: "Q78. Which of the following is the dimensional formula of moment of inertia?",
+    tag: "",
+    o_hi: [
+      "A) [M L^2 T^-2]",
+      "B) [M L^2 T^0]",
+      "C) [M L^2 T^-1]",
+      "D) [M^0 L T^-1]"
+    ],
+    o_en: [
+      "A) [M L^2 T^-2]",
+      "B) [M L^2 T^0]",
+      "C) [M L^2 T^-1]",
+      "D) [M^0 L T^-1]"
+    ],
+    a: 1,
+    e_hi: "जड़त्व आघूर्ण का विमीय सूत्र [M L^2 T^0] होता है।",
+    e_en: "The dimensional formula of moment of inertia is [M L^2 T^0]."
+  },
+  {
+    q_hi: "Q79. [M L^2 T^-1] निम्नलिखित में से किस भौतिक राशि का विमीय सूत्र है?",
+    q_en: "Q79. [M L^2 T^-1] is the dimensional formula of which of the following physical quantities?",
+    tag: "",
+    o_hi: [
+      "A) कोणीय वेग",
+      "B) ऊर्जा घनत्व",
+      "C) कोणीय संवेग",
+      "D) पलायन वेग"
+    ],
+    o_en: [
+      "A) Angular velocity",
+      "B) Energy density",
+      "C) Angular momentum",
+      "D) Escape velocity"
+    ],
+    a: 2,
+    e_hi: "कोणीय संवेग का विमीय सूत्र [M L^2 T^-1] होता है।",
+    e_en: "The dimensional formula of angular momentum is [M L^2 T^-1]."
+  },
+  {
+    q_hi: "Q80. बल-आघूर्ण का विमीय सूत्र क्या है?",
+    q_en: "Q80. What is the dimensional formula of torque?",
+    tag: "",
+    o_hi: [
+      "A) [M L^2 T^-1]",
+      "B) [M^-1 L^3 T^-2]",
+      "C) [M L^2 T^-2]",
+      "D) [M L T^-3 A^-1]"
+    ],
+    o_en: [
+      "A) [M L^2 T^-1]",
+      "B) [M^-1 L^3 T^-2]",
+      "C) [M L^2 T^-2]",
+      "D) [M L T^-3 A^-1]"
+    ],
+    a: 2,
+    e_hi: "बल-आघूर्ण का विमीय सूत्र [M L^2 T^-2] होता है।",
+    e_en: "The dimensional formula of torque is [M L^2 T^-2]."
+  },
+  {
+    q_hi: "Q81. ऊर्जा घनत्व का सही विमीय सूत्र क्या है?",
+    q_en: "Q81. What is the correct dimensional formula of energy density?",
+    tag: "",
+    o_hi: [
+      "A) [M L^-1 T^-2]",
+      "B) [M^0 L T^-1]",
+      "C) [M L^2 T^-3 A^-2]",
+      "D) [M L T^-3 A^-1]"
+    ],
+    o_en: [
+      "A) [M L^-1 T^-2]",
+      "B) [M^0 L T^-1]",
+      "C) [M L^2 T^-3 A^-2]",
+      "D) [M L T^-3 A^-1]"
+    ],
+    a: 0,
+    e_hi: "ऊर्जा घनत्व का विमीय सूत्र [M L^-1 T^-2] होता है।",
+    e_en: "The dimensional formula of energy density is [M L^-1 T^-2]."
+  },
+  {
+    q_hi: "Q82. पलायन वेग का विमीय सूत्र क्या है?",
+    q_en: "Q82. What is the dimensional formula of escape velocity?",
+    tag: "",
+    o_hi: [
+      "A) [M L^2 T^-1]",
+      "B) [M^0 L T^-1]",
+      "C) [M L^0 T^-1]",
+      "D) [M^-1 L^3 T^-2]"
+    ],
+    o_en: [
+      "A) [M L^2 T^-1]",
+      "B) [M^0 L T^-1]",
+      "C) [M L^0 T^-1]",
+      "D) [M^-1 L^3 T^-2]"
+    ],
+    a: 1,
+    e_hi: "पलायन वेग का विमीय सूत्र [M^0 L T^-1] होता है।",
+    e_en: "The dimensional formula of escape velocity is [M^0 L T^-1]."
+  },
+  {
+    q_hi: "Q83. कोणीय आवेग का विमीय सूत्र निम्नलिखित में से कौन सा है?",
+    q_en: "Q83. Which of the following is the dimensional formula of angular impulse?",
+    tag: "",
+    o_hi: [
+      "A) [M L^-1 T^-2]",
+      "B) [M L T^-3 A^-1]",
+      "C) [M L^2 T^-1]",
+      "D) [M L^2 T^-3 A^-2]"
+    ],
+    o_en: [
+      "A) [M L^-1 T^-2]",
+      "B) [M L T^-3 A^-1]",
+      "C) [M L^2 T^-1]",
+      "D) [M L^2 T^-3 A^-2]"
+    ],
+    a: 2,
+    e_hi: "कोणीय आवेग का विमीय सूत्र [M L^2 T^-1] होता है।",
+    e_en: "The dimensional formula of angular impulse is [M L^2 T^-1]."
+  },
+  {
+    q_hi: "Q84. गुरुत्वीय नियतांक का विमीय सूत्र क्या है?",
+    q_en: "Q84. What is the dimensional formula of gravitational constant?",
+    tag: "",
+    o_hi: [
+      "A) [M^-1 L^3 T^-2]",
+      "B) [M L^2 T^-2]",
+      "C) [M L^2 T^0]",
+      "D) [M L^-1 T^-2]"
+    ],
+    o_en: [
+      "A) [M^-1 L^3 T^-2]",
+      "B) [M L^2 T^-2]",
+      "C) [M L^2 T^0]",
+      "D) [M L^-1 T^-2]"
+    ],
+    a: 0,
+    e_hi: "गुरुत्वीय नियतांक का विमीय सूत्र [M^-1 L^3 T^-2] होता है।",
+    e_en: "The dimensional formula of gravitational constant is [M^-1 L^3 T^-2]."
+  },
+  {
+    q_hi: "Q85. प्लांक नियतांक का विमीय सूत्र क्या है?",
+    q_en: "Q85. What is the dimensional formula of Planck's constant?",
+    tag: "",
+    o_hi: [
+      "A) [M L^2 T^-3 A^-2]",
+      "B) [M L^2 T^-1]",
+      "C) [M L T^-3 A^-1]",
+      "D) [M^0 L^0 T^-1]"
+    ],
+    o_en: [
+      "A) [M L^2 T^-3 A^-2]",
+      "B) [M L^2 T^-1]",
+      "C) [M L T^-3 A^-1]",
+      "D) [M^0 L^0 T^-1]"
+    ],
+    a: 1,
+    e_hi: "प्लांक नियतांक का विमीय सूत्र [M L^2 T^-1] होता है।",
+    e_en: "The dimensional formula of Planck's constant is [M L^2 T^-1]."
+  },
+  {
+    q_hi: "Q86. प्रतिरोध का विमीय सूत्र क्या है?",
+    q_en: "Q86. What is the dimensional formula of resistance?",
+    tag: "",
+    o_hi: [
+      "A) [M L T^-3 A^-1]",
+      "B) [M L^2 T^-1]",
+      "C) [M L^2 T^-3 A^-2]",
+      "D) [M^-1 L^3 T^-2]"
+    ],
+    o_en: [
+      "A) [M L T^-3 A^-1]",
+      "B) [M L^2 T^-1]",
+      "C) [M L^2 T^-3 A^-2]",
+      "D) [M^-1 L^3 T^-2]"
+    ],
+    a: 2,
+    e_hi: "प्रतिरोध का विमीय सूत्र [M L^2 T^-3 A^-2] होता है।",
+    e_en: "The dimensional formula of resistance is [M L^2 T^-3 A^-2]."
+  },
+  {
+    q_hi: "Q87. विद्युत क्षेत्र का विमीय सूत्र क्या है?",
+    q_en: "Q87. What is the dimensional formula of electric field?",
+    tag: "",
+    o_hi: [
+      "A) [M L T^-3 A^-1]",
+      "B) [M L^2 T^-3 A^-2]",
+      "C) [M L^-1 T^-2]",
+      "D) [M^0 L T^-1]"
+    ],
+    o_en: [
+      "A) [M L T^-3 A^-1]",
+      "B) [M L^2 T^-3 A^-2]",
+      "C) [M L^-1 T^-2]",
+      "D) [M^0 L T^-1]"
+    ],
+    a: 0,
+    e_hi: "विद्युत क्षेत्र का विमीय सूत्र [M L T^-3 A^-1] होता है।",
+    e_en: "The dimensional formula of electric field is [M L T^-3 A^-1]."
+  }
+];
+
