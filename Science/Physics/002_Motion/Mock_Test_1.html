@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q1. किसी संदर्भ बिंदु के सापेक्ष किसी वस्तु की स्थिति में होने वाले सापेक्ष परिवर्तन को क्या कहा जाता है?",
+    q_en: "Q1. What is the relative change in the position of an object with respect to a reference point called?",
+    tag: "",
+    o_hi: [
+      "A) दूरी",
+      "B) गति",
+      "C) त्वरण",
+      "D) विस्थापन"
+    ],
+    o_en: [
+      "A) Distance",
+      "B) Motion",
+      "C) Acceleration",
+      "D) Displacement"
+    ],
+    a: 1,
+    e_hi: "किसी संदर्भ बिंदु के सापेक्ष किसी वस्तु की स्थिति में होने वाले सापेक्ष परिवर्तन को गति कहा जाता है।",
+    e_en: "The relative change in the position of an object with respect to a reference point is called motion."
+  },
+  {
+    q_hi: "Q2. गति का विपरीत क्या है, जब वस्तु स्थिर हो अथवा गति न कर रही हो?",
+    q_en: "Q2. What is the opposite of motion, when an object is stationary or not moving?",
+    tag: "",
+    o_hi: [
+      "A) चाल",
+      "B) वेग",
+      "C) विश्राम",
+      "D) त्वरण"
+    ],
+    o_en: [
+      "A) Speed",
+      "B) Velocity",
+      "C) Rest",
+      "D) Acceleration"
+    ],
+    a: 2,
+    e_hi: "गति का विपरीत विश्राम है, जब वस्तु स्थिर होती है या गति नहीं कर रही होती है।",
+    e_en: "The opposite of motion is rest, when an object is stationary or not moving."
+  },
+  {
+    q_hi: "Q3. किसी वस्तु द्वारा तय किए गए पथ की कुल लंबाई को क्या कहा जाता है, जो एक अदिश राशि है?",
+    q_en: "Q3. What is the total length of the path covered by an object called, which is a scalar quantity?",
+    tag: "",
+    o_hi: [
+      "A) दूरी",
+      "B) विस्थापन",
+      "C) गति",
+      "D) वेग"
+    ],
+    o_en: [
+      "A) Distance",
+      "B) Displacement",
+      "C) Motion",
+      "D) Velocity"
+    ],
+    a: 0,
+    e_hi: "दूरी किसी वस्तु द्वारा तय किए गए पथ की कुल लंबाई को संदर्भित करती है और यह एक अदिश राशि है।",
+    e_en: "Distance refers to the total length of the path covered by an object and it is a scalar quantity."
+  },
+  {
+    q_hi: "Q4. प्रारंभिक और अंतिम स्थिति के बीच का सबसे छोटा पथ (जो कुल दूरी नहीं है) क्या कहलाता है?",
+    q_en: "Q4. What is the shortest path between the initial and final position (which is not the total distance) called?",
+    tag: "",
+    o_hi: [
+      "A) दूरी",
+      "B) विस्थापन",
+      "C) चाल",
+      "D) औसत गति"
+    ],
+    o_en: [
+      "A) Distance",
+      "B) Displacement",
+      "C) Speed",
+      "D) Average speed"
+    ],
+    a: 1,
+    e_hi: "प्रारंभिक और अंतिम स्थिति के बीच का सबसे छोटा पथ विस्थापन कहलाता है और यह एक सदिश राशि है।",
+    e_en: "The shortest path between the initial and final position is called displacement and it is a vector quantity."
+  },
+  {
+    q_hi: "Q5. यदि कोई बिंदु A से बिंदु B तक 50 मीटर चलता है और फिर वापस बिंदु A पर लौट आता है, तो कुल विस्थापन क्या होगा?",
+    q_en: "Q5. If someone travels 50 metres from point A to point B and then returns back to point A, what will be the total displacement?",
+    tag: "",
+    o_hi: [
+      "A) 100 मीटर",
+      "B) 50 मीटर",
+      "C) 0 मीटर",
+      "D) 25 मीटर"
+    ],
+    o_en: [
+      "A) 100 metres",
+      "B) 50 metres",
+      "C) 0 metres",
+      "D) 25 metres"
+    ],
+    a: 2,
+    e_hi: "बिंदु A से B तक जाकर पुनः A पर वापस लौटने पर प्रारंभिक और अंतिम बिंदु एक ही होने के कारण कुल विस्थापन 0 मीटर होता है।",
+    e_en: "On going from point A to B and returning back to A, since the initial and final points are the same, the total displacement is 0 metres."
+  },
+  {
+    q_hi: "Q6. केवल संख्यात्मक मान (परिमाण) दर्शाने वाली राशि को क्या कहा जाता है?",
+    q_en: "Q6. What is a quantity that shows only a numerical value (magnitude) called?",
+    tag: "",
+    o_hi: [
+      "A) सदिश राशि",
+      "B) अदिश राशि",
+      "C) पूरक राशि",
+      "D) व्युत्पन्न राशि"
+    ],
+    o_en: [
+      "A) Vector quantity",
+      "B) Scalar quantity",
+      "C) Supplementary quantity",
+      "D) Derived quantity"
+    ],
+    a: 1,
+    e_hi: "अदिश राशि वह राशि है जो केवल संख्यात्मक मान (परिमाण) दर्शाती है।",
+    e_en: "A scalar quantity is a quantity that shows only a numerical value (magnitude)."
+  },
+  {
+    q_hi: "Q7. निम्नलिखित में से कौन-सा समूह अदिश राशियों का उदाहरण है?",
+    q_en: "Q7. Which of the following groups is an example of scalar quantities?",
+    tag: "",
+    o_hi: [
+      "A) विस्थापन, वेग",
+      "B) दूरी, गति, समय",
+      "C) बल, त्वरण",
+      "D) संवेग, भार"
+    ],
+    o_en: [
+      "A) Displacement, Velocity",
+      "B) Distance, Speed, Time",
+      "C) Force, Acceleration",
+      "D) Momentum, Weight"
+    ],
+    a: 1,
+    e_hi: "दूरी, गति और समय अदिश राशियाँ हैं।",
+    e_en: "Distance, speed, and time are scalar quantities."
+  },
+  {
+    q_hi: "Q8. संख्यात्मक मान (परिमाण) और दिशा दोनों को दर्शाने वाली राशि को क्या कहा जाता है?",
+    q_en: "Q8. What is a quantity that shows both numerical value (magnitude) and direction called?",
+    tag: "",
+    o_hi: [
+      "A) अदिश राशि",
+      "B) सदिश राशि",
+      "C) मूल राशि",
+      "D) निरपेक्ष राशि"
+    ],
+    o_en: [
+      "A) Scalar quantity",
+      "B) Vector quantity",
+      "C) Fundamental quantity",
+      "D) Absolute quantity"
+    ],
+    a: 1,
+    e_hi: "सदिश राशि संख्यात्मक मान (परिमाण) और दिशा दोनों को दर्शाती है।",
+    e_en: "A vector quantity shows both numerical value (magnitude) and direction."
+  },
+  {
+    q_hi: "Q9. निम्नलिखित में से कौन-सा समूह सदिश राशियों का उदाहरण है?",
+    q_en: "Q9. Which of the following groups is an example of vector quantities?",
+    tag: "",
+    o_hi: [
+      "A) दूरी, समय",
+      "B) विस्थापन, वेग",
+      "C) गति, दूरी",
+      "D) चाल, समय"
+    ],
+    o_en: [
+      "A) Distance, Time",
+      "B) Displacement, Velocity",
+      "C) Speed, Distance",
+      "D) Speed, Time"
+    ],
+    a: 1,
+    e_hi: "विस्थापन और वेग सदिश राशियों के उदाहरण हैं।",
+    e_en: "Displacement and velocity are examples of vector quantities."
+  },
+  {
+    q_hi: "Q10. चाल (S), दूरी (D) और समय (T) के बीच सही सूत्र संबंध क्या है?",
+    q_en: "Q10. What is the correct formula relationship between Speed (S), Distance (D), and Time (T)?",
+    tag: "",
+    o_hi: [
+      "A) S = D × T",
+      "B) S = D / T",
+      "C) S = T / D",
+      "D) S = D + T"
+    ],
+    o_en: [
+      "A) S = D × T",
+      "B) S = D / T",
+      "C) S = T / D",
+      "D) S = D + T"
+    ],
+    a: 1,
+    e_hi: "चाल (S) का सही सूत्र S = D / T (दूरी / समय) होता है।",
+    e_en: "The correct formula for Speed (S) is S = D / T (Distance / Time)."
+  },
+  {
+    q_hi: "Q11. दूरी (D) ज्ञात करने के लिए चाल (S) और समय (T) का सही सूत्र क्या है?",
+    q_en: "Q11. What is the correct formula to find Distance (D) using Speed (S) and Time (T)?",
+    tag: "",
+    o_hi: [
+      "A) D = S / T",
+      "B) D = S × T",
+      "C) D = T / S",
+      "D) D = S + T"
+    ],
+    o_en: [
+      "A) D = S / T",
+      "B) D = S × T",
+      "C) D = T / S",
+      "D) D = S + T"
+    ],
+    a: 1,
+    e_hi: "दूरी (D) का सूत्र D = S × T होता है।",
+    e_en: "The formula for Distance (D) is D = S × T."
+  },
+  {
+    q_hi: "Q12. किलोमीटर/घंटा (किमी/घंटा) को मीटर/सेकंड में बदलने के लिए किस संख्या से गुणा किया जाता है?",
+    q_en: "Q12. By which number is kilometres/hour (km/h) multiplied to convert it into metres/second?",
+    tag: "",
+    o_hi: [
+      "A) 18/5",
+      "B) 5/18",
+      "C) 10/36",
+      "D) 36/10"
+    ],
+    o_en: [
+      "A) 18/5",
+      "B) 5/18",
+      "C) 10/36",
+      "D) 36/10"
+    ],
+    a: 1,
+    e_hi: "किमी/घंटा को मीटर/सेकंड में बदलने के लिए 5/18 से गुणा किया जाता है।",
+    e_en: "To convert km/h to metres/second, it is multiplied by 5/18."
+  },
+  {
+    q_hi: "Q13. अंतरराष्ट्रीय मात्रक प्रणाली (S.I.) की स्थापना किस वर्ष में की गई थी?",
+    q_en: "Q13. In which year was the International System of Units (S.I.) established?",
+    tag: "",
+    o_hi: [
+      "A) 1950",
+      "B) 1960",
+      "C) 1970",
+      "D) 1980"
+    ],
+    o_en: [
+      "A) 1950",
+      "B) 1960",
+      "C) 1970",
+      "D) 1980"
+    ],
+    a: 1,
+    e_hi: "अंतरराष्ट्रीय मात्रक प्रणाली (S.I.) की स्थापना 1960 में की गई थी।",
+    e_en: "The International System of Units (S.I.) was established in 1960."
+  },
+  {
+    q_hi: "Q14. मीटर/सेकंड को किमी/घंटा में परिवर्तित करने के लिए किस गुणांक का उपयोग किया जाता है?",
+    q_en: "Q14. Which factor is used to convert metres/second to km/h?",
+    tag: "",
+    o_hi: [
+      "A) 5/18",
+      "B) 18/5",
+      "C) 15/8",
+      "D) 8/15"
+    ],
+    o_en: [
+      "A) 5/18",
+      "B) 18/5",
+      "C) 15/8",
+      "D) 8/15"
+    ],
+    a: 1,
+    e_hi: "मीटर/सेकंड को किमी/घंटा में बदलने के लिए 18/5 से गुणा किया जाता है।",
+    e_en: "To convert metres/second to km/h, it is multiplied by 18/5."
+  },
+  {
+    q_hi: "Q15. जिस दर पर किसी वस्तु की स्थिति समय के साथ बदलती है (बिना गति की दिशा की परवाह किए), उसे क्या कहते हैं तथा इसका S.I. मात्रक क्या है?",
+    q_en: "Q15. What is the rate at which an object's position changes with time (regardless of direction) called, and what is its S.I. unit?",
+    tag: "",
+    o_hi: [
+      "A) गति, मीटर/सेकंड (m/s)",
+      "B) विस्थापन, मीटर (m)",
+      "C) त्वरण, मीटर/सेकंड² (m/s²)",
+      "D) बल, न्यूटन (N)"
+    ],
+    o_en: [
+      "A) Speed, metre/second (m/s)",
+      "B) Displacement, metre (m)",
+      "C) Acceleration, metre/second² (m/s²)",
+      "D) Force, Newton (N)"
+    ],
+    a: 0,
+    e_hi: "गति वह दर है जिस पर किसी वस्तु की स्थिति समय के साथ बदलती है और इसका S.I. मात्रक मीटर/सेकंड (m/s) है।",
+    e_en: "Speed is the rate at which the position of an object changes with time and its S.I. unit is metre/second (m/s)."
+  },
+  {
+    q_hi: "Q16. औसत गति की परिभाषा क्या है और यह किस प्रकार की राशि है?",
+    q_en: "Q16. What is the definition of average speed and what type of quantity is it?",
+    tag: "",
+    o_hi: [
+      "A) यह वस्तु द्वारा तय की गई कुल दूरी और कुल समय का अनुपात है; यह एक सदिश राशि है।",
+      "B) यह वस्तु द्वारा तय की गई कुल दूरी और कुल समय का अनुपात है; यह एक अदिश राशि है।",
+      "C) यह प्रारंभिक और अंतिम वेग का अंतर है; यह एक सदिश राशि है।",
+      "D) यह प्रति इकाई समय में विस्थापन की दर है; यह एक अदिश राशि है।"
+    ],
+    o_en: [
+      "A) It is the ratio of total distance covered by the object to the total time taken; it is a vector quantity.",
+      "B) It is the ratio of total distance covered by the object to the total time taken; it is a scalar quantity.",
+      "C) It is the difference between initial and final velocity; it is a vector quantity.",
+      "D) It is the rate of displacement per unit time; it is a scalar quantity."
+    ],
+    a: 1,
+    e_hi: "औसत गति वह अनुपात है जिसमें वस्तु द्वारा तय की गई कुल दूरी को कुल समय से विभाजित किया जाता है, और यह एक अदिश राशि है।",
+    e_en: "Average speed is the ratio in which the total distance covered by an object is divided by the total time taken, and it is a scalar quantity."
+  },
+  {
+    q_hi: "Q17. औसत गति ज्ञात करने का सही गणितीय सूत्र क्या है?",
+    q_en: "Q17. What is the correct mathematical formula to find average speed?",
+    tag: "",
+    o_hi: [
+      "A) औसत गति = (कुल विस्थापन) / (कुल लिया गया समय)",
+      "B) औसत गति = (कुल तय की गई दूरी) / (कुल लिया गया समय)",
+      "C) औसत गति = (प्रारंभिक गति + अंतिम गति) / 2",
+      "D) औसत गति = (कुल तय की गई दूरी) × (कुल लिया गया समय)"
+    ],
+    o_en: [
+      "A) Average speed = (Total displacement) / (Total time taken)",
+      "B) Average speed = (Total distance covered) / (Total time taken)",
+      "C) Average speed = (Initial speed + Final speed) / 2",
+      "D) Average speed = (Total distance covered) × (Total time taken)"
+    ],
+    a: 1,
+    e_hi: "औसत गति का सूत्र कुल तय की गई दूरी को कुल लिए गए समय से भाग देकर प्राप्त किया जाता है।",
+    e_en: "The formula for average speed is obtained by dividing the total distance covered by the total time taken."
+  },
+  {
+    q_hi: "Q18. यदि एक वस्तु 4 सेकंड में 16 मीटर और फिर 2 सेकंड में 16 मीटर की दूरी तय करती है, तो उसकी औसत गति क्या होगी?",
+    q_en: "Q18. If an object covers a distance of 16 metres in 4 seconds and then 16 metres in 2 seconds, what will be its average speed?",
+    tag: "",
+    o_hi: [
+      "A) 5.00 m/s",
+      "B) 5.33 m/s",
+      "C) 6.33 m/s",
+      "D) 4.33 m/s"
+    ],
+    o_en: [
+      "A) 5.00 m/s",
+      "B) 5.33 m/s",
+      "C) 6.33 m/s",
+      "D) 4.33 m/s"
+    ],
+    a: 1,
+    e_hi: "कुल दूरी = 16 + 16 = 32 मीटर, कुल समय = 4 + 2 = 6 सेकंड। औसत गति = 32 / 6 = 5.33 m/s होती है।",
+    e_en: "Total distance = 16 + 16 = 32 metres, Total time = 4 + 2 = 6 seconds. Average speed = 32 / 6 = 5.33 m/s."
+  },
+  {
+    q_hi: "Q19. गति को मुख्य रूप से किन दो प्रकारों में वर्गीकृत किया जाता है?",
+    q_en: "Q19. Into which two main types is motion classified?",
+    tag: "",
+    o_hi: [
+      "A) रेखीय गति और वृत्तीय गति",
+      "B) एकसमान गति और असमान गति",
+      "C) घूर्णन गति और दोलन गति",
+      "D) स्थिर गति और अस्थिर गति"
+    ],
+    o_en: [
+      "A) Linear motion and Circular motion",
+      "B) Uniform motion and Non-uniform motion",
+      "C) Rotational motion and Oscillatory motion",
+      "D) Constant motion and Unstable motion"
+    ],
+    a: 1,
+    e_hi: "गति को मुख्य रूप से दो प्रकारों में विभाजित किया जाता है: एकसमान गति और असमान गति।",
+    e_en: "Motion is mainly divided into two types: uniform motion and non-uniform motion."
+  },
+  {
+    q_hi: "Q20. एकसमान गति की सही परिभाषा और इसमें त्वरण की स्थिति क्या होती है?",
+    q_en: "Q20. What is the correct definition of uniform motion and what is the state of acceleration in it?",
+    tag: "",
+    o_hi: [
+      "A) समान समय अंतराल में भिन्न दूरी तय करना; त्वरण धनात्मक होता है।",
+      "B) समान गति के साथ सीधी रेखा में चलना; त्वरण शून्य होता है।",
+      "C) असमान समय अंतराल में समान दूरी तय करना; त्वरण ऋणात्मक होता है।",
+      "D) निश्चित अक्ष पर घूर्णन करना; त्वरण अपरिवर्तनीय होता है।"
+    ],
+    o_en: [
+      "A) Covering different distances in equal time intervals; acceleration is positive.",
+      "B) Moving in a straight line with constant speed; acceleration is zero.",
+      "C) Covering equal distances in unequal time intervals; acceleration is negative.",
+      "D) Rotating on a fixed axis; acceleration is unchangeable."
+    ],
+    a: 1,
+    e_hi: "एकसमान गति में वस्तु समान गति से सीधी रेखा में चलती है जिससे समान समय अंतराल में समान दूरी तय होती है तथा त्वरण शून्य होता है।",
+    e_en: "In uniform motion, an object moves in a straight line at a constant speed, covering equal distances in equal time intervals, and its acceleration is zero."
+  },
+  {
+    q_hi: "Q21. यदि किसी कार की गति 10 मीटर/सेकंड स्थिर है, तो कार हर एक सेकंड में कितनी दूरी तय करेगी?",
+    q_en: "Q21. If the speed of a car is constant at 10 metres/second, how much distance will the car cover in every single second?",
+    tag: "",
+    o_hi: [
+      "A) 5 मीटर",
+      "B) 10 मीटर",
+      "C) 20 मीटर",
+      "D) 100 मीटर"
+    ],
+    o_en: [
+      "A) 5 metres",
+      "B) 10 metres",
+      "C) 20 metres",
+      "D) 100 metres"
+    ],
+    a: 1,
+    e_hi: "10 मीटर/सेकंड स्थिर गति का अर्थ है कि कार हर एक सेकंड में 10 मीटर की दूरी तय करती है।",
+    e_en: "A constant speed of 10 metres/second means that the car covers a distance of 10 metres in every second."
+  },
+  {
+    q_hi: "Q22. एक वस्तु का एक सीधी रेखा में स्थिर गति (स्थिर वेग) से चलना किस प्रकार की गति का उदाहरण है?",
+    q_en: "Q22. An object moving in a straight line at a constant speed (constant velocity) is an example of which type of motion?",
+    tag: "",
+    o_hi: [
+      "A) असमान रेखीय गति",
+      "B) एकसमान रेखीय गति",
+      "C) एकसमान घूर्णन गति",
+      "D) असमान वृत्तीय गति"
+    ],
+    o_en: [
+      "A) Non-uniform linear motion",
+      "B) Uniform linear motion",
+      "C) Uniform rotational motion",
+      "D) Non-uniform circular motion"
+    ],
+    a: 1,
+    e_hi: "सीधी रेखा में स्थिर वेग से चलना एकसमान रेखीय गति कहलाता है।",
+    e_en: "Moving in a straight line at a constant velocity is called uniform linear motion."
+  },
+  {
+    q_hi: "Q23. एक वस्तु का वृत्तीय पथ पर स्थिर गति (स्थिर कोणीय वेग) से चलना क्या कहलाता है?",
+    q_en: "Q23. What is an object moving on a circular path with constant speed (constant angular velocity) called?",
+    tag: "",
+    o_hi: [
+      "A) एकसमान घूर्णन गति",
+      "B) एकसमान वृत्तीय गति",
+      "C) असमान वृत्तीय गति",
+      "D) एकसमान रेखीय गति"
+    ],
+    o_en: [
+      "A) Uniform rotational motion",
+      "B) Uniform circular motion",
+      "C) Non-uniform circular motion",
+      "D) Uniform linear motion"
+    ],
+    a: 1,
+    e_hi: "वृत्तीय पथ पर स्थिर कोणीय वेग से चलना एकसमान वृत्तीय गति का उदाहरण है।",
+    e_en: "Moving on a circular path at a constant angular velocity is an example of uniform circular motion."
+  },
+  {
+    q_hi: "Q24. एक निश्चित अक्ष के चारों ओर स्थिर कोणीय गति से घूमने वाली वस्तु की गति को क्या कहा जाता है?",
+    q_en: "Q24. What is the motion of an object rotating around a fixed axis at a constant angular speed called?",
+    tag: "",
+    o_hi: [
+      "A) एकसमान वृत्तीय गति",
+      "B) एकसमान घूर्णन गति",
+      "C) असमान घूर्णन गति",
+      "D) रेखीय गति"
+    ],
+    o_en: [
+      "A) Uniform circular motion",
+      "B) Uniform rotational motion",
+      "C) Non-uniform rotational motion",
+      "D) Linear motion"
+    ],
+    a: 1,
+    e_hi: "निश्चित अक्ष के चारों ओर स्थिर कोणीय गति से चलना एकसमान घूर्णन गति कहलाता है।",
+    e_en: "Rotating around a fixed axis at a constant angular speed is called uniform rotational motion."
+  },
+  {
+    q_hi: "Q25. असमान गति कब होती है और इसके परिणामस्वरूप क्या होता है?",
+    q_en: "Q25. When does non-uniform motion occur and what is the result of it?",
+    tag: "",
+    o_hi: [
+      "A) जब गति या दिशा समय के साथ बदलती है; समान समय अंतराल में समान दूरी तय नहीं होती।",
+      "B) जब चाल स्थिर रहती है; त्वरण शून्य रहता है।",
+      "C) जब गति केवल सीधी रेखा में होती है; त्वरण हमेशा स्थिर रहता है।",
+      "D) जब केवल दूरी बदलती है; दिशा सदैव समान रहती है।"
+    ],
+    o_en: [
+      "A) When speed or direction changes with time; equal distances are not covered in equal time intervals.",
+      "B) When speed remains constant; acceleration remains zero.",
+      "C) When motion is only in a straight line; acceleration always remains constant.",
+      "D) When only distance changes; direction always remains the same."
+    ],
+    a: 0,
+    e_hi: "असमान गति तब होती है जब वस्तु की गति या दिशा समय के साथ बदलती है, जिससे वह समान समय अंतराल में समान दूरी तय नहीं करती।",
+    e_en: "Non-uniform motion occurs when an object's speed or direction changes with time, such that it does not cover equal distances in equal time intervals."
+  },
+  {
+    q_hi: "Q26. यदि कोई कार पहले दो सेकंड में 10 मीटर और अगले दो सेकंड में 15 मीटर की दूरी तय करती है, तो यह किस गति का उदाहरण है?",
+    q_en: "Q26. If a car covers a distance of 10 metres in the first two seconds and 15 metres in the next two seconds, of which motion is this an example?",
+    tag: "",
+    o_hi: [
+      "A) एकसमान गति",
+      "B) असमान गति",
+      "C) एकसमान रेखीय गति",
+      "D) स्थिर गति"
+    ],
+    o_en: [
+      "A) Uniform motion",
+      "B) Non-uniform motion",
+      "C) Uniform linear motion",
+      "D) Constant motion"
+    ],
+    a: 1,
+    e_hi: "अलग-अलग समय अंतरालों में भिन्न दूरी तय करना असमान गति को दर्शाता है।",
+    e_en: "Covering different distances in equal time intervals indicates non-uniform motion."
+  },
+  {
+    q_hi: "Q27. एक सीधी रेखा में अस्थिर गति (त्वरण) से चलने वाली वस्तु की गति क्या कहलाती है?",
+    q_en: "Q27. What is the motion of an object moving in a straight line with changing speed (acceleration) called?",
+    tag: "",
+    o_hi: [
+      "A) एकसमान रेखीय गति",
+      "B) असमान रेखीय गति",
+      "C) एकसमान वृत्तीय गति",
+      "D) असमान घूर्णन गति"
+    ],
+    o_en: [
+      "A) Uniform linear motion",
+      "B) Non-uniform linear motion",
+      "C) Uniform circular motion",
+      "D) Non-uniform rotational motion"
+    ],
+    a: 1,
+    e_hi: "सीधी रेखा में अस्थिर गति (त्वरण के साथ) चलना असमान रेखीय गति कहलाता है।",
+    e_en: "Moving in a straight line with changing speed (with acceleration) is called non-uniform linear motion."
+  },
+  {
+    q_hi: "Q28. वृत्तीय पथ पर अस्थिर गति (त्वरण) से चलने वाली वस्तु की गति का वर्गीकरण किसमें होता है?",
+    q_en: "Q28. How is the motion of an object moving on a circular path with changing speed (acceleration) classified?",
+    tag: "",
+    o_hi: [
+      "A) एकसमान वृत्तीय गति",
+      "B) असमान वृत्तीय गति",
+      "C) असमान घूर्णन गति",
+      "D) एकसमान रेखीय गति"
+    ],
+    o_en: [
+      "A) Uniform circular motion",
+      "B) Non-uniform circular motion",
+      "C) Non-uniform rotational motion",
+      "D) Uniform linear motion"
+    ],
+    a: 1,
+    e_hi: "वृत्तीय पथ पर अस्थिर गति से चलने पर वह असमान वृत्तीय गति होती है।",
+    e_en: "Moving on a circular path with changing speed is non-uniform circular motion."
+  },
+  {
+    q_hi: "Q29. एक निश्चित अक्ष के चारों ओर अस्थिर कोणीय गति (कोणीय त्वरण) से होने वाली गति को क्या कहते हैं?",
+    q_en: "Q29. What is the motion occurring around a fixed axis with changing angular speed (angular acceleration) called?",
+    tag: "",
+    o_hi: [
+      "A) एकसमान घूर्णन गति",
+      "B) असमान घूर्णन गति",
+      "C) असमान रेखीय गति",
+      "D) एकसमान वृत्तीय गति"
+    ],
+    o_en: [
+      "A) Uniform rotational motion",
+      "B) Non-uniform rotational motion",
+      "C) Non-uniform linear motion",
+      "D) Uniform circular motion"
+    ],
+    a: 1,
+    e_hi: "निश्चित अक्ष के चारों ओर अस्थिर कोणीय गति से घूमना असमान घूर्णन गति कहलाता है।",
+    e_en: "Rotating around a fixed axis with changing angular speed is called non-uniform rotational motion."
+  },
+  {
+    q_hi: "Q30. एकसमान गति और असमान गति के दूरी-समय ग्राफ का रूप क्रमशः कैसा होता है?",
+    q_en: "Q30. What is the shape of the distance-time graph for uniform motion and non-uniform motion respectively?",
+    tag: "",
+    o_hi: [
+      "A) वक्र रेखा और सीधी ढलानदार रेखा",
+      "B) सीधी ढलानदार रेखा और वक्र रेखा",
+      "C) दोनों क्षैतिज सीधी रेखाएँ",
+      "D) दोनों वक्र रेखाएँ"
+    ],
+    o_en: [
+      "A) Curved line and straight sloping line",
+      "B) Straight sloping line and curved line",
+      "C) Both horizontal straight lines",
+      "D) Both curved lines"
+    ],
+    a: 1,
+    e_hi: "एकसमान गति का ग्राफ सीधी ढलानदार रेखा होता है जबकि असमान गति का ग्राफ वक्र (टेढ़ी-मेढ़ी) रेखा होता है।",
+    e_en: "The graph of uniform motion is a straight sloping line, whereas the graph of non-uniform motion is a curved line."
+  },
+  {
+    q_hi: "Q31. वह दर जिस पर कोई वस्तु किसी विशिष्ट दिशा में अपनी स्थिति बदलती है, क्या कहलाती है?",
+    q_en: "Q31. What is the rate at which an object changes its position in a specific direction called?",
+    tag: "",
+    o_hi: [
+      "A) दूरी",
+      "B) चाल",
+      "C) वेग",
+      "D) त्वरण"
+    ],
+    o_en: [
+      "A) Distance",
+      "B) Speed",
+      "C) Velocity",
+      "D) Acceleration"
+    ],
+    a: 2,
+    e_hi: "वेग वह दर है जिस पर कोई वस्तु किसी विशिष्ट दिशा में अपनी स्थिति बदलती है।",
+    e_en: "Velocity is the rate at which an object changes its position in a specific direction."
+  },
+  {
+    q_hi: "Q32. वेग किस प्रकार की भौतिक राशि है?",
+    q_en: "Q32. What type of physical quantity is velocity?",
+    tag: "",
+    o_hi: [
+      "A) अदिश राशि",
+      "B) सदिश राशि",
+      "C) पूरक राशि",
+      "D) मूल राशि"
+    ],
+    o_en: [
+      "A) Scalar quantity",
+      "B) Vector quantity",
+      "C) Supplementary quantity",
+      "D) Fundamental quantity"
+    ],
+    a: 1,
+    e_hi: "गति के विपरीत वेग एक सदिश राशि है, जिसमें परिमाण और दिशा दोनों होते हैं।",
+    e_en: "Unlike speed, velocity is a vector quantity, which has both magnitude and direction."
+  },
+  {
+    q_hi: "Q33. अंतरराष्ट्रीय प्रणाली में वेग का SI मात्रक क्या होता है?",
+    q_en: "Q33. What is the SI unit of velocity in the international system?",
+    tag: "",
+    o_hi: [
+      "A) किमी/घंटा",
+      "B) मीटर/सेकंड²",
+      "C) मीटर/सेकंड",
+      "D) सेमी/सेकंड"
+    ],
+    o_en: [
+      "A) km/h",
+      "B) metre/second²",
+      "C) metre/second",
+      "D) cm/second"
+    ],
+    a: 2,
+    e_hi: "वेग का SI मात्रक m/s (मीटर/सेकंड) होता है।",
+    e_en: "The SI unit of velocity is m/s (metre/second)."
+  },
+  {
+    q_hi: "Q34. निम्नलिखित में से कौन सा समीकरण वेग के सूत्र को सही दर्शाता है?",
+    q_en: "Q34. Which of the following equations correctly represents the formula for velocity?",
+    tag: "",
+    o_hi: [
+      "A) वेग = दूरी / समय",
+      "B) वेग = विस्थापन / समय",
+      "C) वेग = त्वरण × समय",
+      "D) वेग = समय / विस्थापन"
+    ],
+    o_en: [
+      "A) Velocity = Distance / Time",
+      "B) Velocity = Displacement / Time",
+      "C) Velocity = Acceleration × Time",
+      "D) Velocity = Time / Displacement"
+    ],
+    a: 1,
+    e_hi: "वेग की गणना विस्थापन को समय से विभाजित करके की जाती है।",
+    e_en: "Velocity is calculated by dividing displacement by time."
+  },
+  {
+    q_hi: "Q35. किसी वाहन द्वारा तय की गई दूरी को मापने के लिए किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q35. Which device is used to measure the distance covered by a vehicle?",
+    tag: "",
+    o_hi: [
+      "A) स्पीडोमीटर",
+      "B) ओडोमीटर",
+      "C) एमीटर",
+      "D) वोल्टमीटर"
+    ],
+    o_en: [
+      "A) Speedometer",
+      "B) Odometer",
+      "C) Ammeter",
+      "D) Voltmeter"
+    ],
+    a: 1,
+    e_hi: "ओडोमीटर का उपयोग किसी वाहन द्वारा तय की गई दूरी को मापने के लिए किया जाता है।",
+    e_en: "An odometer is used to measure the distance covered by a vehicle."
+  },
+  {
+    q_hi: "Q36. यदि उषा 90 मीटर लंबे पूल में तैरकर एक छोर से दूसरे छोर तक जाती है और उसी सीधे पथ से वापस आती है (कुल दूरी 180 मीटर, समय 1 मिनट), तो उसका कुल विस्थापन कितना होगा?",
+    q_en: "Q36. If Usha swims in a 90 metre long pool from one end to the other and returns back along the same straight path (total distance 180 metres, time 1 minute), what will be her total displacement?",
+    tag: "",
+    o_hi: [
+      "A) 180 मीटर",
+      "B) 90 मीटर",
+      "C) 0 मीटर",
+      "D) 360 मीटर"
+    ],
+    o_en: [
+      "A) 180 metres",
+      "B) 90 metres",
+      "C) 0 metres",
+      "D) 360 metres"
+    ],
+    a: 2,
+    e_hi: "प्रारंभिक और अंतिम स्थिति एक ही होने के कारण उषा का कुल विस्थापन 0 मीटर है।",
+    e_en: "Since the initial and final positions are the same, Usha's total displacement is 0 metres."
+  },
+  {
+    q_hi: "Q37. एक तैराक 1 मिनट में 180 मीटर की कुल दूरी तय करता है। उसकी औसत गति क्या होगी?",
+    q_en: "Q37. A swimmer covers a total distance of 180 metres in 1 minute. What will be his average speed?",
+    tag: "",
+    o_hi: [
+      "A) 1 मीटर/सेकंड",
+      "B) 2 मीटर/सेकंड",
+      "C) 3 मीटर/सेकंड",
+      "D) 0 मीटर/सेकंड"
+    ],
+    o_en: [
+      "A) 1 metre/second",
+      "B) 2 metres/second",
+      "C) 3 metres/second",
+      "D) 0 metres/second"
+    ],
+    a: 2,
+    e_hi: "औसत गति = कुल तय की गई दूरी / कुल समय = 180 मीटर / 60 सेकंड = 3 m/s।",
+    e_en: "Average speed = Total distance covered / Total time = 180 metres / 60 seconds = 3 m/s."
+  },
+  {
+    q_hi: "Q38. यदि 1 मिनट में किसी वस्तु का कुल विस्थापन 0 मीटर है, तो उसका औसत वेग कितना होगा?",
+    q_en: "Q38. If the total displacement of an object in 1 minute is 0 metres, what will be its average velocity?",
+    tag: "",
+    o_hi: [
+      "A) 3 मीटर/सेकंड",
+      "B) 0 मीटर/सेकंड",
+      "C) 180 मीटर/सेकंड",
+      "D) 1.5 मीटर/सेकंड"
+    ],
+    o_en: [
+      "A) 3 metres/second",
+      "B) 0 metres/second",
+      "C) 180 metres/second",
+      "D) 1.5 metres/second"
+    ],
+    a: 1,
+    e_hi: "औसत वेग = विस्थापन / कुल समय = 0 / 60 = 0 m/s।",
+    e_en: "Average velocity = Displacement / Total time = 0 / 60 = 0 m/s."
+  },
+  {
+    q_hi: "Q39. समय के सापेक्ष वेग में परिवर्तन की दर को किस रूप में परिभाषित किया जाता है?",
+    q_en: "Q39. How is the rate of change of velocity with respect to time defined?",
+    tag: "",
+    o_hi: [
+      "A) चाल",
+      "B) दूरी",
+      "C) त्वरण",
+      "D) विस्थापन"
+    ],
+    o_en: [
+      "A) Speed",
+      "B) Distance",
+      "C) Acceleration",
+      "D) Displacement"
+    ],
+    a: 2,
+    e_hi: "समय के सापेक्ष वेग में परिवर्तन की दर को त्वरण कहते हैं।",
+    e_en: "The rate of change of velocity with respect to time is called acceleration."
+  },
+  {
+    q_hi: "Q40. SI प्रणाली में त्वरण का मात्रक क्या है?",
+    q_en: "Q40. What is the unit of acceleration in the SI system?",
+    tag: "",
+    o_hi: [
+      "A) m/s",
+      "B) m/s²",
+      "C) m/s³",
+      "D) kg·m/s"
+    ],
+    o_en: [
+      "A) m/s",
+      "B) m/s²",
+      "C) m/s³",
+      "D) kg·m/s"
+    ],
+    a: 1,
+    e_hi: "त्वरण का SI मात्रक m/s² (मीटर/सेकंड²) होता है।",
+    e_en: "The SI unit of acceleration is m/s² (metre/second²)."
+  }
+];
