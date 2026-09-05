@@ -1,0 +1,622 @@
+const data = [
+  {
+    q_hi: "Q81. जब पौधे का कोई भाग उद्दीपन से दूर हटता है, तो इसे किस नाम से जाना जाता है?",
+    q_en: "Q81. When any part of a plant moves away from a stimulus, what is it known as?",
+    tag: "",
+    o_hi: [
+      "(a) सकारात्मक अनुवर्तन",
+      "(b) नकारात्मक अनुवर्तन",
+      "(c) रैखिक गति",
+      "(d) अनुकुंचन गति"
+    ],
+    o_en: [
+      "(a) Positive tropism",
+      "(b) Negative tropism",
+      "(c) Linear movement",
+      "(d) Nastic movement"
+    ],
+    a: 1,
+    e_hi: "जब पौधे का कोई भाग उद्दीपन से दूर हटता है, तो इसे नकारात्मक अनुवर्तन कहा जाता है।",
+    e_en: "When a part of a plant moves away from a stimulus, it is called negative tropism."
+  },
+  {
+    q_hi: "Q82. पौधे में प्रकाश की प्रतिक्रिया में होने वाली गति को क्या कहते हैं?",
+    q_en: "Q82. What is the movement in a plant in response to light called?",
+    tag: "",
+    o_hi: [
+      "(a) गुरुत्वानुवर्तन",
+      "(b) जलानुवर्तन",
+      "(c) प्रकाशानुवर्तन",
+      "(d) रसायनानुवर्तन"
+    ],
+    o_en: [
+      "(a) Geotropism",
+      "(b) Hydrotropism",
+      "(c) Phototropism",
+      "(d) Chemotropism"
+    ],
+    a: 2,
+    e_hi: "पौधे में प्रकाश की प्रतिक्रिया में होने वाली गति को प्रकाशानुवर्तन कहते हैं।",
+    e_en: "The movement occurring in a plant in response to light is called phototropism."
+  },
+  {
+    q_hi: "Q83. प्रकाशानुवर्तन (Phototropism) के संदर्भ में पौधों के तने किस प्रकार की गति प्रदर्शित करते हैं?",
+    q_en: "Q83. In the context of phototropism, what type of movement do plant stems exhibit?",
+    tag: "",
+    o_hi: [
+      "(a) नकारात्मक प्रकाशानुवर्तन",
+      "(b) प्रकाश से दूर की गति",
+      "(c) कोई गति नहीं",
+      "(d) सकारात्मक प्रकाशानुवर्तन"
+    ],
+    o_en: [
+      "(a) Negative phototropism",
+      "(b) Movement away from light",
+      "(c) No movement",
+      "(d) Positive phototropism"
+    ],
+    a: 3,
+    e_hi: "तने प्रकाश की ओर मुड़ते हैं, जिसे सकारात्मक प्रकाशानुवर्तन कहते हैं।",
+    e_en: "Stems bend towards light, which is called positive phototropism."
+  },
+  {
+    q_hi: "Q84. पौधों की जड़ें प्रकाश की प्रतिक्रिया में किस प्रकार की गति दर्शाती हैं?",
+    q_en: "Q84. What type of movement do plant roots show in response to light?",
+    tag: "",
+    o_hi: [
+      "(a) नकारात्मक प्रकाशानुवर्तन",
+      "(b) सकारात्मक प्रकाशानुवर्तन",
+      "(c) सकारात्मक गुरुत्वानुवर्तन से रहित",
+      "(d) जलानुवर्तन गति"
+    ],
+    o_en: [
+      "(a) Negative phototropism",
+      "(b) Positive phototropism",
+      "(c) Devoid of positive geotropism",
+      "(d) Hydrotropism movement"
+    ],
+    a: 0,
+    e_hi: "जड़ें प्रकाश से दूर हटती हैं, जिसे नकारात्मक प्रकाशानुवर्तन कहते हैं।",
+    e_en: "Roots move away from light, which is called negative phototropism."
+  },
+  {
+    q_hi: "Q85. गुरुत्वाकर्षण की प्रतिक्रिया में होने वाली पादप गति को क्या कहा जाता है?",
+    q_en: "Q85. What is the plant movement in response to gravity called?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाशानुवर्तन",
+      "(b) गुरुत्वानुवर्तन",
+      "(c) जलानुवर्तन",
+      "(d) अनुकुंचन गति"
+    ],
+    o_en: [
+      "(a) Phototropism",
+      "(b) Geotropism",
+      "(c) Hydrotropism",
+      "(d) Nastic movement"
+    ],
+    a: 1,
+    e_hi: "गुरुत्वाकर्षण की प्रतिक्रिया में होने वाली पादप गति गुरुत्वानुवर्तन कहलाती है।",
+    e_en: "Plant movement in response to gravity is called geotropism."
+  },
+  {
+    q_hi: "Q86. पौधों की जड़ें गुरुत्वाकर्षण की दिशा में नीचे की ओर बढ़ती हैं, यह किसका उदाहरण है?",
+    q_en: "Q86. Plant roots grow downwards in the direction of gravity, this is an example of what?",
+    tag: "",
+    o_hi: [
+      "(a) नकारात्मक गुरुत्वानुवर्तन",
+      "(b) सकारात्मक प्रकाशानुवर्तन",
+      "(c) सकारात्मक गुरुत्वानुवर्तन",
+      "(d) नकारात्मक जलानुवर्तन"
+    ],
+    o_en: [
+      "(a) Negative geotropism",
+      "(b) Positive phototropism",
+      "(c) Positive geotropism",
+      "(d) Negative hydrotropism"
+    ],
+    a: 2,
+    e_hi: "जड़ें गुरुत्वाकर्षण की दिशा में नीचे की ओर बढ़ती हैं, जिसे सकारात्मक वृद्धि या सकारात्मक गुरुत्वानुवर्तन कहते हैं।",
+    e_en: "Roots grow downwards in the direction of gravity, which is called positive growth or positive geotropism."
+  },
+  {
+    q_hi: "Q87. गुरुत्वाकर्षण के संदर्भ में पौधों के तने की ऊपर की ओर वृद्धि किस प्रकार की अनुवर्तन गति है?",
+    q_en: "Q87. In the context of gravity, what type of tropic movement is the upward growth of a plant stem?",
+    tag: "",
+    o_hi: [
+      "(a) सकारात्मक गुरुत्वानुवर्तन",
+      "(b) सकारात्मक जलानुवर्तन",
+      "(c) नकारात्मक प्रकाशानुवर्तन",
+      "(d) नकारात्मक गुरुत्वानुवर्तन"
+    ],
+    o_en: [
+      "(a) Positive geotropism",
+      "(b) Positive hydrotropism",
+      "(c) Negative phototropism",
+      "(d) Negative geotropism"
+    ],
+    a: 3,
+    e_hi: "तने गुरुत्वाकर्षण से दूर ऊपर की ओर बढ़ते हैं, जिसे नकारात्मक वृद्धि या ऋणात्मक गुरुत्वानुवर्तन कहते हैं।",
+    e_en: "Stems grow upwards away from gravity, which is called negative growth or negative geotropism."
+  },
+  {
+    q_hi: "Q88. जल की प्रतिक्रिया में पौधे में होने वाली गति को क्या कहते हैं?",
+    q_en: "Q88. What is the movement occurring in a plant in response to water called?",
+    tag: "",
+    o_hi: [
+      "(a) जलानुवर्तन",
+      "(b) प्रकाशानुवर्तन",
+      "(c) गुरुत्वानुवर्तन",
+      "(d) रसायनानुवर्तन"
+    ],
+    o_en: [
+      "(a) Hydrotropism",
+      "(b) Phototropism",
+      "(c) Geotropism",
+      "(d) Chemotropism"
+    ],
+    a: 0,
+    e_hi: "जल की प्रतिक्रिया में होने वाली पादप गति को जलानुवर्तन (Hydrotropism) कहा जाता है।",
+    e_en: "Plant movement in response to water is called hydrotropism."
+  },
+  {
+    q_hi: "Q89. जलानुवर्तन (Hydrotropism) के अंतर्गत पौधों की जड़ें किस दिशा में बढ़ती हैं?",
+    q_en: "Q89. Under hydrotropism, in which direction do plant roots grow?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाश की दिशा में",
+      "(b) जल स्रोतों की ओर",
+      "(c) जल स्रोतों से दूर",
+      "(d) गुरुत्वाकर्षण के विपरीत"
+    ],
+    o_en: [
+      "(a) In the direction of light",
+      "(b) Towards water sources",
+      "(c) Away from water sources",
+      "(d) Opposite to gravity"
+    ],
+    a: 1,
+    e_hi: "जलानुवर्तन में जड़ें जल स्रोतों की ओर बढ़ती हैं, जिसे सकारात्मक वृद्धि कहते हैं।",
+    e_en: "In hydrotropism, roots grow towards water sources, which is called positive growth."
+  },
+  {
+    q_hi: "Q90. जलानुवर्तन के दौरान जड़ों का जल स्रोतों की ओर बढ़ना किस प्रकार की वृद्धि को दर्शाता है?",
+    q_en: "Q90. During hydrotropism, roots growing towards water sources indicates what type of growth?",
+    tag: "",
+    o_hi: [
+      "(a) ऋणात्मक वृद्धि",
+      "(b) जल से दूर वृद्धि",
+      "(c) सकारात्मक वृद्धि",
+      "(d) उदासीन वृद्धि"
+    ],
+    o_en: [
+      "(a) Negative growth",
+      "(b) Growth away from water",
+      "(c) Positive growth",
+      "(d) Neutral growth"
+    ],
+    a: 2,
+    e_hi: "जलानुवर्तन में जड़ें जल स्रोतों की ओर बढ़ती हैं, जो एक सकारात्मक वृद्धि है।",
+    e_en: "In hydrotropism, roots grow towards water sources, which is a positive growth."
+  },
+  {
+    q_hi: "Q91. रसायनों की प्रतिक्रिया में होने वाली पादप गति को क्या कहा जाता है?",
+    q_en: "Q91. What is the plant movement in response to chemicals called?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाशानुवर्तन",
+      "(b) रसायनानुवर्तन",
+      "(c) गुरुत्वानुवर्तन",
+      "(d) जलानुवर्तन"
+    ],
+    o_en: [
+      "(a) Phototropism",
+      "(b) Chemotropism",
+      "(c) Geotropism",
+      "(d) Hydrotropism"
+    ],
+    a: 1,
+    e_hi: "रसायनों की प्रतिक्रिया में होने वाली गति को रसायनानुवर्तन (Chemotropism) कहा जाता है।",
+    e_en: "Movement in response to chemicals is called chemotropism."
+  },
+  {
+    q_hi: "Q92. निषेचन के दौरान परागनलिकाएं किस पादप अंग की ओर बढ़ती हैं?",
+    q_en: "Q92. During fertilization, pollen tubes grow towards which plant organ?",
+    tag: "",
+    o_hi: [
+      "(a) बाह्यदल",
+      "(b) दलपुंज",
+      "(c) अंडाशय",
+      "(d) पुंकेसर"
+    ],
+    o_en: [
+      "(a) Sepal",
+      "(b) Petal",
+      "(c) Ovary",
+      "(d) Stamen"
+    ],
+    a: 2,
+    e_hi: "निषेचन की प्रक्रिया के दौरान परागनलिकाएं रसायनानुवर्तन गति दर्शाते हुए अंडाशय की ओर बढ़ती हैं।",
+    e_en: "During the process of fertilization, pollen tubes move towards the ovary showing chemotropic movement."
+  },
+  {
+    q_hi: "Q93. निषेचन प्रक्रिया के समय रासायनिक उद्दीपन का स्राव निम्नलिखित में से किसके द्वारा किया जाता है?",
+    q_en: "Q93. During the fertilization process, chemical stimulus is secreted by which of the following?",
+    tag: "",
+    o_hi: [
+      "(a) बीजांड",
+      "(b) परागकण",
+      "(c) वर्तिकाग्र",
+      "(d) वर्तिका"
+    ],
+    o_en: [
+      "(a) Ovule",
+      "(b) Pollen grain",
+      "(c) Stigma",
+      "(d) Style"
+    ],
+    a: 0,
+    e_hi: "निषेचन प्रक्रिया के दौरान बीजांड (Ovule) रासायनिक उद्दीपन स्रावित करता है, जिससे परागनलिका उसकी ओर आकर्षित होती है।",
+    e_en: "During the fertilization process, the ovule secretes a chemical stimulus, which attracts the pollen tube towards it."
+  },
+  {
+    q_hi: "Q94. रासायनिक उद्दीपन की प्रतिक्रिया में पराग नलिका का विकास होने के पश्चात् कौन-सा केंद्रक नष्ट हो जाता है?",
+    q_en: "Q94. After the development of the pollen tube in response to chemical stimulus, which nucleus gets degenerated?",
+    tag: "",
+    o_hi: [
+      "(a) जनन केंद्रक",
+      "(b) नलिका केंद्रक",
+      "(c) द्विगुणित केंद्रक",
+      "(d) प्राथमिक केंद्रक"
+    ],
+    o_en: [
+      "(a) Generative nucleus",
+      "(b) Tube nucleus",
+      "(c) Diploid nucleus",
+      "(d) Primary nucleus"
+    ],
+    a: 1,
+    e_hi: "पराग नलिका के विकास के बाद उसमें उपस्थित नलिका केंद्रक (Tube nucleus) नष्ट हो जाता है।",
+    e_en: "After the development of the pollen tube, the tube nucleus present in it gets degenerated."
+  },
+  {
+    q_hi: "Q95. पौधों की वृद्धि को मापने के लिए निम्नलिखित में से किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q95. Which of the following instruments is used to measure the growth of plants?",
+    tag: "",
+    o_hi: [
+      "(a) अक्सैनोमीटर",
+      "(b) बैरोमीटर",
+      "(c) क्रेस्कोग्राफ",
+      "(d) हाइग्रोमीटर"
+    ],
+    o_en: [
+      "(a) Auxanometer",
+      "(b) Barometer",
+      "(c) Crescograph",
+      "(d) Hygrometer"
+    ],
+    a: 2,
+    e_hi: "क्रेस्कोग्राफ एक ऐसा उपकरण है जिसका उपयोग पौधों की वृद्धि दर को मापने के लिए किया जाता है।",
+    e_en: "Crescograph is a device used to measure the growth rate of plants."
+  },
+  {
+    q_hi: "Q96. क्रेस्कोग्राफ नामक उपकरण का आविष्कार किस भारतीय वैज्ञानिक ने किया था?",
+    q_en: "Q96. Which Indian scientist invented the device named Crescograph?",
+    tag: "",
+    o_hi: [
+      "(a) डॉ. होमी जहांगीर भाभा",
+      "(b) सी. वी. रमन",
+      "(c) सत्येंद्र नाथ बोस",
+      "(d) सर जगदीश चंद्र बोस"
+    ],
+    o_en: [
+      "(a) Dr. Homi Jehangir Bhabha",
+      "(b) C. V. Raman",
+      "(c) Satyendra Nath Bose",
+      "(d) Sir Jagadish Chandra Bose"
+    ],
+    a: 3,
+    e_hi: "क्रेस्कोग्राफ उपकरण का आविष्कार भारतीय वनस्पतिशास्त्री और जीवविज्ञानी सर जगदीश चंद्र बोस ने किया था।",
+    e_en: "The Crescograph device was invented by Indian botanist and biologist Sir Jagadish Chandra Bose."
+  },
+  {
+    q_hi: "Q97. सर जगदीश चंद्र बोस ने क्रेस्कोग्राफ उपकरण का आविष्कार किस वर्ष में किया था?",
+    q_en: "Q97. In which year did Sir Jagadish Chandra Bose invent the Crescograph device?",
+    tag: "",
+    o_hi: [
+      "(a) 1919",
+      "(b) 1905",
+      "(c) 1928",
+      "(d) 1947"
+    ],
+    o_en: [
+      "(a) 1919",
+      "(b) 1905",
+      "(c) 1928",
+      "(d) 1947"
+    ],
+    a: 0,
+    e_hi: "सर जगदीश चंद्र बोस ने वर्ष 1919 में पौधों की वृद्धि मापने वाले उपकरण क्रेस्कोग्राफ का आविष्कार किया था।",
+    e_en: "Sir Jagadish Chandra Bose invented the plant growth measuring device Crescograph in the year 1919."
+  },
+  {
+    q_hi: "Q98. किस वैज्ञानिक ने सर्वप्रथम यह प्रदर्शित किया कि पौधे उद्दीपनों के प्रति प्रतिक्रिया दे सकते हैं तथा दर्द और दबाव महसूस कर सकते हैं?",
+    q_en: "Q98. Which scientist first demonstrated that plants can respond to stimuli and feel pain and pressure?",
+    tag: "",
+    o_hi: [
+      "(a) बीरबल साहनी",
+      "(b) सर जगदीश चंद्र बोस",
+      "(c) एम. एस. स्वामीनाथन",
+      "(d) पंचानन माहेश्वरी"
+    ],
+    o_en: [
+      "(a) Birbal Sahni",
+      "(b) Sir Jagadish Chandra Bose",
+      "(c) M. S. Swaminathan",
+      "(d) Panchanan Maheshwari"
+    ],
+    a: 1,
+    e_hi: "सर जगदीश चंद्र बोस यह प्रदर्शित करने के लिए प्रसिद्ध हैं कि पौधे बाहरी उद्दीपनों के प्रति प्रतिक्रिया देते हैं और दर्द तथा दबाव महसूस कर सकते हैं।",
+    e_en: "Sir Jagadish Chandra Bose is famous for demonstrating that plants respond to external stimuli and can feel pain and pressure."
+  },
+  {
+    q_hi: "Q99. पौधे के किसी भाग की वह गैर-दिशात्मक गति क्या कहलाती है, जो प्रकाश, स्पर्श या तापमान जैसे बाहरी उद्दीपन की प्रतिक्रिया में होती है?",
+    q_en: "Q99. What is the non-directional movement of a plant part in response to external stimuli like light, touch, or temperature called?",
+    tag: "",
+    o_hi: [
+      "(a) अनुवर्तन गति",
+      "(b) अनुचलन गति",
+      "(c) अनुकुंचन गति",
+      "(d) स्वायत्त गति"
+    ],
+    o_en: [
+      "(a) Tropic movement",
+      "(b) Tactic movement",
+      "(c) Nastic movement",
+      "(d) Autonomous movement"
+    ],
+    a: 2,
+    e_hi: "अनुकुंचन गति (Nastic Movement) पौधे के किसी भाग की गैर-दिशात्मक गति होती है जो प्रकाश, स्पर्श या तापमान जैसे बाहरी उद्दीपन के कारण होती है।",
+    e_en: "Nastic Movement is a non-directional movement of a plant part caused by external stimuli such as light, touch, or temperature."
+  },
+  {
+    q_hi: "Q100. प्रकाश की तीव्रता में परिवर्तन के प्रति पौधे के भागों (विशेषकर पुष्पदल) की गैर-दिशात्मक गति को क्या कहा जाता है?",
+    q_en: "Q100. What is the non-directional movement of plant parts (especially petals) in response to changes in light intensity called?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाशानुकुंचनी गति",
+      "(b) स्पर्शानुकुंचनी गति",
+      "(c) तापानुकुंचनी गति",
+      "(d) रसायनानुकुंचनी गति"
+    ],
+    o_en: [
+      "(a) Photonastic movement",
+      "(b) Thigmonastic movement",
+      "(c) Thermonastic movement",
+      "(d) Chemonastic movement"
+    ],
+    a: 0,
+    e_hi: "प्रकाश की तीव्रता में बदलाव की प्रतिक्रिया स्वरूप पुष्पदल आदि में होने वाली गैर-दिशात्मक गति प्रकाशानुकुंचनी गति (Photonastic Movement) कहलाती है।",
+    e_en: "Non-directional movement in petals etc. in response to changes in light intensity is called photonastic movement."
+  },
+  {
+    q_hi: "Q101. पौधे या कवक की वह गैर-दिशात्मक प्रतिक्रिया जो स्पर्श या कंपन के प्रति होती है, क्या कहलाती है?",
+    q_en: "Q101. What is the non-directional response of a plant or fungus to touch or vibration called?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाशानुकुंचनी गति",
+      "(b) गुरुत्वानुवर्तन गति",
+      "(c) जलानुवर्तन गति",
+      "(d) स्पर्शानुकुंचनी गति"
+    ],
+    o_en: [
+      "(a) Photonastic movement",
+      "(b) Geotropic movement",
+      "(c) Hydrotropic movement",
+      "(d) Thigmonastic movement"
+    ],
+    a: 3,
+    e_hi: "स्पर्श या कंपन की प्रतिक्रिया स्वरूप पौधे या कवक में होने वाली गैर-दिशात्मक गति को स्पर्शानुकुंचनी गति (Thigmonastic Movement) कहते हैं।",
+    e_en: "Non-directional movement in a plant or fungus in response to touch or vibration is called thigmonastic movement."
+  },
+  {
+    q_hi: "Q102. छुई-मुई के पौधे का वनस्पति / वैज्ञानिक नाम क्या है?",
+    q_en: "Q102. What is the botanical / scientific name of the touch-me-not plant?",
+    tag: "",
+    o_hi: [
+      "(a) Mimusops elengi",
+      "(b) Mimosa pudica",
+      "(c) Mangifera indica",
+      "(d) Moringa oleifera"
+    ],
+    o_en: [
+      "(a) Mimusops elengi",
+      "(b) Mimosa pudica",
+      "(c) Mangifera indica",
+      "(d) Moringa oleifera"
+    ],
+    a: 1,
+    e_hi: "छुई-मुई के पौधे का वैज्ञानिक नाम मिमोसा पुडिका (Mimosa pudica) है।",
+    e_en: "The scientific name of the touch-me-not plant is Mimosa pudica."
+  },
+  {
+    q_hi: "Q103. छुई-मुई (Mimosa pudica) की पत्तियाँ छूने पर सिकुड़ जाती हैं, इसका मुख्य कारण पत्ती की कोशिकाओं में किस घटक की मात्रा में बदलाव आना है?",
+    q_en: "Q103. The leaves of touch-me-not (Mimosa pudica) droop upon touching; the main reason for this is a change in the amount of which component in the leaf cells?",
+    tag: "",
+    o_hi: [
+      "(a) कैल्शियम",
+      "(b) ग्लूकोज",
+      "(c) पानी",
+      "(d) प्रोटीन"
+    ],
+    o_en: [
+      "(a) Calcium",
+      "(b) Glucose",
+      "(c) Water",
+      "(d) Protein"
+    ],
+    a: 2,
+    e_hi: "छुई-मुई की पत्तियाँ छूने पर इसलिए सिकुड़ जाती हैं क्योंकि उसकी कोशिकाओं में मौजूद पानी की मात्रा में बदलाव आ जाता है।",
+    e_en: "The leaves of touch-me-not shrink when touched because there is a change in the amount of water present in its cells."
+  },
+  {
+    q_hi: "Q104. छुई-मुई के पौधे में स्पर्श करने पर कोशिकाओं में पानी की मात्रा में परिवर्तन हेतु किस प्रकार के संकेतों का उपयोग होता है?",
+    q_en: "Q104. What type of signals are used in the touch-me-not plant to change the amount of water in cells upon touching?",
+    tag: "",
+    o_hi: [
+      "(a) विद्युत-रासायनिक संकेत",
+      "(b) केवल यांत्रिक संकेत",
+      "(c) केवल चुंबकीय संकेत",
+      "(d) केवल तापीय संकेत"
+    ],
+    o_en: [
+      "(a) Electrochemical signals",
+      "(b) Only mechanical signals",
+      "(c) Only magnetic signals",
+      "(d) Only thermal signals"
+    ],
+    a: 0,
+    e_hi: "छुई-मुई पौधा पत्तियों को सिकुड़ने के लिए विद्युत-रासायनिक संकेतों (electrochemical signals) का उपयोग करता है।",
+    e_en: "The touch-me-not plant uses electrochemical signals to shrink its leaves."
+  },
+  {
+    q_hi: "Q105. दिन के समय फूल का खिलना और रात में उसका बंद हो जाना किस प्रकार की पादप गति का उदाहरण है?",
+    q_en: "Q105. The blooming of a flower during the day and its closing at night is an example of which type of plant movement?",
+    tag: "",
+    o_hi: [
+      "(a) स्पर्शानुकुंचनी गति",
+      "(b) रसायनानुवर्तन गति",
+      "(c) गुरुत्वानुवर्तन गति",
+      "(d) प्रकाशानुकुंचनी गति"
+    ],
+    o_en: [
+      "(a) Thigmonastic movement",
+      "(b) Chemotropic movement",
+      "(c) Geotropic movement",
+      "(d) Photonastic movement"
+    ],
+    a: 3,
+    e_hi: "दिन में फूल खिलना और रात में बंद होना प्रकाश की तीव्रता पर आधारित गैर-दिशात्मक गति यानी प्रकाशानुकुंचनी गति का उदाहरण है।",
+    e_en: "Blooming of flowers during the day and closing at night is an example of photonastic movement, which is a non-directional movement based on light intensity."
+  },
+  {
+    q_hi: "Q106. मक्खी के पत्ती पर बैठने पर पत्तियों का तुरंत बंद हो जाना और मक्खी का फंस जाना किस पादप गति का उदाहरण है?",
+    q_en: "Q106. The immediate closing of leaves when a fly sits on them and trapping the fly is an example of which plant movement?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाशानुकुंचनी गति",
+      "(b) रसायनानुवर्तन गति",
+      "(c) स्पर्शानुकुंचनी गति",
+      "(d) गुरुत्वानुवर्तन गति"
+    ],
+    o_en: [
+      "(a) Photonastic movement",
+      "(b) Chemotropic movement",
+      "(c) Thigmonastic movement",
+      "(d) Geotropic movement"
+    ],
+    a: 2,
+    e_hi: "मक्खी के बैठने पर पत्तियों का बंद हो जाना स्पर्श या कंपन के प्रति होने वाली गैर-दिशात्मक अनुक्रिया है, जिसे स्पर्शानुकुंचनी गति (Thigmonastic Movement) कहा जाता है।",
+    e_en: "The closing of leaves when a fly lands on them is a non-directional response to touch or vibration, called thigmonastic movement."
+  },
+  {
+    q_hi: "Q107. सोयाबीन उत्पादों में कौन-सा प्राकृतिक घटक पाया जाता है, जो मानव शरीर के एक हार्मोन के समान होता है?",
+    q_en: "Q107. Which natural component is found in soybean products that is similar to a hormone in the human body?",
+    tag: "",
+    o_hi: [
+      "(a) फाइटोएस्ट्रोजन",
+      "(b) फाइटोप्रोजेस्टेरोन",
+      "(c) फाइटोटेस्टोस्टेरोन",
+      "(d) फाइटोइंसुलिन"
+    ],
+    o_en: [
+      "(a) Phytoestrogen",
+      "(b) Phytoprogesterone",
+      "(c) Phytotestosterone",
+      "(d) Phytoinsulin"
+    ],
+    a: 0,
+    e_hi: "सोयाबीन उत्पादों में फाइटोएस्ट्रोजन पाया जाता है, जो मानव शरीर के एस्ट्रोजन हार्मोन की तरह कार्य करता है।",
+    e_en: "Phytoestrogen is found in soybean products, which functions similarly to the estrogen hormone in the human body."
+  },
+  {
+    q_hi: "Q108. भरपूर धूप में रहने के लिए अनुकूलित पादपों को क्या कहा जाता है?",
+    q_en: "Q108. What are plants adapted to living in full sunlight called?",
+    tag: "",
+    o_hi: [
+      "(a) साइक्रोफाइट्स",
+      "(b) हीलियोफाइट्स",
+      "(c) लिथोफाइट्स",
+      "(d) मेसोफाइट्स"
+    ],
+    o_en: [
+      "(a) Psychrophytes",
+      "(b) Heliophytes",
+      "(c) Lithophytes",
+      "(d) Mesophytes"
+    ],
+    a: 1,
+    e_hi: "जो पौधे भरपूर धूप या तेज प्रकाश वाले वातावरण में रहने के लिए अनुकूलित होते हैं, उन्हें हीलियोफाइट्स (Heliophytes) कहा जाता है।",
+    e_en: "Plants adapted to living in full sunlight or high light environments are called heliophytes."
+  },
+  {
+    q_hi: "Q109. नमक को सहन करने वाले अथवा अत्यधिक लवणीय वातावरण में उगने वाले पौधों को किस नाम से जाना जाता है?",
+    q_en: "Q109. What are plants that tolerate salt or grow in highly saline environments known as?",
+    tag: "",
+    o_hi: [
+      "(a) हाइड्रोफाइट्स",
+      "(b) जेरोफाइट्स",
+      "(c) सैमोफाइट्स",
+      "(d) हैलोफाइट्स"
+    ],
+    o_en: [
+      "(a) Hydrophytes",
+      "(b) Xerophytes",
+      "(c) Psammophytes",
+      "(d) Halophytes"
+    ],
+    a: 3,
+    e_hi: "लवणीय मृदा या उच्च लवणता वाले वातावरण को सहन करने की क्षमता रखने वाले पौधों को हैलोफाइट्स (Halophytes) कहा जाता है।",
+    e_en: "Plants capable of tolerating saline soil or highly saline environments are called halophytes."
+  },
+  {
+    q_hi: "Q110. पत्ती के चौड़े और हरे भाग को क्या कहा जाता है?",
+    q_en: "Q110. What is the broad, green part of a leaf called?",
+    tag: "",
+    o_hi: [
+      "(a) पर्णवृंत",
+      "(b) लैमिना",
+      "(c) मध्यशिरा",
+      "(d) पर्णाधार"
+    ],
+    o_en: [
+      "(a) Petiole",
+      "(b) Lamina",
+      "(c) Midrib",
+      "(d) Leaf base"
+    ],
+    a: 1,
+    e_hi: "पत्ती का फैला हुआ चौड़ा और हरा भाग लैमिना (Lamina) कहलाता है।",
+    e_en: "The expanded broad and green part of a leaf is called lamina."
+  },
+  {
+    q_hi: "Q111. कोशिका में उपस्थित चिकना एंडोप्लाज्मिक रेटिकुलम (Smooth Endoplasmic Reticulum) मुख्य रूप से किन पदार्थों के उत्पादन और चयापचय से जुड़ा होता है?",
+    q_en: "Q111. The Smooth Endoplasmic Reticulum present in the cell is mainly involved in the production and metabolism of which substances?",
+    tag: "",
+    o_hi: [
+      "(a) केवल कार्बोहाइड्रेट और प्रोटीन",
+      "(b) केवल न्यूक्लिक अम्ल और खनिज",
+      "(c) केवल जल और विटामिन",
+      "(d) वसा और स्टेरॉयड हार्मोन"
+    ],
+    o_en: [
+      "(a) Carbohydrates and proteins only",
+      "(b) Nucleic acids and minerals only",
+      "(c) Water and vitamins only",
+      "(d) Lipids and steroid hormones"
+    ],
+    a: 3,
+    e_hi: "चिकना एंडोप्लाज्मिक रेटिकुलम (SER) वसा (Lipids) और स्टेरॉयड हार्मोन के उत्पादन तथा चयापचय प्रक्रिया से संबंधित होता है।",
+    e_en: "Smooth Endoplasmic Reticulum (SER) is related to the production and metabolism of lipids and steroid hormones."
+  }
+];

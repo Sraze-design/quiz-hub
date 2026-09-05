@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q1. शरीर के वे अंग जो विशिष्ट कार्य करने के लिए पदार्थ, या तो हार्मोन या अन्य रसायन का उत्पादन और उत्सर्जन करते हैं, क्या कहलाते हैं?",
+    q_en: "Q1. What are those organs of the body called that produce and secrete substances, either hormones or other chemicals, to perform specific functions?",
+    tag: "",
+    o_hi: [
+      "(A) ग्रंथियां",
+      "(B) ऊतक",
+      "(C) कोशिकाएं",
+      "(D) अंग तंत्र"
+    ],
+    o_en: [
+      "(A) Glands",
+      "(B) Tissues",
+      "(C) Cells",
+      "(D) Organ systems"
+    ],
+    a: 0,
+    e_hi: "शरीर में विशिष्ट कार्य हेतु रसायन या हार्मोन का उत्पादन और उत्सर्जन करने वाले अंगों को ग्रंथियां कहा जाता है।",
+    e_en: "Organs that produce and secrete chemicals or hormones for specific functions in the body are called glands."
+  },
+  {
+    q_hi: "Q2. ग्रंथियां मुख्य रूप से कितने प्रकार की होती हैं?",
+    q_en: "Q2. How many main types of glands are there?",
+    tag: "",
+    o_hi: [
+      "(A) धमनी ग्रंथियां और शिरा ग्रंथियां",
+      "(B) अंत: स्रावी ग्रंथियां और बहि: स्रावी ग्रंथियां",
+      "(C) केवल नलिका युक्त ग्रंथियां",
+      "(D) केवल मास्टर ग्रंथियां"
+    ],
+    o_en: [
+      "(A) Artery glands and Vein glands",
+      "(B) Endocrine glands and Exocrine glands",
+      "(C) Duct glands only",
+      "(D) Master glands only"
+    ],
+    a: 1,
+    e_hi: "ग्रंथियां मुख्य रूप से दो प्रकार की होती हैं: अंत: स्रावी ग्रंथियां और बहि: स्रावी ग्रंथियां।",
+    e_en: "Glands are mainly of two types: Endocrine glands and Exocrine glands."
+  },
+  {
+    q_hi: "Q3. अंत: स्रावी ग्रंथियों (Endocrine glands) द्वारा किसका स्राव किया जाता है?",
+    q_en: "Q3. What is secreted by endocrine glands?",
+    tag: "",
+    o_hi: [
+      "(A) एंजाइम",
+      "(B) पाचक रस",
+      "(C) हार्मोन",
+      "(D) केवल पसीना"
+    ],
+    o_en: [
+      "(A) Enzymes",
+      "(B) Digestive juices",
+      "(C) Hormones",
+      "(D) Sweat only"
+    ],
+    a: 2,
+    e_hi: "अंत: स्रावी ग्रंथियां विशिष्ट रसायनों के रूप में हार्मोन का स्राव करती हैं।",
+    e_en: "Endocrine glands secrete hormones as specific chemicals."
+  },
+  {
+    q_hi: "Q4. अंत: स्रावी ग्रंथियां अपने स्रावित हार्मोन को कहाँ छोड़ती हैं?",
+    q_en: "Q4. Where do endocrine glands release their secreted hormones?",
+    tag: "",
+    o_hi: [
+      "(A) त्वचा की बाहरी सतह पर",
+      "(B) विशेष नलिकाओं में",
+      "(C) छोटी आंत के अंदर",
+      "(D) सीधे रक्त में"
+    ],
+    o_en: [
+      "(A) On the outer surface of the skin",
+      "(B) In special ducts",
+      "(C) Inside the small intestine",
+      "(D) Directly into the blood"
+    ],
+    a: 3,
+    e_hi: "अंत: स्रावी ग्रंथियां अपने हार्मोन को किसी नलिका के बिना सीधे रक्त में छोड़ती हैं।",
+    e_en: "Endocrine glands release their hormones directly into the blood without any ducts."
+  },
+  {
+    q_hi: "Q5. अंत: स्रावी ग्रंथियों की संरचनात्मक विशेषता क्या है?",
+    q_en: "Q5. What is the structural feature of endocrine glands?",
+    tag: "",
+    o_hi: [
+      "(A) ये नलिकाहीन ग्रंथियां हैं",
+      "(B) ये केवल एंजाइम का स्राव करती हैं",
+      "(C) इनमें नलिकाएं उपस्थित होती हैं",
+      "(D) ये रक्त में हार्मोन नहीं छोड़ती हैं"
+    ],
+    o_en: [
+      "(A) They are ductless glands",
+      "(B) They secrete enzymes only",
+      "(C) Ducts are present in them",
+      "(D) They do not release hormones into the blood"
+    ],
+    a: 0,
+    e_hi: "अंत: स्रावी ग्रंथियों में स्राव ले जाने के लिए नलिकाएं नहीं होती हैं, इसलिए इन्हें नलिकाहीन ग्रंथियां कहा जाता है।",
+    e_en: "Endocrine glands do not have ducts to carry secretions, so they are called ductless glands."
+  },
+  {
+    q_hi: "Q6. बहि: स्रावी (Exocrine) ग्रंथियां निम्नलिखित में से किसका स्राव करती हैं?",
+    q_en: "Q6. Which of the following is secreted by exocrine glands?",
+    tag: "",
+    o_hi: [
+      "(A) केवल हार्मोन",
+      "(B) एंजाइम",
+      "(C) केवल इंसुलिन",
+      "(D) केवल हीमोग्लोबिन"
+    ],
+    o_en: [
+      "(A) Hormones only",
+      "(B) Enzymes",
+      "(C) Insulin only",
+      "(D) Hemoglobin only"
+    ],
+    a: 1,
+    e_hi: "बहि: स्रावी ग्रंथियां मुख्य रूप से एंजाइम का स्राव करने का कार्य करती हैं।",
+    e_en: "Exocrine glands mainly function to secrete enzymes."
+  },
+  {
+    q_hi: "Q7. बहि: स्रावी ग्रंथियां अपने स्राव को शरीर में किस प्रकार प्रवाहित करती हैं?",
+    q_en: "Q7. How do exocrine glands flow their secretions in the body?",
+    tag: "",
+    o_hi: [
+      "(A) सीधे रक्त में छोड़कर",
+      "(B) बिना किसी माध्यम के",
+      "(C) नलिकाओं के माध्यम से",
+      "(D) केवल तंत्रिकाओं द्वारा"
+    ],
+    o_en: [
+      "(A) By releasing directly into the blood",
+      "(B) Without any medium",
+      "(C) Through ducts",
+      "(D) Only by nerves"
+    ],
+    a: 2,
+    e_hi: "बहि: स्रावी ग्रंथियां अपने एंजाइम को नलिकाओं (Ducts) के माध्यम से स्रावित करती हैं।",
+    e_en: "Exocrine glands secrete their enzymes through ducts."
+  },
+  {
+    q_hi: "Q8. डब्ल्यूबीसी (WBC) को प्रशिक्षित करने के लिए कौन-सी ग्रंथि जिम्मेदार होती है?",
+    q_en: "Q8. Which gland is responsible for training WBCs?",
+    tag: "",
+    o_hi: [
+      "(A) पीनियल ग्रंथि",
+      "(B) पैराथायराइड ग्रंथि",
+      "(C) एड्रिनल ग्रंथि",
+      "(D) थाइमस ग्रंथि"
+    ],
+    o_en: [
+      "(A) Pineal gland",
+      "(B) Parathyroid gland",
+      "(C) Adrenal gland",
+      "(D) Thymus gland"
+    ],
+    a: 3,
+    e_hi: "थाइमस ग्रंथि श्वेत रक्त कोशिकाओं (WBC) को प्रशिक्षित करने के लिए जिम्मेदार होती है।",
+    e_en: "The thymus gland is responsible for training white blood cells (WBCs)."
+  },
+  {
+    q_hi: "Q9. निम्नलिखित में से किस ग्रंथि को \"मास्टर ग्रंथि\" के नाम से भी जाना जाता है?",
+    q_en: "Q9. Which of the following glands is also known as the \"Master Gland\"?",
+    tag: "",
+    o_hi: [
+      "(A) पीयूष ग्रंथि (Pituitary Gland)",
+      "(B) थायराइड ग्रंथि",
+      "(C) एड्रिनल ग्रंथि",
+      "(D) पीनियल ग्रंथि"
+    ],
+    o_en: [
+      "(A) Pituitary Gland",
+      "(B) Thyroid gland",
+      "(C) Adrenal gland",
+      "(D) Pineal gland"
+    ],
+    a: 0,
+    e_hi: "पीयूष ग्रंथि को मास्टर ग्रंथि कहा जाता है क्योंकि यह अन्य अंत:स्रावी ग्रंथियों को नियंत्रित करती है।",
+    e_en: "The pituitary gland is called the master gland because it controls other endocrine glands."
+  },
+  {
+    q_hi: "Q10. पीयूष ग्रंथि का आकार कैसा होता है और यह कहाँ स्थित होती है?",
+    q_en: "Q10. What is the shape of the pituitary gland and where is it located?",
+    tag: "",
+    o_hi: [
+      "(A) काजू के आकार की और वक्ष में",
+      "(B) मटर के आकार की और मस्तिष्क के आधार पर",
+      "(C) बादाम के आकार की और गर्दन में",
+      "(D) अण्डाकार और उदर में"
+    ],
+    o_en: [
+      "(A) Cashew-shaped and in the thorax",
+      "(B) Pea-sized and at the base of the brain",
+      "(C) Almond-shaped and in the neck",
+      "(D) Oval-shaped and in the abdomen"
+    ],
+    a: 1,
+    e_hi: "पीयूष ग्रंथि मटर के आकार की होती है और मस्तिष्क के आधार पर स्थित होती है।",
+    e_en: "The pituitary gland is pea-sized and located at the base of the brain."
+  },
+  {
+    q_hi: "Q11. हार्मोन के खोजकर्ता के रूप में किसे जाना जाता है?",
+    q_en: "Q11. Who is known as the discoverer of hormones?",
+    tag: "",
+    o_hi: [
+      "(A) रॉबर्ट हुक",
+      "(B) लुई पाश्चर",
+      "(C) ई. एच. स्टर्लिंग",
+      "(D) एलेक्जैंडर फ्लेमिंग"
+    ],
+    o_en: [
+      "(A) Robert Hooke",
+      "(B) Louis Pasteur",
+      "(C) E. H. Starling",
+      "(D) Alexander Fleming"
+    ],
+    a: 2,
+    e_hi: "ई. एच. स्टर्लिंग को हार्मोन के खोजकर्ता के रूप में जाना जाता है।",
+    e_en: "E. H. Starling is known as the discoverer of hormones."
+  },
+  {
+    q_hi: "Q12. वर्ष 1902 में खोजे गए पहले हार्मोन का नाम क्या है?",
+    q_en: "Q12. What is the name of the first hormone discovered in the year 1902?",
+    tag: "",
+    o_hi: [
+      "(A) इंसुलिन",
+      "(B) थायरोक्सिन",
+      "(C) ऑक्सीटोसिन",
+      "(D) सीक्रेटिन"
+    ],
+    o_en: [
+      "(A) Insulin",
+      "(B) Thyroxine",
+      "(C) Oxytocin",
+      "(D) Secretin"
+    ],
+    a: 3,
+    e_hi: "पहला खोजा गया हार्मोन सीक्रेटिन था, जिसकी खोज वर्ष 1902 में हुई थी।",
+    e_en: "The first discovered hormone was secretin, which was discovered in the year 1902."
+  },
+  {
+    q_hi: "Q13. पीयूष ग्रंथि द्वारा उत्पन्न किए जाने वाले हार्मोनों में कौन-से प्रमुख हार्मोन शामिल हैं?",
+    q_en: "Q13. Which major hormones are among those produced by the pituitary gland?",
+    tag: "",
+    o_hi: [
+      "(A) वृद्धि हार्मोन, प्रोलेक्टिन और ऑक्सीटोसिन",
+      "(B) केवल इंसुलिन, ग्लूकागन और सेरोटोनिन",
+      "(C) केवल टेस्टोस्टेरोन, एस्ट्रोजन और प्रोजेस्टेरोन",
+      "(D) केवल मेलाटोनिन, कैल्सीटोनिन और थायरोक्सिन"
+    ],
+    o_en: [
+      "(A) Growth hormone, prolactin, and oxytocin",
+      "(B) Only insulin, glucagon, and serotonin",
+      "(C) Only testosterone, estrogen, and progesterone",
+      "(D) Only melatonin, calcitonin, and thyroxine"
+    ],
+    a: 0,
+    e_hi: "पीयूष ग्रंथि वृद्धि हार्मोन, प्रोलेक्टिन और ऑक्सीटोसिन जैसे विभिन्न हार्मोनों का उत्पादन करती है।",
+    e_en: "The pituitary gland produces various hormones such as growth hormone, prolactin, and oxytocin."
+  },
+  {
+    q_hi: "Q14. पीयूष ग्रंथि (Pituitary Gland) को निम्नलिखित में से किसके द्वारा नियंत्रित किया जाता है?",
+    q_en: "Q14. The Pituitary Gland is controlled by which of the following?",
+    tag: "",
+    o_hi: [
+      "(A) थाइमस",
+      "(B) हाइपोथैलेमस",
+      "(C) थायराइड",
+      "(D) एड्रिनल"
+    ],
+    o_en: [
+      "(A) Thymus",
+      "(B) Hypothalamus",
+      "(C) Thyroid",
+      "(D) Adrenal"
+    ],
+    a: 1,
+    e_hi: "पीयूष ग्रंथि का नियंत्रण हाइपोथैलेमस द्वारा किया जाता है।",
+    e_en: "The pituitary gland is controlled by the hypothalamus."
+  },
+  {
+    q_hi: "Q15. शरीर का तापमान, भूख, नींद-जागरण चक्र और हार्मोन स्राव को नियंत्रित करने वाला मस्तिष्क का क्षेत्र कौन-सा है?",
+    q_en: "Q15. Which region of the brain controls body temperature, hunger, sleep-wake cycle, and hormone secretion?",
+    tag: "",
+    o_hi: [
+      "(A) पीनियल ग्रंथि",
+      "(B) पैराथायराइड ग्रंथि",
+      "(C) हाइपोथैलेमस",
+      "(D) थाइमस ग्रंथि"
+    ],
+    o_en: [
+      "(A) Pineal gland",
+      "(B) Parathyroid gland",
+      "(C) Hypothalamus",
+      "(D) Thymus gland"
+    ],
+    a: 2,
+    e_hi: "हाइपोथैलेमस मस्तिष्क का वह क्षेत्र है जो हार्मोन स्राव, शरीर के तापमान, भूख और नींद-जागरण चक्र को नियंत्रित करता है।",
+    e_en: "The hypothalamus is the area of the brain that controls hormone secretion, body temperature, hunger, and sleep-wake cycle."
+  },
+  {
+    q_hi: "Q16. हाइपोथैलेमस द्वारा हार्मोनों के स्रावण को नियंत्रित करने के बाद, पीयूष ग्रंथि इन हार्मोनों को कहाँ छोड़ती है?",
+    q_en: "Q16. After the hypothalamus controls the secretion of hormones, where does the pituitary gland release these hormones?",
+    tag: "",
+    o_hi: [
+      "(A) लसिका वाहिकाओं में",
+      "(B) सीधे उत्तकों में",
+      "(C) पाचक नलिकाओं में",
+      "(D) रक्त प्रवाह में"
+    ],
+    o_en: [
+      "(A) Into lymphatic vessels",
+      "(B) Directly into tissues",
+      "(C) Into digestive ducts",
+      "(D) Into the bloodstream"
+    ],
+    a: 3,
+    e_hi: "हाइपोथैलेमस हार्मोन स्रावण को नियंत्रित करता है और पीयूष ग्रंथि इन हार्मोनों को सीधे रक्त प्रवाह में छोड़ती है।",
+    e_en: "The hypothalamus controls hormone secretion, and the pituitary gland releases these hormones directly into the bloodstream."
+  },
+  {
+    q_hi: "Q17. पीयूष क्षेत्र के अंतर्गत अग्र पीयूष ग्रंथि को किस नाम से जाना जाता है?",
+    q_en: "Q17. By what name is the anterior pituitary gland known in the pituitary region?",
+    tag: "",
+    o_hi: [
+      "(A) न्यूरोहाइपोफाइसिस",
+      "(B) एडेनोहाइपोफाइसिस",
+      "(C) हाइपोथैलेमस",
+      "(D) पीनियल काय"
+    ],
+    o_en: [
+      "(A) Neurohypophysis",
+      "(B) Adenohypophysis",
+      "(C) Hypothalamus",
+      "(D) Pineal body"
+    ],
+    a: 1,
+    e_hi: "अग्र पीयूष ग्रंथि को एडेनोहाइपोफाइसिस कहा जाता है।",
+    e_en: "The anterior pituitary gland is called adenohypophysis."
+  },
+  {
+    q_hi: "Q18. अग्र पीयूष ग्रंथि (एडेनोहाइपोफाइसिस) द्वारा स्रावित हार्मोन किन शारीरिक प्रक्रियाओं को नियंत्रित करते हैं?",
+    q_en: "Q18. Which bodily processes are controlled by the hormones secreted by the anterior pituitary gland (adenohypophysis)?",
+    tag: "",
+    o_hi: [
+      "(A) वृद्धि, चयापचय, प्रजनन और तनाव प्रतिक्रिया",
+      "(B) केवल रक्तचाप और हीमोग्लोबिन निर्माण",
+      "(C) केवल अस्थि घनत्व और बाल विकास",
+      "(D) केवल पाचन क्रिया और मूत्र निर्माण"
+    ],
+    o_en: [
+      "(A) Growth, metabolism, reproduction, and stress response",
+      "(B) Only blood pressure and hemoglobin formation",
+      "(C) Only bone density and hair growth",
+      "(D) Only digestive function and urine formation"
+    ],
+    a: 0,
+    e_hi: "अग्र पीयूष ग्रंथि विभिन्न हार्मोनों का स्राव करती है जो वृद्धि, चयापचय, प्रजनन और तनाव प्रतिक्रिया को नियंत्रित करते हैं।",
+    e_en: "The anterior pituitary gland secretes various hormones that control growth, metabolism, reproduction, and stress response."
+  },
+  {
+    q_hi: "Q19. 'सोमैटोट्रॉपिन' निम्नलिखित में से किस हार्मोन का अन्य नाम है?",
+    q_en: "Q19. 'Somatotropin' is another name for which of the following hormones?",
+    tag: "",
+    o_hi: [
+      "(A) प्रोलेक्टिन",
+      "(B) ऑक्सीटोसिन",
+      "(C) वृद्धि हार्मोन",
+      "(D) सीक्रेटिन"
+    ],
+    o_en: [
+      "(A) Prolactin",
+      "(B) Oxytocin",
+      "(C) Growth hormone",
+      "(D) Secretin"
+    ],
+    a: 2,
+    e_hi: "वृद्धि हार्मोन को सोमैटोट्रॉपिन के नाम से भी जाना जाता है।",
+    e_en: "Growth hormone is also known as somatotropin."
+  },
+  {
+    q_hi: "Q20. अग्र पीयूष ग्रंथि में वृद्धि हार्मोन के स्राव को कौन प्रेरित करता है?",
+    q_en: "Q20. What stimulates the secretion of growth hormone in the anterior pituitary gland?",
+    tag: "",
+    o_hi: [
+      "(A) TSH (थायराइड उत्तेजक हार्मोन)",
+      "(B) ACTH (एड्रिनोकोर्टिकोट्रॉपिक हार्मोन)",
+      "(C) FSH (फॉलिकल उत्तेजक हार्मोन)",
+      "(D) GHRH (वृद्धि हार्मोन-स्राव हार्मोन)"
+    ],
+    o_en: [
+      "(A) TSH (Thyroid Stimulating Hormone)",
+      "(B) ACTH (Adrenocorticotropic Hormone)",
+      "(C) FSH (Follicle Stimulating Hormone)",
+      "(D) GHRH (Growth Hormone-Releasing Hormone)"
+    ],
+    a: 3,
+    e_hi: "GHRH (वृद्धि हार्मोन-स्राव हार्मोन) अग्र पीयूष में वृद्धि हार्मोन का स्राव करता है।",
+    e_en: "GHRH (Growth Hormone-Releasing Hormone) stimulates the secretion of growth hormone in the anterior pituitary."
+  },
+  {
+    q_hi: "Q21. अंत:स्रावी ग्रंथियों के अवलोकन के अनुसार, मानव शरीर के गले क्षेत्र में कौन-सी ग्रंथियां स्थित होती हैं?",
+    q_en: "Q21. According to the overview of endocrine glands, which glands are located in the neck region of the human body?",
+    tag: "",
+    o_hi: [
+      "(A) एड्रिनल ग्रंथि और अग्न्याशय",
+      "(B) थायराइड ग्रंथि और पैराथायराइड ग्रंथि",
+      "(C) पीनियल ग्रंथि और थाइमस",
+      "(D) अंडाशय और वृषण"
+    ],
+    o_en: [
+      "(A) Adrenal gland and Pancreas",
+      "(B) Thyroid gland and Parathyroid gland",
+      "(C) Pineal gland and Thymus",
+      "(D) Ovary and Testis"
+    ],
+    a: 1,
+    e_hi: "थायराइड ग्रंथि और पैराथायराइड ग्रंथि गले के क्षेत्र में स्थित अंत:स्रावी ग्रंथियां हैं।",
+    e_en: "The thyroid gland and parathyroid gland are endocrine glands located in the neck region."
+  },
+  {
+    q_hi: "Q22. प्रोलेक्टिन हार्मोन का मानव शरीर में मुख्य कार्य क्या है?",
+    q_en: "Q22. What is the main function of the prolactin hormone in the human body?",
+    tag: "",
+    o_hi: [
+      "A) दूध का निर्माण",
+      "B) रक्तचाप का नियंत्रण",
+      "C) नींद का विनियमन",
+      "D) मांसपेशियों का संकुचन"
+    ],
+    o_en: [
+      "A) Production of milk",
+      "B) Control of blood pressure",
+      "C) Regulation of sleep",
+      "D) Contraction of muscles"
+    ],
+    a: 0,
+    e_hi: "प्रोलेक्टिन हार्मोन मानव शरीर में दूध के निर्माण में सहायता करता है।",
+    e_en: "Prolactin hormone helps in the production of milk in the human body."
+  },
+  {
+    q_hi: "Q23. आनुवंशिक या चिकित्सीय स्थिति के कारण शरीर की लंबाई में कमी होना, वृद्धि हार्मोन की कमी से होने वाला कौन सा विकार है?",
+    q_en: "Q23. Stunted body height due to a genetic or medical condition is which disorder caused by growth hormone deficiency?",
+    tag: "",
+    o_hi: [
+      "A) जाइगेंटिज्म",
+      "B) बौनापन",
+      "C) एक्रोमेगाली",
+      "D) हाइपोफिसिस"
+    ],
+    o_en: [
+      "A) Gigantism",
+      "B) Dwarfism",
+      "C) Acromegaly",
+      "D) Hypophysis"
+    ],
+    a: 1,
+    e_hi: "वृद्धि हार्मोन की कमी के कारण आनुवंशिक या चिकित्सीय स्थिति से शरीर की लंबाई कम रह जाती है, जिसे बौनापन कहा जाता है।",
+    e_en: "A genetic or medical condition caused by growth hormone deficiency leads to reduced body height, which is called dwarfism."
+  },
+  {
+    q_hi: "Q24. अत्यधिक वृद्धि और असामान्य कंकाल विकास की स्थिति, जो वृद्धि हार्मोन की अधिकता से होती है, क्या कहलाती है?",
+    q_en: "Q24. What is the condition of excessive growth and abnormal skeletal development caused by an excess of growth hormone called?",
+    tag: "",
+    o_hi: [
+      "A) बौनापन",
+      "B) एक्रोमेगाली",
+      "C) जाइगेंटिज्म",
+      "D) न्यूरोहाइपोफाइसिस"
+    ],
+    o_en: [
+      "A) Dwarfism",
+      "B) Acromegaly",
+      "C) Gigantism",
+      "D) Neurohypophysis"
+    ],
+    a: 2,
+    e_hi: "वृद्धि हार्मोन की अधिकता से शरीर में अत्यधिक वृद्धि और असामान्य कंकाल विकास होता है, जिसे जाइगेंटिज्म कहा जाता है।",
+    e_en: "An excess of growth hormone causes excessive growth and abnormal skeletal development in the body, which is called gigantism."
+  },
+  {
+    q_hi: "Q25. वृद्धि हार्मोन की अधिकता से मानव शरीर के कुछ विशेष हिस्सों में अत्यधिक वृद्धि होने की स्थिति को क्या कहा जाता है?",
+    q_en: "Q25. What is the condition called where certain parts of the human body grow excessively due to an excess of growth hormone?",
+    tag: "",
+    o_hi: [
+      "A) जाइगेंटिज्म",
+      "B) बौनापन",
+      "C) थाइमस",
+      "D) एक्रोमेगाली"
+    ],
+    o_en: [
+      "A) Gigantism",
+      "B) Dwarfism",
+      "C) Thymus",
+      "D) Acromegaly"
+    ],
+    a: 3,
+    e_hi: "मानव शरीर के कुछ हिस्सों में अत्यधिक वृद्धि होने की स्थिति को एक्रोमेगाली कहते हैं, जो वृद्धि हार्मोन की अधिकता से उत्पन्न होती है।",
+    e_en: "The condition of excessive growth in specific body parts is called acromegaly, which arises from an excess of growth hormone."
+  },
+  {
+    q_hi: "Q26. पश्च पीयूष ग्रंथि (न्यूरोहाइपोफाइसिस) की क्या मुख्य विशेषता है?",
+    q_en: "Q26. What is the main characteristic of the posterior pituitary gland (neurohypophysis)?",
+    tag: "",
+    o_hi: [
+      "A) यह हाइपोथैलेमस द्वारा उत्पादित हार्मोनों को संग्रहित और स्रावित करती है",
+      "B) यह स्वयं अपने हार्मोनों का निर्माण करती है",
+      "C) यह केवल मेलाटोनिन का उत्पादन करती है",
+      "D) यह उरोस्थि के पीछे स्थित होती है"
+    ],
+    o_en: [
+      "A) It stores and secretes hormones produced by the hypothalamus",
+      "B) It produces its own hormones",
+      "C) It produces only melatonin",
+      "D) It is located behind the sternum"
+    ],
+    a: 0,
+    e_hi: "पश्च पीयूष ग्रंथि स्वयं हार्मोन का उत्पादन नहीं करती है, बल्कि हाइपोथैलेमस द्वारा निर्मित हार्मोनों का संग्रहण और स्राव करती है।",
+    e_en: "The posterior pituitary gland does not produce hormones itself; rather, it stores and secretes hormones produced by the hypothalamus."
+  },
+  {
+    q_hi: "Q27. शरीर में पानी की मात्रा (जल के पुनः अवशोषण) और रक्तचाप दोनों को नियंत्रित करने वाला हार्मोन कौन सा है?",
+    q_en: "Q27. Which hormone controls both the amount of water (reabsorption of water) and blood pressure in the body?",
+    tag: "",
+    o_hi: [
+      "A) ऑक्सीटोसिन",
+      "B) प्रोलेक्टिन",
+      "C) ADH या वैसोप्रेसिन",
+      "D) सेरोटोनिन"
+    ],
+    o_en: [
+      "A) Oxytocin",
+      "B) Prolactin",
+      "C) ADH or Vasopressin",
+      "D) Serotonin"
+    ],
+    a: 2,
+    e_hi: "ADH (एंटी-मूत्रवर्धक हार्मोन) या वैसोप्रेसिन जल के पुनः अवशोषण और रक्तचाप को नियंत्रित करने में मदद करता है।",
+    e_en: "ADH (Anti-diuretic hormone) or vasopressin helps control water reabsorption and blood pressure."
+  },
+  {
+    q_hi: "Q28. 'प्रेम हार्मोन' के नाम से जाना जाने वाला ऑक्सीटोसिन हार्मोन शरीर में किस प्रक्रिया में सहायक होता है?",
+    q_en: "Q28. In which process of the body is oxytocin, known as the 'love hormone', helpful?",
+    tag: "",
+    o_hi: [
+      "A) जल पुनः अवशोषण में",
+      "B) रक्तचाप नियंत्रण में",
+      "C) नींद चक्र नियमन में",
+      "D) दूध के स्राव और गर्भाशय संकुचन में"
+    ],
+    o_en: [
+      "A) In water reabsorption",
+      "B) In blood pressure control",
+      "C) In sleep cycle regulation",
+      "D) In milk ejection and uterine contractions"
+    ],
+    a: 3,
+    e_hi: "ऑक्सीटोसिन हार्मोन दूध के स्राव में सहायता करता है और प्रसव के समय गर्भाशय की मांसपेशियों में संकुचन को प्रेरित करता है।",
+    e_en: "Oxytocin hormone helps in milk ejection and stimulates uterine muscle contractions during childbirth."
+  },
+  {
+    q_hi: "Q29. पीयूष ग्रंथि को हाइपोथैलेमस से जोड़ने वाले 'कीपक' के लिए प्रयुक्त अंग्रेजी पारिभाषिक शब्द क्या है?",
+    q_en: "Q29. What is the English technical term used for the 'funnel' (keepak) connecting the pituitary gland to the hypothalamus?",
+    tag: "",
+    o_hi: [
+      "A) Infundibulum",
+      "B) Anterior lobe",
+      "C) Posterior lobe",
+      "D) Hypophyseal vein"
+    ],
+    o_en: [
+      "A) Infundibulum",
+      "B) Anterior lobe",
+      "C) Posterior lobe",
+      "D) Hypophyseal vein"
+    ],
+    a: 0,
+    e_hi: "पीयूष ग्रंथि और हाइपोथैलेमस के बीच के कीपक भाग को अंग्रेजी में Infundibulum कहा जाता है।",
+    e_en: "The funnel-like part between the pituitary gland and hypothalamus is called Infundibulum in English."
+  },
+  {
+    q_hi: "Q30. मस्तिष्क के मध्य में स्थित कौन सी अंतःस्रावी ग्रंथि मेलाटोनिन हार्मोन स्रावित करके शरीर की दैनिक लय को विनियमित करती है?",
+    q_en: "Q30. Which endocrine gland located in the middle of the brain regulates the body's daily rhythm by secreting the hormone melatonin?",
+    tag: "",
+    o_hi: [
+      "A) थाइमस ग्रंथि",
+      "B) पीनियल ग्रंथि",
+      "C) पश्च पीयूष ग्रंथि",
+      "D) थाइरॉइड ग्रंथि"
+    ],
+    o_en: [
+      "A) Thymus gland",
+      "B) Pineal gland",
+      "C) Posterior pituitary gland",
+      "D) Thyroid gland"
+    ],
+    a: 1,
+    e_hi: "पीनियल ग्रंथि मस्तिष्क के मध्य में स्थित एक छोटी अंतःस्रावी ग्रंथि है जो मेलाटोनिन का स्राव कर शरीर की दैनिक लय का नियमन करती है।",
+    e_en: "The pineal gland is a small endocrine gland located in the middle of the brain that secretes melatonin to regulate the body's daily rhythm."
+  },
+  {
+    q_hi: "Q31. पीनियल ग्रंथि द्वारा मेलाटोनिन के निर्माण की प्रक्रिया में कौन सा अमीनो एसिड सेरोटोनिन में परिवर्तित होता है?",
+    q_en: "Q31. In the process of melatonin synthesis by the pineal gland, which amino acid is converted into serotonin?",
+    tag: "",
+    o_hi: [
+      "A) ट्रिप्टोफैन",
+      "B) ल्यूसीन",
+      "C) लाइसिन",
+      "D) वैलीन"
+    ],
+    o_en: [
+      "A) Tryptophan",
+      "B) Leucine",
+      "C) Lysine",
+      "D) Valine"
+    ],
+    a: 0,
+    e_hi: "ट्रिप्टोफैन नामक अमीनो एसिड सेरोटोनिन में परिवर्तित होता है, जिससे बाद में मेलाटोनिन हार्मोन बनता है।",
+    e_en: "The amino acid tryptophan is converted into serotonin, which is later used to make melatonin."
+  },
+  {
+    q_hi: "Q32. \"अंधेरे का हार्मोन\" कहा जाने वाला मेलाटोनिन आँख के किस भाग से प्राप्त संकेतों के माध्यम से प्रकाश और अंधेरे को महसूस करता है?",
+    q_en: "Q32. Melatonin, known as the \"hormone of darkness\", senses light and dark through signals received from which part of the eye?",
+    tag: "",
+    o_hi: [
+      "A) कॉर्निया",
+      "B) आइरिस",
+      "C) रेटिना",
+      "D) लेंस"
+    ],
+    o_en: [
+      "A) Cornea",
+      "B) Iris",
+      "C) Retina",
+      "D) Lens"
+    ],
+    a: 2,
+    e_hi: "मेलाटोनिन हार्मोन आँख के रेटिना से प्राप्त संकेतों के आधार पर प्रकाश व अंधेरे को महसूस करके नींद-जागने के चक्र को विनियमित करता है।",
+    e_en: "Melatonin regulates the sleep-wake cycle by sensing light and dark based on signals received from the retina of the eye."
+  },
+  {
+    q_hi: "Q33. थाइमस ग्रंथि की सटीक शारीरिक स्थिति कौन सी है?",
+    q_en: "Q33. What is the exact anatomical location of the thymus gland?",
+    tag: "",
+    o_hi: [
+      "A) मस्तिष्क के मध्य भाग में",
+      "B) गर्दन के निचले हिस्से में",
+      "C) उदर गुहा में",
+      "D) ऊपरी छाती में उरोस्थि के पीछे और हृदय के सामने"
+    ],
+    o_en: [
+      "A) In the middle part of the brain",
+      "B) In the lower part of the neck",
+      "C) In the abdominal cavity",
+      "D) In the upper chest behind the sternum and in front of the heart"
+    ],
+    a: 3,
+    e_hi: "थाइमस ग्रंथि ऊपरी छाती में, उरोस्थि (छाती की हड्डी) के पीछे और हृदय के सामने स्थित होती है।",
+    e_en: "The thymus gland is located in the upper chest, behind the sternum (breastbone) and in front of the heart."
+  },
+  {
+    q_hi: "Q34. थाइमस ग्रंथि मुख्य रूप से किन कोशिकाओं की परिपक्वता के लिए जिम्मेदार है जो संक्रमण से लड़ने में सहायक हैं?",
+    q_en: "Q34. The thymus gland is primarily responsible for the maturation of which cells that help fight infections?",
+    tag: "",
+    o_hi: [
+      "A) लाल रक्त कोशिकाएं",
+      "B) प्लेटलेट्स",
+      "C) न्यूट्रोफिल्स",
+      "D) टी-लिम्फोसाइट"
+    ],
+    o_en: [
+      "A) Red blood cells",
+      "B) Platelets",
+      "C) Neutrophils",
+      "D) T-lymphocytes"
+    ],
+    a: 3,
+    e_hi: "थाइमस ग्रंथि टी-लिम्फोसाइट (टी-कोशिकाओं) की परिपक्वता के लिए जिम्मेदार होती है, जो शरीर को संक्रमण से बचाती हैं।",
+    e_en: "The thymus gland is responsible for the maturation of T-lymphocytes (T-cells), which protect the body from infections."
+  },
+  {
+    q_hi: "Q35. मानव शरीर में एंटीबॉडीज के निर्माण और लिम्फोसाइटों के प्रशिक्षण केंद्र के रूप में कौन सी ग्रंथि कार्य करती है?",
+    q_en: "Q35. Which gland functions as the training center for lymphocytes and the production of antibodies in the human body?",
+    tag: "",
+    o_hi: [
+      "A) पीनियल ग्रंथि",
+      "B) थाइमस ग्रंथि",
+      "C) हाइपोथैलेमस",
+      "D) पश्च पीयूष ग्रंथि"
+    ],
+    o_en: [
+      "A) Pineal gland",
+      "B) Thymus gland",
+      "C) Hypothalamus",
+      "D) Posterior pituitary gland"
+    ],
+    a: 1,
+    e_hi: "थाइमस ग्रंथि लिम्फोसाइटों (एंटीबॉडीज) के लिए प्रशिक्षण केंद्र के रूप में कार्य करती है और प्रतिरक्षा प्रणाली में महत्वपूर्ण भूमिका निभाती है।",
+    e_en: "The thymus gland acts as a training center for lymphocytes and plays an important role in the immune system."
+  },
+  {
+    q_hi: "Q36. मानव शरीर में मनोदशा (Mood) और भावनाओं को नियंत्रित करने वाला हार्मोन कौन सा है?",
+    q_en: "Q36. Which hormone controls mood and emotions in the human body?",
+    tag: "",
+    o_hi: [
+      "A) वैसोप्रेसिन",
+      "B) प्रोलेक्टिन",
+      "C) सेरोटोनिन",
+      "D) मेलाटोनिन"
+    ],
+    o_en: [
+      "A) Vasopressin",
+      "B) Prolactin",
+      "C) Serotonin",
+      "D) Melatonin"
+    ],
+    a: 2,
+    e_hi: "सेरोटोनिन हार्मोन मनुष्य की मनोदशा और भावनाओं को नियंत्रित करने के लिए जिम्मेदार होता है।",
+    e_en: "Serotonin is responsible for controlling mood and emotions in humans."
+  },
+  {
+    q_hi: "Q37. गर्दन में स्थित तितली के आकार की ग्रंथि निम्नलिखित में से कौन सी है?",
+    q_en: "Q37. Which of the following is a butterfly-shaped gland located in the neck?",
+    tag: "",
+    o_hi: [
+      "A) एड्रिनल ग्रंथि",
+      "B) थायराइड ग्रंथि",
+      "C) पैराथायराइड ग्रंथि",
+      "D) पीयूष ग्रंथि"
+    ],
+    o_en: [
+      "A) Adrenal gland",
+      "B) Thyroid gland",
+      "C) Parathyroid gland",
+      "D) Pituitary gland"
+    ],
+    a: 1,
+    e_hi: "थायराइड एक तितली के आकार की ग्रंथि है जो गर्दन में स्थित होती है।",
+    e_en: "The thyroid is a butterfly-shaped gland located in the neck."
+  },
+  {
+    q_hi: "Q38. थायराइड ग्रंथि द्वारा उत्पादित थायरोक्सिन हार्मोन के निर्माण के लिए आहार से प्राप्त होने वाले किस खनिज की आवश्यकता होती है?",
+    q_en: "Q38. Which mineral obtained from the diet is required for the production of thyroxine hormone produced by the thyroid gland?",
+    tag: "",
+    o_hi: [
+      "A) आयोडीन",
+      "B) कैल्शियम",
+      "C) आयरन",
+      "D) सोडियम"
+    ],
+    o_en: [
+      "A) Iodine",
+      "B) Calcium",
+      "C) Iron",
+      "D) Sodium"
+    ],
+    a: 0,
+    e_hi: "थायरोक्सिन के उत्पादन के लिए आयोडीन की आवश्यकता होती है, जो चयापचय को बढ़ाने में महत्वपूर्ण भूमिका निभाता है।",
+    e_en: "Iodine is required for the production of thyroxine, playing a crucial role in boosting metabolism."
+  },
+  {
+    q_hi: "Q39. शरीर में आयोडीन की कमी से थायराइड हार्मोन का पर्याप्त उत्पादन न होना और थायराइड ग्रंथि का बढ़ जाना क्रमशः किन स्थितियाँ को दर्शाता है?",
+    q_en: "Q39. Inadequate production of thyroid hormone due to iodine deficiency and enlargement of the thyroid gland represent which conditions respectively?",
+    tag: "",
+    o_hi: [
+      "A) हाइपरथायरायडिज्म और एडिसन रोग",
+      "B) डायबिटीज इंसिपिडस और टेटेनी",
+      "C) हाइपोथायरायडिज्म और घेंघा रोग",
+      "D) एक्रोमेगाली और बौनापन"
+    ],
+    o_en: [
+      "A) Hyperthyroidism and Addison's disease",
+      "B) Diabetes insipidus and Tetany",
+      "C) Hypothyroidism and Goiter",
+      "D) Acromegaly and Dwarfism"
+    ],
+    a: 2,
+    e_hi: "आयोडीन की कमी से हाइपोथायरायडिज्म स्थिति उत्पन्न होती है और इसके कारण थायराइड ग्रंथि बढ़ने से घेंघा नामक स्थिति उत्पन्न होती है।",
+    e_en: "Iodine deficiency leads to hypothyroidism, and the resulting enlargement of the thyroid gland causes goiter."
+  },
+  {
+    q_hi: "Q40. जब थायराइड ग्रंथि अत्यधिक सक्रिय हो जाती है और बहुत अधिक मात्रा में थायरोक्सिन हार्मोन उत्पन्न करती है, तो इस स्थिति को क्या कहा जाता है?",
+    q_en: "Q40. When the thyroid gland becomes overactive and produces excessive amounts of thyroxine hormone, what is this condition called?",
+    tag: "",
+    o_hi: [
+      "A) हाइपोथायरायडिज्म",
+      "B) कुशिंग सिंड्रोम",
+      "C) एडिसन रोग",
+      "D) हाइपरथायरायडिज्म"
+    ],
+    o_en: [
+      "A) Hypothyroidism",
+      "B) Cushing's syndrome",
+      "C) Addison's disease",
+      "D) Hyperthyroidism"
+    ],
+    a: 3,
+    e_hi: "थायराइड के अत्यधिक सक्रिय होने और बहुत अधिक थायरोक्सिन हार्मोन उत्पन्न करने की स्थिति को हाइपरथायरायडिज्म कहते हैं।",
+    e_en: "The condition where the thyroid gland is overactive and produces too much thyroxine hormone is called hyperthyroidism."
+  }
+];
