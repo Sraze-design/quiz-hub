@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q1. किसी वस्तु की विश्राम या गति की स्थिति को बदलने में सक्षम बाहरी कारक को क्या कहा जाता है?",
+    q_en: "Q1. What is the external factor capable of changing the state of rest or motion of an object called?",
+    tag: "",
+    o_hi: [
+      "(a) बल",
+      "(b) दाब",
+      "(c) कार्य",
+      "(d) ऊर्जा"
+    ],
+    o_en: [
+      "(a) Force",
+      "(b) Pressure",
+      "(c) Work",
+      "(d) Energy"
+    ],
+    a: 0,
+    e_hi: "बल वह बाहरी कारक है जो किसी वस्तु की विश्राम या गति की स्थिति को बदलने में सक्षम होता है।",
+    e_en: "Force is the external factor capable of changing the state of rest or motion of an object."
+  },
+  {
+    q_hi: "Q2. अंतरराष्ट्रीय मानक प्रणाली (SI) में बल का मात्रक क्या है?",
+    q_en: "Q2. What is the unit of force in the International System of Units (SI)?",
+    tag: "",
+    o_hi: [
+      "(a) पास्कल",
+      "(b) जूल",
+      "(c) न्यूटन",
+      "(d) वाट"
+    ],
+    o_en: [
+      "(a) Pascal",
+      "(b) Joule",
+      "(c) Newton",
+      "(d) Watt"
+    ],
+    a: 2,
+    e_hi: "बल का SI मात्रक न्यूटन (N) है।",
+    e_en: "The SI unit of force is Newton (N)."
+  },
+  {
+    q_hi: "Q3. एक न्यूटन (1 N) को निम्नलिखित में से किस रूप में परिभाषित किया जाता है?",
+    q_en: "Q3. How is one Newton (1 N) defined among the following?",
+    tag: "",
+    o_hi: [
+      "(a) 1 किलोग्राम मीटर / सेकंड²",
+      "(b) 1 किलोग्राम मीटर / सेकंड",
+      "(c) 1 किलोग्राम / मीटर सेकंड²",
+      "(d) 1 किलोग्राम मीटर² / सेकंड²"
+    ],
+    o_en: [
+      "(a) 1 kilogram meter / second²",
+      "(b) 1 kilogram meter / second",
+      "(c) 1 kilogram / meter second²",
+      "(d) 1 kilogram meter² / second²"
+    ],
+    a: 0,
+    e_hi: "एक न्यूटन को 1 किलोग्राम मीटर / सेकंड² के रूप में परिभाषित किया जाता है।",
+    e_en: "One Newton is defined as 1 kilogram meter / second²."
+  },
+  {
+    q_hi: "Q4. बल लगाने पर निम्नलिखित में से कौन-सा प्रभाव उत्पन्न नहीं हो सकता?",
+    q_en: "Q4. Which of the following effects cannot be produced by applying force?",
+    tag: "",
+    o_hi: [
+      "(a) गतिशील वस्तु की गति को बढ़ाना या धीमा करना",
+      "(b) वस्तु की गति की दिशा में परिवर्तन करना",
+      "(c) स्थिर अवस्था में पड़े किसी पिंड को गतिशील बनाना",
+      "(d) वस्तु का द्रव्यमान परिवर्तित करना"
+    ],
+    o_en: [
+      "(a) Increasing or decreasing the speed of a moving object",
+      "(b) Changing the direction of motion of an object",
+      "(c) Making a stationary object move",
+      "(d) Changing the mass of the object"
+    ],
+    a: 3,
+    e_hi: "बल किसी वस्तु की विश्राम/गति की स्थिति, गति की दर, दिशा तथा आकार को बदल सकता है, लेकिन यह वस्तु के द्रव्यमान को परिवर्तित नहीं करता है।",
+    e_en: "Force can change the state of rest/motion, rate of motion, direction, and shape of an object, but it does not change the mass of the object."
+  },
+  {
+    q_hi: "Q5. जब दो समान शक्ति वाले बल एक-दूसरे के विपरीत दिशा में कार्य करते हैं, तो वस्तु पर लगने वाला शुद्ध बल कितना होता है?",
+    q_en: "Q5. When two forces of equal magnitude act in opposite directions on an object, what is the net force acting on the object?",
+    tag: "",
+    o_hi: [
+      "(a) अनंत",
+      "(b) शून्य",
+      "(c) धनात्मक",
+      "(d) ऋणात्मक"
+    ],
+    o_en: [
+      "(a) Infinite",
+      "(b) Zero",
+      "(c) Positive",
+      "(d) Negative"
+    ],
+    a: 1,
+    e_hi: "संतुलित बलों की शक्ति समान होती है और वे विपरीत दिशाओं में कार्य करते हैं, जिससे वस्तु पर लगने वाला शुद्ध बल शून्य होता है।",
+    e_en: "Balanced forces have equal magnitude and act in opposite directions, making the net force acting on the object zero."
+  },
+  {
+    q_hi: "Q6. असंतुलित बलों के संबंध में निम्नलिखित में से कौन-सा कथन सत्य है?",
+    q_en: "Q6. Which of the following statements is true regarding unbalanced forces?",
+    tag: "",
+    o_hi: [
+      "(a) उनसे वस्तु पर लगने वाला शुद्ध बल शून्य नहीं होता है",
+      "(b) उनसे वस्तु पर लगने वाला शुद्ध बल सदैव शून्य होता है",
+      "(c) वे बल परिमाण में सदैव समान होते हैं",
+      "(d) वे केवल एक ही दिशा में कार्य कर सकते हैं"
+    ],
+    o_en: [
+      "(a) The net force acting on the object is not zero",
+      "(b) The net force acting on the object is always zero",
+      "(c) They are always equal in magnitude",
+      "(d) They can only act in one direction"
+    ],
+    a: 0,
+    e_hi: "असंतुलित बल परिमाण में समान नहीं होते हैं और उनसे वस्तु पर लगने वाला शुद्ध बल शून्य नहीं होता है।",
+    e_en: "Unbalanced forces are not equal in magnitude, and the net force acting on the object due to them is not zero."
+  },
+  {
+    q_hi: "Q7. जब कोई व्यक्ति दीवार को धक्का देता है और दीवार अपने स्थान से नहीं हिलती, तो यह किसका उदाहरण है?",
+    q_en: "Q7. When a person pushes a wall and the wall does not move from its place, what is this an example of?",
+    tag: "",
+    o_hi: [
+      "(a) असंतुलित बल",
+      "(b) संतुलित बल",
+      "(c) घर्षण बल",
+      "(d) असंपर्क बल"
+    ],
+    o_en: [
+      "(a) Unbalanced force",
+      "(b) Balanced force",
+      "(c) Frictional force",
+      "(d) Non-contact force"
+    ],
+    a: 1,
+    e_hi: "जब आदमी दीवार पर धक्का देता है, तो दोनों बल एक-दूसरे को संतुलित कर देते हैं और परिणामस्वरूप दीवार नहीं हिलती।",
+    e_en: "When a man pushes the wall, the forces balance each other, and as a result, the wall does not move."
+  },
+  {
+    q_hi: "Q8. वह बल जो किसी वस्तु पर सीधे या किसी माध्यम के जरिए कार्य करता है, क्या कहलाता है?",
+    q_en: "Q8. What is the force that acts on an object directly or through a medium called?",
+    tag: "",
+    o_hi: [
+      "(a) असंपर्क बल",
+      "(b) गुरुत्वाकर्षण बल",
+      "(c) स्थिरवैद्युतिकी बल",
+      "(d) संपर्क बल"
+    ],
+    o_en: [
+      "(a) Non-contact force",
+      "(b) Gravitational force",
+      "(c) Electrostatic force",
+      "(d) Contact force"
+    ],
+    a: 3,
+    e_hi: "संपर्क बल वह बल है जो किसी वस्तु पर सीधे या किसी माध्यम के जरिए कार्य करता है।",
+    e_en: "A contact force is a force that acts on an object directly or through a medium."
+  },
+  {
+    q_hi: "Q9. किसी स्प्रिंग को खींचने या संपीडित करने पर स्प्रिंग द्वारा लगाए गए पुनस्थापन बल को किस श्रेणी में रखा जाता है?",
+    q_en: "Q9. In which category is the restoring force exerted by a spring when it is stretched or compressed placed?",
+    tag: "",
+    o_hi: [
+      "(a) असंपर्क बल",
+      "(b) चुंबकीय बल",
+      "(c) संपर्क बल",
+      "(d) गुरुत्वाकर्षण बल"
+    ],
+    o_en: [
+      "(a) Non-contact force",
+      "(b) Magnetic force",
+      "(c) Contact force",
+      "(d) Gravitational force"
+    ],
+    a: 2,
+    e_hi: "स्प्रिंग बल एक पुनस्थापन बल है जो स्प्रिंग को खींचने या संपीडित करने पर लगाया जाता है और यह संपर्क बल का एक प्रकार है।",
+    e_en: "The spring force is a restoring force applied when stretching or compressing a spring, and it is a type of contact force."
+  },
+  {
+    q_hi: "Q10. हुक का नियम किसी लोचदार सामग्री को फैलाने या संपीडित करने के लिए आवश्यक बल को किसके समानुपाती बताता है?",
+    q_en: "Q10. Hooke's law states that the force required to stretch or compress an elastic material is proportional to what?",
+    tag: "",
+    o_hi: [
+      "(a) वस्तु के द्रव्यमान के",
+      "(b) दूरी (खिंचाव या संपीडन) के",
+      "(c) वस्तु के वेग के",
+      "(d) समय की अवधि के"
+    ],
+    o_en: [
+      "(a) Mass of the object",
+      "(b) Distance (stretch or compression)",
+      "(c) Velocity of the object",
+      "(d) Duration of time"
+    ],
+    a: 1,
+    e_hi: "हुक के नियम के अनुसार, किसी स्प्रिंग या लोचदार सामग्री को एक निश्चित दूरी तक फैलाने या संपीडित करने के लिए आवश्यक बल उस दूरी के समानुपाती होता है।",
+    e_en: "According to Hooke's law, the force required to stretch or compress a spring or elastic material by a certain distance is proportional to that distance."
+  },
+  {
+    q_hi: "Q11. किसी वस्तु पर किसी अन्य वस्तु द्वारा लगाया गया बल जो उसके सीधे संपर्क में नहीं होता, क्या कहलाता है?",
+    q_en: "Q11. What is the force exerted on an object by another object that is not in direct contact with it called?",
+    tag: "",
+    o_hi: [
+      "(a) संपर्क बल",
+      "(b) घर्षण बल",
+      "(c) असंपर्क बल",
+      "(d) स्प्रिंग बल"
+    ],
+    o_en: [
+      "(a) Contact force",
+      "(b) Frictional force",
+      "(c) Non-contact force",
+      "(d) Spring force"
+    ],
+    a: 2,
+    e_hi: "असंपर्क बल किसी वस्तु पर किसी अन्य वस्तु द्वारा लगाया गया ऐसा बल है जो उसके सीधे संपर्क में नहीं होता है।",
+    e_en: "A non-contact force is a force exerted on an object by another object that is not in direct contact with it."
+  },
+  {
+    q_hi: "Q12. दो द्रव्यमानों के बीच कार्य करने वाले आकर्षक बल को क्या कहते हैं?",
+    q_en: "Q12. What is the attractive force acting between two masses called?",
+    tag: "",
+    o_hi: [
+      "(a) गुरुत्वाकर्षण बल",
+      "(b) स्थिरवैद्युतिकी बल",
+      "(c) चुंबकीय बल",
+      "(d) घर्षण बल"
+    ],
+    o_en: [
+      "(a) Gravitational force",
+      "(b) Electrostatic force",
+      "(c) Magnetic force",
+      "(d) Frictional force"
+    ],
+    a: 0,
+    e_hi: "गुरुत्वाकर्षण बल दो द्रव्यमानों के बीच कार्य करने वाला एक आकर्षक बल है।",
+    e_en: "Gravitational force is an attractive force acting between two masses."
+  },
+  {
+    q_hi: "Q13. दो विद्युत आवेशित वस्तुओं के बीच लगने वाले आकर्षक या प्रतिकर्षक बल को किस नाम से जाना जाता है?",
+    q_en: "Q13. By what name is the attractive or repulsive force acting between two electrically charged objects known?",
+    tag: "",
+    o_hi: [
+      "(a) स्प्रिंग बल",
+      "(b) नाभिकीय बल",
+      "(c) श्यान बल",
+      "(d) कूलॉम बल"
+    ],
+    o_en: [
+      "(a) Spring force",
+      "(b) Nuclear force",
+      "(c) Viscous force",
+      "(d) Coulomb force"
+    ],
+    a: 3,
+    e_hi: "दो विद्युत आवेशित वस्तुओं के बीच कार्य करने वाले आकर्षक या प्रतिकर्षक बल को स्थिरवैद्युतिकी बल या कूलॉम बल भी कहा जाता है।",
+    e_en: "The attractive or repulsive force acting between two electrically charged objects is also called electrostatic force or Coulomb force."
+  },
+  {
+    q_hi: "Q14. जिस बल द्वारा किसी बंद पथ में किया गया कार्य शून्य होता है और किया गया कार्य केवल प्रारंभिक एवं अंतिम बिंदु पर निर्भर करता है, उसे क्या कहते हैं?",
+    q_en: "Q14. What is the force called by which the work done in a closed path is zero and the work done depends only on the initial and final points?",
+    tag: "",
+    o_hi: [
+      "(a) असरक्षी बल",
+      "(b) घर्षण बल",
+      "(c) संरक्षी बल",
+      "(d) खिंचाव बल"
+    ],
+    o_en: [
+      "(a) Non-conservative force",
+      "(b) Frictional force",
+      "(c) Conservative force",
+      "(d) Tension force"
+    ],
+    a: 2,
+    e_hi: "संरक्षी बल द्वारा किया गया कार्य पथ से स्वतंत्र होता है, बंद पथ की स्थिति में कार्य शून्य होता है तथा यह पूर्णतः पुनर्प्राप्ति योग्य होता है।",
+    e_en: "The work done by a conservative force is independent of the path, the work done in a closed path is zero, and it is completely recoverable."
+  },
+  {
+    q_hi: "Q15. निम्नलिखित में से कौन-सा बल एक असरक्षी बल है?",
+    q_en: "Q15. Which of the following forces is a non-conservative force?",
+    tag: "",
+    o_hi: [
+      "(a) गुरुत्वाकर्षण बल",
+      "(b) घर्षण बल",
+      "(c) स्थिरवैद्युतिकी बल",
+      "(d) स्प्रिंग बल"
+    ],
+    o_en: [
+      "(a) Gravitational force",
+      "(b) Frictional force",
+      "(c) Electrostatic force",
+      "(d) Spring force"
+    ],
+    a: 1,
+    e_hi: "घर्षण बल एक असरक्षी बल है क्योंकि इसके द्वारा किया गया कार्य पथ पर निर्भर करता है, बंद पथ में कार्य शून्य नहीं होता और ऊर्जा ऊष्मा के रूप में नष्ट हो जाती है।",
+    e_en: "Frictional force is a non-conservative force because the work done by it depends on the path, the work in a closed path is not zero, and energy is lost as heat."
+  },
+  {
+    q_hi: "Q16. बल किसी वस्तु में निम्नलिखित में से क्या परिवर्तन उत्पन्न करता है?",
+    q_en: "Q16. Which of the following changes does force produce in an object?",
+    tag: "",
+    o_hi: [
+      "(a) वेग में परिवर्तन",
+      "(b) परमाणु द्रव्यमान में परिवर्तन",
+      "(c) रासायनिक संरचना में परिवर्तन",
+      "(d) कुल द्रव्यमान में परिवर्तन"
+    ],
+    o_en: [
+      "(a) Change in velocity",
+      "(b) Change in atomic mass",
+      "(c) Change in chemical structure",
+      "(d) Change in total mass"
+    ],
+    a: 0,
+    e_hi: "बल किसी वस्तु के वेग में परिवर्तन उत्पन्न करता है, जिससे वस्तु की गति या दिशा में बदलाव आ सकता है।",
+    e_en: "Force produces a change in the velocity of an object, which can change the speed or direction of the object."
+  },
+  {
+    q_hi: "Q17. जब किसी पिंड पर लगने वाले सभी बल संतुलित होते हैं, तो उस पिंड का त्वरण कितना होता है?",
+    q_en: "Q17. When all the forces acting on a body are balanced, what is the acceleration of that body?",
+    tag: "",
+    o_hi: [
+      "(a) अनंत",
+      "(b) शून्य",
+      "(c) धनात्मक",
+      "(d) ऋणात्मक"
+    ],
+    o_en: [
+      "(a) Infinite",
+      "(b) Zero",
+      "(c) Positive",
+      "(d) Negative"
+    ],
+    a: 1,
+    e_hi: "संतुलित बलों का शुद्ध बल शून्य होता है, जिसके कारण पिंड में उत्पन्न त्वरण भी शून्य होता है।",
+    e_en: "The net force of balanced forces is zero, due to which the acceleration produced in the body is also zero."
+  },
+  {
+    q_hi: "Q18. झूलों में एक व्यक्ति का दूसरे व्यक्ति से काफी भारी होना किस प्रकार के बलों की स्थिति उत्पन्न करता है?",
+    q_en: "Q18. One person being significantly heavier than another on a seesaw creates a situation of which type of forces?",
+    tag: "",
+    o_hi: [
+      "(a) केवल संरक्षी बल",
+      "(b) केवल संतुलित बल",
+      "(c) असंतुलित बल",
+      "(d) केवल असंपर्क बल"
+    ],
+    o_en: [
+      "(a) Only conservative forces",
+      "(b) Only balanced forces",
+      "(c) Unbalanced forces",
+      "(d) Only non-contact forces"
+    ],
+    a: 2,
+    e_hi: "जब झूलों में एक व्यक्ति दूसरे व्यक्ति से अधिक भारी होता है, तो दोनों पक्षों पर लगने वाले बल असमान हो जाते हैं, जो असंतुलित बल की स्थिति पैदा करता है।",
+    e_en: "When one person on a seesaw is heavier than the other, the forces acting on both sides become unequal, creating a situation of unbalanced forces."
+  },
+  {
+    q_hi: "Q19. यदि किसी पिंड पर एक ही रेखा में विपरीत दिशाओं से 20 N और 30 N के बल लगाए जाते हैं, तो उस पर लगने वाला शुद्ध असंतुलित बल कितना होगा?",
+    q_en: "Q19. If forces of 20 N and 30 N are applied to a body from opposite directions in the same line, what will be the net unbalanced force acting on it?",
+    tag: "",
+    o_hi: [
+      "(a) 50 N",
+      "(b) 25 N",
+      "(c) 0 N",
+      "(d) 10 N"
+    ],
+    o_en: [
+      "(a) 50 N",
+      "(b) 25 N",
+      "(c) 0 N",
+      "(d) 10 N"
+    ],
+    a: 3,
+    e_hi: "विपरीत दिशाओं में कार्य करने वाले बलों का शुद्ध बल उनके परिमाण के अंतर के बराबर होता है। यहाँ शुद्ध असंतुलित बल 30 N - 20 N = 10 N होगा।",
+    e_en: "The net force of forces acting in opposite directions is equal to the difference of their magnitudes. Here the net unbalanced force will be 30 N - 20 N = 10 N."
+  },
+  {
+    q_hi: "Q20. दो सतहों के एक-दूसरे के संपर्क में आने तथा एक-दूसरे के विरुद्ध फिसलने से उत्पन्न होने वाले बल को क्या कहते हैं?",
+    q_en: "Q20. What is the force generated by two surfaces coming in contact with each other and sliding against each other called?",
+    tag: "",
+    o_hi: [
+      "(a) घर्षण बल",
+      "(b) स्प्रिंग बल",
+      "(c) गुरुत्वाकर्षण बल",
+      "(d) चुंबकीय बल"
+    ],
+    o_en: [
+      "(a) Frictional force",
+      "(b) Spring force",
+      "(c) Gravitational force",
+      "(d) Magnetic force"
+    ],
+    a: 0,
+    e_hi: "दो सतहों द्वारा आपस में संपर्क में आने और एक-दूसरे के विरुद्ध फिसलने पर उत्पन्न बल को घर्षण बल कहा जाता है।",
+    e_en: "The force generated when two surfaces come in contact and slide against each other is called frictional force."
+  },
+  {
+    q_hi: "Q21. चुंबकीय क्षेत्र में किसी गतिशील विद्युत आवेश या चुंबकीय पदार्थ द्वारा अनुभव किए जाने वाले बल को क्या कहते हैं?",
+    q_en: "Q21. What is the force experienced by a moving electric charge or a magnetic material in a magnetic field called?",
+    tag: "",
+    o_hi: [
+      "(a) स्थिरवैद्युतिकी बल",
+      "(b) चुंबकीय बल",
+      "(c) गुरुत्वाकर्षण बल",
+      "(d) लोटनिक घर्षण"
+    ],
+    o_en: [
+      "(a) Electrostatic force",
+      "(b) Magnetic force",
+      "(c) Gravitational force",
+      "(d) Rolling friction"
+    ],
+    a: 1,
+    e_hi: "चुंबकीय क्षेत्र में गतिशील विद्युत आवेश या चुंबकीय पदार्थ द्वारा अनुभव किया जाने वाला आकर्षण या प्रतिकर्षण बल चुंबकीय बल कहलाता है।",
+    e_en: "The force of attraction or repulsion experienced by a moving electric charge or magnetic material in a magnetic field is called magnetic force."
+  },
+  {
+    q_hi: "Q22. संरक्षी बल (Conservative Force) द्वारा किए गए कार्य की मुख्य विशेषता क्या है?",
+    q_en: "Q22. What is the main characteristic of the work done by a conservative force?",
+    tag: "",
+    o_hi: [
+      "(a) किया गया कार्य पूर्णतः नष्ट हो जाता है",
+      "(b) यह केवल पथ पर निर्भर करता है",
+      "(c) किया गया कार्य पूर्णतः पुनर्प्राप्ति योग्य होता है",
+      "(d) बंद पथ में किया गया कार्य अनंत होता है"
+    ],
+    o_en: [
+      "(a) The work done is completely lost",
+      "(b) It depends only on the path",
+      "(c) The work done is completely recoverable",
+      "(d) The work done in a closed path is infinite"
+    ],
+    a: 2,
+    e_hi: "संरक्षी बल द्वारा किया गया कार्य पूर्णतः पुनर्प्राप्ति योग्य होता है तथा बंद पथ की स्थिति में किया गया कुल कार्य शून्य होता है।",
+    e_en: "The work done by a conservative force is completely recoverable, and the total work done in a closed path is zero."
+  },
+  {
+    q_hi: "Q23. निम्नलिखित में से कौन-कौन से बल संरक्षी बल (Conservative Forces) की श्रेणी में आते हैं?",
+    q_en: "Q23. Which of the following forces fall into the category of conservative forces?",
+    tag: "",
+    o_hi: [
+      "(a) केवल घर्षण बल और खिंचाव",
+      "(b) केवल घर्षण बल और स्प्रिंग बल",
+      "(c) केवल वायु प्रतिरोध और घर्षण बल",
+      "(d) गुरुत्वाकर्षण बल, स्थिरवैद्युतिकी बल, चुंबकीय बल और स्प्रिंग बल"
+    ],
+    o_en: [
+      "(a) Only frictional force and tension",
+      "(b) Only frictional force and spring force",
+      "(c) Only air resistance and frictional force",
+      "(d) Gravitational force, electrostatic force, magnetic force, and spring force"
+    ],
+    a: 3,
+    e_hi: "गुरुत्वाकर्षण बल, स्थिरवैद्युतिकी बल, चुंबकीय बल तथा स्प्रिंग बल सभी संरक्षी बलों के उदाहरण हैं।",
+    e_en: "Gravitational force, electrostatic force, magnetic force, and spring force are all examples of conservative forces."
+  },
+  {
+    q_hi: "Q24. असरक्षी बल (Non-Conservative Force) के प्रभाव में कार्य होने पर नष्ट हुई ऊर्जा मुख्य रूप से किस रूप में प्रकट होती है?",
+    q_en: "Q24. When work is done under the influence of a non-conservative force, the lost energy mainly appears in what form?",
+    tag: "",
+    o_hi: [
+      "(a) ऊष्मा के रूप में",
+      "(b) प्रकाश के रूप में",
+      "(c) रासायनिक ऊर्जा के रूप में",
+      "(d) नाभिकीय ऊर्जा के रूप में"
+    ],
+    o_en: [
+      "(a) As heat",
+      "(b) As light",
+      "(c) As chemical energy",
+      "(d) As nuclear energy"
+    ],
+    a: 0,
+    e_hi: "असरक्षी बल (जैसे घर्षण) द्वारा किए गए कार्य में ऊर्जा पूर्णतः वापस नहीं मिल पाती और वह आमतौर पर ऊष्मा के रूप में नष्ट हो जाती है।",
+    e_en: "In the work done by a non-conservative force (like friction), energy is not fully recoverable and is usually lost as heat."
+  },
+  {
+    q_hi: "Q25. किसी तरल पदार्थ (वायु या द्रव) के माध्यम से गतिमान वस्तु की गति का प्रतिरोध करने वाले बल को क्या कहा जाता है?",
+    q_en: "Q25. What is the force that resists the motion of an object moving through a fluid (air or liquid) called?",
+    tag: "",
+    o_hi: [
+      "(a) स्थिरवैद्युतिकी बल",
+      "(b) घर्षण खिंचाव",
+      "(c) गुरुत्वाकर्षण बल",
+      "(d) स्प्रिंग पुनस्थापन बल"
+    ],
+    o_en: [
+      "(a) Electrostatic force",
+      "(b) Frictional drag",
+      "(c) Gravitational force",
+      "(d) Spring restoring force"
+    ],
+    a: 1,
+    e_hi: "घर्षण खिंचाव वह प्रतिरोधक बल है जो वायु या द्रव जैसे तरल माध्यम में गतिमान किसी वस्तु की गति का विरोध करता है।",
+    e_en: "Frictional drag is the resistive force that opposes the motion of an object moving in a fluid medium like air or liquid."
+  },
+  {
+    q_hi: "Q26. जब किसी वस्तु में लोटनिक गति (Rolling Motion) होती है, तो उस स्थिति में कौन-सा घर्षण बल कार्य करता है?",
+    q_en: "Q26. When an object undergoes rolling motion, which frictional force acts in that situation?",
+    tag: "",
+    o_hi: [
+      "(a) स्थैतिक घर्षण",
+      "(b) सर्पी घर्षण",
+      "(c) लोटनिक घर्षण",
+      "(d) असरक्षी खिंचाव"
+    ],
+    o_en: [
+      "(a) Static friction",
+      "(b) Sliding friction",
+      "(c) Rolling friction",
+      "(d) Non-conservative drag"
+    ],
+    a: 2,
+    e_hi: "लोटनिक गति के दौरान संपर्क सतहों के बीच कार्य करने वाले घर्षण बल को लोटनिक घर्षण कहते हैं।",
+    e_en: "The frictional force acting between contact surfaces during rolling motion is called rolling friction."
+  },
+  {
+    q_hi: "Q27. विभिन्न घर्षण बलों के परिमाण का सही घटता क्रम कौन-सा है?",
+    q_en: "Q27. Which is the correct decreasing order of the magnitudes of different frictional forces?",
+    tag: "",
+    o_hi: [
+      "(a) लोटनिक घर्षण > सर्पी घर्षण > स्थैतिक घर्षण",
+      "(b) सर्पी घर्षण > स्थैतिक घर्षण > लोटनिक घर्षण",
+      "(c) स्थैतिक घर्षण > लोटनिक घर्षण > सर्पी घर्षण",
+      "(d) स्थैतिक घर्षण > सर्पी घर्षण > लोटनिक घर्षण"
+    ],
+    o_en: [
+      "(a) Rolling friction > Sliding friction > Static friction",
+      "(b) Sliding friction > Static friction > Rolling friction",
+      "(c) Static friction > Rolling friction > Sliding friction",
+      "(d) Static friction > Sliding friction > Rolling friction"
+    ],
+    a: 3,
+    e_hi: "घर्षण बलों का परिमाण घटते क्रम में स्थैतिक घर्षण > सर्पी घर्षण > लोटनिक घर्षण होता है।",
+    e_en: "The magnitude of frictional forces in decreasing order is static friction > sliding friction > rolling friction."
+  },
+  {
+    q_hi: "Q28. निम्नलिखित में से किस वैज्ञानिक ने सबसे पहले जड़त्व की अवधारणा प्रस्तुत की थी?",
+    q_en: "Q28. Which of the following scientists first introduced the concept of inertia?",
+    tag: "",
+    o_hi: [
+      "(a) आइजैक न्यूटन",
+      "(b) आर्किमिडीज",
+      "(c) अल्बर्ट आइंस्टीन",
+      "(d) गैलीलियो गैलीली"
+    ],
+    o_en: [
+      "(a) Isaac Newton",
+      "(b) Archimedes",
+      "(c) Albert Einstein",
+      "(d) Galileo Galilei"
+    ],
+    a: 3,
+    e_hi: "जड़त्व की अवधारणा को सबसे पहले गैलीलियो गैलीली ने प्रस्तुत किया था।",
+    e_en: "The concept of inertia was first introduced by Galileo Galilei."
+  },
+  {
+    q_hi: "Q29. झुके हुए तल पर वस्तुओं की गति का प्रेक्षण करके गैलीलियो ने क्या निष्कर्ष निकाला था?",
+    q_en: "Q29. What did Galileo conclude by observing the motion of objects on an inclined plane?",
+    tag: "",
+    o_hi: [
+      "(a) बाहरी बल के बिना वस्तुएँ एक समान गति से चलती हैं।",
+      "(b) बाहरी बल के बिना वस्तुएँ तुरंत रुक जाती हैं।",
+      "(c) बाहरी बल के बिना वस्तु का त्वरण निरंतर बढ़ता है।",
+      "(d) बाहरी बल के बिना वस्तु की गति में अनियमितता आती है।"
+    ],
+    o_en: [
+      "(a) Objects move with uniform motion without an external force.",
+      "(b) Objects stop immediately without an external force.",
+      "(c) The acceleration of an object increases continuously without an external force.",
+      "(d) The motion of an object becomes irregular without an external force."
+    ],
+    a: 0,
+    e_hi: "झुके हुए तल पर गति का अध्ययन करके निष्कर्ष निकाला गया कि जब कोई बल कार्य नहीं करता, तो वस्तुएँ एक समान गति से चलती हैं।",
+    e_en: "By studying motion on an inclined plane, it was concluded that when no force acts, objects move with uniform motion."
+  },
+  {
+    q_hi: "Q30. गैलीलियो द्वारा प्रकाशित निबंधों की श्रृंखला 'दे मोटू' (De Motu) का शाब्दिक अर्थ क्या है?",
+    q_en: "Q30. What is the literal meaning of the series of essays 'De Motu' published by Galileo?",
+    tag: "",
+    o_hi: [
+      "(a) विराम अवस्था",
+      "(b) गति पर",
+      "(c) बल का सिद्धांत",
+      "(d) गुरुत्वाकर्षण नियम"
+    ],
+    o_en: [
+      "(a) State of rest",
+      "(b) On motion",
+      "(c) Principle of force",
+      "(d) Law of gravitation"
+    ],
+    a: 1,
+    e_hi: "गैलीलियो द्वारा प्रकाशित निबंधों की श्रृंखला 'दे मोटू' का शाब्दिक अर्थ 'गति पर' होता है।",
+    e_en: "The literal meaning of the series of essays 'De Motu' published by Galileo is 'On motion'."
+  },
+  {
+    q_hi: "Q31. गैलीलियो गैलीली की पहली पुस्तक 'ला बिलांसेटा' (द लिटिल बैलेंस) किस वर्ष में प्रकाशित हुई थी?",
+    q_en: "Q31. In which year was Galileo Galilei's first book 'La Bilancetta' (The Little Balance) published?",
+    tag: "",
+    o_hi: [
+      "(a) 1687",
+      "(b) 1609",
+      "(c) 1586",
+      "(d) 1543"
+    ],
+    o_en: [
+      "(a) 1687",
+      "(b) 1609",
+      "(c) 1586",
+      "(d) 1543"
+    ],
+    a: 2,
+    e_hi: "गैलीलियो की प्रथम पुस्तक 'ला बिलांसेटा' वर्ष 1586 में प्रकाशित हुई थी।",
+    e_en: "Galileo's first book 'La Bilancetta' was published in the year 1586."
+  },
+  {
+    q_hi: "Q32. सर आइजैक न्यूटन द्वारा गति के कुल कितने नियम प्रतिपादित किए गए हैं?",
+    q_en: "Q32. How many laws of motion were formulated in total by Sir Isaac Newton?",
+    tag: "",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) पांच",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) Five",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "सर आइजैक न्यूटन ने गति के कुल तीन नियम प्रतिपादित किए हैं।",
+    e_en: "Sir Isaac Newton has formulated a total of three laws of motion."
+  },
+  {
+    q_hi: "Q33. गति का पहला नियम क्या दर्शाता है?",
+    q_en: "Q33. What does the first law of motion state?",
+    tag: "",
+    o_hi: [
+      "(a) संवेग सदैव संरक्षित रहता है।",
+      "(b) प्रत्येक क्रिया की विपरीत प्रतिक्रिया होती है।",
+      "(c) बल द्रव्यमान और त्वरण का गुणनफल होता है।",
+      "(d) बाह्य बल के बिना स्थिर वस्तु स्थिर और गतिशील वस्तु स्थिर वेग में रहती है।"
+    ],
+    o_en: [
+      "(a) Momentum is always conserved.",
+      "(b) Every action has an equal and opposite reaction.",
+      "(c) Force is the product of mass and acceleration.",
+      "(d) Without external force, a stationary object remains stationary and a moving object remains in uniform velocity."
+    ],
+    a: 3,
+    e_hi: "गति का पहला नियम बताता है कि कोई स्थिर वस्तु स्थिर रहेगी तथा गतिशील वस्तु स्थिर वेग से चलती रहेगी जब तक उस पर बाह्य बल न लगे।",
+    e_en: "The first law of motion states that a stationary object will remain stationary and a moving object will continue moving with uniform velocity unless acted upon by an external force."
+  },
+  {
+    q_hi: "Q34. पेड़ को हिलाने पर उससे सूखे पत्ते और फल का नीचे गिरना किस भौतिक घटना का उदाहरण है?",
+    q_en: "Q34. Dry leaves and fruits falling down when a tree is shaken is an example of which physical phenomenon?",
+    tag: "",
+    o_hi: [
+      "(a) विराम का जड़त्व",
+      "(b) गति का जड़त्व",
+      "(c) दिशा का जड़त्व",
+      "(d) संवेग संरक्षण"
+    ],
+    o_en: [
+      "(a) Inertia of rest",
+      "(b) Inertia of motion",
+      "(c) Inertia of direction",
+      "(d) Conservation of momentum"
+    ],
+    a: 0,
+    e_hi: "पेड़ को हिलाने पर पत्ते और फल विराम के जड़त्व के कारण अपनी विराम अवस्था में बने रहने का प्रयास करते हैं और गिर जाते हैं।",
+    e_en: "When a tree is shaken, the leaves and fruits try to remain in their state of rest due to inertia of rest and fall down."
+  },
+  {
+    q_hi: "Q35. चलती हुई कार के अचानक रुकने पर उसमें बैठा व्यक्ति आगे की ओर किस कारण झुक जाता है?",
+    q_en: "Q35. Why does a person sitting in a moving car lean forward when it suddenly stops?",
+    tag: "",
+    o_hi: [
+      "(a) दिशा के जड़त्व के कारण",
+      "(b) गति के जड़त्व के कारण",
+      "(c) विराम के जड़त्व के कारण",
+      "(d) गुरुत्वाकर्षण बल के कारण"
+    ],
+    o_en: [
+      "(a) Due to inertia of direction",
+      "(b) Due to inertia of motion",
+      "(c) Due to inertia of rest",
+      "(d) Due to gravitational force"
+    ],
+    a: 1,
+    e_hi: "चलती कार के अचानक रुकने पर शरीर का ऊपरी हिस्सा गति के जड़त्व के कारण गति में बना रहने का प्रयास करता है, जिससे व्यक्ति आगे झुक जाता है।",
+    e_en: "When a moving car stops suddenly, the upper part of the body tends to remain in motion due to the inertia of motion, causing the person to lean forward."
+  },
+  {
+    q_hi: "Q36. जब कोई कार तीव्र मोड़ लेती है, तो यात्री का शरीर पुरानी दिशा में ही गतिमान रहने का प्रयास करता है। यह किस जड़त्व को दर्शाता है?",
+    q_en: "Q36. When a car takes a sharp turn, the passenger's body tends to continue moving in the original direction. Which inertia does this indicate?",
+    tag: "",
+    o_hi: [
+      "(a) दिशा का जड़त्व",
+      "(b) विराम का जड़त्व",
+      "(c) त्वरण का जड़त्व",
+      "(d) संवेग का जड़त्व"
+    ],
+    o_en: [
+      "(a) Inertia of direction",
+      "(b) Inertia of rest",
+      "(c) Inertia of acceleration",
+      "(d) Inertia of momentum"
+    ],
+    a: 0,
+    e_hi: "तीव्र मोड़ पर शरीर का पुरानी दिशा में ही गतिमान रहने की प्रवृत्ति दिशा के जड़त्व को दर्शाती है।",
+    e_en: "The tendency of the body to remain moving in the original direction on a sharp turn indicates the inertia of direction."
+  },
+  {
+    q_hi: "Q37. किसी वस्तु का जड़त्व मुख्य रूप से किस भौतिक राशि पर निर्भर करता है?",
+    q_en: "Q37. On which physical quantity does the inertia of an object mainly depend?",
+    tag: "",
+    o_hi: [
+      "(a) वस्तु के वेग पर",
+      "(b) वस्तु के आयतन पर",
+      "(c) वस्तु के द्रव्यमान पर",
+      "(d) वस्तु के क्षेत्रफल पर"
+    ],
+    o_en: [
+      "(a) Velocity of the object",
+      "(b) Volume of the object",
+      "(c) Mass of the object",
+      "(d) Area of the object"
+    ],
+    a: 2,
+    e_hi: "किसी वस्तु का जड़त्व उसके द्रव्यमान पर निर्भर करता है तथा यह द्रव्यमान के समानुपाती होता है।",
+    e_en: "The inertia of an object depends on its mass and is directly proportional to the mass."
+  },
+  {
+    q_hi: "Q38. गति के द्वितीय नियम के अनुसार, बल (F) का मान निम्नलिखित में से किसके गुणनफल के बराबर होता है?",
+    q_en: "Q38. According to the second law of motion, the value of force (F) is equal to the product of which of the following?",
+    tag: "",
+    o_hi: [
+      "(a) वेग और समय",
+      "(b) द्रव्यमान और संवेग",
+      "(c) त्वरण और समय",
+      "(d) द्रव्यमान और त्वरण"
+    ],
+    o_en: [
+      "(a) Velocity and time",
+      "(b) Mass and momentum",
+      "(c) Acceleration and time",
+      "(d) Mass and acceleration"
+    ],
+    a: 3,
+    e_hi: "गति के दूसरे नियम के अनुसार बल (F) का मान वस्तु के द्रव्यमान (m) और त्वरण (a) के गुणनफल के बराबर होता है।",
+    e_en: "According to the second law of motion, the value of force (F) is equal to the product of the mass (m) and acceleration (a) of the object."
+  },
+  {
+    q_hi: "Q39. क्रिकेट मैच के दौरान खिलाड़ी कैच लेते समय अपने हाथों को पीछे की ओर किस नियम के व्यावहारिक उदाहरण के रूप में खींचता है?",
+    q_en: "Q39. As a practical example of which law does a player pull his hands backward while taking a catch during a cricket match?",
+    tag: "",
+    o_hi: [
+      "(a) गति का दूसरा नियम",
+      "(b) गति का पहला नियम",
+      "(c) गति का तीसरा नियम",
+      "(d) ऊर्जा संरक्षण नियम"
+    ],
+    o_en: [
+      "(a) Second law of motion",
+      "(b) First law of motion",
+      "(c) Third law of motion",
+      "(d) Law of conservation of energy"
+    ],
+    a: 0,
+    e_hi: "गेंद पकड़ते समय हाथ पीछे खींचना गति के दूसरे नियम का व्यावहारिक उदाहरण है, जिससे बल का प्रभाव कम होता है और चोट से बचाव होता है।",
+    e_en: "Pulling hands backward while catching a ball is a practical example of the second law of motion, which reduces the impact of force and prevents injury."
+  },
+  {
+    q_hi: "Q40. बल (Force) को अन्य किस रूप में परिभाषित किया जाता है?",
+    q_en: "Q40. In what other way is force defined?",
+    tag: "",
+    o_hi: [
+      "(a) कार्य परिवर्तन की दर",
+      "(b) ऊर्जा परिवर्तन की दर",
+      "(c) संवेग परिवर्तन की दर",
+      "(d) वेग परिवर्तन की दर"
+    ],
+    o_en: [
+      "(a) Rate of change of work",
+      "(b) Rate of change of energy",
+      "(c) Rate of change of momentum",
+      "(d) Rate of change of velocity"
+    ],
+    a: 2,
+    e_hi: "भौतिकी में बल को संवेग में परिवर्तन की दर के रूप में परिभाषित किया जाता है।",
+    e_en: "In physics, force is defined as the rate of change of momentum."
+  }
+];
