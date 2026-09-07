@@ -4879,9 +4879,13 @@ function formatContent(txt){
  txt=txt.replace(/_\{([^}]+)\}/g,"<sub>$1</sub>");
  txt=txt.replace(/([A-Za-z0-9\)\]])\^(-?\d+)/g,"$1<sup>$2</sup>");
  txt=txt.replace(/([A-Za-z])_([A-Za-z0-9]+)/g,"$1<sub>$2</sub>");
+ // Chemical-formula subscript support: also handle any remaining _digits.
+ txt=txt.replace(/_([0-9]+)/g,"<sub>$1</sub>");
  txt=txt.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g,'<span style="display:inline-block;vertical-align:middle;text-align:center;"><span style="display:block;border-bottom:1px solid #000;padding:0 2px;">$1</span><span style="display:block;">$2</span></span>');
  txt=txt.replace(/\\sqrt\{([^{}]+)\}/g,"√($1)"); // Render LaTeX chemical reaction arrows such as \xrightarrow{\Delta} as a proper
  // arrow with the condition (e.g. Δ) displayed above it.
+ // Also accept doubly escaped LaTeX sequences from JSON/JS data.
+ txt=txt.replace(/\\\\xrightarrow\{([^{}]*)\}/g,"\\xrightarrow{$1}");
  txt=txt.replace(/\\xrightarrow\{([^{}]*)\}/g,function(_,label){
    label=label.replace(/\\Delta/g,"Δ");
    return '<span class="chem-reaction-arrow" style="display:inline-flex;flex-direction:column;vertical-align:middle;align-items:center;line-height:1;margin:0 4px;"><span style="font-size:.72em;line-height:1;min-height:1em;">'+label+'</span><span style="line-height:.8;font-size:1.05em;">→</span></span>';
