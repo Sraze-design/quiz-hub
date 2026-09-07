@@ -1,0 +1,622 @@
+const data = [
+  {
+    q_hi: "Q101. डायनेमो (Dynamo) उपकरण द्वारा किस प्रकार का ऊर्जा रूपांतरण किया जाता है?",
+    q_en: "Q101. What type of energy conversion is carried out by a Dynamo?",
+    tag: "",
+    o_hi: [
+      "A) विद्युत ऊर्जा को यांत्रिक ऊर्जा में",
+      "B) यांत्रिक ऊर्जा को विद्युत ऊर्जा में",
+      "C) ध्वनि ऊर्जा को विद्युत ऊर्जा में",
+      "D) प्रकाश ऊर्जा को विद्युत ऊर्जा में"
+    ],
+    o_en: [
+      "A) Electrical energy into mechanical energy",
+      "B) Mechanical energy into electrical energy",
+      "C) Sound energy into electrical energy",
+      "D) Light energy into electrical energy"
+    ],
+    a: 1,
+    e_hi: "डायनेमो एक ऐसा उपकरण है जो यांत्रिक ऊर्जा को विद्युत ऊर्जा में परिवर्तित करता है।",
+    e_en: "A dynamo is a device that converts mechanical energy into electrical energy."
+  },
+  {
+    q_hi: "Q102. जनरेटर (Generator) निम्नलिखित में से किस ऊर्जा रूपांतरण का कार्य करता है?",
+    q_en: "Q102. Which of the following energy conversions is performed by a Generator?",
+    tag: "",
+    o_hi: [
+      "A) विद्युत ऊर्जा को यांत्रिक ऊर्जा में",
+      "B) यांत्रिक ऊर्जा को ध्वनि ऊर्जा में",
+      "C) यांत्रिक ऊर्जा को विद्युत ऊर्जा में",
+      "D) ध्वनि ऊर्जा को विद्युत ऊर्जा में"
+    ],
+    o_en: [
+      "A) Electrical energy into mechanical energy",
+      "B) Mechanical energy into sound energy",
+      "C) Mechanical energy into electrical energy",
+      "D) Sound energy into electrical energy"
+    ],
+    a: 2,
+    e_hi: "जनरेटर यांत्रिक ऊर्जा को विद्युत ऊर्जा में बदलने का कार्य करता है।",
+    e_en: "A generator works to convert mechanical energy into electrical energy."
+  },
+  {
+    q_hi: "Q103. मोटर (Motor) उपकरण का मुख्य कार्य किस ऊर्जा को किस ऊर्जा में परिवर्तित करना है?",
+    q_en: "Q103. What is the main function of a Motor device in terms of energy conversion?",
+    tag: "",
+    o_hi: [
+      "A) विद्युत ऊर्जा को यांत्रिक ऊर्जा में",
+      "B) यांत्रिक ऊर्जा को विद्युत ऊर्जा में",
+      "C) विद्युत ऊर्जा को ध्वनि ऊर्जा में",
+      "D) ध्वनि ऊर्जा को यांत्रिक ऊर्जा में"
+    ],
+    o_en: [
+      "A) Electrical energy into mechanical energy",
+      "B) Mechanical energy into electrical energy",
+      "C) Electrical energy into sound energy",
+      "D) Sound energy into mechanical energy"
+    ],
+    a: 0,
+    e_hi: "मोटर विद्युत ऊर्जा का उपयोग करके उसे यांत्रिक ऊर्जा में परिवर्तित करती है।",
+    e_en: "A motor uses electrical energy and converts it into mechanical energy."
+  },
+  {
+    q_hi: "Q104. माइक्रोफोन (Microphone) उपकरण द्वारा किस प्रकार का ऊर्जा रूपांतरण किया जाता है?",
+    q_en: "Q104. What type of energy conversion is performed by a Microphone?",
+    tag: "",
+    o_hi: [
+      "A) विद्युत ऊर्जा को ध्वनि ऊर्जा में",
+      "B) यांत्रिक ऊर्जा को विद्युत ऊर्जा में",
+      "C) ध्वनि ऊर्जा को यांत्रिक ऊर्जा में",
+      "D) ध्वनि ऊर्जा को विद्युत ऊर्जा में"
+    ],
+    o_en: [
+      "A) Electrical energy into sound energy",
+      "B) Mechanical energy into electrical energy",
+      "C) Sound energy into mechanical energy",
+      "D) Sound energy into electrical energy"
+    ],
+    a: 3,
+    e_hi: "माइक्रोफोन एक ऐसा उपकरण है जो ध्वनि ऊर्जा को विद्युत ऊर्जा में परिवर्तित करता है।",
+    e_en: "A microphone is a device that converts sound energy into electrical energy."
+  },
+  {
+    q_hi: "Q105. लाउडस्पीकर (Loudspeaker) निम्नलिखित में से किस ऊर्जा रूपांतरण का कार्य करता है?",
+    q_en: "Q105. Which of the following energy conversions is performed by a Loudspeaker?",
+    tag: "",
+    o_hi: [
+      "A) विद्युत ऊर्जा को ध्वनि ऊर्जा में",
+      "B) ध्वनि ऊर्जा को विद्युत ऊर्जा में",
+      "C) यांत्रिक ऊर्जा को ध्वनि ऊर्जा में",
+      "D) विद्युत ऊर्जा को यांत्रिक ऊर्जा में"
+    ],
+    o_en: [
+      "A) Electrical energy into sound energy",
+      "B) Sound energy into electrical energy",
+      "C) Mechanical energy into sound energy",
+      "D) Electrical energy into mechanical energy"
+    ],
+    a: 0,
+    e_hi: "लाउडस्पीकर एक ऐसा उपकरण है जो विद्युत ऊर्जा को ध्वनि ऊर्जा में परिवर्तित करता है।",
+    e_en: "A loudspeaker is a device that converts electrical energy into sound energy."
+  },
+  {
+    q_hi: "Q106. प्रकाश संश्लेषण वह प्रक्रिया है जिसके द्वारा निम्नलिखित में से कौन-कौन ऊर्जा का रूपांतरण करते हैं?",
+    q_en: "Q106. Photosynthesis is the process by which which of the following convert energy?",
+    tag: "",
+    o_hi: [
+      "A) केवल पौधे और कवक",
+      "B) पौधे, शैवाल और कुछ जीवाणु",
+      "C) केवल पौधे और पशु",
+      "D) केवल शैवाल और विषाणु"
+    ],
+    o_en: [
+      "A) Plants and fungi only",
+      "B) Plants, algae and some bacteria",
+      "C) Plants and animals only",
+      "D) Algae and viruses only"
+    ],
+    a: 1,
+    e_hi: "प्रकाश संश्लेषण वह प्रक्रिया है जिसके द्वारा पौधे, शैवाल और कुछ जीवाणु ऊर्जा का रूपांतरण करते हैं।",
+    e_en: "Photosynthesis is the process by which plants, algae, and some bacteria convert energy."
+  },
+  {
+    q_hi: "Q107. प्रकाश संश्लेषण की प्रक्रिया में मुख्य रूप से सूर्य के प्रकाश (प्रकाश ऊर्जा) को कार्बन डाइऑक्साइड और पानी का उपयोग करके किस ऊर्जा रूप में परिवर्तित किया जाता है?",
+    q_en: "Q107. In the process of photosynthesis, sunlight (light energy) using carbon dioxide and water is mainly converted into which form of energy?",
+    tag: "",
+    o_hi: [
+      "A) विद्युत ऊर्जा",
+      "B) यांत्रिक ऊर्जा",
+      "C) रासायनिक ऊर्जा",
+      "D) ऊष्मीय ऊर्जा"
+    ],
+    o_en: [
+      "A) Electrical energy",
+      "B) Mechanical energy",
+      "C) Chemical energy",
+      "D) Thermal energy"
+    ],
+    a: 2,
+    e_hi: "प्रकाश संश्लेषण की प्रक्रिया में सूर्य के प्रकाश की ऊर्जा को कार्बन डाइऑक्साइड और पानी का उपयोग करके शर्करा के रूप में रासायनिक ऊर्जा में बदला जाता है।",
+    e_en: "In the process of photosynthesis, energy from sunlight is converted into chemical energy in the form of sugars using carbon dioxide and water."
+  },
+  {
+    q_hi: "Q108. प्रकाश संश्लेषण की प्रक्रिया में शर्करा के निर्माण के साथ उपउत्पाद के रूप में कौन सी गैस निकलती है?",
+    q_en: "Q108. Which gas is released as a byproduct along with the formation of sugars in the process of photosynthesis?",
+    tag: "",
+    o_hi: [
+      "A) कार्बन डाइऑक्साइड",
+      "B) नाइट्रोजन",
+      "C) हाइड्रोजन",
+      "D) ऑक्सीजन"
+    ],
+    o_en: [
+      "A) Carbon dioxide",
+      "B) Nitrogen",
+      "C) Hydrogen",
+      "D) Oxygen"
+    ],
+    a: 3,
+    e_hi: "प्रकाश संश्लेषण की प्रक्रिया में पौधों द्वारा उपउत्पाद के रूप में ऑक्सीजन गैस छोड़ी जाती है।",
+    e_en: "Oxygen gas is released as a byproduct by plants in the process of photosynthesis."
+  },
+  {
+    q_hi: "Q109. बैटरी निम्नलिखित में से किस ऊर्जा रूपांतरण का कार्य करती है?",
+    q_en: "Q109. Which of the following energy conversions is performed by a Battery?",
+    tag: "",
+    o_hi: [
+      "A) रासायनिक ऊर्जा को विद्युत ऊर्जा में",
+      "B) विद्युत ऊर्जा को प्रकाश ऊर्जा में",
+      "C) यांत्रिक ऊर्जा को रासायनिक ऊर्जा में",
+      "D) विद्युत ऊर्जा को यांत्रिक ऊर्जा में"
+    ],
+    o_en: [
+      "A) Chemical energy into electrical energy",
+      "B) Electrical energy into light energy",
+      "C) Mechanical energy into chemical energy",
+      "D) Electrical energy into mechanical energy"
+    ],
+    a: 0,
+    e_hi: "बैटरी रासायनिक ऊर्जा को विद्युत ऊर्जा में परिवर्तित करने का कार्य करती है।",
+    e_en: "A battery works to convert chemical energy into electrical energy."
+  },
+  {
+    q_hi: "Q110. बल्ब का मुख्य कार्य विद्युत ऊर्जा को मुख्य रूप से किन ऊर्जा रूपों में परिवर्तित करना है?",
+    q_en: "Q110. What is the main function of a bulb in converting electrical energy into which forms of energy?",
+    tag: "",
+    o_hi: [
+      "A) केवल यांत्रिक ऊर्जा में",
+      "B) प्रकाश ऊर्जा और ऊष्मा ऊर्जा में",
+      "C) रासायनिक ऊर्जा और ध्वनि ऊर्जा में",
+      "D) केवल स्थितिज ऊर्जा में"
+    ],
+    o_en: [
+      "A) Into mechanical energy only",
+      "B) Into light energy and heat energy",
+      "C) Into chemical energy and sound energy",
+      "D) Into potential energy only"
+    ],
+    a: 1,
+    e_hi: "बल्ब विद्युत ऊर्जा को मुख्य रूप से प्रकाश ऊर्जा और ऊष्मा ऊर्जा में परिवर्तित करता है।",
+    e_en: "A bulb mainly converts electrical energy into light energy and heat energy."
+  },
+  {
+    q_hi: "Q111. बल्ब का फिलामेंट निम्नलिखित में से किस धातु से बना होता है?",
+    q_en: "Q111. Which of the following metals is used to make the filament of a bulb?",
+    tag: "",
+    o_hi: [
+      "A) कॉपर (तांबा)",
+      "B) एल्युमिनियम",
+      "C) नाइक्रोम",
+      "D) टंगस्टन (W)"
+    ],
+    o_en: [
+      "A) Copper",
+      "B) Aluminium",
+      "C) Nichrome",
+      "D) Tungsten (W)"
+    ],
+    a: 3,
+    e_hi: "बल्ब का फिलामेंट टंगस्टन (W) धातु से बना होता है।",
+    e_en: "The filament of a bulb is made of Tungsten (W) metal."
+  },
+  {
+    q_hi: "Q112. टंगस्टन (W) का गलनांक बिंदु कितना होता है?",
+    q_en: "Q112. What is the melting point of Tungsten (W)?",
+    tag: "",
+    o_hi: [
+      "A) 3422°C",
+      "B) 2500°C",
+      "C) 1538°C",
+      "D) 4100°C"
+    ],
+    o_en: [
+      "A) 3422°C",
+      "B) 2500°C",
+      "C) 1538°C",
+      "D) 4100°C"
+    ],
+    a: 0,
+    e_hi: "टंगस्टन का गलनांक बिंदु 3422°C होता है।",
+    e_en: "The melting point of Tungsten is 3422°C."
+  },
+  {
+    q_hi: "Q113. किसी वस्तु में उपस्थित स्थितिज ऊर्जा (P.E.) और गतिज ऊर्जा (K.E.) की कुल मात्रा को किस ऊर्जा के रूप में परिभाषित किया जाता है?",
+    q_en: "Q113. The total amount of potential energy (P.E.) and kinetic energy (K.E.) present in an object is defined as which energy?",
+    tag: "",
+    o_hi: [
+      "A) नाभिकीय ऊर्जा",
+      "B) रासायनिक ऊर्जा",
+      "C) यांत्रिक ऊर्जा",
+      "D) विद्युत ऊर्जा"
+    ],
+    o_en: [
+      "A) Nuclear energy",
+      "B) Chemical energy",
+      "C) Mechanical energy",
+      "D) Electrical energy"
+    ],
+    a: 2,
+    e_hi: "यांत्रिक ऊर्जा को किसी वस्तु में उपस्थित स्थितिज ऊर्जा और गतिज ऊर्जा की कुल मात्रा के रूप में परिभाषित किया जाता है।",
+    e_en: "Mechanical energy is defined as the total sum of potential energy and kinetic energy present in an object."
+  },
+  {
+    q_hi: "Q114. \"यदि पिंड A, B के साथ तापीय संतुलन में है, और B, C के साथ तापीय संतुलन में है, तो A भी C के साथ तापीय संतुलन में होगा।\" यह कथन किस नियम को दर्शाता है?",
+    q_en: "Q114. \"If body A is in thermal equilibrium with B, and B is in thermal equilibrium with C, then A will also be in thermal equilibrium with C.\" Which law does this statement represent?",
+    tag: "",
+    o_hi: [
+      "A) ऊष्मागतिकी का शून्यवाँ नियम",
+      "B) ऊष्मागतिकी का पहला नियम",
+      "C) ऊष्मागतिकी का दूसरा नियम",
+      "D) ऊष्मागतिकी का तीसरा नियम"
+    ],
+    o_en: [
+      "A) Zeroth Law of Thermodynamics",
+      "B) First Law of Thermodynamics",
+      "C) Second Law of Thermodynamics",
+      "D) Third Law of Thermodynamics"
+    ],
+    a: 0,
+    e_hi: "यह कथन ऊष्मागतिकी के शून्यवें नियम की व्याख्या करता है।",
+    e_en: "This statement explains the Zeroth Law of Thermodynamics."
+  },
+  {
+    q_hi: "Q115. वर्ष 1931 में ऊष्मागतिकी का शून्यवाँ नियम (Zeroth Law of Thermodynamics) किसने प्रतिपादित किया था?",
+    q_en: "Q115. Who formulated the Zeroth Law of Thermodynamics in the year 1931?",
+    tag: "",
+    o_hi: [
+      "A) जेम्स प्रेस्कॉट जूल",
+      "B) राल्फ एच फाउलर",
+      "C) लॉर्ड केल्विन",
+      "D) रुडोल्फ क्लॉसियस"
+    ],
+    o_en: [
+      "A) James Prescott Joule",
+      "B) Ralph H. Fowler",
+      "C) Lord Kelvin",
+      "D) Rudolf Clausius"
+    ],
+    a: 1,
+    e_hi: "राल्फ एच फाउलर ने वर्ष 1931 में ऊष्मागतिकी का शून्यवाँ नियम दिया था।",
+    e_en: "Ralph H. Fowler formulated the Zeroth Law of Thermodynamics in the year 1931."
+  },
+  {
+    q_hi: "Q116. \"ऊर्जा को न तो बनाया जा सकता है और न ही नष्ट किया जा सकता है, इसे केवल एक रूप से दूसरे रूप में परिवर्तित किया जा सकता है।\" यह ऊष्मागतिकी का कौन सा नियम है?",
+    q_en: "Q116. \"Energy can neither be created nor destroyed, it can only be transformed from one form to another.\" Which law of thermodynamics is this?",
+    tag: "",
+    o_hi: [
+      "A) तीसरा नियम",
+      "B) दूसरा नियम",
+      "C) शून्यवाँ नियम",
+      "D) पहला नियम"
+    ],
+    o_en: [
+      "A) Third Law",
+      "B) Second Law",
+      "C) Zeroth Law",
+      "D) First Law"
+    ],
+    a: 3,
+    e_hi: "यह कथन ऊष्मागतिकी के पहले नियम को दर्शाता है, जो ऊष्मा पर लागू ऊर्जा संरक्षण का नियम है।",
+    e_en: "This statement represents the First Law of Thermodynamics, which is the law of conservation of energy applied to heat."
+  },
+  {
+    q_hi: "Q117. ऊष्मागतिकी के प्रथम नियम के सूत्र Q = ΔU + W में 'ΔU' किसे प्रदर्शित करता है?",
+    q_en: "Q117. In the formula Q = ΔU + W of the First Law of Thermodynamics, what does 'ΔU' represent?",
+    tag: "",
+    o_hi: [
+      "A) निकाय द्वारा किया गया कार्य",
+      "B) निकाय में जोड़ी गई ऊष्मा",
+      "C) आंतरिक ऊर्जा में परिवर्तन",
+      "D) निकाय की एंट्रॉपी"
+    ],
+    o_en: [
+      "A) Work done by the system",
+      "B) Heat added to the system",
+      "C) Change in internal energy",
+      "D) Entropy of the system"
+    ],
+    a: 2,
+    e_hi: "सूत्र Q = ΔU + W में Q निकाय में जोड़ी गई ऊष्मा, ΔU आंतरिक ऊर्जा में परिवर्तन तथा W सिस्टम द्वारा किया गया कार्य होता है।",
+    e_en: "In the formula Q = ΔU + W, Q is the heat added to the system, ΔU is the change in internal energy, and W is the work done by the system."
+  },
+  {
+    q_hi: "Q118. ऊष्मागतिकी का कौन सा नियम यह बताता है कि ऊष्मा अपने आप ठंडे शरीर से गर्म शरीर में प्रवाहित नहीं हो सकती?",
+    q_en: "Q118. Which law of thermodynamics states that heat cannot spontaneously flow from a colder body to a hotter body?",
+    tag: "",
+    o_hi: [
+      "A) शून्यवाँ नियम",
+      "B) पहला नियम",
+      "C) दूसरा नियम",
+      "D) तीसरा नियम"
+    ],
+    o_en: [
+      "A) Zeroth Law",
+      "B) First Law",
+      "C) Second Law",
+      "D) Third Law"
+    ],
+    a: 2,
+    e_hi: "ऊष्मागतिकी का दूसरा नियम स्पष्ट करता है कि ऊष्मा का स्वतः प्रवाह ठंडे पिंड से गर्म पिंड की ओर नहीं हो सकता।",
+    e_en: "The Second Law of Thermodynamics clarifies that the spontaneous flow of heat cannot occur from a cold body to a hot body."
+  },
+  {
+    q_hi: "Q119. ऊष्मागतिकी का दूसरा नियम किस अवधारणा को प्रस्तुत करता है, जिसके अनुसार कोई भी ऊष्मा इंजन 100% कुशल नहीं हो सकता?",
+    q_en: "Q119. Which concept is introduced by the Second Law of Thermodynamics, according to which no heat engine can be 100% efficient?",
+    tag: "",
+    o_hi: [
+      "A) एंट्रॉपी (अव्यवस्था)",
+      "B) परम ताप",
+      "C) स्थितिज ऊर्जा",
+      "D) तापीय साम्यावस्था"
+    ],
+    o_en: [
+      "A) Entropy (disorder)",
+      "B) Absolute temperature",
+      "C) Potential energy",
+      "D) Thermal equilibrium"
+    ],
+    a: 0,
+    e_hi: "ऊष्मागतिकी का दूसरा नियम एंट्रॉपी (अव्यवस्था) की अवधारणा प्रस्तुत करता है, जिससे स्पष्ट होता है कि ऊष्मा इंजन 100% कुशल नहीं हो सकता।",
+    e_en: "The Second Law of Thermodynamics introduces the concept of entropy (disorder), making it clear that no heat engine can be 100% efficient."
+  },
+  {
+    q_hi: "Q120. ठंडे से गर्म में ऊष्मा स्थानांतरित करने के लिए रेफ्रिजरेटर को किसकी आवश्यकता होती है?",
+    q_en: "Q120. What does a refrigerator require to transfer heat from cold to hot?",
+    tag: "",
+    o_hi: [
+      "A) आंतरिक ऊर्जा के ह्रास की",
+      "B) बाहरी कार्य की",
+      "C) केवल परम शून्य तापमान की",
+      "D) शून्य एंट्रॉपी की"
+    ],
+    o_en: [
+      "A) Loss of internal energy",
+      "B) External work",
+      "C) Absolute zero temperature only",
+      "D) Zero entropy"
+    ],
+    a: 1,
+    e_hi: "रेफ्रिजरेटर को ठंडे स्थान से गर्म स्थान में ऊष्मा स्थानांतरित करने के लिए बाहरी कार्य की आवश्यकता होती है।",
+    e_en: "A refrigerator requires external work to transfer heat from a cold place to a hot place."
+  },
+  {
+    q_hi: "Q121. जैसे-जैसे तापमान परम शून्य (0 K) के करीब पहुंचता है, एक आदर्श क्रिस्टल की एंट्रॉपी पर क्या प्रभाव पड़ता है?",
+    q_en: "Q121. As the temperature approaches absolute zero (0 K), what happens to the entropy of a perfect crystal?",
+    tag: "",
+    o_hi: [
+      "A) अनंत हो जाती है",
+      "B) शून्य हो जाती है",
+      "C) दोगुनी हो जाती है",
+      "D) अपरिवर्तित रहती है"
+    ],
+    o_en: [
+      "A) Becomes infinite",
+      "B) Becomes zero",
+      "C) Doubles",
+      "D) Remains unchanged"
+    ],
+    a: 1,
+    e_hi: "ऊष्मागतिकी के तीसरे नियम के अनुसार परम शून्य (0 K) तापमान के पास आदर्श क्रिस्टल की एंट्रॉपी शून्य हो जाती है।",
+    e_en: "According to the Third Law of Thermodynamics, as the temperature approaches absolute zero (0 K), the entropy of a perfect crystal becomes zero."
+  },
+  {
+    q_hi: "Q122. प्रति इकाई तापमान पर किसी प्रणाली की उस ऊष्मीय ऊर्जा के माप को क्या कहा जाता है जो उपयोगी कार्य करने के लिए उपलब्ध नहीं होती?",
+    q_en: "Q122. What is the measure of a system's thermal energy per unit temperature that is not available for doing useful work called?",
+    tag: "",
+    o_hi: [
+      "A) एंट्रॉपी",
+      "B) आंतरिक ऊर्जा",
+      "C) तापीय क्षमता",
+      "D) स्थितिज ऊर्जा"
+    ],
+    o_en: [
+      "A) Entropy",
+      "B) Internal energy",
+      "C) Thermal capacity",
+      "D) Potential energy"
+    ],
+    a: 0,
+    e_hi: "एंट्रॉपी, प्रति इकाई तापमान पर किसी प्रणाली की ऊष्मीय ऊर्जा का माप है जो उपयोगी कार्य करने के लिए उपलब्ध नहीं होती है।",
+    e_en: "Entropy is the measure of a system's thermal energy per unit temperature that is unavailable for doing useful work."
+  },
+  {
+    q_hi: "Q123. जिस दर पर कार्य किया जाता है या जिस दर पर ऊर्जा स्थानांतरित अथवा एक प्रकार से दूसरे प्रकार में परिवर्तित होती है, उसे क्या कहते हैं?",
+    q_en: "Q123. What is the rate at which work is done or at which energy is transferred or converted from one form to another called?",
+    tag: "",
+    o_hi: [
+      "A) संवेग",
+      "B) बल",
+      "C) त्वरण",
+      "D) शक्ति"
+    ],
+    o_en: [
+      "A) Momentum",
+      "B) Force",
+      "C) Acceleration",
+      "D) Power"
+    ],
+    a: 3,
+    e_hi: "शक्ति वह दर है जिस पर काम किया जाता है या जिस पर ऊर्जा एक स्थान से दूसरे स्थान पर स्थानांतरित या परिवर्तित होती है।",
+    e_en: "Power is the rate at which work is done or energy is transferred or converted from one form to another."
+  },
+  {
+    q_hi: "Q124. अंतरराष्ट्रीय मात्रक प्रणाली (S.I.) में शक्ति का मात्रक क्या है?",
+    q_en: "Q124. What is the S.I. unit of power in the International System of Units?",
+    tag: "",
+    o_hi: [
+      "A) जूल",
+      "B) वाट (W)",
+      "C) न्यूटन",
+      "D) पास्कल"
+    ],
+    o_en: [
+      "A) Joule",
+      "B) Watt (W)",
+      "C) Newton",
+      "D) Pascal"
+    ],
+    a: 1,
+    e_hi: "शक्ति का S.I. मात्रक वाट (W) होता है।",
+    e_en: "The S.I. unit of power is Watt (W)."
+  },
+  {
+    q_hi: "Q125. कार्य और समय के संदर्भ में शक्ति की गणना करने का सही गणितीय सूत्र क्या है?",
+    q_en: "Q125. What is the correct mathematical formula to calculate power in terms of work and time?",
+    tag: "",
+    o_hi: [
+      "A) शक्ति = कार्य × समय",
+      "B) शक्ति = समय / कार्य",
+      "C) शक्ति = कार्य / समय",
+      "D) शक्ति = कार्य + समय"
+    ],
+    o_en: [
+      "A) Power = Work × Time",
+      "B) Power = Time / Work",
+      "C) Power = Work / Time",
+      "D) Power = Work + Time"
+    ],
+    a: 2,
+    e_hi: "शक्ति की गणना किए गए कार्य को समय से विभाजित करके की जाती है, अर्थात शक्ति = कार्य / समय।",
+    e_en: "Power is calculated by dividing work done by time, i.e., Power = Work / Time."
+  },
+  {
+    q_hi: "Q126. बल (F) और वेग (v) के पदों में शक्ति (P) को व्यक्त करने वाला सही सूत्र कौन सा है?",
+    q_en: "Q126. Which is the correct formula expressing power (P) in terms of force (F) and velocity (v)?",
+    tag: "",
+    o_hi: [
+      "A) P = F / v",
+      "B) P = F + v",
+      "C) P = v / F",
+      "D) P = F × v"
+    ],
+    o_en: [
+      "A) P = F / v",
+      "B) P = F + v",
+      "C) P = v / F",
+      "D) P = F × v"
+    ],
+    a: 3,
+    e_hi: "शक्ति (P) का मान बल (F) और वेग (v) के गुणनफल के बराबर होता है, अर्थात P = F × v।",
+    e_en: "The value of power (P) is equal to the product of force (F) and velocity (v), i.e., P = F × v."
+  },
+  {
+    q_hi: "Q127. एक वाट (1 W) शक्ति को किस रूप में परिभाषित किया जाता है?",
+    q_en: "Q127. How is one Watt (1 W) of power defined?",
+    tag: "",
+    o_hi: [
+      "A) 1 न्यूटन प्रति मीटर",
+      "B) 1 जूल प्रति सेकंड (1 J/s)",
+      "C) 1 जूल प्रति मिनट",
+      "D) 1 अर्ग प्रति सेकंड"
+    ],
+    o_en: [
+      "A) 1 Newton per metre",
+      "B) 1 Joule per second (1 J/s)",
+      "C) 1 Joule per minute",
+      "D) 1 Erg per second"
+    ],
+    a: 1,
+    e_hi: "वाट (W) शक्ति की वह इकाई है, जिसे प्रति सेकंड स्थानांतरित या परिवर्तित ऊर्जा के एक जूल (1 J/s) के रूप में परिभाषित किया जाता है।",
+    e_en: "Watt (W) is the unit of power defined as one joule of energy transferred or converted per second (1 J/s)."
+  },
+  {
+    q_hi: "Q128. अश्वशक्ति (hp) निम्नलिखित में से किस राशि के मापन की इकाई है?",
+    q_en: "Q128. Horsepower (hp) is a unit of measurement for which of the following quantities?",
+    tag: "",
+    o_hi: [
+      "A) शक्ति या कार्य की दर",
+      "B) केवल निकाय का दाब",
+      "C) केवल निकाय की ऊर्जा",
+      "D) केवल कुल तय दूरी"
+    ],
+    o_en: [
+      "A) Power or rate of doing work",
+      "B) Pressure of system only",
+      "C) Energy of system only",
+      "D) Total distance covered only"
+    ],
+    a: 0,
+    e_hi: "अश्वशक्ति (hp) शक्ति या कार्य की दर के मापन की एक इकाई है।",
+    e_en: "Horsepower (hp) is a unit of measurement for power or the rate of doing work."
+  },
+  {
+    q_hi: "Q129. प्रायः इंजन या मोटर की दक्षता का वर्णन करने के लिए किस इकाई का उपयोग किया जाता है?",
+    q_en: "Q129. Which unit is often used to describe the efficiency/power output of an engine or motor?",
+    tag: "",
+    o_hi: [
+      "A) न्यूटन (N)",
+      "B) अश्वशक्ति (hp)",
+      "C) पास्कल (Pa)",
+      "D) कूलॉम (C)"
+    ],
+    o_en: [
+      "A) Newton (N)",
+      "B) Horsepower (hp)",
+      "C) Pascal (Pa)",
+      "D) Coulomb (C)"
+    ],
+    a: 1,
+    e_hi: "इंजन या मोटर की दक्षता का वर्णन करने के लिए अक्सर अश्वशक्ति (hp) का उपयोग किया जाता है।",
+    e_en: "Horsepower (hp) is often used to describe the capacity/rating of an engine or motor."
+  },
+  {
+    q_hi: "Q130. 1 अश्वशक्ति (1 hp) का मान वॉट (W) तथा किलोवॉट (kW) में क्रमशः कितना होता है?",
+    q_en: "Q130. What is the value of 1 horsepower (1 hp) in Watt (W) and kilowatt (kW) respectively?",
+    tag: "",
+    o_hi: [
+      "A) 1000 W तथा 1 kW",
+      "B) 746 W तथा 100 kW",
+      "C) 746 W तथा 0.746 kW",
+      "D) 1000 W तथा 0.746 kW"
+    ],
+    o_en: [
+      "A) 1000 W and 1 kW",
+      "B) 746 W and 100 kW",
+      "C) 746 W and 0.746 kW",
+      "D) 1000 W and 0.746 kW"
+    ],
+    a: 2,
+    e_hi: "1 अश्वशक्ति (1 hp) का मान 746 वॉट (W) अथवा 0.746 किलोवॉट (kW) के बराबर होता है।",
+    e_en: "The value of 1 horsepower (1 hp) is equal to 746 Watts (W) or 0.746 kilowatts (kW)."
+  },
+  {
+    q_hi: "Q131. 1 किलोवॉट (1 kW) का मान कितने वॉट (W) के बराबर होता है?",
+    q_en: "Q131. How many Watts (W) is equal to 1 kilowatt (1 kW)?",
+    tag: "",
+    o_hi: [
+      "A) 746 W",
+      "B) 0.746 W",
+      "C) 100 W",
+      "D) 1000 W"
+    ],
+    o_en: [
+      "A) 746 W",
+      "B) 0.746 W",
+      "C) 100 W",
+      "D) 1000 W"
+    ],
+    a: 3,
+    e_hi: "1 किलोवॉट (1 kW) का मान 1000 वॉट (W) के बराबर होता है।",
+    e_en: "The value of 1 kilowatt (1 kW) is equal to 1000 Watts (W)."
+  }
+];
