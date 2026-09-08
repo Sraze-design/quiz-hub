@@ -2010,6 +2010,24 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   color: var(--dark);
 }
 
+/* Additive: independent answer-check UI. It never replaces the normal
+   explanation; it is appended inside the same AI response card. */
+.ai-verify-result {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ai-verify-result.verify-agree { background: #f0fdf4; border-color: #bbf7d0; }
+.ai-verify-result.verify-mismatch { background: #fef2f2; border-color: #fecaca; }
+.ai-verify-result.verify-uncertain { background: #fffbeb; border-color: #fde68a; }
+.ai-verify-title { font-weight: 800; margin-bottom: 4px; }
+.ai-verify-meta { font-size: 11px; color: #64748b; margin-top: 5px; }
+.ai-verify-btn { font-weight: 800; }
+
 .ai-typing-indicator {
   display: none;
   align-self: flex-start;
@@ -5819,6 +5837,12 @@ let aiChatHistory = [];
 let isAIGenerating = false;
 let currentAbortController = null;
 let currentAutoScannedQ = -1;
+// Tracks whether the currently requested reply is the automatic question
+// explanation. This lets the Verify button appear only on that explanation,
+// without changing normal chat behavior.
+let lastAIRequestWasAutoScan = false;
+let isAIVerifying = false;
+let verifyAbortController = null;
 
 // ===== AI Quiz Card Mode (Additive Feature) =====
 // Only this exact prompt activates Quiz Card Mode. No other prompt should activate it.
@@ -5923,6 +5947,11 @@ function resetAIChat() {
     currentAbortController.abort();
     currentAbortController = null;
   }
+  if (verifyAbortController) {
+    verifyAbortController.abort();
+    verifyAbortController = null;
+  }
+  isAIVerifying = false;
   isAIGenerating = false;
   showAITyping(false);
 }
@@ -5970,7 +5999,7 @@ Rules:
 ${langRule}
 2. Subjects: Math, Formulas, Tricks, Reasoning, GK, English.
 3. Concise/precise — short explanation by default, detail sirf tabhi jab maanga jaaye.
-4. Reference Explanation sirf rough internal note hai — copy/paraphrase mat karo. Khud independently solve karo, cross-check karo, apni verified reasoning trust karo, discrepancy ho to briefly mention karo. Poora explanation apne words me likho.
+4. Question ko **independently solve karo**. Kisi stored answer key, reference explanation, ya pre-supplied correct answer ko source of truth mat maano. Apni reasoning se answer nikaalo aur explanation apne words mein do.
 5. MIND METHOD (Maths/Reasoning only): Purely mental calculation se solve karo (bina pen-paper). Priority: (a) Unitary method/ratio-percentage shortcut/approximation/reverse-checking — ye MIND TRICK hai. (b) Option Elimination — sirf LAST RESORT jab (a) na bane. AVOID variable algebra (X/Y equation) jab tak koi mental trick bilkul na ho — iski jagah Ratio-Unit method use karo; algebra sabse aakhri resort, elimination se bhi baad. Complex multiplication ho to round numbers me todo. GK/English pe ye rule apply nahi.
 6. SIRF EK solution do, dono ek saath mat dikhao. "Vistrit/Basic Method" sirf explicitly maange jaane par. Response crisp rakho, extra verification steps mat dikhao.
 7. Solution ke end mein 1-2 lines: a) Trick ka naam (jaise "Ye Unitary Method Trick hai") b) General Formula/Shortcut (agar possible ho) is TYPE ke sabhi similar questions ke liye. YE RULE MATHS/REASONING KE LIYE PEHLE KI TARAH HI APPLY HOGA. GK par is Rule ka "Trick ka naam" wala hissa APPLY NAHI HOGA.
@@ -5984,21 +6013,20 @@ Current Question:
 - Q${qContext.questionNumber}/${qContext.totalQuestions} | Tag: ${qContext.examTag}
 - Question: ${qContext.questionText}
 - Options: ${JSON.stringify(qContext.options)}
-- Correct Answer: ${qContext.correctAnswer}
-- Reference Explanation (verify before using): ${qContext.explanation}
 - User Choice: ${qContext.userSelected}
 `;
 
   const taskLine = (appLang === 'en')
-    ? "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation for this question in English. Do not just restate the reference explanation."
-    : "\nTask: Solve the question yourself step-by-step and then provide a clear, short, independently-verified explanation (संक्षिप्त व्याख्या) for this question in Hindi. Do not just restate the reference explanation.";
+    ? "\nTask: Solve the question yourself step-by-step and provide a clear, short explanation based only on the question and options. Do not assume any hidden/stored answer key."
+    : "\nTask: प्रश्न और विकल्पों के आधार पर स्वयं हल करके स्पष्ट, संक्षिप्त व्याख्या दो। किसी छिपी या stored answer key को सही मानकर मत चलो।";
 
   aiChatHistory = [
     { role: "user", parts: [{ text: systemInstruction + taskLine }] }
   ];
 
   appendAIMessage("bot", "🔍 **Question scanned!** Answer is being prepared...");
-  requestGeminiResponse();
+  lastAIRequestWasAutoScan = true;
+  requestGeminiResponse(true);
 }
 
 function sendUserMessage() {
@@ -6052,7 +6080,8 @@ aiChatHistory.push({
   if (preview) preview.style.display = "none";
   if (previewImg) previewImg.src = "";
 
-  requestGeminiResponse();
+  lastAIRequestWasAutoScan = false;
+  requestGeminiResponse(false);
 }
 
 function sendQuickPrompt(promptText) {
@@ -6062,7 +6091,7 @@ function sendQuickPrompt(promptText) {
   sendUserMessage();
 }
 
-async function requestGeminiResponse() {
+async function requestGeminiResponse(isAutoScanRequest = false) {
   if (isAIGenerating) return;
   isAIGenerating = true;
   showAITyping(true);
@@ -6183,7 +6212,7 @@ STRICT FORMATTING RULES:
       const displayText = replyText
         .replace(/<<<QUIZDATA>>>[\s\S]*?<<<END>>>/g, "")
         .trim();
-      appendAIMessage("bot", displayText, true, null, modelUsed, modelAttempts);
+      appendAIMessage("bot", displayText, true, null, modelUsed, modelAttempts, isAutoScanRequest);
     }
 
   } catch (err) {
@@ -6202,6 +6231,174 @@ STRICT FORMATTING RULES:
     isAIGenerating = false;
     currentAbortController = null;
     quizCardPendingRequest = false;
+  }
+}
+
+// ===== Optional Independent Answer Check =====
+// This is intentionally a separate request from the normal explanation.
+// It sends ONLY the current question + options (and exam tag) to the Worker;
+// stored answer key, stored explanation, user choice and previous AI history
+// are never sent. The result is advisory, not an absolute "truth" guarantee.
+function parseVerifyResult(text) {
+  if (!text) return null;
+  let raw = String(text).trim();
+  raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+  const match = raw.match(/\{[\s\S]*\}/);
+  if (!match) return null;
+  try {
+    const parsed = JSON.parse(match[0]);
+    if (!parsed || !Number.isInteger(parsed.answerIndex) || parsed.answerIndex < 0 || parsed.answerIndex > 3) return null;
+    const confidence = String(parsed.confidence || '').toLowerCase();
+    if (!['high','medium','low'].includes(confidence)) return null;
+    return {
+      answerIndex: parsed.answerIndex,
+      confidence,
+      reason: typeof parsed.reason === 'string' ? parsed.reason.trim() : ''
+    };
+  } catch (_) {
+    return null;
+  }
+}
+
+function setVerifyButtonState(btn, text, disabled) {
+  if (!btn) return;
+  btn.innerText = text;
+  btn.disabled = !!disabled;
+}
+
+function renderVerifyResult(container, result, qContext, modelUsed) {
+  if (!container || !result || !qContext) return;
+
+  const storedIndex = data && data[currentQ] ? data[currentQ].a : null;
+  const hasStoredIndex = Number.isInteger(storedIndex) && storedIndex >= 0 && storedIndex <= 3;
+  const agree = hasStoredIndex && result.answerIndex === storedIndex;
+
+  let state = 'verify-uncertain';
+  let title = appLang === 'en' ? '🟡 Independent Check: Uncertain' : '🟡 स्वतंत्र जाँच: निश्चित नहीं';
+  if (result.confidence === 'high' && agree) {
+    state = 'verify-agree';
+    title = appLang === 'en' ? '🟢 Likely Correct — Independent Check Agrees' : '🟢 संभावित रूप से सही — स्वतंत्र जाँच सहमत है';
+  } else if (result.confidence === 'high' && hasStoredIndex && !agree) {
+    state = 'verify-mismatch';
+    title = appLang === 'en' ? '🔴 Possible Answer-Key Error' : '🔴 उत्तर-कुंजी में गलती संभव';
+  } else if (hasStoredIndex && !agree) {
+    state = 'verify-mismatch';
+    title = appLang === 'en' ? '🟠 Flash Answer Differs' : '🟠 Flash का उत्तर अलग है';
+  }
+
+  const box = document.createElement('div');
+  box.className = `ai-verify-result ${state}`;
+  box.setAttribute('data-ai-verification', 'true');
+
+  const titleEl = document.createElement('div');
+  titleEl.className = 'ai-verify-title';
+  titleEl.textContent = title;
+  box.appendChild(titleEl);
+
+  const answerEl = document.createElement('div');
+  const letters = ['A','B','C','D'];
+  answerEl.innerHTML = appLang === 'en'
+    ? `Flash independent answer: <strong>${letters[result.answerIndex]}</strong>`
+    : `Flash की स्वतंत्र जाँच का उत्तर: <strong>${letters[result.answerIndex]}</strong>`;
+  box.appendChild(answerEl);
+
+  if (hasStoredIndex) {
+    const storedEl = document.createElement('div');
+    storedEl.innerHTML = appLang === 'en'
+      ? `Stored key: <strong>${letters[storedIndex]}</strong>`
+      : `Stored उत्तर-कुंजी: <strong>${letters[storedIndex]}</strong>`;
+    box.appendChild(storedEl);
+  }
+
+  if (result.reason) {
+    const reasonEl = document.createElement('div');
+    reasonEl.style.marginTop = '4px';
+    reasonEl.textContent = result.reason;
+    box.appendChild(reasonEl);
+  }
+
+  const meta = document.createElement('div');
+  meta.className = 'ai-verify-meta';
+  meta.textContent = appLang === 'en'
+    ? `Confidence: ${result.confidence}${modelUsed ? ` • ${modelUsed}` : ''} • AI check is advisory, not a 100% guarantee.`
+    : `विश्वास स्तर: ${result.confidence}${modelUsed ? ` • ${modelUsed}` : ''} • यह AI जाँच केवल संकेत है, 100% गारंटी नहीं।`;
+  box.appendChild(meta);
+
+  const old = container.querySelector('[data-ai-verification="true"]');
+  if (old) old.remove();
+  container.appendChild(box);
+}
+
+async function verifyCurrentAnswer(btn, messageContainer) {
+  if (isAIGenerating || isAIVerifying) return;
+  const qContext = getCurrentQuestionContext();
+  if (!qContext || !qContext.questionText || !Array.isArray(qContext.options) || qContext.options.length !== 4) return;
+
+  isAIVerifying = true;
+  setVerifyButtonState(btn, '⏳ Checking...', true);
+  verifyAbortController = new AbortController();
+  const thisQuestion = currentQ;
+
+  try {
+    const payload = {
+      mode: 'verify',
+      question: qContext.questionText,
+      options: qContext.options,
+      examTag: qContext.examTag || '',
+      language: appLang === 'en' ? 'en' : 'hi'
+    };
+
+    const res = await fetch(GEMINI_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: verifyAbortController.signal
+    });
+
+    if (!res.ok) {
+      let detail = '';
+      try {
+        const t = await res.text();
+        const j = JSON.parse(t);
+        detail = j.error || j.message || t;
+      } catch (_) {}
+      throw new Error(`Server Error (${res.status}): ${detail || res.statusText || 'Unknown error'}`);
+    }
+
+    const modelUsed = res.headers.get('X-Model-Used') || '';
+    const resData = await res.json();
+    let replyText = '';
+    if (resData && resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts) {
+      replyText = resData.candidates[0].content.parts.map(p => p.text || '').join('');
+    } else if (resData && typeof resData.text === 'string') {
+      replyText = resData.text;
+    }
+
+    const result = parseVerifyResult(replyText);
+    if (!result) throw new Error('Flash verification returned an invalid result. Please try again.');
+
+    // Do not attach a result to a different question if the user navigated
+    // while the request was in flight.
+    if (thisQuestion !== currentQ) return;
+
+    renderVerifyResult(messageContainer || document.getElementById('aiChatBody')?.lastElementChild, result, qContext, modelUsed);
+    setVerifyButtonState(btn, '🔍 Re-check', false);
+  } catch (err) {
+    if (err && err.name === 'AbortError') return;
+    console.error('[AI verify]', err);
+    if (messageContainer) {
+      const old = messageContainer.querySelector('[data-ai-verification="true"]');
+      if (old) old.remove();
+      const errorBox = document.createElement('div');
+      errorBox.className = 'ai-verify-result verify-uncertain';
+      errorBox.setAttribute('data-ai-verification', 'true');
+      errorBox.textContent = '⚠️ Independent check failed: ' + (err.message || 'Please try again.');
+      messageContainer.appendChild(errorBox);
+    }
+    setVerifyButtonState(btn, '🔍 Verify Answer', false);
+  } finally {
+    isAIVerifying = false;
+    verifyAbortController = null;
   }
 }
 
@@ -6224,7 +6421,7 @@ function buildModelTagText(modelUsed, modelAttempts) {
   return tag;
 }
 
-function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, modelUsed = null, modelAttempts = null) {
+function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, modelUsed = null, modelAttempts = null, showVerify = false) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
 
@@ -6278,12 +6475,21 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
     retryBtn.onclick = () => {
       if (!isAIGenerating) {
         aiChatHistory.pop();
-        requestGeminiResponse();
+        requestGeminiResponse(lastAIRequestWasAutoScan);
       }
     };
 
     actionsDiv.appendChild(copyBtn);
     actionsDiv.appendChild(retryBtn);
+
+    if (showVerify) {
+      const verifyBtn = document.createElement('button');
+      verifyBtn.className = 'ai-action-btn ai-verify-btn';
+      verifyBtn.innerText = '🔍 Verify Answer';
+      verifyBtn.onclick = () => verifyCurrentAnswer(verifyBtn, msgDiv);
+      actionsDiv.appendChild(verifyBtn);
+    }
+
     msgDiv.appendChild(actionsDiv);
   }
 
