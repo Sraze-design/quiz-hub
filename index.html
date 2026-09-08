@@ -5979,7 +5979,10 @@ function getCurrentQuestionContext() {
     examTag: T(item, 'tag') || "",
     correctAnswer: correctOptText,
     explanation: T(item, 'e') || "",
-    userSelected: selectedOptText
+    userSelected: selectedOptText,
+    // Some questions store their figure/diagram as a Base64 data URL.
+    // Keep it separate so Verify can send the actual image to Gemini.
+    imageData: (typeof item.image === 'string' && item.image.startsWith('data:image/')) ? item.image : null
   };
 }
 
@@ -6020,8 +6023,24 @@ Current Question:
     ? "\nTask: Solve the question yourself step-by-step and provide a clear, short explanation based only on the question and options. Do not assume any hidden/stored answer key."
     : "\nTask: प्रश्न और विकल्पों के आधार पर स्वयं हल करके स्पष्ट, संक्षिप्त व्याख्या दो। किसी छिपी या stored answer key को सही मानकर मत चलो।";
 
+  // Normal auto-explain also receives the question's stored Base64 figure
+  // as a native Gemini image input, when one exists. The text prompt stays
+  // separate so Gemini can use both the question text and the actual figure.
+  const autoScanParts = [{ text: systemInstruction + taskLine }];
+  if (qContext.imageData) {
+    const match = qContext.imageData.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,([A-Za-z0-9+/=\s]+)$/);
+    if (match) {
+      autoScanParts.push({
+        inlineData: {
+          mimeType: match[1].toLowerCase(),
+          data: match[2].replace(/\s+/g, '')
+        }
+      });
+    }
+  }
+
   aiChatHistory = [
-    { role: "user", parts: [{ text: systemInstruction + taskLine }] }
+    { role: "user", parts: autoScanParts }
   ];
 
   appendAIMessage("bot", "🔍 **Question scanned!** Answer is being prepared...");
@@ -6340,13 +6359,24 @@ async function verifyCurrentAnswer(btn, messageContainer) {
   const thisQuestion = currentQ;
 
   try {
+    // The question HTML can contain an <img> tag. Verify should not rely on
+    // the HTML itself; when a real Base64 image exists, send the image as a
+    // native Gemini inline image input as well.
+    const verifyQuestionText = (() => {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = qContext.questionText || '';
+      tmp.querySelectorAll('img').forEach(img => img.remove());
+      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+    })();
+
     const payload = {
       mode: 'verify',
-      question: qContext.questionText,
+      question: verifyQuestionText,
       options: qContext.options,
       examTag: qContext.examTag || '',
       language: appLang === 'en' ? 'en' : 'hi'
     };
+    if (qContext.imageData) payload.imageData = qContext.imageData;
 
     const res = await fetch(GEMINI_WORKER_URL, {
       method: 'POST',
