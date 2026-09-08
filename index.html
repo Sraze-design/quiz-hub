@@ -6067,11 +6067,14 @@ Current Question:
 - Question: ${qContext.questionText}
 - Options: ${JSON.stringify(qContext.options)}
 - User Choice (UI context only — **DO NOT use as evidence for the answer**): ${qContext.userSelected}
+- Exam Expected Answer (reference/convention layer only): ${qContext.correctAnswer}
+
+IMPORTANT EXAM-ANSWER RECONCILIATION: First solve the question independently from the question, options and actual image. Do NOT look at the Exam Expected Answer while forming your initial solution. After independently deriving the answer, compare your derived option with the Exam Expected Answer. If they differ, do a second careful check of wording, diagram direction, units, notation, source/exam convention and calculations. If the difference is caused by a known wording/convention mismatch in the supplied exam question, the **exam expected answer must be used as the final exam-facing answer**, but briefly mention the mismatch so the explanation is not misleading. If your independent derivation and the exam expected answer agree, give the agreed answer normally. Never blindly copy the Exam Expected Answer without doing the independent check first.
 `;
 
   const taskLine = (appLang === 'en')
-    ? "\nTask: Solve independently. If an image/diagram is attached, the image is evidence, not decoration. Follow this order internally: OBSERVE actual visible facts -> EXTRACT neutral visual facts -> INTERPRET only what is supported -> CALCULATE/APPLY the relevant rule -> COMPARE every option against the calculation and ALL visible facts -> CROSS-CHECK the final option against the image AND wording. Read labels, positions, angles, directions, sizes and ray/geometry carefully before recalling a familiar pattern. Never invent missing geometry or silently ignore contradictions. Do not let the user choice, stored answer key, reference explanation, or remembered textbook pattern influence the answer. For optics, never identify lens/mirror from one clue alone; use position + orientation + size/magnification + ray/geometry evidence together. For numerical diagrams, extract exact visible values first, then calculate, then match options. If visual evidence is unclear/contradictory/insufficient, do not force high confidence; choose the best-supported option with medium/low confidence."
-    : "\nTask: स्वतंत्र रूप से हल करो। यदि चित्र/डायग्राम है, तो image evidence है, decoration नहीं। अंदर ही अंदर यह क्रम अपनाओ: पहले actual image के visible facts OBSERVE करो -> neutral visual facts EXTRACT करो -> केवल supported meaning INTERPRET करो -> relevant formula/concept CALCULATE/APPLY करो -> हर option को calculation + सभी visible facts से COMPARE करो -> final option को image और wording से CROSS-CHECK करो। Labels, positions, angles, directions, sizes और ray/geometry को familiar pattern याद करने से पहले ध्यान से पढ़ो। Missing geometry/details assume मत करो और contradiction को silently ignore मत करो। User choice, stored answer key, reference explanation या remembered textbook pattern को उत्तर पर प्रभाव न डालने दो। Optics में किसी एक clue से lens/mirror तय मत करो; position + orientation + size/magnification + ray/geometry evidence को साथ में match करो। Numerical diagrams में exact visible values पहले निकालो, फिर calculate करो, फिर options match करो। Visual unclear/contradictory/insufficient हो तो high confidence force मत करो; best-supported option के साथ medium/low confidence रखो।";
+    ? "\nTask: First solve independently, then perform the EXAM-ANSWER RECONCILIATION using the supplied Exam Expected Answer reference. The final answer shown to the student is exam-facing: when a source/exam convention or wording mismatch explains a disagreement, use the Exam Expected Answer as the final exam-facing option and clearly note the mismatch in one short line. Never blindly copy the stored answer; independently verify it first. If no mismatch exists, use your independently derived answer. If an image/diagram is attached, the image is evidence, not decoration. Follow this order internally: OBSERVE actual visible facts -> EXTRACT neutral visual facts -> INTERPRET only what is supported -> CALCULATE/APPLY the relevant rule -> COMPARE every option against the calculation and ALL visible facts -> CROSS-CHECK the final option against the image AND wording. Read labels, positions, angles, directions, sizes and ray/geometry carefully before recalling a familiar pattern. Never invent missing geometry or silently ignore contradictions. Do not let the user choice, stored answer key, reference explanation, or remembered textbook pattern influence the answer. For optics, never identify lens/mirror from one clue alone; use position + orientation + size/magnification + ray/geometry evidence together. For numerical diagrams, extract exact visible values first, then calculate, then match options. If visual evidence is unclear/contradictory/insufficient, do not force high confidence; choose the best-supported option with medium/low confidence."
+    : "\nTask: पहले स्वतंत्र रूप से हल करो, फिर दिए गए Exam Expected Answer reference के साथ EXAM-ANSWER RECONCILIATION करो। Student को दिखने वाला final answer exam-facing होगा: यदि wording/source convention के कारण independent result और exam answer अलग हों, तो Exam Expected Answer को final exam-facing option रखो और एक छोटी line में mismatch स्पष्ट करो। Stored answer को बिना जाँचे blindly copy मत करो; पहले independent verification जरूरी है। यदि mismatch नहीं है, तो independently निकला answer ही final रखो। यदि चित्र/डायग्राम है, तो image evidence है, decoration नहीं। अंदर ही अंदर यह क्रम अपनाओ: पहले actual image के visible facts OBSERVE करो -> neutral visual facts EXTRACT करो -> केवल supported meaning INTERPRET करो -> relevant formula/concept CALCULATE/APPLY करो -> हर option को calculation + सभी visible facts से COMPARE करो -> final option को image और wording से CROSS-CHECK करो। Labels, positions, angles, directions, sizes और ray/geometry को familiar pattern याद करने से पहले ध्यान से पढ़ो। Missing geometry/details assume मत करो और contradiction को silently ignore मत करो। User choice, stored answer key, reference explanation या remembered textbook pattern को उत्तर पर प्रभाव न डालने दो। Optics में किसी एक clue से lens/mirror तय मत करो; position + orientation + size/magnification + ray/geometry evidence को साथ में match करो। Numerical diagrams में exact visible values पहले निकालो, फिर calculate करो, फिर options match करो। Visual unclear/contradictory/insufficient हो तो high confidence force मत करो; best-supported option के साथ medium/low confidence रखो। RELATIONAL/DIRECTIONAL WORDING CHECK: “X के संबंध में Y”, “X के सापेक्ष Y”, “X with respect to Y”, “X relative to Y”, “from X to Y” जैसे phrases में पहले requested ratio/relationship को symbolic रूप में तय करो (जैसे n_X/n_Y), फिर diagram की actual direction के अनुसार formula apply करो। किसी familiar formula जैसे sin(i)/sin(r) को देखकर ratio अपने-आप reverse मत करो। यदि wording, diagram convention या options में conflict हो तो उसे पहचानो, silently force मत करो, और confidence कम करो।";
 
   // Normal auto-explain also receives the question's stored Base64 figure
   // as a native Gemini image input, when one exists. The text prompt stays
@@ -6223,6 +6226,16 @@ STRICT FORMATTING RULES:
       contents: aiChatHistory
     };
 
+    // Exam/PYQ reconciliation is available only for the automatic question
+    // explanation. Manual AI chat remains fully independent of quiz answer keys.
+    if (isAutoScanRequest && data && data[currentQ]) {
+      const autoExamIndex = data[currentQ].a;
+      const autoOptions = T(data[currentQ], 'o') || [];
+      if (Number.isInteger(autoExamIndex) && autoExamIndex >= 0 && autoExamIndex < 4) {
+        payload.examExpectedAnswer = autoOptions[autoExamIndex] || '';
+      }
+    }
+
     const res = await fetch(GEMINI_WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -6356,10 +6369,10 @@ function renderVerifyResult(container, result, qContext, modelUsed) {
     title = appLang === 'en' ? '🟢 Likely Correct — Independent Check Agrees' : '🟢 संभावित रूप से सही — स्वतंत्र जाँच सहमत है';
   } else if (result.confidence === 'high' && hasStoredIndex && !agree) {
     state = 'verify-mismatch';
-    title = appLang === 'en' ? '🔴 Possible Answer-Key Error' : '🔴 उत्तर-कुंजी में गलती संभव';
+    title = appLang === 'en' ? '🟠 Independent vs Exam Answer Mismatch — Review Needed' : '🟠 स्वतंत्र उत्तर और परीक्षा-उत्तर में अंतर — जाँच आवश्यक';
   } else if (hasStoredIndex && !agree) {
     state = 'verify-mismatch';
-    title = appLang === 'en' ? '🟠 Flash Answer Differs' : '🟠 Flash का उत्तर अलग है';
+    title = appLang === 'en' ? '🟡 Independent vs Exam Answer Differ' : '🟡 स्वतंत्र उत्तर और परीक्षा-उत्तर अलग हैं';
   }
 
   const box = document.createElement('div');
@@ -6381,8 +6394,8 @@ function renderVerifyResult(container, result, qContext, modelUsed) {
   if (hasStoredIndex) {
     const storedEl = document.createElement('div');
     storedEl.innerHTML = appLang === 'en'
-      ? `Stored key: <strong>${letters[storedIndex]}</strong>`
-      : `Stored उत्तर-कुंजी: <strong>${letters[storedIndex]}</strong>`;
+      ? `Exam expected answer: <strong>${letters[storedIndex]}</strong>`
+      : `परीक्षा में अपेक्षित उत्तर: <strong>${letters[storedIndex]}</strong>`;
     box.appendChild(storedEl);
   }
 
