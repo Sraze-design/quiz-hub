@@ -6341,7 +6341,9 @@ function renderVerifyResult(container, result, qContext, modelUsed) {
   if (result.reason) {
     const reasonEl = document.createElement('div');
     reasonEl.style.marginTop = '4px';
-    reasonEl.textContent = result.reason;
+    // Use the exact same MASTER AI render engine as Normal AI.
+    // This keeps math/science notation and Markdown rendering identical.
+    reasonEl.innerHTML = formatAIResponseText(result.reason);
     box.appendChild(reasonEl);
   }
 
@@ -6573,37 +6575,27 @@ function normalizeHindiMixedScript(txt) {
 }
 
 function formatAIResponseText(txt) {
-  if (!txt) return "";
-  txt = normalizeHindiMixedScript(txt);
-  let formatted = txt
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  // MASTER AI RENDER ENGINE
+  // Both Normal AI and Verify AI use this same renderer so mathematical,
+  // chemical, Greek, fraction, superscript/subscript, arrow and Markdown
+  // output is displayed consistently everywhere.
+  if (txt == null) return "";
+  txt = normalizeHindiMixedScript(String(txt));
 
-  // Mixed-fraction rendering: the model is instructed to write ONLY mixed
-  // fractions (whole number + fraction, e.g. "16" + "2/3") using \frac{a}{b}
-  // right after the whole number — everything else stays plain Unicode text
-  // per the system prompt. Render that specific pattern as a small stacked
-  // fraction (numerator over denominator) instead of showing raw "\frac{2}{3}".
-  // This intentionally only matches \frac{..}{..} — plain "2/3" text and any
-  // other LaTeX the model wasn't supposed to use are left untouched as text.
-  formatted = formatted.replace(
-    /\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
-    '<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$1</span><span class="ai-mixed-frac-den">$2</span></span>'
-  );
+  // Escape model HTML first; the renderer below deliberately creates only
+  // the safe markup that we need for display.
+  txt = txt.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-  // Safety net: the model sometimes ignores the "plain text only" instruction
-  // and wraps things in LaTeX-style "$...$" math delimiters, or writes "\%"
-  // instead of a plain percent sign. Clean these up so they never show as
-  // raw symbols even when the model slips up. This runs AFTER the \frac
-  // replacement above so it doesn't interfere with the stacked-fraction spans.
-  formatted = formatted.replace(/\\%/g, "%");
-  formatted = formatted.replace(/\$\$?([^$]*)\$\$?/g, "$1");
+  // Use the existing full legacy quiz renderer as the single source of truth
+  // for math/science notation: fractions, roots, powers, subscripts,
+  // Greek letters, trig functions, units, arrows, chemistry notation, etc.
+  let formatted = formatContent(txt);
 
+  // Keep the Normal AI's Markdown display behavior on top of the same
+  // notation engine.
   formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
   formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
-  formatted = formatted.replace(/\n/g, '<br>');
 
   return formatted;
 }
