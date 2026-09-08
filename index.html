@@ -6107,7 +6107,12 @@ STRICT FORMATTING RULES:
 - Use bullet points where appropriate.
 - Keep answers clean, mobile-friendly and easy to read.
 - Follow these formatting rules for ALL subjects including Maths, Reasoning, English, General Science, History, Geography, Polity, Economics, Current Affairs, Computer and every other subject.
-- Do not overuse bold.`
+- Do not overuse bold.
+- Hindi responses MUST use Devanagari script. Never output Urdu, Arabic, or Persian script.
+- Do not mix even a single Urdu/Arabic/Persian-script word or letter into Hindi text.
+- If a Hindi word has multiple forms, use the standard Devanagari Hindi spelling.
+- Before sending the final answer, scan the entire response and replace any accidental Urdu/Arabic/Persian-script text with Hindi Devanagari.
+`
         }]
       },
       contents: aiChatHistory
@@ -6290,8 +6295,41 @@ function appendAIMessage(sender, text, showCopy = false, imageDataUrl = null, mo
   }
 }
 
+// AI Hindi safety-net: Gemini can occasionally slip a single Urdu/Arabic-script
+// word into an otherwise Hindi response (for example "چھوٹی" instead of "छोटी").
+// Normalize common accidental Urdu words before rendering. This is display-only;
+// the original model reply/history is left untouched so context and retry behavior
+// remain unchanged.
+function normalizeHindiMixedScript(txt) {
+  if (!txt) return "";
+  let out = String(txt);
+  const urduToHindi = {
+    "چھوٹی": "छोटी", "چھوٹا": "छोटा", "چھوٹے": "छोटे",
+    "بڑی": "बड़ी", "بڑا": "बड़ा", "بڑے": "बड़े",
+    "کی": "की", "کے": "के", "کا": "का", "ہے": "है",
+    "ہیں": "हैं", "اور": "और", "میں": "में", "سے": "से",
+    "کو": "को", "یہ": "यह", "وہ": "वह", "ایک": "एक",
+    "دو": "दो", "تین": "तीन", "چار": "चार", "پانچ": "पाँच",
+    "چھ": "छह", "سات": "सात", "آٹھ": "आठ", "نو": "नौ",
+    "دس": "दस", "ساتھ": "साथ", "بعد": "बाद", "پہلے": "पहले",
+    "لیے": "लिए", "کیونکہ": "क्योंकि", "اس": "इस", "اسے": "इसे",
+    "اس میں": "इसमें", "اس کے": "इसके", "اس کا": "इसका",
+    "ہوتا": "होता", "ہوتی": "होती", "ہوتے": "होते",
+    "ہوگا": "होगा", "ہوگی": "होगी", "ہوئے": "हुए",
+    "کرنے": "करने", "کرنا": "करना", "کرتا": "करता", "کرتی": "करती",
+    "کرتے": "करते", "لگتا": "लगता", "لگتی": "लगती",
+    "درمیان": "बीच", "سوال": "प्रश्न", "جواب": "उत्तर",
+    "وضاحت": "व्याख्या", "درست": "सही", "غلط": "गलत"
+  };
+  Object.keys(urduToHindi).sort((a,b)=>b.length-a.length).forEach((u)=>{
+    out = out.split(u).join(urduToHindi[u]);
+  });
+  return out;
+}
+
 function formatAIResponseText(txt) {
   if (!txt) return "";
+  txt = normalizeHindiMixedScript(txt);
   let formatted = txt
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
