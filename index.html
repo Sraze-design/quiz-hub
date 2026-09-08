@@ -5981,8 +5981,16 @@ function getCurrentQuestionContext() {
     explanation: T(item, 'e') || "",
     userSelected: selectedOptText,
     // Some questions store their figure/diagram as a Base64 data URL.
-    // Keep it separate so Verify can send the actual image to Gemini.
-    imageData: (typeof item.image === 'string' && item.image.startsWith('data:image/')) ? item.image : null
+    // Prefer item.image, but also recover a Base64 image embedded directly
+    // inside the question HTML when the dataset uses <img src="data:...">.
+    imageData: (() => {
+      if (typeof item.image === 'string' && item.image.startsWith('data:image/')) {
+        return item.image;
+      }
+      const qHtml = T(item, 'q') || '';
+      const imgMatch = qHtml.match(/<img[^>]+src=["'](data:image\/[a-zA-Z0-9.+-]+;base64,[A-Za-z0-9+/=\s]+)["']/i);
+      return imgMatch ? imgMatch[1] : null;
+    })()
   };
 }
 
@@ -6003,6 +6011,7 @@ ${langRule}
 2. Subjects: Math, Formulas, Tricks, Reasoning, GK, English.
 3. Concise/precise — short explanation by default, detail sirf tabhi jab maanga jaaye.
 4. Question ko **independently solve karo**. Kisi stored answer key, reference explanation, ya pre-supplied correct answer ko source of truth mat maano. Apni reasoning se answer nikaalo aur explanation apne words mein do.
+4A. **IMAGE/DIAGRAM QUESTIONS — MANDATORY VISUAL-FIRST CHECK:** Agar question ke saath image, figure, diagram, graph, map, table, circuit, ray diagram, geometry figure ya koi visual attached ho, to actual image ko dhyan se inspect karke hi answer do. Pehle internally visual facts identify karo: (1) objects/labels kis position par hain, (2) direction/orientation — seedha ya ulta, (3) relative size/magnification, (4) arrows/rays/lines/curves, (5) relevant distances/geometry/relationships, aur (6) image mein diye gaye symbols/markings. **Visual ko text ke assumption se replace mat karo.** Kisi common textbook pattern ko dekhkar figure ke missing facts assume mat karo. Agar text aur figure mein apparent conflict ho, to figure ko actual visual evidence ke roop mein inspect karke dono ko reconcile karo; bina evidence ke option select mat karo. Optics/diagram questions mein sirf "image doosri taraf hai" jaise ek hi clue se lens/mirror/device identify mat karo — **position + orientation + size + relevant ray/geometry evidence** ko saath mein match karo. Final answer dene se pehle apne selected option ko image ke visible facts ke against cross-check karo.
 5. MIND METHOD (Maths/Reasoning only): Purely mental calculation se solve karo (bina pen-paper). Priority: (a) Unitary method/ratio-percentage shortcut/approximation/reverse-checking — ye MIND TRICK hai. (b) Option Elimination — sirf LAST RESORT jab (a) na bane. AVOID variable algebra (X/Y equation) jab tak koi mental trick bilkul na ho — iski jagah Ratio-Unit method use karo; algebra sabse aakhri resort, elimination se bhi baad. Complex multiplication ho to round numbers me todo. GK/English pe ye rule apply nahi.
 6. SIRF EK solution do, dono ek saath mat dikhao. "Vistrit/Basic Method" sirf explicitly maange jaane par. Response crisp rakho, extra verification steps mat dikhao.
 7. Solution ke end mein 1-2 lines: a) Trick ka naam (jaise "Ye Unitary Method Trick hai") b) General Formula/Shortcut (agar possible ho) is TYPE ke sabhi similar questions ke liye. YE RULE MATHS/REASONING KE LIYE PEHLE KI TARAH HI APPLY HOGA. GK par is Rule ka "Trick ka naam" wala hissa APPLY NAHI HOGA.
@@ -6020,8 +6029,8 @@ Current Question:
 `;
 
   const taskLine = (appLang === 'en')
-    ? "\nTask: Solve the question yourself step-by-step and provide a clear, short explanation based only on the question and options. Do not assume any hidden/stored answer key."
-    : "\nTask: प्रश्न और विकल्पों के आधार पर स्वयं हल करके स्पष्ट, संक्षिप्त व्याख्या दो। किसी छिपी या stored answer key को सही मानकर मत चलो।";
+    ? "\nTask: Solve the question yourself step-by-step and provide a clear, short explanation based only on the question, options, and the actual attached image when present. For any image/diagram, inspect the visual facts first and cross-check the chosen option against position, orientation, size, arrows/rays/geometry, and other visible evidence. Do not assume any hidden/stored answer key."
+    : "\nTask: प्रश्न और विकल्पों के आधार पर स्वयं हल करके स्पष्ट, संक्षिप्त व्याख्या दो। यदि चित्र/डायग्राम है तो पहले उसे ध्यान से देखकर उसके वास्तविक दृश्य तथ्यों को पहचानो, फिर उन्हीं तथ्यों से विकल्पों को cross-check करके उत्तर दो। किसी छिपी या stored answer key को सही मानकर मत चलो।";
 
   // Normal auto-explain also receives the question's stored Base64 figure
   // as a native Gemini image input, when one exists. The text prompt stays
