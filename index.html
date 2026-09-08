@@ -5978,33 +5978,67 @@ function getCurrentQuestionContext() {
     correctOptText = opts[item.a];
   }
 
+  const qHtml = T(item, 'q') || '';
+  let imageSource = null;
+  if (typeof item.image === 'string' && item.image.trim()) {
+    imageSource = item.image.trim();
+  } else {
+    const imgMatch = qHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
+    if (imgMatch) imageSource = imgMatch[1].trim();
+  }
+
   return {
     questionNumber: currentQ + 1,
     totalQuestions: data.length,
-    questionText: T(item, 'q') || "",
+    questionText: qHtml,
     options: opts,
     examTag: T(item, 'tag') || "",
     correctAnswer: correctOptText,
     explanation: T(item, 'e') || "",
     userSelected: selectedOptText,
-    // Some questions store their figure/diagram as a Base64 data URL.
-    // Prefer item.image, but also recover a Base64 image embedded directly
-    // inside the question HTML when the dataset uses <img src="data:...">.
-    imageData: (() => {
-      if (typeof item.image === 'string' && item.image.startsWith('data:image/')) {
-        return item.image;
-      }
-      const qHtml = T(item, 'q') || '';
-      const imgMatch = qHtml.match(/<img[^>]+src=["'](data:image\/[a-zA-Z0-9.+-]+;base64,[A-Za-z0-9+/=\s]+)["']/i);
-      return imgMatch ? imgMatch[1] : null;
-    })()
+    imageData: (typeof imageSource === 'string' && imageSource.startsWith('data:image/')) ? imageSource : null,
+    imageSource: imageSource
   };
 }
 
-function autoScanAndExplain() {
+// Convert the question's ACTUAL figure/diagram into native image bytes for Gemini.
+// This handles Base64 images, relative paths, absolute same-origin paths, and URLs.
+// If a visual exists but cannot be fetched, callers can fail closed instead of
+// silently sending a text-only question and pretending the figure was inspected.
+async function hydrateQuestionImageData(qContext) {
+  if (!qContext) return qContext;
+  if (qContext.imageData) return qContext;
+  if (!qContext.imageSource) return qContext;
+
+  try {
+    const src = new URL(qContext.imageSource, document.baseURI).href;
+    const res = await fetch(src, { credentials: 'same-origin', cache: 'force-cache' });
+    if (!res.ok) throw new Error(`Image fetch failed (${res.status})`);
+    const blob = await res.blob();
+    if (!blob.type || !blob.type.toLowerCase().startsWith('image/')) {
+      throw new Error('Fetched question asset is not an image');
+    }
+
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error('Could not convert question image to Base64'));
+      reader.readAsDataURL(blob);
+    });
+
+    qContext.imageData = typeof base64 === 'string' ? base64 : null;
+    return qContext;
+  } catch (err) {
+    console.warn('[AI image pipeline] Could not load question image:', qContext.imageSource, err);
+    return qContext;
+  }
+}
+
+async function autoScanAndExplain() {
   currentAutoScannedQ = currentQ;
-  const qContext = getCurrentQuestionContext();
+  let qContext = getCurrentQuestionContext();
   if (!qContext) return;
+  qContext = await hydrateQuestionImageData(qContext);
 
   const langRule = (appLang === 'en')
     ? "1. Output in clear, simple ENGLISH — do not switch to Hindi. Technical terms (Ratio, Percentage, Unitary Method) stay in English as usual."
@@ -6042,6 +6076,13 @@ Current Question:
   // Normal auto-explain also receives the question's stored Base64 figure
   // as a native Gemini image input, when one exists. The text prompt stays
   // separate so Gemini can use both the question text and the actual figure.
+  if (qContext.imageSource && !qContext.imageData) {
+    appendAIMessage('bot', appLang === 'en'
+      ? '⚠️ The question contains a diagram/image, but it could not be loaded for AI inspection. Please retry.'
+      : '⚠️ प्रश्न में चित्र/डायग्राम है, लेकिन AI जाँच के लिए वह लोड नहीं हो पाया। कृपया Retry करें।');
+    return;
+  }
+
   const autoScanParts = [{ text: systemInstruction + taskLine }];
   if (qContext.imageData) {
     const match = qContext.imageData.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,([A-Za-z0-9+/=\s]+)$/);
@@ -6366,8 +6407,10 @@ function renderVerifyResult(container, result, qContext, modelUsed) {
 
 async function verifyCurrentAnswer(btn, messageContainer) {
   if (isAIGenerating || isAIVerifying) return;
-  const qContext = getCurrentQuestionContext();
+  let qContext = getCurrentQuestionContext();
   if (!qContext || !qContext.questionText || !Array.isArray(qContext.options) || qContext.options.length !== 4) return;
+
+  qContext = await hydrateQuestionImageData(qContext);
 
   isAIVerifying = true;
   setVerifyButtonState(btn, '⏳ Checking...', true);
@@ -6384,6 +6427,11 @@ async function verifyCurrentAnswer(btn, messageContainer) {
       tmp.querySelectorAll('img').forEach(img => img.remove());
       return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
     })();
+
+    const visualExists = !!qContext.imageSource;
+    if (visualExists && !qContext.imageData) {
+      throw new Error('Question diagram/image could not be loaded for independent AI verification. The check was stopped instead of using text-only reasoning.');
+    }
 
     const payload = {
       mode: 'verify',
