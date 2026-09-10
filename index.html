@@ -1787,6 +1787,30 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 
 
+/* ===== AI Model + Thinking Settings ===== */
+.ai-settings-btn{
+  background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;
+  border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:background .2s ease;
+}
+.ai-settings-btn:hover{background:rgba(255,255,255,.3)}
+.ai-settings-btn.active{background:#fff;color:#2563eb}
+#aiSettingsPopover{
+  position:absolute;top:58px;right:10px;width:min(330px,calc(100% - 20px));
+  background:#fff;border:1px solid #e2e8f0;border-radius:18px;
+  box-shadow:0 14px 36px rgba(15,23,42,.22);padding:16px;z-index:100;
+  display:none;color:#0f172a;
+}
+#aiSettingsPopover.open{display:block;animation:aiSettingsIn .16s ease-out}
+@keyframes aiSettingsIn{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:none}}
+.ai-settings-title{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ai-settings-group{margin-bottom:13px}
+.ai-settings-group:last-child{margin-bottom:0}
+.ai-settings-label{display:block;font-size:11px;font-weight:800;color:#64748b;margin:0 0 7px 2px;text-transform:uppercase;letter-spacing:.5px}
+.ai-settings-select{width:100%;height:42px;border:1px solid #dbe3ee;border-radius:12px;background:#f8fafc;color:#0f172a;
+  padding:0 12px;font:600 13px 'Plus Jakarta Sans',sans-serif;outline:none}
+.ai-settings-select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1);background:#fff}
+.ai-settings-note{font-size:10px;color:#94a3b8;margin-top:10px;line-height:1.45}
 .ai-sheet-header {
   padding: 16px 20px;
   background: linear-gradient(135deg, #1e3a8a, #2563eb);
@@ -2807,9 +2831,36 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
       <span>AI Assistant</span>
     </div>
     <div class="ai-header-actions">
+      <button class="ai-settings-btn" id="aiSettingsBtn" type="button" onclick="toggleAISettings(event)" title="AI Settings" aria-label="AI Settings">⚙️</button>
       <button class="ai-pencil-toggle" id="aiPencilToggleBtn" type="button" onclick="toggleAIPencil()" title="Pencil">✏️</button>
       <button class="ai-sheet-close" onclick="toggleAIPanel()">✕</button>
     </div>
+  </div>
+
+  <div id="aiSettingsPopover" role="dialog" aria-label="AI Settings" aria-hidden="true">
+    <div class="ai-settings-title"><span>⚙️</span><span>AI Settings</span></div>
+    <div class="ai-settings-group">
+      <label class="ai-settings-label" for="aiModelSelect">Model</label>
+      <select id="aiModelSelect" class="ai-settings-select">
+        <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite</option>
+        <option value="gemini-3.1-flash-lite">Gemini 3.1 Flash Lite</option>
+        <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite</option>
+        <option value="gemini-3.6-flash">Gemini 3.6 Flash</option>
+        <option value="gemini-3.5-flash">Gemini 3.5 Flash</option>
+        <option value="gemini-3-flash-preview">Gemini 3 Flash Preview</option>
+        <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+      </select>
+    </div>
+    <div class="ai-settings-group">
+      <label class="ai-settings-label" for="aiThinkingSelect">Thinking</label>
+      <select id="aiThinkingSelect" class="ai-settings-select">
+        <option value="default">Default</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="ai-settings-note">Settings automatically save on this device and stay active until you change them.</div>
   </div>
 
   <div class="ai-chat-body" id="aiChatBody">
@@ -5836,6 +5887,62 @@ function createMiniParticles(x,y){
 <script>
 const GEMINI_WORKER_URL = "https://gemini-proxy.trevoraxgaming9720.workers.dev/";
 
+// ===== Normal AI Model + Thinking Settings =====
+// These settings apply ONLY to normal AI requests. Verify AI has its own isolated payload.
+const AI_MODEL_STORAGE_KEY = "quiz_ai_selected_model_v1";
+const AI_THINKING_STORAGE_KEY = "quiz_ai_selected_thinking_v1";
+const AI_DEFAULT_MODEL = "gemini-3.5-flash-lite";
+const AI_DEFAULT_THINKING = "default";
+
+function loadAISavedSettings(){
+  const modelEl = document.getElementById("aiModelSelect");
+  const thinkingEl = document.getElementById("aiThinkingSelect");
+  if (!modelEl || !thinkingEl) return;
+  const savedModel = localStorage.getItem(AI_MODEL_STORAGE_KEY);
+  const savedThinking = localStorage.getItem(AI_THINKING_STORAGE_KEY);
+  modelEl.value = Array.from(modelEl.options).some(o => o.value === savedModel) ? savedModel : AI_DEFAULT_MODEL;
+  thinkingEl.value = Array.from(thinkingEl.options).some(o => o.value === savedThinking) ? savedThinking : AI_DEFAULT_THINKING;
+}
+
+function saveAISettings(){
+  const modelEl = document.getElementById("aiModelSelect");
+  const thinkingEl = document.getElementById("aiThinkingSelect");
+  if (!modelEl || !thinkingEl) return;
+  localStorage.setItem(AI_MODEL_STORAGE_KEY, modelEl.value);
+  localStorage.setItem(AI_THINKING_STORAGE_KEY, thinkingEl.value);
+}
+
+function toggleAISettings(event){
+  if (event) event.stopPropagation();
+  const pop = document.getElementById("aiSettingsPopover");
+  const btn = document.getElementById("aiSettingsBtn");
+  if (!pop) return;
+  const willOpen = !pop.classList.contains("open");
+  pop.classList.toggle("open", willOpen);
+  pop.setAttribute("aria-hidden", willOpen ? "false" : "true");
+  if (btn) btn.classList.toggle("active", willOpen);
+  if (willOpen) loadAISavedSettings();
+}
+
+function closeAISettings(){
+  const pop = document.getElementById("aiSettingsPopover");
+  const btn = document.getElementById("aiSettingsBtn");
+  if (!pop) return;
+  pop.classList.remove("open");
+  pop.setAttribute("aria-hidden", "true");
+  if (btn) btn.classList.remove("active");
+}
+
+// Initialize after DOM is available; change handlers keep the latest choice persistent.
+document.addEventListener("DOMContentLoaded", () => {
+  loadAISavedSettings();
+  const modelEl = document.getElementById("aiModelSelect");
+  const thinkingEl = document.getElementById("aiThinkingSelect");
+  if (modelEl) modelEl.addEventListener("change", saveAISettings);
+  if (thinkingEl) thinkingEl.addEventListener("change", saveAISettings);
+});
+
+
 // ===== AI Image Variables =====
 let selectedAIImage = null;
 let selectedAIImageBase64 = "";
@@ -6170,6 +6277,12 @@ function sendQuickPrompt(promptText) {
   sendUserMessage();
 }
 
+document.addEventListener("click", (event) => {
+  const pop = document.getElementById("aiSettingsPopover");
+  const btn = document.getElementById("aiSettingsBtn");
+  if (pop && pop.classList.contains("open") && !pop.contains(event.target) && event.target !== btn) closeAISettings();
+});
+
 async function requestGeminiResponse(isAutoScanRequest = false) {
   if (isAIGenerating) return;
   isAIGenerating = true;
@@ -6190,6 +6303,9 @@ async function requestGeminiResponse(isAutoScanRequest = false) {
     // is sent, so leaving that worker code in place is harmless.
     const payload = {
       subject: currentSubject || "",
+      // Normal AI only: the Worker will use these user-selected settings.
+      selectedModel: (document.getElementById("aiModelSelect")?.value || AI_DEFAULT_MODEL),
+      selectedThinking: (document.getElementById("aiThinkingSelect")?.value || AI_DEFAULT_THINKING),
       systemInstruction: {
         parts: [{
           text: `Reply ONLY in plain Unicode text.
