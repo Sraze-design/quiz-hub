@@ -6151,6 +6151,10 @@ async function autoScanAndExplain() {
     ? "1. Output in clear, simple ENGLISH — do not switch to Hindi. Technical terms (Ratio, Percentage, Unitary Method) stay in English as usual."
     : "1. Output SHUDH HINDI (Devanagari) mein ho — koi English label nahi (jaise \"Sahi Uttar\" nahi, \"सही उत्तर\" likho). Sirf technical terms (Ratio, Percentage, Unitary Method) English me rakh sakte ho.";
 
+  const imageProtocol = qContext.imageData ? `
+4A. **IMAGE/DIAGRAM QUESTIONS — HARD VISUAL-FIRST PROTOCOL (MANDATORY):** Actual image ko answer/rule recall karne se pehle inspect karo. Visible labels, positions, orientation, relative size/magnification, arrows/rays/lines, angles, distances, geometry aur markings ko observe karke neutral visual facts extract karo; sirf image-supported meaning interpret karo; phir relevant formula/concept apply karke har option ko calculation + visible facts se compare karo aur final answer ko image + wording se cross-check karo. Missing details assume mat karo aur text/figure conflict ko ignore mat karo. **Optics/ray-diagram mein kisi ek clue se lens/mirror/device identify mat karo; position + orientation + size/magnification + ray/geometry evidence together match karo.** Numerical diagram mein exact visible values pehle read karo, phir calculate karo. Visual unclear/contradictory/insufficient ho to high confidence force mat karo.
+` : '';
+
   const systemInstruction = `
 Role: Aap ek Expert SSC/RRB Exam Teacher hain, 10+ saal coaching experience. Style: friendly, motivating, to-the-point — real classroom teacher jaisa.
 
@@ -6159,8 +6163,7 @@ ${langRule}
 2. Subjects: Math, Formulas, Tricks, Reasoning, GK, English.
 3. Concise/precise — short explanation by default, detail sirf tabhi jab maanga jaaye.
 4. Question ko **independently solve karo**. Kisi stored answer key, reference explanation, ya pre-supplied correct answer ko source of truth mat maano. Apni reasoning se answer nikaalo aur explanation apne words mein do.
-4A. **IMAGE/DIAGRAM QUESTIONS — HARD VISUAL-FIRST PROTOCOL (MANDATORY):** Agar question ke saath image, figure, diagram, graph, map, table, circuit, ray diagram, geometry figure ya koi visual attached ho, to **answer/rule recall karne se pehle actual image ko inspect karo**. Image ko decorative/reference picture mat samjho — **figure ke visible facts answer ke evidence hain**. Strict order: **(1) OBSERVE:** exact visible labels, positions, left/right/top/bottom placement, orientation, relative size/magnification, arrows/rays/lines/curves, angles, distances, geometry, symbols/markings; **(2) EXTRACT:** neutral visual-facts set banao; **(3) INTERPRET:** sirf wahi meaning lo jo image support karti hai; **(4) CALCULATE/APPLY:** diagram ke values/relations par relevant formula/concept lagao; **(5) COMPARE:** har option ko calculation + ALL visible facts se match/eliminate karo; **(6) CROSS-CHECK:** final option ko image aur wording dono se dobara verify karo. **Final answer tab tak mat do jab tak selected option visual evidence aur question wording se consistent na ho.** Visual ko stored answer key, reference explanation, user choice, remembered textbook pattern ya ek familiar clue se replace mat karo. Missing/unreadable labels, angles, distances, ray directions, positions ya geometry assume mat karo. Text aur figure conflict kare to conflict ko silently ignore mat karo. **Optics/ray-diagram mein kisi ek clue se lens/mirror/device identify karna strictly prohibited hai; position + orientation + size/magnification + ray/geometry evidence together match karo.** Numerical diagram mein exact visible values pehle read karo, phir calculate karo, phir options match karo. Agar visual unclear, contradictory, incomplete ya insufficient ho, high confidence mat do; best-supported option ke saath medium/low confidence do.
-5. MIND METHOD (Maths/Reasoning only): Purely mental calculation se solve karo (bina pen-paper). Priority: (a) Unitary method/ratio-percentage shortcut/approximation/reverse-checking — ye MIND TRICK hai. (b) Option Elimination — sirf LAST RESORT jab (a) na bane. AVOID variable algebra (X/Y equation) jab tak koi mental trick bilkul na ho — iski jagah Ratio-Unit method use karo; algebra sabse aakhri resort, elimination se bhi baad. Complex multiplication ho to round numbers me todo. GK/English pe ye rule apply nahi.
+${imageProtocol}5. MIND METHOD (Maths/Reasoning only): Purely mental calculation se solve karo (bina pen-paper). Priority: (a) Unitary method/ratio-percentage shortcut/approximation/reverse-checking — ye MIND TRICK hai. (b) Option Elimination — sirf LAST RESORT jab (a) na bane. AVOID variable algebra (X/Y equation) jab tak koi mental trick bilkul na ho — iski jagah Ratio-Unit method use karo; algebra sabse aakhri resort, elimination se bhi baad. Complex multiplication ho to round numbers me todo. GK/English pe ye rule apply nahi.
 6. SIRF EK solution do, dono ek saath mat dikhao. "Vistrit/Basic Method" sirf explicitly maange jaane par. Response crisp rakho, extra verification steps mat dikhao.
 7. Solution ke end mein 1-2 lines: a) Trick ka naam (jaise "Ye Unitary Method Trick hai") b) General Formula/Shortcut (agar possible ho) is TYPE ke sabhi similar questions ke liye. YE RULE MATHS/REASONING KE LIYE PEHLE KI TARAH HI APPLY HOGA. GK par is Rule ka "Trick ka naam" wala hissa APPLY NAHI HOGA.
 8. GK/Current Affairs/English/Science/History/Polity: Expert GS Teacher ki tarah direct, factual, exam-focused jawab do. Core answer chhota (Rule 3). GK mein "Trick ka naam", "Formula" ya "Shortcut" NAHI dena hai. Sahi answer ki short explanation do aur **baaki sabhi options ko bhi alag-alag 1 chhoti line mein batao ki ve kyun sahi nahi hain/ve kis se sambandhit hain.** Explanation ke poore reply mein sirf important, exam-useful facts, keywords, names, dates, numbers, definitions aur distinctions ko context ke anusaar **bold** karke clearly highlight karo; poore paragraph ya normal text ko bold mat karo. Explanation ke end mein sirf 1 closely-related, exam-useful additional fact do aur use explanation se alag nayi line mein exactly **"👉 रोचक तथ्य:"** label ke saath clearly highlight karo; "रोचक तथ्य" ke andar bhi important information ko **bold** karo. Ye fact question ke main topic se directly related aur exam ke liye useful ho. GK mein koi mnemonic/trick section na jodo. बाकी subjects ke existing behavior ko change mat karo.
@@ -6180,8 +6183,10 @@ IMPORTANT EXAM-ANSWER RECONCILIATION: First solve the question independently fro
 `;
 
   const taskLine = (appLang === 'en')
-    ? "\nTask: First solve independently, then perform the EXAM-ANSWER RECONCILIATION using the supplied Exam Expected Answer reference. If no mismatch exists, use your independently derived answer. If they disagree, only use the Exam Expected Answer as final when you can name the exact, concrete wording/convention reason for the disagreement, and clearly note it in one short line; otherwise keep your own independently derived answer as final and tell the student both answers differ, stating each, instead of silently preferring the stored key. Never blindly copy the stored answer; independently verify it first. If an image/diagram is attached, the image is evidence, not decoration. Follow this order internally: OBSERVE actual visible facts -> EXTRACT neutral visual facts -> INTERPRET only what is supported -> CALCULATE/APPLY the relevant rule -> COMPARE every option against the calculation and ALL visible facts -> CROSS-CHECK the final option against the image AND wording. Read labels, positions, angles, directions, sizes and ray/geometry carefully before recalling a familiar pattern. Never invent missing geometry or silently ignore contradictions. Do not let the user choice, stored answer key, reference explanation, or remembered textbook pattern influence the answer. For optics, never identify lens/mirror from one clue alone; use position + orientation + size/magnification + ray/geometry evidence together. For numerical diagrams, extract exact visible values first, then calculate, then match options. If visual evidence is unclear/contradictory/insufficient, do not force high confidence; choose the best-supported option with medium/low confidence."
-    : "\nTask: पहले स्वतंत्र रूप से हल करो, फिर दिए गए Exam Expected Answer reference के साथ EXAM-ANSWER RECONCILIATION करो। यदि mismatch नहीं है, तो independently निकला answer ही final रखो। यदि दोनों अलग हों, to Exam Expected Answer ko final तभी maano jab tum EXACT, CONCRETE wording/convention ka reason bata sako (jaise \"question X ke sapeksh Y maang raha tha, maine pehle Y ke sapeksh X nikal liya\"). Sirf ye lagna ki \"convention alag ho sakta hai\" kaafi nahi hai — agar specific reason identify nahi kar pa rahe, to apna independently derive kiya answer hi final rakho, aur student ko ek chhoti line mein bata do ki tumhara solve answer stored key se alag hai, dono batao — chupke se stored key ko mat prefer karo। Stored answer ko बिना jaanche blindly copy मत करो; पहले independent verification जरूरी है। यदि चित्र/डायग्राम है, तो image evidence है, decoration नहीं। अंदर ही अंदर यह क्रम अपनाओ: पहले actual image के visible facts OBSERVE करो -> neutral visual facts EXTRACT करो -> केवल supported meaning INTERPRET करो -> relevant formula/concept CALCULATE/APPLY करो -> हर option को calculation + सभी visible facts से COMPARE करो -> final option को image और wording से CROSS-CHECK करो। Labels, positions, angles, directions, sizes और ray/geometry को familiar pattern याद करने से पहले ध्यान से पढ़ो। Missing geometry/details assume मत करो और contradiction को silently ignore मत करो। User choice, stored answer key, reference explanation या remembered textbook pattern को उत्तर पर प्रभाव न डालने दो। Optics में किसी एक clue से lens/mirror तय मत करो; position + orientation + size/magnification + ray/geometry evidence को साथ में match करो। Numerical diagrams में exact visible values पहले निकालो, फिर calculate करो, फिर options match करो। Visual unclear/contradictory/insufficient हो तो high confidence force मत करो; best-supported option के साथ medium/low confidence रखो। RELATIONAL/DIRECTIONAL WORDING CHECK: “X के संबंध में Y”, “X के सापेक्ष Y”, “X with respect to Y”, “X relative to Y”, “from X to Y” जैसे phrases में पहले requested ratio/relationship को symbolic रूप में तय करो (जैसे n_X/n_Y), फिर diagram की actual direction के अनुसार formula apply करो। किसी familiar formula जैसे sin(i)/sin(r) को देखकर ratio अपने-आप reverse मत करो। यदि wording, diagram convention या options में conflict हो तो उसे पहचानो, silently force मत करो, और confidence कम करो।";
+    ? `
+Task: First solve independently, then perform the EXAM-ANSWER RECONCILIATION using the supplied Exam Expected Answer reference. If no mismatch exists, use your independently derived answer. If they disagree, only use the Exam Expected Answer as final when you can name the exact, concrete wording/convention reason for the disagreement, and clearly note it in one short line; otherwise keep your own independently derived answer as final and tell the student both answers differ, stating each, instead of silently preferring the stored key. Never blindly copy the stored answer; independently verify it first.${qContext.imageData ? ' If an image/diagram is attached, the image is evidence, not decoration. Observe actual visible facts -> extract neutral visual facts -> interpret only what is supported -> calculate/apply -> compare every option -> cross-check the final answer against image and wording. Read labels, positions, angles, directions, sizes and ray/geometry carefully. Never invent missing geometry or silently ignore contradictions. For optics, never identify lens/mirror from one clue alone; use position + orientation + size/magnification + ray/geometry evidence together. For numerical diagrams, extract exact visible values first, then calculate, then match options. If visual evidence is unclear/contradictory/insufficient, do not force high confidence.' : ''}`
+    : `
+Task: पहले स्वतंत्र रूप से हल करो, फिर दिए गए Exam Expected Answer reference के साथ EXAM-ANSWER RECONCILIATION करो। यदि mismatch नहीं है, तो independently निकला answer ही final रखो। यदि दोनों अलग हों, to Exam Expected Answer ko final तभी maano jab tum EXACT, CONCRETE wording/convention ka reason bata sako (jaise "question X ke sapeksh Y maang raha tha, maine pehle Y ke sapeksh X nikal liya"). Sirf ye lagna ki "convention alag ho sakta hai" kaafi nahi hai — agar specific reason identify nahi kar pa rahe, to apna independently derive kiya answer hi final rakho, aur student ko ek chhoti line mein bata do ki tumhara solve answer stored key se alag hai, dono batao — chupke se stored key ko mat prefer karo। Stored answer ko बिना jaanche blindly copy मत करो; पहले independent verification जरूरी है।${qContext.imageData ? ' यदि चित्र/डायग्राम है, तो image evidence है, decoration नहीं। पहले actual image के visible facts OBSERVE करो -> neutral visual facts EXTRACT करो -> केवल supported meaning INTERPRET करो -> relevant formula/concept CALCULATE/APPLY करो -> हर option को calculation + सभी visible facts से COMPARE करो -> final option को image और wording से CROSS-CHECK करो। Labels, positions, angles, directions, sizes और ray/geometry को familiar pattern याद करने से पहले ध्यान से पढ़ो। Missing geometry/details assume मत करो और contradiction को silently ignore मत करो। User choice, stored answer key, reference explanation या remembered textbook pattern को उत्तर पर प्रभाव न डालने दो। Optics में किसी एक clue से lens/mirror तय मत करो; position + orientation + size/magnification + ray/geometry evidence को साथ में match करो। Numerical diagrams में exact visible values पहले निकालो, फिर calculate करो, फिर options match करो। Visual unclear/contradictory/insufficient हो तो high confidence force मत करो। RELATIONAL/DIRECTIONAL WORDING CHECK: “X के संबंध में Y”, “X के सापेक्ष Y”, “X with respect to Y”, “X relative to Y”, “from X to Y” जैसे phrases में पहले requested ratio/relationship को symbolic रूप में तय करो (जैसे n_X/n_Y), फिर diagram की actual direction के अनुसार formula apply करो। किसी familiar formula जैसे sin(i)/sin(r) को देखकर ratio अपने-आप reverse मत करो। यदि wording, diagram convention या options में conflict हो तो उसे पहचानो, silently force मत करो, और confidence कम करो।' : ''}`;
 
   // Normal auto-explain also receives the question's stored Base64 figure
   // as a native Gemini image input, when one exists. The text prompt stays
@@ -6283,6 +6288,44 @@ document.addEventListener("click", (event) => {
   if (pop && pop.classList.contains("open") && !pop.contains(event.target) && event.target !== btn) closeAISettings();
 });
 
+async function readGeminiStreamingResponse(response, onTextChunk) {
+  if (!response.body) throw new Error("Streaming response body unavailable.");
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let fullText = "";
+
+  const consumeEvent = async (eventText) => {
+    const lines = eventText.split(/\r?\n/);
+    const dataLines = lines
+      .filter(line => line.startsWith("data:"))
+      .map(line => line.slice(5).trimStart());
+    if (!dataLines.length) return;
+    const dataText = dataLines.join("\n").trim();
+    if (!dataText || dataText === "[DONE]") return;
+    let chunk;
+    try { chunk = JSON.parse(dataText); } catch (_) { return; }
+    const parts = chunk?.candidates?.[0]?.content?.parts;
+    if (!Array.isArray(parts)) return;
+    const text = parts.map(p => typeof p?.text === "string" ? p.text : "").join("");
+    if (!text) return;
+    fullText += text;
+    if (typeof onTextChunk === "function") onTextChunk(text, fullText);
+  };
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const events = buffer.split(/\r?\n\r?\n/);
+    buffer = events.pop() || "";
+    for (const eventText of events) await consumeEvent(eventText);
+  }
+  buffer += decoder.decode();
+  if (buffer.trim()) await consumeEvent(buffer);
+  return fullText;
+}
+
 async function requestGeminiResponse(isAutoScanRequest = false) {
   if (isAIGenerating) return;
   isAIGenerating = true;
@@ -6310,32 +6353,24 @@ async function requestGeminiResponse(isAutoScanRequest = false) {
         parts: [{
           text: `Reply ONLY in plain Unicode text.
 
-Never use LaTeX or Markdown math.
-Never use $, $$, \\(...\\), \\[...\\], \\sqrt, \\text, \\times, \\div, \\%.
-Use only plain Unicode symbols like × ÷ √ π ≤ ≥ ≠ ± °.
-Write standalone fractions as 3/4 (plain text, never wrap formulas in LaTeX).
-Write percent as a plain % sign only — never \\% and never wrap anything in $ signs. WRONG: "$20\\%=1/5$". RIGHT: "20% = 1/5".
+Never use LaTeX or Markdown math. Use plain Unicode symbols such as × ÷ √ π ≤ ≥ ≠ ± °. Standalone fractions stay like 3/4. Percent uses %.
 
-MIXED FRACTION EXCEPTION (the ONLY allowed use of \\frac):
-- A mixed fraction is a whole number combined with a fraction, e.g. "16 and two-thirds" or "16(2/3)".
-- For a mixed fraction ONLY, write the fractional part as \\frac{numerator}{denominator} placed immediately after the whole number with no space, e.g. 16\\frac{2}{3}% or 14\\frac{2}{7}%.
-- Do NOT use \\frac for a plain standalone fraction that is not attached to a whole number — e.g. a lone 2/3 stays as plain "2/3", never \\frac{2}{3}.
-- Do NOT use \\frac, \\sqrt, or any other LaTeX command anywhere else in the reply.
-- This same mixed-fraction rule applies everywhere you write one — in the question, in each option, in the final answer, and in the explanation.
+MIXED FRACTION EXCEPTION: Only when a whole number is combined with a fraction, e.g. 16 and two-thirds, write the fractional part as \frac{2}{3} immediately after the whole number. Do not use \frac anywhere else.
 
-STRICT FORMATTING RULES:
-- Use Markdown formatting.
-- Bold ONLY important words, concepts, formulas, definitions, dates, names, rules, tricks, keywords and the final answer using **bold**.
-- Keep normal explanations in plain text.
-- Never bold the entire paragraph or every sentence.
-- Use bullet points where appropriate.
-- Keep answers clean, mobile-friendly and easy to read.
-- Follow these formatting rules for ALL subjects including Maths, Reasoning, English, General Science, History, Geography, Polity, Economics, Current Affairs, Computer and every other subject.
-- Do not overuse bold.
-- Hindi responses MUST use Devanagari script. Never output Urdu, Arabic, or Persian script.
-- Do not mix even a single Urdu/Arabic/Persian-script word or letter into Hindi text.
-- If a Hindi word has multiple forms, use the standard Devanagari Hindi spelling.
-- Before sending the final answer, scan the entire response and replace any accidental Urdu/Arabic/Persian-script text with Hindi Devanagari.
+FORMATTING:
+- Use Markdown; bold only important words, concepts, formulas, definitions, dates, names, rules, tricks, keywords and the final answer.
+- Keep replies clean, concise, mobile-friendly and exam-focused.
+- Hindi replies must use Devanagari only; never Urdu/Arabic/Persian script.
+
+TEACHING RULES:
+1. Act as an expert SSC/RRB exam teacher. Be friendly, precise and to-the-point.
+2. Solve independently. Do not treat a stored answer key, reference explanation or user choice as proof.
+3. For IMAGE/DIAGRAM questions, inspect the actual image before answering. Observe visible labels, positions, orientation, sizes, arrows/rays, angles, distances and markings; extract the visual facts; interpret only what the image supports; calculate/apply the relevant concept; compare all options; then cross-check the final answer against the image and wording. Never replace an unclear visual with a remembered textbook pattern. Do not assume missing values. In optics/ray diagrams, identify the device only after matching position, orientation, size/magnification and ray/geometry evidence together.
+4. Maths/Reasoning: use mental-friendly unitary/ratio/percentage shortcuts or approximation first, then option elimination; avoid algebra unless necessary. Give only one solution. End with a short trick/formula when useful.
+5. GK/Current Affairs/English/Science/History/Polity: direct, factual and exam-focused. Explain the correct answer briefly; for GK, briefly state why the other options are not correct/what they refer to, and end with exactly one closely related exam-useful fact labeled **👉 रोचक तथ्य:**. Do not add a maths-style trick/formula.
+6. Do not repeat the full question and all options at the top unless the user explicitly asks for them. Start directly with the answer/solution.
+
+For automatic question explanations, independently solve first, then reconcile with the supplied Exam Expected Answer. If they agree, use the result. If they differ, re-check wording, diagram, direction, units, notation and calculation; switch to the stored answer only when there is a specific, concrete reason. Otherwise keep your independent answer and briefly state the mismatch. Never blindly copy the stored key.
 `
         }]
       },
@@ -6381,16 +6416,45 @@ STRICT FORMATTING RULES:
     if (modelUsed) console.log('[Gemini model used]:', modelUsed);
     if (modelAttempts) console.log('[Gemini attempts]:', modelAttempts);
 
-    const resData = await res.json();
-    showAITyping(false);
-
     let replyText = "";
-    if (resData && resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts) {
-      replyText = resData.candidates[0].content.parts.map(p => p.text).join('');
-    } else if (resData && resData.text) {
-      replyText = resData.text;
+    let streamBubble = null;
+    const contentType = (res.headers.get('content-type') || '').toLowerCase();
+    const isStreamingResponse = contentType.includes('text/event-stream');
+
+    if (isStreamingResponse) {
+      // Stream directly into a temporary bot bubble so the user sees the answer
+      // as Gemini generates it. The final full text is still kept for history,
+      // quiz-card parsing and the existing <<<QUIZDATA>>> stripping logic.
+      showAITyping(false);
+      let streamedDisplay = "";
+      const ensureStreamBubble = () => {
+        if (streamBubble) return streamBubble;
+        streamBubble = document.createElement('div');
+        streamBubble.className = 'ai-msg bot';
+        const container = document.getElementById('aiChatBody');
+        if (container) container.appendChild(streamBubble);
+        return streamBubble;
+      };
+      replyText = await readGeminiStreamingResponse(res, (_chunk, fullText) => {
+        const bubble = ensureStreamBubble();
+        let content = bubble.querySelector('.ai-stream-content');
+        if (!content) { content = document.createElement('div'); content.className = 'ai-stream-content notranslate'; content.setAttribute('translate','no'); bubble.appendChild(content); }
+        streamedDisplay = fullText.replace(/<<<QUIZDATA>>>[\s\S]*?<<<END>>>/g, '').trim();
+        try { content.innerHTML = formatAIResponseText(streamedDisplay); } catch (_) { content.textContent = streamedDisplay; }
+        const scroller = bubble.closest('.ai-messages, .ai-chat-messages, #aiMessages');
+        if (scroller) scroller.scrollTop = scroller.scrollHeight;
+      });
+      if (!replyText.trim()) throw new Error("Streaming response was empty.");
     } else {
-      replyText = "Sorry, there was a problem retrieving the answer. Please try again.";
+      const resData = await res.json();
+      showAITyping(false);
+      if (resData && resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts) {
+        replyText = resData.candidates[0].content.parts.map(p => p.text).join('');
+      } else if (resData && resData.text) {
+        replyText = resData.text;
+      } else {
+        replyText = "Sorry, there was a problem retrieving the answer. Please try again.";
+      }
     }
 
     aiChatHistory.push({
@@ -6409,6 +6473,11 @@ STRICT FORMATTING RULES:
     quizCardPendingRequest = false;
 
     if (!renderedAsQuizCard) {
+      // The stream bubble is only a live preview; replace it with the app's
+      // normal final renderer so existing message styling/metadata stays intact.
+      if (typeof streamBubble !== 'undefined' && streamBubble && streamBubble.parentNode) {
+        streamBubble.parentNode.removeChild(streamBubble);
+      }
       // Even outside quiz-card mode, replies can carry a trailing
       // <<<QUIZDATA>>>...<<<END>>> block (e.g. the next question, appended
       // after this answer's explanation). Never show that raw block to the
