@@ -2925,6 +2925,42 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 <!-- RE-ENGINEERED DYNAMIC PREMIUM VIEW RENDERING CORE INTERFACE LAYER -->
 <script>
+// Read quiz data together with its image constants, without running its quiz UI.
+function parseQuizSource(source) {
+  let code = source.replace(/^\uFEFF/, '');
+  if (/^\s*</.test(code)) {
+    const doc = new DOMParser().parseFromString(code, 'text/html');
+    code = Array.from(doc.querySelectorAll('script:not([src])'))
+      .filter(script => !script.type || /^(?:text|application)\/javascript$/i.test(script.type))
+      .map(script => script.textContent).join('\n');
+  }
+  const declaration = /\b(?:const|let|var)\s+data\s*=\s*\[/.exec(code);
+  if (!declaration) throw new Error('Quiz file has no data array.');
+  const start = declaration.index + declaration[0].lastIndexOf('[');
+  let depth = 0, quote = null, escaped = false, comment = null, end = -1;
+  for (let i = start; i < code.length; i++) {
+    const ch = code[i], next = code[i + 1];
+    if (comment === 'line') { if (ch === '\n' || ch === '\r') comment = null; continue; }
+    if (comment === 'block') { if (ch === '*' && next === '/') { comment = null; i++; } continue; }
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === quote) quote = null;
+      continue;
+    }
+    if (ch === '/' && next === '/') { comment = 'line'; i++; continue; }
+    if (ch === '/' && next === '*') { comment = 'block'; i++; continue; }
+    if (ch === '"' || ch === "'" || ch === '`') { quote = ch; continue; }
+    if (ch === '[') depth++;
+    if (ch === ']' && --depth === 0) { end = i + 1; break; }
+  }
+  if (end < 0) throw new Error('Quiz data array is incomplete.');
+  const questions = new Function(code.slice(0, end) + ';\nreturn data;')();
+  if (!Array.isArray(questions) || !questions.length) throw new Error('Quiz data must be a non-empty array.');
+  return questions;
+}
+
+
 
 // Move blur-overlay modals to <body> so they escape #quizEngineBox's
 // position:fixed + overflow:hidden wrapper — iOS Safari fails to render
@@ -3191,13 +3227,7 @@ async function openBookmarkedQuestion(bookmark){
       const response = await fetch(`./${bookmark.path}`);
       if(!response.ok) throw new Error('File Download Failed');
       const source = await response.text();
-      let quizQuestions;
-      try{ quizQuestions = new Function(source + "\nreturn data;")(); }
-      catch(e){
-        const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
-        if(!match) throw e;
-        quizQuestions = new Function('return ' + match[1])();
-      }
+      const quizQuestions = parseQuizSource(source);
       if(!Array.isArray(quizQuestions) || !quizQuestions[bookmark.questionIndex]) throw new Error('Saved question not found');
       item = JSON.parse(JSON.stringify(quizQuestions[bookmark.questionIndex]));
     }
@@ -3281,13 +3311,7 @@ async function startBookmarkedTestQuiz(bookmarks){
             const response = await fetch(`./${b.path}`);
             if(!response.ok) throw new Error('File Download Failed');
             const source = await response.text();
-            let quizQuestions;
-            try{ quizQuestions = new Function(source + "\nreturn data;")(); }
-            catch(e){
-              const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
-              if(!match) throw e;
-              quizQuestions = new Function('return ' + match[1])();
-            }
+            const quizQuestions = parseQuizSource(source);
             fileCache[b.path]=Array.isArray(quizQuestions)?quizQuestions:[];
           }
           const quizQuestions=fileCache[b.path];
@@ -4779,14 +4803,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     const response = await fetch(`./${quizPath}`);
     if (!response.ok) throw new Error("File Download Failed");
     const source = await response.text();
-    let quizQuestions;
-    try{
-      quizQuestions = new Function(source + "\nreturn data;")();
-    }catch(e){
-      const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
-      if(!match) throw e;
-      quizQuestions = new Function("return " + match[1])();
-    }
+    const quizQuestions = parseQuizSource(source);
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
