@@ -1940,6 +1940,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   user-select: none !important;
   -webkit-touch-callout: none !important;
 }
+#ai-bottom-sheet.ai-pencil-on #ai-chat-body,
+#ai-bottom-sheet.ai-pencil-on .ai-chat-body,
+#ai-bottom-sheet.ai-pencil-on .ai-chat-body * { touch-action:none !important; }
 #ai-bottom-sheet.ai-pencil-on {
   touch-action: none !important;
   overscroll-behavior: none !important;
@@ -4315,7 +4318,7 @@ function showEmptyState() {
   // mid-word when shifting to the next letter. Now the pencil can write
   // anywhere outside the named control zones, without interruption.
   var EXCLUDED_ZONE_SELECTOR = [
-    '.floating-quiz-header', '#controls', '#pencilTools',
+    '.floating-quiz-header', '#controls', '#pencilTools', '#pencilInputCheck',
     '#exitConfirmModal', '#exitConfirmFade',
     '#pauseModal', '#pauseFade',
     '#submitConfirmModal', '#submitConfirmFade',
@@ -4368,7 +4371,7 @@ function showEmptyState() {
     // pointerrawupdate can both report the exact same physical sample with
     // slightly different timeStamp values, so this also dedupes across the
     // two fallback streams, not just repeats within one stream.
-    if(t<lastTime || (rawX===lastX && rawY===lastY)) return;
+    if(t<=lastTime || (rawX===lastX && rawY===lastY)) return;
     const dt=Math.max(1,t-lastTime);
     const speed=Math.hypot(rawX-lastX,rawY-lastY)/dt;
     // More filtering at low speed; catch up quickly on fast handwriting.
@@ -4424,7 +4427,7 @@ function showEmptyState() {
         pointerType:'pen', pointerId:activePointerId===null?-(t.identifier+1):activePointerId,
         clientX:t.clientX, clientY:t.clientY, pressure:t.force>0?t.force:0.5,
         timeStamp:e.timeStamp, target:t.target, stylusTouch:true,
-        preventDefault(){if(e.cancelable) e.preventDefault();},
+        preventDefault(){},
         stopPropagation(){e.stopPropagation();}
       };
       if(stylusTouchId===null){
@@ -4437,8 +4440,16 @@ function showEmptyState() {
     }
   }
 
+  window.__pencilInputState=window.__pencilInputState||{};
+  window.__pencilInputState.main=()=>({enabled,drawing,activePointerId,stylusTouchId,points:currentStroke?currentStroke.points.length:0});
   function start(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        move(e); return;
+      }
+    }
     if(!isPencil(e)) return;
     if(isInExcludedZone(e.target)) return;
     e.preventDefault();
@@ -4501,7 +4512,13 @@ function showEmptyState() {
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
@@ -4512,7 +4529,13 @@ function showEmptyState() {
   }
 
   function rawMove(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
@@ -4523,7 +4546,12 @@ function showEmptyState() {
   }
 
   function end(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      // Pointer cancellation can coexist with valid stylus touches. An actual
+      // matching pen release still closes the stroke if touchend is missing.
+      if(e.type!=='pointerup'||e.pointerType!=='pen'||e.pointerId!==activePointerId) return;
+      stylusTouchId=null;
+    }
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
     e.stopPropagation();
@@ -4770,16 +4798,12 @@ function showEmptyState() {
     document.addEventListener('selectstart',blockOptionAndSelection,{capture:true,passive:false});
     document.addEventListener('selectionchange',clearNativeSelection,{capture:true,passive:true});
 
-    // Palm-rejection fix: while pencil mode is active, suppress the browser's
-    // own touch handling for EVERY touch (including a resting palm), not just
-    // the pen. If we don't do this, WebKit sometimes treats the extra palm
-    // touch as a gesture candidate and pauses/cancels the pen's pointer
-    // stream mid-stroke until the pen is lifted and put down again.
+    // Keep app touch gestures away from ink without canceling finger contact.
     function blockAllTouch(e){
     routeStylusTouch(e);
       if(!enabled) return;
       if(isInExcludedZone(e.target)) return;
-      e.preventDefault();
+      // Do not cancel a finger-first touch sequence; CSS disables gestures.
     e.stopPropagation();
     }
     document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
@@ -7665,7 +7689,7 @@ if ('serviceWorker' in navigator) {
         pointerType:'pen', pointerId:activePointerId===null?-(t.identifier+1):activePointerId,
         clientX:t.clientX, clientY:t.clientY, pressure:t.force>0?t.force:0.5,
         timeStamp:e.timeStamp, target:t.target, stylusTouch:true,
-        preventDefault(){if(e.cancelable) e.preventDefault();},
+        preventDefault(){},
         stopPropagation(){e.stopPropagation();}
       };
       if(stylusTouchId===null){
@@ -7678,8 +7702,16 @@ if ('serviceWorker' in navigator) {
     }
   }
 
+  window.__pencilInputState=window.__pencilInputState||{};
+  window.__pencilInputState.ai=()=>({enabled,drawing,activePointerId,stylusTouchId,points:currentStroke?currentStroke.points.length:0});
   function start(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        move(e); return;
+      }
+    }
     if(!enabled||!canvas||e.target!==canvas||!isPen(e)) return;
     e.preventDefault();
     notePenEvent(e);
@@ -7749,7 +7781,7 @@ if ('serviceWorker' in navigator) {
     if(tool==='star') return;
     const r=canvas.getBoundingClientRect();
     const rawX=ev.clientX-r.left, rawY=ev.clientY-r.top, t=ev.timeStamp||performance.now();
-    if(t<lastTime || (rawX===lastX && rawY===lastY)) return;
+    if(t<=lastTime || (rawX===lastX && rawY===lastY)) return;
     const dt=Math.max(1,t-lastTime);
     const speed=Math.hypot(rawX-lastX,rawY-lastY)/dt;
     // More filtering at low speed; catch up quickly on fast handwriting.
@@ -7787,7 +7819,13 @@ if ('serviceWorker' in navigator) {
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
@@ -7797,7 +7835,13 @@ if ('serviceWorker' in navigator) {
     appendEvents(events.length?events:[e]);
   }
   function rawMove(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
@@ -7808,7 +7852,12 @@ if ('serviceWorker' in navigator) {
   }
 
   function end(e){
-    if(stylusTouchId!==null && !e.stylusTouch) return;
+    if(stylusTouchId!==null && !e.stylusTouch){
+      // Pointer cancellation can coexist with valid stylus touches. An actual
+      // matching pen release still closes the stroke if touchend is missing.
+      if(e.type!=='pointerup'||e.pointerType!=='pen'||e.pointerId!==activePointerId) return;
+      stylusTouchId=null;
+    }
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
     clearTip();
@@ -7866,23 +7915,16 @@ if ('serviceWorker' in navigator) {
   // is on, so a resting palm can't make WebKit cancel the pen's stream.
   function blockGesture(e){
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools, #pencilInputCheck')) return;
     e.preventDefault();
   }
 
-  // Same palm-rejection fix as the main engine, previously missing here:
-  // suppress the browser's own touch handling for EVERY touch (including a
-  // finger placed on screen BEFORE the pencil touches down), not just the
-  // pen. Without this, WebKit can treat that earlier finger touch as a
-  // gesture candidate and hold/cancel the pencil's pointer stream so
-  // nothing gets written until the pencil is lifted and put down again —
-  // this was the specific "finger first, then pencil doesn't write" bug in
-  // the AI sheet (the main quiz page already had this layer).
+  // Preserve the browser contact stream; CSS blocks pan/zoom in the ink area.
   function blockAllTouch(e){
     routeStylusTouch(e);
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
-    e.preventDefault();
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools, #pencilInputCheck')) return;
+      // Do not cancel a finger-first touch sequence; CSS disables gestures.
     e.stopPropagation();
   }
   document.addEventListener('touchstart', blockAllTouch, {capture:true, passive:false});
@@ -8120,6 +8162,49 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('touchcancel',onEnd,{passive:true,capture:true});
 })();
 </script>
+
+<script>
+(function(){
+  const button=document.createElement('button');
+  button.id='pencilInputCheck';
+  button.textContent='Pencil check';
+  button.style.cssText='position:fixed;left:8px;top:64px;z-index:1000001;font:12px system-ui;padding:7px;border:1px solid #777;border-radius:6px;background:white;color:#111;touch-action:manipulation';
+  const panel=document.createElement('pre');
+  panel.style.cssText='display:none;position:fixed;left:8px;top:100px;z-index:1000001;max-width:90vw;white-space:pre-wrap;pointer-events:none;background:rgba(255,255,255,.97);color:#111;border:1px solid #777;border-radius:6px;padding:8px;font:11px/1.35 monospace';
+  document.body.append(button,panel);
+  let opened=false,rows=[],counts={},lastMove={};
+  const base=performance.now();
+  function record(e){
+    if(!opened) return;
+    const pen=e.pointerType||'';
+    const kind=e.type+':'+pen;
+    counts[kind]=(counts[kind]||0)+1;
+    const now=performance.now();
+    if(e.type==='pointermove'||e.type==='pointerrawupdate'||e.type==='touchmove'){
+      if(now-(lastMove[kind]||0)<200)return;
+      lastMove[kind]=now;
+    }
+    let detail='';
+    if(e.changedTouches)detail=Array.from(e.changedTouches).map(t=>t.identifier+':'+(t.touchType||'unknown')).join(',');
+    else detail=pen+' id='+e.pointerId+' primary='+e.isPrimary+' buttons='+e.buttons;
+    rows.push(((now-base)/1000).toFixed(1)+' '+e.type+' '+detail);
+    rows=rows.slice(-12);
+  }
+  ['pointerdown','pointermove','pointerrawupdate','pointerup','pointercancel','touchstart','touchmove','touchend','touchcancel','gesturestart'].forEach(type=>window.addEventListener(type,record,{capture:true,passive:true}));
+  button.addEventListener('click',()=>{
+    opened=!opened;panel.style.display=opened?'block':'none';button.textContent=opened?'Close check':'Pencil check';
+    if(opened){rows=[];counts={};lastMove={};}
+  });
+  setInterval(()=>{
+    if(!opened)return;
+    const state=window.__pencilInputState||{};
+    panel.textContent='PENCIL INPUT CHECK v1\n'+navigator.userAgent+'\n'+
+      Object.entries(state).map(([name,get])=>name+' '+JSON.stringify(get())).join('\n')+'\n'+
+      'Counts '+JSON.stringify(counts)+'\n'+rows.join('\n');
+  },250);
+})();
+</script>
+
 </body>
 
 </html>
