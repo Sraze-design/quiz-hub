@@ -1,0 +1,1005 @@
+const Q947_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q899. यदि धारा को दोगुना और विभवांतर को आधा कर दिया जाए, तो_______।",
+    q_en: "Q899. If the current is doubled and the potential difference is halved, then _______.",
+    tag: "RRC Group D 13/09/2022 (Morning)",
+    o_hi: [
+      "(a) प्रतिरोध आधा हो जाएगा",
+      "(b) प्रतिरोध चार गुना हो जाएगा",
+      "(c) प्रतिरोध एक-चौथाई हो जाएगा",
+      "(d) प्रतिरोध दोगुना हो जाएगा"
+    ],
+    o_en: [
+      "(a) Resistance will become half",
+      "(b) Resistance will become four times",
+      "(c) Resistance will become one-fourth",
+      "(d) Resistance will become double"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q900. किसी सीधे धारावाही चालक में क्रमशः धाराएं I, 2I और 3I प्रवाहित करने पर उससे r दूरी पर स्थित किसी बिंदु पर उत्पन्न चुंबकीय क्षेत्रों के परिमाण क्रमशः B₁, B₂ और B₃ हैं। निम्न में से कौन सा संबंध सही है?",
+    q_en: "Q900. When currents I, 2I and 3I respectively flow through a straight current-carrying conductor, the magnetic fields at a point at distance r are B₁, B₂ and B₃ respectively. Which relation is correct?",
+    tag: "RRC Group D 13/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) B₁ = B₂ = B₃",
+      "(b) B₁ > B₂ > B₃",
+      "(c) B₃ > B₂ > B₁",
+      "(d) B₂ > B₃ > B₁"
+    ],
+    o_en: [
+      "(a) B₁ = B₂ = B₃",
+      "(b) B₁ > B₂ > B₃",
+      "(c) B₃ > B₂ > B₁",
+      "(d) B₂ > B₃ > B₁"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q901. विद्युत शक्ति के लिए निम्न में से कौन सा सूत्र ग़लत है?",
+    q_en: "Q901. Which of the following formulae for electric power is incorrect?",
+    tag: "RRC Group D 13/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) P = V/I",
+      "(b) P = I²R",
+      "(c) P = IV",
+      "(d) P = V²/R"
+    ],
+    o_en: [
+      "(a) P = V/I",
+      "(b) P = I²R",
+      "(c) P = IV",
+      "(d) P = V²/R"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q902. प्रत्येक 20Ω के दो प्रतिरोध, समानांतर क्रम में संयोजित है। इसके बाद इस संयोजन को 20Ω के तीसरे प्रतिरोध और 3 V की बैटरी के साथ श्रेणी क्रम में संयोजित किया गया है। बैटरी द्वारा आपूर्ति की गई शक्ति ______ होगी।",
+    q_en: "Q902. Two 20 Ω resistors are connected in parallel. This combination is then connected in series with a third 20 Ω resistor and a 3 V battery. The power supplied by the battery will be ______.",
+    tag: "RRC Group D 13/09/2022 (Evening)",
+    o_hi: [
+      "(a) 0.675 W",
+      "(b) 0.15 W",
+      "(c) 1.35 W",
+      "(d) 0.30 W"
+    ],
+    o_en: [
+      "(a) 0.675 W",
+      "(b) 0.15 W",
+      "(c) 1.35 W",
+      "(d) 0.30 W"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q903. यदि किसी परिपथ में प्रतिरोध को स्थिर रखते हुए उसकी धारा और विभवान्तर को तीन गुना कर दिया जाए, तो शक्ति में _____वृद्धि होगी।",
+    q_en: "Q903. If the resistance in a circuit is kept constant while its current and potential difference are both made three times, the power will increase by _____.",
+    tag: "RRC Group D 14/09/2022 (Morning)",
+    o_hi: [
+      "(a) तीन गुना",
+      "(b) छह गुना",
+      "(c) एक तिहाई",
+      "(d) नौ गुना"
+    ],
+    o_en: [
+      "(a) Three times",
+      "(b) Six times",
+      "(c) One-third",
+      "(d) Nine times"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q904. 4 Ω प्रतिरोध वाले एक चालक की कुंडली में 1 mA की धारा प्रेरित होने पर कुंडली में प्रेरित विद्युतवाहक बल (EMF) निम्नांकित में से कितना होगा?",
+    q_en: "Q904. If a current of 1 mA is induced in a conducting coil of resistance 4 Ω, what will be the induced EMF in the coil?",
+    tag: "RRC Group D 14/09/2022 (Morning)",
+    o_hi: [
+      "(a) 1 V",
+      "(b) 4 V",
+      "(c) 4 mV",
+      "(d) 1 mV"
+    ],
+    o_en: [
+      "(a) 1 V",
+      "(b) 4 V",
+      "(c) 4 mV",
+      "(d) 1 mV"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q905. 100Ω प्रतिरोध वाले चालक में 2 A की अपरिवर्तित धारा का प्रवाह होने पर, चालक पर विभवान्तर निम्न में से कितना होगा?",
+    q_en: "Q905. If a constant current of 2 A flows through a conductor of resistance 100 Ω, what will be the potential difference across it?",
+    tag: "RRC Group D 15/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 50",
+      "(b) 20 V",
+      "(c) 200 V",
+      "(d) 0.02 V"
+    ],
+    o_en: [
+      "(a) 50",
+      "(b) 20 V",
+      "(c) 200 V",
+      "(d) 0.02 V"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q906. यदि एक टोस्टर को 220 V AC के बजाय 440 V AC से जोड़ा जाए, तो प्रति सेकंड उत्पन्न होने वाली ऊष्मा, पहले उत्पन्न होने वाली ऊष्मा की _____होगी।",
+    q_en: "Q906. If a toaster is connected to 440 V AC instead of 220 V AC, the heat produced per second will be _____ of the heat produced earlier.",
+    tag: "RRC Group D 14/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) आधी",
+      "(b) एक-चौथाई",
+      "(c) चार गुनी",
+      "(d) दोगुनी"
+    ],
+    o_en: [
+      "(a) Half",
+      "(b) One-fourth",
+      "(c) Four times",
+      "(d) Double"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q907. विद्युत धारा द्वारा उत्पन्न ऊष्मा के लिए सही सूत्र _____है।",
+    q_en: "Q907. The correct formula for heat produced by electric current is _____.",
+    tag: "RRC Group D 15/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) H = R/T",
+      "(b) H = V.I.T",
+      "(c) H = V.I/T",
+      "(d) H = I².R"
+    ],
+    o_en: [
+      "(a) H = R/T",
+      "(b) H = V.I.T",
+      "(c) H = V.I/T",
+      "(d) H = I².R"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q908. 3 V बैटरी के साथ श्रृंखला में जुड़े दो बिजली के बल्ब (प्रत्येक 5 Ω प्रतिरोध के साथ) द्वारा खपत विद्युत शक्ति _____ है।",
+    q_en: "Q908. The electric power consumed by two electric bulbs, each of resistance 5 Ω, connected in series to a 3 V battery is _____.",
+    tag: "RRC Group D 15/09/2022 (Evening)",
+    o_hi: [
+      "(a) 0.3 W",
+      "(b) 3 W",
+      "(c) 0.9 W",
+      "(d) 1 W"
+    ],
+    o_en: [
+      "(a) 0.3 W",
+      "(b) 3 W",
+      "(c) 0.9 W",
+      "(d) 1 W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q909. जब एक हीटर द्वारा 1 मिनट 20 सेकण्ड में 60 KJ ऊष्मा उत्पन्न की जाती है तो इसकी शक्ति ______ है।",
+    q_en: "Q909. If a heater produces 60 kJ of heat in 1 minute 20 seconds, its power is ______.",
+    tag: "RRC Group D 15/09/2022 (Evening)",
+    o_hi: [
+      "(a) 750W",
+      "(b) 7.5 kW",
+      "(c) 1.5 kW",
+      "(d) 150W"
+    ],
+    o_en: [
+      "(a) 750 W",
+      "(b) 7.5 kW",
+      "(c) 1.5 kW",
+      "(d) 150 W"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q910. 12 V की आपूर्ति से संयोजित किए जाने पर एक बल्ब 36 W की शक्ति कर्षित करता है। यदि इसे 6 V की आपूर्ति से संयोजित किया जाए, तो उसके द्वारा उपभुक्त शक्ति कितनी होगी ?",
+    q_en: "Q910. A bulb draws 36 W of power when connected to a 12 V supply. If it is connected to a 6 V supply, what power will it consume?",
+    tag: "RRC Group D 16/09/2022 (Morning)",
+    o_hi: [
+      "(a) 12W",
+      "(b) 6W",
+      "(c) 9W",
+      "(d) 24W"
+    ],
+    o_en: [
+      "(a) 12 W",
+      "(b) 6 W",
+      "(c) 9 W",
+      "(d) 24 W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q911. एक घर में, 150 W रेटिंग वाला एक TV सेट 4 घंटे के लिए संचालित होता है, और 1500 W का विद्युत हीटर 25 मिनट के लिए संचालित होता है। TV सेट और विद्युत हीटर की दैनिक ऊर्जा खपत ________है।",
+    q_en: "Q911. In a house, a TV set rated 150 W operates for 4 hours and an electric heater of 1500 W operates for 25 minutes. The daily energy consumptions of the TV set and electric heater are ________.",
+    tag: "RRC Group D 16/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) क्रमशः 525 Wh और 500 Wh",
+      "(b) क्रमशः 500 Wh और 525 Wh",
+      "(c) क्रमशः 625 Wh और 600 Wh",
+      "(d) क्रमशः 600 Wh और 625 Wh"
+    ],
+    o_en: [
+      "(a) 525 Wh and 500 Wh respectively",
+      "(b) 500 Wh and 525 Wh respectively",
+      "(c) 625 Wh and 600 Wh respectively",
+      "(d) 600 Wh and 625 Wh respectively"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q912. यदि किसी तार से होकर 10 मिनट में 1200 C आवेश प्रवाहित होता है, तो उस तार में प्रवाहित धारा ज्ञात कीजिए।",
+    q_en: "Q912. If 1200 C of charge flows through a wire in 10 minutes, find the current through the wire.",
+    tag: "RRC Group D 16/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 3A",
+      "(b) 4A",
+      "(c) 2A",
+      "(d) 1.5A"
+    ],
+    o_en: [
+      "(a) 3 A",
+      "(b) 4 A",
+      "(c) 2 A",
+      "(d) 1.5 A"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q913. दो परिपथों A और B पर विचार कीजिए, और परिपथ A में RA प्रतिरोध वाले 12 प्रतिरोध संयोजित हैं, और परिपथ B में RB प्रतिरोध वाले 12 प्रतिरोध संयोजित हैं। प्रत्येक परिपथ में, प्रतिरोधों को इस प्रकार संयोजित किया गया है कि प्रत्येक परिपथ का निवल प्रतिरोध (net resistance) न्यूनतम हो। अब नगण्य आंतरिक प्रतिरोध वाली 30 V की एक बैटरी को अलग-अलग, प्रत्येक परिपथ में जोड़ने पर परिपथ A और परिपथ B द्वारा कर्षित धाराएं (current drawn) क्रमश: 10 A और 18 A हैं। RA और RB के मान क्या होंगे?",
+    q_en: "Q913. Consider two circuits A and B. Circuit A contains 12 resistors each of resistance RA, and circuit B contains 12 resistors each of resistance RB. In each circuit the resistors are connected so that the net resistance is minimum. A 30 V battery of negligible internal resistance is connected separately to each circuit, and the currents drawn by A and B are 10 A and 18 A respectively. What are RA and RB?",
+    tag: "RRC Group D 16/09/2022 (Evening)",
+    o_hi: [
+      "(a) RA= 26Ω और RB = 20Ω",
+      "(b) RA= 26Ω और RB = 25Ω",
+      "(c) RA= 36Ω और RB = 20Ω",
+      "(d) RA= 36Ω और RB = 15Ω"
+    ],
+    o_en: [
+      "(a) RA = 26 Ω and RB = 20 Ω",
+      "(b) RA = 26 Ω and RB = 25 Ω",
+      "(c) RA = 36 Ω and RB = 20 Ω",
+      "(d) RA = 36 Ω and RB = 15 Ω"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q914. समान लंबाई और समान प्रतिरोध वाले दो तार हैं, लेकिन उनके अनुप्रस्थ काट क्षेत्रफलों का अनुपात 1 : 8 है। उनके प्रतिरोधों का अनुपात क्या होगा?",
+    q_en: "Q914. There are two wires of equal length and equal resistance, but their cross-sectional areas are in the ratio 1 : 8. What will be the ratio of their resistances?",
+    tag: "RRC Group D 17/09/2022 (Morning)",
+    o_hi: [
+      "(a) 8 : 3",
+      "(b) 1 : 8",
+      "(c) 3 : 8",
+      "(d) 8 : 1"
+    ],
+    o_en: [
+      "(a) 8 : 3",
+      "(b) 1 : 8",
+      "(c) 3 : 8",
+      "(d) 8 : 1"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q915. यदि श्रेणी क्रम में सयोंजित 3Ω, 2Ω और 6Ω के तीन प्रतिरोधकों को 9V की बैटरी के साथ जोड़ा जाता है, तो 6Ω प्रतिरोधक में विभवांतर ज्ञात कीजिए।",
+    q_en: "Q915. If three resistors of 3 Ω, 2 Ω and 6 Ω connected in series are connected to a 9 V battery, find the potential difference across the 6 Ω resistor.",
+    tag: "RRC Group D 17/09/2022 (Morning)",
+    o_hi: [
+      "(a) 9 V",
+      "(b) 2.4 V",
+      "(c) 1.6 V",
+      "(d) 4.9 V"
+    ],
+    o_en: [
+      "(a) 9 V",
+      "(b) 2.4 V",
+      "(c) 1.6 V",
+      "(d) 4.9 V"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q916. आशुतोष ने दो ओमिक कंडक्टरों के लिए करंट के प्रतिकूल वोल्टेज प्लॉट किया और पाया कि इन दो कंडक्टरों की ढलान क्रमशः 10 और 50 है। यदि वही 20 V की बैटरी इन दोनों ओमिक तारों के बीच अलग-अलग जोड़ दी जाए, तो इन दोनों तारों में धारा प्रवाह का अनुपात क्या होगा ?",
+    q_en: "Q916. Ashutosh plotted voltage against current for two ohmic conductors and found their slopes to be 10 and 50 respectively. If the same 20 V battery is connected separately across the two wires, what is the ratio of currents through them?",
+    tag: "RRC Group D 17/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 5 : 2",
+      "(b) 5 : 1",
+      "(c) 5 : 3",
+      "(d) 5 : 4"
+    ],
+    o_en: [
+      "(a) 5 : 2",
+      "(b) 5 : 1",
+      "(c) 5 : 3",
+      "(d) 5 : 4"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q917. 100 Ω के एक प्रतिरोध में 15 मिनट तक 5A की धारा प्रवाहित होने पर उत्पन्न ऊष्मा ज्ञात कीजिए।",
+    q_en: "Q917. Find the heat produced when a current of 5 A flows through a resistance of 100 Ω for 15 minutes.",
+    tag: "RRC Group D 18/09/2022 (Morning)",
+    o_hi: [
+      "(a) 3.25 × 10⁶ J",
+      "(b) 2.25 × 10⁶ J",
+      "(c) 1.15 × 10⁷ J",
+      "(d) 1.05 × 10⁷ J"
+    ],
+    o_en: [
+      "(a) 3.25 × 10⁶ J",
+      "(b) 2.25 × 10⁶ J",
+      "(c) 1.15 × 10⁷ J",
+      "(d) 1.05 × 10⁷ J"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q918. एक विद्युत लैंप, 240 V DC स्रोत से संयोजित है। लैंप से प्रवाहित होने वाली धारा 0.25 A है। लैंप की शक्ति ज्ञात कीजिए।",
+    q_en: "Q918. An electric lamp is connected to a 240 V DC source. The current through the lamp is 0.25 A. Find the power of the lamp.",
+    tag: "RRC Group D 18/09/2022 (Morning)",
+    o_hi: [
+      "(a) 60W",
+      "(b) 80W",
+      "(c) 100W",
+      "(d) 40W"
+    ],
+    o_en: [
+      "(a) 60 W",
+      "(b) 80 W",
+      "(c) 100 W",
+      "(d) 40 W"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q919. एक घर में, क्रमश: 30 W, 60 W और 75 W रेटिंग वाले बल्ब A, B और C एक विद्युत स्रोत के साथ समानांतर क्रम में संयोजित हैं। इस स्थिति के लिए निम्न में से कौन सा सत्य होगा ?",
+    q_en: "Q919. In a house, bulbs A, B and C rated 30 W, 60 W and 75 W respectively are connected in parallel to an electric source. Which of the following is true?",
+    tag: "RRC Group D 18/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) सभी बल्बों की चमक समान होगी",
+      "(b) बल्ब A की चमक अधिकतम होगी",
+      "(c) बल्ब B की चमक न्यूनतम होगी",
+      "(d) बल्ब C की चमक अधिकतम होगी"
+    ],
+    o_en: [
+      "(a) All bulbs will have the same brightness",
+      "(b) Bulb A will have maximum brightness",
+      "(c) Bulb B will have minimum brightness",
+      "(d) Bulb C will have maximum brightness"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q920. मान लीजिए कि दो कुंडलियां A और B हैं। कुंडली A को कुंडली B से बदल दिया जाता है, जिसमें लूपों की संख्या, कुंडली A में लूपों की संख्या की दोगुनी है, और चुंबकीय फ्लक्स के परिवर्तन की दर नियत है। आरंभिक प्रेरित EMF और अंतिम प्रेरित EMF का अनुपात ज्ञात कीजिए।",
+    q_en: "Q920. Suppose there are two coils A and B. Coil A is replaced by coil B, which has twice the number of loops as coil A, while the rate of change of magnetic flux remains constant. Find the ratio of initial induced EMF to final induced EMF.",
+    tag: "RRC Group D 18/09/2022 (Evening)",
+    o_hi: [
+      "(a) 2 : 1",
+      "(b) 2 : 3",
+      "(c) 1 : 2",
+      "(d) 3 : 2"
+    ],
+    o_en: [
+      "(a) 2 : 1",
+      "(b) 2 : 3",
+      "(c) 1 : 2",
+      "(d) 3 : 2"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q921. दो तार A और B एक ही पदार्थ के बने हुए हैं, लेकिन A की लंबाई, B की लंबाई की 3 गुनी है, और A की अनुप्रस्थ काट, B की अनुप्रस्थ काट के 1/4 के बराबर है। A का प्रतिरोध कितना होगा ?",
+    q_en: "Q921. Two wires A and B are made of the same material, but A is three times as long as B and its cross-sectional area is one-fourth that of B. What will be the resistance of A?",
+    tag: "RRC Group D 18/09/2022 (Evening)",
+    o_hi: [
+      "(a) B के प्रतिरोध के 6 गुने के बराबर",
+      "(b) B के प्रतिरोध के 9 गुने के बराबर",
+      "(c) B के प्रतिरोध के 12 गुने के बराबर",
+      "(d) B के प्रतिरोध के 3 गुने के बराबर"
+    ],
+    o_en: [
+      "(a) 6 times the resistance of B",
+      "(b) 9 times the resistance of B",
+      "(c) 12 times the resistance of B",
+      "(d) 3 times the resistance of B"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q922. एक परिपथ, 5 Ω प्रत्येक के पांच प्रतिरोधी के संयोजन से बना है, और वे इस प्रकार संयोजित है कि परिपथ का प्रतिरोध अधिकतम है। इस परिपथ को 15 V की एक बैटरी से संयोजित किए जाने पर, परिपथ में प्रवाहित होने वाली धारा का मान क्या होगा?",
+    q_en: "Q922. A circuit is made from five resistors of 5 Ω each, connected so that the circuit resistance is maximum. When connected to a 15 V battery, what current flows in the circuit?",
+    tag: "RRC Group D 18/09/2022 (Evening)",
+    o_hi: [
+      "(a) 0.4 A",
+      "(b) 0.9 A",
+      "(c) 0.6 A",
+      "(d) 0.8 A"
+    ],
+    o_en: [
+      "(a) 0.4 A",
+      "(b) 0.9 A",
+      "(c) 0.6 A",
+      "(d) 0.8 A"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q923. एक विद्युत परिपथ में चार एक-समान बल्ब एक दूसरे के साथ समानांतर 10 V (नगण्य आंतरिक प्रतिरोध) की बैटरी के साथ सयोंजित हैं। जब चारों बल्ब जलते हैं, तो 4 A की धारा दर्ज की जाती है। तब परिपथ में क्षय शक्ति और प्रत्येक बल्ब का प्रतिरोध क्रमशः _____और ____ है।",
+    q_en: "Q923. In an electric circuit, four identical bulbs are connected in parallel to a 10 V battery of negligible internal resistance. When all four bulbs glow, a current of 4 A is recorded. The power dissipated in the circuit and the resistance of each bulb are respectively _____ and ____.",
+    tag: "RRC Group D 19/09/2022 (Morning)",
+    o_hi: [
+      "(a) 22.4 W, 1.4 Ω",
+      "(b) 40 W, 10 Ω",
+      "(c) 27.2 W, 1.7 Ω",
+      "(d) 24 W, 1.5 ΩA"
+    ],
+    o_en: [
+      "(a) 22.4 W, 1.4 Ω",
+      "(b) 40 W, 10 Ω",
+      "(c) 27.2 W, 1.7 Ω",
+      "(d) 24 W, 1.5 ΩA"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q924. 10Ω प्रतिरोध वाले एक चालक की कुंडली में -2V का प्रेरित विद्युतवाहक बल (EMF) होने पर कुंडली में प्रेरित धारा कितनी होगी?",
+    q_en: "Q924. If a conducting coil of resistance 10 Ω has an induced EMF of -2 V, what will be the induced current in the coil?",
+    tag: "RRC Group D 19/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) -0.2 A",
+      "(b) 2A",
+      "(c) 0.2 A",
+      "(d) -2A"
+    ],
+    o_en: [
+      "(a) -0.2 A",
+      "(b) 2 A",
+      "(c) 0.2 A",
+      "(d) -2 A"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q925. मान लीजिए कि किसी परिपथ में 220 V विद्युत आपूर्ति वाली लाइन पर कई विद्युत लैंपों का उपयोग किए जाने की आवश्यकता है, और बल्बों की रेटिंग 20 W निर्धारित है। यदि अधिकतम स्वीकार्य धारा 10 A है, तो 220 V लाइन के दोनों तारों के बीच एक दूसरे के समानांतर क्रम में संयोजित किए जा सकने वाले लैंपों की संख्या ज्ञात कीजिए।",
+    q_en: "Q925. Suppose several electric lamps rated 20 W are to be used on a 220 V supply line. If the maximum permissible current is 10 A, find the number of lamps that can be connected in parallel across the two wires of the 220 V line.",
+    tag: "RRC Group D 19/09/2022 (Evening)",
+    o_hi: [
+      "(a) 220",
+      "(b) 110",
+      "(c) 55",
+      "(d) 165"
+    ],
+    o_en: [
+      "(a) 220",
+      "(b) 110",
+      "(c) 55",
+      "(d) 165"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q926. 10Ω वाले प्रतिरोध में 5 मिनट तक 5 A की धारा प्रवाहित करने पर उत्पन्न ऊष्मीय ऊर्जा का मान क्या होगा ?",
+    q_en: "Q926. What is the heat energy produced when a current of 5 A flows through a 10 Ω resistor for 5 minutes?",
+    tag: "RRC Group D 19/09/2022 (Evening)",
+    o_hi: [
+      "(a) 7.5 × 10⁴ J",
+      "(b) 7.5 × 10⁵ J",
+      "(c) 7.5 × 10⁶ J",
+      "(d) 7.5 × 10³ J"
+    ],
+    o_en: [
+      "(a) 7.5 × 10⁴ J",
+      "(b) 7.5 × 10⁵ J",
+      "(c) 7.5 × 10⁶ J",
+      "(d) 7.5 × 10³ J"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q927. मान लीजिए कि दो परिपथ A और B हैं, जिनमें से प्रत्येक में छह प्रतिरोध हैं, और उनमें से प्रत्येक परिपथ का प्रतिरोध क्रमशः RA और RB है। प्रत्येक परिपथ में, प्रतिरोधों को इस प्रकार संयोजित किया गया है कि प्रत्येक परिपथ का निवल प्रतिरोध (net resistance) न्यूनतम हो। अब नगण्य आंतरिक प्रतिरोध वाली 20 V की एक बैटरी को अलग-अलग, प्रत्येक परिपथ में जोड़ने पर परिपथ A और परिपथ B द्वारा कर्षित धाराएं क्रमशः 6 A और 8 A हैं। RA और RB के मान क्या होंगे?",
+    q_en: "Q927. Suppose there are two circuits A and B, each containing six resistors, with the resistance of each resistor in the two circuits being RA and RB respectively. The resistors in each circuit are connected so that the net resistance is minimum. A 20 V battery of negligible internal resistance is connected separately to each circuit, and the currents drawn by A and B are 6 A and 8 A respectively. What are RA and RB?",
+    tag: "RRC Group D 19/09/2022 (Evening)",
+    o_hi: [
+      "(a) RA = 15Ω और RB = 20Ω",
+      "(b) RA = 20Ω और RB = 15Ω",
+      "(c) RA = 30Ω और RB = 15Ω",
+      "(d) RA = 15Ω और RB = 30Ω"
+    ],
+    o_en: [
+      "(a) RA = 15 Ω and RB = 20 Ω",
+      "(b) RA = 20 Ω and RB = 15 Ω",
+      "(c) RA = 30 Ω and RB = 15 Ω",
+      "(d) RA = 15 Ω and RB = 30 Ω"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q928. 15Ω प्रतिरोध वाली कुंडली A और 5Ω प्रतिरोध वाली कुंडली B को समय के साथ परिवर्तनशील चुंबकीय क्षेत्र के प्रभाव में रखे जाने पर इन कुंडलियों में प्रेरित धारा _______होगी।",
+    q_en: "Q928. When coil A of resistance 15 Ω and coil B of resistance 5 Ω are placed in a magnetic field varying with time, the induced currents in these coils will be _______.",
+    tag: "RRC Group D 19/09/2022 (Evening)",
+    o_hi: [
+      "(a) समान",
+      "(b) 1 : 1 के अनुपात में",
+      "(c) 1 : 2 के अनुपात में",
+      "(d) भिन्न"
+    ],
+    o_en: [
+      "(a) Equal",
+      "(b) In the ratio 1 : 1",
+      "(c) In the ratio 1 : 2",
+      "(d) Different"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q929. किसी परिपथ में, L लंबाई और A अनुप्रस्थ-काट के क्षेत्रफल वाले चांदी (silver) के तार को 5L लंबाई और 9A अनुप्रस्थ-काट क्षेत्रफल वाले एल्यूमीनियम (aluminium) के तार से बदल दिया जाता है। परिपथ के प्रतिरोध पर क्या प्रभाव पड़ेगा? (दिया गया है ρsilver = 1.6 × 10⁻⁸ Ω m और ρaluminium = 2.6 × 10⁻⁸ Ω m)",
+    q_en: "Q929. In a circuit, a silver wire of length L and cross-sectional area A is replaced by an aluminium wire of length 5L and cross-sectional area 9A. What effect will this have on the circuit resistance? (Given ρsilver = 1.6 × 10⁻⁸ Ω m and ρaluminium = 2.6 × 10⁻⁸ Ω m)",
+    tag: "RRC Group D 20/09/2022 (Morning)",
+    o_hi: [
+      "(a) बढ़कर पूर्व का 1.1 गुना हो जाएगा",
+      "(b) बढ़कर पूर्व का 1.2 गुना हो जाएगा",
+      "(c) घटकर पूर्व का 0.9 गुना हो जाएगा",
+      "(d) घटकर पूर्व का 0.8 गुना हो जाएगा"
+    ],
+    o_en: [
+      "(a) It will increase to 1.1 times the previous value",
+      "(b) It will increase to 1.2 times the previous value",
+      "(c) It will decrease to 0.9 times the previous value",
+      "(d) It will decrease to 0.8 times the previous value"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q930. मान लीजिए एक तार का प्रतिरोध 10Ω है। यदि उसी पदार्थ और समान लंबाई का एक अन्य तार है, जिसकी अनुप्रस्थ काट का क्षेत्रफल, पहले वाले तार से दोगुना है, तो दूसरे तार का प्रतिरोध क्या होगा ?",
+    q_en: "Q930. Suppose a wire has resistance 10 Ω. If another wire of the same material and same length has twice the cross-sectional area, what will be the resistance of the second wire?",
+    tag: "RRC Group D 20/09/2022 (Morning)",
+    o_hi: [
+      "(a) 7.5 Ω",
+      "(b) 5 Ω",
+      "(c) 20 Ω",
+      "(d) 10"
+    ],
+    o_en: [
+      "(a) 7.5 Ω",
+      "(b) 5 Ω",
+      "(c) 20 Ω",
+      "(d) 10"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q931. 30°C पर 1 m लंबाई के किसी धातु के तार का प्रतिरोध 50 Ω है। मान लीजिए तार का व्यास 0.3 mm है। उसी धातु के समान लंबाई के एक अन्य तार, जिसका व्यास बढ़ाकर 0.6 mm कर दिया गया हो, का प्रतिरोध (30 °C पर) कितना होगा ?",
+    q_en: "Q931. At 30°C, a 1 m long metal wire has resistance 50 Ω and diameter 0.3 mm. What will be the resistance at 30°C of another wire of the same metal and same length whose diameter is increased to 0.6 mm?",
+    tag: "RRC Group D 20/09/2022 (Morning)",
+    o_hi: [
+      "(a) 12.5 Ω",
+      "(b) 20.5 Ω",
+      "(c) 2.5 Ω",
+      "(d) 120.5 Ω"
+    ],
+    o_en: [
+      "(a) 12.5 Ω",
+      "(b) 20.5 Ω",
+      "(c) 2.5 Ω",
+      "(d) 120.5 Ω"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q932. एक घर को एक 15 A फ्यूज द्वारा विद्युत आपूर्ति प्रदान की जाती है। 2KW AC के साथ-साथ उपयोग किए जा सकने वाले 100 W लैंपों की संख्या ज्ञात कीजिए। (AC और लैंप दोनों को 220 V आपूर्ति के लिए रेट किया गया है)",
+    q_en: "Q932. A house is supplied through a 15 A fuse. Find the number of 100 W lamps that can be used along with a 2 kW AC. (Both the AC and lamps are rated for 220 V supply.)",
+    tag: "RRC Group D 20/09/2022 (Morning)",
+    o_hi: [
+      "(a) 13",
+      "(b) 23",
+      "(c) 18",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 13",
+      "(b) 23",
+      "(c) 18",
+      "(d) 15"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q933. प्रत्येक 1/6Ω वाले सात प्रतिरोध का उपयोग करके बनाए गए परिपथ का न्यूनतम प्रतिरोध ज्ञात कीजिए।",
+    q_en: "Q933. Find the minimum resistance of a circuit made using seven resistors, each of resistance 1/6 Ω.",
+    tag: "RRC Group D 20/09/2022 (Evening)",
+    o_hi: [
+      "(a) 1/42 Ω",
+      "(b) 5/7 Ω",
+      "(c) 7/6 Ω",
+      "(d) 7/5 Ω"
+    ],
+    o_en: [
+      "(a) 1/42 Ω",
+      "(b) 5/7 Ω",
+      "(c) 7/6 Ω",
+      "(d) 7/5 Ω"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q934. 2Ω, 3Ω, 4Ω, 6Ω और 12Ω प्रतिरोधों वाली 5 कुण्डलियों के संयोजन से प्राप्त होने वाले अधिकतम और न्यूनतम प्रतिरोधों का मान क्या होगा?",
+    q_en: "Q934. What are the maximum and minimum resistances obtainable from a combination of five coils having resistances 2 Ω, 3 Ω, 4 Ω, 6 Ω and 12 Ω?",
+    tag: "RRC Group D 20/09/2022 (Evening)",
+    o_hi: [
+      "(a) 27Ω, 0.75 Ω",
+      "(b) 28 Ω, 0.65 Ω",
+      "(c) 27 Ω, 0.65 Ω",
+      "(d) 28 Ω, 0.75 Ω"
+    ],
+    o_en: [
+      "(a) 27 Ω, 0.75 Ω",
+      "(b) 28 Ω, 0.65 Ω",
+      "(c) 27 Ω, 0.65 Ω",
+      "(d) 28 Ω, 0.75 Ω"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q935. एक विद्यार्थी, तीन ओमिय चालकों A, B और C के लिए I और V के बीच तीन ग्राफ खींचता है। वह पाता है कि इन तीन ग्राफों की प्रवणताएं क्रमशः 0.5, 0.1 और 0.2 है। यदि चालकों की लंबाई समान है, और उनकी अनुप्रस्थ-काटों के क्षेत्रफलों का अनुपात 1 : 2 : 3 है, तो उनका प्रतिरोधकता अनुपात ρA : ρB : ρC _____होगा।",
+    q_en: "Q935. A student draws three graphs between I and V for three ohmic conductors A, B and C. Their slopes are 0.5, 0.1 and 0.2 respectively. If the conductors have equal lengths and their cross-sectional areas are in the ratio 1 : 2 : 3, what will be the resistivity ratio ρA : ρB : ρC?",
+    tag: "RRC Group D 22/09/2022 (Morning)",
+    o_hi: [
+      "(a) 3 : 20 : 15",
+      "(b) 1 : 20 : 15",
+      "(c) 2 : 20 : 15",
+      "(d) 4 : 20 : 15"
+    ],
+    o_en: [
+      "(a) 3 : 20 : 15",
+      "(b) 1 : 20 : 15",
+      "(c) 2 : 20 : 15",
+      "(d) 4 : 20 : 15"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q936. 240 V विद्युत आपूर्ति लाइन पर उपयोग किए जाने हेतु डिज़ाइन किए गए विभिन्न विद्युत बल्बों पर विचार कीजिए। बल्बों की रेटिंग 10 W निर्धारित है। यदि अधिकतम स्वीकार्य धारा 8 A है, तो 240 V लाइन के दोनों तारों के बीच एक दूसरे के समानांतर क्रम साथ कितने बल्ब संयोजित किए जा सकते हैं?",
+    q_en: "Q936. Consider electric bulbs designed for use on a 240 V supply line, each rated at 10 W. If the maximum permissible current is 8 A, how many bulbs can be connected in parallel across the two wires of the 240 V line?",
+    tag: "RRC Group D 22/09/2022 (Morning)",
+    o_hi: [
+      "(a) 192",
+      "(b) 212",
+      "(c) 174",
+      "(d) 156"
+    ],
+    o_en: [
+      "(a) 192",
+      "(b) 212",
+      "(c) 174",
+      "(d) 156"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q937. किसी परिपथ में, L लंबाई और A अनुप्रस्थ-काट के क्षेत्रफल वाले चांदी (silver) के तार को L/3 लंबाई और 3A अनुप्रस्थ-काट के क्षेत्रफल वाले क्रोमियम (chromium) के तार से बदल दिया जाता है। परिपथ के प्रतिरोध पर क्या प्रभाव पड़ेगा? (दिया गया है ρsilver = 1.6 × 10⁻⁸ Ωm और ρchromium = 12.9 × 10⁻⁸ Ωm)",
+    q_en: "Q937. In a circuit, a silver wire of length L and cross-sectional area A is replaced by a chromium wire of length L/3 and cross-sectional area 3A. What effect will this have on the circuit resistance? (Given ρsilver = 1.6 × 10⁻⁸ Ωm and ρchromium = 12.9 × 10⁻⁸ Ωm)",
+    tag: "RRC Group D 22/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) घटकर स्वयं का 0.89 गुना हो जाएगा",
+      "(b) घटकर स्वयं का 0.78 गुना हो जाएगा",
+      "(c) बढ़कर स्वयं का 1.3 गुना हो जाएगा",
+      "(d) बढ़कर स्वयं का 1.05 गुना हो जाएगा"
+    ],
+    o_en: [
+      "(a) It will decrease to 0.89 times its value",
+      "(b) It will decrease to 0.78 times its value",
+      "(c) It will increase to 1.3 times its value",
+      "(d) It will increase to 1.05 times its value"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q938. 0.7Ω प्रतिरोध, 1 m लंबाई और 0.2 mm व्यास वाले तार के पदार्थ की प्रतिरोधकता कितनी होगी?",
+    q_en: "Q938. What is the resistivity of the material of a wire having resistance 0.7 Ω, length 1 m and diameter 0.2 mm?",
+    tag: "RRC Group D 22/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 2.2 × 10⁻⁸ Ωm",
+      "(b) 22 × 10⁻⁸ Ωm",
+      "(c) 0.22 × 10⁻⁸ Ωm",
+      "(d) 220 × 10⁻⁸ Ωm"
+    ],
+    o_en: [
+      "(a) 2.2 × 10⁻⁸ Ωm",
+      "(b) 22 × 10⁻⁸ Ωm",
+      "(c) 0.22 × 10⁻⁸ Ωm",
+      "(d) 220 × 10⁻⁸ Ωm"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q939. एक 2KW AC का उपयोग 250 V a.c मेन्स पर किया जाना है, जिसके लिए एक केबल में फिट किए गए 3-पिन टॉप प्लग की आवश्यकता होती है। इस संबंध में निम्नलिखित में से कौन सा विकल्प सही नहीं है?",
+    q_en: "Q939. A 2 kW AC is to be used on 250 V a.c. mains, requiring a 3-pin top plug fitted to a cable. Which of the following options is not correct?",
+    tag: "RRC Group D 22/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) हरा तार अर्थ पिन कनेक्शन के होता है",
+      "(b) विद्युत्मय तार में फ्यूज जुड़ा हुआ होना चाहिए",
+      "(c) न्यूट्रल तार काले रंग का होता है",
+      "(d) उपयोग किए जाने वाले फ्यूज का उपयुक्त मान 12 A होता है"
+    ],
+    o_en: [
+      "(a) The green wire is for the earth-pin connection",
+      "(b) The live wire should have a fuse connected",
+      "(c) The neutral wire is black in colour",
+      "(d) The suitable fuse value to be used is 12 A"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q940. समान प्रतिरोध वाले दो तारों की अनुप्रस्थ काटों के क्षेत्रफलों का अनुपात 1 : 9 है। साथ ही, उनकी लम्बाइयों का अनुपात 3 : 2 है। उनकी प्रतिरोधकता का अनुपात क्या होगा?",
+    q_en: "Q940. Two wires have equal resistance. Their cross-sectional areas are in the ratio 1 : 9 and their lengths are in the ratio 3 : 2. What is the ratio of their resistivities?",
+    tag: "RRC Group D 22/09/2022 (Evening)",
+    o_hi: [
+      "(a) 2 : 27",
+      "(b) 2 : 33",
+      "(c) 2 : 9",
+      "(d) 2 : 13"
+    ],
+    o_en: [
+      "(a) 2 : 27",
+      "(b) 2 : 33",
+      "(c) 2 : 9",
+      "(d) 2 : 13"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q941. 10 ओम प्रतिरोध वाले एक विद्युत परिपथ से प्रवाहित धारा I, 5 amp है। प्रति सेकण्ड उत्पन्न ऊष्मा कितनी होगी ?",
+    q_en: "Q941. A current I of 5 amp flows through an electric circuit of resistance 10 ohm. How much heat is produced per second?",
+    tag: "RRC Group D 26/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 250 जूल",
+      "(b) 50 जूल",
+      "(c) 250 कैलोरी",
+      "(d) 50 कैलोरी"
+    ],
+    o_en: [
+      "(a) 250 joule",
+      "(b) 50 joule",
+      "(c) 250 calorie",
+      "(d) 50 calorie"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q942. 12V की एक बैटरी द्वारा इससे जुड़े एक लैम्प को 3 A की धारा की आपूर्ति की जाती है। लैम्प में 15 मिनट में आपूर्ति की गई ऊर्जा कितनी होगी?",
+    q_en: "Q942. A 12 V battery supplies a current of 3 A to a lamp connected to it. How much energy is supplied to the lamp in 15 minutes?",
+    tag: "RRC Group D 26/09/2022 (Evening)",
+    o_hi: [
+      "(a) 32000 J",
+      "(b) 32150 J",
+      "(c) 32400 J",
+      "(d) 540 J"
+    ],
+    o_en: [
+      "(a) 32000 J",
+      "(b) 32150 J",
+      "(c) 32400 J",
+      "(d) 540 J"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q943. यदि 5 ओम के प्रतिरोध से 6 amp की धारा प्रवाहित होती है, तो इसके साथ श्रेणीक्रम में संयोजित 10 ओम के एक अन्य प्रतिरोध से प्रवाहित धारा _______ होगी।",
+    q_en: "Q943. If a current of 6 amp flows through a 5 ohm resistor, then the current through another 10 ohm resistor connected in series with it will be _______.",
+    tag: "RRC Group D 27/09/2022 (Morning)",
+    o_hi: [
+      "(a) 0 amp",
+      "(b) 12 amp",
+      "(c) 3 amp",
+      "(d) 6 amp"
+    ],
+    o_en: [
+      "(a) 0 amp",
+      "(b) 12 amp",
+      "(c) 3 amp",
+      "(d) 6 amp"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q944. प्रति सेकेंड 200 जूल ऊष्मा उत्पन्न होने पर, 2 ओम के एक प्रतिरोध के टर्मिनलों के बीच विभवांतर _______होगा।",
+    q_en: "Q944. If 200 joule of heat is produced per second, the potential difference across the terminals of a 2 ohm resistor will be _______.",
+    tag: "RRC Group D 27/09/2022 (Evening)",
+    o_hi: [
+      "(a) 40 वोल्ट",
+      "(b) 80 वोल्ट",
+      "(c) 20 वोल्ट",
+      "(d) 10 वोल्ट"
+    ],
+    o_en: [
+      "(a) 40 volt",
+      "(b) 80 volt",
+      "(c) 20 volt",
+      "(d) 10 volt"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q945. 20 V के स्रोत से संयोजित एक विद्युत उपकरण से प्रति 5 सेकेंड में 15 कूलॉम आवेश प्रवाहित हो रहा है, तो इसकी शक्ति ज्ञात कीजिए।",
+    q_en: "Q945. An electrical appliance connected to a 20 V source has 15 coulomb of charge flowing through it every 5 seconds. Find its power.",
+    tag: "RRC Group D 28/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 1500 कैलोरी",
+      "(b) 60 कैलोरी",
+      "(c) 60 वाट",
+      "(d) 1500 वाट"
+    ],
+    o_en: [
+      "(a) 1500 calorie",
+      "(b) 60 calorie",
+      "(c) 60 watt",
+      "(d) 1500 watt"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q946. 1100 W के एक तापन उपकरण को 220 V लाइन वोल्टेज पर उपयोग किए जाने हेतु डिजाइन किया गया है। किसी विशेष दिन, लाइन वोल्टेज घटकर 110 V रह जाने पर, इससे प्रवाहित धारा____और इसकी आउटपुट शक्ति ____होगी।",
+    q_en: "Q946. A heating appliance rated 1100 W is designed for use at a 220 V line voltage. On a particular day, if the line voltage drops to 110 V, the current through it ____ and its output power ____ will be.",
+    tag: "RRC Group D 29/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) 10 A, 275 W",
+      "(b) 5A, 550 W",
+      "(c) 10 A, 550W",
+      "(d) 2.5 A, 275 W"
+    ],
+    o_en: [
+      "(a) 10 A, 275 W",
+      "(b) 5 A, 550 W",
+      "(c) 10 A, 550 W",
+      "(d) 2.5 A, 275 W"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q947. दिए गए ग्राफ का प्रयोग कर चालक का प्रतिरोध ज्ञात कीजिए।<br>[संदर्भ - voltage - वोल्टेज current - धारा ]<br><div style='text-align:center;margin:14px 0;'><img src='" + Q947_IMAGE + "' alt='Q947 graph' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    q_en: "Q947. Using the given graph, find the resistance of the conductor.<br>[Reference - voltage - वोल्टेज current - धारा ]<br><div style='text-align:center;margin:14px 0;'><img src='" + Q947_IMAGE + "' alt='Q947 graph' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    tag: "RRC Group D 29/09/2022 (Afternoon)",
+    image: Q947_IMAGE,
+    o_hi: [
+      "(a) 600 ओम",
+      "(b) 0.24 ओम",
+      "(c) 0.016 ओम",
+      "(d) 60 ओम"
+    ],
+    o_en: [
+      "(a) 600 ohm",
+      "(b) 0.24 ohm",
+      "(c) 0.016 ohm",
+      "(d) 60 ohm"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q948. श्रेणीक्रम में सयोंजित दो प्रतिरोधों R1 और R2 का निवल प्रतिरोध (net resistance) 8 ओम है, और समानांतर क्रम में सयोंजित किए जाने पर उनका निवल प्रतिरोध (net resistance) 2 ओम है। प्रतिरोधों R1 और R2, के मान अलग-अलग क्रमशः क्या होंगे?",
+    q_en: "Q948. The net resistance of two resistors R1 and R2 connected in series is 8 ohm, and when connected in parallel their net resistance is 2 ohm. What are the individual values of R1 and R2 respectively?",
+    tag: "RRC Group D 29/09/2022 (Evening)",
+    o_hi: [
+      "(a) 8 ओम; 0 ओम",
+      "(b) 4 ओम; 4 ओम",
+      "(c) 6 ओम; 2 ओम",
+      "(d) 2 ओम; 6 ओम"
+    ],
+    o_en: [
+      "(a) 8 ohm; 0 ohm",
+      "(b) 4 ohm; 4 ohm",
+      "(c) 6 ohm; 2 ohm",
+      "(d) 2 ohm; 6 ohm"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
