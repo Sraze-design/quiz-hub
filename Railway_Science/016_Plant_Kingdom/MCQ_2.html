@@ -1,0 +1,1005 @@
+const Q930_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q919. वाष्पोत्सर्जन, इनमें से मुख्यतः किस स्थल पर नहीं होता है ?",
+    q_en: "Q919. Transpiration mainly does not occur at which of the following sites?",
+    tag: "RRC Group D 25/08/2022 (Evening)",
+    o_hi: [
+      "(a) उपत्वचा (Cuticle)",
+      "(b) रंध्र (Stomata)",
+      "(c) अंतः कोशिकीय अंतरालों (Intracellular spaces)",
+      "(d) वातरंध्र (Lenticels)"
+    ],
+    o_en: [
+      "(a) Cuticle",
+      "(b) Stomata",
+      "(c) Intracellular spaces",
+      "(d) Lenticels"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q920. बड़े पौधों और पेड़ों के कठोर तने में उत्पन्न गैसीय अपशिष्ट उत्पादों को पौधे द्वारा किस प्रकार हटाया जाता है?",
+    q_en: "Q920. How are gaseous waste products produced in the hard stems of large plants and trees removed by the plant?",
+    tag: "RRC Group D 26/08/2022 (Morning)",
+    o_hi: [
+      "(a) परासरण के माध्यम से",
+      "(b) वातरन्ध के माध्यम से",
+      "(c) वाष्पोत्सर्जन के माध्यम से",
+      "(d) रंध्र के माध्यम से"
+    ],
+    o_en: [
+      "(a) Through osmosis",
+      "(b) Through lenticels",
+      "(c) Through transpiration",
+      "(d) Through stomata"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q921. रात के समय, प्रकाश संश्लेषण के बिना ____का उत्सर्जन एक मुख्य विनिमय गतिविधि है।",
+    q_en: "Q921. At night, without photosynthesis, the release of ____ is a major exchange activity.",
+    tag: "RRC Group D 29/08/2022 (Morning)",
+    o_hi: [
+      "(a) पानी",
+      "(b) हाइड्रोजन",
+      "(c) कार्बन डाइऑक्साइड",
+      "(d) ऑक्सीजन"
+    ],
+    o_en: [
+      "(a) Water",
+      "(b) Hydrogen",
+      "(c) Carbon dioxide",
+      "(d) Oxygen"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q922. एकसंकर संकरण (Monohybrid cross) ______ विभिन्न संस्करणों की विशेषताओ (trait) वाले दो पौधों का संयोजन है।",
+    q_en: "Q922. A monohybrid cross is a combination of two plants having ______ different versions of a trait.",
+    tag: "RRC Group D 29/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) छह",
+      "(c) आठ",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Six",
+      "(c) Eight",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q923. पौधों की जड़ें ऑक्सीजन कहाँ से प्राप्त करती हैं?",
+    q_en: "Q923. From where do plant roots obtain oxygen?",
+    tag: "RRC Group D 29/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) मिट्टी में मौजूद जल से",
+      "(b) मिट्टी के कणों के बीच मौजूद वायु अवकाशों से",
+      "(c) जड़ों को ऑक्सीजन की आवश्यकता नहीं होती है",
+      "(d) रंध्रों द्वारा ली गई ऑक्सीजन जड़ों तक पहुँचती है"
+    ],
+    o_en: [
+      "(a) From water present in the soil",
+      "(b) From air spaces present between soil particles",
+      "(c) Roots do not require oxygen",
+      "(d) Oxygen taken in through stomata reaches the roots"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q924. मिट्टी से पौधे की जड़ कोशिकाओं में जल और खनिज आयनों की गति के संबंध में निम्न में से कौन सा विकल्प सही है?",
+    q_en: "Q924. Which of the following options is correct regarding the movement of water and mineral ions from soil into plant root cells?",
+    tag: "RRC Group D 30/08/2022 (Morning)",
+    o_hi: [
+      "(a) आयन और जल एक साथ अवशोषित होते हैं।",
+      "(b) पहले विसरण द्वारा जल अंदर प्रवेश करता है, उसके बाद आयनों का सक्रिय परिवहन होता है",
+      "(c) आयन पहले निष्क्रिय परिवहन द्वारा अंदर प्रवेश करते हैं, उसके बाद सक्रिय परिवहन द्वारा जल प्रवेश करता है।",
+      "(d) आयन पहले सक्रिय परिवहन द्वारा अंदर प्रवेश करते हैं, उसके बाद संकेंद्रित प्रवणता के अनुदिश जल प्रवेश करता है।"
+    ],
+    o_en: [
+      "(a) Ions and water are absorbed together.",
+      "(b) Water first enters by diffusion, followed by active transport of ions.",
+      "(c) Ions first enter by passive transport, followed by active transport of water.",
+      "(d) Ions first enter by active transport, after which water enters along the concentration gradient."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q925. पौधों में वाष्पोत्सर्जन के कुछ लाभों का उल्लेख नीचे किया गया है। उस विकल्प का चयन कीजिए, जो वाष्पोत्सर्जन से होने वाली हानि को दर्शाता है।",
+    q_en: "Q925. Some benefits of transpiration in plants are listed below. Select the option that represents a disadvantage of transpiration.",
+    tag: "RRC Group D 30/08/2022 (Morning)",
+    o_hi: [
+      "(a) यह वाष्पीकरण द्वारा पौधों को ठंडा करने का कार्य करता है",
+      "(b) यह पौधों के मुरझाने का कारण बन सकता है",
+      "(c) यह पत्तियों को प्रकाश संश्लेषण के लिए जल प्रदान करता है",
+      "(d) यह खनिज आयनों के परिवहन में सहायता करता है।"
+    ],
+    o_en: [
+      "(a) It cools plants by evaporation.",
+      "(b) It can cause plants to wilt.",
+      "(c) It supplies water to leaves for photosynthesis.",
+      "(d) It helps in the transport of mineral ions."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q926. यीस्ट में किण्वन के दौरान पाइरूवेट निम्नलिखित में से किस उत्पाद में परिवर्तित होता है?",
+    q_en: "Q926. During fermentation in yeast, pyruvate is converted into which of the following products?",
+    tag: "RRC Group D 05/09/2022 (Morning)",
+    o_hi: [
+      "(a) जल और कार्बन डाइऑक्साइड",
+      "(b) ग्लूकोज और कार्बन डाइऑक्साइड",
+      "(c) इथेनॉल और कार्बन डाइऑक्साइड",
+      "(d) लैक्टिक अम्ल और कार्बन डाइऑक्साइड"
+    ],
+    o_en: [
+      "(a) Water and carbon dioxide",
+      "(b) Glucose and carbon dioxide",
+      "(c) Ethanol and carbon dioxide",
+      "(d) Lactic acid and carbon dioxide"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q927. पौधों द्वारा उत्सर्जित होने वाले अपशिष्ट उत्पाद, गोंद और राल पौधे के किस भाग में संग्रहित होते हैं?",
+    q_en: "Q927. In which part of the plant are waste products, gums and resins excreted by plants stored?",
+    tag: "RRC Group D 06/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) पत्तियों में",
+      "(b) कोशिका की रसधानियों में",
+      "(c) पुराने जाइलम में",
+      "(d) फलों में"
+    ],
+    o_en: [
+      "(a) In leaves",
+      "(b) In cell vacuoles",
+      "(c) In old xylem",
+      "(d) In fruits"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q928. निम्नलिखित में से किसकी उपस्थिति जटिल पादपों का एक विशिष्ट गुण है, जिसने स्थलीय वातावरण में उनके अस्तित्व को संभव बनाया है?",
+    q_en: "Q928. The presence of which of the following is a distinctive feature of complex plants that made their survival in terrestrial environments possible?",
+    tag: "RRC Group D 06/09/2022 (Evening)",
+    o_hi: [
+      "(a) दृढ़ोतक ऊतक",
+      "(b) विभज्योतकीय ऊतक",
+      "(c) संवहनी ऊतक",
+      "(d) मृदूतक ऊतक"
+    ],
+    o_en: [
+      "(a) Sclerenchyma tissue",
+      "(b) Meristematic tissue",
+      "(c) Vascular tissue",
+      "(d) Parenchyma tissue"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q929. पादपों में अपशिष्ट उत्सर्जन की प्रक्रिया के संबंध में इनमें से कौन सा कथन सही है?",
+    q_en: "Q929. Which of the following statements is correct regarding the process of waste excretion in plants?",
+    tag: "RRC Group D 08/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) पादप, मिट्टी में अपशिष्ट पदार्थों का उत्सर्जन नहीं करते हैं।",
+      "(b) पादपों में, अतिरिक्त जल को स्थानांतरण द्वारा निकाल दिया जाता है।",
+      "(c) कार्बन डाईऑक्साइड, प्रकाश संश्लेषण में उत्पन्न एक अपशिष्ट उत्पाद है।",
+      "(d) कुछ पौधों में, अपशिष्ट उत्पाद राल (रेज़िन) के रूप में संचित होते है।"
+    ],
+    o_en: [
+      "(a) Plants do not excrete waste substances into the soil.",
+      "(b) In plants, excess water is removed by translocation.",
+      "(c) Carbon dioxide is a waste product produced during photosynthesis.",
+      "(d) In some plants, waste products are stored in the form of resin."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q930. निम्नांकित चित्र A और B दोनों ही पौधों में पाए जाने वाले दृढ़ोलकों (Sclerenchyma) को दर्शाते हैं, फिर भी उनकी संरचनाएं अलग क्यों हैं?" + "<br><div style='text-align:center;margin:10px 0;'><img src='" + Q930_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q930. The figures A and B below both show sclerenchyma found in plants, yet why are their structures different?" + "<br><div style='text-align:center;margin:10px 0;'><img src='" + Q930_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 13/09/2022 (Morning)",
+    o_hi: [
+      "(a) A - अनुदैर्ध्य काट; B - तिर्यक काट",
+      "(b) A - अरीय काट; B - अनुप्रस्थ काट",
+      "(c) A - अनुदैर्ध्य काट; B - अनुप्रस्थ काट",
+      "(d) A - अनुप्रस्थ काट; B - अनुदैर्ध्य काट"
+    ],
+    o_en: [
+      "(a) A - longitudinal section; B - oblique section",
+      "(b) A - radial section; B - transverse section",
+      "(c) A - longitudinal section; B - transverse section",
+      "(d) A - transverse section; B - longitudinal section"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: "",
+    image: Q930_IMAGE
+  },
+  {
+    q_hi: "Q931. एक लंबा वृक्ष अपने अपशिष्ट उत्पादों को कहां संग्रहीत कर सकता है?",
+    q_en: "Q931. Where can a tall tree store its waste products?",
+    tag: "RRC Group D 16/09/2022 (Morning)",
+    o_hi: [
+      "(a) पुराने जाइलम (हार्टवुड) में",
+      "(b) पुरानी जड़ों में",
+      "(c) छाल के ऊतक में",
+      "(d) अंतरकोशिकीय अंतरालों में"
+    ],
+    o_en: [
+      "(a) In old xylem (heartwood)",
+      "(b) In old roots",
+      "(c) In bark tissue",
+      "(d) In intercellular spaces"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q932. निम्नलिखित में से कौन सी घटना, दिन के समय के दौरान पादपों में होने वाली एक प्रमुख घटना है?",
+    q_en: "Q932. Which of the following is a major event occurring in plants during daytime?",
+    tag: "RRC Group D 22/09/2022 (Evening)",
+    o_hi: [
+      "(a) CO₂ मुक्त होना",
+      "(b) O₃ मुक्त होना",
+      "(c) O₂ मुक्त होना",
+      "(d) CO मुक्त होना"
+    ],
+    o_en: [
+      "(a) Release of CO₂",
+      "(b) Release of O₃",
+      "(c) Release of O₂",
+      "(d) Release of CO"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q933. जाइलम का इनमें से कौन सा घटक जल के परिवहन में कार्य नहीं करता है?",
+    q_en: "Q933. Which of the following components of xylem does not function in water transport?",
+    tag: "RRC Group D 26/09/2022 (Morning)",
+    o_hi: [
+      "(a) जाइलम मृदूतक (Xylem parenchyma)",
+      "(b) जाइलम वाहिकाएँ (Xylem vessels)",
+      "(c) जाइलम तंतु (Xylem fibres)",
+      "(d) जाइलम वाहिनिकाएँ (Xylem tracheids)"
+    ],
+    o_en: [
+      "(a) Xylem parenchyma",
+      "(b) Xylem vessels",
+      "(c) Xylem fibres",
+      "(d) Xylem tracheids"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q934. पादपों में प्रांकुर (plumule) कहाँ पाया जाता है?",
+    q_en: "Q934. Where is the plumule found in plants?",
+    tag: "",
+    o_hi: [
+      "(a) पुष्प (flower) में",
+      "(b) बीज (seed) में",
+      "(c) पत्ती (leaf) में",
+      "(d) मूलाग्र (root tips) में"
+    ],
+    o_en: [
+      "(a) In the flower",
+      "(b) In the seed",
+      "(c) In the leaf",
+      "(d) In the root tips"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q935. चालनी पट्टिकाएं (sieve plates),______ में पाई जाती है।",
+    q_en: "Q935. Sieve plates are found in ______.",
+    tag: "RRC Group D 26/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) फ्लोएम नली कोशिकाओं",
+      "(b) फ्लोएम पैरेंकाइमा कोशिकाओं",
+      "(c) फ्लोएम तंतु कोशिकाओं",
+      "(d) फ्लोएम सहचर कोशिकाओं"
+    ],
+    o_en: [
+      "(a) Phloem tube cells",
+      "(b) Phloem parenchyma cells",
+      "(c) Phloem fibre cells",
+      "(d) Phloem companion cells"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q936. कुछ पौधों के तनों से एक चिपचिपा पदार्थ उत्पन्न होता है जिसका उपयोग गोंद आसंजक बनाने में किया जाता है। पौधों के लिए इस गोंद का क्या उपयोग है?",
+    q_en: "Q936. A sticky substance is produced from the stems of some plants and is used to make gum adhesive. What is the use of this gum for plants?",
+    tag: "RRC Group D 27/09/2022 (Morning)",
+    o_hi: [
+      "(a) यह कीट परागणकों को आकर्षित करता है।",
+      "(b) इसका औषधीय महत्व है।",
+      "(c) यह जल के परिवहन में मदद करता है।",
+      "(d) यह चयापचय का एक अपशिष्ट उत्पाद है।"
+    ],
+    o_en: [
+      "(a) It attracts insect pollinators.",
+      "(b) It has medicinal importance.",
+      "(c) It helps in water transport.",
+      "(d) It is a waste product of metabolism."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q937. क्लेमाइडोमोनास (Chlamydomonas) जैसे कई एककोशिकीय शैबाल जल में रहते हैं। वे श्वसन के लिए ऑक्सीजन कैसे ग्रहण करते हैं?",
+    q_en: "Q937. Many unicellular algae such as Chlamydomonas live in water. How do they obtain oxygen for respiration?",
+    tag: "RRC Group D 27/09/2022 (Morning)",
+    o_hi: [
+      "(a) उनमें गैसों को ग्रहण करने के लिए छोटे-छोटे द्वार (श्वासरंध्र) होते हैं।",
+      "(b) वे अनाक्सी श्वसन के माध्यम से जीवित रहते हैं।",
+      "(c) वे प्रकाश संश्लेषण द्वारा उत्पन्न ऑक्सीजन को अपनी रसधानियों में संग्रहीत करते हैं।",
+      "(d) वे अमीबा की तरह विसरण द्वारा घुलित ऑक्सीजन अवशोषित करते हैं।"
+    ],
+    o_en: [
+      "(a) They have small openings for taking in gases.",
+      "(b) They survive through anaerobic respiration.",
+      "(c) They store oxygen produced by photosynthesis in their vacuoles.",
+      "(d) Like Amoeba, they absorb dissolved oxygen by diffusion."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q938. निम्नलिखित में से कौन से खनिज, फसलों को कीटों से बचाने में सहायक होते है?",
+    q_en: "Q938. Which of the following minerals help protect crops from pests?",
+    tag: "RRC Group D 28/09/2022 (Morning)",
+    o_hi: [
+      "(a) कैल्शियम, पोटैशियम और सोडियम",
+      "(b) सोडियम, कैल्शियम और मैग्नीशियम",
+      "(c) पोटैशियम, कैल्शियम और मैग्नीशियम",
+      "(d) मैग्नीशियम, आयरन और बोरॉन"
+    ],
+    o_en: [
+      "(a) Calcium, potassium and sodium",
+      "(b) Sodium, calcium and magnesium",
+      "(c) Potassium, calcium and magnesium",
+      "(d) Magnesium, iron and boron"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q939. निम्न में से कौन सा जीवित/सजीव होने का एक सामान्य प्रमाण है?",
+    q_en: "Q939. Which of the following is a general evidence of being living/alive?",
+    tag: "RRC Group D 29/09/2022 (Morning)",
+    o_hi: [
+      "(a) पौधों की दृश्यमान गति।",
+      "(b) हमारी आंखों के सामने पौधों की दृश्यमान वृद्धि।",
+      "(c) दृश्यमान गति के बिना कुछ प्राणी सांस ले सकते हैं।",
+      "(d) किसी भी प्रकार की गति, चाहे वृद्धि-संबंधी हो या श्वसन संबंधी।"
+    ],
+    o_en: [
+      "(a) Visible movement of plants.",
+      "(b) Visible growth of plants before our eyes.",
+      "(c) Some animals can breathe without visible movement.",
+      "(d) Movement of any kind, whether growth-related or respiratory."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q940. निम्नलिखित में से कौन रात्रि के समय कार्बन डाइऑक्साइड लेते है, और एक मध्यस्थ उत्पाद तैयार करते है जो दिन के दौरान क्लोरोफिल द्वारा अवशोषित करके, उस पर कार्य करके अंतिम उत्पाद बनाते हैं?",
+    q_en: "Q940. Which of the following takes in carbon dioxide at night and prepares an intermediate product that is acted upon during the day using energy absorbed by chlorophyll to form the final product?",
+    tag: "RRC Group D 29/09/2022 (Evening)",
+    o_hi: [
+      "(a) जीवाणु",
+      "(b) नील हरे शैवाल",
+      "(c) कवक",
+      "(d) मरुद्भिद पौधे"
+    ],
+    o_en: [
+      "(a) Bacteria",
+      "(b) Blue-green algae",
+      "(c) Fungi",
+      "(d) Xerophytic plants"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q941. आम तौर पर, जानवरों की तुलना में पौधों को कम ऊर्जा की आवश्यकता होती है। इसका मुख्य कारण है:<br>(A) ऊतकों में मृत कोशिकाओं के बड़े अनुपात की उपस्थिति<br>(B) गतिशीलता की अनुपस्थिति<br>(C) पौधे अपना भोजन स्वयं संश्लेषित करते हैं<br>(D) पौधे श्वसन के दौरान O₂ छोड़ते हैं",
+    q_en: "Q941. Generally, plants require less energy than animals. The main reason is:<br>(A) Presence of a large proportion of dead cells in tissues<br>(B) Absence of locomotion<br>(C) Plants synthesise their own food<br>(D) Plants release O₂ during respiration",
+    tag: "RRC Group D 11/10/2022 (Morning)",
+    o_hi: [
+      "(a) A और B",
+      "(b) B और C",
+      "(c) A और D",
+      "(d) A और C"
+    ],
+    o_en: [
+      "(a) A and B",
+      "(b) B and C",
+      "(c) A and D",
+      "(d) A and C"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q942. निम्नलिखित में से कौन सा पौधा अपने मूल नोड्यूल में पाए जाने वाले राइजोबिया बैक्टीरिया के साथ पारस्परिक सहजीवी संबंध के कारण वायुमंडलीय नाइट्रोजन को ठीक नहीं करता है?",
+    q_en: "Q942. Which of the following plants does not fix atmospheric nitrogen through a mutualistic symbiotic association with Rhizobium bacteria present in root nodules?",
+    tag: "RRB NTPC CBT - II (09/05/2022) Shift 2",
+    o_hi: [
+      "(a) फिकस",
+      "(b) मसूर की दाल",
+      "(c) चने",
+      "(d) मूंगफली"
+    ],
+    o_en: [
+      "(a) Ficus",
+      "(b) Lentil",
+      "(c) Chickpea",
+      "(d) Groundnut"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q943. मैगनोलियोफाइटा फूल वाले पौधे हैं जिन्हें इस रूप में भी जाना जाता है:",
+    q_en: "Q943. Magnoliophyta are flowering plants also known as:",
+    tag: "RRB NTPC CBT - II (13/06/2022) Shift 1",
+    o_hi: [
+      "(a) टेरिडोफाइट्स",
+      "(b) जिमनोस्पर्म",
+      "(c) एंजियोस्पर्म",
+      "(d) ब्रायोफाइट्स"
+    ],
+    o_en: [
+      "(a) Pteridophytes",
+      "(b) Gymnosperms",
+      "(c) Angiosperms",
+      "(d) Bryophytes"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q944. निम्नलिखित में से कौन रसीले पौधों की विशेषता नहीं है?",
+    q_en: "Q944. Which of the following is not a characteristic of succulent plants?",
+    tag: "RRB NTPC CBT - II (13/06/2022) Shift 2",
+    o_hi: [
+      "(a) कोई पत्ते नहीं",
+      "(b) तना उपस्थित",
+      "(c) जड़ें मौजूद हैं",
+      "(d) सूखा प्रतिरोधी"
+    ],
+    o_en: [
+      "(a) No leaves",
+      "(b) Stem present",
+      "(c) Roots are present",
+      "(d) Drought resistant"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q945. निम्नलिखित में से कौन सा पौधा ब्रायोफाइटा का है?",
+    q_en: "Q945. Which of the following plants belongs to Bryophyta?",
+    tag: "RRB NTPC CBT - I (29/12/2020) Evening",
+    o_hi: [
+      "(a) देवदार",
+      "(b) मर्चेंटिया",
+      "(c) मार्सिलिया",
+      "(d) क्लैडोफोरा"
+    ],
+    o_en: [
+      "(a) Deodar",
+      "(b) Marchantia",
+      "(c) Marsilea",
+      "(d) Cladophora"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q946. निम्न में से किस औषधीय पौधे का उपयोग रक्तचाप के उपचार के लिए किया जा सकता है?",
+    q_en: "Q946. Which of the following medicinal plants can be used for the treatment of blood pressure?",
+    tag: "RRB NTPC CBT - I (08/01/2021) Morning",
+    o_hi: [
+      "(a) जामुन",
+      "(b) सर्पगंधा",
+      "(c) तुलसी",
+      "(d) बबूल"
+    ],
+    o_en: [
+      "(a) Jamun",
+      "(b) Sarpagandha",
+      "(c) Tulsi",
+      "(d) Babul"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q947. ________एक पौधा है जो जंगल में उगता है और इसकी पत्तियों पर चुभने वाले बाल होते हैं जो गलती से छूने पर दर्दनाक डंक मारते हैं।",
+    q_en: "Q947. ________ is a plant that grows in the wild and has stinging hairs on its leaves that cause a painful sting when accidentally touched.",
+    tag: "RRB NTPC CBT - I (17/01/2021) Morning",
+    o_hi: [
+      "(a) बिच्छू बूटी",
+      "(b) पिगवीड",
+      "(c) खनिक का काहू",
+      "(d) तिपतिया घास"
+    ],
+    o_en: [
+      "(a) Stinging nettle",
+      "(b) Pigweed",
+      "(c) Miner's lettuce",
+      "(d) Clover"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q948. _______ मांसाहारी पौधा नहीं है।",
+    q_en: "Q948. _______ is not a carnivorous plant.",
+    tag: "RRB NTPC CBT - I (04/02/2021) Evening",
+    o_hi: [
+      "(a) सनड्यू",
+      "(b) कॉर्कस्क्रू",
+      "(c) मंकी कैप",
+      "(d) टाइगर लिली"
+    ],
+    o_en: [
+      "(a) Sundew",
+      "(b) Corkscrew",
+      "(c) Monkey cup",
+      "(d) Tiger lily"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q949. निम्नलिखित में से किसमें पौधे का शरीर जड़, तना और पत्तियों में विभेदित नहीं होता है?",
+    q_en: "Q949. In which of the following is the plant body not differentiated into root, stem and leaves?",
+    tag: "RRB NTPC CBT - I (08/02/2021) Morning",
+    o_hi: [
+      "(a) फ़र्न",
+      "(b) थूजा",
+      "(c) स्पाइरोगाइरा",
+      "(d) मार्सिलिया"
+    ],
+    o_en: [
+      "(a) Fern",
+      "(b) Thuja",
+      "(c) Spirogyra",
+      "(d) Marsilea"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q950. निम्नलिखित में से कौन आलू के पौधे का खाने योग्य भाग है?",
+    q_en: "Q950. Which of the following is the edible part of the potato plant?",
+    tag: "RRB NTPC CBT - I (10/02/2021) Morning",
+    o_hi: [
+      "(a) पत्ता",
+      "(b) बीज",
+      "(c) तना",
+      "(d) जड़"
+    ],
+    o_en: [
+      "(a) Leaf",
+      "(b) Seed",
+      "(c) Stem",
+      "(d) Root"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q951. निम्नलिखित में से किस पौधे में पादपकाय के एक हिस्से से दूसरे हिस्से में जल एवं अन्य पदार्थों के संबहन हेतु विशिष्ट ऊतक मौजूद होते हैं?",
+    q_en: "Q951. In which of the following plants are specialised tissues present for the transport of water and other substances from one part of the plant body to another?",
+    tag: "RRB NTPC CBT - I (07/04/2021) Evening",
+    o_hi: [
+      "(a) मॉस (Moss)",
+      "(b) मार्सिलिया (Marsilea)",
+      "(c) रिक्सिया (Riccia)",
+      "(d) कारा (Chara)"
+    ],
+    o_en: [
+      "(a) Moss",
+      "(b) Marsilea",
+      "(c) Riccia",
+      "(d) Chara"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q952. पादपों को समूहों में विभाजित किया जाता है। निम्नलिखित में से कौन सा उनमें से एक नहीं है?",
+    q_en: "Q952. Plants are divided into groups. Which of the following is not one of them?",
+    tag: "RRB NTPC CBT - I (24/07/2021)Morning",
+    o_hi: [
+      "(a) थैलोफाइटा",
+      "(b) आर्थ्रोपोडा",
+      "(c) जिम्नोस्पर्म",
+      "(d) एंजियोस्पर्म"
+    ],
+    o_en: [
+      "(a) Thallophyta",
+      "(b) Arthropoda",
+      "(c) Gymnosperms",
+      "(d) Angiosperms"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q953. समान जीवों का एक समूह, जो आनुवांशिक रूप से विशिष्ट एवं प्रजननात्मक रूप से विलगित होते हैं, उसे क्या कहा जाता है?",
+    q_en: "Q953. A group of similar organisms that are genetically distinct and reproductively isolated is called what?",
+    tag: "RRB JE 22/05/2019 (Evening)",
+    o_hi: [
+      "(a) प्रजाति",
+      "(b) परिवार",
+      "(c) वर्ग",
+      "(d) क्रम"
+    ],
+    o_en: [
+      "(a) Species",
+      "(b) Family",
+      "(c) Class",
+      "(d) Order"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q954. इनमें से किस पौधे में बहु-रंगी पत्तियाँ होती हैं?",
+    q_en: "Q954. Which of these plants has multicoloured leaves?",
+    tag: "RRB JE 26/05/2019 (Evening)",
+    o_hi: [
+      "(a) चमेली",
+      "(b) हाइबिस्कस",
+      "(c) क्रोटन",
+      "(d) तुलसी"
+    ],
+    o_en: [
+      "(a) Jasmine",
+      "(b) Hibiscus",
+      "(c) Croton",
+      "(d) Tulsi"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q955. पानी में सूर्य के प्रकाश के अभाव में उगने वाले पौधों को क्या कहा जाता है?",
+    q_en: "Q955. What are plants that grow in water in the absence of sunlight called?",
+    tag: "RRB JE 01/06/2019 (Morning)",
+    o_hi: [
+      "(a) शैवाल",
+      "(b) क्षुप या झाड़ी (Shrubs)",
+      "(c) कवक",
+      "(d) a और b दोनों"
+    ],
+    o_en: [
+      "(a) Algae",
+      "(b) Shrubs",
+      "(c) Fungi",
+      "(d) Both a and b"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q956. ____________के कारण स्क्लेरेन्काइमा कोशिकाओं की दीवार मोटी होती हैं।",
+    q_en: "Q956. The walls of sclerenchyma cells are thick due to ____________.",
+    tag: "RRB Group D 18/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) सेलूलोज़",
+      "(b) लिग्निन",
+      "(c) हेमी-सेलूलोज़",
+      "(d) पेक्टिन"
+    ],
+    o_en: [
+      "(a) Cellulose",
+      "(b) Lignin",
+      "(c) Hemicellulose",
+      "(d) Pectin"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q957. _______एक जटिल स्थायी ऊतक है।",
+    q_en: "Q957. _______ is a complex permanent tissue.",
+    tag: "RRB Group D 18/09/2018 (Evening)",
+    o_hi: [
+      "(a) जाइलम",
+      "(b) पैरेन्काइमा",
+      "(c) स्क्लेरेनकाइमा",
+      "(d) कोलेनकाइमा"
+    ],
+    o_en: [
+      "(a) Xylem",
+      "(b) Parenchyma",
+      "(c) Sclerenchyma",
+      "(d) Collenchyma"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q958. कौन सा ऊतक पौधों के प्रकाश संश्लेषक भागों से दूर पदार्थों के परिवहन में मदद करता है?",
+    q_en: "Q958. Which tissue helps transport substances away from the photosynthetic parts of plants?",
+    tag: "RRB Group D 19/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) भरण ऊतक",
+      "(b) जाइलम वाहिकाएँ",
+      "(c) फ्लोएम",
+      "(d) विभज्योतक ऊतक"
+    ],
+    o_en: [
+      "(a) Ground tissue",
+      "(b) Xylem vessels",
+      "(c) Phloem",
+      "(d) Meristematic tissue"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q959. जड़ों की कोशिकाओं में लंबे रोमों जैसे भाग को क्या कहते हैं ?",
+    q_en: "Q959. What are the long hair-like parts of root cells called?",
+    tag: "RRB Group D 19/09/2018 (Evening)",
+    o_hi: [
+      "(a) रूट ट्रैकहाइड्स",
+      "(b) रूट नेल्स",
+      "(c) रूट विली",
+      "(d) रूट हेयर"
+    ],
+    o_en: [
+      "(a) Root tracheids",
+      "(b) Root nails",
+      "(c) Root villi",
+      "(d) Root hair"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q960. पौधों में फ्लोएम_______के परिवहन के लिए उत्तरदायी है।",
+    q_en: "Q960. In plants, phloem is responsible for the transport of _______.",
+    tag: "RRB Group D 20/09/2018 (Morning)",
+    o_hi: [
+      "(a) ऑक्सीजन",
+      "(b) पानी",
+      "(c) भोजन",
+      "(d) खनिज"
+    ],
+    o_en: [
+      "(a) Oxygen",
+      "(b) Water",
+      "(c) Food",
+      "(d) Minerals"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q961. स्क्लेरेनकाइमा में, कोशिका भित्ति___के कारण मोटी होती है।",
+    q_en: "Q961. In sclerenchyma, the cell wall is thick due to ___.",
+    tag: "RRB Group D 20/09/2018 (Morning)",
+    o_hi: [
+      "(a) लिग्रिन",
+      "(b) वसा",
+      "(c) सेल्यूलोज़",
+      "(d) क्यूटिन"
+    ],
+    o_en: [
+      "(a) Lignin",
+      "(b) Fat",
+      "(c) Cellulose",
+      "(d) Cutin"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q962. निम्नलिखित में से कौन जाइलम का भाग नहीं है?",
+    q_en: "Q962. Which of the following is not a part of xylem?",
+    tag: "RRB Group D 20/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) जाइलम फाइबर",
+      "(b) छलनी ट्यूब",
+      "(c) वाहिकाएं",
+      "(d) वाहिनिकाएं"
+    ],
+    o_en: [
+      "(a) Xylem fibre",
+      "(b) Sieve tube",
+      "(c) Vessels",
+      "(d) Tracheids"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q963. निम्नलिखित में से कौन सा प्रकार का ऊतक कोशिका विभाजन में सक्षम है ?",
+    q_en: "Q963. Which type of the following tissue is capable of cell division?",
+    tag: "RRB Group D 20/09/2018 (Evening)",
+    o_hi: [
+      "(a) मेरिस्टेमेटिक ऊतक",
+      "(b) स्क्लेरेन्काइमा",
+      "(c) पैरेन्काइमा",
+      "(d) कोलेनकाइमा"
+    ],
+    o_en: [
+      "(a) Meristematic tissue",
+      "(b) Sclerenchyma",
+      "(c) Parenchyma",
+      "(d) Collenchyma"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q964. रेगिस्तानी पौधों में, एपिडर्मिस पर_____ नामक एक मोटी मोमी परत मौजूद होती है।",
+    q_en: "Q964. In desert plants, a thick waxy layer called _____ is present on the epidermis.",
+    tag: "RRB Group D 20/09/2018 (Evening)",
+    o_hi: [
+      "(a) क्यूटिन",
+      "(b) लिग्निन",
+      "(c) सेल्युलोज",
+      "(d) वसा"
+    ],
+    o_en: [
+      "(a) Cutin",
+      "(b) Lignin",
+      "(c) Cellulose",
+      "(d) Fat"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q965.पौधों को______द्वारा पानी की अधिकता से छुटकारा मिल सकता है।",
+    q_en: "Q965. Plants can get rid of excess water by ______.",
+    tag: "RRB Group D 20/09/2018 (Evening)",
+    o_hi: [
+      "(a) परिसंचरण",
+      "(b) श्वसन",
+      "(c) वाष्पोत्सर्जन",
+      "(d) उत्सर्जन"
+    ],
+    o_en: [
+      "(a) Circulation",
+      "(b) Respiration",
+      "(c) Transpiration",
+      "(d) Excretion"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q966. निम्नलिखित में से कौन से पौधों के बीज में दो बीजपत्र होते हैं?",
+    q_en: "Q966. Which of the following plants have seeds with two cotyledons?",
+    tag: "RRB Group D 23/09/2018 (Evening)",
+    o_hi: [
+      "(a) कलमी",
+      "(b) उल्वा",
+      "(c) देवदार",
+      "(d) चीड़"
+    ],
+    o_en: [
+      "(a) Kalmi",
+      "(b) Ulva",
+      "(c) Deodar",
+      "(d) Pine"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q967. पौधों के वर्गीकरण का पदानुक्रम है:",
+    q_en: "Q967. The hierarchy of plant classification is:",
+    tag: "RRB Group D 23/09/2018 (Evening)",
+    o_hi: [
+      "(a) संघ , वर्ग, कुल , वंश, गण , जाति",
+      "(b) संघ , वर्ग, कुल , गण , वंश, जाति",
+      "(c) संघ , गण , कुल , वर्ग, वंश,जाति",
+      "(d) संघ , वर्ग, गण , कुल , वंश, जाति"
+    ],
+    o_en: [
+      "(a) Division, class, family, genus, order, species",
+      "(b) Division, class, family, order, genus, species",
+      "(c) Division, order, family, class, genus, species",
+      "(d) Division, class, order, family, genus, species"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q968.निम्नलिखित में से कौन से पौधे में आवरण रहित बीज पाए जाते हैं?",
+    q_en: "Q968. Which of the following plants has uncovered (naked) seeds?",
+    tag: "RRB Group D 24/09/2018 (Morning)",
+    o_hi: [
+      "(a) चारा",
+      "(b) फुनेरिया",
+      "(c) मार्सिलिया",
+      "(d) देवदार"
+    ],
+    o_en: [
+      "(a) Chara",
+      "(b) Funaria",
+      "(c) Marsilea",
+      "(d) Deodar"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
