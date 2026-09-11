@@ -1,0 +1,1005 @@
+const Q1015_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q1004. निम्नलिखित में से कौन-सा एककोशिकीय जीव का उदाहरण है?",
+    q_en: "Q1004. Which of the following is an example of a unicellular organism?",
+    tag: "RRB Tech. - (III) 26/12/2024 (Evening)",
+    o_hi: [
+      "(a) छिपकली",
+      "(b) घरेलू मक्खी",
+      "(c) अमीबा",
+      "(d) हाइड्रा"
+    ],
+    o_en: [
+      "(a) Lizard",
+      "(b) Housefly",
+      "(c) Amoeba",
+      "(d) Hydra"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1005. निम्नलिखित में से कौन-सा एक परजीवी जीव (parasitic organism): नहीं है?",
+    q_en: "Q1005. Which of the following is not a parasitic organism?",
+    tag: "RRB Tech. - (III) 27/12/2024 (Evening)",
+    o_hi: [
+      "(a) किलनी (Ticks)",
+      "(b) जूं (Lice)",
+      "(c) अमरबेल (Cuscuta)",
+      "(d) अमीबा (Amoeba)"
+    ],
+    o_en: [
+      "(a) Ticks",
+      "(b) Lice",
+      "(c) Cuscuta",
+      "(d) Amoeba"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1006. निम्नलिखित कथनों में से पुनरुद्भवन (पुनर्जनन) से संबंधित गलत कथन की पहचान कीजिए।",
+    q_en: "Q1006. Identify the incorrect statement related to regeneration from the following statements.",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) अमीबा पुनर्जनन प्रदर्शित करता है।",
+      "(b) पुनर्जनन के लिए विशिष्ट कोशिकाएं जिम्मेदार होती हैं।",
+      "(c) ये विशेषीकृत कोशिकाएं तेजी से गुणन करती हैं और बड़ी संख्या में नई कोशिकाएं उत्पन्न करती हैं।",
+      "(d) हाइड्रा और प्लैनेरिया जनन की पुनर्जनन विधि दर्शाते हैं"
+    ],
+    o_en: [
+      "(a) Amoeba shows regeneration.",
+      "(b) Specialised cells are responsible for regeneration.",
+      "(c) These specialised cells multiply rapidly and produce a large number of new cells.",
+      "(d) Hydra and Planaria show regeneration as a mode of reproduction."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1007. निम्नलिखित में से कौन-सा एककोशिकीय जीव अपना आकार बदलता है?",
+    q_en: "Q1007. Which of the following unicellular organisms changes its shape?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Evening)",
+    o_hi: [
+      "(a) खमीर",
+      "(b) पैरामीशियम",
+      "(c) अमीबा",
+      "(d) जीवाणु"
+    ],
+    o_en: [
+      "(a) Yeast",
+      "(b) Paramecium",
+      "(c) Amoeba",
+      "(d) Bacterium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1008. ‘इचथियोफिस बेडडोमी' (Ichthyophis beddomei), एक कृमि जैसा उभयचर जो तैर सकता है। यह किस वंश से संबंधित है?",
+    q_en: "Q1008. 'Ichthyophis beddomei', a worm-like amphibian that can swim, belongs to which type?",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) पादहीन उभयचर",
+      "(b) न्यूनीकृत अग्रपाद उभयचर",
+      "(c) लघु पाद उभयचर",
+      "(d) लंबे पश्चपाद उभयचर"
+    ],
+    o_en: [
+      "(a) Limbless amphibian",
+      "(b) Amphibian with reduced forelimbs",
+      "(c) Short-legged amphibian",
+      "(d) Long-hindlimbed amphibian"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1009. सबसे अधिक समुपयोजित, पाले जाने वाले और वाणिज्यिक गैर-शहतूत रेशम कीटों में से एक, 'एरी सिल्कवर्म (Eri Silkworm)' का वैज्ञानिक नाम क्या है?",
+    q_en: "Q1009. What is the scientific name of one of the most domesticated, reared and commercially important non-mulberry silkworms, the Eri silkworm?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) फिलोसामिया रिसिनी (Philosamia ricinii)",
+      "(b) बॉम्बेक्स मोरी (Bombyx mori)",
+      "(c) एन्थेरिया माइलिटा (Antheraea mylitta)",
+      "(d) मोरस अल्बा (Morus alba)"
+    ],
+    o_en: [
+      "(a) Philosamia ricinii",
+      "(b) Bombyx mori",
+      "(c) Antheraea mylitta",
+      "(d) Morus alba"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1010. गोल कृमि, किस संघ (phylum) से संबंधित है?",
+    q_en: "Q1010. Roundworm belongs to which phylum?",
+    tag: "RPF S.I. 03/12/2024 (Evening)",
+    o_hi: [
+      "(a) प्लेटीहेल्मिथीज (Platyhelminthes)",
+      "(b) ऐस्केलमिन्थीज (Aschelminthes)",
+      "(c) ऐनेलिडा (Annelida)",
+      "(d) टीनोफोरा (Ctenophora)"
+    ],
+    o_en: [
+      "(a) Platyhelminthes",
+      "(b) Aschelminthes",
+      "(c) Annelida",
+      "(d) Ctenophora"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1011. निम्नलिखित में से कौन-सा उप संघ वर्टिबेटा का वर्ग नहीं है?",
+    q_en: "Q1011. Which of the following is not a class of subphylum Vertebrata?",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) सरीसृप (Reptilia)",
+      "(b) एवीज (Aves)",
+      "(c) एरेक्निडा (Arachnida)",
+      "(d) स्तनधारी (Mammals)"
+    ],
+    o_en: [
+      "(a) Reptilia",
+      "(b) Aves",
+      "(c) Arachnida",
+      "(d) Mammals"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1012. मनुष्यों में आंत्र हुकवर्म रोग (Intestinal hookworm disease) ऐस्केलमिन्थीज़ की किस प्रजाति के कारण होता है?",
+    q_en: "Q1012. Intestinal hookworm disease in humans is caused by which species of Aschelminthes?",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) एन्साइलोस्टोमा डुओडेनल (Ancylostoma duodenale)",
+      "(b) स्ट्रॉन्गाइलोइड्स स्टेरकोरेलिस (Strongyloides stercoralis)",
+      "(c) एस्केरिस लुम्ब्रिकोइड्स (Ascaris lumbricoides)",
+      "(d) ट्राइक्यूरिस टाइकियरा (Trichuris trichiura)"
+    ],
+    o_en: [
+      "(a) Ancylostoma duodenale",
+      "(b) Strongyloides stercoralis",
+      "(c) Ascaris lumbricoides",
+      "(d) Trichuris trichiura"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1013. अमीबा में, भोजन का ग्रहण ______ द्वारा होता है।",
+    q_en: "Q1013. In Amoeba, ingestion of food takes place through ______.",
+    tag: "RRC Group D 25/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) शरीर की पूरी त्वचा",
+      "(b) पक्ष्माभ की गति",
+      "(c) कशाभिका की गति",
+      "(d) मुंह"
+    ],
+    o_en: [
+      "(a) Entire body surface",
+      "(b) Movement of cilia",
+      "(c) Movement of flagella",
+      "(d) Mouth"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1014. जीवों का निम्न में से कौन सा समूह अन्य पौधों और जीवों को मारे बिना उनसे पोषण प्राप्त करता है?",
+    q_en: "Q1014. Which of the following groups of organisms obtains nutrition from other plants and organisms without killing them?",
+    tag: "RRC Group D 26/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) जूं, फीताकृमि, जोंक, अमरबेल",
+      "(b) फीताकृमि, शेर, यीस्ट, जूं",
+      "(c) अमरबेल, ऑर्किड, यीस्ट, मशरूम",
+      "(d) कुटकी, जोंक, अमरबेल, ऑर्किड"
+    ],
+    o_en: [
+      "(a) Lice, tapeworm, leech, Cuscuta",
+      "(b) Tapeworm, lion, yeast, lice",
+      "(c) Cuscuta, orchid, yeast, mushroom",
+      "(d) Kutki, leech, Cuscuta, orchid"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1015. एक मछली के निम्नलिखित चित्र में गलफड़े कहाँ स्थित हैं?" + "<br><div style='text-align:center;margin:10px 0;'><img src='" + Q1015_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q1015. In the following diagram of a fish, where are the gills located?" + "<br><div style='text-align:center;margin:10px 0;'><img src='" + Q1015_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 20/09/2022 (Morning)",
+    o_hi: [
+      "(a) स्थिति 2",
+      "(b) स्थिति 4",
+      "(c) स्थिति 1",
+      "(d) स्थिति 3"
+    ],
+    o_en: [
+      "(a) Position 2",
+      "(b) Position 4",
+      "(c) Position 1",
+      "(d) Position 3"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: "",
+    image: Q1015_IMAGE
+  },
+  {
+    q_hi: "Q1016. मालपिघियन नलिकाएं निम्नलिखित में से किसकी विशेषताएं हैं?",
+    q_en: "Q1016. Malpighian tubules are a characteristic of which of the following?",
+    tag: "RRB NTPC CBT - II (10/05/2022) Shift 1",
+    o_hi: [
+      "(a) एकिनोडर्मेटा",
+      "(b) आर्थ्रोपोडा",
+      "(c) एनेलिडा",
+      "(d) कॉर्डाटा"
+    ],
+    o_en: [
+      "(a) Echinodermata",
+      "(b) Arthropoda",
+      "(c) Annelida",
+      "(d) Chordata"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1017. तीव्र परिवर्तनों से होने वाले रेशम के कीड़ों और मेंढक के लार्वा के वयस्कों में रूपांतरण को _____ कहा जाता है।",
+    q_en: "Q1017. The transformation of silkworms and frog larvae into adults through rapid changes is called _____.",
+    tag: "RRB NTPC CBT - II (12/06/2022) Shift 2",
+    o_hi: [
+      "(a) उत्परिवर्तन (mutation)",
+      "(b) कायांतरण (metamorphosis)",
+      "(c) विविधीकरण (diversification)",
+      "(d) रूपांतरण (transfiguration)"
+    ],
+    o_en: [
+      "(a) Mutation",
+      "(b) Metamorphosis",
+      "(c) Diversification",
+      "(d) Transfiguration"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1018. निम्नलिखित में से कौन सा शैवाल प्रोटीन से भरपूर होता है और अंतरिक्ष यात्रियों द्वारा भोजन के पूरक के रूप में उपयोग किया जाता है?<br>a. स्पिरुलिना<br>b. स्पाइरोगाइरा<br>c. क्लोरेला<br>d. फनारिया",
+    q_en: "Q1018. Which of the following algae are rich in protein and are used as food supplements by astronauts?<br>a. Spirulina<br>b. Spirogyra<br>c. Chlorella<br>d. Funaria",
+    tag: "RRB NTPC CBT - II (13/06/2022) Shift 1",
+    o_hi: [
+      "(a) b और c",
+      "(b) a और b",
+      "(c) a और c",
+      "(d) b और d"
+    ],
+    o_en: [
+      "(a) b and c",
+      "(b) a and b",
+      "(c) a and c",
+      "(d) b and d"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1019. अकशेरूकीय में______शामिल नहीं हैं।",
+    q_en: "Q1019. ______ is not included among invertebrates.",
+    tag: "RRB NTPC CBT - I (30/12/2020) Morning",
+    o_hi: [
+      "(a) मोलस्क",
+      "(b) मकड़ी",
+      "(c) सरीसृप",
+      "(d) कीड़े"
+    ],
+    o_en: [
+      "(a) Molluscs",
+      "(b) Spider",
+      "(c) Reptiles",
+      "(d) Insects"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1020. निम्नलिखित में से किसे एनीमेलिया प्रजाति के अंतर्गत वर्गीकृत किया गया है?",
+    q_en: "Q1020. Which of the following is classified under Animalia?",
+    tag: "RRB NTPC CBT - I (30/12/2020) Morning",
+    o_hi: [
+      "(a) प्रोटोजोआ",
+      "(b) मेटाज़ोआ",
+      "(c) चोआनोज़ोआ",
+      "(d) पिपियन्स"
+    ],
+    o_en: [
+      "(a) Protozoa",
+      "(b) Metazoa",
+      "(c) Choanozoa",
+      "(d) Pipians"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1021. _______ पर कूटपाद उंगली के समान विस्तार हैं",
+    q_en: "Q1021. Pseudopodia are finger-like extensions in _______.",
+    tag: "RRB NTPC CBT - I (29/01/2021) Evening",
+    o_hi: [
+      "(a) पैरामेनियम",
+      "(b) केंचुआ",
+      "(c) अमीबा",
+      "(d) हाइड्रा"
+    ],
+    o_en: [
+      "(a) Paramecium",
+      "(b) Earthworm",
+      "(c) Amoeba",
+      "(d) Hydra"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1022. निम्नलिखित में से कौन एक उपस्थि मछली है?",
+    q_en: "Q1022. Which of the following is a cartilaginous fish?",
+    tag: "RRB NTPC CBT - I (03/02/2021) Evening",
+    o_hi: [
+      "(a) शार्क",
+      "(b) रोहु",
+      "(c) सैल्मन",
+      "(d) टूना"
+    ],
+    o_en: [
+      "(a) Shark",
+      "(b) Rohu",
+      "(c) Salmon",
+      "(d) Tuna"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1023. अंगोरा, अल्पाइन और न्युबियन ____के उदाहरण हैं।",
+    q_en: "Q1023. Angora, Alpine and Nubian are examples of ____.",
+    tag: "RPF Constable 24/01/2019 (Evening)",
+    o_hi: [
+      "(a) बिल्ली की नस्ल",
+      "(b) भैंस की नस्ल",
+      "(c) गाय की नस्ल",
+      "(d) बकरी की नस्ल"
+    ],
+    o_en: [
+      "(a) Cat breeds",
+      "(b) Buffalo breeds",
+      "(c) Cow breeds",
+      "(d) Goat breeds"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1024. निम्नलिखित में से कौन सा जानवर गर्म रक्त वाला है?",
+    q_en: "Q1024. Which of the following animals is warm-blooded?",
+    tag: "RRB Group D 17/09/2018 (Morning)",
+    o_hi: [
+      "(a) कबूतर",
+      "(b) मछली",
+      "(c) मगरमच्छ",
+      "(d) टोड"
+    ],
+    o_en: [
+      "(a) Pigeon",
+      "(b) Fish",
+      "(c) Crocodile",
+      "(d) Toad"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1025. निम्नलिखित में से कौन सा जानवर अल्ट्रासाउंड उत्पन्न कर सकता है?",
+    q_en: "Q1025. Which of the following animals can produce ultrasound?",
+    tag: "RRB Group D 17/09/2018 (Morning)",
+    o_hi: [
+      "(a) पतिंगे",
+      "(b) पोरपॉइज़",
+      "(c) शार्क",
+      "(d) हाथी"
+    ],
+    o_en: [
+      "(a) Moth",
+      "(b) Porpoise",
+      "(c) Shark",
+      "(d) Elephant"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1026. निम्नलिखित में से कौन सा मत्स्य वर्ग का लक्षण नहीं है?",
+    q_en: "Q1026. Which of the following is not a characteristic of class Pisces?",
+    tag: "RRB Group D 17/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) शल्को का बाह्यकंकाल",
+      "(b) गलफड़ों से सांस लेना",
+      "(c) अस्थि/उपास्थि का अंतः कंकाल",
+      "(d) स्यूडोकोइलोम की उपस्थिति"
+    ],
+    o_en: [
+      "(a) Exoskeleton of scales",
+      "(b) Breathing through gills",
+      "(c) Endoskeleton of bone/cartilage",
+      "(d) Presence of pseudocoelom"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1027. _____एनेलिडा वर्ग से संबंधित नहीं है।",
+    q_en: "Q1027. _____ does not belong to Annelida.",
+    tag: "RRB Group D 18/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) जोंक",
+      "(b) एस्केरिस",
+      "(c) नेरीस",
+      "(d) केंचुआ"
+    ],
+    o_en: [
+      "(a) Leech",
+      "(b) Ascaris",
+      "(c) Nereis",
+      "(d) Earthworm"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1028. निम्नलिखित में से कौन व्हिटेकर द्वारा 5- किंगडम वर्गीकरण का हिस्सा नहीं है?",
+    q_en: "Q1028. Which of the following is not a part of Whittaker's five-kingdom classification?",
+    tag: "RRB Group D 19/09/2018 (Morning)",
+    o_hi: [
+      "(a) प्रोटिस्टा",
+      "(b) फंगी",
+      "(c) प्रोटोजोआ",
+      "(d) एनिमेलिया"
+    ],
+    o_en: [
+      "(a) Protista",
+      "(b) Fungi",
+      "(c) Protozoa",
+      "(d) Animalia"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1029. व्हिटकर के वर्गीकरण के अनुसार, _________ समूह में शामिल जीवों में पूर्णतः विकसित नाभिक नहीं पाया जाता है।",
+    q_en: "Q1029. According to Whittaker's classification, organisms included in the _________ group do not possess a fully developed nucleus.",
+    tag: "RRB Group D 22/09/2018 (Morning)",
+    o_hi: [
+      "(a) प्रोटिस्टा",
+      "(b) मोनेरा",
+      "(c) प्लांटी",
+      "(d) कवक"
+    ],
+    o_en: [
+      "(a) Protista",
+      "(b) Monera",
+      "(c) Plantae",
+      "(d) Fungi"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1030. अधिकांश सरीसृपों में होता है -",
+    q_en: "Q1030. Most reptiles have -",
+    tag: "RRB Group D 22/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) अपूर्ण तीन कक्षीय हृदय",
+      "(b) तीन-कक्षीय हृदय",
+      "(c) चार-कक्षीय हृदय",
+      "(d) द्विकक्षीय हृदय"
+    ],
+    o_en: [
+      "(a) Incomplete three-chambered heart",
+      "(b) Three-chambered heart",
+      "(c) Four-chambered heart",
+      "(d) Two-chambered heart"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1031. प्राणी कोशिकाओं में,__________ उपकला यांत्रिक सहायता प्रदान करने के लिए गुर्दे की आंतरिक परत बनाता है।",
+    q_en: "Q1031. In animal cells, __________ epithelium forms the inner lining of the kidney to provide mechanical support.",
+    tag: "RRB Group D 22/09/2018 (Evening)",
+    o_hi: [
+      "(a) ग्रंथिक",
+      "(b) घनाकार",
+      "(c) स्तंभकार",
+      "(d) शल्की (स्क्वैमस)"
+    ],
+    o_en: [
+      "(a) Glandular",
+      "(b) Cuboidal",
+      "(c) Columnar",
+      "(d) Squamous"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1032. जन्तु वर्गीकरण का पदानुक्रम है :",
+    q_en: "Q1032. The hierarchy of animal classification is:",
+    tag: "RRB Group D 23/09/2018 (Morning)",
+    o_hi: [
+      "(a) संघ , वर्ग , गण , परिवार, वंश , प्रजाति",
+      "(b) संघ , गण , परिवार, वर्ग, वंश , प्रजाति",
+      "(c) संघ , वर्ग, परिवार, गण , प्रजाति, वंश",
+      "(d) संघ , वर्ग, परिवार, गण , वंश , प्रजाति"
+    ],
+    o_en: [
+      "(a) Phylum, class, order, family, genus, species",
+      "(b) Phylum, order, family, class, genus, species",
+      "(c) Phylum, class, family, order, species, genus",
+      "(d) Phylum, class, family, order, genus, species"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1033. _______वर्ग के प्राणियों का रक्त गर्म होता है।",
+    q_en: "Q1033. Animals of class _______ are warm-blooded.",
+    tag: "RRB Group D 24/09/2018 (Morning)",
+    o_hi: [
+      "(a) पक्षी",
+      "(b) सरीसृप",
+      "(c) उभयचर",
+      "(d) मत्स्य"
+    ],
+    o_en: [
+      "(a) Aves",
+      "(b) Reptilia",
+      "(c) Amphibia",
+      "(d) Pisces"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1034. ______जन्तुओं का सबसे बड़ा समूह है।",
+    q_en: "Q1034. ______ is the largest group of animals.",
+    tag: "RRB Group D 24/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) मोलस्का",
+      "(b) एनेलिडा",
+      "(c) नेमाटोडा",
+      "(d) आर्थोपोडा"
+    ],
+    o_en: [
+      "(a) Mollusca",
+      "(b) Annelida",
+      "(c) Nematoda",
+      "(d) Arthropoda"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1035. __________चार कोष्ठीय हृदय युक्त गर्म रक्त वाले प्राणी हैं।",
+    q_en: "Q1035. __________ are warm-blooded animals with a four-chambered heart.",
+    tag: "RRB Group D 24/09/2018 (Evening)",
+    o_hi: [
+      "(a) सरीसृप",
+      "(b) उभयचर",
+      "(c) मछली",
+      "(d) स्तनधारी"
+    ],
+    o_en: [
+      "(a) Reptiles",
+      "(b) Amphibians",
+      "(c) Fish",
+      "(d) Mammals"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1036. निम्नलिखित में से किस वर्ग के जानवर गर्म रक्त वाले होते हैं?",
+    q_en: "Q1036. Animals of which of the following classes are warm-blooded?",
+    tag: "RRB Group D 24/09/2018 (Evening)",
+    o_hi: [
+      "(a) पक्षी वर्ग",
+      "(b) सरीसृप",
+      "(c) उभयचर",
+      "(d) मछलियों का वर्ग"
+    ],
+    o_en: [
+      "(a) Aves",
+      "(b) Reptilia",
+      "(c) Amphibia",
+      "(d) Pisces"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1037. ______ऊतक हमारे मुंह की आतंरिक अस्तर को बनाना है।",
+    q_en: "Q1037. ______ tissue forms the inner lining of our mouth.",
+    tag: "RRB Group D 26/09/2018 (Evening)",
+    o_hi: [
+      "(a) सिलिटेड कॉलमर एपीथेलियम",
+      "(b) सरल स्कवैमस एपीथेलियम",
+      "(c) स्तरीकृत स्कवैमस एपीथेलियम",
+      "(d) कॉलमर एपीथेलियम"
+    ],
+    o_en: [
+      "(a) Ciliated columnar epithelium",
+      "(b) Simple squamous epithelium",
+      "(c) Stratified squamous epithelium",
+      "(d) Columnar epithelium"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1038. एक_______ऊतक त्वचा के नीचे और आंतरिक अंगों के बीच बनता है।",
+    q_en: "Q1038. A _______ tissue is found beneath the skin and between internal organs.",
+    tag: "RRB Group D 27/09/2018 (Morning)",
+    o_hi: [
+      "(a) उपकला",
+      "(b) तंत्रिका",
+      "(c) पेशीय",
+      "(d) वसा"
+    ],
+    o_en: [
+      "(a) Epithelial",
+      "(b) Nervous",
+      "(c) Muscular",
+      "(d) Adipose"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1039. ____प्रकार के ऊतक ग्रंथियाँ बनाते हैं।",
+    q_en: "Q1039. ____ type of tissue forms glands.",
+    tag: "RRB Group D 28/09/2018 (Evening)",
+    o_hi: [
+      "(a) संयोजक",
+      "(b) मांसपेशी",
+      "(c) तंत्रिका",
+      "(d) उपकला"
+    ],
+    o_en: [
+      "(a) Connective",
+      "(b) Muscular",
+      "(c) Nervous",
+      "(d) Epithelial"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1040. एवीज में शामिल है:",
+    q_en: "Q1040. Aves includes:",
+    tag: "RRB Group D 01/10/2018 (Morning)",
+    o_hi: [
+      "(a) पक्षी",
+      "(b) जलजीवी",
+      "(c) स्तनधारी",
+      "(d) मछलियाँ"
+    ],
+    o_en: [
+      "(a) Birds",
+      "(b) Aquatic animals",
+      "(c) Mammals",
+      "(d) Fishes"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1041. ____________हड्डियाँ जोड़ता है।",
+    q_en: "Q1041. ____________ joins bones.",
+    tag: "RRB Group D 03/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) लिगामेंट",
+      "(b) एरिओलर",
+      "(c) टेंडन",
+      "(d) कार्टिलेज"
+    ],
+    o_en: [
+      "(a) Ligament",
+      "(b) Areolar",
+      "(c) Tendon",
+      "(d) Cartilage"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1042. एरियोलर ऊतक अंगों के______स्थान भरता है, ______ अंगों को सहारा देता है और ऊतकों की मरम्मत करता है।",
+    q_en: "Q1042. Areolar tissue fills the ______ spaces of organs, supports ______ organs and repairs tissues.",
+    tag: "RRB Group D 04/10/2018 (Morning)",
+    o_hi: [
+      "(a) अंदर के ; आतंरिक",
+      "(b) बाहर के ; बाह्य",
+      "(c) बाहर के ; आतंरिक",
+      "(d) अंदर के ; बाह्य"
+    ],
+    o_en: [
+      "(a) Inner; internal",
+      "(b) Outer; external",
+      "(c) Outer; internal",
+      "(d) Inner; external"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1043. मछली में पाया जाता है-",
+    q_en: "Q1043. Fish has -",
+    tag: "RRB Group D 08/10/2018 (Morning)",
+    o_hi: [
+      "(a) एक कक्षीय हृदय",
+      "(b) दो कक्षीय हृदय",
+      "(c) तीन कक्षीय हृदय",
+      "(d) चार कक्षीय हृदय"
+    ],
+    o_en: [
+      "(a) One-chambered heart",
+      "(b) Two-chambered heart",
+      "(c) Three-chambered heart",
+      "(d) Four-chambered heart"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1044. ______संभवतः जंतुओं का सबसे बड़ा समूह है",
+    q_en: "Q1044. ______ is probably the largest group of animals.",
+    tag: "RRB Group D 09/10/2018 (Morning)",
+    o_hi: [
+      "(a) एनेलिडा",
+      "(b) एकाइनोडर्मेटा",
+      "(c) मोलस्का",
+      "(d) आर्थ्रोपोडा"
+    ],
+    o_en: [
+      "(a) Annelida",
+      "(b) Echinodermata",
+      "(c) Mollusca",
+      "(d) Arthropoda"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1045. स्तनधारियों के पास है:",
+    q_en: "Q1045. Mammals have:",
+    tag: "RRB Group D 09/10/2018 (Morning)",
+    o_hi: [
+      "(a) चार कक्षीय हृदय",
+      "(b) तीन कक्षीय हृदय",
+      "(c) एक कक्षीय हृदय",
+      "(d) दो-कक्षीय हृदय"
+    ],
+    o_en: [
+      "(a) Four-chambered heart",
+      "(b) Three-chambered heart",
+      "(c) One-chambered heart",
+      "(d) Two-chambered heart"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1046. निम्नलिखित में से किस समूह में बैक्टीरिया ; जैसे प्रोकैरियोटिक कोशिका तंत्र (केंद्रीय झिल्ली रहित) वाले एककोशिकीय जीव समाविष्ट हैं?",
+    q_en: "Q1046. Which of the following groups includes unicellular organisms such as bacteria having a prokaryotic cellular system (without a nuclear membrane)?",
+    tag: "RRB Group D 09/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) कवक",
+      "(b) मोनेरा",
+      "(c) प्रॉटिस्टा",
+      "(d) प्लांटी"
+    ],
+    o_en: [
+      "(a) Fungi",
+      "(b) Monera",
+      "(c) Protista",
+      "(d) Plantae"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1047. _______पूरी तरह से मुक्त रहने वाले समुद्री जीव हैं।",
+    q_en: "Q1047. _______ are completely free-living marine organisms.",
+    tag: "RRB Group D 09/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) मोलस्का",
+      "(b) आर्थोपोडा",
+      "(c) इकाइनोडर्मेटा",
+      "(d) नेमेटोडा"
+    ],
+    o_en: [
+      "(a) Mollusca",
+      "(b) Arthropoda",
+      "(c) Echinodermata",
+      "(d) Nematoda"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1048. _______ के जंतुऍं अगतिशील होते हैं।",
+    q_en: "Q1048. Animals of _______ are non-motile.",
+    tag: "RRB Group D 10/10/2018 (Morning)",
+    o_hi: [
+      "(a) पोरिफेरा",
+      "(b) सिलेन्ट्रेट",
+      "(c) प्लेटीहेल्मिंथीज़",
+      "(d) नेमेटोडा"
+    ],
+    o_en: [
+      "(a) Porifera",
+      "(b) Coelenterata",
+      "(c) Platyhelminthes",
+      "(d) Nematoda"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1049. निम्नलिखित में से कौन से जानवरों के नेत्र बहुत ही साधारण होते हैं, वास्तव में रोशनी को पहचानने वाली केवल नेत्र बिंदु होती हैं?",
+    q_en: "Q1049. Which of the following animals have very simple eyes, actually only eye spots that detect light?",
+    tag: "RRB Group D 10/10/2018 (Evening)",
+    o_hi: [
+      "(a) फ़ीता कृमि",
+      "(b) प्लेनेरिया",
+      "(c) राउंडवर्म",
+      "(d) एस्केरिस"
+    ],
+    o_en: [
+      "(a) Tapeworm",
+      "(b) Planaria",
+      "(c) Roundworm",
+      "(d) Ascaris"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1050. स्टारफिश______समूह से संबंधित है।",
+    q_en: "Q1050. Starfish belongs to the ______ group.",
+    tag: "RRB Group D 11/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) एकाइनोडर्मेटा",
+      "(b) एनेलिडा",
+      "(c) पोरिफेरा",
+      "(d) निमेटोडा"
+    ],
+    o_en: [
+      "(a) Echinodermata",
+      "(b) Annelida",
+      "(c) Porifera",
+      "(d) Nematoda"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1051. किस वर्ग के जानवरों की त्वचा शुष्क और ग्रन्थि-विहीन होती है?",
+    q_en: "Q1051. Animals of which class have dry and glandless skin?",
+    tag: "RRB Group D 11/10/2018 (Evening)",
+    o_hi: [
+      "(a) उभयचर",
+      "(b) स्तनधारी",
+      "(c) पक्षीवर्ग",
+      "(d) सरीसृप"
+    ],
+    o_en: [
+      "(a) Amphibians",
+      "(b) Mammals",
+      "(c) Aves",
+      "(d) Reptiles"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1052. वर्ग सरीसृप में________|",
+    q_en: "Q1052. In class Reptilia, ________.",
+    tag: "RRB Group D 12/10/2018 (Morning)",
+    o_hi: [
+      "(a) शल्क के साथ शुष्क और ग्रन्थिविहीन त्वचा होती है।",
+      "(b) बालों के साथ ग्रन्थि वाली त्वचा होती है।",
+      "(c) पंखों के साथ शुष्क और ग्रन्थिविहीन त्वचा होती है।",
+      "(d) बालों के साथ शुष्क और ग्रन्थिविहीन त्वचा होती है।"
+    ],
+    o_en: [
+      "(a) Skin is dry and glandless with scales.",
+      "(b) Skin is glandular with hair.",
+      "(c) Skin is dry and glandless with feathers.",
+      "(d) Skin is dry and glandless with hair."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1053. स्तनधारियों में ________ होता है।",
+    q_en: "Q1053. Mammals have ________.",
+    tag: "RRB Group D 12/10/2018 (Evening)",
+    o_hi: [
+      "(a) बालों के साथ ग्रंथियों की त्वचा",
+      "(b) पंखों के साथ सूखी और गैर-ग्रंथियों वाली त्वचा",
+      "(c) शल्कों के साथ सूखी और गैर-ग्रंथियों वाली त्वचा",
+      "(d) पंखों के साथ सूखी और ग्रंथियों की त्वचा"
+    ],
+    o_en: [
+      "(a) Glandular skin with hair",
+      "(b) Dry, non-glandular skin with feathers",
+      "(c) Dry, non-glandular skin with scales",
+      "(d) Dry, glandular skin with feathers"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];
