@@ -4372,7 +4372,35 @@ function showEmptyState() {
     for(const ev of events) appendSample(ev);
   }
 
+  // Safari can suppress secondary pen PointerEvents after an earlier finger.
+  // Use explicitly identified stylus Touch events for that contact only.
+  let stylusTouchId=null;
+  function routeStylusTouch(e){
+    if(!enabled) return;
+    const ending=e.type==='touchend'||e.type==='touchcancel';
+    for(const t of Array.from(e.changedTouches||[])){
+      if(stylusTouchId!==null ? t.identifier!==stylusTouchId : t.touchType!=='stylus') continue;
+      if(stylusTouchId===null && ending) continue;
+      const ev={
+        type:ending?(e.type==='touchcancel'?'pointercancel':'pointerup'):'pointermove',
+        pointerType:'pen', pointerId:activePointerId===null?-(t.identifier+1):activePointerId,
+        clientX:t.clientX, clientY:t.clientY, pressure:t.force>0?t.force:0.5,
+        timeStamp:e.timeStamp, target:t.target, stylusTouch:true,
+        preventDefault(){if(e.cancelable) e.preventDefault();},
+        stopPropagation(){e.stopPropagation();}
+      };
+      if(stylusTouchId===null){
+        if(!drawing){ ev.type='pointerdown'; start(ev); }
+        if(!drawing) continue;
+        stylusTouchId=t.identifier;
+      }
+      if(ending){end(ev);stylusTouchId=null;}
+      else move(ev);
+    }
+  }
+
   function start(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     if(!isPencil(e)) return;
     if(isInExcludedZone(e.target)) return;
     e.preventDefault();
@@ -4435,6 +4463,7 @@ function showEmptyState() {
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
@@ -4445,6 +4474,7 @@ function showEmptyState() {
   }
 
   function rawMove(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
@@ -4455,6 +4485,7 @@ function showEmptyState() {
   }
 
   function end(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
     e.stopPropagation();
@@ -4548,7 +4579,7 @@ function showEmptyState() {
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
-    else { drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); resetClearConfirm(); clearLaser(); }
+    else { forceEndStroke(); drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); resetClearConfirm(); clearLaser(); }
   }
 
   function undo(){
@@ -4565,6 +4596,7 @@ function showEmptyState() {
 
   function forceDisable(){
     if(!enabled) return;
+    forceEndStroke();
     enabled=false;
     drawing=false; activePointerId=null; usingRawStream=false; currentStroke=null;
     document.body.classList.remove('pencil-mode');
@@ -4613,6 +4645,7 @@ function showEmptyState() {
   // is backgrounded or the OS eats the event mid-stroke), force-finalize the
   // stroke so drawing state can never stay stuck until the pen is re-lifted.
   function forceEndStroke(){
+    stylusTouchId=null;
     if(!drawing) return;
     try{document.documentElement.releasePointerCapture(activePointerId);}catch(_){}
     drawing=false; activePointerId=null; usingRawStream=false; starTapStart=null;
@@ -4697,6 +4730,7 @@ function showEmptyState() {
     // touch as a gesture candidate and pauses/cancels the pen's pointer
     // stream mid-stroke until the pen is lifted and put down again.
     function blockAllTouch(e){
+    routeStylusTouch(e);
       if(!enabled) return;
       if(isInExcludedZone(e.target)) return;
       e.preventDefault();
@@ -4705,6 +4739,7 @@ function showEmptyState() {
     document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
     document.addEventListener('touchmove',blockAllTouch,{capture:true,passive:false});
     document.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
+    document.addEventListener('touchcancel',blockAllTouch,{capture:true,passive:false});
 
     // Second half of the palm-rejection fix: touch-action:none stops the
     // *page* from scrolling/zooming on a second touch, but Safari's native
@@ -7548,6 +7583,7 @@ if ('serviceWorker' in navigator) {
   function isPen(e){ return e.pointerType==='pen'; }
 
   function forceEndStroke(){
+    stylusTouchId=null;
     if(!drawing) return;
     try{document.documentElement.releasePointerCapture(activePointerId);}catch(_){}
     drawing=false; activePointerId=null; starTapStart=null;
@@ -7567,7 +7603,35 @@ if ('serviceWorker' in navigator) {
 
   // Keep stationary contact alive until release/cancel or backgrounding.
 
+  // Safari can suppress secondary pen PointerEvents after an earlier finger.
+  // Use explicitly identified stylus Touch events for that contact only.
+  let stylusTouchId=null;
+  function routeStylusTouch(e){
+    if(!enabled) return;
+    const ending=e.type==='touchend'||e.type==='touchcancel';
+    for(const t of Array.from(e.changedTouches||[])){
+      if(stylusTouchId!==null ? t.identifier!==stylusTouchId : t.touchType!=='stylus') continue;
+      if(stylusTouchId===null && ending) continue;
+      const ev={
+        type:ending?(e.type==='touchcancel'?'pointercancel':'pointerup'):'pointermove',
+        pointerType:'pen', pointerId:activePointerId===null?-(t.identifier+1):activePointerId,
+        clientX:t.clientX, clientY:t.clientY, pressure:t.force>0?t.force:0.5,
+        timeStamp:e.timeStamp, target:t.target, stylusTouch:true,
+        preventDefault(){if(e.cancelable) e.preventDefault();},
+        stopPropagation(){e.stopPropagation();}
+      };
+      if(stylusTouchId===null){
+        if(!drawing){ ev.type='pointerdown'; start(ev); }
+        if(!drawing) continue;
+        stylusTouchId=t.identifier;
+      }
+      if(ending){end(ev);stylusTouchId=null;}
+      else move(ev);
+    }
+  }
+
   function start(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     if(!enabled||!canvas||e.target!==canvas||!isPen(e)) return;
     e.preventDefault();
     notePenEvent(e);
@@ -7639,6 +7703,7 @@ if ('serviceWorker' in navigator) {
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
@@ -7648,6 +7713,7 @@ if ('serviceWorker' in navigator) {
     appendEvents(events.length?events:[e]);
   }
   function rawMove(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
@@ -7658,6 +7724,7 @@ if ('serviceWorker' in navigator) {
   }
 
   function end(e){
+    if(stylusTouchId!==null && !e.stylusTouch) return;
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
     if(e.type!=='pointercancel'){
@@ -7721,6 +7788,7 @@ if ('serviceWorker' in navigator) {
   // this was the specific "finger first, then pencil doesn't write" bug in
   // the AI sheet (the main quiz page already had this layer).
   function blockAllTouch(e){
+    routeStylusTouch(e);
     if(!enabled) return;
     if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
     e.preventDefault();
@@ -7729,6 +7797,7 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('touchstart', blockAllTouch, {capture:true, passive:false});
   document.addEventListener('touchmove', blockAllTouch, {capture:true, passive:false});
   document.addEventListener('touchend', blockAllTouch, {capture:true, passive:false});
+  document.addEventListener('touchcancel', blockAllTouch, {capture:true, passive:false});
 
   // ---- Toolbar wiring: pen/color/eraser/star/undo/redo/clear ----
   function setTool(next){
@@ -7790,6 +7859,7 @@ if ('serviceWorker' in navigator) {
   }
 
   function setEnabled(v){
+    if(!v) forceEndStroke();
     enabled=!!v;
     ensureCanvas();
     resize();
@@ -7827,6 +7897,8 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('gesturechange', blockGesture, {capture:true, passive:false});
   document.addEventListener('gestureend', blockGesture, {capture:true, passive:false});
   window.addEventListener('resize', function(){ if(enabled) resize(); }, {passive:true});
+  window.addEventListener('blur',forceEndStroke,{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden) forceEndStroke();},{passive:true});
 
   document.getElementById('aiPencilPenBtn')?.addEventListener('click',()=>setTool('pen'));
   document.getElementById('aiPencilColorRedBtn')?.addEventListener('click',()=>setColor('#dc2626'));
