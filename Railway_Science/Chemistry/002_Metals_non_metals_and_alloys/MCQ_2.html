@@ -1,0 +1,862 @@
+const data = [
+  {
+    q_hi: "Q211. धातुओं की अभिक्रियाशीलता के लिए निम्नलिखित में से कौन सा अवरोही क्रम सही है?",
+    q_en: "Q211. Which of the following descending orders of reactivity of metals is correct?",
+    tag: "RRC Group D 16/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) Al > Cu > Hg > Ca",
+      "(b) Al > Ca > Cu > Hg",
+      "(c) Ca > Al > Cu > Hg",
+      "(d) Al > Cu > Ca > Hg"
+    ],
+    o_en: [
+      "(a) Al > Cu > Hg > Ca",
+      "(b) Al > Ca > Cu > Hg",
+      "(c) Ca > Al > Cu > Hg",
+      "(d) Al > Cu > Ca > Hg"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q212. धातुओं की अभिक्रियाशीलता श्रेणी (reactivity series) के अनुसार, इनमें से कौन सी धातु सबसे कम सक्रिय है?",
+    q_en: "Q212. According to the reactivity series of metals, which of these metals is the least reactive?",
+    tag: "RRC Group D 17/09/2022 (Morning)",
+    o_hi: [
+      "(a) सीसा (Lead)",
+      "(b) जस्ता (Zinc)",
+      "(c) लोहा (Iron)",
+      "(d) मैग्नीशियम (Magnesium)"
+    ],
+    o_en: [
+      "(a) Lead",
+      "(b) Zinc",
+      "(c) Iron",
+      "(d) Magnesium"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q213. निम्न तत्वों में से अर्ध-धातुओं के सही युग्म का चयन कीजिए।",
+    q_en: "Q213. Select the correct pair of metalloids from the following elements.",
+    tag: "RRC Group D 17/09/2022 (Evening)",
+    o_hi: [
+      "(a) सल्फर और फास्फोरस",
+      "(b) हाइड्रोजन और हीलियम",
+      "(c) सिलिकॉन और जर्मेनियम",
+      "(d) कार्बन और नाइट्रोजन"
+    ],
+    o_en: [
+      "(a) Sulphur and phosphorus",
+      "(b) Hydrogen and helium",
+      "(c) Silicon and germanium",
+      "(d) Carbon and nitrogen"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q214. अधातुओं के संबंध में दिए गए कथनों में से कौन सा सत्य है?",
+    q_en: "Q214. Which of the following statements about non-metals is true?",
+    tag: "RRC Group D 18/09/2022 (Morning)",
+    o_hi: [
+      "(a) अधातुएं, प्रकृति में विद्युत धनात्मक होती हैं, और इलेक्ट्रॉन त्याग कर बंध बनाती हैं।",
+      "(b) अधातुएं, प्रकृति में विद्युत ऋणात्मक होती हैं, और इलेक्ट्रॉन ग्रहण कर बंध बनाती हैं।",
+      "(c) अधातुएं, प्रकृति में विद्युत धनात्मक होती हैं, और इलेक्ट्रॉन ग्रहण कर बंध बनाती हैं।",
+      "(d) अधातुएं, प्रकृति में विद्युत ऋणात्मक होती हैं, और इलेक्ट्रॉन त्याग कर बंध बनाती हैं।"
+    ],
+    o_en: [
+      "(a) Non-metals are electropositive in nature and form bonds by losing electrons.",
+      "(b) Non-metals are electronegative in nature and form bonds by gaining electrons.",
+      "(c) Non-metals are electropositive in nature and form bonds by gaining electrons.",
+      "(d) Non-metals are electronegative in nature and form bonds by losing electrons."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q215. धातुएं, प्रकृति में वैद्युत धनात्मक होती हैं। निम्न में से कौन सा दिए गए अभिकथन की सही व्याख्या करता है?",
+    q_en: "Q215. Metals are electropositive in nature. Which of the following correctly explains the given assertion?",
+    tag: "RRC Group D 19/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) धातुएं, धनायन बनाने के लिए इलेक्ट्रॉन त्यागती हैं।",
+      "(b) धातुएं, ऋणायन बनाने के लिए इलेक्ट्रॉन ग्रहण करती हैं।",
+      "(c) धातुएं, धनायन बनाने के लिए इलेक्ट्रॉन ग्रहण करती हैं।",
+      "(d) धातुएं, ऋणायन बनाने के लिए इलेक्ट्रॉन त्यागती हैं।"
+    ],
+    o_en: [
+      "(a) Metals lose electrons to form cations.",
+      "(b) Metals gain electrons to form anions.",
+      "(c) Metals gain electrons to form cations.",
+      "(d) Metals lose electrons to form anions."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q216. धातुओं के संबंध में इनमें से कौन सा कथन सही नहीं है?",
+    q_en: "Q216. Which of the following statements about metals is not correct?",
+    tag: "RRC Group D 20/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) सामान्यतः, धातुएं अम्लीय ऑक्साइड बनाती हैं।",
+      "(b) धातुओं को आवर्त सारणी में बाईं ओर रखा गया है।",
+      "(c) धातुएं, प्रकृति में विद्युत धनात्मक होती हैं।",
+      "(d) धातुएं, बंध निर्माण के दौरान इलेक्ट्रॉन त्यागने की प्रवृत्ति प्रदर्शित करती हैं।"
+    ],
+    o_en: [
+      "(a) Generally, metals form acidic oxides.",
+      "(b) Metals are placed on the left side of the periodic table.",
+      "(c) Metals are electropositive in nature.",
+      "(d) Metals tend to lose electrons during bond formation."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q217. निम्न में से किस धातु में संक्षारण के कारण हरे रंग की परत बनती है?",
+    q_en: "Q217. Which of the following metals develops a green layer due to corrosion?",
+    tag: "RRC Group D 22/09/2022 (Evening)",
+    o_hi: [
+      "(a) लोहा",
+      "(b) चांदी",
+      "(c) तांबा",
+      "(d) जिंक"
+    ],
+    o_en: [
+      "(a) Iron",
+      "(b) Silver",
+      "(c) Copper",
+      "(d) Zinc"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q218. किस अधातु का अपरूप (allotrope) विद्युत का सुचालक होता है?",
+    q_en: "Q218. An allotrope of which non-metal is a conductor of electricity?",
+    tag: "RRC Group D 30/09/2022 (Morning)",
+    o_hi: [
+      "(a) सल्फर",
+      "(b) फॉस्फोरस",
+      "(c) कार्बन",
+      "(d) ऑक्सीजन"
+    ],
+    o_en: [
+      "(a) Sulphur",
+      "(b) Phosphorus",
+      "(c) Carbon",
+      "(d) Oxygen"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q219. निम्नलिखित धातुओं को उनकी अभिक्रियाशीलता के अनुसार सही क्रम में व्यवस्थित कीजिए:<br>K, Al, Fe, Au, Pb",
+    q_en: "Q219. Arrange the following metals in the correct order according to their reactivity:<br>K, Al, Fe, Au, Pb",
+    tag: "RRC Group D 06/10/2022 (Morning)",
+    o_hi: [
+      "(a) K > Al > Pb > Fe > Au",
+      "(b) K > Al > Fe > Pb > Au",
+      "(c) K > Al > Fe > Au > Pb",
+      "(d) K > Fe > Al > Pb > Au"
+    ],
+    o_en: [
+      "(a) K > Al > Pb > Fe > Au",
+      "(b) K > Al > Fe > Pb > Au",
+      "(c) K > Al > Fe > Au > Pb",
+      "(d) K > Fe > Al > Pb > Au"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q220. निम्नलिखित में से कौन सा तत्व, तांबे से अधिक अभिक्रियाशील होता है?",
+    q_en: "Q220. Which of the following elements is more reactive than copper?",
+    tag: "RRC Group D 06/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) जिंक",
+      "(b) सोना",
+      "(c) चांदी",
+      "(d) प्लेटिनम"
+    ],
+    o_en: [
+      "(a) Zinc",
+      "(b) Gold",
+      "(c) Silver",
+      "(d) Platinum"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q221. निम्नलिखित में से किसका मुख्य रूप से फोटोवोल्टिक सौर सेल बनाने के लिए उपयोग किया जाता है?",
+    q_en: "Q221. Which of the following is mainly used to make photovoltaic solar cells?",
+    tag: "RRB NTPC CBT - II (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) Si",
+      "(b) S",
+      "(c) Se",
+      "(d) Su"
+    ],
+    o_en: [
+      "(a) Si",
+      "(b) S",
+      "(c) Se",
+      "(d) Su"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q222. निम्न में से कौन सा धातु समूह इतना मृदु होता है, कि इन्हें चाकू से काटा जा सकता है और इनका घनत्व कम और गलनांक निम्न होता है?",
+    q_en: "Q222. Which of the following groups of metals is so soft that they can be cut with a knife and have low density and low melting points?",
+    tag: "RRB NTPC CBT - II (15/06/2022) Shift 2",
+    o_hi: [
+      "(a) आर्सेनिक, एंटीमोनी, बिस्मथ",
+      "(b) बेरिलियम, कैल्शियम, मैग्नीशियम",
+      "(c) जर्मेनियम, गैलियम, इंडियम",
+      "(d) लिथियम, सोडियम, पोटेशियम"
+    ],
+    o_en: [
+      "(a) Arsenic, antimony, bismuth",
+      "(b) Beryllium, calcium, magnesium",
+      "(c) Germanium, gallium, indium",
+      "(d) Lithium, sodium, potassium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q223. निम्नलिखित में से कौन अधात्विक खनिज का उदाहरण है?",
+    q_en: "Q223. Which of the following is an example of a non-metallic mineral?",
+    tag: "RRB NTPC CBT - II (15/06/2022) Shift 3",
+    o_hi: [
+      "(a) हेमेटाइट",
+      "(b) पाइराइट",
+      "(c) चूना पत्थर (Limestone)",
+      "(d) बॉक्साइट"
+    ],
+    o_en: [
+      "(a) Hematite",
+      "(b) Pyrite",
+      "(c) Limestone",
+      "(d) Bauxite"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q224. धातुओं के पतले तारों में खींचे जाने की क्षमता ________ कहलाती है।",
+    q_en: "Q224. The ability of metals to be drawn into thin wires is called ________.",
+    tag: "NTPC CBT - I (04/01/2021) Morning",
+    o_hi: [
+      "(a) तन्यता (Ductility)",
+      "(b) विलेयता (solubility)",
+      "(c) अभिक्रियाशीलता (reactivity)",
+      "(d) आघातवर्धनीयता (malleability)"
+    ],
+    o_en: [
+      "(a) Ductility",
+      "(b) Solubility",
+      "(c) Reactivity",
+      "(d) Malleability"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q225. निम्नलिखित में से कौन सा सामान्यतः अधातुओं का गुण नहीं है?",
+    q_en: "Q225. Which of the following is generally not a property of non-metals?",
+    tag: "RRB NTPC CBT - I (18/01/2021) Evening",
+    o_hi: [
+      "(a) धूमिल एवं मंद",
+      "(b) चालक",
+      "(c) भंगुर",
+      "(d) हल्के पदार्थ"
+    ],
+    o_en: [
+      "(a) Dull and non-lustrous",
+      "(b) Conductor",
+      "(c) Brittle",
+      "(d) Light substances"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q226. एलुमिनियम की सतह पर एलुमिनियम ऑक्साइड की एक मोटी परत बनाने की प्रक्रिया को _________ कहा जाता है ताकि इसे जंग से बचाया जा सके",
+    q_en: "Q226. The process of forming a thick layer of aluminium oxide on the surface of aluminium to protect it from corrosion is called _________.",
+    tag: "RRB NTPC CBT - I (29/01/2021) Morning",
+    o_hi: [
+      "(a) यशदलेपन",
+      "(b) ऐनोडीकरण",
+      "(c) भर्जन",
+      "(d) निस्तापन"
+    ],
+    o_en: [
+      "(a) Galvanising",
+      "(b) Anodising",
+      "(c) Roasting",
+      "(d) Calcination"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q227. एनोडाइजिंग प्रक्रिया में किस अम्ल का उपयोग किया जाता है?",
+    q_en: "Q227. Which acid is used in the anodising process?",
+    tag: "RRB NTPC CBT - I (30/01/2021) Evening",
+    o_hi: [
+      "(a) तनु एसीटिक अम्ल",
+      "(b) तनु सल्फ्यूरिक अम्ल",
+      "(c) तनु हाइड्रोक्लोरिक अम्ल",
+      "(d) तनु नाइट्रिक अम्ल"
+    ],
+    o_en: [
+      "(a) Dilute acetic acid",
+      "(b) Dilute sulphuric acid",
+      "(c) Dilute hydrochloric acid",
+      "(d) Dilute nitric acid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q228. प्रकृति में पाए जाने वाले धातु के यौगिक को _____ कहा जाता है।",
+    q_en: "Q228. A naturally occurring compound of a metal is called _____.",
+    tag: "RRB NTPC CBT - I (02/02/2021) Evening",
+    o_hi: [
+      "(a) गालक",
+      "(b) खनिज",
+      "(c) अयस्क",
+      "(d) धातुमल"
+    ],
+    o_en: [
+      "(a) Flux",
+      "(b) Mineral",
+      "(c) Ore",
+      "(d) Slag"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q229. निम्नलिखित में से कौन थोरियम का अयस्क है?",
+    q_en: "Q229. Which of the following is an ore of thorium?",
+    tag: "RRB NTPC CBT - I (17/02/2021) Evening",
+    o_hi: [
+      "(a) कार्नोटाइट",
+      "(b) टॉर्बनाइट",
+      "(c) मोनाजाइट",
+      "(d) पिचब्लेंडे"
+    ],
+    o_en: [
+      "(a) Carnotite",
+      "(b) Torbernite",
+      "(c) Monazite",
+      "(d) Pitchblende"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q230. संक्षारण एवं जंग लगने से बचाने के लिए लोहे पर किए जाने वाले विद्युत लेपन में किस धातु का उपयोग किया जाता है?",
+    q_en: "Q230. Which metal is used for electroplating iron to protect it from corrosion and rusting?",
+    tag: "RRB NTPC CBT - I (04/03/2021) Morning",
+    o_hi: [
+      "(a) रोडियम",
+      "(b) जस्ता",
+      "(c) टिन",
+      "(d) क्रोमियम"
+    ],
+    o_en: [
+      "(a) Rhodium",
+      "(b) Zinc",
+      "(c) Tin",
+      "(d) Chromium"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q231. इस्पात को कठोरीकृत करने के लिए किस रासायनिक तत्व की आवश्यकता होती है?",
+    q_en: "Q231. Which chemical element is required to harden steel?",
+    tag: "RRB NTPC CBT - I (04/03/2021) Evening",
+    o_hi: [
+      "(a) मैंगनीज",
+      "(b) वैनेडियम",
+      "(c) निकल",
+      "(d) क्रोमियम"
+    ],
+    o_en: [
+      "(a) Manganese",
+      "(b) Vanadium",
+      "(c) Nickel",
+      "(d) Chromium"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q232. निम्नलिखित में से कौन एक अलौह धात्विक खनिज नहीं है?",
+    q_en: "Q232. Which of the following is not a non-ferrous metallic mineral?",
+    tag: "RRB NTPC CBT - I (04/03/2021) Evening",
+    o_hi: [
+      "(a) बाक्साइट",
+      "(b) अभ्रक",
+      "(c) तांबा",
+      "(d) लेड"
+    ],
+    o_en: [
+      "(a) Bauxite",
+      "(b) Mica",
+      "(c) Copper",
+      "(d) Lead"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q233. वे तत्व जिनमें धातुओं और अधातुओं के बीच मध्यवर्ती गुण होते हैं, उपधातु कहलाते हैं। निम्नलिखित में से किसे उपधातु के रूप में जाना जाता है?",
+    q_en: "Q233. Elements having properties intermediate between metals and non-metals are called metalloids. Which of the following is known as a metalloid?",
+    tag: "RRB NTPC CBT - I (13/03/2021) Morning",
+    o_hi: [
+      "(a) कार्बन",
+      "(b) तांबा",
+      "(c) जर्मेनियम",
+      "(d) आयोडीन"
+    ],
+    o_en: [
+      "(a) Carbon",
+      "(b) Copper",
+      "(c) Germanium",
+      "(d) Iodine"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q234. निम्नलिखित में से कौन लेड का अयस्क है?",
+    q_en: "Q234. Which of the following is an ore of lead?",
+    tag: "RRB NTPC CBT - I (15/03/2021) Evening",
+    o_hi: [
+      "(a) बॉक्साइट",
+      "(b) पायरोलुसाइट",
+      "(c) गैलेना",
+      "(d) लिमोनाइट"
+    ],
+    o_en: [
+      "(a) Bauxite",
+      "(b) Pyrolusite",
+      "(c) Galena",
+      "(d) Limonite"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q235. इनमें से कौन सा कमरे के ताप पर द्रव अवस्था में मौजूद एकमात्र अधातु पदार्थ है?",
+    q_en: "Q235. Which of these is the only non-metallic substance present in liquid state at room temperature?",
+    tag: "RRB NTPC CBT - I (06/04/2021) Evening",
+    o_hi: [
+      "(a) आयोडीन",
+      "(b) ब्रोमीन",
+      "(c) क्लोरीन",
+      "(d) फ्लोरीन"
+    ],
+    o_en: [
+      "(a) Iodine",
+      "(b) Bromine",
+      "(c) Chlorine",
+      "(d) Fluorine"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q236. पीतल मिश्रण है:",
+    q_en: "Q236. Brass is a mixture of:",
+    tag: "RRB NTPC CBT - I (24/07/2021) Evening",
+    o_hi: [
+      "(a) 80% जिंक और 20% तांबा",
+      "(b) 20% जिंक और 80% तांबा",
+      "(c) 70% जिंक और 30% तांबा",
+      "(d) 30% जिंक और 70% तांबा"
+    ],
+    o_en: [
+      "(a) 80% zinc and 20% copper",
+      "(b) 20% zinc and 80% copper",
+      "(c) 70% zinc and 30% copper",
+      "(d) 30% zinc and 70% copper"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q237. निम्नलिखित में से कौन सा बहु-परमाणुक है?",
+    q_en: "Q237. Which of the following is polyatomic?",
+    tag: "RRB JE 24/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) हाइड्रोजन",
+      "(b) नाइट्रोजन",
+      "(c) गंधक",
+      "(d) क्लोरीन"
+    ],
+    o_en: [
+      "(a) Hydrogen",
+      "(b) Nitrogen",
+      "(c) Sulphur",
+      "(d) Chlorine"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q238. निम्नलिखित में से कौन सी धातु तत्वों की आवर्त सारणी में मौजूद सबसे हल्की धातु है?",
+    q_en: "Q238. Which of the following metals is the lightest metal present in the periodic table?",
+    tag: "RRB JE 24/05/2019 (Evening)",
+    o_hi: [
+      "(a) मैग्नीशियम",
+      "(b) एलुमिनियम",
+      "(c) लीथियम",
+      "(d) टाइटेनियम"
+    ],
+    o_en: [
+      "(a) Magnesium",
+      "(b) Aluminium",
+      "(c) Lithium",
+      "(d) Titanium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q239. लैंथेनाइड्स और एक्टिनाइड्स को ____ भी कहा जाता है।",
+    q_en: "Q239. Lanthanides and actinides are also called ____.",
+    tag: "RRB JE 24/05/2019 (Evening)",
+    o_hi: [
+      "(a) संक्रमण तत्व",
+      "(b) अक्रिय गैस",
+      "(c) आंतरिक संक्रमण तत्व",
+      "(d) सामान्य तत्व"
+    ],
+    o_en: [
+      "(a) Transition elements",
+      "(b) Inert gases",
+      "(c) Inner transition elements",
+      "(d) Normal elements"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q240. निम्नलिखित में से कौन सी अधातु विद्युत की सुचालक है?",
+    q_en: "Q240. Which of the following non-metals is a conductor of electricity?",
+    tag: "RRB JE 26/05/2019 (Morning)",
+    o_hi: [
+      "(a) ब्रोमीन",
+      "(b) फास्फोरस",
+      "(c) ग्रेफाइट",
+      "(d) हाइड्रोजन"
+    ],
+    o_en: [
+      "(a) Bromine",
+      "(b) Phosphorus",
+      "(c) Graphite",
+      "(d) Hydrogen"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q241. निम्नलिखित में से कौन सी धातु भाप के साथ अभिक्रिया करके धातु ऑक्साइड और हाइड्रोजन बनाती है?",
+    q_en: "Q241. Which of the following metals reacts with steam to form metal oxide and hydrogen?",
+    tag: "RRB Group D 17/09/2018 (Morning)",
+    o_hi: [
+      "(a) तांबा",
+      "(b) चांदी",
+      "(c) सीसा",
+      "(d) एलुमिनियम"
+    ],
+    o_en: [
+      "(a) Copper",
+      "(b) Silver",
+      "(c) Lead",
+      "(d) Aluminium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q242. निम्नलिखित में से कौन ठोस, तरल और गैसीय रूप में मौजूद हो सकता है?",
+    q_en: "Q242. Which of the following can exist in solid, liquid and gaseous forms?",
+    tag: "RRB Group D 17/09/2018 (Morning)",
+    o_hi: [
+      "(a) उपधातु",
+      "(b) निष्क्रिय तत्व",
+      "(c) अधातु",
+      "(d) धातु"
+    ],
+    o_en: [
+      "(a) Metalloid",
+      "(b) Inert element",
+      "(c) Non-metal",
+      "(d) Metal"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q243. धातुओं की विद्युत प्रतिरोधकता का सही क्रम चुनिए।",
+    q_en: "Q243. Choose the correct order of electrical resistivity of metals.",
+    tag: "RRB Group D 17/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) Ag > W > Ni > Hg",
+      "(b) Hg > Ni > W > Ag",
+      "(c) Ag > Ni > Hg > W",
+      "(d) Ag > W > Hg > Ni"
+    ],
+    o_en: [
+      "(a) Ag > W > Ni > Hg",
+      "(b) Hg > Ni > W > Ag",
+      "(c) Ag > Ni > Hg > W",
+      "(d) Ag > W > Hg > Ni"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q244. निम्न में से कौन सी धातु सबसे अधिक आघातवर्धनीय है?",
+    q_en: "Q244. Which of the following metals is the most malleable?",
+    tag: "RRB ALP Tier - I (13/08/2018) Afternoon",
+    o_hi: [
+      "(a) Zn",
+      "(b) Al",
+      "(c) Ag",
+      "(d) Na"
+    ],
+    o_en: [
+      "(a) Zn",
+      "(b) Al",
+      "(c) Ag",
+      "(d) Na"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q245. निम्नलिखित में से किससे पुलों, लोहे के जंगले और धातुओं से बनी सभी वस्तुओं को नुकसान पहुंचता है?",
+    q_en: "Q245. Which of the following damages bridges, iron railings and all objects made of metals?",
+    tag: "RRB ALP Tier - I (14/08/2018) Morning",
+    o_hi: [
+      "(a) अम्लता",
+      "(b) अपचयन",
+      "(c) जंग/संक्षारण",
+      "(d) विकृतगंधिता (Rancidity)"
+    ],
+    o_en: [
+      "(a) Acidity",
+      "(b) Reduction",
+      "(c) Rusting/Corrosion",
+      "(d) Rancidity"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q246. निम्नलिखित में से कौन सी धातु ठंडे या गर्म जल के साथ प्रतिक्रिया नहीं करती है?",
+    q_en: "Q246. Which of the following metals does not react with cold or hot water?",
+    tag: "RRB ALP Tier - I (17/08/2018) Morning",
+    o_hi: [
+      "(a) एलुमिनियम",
+      "(b) सोडियम",
+      "(c) कैल्शियम",
+      "(d) पोटैशियम"
+    ],
+    o_en: [
+      "(a) Aluminium",
+      "(b) Sodium",
+      "(c) Calcium",
+      "(d) Potassium"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q247. कार्बन के उपयोग द्वारा अपचयन करके, निम्न धातुओं में से किसको प्राप्त नहीं किया जा सकता?",
+    q_en: "Q247. Which of the following metals cannot be obtained by reduction using carbon?",
+    tag: "RRB ALP Tier - I (20/08/2018) Afternoon",
+    o_hi: [
+      "(a) लोहा",
+      "(b) तांबा",
+      "(c) सोडियम",
+      "(d) जस्ता"
+    ],
+    o_en: [
+      "(a) Iron",
+      "(b) Copper",
+      "(c) Sodium",
+      "(d) Zinc"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q248. निम्नलिखित में से कौन-सी धातु ठंडे जल से तीव्र अभिक्रिया करती है?",
+    q_en: "Q248. Which of the following metals reacts vigorously with cold water?",
+    tag: "RRB ALP Tier - I (20/08/2018) Evening",
+    o_hi: [
+      "(a) जस्ता",
+      "(b) एलुमिनियम",
+      "(c) लोहा",
+      "(d) पोटैशियम"
+    ],
+    o_en: [
+      "(a) Zinc",
+      "(b) Aluminium",
+      "(c) Iron",
+      "(d) Potassium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q249. निम्नलिखित में से कौन सी धातु उच्च तापमान पर भी ऑक्सीजन के साथ प्रतिक्रिया नहीं करती है?",
+    q_en: "Q249. Which of the following metals does not react with oxygen even at high temperature?",
+    tag: "RRB ALP Tier - I (21/08/2018) Afternoon",
+    o_hi: [
+      "(a) चांदी",
+      "(b) एलुमिनियम",
+      "(c) सीसा",
+      "(d) जस्ता"
+    ],
+    o_en: [
+      "(a) Silver",
+      "(b) Aluminium",
+      "(c) Lead",
+      "(d) Zinc"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q250. अधातुओं में आमतौर पर सबसे बाहरी कोश (shell) में ________ इलेक्ट्रॉन होते हैं।",
+    q_en: "Q250. Non-metals generally have ________ electrons in their outermost shell.",
+    tag: "RRB ALP Tier - I (29/08/2018) Morning",
+    o_hi: [
+      "(a) 5, 6, 7 या 8",
+      "(b) 8, 9 या 10",
+      "(c) 1, 2 या 3",
+      "(d) 10 से 18"
+    ],
+    o_en: [
+      "(a) 5, 6, 7 or 8",
+      "(b) 8, 9 or 10",
+      "(c) 1, 2 or 3",
+      "(d) 10 to 18"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q251. सामान्य धातुओं को उनकी घटती अभिक्रियाशीलता के क्रम में व्यवस्थित करने के रूप में जाना जाता है?",
+    q_en: "Q251. What is the arrangement of common metals in decreasing order of reactivity known as?",
+    tag: "RRB ALP Tier - I (29/08/2018) Evening",
+    o_hi: [
+      "(a) अभिक्रियाशीलता (Reactivity)",
+      "(b) गतिविधि श्रृंखला",
+      "(c) प्रवाहकत्त्व (Conductivity)",
+      "(d) इलेक्ट्रोलाइटिक अपचयन (Electrolytic reduction)"
+    ],
+    o_en: [
+      "(a) Reactivity",
+      "(b) Activity series",
+      "(c) Conductivity",
+      "(d) Electrolytic reduction"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q252. लोहे को कठोर और मजबूत बनाने के लिए निम्नलिखित में से लोहे में क्या मिलाया जाता है?",
+    q_en: "Q252. Which of the following is added to iron to make it hard and strong?",
+    tag: "RRB ALP Tier - I (30/08/2018) Morning",
+    o_hi: [
+      "(a) जस्ता",
+      "(b) सोडियम",
+      "(c) तांबा",
+      "(d) कार्बन"
+    ],
+    o_en: [
+      "(a) Zinc",
+      "(b) Sodium",
+      "(c) Copper",
+      "(d) Carbon"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q253. निम्न में से कौन आघातवर्धनीय नहीं है?",
+    q_en: "Q253. Which of the following is not malleable?",
+    tag: "RRB ALP Tier - I (30/08/2018) Afternoon",
+    o_hi: [
+      "(a) एलुमिनियम",
+      "(b) तांबा",
+      "(c) चांदी",
+      "(d) ग्रैफाइट"
+    ],
+    o_en: [
+      "(a) Aluminium",
+      "(b) Copper",
+      "(c) Silver",
+      "(d) Graphite"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
