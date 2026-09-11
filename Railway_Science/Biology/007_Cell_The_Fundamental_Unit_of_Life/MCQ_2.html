@@ -1,0 +1,1005 @@
+const Q507_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q458. वे जीव जिनकी कोशिकाओं में केन्द्रक झिल्ली नहीं होती _________ कहलाते हैं।",
+    q_en: "Q458. Organisms whose cells do not have a nuclear membrane are called _________.",
+    tag: "RRB Tech. - (III) 28/12/2024 (Evening)",
+    o_hi: [
+      "(a) यूकैरियोटिक (eukaryotes)",
+      "(b) कोशिका द्रव्य (cytoplasm)",
+      "(c) क्रोमेटिन (chromatin)",
+      "(d) प्रोकैरियोटिक (prokaryotes)"
+    ],
+    o_en: [
+      "(a) Eukaryotes",
+      "(b) Cytoplasm",
+      "(c) Chromatin",
+      "(d) Prokaryotes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q459. किसी लक्षण की विशेषताओं को नियंत्रित करने वाले जीन किसमें स्थित होते हैं?",
+    q_en: "Q459. Genes controlling the characteristics of a trait are located in which of the following?",
+    tag: "RRB Tech. - (III) 28/12/2024 (Evening)",
+    o_hi: [
+      "(a) रसधानियां",
+      "(b) गुणसूत्र",
+      "(c) अंतर्द्रव्यी जालिका",
+      "(d) लयनकाय"
+    ],
+    o_en: [
+      "(a) Vacuoles",
+      "(b) Chromosomes",
+      "(c) Endoplasmic reticulum",
+      "(d) Lysosomes"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q460. प्राक्केंद्रकी कोशिका (prokaryotic cell) की विशेषताओं से संबंधित सही कथन का चयन कीजिए।",
+    q_en: "Q460. Select the correct statement related to the characteristics of a prokaryotic cell.",
+    tag: "RRB Tech. - (III) 29/12/2024 (Morning)",
+    o_hi: [
+      "(a) इसमें एक से अधिक गुणसूत्र होते हैं।",
+      "(b) केंद्रक क्षेत्र स्पष्ट रूप से परिभाषित होता है और केंद्रक झिल्ली द्वारा घिरा होता है।",
+      "(c) इसमें एक ही गुणसूत्र होता है।",
+      "(d) झिल्ली द्वारा आबद्ध कोशिकांग उपस्थित होते हैं।"
+    ],
+    o_en: [
+      "(a) It has more than one chromosome.",
+      "(b) The nuclear region is clearly defined and surrounded by a nuclear membrane.",
+      "(c) It has a single chromosome.",
+      "(d) Membrane-bound organelles are present."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q461. कोशिका की आंतरिक सभी गतिविधियां और कोशिका की पर्यावरण के साथ अंतःक्रिया प्रायः प्रत्येक कोशिका में देखी जाने वाली तीन महत्वपूर्ण विशेषताओं के कारण संभव होती है। वह तीन विशेषताएं कौन सी हैं?",
+    q_en: "Q461. All internal activities of the cell and its interaction with the environment are possible mainly because of three important features seen in almost every cell. What are those three features?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Morning)",
+    o_hi: [
+      "(a) प्लाज्मा झिल्ली, केंद्रक और गॉल्जीकाय",
+      "(b) माइटोकॉन्ड्रिया, केंद्रक और कोशिका द्रव्य",
+      "(c) माइटोकॉन्ड्रिया, केंद्रक और गॉल्जीकाय",
+      "(d) प्लाज्मा झिल्ली, केंद्रक और कोशिका द्रव्य"
+    ],
+    o_en: [
+      "(a) Plasma membrane, nucleus and Golgi body",
+      "(b) Mitochondria, nucleus and cytoplasm",
+      "(c) Mitochondria, nucleus and Golgi body",
+      "(d) Plasma membrane, nucleus and cytoplasm"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q462. विभिन्न कोशिकांग जैसे सूत्रकणिका, राइबोसोम, आदि मिलकर जीवन की मूलभूत इकाई का निर्माण करते हैं, उसे क्या कहा जाता है?",
+    q_en: "Q462. Various organelles such as mitochondria, ribosomes, etc. together form the fundamental unit of life. What is it called?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Morning)",
+    o_hi: [
+      "(a) अंग तंत्र",
+      "(b) अंग",
+      "(c) कोशिका",
+      "(d) ऊतक"
+    ],
+    o_en: [
+      "(a) Organ system",
+      "(b) Organ",
+      "(c) Cell",
+      "(d) Tissue"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q463. पादपों में प्लाज्मा झिल्ली के बाहर स्थित कठोर बाह्य आवरण को क्या कहा जाता है?",
+    q_en: "Q463. What is the rigid outer covering located outside the plasma membrane in plants called?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Morning)",
+    o_hi: [
+      "(a) केंद्रक झिल्ली (nuclear membrane)",
+      "(b) कोशिका भित्ति (cell wall)",
+      "(c) वर्णात्मक पारगम्य झिल्ली (selectively permeable membrane)",
+      "(d) कोशिका आवरण (cell envelope)"
+    ],
+    o_en: [
+      "(a) Nuclear membrane",
+      "(b) Cell wall",
+      "(c) Selectively permeable membrane",
+      "(d) Cell envelope"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q464. एक संतति कोशिका (daughter cell) में गुणसूत्रों की संख्या किस प्रक्रिया द्वारा आधी हो जाती है?",
+    q_en: "Q464. By which process does the number of chromosomes in a daughter cell become half?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) सूत्री कोशिका विभाजन (mitosis)",
+      "(b) असूत्री विभाजन (amitosis)",
+      "(c) अर्धसूत्री विभाजन (meiosis)",
+      "(d) द्विखंडन (binary fission)"
+    ],
+    o_en: [
+      "(a) Mitosis",
+      "(b) Amitosis",
+      "(c) Meiosis",
+      "(d) Binary fission"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q465. निम्नलिखित में से कौन-सा एपिथीलियमी ऊतकों (epithelial tissues) का एक कार्य है?",
+    q_en: "Q465. Which of the following is a function of epithelial tissues?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) सुरक्षा",
+      "(b) उद्दीपन के प्रति प्रतिक्रिया प्रदान करना",
+      "(c) वसा का भंडारण",
+      "(d) अनैच्छिक गतियों के लिए जिम्मेदार"
+    ],
+    o_en: [
+      "(a) Protection",
+      "(b) Providing response to stimuli",
+      "(c) Storage of fat",
+      "(d) Responsible for involuntary movements"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q466. निम्नलिखित में से किसके संकुचन (contraction) और शिथिलीकरण (relaxation) के परिणामस्वरूप अंग में गति होती है?",
+    q_en: "Q466. Contraction and relaxation of which of the following results in movement of an organ?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) पेशीय कोशिकाएं",
+      "(b) तंत्रिका कोशिकाएं",
+      "(c) उपास्थि",
+      "(d) अस्थियां"
+    ],
+    o_en: [
+      "(a) Muscle cells",
+      "(b) Nerve cells",
+      "(c) Cartilage",
+      "(d) Bones"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q467. वे जीव जिनमें केवल एक कोशिका होती है, _________ कहलाते हैं।",
+    q_en: "Q467. Organisms having only one cell are called _________.",
+    tag: "RRB Tech. - (III) 29/12/2024 (Evening)",
+    o_hi: [
+      "(a) एककोशिकी (unicellular)",
+      "(b) बहुकोशिकी (multicellular)",
+      "(c) एकल (singular)",
+      "(d) एकलिंगी (unisexual)"
+    ],
+    o_en: [
+      "(a) Unicellular",
+      "(b) Multicellular",
+      "(c) Singular",
+      "(d) Unisexual"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q468. कौन सा कोशिकांग कोशिका का शक्तिगृह होता है?",
+    q_en: "Q468. Which organelle is the powerhouse of the cell?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) लवक (Plastids)",
+      "(b) अन्तर्द्रव्यी जालिका (Endoplasmic reticulum)",
+      "(c) माइटोकॉन्ड्रिया (Mitochondria)",
+      "(d) गॉल्जीकाय (Golgi apparatus)"
+    ],
+    o_en: [
+      "(a) Plastids",
+      "(b) Endoplasmic reticulum",
+      "(c) Mitochondria",
+      "(d) Golgi apparatus"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q469. निम्नलिखित क्रिया पादपों में क्यों होती है? पादप कोशिकाएं जल की मात्रा में परिवर्तन करके अपनी आकृति बदल लेती हैं, परिणामस्वरूप फूलने या सिकुड़ने में उनका आकार बदल जाता है।",
+    q_en: "Q469. Why does the following action occur in plants? Plant cells change their shape by changing the amount of water, resulting in a change in size by swelling or shrinking.",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) कुछ उद्दीपन के लिए तत्काल अनुक्रिया में",
+      "(b) संतुलन बनाए रखने के लिए",
+      "(c) ऊर्जा संरक्षण के लिए",
+      "(d) डर में"
+    ],
+    o_en: [
+      "(a) In an immediate response to certain stimuli",
+      "(b) To maintain balance",
+      "(c) For energy conservation",
+      "(d) In fear"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q470. एक पादप कोशिका को, कोशिका की तुलना में अधिक जल सांद्रता वाले माध्यम में रखे जाने पर क्या होगा?",
+    q_en: "Q470. What will happen when a plant cell is placed in a medium having a higher water concentration than the cell?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) यह फट जाएगी",
+      "(b) इसमें कोई परिवर्तन नहीं आएगा",
+      "(c) यह संभवतः सिकुड़ जाएगी",
+      "(d) यह संभवतः फूल जाएगी"
+    ],
+    o_en: [
+      "(a) It will burst",
+      "(b) There will be no change",
+      "(c) It will probably shrink",
+      "(d) It will probably swell"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q471. प्राक्केंद्रकी कोशिका (prokaryotic cell) की विशेषताओं से संबंधित सही कथन का चयन कीजिए।",
+    q_en: "Q471. Select the correct statement related to the characteristics of a prokaryotic cell.",
+    tag: "RRB Tech. - (III) 30/12/2024 (Evening)",
+    o_hi: [
+      "(a) इसमें एक ही गुणसूत्र होता है।",
+      "(b) झिल्ली द्वारा आबद्ध कोशिकांग उपस्थित होते हैं।",
+      "(c) केंद्रक क्षेत्र स्पष्ट रूप से परिभाषित होता है और केंद्रक झिल्ली द्वारा घिरा होता है।",
+      "(d) इसमें एक से अधिक गुणसूत्र होते हैं।"
+    ],
+    o_en: [
+      "(a) It has a single chromosome.",
+      "(b) Membrane-bound organelles are present.",
+      "(c) The nuclear region is clearly defined and surrounded by a nuclear membrane.",
+      "(d) It has more than one chromosome."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q472. ए.टी.पी. के विखंडन से एक निश्चित मात्रा में ऊर्जा मोचित होती है जो कोशिका के अंदर होने वाली आंतरोष्मि (endothermic) क्रियाओं का परिचालन कर सकती है?",
+    q_en: "Q472. The breakdown of ATP releases a certain amount of energy that can drive endothermic reactions occurring inside the cell. Which organelle is associated with this?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Evening)",
+    o_hi: [
+      "(a) माइटोकॉन्ड्रिया (Mitochondria)",
+      "(b) राइबोसोम (Ribosome)",
+      "(c) क्लोरोप्लास्ट (Chloroplast)",
+      "(d) लाइसोसोम (Lysosome)"
+    ],
+    o_en: [
+      "(a) Mitochondria",
+      "(b) Ribosome",
+      "(c) Chloroplast",
+      "(d) Lysosome"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q473. अधिकांश परिपक्व पादपों की कोशिकाओं में एक ______ होता है जो कोशिका की स्फीति को बनाए रखने और अपशिष्ट सहित महत्वपूर्ण पदार्थों को संग्रहीत करने में मदद करता है।",
+    q_en: "Q473. Most mature plant cells have a ______ that helps maintain cell turgidity and stores important substances including waste.",
+    tag: "RRB Tech. - (III) 30/12/2024 (Evening)",
+    o_hi: [
+      "(a) छोटा राइबोसोम (small ribosome)",
+      "(b) ल्यूकोप्लास्ट (leucoplasts)",
+      "(c) क्रोमोप्लास्ट (chromoplasts)",
+      "(d) बड़ी केन्द्रीय रसधानी (large central vacuole)"
+    ],
+    o_en: [
+      "(a) Small ribosome",
+      "(b) Leucoplasts",
+      "(c) Chromoplasts",
+      "(d) Large central vacuole"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q474. कोशिका जीवविज्ञान के संदर्भ में निम्नलिखित में से कौन-सा कथन, पादाभ (pseudopodia) का सर्वोत्तम वर्णन करता है?",
+    q_en: "Q474. In the context of cell biology, which of the following best describes pseudopodia?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) कोशिका को यांत्रिक आधार प्रदान करने वाली दृढ़ संरचनाएँ",
+      "(b) गमन और पोषण के लिए उपयोग की जाने वाली कोशिका झिल्ली के अस्थायी प्रवर्ध",
+      "(c) कोशिका के लिए ऊर्जा का उत्पादन करने वाले विशिष्ट कोशिकांग",
+      "(d) संचलन और श्वसन के लिए उपयोग की जाने वाली कोशिकाओं की सतह पर स्थायी संरचनाएँ"
+    ],
+    o_en: [
+      "(a) Rigid structures providing mechanical support to the cell",
+      "(b) Temporary extensions of the cell membrane used for movement and feeding",
+      "(c) Specialised organelles producing energy for the cell",
+      "(d) Permanent structures on the cell surface used for movement and respiration"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q475. उस नीले-फ्लोरोसेंट रंजक का नाम बताइए जिसका उपयोग जीवित या स्थिर कोशिकाओं के रंजन (stain) के लिए किया जा सकता है।",
+    q_en: "Q475. Name the blue-fluorescent dye that can be used to stain living or fixed cells.",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) फ्यूशिन (Fuchsin)",
+      "(b) डीएपीआई (DAPI)",
+      "(c) फैलोलाइडिन (Phalloidin)",
+      "(d) बॉडीपी (BODIPY)"
+    ],
+    o_en: [
+      "(a) Fuchsin",
+      "(b) DAPI",
+      "(c) Phalloidin",
+      "(d) BODIPY"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q476. निम्नलिखित में से कौन सा कोशिका झिल्ली का प्राथमिक कार्य है?",
+    q_en: "Q476. Which of the following is the primary function of the cell membrane?",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) आनुवंशिक जानकारी संग्रहीत करना",
+      "(b) संरचनात्मक सहायता प्रदान करना",
+      "(c) कोशिका के अंदर और बाहर पदार्थों के मार्ग को विनियमित करना",
+      "(d) प्रोटीन का संश्लेषण करना"
+    ],
+    o_en: [
+      "(a) Storing genetic information",
+      "(b) Providing structural support",
+      "(c) Regulating the passage of substances into and out of the cell",
+      "(d) Synthesising proteins"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q477. निम्नलिखित में से कौन-सा विकल्प, पादप कोशिका में संग्रहित वसा को शर्करा में रूपांतरित करने के लिए उत्तरदायी है।",
+    q_en: "Q477. Which of the following is responsible for converting stored fats into sugars in a plant cell?",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) ऑक्सीसोम",
+      "(b) गॉल्जी बॉडी",
+      "(c) ग्लाइऑक्सीसोम",
+      "(d) राइबोसोम"
+    ],
+    o_en: [
+      "(a) Oxysome",
+      "(b) Golgi body",
+      "(c) Glyoxysome",
+      "(d) Ribosome"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q478. हमारे शरीर की कोशिकाओं में उपस्थित अम्ल, ______ होता है।",
+    q_en: "Q478. The acid present in the cells of our body is ______.",
+    tag: "RPF S.I. 09/12/2024 (Evening)",
+    o_hi: [
+      "(a) सल्फ्यूरिक अम्ल (sulphuric acid)",
+      "(b) ऑक्जैलिक अम्ल (oxalic acid)",
+      "(c) डिऑक्सीराइबोन्यूक्लीक अम्ल (deoxyribonucleic acid)",
+      "(d) राइबोन्यूक्लिक अम्ल (ribonucleic acid)"
+    ],
+    o_en: [
+      "(a) Sulphuric acid",
+      "(b) Oxalic acid",
+      "(c) Deoxyribonucleic acid",
+      "(d) Ribonucleic acid"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q479. निम्नलिखित में से कौन-सा, माइटोसिस (mitosis) के सूत्री विभाजन का प्रथम चरण है जो इंटरफेज़ (interphase) के S और G2 अवस्थाओं का अनुसरण करता है?",
+    q_en: "Q479. Which of the following is the first stage of mitosis that follows the S and G2 phases of interphase?",
+    tag: "RPF S.I. 09/12/2024 (Evening)",
+    o_hi: [
+      "(a) प्रोफेज़",
+      "(b) मेटाफेज़",
+      "(c) टीलोफ़ेज़",
+      "(d) एनाफ़ेज़"
+    ],
+    o_en: [
+      "(a) Prophase",
+      "(b) Metaphase",
+      "(c) Telophase",
+      "(d) Anaphase"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q480. एक कोशिका को दूसरी कोशिका से जोड़ने वाले कोशिकाद्रव्यी तंतु, _____ कहलाते हैं।",
+    q_en: "Q480. Cytoplasmic strands connecting one cell to another are called _____.",
+    tag: "RPF S.I. 13/12/2024 (Morning)",
+    o_hi: [
+      "(a) तारक केंद्र (Centriole)",
+      "(b) तर्कु तंतु (Spindle Fibre)",
+      "(c) अंतर्द्रव्यी जालिका (Endoplasmic Reticulum)",
+      "(d) जीव द्रव्य तंतु (Plasmodesmata)"
+    ],
+    o_en: [
+      "(a) Centriole",
+      "(b) Spindle fibre",
+      "(c) Endoplasmic reticulum",
+      "(d) Plasmodesmata"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q481. निम्नलिखित में से कौन-सा कथन एन्यूप्लोइड्स (aneuploids) के संबंध में गलत है?",
+    q_en: "Q481. Which of the following statements regarding aneuploids is incorrect?",
+    tag: "RPF S.I. 13/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) विपरीत ध्रुवों पर गुणसूत्रों का असमान वितरण",
+      "(b) वे जीव जिनकी प्रत्येक कोशिका में गुणसूत्रों के दो से अधिक सेट होते हैं",
+      "(c) किसी गुणसूत्र सेट में एक या अधिक गुणसूत्र या तो गायब हैं या उनकी अधिक प्रतियाँ हैं",
+      "(d) आमतौर पर यह अनियमित अर्धसूत्री विभाजन के परिणामस्वरूप होता है"
+    ],
+    o_en: [
+      "(a) Unequal distribution of chromosomes at opposite poles",
+      "(b) Organisms whose each cell has more than two sets of chromosomes",
+      "(c) One or more chromosomes in a chromosome set are either missing or present in extra copies",
+      "(d) It usually results from irregular meiosis"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q482. एटीपी (ATP) का उत्पादन किस कोशिकांग में होता है?",
+    q_en: "Q482. In which organelle is ATP produced?",
+    tag: "RRB ALP 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) लयनकाय",
+      "(b) सूत्रकणिका",
+      "(c) हरित लवक",
+      "(d) अंतर्द्रव्यी जालिका"
+    ],
+    o_en: [
+      "(a) Lysosome",
+      "(b) Mitochondria",
+      "(c) Chloroplast",
+      "(d) Endoplasmic reticulum"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q483. श्रम का विभाजन (division of labour) किसमें होता है?",
+    q_en: "Q483. In which organisms does division of labour occur?",
+    tag: "RRB ALP 25/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल एककोशिकीय जीव",
+      "(b) केवल बहुकोशिकीय जीव",
+      "(c) न तो एककोशिकीय और न ही बहुकोशिकीय जीव",
+      "(d) एककोशिकीय और बहुकोशिकीय, दोनों जीव"
+    ],
+    o_en: [
+      "(a) Only unicellular organisms",
+      "(b) Only multicellular organisms",
+      "(c) Neither unicellular nor multicellular organisms",
+      "(d) Both unicellular and multicellular organisms"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q484. किस कोशिका का आकार बदलता रहता है?",
+    q_en: "Q484. Which cell keeps changing its shape?",
+    tag: "RRB ALP 25/11/2024 (Evening)",
+    o_hi: [
+      "(a) चिकनी पेशी",
+      "(b) अंडाणु",
+      "(c) अमीबा",
+      "(d) तंत्रिका कोशिका"
+    ],
+    o_en: [
+      "(a) Smooth muscle",
+      "(b) Ovum",
+      "(c) Amoeba",
+      "(d) Nerve cell"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q485. निम्नलिखित में से किसमें कोई भी झिल्ली नहीं होती है?",
+    q_en: "Q485. Which of the following does not have any membrane?",
+    tag: "RRB ALP 26/11/2024 (Morning)",
+    o_hi: [
+      "(a) पादप कोशिका",
+      "(b) कवक कोशिका",
+      "(c) विषाणु",
+      "(d) जंतु कोशिका"
+    ],
+    o_en: [
+      "(a) Plant cell",
+      "(b) Fungal cell",
+      "(c) Virus",
+      "(d) Animal cell"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q486. निम्नलिखित में से कौन-सा/कौन-से जीव एककोशिकीय नहीं है/हैं?",
+    q_en: "Q486. Which of the following organism(s) is/are not unicellular?",
+    tag: "RRB ALP 26/11/2024 (Morning)",
+    o_hi: [
+      "(a) अमीबा",
+      "(b) पौधे",
+      "(c) पैरामीशियम",
+      "(d) क्लैमाइडोमोनास"
+    ],
+    o_en: [
+      "(a) Amoeba",
+      "(b) Plants",
+      "(c) Paramecium",
+      "(d) Chlamydomonas"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q487. कौन-सा अंगक केवल पादप कोशिकाओं में पाया जाता है?",
+    q_en: "Q487. Which organelle is found only in plant cells?",
+    tag: "RRB ALP 26/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) सूत्रकणिका",
+      "(b) हरित लवक",
+      "(c) लयनकाय",
+      "(d) केन्द्रक"
+    ],
+    o_en: [
+      "(a) Mitochondria",
+      "(b) Chloroplast",
+      "(c) Lysosome",
+      "(d) Nucleus"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q488. कौन सा कोशिकांग कोशिकाद्रव्य के विभिन्न क्षेत्रों में, पदार्थों के परिवहन के लिए एक चैनल के रूप में कार्य करता है?",
+    q_en: "Q488. Which organelle acts as a channel for transport of substances in different regions of the cytoplasm?",
+    tag: "RRB ALP 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) सूत्रकणिका (Mitochondria)",
+      "(b) लयनकाय (Lysosomes)",
+      "(c) अंतर्द्रव्यी जालिका (Endoplasmic reticulum)",
+      "(d) हरित लवक (Chloroplast)"
+    ],
+    o_en: [
+      "(a) Mitochondria",
+      "(b) Lysosomes",
+      "(c) Endoplasmic reticulum",
+      "(d) Chloroplast"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q489. निम्नलिखित में से किसमें झिल्लीयुक्त कोशिकांगों का अभाव होता है?",
+    q_en: "Q489. Which of the following lacks membrane-bound organelles?",
+    tag: "RRB ALP 27/11/2024 (Morning)",
+    o_hi: [
+      "(a) न तो यूकैरियोटिक कोशिकाएं और न ही प्रोकैरियोटिक कोशिकाएं",
+      "(b) केवल यूकैरियोटिक कोशिकाएं",
+      "(c) यूकैरियोटिक कोशिकाएं और प्रोकैरियोटिक कोशिकाएं दोनों",
+      "(d) केवल प्रोकैरियोटिक कोशिकाएं"
+    ],
+    o_en: [
+      "(a) Neither eukaryotic nor prokaryotic cells",
+      "(b) Only eukaryotic cells",
+      "(c) Both eukaryotic and prokaryotic cells",
+      "(d) Only prokaryotic cells"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q490. किस कोशिका का आकार बदलता रहता है?",
+    q_en: "Q490. Which cell keeps changing its shape?",
+    tag: "RRB ALP 27/11/2024 (Morning)",
+    o_hi: [
+      "(a) चिकनी पेशी",
+      "(b) तंत्रिका कोशिका",
+      "(c) अमीबा",
+      "(d) अंडाणु"
+    ],
+    o_en: [
+      "(a) Smooth muscle",
+      "(b) Nerve cell",
+      "(c) Amoeba",
+      "(d) Ovum"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q491. विभज्योतक ऊतक (meristematic tissue) की कोशिकाएं अत्यधिक क्रियाशील होती हैं, लेकिन उनके पास ______ का अभाव होता है।",
+    q_en: "Q491. Cells of meristematic tissue are highly active, but they lack ______.",
+    tag: "RRB ALP 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) बहुत अधिक कोशिकाद्रव्य",
+      "(b) रसधानी",
+      "(c) पतली कोशिका भित्ति",
+      "(d) स्पष्ट केंद्रक"
+    ],
+    o_en: [
+      "(a) A large amount of cytoplasm",
+      "(b) Vacuole",
+      "(c) Thin cell wall",
+      "(d) Distinct nucleus"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q492. कोशिका में निम्नलिखित अभिक्रिया कहां होती है: छह कार्बन वाले अणु ग्लूकोज़ का तीन कार्बन वाले अणु में विखंडन।",
+    q_en: "Q492. Where in the cell does the following reaction occur: breakdown of a six-carbon glucose molecule into three-carbon molecules?",
+    tag: "RRB ALP 27/11/2024 (Evening)",
+    o_hi: [
+      "(a) माइटोकॉन्ड्रिया में",
+      "(b) केंद्रक में",
+      "(c) गोल्गीकाय में",
+      "(d) कोशिका द्रव्य में"
+    ],
+    o_en: [
+      "(a) In mitochondria",
+      "(b) In the nucleus",
+      "(c) In Golgi body",
+      "(d) In cytoplasm"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q493. किस जीव की भोजन रिक्तिका में जटिल पदार्थ सरल पदार्थों में टूट जाते हैं जो फिर कोशिका द्रव्य में फैल जाते हैं?",
+    q_en: "Q493. In which organism do complex substances break down into simple substances in the food vacuole and then diffuse into the cytoplasm?",
+    tag: "RRB ALP 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) अमीबा",
+      "(b) लाइकेन",
+      "(c) प्लाज्मोडियम",
+      "(d) स्पाइरोगाइरा"
+    ],
+    o_en: [
+      "(a) Amoeba",
+      "(b) Lichen",
+      "(c) Plasmodium",
+      "(d) Spirogyra"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q494. किस जीव में कोशिका विभाजन या विखंडन से नए जीवों का निर्माण होता है?",
+    q_en: "Q494. In which organism(s) are new organisms formed by cell division or fission?",
+    tag: "RRB ALP 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) पादप",
+      "(b) स्तनधारी",
+      "(c) एककोशिकीय जीव",
+      "(d) सरीसृप"
+    ],
+    o_en: [
+      "(a) Plants",
+      "(b) Mammals",
+      "(c) Unicellular organisms",
+      "(d) Reptiles"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q495. जीवों की मूल निर्माण इकाई कौन-सी है?",
+    q_en: "Q495. What is the basic building unit of organisms?",
+    tag: "RRB ALP 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) कोशिका (Cells)",
+      "(b) अस्थि (Bones)",
+      "(c) तंतु (Fibres)",
+      "(d) ऊतक (Tissues)"
+    ],
+    o_en: [
+      "(a) Cells",
+      "(b) Bones",
+      "(c) Fibres",
+      "(d) Tissues"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q496. पौधे में शीर्षस्थ विभज्योतक ऊतक (apical meristematic tissue) की स्थिति क्या होती है?",
+    q_en: "Q496. What is the location of apical meristematic tissue in a plant?",
+    tag: "RRB ALP 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) तनों और जड़ों की वृद्धि वाले भाग में",
+      "(b) केवल जड़ वाले भाग के निकट",
+      "(c) तनों और जड़ों के पार्श्व भाग पर",
+      "(d) पर्वसंधियों के पास"
+    ],
+    o_en: [
+      "(a) At the growing regions of stems and roots",
+      "(b) Only near the root region",
+      "(c) On the lateral parts of stems and roots",
+      "(d) Near the internodes"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q497. एकल कोशिका जीव की पहचान कीजिए।",
+    q_en: "Q497. Identify the single-celled organism.",
+    tag: "RRB ALP 28/11/2024 (Evening)",
+    o_hi: [
+      "(a) अमीबा (Amoeba)",
+      "(b) समुद्री शैवाल (Seaweed)",
+      "(c) जोंक (Leech)",
+      "(d) पर्णकृमि (Liver fluke)"
+    ],
+    o_en: [
+      "(a) Amoeba",
+      "(b) Seaweed",
+      "(c) Leech",
+      "(d) Liver fluke"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q498. सही विधान का चयन करें।<br>a. इस एरोबिक (aerobic) प्रक्रिया में ऊर्जा का विमोचन अवायवीय (anaerobic) प्रक्रिया की तुलना में बहुत अधिक होता है।<br>b. एटीपी (ATP) खंडित हो जाता है जिससे एक निश्चित मात्रा में ऊर्जा उत्पन्न होती है जो कोशिका में होने वाली ऊष्माशोषी अभिक्रियाओं को संचालित कर सकती है।<br>c. पाइरूवेट (pyruvate) लैक्टिक (lactic) अम्ल में परिवर्तित हो जाता है जो एक तीन कार्बन वाला अणु भी है।",
+    q_en: "Q498. Select the correct statements.<br>a. In this aerobic process, the release of energy is much greater than in the anaerobic process.<br>b. ATP breaks down, releasing a definite amount of energy that can drive endothermic reactions in the cell.<br>c. Pyruvate is converted into lactic acid, which is also a three-carbon molecule.",
+    tag: "RRB ALP 28/11/2024 (Evening)",
+    o_hi: [
+      "(a) केवल a",
+      "(b) केवल a और b",
+      "(c) a, b और c",
+      "(d) केवल b और c"
+    ],
+    o_en: [
+      "(a) Only a",
+      "(b) Only a and b",
+      "(c) a, b and c",
+      "(d) Only b and c"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q499. उस वैज्ञानिक का नाम बताइए जिसने सबसे पहले 1665 में कोशिका की खोज की थी।",
+    q_en: "Q499. Name the scientist who first discovered the cell in 1665.",
+    tag: "RRB ALP 28/11/2024 (Evening)",
+    o_hi: [
+      "(a) मेथीयस जैकब स्लाइडेन (Matthias Jakob Schleiden)",
+      "(b) थियोडोर श्वान (Theodor Schwann)",
+      "(c) एंटोनी वैन लीउवेनहॉक (Antonie van Leeuwenhoek)",
+      "(d) रॉबर्ट हुक (Robert Hooke)"
+    ],
+    o_en: [
+      "(a) Matthias Jakob Schleiden",
+      "(b) Theodor Schwann",
+      "(c) Antonie van Leeuwenhoek",
+      "(d) Robert Hooke"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q500. निम्नलिखित में से कौन-सा पदार्थ विसरण द्वारा कोशिका झिल्ली के पार संचलन कर सकता है?",
+    q_en: "Q500. Which of the following substances can move across the cell membrane by diffusion?",
+    tag: "RRB ALP 29/11/2024 (Morning)",
+    o_hi: [
+      "(a) ऑक्सीजन",
+      "(b) न्यूक्लीक अम्ल",
+      "(c) प्रोटीन",
+      "(d) श्वेतसार"
+    ],
+    o_en: [
+      "(a) Oxygen",
+      "(b) Nucleic acid",
+      "(c) Protein",
+      "(d) Starch"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q501. निम्नलिखित पदार्थों में से कौन-सा पदार्थ कोशिकाओं की रसधानियों में जमा नहीं होता है?",
+    q_en: "Q501. Which of the following substances is not stored in the vacuoles of cells?",
+    tag: "RRB ALP 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) शर्करा",
+      "(b) प्रोटीन",
+      "(c) ऐमीनो अम्ल",
+      "(d) खनिज लवण"
+    ],
+    o_en: [
+      "(a) Sugar",
+      "(b) Protein",
+      "(c) Amino acid",
+      "(d) Mineral salts"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q502. निम्नलिखित विशेषताओं में से कौन-सी एपिथीलियमी ऊतक की एक विशेषता नहीं है?",
+    q_en: "Q502. Which of the following is not a characteristic of epithelial tissue?",
+    tag: "RRB ALP 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) इसमें कोई अंतराकोशिक स्थान नहीं होता है",
+      "(b) यह शरीर के अधिकांश अंगों और गुहाओं को ढकते हैं",
+      "(c) यह एक दूसरे से सटे होते हैं",
+      "(d) इसमें बाह्य-रेशेदार आधार झिल्ली द्वारा उसे नीचे रहने वाले ऊतकों से अलग किया जाता है"
+    ],
+    o_en: [
+      "(a) It has no intercellular space",
+      "(b) It covers most organs and cavities of the body",
+      "(c) Its cells are closely packed together",
+      "(d) It is separated from underlying tissues by an external fibrous basement membrane"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q503. विभिन्न कोशिकांग जैसे सूत्रकणिका (mitochondria), राइबोसोम (ribosome), आदि मिलकर जीवन की मूलभूत इकाई का निर्माण करते हैं, उसे क्या कहा जाता है?",
+    q_en: "Q503. Various cell organelles such as mitochondria, ribosomes, etc. together form the fundamental unit of life. What is it called?",
+    tag: "RRB ALP 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) अंग तंत्र",
+      "(b) ऊतक",
+      "(c) कोशिका",
+      "(d) अंग"
+    ],
+    o_en: [
+      "(a) Organ system",
+      "(b) Tissue",
+      "(c) Cell",
+      "(d) Organ"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q504. पादपों के हार्मोन और उनके कार्यों के बीच सही मेल की पहचान कीजिए।<br>जिब्बेरेलिन : तने की वृद्धि में सहायता करता है",
+    q_en: "Q504. Identify the correct match between plant hormones and their functions.<br>Gibberellin: helps in stem growth",
+    tag: "RRB ALP 29/11/2024 (Evening)",
+    o_hi: [
+      "(a) साइटोकिनिन : कोशिका विभाजन में वृद्धि करता है<br>एबसिसिक एसिड : वृद्धि को रोकता है<br>जिब्बेरेलिन : तने की वृद्धि में सहायता करता है",
+      "(b) साइटोकिनिन : वृद्धि को रोकता है<br>एबसिसिक एसिड : कोशिका विभाजन में वृद्धि करता है<br>जिब्बेरेलिन : कोशिका विभाजन में वृद्धि करता है",
+      "(c) साइटोकिनिन : तने की वृद्धि में सहायता करता है<br>एबसिसिक एसिड : वृद्धि को रोकता है<br>जिब्बेरेलिन : वृद्धि को रोकता है",
+      "(d) साइटोकिनिन : कोशिका विभाजन में वृद्धि करता है<br>एबसिसिक एसिड : तने की वृद्धि में सहायता करता है"
+    ],
+    o_en: [
+      "(a) Cytokinin: increases cell division<br>Abscisic acid: inhibits growth<br>Gibberellin: helps in stem growth",
+      "(b) Cytokinin: inhibits growth<br>Abscisic acid: increases cell division<br>Gibberellin: increases cell division",
+      "(c) Cytokinin: helps in stem growth<br>Abscisic acid: inhibits growth<br>Gibberellin: inhibits growth",
+      "(d) Cytokinin: increases cell division<br>Abscisic acid: helps in stem growth"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q505. एसईआर (SER) का पूर्ण रूप क्या है, जो कि एक कोशिकांग है तथा जो कोशिका कार्य के लिए महत्वपूर्ण वसा अणुओं अथवा लिपिड के निर्माण में सहायता करता है?",
+    q_en: "Q505. What is the full form of SER, an organelle that helps in the formation of fat molecules or lipids important for cell function?",
+    tag: "RRB ALP 29/11/2024 (Evening)",
+    o_hi: [
+      "(a) सिंपल एंडोप्लाज़्मिक रेटिकुलम (Simple Endoplasmic Reticulum)",
+      "(b) स्पीशीज़ एंडोप्लाज़्मिक रेटिकुलम (Species Endoplasmic Reticulum)",
+      "(c) स्मूद एंडोप्लाज़्मिक रेटिकुलम (Smooth Endoplasmic Reticulum)",
+      "(d) सिमिलर एंडोप्लाज़्मिक रेटिकुलम (Similar Endoplasmic Reticulum)"
+    ],
+    o_en: [
+      "(a) Simple Endoplasmic Reticulum",
+      "(b) Species Endoplasmic Reticulum",
+      "(c) Smooth Endoplasmic Reticulum",
+      "(d) Similar Endoplasmic Reticulum"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q506. कशेरुकी यकृत कोशिकाओं में SER द्वारा किया जाने वाला महत्वपूर्ण कार्य क्या है?",
+    q_en: "Q506. What important function is performed by SER in vertebrate liver cells?",
+    tag: "RRC Group D 17/08/2022 (Morning)",
+    o_hi: [
+      "(a) लिपिड का संश्लेषण",
+      "(b) प्रोटीन का संश्लेषण",
+      "(c) जटिल शर्कराओं का संश्लेषण",
+      "(d) औषधियों और विषों का निराविषीकरण"
+    ],
+    o_en: [
+      "(a) Synthesis of lipids",
+      "(b) Synthesis of proteins",
+      "(c) Synthesis of complex sugars",
+      "(d) Detoxification of drugs and poisons"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q507. एक पत्ती की अनुप्रस्थ काट के निम्नांकित चित्र का अध्ययन करें, और बताएं कि कौन सा विकल्प इसके सही अक्षरांकन को दर्शाता है?<br><div style='text-align:center;margin:10px 0;'><img src='" + Q507_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q507. Study the following diagram of a transverse section of a leaf and identify the option showing its correct labelling.<br><div style='text-align:center;margin:10px 0;'><img src='" + Q507_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 17/08/2022 (Morning)",
+    o_hi: [
+      "(a) a - ऊपरी अधिचर्म, b - निचला अधिचर्म, c - रंध्र, d - वायु अवकाश, e - केन्द्रक",
+      "(b) a - ऊपरी अधिचर्म, b - निचला अधिचर्म, c - रक्षक कोशिका, d - वायु अवकाश, e - हरित लवक",
+      "(c) a - ऊपरी अधिचर्म, b - मोमी क्यूटिकल, c - रंध्र, d - वायु अवकाश, e - हरित लवक",
+      "(d) a - मोमी क्यूटिकल, b - ऊपरी अधिचर्म, c - रंध्र, d - वायु अवकाश, e - केन्द्रक"
+    ],
+    o_en: [
+      "(a) a - Upper epidermis, b - Lower epidermis, c - Stoma, d - Air space, e - Nucleus",
+      "(b) a - Upper epidermis, b - Lower epidermis, c - Guard cell, d - Air space, e - Chloroplast",
+      "(c) a - Upper epidermis, b - Waxy cuticle, c - Stoma, d - Air space, e - Chloroplast",
+      "(d) a - Waxy cuticle, b - Upper epidermis, c - Stoma, d - Air space, e - Nucleus"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: "",
+    image: Q507_IMAGE
+  }
+];
