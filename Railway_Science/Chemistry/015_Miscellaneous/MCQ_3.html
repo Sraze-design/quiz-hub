@@ -1,0 +1,862 @@
+const data = [
+  {
+    q_hi: "Q1660. _______ एक सल्फर युक्त अमीनो अम्ल है।",
+    q_en: "Q1660. _______ is a sulphur-containing amino acid.",
+    tag: "RRB NTPC CBT - I (15/03/2021) Morning",
+    o_hi: [
+      "(a) ट्रिप्टोफैन",
+      "(b) सिस्टीन",
+      "(c) हिस्टिडीन",
+      "(d) सेरीन"
+    ],
+    o_en: [
+      "(a) Tryptophan",
+      "(b) Cysteine",
+      "(c) Histidine",
+      "(d) Serine"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1661. निम्नलिखित में से कौन मानव निर्मित रेशा का उदाहरण है?",
+    q_en: "Q1661. Which of the following is an example of a man-made fibre?",
+    tag: "RRB NTPC CBT - I (01/04/2021) Morning",
+    o_hi: [
+      "(a) रेयॉन",
+      "(b) सिल्क",
+      "(c) लिनेन",
+      "(d) जूट"
+    ],
+    o_en: [
+      "(a) Rayon",
+      "(b) Silk",
+      "(c) Linen",
+      "(d) Jute"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1662. सिंथेटिक फाइबर आसानी से आग पकड़ लेते हैं, हालांकि, अग्निशामकों की वर्दी को आग प्रतिरोधी बनाने के लिए ________ प्लास्टिक की कोटिंग होती है।",
+    q_en: "Q1662. Synthetic fibres catch fire easily; however, firefighters' uniforms are coated with ________ plastic to make them fire-resistant.",
+    tag: "RRB NTPC CBT - I (01/04/2021) Evening",
+    o_hi: [
+      "(a) मेलामाइन",
+      "(b) ऐक्रेलिक",
+      "(c) नायलॉन",
+      "(d) रेयॉन"
+    ],
+    o_en: [
+      "(a) Melamine",
+      "(b) Acrylic",
+      "(c) Nylon",
+      "(d) Rayon"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1663. निम्न में से किसका प्रयोग कैंसर के उपचार में किया जाता है?",
+    q_en: "Q1663. Which of the following is used in the treatment of cancer?",
+    tag: "RRB NTPC CBT - I (06/04/2021) Morning",
+    o_hi: [
+      "(a) यूरेनियम के समस्थानिक का",
+      "(b) कोबाल्ट के समस्थानिक का",
+      "(c) तांबे के समस्थानिक का",
+      "(d) आयोडीन के समस्थानिक का"
+    ],
+    o_en: [
+      "(a) An isotope of uranium",
+      "(b) An isotope of cobalt",
+      "(c) An isotope of copper",
+      "(d) An isotope of iodine"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1664. पृथ्वी पर पाया जाने वाला सर्वाधिक सघन पदार्थ कौन सा है?",
+    q_en: "Q1664. Which is the densest substance found on Earth?",
+    tag: "RRB NTPC CBT - I (07/04/2021) Evening",
+    o_hi: [
+      "(a) प्लेटिनम",
+      "(b) ऑस्मियम",
+      "(c) इस्पात",
+      "(d) तांबा"
+    ],
+    o_en: [
+      "(a) Platinum",
+      "(b) Osmium",
+      "(c) Steel",
+      "(d) Copper"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1665. निम्नलिखित में से किस मिश्रण का उपयोग सोने को शुद्ध करने के लिए किया जाता है?",
+    q_en: "Q1665. Which of the following mixtures is used to purify gold?",
+    tag: "RRB NTPC CBT - I (08/04/2021) Evening",
+    o_hi: [
+      "(a) एरोसोल",
+      "(b) नेस्लर का अभिकर्मक",
+      "(c) एक्वा रेजिया",
+      "(d) लिकर अमोनिया"
+    ],
+    o_en: [
+      "(a) Aerosol",
+      "(b) Nessler's reagent",
+      "(c) Aqua regia",
+      "(d) Liquor ammonia"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1666. निम्नलिखित में से कौन अचार के लिए एक अच्छा परिरक्षक नहीं है?",
+    q_en: "Q1666. Which of the following is not a good preservative for pickles?",
+    tag: "RRB NTPC CBT - I (24/07/2021) Morning",
+    o_hi: [
+      "(a) नमक",
+      "(b) सोडियम बेंजोएट",
+      "(c) सोडियम मेटाबाईसल्फाइट",
+      "(d) काली मिर्च"
+    ],
+    o_en: [
+      "(a) Salt",
+      "(b) Sodium benzoate",
+      "(c) Sodium metabisulphite",
+      "(d) Black pepper"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1667. भारत की पहली संश्लेषित दवा __________, वैज्ञानिक एवं औद्योगिक अनुसंधान परिषद (CSIR) द्वारा विकसित की गई थी।",
+    q_en: "Q1667. India's first synthesized drug, __________, was developed by the Council of Scientific and Industrial Research (CSIR).",
+    tag: "RRB NTPC CBT - I (31/07/2021) Evening",
+    o_hi: [
+      "(a) एर्गोपियल (Ergoapiol)",
+      "(b) लॉडानम (Laudanum)",
+      "(c) नोरोडिन (Norodin)",
+      "(d) मेथाक्वालोन (Methaqualone)"
+    ],
+    o_en: [
+      "(a) Ergoapiol",
+      "(b) Laudanum",
+      "(c) Norodin",
+      "(d) Methaqualone"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1668. साबुन अणु में एक _________ होता है।",
+    q_en: "Q1668. A soap molecule has a _________.",
+    tag: "RRB JE 23/05/2019 (Evening)",
+    o_hi: [
+      "(a) जलस्नेही शीर्ष और एक जलस्नेही पुच्छ",
+      "(b) जलविरागी शीर्ष और एक जलस्नेही पुच्छ",
+      "(c) जलस्नेही शीर्ष और एक जलविरागी पुच्छ",
+      "(d) जलविरागी शीर्ष और एक जलविरागी पुच्छ"
+    ],
+    o_en: [
+      "(a) hydrophilic head and a hydrophilic tail",
+      "(b) hydrophobic head and a hydrophilic tail",
+      "(c) hydrophilic head and a hydrophobic tail",
+      "(d) hydrophobic head and a hydrophobic tail"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1669. निम्नलिखित में से किस गैस का ऊर्जा मान (कैलोरी मान) सबसे अधिक होता है?",
+    q_en: "Q1669. Which of the following gases has the highest energy value (calorific value)?",
+    tag: "RRB JE 23/05/2019 (Evening)",
+    o_hi: [
+      "(a) LPG",
+      "(b) मेथेन",
+      "(c) हाइड्रोजन",
+      "(d) प्राकृतिक गैस"
+    ],
+    o_en: [
+      "(a) LPG",
+      "(b) Methane",
+      "(c) Hydrogen",
+      "(d) Natural gas"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1670. ________ की अधिक मात्रा की वजह से चॉकलेट सेहत के लिए हानिकारक हो सकते हैं।",
+    q_en: "Q1670. Chocolate can be harmful to health due to an excessive amount of ________.",
+    tag: "RRB JE 23/05/2019 (Evening)",
+    o_hi: [
+      "(a) जिंक",
+      "(b) कोबाल्ट",
+      "(c) लेड",
+      "(d) निकल (Nickel)"
+    ],
+    o_en: [
+      "(a) Zinc",
+      "(b) Cobalt",
+      "(c) Lead",
+      "(d) Nickel"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1671. निम्नलिखित में से कौन सा भौतिक परिवर्तन नहीं है?",
+    q_en: "Q1671. Which of the following is not a physical change?",
+    tag: "RRB JE 24/05/2019 (Morning)",
+    o_hi: [
+      "(a) ठोसों का द्रवों में पिघलना",
+      "(b) गैसों का द्रवों में द्रवीकरण",
+      "(c) पदार्थों का किण्वन",
+      "(d) द्रवों का गैसों में वाष्पीकरण"
+    ],
+    o_en: [
+      "(a) Melting of solids into liquids",
+      "(b) Liquefaction of gases into liquids",
+      "(c) Fermentation of substances",
+      "(d) Evaporation of liquids into gases"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1672. निम्नलिखित में से किस गैस का उपयोग \"ग्लोबल वार्मिंग पोटेंशियल (GWP)\" की गणना के लिए किया जाता है?",
+    q_en: "Q1672. Which of the following gases is used for calculating \"Global Warming Potential (GWP)\"?",
+    tag: "RRB JE 24/05/2019 (Morning)",
+    o_hi: [
+      "(a) कार्बन डाइऑक्साइड",
+      "(b) मीथेन",
+      "(c) ओजोन",
+      "(d) नाइट्रोजन डाइऑक्साइड"
+    ],
+    o_en: [
+      "(a) Carbon dioxide",
+      "(b) Methane",
+      "(c) Ozone",
+      "(d) Nitrogen dioxide"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1673. ऑक्सीजन के अभाव में अवायवीय जीवाणुओं द्वारा पानी के नीचे मौजूद वनस्पति सामग्री के अपघटन से पृथ्वी के नीचे कौन सा जीवाश्म ईंधन बनता है?",
+    q_en: "Q1673. Which fossil fuel is formed beneath the Earth by decomposition of underwater plant material by anaerobic bacteria in the absence of oxygen?",
+    tag: "RRB JE 24/05/2019 (Morning)",
+    o_hi: [
+      "(a) कच्चा तेल",
+      "(b) पेट्रोल",
+      "(c) कोयला",
+      "(d) प्राकृतिक गैस"
+    ],
+    o_en: [
+      "(a) Crude oil",
+      "(b) Petrol",
+      "(c) Coal",
+      "(d) Natural gas"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1674. निम्नलिखित में से कौन सा प्रदूषक, प्रकाश रासायनिक स्मॉग का एक प्रमुख कारक है?",
+    q_en: "Q1674. Which of the following pollutants is a major factor in photochemical smog?",
+    tag: "RRB JE 24/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) नाइट्रोजन डाइऑक्साइड",
+      "(b) हाइड्रोपेरॉक्साइड",
+      "(c) ओजोन",
+      "(d) पेरॉक्सीनाइट्रेट"
+    ],
+    o_en: [
+      "(a) Nitrogen dioxide",
+      "(b) Hydroperoxide",
+      "(c) Ozone",
+      "(d) Peroxynitrate"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1675. ऊर्जा के पारंपरिक स्रोत का दूसरा नाम क्या है?",
+    q_en: "Q1675. What is another name for a conventional source of energy?",
+    tag: "RRB JE 24/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) ऊर्जा के अक्षय स्रोत",
+      "(b) ऊर्जा के नवीकरणीय स्रोत",
+      "(c) ऊर्जा के वैकल्पिक स्रोत",
+      "(d) ऊर्जा के गैर नवीकरणीय स्रोत"
+    ],
+    o_en: [
+      "(a) Inexhaustible sources of energy",
+      "(b) Renewable sources of energy",
+      "(c) Alternative sources of energy",
+      "(d) Non-renewable sources of energy"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1676. सूर्य और तारे उनमें ________ की उपस्थिति की वजह से चमकते हैं।",
+    q_en: "Q1676. The Sun and stars shine due to the presence of ________ in them.",
+    tag: "RRB JE 24/05/2019 (Evening)",
+    o_hi: [
+      "(a) गैस",
+      "(b) प्रकाश ऊर्जा",
+      "(c) विद्युत",
+      "(d) प्लाज्मा"
+    ],
+    o_en: [
+      "(a) Gas",
+      "(b) Light energy",
+      "(c) Electricity",
+      "(d) Plasma"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1677. परमाणु रासायनिक रूप से जुड़कर _________ बन जाते हैं।",
+    q_en: "Q1677. Atoms chemically combine to form _________.",
+    tag: "RRB JE 25/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) तत्व",
+      "(b) अणु",
+      "(c) तत्व और मिश्रधातु दोनों",
+      "(d) मिश्रधातु"
+    ],
+    o_en: [
+      "(a) Elements",
+      "(b) Molecules",
+      "(c) Both elements and alloys",
+      "(d) Alloys"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1678. चूने के पानी (पुताई) का सूखना ________ की क्रिया की वजह से होता है।",
+    q_en: "Q1678. Drying of lime water (whitewash) occurs due to the action of ________.",
+    tag: "RRB JE 25/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) वायु में मौजूद नाइट्रोजन",
+      "(b) वायु में मौजूद ऑक्सीजन",
+      "(c) वायु में मौजूद CO₂",
+      "(d) वायु में मौजूद हाइड्रोजन"
+    ],
+    o_en: [
+      "(a) Nitrogen present in air",
+      "(b) Oxygen present in air",
+      "(c) CO₂ present in air",
+      "(d) Hydrogen present in air"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1679. 'विश्व स्वास्थ्य संगठन के अनुसार, पेय जल में 0 से ______ मिलीग्राम प्रति लीटर CaCO₃ होता है।",
+    q_en: "Q1679. According to the World Health Organization, drinking water contains 0 to ______ milligrams per litre of CaCO₃.",
+    tag: "RRB JE 25/05/2019 (Evening)",
+    o_hi: [
+      "(a) 30",
+      "(b) 60",
+      "(c) 90",
+      "(d) 120"
+    ],
+    o_en: [
+      "(a) 30",
+      "(b) 60",
+      "(c) 90",
+      "(d) 120"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1680. प्लास्टर ऑफ पेरिस के कड़े होने के दौरान क्या होता है?",
+    q_en: "Q1680. What happens during the hardening of Plaster of Paris?",
+    tag: "RRB JE 27/05/2019 (Morning)",
+    o_hi: [
+      "(a) द्रव्यमान का विस्तार होता है।",
+      "(b) द्रव्यमान का विस्तार होता है और ऊष्मा मुक्त होती है।",
+      "(c) जलयोजन होता है।",
+      "(d) ऊष्मा मुक्त होती है।"
+    ],
+    o_en: [
+      "(a) The mass expands.",
+      "(b) The mass expands and heat is released.",
+      "(c) Hydration occurs.",
+      "(d) Heat is released."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1681. निम्न में से कौन सा पदार्थ, तनु अम्ल से उपचारित करने पर कार्बन डाईऑक्साइड उत्पन्न नहीं करेगा?",
+    q_en: "Q1681. Which of the following substances will not produce carbon dioxide when treated with a dilute acid?",
+    tag: "RRB JE 27/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) बेकिंग सोडा",
+      "(b) चूना पत्थर",
+      "(c) संगमरमर",
+      "(d) चूना"
+    ],
+    o_en: [
+      "(a) Baking soda",
+      "(b) Limestone",
+      "(c) Marble",
+      "(d) Lime"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1682. _______ के ऑक्सीकरण के कारण कार्बनमय मांग उत्पन्न होती है।",
+    q_en: "Q1682. Carbonaceous demand is produced due to the oxidation of _______.",
+    tag: "RRB JE 27/05/2019 (Evening)",
+    o_hi: [
+      "(a) सल्फर",
+      "(b) नाइट्रोजन",
+      "(c) अमोनिया",
+      "(d) कार्बनिक पदार्थ"
+    ],
+    o_en: [
+      "(a) Sulphur",
+      "(b) Nitrogen",
+      "(c) Ammonia",
+      "(d) Organic matter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1683. पदार्थ की वह मात्रा, जिसमें उतने ही निर्दिष्ट मूल कण शामिल होते हैं, जितने कार्बन-12 समस्थानिक के 12 ग्राम में परमाणुओं की संख्या होती है, ____________ कहलाते हैं।",
+    q_en: "Q1683. The amount of substance containing as many specified elementary entities as there are atoms in 12 grams of the carbon-12 isotope is called ____________.",
+    tag: "RRB JE 29/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) मोल",
+      "(b) समस्थानिक (Isotope)",
+      "(c) आयन",
+      "(d) अणु संख्या"
+    ],
+    o_en: [
+      "(a) Mole",
+      "(b) Isotope",
+      "(c) Ion",
+      "(d) Molecular number"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1684. निम्नलिखित में से किस अवस्था में अति ऊर्जावान और अति उत्तेजित कण मौजूद होते हैं?",
+    q_en: "Q1684. In which of the following states are highly energetic and highly excited particles present?",
+    tag: "RRB JE 29/05/2019 (Evening)",
+    o_hi: [
+      "(a) प्लाज्मा",
+      "(b) द्रव",
+      "(c) ठोस",
+      "(d) गैस"
+    ],
+    o_en: [
+      "(a) Plasma",
+      "(b) Liquid",
+      "(c) Solid",
+      "(d) Gas"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1685. परमाणु द्रव्यमान मापने के लिए मानक संदर्भ के रूप में किस समस्थानिक को चुना गया था?",
+    q_en: "Q1685. Which isotope was chosen as the standard reference for measuring atomic mass?",
+    tag: "RRB JE 29/05/2019 (Evening)",
+    o_hi: [
+      "(a) कार्बन-13",
+      "(b) कार्बन-11",
+      "(c) कार्बन-14",
+      "(d) कार्बन-12"
+    ],
+    o_en: [
+      "(a) Carbon-13",
+      "(b) Carbon-11",
+      "(c) Carbon-14",
+      "(d) Carbon-12"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1686. निम्नलिखित में से कौन सी पृथक्करण तकनीक का उपयोग रेत से लोहे के पिनों के पृथक्करण के लिए किया जा सकता है?",
+    q_en: "Q1686. Which of the following separation techniques can be used to separate iron pins from sand?",
+    tag: "RRB JE 30/05/2019 (Morning)",
+    o_hi: [
+      "(a) वाष्पीकरण",
+      "(b) प्रभाजी आसवन",
+      "(c) निस्यंदन",
+      "(d) चुंबकीय पृथक्करण"
+    ],
+    o_en: [
+      "(a) Evaporation",
+      "(b) Fractional distillation",
+      "(c) Filtration",
+      "(d) Magnetic separation"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1687. ग्लेशियल एसिटिक अम्ल ________ है।",
+    q_en: "Q1687. Glacial acetic acid is ________.",
+    tag: "RRB JE 30/05/2019 (Morning)",
+    o_hi: [
+      "(a) पानी से मुक्त 100% एसिटिक अम्ल",
+      "(b) फ्रोजेन एसिटिक अम्ल",
+      "(c) गैसीय एसिटिक अम्ल",
+      "(d) ठोसीय एसिटिक अम्ल"
+    ],
+    o_en: [
+      "(a) 100% acetic acid free from water",
+      "(b) Frozen acetic acid",
+      "(c) Gaseous acetic acid",
+      "(d) Solid acetic acid"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1688. किसी रासायनिक समीकरण में संकेताक्षर (g) का उपयोग किस अवस्था में मौजूद किसी विशेष, तत्व या यौगिक को प्रदर्शित करने के लिए किया जाता है?",
+    q_en: "Q1688. In a chemical equation, the symbol (g) is used to represent a particular element or compound present in which state?",
+    tag: "RRB JE 30/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) जलीय अवस्था",
+      "(b) ठोस अवस्था",
+      "(c) द्रव अवस्था",
+      "(d) गैसीय अवस्था"
+    ],
+    o_en: [
+      "(a) Aqueous state",
+      "(b) Solid state",
+      "(c) Liquid state",
+      "(d) Gaseous state"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1689. निम्नलिखित में से कौन सा एक धनायन है?",
+    q_en: "Q1689. Which of the following is a cation?",
+    tag: "RRB ALP Tier - I (10/08/2018) Afternoon",
+    o_hi: [
+      "(a) हाइड्रोक्साइड",
+      "(b) नाइट्रेट",
+      "(c) अमोनियम",
+      "(d) कार्बोनेट"
+    ],
+    o_en: [
+      "(a) Hydroxide",
+      "(b) Nitrate",
+      "(c) Ammonium",
+      "(d) Carbonate"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1690. निम्नलिखित में से कौन सा कथन प्रयोग करने के लिए गलत होगा?",
+    q_en: "Q1690. Which of the following expressions would be incorrect to use?",
+    tag: "RRB ALP Tier - I (10/08/2018) Afternoon",
+    o_hi: [
+      "(a) एक यौगिक का एक परमाणु",
+      "(b) एक तत्व का एक परमाणु",
+      "(c) एक यौगिक का एक मोल",
+      "(d) एक तत्व का एक मोल"
+    ],
+    o_en: [
+      "(a) One atom of a compound",
+      "(b) One atom of an element",
+      "(c) One mole of a compound",
+      "(d) One mole of an element"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1691. निम्नलिखित में से कौन सा कथन गलत है?",
+    q_en: "Q1691. Which of the following statements is incorrect?",
+    tag: "RRB ALP Tier - I (10/08/2018) Evening",
+    o_hi: [
+      "(a) ठोस पदार्थ लगभग असंपीनीय होते हैं।",
+      "(b) ठोस पदार्थों का आकार अनिश्चित होता है",
+      "(c) ठोस पदार्थ कठोर होते हैं",
+      "(d) ठोस पदार्थों का आयतन निश्चित होता है"
+    ],
+    o_en: [
+      "(a) Solids are almost incompressible.",
+      "(b) Solids have an indefinite shape.",
+      "(c) Solids are rigid.",
+      "(d) Solids have a definite volume."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1692. निम्नलिखित में से कौन सा कथन गलत है?",
+    q_en: "Q1692. Which of the following statements is incorrect?",
+    tag: "RRB ALP Tier - I (13/08/2018) Afternoon",
+    o_hi: [
+      "(a) पदार्थों के कण स्थिर अवस्था में होते हैं।",
+      "(b) पदार्थों के कण एक दूसरे को आकर्षित करते हैं।",
+      "(c) पदार्थ के कणों के बीच में रिक्त स्थान हैं।",
+      "(d) पदार्थ के कण बहुत छोटे होते हैं।"
+    ],
+    o_en: [
+      "(a) Particles of matter are stationary.",
+      "(b) Particles of matter attract one another.",
+      "(c) There is space between particles of matter.",
+      "(d) Particles of matter are very small."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1693. कार्बन (सी-12) के एक मोल में कितने परमाणु होंगे?",
+    q_en: "Q1693. How many atoms are present in one mole of carbon (C-12)?",
+    tag: "RRB ALP Tier - I (13/08/2018) Evening",
+    o_hi: [
+      "(a) 6.02 × 10²³",
+      "(b) 60.20 × 10²⁶",
+      "(c) 8.06 × 10²⁰",
+      "(d) 6.02 × 10²⁶"
+    ],
+    o_en: [
+      "(a) 6.02 × 10²³",
+      "(b) 60.20 × 10²⁶",
+      "(c) 8.06 × 10²⁰",
+      "(d) 6.02 × 10²⁶"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1694. एक शुष्क सेल में ऊर्जा किस रूप में संग्रहीत रहती है?",
+    q_en: "Q1694. In what form is energy stored in a dry cell?",
+    tag: "RRB ALP Tier - I (17/08/2018)morning",
+    o_hi: [
+      "(a) गतिज ऊर्जा",
+      "(b) रसायनिक ऊर्जा",
+      "(c) स्थितिज ऊर्जा",
+      "(d) नाभिकीय ऊर्जा"
+    ],
+    o_en: [
+      "(a) Kinetic energy",
+      "(b) Chemical energy",
+      "(c) Potential energy",
+      "(d) Nuclear energy"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1695. सोडियम क्लोराइड के जलीय विलयन में विद्युत धारा प्रवाहित करने पर कौन सा उत्पाद बनता है?",
+    q_en: "Q1695. Which product is formed when electric current is passed through an aqueous solution of sodium chloride?",
+    tag: "RRB ALP Tier - I (20/08/2018) Afternoon",
+    o_hi: [
+      "(a) सोडियम हाइड्रॉक्साइड",
+      "(b) सोडियम ऑक्साइड",
+      "(c) सोडियम और पानी",
+      "(d) सोडियम और क्लोरीन"
+    ],
+    o_en: [
+      "(a) Sodium hydroxide",
+      "(b) Sodium oxide",
+      "(c) Sodium and water",
+      "(d) Sodium and chlorine"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1696. निम्नलिखित में से कौन सा ऊर्ध्वपातन कर सकता है?",
+    q_en: "Q1696. Which of the following can undergo sublimation?",
+    tag: "RRB ALP Tier - I (20/08/2018) Evening",
+    o_hi: [
+      "(a) अमोनियम क्लोराइड",
+      "(b) अमोनियम सल्फाइड",
+      "(c) अमोनियम क्लोरेट",
+      "(d) अमोनियम सल्फेट"
+    ],
+    o_en: [
+      "(a) Ammonium chloride",
+      "(b) Ammonium sulphide",
+      "(c) Ammonium chlorate",
+      "(d) Ammonium sulphate"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1697. निम्नलिखित में से किसमें परिवर्तन करके किसी पदार्थ को एक अवस्था/रूप से दूसरे में परिवर्तित किया जा सकता है?",
+    q_en: "Q1697. By changing which of the following can a substance be converted from one state/form to another?",
+    tag: "RRB ALP Tier - I (30/08/2018) Morning",
+    o_hi: [
+      "(a) आयतन",
+      "(b) तापमान",
+      "(c) आकार",
+      "(d) घनत्व"
+    ],
+    o_en: [
+      "(a) Volume",
+      "(b) Temperature",
+      "(c) Shape",
+      "(d) Density"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1698. निम्नलिखित तत्वों में से कौन सा बहु-परमाण्विक है?",
+    q_en: "Q1698. Which of the following elements is polyatomic?",
+    tag: "RRB ALP Tier - I (30/08/2018) Afternoon",
+    o_hi: [
+      "(a) सल्फर",
+      "(b) सोडियम",
+      "(c) आर्गन",
+      "(d) ऑक्सीजन"
+    ],
+    o_en: [
+      "(a) Sulphur",
+      "(b) Sodium",
+      "(c) Argon",
+      "(d) Oxygen"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1699. निम्न में से कौन सा कथन सही या गलत है?<br>कथन:<br>A. पवन के बहने के लिए पृथ्वी का चक्रण जिम्मेदार है।<br>B. एक ईंधन को पर्यावरण के अनुकूल माना जाएगा यदि इसके दहन के उत्पाद गैर विषैले होते हैं।<br>C. कोयला O₂ और H₂ आधा मुक्त कार्बन के यौगिकों का एक जटिल मिश्रण है। कोयले में एक छोटी मात्रा में नाइट्रोजन और सल्फर यौगिक मौजूद हैं।",
+    q_en: "Q1699. Which of the following statements is correct/incorrect?<br>Statements:<br>A. Rotation of the Earth is responsible for the blowing of wind.<br>B. A fuel is considered environment-friendly if its combustion products are non-toxic.<br>C. Coal is a complex mixture of compounds of O₂ and H₂ and half-free carbon. Coal contains a small amount of nitrogen and sulphur compounds.",
+    tag: "RRB ALP Tier - I (30/08/2018) Afternoon",
+    o_hi: [
+      "(a) केवल कथन A सही है, कथन B और C गलत हैं।",
+      "(b) सभी कथन गलत हैं।",
+      "(c) केवल कथन B सही है, कथन A और C गलत हैं।",
+      "(d) कथन A और B सही हैं, कथन C गलत है।"
+    ],
+    o_en: [
+      "(a) Only statement A is correct; B and C are incorrect.",
+      "(b) All statements are incorrect.",
+      "(c) Only statement B is correct; A and C are incorrect.",
+      "(d) Statements A and B are correct; C is incorrect."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1700. Ag⁺ और Cl⁻ के संयुक्त होने पर बनने वाला यौगिक क्या है?",
+    q_en: "Q1700. Which compound is formed when Ag⁺ and Cl⁻ combine?",
+    tag: "RRB ALP Tier - I (30/08/2018) Evening",
+    o_hi: [
+      "(a) आर्गन क्लोरेट",
+      "(b) आर्गोन क्लोराइड",
+      "(c) सिल्वर क्लोराइड",
+      "(d) सिल्वर क्लोरेट"
+    ],
+    o_en: [
+      "(a) Argon chlorate",
+      "(b) Argon chloride",
+      "(c) Silver chloride",
+      "(d) Silver chlorate"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1701. निम्नलिखित में से कौन एक बायोगैस का घटक नहीं है?",
+    q_en: "Q1701. Which of the following is not a component of biogas?",
+    tag: "RRB ALP Tier - I (31/08/2018) Morning",
+    o_hi: [
+      "(a) मीथेन",
+      "(b) कार्बन मोनोऑक्साइड",
+      "(c) कार्बन डाइऑक्साइड",
+      "(d) हाइड्रोजन सल्फाइड"
+    ],
+    o_en: [
+      "(a) Methane",
+      "(b) Carbon monoxide",
+      "(c) Carbon dioxide",
+      "(d) Hydrogen sulphide"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1702. निम्नलिखित में से कौन सा कथन सही / गलत है?<br>कथन :<br>A) H₂SO₄ का प्रयोग पेट्रोलियम के परिष्करण में सल्फर और अन्य यौगिकों को हटाने के लिए किया जाता है।<br>B) सोडियम हाइड्रोक्साइड (NaOH) की मूल प्रकृति हाइड्रोजन के आयनों की उपस्थिति के कारण है।",
+    q_en: "Q1702. Which of the following statements is correct/incorrect?<br>Statements:<br>A) H₂SO₄ is used in petroleum refining to remove sulphur and other compounds.<br>B) The basic nature of sodium hydroxide (NaOH) is due to the presence of hydrogen ions.",
+    tag: "RRB ALP Tier - I (31/08/2018) Evening",
+    o_hi: [
+      "(a) केवल कथन B सही है।",
+      "(b) दोनों कथन गलत हैं।",
+      "(c) दोनों कथन सही हैं।",
+      "(d) केवल कथन A सही है।"
+    ],
+    o_en: [
+      "(a) Only statement B is correct.",
+      "(b) Both statements are incorrect.",
+      "(c) Both statements are correct.",
+      "(d) Only statement A is correct."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
