@@ -1,0 +1,682 @@
+const data = [
+  {
+    q_hi: "Q835. मुक्त पर्शुका (floating ribs) के ऊपर कूट पर्शुका (false ribs) के कितने युग्म स्थित होते हैं, जो पर्शुक उपास्थि द्वारा एक दूसरे से जुड़े होते हैं?",
+    q_en: "Q835. How many pairs of false ribs are situated above the floating ribs and are joined to one another by costal cartilage?",
+    tag: "NTPC CBT - I (UG) 19/08/2025 (Evening)",
+    o_hi: [
+      "(a) 2",
+      "(b) 5",
+      "(c) 6",
+      "(d) 3"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 5",
+      "(c) 6",
+      "(d) 3"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q836. आनन कंकाल (face skeleton) में कितनी अस्थियां होती हैं, जिनमें से प्रत्येक के अपने शारीरीय लैंडमार्क (anatomical landmarks) और विकास के चरण होते हैं?",
+    q_en: "Q836. How many bones are present in the face skeleton, each having its own anatomical landmarks and stages of development?",
+    tag: "NTPC CBT - I (UG) 28/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) 14",
+      "(b) 18",
+      "(c) 11",
+      "(d) 21"
+    ],
+    o_en: [
+      "(a) 14",
+      "(b) 18",
+      "(c) 11",
+      "(d) 21"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q837. निम्नलिखित में से कौन सिकुड़ता और शिथिल होता है जिसके परिणामस्वरूप गति होती है और इसमें एक विशेष प्रकार का प्रोटीन होता है?",
+    q_en: "Q837. Which of the following contracts and relaxes, resulting in movement, and contains a special type of protein?",
+    tag: "RRB Tech. - (III) 20/12/2024 (Evening)",
+    o_hi: [
+      "(a) रक्त",
+      "(b) उपास्थि",
+      "(c) पेशियां",
+      "(d) अस्थि"
+    ],
+    o_en: [
+      "(a) Blood",
+      "(b) Cartilage",
+      "(c) Muscles",
+      "(d) Bone"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q838. हाथ और पैर में विद्यमान पेशियों को हम अपनी इच्छानुसार आवश्यकता पड़ने पर गति करा सकते हैं या उनकी गति को रोक सकते हैं। इस तरह की पेशियों को क्या कहा जाता है?",
+    q_en: "Q838. The muscles present in the hands and legs can be moved or stopped according to our will when required. What are such muscles called?",
+    tag: "RRB Tech. - (III) 24/12/2024 (Morning)",
+    o_hi: [
+      "(a) आरेखित पेशियां",
+      "(b) ऐच्छिक पेशियां",
+      "(c) हृदय पेशियां",
+      "(d) अनैच्छिक पेशियां"
+    ],
+    o_en: [
+      "(a) Unstriated muscles",
+      "(b) Voluntary muscles",
+      "(c) Cardiac muscles",
+      "(d) Involuntary muscles"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q839. शरीर के उस भाग की पहचान कीजिए जिसमें अनैच्छिक पेशियां नहीं होती है।",
+    q_en: "Q839. Identify the part of the body that does not contain involuntary muscles.",
+    tag: "RRB Tech. - (III) 24/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) आमाशय (Stomach)",
+      "(b) द्विशिर पेशी (Biceps)",
+      "(c) फेफड़े (Lungs)",
+      "(d) हृदय (Heart)"
+    ],
+    o_en: [
+      "(a) Stomach",
+      "(b) Biceps",
+      "(c) Lungs",
+      "(d) Heart"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q840. अधिकांश जन्तुओं में गति निम्नलिखित में से किस तंत्रो की समन्वित गतिविधि है?",
+    q_en: "Q840. In most animals, movement is the coordinated activity of which of the following systems?",
+    tag: "RRC Group D 22/08/2022 (Morning)",
+    o_hi: [
+      "(a) केवल कंकाल और तंत्रिका तंत्र",
+      "(b) केवल पेशी तंत्र",
+      "(c) मांसपेशी, कंकाल और तंत्रिका तंत्र",
+      "(d) केवल तंत्रिका तंत्र"
+    ],
+    o_en: [
+      "(a) Only skeletal and nervous systems",
+      "(b) Only muscular system",
+      "(c) Muscular, skeletal and nervous systems",
+      "(d) Only nervous system"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q841. 400 मीटर की दौड़ में भाग लेने के बाद आपको ऐंठन होती है। कौन सा विकल्प इसका सबसे सटीक कारण बताता है?",
+    q_en: "Q841. After taking part in a 400-metre race, you experience cramps. Which option gives the most accurate reason?",
+    tag: "RRC Group D 29/08/2022 (Evening)",
+    o_hi: [
+      "(a) ऑक्सीजन की कमी और पाइरूवेट का ग्लूकोज में परिवर्तन",
+      "(b) ऑक्सीजन की कमी और पाइरूवेट का एथेनॉल में परिवर्तन",
+      "(c) ऑक्सीजन की पर्याप्त उपस्थिति और पाइरूवेट का लैक्टिक अम्ल में परिवर्तन",
+      "(d) ऑक्सीजन की कमी और पाइरूवेट का लैक्टिक अम्ल में परिवर्तन"
+    ],
+    o_en: [
+      "(a) Lack of oxygen and conversion of pyruvate into glucose",
+      "(b) Lack of oxygen and conversion of pyruvate into ethanol",
+      "(c) Adequate oxygen and conversion of pyruvate into lactic acid",
+      "(d) Lack of oxygen and conversion of pyruvate into lactic acid"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q842. रेखित और अरेखित पेशी कोशिकाओं में क्या अंतर है?",
+    q_en: "Q842. What is the difference between striated and unstriated muscle cells?",
+    tag: "RRC Group D 12/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) रेखित पेशियों में केंद्रक नहीं होता है जबकि अरेखित पेशियां द्विकेंद्रक होती हैं।",
+      "(b) अरेखित पेशियां तंत्रिकाओं से नहीं जुड़ी होती हैं जबकि रेखित पेशियां जुड़ी होती हैं।",
+      "(c) अरेखित पेशियों की तुलना में सभी रेखित पेशियां प्रतिवर्ती क्रिया द्वारा कार्य करती हैं।",
+      "(d) अरेखित पेशियों का ऐच्छिक संकुचन नहीं होता, जबकि ऐच्छिक पेशियों का अपनी इच्छा से संकुचन होता है।"
+    ],
+    o_en: [
+      "(a) Striated muscles have no nucleus whereas unstriated muscles are binucleate.",
+      "(b) Unstriated muscles are not connected to nerves whereas striated muscles are.",
+      "(c) All striated muscles act by reflex action compared with unstriated muscles.",
+      "(d) Unstriated muscles do not contract voluntarily, whereas voluntary muscles contract according to one's will."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q843. कठोर शारीरिक श्रम (intense activity) के बाद हुई पैर की पेशियों में ऐंठन से राहत पाने का एक अच्छा तरीका क्या है?",
+    q_en: "Q843. What is a good way to get relief from cramps in the leg muscles after intense activity?",
+    tag: "RRC Group D 14/09/2022 (Evening)",
+    o_hi: [
+      "(a) दर्द निवारक मरहम लगाना",
+      "(b) आइस- पैक को पैरों पर रगड़ना",
+      "(c) गर्म पैड से हल्की मालिश करना",
+      "(d) गर्म मीठा दूध या चाय पीना"
+    ],
+    o_en: [
+      "(a) Applying pain-relieving ointment",
+      "(b) Rubbing an ice pack on the legs",
+      "(c) Gently massaging with a warm pad",
+      "(d) Drinking warm sweet milk or tea"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q844. ऐच्छिक पेशियों के संबंध में निम्न में से कौन सा कथन गलत है?",
+    q_en: "Q844. Which of the following statements about voluntary muscles is incorrect?",
+    tag: "RRC Group D 15/09/2022 (Evening)",
+    o_hi: [
+      "(a) कोशिकाएं लंबी, बेलनाकार, अशाखित और एककेंद्रकी होती हैं।",
+      "(b) इन पेशियों को कंकाल पेशियाँ भी कहा जाता है।",
+      "(c) इन मांसपेशियां में क्रमवार हल्की और गहरी पट्टीयां दिखाई देती हैं।",
+      "(d) ये ज्यादातर अस्थियों से जुड़ी होती हैं।"
+    ],
+    o_en: [
+      "(a) The cells are long, cylindrical, unbranched and uninucleate.",
+      "(b) These muscles are also called skeletal muscles.",
+      "(c) Alternating light and dark bands are seen in these muscles.",
+      "(d) They are mostly attached to bones."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q845. इनमें से कौन सा ऊतक, ऊतक की मरम्मत में मदद करता है?",
+    q_en: "Q845. Which of the following tissues helps in tissue repair?",
+    tag: "RRC Group D 16/09/2022 (Evening)",
+    o_hi: [
+      "(a) एरियोलर (Areolar)",
+      "(b) कंडरा (Tendon)",
+      "(c) उपास्थि (Cartilage)",
+      "(d) स्नायु (Ligament)"
+    ],
+    o_en: [
+      "(a) Areolar",
+      "(b) Tendon",
+      "(c) Cartilage",
+      "(d) Ligament"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q846. पेशियों में ऐंठन का कारण क्या है?",
+    q_en: "Q846. What causes muscle cramps?",
+    tag: "RRC Group D 17/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) तंत्रिका-पेशीय संधियों का अत्यधिक उत्तेजन",
+      "(b) पेशियों में होने वाली ऑक्सीजन की आपूर्ति में कमी",
+      "(c) शरीर की थकान और कमजोरी",
+      "(d) रक्त में निम्न ग्लूकोज स्तर (हाइपोग्लाइकेमिया)"
+    ],
+    o_en: [
+      "(a) Excessive stimulation of neuromuscular junctions",
+      "(b) Reduced oxygen supply to the muscles",
+      "(c) Fatigue and weakness of the body",
+      "(d) Low glucose level in blood (hypoglycaemia)"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q847. निम्नलिखित में से कौन वृक्क नलिकाओं और लार ग्रंथियों की नलिकाओं का वाहिनियों का निर्माण करता है?",
+    q_en: "Q847. Which of the following forms the ducts of kidney tubules and salivary glands?",
+    tag: "RRC Group D 19/09/2022 (Morning)",
+    o_hi: [
+      "(a) शल्की उपकला (Squamous epithelium)",
+      "(b) ग्रंथिल उपकला (Glandular epithelium)",
+      "(c) घनाभकार उपकला(Cuboidal epithelium)",
+      "(d) स्तंभकार उपकला(Columnar epithelium)"
+    ],
+    o_en: [
+      "(a) Squamous epithelium",
+      "(b) Glandular epithelium",
+      "(c) Cuboidal epithelium",
+      "(d) Columnar epithelium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q848. अस्थि कोशिकाएं एक कठोर मैट्रिक्स में सन्निहित होती हैं जो निम्न से बनी होती हैं:",
+    q_en: "Q848. Bone cells are embedded in a hard matrix made of:",
+    tag: "RRC Group D 19/09/2022 (Evening)",
+    o_hi: [
+      "(a) फास्फोरस और पोटेशियम",
+      "(b) फ्लोराइड और कैल्शियम",
+      "(c) कैल्शियम और फास्फोरस",
+      "(d) पोटेशियम और कैल्शियम"
+    ],
+    o_en: [
+      "(a) Phosphorus and potassium",
+      "(b) Fluoride and calcium",
+      "(c) Calcium and phosphorus",
+      "(d) Potassium and calcium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q849. निम्न में से कौन सा मानव शरीर के संचलन (movement) के लिए मुख्यतः उत्तरदायी है?",
+    q_en: "Q849. Which of the following is mainly responsible for movement in the human body?",
+    tag: "RRC Group D 26/09/2022 (Evening)",
+    o_hi: [
+      "(a) तंत्रिका और संयोजी ऊतकों का संयोजन",
+      "(b) पेशिय और संयोजी ऊतकों का संयोजन",
+      "(c) तंत्रिका और पेशिय के ऊतकों का संयोजन",
+      "(d) तंत्रिका और उपकला ऊतकों का संयोजन"
+    ],
+    o_en: [
+      "(a) Combination of nervous and connective tissues",
+      "(b) Combination of muscular and connective tissues",
+      "(c) Combination of nervous and muscular tissues",
+      "(d) Combination of nervous and epithelial tissues"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q850. रेखित पेशियों (striated muscles) के संबंध में निम्नलिखित में से कौन सा कथन सही है ?",
+    q_en: "Q850. Which of the following statements about striated muscles is correct?",
+    tag: "RRC Group D 28/09/2022 (Morning)",
+    o_hi: [
+      "(a) इनकी कोशिकाएं लंबी, बेलनाकार, अशुंडित और अशाखित होती हैं।",
+      "(b) इनमें स्पष्ट हल्के और गहरे पट्ट उपस्थित होते हैं।",
+      "(c) इनकी कोशिकाएं लंबी, अशुंडित सिरों वाली, और अशाखित होती हैं।",
+      "(d) इनकी कोशिकाएं अशुंडित और बेलनाकार आकृति वाली तथा शाखित होती हैं।"
+    ],
+    o_en: [
+      "(a) Their cells are long, cylindrical, spindle-ended and unbranched.",
+      "(b) Distinct light and dark bands are present in them.",
+      "(c) Their cells are long, with spindle-shaped ends, and unbranched.",
+      "(d) Their cells are spindle-shaped, cylindrical and branched."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q851. भारी व्यायाम के दौरान, जब ऊर्जा की मांग अधिक होती है, लेकिन ऊर्जा उत्पन्न करने के लिए ऑक्सीजन की आपूर्ति सीमित होती है, तो मांसपेशियों की कोशिकाएं______ को दर्शाती हैं।",
+    q_en: "Q851. During heavy exercise, when energy demand is high but oxygen supply for energy production is limited, muscle cells show ______.",
+    tag: "RRC Group D 11/10/2022 (Morning)",
+    o_hi: [
+      "(a) जल की हानि",
+      "(b) एथेनॉल का संश्लेषण",
+      "(c) पाइरूवेट का संचय",
+      "(d) लैक्टिक अम्ल के निर्माण"
+    ],
+    o_en: [
+      "(a) Loss of water",
+      "(b) Synthesis of ethanol",
+      "(c) Accumulation of pyruvate",
+      "(d) Formation of lactic acid"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q852. एक वयस्क मानव शरीर में हड्डियों की संख्या कितनी होती है?",
+    q_en: "Q852. How many bones are there in an adult human body?",
+    tag: "RRB NTPC CBT - I (09/01/2021) Evening",
+    o_hi: [
+      "(a) 16",
+      "(b) 296",
+      "(c) 206",
+      "(d) 156"
+    ],
+    o_en: [
+      "(a) 16",
+      "(b) 296",
+      "(c) 206",
+      "(d) 156"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q853. मानव शरीर की सबसे लंबी अस्थि कौन सी है?",
+    q_en: "Q853. Which is the longest bone in the human body?",
+    tag: "RRB NTPC CBT - I (21/01/2021) Evening",
+    o_hi: [
+      "(a) टिबिया",
+      "(b) पटेला",
+      "(c) स्टर्नम",
+      "(d) फीमर"
+    ],
+    o_en: [
+      "(a) Tibia",
+      "(b) Patella",
+      "(c) Sternum",
+      "(d) Femur"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q854. मानव शरीर का कौन सा भाग इलियम, इस्चियम और प्यूबिस के संलयन से बनता है?",
+    q_en: "Q854. Which part of the human body is formed by the fusion of the ilium, ischium and pubis?",
+    tag: "RRB NTPC CBT - I (22/01/2021) Morning",
+    o_hi: [
+      "(a) जबड़ा",
+      "(b) नितम्बास्थि",
+      "(c) कपाल",
+      "(d) पैर"
+    ],
+    o_en: [
+      "(a) Jaw",
+      "(b) Hip bone",
+      "(c) Skull",
+      "(d) Leg"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q855. मनुष्य के सिर में 29 हड्डियाँ होती हैं। निम्नलिखित में से कौन सा वर्गीकरण सही है?",
+    q_en: "Q855. There are 29 bones in the human head. Which of the following classifications is correct?",
+    tag: "RRB NTPC CBT - I (03/04/2021) Morning",
+    o_hi: [
+      "(a) माथा -8, चेहरा -12, कान -6, कंठिकास्थि -3",
+      "(b) माथा -8, चेहरा -12, कान -8, कंठिकास्थि -1",
+      "(c) माथा -8, चेहरा -14, कान -6, कंठिकास्थि -1",
+      "(d) माथा -8, चेहरा -14, कान -4, कंठिकास्थि -3"
+    ],
+    o_en: [
+      "(a) Cranium - 8, face - 12, ear - 6, hyoid - 3",
+      "(b) Cranium - 8, face - 12, ear - 8, hyoid - 1",
+      "(c) Cranium - 8, face - 14, ear - 6, hyoid - 1",
+      "(d) Cranium - 8, face - 14, ear - 4, hyoid - 3"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q856. मानव शरीर में कितनी मेरु तंत्रिकाएं (spinal nerves) होती हैं?",
+    q_en: "Q856. How many spinal nerves are there in the human body?",
+    tag: "RRB NTPC CBT - I (03/04/2021) Evening",
+    o_hi: [
+      "(a) 30 जोड़ी",
+      "(b) 33 जोड़ी",
+      "(c) 31 जोड़ी",
+      "(d) 32 जोड़ी"
+    ],
+    o_en: [
+      "(a) 30 pairs",
+      "(b) 33 pairs",
+      "(c) 31 pairs",
+      "(d) 32 pairs"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q857. मानव शरीर में सबसे बड़ा जोड़ कौन सा है?",
+    q_en: "Q857. Which is the largest joint in the human body?",
+    tag: "RRB NTPC CBT - I (05/04/2021) Evening",
+    o_hi: [
+      "(a) कंधे का जोड़",
+      "(b) गर्दन का जोड़",
+      "(c) श्रोणि(Pelvic) का जोड़",
+      "(d) घुटने का जोड़"
+    ],
+    o_en: [
+      "(a) Shoulder joint",
+      "(b) Neck joint",
+      "(c) Pelvic joint",
+      "(d) Knee joint"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q858. दिए गए विकल्पों में से अस्थि और मानव शरीर के संबंधित भाग के गलत युग्म का चयन करें।",
+    q_en: "Q858. Select the incorrect pair of a bone and the corresponding part of the human body from the given options.",
+    tag: "RRB NTPC CBT - I (23/07/2021) Evening",
+    o_hi: [
+      "(a) अन्तः प्रकोष्ठिका अस्थि (Ulna bone) - हाथ",
+      "(b) ऊर्ध्वहन्वस्थि (Maxilla) - जबड़ा",
+      "(c) मणिबंध (Carpal bone) - गर्दन",
+      "(d) जानुका अस्थि (Patella bone) - पैर"
+    ],
+    o_en: [
+      "(a) Ulna bone - hand",
+      "(b) Maxilla - jaw",
+      "(c) Carpal bone - neck",
+      "(d) Patella bone - leg"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q859. इनमें से कौन सा एक जोड़ नहीं है?",
+    q_en: "Q859. Which of these is not a joint?",
+    tag: "RRB JE 22/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) टखना",
+      "(b) कोहनी",
+      "(c) गर्दन",
+      "(d) घुटना"
+    ],
+    o_en: [
+      "(a) Ankle",
+      "(b) Elbow",
+      "(c) Neck",
+      "(d) Knee"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q860. निम्नलिखित में से किसमें श्लेष द्रव पाया जाता है?",
+    q_en: "Q860. In which of the following is synovial fluid found?",
+    tag: "RRB JE 28/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) मुक्त रूप से गतिशील जोड़",
+      "(b) तन्तुमय जोड़",
+      "(c) उपास्थिमय जोड़",
+      "(d) स्थिर जोड़"
+    ],
+    o_en: [
+      "(a) Freely movable joint",
+      "(b) Fibrous joint",
+      "(c) Cartilaginous joint",
+      "(d) Fixed joint"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q861. इन जानवरों में से किसके पास खुद को बचाने के लिए रीढ़ का एक आवरण (coat of spines) होता है?",
+    q_en: "Q861. Which of these animals has a coat of spines for self-protection?",
+    tag: "RRB JE 29/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) साही (Hedgehog)",
+      "(b) मृग (Antelope)",
+      "(c) विशालकाय पांडा",
+      "(d) बारहसिंहा"
+    ],
+    o_en: [
+      "(a) Hedgehog",
+      "(b) Antelope",
+      "(c) Giant panda",
+      "(d) Barasingha"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q862. गठिया (rheumatism) वात हमारे शरीर के किस हिस्से को प्रभावित करता है?",
+    q_en: "Q862. Rheumatism affects which part of our body?",
+    tag: "RRB JE 29/05/2019 (Evening)",
+    o_hi: [
+      "(a) जोड़",
+      "(b) हृदय",
+      "(c) सिर",
+      "(d) गरदन"
+    ],
+    o_en: [
+      "(a) Joints",
+      "(b) Heart",
+      "(c) Head",
+      "(d) Neck"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q863. नी कैप (knee cap) को क्या कहा जाता है?",
+    q_en: "Q863. What is the knee cap called?",
+    tag: "RRB JE 31/05/2019 (Morning)",
+    o_hi: [
+      "(a) टांग के अगले भाग की हड्डी (Fibula)",
+      "(b) पलिया (Patella)",
+      "(c) मैलस (Malus )",
+      "(d) कंधे की हड्डी (Scapula)"
+    ],
+    o_en: [
+      "(a) Fibula",
+      "(b) Patella",
+      "(c) Malus",
+      "(d) Scapula"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q864. मानव शरीर की सबसे छोटी मांसपेशी कौन सी है?",
+    q_en: "Q864. Which is the smallest muscle in the human body?",
+    tag: "RRB JE 02/06/2019 (Morning)",
+    o_hi: [
+      "(a) अंसपेशी (Pectoralis)",
+      "(b) स्टेपेडियस",
+      "(c) टिबियलिस",
+      "(d) हृदय"
+    ],
+    o_en: [
+      "(a) Pectoralis",
+      "(b) Stapedius",
+      "(c) Tibialis",
+      "(d) Heart"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q865. मानव शरीर में द्विशिरस्क (biceps) मांसपेशियां कहाँ स्थित होती हैं?",
+    q_en: "Q865. Where are the biceps muscles located in the human body?",
+    tag: "RRB JE 26/06/2019 (Morning)",
+    o_hi: [
+      "(a) बांह",
+      "(b) कान",
+      "(c) आँख",
+      "(d) नाक"
+    ],
+    o_en: [
+      "(a) Arm",
+      "(b) Ear",
+      "(c) Eye",
+      "(d) Nose"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q866. पीरियोडॉन्टिक्स ________ से संबंधित है।",
+    q_en: "Q866. Periodontics is related to ________.",
+    tag: "RRB JE 27/06/2019 (Evening)",
+    o_hi: [
+      "(a) दंत चिकित्सा",
+      "(b) आमाशय के विकार",
+      "(c) अस्थिबंधों की पुनर्प्राप्ति (Ligaments restoration)",
+      "(d) रीढ़ की सर्जरी"
+    ],
+    o_en: [
+      "(a) Dentistry",
+      "(b) Disorders of the stomach",
+      "(c) Ligaments restoration",
+      "(d) Spinal surgery"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q867. दो हड्डियों को एक अन्य प्रकार के संयोजी ऊतक द्वारा एक दूसरे से जोड़ा जा सकता है जिसे ________ कहा जाता है।",
+    q_en: "Q867. Two bones can be connected to each other by another type of connective tissue called ________.",
+    tag: "RRB Group D 22/09/2018 (Morning)",
+    o_hi: [
+      "(a) उपास्थि",
+      "(b) लिगामेंट",
+      "(c) मैट्रिक्स",
+      "(d) टेंडन"
+    ],
+    o_en: [
+      "(a) Cartilage",
+      "(b) Ligament",
+      "(c) Matrix",
+      "(d) Tendon"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q868 अस्थि कोशिकाएं एक हार्ड मैट्रिक्स में अंतःस्थापित होती हैं जो बना है :",
+    q_en: "Q868 Bone cells are embedded in a hard matrix which is made of:",
+    tag: "RRB Group D 26/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) Ca और Na",
+      "(b) P और Na",
+      "(c) Ca और P",
+      "(d) Ca और F"
+    ],
+    o_en: [
+      "(a) Ca and Na",
+      "(b) P and Na",
+      "(c) Ca and P",
+      "(d) Ca and F"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
