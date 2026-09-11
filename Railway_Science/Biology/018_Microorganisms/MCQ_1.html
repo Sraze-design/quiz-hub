@@ -1,0 +1,545 @@
+const Q1083_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q1067. निम्नलिखित में से कौन-सा रोग प्रोटोजोआ के कारण होता है ?",
+    q_en: "Q1067. Which of the following diseases is caused by protozoa?",
+    tag: "NTPC CBT - I (UG) 07/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) पोलियो",
+      "(b) टाइफाइड",
+      "(c) चिकन पॉक्स",
+      "(d) मलेरिया"
+    ],
+    o_en: [
+      "(a) Polio",
+      "(b) Typhoid",
+      "(c) Chicken pox",
+      "(d) Malaria"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1068. निम्नलिखित में से कौन-सा रोग विषाणु के कारण होता है ?",
+    q_en: "Q1068. Which of the following diseases is caused by a virus?",
+    tag: "NTPC CBT - I (UG) 20/08/2025 (Evening)",
+    o_hi: [
+      "(a) यक्ष्मा",
+      "(b) खसरा",
+      "(c) कॉलरा",
+      "(d) मलेरिया"
+    ],
+    o_en: [
+      "(a) Tuberculosis",
+      "(b) Measles",
+      "(c) Cholera",
+      "(d) Malaria"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1069. खमीर (यीस्ट) मिलाकर शर्करा को ऐल्कोहॉल में परिवर्तित करने की प्रक्रिया को___ कहते हैं।",
+    q_en: "Q1069. The process of converting sugar into alcohol by adding yeast is called ___.",
+    tag: "RPF Constable 05/03/2025 (Morning)",
+    o_hi: [
+      "(a) प्रकाश संश्लेषण",
+      "(b) वाष्पोत्सर्जन",
+      "(c) श्वसन",
+      "(d) किण्वन"
+    ],
+    o_en: [
+      "(a) Photosynthesis",
+      "(b) Transpiration",
+      "(c) Respiration",
+      "(d) Fermentation"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1070. खाद्य प्रसंस्करण में पॉश्वरीकरण (pasteurisation) का प्राथमिक उद्देश्य क्या है ?",
+    q_en: "Q1070. What is the primary purpose of pasteurisation in food processing?",
+    tag: "RPF Constable 05/03/2025 (Evening)",
+    o_hi: [
+      "(a) स्वाद (flavour) को बढ़ाना",
+      "(b) बनावट (texture) में सुधार करना",
+      "(c) पोषण मान (nutritional value) को बढ़ाना",
+      "(d) हानिकारक सूक्ष्मजीवों को मारना"
+    ],
+    o_en: [
+      "(a) To enhance flavour",
+      "(b) To improve texture",
+      "(c) To increase nutritional value",
+      "(d) To kill harmful microorganisms"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1071. किस सरल बहुकोशिकीय जीव में बीजाणुधानी (sporangia) का विकास कवकतंतु (hyphae) पर होता है तथा बीजाणुधानी में बीजाणु का निर्माण होता है ?",
+    q_en: "Q1071. In which simple multicellular organism do sporangia develop on hyphae and spores are formed inside the sporangia?",
+    tag: "RRB Tech. - (III) 23/12/2024 (Morning)",
+    o_hi: [
+      "(a) राइजोपस (Rhizopus)",
+      "(b) यीस्ट (Yeast)",
+      "(c) अमीबा (Amoeba)",
+      "(d) लेस्मानिया (Leishmania)"
+    ],
+    o_en: [
+      "(a) Rhizopus",
+      "(b) Yeast",
+      "(c) Amoeba",
+      "(d) Leishmania"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1072. निम्नलिखित में से किस जीव को सामान्यतः ब्रेड मोल्ड (bread mould) कहा जाता है ?",
+    q_en: "Q1072. Which of the following organisms is commonly called bread mould?",
+    tag: "RRB Tech. - (III) 23/12/2024 (Morning)",
+    o_hi: [
+      "(a) राइजोपस (Rhizopus)",
+      "(b) यीस्ट (Yeast)",
+      "(c) स्पाइरोगाइरा (Spirogyra)",
+      "(d) प्लेनेरिया (Planaria)"
+    ],
+    o_en: [
+      "(a) Rhizopus",
+      "(b) Yeast",
+      "(c) Spirogyra",
+      "(d) Planaria"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1073. निम्नलिखित में से कौन सा पैरामोशियम को पोषण प्राप्त करने के लिए कोशिका में भोजन को विशिष्ट स्थान पर ले जाने में मदद करता है ?",
+    q_en: "Q1073. Which of the following helps Paramecium move food to a specific location in the cell for obtaining nutrition?",
+    tag: "RRB Tech. - (III) 27/12/2024 (Morning)",
+    o_hi: [
+      "(a) सिलिया",
+      "(b) स्यूडोपोडिया",
+      "(c) पैरापोडिया",
+      "(d) फ्लैजेला"
+    ],
+    o_en: [
+      "(a) Cilia",
+      "(b) Pseudopodia",
+      "(c) Parapodia",
+      "(d) Flagella"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1074. निम्नलिखित में से कौन-सा एक एककोशिकीय पक्ष्माभी जीव (ciliary organism) है ?",
+    q_en: "Q1074. Which of the following is a unicellular ciliated organism?",
+    tag: "RRB Tech. - (III) 27/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) पैरामीशियम",
+      "(b) जोंक",
+      "(c) अमीबा",
+      "(d) किलनी"
+    ],
+    o_en: [
+      "(a) Paramecium",
+      "(b) Leech",
+      "(c) Amoeba",
+      "(d) Tick"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1075. किस एककोशिकीय जीव की कोशिका के एक सिरे पर चाबुक जैसी संरचना होती है और इन संरचनाओं के संबंध में द्विआधारी विखंडन एक निश्चित अभिविन्यास में होता है ?",
+    q_en: "Q1075. Which unicellular organism has a whip-like structure at one end of the cell and undergoes binary fission in a definite orientation with respect to this structure?",
+    tag: "RRB Tech. - (III) 28/12/2024 (Morning)",
+    o_hi: [
+      "(a) अमीबा",
+      "(b) यीस्ट",
+      "(c) लेस्मानिया",
+      "(d) प्लेज्मोडियम"
+    ],
+    o_en: [
+      "(a) Amoeba",
+      "(b) Yeast",
+      "(c) Leishmania",
+      "(d) Plasmodium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1076. निम्नलिखित में से कौन-सा राइजोपस का एक जनन अंग नहीं है ?",
+    q_en: "Q1076. Which of the following is not a reproductive structure of Rhizopus?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Evening)",
+    o_hi: [
+      "(a) कवक तंतु (Hyphae)",
+      "(b) बीजाणुधानीधर (Sporangiophores)",
+      "(c) बीजाणु (Spores)",
+      "(d) बीजाणुधानी (Sporangium)"
+    ],
+    o_en: [
+      "(a) Hyphae",
+      "(b) Sporangiophores",
+      "(c) Spores",
+      "(d) Sporangium"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1077. राइजोपस में बीजाणु गुच्छों में उपस्थित होते हैं, जिन्हें किस रूप में जाना जाता है ?",
+    q_en: "Q1077. In Rhizopus, spores are present in clusters known as what?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) फलित शरीर (fruiting bodies)",
+      "(b) पुटी (sacs)",
+      "(c) कलिका (buds)",
+      "(d) बीजाणुधानी (sporangia)"
+    ],
+    o_en: [
+      "(a) Fruiting bodies",
+      "(b) Sacs",
+      "(c) Buds",
+      "(d) Sporangia"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1078. निम्नलिखित में से कौन-सा एककोशिकीय जीव नहीं है ?",
+    q_en: "Q1078. Which of the following is not a unicellular organism?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) पैरामीशियम (Paramecium)",
+      "(b) क्लेमाइडोमोनास (Chlamydomonas)",
+      "(c) जीवाणु (Bacteria)",
+      "(d) कवक (Fungi)"
+    ],
+    o_en: [
+      "(a) Paramecium",
+      "(b) Chlamydomonas",
+      "(c) Bacteria",
+      "(d) Fungi"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1079. राइजोपस (Rhizopus) में धागे जैसी संरचना क्या होती है ?",
+    q_en: "Q1079. What are the thread-like structures in Rhizopus?",
+    tag: "RRB JE 16/12/2024 (Evening)",
+    o_hi: [
+      "(a) बीजाणुधानी (Sporangia)",
+      "(b) बीजाणु (Spores)",
+      "(c) गुच्छ (Blobs)",
+      "(d) कवक तंतु (Hyphae)"
+    ],
+    o_en: [
+      "(a) Sporangia",
+      "(b) Spores",
+      "(c) Blobs",
+      "(d) Hyphae"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1080. किस जीवाणु की उपस्थिति जल प्रदूषण का सूचक है ?",
+    q_en: "Q1080. The presence of which bacterium is an indicator of water pollution?",
+    tag: "RRC Group D 17/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) माइकोबैक्टीरियम ट्यूबरकुलोसिस",
+      "(b) ई कोली कोलीफॉर्म",
+      "(c) साल्मोनेला टाइफी",
+      "(d) विब्रियो कोलेरी"
+    ],
+    o_en: [
+      "(a) Mycobacterium tuberculosis",
+      "(b) E. coli coliform",
+      "(c) Salmonella typhi",
+      "(d) Vibrio cholerae"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1081. निम्न में से कौन सा वायरस का उदाहरण है ?",
+    q_en: "Q1081. Which of the following is an example of a virus?",
+    tag: "RRC Group D 23/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) HIV",
+      "(b) ऐन्थ्रेक्स (Anthrax)",
+      "(c) AIDS",
+      "(d) फ़ीलपांव (Elephantiasis)"
+    ],
+    o_en: [
+      "(a) HIV",
+      "(b) Anthrax",
+      "(c) AIDS",
+      "(d) Elephantiasis"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1082. यह एक निश्चित आकृति का एककोशिकीय जीव है , जिसमें भोजन ग्रहण करने के लिए एक विशिष्ट स्थान होता है , और अपने भोजन को उस स्थान तक ले जाने के लिए रोम जैसी संरचनाओं, जिन्हें पक्ष्माभिका (cilia) कहा जाता है , का प्रयोग करता है । इस जीव का नाम बताइए ।",
+    q_en: "Q1082. This is a unicellular organism of definite shape having a specific site for food intake, and it uses hair-like structures called cilia to move food to that site. Name the organism.",
+    tag: "RRC Group D 01/09/2022 (Evening)",
+    o_hi: [
+      "(a) पैरामीशियम",
+      "(b) जूं",
+      "(c) यूग्लीना",
+      "(d) प्लाज्मोडियम"
+    ],
+    o_en: [
+      "(a) Paramecium",
+      "(b) Louse",
+      "(c) Euglena",
+      "(d) Plasmodium"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1083. निम्न जीव अपने नाइट्रोजनी अपशिष्टों का उत्सर्जन किस प्रकार करता है ?" + "<br><div style='text-align:center;margin:10px 0;'><img src='" + Q1083_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q1083. How does the following organism excrete its nitrogenous wastes?" + "<br><div style='text-align:center;margin:10px 0;'><img src='" + Q1083_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 29/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) उत्सर्जी रसधानियों के माध्यम से",
+      "(b) सामान्य विसरण द्वारा",
+      "(c) स्रावण द्वारा",
+      "(d) रसधानियों में क्रिस्टल जमा करके"
+    ],
+    o_en: [
+      "(a) Through excretory vacuoles",
+      "(b) By simple diffusion",
+      "(c) By secretion",
+      "(d) By depositing crystals in vacuoles"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: "",
+    image: Q1083_IMAGE
+  },
+  {
+    q_hi: "Q1084. ब्रेड को ऊपर उठाने के लिए उसमें कौन सी सामग्री डाली जाती है ?",
+    q_en: "Q1084. Which ingredient is added to bread to make it rise?",
+    tag: "RRB NTPC CBT - I (29/01/2021) Morning",
+    o_hi: [
+      "(a) टमाटर की चटनी",
+      "(b) पनीर",
+      "(c) ख़मीर",
+      "(d) गेहूं"
+    ],
+    o_en: [
+      "(a) Tomato sauce",
+      "(b) Cheese",
+      "(c) Yeast",
+      "(d) Wheat"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1085. कॉक्सी बैक्टीरिया की आकृति कैसी होती है ?",
+    q_en: "Q1085. What is the shape of cocci bacteria?",
+    tag: "RRB JE 25/05/2019 (Evening)",
+    o_hi: [
+      "(a) कुंडलित आकार",
+      "(b) छड़नुमा",
+      "(c) कॉमा के आकार",
+      "(d) गोलाकार"
+    ],
+    o_en: [
+      "(a) Coiled",
+      "(b) Rod-shaped",
+      "(c) Comma-shaped",
+      "(d) Spherical"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1086. निम्नलिखित में से कौन सा जैविक पदार्थों के अपघटन का कारण है ?",
+    q_en: "Q1086. Which of the following causes the decomposition of organic matter?",
+    tag: "RRB JE 26/05/2019 (Evening)",
+    o_hi: [
+      "(a) शैवाल",
+      "(b) लिवरवर्ट",
+      "(c) जीवाणु",
+      "(d) विषाणु"
+    ],
+    o_en: [
+      "(a) Algae",
+      "(b) Liverwort",
+      "(c) Bacteria",
+      "(d) Virus"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1087. नीले हरे शैवाल में _________ होता है ।",
+    q_en: "Q1087. Blue-green algae contain _________.",
+    tag: "RRB JE 30/05/2019 (Morning)",
+    o_hi: [
+      "(a) माइटोकॉन्ड्रिया",
+      "(b) थायलेकॉइड झिल्ली (Thylakoid membranes )",
+      "(c) लाइसोसोम",
+      "(d) गॉल्जीकाय"
+    ],
+    o_en: [
+      "(a) Mitochondria",
+      "(b) Thylakoid membranes",
+      "(c) Lysosome",
+      "(d) Golgi body"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1088. जीवाणु, जो रेफ्रिजरेटर के अंदर भी घातक विषाक्त पदार्थों को उत्पन्न एवं विकसित कर सकते हैं, वे ________ हैं।",
+    q_en: "Q1088. Bacteria that can produce and develop deadly toxins even inside a refrigerator are ________.",
+    tag: "RRB JE 01/06/2019 (Evening)",
+    o_hi: [
+      "(a) साल्मोनेला",
+      "(b) स्ट्रेप्टोकॉकस फीकेलिस",
+      "(c) क्लॉस्ट्रीडियम बॉटूलाइनम",
+      "(d) एशेरिकिया, कोलाई"
+    ],
+    o_en: [
+      "(a) Salmonella",
+      "(b) Streptococcus faecalis",
+      "(c) Clostridium botulinum",
+      "(d) Escherichia coli"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1089. पोलियोमाइलाइटिस _______ की वजह से होता है ।",
+    q_en: "Q1089. Poliomyelitis is caused by _______.",
+    tag: "RRB JE 02/06/2019 (Morning)",
+    o_hi: [
+      "(a) विषाणु",
+      "(b) जीवाणु",
+      "(c) कवक",
+      "(d) कृमि"
+    ],
+    o_en: [
+      "(a) Virus",
+      "(b) Bacteria",
+      "(c) Fungus",
+      "(d) Worm"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1090. ______ नामक एक फ्लैटवार्म में बहुत सामान्य 'आंखें' होती हैं जो वास्तव में केवल आंखों के धब्बे होते हैं, जो प्रकाश का पता लगाते हैं।",
+    q_en: "Q1090. A flatworm called ______ has very simple 'eyes' that are actually only eye spots which detect light.",
+    tag: "RRB Group D 26/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) प्लैनेरिया",
+      "(b) लिवरफ्लूक",
+      "(c) टेपवार्म",
+      "(d) एस्केरिस"
+    ],
+    o_en: [
+      "(a) Planaria",
+      "(b) Liver fluke",
+      "(c) Tapeworm",
+      "(d) Ascaris"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1091. निम्नलिखित में से कौन मुकुलन द्वारा जनन करता है ?",
+    q_en: "Q1091. Which of the following reproduces by budding?",
+    tag: "RRB Group D 09/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) अमीबा",
+      "(b) पैरामीशियम",
+      "(c) यीस्ट",
+      "(d) प्लाज्मोडियम"
+    ],
+    o_en: [
+      "(a) Amoeba",
+      "(b) Paramecium",
+      "(c) Yeast",
+      "(d) Plasmodium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1092. शैवाल सबसे प्राचीनतम पौधे हैं और विशेष रूप से __________ में पाए जाते हैं।",
+    q_en: "Q1092. Algae are among the most ancient plants and are found especially in __________.",
+    tag: "RRB Group D 23/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) कीचड़",
+      "(b) वायु",
+      "(c) पानी",
+      "(d) रेत"
+    ],
+    o_en: [
+      "(a) Mud",
+      "(b) Air",
+      "(c) Water",
+      "(d) Sand"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1093. _____बहू विखंडन द्वारा उत्पन्न होता है ।",
+    q_en: "Q1093. _____ reproduces by multiple fission.",
+    tag: "RRB ALP Tier - I (10/08/2018) Morning",
+    o_hi: [
+      "(a) राइजोपस",
+      "(b) प्लाज्मोडियम",
+      "(c) प्लेनेरिया",
+      "(d) ख़मीर"
+    ],
+    o_en: [
+      "(a) Rhizopus",
+      "(b) Plasmodium",
+      "(c) Planaria",
+      "(d) Yeast"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
