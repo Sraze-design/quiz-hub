@@ -1,0 +1,1009 @@
+const Q599_IMAGE = "data:image/jpeg;base64,/9j/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCACFAK0DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD06iiq95dC2jGBukbhF9ff6CgB89zDbqDK+M9B1J+grMn1sxNGot9vmttXe3I+oGR+tQEszF5GLOerGqPnXEgZxJCiQy/OQd3yjqO/P5UAap1lo5BHJ9nLt0UvsJ/nVuDUonbZKpiboCeVP4/44rzWMvc36tzvllB+hJrsVjt/tcjAqZmXDDPb6flQB01FYmlaiCdh3iHdsG8YKH/Dt7Vt0AFMlljhjLyuqIOpY4FQ3t2LddqYaVui+g9T7VkOWdvMkYySdi39PSgC9c65ZW7oh813kOFCxkZ5A6nA7ipY9Ut2++ssZ9GTP8siufQ3NyYJf3SBHO8cN+XX37j+lXqANyKWOaMSROroejKcin1zESLFqLzQ3LrOy5KBuMcckenH6mtrTdRivldVIEsRw6/1HtxQBdooqK5uEtot75JJwqjqTQBLVZ9Qs1cp9oRnHVUO4j6gVk3dw8iPLctlFGSg+6APbv8AjVAS232iO4MRVTGMTE4UDPA9P/10AdKNQsyQDOqE8Df8ufpmrNc1JcwRzJDJIokk+6p7062a6trmR4plEJxsix8vvkf5/wAQDo6KgtLpLmPI+V1++mc4/wDre9T0AFc/qUk892zWzJhH8vLeg6/jnI/CugrnU58znkyPn67jn9aAIFUSagz4nUxqBzwjfT86zb5QumXFxCssCEbGidcZyQPy5qx50X2BZ5L2UJG+S3Qt7Y7/AE/Ss2+1WG6kKRRTMHXy9rHA69QBnmgDNsrkWl2lwYzJ5YJA6AHGOT+NXYtanF08rJCDINpOCNvv3rS0+wFtJdQ211++V1DFkHC4z/X9KzNcsngvnlSIiGTkFRwD3Ht60AdKXVLZftbx/MNrHsTW5YXBksg8pw0eVck+nf8AEYP41y2iH7TpUa3EYYRthNwzkDoR/L8K3ISRpN+R/tf+gCgDPubmY3H2l/Ljgf5naQ4KDsPbt+OaxrjXYoZ5ntnecnjDH5Fx9D+nHvWhrzyppknlxq4Y7Xz2B4yPfOK5E9TwR7E9Oe/FAGjay3N1dwpbhoHjY7pIQXAB4GQTjHHr/KrGo3+p2M7Wxug5KhlfywDg/wD1waseFkby7iTcNpfbjHsD1/E/nUHigAXkDesZHHt0/U0AaVpd2l4zzWv/AB97PuycE/h09ORV23lkto1upRHHImWfHQjuPy/XFcRHJJC4khco46MO1dnFEtzp8SyszhkU7jwSeDmgDqAQyhlIIIyCK56S9F3fv8r7QuY2K/Lt9j79f/1VoxHy/Do2k/u7cqD34GB/KsjUJRb2EsmxWAXG0nA9OfagCje6t9ltZN5TzmB8oIcjH94n0/zisO51S8u7fyJ2QocE4XHQ/wD6jVME7t2Tndu5JJB696QAAADoBQArPtO9mwR3JroPD09wllNJKsksAJZHDZJOegH+RxR4fltY7Zcxfv2kKF8ZJ9PoMHH4Gt+gCGw2WMccsCuiDllbrtPUH3/qK6UcjIrm51lePEMgRsjkjPFbWmn/AIl8K/3BsH0Bx/SgC1XP6jaAzTQbnRWbzAVPPJyf1zXQVVvrT7QgZMCVPuk9x3FAHGazG161klszSRbyjOOcHjk/hk1ZtbHyIUeGxiScPz5rbzj1B7Vda3ZWRYW+z7HzIgXr7f5/wp6QKlw84ZtzgAgnigDD1STyLpdRtQ6OsnlSKwwH4/wH8q0ree2uLqOZJJPMkiyEPQD/AB4Peq9/Ztc26WUl0Gn3+apZSARgjH86sWCxwQG1iIeaBcFiMZJ5/LNAFmSIm4jm85lVAcpng1rWlszaU8bcPOrE+2Rx+mKo6ZbTXaK10ihAfnx0f2Ht6/l61u0Achq0M13pciQgq+MshHJI7fUH+VcgeO3OcY969H1Szx5jjPkyjD46oT1P0P8An2yBp6JdwSJFEVjHLMPm9v6fSgCvpAaysIVMTuZ5CWKjIXoOfy+nWs/xDGGnW6SbzFJ8orj7hAzj+ZroYlnEkpldWUn5ABjAqCK0Wa3Md9BDuL7yq9CfWgDk7OOO4vIYJG2rI4BIPbnj6muxnE6NF9n8sRrwynqfQD/PpSmGBX8xIwXiXACdh6Y/GrukRG7CXUsZSMcorfxHsfp/X6UAXmtimkG1X5isHlj3O3Fc9fIbyFbdVYxTLkyA/d7jjvXWVgalbz27stvsAc5jLDgeq/4e30oA4FlaNijjaynDA9jSV1F/p8F/eAKzQ3CYZ3CZDDj9enP86qQaLbCJpnluBFHnejrjcB9P85oATw3G7lnS4KhJDvix94FRj9c1vLI5uHjMTBVAIfsaq6VY2ttCJLcElx99uuPSrSpKLlnMuYyMBMdD/n+dACST+XOkRjchgSXA4XHrW7p6MljCHBViu5gexPJH61l28BuZxEB8g5kPt6fj/jW5QAUUUUAQXFnDcHc4IcDAdeD/APX/ABqg2m3KkhJIpB2LZU/1z+la1FAGN/ZlyZBI0dtvAwG3nIH/AHzVmHS1HNy/mE/wqNq/j3P+eKj0tdSGoXpvQ4t2P7ncykfebpjtjb1A6fidSgBAAoAUAAcADtS0UUABGRg9Kz59MXrasI/9g8r+Hp/L2rQqnq0Ms9gyQBy4eNgEYBvldScE8ZwDQBQktbyM4+ytJ7xuuP1IqFdMnmu1uGtGjkUYDSSKB3/uk+prZ09bhbKMXZJmwc5IJxngEjgnGM471YoAyrXRYo5pJrg+Y0nVB938fX+XtWrRRQAUyaJJozHIuVNPooAxp7OeBuFaWPsyjkfUf4fpVZpY1OHdVPoxwfyNdFVDU0u3aD7N5hQMd4jZVOeME7v4RzkDnp1oAxo5HN0+ZomiIGxVOWz/AJzVmysr6ZpPNOyMt8rMuCB6Af4/rW+AAMAYooAjghSCPZGMDqSepPqakoooAKKKKACiioZrmKHh259B1oAmoqgdSGfliJHu2Kkj1CJuHBQ/mKALdFICGAKkEHoRS0AFFFIzBVLMcAdTQAtFZlxfuxKw/Kvr3NVZLp41Mkk7Kq8klulAG7RXP2HiK3muBAJvMJ6ZUgn6Vvo6ugZDkHvQAtFFFABRRRQAUUUUAFFFFABRRRQBWvbjyUCr99untXL6tqosQEQB525wegHqa2r9i12/tgVwWqMz6ncF+vmEfgOBQA6bVL6ZstcOvsh2j9KkttYvYCMymRe6yc/r1rPooA77RNWS4iDqcKTh0P8ACa6CvOPDTsL90H3WjJI+hFeg2jF7WMn0x+VAE1UNSmIxCD15ar9Y14c3Un1xQBRvb2Gyi8yZuv3VHU1ymoajPfP+8O2MfdQdB/jTdTnkuNQmaQ/dYqB6AGqtADo3aORZEJDKcg16JoN6LmBCOki5x6HuK85rqvCMp8opn7kox9DQB2lFFFABRRRQAUUUUAFFFFABRRRQBlaihW5LdmGa5bXdLd5Dd26lsj51HX6iu5uIFnj2ng9j6GsiWGSFsOpHv2NAHnvTrTo43kcJGpZj0AGa7aW0tp23SwRu3qVGafDbxQ/LBEiZ/urjNAFDRdNayiZpcGaTqBztHpXXW6eXAidwOap2VmwYSyjGOi1oUAFZF+hW6b0bkVr1VvoPOi3KMuvT3FAHG6noktxeGa2KBX5YMcYPrVXUbK106xWNv3lzKfv/AN0D2/SunrktfkL6rID0QBR+Wf60AZtdh4TtGSCNmGDI+/8AAdP8+9c/pOnPezhnUiBTlm9fYV6Dp1t5Me8rtJGFHoKALtFFFABRRRQAUUUUAFFFFABRRRQAUjKGGGAIPY0tFAEJtLcnPlCnxwxR8oig+uKg1K6azsmnVVO1lBLHAUFgCx9gDk/SjTJ3ubJZZSCzO/I6YDkDH4YoAtUUUUAFFFFAFeezimJb7reorNm8PW883myrG7+pB5rYkYpGzBSxUEhR1PtVDQ9Rk1SxNxLAITv2hQ4bsD2J7kj147dKAJ7ewhgC4GSvTjAH4VaoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//9k=";
+const Q610_IMAGE = "data:image/jpeg;base64,/9j/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCACvAKcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD06iiigCCa9tIJhDPdQxyMMhXcAn8DU4IIBByD3rJ0/wApbi5tr5R9qmlZ/wB4vEiZ+Xae4C447VM+lrGGbTpntHIOFQ5jJ91OQPwxQBbW5t2lMSzxGQcFA4yPwqWs+HS7OLTY4LmGKTy0G92HU92z165OaXRfMNhvcuY3ctCJDlhH/Dk/r+IoAt3E8VtC007hEXqTVQXd9N81tp4VOxuJfLJ/AAkfjijV43NulxGU3Wr+cFc4V8AjBPbrwfXFQ2019qlqk0c9vbQyqD+6zI4B7ZOAD+BoAuWF4LyFm2GN43MciE52sDzzUWtTy2+lyyW7FZMqqkYzywHGeM81WmtotIkiu7ZAkAxHcj1Unhz6kE8n0JqbXObGNR0e4hH/AJEWgCh5OjjP2yzuVn7tNG7uT6hhn9DV/RZXlgm+eR4UlKRGUESYHUNnng5HPPrV+RtkbOf4QTWJbySroNlbQk/a75N27+7u+Z3P0z+ZFAE9vdz6lcXP2O9jiSF9qL5e7cMfeOT0JyOPSrVpdyNO1peIsdyq7htPyyL/AHl/qO1RXdla29skwla1NrHtWVMZCjsR/EPam6bb3M0kd/qDnzVVlij2bdqkjkjJ+Y4H0oA06KKKACiiigAooooAKKKKACiiigCG5tobuLyriMOucjsQfUHsfeqthcPFcyaddSbpoxvickZkjOcH6jGD+fetCs/VMRT2NyBylwIyf9l/l/mV/KgC7NEk8EkMgykilWHsRism01GSO2WxWPztQiJiKdAAOA7HspGD+PFbNFAFCLTEdxNqBF1P1G5fkT2Veg+vWotRgFir6lZqsbxDdMijCyoOuR6gZwas3t40Lpb2yCW6lzsQnAUDqzHsB+tRrpvmsH1GdrpgchCNsYPsvf8AHNAF0hZIyrAMjDBBHBFZiabOskEDTI9lBL5sYOd4wDhfQgE9fYCtWigBHUOjI3RgQapadpqWIDGV5pAixK7gDag6KAP8mr1FAGbqeDfack2fIMpJ9C4HyA/jn8QK0qiureO6tnglztcdR1B7Ee4PNV9NuJJUkt7k/wCk27bJCBgN6MPYj9c0AXaKKKACiiigAooooAKKKKACq1zfRW0ixFZJJWGRHEhY49T6CrNZunYXUtSWTiYyqwz1Me0Bce2Q360ASHUwPvWV6P8AtgT/ACzVLVdQhmt4UWO5VvtMJG+3dR/rF7kYrbrO1/8A5BEh7iSMj6+YtAGjRRVfUJjb6dczjrHEzD8ATQBW0r/SGuL9hzM5WP2jU4H5nJ/GtGq+nxCDTraIdEiVf0qxQAVBdXkFptEznc/3UVSzN9AOamd1jRnc4VQSSewqhpMbSI2oTr++uvmGf4I/4V/Lk+5oAq/8JCPN2/2XqGN2P9Vz+VW/7YsRxJK0Tf3ZY2Q/kRV+igCh/aRl/wCPSyuZx2YqI1/NsfoKg8nVHvzeJHawZi8so0jPnnIJwB05/Otaq1xqFlbNtuLuCJvR5AD+VAEW3Vj/AMtrJf8Atk5/9mFHk6p/z/Wv/gK3/wAXR/a9m3+qM0xPTyoXbP4gYqlItpI7OdO1IsxJOC4/9moAlhudVkubiKP7JOsBClyrR5bGSo5boMc+9X7K5W8s4rhVKhxkqeqnuPzrAt7GRVuFTTLrdJKzQu9xtUA4+9h88HPYmt3TrNbCwitlYtsX5mJ+8e5/E0AWaKKKACiiigArM1PyJLiOJYJ5bpV3KbdgrRqfViQMHHTvjpWnWdpfz3eozNyxuPL+iqowP1J/GgCpnVI+n9o4/wBoW7/yINVb+e8liiine42vPEpWS12A/Ov8QJxXTVna1zDar3a7h/Rgf6UAaNU9XUvo96o6m3cD/vk1Nc3dvaqGuZkiB4G5sZ+nrVV9W010ZZLlQrDB3Arx+IoAt2rbrSFh3jU/pUtZ+gzCbSIMMH8vMW4HIbaSoOfcDNaFAFDW8nSpolODMVhz/vsF/rV5VCKFUYAGAKoavy1hH/fu0/QFv/Za0KACq9/eRWFo9xMflXoM8sewFWK565msL+9ke9vNqW7mOCGNvnJHDNgfN1yB9PegB4u7S7+bUNVhIP8Ay720vyj2JHLfy9qfNcaYlhcQWNuSzxsoWG2b5iR6gfrTBDYEfJpupSD+8fM/9mYGhJbWN9sF9eWEmcBLncUPt8+R+AIoAt22ohLWJPst67KgB/0dl5A98VL9vnb7ml3h+pjX+bUW97Is62t+ixzN/q3U/JL9PQ+x/Wr1AFH7XfHppbj/AHpkH8iahi1W5kabGmSMsD7HMcitzjJx0z1q7Le2kLlJbqBGHVWkAIrO0fULGPTV829tlbzJN2ZVGTvbnr3oA1LeeO5gSaFt0bjINSVn6Pt2XXksrW5uGaFlYEEEAnBH+0WrQoAKKKKACsiWVbW8mns7qyYTkGSKWfZhgMZBGewHGO1S6iBc6haWD8wuryyr/eC4AU+2W/Srgs7VQAttCAOwjFAGWNbfOP8AiWE+g1Af/E1Xvr24u5rKBDZxSG4BVkuPNI+VuduB/P0rfMMJGDEmPTaKx/E1tZroc26JEOV2lU53Z9uvegDRtNPgtT5gBknI+aaTl2/Ht9BxVqs6J9TjhRUgtJ02ja6zMnHbgg/zpxt9QueLm6SCM9Utgdx/4Gf6AUAQWVzBFrNzbxZ8qYgqQPk80D51B9cBT+da1UrjTonsFtrcCExYaFl/gYdD/j65NP0+7+1wHevlzxnZNH/cb/DuD6UAQX4L6rpidlkeQ/ghH/s1aNZ7nf4hiX/nlasf++mA/wDZTWhQBU1W4a202aSP/WEBI/8AeY4H6kVJZ2kVnbJDCoARQM45b3NV9SAe606FujXG4j/dRiP1Aq/QBn6yWMVtESRFNcJHKQcfKc8ficD8aJdE0ySPYLOKI/3olCN+Yq3cwR3Vu8EoOxxg46j3HvVKO8msgItSR2C8LcxoWVx/tAcqf0oAyJIn0t/7PvnMthIMxyDhosfxD0xwSB9R0Iq22r38EgsvsvnzqgbzlDFXXswAH58jmp7m4h1Ke0itAZvLmEjvtO1FAOck9znGKrTQzWFzHHCCzQhnteeZI/44T9ByPoPSgAYavcNv+yqGPUtBGv8ANyf0qD7DrUEk91/oSeYN0jM3TAxkfLgHH16V0cE0dxBHNE25JFDKfY1U11WbRboKCfkyQO4HJ/TNAFTT7w2em27SWMkNoQCZDIGI3HO5hweSefrW1UEwgnsX3lTbyRnJ7bSP8Kj0lpH0mzaXO8wpuz9BQBbooooApahBKZYLy1QPNASChON6HqM+vAI+lN/tWMf6y0vkPcfZnbH4gEVfooAof2tb9obw/wDbpJ/8TVHUrlbx4kVJFSGGW4cSIVIwpVeD7sfyrdrn7hml03ULzOTeuLeH/czsH5ksfxoA2NOBXTbVT1EKA/kKsUigKoVRgAYAqtcajZ20nlzXCCTGdg5YfgOaALVUry0l88XlkVW4UbWVuFlX0Pv6HtU9tdW90ha3mSQKcHaeh9/SpqAMnTpHuNavZpIXhZIoo9j4yPvE9CR3Fa1Yi3Mi6jfRWiq1zPOFXd92NVRMsfbJ6dzVtrO+jXzIdRkklHO2VV2N7YABH5/nQBDqVvHeazZ28wOxYZZAQcEHKgEHsRnrU1vcy2twllfPuL8QTnjzP9k+jfzrPE8moa5EIZGtJ4raRZl2hmQ7l4549we4qTWLFYtOeS4uryaJSDJ+8XIGeWHy9R14xQBuUVyz3KDMtxPJeJIR5U4u/ICgDlSoIw2R6c57VahvLiAxmN5m8wZWG5ZWEo/6ZyDjPsevtQBrXt4tqqDY0k0p2xRL1c/0Hqaxb+W9j+x/arqwa7SZGSBQVYknbjOTxhjk4pZr8XupKLNyskkaQxkj5otxYyHHYgIB9cVavLO2tW0+GCJQ0l0pZurNgM2Sep6UAVpJtT0pXJt4FgnnG3EhkEJbrxheCfcYzWl9kvnB83U2Ge0UCAf+PbquTRRzwvFMgeNxhlPcVSsJZLec6dcuWZRugkY8yJ7/AO0Oh/A0ARppEgtls3v5nswoUxlVDFf7u4Dp/nNaagKoVRgAYAFLRQAUUUUAFFFFAFLV5Xi02UQnE0mIoz/tMdo/nn8Kgu4UR9LsEGI1lBH0jUkfrinall9S0uHGUMzSN/wFDj9TS3uRrWmnHy/vR+O0H+hoAdfSSTXcWnwu0e9TJNIpwVQcYB7En9Aas21rBaR+XbxLGvU4HJPqT3NU7qT7FqgvJR/o0sQidx/yzIJIJ9juPNTPq2nIoP2yFs9FRw7H6AZJoAh1NFhubO7iUCYzpExH8SNwQfXHX8K0qzoUlv7xLqaN4reAkwxuMMzYxvI7cEgD8atXd5DaKplJLOcJGgyzn0AoAxo5zB9rurSGI3V3emGPf3C8du3ysfxrUTUYTpQ1BwVTy9zL1IPdfrniqOhxW8bXLz2yRXqSu8hcDcFYlgcjtjjr2NQrFI/hwyLGzK1ybjYBy0fm7+n+7zQA+O5leez1Dy1WaXzLWWMnADjJUE891Iz71Z/tiESSW99bSwsijzMrvQA9Dkdj6nFZ+rxxEwT2NzKy3EonMcOGztHLrnoQO3c1NZXkcFyZ76SWaedQsEsUJZJIxz8oXOD3IP8AKgCWHTZYQTp72jRyLiOd0zIinsGH3gO1KPDdh9lW333flqANv2qTaSO+M4qzo8TxW0paIwpJM7xxkYKKTxx27nHvV+gDmrTw5LFq00sl5dbduUmWT5mJJ4bI64wKl1HTriK60911W8P+kbAXEbbMo3I+X8Oc9a6CqmqW73OnyxxcTAB4j6Opyv6igCD7DqI+7rEh/wB+CM/ngCq95p2rSIkkeowPNC3mR7rbBJx0yG4B6HjvWpZ3C3VpFcLwJFDY9PapqAMezm1i6tY7iOfT2Dj7phdSp7g/MeQeKm3a2P8Alnp7/wDbR1z+hpbX/RtXubUDEc6/aI/Y5w4/PB/GtGgCOCTzIlJKF8fOEbcAe4zRVfT9Oh0/zvJaQ+c+9t5zzRQBcooooAztUBjutOuf4Y7ja3sHUrn8yKXWN0cMN2oz9llEjY67OQ36En8KsX9sLyxmtydpkUgN/dPY/gcU2xnF5YI0ijeQUlT0YcMPzzQBaBDAEEEHoRTVijQkpGqk9SBiqGlsbctpkud8AzESfvxZ+U/h0P0960aACsQ3HkS6rfMoeeKRYIgewKrtHsCzVoTajbxTGFRJNKPvJChcr9ccD8ax9SljkuWLxXFtFcx7JnkiIVGXlHz04PH5elAGkui2bRH7XGLmZ/8AWTP95ievPYe3SnDSoVAVLi8VRwFFy+B+tS6bdi9s1lI2uCUkX0YcH8KtUAVbPTrSxybaEKzfecksx5zyTz1qheWcVvcRxtn7HcyYG3g28p5DKe2Tx9T71s1V1S3a7024gTh2Q7D6MOR+uKAII7uaydYNSIZGOI7kDCt7MP4T79D7dK0ar20sd/p8cjKrJNGCykZHI5BqmfM0j5stLp/cE5aD391/UfSgDUooBDAEEEHkEUUAZ1l/oupXFkT8kn+kQj0yfnH58/8AAq0az9TxFdWFz3Wfyj/uuCP57fyqTUL77AqTSQlrbOJpFPMQ7HHcevpQBFqeY7vT7heqz+U3+64I/mFrRrP1l1Ol+ajAgSROrA5H+sU5rQoAKKKKACiiigArLumXS777WWVbW5YLPk42P0D/AEPQ/ga1Kz9VQSy2ELAFXuQSD3ARm/pQBLfWpuo0lt3VLmL5oZOuD6H1B71SfUJbzZZQhre6bP2jPWFR1IPfPY++e1SFJNJJaENJYfxRjlofdfVfbt29KlvrG31W1DxylWZCI54m5wR7dR7UAVbG1F3EDE0tvp//ACySNtrTers3Xn689TVo6PYkECORc91mcH8wabDem02W2oRrBjCpKv8Aqm9Bn+E+x/M1o0AQWdnb2NusFrGI4x2HNT0UUAFFFFAGbp5FpeXGntwpYzQZ6FWOWA+jE/mK0iAwIIBB4INVr60F1EpRvLnibfFJj7rf1B6EelNsrwzloZ08q6i/1kef/HlPdT60AQWedPu/sDt+4ky1qT29U/DqPb6VpVW1G1N3aNGjBJVIeJz/AAOOQaLC6F3b7ypSRSUkQ9UYdR/ntQBX17jTC/eOWJx9Q61okAggjIPas7XedPWP/npPEn/kRa0aAOW120udLsZjZlm00kO8K4zCQcnbn+E+g6H2zXTxSJNEksbBkcBlI7g1R1//AJAV5/1zNVpIpNEkee1jL6c3zSwL1hPdkHp6r+IoA2aKZDNHPCk0Lq8bjcrKcgiigB9FFFABWfenOsaanp5r/kuP/Zq0Kzpfm8RWy/3LWRvzZB/SgDRrPeymtZGm01lUMdz27/cc+oP8J/T2rQooAqW15b36PCyhZF+WW3kxuX6juPfoai/s6S25025aEf8APFxvj/AdV/A/hVexs7e9jupJ4wzG7k2uDhlwdvDDkdKsY1Cy+6ft0A7EhZV/Ho36H60AL/aE0HF/ZyRj/npD+9T9PmH4irFteW10M21xHLjqFYEj6jtTba/trpikcmJR96JxtcfVTzS3FjaXR3XFvG7DoxX5h9D1oAsUVQ/s54/+PW/uovRWYSL/AOPZP60u3Vo+j2lwP9pWjP6bv5UAXqq3tmLkK6OYriLmKUDlfY+oPcVH9svU/wBbpkh94ZUb+ZBo/tML9+yvV/7Ylv8A0HNAD7C7a4V4pkEdzCdsqDp7EeoPaoLwGwvP7QUEwSAJcgfw46P+HQ+30piyvdatbT21vOiqrLM8sZQFSMgc8k7sfrWqRkYNAGbdutzqVhboQyqTcsRyMAYX8y2fwrSqC2s7a1Lm2gji3/e2LjNT0AZ+ujdpMqDq7Ig+pcD+taFZ1+ftGoWdmhztcXEvsq/d/Nsfka0aAK1iLQQuLJUWPzG3BRgbs88frRVhUVc7VC564GM0UALRRmjNABWcxC+I03cb7UhPchskfqK0c1XvbVLuIKXaORG3RyL1RvUf4UAWKKz1uNRhGyazW4I6SQyBQ31DYx+ZpGtbq+4v3WGA9beJiS3+83p7D8zQAugrjSIXP/LUtJ9dzFv61oUiqqKFQBVUYAA4Apc0AQ3Npb3ahbiFJAOhI5H0Paq32G5g/wCPK+cKOkdwPMX8+G/U1fzRmgCh9qvof+PiwMg/v28gb9Gwf50o1exBAmmNu3pOhj/9CAq9mkOCMHkUAMiuIJhmKaNx/ssDUlVZNN0+XJlsrZie5iXP8qi/siwH3IWj/wCucjJ/IigC/RVD+ybXu92frdy//FUv9kaefvweYPSR2cfqTQBLNqFlAcTXcCH0aQA/lUBv5bn5dNt2fP8Ay2lUpGPz5b8Pzq1DbW1uMQQRRf7iBf5VNmgCtZWYtVdmcyzynMsrDlj/AEA7CrNGaM0AFFGaKAP/2Q==";
+const Q615_IMAGE = "data:image/jpeg;base64,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";
+
+const data = [
+  {
+    q_hi: "Q577. कौन-सी रुधिर वाहिकाएं, मनुष्यों में ऑक्सीजन युक्त रुधिर को हृदय से शरीर के सभी भागों तक ले जाती हैं?",
+    q_en: "Q577. Which blood vessels carry oxygenated blood from the heart to all parts of the body in humans?",
+    tag: "NTPC CBT - I (UG) 18/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) शिरा",
+      "(b) तनुशिरा",
+      "(c) केशिका",
+      "(d) धमनी"
+    ],
+    o_en: [
+      "(a) Vein",
+      "(b) Venule",
+      "(c) Capillary",
+      "(d) Artery"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q578. हृदय चालन तंत्र (cardiac conduction system) में, किस संरचना को प्रत्येक हृदयस्पंद को प्रारंभ करने के लिए उत्तरदायी पेसमेकर (pacemaker) के रूप में मान्यता प्राप्त है?",
+    q_en: "Q578. In the cardiac conduction system, which structure is recognised as the pacemaker responsible for initiating each heartbeat?",
+    tag: "NTPC CBT - I (GL) 24/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) हिज़ तंतबंधु (Bundle of His)",
+      "(b) आलिंद-निलय (AV) नोड (Atrioventricular (AV) node)",
+      "(c) कोटरालिंद (SA) नोड (Sinoatrial (SA) node)",
+      "(d) पुरकिंजे तंतु (Purkinje fibers)"
+    ],
+    o_en: [
+      "(a) Bundle of His",
+      "(b) Atrioventricular (AV) node",
+      "(c) Sinoatrial (SA) node",
+      "(d) Purkinje fibers"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q579. मानव शरीर में श्वेताणु (leukocytes) का मुख्य कार्य क्या है?",
+    q_en: "Q579. What is the main function of leukocytes in the human body?",
+    tag: "RPF Constable 05/03/2025 (Morning)",
+    o_hi: [
+      "(a) रक्तस्राव को रोकने के लिए रक्त के थक्के बनना",
+      "(b) प्रतिरक्षा अनुक्रिया शुरू करना",
+      "(c) कोशिकाओं तक पोषक तत्वों का परिवहन",
+      "(d) ऊतकों तक ऑक्सीजन पहुंचाना"
+    ],
+    o_en: [
+      "(a) Forming blood clots to stop bleeding",
+      "(b) Initiating an immune response",
+      "(c) Transporting nutrients to cells",
+      "(d) Delivering oxygen to tissues"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q580. मानव शरीरक्रिया विज्ञान के प्रमुख तंत्रों में से रक्त किस अंग तंत्र से संबंधित है?",
+    q_en: "Q580. Among the major systems of human physiology, blood belongs to which organ system?",
+    tag: "RPF Constable 12/03/2025 (Evening)",
+    o_hi: [
+      "(a) तंत्रिका तंत्र",
+      "(b) अंतःस्रावी तंत्र",
+      "(c) परिसंचरण तंत्र",
+      "(d) पाचन तंत्र"
+    ],
+    o_en: [
+      "(a) Nervous system",
+      "(b) Endocrine system",
+      "(c) Circulatory system",
+      "(d) Digestive system"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q581. मानव शरीर में बिम्बाणु (thrombocytes) की प्राथमिक भूमिका क्या है?",
+    q_en: "Q581. What is the primary role of thrombocytes in the human body?",
+    tag: "RPF Constable 18/03/2025 (Morning)",
+    o_hi: [
+      "(a) कोशिकाओं तक पोषक तत्वों का परिवहन करना",
+      "(b) ऊतकों तक ऑक्सीजन पहुंचाना",
+      "(c) रक्तस्राव को रोकने के लिए रक्त के थक्के बनाना",
+      "(d) प्रतिरक्षा अनुक्रिया आरंभ करना"
+    ],
+    o_en: [
+      "(a) Transporting nutrients to cells",
+      "(b) Delivering oxygen to tissues",
+      "(c) Forming blood clots to stop bleeding",
+      "(d) Initiating an immune response"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q582. परिवहन (transportation) से संबंधित निम्नलिखित में से कौन-सा/कौन-से कथन सही है/हैं?<br>i. धमनियां वे वाहिकाएं होती हैं, जो रक्त को हृदय से शरीर के विभिन्न अंगों तक ले जाती हैं।<br>ii. धमनियों की दीवारें पतली और लोचदार होती हैं।<br>iii. शिराओं में कपाट होते हैं, जो यह सुनिश्चित करते हैं कि रक्त केवल एक ही दिशा में प्रवाहित हो।",
+    q_en: "Q582. Which of the following statement(s) related to transportation is/are correct?<br>i. Arteries are vessels that carry blood from the heart to different organs of the body.<br>ii. Arteries have thin and elastic walls.<br>iii. Veins have valves that ensure blood flows in only one direction.",
+    tag: "RRB Tech. - (III) 23/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल (i)",
+      "(b) (i), (ii) और (iii)",
+      "(c) केवल (i) और (iii)",
+      "(d) केवल (i) और (ii)"
+    ],
+    o_en: [
+      "(a) Only (i)",
+      "(b) (i), (ii) and (iii)",
+      "(c) Only (i) and (iii)",
+      "(d) Only (i) and (ii)"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q583. निम्नलिखित में से कौन भोजन, कार्बन डाइऑक्साइड और नाइट्रोजनयुक्त अपशिष्टों को घुले हुए रूप में ले जाता है?",
+    q_en: "Q583. Which of the following carries food, carbon dioxide and nitrogenous wastes in dissolved form?",
+    tag: "RRB Tech. - (III) 23/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) रक्त प्लेटलेट",
+      "(b) प्लाज़्मा",
+      "(c) लाल रुधिर कणिकाएं",
+      "(d) लसीका"
+    ],
+    o_en: [
+      "(a) Blood platelets",
+      "(b) Plasma",
+      "(c) Red blood corpuscles",
+      "(d) Lymph"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q584. ऐसी स्थिति में जहां हम घायल हो जाते हैं और रक्तस्राव शुरू हो जाता है, रक्तस्राव से दबाव में कमी हो सकती है जो पंपिंग प्रणाली की दक्षता को कम कर सकता है। इससे बचने के लिए चोट वाले स्थान पर रक्त का थक्का जमने में मुख्य रूप से कौन सी कोशिकाएं मदद करती हैं?",
+    q_en: "Q584. When we are injured and bleeding starts, the loss of blood can reduce pressure and lower the efficiency of the pumping system. Which cells mainly help blood clot at the site of injury to prevent this?",
+    tag: "RRB Tech. - (III) 23/12/2024 (Evening)",
+    o_hi: [
+      "(a) लाल रुधिर कणिकाएं (Red blood corpuscles)",
+      "(b) लसीका (Lymph)",
+      "(c) श्वेत रुधिर कणिकाएं (White blood corpuscles)",
+      "(d) रक्त बिम्बाणु (Blood platelets)"
+    ],
+    o_en: [
+      "(a) Red blood corpuscles",
+      "(b) Lymph",
+      "(c) White blood corpuscles",
+      "(d) Blood platelets"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q585. निम्नलिखित में से कौन-सा वर्णक मनुष्यों की लाल रक्त कणिकाओं में विद्यमान होता है?",
+    q_en: "Q585. Which of the following pigments is present in human red blood cells?",
+    tag: "RRB Tech. - (III) 23/12/2024 (Evening)",
+    o_hi: [
+      "(a) जैंथोफिल",
+      "(b) हीमोग्लोबिन",
+      "(c) क्लोरोफिल",
+      "(d) मेलानिन"
+    ],
+    o_en: [
+      "(a) Xanthophyll",
+      "(b) Haemoglobin",
+      "(c) Chlorophyll",
+      "(d) Melanin"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q586. फेफड़ों से ऑक्सीजन युक्त रुधिर हृदय में कहां से आता है?",
+    q_en: "Q586. Where does oxygenated blood from the lungs enter the heart?",
+    tag: "RRB Tech. - (III) 27/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) फुफ्फुसीय धमनियां",
+      "(b) फुफ्फुसीय शिराएं",
+      "(c) बाएं निलय",
+      "(d) बाएं आलिंद"
+    ],
+    o_en: [
+      "(a) Pulmonary arteries",
+      "(b) Pulmonary veins",
+      "(c) Left ventricle",
+      "(d) Left atrium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q587. उभयचरों के हृदय में कितने प्रकोष्ठ होते हैं?",
+    q_en: "Q587. How many chambers are present in the heart of amphibians?",
+    tag: "RRB Tech. - (III) 27/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) दो",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) Two",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q588. मानव शरीर का कौन-सा अंग रक्त को पंप करता है?",
+    q_en: "Q588. Which organ of the human body pumps blood?",
+    tag: "RRB Tech. - (III) 27/12/2024 (Evening)",
+    o_hi: [
+      "(a) हृदय",
+      "(b) आमाशय",
+      "(c) यकृत",
+      "(d) अग्नाशय"
+    ],
+    o_en: [
+      "(a) Heart",
+      "(b) Stomach",
+      "(c) Liver",
+      "(d) Pancreas"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q589. निम्नलिखित में से किस जीव का हृदय तीन कक्षों वाला होता है?",
+    q_en: "Q589. Which of the following organisms has a three-chambered heart?",
+    tag: "RRB Tech. - (III) 28/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) मछलियां",
+      "(b) स्तनधारी",
+      "(c) पक्षी",
+      "(d) उभयचर"
+    ],
+    o_en: [
+      "(a) Fishes",
+      "(b) Mammals",
+      "(c) Birds",
+      "(d) Amphibians"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q590. परिवहन (transportation) से संबंधित निम्नलिखित में से कौन-सा/कौन-से कथन सही है/हैं?<br>i. धमनियां वे वाहिकाएं होती हैं, जो रक्त को हृदय से शरीर के विभिन्न अंगों तक ले जाती हैं।<br>ii. धमनियों की दीवारें पतली और लोचदार होती हैं।<br>iii. शिराओं में कपाट होते हैं, जो यह सुनिश्चित करते हैं कि रक्त केवल एक ही दिशा में प्रवाहित हो।",
+    q_en: "Q590. Which of the following statement(s) related to transportation is/are correct?<br>i. Arteries are vessels that carry blood from the heart to different organs of the body.<br>ii. Arteries have thin and elastic walls.<br>iii. Veins have valves that ensure blood flows in only one direction.",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) (i), (ii) और (iii)",
+      "(b) केवल (i) और (ii)",
+      "(c) केवल (i) और (iii)",
+      "(d) केवल (i)"
+    ],
+    o_en: [
+      "(a) (i), (ii) and (iii)",
+      "(b) Only (i) and (ii)",
+      "(c) Only (i) and (iii)",
+      "(d) Only (i)"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q591. निम्नलिखित में से कौन-सा रक्त का एक कार्य नहीं है?",
+    q_en: "Q591. Which of the following is not a function of blood?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) श्वेतसार के संश्लेषण में सहायता (Helps in the synthesis of starch)",
+      "(b) अपशिष्ट पदार्थों का परिवहन (Transports waste materials)",
+      "(c) हार्मोनों का परिवहन (Transports hormones)",
+      "(d) गैसों का परिवहन (Transports gases)"
+    ],
+    o_en: [
+      "(a) Helps in the synthesis of starch",
+      "(b) Transports waste materials",
+      "(c) Transports hormones",
+      "(d) Transports gases"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q592. उस रक्त विकार का नाम बताइए जो हीमोग्लोबिन के उत्पादन को कम कर देता है।",
+    q_en: "Q592. Name the blood disorder that reduces the production of haemoglobin.",
+    tag: "RPF S.I. 13/12/2024 (Evening)",
+    o_hi: [
+      "(a) रक्तवर्णकता (Hemochromatosis)",
+      "(b) मज्जाबुर्द (Myeloma)",
+      "(c) थैलेसीमिया (Thalassemia)",
+      "(d) पॉलीसिथेमिया वेरा (Polycythemia Vera)"
+    ],
+    o_en: [
+      "(a) Hemochromatosis",
+      "(b) Myeloma",
+      "(c) Thalassemia",
+      "(d) Polycythemia Vera"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q593. रक्त शरीर के शेष भागों से कार्बन डाइऑक्साइड _____ में छोड़ने के लिए लाता है।",
+    q_en: "Q593. Blood brings carbon dioxide from the rest of the body to be released into the _____.",
+    tag: "RRB ALP 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) आंत",
+      "(b) ग्रसिका",
+      "(c) आमाशय",
+      "(d) कूपिका"
+    ],
+    o_en: [
+      "(a) Intestine",
+      "(b) Oesophagus",
+      "(c) Stomach",
+      "(d) Alveoli"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q594. निम्नलिखित में से कौन-सा विकल्प ठोस पदार्थों के गुण को नहीं दर्शाता है?",
+    q_en: "Q594. Which of the following options does not show the property of a solid substance?",
+    tag: "RRB ALP 29/11/2024 (Morning)",
+    o_hi: [
+      "(a) उपास्थि",
+      "(b) वसामय संयोजी ऊतक",
+      "(c) रक्त",
+      "(d) एरिओलर संयोजी ऊतक"
+    ],
+    o_en: [
+      "(a) Cartilage",
+      "(b) Adipose connective tissue",
+      "(c) Blood",
+      "(d) Areolar connective tissue"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q595. निम्नलिखित में से कौन सी घटना मानव हृदय में हृदय के अनुशिथिलन (डायस्टोल) के दौरान घटित होती है?",
+    q_en: "Q595. Which of the following events occurs during cardiac diastole in the human heart?",
+    tag: "RRC Group D 18/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) रक्त महाधमनी में प्रवेश करता है",
+      "(b) रक्त फेफड़ों में प्रवेश करता है",
+      "(c) रक्त निलय (वेंट्रिकल) से बाहर निकलता है",
+      "(d) रक्त निलय में प्रवेश करता है"
+    ],
+    o_en: [
+      "(a) Blood enters the aorta",
+      "(b) Blood enters the lungs",
+      "(c) Blood leaves the ventricle",
+      "(d) Blood enters the ventricle"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q596. ____ में 'दोहरा परिसंचरण' नहीं होता है।",
+    q_en: "Q596. There is no 'double circulation' in ____.",
+    tag: "RRC Group D 22/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) गरुड़ों",
+      "(b) सर्पों",
+      "(c) मछलियों",
+      "(d) मेंढक"
+    ],
+    o_en: [
+      "(a) Eagles",
+      "(b) Snakes",
+      "(c) Fishes",
+      "(d) Frog"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q597. मनुष्यों के परिसंचरण तंत्र की कुछ विशेषताओं का उल्लेख नीचे किया गया है। गलत विकल्प का चयन करें।",
+    q_en: "Q597. Some characteristics of the human circulatory system are mentioned below. Select the incorrect option.",
+    tag: "RRC Group D 22/08/2022 (Evening)",
+    o_hi: [
+      "(a) लसीका को ऊतक द्रव भी कहा जाता है",
+      "(b) प्लेटलेट्स रक्त के थक्के जमाने में सहायक होते हैं",
+      "(c) केशिकाएँ संयुक्त होकर शिराओं का निर्माण करते हैं।",
+      "(d) उच्च रक्तचाप, शिराओं के संकुचन के कारण होता है"
+    ],
+    o_en: [
+      "(a) Lymph is also called tissue fluid",
+      "(b) Platelets help in blood clotting",
+      "(c) Capillaries join to form veins",
+      "(d) High blood pressure is caused by constriction of veins"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q598. निम्नलिखित में से किस चरण के दौरान धमनी की दीवारों के खिलाफ रक्त द्वारा सिस्टोलिक ब्लड प्रेशर लगाया जाता है?",
+    q_en: "Q598. During which of the following phases is systolic blood pressure exerted by blood against the walls of arteries?",
+    tag: "RRC Group D 24/08/2022 (Morning)",
+    o_hi: [
+      "(a) निलय संकुचन (Ventricular contraction)",
+      "(b) निलय शिथिलता (Ventricular relaxation)",
+      "(c) आलिंद संकुचन (Auricular contraction)",
+      "(d) आलिंद शिथिलता (Auricular relaxation)"
+    ],
+    o_en: [
+      "(a) Ventricular contraction",
+      "(b) Ventricular relaxation",
+      "(c) Auricular contraction",
+      "(d) Auricular relaxation"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q599. निम्नांकित चित्र विभिन्न प्रकार की श्वेत रक्त कणिकाओं को दर्शाता है। सही नामांकन वाले विकल्प की पहचान कीजिए।<br><div style='text-align:center;margin:10px 0;'><img src='" + Q599_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q599. The following diagram shows different types of white blood cells. Identify the option with the correct labelling.<br><div style='text-align:center;margin:10px 0;'><img src='" + Q599_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 24/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) a - न्यूट्रोफिल, b - मोनोसाइट, c - इओसिनोफिल, d - बेसोफिल, e - लिम्फोसाइट",
+      "(b) a - न्यूट्रोफिल, b - बेसोफिल, c - लिम्फोसाइट, d - इओसिनोफिल, e - मोनोसाइट",
+      "(c) a - न्यूट्रोफिल, b - इओसिनोफिल, c - बेसोफिल, d - लिम्फोसाइट, e - मोनोसाइट",
+      "(d) a - इओसिनोफिल, b - न्यूट्रोफिल, c - बेसोफिल, d - मोनोसाइट, e - लिम्फोसाइट"
+    ],
+    o_en: [
+      "(a) a - Neutrophil, b - Monocyte, c - Eosinophil, d - Basophil, e - Lymphocyte",
+      "(b) a - Neutrophil, b - Basophil, c - Lymphocyte, d - Eosinophil, e - Monocyte",
+      "(c) a - Neutrophil, b - Eosinophil, c - Basophil, d - Lymphocyte, e - Monocyte",
+      "(d) a - Eosinophil, b - Neutrophil, c - Basophil, d - Monocyte, e - Lymphocyte"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: "",
+    image: Q599_IMAGE
+  },
+  {
+    q_hi: "Q600. हृदय में ऑक्सीजन युक्त रक्त और कार्बन डाइऑक्साइड युक्त रक्त को आपस में मिलने से रोकने में निम्न में से क्या सहायक होता है?",
+    q_en: "Q600. Which of the following helps prevent oxygenated and carbon-dioxide-rich blood from mixing in the heart?",
+    tag: "RRC Group D 24/08/2022 (Evening)",
+    o_hi: [
+      "(a) कक्षों के बीच की भित्ति",
+      "(b) फुफ्फुसीय कपाट",
+      "(c) त्रिवलन-कपाट",
+      "(d) महाधमनी कपाट"
+    ],
+    o_en: [
+      "(a) Wall between the chambers",
+      "(b) Pulmonary valve",
+      "(c) Tricuspid valve",
+      "(d) Aortic valve"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q601. अधिकांश कशेरुकी समूहों में, रक्त का दोहरा परिसंचरण होता है। हालांकि, इन समूहों में से एक अपवाद है। नीचे दिए गए विकल्पों में से उस समूह को पहचानिए।",
+    q_en: "Q601. Most vertebrate groups have double circulation. However, one of these groups is an exception. Identify that group from the options below.",
+    tag: "RRC Group D 30/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) सरीसृप वर्ग",
+      "(b) मत्स्य वर्ग",
+      "(c) उभयचर वर्ग",
+      "(d) पक्षी वर्ग"
+    ],
+    o_en: [
+      "(a) Reptiles",
+      "(b) Fishes",
+      "(c) Amphibians",
+      "(d) Birds"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q602. इनमें से किस जीव में तीन-कोष्ठीय हृदय होता है?",
+    q_en: "Q602. Which of these organisms has a three-chambered heart?",
+    tag: "RRC Group D 02/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) मछली",
+      "(b) मेंढक",
+      "(c) पक्षी",
+      "(d) मनुष्य"
+    ],
+    o_en: [
+      "(a) Fish",
+      "(b) Frog",
+      "(c) Bird",
+      "(d) Human"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q603. हृदय की धड़कन का पता लगाने में निम्न में से कौन सा यंत्र सहायक होता है?",
+    q_en: "Q603. Which of the following instruments helps detect the heartbeat?",
+    tag: "RRC Group D 02/09/2022 (Evening)",
+    o_hi: [
+      "(a) स्टेथेस्कोप (Stethoscope)",
+      "(b) थर्मोमीटर (Thermometer)",
+      "(c) स्पाइरोमीटर (Spirometer)",
+      "(d) स्फिग्मोमैनोमीटर (Sphygmomanometer)"
+    ],
+    o_en: [
+      "(a) Stethoscope",
+      "(b) Thermometer",
+      "(c) Spirometer",
+      "(d) Sphygmomanometer"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q604. मानव परिसंचरण तंत्र में, सभी शिराएं रक्त को हृदय की ओर ले जाती हैं। फुफ्फुसीय शिरा और अन्य शिराओं में क्या अंतर है?",
+    q_en: "Q604. In the human circulatory system, all veins carry blood toward the heart. What is the difference between the pulmonary vein and other veins?",
+    tag: "RRC Group D 05/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) फुफ्फुसीय शिरा ऑक्सीजन युक्त रक्त ले जाती है",
+      "(b) फुफ्फुसीय शिरा में एक छोटी अवकाशिका (lumen) होती है",
+      "(c) फुफ्फुसीय शिरा में कोई वाल्व नहीं होता है",
+      "(d) फुफ्फुसीय शिरा में रक्त का प्रवाह दाब के साथ होता है"
+    ],
+    o_en: [
+      "(a) The pulmonary vein carries oxygenated blood",
+      "(b) The pulmonary vein has a small lumen",
+      "(c) The pulmonary vein has no valve",
+      "(d) Blood flows through the pulmonary vein under pressure"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q605. मनुष्यों में सामान्य प्रकुंचन (सिस्टोलिक) और अनुशिथिलन (डायस्टोलिक) दाब कितना होता है?",
+    q_en: "Q605. What are the normal systolic and diastolic blood pressures in humans?",
+    tag: "RRC Group D 08/09/2022 (Evening)",
+    o_hi: [
+      "(a) 130 mm of Hg/80 mm of Hg",
+      "(b) 120 mm of Hg/90 mm of Hg",
+      "(c) 130 mm of Hg/90 mm of Hg",
+      "(d) 120 mm of Hg/80 mm of Hg"
+    ],
+    o_en: [
+      "(a) 130 mm of Hg/80 mm of Hg",
+      "(b) 120 mm of Hg/90 mm of Hg",
+      "(c) 130 mm of Hg/90 mm of Hg",
+      "(d) 120 mm of Hg/80 mm of Hg"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q606. निम्नलिखित में से कौन सा विकल्प धमनियों की विशेषताओं का सही वर्णन करता है?",
+    q_en: "Q606. Which of the following options correctly describes the characteristics of arteries?",
+    tag: "RRC Group D 08/09/2022 (Evening)",
+    o_hi: [
+      "(a) मोटी भित्तियां, कोई भी वाल्व नहीं होता है, रक्त का प्रवाह उच्च दाब के तहत होता है, शरीर के विभिन्न भागों तक रक्त ले जाती हैं",
+      "(b) वाल्व युक्त पतली भित्तियां, रक्त का प्रवाह उच्च दाब के तहत होता है, शरीर के विभिन्न भागों तक रक्त ले जाती हैं।",
+      "(c) मोटी भित्तियां होती हैं; रक्त का प्रवाह निम्न दाब के तहत होता है, शरीर के विभिन्न भागों से रक्त एकत्रित करती हैं",
+      "(d) वाल्व युक्त पतली भित्तियां, रक्त का प्रवाह निम्न दाब के तहत होता है, शरीर के विभिन्न भागों से रक्त एकत्रित करती हैं।"
+    ],
+    o_en: [
+      "(a) Thick walls, no valves, blood flows under high pressure, carry blood to different parts of the body",
+      "(b) Thin walls with valves, blood flows under high pressure, carry blood to different parts of the body",
+      "(c) Thick walls, blood flows under low pressure, collect blood from different parts of the body",
+      "(d) Thin walls with valves, blood flows under low pressure, collect blood from different parts of the body"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q607. निम्न विकल्पों में से तीन कक्षीय हृदय वाले जीव का नाम बताइए।",
+    q_en: "Q607. Name the organism with a three-chambered heart from the following options.",
+    tag: "RRC Group D 09/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) बाघ",
+      "(b) कबूतर",
+      "(c) मछली",
+      "(d) सैलामैंडर"
+    ],
+    o_en: [
+      "(a) Tiger",
+      "(b) Pigeon",
+      "(c) Fish",
+      "(d) Salamander"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q608. मछलियों में रक्त परिसंचरण के संबंध में गलत कथन पहचानें।",
+    q_en: "Q608. Identify the incorrect statement regarding blood circulation in fishes.",
+    tag: "RRC Group D 13/09/2022 (Morning)",
+    o_hi: [
+      "(a) निलय से रक्त केवल क्लोमों (gills) में जाता है।",
+      "(b) क्लोमों (gills) से रक्त शरीर के बाकी हिस्सों में भेजा जाता है।",
+      "(c) दो-कक्षीय हृदय में दोहरा परिसंचरण होता है।",
+      "(d) शरीर से रक्त आलिंद में प्रवेश करता है।"
+    ],
+    o_en: [
+      "(a) Blood from the ventricle goes only to the gills.",
+      "(b) Blood from the gills is sent to the rest of the body.",
+      "(c) A two-chambered heart has double circulation.",
+      "(d) Blood from the body enters the atrium."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q609. निम्न में से किन प्राणियों में दो-कक्षीय हृदय होते हैं?",
+    q_en: "Q609. Which of the following animals have a two-chambered heart?",
+    tag: "RRC Group D 14/09/2022 (Morning)",
+    o_hi: [
+      "(a) पक्षी",
+      "(b) स्तनधारी",
+      "(c) सरीसृप",
+      "(d) मत्स्य"
+    ],
+    o_en: [
+      "(a) Birds",
+      "(b) Mammals",
+      "(c) Reptiles",
+      "(d) Fishes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q610. मानव हृदय के अनुप्रस्थ भागों पर आधारित दो प्रश्न नीचे दिए गए हैं। दोनों प्रश्नों के सही उत्तर देने वाले विकल्प का चयन कीजिए।<br>प्रश्न 1. 'A' द्वारा नामांकित भाग में मोटी भित्तियां क्यों होती हैं?<br>प्रश्न 2. 'B' द्वारा नामांकित भाग का कार्य क्या है?<br><div style='text-align:center;margin:10px 0;'><img src='" + Q610_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q610. Two questions based on a transverse section of the human heart are given below. Select the option that correctly answers both questions.<br>Question 1. Why does the part labelled 'A' have thick walls?<br>Question 2. What is the function of the part labelled 'B'?<br><div style='text-align:center;margin:10px 0;'><img src='" + Q610_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 22/09/2022 (Morning)",
+    o_hi: [
+      "(a) A- क्योंकि यह रक्त को बाएं आलिंद में पंप करता है<br>B - रक्त के अग्रप्रवाह को रोकता है",
+      "(b) A- क्योंकि यह रक्त को दाएं आलिंद में पंप करता है<br>B - रक्त के पश्चवाह को रोकता है",
+      "(c) A- क्योंकि यह शरीर के विभिन्न भागों में रक्त को पंप करता है<br>B - रक्त के पश्चवाह को रोकता है",
+      "(d) A- क्योंकि यह रक्त को फुफ्फुसीय धमनी में पंप करता है<br>B - रक्त को महाधमनी में पंप करता है"
+    ],
+    o_en: [
+      "(a) A- Because it pumps blood into the left atrium<br>B - Prevents forward flow of blood",
+      "(b) A- Because it pumps blood into the right atrium<br>B - Prevents backflow of blood",
+      "(c) A- Because it pumps blood to different parts of the body<br>B - Prevents backflow of blood",
+      "(d) A- Because it pumps blood into the pulmonary artery<br>B - Pumps blood into the aorta"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: "",
+    image: Q610_IMAGE
+  },
+  {
+    q_hi: "Q611. निम्न में से किन प्राणियों में पूरे शरीर में रक्त प्रवाह के प्रत्येक चक्र के दौरान, रक्त केवल एक बार हृदय से होकर गुजरता है?",
+    q_en: "Q611. In which of the following animals does blood pass through the heart only once during each cycle of blood flow through the whole body?",
+    tag: "RRC Group D 22/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) सरीसृप",
+      "(b) पक्षी",
+      "(c) स्तनधारी",
+      "(d) मत्स्य"
+    ],
+    o_en: [
+      "(a) Reptiles",
+      "(b) Birds",
+      "(c) Mammals",
+      "(d) Fishes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q612. रक्त स्कंदन, ______ की मदद से होता है।",
+    q_en: "Q612. Blood clotting occurs with the help of ______.",
+    tag: "RRC Group D 26/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) लाल रक्त कणिकाओं",
+      "(b) श्वेत रक्त कणिकाओं",
+      "(c) प्लेटलेट कणिकाओं",
+      "(d) रक्त प्लाज्मा"
+    ],
+    o_en: [
+      "(a) Red blood cells",
+      "(b) White blood cells",
+      "(c) Platelets",
+      "(d) Blood plasma"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q613. निम्न में से किन प्राणियों में प्रत्येक चक्र के दौरान रक्त दो बार हृदय से होकर गुजरता है?",
+    q_en: "Q613. In which of the following animals does blood pass through the heart twice during each cycle?",
+    tag: "RRC Group D 29/09/2022 (Evening)",
+    o_hi: [
+      "(a) स्तनधारी, पक्षी और सरीसृप वर्ग",
+      "(b) मत्स्य, पक्षी और सरीसृप वर्ग",
+      "(c) स्तनधारी, पक्षी और मत्स्य वर्ग",
+      "(d) स्तनधारी, मत्स्य और सरीसृप वर्ग"
+    ],
+    o_en: [
+      "(a) Mammals, birds and reptiles",
+      "(b) Fishes, birds and reptiles",
+      "(c) Mammals, birds and fishes",
+      "(d) Mammals, fishes and reptiles"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q614. स्पंदन गतियां, जिन्हें नाड़ी स्पंद / नब्ज कहा जाता है, क्यों महसूस होती हैं?",
+    q_en: "Q614. Why are pulsating movements, called pulse, felt?",
+    tag: "RRC Group D 30/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) शिराओं में प्रवाहित रक्त के कारण",
+      "(b) फेफड़ों में प्रवाहित रक्त के कारण",
+      "(c) धमनियों में प्रवाहित रक्त के कारण",
+      "(d) हृदय में प्रवाहित रक्त के कारण"
+    ],
+    o_en: [
+      "(a) Due to blood flowing in veins",
+      "(b) Due to blood flowing in the lungs",
+      "(c) Due to blood flowing in arteries",
+      "(d) Due to blood flowing in the heart"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q615. निम्नांकित आकृति मानव हृदय को दर्शाती है। LA = बायां आलिंद, LV = बायां निलय, RA = दायां आलिंद, RV = दायां निलय। कपाट (valves) कहां स्थित हैं?<br><div style='text-align:center;margin:10px 0;'><img src='" + Q615_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    q_en: "Q615. The following figure shows the human heart. LA = left atrium, LV = left ventricle, RA = right atrium, RV = right ventricle. Where are the valves located?<br><div style='text-align:center;margin:10px 0;'><img src='" + Q615_IMAGE + "' style='max-width:100%;height:auto;'></div>",
+    tag: "RRC Group D 06/10/2022 (Morning)",
+    o_hi: [
+      "(a) 1, 2, 3, 4, 5 और 6 क्रमांकित सभी स्थानों पर",
+      "(b) 1, 2, 4 और 6 क्रमांकित स्थानों पर",
+      "(c) 2, 3, 4 और 5 क्रमांकित स्थानों पर",
+      "(d) 4, 5 और 6 क्रमांकित स्थानों पर"
+    ],
+    o_en: [
+      "(a) At all locations numbered 1, 2, 3, 4, 5 and 6",
+      "(b) At locations numbered 1, 2, 4 and 6",
+      "(c) At locations numbered 2, 3, 4 and 5",
+      "(d) At locations numbered 4, 5 and 6"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: "",
+    image: Q615_IMAGE
+  },
+  {
+    q_hi: "Q616. रक्त का इनमें से कौन सा घटक प्रतिरक्षा को बढ़ावा देता है, और कीटाणुओं से लड़ने में शरीर की मदद करता है?",
+    q_en: "Q616. Which component of blood promotes immunity and helps the body fight germs?",
+    tag: "RRC Group D 06/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) रक्त प्लेटलेट्स",
+      "(b) रक्त प्लाज्मा",
+      "(c) लाल रक्त कणिकाएं",
+      "(d) श्वेत रक्त कणिकाएं"
+    ],
+    o_en: [
+      "(a) Blood platelets",
+      "(b) Blood plasma",
+      "(c) Red blood cells",
+      "(d) White blood cells"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q617. मानव हृदय में, फुफ्फुसीय शिरा _____ से जुड़ी होती है।",
+    q_en: "Q617. In the human heart, the pulmonary vein is connected to the _____.",
+    tag: "RRC Group D 06/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) दाएं निलय",
+      "(b) दाएं आलिंद",
+      "(c) बाएं आलिंद",
+      "(d) बाएं निलय"
+    ],
+    o_en: [
+      "(a) Right ventricle",
+      "(b) Right atrium",
+      "(c) Left atrium",
+      "(d) Left ventricle"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q618. निम्नलिखित में से किसके पास चार कक्षों वाला हृदय है?",
+    q_en: "Q618. Which of the following has a four-chambered heart?",
+    tag: "RRB NTPC CBT - II (09/05/2022) Shift 1",
+    o_hi: [
+      "(a) मोर",
+      "(b) समुद्री घोड़े",
+      "(c) मेंढक",
+      "(d) मछली"
+    ],
+    o_en: [
+      "(a) Peacock",
+      "(b) Seahorse",
+      "(c) Frog",
+      "(d) Fish"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q619. निम्नलिखित में से कौन सा तत्व मानव रक्त के हीम (हेम) का हिस्सा है?",
+    q_en: "Q619. Which of the following elements is a part of haem in human blood?",
+    tag: "RRB NTPC CBT - II (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) लोहा",
+      "(b) मैग्नीशियम",
+      "(c) कोबाल्ट",
+      "(d) मैंगनीज"
+    ],
+    o_en: [
+      "(a) Iron",
+      "(b) Magnesium",
+      "(c) Cobalt",
+      "(d) Manganese"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q620. रक्त का इनमें से कौन सा घटक ऑक्सीजन का परिवहन करता है?",
+    q_en: "Q620. Which component of blood transports oxygen?",
+    tag: "RRB JE 22/05/2019 (Evening)",
+    o_hi: [
+      "(a) प्लाज्मा",
+      "(b) प्लेटलेट",
+      "(c) WBC",
+      "(d) RBC"
+    ],
+    o_en: [
+      "(a) Plasma",
+      "(b) Platelet",
+      "(c) WBC",
+      "(d) RBC"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q621. निम्नलिखित में से कौन रक्त को हृदय से शरीर के विभिन्न अंगों तक ले जाता है?",
+    q_en: "Q621. Which of the following carries blood from the heart to different organs of the body?",
+    tag: "RPF Constable 02/02/2019 (Morning)",
+    o_hi: [
+      "(a) ऊतक",
+      "(b) शिराएँ",
+      "(c) लसीका",
+      "(d) धमनियां"
+    ],
+    o_en: [
+      "(a) Tissue",
+      "(b) Veins",
+      "(c) Lymph",
+      "(d) Arteries"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q622. मछलियों का ____ कक्षीय हृदय होता है।",
+    q_en: "Q622. Fishes have a ____-chambered heart.",
+    tag: "RRB Group D 17/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) एकल",
+      "(b) तीन",
+      "(c) चार",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Three",
+      "(c) Four",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q623. निम्नलिखित में से कौन सा विकल्प RBC के बारे में सत्य नहीं है?",
+    q_en: "Q623. Which of the following options is not true about RBCs?",
+    tag: "RRB Group D 09/10/2018 (Evening)",
+    o_hi: [
+      "(a) आकार - अमीबा के आकार का अथवा वृत्तीय आकार का",
+      "(b) लंबाई - 7.5 µm",
+      "(c) कार्य - ऑक्सीजन और कार्बन डाइऑक्साइड का परिवहन",
+      "(d) RBC की गणना हेमोसाइटोमीटर नामक उपकरण द्वारा की जा सकती है।"
+    ],
+    o_en: [
+      "(a) Shape - amoeboid or circular",
+      "(b) Length - 7.5 µm",
+      "(c) Function - transport of oxygen and carbon dioxide",
+      "(d) RBCs can be counted using an instrument called a haemocytometer."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q624. निम्नलिखित में से किसे मानव शरीर का 'सैनिक' कहलाता है?",
+    q_en: "Q624. Which of the following is called the 'soldier' of the human body?",
+    tag: "RRB Group D 10/10/2018 (Morning)",
+    o_hi: [
+      "(a) WBCs",
+      "(b) आमाशय",
+      "(c) हृदय",
+      "(d) RBCs"
+    ],
+    o_en: [
+      "(a) WBCs",
+      "(b) Stomach",
+      "(c) Heart",
+      "(d) RBCs"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q625. ______ में फाइबर अनुपस्थित होते हैं।",
+    q_en: "Q625. Fibres are absent in ______.",
+    tag: "RRB Group D 16/10/2018 (Evening)",
+    o_hi: [
+      "(a) यकृत",
+      "(b) रक्त",
+      "(c) किडनी",
+      "(d) हृदय"
+    ],
+    o_en: [
+      "(a) Liver",
+      "(b) Blood",
+      "(c) Kidney",
+      "(d) Heart"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q626. निलय की भित्तियाँ आलिंद की भित्तियों की तुलना में ______ होती हैं।",
+    q_en: "Q626. The walls of the ventricles are ______ than the walls of the atria.",
+    tag: "RRB Group D 31/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) पतली",
+      "(b) बड़ी",
+      "(c) छोटी",
+      "(d) मोटी"
+    ],
+    o_en: [
+      "(a) Thinner",
+      "(b) Larger",
+      "(c) Smaller",
+      "(d) Thicker"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
