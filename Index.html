@@ -8172,7 +8172,10 @@ if ('serviceWorker' in navigator) {
   const panel=document.createElement('pre');
   panel.style.cssText='display:none;position:fixed;left:8px;top:100px;z-index:1000001;max-width:90vw;white-space:pre-wrap;pointer-events:none;background:rgba(255,255,255,.97);color:#111;border:1px solid #777;border-radius:6px;padding:8px;font:11px/1.35 monospace';
   document.body.append(button,panel);
-  let opened=false,rows=[],counts={},lastMove={};
+  let opened=true,rows=[],counts={},lastMove={};
+  panel.style.display='block';
+  panel.textContent='PENCIL CHECK v2 — Ready. Pehle finger rakhein, phir Pencil se likhein.';
+  button.textContent='Close check';
   const base=performance.now();
   function record(e){
     if(!opened) return;
@@ -8198,7 +8201,7 @@ if ('serviceWorker' in navigator) {
   setInterval(()=>{
     if(!opened)return;
     const state=window.__pencilInputState||{};
-    panel.textContent='PENCIL INPUT CHECK v1\n'+navigator.userAgent+'\n'+
+    panel.textContent='PENCIL INPUT CHECK v2\n'+navigator.userAgent+'\n'+
       Object.entries(state).map(([name,get])=>name+' '+JSON.stringify(get())).join('\n')+'\n'+
       'Counts '+JSON.stringify(counts)+'\n'+rows.join('\n');
   },250);
