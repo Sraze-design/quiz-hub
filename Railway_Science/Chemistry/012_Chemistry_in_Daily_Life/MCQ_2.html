@@ -1,0 +1,602 @@
+const data = [
+  {
+    q_hi: "Q1480. वाशिंग सोडा किस विधि से प्राप्त होता है?",
+    q_en: "Q1480. By which method is washing soda obtained?",
+    tag: "RRC Group D 11/10/2022 (Morning)",
+    o_hi: [
+      "(a) NaCl(aq), NH₃ और CO₂ के बीच अभिक्रिया द्वारा",
+      "(b) NaHCO₃ को गर्म करके",
+      "(c) NaHCO₃ को एक खाद्य अम्ल के साथ मिलाकर",
+      "(d) Na₂CO₃ के पुनः क्रिस्टलीकरण द्वारा"
+    ],
+    o_en: [
+      "(a) By reaction between NaCl(aq), NH₃ and CO₂",
+      "(b) By heating NaHCO₃",
+      "(c) By mixing NaHCO₃ with an edible acid",
+      "(d) By recrystallization of Na₂CO₃"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1481. ओजोन के एक अणु में ऑक्सीजन के कितने परमाणु होते हैं?",
+    q_en: "Q1481. How many oxygen atoms are present in one molecule of ozone?",
+    tag: "RRB NTPC CBT - I (05/01/2021) Evening",
+    o_hi: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 2",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 2",
+      "(d) 4"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1482. निम्नलिखित में से किसमें CFC शामिल है?",
+    q_en: "Q1482. Which of the following contains CFC?",
+    tag: "RRB NTPC CBT - I (08/01/2021) Morning",
+    o_hi: [
+      "(a) वातित पेय",
+      "(b) दीवार पेंट",
+      "(c) रोग़न",
+      "(d) रेफ्रीजेरेंट"
+    ],
+    o_en: [
+      "(a) Aerated drink",
+      "(b) Wall paint",
+      "(c) Varnish",
+      "(d) Refrigerant"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1483. बायोगैस एक उत्कृष्ट ईंधन है क्योंकि इसमें 75% तक ___________ होता है।",
+    q_en: "Q1483. Biogas is an excellent fuel because it contains up to 75% ___________.",
+    tag: "RRB NTPC CBT - I (13/01/2021) Morning",
+    o_hi: [
+      "(a) मीथेन",
+      "(b) ऑक्सीजन",
+      "(c) सल्फाइड",
+      "(d) हाइड्रोजन"
+    ],
+    o_en: [
+      "(a) Methane",
+      "(b) Oxygen",
+      "(c) Sulphide",
+      "(d) Hydrogen"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1484. हल्का और ज्वलनशील होने के कारण, ______ गैस का उपयोग गुब्बारों में हवा भरने के लिए किया जाता है।",
+    q_en: "Q1484. Because it is light and inflammable, ______ gas is used to fill balloons.",
+    tag: "RRB NTPC CBT - I (17/01/2021) Evening",
+    o_hi: [
+      "(a) क्लोरीन",
+      "(b) नियोन",
+      "(c) ऑक्सीजन",
+      "(d) हीलियम"
+    ],
+    o_en: [
+      "(a) Chlorine",
+      "(b) Neon",
+      "(c) Oxygen",
+      "(d) Helium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1485. निम्नलिखित में से किसका उपयोग जल के शुद्धिकरण के लिए किया जा सकता है?",
+    q_en: "Q1485. Which of the following can be used for purification of water?",
+    tag: "RRB NTPC CBT - I (05/02/2021) Morning",
+    o_hi: [
+      "(a) फिटकरी",
+      "(b) सोडियम",
+      "(c) नाइट्रोजन",
+      "(d) कार्बन डाइआक्साइड"
+    ],
+    o_en: [
+      "(a) Alum",
+      "(b) Sodium",
+      "(c) Nitrogen",
+      "(d) Carbon dioxide"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1486. जल के पाइप के निर्माण के लिए किस बहुलक का प्रयोग किया जाता है?",
+    q_en: "Q1486. Which polymer is used for manufacturing water pipes?",
+    tag: "RRB NTPC CBT - I (16/02/2021) Morning",
+    o_hi: [
+      "(a) पॉलीस्टाइनिन",
+      "(b) बैकेलाइट",
+      "(c) ग्लाइप्टल",
+      "(d) PVC"
+    ],
+    o_en: [
+      "(a) Polystyrene",
+      "(b) Bakelite",
+      "(c) Glyptal",
+      "(d) PVC"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1487. खाद्य डिब्बों पर टिन की लेपन की जाती है, जस्ता की नहीं, क्योंकि__________",
+    q_en: "Q1487. Food cans are coated with tin and not zinc because __________",
+    tag: "RRB JE 23/05/2019 (Morning)",
+    o_hi: [
+      "(a) जस्ता टिन से कम अभिक्रियाशील होता है",
+      "(b) जस्ता टिन से अधिक अभिक्रियाशील होता है",
+      "(c) जस्ता का गलनांक टिन से अधिक होता है",
+      "(d) जस्ता टिन से महंगा होता है।"
+    ],
+    o_en: [
+      "(a) Zinc is less reactive than tin",
+      "(b) Zinc is more reactive than tin",
+      "(c) The melting point of zinc is higher than that of tin",
+      "(d) Zinc is more expensive than tin."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1488. निम्नलिखित में से किसमें इथेनॉल का उपयोग होता है?",
+    q_en: "Q1488. In which of the following is ethanol used?",
+    tag: "RRB JE 25/05/2019 (Evening)",
+    o_hi: [
+      "(a) कफ सिरप में",
+      "(b) एल्कोहल युक्त पेय में",
+      "(c) सभी विकल्प",
+      "(d) विनिर्माण पेंट में"
+    ],
+    o_en: [
+      "(a) In cough syrup",
+      "(b) In alcoholic beverages",
+      "(c) All options",
+      "(d) In manufacturing paint"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1489. बिच्छू बूटी (stinging nettles) में निम्नलिखित में से कौन सा अम्ल मौजूद होता है?",
+    q_en: "Q1489. Which of the following acids is present in stinging nettles?",
+    tag: "RRB JE 29/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) टार्टरिक अम्ल (Tartaric acid)",
+      "(b) लैक्टिक अम्ल (Lactic acid)",
+      "(c) फॉर्मिक अम्ल (Formic acid)",
+      "(d) साइट्रिक अम्ल (Citric acid)"
+    ],
+    o_en: [
+      "(a) Tartaric acid",
+      "(b) Lactic acid",
+      "(c) Formic acid",
+      "(d) Citric acid"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1490. बासी मक्खन में दुर्गंध, ______ की वजह से आती है।",
+    q_en: "Q1490. The bad smell in rancid butter is due to ______.",
+    tag: "RRB JE 30/05/2019 (Morning)",
+    o_hi: [
+      "(a) ब्यूटाइरिक अम्ल",
+      "(b) स्टीयरिक अम्ल",
+      "(c) कैप्रोइक अम्ल",
+      "(d) पामिटिक अम्ल"
+    ],
+    o_en: [
+      "(a) Butyric acid",
+      "(b) Stearic acid",
+      "(c) Caproic acid",
+      "(d) Palmitic acid"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1491. निम्नलिखित में से कौन सा एक लोकप्रिय पॉलिएस्टर है जिसका उपयोग बोतलें और बर्तन बनाने के लिए किया जाता है?",
+    q_en: "Q1491. Which of the following is a popular polyester used to make bottles and containers?",
+    tag: "RPF Constable 18/01/2019 (Evening)",
+    o_hi: [
+      "(a) लेड",
+      "(b) नायलॉन",
+      "(c) एक्रिलिक",
+      "(d) पॉलीएथिलीन टेरेफ्थेलेट"
+    ],
+    o_en: [
+      "(a) Lead",
+      "(b) Nylon",
+      "(c) Acrylic",
+      "(d) Polyethylene terephthalate"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1492. निम्नलिखित में से किसका उपयोग कांच, साबुन और कागज उद्योग में किया जाता है?",
+    q_en: "Q1492. Which of the following is used in the glass, soap and paper industries?",
+    tag: "RPF Constable 19/01/2019 (morning)",
+    o_hi: [
+      "(a) सोडियम कार्बोनेट",
+      "(b) कार्बन डाइऑक्साइड",
+      "(c) मिल्क ऑफ मैग्नेशिया",
+      "(d) पोटेशियम नाइट्रेट"
+    ],
+    o_en: [
+      "(a) Sodium carbonate",
+      "(b) Carbon dioxide",
+      "(c) Milk of magnesia",
+      "(d) Potassium nitrate"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1493. निम्नलिखित में से कौन से बहुलक (polymer) का विद्युत स्विच बनाने में उपयोग किया जाता है?",
+    q_en: "Q1493. Which of the following polymers is used to make electrical switches?",
+    tag: "RPF Constable 20/01/2019 (Morning)",
+    o_hi: [
+      "(a) बैकेलाइट",
+      "(b) फ़िनोल",
+      "(c) एपॉक्सी रेज़िन",
+      "(d) पॉलीएथिलीन"
+    ],
+    o_en: [
+      "(a) Bakelite",
+      "(b) Phenol",
+      "(c) Epoxy resin",
+      "(d) Polyethylene"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1494. निम्नलिखित में से किस रसायन में फलों की सुगंध आती है?",
+    q_en: "Q1494. Which of the following chemicals has a fruity smell?",
+    tag: "RPF Constable 20/01/2019 (Evening)",
+    o_hi: [
+      "(a) फॉर्मेल्डिहाइड",
+      "(b) थियोसॉटोन",
+      "(c) एस्टर",
+      "(d) मेथेनॉल"
+    ],
+    o_en: [
+      "(a) Formaldehyde",
+      "(b) Thiosotone",
+      "(c) Ester",
+      "(d) Methanol"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1495. रसोई के बर्तनों पर नॉन-स्टिक कोटिंग के लिए निम्न में से कौन सा एक विशेष प्लास्टिक उपयुक्त होता है?",
+    q_en: "Q1495. Which of the following special plastics is suitable for non-stick coating on kitchen utensils?",
+    tag: "RPF Constable 22/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) बैकेलाइट",
+      "(b) टेफ्लॉन",
+      "(c) फिनोल",
+      "(d) पॉलीथीन"
+    ],
+    o_en: [
+      "(a) Bakelite",
+      "(b) Teflon",
+      "(c) Phenol",
+      "(d) Polythene"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1496. वैद्युत बल्ब सामान्यतः रासायनिक रूप से अक्रिय _______ गैसों से भरे होते हैं।",
+    q_en: "Q1496. Electric bulbs are generally filled with chemically inert _______ gases.",
+    tag: "RRB ALP Tier - II (21/01/2019) Afternoon",
+    o_hi: [
+      "(a) नाइट्रोजन तथा आर्गन",
+      "(b) नाइट्रोजन तथा ऑक्सीजन",
+      "(c) नाइट्रोजन तथा कार्बन डाइऑक्साइड",
+      "(d) नाइट्रोजन तथा कार्बन मोनोऑक्साइड"
+    ],
+    o_en: [
+      "(a) Nitrogen and argon",
+      "(b) Nitrogen and oxygen",
+      "(c) Nitrogen and carbon dioxide",
+      "(d) Nitrogen and carbon monoxide"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1497. दूधवाला ताजे दूध में थोड़ा सा बेकिंग सोडा मिलाता है:",
+    q_en: "Q1497. A milkman adds a small amount of baking soda to fresh milk:",
+    tag: "RRB Group D 18/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) दूध का स्वाद बेहतर बनाने के लिए",
+      "(b) दूध के गाढ़ेपन में सुधार करने के लिए",
+      "(c) दूध में क्रीम बढ़ाने के लिए",
+      "(d) दूध के अम्लीकरण को रोकने के लिए"
+    ],
+    o_en: [
+      "(a) To improve the taste of milk",
+      "(b) To improve the thickness of milk",
+      "(c) To increase cream in milk",
+      "(d) To prevent acidification of milk"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1498. मिट्टी के बर्तन में रखा जल, गर्मियों में भी _______ के कारण ठंडा रहता है।",
+    q_en: "Q1498. Water kept in an earthen pot remains cool even in summer due to _______.",
+    tag: "RRB Group D 25/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) वाष्पोत्सर्जन",
+      "(b) संघनन",
+      "(c) रूपांतरण",
+      "(d) वाष्पन"
+    ],
+    o_en: [
+      "(a) Transpiration",
+      "(b) Condensation",
+      "(c) Conversion",
+      "(d) Evaporation"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1499. जब आप अपनी हथेली पर कुछ एसीटोन डालते हैं, तो आपकी हथेली ठंडी महसूस होती है। यह दी गई अभिक्रियाओं में से किस एक के कारण होता है?",
+    q_en: "Q1499. When you put some acetone on your palm, your palm feels cold. Which of the following processes causes this?",
+    tag: "RRB Group D 29/10/2018 (Evening)",
+    o_hi: [
+      "(a) वाष्पीकरण",
+      "(b) ऊर्ध्वपातन",
+      "(c) संलयन",
+      "(d) संघनन"
+    ],
+    o_en: [
+      "(a) Evaporation",
+      "(b) Sublimation",
+      "(c) Fusion",
+      "(d) Condensation"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1500. किस तापमान पर पानी तरल और ठोस अवस्था में मौजूद हो सकता है?",
+    q_en: "Q1500. At what temperature can water exist in both liquid and solid states?",
+    tag: "RRB Group D 29/10/2018 (Evening)",
+    o_hi: [
+      "(a) -100°C",
+      "(b) 100°C",
+      "(c) -1°C",
+      "(d) 0°C"
+    ],
+    o_en: [
+      "(a) -100°C",
+      "(b) 100°C",
+      "(c) -1°C",
+      "(d) 0°C"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1501. LPG का मुख्य घटक क्या है?",
+    q_en: "Q1501. What is the main component of LPG?",
+    tag: "RRB Group D 30/10/2018 (Afternoon)",
+    o_hi: [
+      "(a) मीथेन",
+      "(b) प्रोपेन",
+      "(c) इथेन",
+      "(d) ब्यूटेन"
+    ],
+    o_en: [
+      "(a) Methane",
+      "(b) Propane",
+      "(c) Ethane",
+      "(d) Butane"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1502. निम्नलिखित में से किस मिश्रण को पृथक्कारी फ़नल द्वारा अलग किया जा सकता है?",
+    q_en: "Q1502. Which of the following mixtures can be separated using a separating funnel?",
+    tag: "RRB Group D 31/10/2018 (Morning)",
+    o_hi: [
+      "(a) तेल और जल",
+      "(b) ऐल्कोहॉल और जल",
+      "(c) नमक और जल",
+      "(d) ऐल्कोहॉल में आयोडीन"
+    ],
+    o_en: [
+      "(a) Oil and water",
+      "(b) Alcohol and water",
+      "(c) Salt and water",
+      "(d) Iodine in alcohol"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1503. लौह या स्टील पर जस्ते की पतली परत चढ़ाने की प्रक्रिया को कहा जाता है?",
+    q_en: "Q1503. What is the process of coating iron or steel with a thin layer of zinc called?",
+    tag: "RRB Group D 15/11/2018 (Morning)",
+    o_hi: [
+      "(a) ऐनोडाइजिंग",
+      "(b) विद्युत् लेपन",
+      "(c) गैल्वानीकरण",
+      "(d) मिश्रधातुकरण"
+    ],
+    o_en: [
+      "(a) Anodizing",
+      "(b) Electroplating",
+      "(c) Galvanization",
+      "(d) Alloying"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1504. खाद्य पदार्थों का ऑक्सीकरण होने से रोकने के लिए निम्न में से किस गैस का उपयोग किया जाता है?",
+    q_en: "Q1504. Which of the following gases is used to prevent oxidation of food items?",
+    tag: "RRB ALP Tier - I (10/08/2018) Morning",
+    o_hi: [
+      "(a) क्लोरीन",
+      "(b) हाइड्रोजन",
+      "(c) ऑक्सीजन",
+      "(d) नाइट्रोजन"
+    ],
+    o_en: [
+      "(a) Chlorine",
+      "(b) Hydrogen",
+      "(c) Oxygen",
+      "(d) Nitrogen"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1505. निम्नलिखित गैसों में से किसकी वजह से ब्रेड या केक फूलता है और नरम और सुगंधित बन जाता है?",
+    q_en: "Q1505. Which of the following gases makes bread or cake rise and become soft and fragrant?",
+    tag: "RRB ALP Tier - I (20/08/2018) Afternoon",
+    o_hi: [
+      "(a) H₂",
+      "(b) CO",
+      "(c) CO₂",
+      "(d) O₂"
+    ],
+    o_en: [
+      "(a) H₂",
+      "(b) CO",
+      "(c) CO₂",
+      "(d) O₂"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1506. निम्नलिखित में से किस का प्रयोग टिंक्चर आयोडीन, खाँसी सिरप और कई टॉनिक तैयार करने में किया जाता है?",
+    q_en: "Q1506. Which of the following is used in preparing tincture iodine, cough syrup and many tonics?",
+    tag: "RRB ALP Tier - I (20/08/2018) Evening",
+    o_hi: [
+      "(a) ऐसिटिक एसिड",
+      "(b) मेथनॉल",
+      "(c) एथेनॉल",
+      "(d) ईथेनोइक एसिड"
+    ],
+    o_en: [
+      "(a) Acetic acid",
+      "(b) Methanol",
+      "(c) Ethanol",
+      "(d) Ethanoic acid"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1507. रिक्त स्थान में सबसे उपयुक्त विकल्प भरें।<br>इथेनॉल का _______ के लिए विकृतिकरण होता है।",
+    q_en: "Q1507. Fill in the blank with the most appropriate option.<br>Ethanol is denatured in order to _______.",
+    tag: "RRB ALP Tier - I (21/08/2018) Afternoon",
+    o_hi: [
+      "(a) इसे पीने के लिए अनुपयुक्त बनाने",
+      "(b) इसे रोगाणु-रोधक के रूप में उपयुक्त बनाने",
+      "(c) इसकी स्थिरता में वृद्धि करने",
+      "(d) इसे पीने के लिए उपयुक्त बनाने"
+    ],
+    o_en: [
+      "(a) make it unfit for drinking",
+      "(b) make it suitable as an antimicrobial agent",
+      "(c) increase its stability",
+      "(d) make it fit for drinking"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1508. निम्नलिखित में से किसका उपयोग सिरका तैयार करने में किया जाता है?",
+    q_en: "Q1508. Which of the following is used to prepare vinegar?",
+    tag: "RRB ALP Tier - I (29/08/2018) Evening",
+    o_hi: [
+      "(a) ईथेनोइक एसिड",
+      "(b) इथेनॉल",
+      "(c) मेथनॉल",
+      "(d) एसिटिक एसिड"
+    ],
+    o_en: [
+      "(a) Ethanoic acid",
+      "(b) Ethanol",
+      "(c) Methanol",
+      "(d) Acetic acid"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1509. क्या बेकिंग सोडा रासायनिक रूप से बेकिंग पाउडर से अलग होता है?",
+    q_en: "Q1509. Is baking soda chemically different from baking powder?",
+    tag: "RRB ALP Tier - I (29/08/2018) Evening",
+    o_hi: [
+      "(a) हाँ, बेकिंग सोडा सोडियम बाइकार्बोनेट हैं जबकि बेकिंग पाउडर कैल्शियम कार्बोनेट है।",
+      "(b) हाँ, बेकिंग सोडा सोडियम बाइकार्बोनेट हैं जबकि बेकिंग पाउडर सोडियम बाइकार्बोनेट और टार्टरिक अम्ल का मिश्रण होता है।",
+      "(c) नहीं, वे रासायनिक रूप से समान होते हैं।",
+      "(d) हाँ, बेकिंग सोडा सोडियम कार्बोनेट हैं जबकि बेकिंग पाउडर सोडियम बाइकार्बोनेट है।"
+    ],
+    o_en: [
+      "(a) Yes, baking soda is sodium bicarbonate whereas baking powder is calcium carbonate.",
+      "(b) Yes, baking soda is sodium bicarbonate whereas baking powder is a mixture of sodium bicarbonate and tartaric acid.",
+      "(c) No, they are chemically the same.",
+      "(d) Yes, baking soda is sodium carbonate whereas baking powder is sodium bicarbonate."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
