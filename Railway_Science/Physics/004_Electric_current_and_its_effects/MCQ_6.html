@@ -1,0 +1,1005 @@
+const Q735_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q709. एक धारावाही तार एक चुंबकीय क्षेत्र में क्षैतिज रूप से रखा जाता है, जिसका उत्तरी ध्रुव ऊपर की दिशा में और दक्षिणी ध्रुव नीचे की दिशा में होता है। तार दक्षिण दिशा की ओर विक्षेपित होता है। तार में इलेक्ट्रॉनों की दिशा ______है।",
+    q_en: "Q709. A current-carrying wire is placed horizontally in a magnetic field whose north pole is upward and south pole is downward. The wire is deflected towards the south. The direction of electrons in the wire is ______.",
+    tag: "RRC Group D 09/09/2022 (Morning)",
+    o_hi: [
+      "(a) पश्चिम से पूर्व",
+      "(b) उत्तर से दक्षिण",
+      "(c) दक्षिण से उत्तर",
+      "(d) पूर्व से पश्चिम"
+    ],
+    o_en: [
+      "(a) West to east",
+      "(b) North to south",
+      "(c) South to north",
+      "(d) East to west"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q710. परिनालिका द्वारा उत्पन्न चुंबकीय क्षेत्र बढ़ता है:",
+    q_en: "Q710. The magnetic field produced by a solenoid increases by:",
+    tag: "RRC Group D 09/09/2022 (Morning)",
+    o_hi: [
+      "(a) सोलनॉइड की दिशा बदलना",
+      "(b) इसके अंदर नरम लोहे की कोर रखना",
+      "(c) घुमावों की घटती संख्या",
+      "(d) धारा की दिशा बदलना"
+    ],
+    o_en: [
+      "(a) Changing the direction of the solenoid",
+      "(b) Placing a soft iron core inside it",
+      "(c) Decreasing the number of turns",
+      "(d) Changing the direction of current"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q711. श्रेणी संयोजन में, प्रत्येक प्रतिरोध से गुजरने वाली धारा _______ है।",
+    q_en: "Q711. In a series combination, the current passing through each resistor is _______.",
+    tag: "RRC Group D 09/09/2022 (Morning)",
+    o_hi: [
+      "(a) सभी प्रतिरोधों में बराबर होती",
+      "(b) उनकी मोटाई के समानुपाती होती",
+      "(c) उनके प्रतिरोध के समानुपाती होती",
+      "(d) धीरे-धीरे बढ़ती"
+    ],
+    o_en: [
+      "(a) equal through all resistors",
+      "(b) proportional to their thickness",
+      "(c) proportional to their resistance",
+      "(d) gradually increases"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q712. प्रेरित धारा अधिकतम होती है जब ____।",
+    q_en: "Q712. The induced current is maximum when ____.",
+    tag: "RRC Group D 09/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) कुण्डली को चुंबकीय क्षेत्र के लंबवत दिशा में रखने पर",
+      "(b) कुण्डली की गति की दिशा चुंबकीय क्षेत्र के समानांतर होने पर",
+      "(c) कुण्डली की गति की दिशा चुंबकीय क्षेत्र के लंबवत होने पर",
+      "(d) कुण्डली को चुंबकीय क्षेत्र के समान्तर दिशा में रखने पर"
+    ],
+    o_en: [
+      "(a) the coil is placed perpendicular to the magnetic field",
+      "(b) the direction of motion of the coil is parallel to the magnetic field",
+      "(c) the direction of motion of the coil is perpendicular to the magnetic field",
+      "(d) the coil is placed parallel to the magnetic field"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q713. ताँबे, चाँदी, नाइक्रोम तथा काँच के तार समान लम्बाई तथा व्यास के बनाए जाते हैं। इन तारों में किसका प्रतिरोध सबसे अधिक होगा?",
+    q_en: "Q713. Wires of copper, silver, nichrome and glass are made with equal length and diameter. Which of these wires will have the highest resistance?",
+    tag: "RRC Group D 09/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) कांच",
+      "(b) नाइक्रोम",
+      "(c) ताँबे",
+      "(d) चांदी"
+    ],
+    o_en: [
+      "(a) Glass",
+      "(b) Nichrome",
+      "(c) Copper",
+      "(d) Silver"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q714. यदि पदार्थ और मोटाई को पूर्ववत रखते हुए किसी चालक की लंबाई पांच गुना बढ़ा दी जाए, तो उसका प्रतिरोध _________।",
+    q_en: "Q714. If the length of a conductor is increased five times while keeping the material and thickness unchanged, its resistance _________.",
+    tag: "RRC Group D 09/09/2022 (Evening)",
+    o_hi: [
+      "(a) मूल का 1/5 हो जाएगा",
+      "(b) अपरिवर्तित रहेगा",
+      "(c) मूल का पांच गुना हो जाएगा",
+      "(d) दोगुना हो जाएगा"
+    ],
+    o_en: [
+      "(a) will become 1/5 of the original",
+      "(b) will remain unchanged",
+      "(c) will become five times the original",
+      "(d) will become double"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q715. यदि समान लंबाई और मोटाई वाले टंगस्टन, मैंगनिन और कठोर रबर के तारों पर समान विभवांतर आरोपित किया जाता है, तो ___।",
+    q_en: "Q715. If the same potential difference is applied across tungsten, manganin and hard-rubber wires of equal length and thickness, then ___.",
+    tag: "RRC Group D 12/09/2022 (Morning)",
+    o_hi: [
+      "(a) सभी तारों में समान धारा प्रवाहित होगी",
+      "(b) कठोर रबर के तार से अधिकतम धारा प्रवाहित होगी",
+      "(c) टंगस्टन के तार से अधिकतम धारा प्रवाहित होगी",
+      "(d) मैंगनिन के तार से अधिकतम धारा प्रवाहित होगी"
+    ],
+    o_en: [
+      "(a) the same current will flow through all wires",
+      "(b) maximum current will flow through the hard-rubber wire",
+      "(c) maximum current will flow through the tungsten wire",
+      "(d) maximum current will flow through the manganin wire"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q716. निम्नलिखित में से किसमें धारा के प्रवाह के विरोध की शक्ति न्यूनतम होती है?",
+    q_en: "Q716. Which of the following has the least opposition to the flow of current?",
+    tag: "RRC Group D 12/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) एक सुचालक में",
+      "(b) एक अच्छा विसंवाहक में",
+      "(c) एक उच्च प्रतिरोध",
+      "(d) एक कुचालक में"
+    ],
+    o_en: [
+      "(a) In a conductor",
+      "(b) In a good insulator",
+      "(c) A high resistance",
+      "(d) In a poor conductor"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q717. किसी चुंबकीय क्षेत्र में स्थित एक सीधे धारावाही चालक पर आरोपित बल से संबंधित निम्न कथनों पर विचार कीजिए:<br>(a) चुंबकीय क्षेत्र की दिशा उलटने पर भी बल की दिशा समान रहती है।<br>(b) बल की दिशा फ्लेमिंग के बाएं हाथ के नियम का उपयोग करके निर्धारित की जा सकती है।<br>उपरोक्त में से कौन से कथन सही हैं?",
+    q_en: "Q717. Consider the following statements related to the force acting on a straight current-carrying conductor placed in a magnetic field:<br>(a) The direction of force remains the same even if the direction of the magnetic field is reversed.<br>(b) The direction of force can be determined using Fleming's left-hand rule.<br>Which of the above statements are correct?",
+    tag: "RRC Group D 12/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) केवल (a)",
+      "(b) न तो (a) न ही (b)",
+      "(c) (a) और (b) दोनों",
+      "(d) केवल (b)"
+    ],
+    o_en: [
+      "(a) Only (a)",
+      "(b) Neither (a) nor (b)",
+      "(c) Both (a) and (b)",
+      "(d) Only (b)"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q718. एक आयताकार कुंडली एकसमान चुंबकीय क्षेत्र में घूम रही है। चुंबकीय क्षेत्र की दिशा कुंडली के तल के लंबवत है। यदि चुंबकीय क्षेत्र में गतिमान कुंडली की गति (स्पीड) कम हो जाती है, तो _____।",
+    q_en: "Q718. A rectangular coil is rotating in a uniform magnetic field. The magnetic field is perpendicular to the plane of the coil. If the speed of the coil moving in the magnetic field decreases, then _____.",
+    tag: "RRC Group D 12/09/2022 (Evening)",
+    o_hi: [
+      "(a) यह चुंबकीय क्षेत्र को नष्ट कर देगी",
+      "(b) प्रेरित विभवांतर घटेगा",
+      "(c) प्रेरित विभवांतर बढ़ेगा",
+      "(d) यह चुंबकीय क्षेत्र को प्रबलता प्रदान करेगी"
+    ],
+    o_en: [
+      "(a) it will destroy the magnetic field",
+      "(b) the induced potential difference will decrease",
+      "(c) the induced potential difference will increase",
+      "(d) it will strengthen the magnetic field"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q719. निम्न स्थितियों में प्रेरित विभवांतर के परिमाण और दिशाओं पर विचार कीजिए:<br>(a) किसी चुंबक के उत्तरी ध्रुव को एक स्थिर कुंडली की ओर रखकर, इसके 1 m/s की चाल से गतिमान होने पर<br>(b) उसी चुंबक के दक्षिणी ध्रुव को, उसी स्थिर कुंडली की ओर रखकर, उसके 1 m/s की चाल से गतिमान होने पर प्रेरित विभवांतरों के परिमाण_____होंगे, और उपरोक्त दोनों स्थितियों में उनके चिह्न _____होंगे।",
+    q_en: "Q719. Consider the magnitudes and directions of induced potential differences in the following situations:<br>(a) The north pole of a magnet moves towards a stationary coil at 1 m/s.<br>(b) The south pole of the same magnet moves towards the same stationary coil at 1 m/s. The magnitudes of the induced potential differences will be _____ and their signs in the two situations will be _____.",
+    tag: "RRC Group D 13/09/2022 (Morning)",
+    o_hi: [
+      "(a) समान, समान",
+      "(b) भिन्न, समान",
+      "(c) समान, विपरीत",
+      "(d) भिन्न, विपरीत"
+    ],
+    o_en: [
+      "(a) same, same",
+      "(b) different, same",
+      "(c) same, opposite",
+      "(d) different, opposite"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q720. विद्युत चुंबक में____, ऊर्जा____ऊर्जा में रूपांतरित हो जाती है।",
+    q_en: "Q720. In an electromagnet, ____ energy is converted into ____ energy.",
+    tag: "RRC Group D 13/09/2022 (Morning)",
+    o_hi: [
+      "(a) विद्युत, प्रकाशीय",
+      "(b) विद्युत, ऊष्मीय",
+      "(c) विद्युत, चुंबकीय",
+      "(d) चुंबकीय, ऊष्मीय"
+    ],
+    o_en: [
+      "(a) Electrical, light",
+      "(b) Electrical, thermal",
+      "(c) Electrical, magnetic",
+      "(d) Magnetic, thermal"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q721. यदि चुंबकीय रेखाएं पश्चिम से पूर्व दिशा की ओर गतिमान हैं और क्षैतिज रूप से रखा गया चालक ऊपर की दिशा में गतिमान है, तो इस स्थिति में, प्रेरित धारा की दिशा ______में होगी।",
+    q_en: "Q721. If magnetic field lines are directed from west to east and a horizontally placed conductor moves upward, then the direction of induced current will be towards ______.",
+    tag: "RRC Group D 13/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) पश्चिम",
+      "(c) उत्तर",
+      "(d) दक्षिण"
+    ],
+    o_en: [
+      "(a) East",
+      "(b) West",
+      "(c) North",
+      "(d) South"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q722. जब ग्राफ को V और I के बीच आलेखित किया जाता है, तो _______।",
+    q_en: "Q722. When a graph is plotted between V and I, then _______.",
+    tag: "RRC Group D 14/09/2022 (Morning)",
+    o_hi: [
+      "(a) एक वक्रित ग्राफ प्राप्त होता है",
+      "(b) एक ऊर्ध्वाधर सरल रेखा प्राप्त होती है",
+      "(c) एक क्षैतिज सरल रेखा प्राप्त होती है",
+      "(d) एक आनत सरल रेखा प्राप्त होती है"
+    ],
+    o_en: [
+      "(a) a curved graph is obtained",
+      "(b) a vertical straight line is obtained",
+      "(c) a horizontal straight line is obtained",
+      "(d) an inclined straight line is obtained"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q723. यदि तार की लंबाई दोगुनी कर दी जाए और तार के अनुप्रस्थ काट का क्षेत्रफल आधा कर दिया जाए, तो पदार्थ की प्रतिरोधकता पर क्या प्रभाव पड़ेगा?",
+    q_en: "Q723. If the length of a wire is doubled and its cross-sectional area is halved, what effect will it have on the resistivity of the material?",
+    tag: "RRC Group D 14/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) दोगुनी हो जाएगी",
+      "(b) आधी रह जाएगी",
+      "(c) 4 गुनी बढ़ जाएगी",
+      "(d) अपरिवर्तित रहेगी"
+    ],
+    o_en: [
+      "(a) It will double",
+      "(b) It will become half",
+      "(c) It will increase four times",
+      "(d) It will remain unchanged"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q724. यदि किसी परिनालिका के फेरों की संख्या में वृद्धि होती है, तो उसका______",
+    q_en: "Q724. If the number of turns of a solenoid increases, then its ______",
+    tag: "RRC Group D 14/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) चुंबकीय क्षेत्र बढ़ता है",
+      "(b) चुंबकीय क्षेत्र घटता है",
+      "(c) चुंबकीय क्षेत्र नियत रहता है",
+      "(d) चुंबकीय क्षेत्र घटकर शून्य हो जाता है"
+    ],
+    o_en: [
+      "(a) magnetic field increases",
+      "(b) magnetic field decreases",
+      "(c) magnetic field remains constant",
+      "(d) magnetic field decreases to zero"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q725. नियत ताप पर, किसी चालक में आरोपित विभवांतर में वृद्धि करने पर,______।",
+    q_en: "Q725. At constant temperature, when the potential difference applied across a conductor is increased, ______.",
+    tag: "RRC Group D 14/09/2022 (Evening)",
+    o_hi: [
+      "(a) धारा का मान घटता है",
+      "(b) धारा का मान नियत रहता है।",
+      "(c) धारा का मान शून्य हो जाता है",
+      "(d) धारा का मान बढ़ता है।"
+    ],
+    o_en: [
+      "(a) the current decreases",
+      "(b) the current remains constant",
+      "(c) the current becomes zero",
+      "(d) the current increases"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q726. स्थिर धारा वाली एक परिनालिका का उपयोग किस प्रकार किया जा सकता है:",
+    q_en: "Q726. A solenoid carrying a steady current can be used as:",
+    tag: "RRC Group D 15/09/2022 (Morning)",
+    o_hi: [
+      "(a) एक यांत्रिक ऊर्जा का स्रोत",
+      "(b) एक निरंतर चुंबकीय क्षेत्र का स्रोत",
+      "(c) प्रकाश का स्रोत",
+      "(d) एक असमान चुंबकीय क्षेत्र का स्रोत"
+    ],
+    o_en: [
+      "(a) a source of mechanical energy",
+      "(b) a source of a constant magnetic field",
+      "(c) a source of light",
+      "(d) a source of a non-uniform magnetic field"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q727. यदि टंगस्टन, मैंगनिन और कठोर रबड़ के समान विमाओं वाले तीन तार हैं, इसमें से ______ होगा।",
+    q_en: "Q727. If there are three wires of tungsten, manganin and hard rubber having the same dimensions, then ______.",
+    tag: "RRC Group D 15/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) मैंगनिन के तार का प्रतिरोध सर्वाधिक",
+      "(b) टंगस्टन के तार का प्रतिरोध सबसे कम",
+      "(c) टंगस्टन के तार का प्रतिरोध सर्वाधिक",
+      "(d) कठोर रबर तार का प्रतिरोध सबसे कम"
+    ],
+    o_en: [
+      "(a) the manganin wire will have the highest resistance",
+      "(b) the tungsten wire will have the least resistance",
+      "(c) the tungsten wire will have the highest resistance",
+      "(d) the hard-rubber wire will have the least resistance"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q728. जब चुंबकीय क्षेत्र के भाग में चुंबकीय बल रेखाएं अधिक सघन होती हैं, तो निम्नलिखित में से किसकी उपस्थिति इंगित होती है?",
+    q_en: "Q728. When magnetic lines of force are denser in a region of a magnetic field, which of the following is indicated?",
+    tag: "RRC Group D 16/09/2022 (Morning)",
+    o_hi: [
+      "(a) दुर्बल चुंबकीय क्षेत्र",
+      "(b) केवल दक्षिणी चुंबकीय ध्रुव",
+      "(c) प्रबल चुंबकीय क्षेत्र",
+      "(d) केवल उत्तरी चुंबकीय ध्रुव"
+    ],
+    o_en: [
+      "(a) Weak magnetic field",
+      "(b) Only a south magnetic pole",
+      "(c) Strong magnetic field",
+      "(d) Only a north magnetic pole"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q729. एक सीधा धारावाही चालक, एक चालक के संवृत वृत्तीय पाश के अनुदिश रखा है। सीधे चालक में धारा की दिशा निरंतर परिवर्तित किए जाने पर :",
+    q_en: "Q729. A straight current-carrying conductor is placed along a closed circular conducting loop. If the direction of current in the straight conductor is continuously changed:",
+    tag: "RRC Group D 16/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) पाश में प्रेरित धारा ऋणात्मक होगी।",
+      "(b) पाश में प्रेरित धारा अपरिवर्ती नहीं होगी",
+      "(c) पाश में प्रेरित धारा शून्य होगी।",
+      "(d) पाश में प्रेरित धारा अपरिवर्ती होगी।"
+    ],
+    o_en: [
+      "(a) the induced current in the loop will be negative.",
+      "(b) the induced current in the loop will not be constant",
+      "(c) the induced current in the loop will be zero.",
+      "(d) the induced current in the loop will be constant."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q730. किसी आर्मेचर की भुजाओं पर कार्यरत बल का परिमाण अधिकतम होता है, जब भुजाओं की लंबाई ______ होती है।",
+    q_en: "Q730. The magnitude of force acting on the arms of an armature is maximum when the length of the arms is ______.",
+    tag: "RRC Group D 17/09/2022 (Morning)",
+    o_hi: [
+      "(a) चुंबकीय क्षेत्र से 45° के कोण पर",
+      "(b) चुंबकीय क्षेत्र के लंबवत",
+      "(c) चुंबकीय क्षेत्र से 60° के कोण पर",
+      "(d) चुंबकीय क्षेत्र के समानांतर"
+    ],
+    o_en: [
+      "(a) at an angle of 45° to the magnetic field",
+      "(b) perpendicular to the magnetic field",
+      "(c) at an angle of 60° to the magnetic field",
+      "(d) parallel to the magnetic field"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q731. दिक् परिवर्तक (commutator) का उपयोग _____की कुंडली में धारा की दिशा बदलने के लिए किया जाता है।",
+    q_en: "Q731. A commutator is used to change the direction of current in the coil of _____.",
+    tag: "RRC Group D 17/09/2022 (Morning)",
+    o_hi: [
+      "(a) केवल AC जनरेटर",
+      "(b) DC मोटर और DC जनरेटर दोनों",
+      "(c) केवल DC मोटर",
+      "(d) केवल DC जनरेटर"
+    ],
+    o_en: [
+      "(a) Only an AC generator",
+      "(b) Both DC motor and DC generator",
+      "(c) Only a DC motor",
+      "(d) Only a DC generator"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q732. चुंबकीय क्षेत्र रेखाएं कभी भी एक दूसरे को नहीं काटती हैं। इस तथ्य का तात्पर्य यह है, कि चुंबकीय क्षेत्र के हमेशा ___________।",
+    q_en: "Q732. Magnetic field lines never intersect each other. This implies that a magnetic field always has ___________.",
+    tag: "RRC Group D 17/09/2022 (Evening)",
+    o_hi: [
+      "(a) क्षेत्र के किसी भी बिंदु पर एकाधिक मान होते हैं",
+      "(b) क्षेत्र के किसी भी बिंदु पर तीन मान होते हैं",
+      "(c) क्षेत्र के किसी भी बिंदु पर एक अद्वितीय मान होता है।",
+      "(d) क्षेत्र के किसी भी बिंदु पर दो मान होते हैं"
+    ],
+    o_en: [
+      "(a) multiple values at any point in the field",
+      "(b) three values at any point in the field",
+      "(c) a unique value at any point in the field",
+      "(d) two values at any point in the field"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q733. फ्लेमिंग के दाएं हाथ के नियम के अनुसार, चालक की गति की दिशा और प्रेरित EMF की दिशा _____ होती है।",
+    q_en: "Q733. According to Fleming's right-hand rule, the direction of motion of the conductor and the direction of induced EMF are _____.",
+    tag: "RRC Group D 18/09/2022 (Morning)",
+    o_hi: [
+      "(a) समान",
+      "(b) विपरीत",
+      "(c) लंबवत",
+      "(d) समानांतर"
+    ],
+    o_en: [
+      "(a) Same",
+      "(b) Opposite",
+      "(c) Perpendicular",
+      "(d) Parallel"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q734. चुंबकीय कंपास में निम्नलिखित में से क्या होता है?",
+    q_en: "Q734. Which of the following is present in a magnetic compass?",
+    tag: "RRC Group D 18/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) एल्यूमीनियम का एक सूचक (पॉइंटर)",
+      "(b) एल्यूमीनियम के एक सूचक (पॉइंटर) से जुड़ा एक छोटा चुंबक",
+      "(c) एक कुंडलीवाही चालक",
+      "(d) एक चालक कुंडली"
+    ],
+    o_en: [
+      "(a) An aluminium pointer",
+      "(b) A small magnet attached to an aluminium pointer",
+      "(c) A coiled conductor",
+      "(d) A conducting coil"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q735. निम्नांकित चित्र में दर्शाए गए अनुसार, तीन एक-समान प्रकाश बल्ब एक बैटरी से संयोजित हैं। P, Q, X, Y और Z परिपथ में कई बिंदुओं को निरूपित करते हैं। निम्न में से कौन सा इस परिपथ के लिए सत्य है?<br><div style='text-align:center;margin:14px 0;'><img src='" + Q735_IMAGE + "' alt='Q735 figure' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    q_en: "Q735. As shown in the figure below, three identical light bulbs are connected to a battery. P, Q, X, Y and Z represent different points in the circuit. Which of the following is true for this circuit?<br><div style='text-align:center;margin:14px 0;'><img src='" + Q735_IMAGE + "' alt='Q735 figure' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    tag: "RRC Group D 18/09/2022 (Evening)",
+    image: Q735_IMAGE,
+    o_hi: [
+      "(a) Q पर धारा, P पर धारा से अधिक है।",
+      "(b) केवल P और Q पर धाराएं समान हैं।",
+      "(c) सभी स्थानों पर धारा समान है।",
+      "(d) P पर धारा, Q पर धारा से अधिक है।"
+    ],
+    o_en: [
+      "(a) The current at Q is greater than the current at P.",
+      "(b) Only the currents at P and Q are equal.",
+      "(c) The current is the same at all points.",
+      "(d) The current at P is greater than the current at Q."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q736. मान लीजिए कि एक प्रोटॉन नीचे की दिशा में एक समान चुंबकीय क्षेत्र में प्रवेश करके पूर्व की ओर गति करता है। प्रोटॉन पर कार्य करने वाले बल की दिशा ______होगी।",
+    q_en: "Q736. Suppose a proton enters a uniform magnetic field directed downward while moving eastward. The direction of the force acting on the proton will be ______.",
+    tag: "RRC Group D 19/09/2022 (Morning)",
+    o_hi: [
+      "(a) पश्चिम की ओर",
+      "(b) पूर्व की ओर",
+      "(c) दक्षिण की ओर",
+      "(d) उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) Westward",
+      "(b) Eastward",
+      "(c) Southward",
+      "(d) Northward"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q737. धारावाही परिनालिका द्वारा उत्पन्न चुंबकीय क्षेत्र की दिशा, _______में होती है।",
+    q_en: "Q737. The direction of the magnetic field produced by a current-carrying solenoid is _______.",
+    tag: "RRC Group D 19/09/2022 (Morning)",
+    o_hi: [
+      "(a) परिनालिका की अक्ष के समानांतर",
+      "(b) परिनालिका के अक्ष के लंबवत",
+      "(c) परिनालिका के व्यास के समानांतर",
+      "(d) धारा की दिशा के समानांतर"
+    ],
+    o_en: [
+      "(a) parallel to the axis of the solenoid",
+      "(b) perpendicular to the axis of the solenoid",
+      "(c) parallel to the diameter of the solenoid",
+      "(d) parallel to the direction of current"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q738. किसी परिनालिका में उत्पन्न चुंबकीय क्षेत्र की प्रबलता, निम्नलिखित में से किस कारक पर निर्भर नहीं करती है?",
+    q_en: "Q738. The strength of the magnetic field produced in a solenoid does not depend on which of the following factors?",
+    tag: "RRC Group D 19/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) क्रोड सामग्री के रूप में नर्म लोहे का उपयोग किए जाने पर",
+      "(b) क्रोड सामग्री के रूप में लकड़ी की छड़ का उपयोग किए जाने पर",
+      "(c) परिनालिका में फेरों की संख्या",
+      "(d) परिनालिका में धारा की प्रबलता"
+    ],
+    o_en: [
+      "(a) Use of soft iron as core material",
+      "(b) Use of a wooden rod as core material",
+      "(c) Number of turns in the solenoid",
+      "(d) Strength of current in the solenoid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q739. एक लंबी धारावाही सीधी परिनालिका के अंदर चुंबकीय क्षेत्र की प्रबलता (strength) ______होती है।",
+    q_en: "Q739. Inside a long straight current-carrying solenoid, the magnetic field strength is ______.",
+    tag: "RRC Group D 20/09/2022 (Morning)",
+    o_hi: [
+      "(a) परिनालिका के अंदर सभी बिंदुओं पर एकसमान",
+      "(b) केंद्र में न्यूनतम",
+      "(c) केंद्र की तुलना में सिरे पर अधिक",
+      "(d) मध्य में अधिकतम"
+    ],
+    o_en: [
+      "(a) uniform at all points inside the solenoid",
+      "(b) minimum at the centre",
+      "(c) greater at the end than at the centre",
+      "(d) maximum in the middle"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q740. किसी कुंडली में विद्युत चुम्बकीय रूप से प्रेरित EMF और प्रेरित धारा की कुंडली के प्रतिरोध R पर निर्भरता किस प्रकार होती है?",
+    q_en: "Q740. How do the electromagnetically induced EMF and induced current in a coil depend on the resistance R of the coil?",
+    tag: "RRC Group D 20/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) दोनों R से स्वतंत्र होते है",
+      "(b) प्रेरित EMF, R पर निर्भर करता है, लेकिन प्रेरित धारा नहीं करती है",
+      "(c) प्रेरित EMF, R पर निर्भर नहीं करता है, किन्तु प्रेरित धारा निर्भर करती है",
+      "(d) प्रेरित EMF और प्रेरित धारा दोनों R पर निर्भर करते हैं"
+    ],
+    o_en: [
+      "(a) Both are independent of R",
+      "(b) Induced EMF depends on R, but induced current does not",
+      "(c) Induced EMF does not depend on R, but induced current does",
+      "(d) Both induced EMF and induced current depend on R"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q741. मान लीजिए कि राममोहन ने बेलनाकार छड़ चुंबक को एक वृत्ताकार परिनालिका के अक्ष के अनुदिश रखा है। फिर, वह चुंबक को परिनालिका की अक्ष के परितः घुमाता है। कुंडली में प्रेरित विद्युत धारा ______होगी।",
+    q_en: "Q741. Suppose Rammohan places a cylindrical bar magnet along the axis of a circular solenoid. He then rotates the magnet about the axis of the solenoid. The induced electric current in the coil will be ______.",
+    tag: "RRC Group D 22/09/2022 (Evening)",
+    o_hi: [
+      "(a) परिनालिका के प्रतिरोध के व्युत्क्रमानुपाती",
+      "(b) शून्य",
+      "(c) परिनालिका की लंबाई के समानुपाती",
+      "(d) परिनालिका में फेरों की संख्या के समानुपाती"
+    ],
+    o_en: [
+      "(a) inversely proportional to the resistance of the solenoid",
+      "(b) zero",
+      "(c) proportional to the length of the solenoid",
+      "(d) proportional to the number of turns in the solenoid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q742. किसी चालक के लिए वोल्टता-धारा ग्राफ की आकृति ________ होगी।",
+    q_en: "Q742. The shape of the voltage-current graph for a conductor will be ________.",
+    tag: "RRC Group D 26/09/2022 (Morning)",
+    o_hi: [
+      "(a) परवलयाकार",
+      "(b) रैखिक",
+      "(c) टेढ़ी-मेढ़ी",
+      "(d) चरघातांकी"
+    ],
+    o_en: [
+      "(a) Parabolic",
+      "(b) Linear",
+      "(c) Irregular",
+      "(d) Exponential"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q743. ______में वृद्धि के साथ, धारावाही चालक के चुंबकीय क्षेत्र का परिमाण में वृद्धि होती है।",
+    q_en: "Q743. With an increase in ______, the magnitude of the magnetic field of a current-carrying conductor increases.",
+    tag: "RRC Group D 26/09/2022 (Morning)",
+    o_hi: [
+      "(a) प्रतिरोध",
+      "(b) दूरी",
+      "(c) प्रतिरोधकता",
+      "(d) धारा"
+    ],
+    o_en: [
+      "(a) Resistance",
+      "(b) Distance",
+      "(c) Resistivity",
+      "(d) Current"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q744. प्रतिरोध का मान दोगुना हो जाता है यदि इसकी लंबाई___है (अन्य मापदंडों को स्थिर रखते हुए)।",
+    q_en: "Q744. The value of resistance doubles if its length is ___ (keeping other parameters constant).",
+    tag: "RRC Group D 26/09/2022 (Evening)",
+    o_hi: [
+      "(a) अपरिवर्तित रखने",
+      "(b) का वर्ग करने",
+      "(c) दोगुनी करने",
+      "(d) आधी करने"
+    ],
+    o_en: [
+      "(a) kept unchanged",
+      "(b) squared",
+      "(c) doubled",
+      "(d) halved"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q745. एक लघुपथित परिपथ में, धारा _____।",
+    q_en: "Q745. In a short-circuited circuit, the current _____.",
+    tag: "RRC Group D 27/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) परिवर्तित नहीं होती है",
+      "(b) अत्यधिक तेजी से बढ़ती है।",
+      "(c) निरंतर परिवर्तित होती रहती है।",
+      "(d) अत्यधिक तेजी से कम होती है।"
+    ],
+    o_en: [
+      "(a) does not change",
+      "(b) increases very rapidly",
+      "(c) keeps changing continuously",
+      "(d) decreases very rapidly"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q746. चुंबकीय बल रेखाओं के किसी बिंदु पर आरेखित_______से चुंबकीय क्षेत्र की दिशा ज्ञात की जा सकती है।",
+    q_en: "Q746. The direction of the magnetic field can be determined from the _______ drawn at any point on the magnetic lines of force.",
+    tag: "RRC Group D 27/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) ढाल (slope)",
+      "(b) छेदक रेखा (secant)",
+      "(c) उप-स्पर्शज्या (subtangent)",
+      "(d) स्पर्शज्या (tangent)"
+    ],
+    o_en: [
+      "(a) Slope",
+      "(b) Secant",
+      "(c) Subtangent",
+      "(d) Tangent"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q747. l लम्बाई, r त्रिज्या, और ρ प्रतिरोधकता वाले एक तार का प्रतिरोध ______होगा।",
+    q_en: "Q747. The resistance of a wire of length l, radius r and resistivity ρ will be ______.",
+    tag: "RRC Group D 27/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) R = ρl/4πr",
+      "(b) R = ρl/2πr",
+      "(c) R = ρl/4πr²",
+      "(d) R = ρl/πr²"
+    ],
+    o_en: [
+      "(a) R = ρl/4πr",
+      "(b) R = ρl/2πr",
+      "(c) R = ρl/4πr²",
+      "(d) R = ρl/πr²"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q748. पूर्व दिशा में धारा प्रवाहित करने वाले सीधे धारावाही चालक द्वारा उत्पन्न चुंबकीय क्षेत्र की दिशा _______दिशा के अनुदिश होती है।",
+    q_en: "Q748. The direction of the magnetic field produced by a straight current-carrying conductor carrying current towards the east is along the ______ direction.",
+    tag: "",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) उत्तर",
+      "(c) पूर्व",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) South",
+      "(b) North",
+      "(c) East",
+      "(d) West"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q749. कुंडली में प्रेरित धारा की दिशा, ______में एक बार बदलेगी।",
+    q_en: "Q749. The direction of induced current in a coil will change once in every ______.",
+    tag: "RRC Group D 27/09/2022 (Evening)",
+    o_hi: [
+      "(a) कुंडली के प्रत्येक आधे परिक्रमण",
+      "(b) कुंडली के प्रत्येक एक-चौथाई परिक्रमण",
+      "(c) कुंडली के प्रत्येक 1/6वें परिक्रमण",
+      "(d) कुंडली के प्रत्येक 1/8वें परिक्रमण"
+    ],
+    o_en: [
+      "(a) half revolution of the coil",
+      "(b) one-fourth revolution of the coil",
+      "(c) 1/6th revolution of the coil",
+      "(d) 1/8th revolution of the coil"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q750. अपशिष्ट के उत्पादन को कम करने का सर्वाधिक प्रभावी समाधान क्या है?",
+    q_en: "Q750. What is the most effective solution for reducing the production of waste?",
+    tag: "",
+    o_hi: [
+      "(a) मनाही (Refuse)",
+      "(b) पुन: उपयोग (Reuse)",
+      "(c) कम्पोस्टिंग (Composting)",
+      "(d) दहन (Combustion)"
+    ],
+    o_en: [
+      "(a) Refuse",
+      "(b) Reuse",
+      "(c) Composting",
+      "(d) Combustion"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q751. इलेक्ट्रिक ओवन की कार्यप्रणाली के पीछे की परिघटना ______है।",
+    q_en: "Q751. The phenomenon behind the working of an electric oven is ______.",
+    tag: "RRC Group D 28/09/2022 (Morning)",
+    o_hi: [
+      "(a) प्रेरित वोल्टेज",
+      "(b) प्रेरित धारा",
+      "(c) विद्युत-चुम्बकीय प्रेरण",
+      "(d) जूल का तापन प्रभाव"
+    ],
+    o_en: [
+      "(a) Induced voltage",
+      "(b) Induced current",
+      "(c) Electromagnetic induction",
+      "(d) Joule's heating effect"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q752. यदि किसी चालक से प्रवाहित धारा की दिशा और चुंबकीय क्षेत्र की दिशा के बीच का कोण शून्य हो, तो चालक पर लगने वाला बल (F) कितना होगा?",
+    q_en: "Q752. If the angle between the direction of current through a conductor and the direction of the magnetic field is zero, what will be the force (F) acting on the conductor?",
+    tag: "RRC Group D 28/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) शून्य",
+      "(b) F",
+      "(c) 2F",
+      "(d) F/2"
+    ],
+    o_en: [
+      "(a) Zero",
+      "(b) F",
+      "(c) 2F",
+      "(d) F/2"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q753. किस भौतिक राशि का मात्रक वोल्ट/एम्पियर होता है।",
+    q_en: "Q753. Which physical quantity has the unit volt/ampere?",
+    tag: "RRC Group D 28/09/2022 (Evening)",
+    o_hi: [
+      "(a) कार्य",
+      "(b) धारा",
+      "(c) आवेश",
+      "(d) प्रतिरोध"
+    ],
+    o_en: [
+      "(a) Work",
+      "(b) Current",
+      "(c) Charge",
+      "(d) Resistance"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q754. किसी धारावाही चालक द्वारा उत्पन्न चुंबकीय क्षेत्र, _______में वृद्धि के साथ घटता है।",
+    q_en: "Q754. The magnetic field produced by a current-carrying conductor decreases with an increase in _______.",
+    tag: "RRC Group D 28/09/2022 (Evening)",
+    o_hi: [
+      "(a) वोल्टेज",
+      "(b) धारा",
+      "(c) दूरी",
+      "(d) प्रतिरोध"
+    ],
+    o_en: [
+      "(a) Voltage",
+      "(b) Current",
+      "(c) Distance",
+      "(d) Resistance"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q755. फ्लेमिंग के बाएं हाथ के नियम के अनुसार, किसी विद्युत मोटर में, कुंडली की भुजाओं से प्रवाहित होने वाली धाराओं की दिशा एक-दूसरे के ______होगी।",
+    q_en: "Q755. According to Fleming's left-hand rule, in an electric motor, the directions of currents flowing through the arms of the coil will be ______ to each other.",
+    tag: "RRC Group D 29/09/2022 (Morning)",
+    o_hi: [
+      "(a) विपरीत",
+      "(b) समानांतर",
+      "(c) लंबवत",
+      "(d) समान दिशा में"
+    ],
+    o_en: [
+      "(a) Opposite",
+      "(b) Parallel",
+      "(c) Perpendicular",
+      "(d) In the same direction"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q756. किसी धारावाही चालक पर लगने वाले बल की दिशा परिवर्तित करने के लिए इनमें से किस विधि का प्रयोग किया जा सकता है?<br>I. धारा के परिमाण में परिवर्तन<br>II. चुंबकीय क्षेत्र की प्रबलता में परिवर्तन<br>III. धारा की दिशा में परिवर्तन",
+    q_en: "Q756. Which of the following methods can be used to change the direction of force acting on a current-carrying conductor?<br>I. Change in magnitude of current<br>II. Change in strength of magnetic field<br>III. Change in direction of current",
+    tag: "RRC Group D 29/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) केवल (i)",
+      "(b) दोनों (i) और (iii)",
+      "(c) केवल (iii)",
+      "(d) दोनों (ii) और (iii)"
+    ],
+    o_en: [
+      "(a) Only (i)",
+      "(b) Both (i) and (iii)",
+      "(c) Only (iii)",
+      "(d) Both (ii) and (iii)"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q757. शरीर के अंदर उत्पन्न दुर्बल चुंबकीय क्षेत्र का उपयोग करके शरीर के विभिन्न अंगों की छवियां प्राप्त करने की प्रक्रिया को____कहा जाता है।",
+    q_en: "Q757. The process of obtaining images of different organs of the body using the weak magnetic field produced inside the body is called ____.",
+    tag: "RRC Group D 30/09/2022 (Morning)",
+    o_hi: [
+      "(a) पी. ई. टी. स्कैन (PET scan)",
+      "(b) अल्ट्रासाउंड स्कैन (Ultrasound scan)",
+      "(c) सी. टी. स्कैन (CT scan)",
+      "(d) एम. आर. आई. स्कैन (MRI scan)"
+    ],
+    o_en: [
+      "(a) PET scan",
+      "(b) Ultrasound scan",
+      "(c) CT scan",
+      "(d) MRI scan"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q758. विद्युत-चुंबकीय प्रेरण की परिघटना में, धारावाही कुंडली और चुंबकीय क्षेत्र स्थैतिक होने पर गैल्वेनोमीटर ______।",
+    q_en: "Q758. In the phenomenon of electromagnetic induction, when the current-carrying coil and magnetic field are static, the galvanometer ______.",
+    tag: "RRC Group D 30/09/2022 (Morning)",
+    o_hi: [
+      "(a) शून्य विक्षेपण प्रदर्शित करता है",
+      "(b) एक-एक बार दोनों ओर विक्षेपण प्रदर्शित करता",
+      "(c) दाईं ओर विक्षेपित होता है",
+      "(d) बाईं ओर विक्षेपित होता है"
+    ],
+    o_en: [
+      "(a) shows zero deflection",
+      "(b) shows deflection once on both sides",
+      "(c) deflects to the right",
+      "(d) deflects to the left"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];

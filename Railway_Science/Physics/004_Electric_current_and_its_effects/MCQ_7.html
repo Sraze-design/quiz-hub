@@ -1,0 +1,805 @@
+const Q760_IMAGE = "data:image/png;base64,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QghjxowZMmRIGluuqKiYNWtWCGHTpk3Lli3zHhdAEGmqd6MqPJmrDEqEtCFzFGnguPPOO48ePRpCuPnmm9Pe+NSpU8vLy0MICxcu9KHifEkVkOnKoESkfd71txP3wLFz584VK1aEECorK8ePH5/29rt3737FFVeEEN5///1nnnnG2wx5IdOVQYlwBmL7FF3gWLZsWV1dXQjhqquuatOmTSa6uOaaa6KFhx56yNuc10dX8n6NqpBkoTIoEU7xbYHiChzLly+PFiZOnNjsyrW1tQ8//PDVV189YMCALl26tGvXrm/fvhdccMG0adOefvrpAwcONPqvxo4dW1FREUKoqqratWuXd7oFM2g8jy6jKmCpV4b6+vpVq1ZNmDDhzDPPLC8v79Onz8iRI//whz8cPHgwxb6UCKfvtlIOCmWWffTRR1HXHTp0OHz4cPKVly9f3qtXryTjnz59elP/dsyYMdE6S5curac5KU6iRhXbUeW71CvDrl27RowY0WhBGDBgwFtvvTVjxozoP+fPn5+kHSUi9Z3cBrFlWi8HVzief/75aGHo0KFlZWVJ1vzlL3953XXX7dixo2UdDR8+PFpYs2aNZFkYlzcoYClWhv37948aNepf//pXo69WV1ePGzfuk08+USLSWBBUgyRbw0WO1OUgcKxfvz5aOPfcc5OstnTp0jvuuCNxxvOzn/3slVdeqampqaur+/jjj19//fUHHnjgsssu69SpU1MtnHfeeSf0SL7fKYjGY1QFKcXKMHv27H//+9/R8re+9a1nn322pqamtrb2vffemzNnTrt27Xbs2PHEE0+k0qMSAdmulVn2jW98I+r6wQcfbGqdffv2de3aNVqtf//+W7dubUFHH3zwQeLP3Ldvn8tZp3SDIMVXczUwoyo8qVSG6urqxAnltddee+zYsRNWWLduXfv27RPbP/ktFSWiBQUBmyifbql8+OGH0UJlZWVT6zz00EPRowbLysqefvrpc845pwUd9enTJ7G8bds24RLiLJXKsGTJkqjcV1ZW/vGPf/zSl06sYBdffPFtt92mRBTwZU7bJH9lO3AcPXq0pqYmWu7evXtTqz333HPRwqRJk772ta+1rK/y8vLEDZfPPvvMm92yYyk+h1bDkRhVgUmxMvz973+PFn784x936NCh0XV++tOftmvXTolomcL4REJJUrZbsQSOhl9ai76T1qjXXnstWrjsssta012ii9S/LKe+xOTQOtVeinlUBSCVylBfX//2229Hy6NGjWqqqS5dunz9619XIorzVD6VSJGW2OHsIg8CRypv2P79+7/44otoefDgwfYJMMmFEPbt23f48OFo+ayzzkrSwoABA5QIp09OBoo9cDS8ClpbW9voOp9//nliOcmXUFKR6KKpq6+Oz1TqbxyKcqNffzeqgpFKZWj4lL+OHTsmaS35q0pEQc7BOb9YK8HELnCUlpaefvrp0fLu3bsbXadz586J5f3797e4r7q6usQ/P+OMM7zZeXRotaz94hxVYUilMjSMEU09YjiVV5WIFufp/Dp3SuULJq05PJ1dxD1whBD69+8fLXz66aeNrtCpU6fEjdVNmza1uKOG7ffr18+b3bLLGxCTytClS5e2bdtGyw2/0Xqy6upqJaJ46tjJjylLUspOfjVznyQl94Ej8bCdzZs3N7XO0KFDo4W//OUvLe4o0X7//v0bXjUh77J8U70bVSFptjKUlJQk1nnxxRebamffvn1vvvmmEqFSuTghcIQLL7wwWti4cWNT63zve9+LFh577LEWX+RIfKA9EV9I4xGYuXOC1rRcbKMqJKlUhu985zvRwoMPPpj4aPkJ7r///kOHDikRrdxL82JKbs2Y0/KEco85j3vgGDt2bLSwfv36I0eONLrOlClTunTpEkI4fPjw97///eSXT5uybt26aOGSSy7xTrd+CsxVAUrer1EVjFQqww033BDtup988smNN954/PjxE1Z45ZVXfv3rXysREpK4IHCEEEJlZeX5558fQjh48GDieRsn6Ny586JFi6Ll6urq884779Zbb33ttdf27dt35MiR7du3v/HGGw8++ODll1/+i1/8otEWDh069PLLL4cQSktLx48f752O20l/5tosnlEVmFQqw4ABA6ZMmRItL1u2bOTIkX/729/27t1bV1e3efPm2267bdSoUU19yUWJkDZkjhzLyQPVE2Fi5syZSVabPXt2s+Nv6ufpn3rqqWiFCRMmeIJ9un4IIAv7Twu6KNpRFZ5UKsO+ffuSP324V69eEydOjJaT/JaKEpHXv7qe3qG2pjWHeax/SyWEMHny5OjZw6tXrz527FhTq911110PP/xw4styp+Sxxx6LFqZOnSpWZuc+Qq56NKqCkUpl6Ny584svvjhs2LBGX+3fv/9zzz335S9/WYlwbdXFyLjJTeDo3r379ddfH0LYvn37s88+m2TNG264Ydu2bffdd9+ECRO+8pWvtG/fvqKiom/fvhdccMG0adOefvrpO++88+R/tWfPnieffDKEcPbZZ0+YMMHbnPxwas3UGM8n5xTDqApSipWhR48e69at+/Of/zxu3LjevXuXlZX17t374osvXrRo0caNG6P7MskpERm6Q5GnQ23NjRU3ZU5tQ+dEdXV1WVlZCGH06NFpb3zhwoXRX/fII4+4ipXeS/0Z3YVa3HgRjqpQZbQyKBH5fl8go+NsceMO8xSV5DDJ3njjjQ888EAIYcOGDUOGDElXs7W1tf369du5c+egQYPeeeedNm3aiJXpPT/I3MlQa1outlEVsAxVBiWiAHbUhuPMxCBb1r7DPNa3VCILFizo2rVrCGHevHlpbHbx4sU7d+4MIdxzzz1KSRau6rsPktvtX3gyVBmUCOXL0Vq8gaNnz5633357CKGqqmrt2rVpabOmpiZqc+LEiePGjfMGQ97JRGVQIgosbWToKoIPZGT2TXTxp5jPD1r87mfi4I/nvZ4434GC/JrO82V4ie7q6+tLSpqfJR3jKfqSTUAmokz2WyieUUExy8J0nujC0ZpepTZBYUzY8TxuKZ6dyu5UtHtXQb710bWNxB9r904LVziI4+zSsvaLc1TxibBQYDtzkq+4I3CQs1nQT7zGp4BKGxRMIMjhxyPkDIGDuBxFmTsaW9NysY0K4lBGMpQ5fBhT4EDmSOeJTjxP9/P3IoTLGxRG5pA2Co8PjRZyAqDYNFr07V1krnBlJ+DahwuDKxzEqwq0vs3iGZW0Qfzzbs6bQuBAxcleWSmMUTkvJP5nHWnZq91METiAfIp6yjTZyQ3pzRx5lzbEI4GD3NSpmLRWDKNK+2klxG3fNnkLHJCeyS+b02S+j0qlpiCLgOgscAB5XNylDbKv9TdW3JsQOCBLJ9PuzjgjpGgzh7QhcECmZsHsz5T5O6pT+rcqNdmPC61sJH/ThpwkcIA5A/IjuJizBQ7I6jznGWKtPLVSqYnzZYBGY0dT/59C5dHmZKrEJJn/clVl8nFUsRoqjuLUU/UJe2mzO23eJWaH4alyhYPcn7j74dl4tomjOGutFcAO7BgUOIhd/M/taUF+jSrFlVU68noOtgMLHEDexDiI5/5WX1+fJE8kf9WRWGB8hoN0ns204CDMdLkppFH5HizxPIpzfkDFYbvZeZrlCgdZPQmIw2lBvoxKmcOpvG0icAC5r3HSBk7WbTGBAwdejA7UAhiVMypA4IBUZ8r4zJrxH5WTKuJz5iDvJtkajkSBAwq2wKlxxDwN2w4IHOTg3Cgm5+j5OyoFjpgfyLYSAgfxOieI28QZ51ElTxtqHE7ubQGBA3BGhZ3N9kHgIDbHYfaP1bwblY9u4BTf3y5wQCEcq3EelepGPE8einPPlP4FDvKpTsXhWM3HUSlwyBzShsABKHAAAgcArVbMFzmkf4GDvCxScThc82tUChwyh7QhcAC5zyIgc0gbAgcgbVB01wD8XQgcxGK+jMMMmi+jgrxIwIU3N3vCr8CBk/XiGpUCh8whbRRUkrMdATArSxsCBwD5MTfn7/RcYH9OPLmlAsApa2omzsfbK9KGwAGAzCFtFAi3VAAoxjlb1BA4ACiQzBHP+Tu/Rlsw3FIBoLWSzNNxu8MibeRsy9u+AGRhOs/tjB7bgQkcAJD+qT37s3vcxiNwAED2pvlMz/Q5HwACBwAxih3pnfiz3yMCBwD5FDtalgYy2jgCBwAFHjvSznwncAAgdogaAgcA5GHyMMEJHACQkfBhUhM4ACD9+cMsJnAAAPw/v6UCAAgcAIDAAQAgcAAAAgcAIHAAAAgcAIDAAQAgcAAAAgcAIHAAAAgcAIDAAQAIHAAAAgcAkBf+D8A2rvJthfD1AAAAAElFTkSuQmCC";
+
+const data = [
+  {
+    q_hi: "Q759. यदि दो समांतर सीधे चालकों में धारा प्रवाह की दिशा समान है, तो उत्पन्न चुंबकीय क्षेत्रों की दिशाएं ______होंगी।",
+    q_en: "Q759. If the direction of current flow in two parallel straight conductors is the same, the directions of the magnetic fields produced will be ______.",
+    tag: "RRC Group D 30/09/2022 (Afternoon)",
+    o_hi: [
+      "(a) एक दूसरे के लंबवत",
+      "(b) एक दूसरे के विपरीत",
+      "(c) यादृच्छिक दिशाओं में",
+      "(d) समान दिशा में"
+    ],
+    o_en: [
+      "(a) Perpendicular to each other",
+      "(b) Opposite to each other",
+      "(c) In random directions",
+      "(d) In the same direction"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q760. प्रतिरोध (R) को किस प्रतीक द्वारा निरूपित किया जाता है।<br><div style='text-align:center;margin:14px 0;'><img src='" + Q760_IMAGE + "' alt='Q760 circuit symbols' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    q_en: "Q760. Which symbol represents resistance (R)?<br><div style='text-align:center;margin:14px 0;'><img src='" + Q760_IMAGE + "' alt='Q760 circuit symbols' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    tag: "RRC Group D 06/10/2022 (Morning)",
+    image: Q760_IMAGE,
+    o_hi: [
+      "(a)",
+      "(b)",
+      "(c)",
+      "(d)"
+    ],
+    o_en: [
+      "(a)",
+      "(b)",
+      "(c)",
+      "(d)"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q761. छड़-चुंबक के निकट लाए जाने पर दिक्सूचक की सुई विक्षेपित क्यों हो जाती है ?",
+    q_en: "Q761. Why does a compass needle get deflected when brought near a bar magnet?",
+    tag: "RRC Group D 06/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) क्योंकि इसमें धारा प्रवाहित होती है।",
+      "(b) क्योंकि यह एक लघु चुंबक होती है।",
+      "(c) क्योंकि यह चालक होती है।",
+      "(d) क्योंकि एक यह लौह छड़ होती है।"
+    ],
+    o_en: [
+      "(a) Because current flows through it.",
+      "(b) Because it is a small magnet.",
+      "(c) Because it is a conductor.",
+      "(d) Because it is an iron rod."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q762. निम्नलिखित में से कौन सा विकल्प, पदार्थों को उनके प्रतिरोध के बढ़ते क्रम में प्रदर्शित करता है?",
+    q_en: "Q762. Which of the following options shows materials in increasing order of resistance?",
+    tag: "RRC Group D 06/10/2022 (Evening)",
+    o_hi: [
+      "(a) मिश्र धातु, चालक, विद्युतरोधक",
+      "(b) विद्युतरोधक, चालक, मिश्र धातु",
+      "(c) विद्युतरोधक, मिश्र धातु, चालक",
+      "(d) चालक, मिश्र धातु, विद्युतरोधक"
+    ],
+    o_en: [
+      "(a) Alloy, conductor, insulator",
+      "(b) Insulator, conductor, alloy",
+      "(c) Insulator, alloy, conductor",
+      "(d) Conductor, alloy, insulator"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q763. विद्युत मोटर में, मोटर के आर्मेचर की भुजाओं पर चुंबकीय क्षेत्र के लंबवत कार्यरत बलों के संबंध में इनमें से कौन सा सत्य है?",
+    q_en: "Q763. In an electric motor, which of the following is true about the forces acting perpendicular to the magnetic field on the arms of the motor armature?",
+    tag: "RRC Group D 07/10/2022 (Morning)",
+    o_hi: [
+      "(a) इनका परिमाण असमान होता है, और समान दिशा में अनुदिश होते हैं",
+      "(b) इनका परिमाण असमान होता है, और दिशा विपरीत होती है",
+      "(c) इनका परिमाण समान होता है, और दिशा विपरीत होती है",
+      "(d) इनका परिमाण समान होता है, और दिशा समान होती है"
+    ],
+    o_en: [
+      "(a) Their magnitudes are unequal and they act in the same direction",
+      "(b) Their magnitudes are unequal and their directions are opposite",
+      "(c) Their magnitudes are equal and their directions are opposite",
+      "(d) Their magnitudes are equal and their directions are the same"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q764. एक चुंबकीय क्षेत्र की उपस्थिति_____ द्वारा निर्धारित की जा सकती है।",
+    q_en: "Q764. The presence of a magnetic field can be determined by _____.",
+    tag: "RRC Group D 07/10/2022 (Morning)",
+    o_hi: [
+      "(a) एक गैल्वेनोमीटर",
+      "(b) एक वाल्टमीटर",
+      "(c) एक चुंबकीय सुई",
+      "(d) एक एमीटर"
+    ],
+    o_en: [
+      "(a) A galvanometer",
+      "(b) A voltmeter",
+      "(c) A magnetic needle",
+      "(d) An ammeter"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q765. ऑस्ट्रेड के प्रयोग के संबंध में, इनमें से कौन से निष्कर्ष सही हैं?<br>(a) किसी धारावाही चालक के बगल में रखे गए चुंबकीय दिक्सूचक की सुई विक्षेपित होती है।<br>(b) धारावाही चालक के आसपास चुंबकीय क्षेत्र उत्पन्न होता है।<br>(c) एक धारावाही चालक के बगल में रखे गए चुंबकीय दिक्सूचक की सुई के विक्षेपण की दिशा, धारा की दिशा उलटने पर परिवर्तित नहीं होती है।",
+    q_en: "Q765. Regarding Oersted's experiment, which of the following conclusions are correct?<br>(a) A magnetic compass needle placed beside a current-carrying conductor gets deflected.<br>(b) A magnetic field is produced around a current-carrying conductor.<br>(c) The direction of deflection of a compass needle placed beside a current-carrying conductor does not change when the direction of current is reversed.",
+    tag: "RRC Group D 07/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) केवल (a) और (b) सही हैं",
+      "(b) केवल (c) और (a) सही हैं",
+      "(c) केवल (b) और (c) सही हैं",
+      "(d) (a), (b) और (c) सही हैं"
+    ],
+    o_en: [
+      "(a) Only (a) and (b) are correct",
+      "(b) Only (c) and (a) are correct",
+      "(c) Only (b) and (c) are correct",
+      "(d) (a), (b) and (c) are correct"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q766. सीधे धारावाही चालक से दूर जाने पर, चुंबकीय क्षेत्र रेखाओं की परिधि________।",
+    q_en: "Q766. On moving away from a straight current-carrying conductor, the circumference of the magnetic field lines ________.",
+    tag: "RRC Group D 07/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) में कमी होती है",
+      "(b) में वृद्धि होती है",
+      "(c) समान बनी रहती है",
+      "(d) शून्य हो जाती है"
+    ],
+    o_en: [
+      "(a) decreases",
+      "(b) increases",
+      "(c) remains the same",
+      "(d) becomes zero"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q767. _____श्रेणी परिपथ का एक उदाहरण है।",
+    q_en: "Q767. _____ is an example of a series circuit.",
+    tag: "RRC Group D 07/10/2022 (Evening)",
+    o_hi: [
+      "(a) सजावट लाइटें",
+      "(b) कार हेड लाइटें",
+      "(c) घरेलू वायरिंग प्रणाली",
+      "(d) स्ट्रीट लाइटें"
+    ],
+    o_en: [
+      "(a) Decorative lights",
+      "(b) Car headlights",
+      "(c) Domestic wiring system",
+      "(d) Street lights"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q768. चुंबकीय क्षेत्र के समानांतर दिशा में गति करने पर एक चालक में उत्पन्न प्रेरित विद्युत वाहक बल (EMF) ______होता है",
+    q_en: "Q768. When a conductor moves in a direction parallel to a magnetic field, the induced electromotive force (EMF) produced in it is ______.",
+    tag: "RRC Group D 07/10/2022 (Evening)",
+    o_hi: [
+      "(a) न्यूनतम",
+      "(b) शून्य",
+      "(c) अधिकतम",
+      "(d) अनंत"
+    ],
+    o_en: [
+      "(a) Minimum",
+      "(b) Zero",
+      "(c) Maximum",
+      "(d) Infinite"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q769. विद्युत परिपथों में, विद्युत धारा के प्रवाह के कारण______के रूप में हानियां होती है।",
+    q_en: "Q769. In electrical circuits, losses due to the flow of electric current occur in the form of ______.",
+    tag: "RRC Group D 11/10/2022 (Morning)",
+    o_hi: [
+      "(a) प्रकाश",
+      "(b) ध्वनि",
+      "(c) चुंबकीय हानियों",
+      "(d) ऊष्मा"
+    ],
+    o_en: [
+      "(a) Light",
+      "(b) Sound",
+      "(c) Magnetic losses",
+      "(d) Heat"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q770. घरेलू उद्देश्य हेतु प्रयुक्त फ्यूजों की रेटिंग ______की सीमा में होती है।",
+    q_en: "Q770. The rating of fuses used for domestic purposes lies in the range of ______.",
+    tag: "RRC Group D 11/10/2022 (Morning)",
+    o_hi: [
+      "(a) 100 एम्पियर – 200 एम्पियर",
+      "(b) 500 एम्पियर– 1000 एम्पियर",
+      "(c) 1 एम्पियर– 10 एम्पियर",
+      "(d) 1000 एम्पियर– 2000 एम्पियर"
+    ],
+    o_en: [
+      "(a) 100 ampere – 200 ampere",
+      "(b) 500 ampere – 1000 ampere",
+      "(c) 1 ampere – 10 ampere",
+      "(d) 1000 ampere – 2000 ampere"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q771. एक घोड़े की नाल के चुंबक पर विचार करें जिसका उत्तरी ध्रुव पश्चिम की ओर और दक्षिण ध्रुव पूर्व की ओर है। एक संवाहक छड़ गैल्वेनोमीटर से शिथिल रूप से जुड़ी होती है। यदि इस छड़ को अब चुंबक के ध्रुवों के बीच लंबवत नीचे की ओर ले जाया जाए, तो इसमें प्रेरित धारा की दिशा _____होगी।",
+    q_en: "Q771. Consider a horseshoe magnet whose north pole points west and south pole points east. A conducting rod is loosely connected to a galvanometer. If the rod is moved vertically downward between the poles of the magnet, the direction of induced current in it will be _____.",
+    tag: "RRC Group D 11/10/2022 (Morning)",
+    o_hi: [
+      "(a) पश्चिम से पूर्व दिशा की ओर",
+      "(b) दक्षिण से उत्तर दिशा की ओर",
+      "(c) पूर्व से पश्चिम दिशा में की ओर",
+      "(d) उत्तर से दक्षिण दिशा की ओर"
+    ],
+    o_en: [
+      "(a) From west to east",
+      "(b) From south to north",
+      "(c) From east to west",
+      "(d) From north to south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q772. विद्युत मोटर में,______दिक्परिवर्तक (commutator) और बैटरी के टर्मिनलों के बीच संपर्क के रूप में कार्य करता है।",
+    q_en: "Q772. In an electric motor, ______ acts as the contact between the commutator and the battery terminals.",
+    tag: "RRC Group D 11/10/2022 (Afternoon)",
+    o_hi: [
+      "(a) चुंबकीय ध्रुव (magnetic poles)",
+      "(b) विभाजित अंगूठी (split ring)",
+      "(c) प्लग कुंजी (plug key)",
+      "(d) कार्बन ब्रश (carbon brushes)"
+    ],
+    o_en: [
+      "(a) Magnetic poles",
+      "(b) Split ring",
+      "(c) Plug key",
+      "(d) Carbon brushes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q773. निम्नलिखित में से किस स्थिति में, एक बंद चालक कुंडली में विभवांतर प्रेरित होता है ?",
+    q_en: "Q773. In which of the following situations is a potential difference induced in a closed conducting coil?",
+    tag: "RRC Group D 11/10/2022 (Evening)",
+    o_hi: [
+      "(a) या तो छड़ चुंबक को बंद कुंडली की ओर ले जाए जाने पर, या बंद कुंडली को छड़ चुंबक की ओर ले जाए जाने पर",
+      "(b) छड़ चुंबक और बंद कुंडली, दोनों को ही समान चाल से समान दिशा में ले जाए जाने पर",
+      "(c) केवल बंद कुंडली को एक छड़ चुंबक की ओर ले जाए जाने पर",
+      "(d) केवल एक छड़ चुंबक को बंद कुंडली की ओर ले जाए जाने पर"
+    ],
+    o_en: [
+      "(a) Either when the bar magnet is moved towards the closed coil, or when the closed coil is moved towards the bar magnet",
+      "(b) When both the bar magnet and the closed coil are moved with the same speed in the same direction",
+      "(c) Only when the closed coil is moved towards a bar magnet",
+      "(d) Only when a bar magnet is moved towards the closed coil"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q774. श्रेणीक्रम में संयोजित तीन प्रतिरोधों R₁, R₂ और R₃ के टर्मिनलों पर वोल्टेज, क्रमशः V₁, V₂ और V₃ हैं। यदि I, उनसे होकर प्रवाहित होने वाली निवल धारा को निरूपित करता है, तो उनकी निवल वोल्टेज V कितनी होगी?",
+    q_en: "Q774. The voltages across the terminals of three resistors R₁, R₂ and R₃ connected in series are V₁, V₂ and V₃ respectively. If I represents the net current flowing through them, what will be their net voltage V?",
+    tag: "RRC Group D 11/10/2022 (Evening)",
+    o_hi: [
+      "(a) V = (1/V₁) + (1/V₂) + (1/V₃)",
+      "(b) V = (1/R₁) + (1/R₂) + (1/R₃)",
+      "(c) V = V₁ + V₂ + V₃",
+      "(d) V = R₁ + R₂ + R₃"
+    ],
+    o_en: [
+      "(a) V = (1/V₁) + (1/V₂) + (1/V₃)",
+      "(b) V = (1/R₁) + (1/R₂) + (1/R₃)",
+      "(c) V = V₁ + V₂ + V₃",
+      "(d) V = R₁ + R₂ + R₃"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q775. ______एक निष्क्रिय दो-टर्मिनल विद्युत घटक है जो विद्युत प्रतिरोध को सर्किट तत्व के रूप में लागू करता है।",
+    q_en: "Q775. ______ is a passive two-terminal electrical component that implements electrical resistance as a circuit element.",
+    tag: "RRB NTPC CBT - II (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) संधारित्र (कैपेसिटर)",
+      "(b) ट्रांजिस्टर(ट्रांजिस्टर)",
+      "(c) प्रतिरोध (रेसिस्टर)",
+      "(d) डायोड"
+    ],
+    o_en: [
+      "(a) Capacitor",
+      "(b) Transistor",
+      "(c) Resistor",
+      "(d) Diode"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q776. लगभग______केल्विन पर जल का घनत्व सबसे अधिक होता है।",
+    q_en: "Q776. The density of water is maximum at approximately ______ kelvin.",
+    tag: "RRB NTPC CBT - II (16/06/2022) Shift 1",
+    o_hi: [
+      "(a) 273",
+      "(b) 0",
+      "(c) 277",
+      "(d) 227"
+    ],
+    o_en: [
+      "(a) 273",
+      "(b) 0",
+      "(c) 277",
+      "(d) 227"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q777. विद्युत बल्ब में प्रकाश देने वाले पतले तार को ______कहा जाता है।",
+    q_en: "Q777. The thin wire that gives light in an electric bulb is called ______.",
+    tag: "RRB NTPC CBT - II (17/06/2022) Shift 1",
+    o_hi: [
+      "(a) फिलामेंट (filament)",
+      "(b) रिले ( relay)",
+      "(c) फ्यूज (fuse)",
+      "(d) प्रतिरोध (resistor)"
+    ],
+    o_en: [
+      "(a) Filament",
+      "(b) Relay",
+      "(c) Fuse",
+      "(d) Resistor"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q778. विभिन्न विद्युत सुरक्षा उपकरणों में, विद्युत धारा के ऊष्मीय प्रभाव पर आधारित उपकरण को _____कहा जाता है।",
+    q_en: "Q778. Among various electrical safety devices, the device based on the heating effect of electric current is called _____.",
+    tag: "RRB NTPC CBT - I (05/01/2021) Morning",
+    o_hi: [
+      "(a) फ्यूज (fuse)",
+      "(b) सर्किट ब्रेकर (circuit breaker)",
+      "(c) प्रोटेक्टिव रिले (protective relay)",
+      "(d) सर्ज प्रोटेक्टर (surge protector)"
+    ],
+    o_en: [
+      "(a) Fuse",
+      "(b) Circuit breaker",
+      "(c) Protective relay",
+      "(d) Surge protector"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q779. आधुनिक विद्युत जनरेटर_____ सिद्धांत पर कार्य करता है।",
+    q_en: "Q779. A modern electric generator works on the principle of _____.",
+    tag: "RRB NTPC CBT - I (11/01/2021) Morning",
+    o_hi: [
+      "(a) विद्युत प्रेरण",
+      "(b) विद्युतचुंबकीय प्रेरण",
+      "(c) विद्युत ऊर्जा",
+      "(d) चुंबकीय प्रेरण"
+    ],
+    o_en: [
+      "(a) Electric induction",
+      "(b) Electromagnetic induction",
+      "(c) Electrical energy",
+      "(d) Magnetic induction"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q780. _____एक विद्युतरोधी का उदाहरण नहीं है।",
+    q_en: "Q780. _____ is not an example of an insulator.",
+    tag: "RRB NTPC CBT - I (16/01/2021) Evening",
+    o_hi: [
+      "(a) हीरा",
+      "(b) रबर",
+      "(c) मानव शरीर",
+      "(d) कांच"
+    ],
+    o_en: [
+      "(a) Diamond",
+      "(b) Rubber",
+      "(c) Human body",
+      "(d) Glass"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q781. निम्नलिखित में से कौन धारा के ऊष्मीय प्रभाव का उदाहरण नहीं है?",
+    q_en: "Q781. Which of the following is not an example of the heating effect of current?",
+    tag: "RRB NTPC CBT - I (17/01/2021) Morning",
+    o_hi: [
+      "(a) बल्ब",
+      "(b) पंखे की कार्यप्रणाली",
+      "(c) विद्युत प्रेस",
+      "(d) विद्युत केतली"
+    ],
+    o_en: [
+      "(a) Bulb",
+      "(b) Working of a fan",
+      "(c) Electric iron",
+      "(d) Electric kettle"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q782. विद्युत के माध्यम से किसी अन्य पदार्थ पर किसी वांछित धातु की परत जमा करने की प्रक्रिया कहलाती है",
+    q_en: "Q782. The process of depositing a layer of a desired metal on another material by means of electricity is called",
+    tag: "RRB NTPC CBT - I (21/01/2021) Morning",
+    o_hi: [
+      "(a) विद्युत लेपन",
+      "(b) विद्युत चुम्बकीय",
+      "(c) विद्युत चालक",
+      "(d) इलेक्ट्रोड"
+    ],
+    o_en: [
+      "(a) Electroplating",
+      "(b) Electromagnetic",
+      "(c) Electrical conductor",
+      "(d) Electrode"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q783. प्रत्यावर्ती धारा को दिष्ट धारा में परिवर्तित करने के लिए निम्नलिखित में से किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q783. Which of the following devices is used to convert alternating current into direct current?",
+    tag: "RRB NTPC CBT - I (23/01/2021) Evening",
+    o_hi: [
+      "(a) कैलोरीमीटर (Calorimeter)",
+      "(b) धारा नियंत्रक (Rheostat)",
+      "(c) संधारित्र (Capacitor)",
+      "(d) दिष्टकारी (Rectifier)"
+    ],
+    o_en: [
+      "(a) Calorimeter",
+      "(b) Rheostat",
+      "(c) Capacitor",
+      "(d) Rectifier"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q784. निम्नलिखित में से कौन सा विलयन बिजली का संचालन नहीं करता है?",
+    q_en: "Q784. Which of the following solutions does not conduct electricity?",
+    tag: "RRB NTPC CBT - I (30/01/2021) Evening",
+    o_hi: [
+      "(a) अम्ल और क्षार",
+      "(b) ग्लूकोज और क्षार",
+      "(c) अल्कोहल और ग्लूकोज",
+      "(d) अल्कोहल और अम्ल"
+    ],
+    o_en: [
+      "(a) Acid and base",
+      "(b) Glucose and base",
+      "(c) Alcohol and glucose",
+      "(d) Alcohol and acid"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q785. विद्युत ऊर्जा को यांत्रिक ऊर्जा में बदलने के लिए किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q785. Which device is used to convert electrical energy into mechanical energy?",
+    tag: "RRB NTPC CBT - I (07/03/2021) Evening",
+    o_hi: [
+      "(a) बैटरी",
+      "(b) इलेक्ट्रिक मोटर",
+      "(c) मोमबत्ती",
+      "(d) फोटोसेल"
+    ],
+    o_en: [
+      "(a) Battery",
+      "(b) Electric motor",
+      "(c) Candle",
+      "(d) Photocell"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q786. जब दो या दो से अधिक प्रतिरोधों को एक समान दो बिंदुओं के बीच जोड़ा जाता है , तो वे____ में जुड़े होते हैं।",
+    q_en: "Q786. When two or more resistors are connected between the same two points, they are connected in ____.",
+    tag: "RRB JE 22/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) समानांतर",
+      "(b) आर-पार",
+      "(c) श्रेणी",
+      "(d) लाइन"
+    ],
+    o_en: [
+      "(a) Parallel",
+      "(b) Across",
+      "(c) Series",
+      "(d) Line"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q787. _____पदार्थ की भौतिक राशि है जो संख्यात्मक रूप से उसी पदार्थ से बने 1 मीटर लंबे और 1 वर्ग मीटर अनुप्रस्थ काट वाले एक छड़ के प्रतिरोध के बराबर होती है।",
+    q_en: "Q787. _____ is the physical quantity of a material that is numerically equal to the resistance of a rod of that material 1 metre long and having a cross-sectional area of 1 square metre.",
+    tag: "RRB JE 22/05/2019 (Evening)",
+    o_hi: [
+      "(a) चालकता",
+      "(b) आवेश",
+      "(c) प्रतिरोध",
+      "(d) प्रतिरोधकता"
+    ],
+    o_en: [
+      "(a) Conductivity",
+      "(b) Charge",
+      "(c) Resistance",
+      "(d) Resistivity"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q788. जब दो या दो से अधिक प्रतिरोधों को एक-दूसरे के साथ क्रमवार जोड़ा जाता है, तो वे ______जुड़े होते हैं।",
+    q_en: "Q788. When two or more resistors are connected one after another, they are connected in ______.",
+    tag: "RRB JE 23/05/2019 (Morning)",
+    o_hi: [
+      "(a) श्रेणी क्रम में",
+      "(b) समानांतर क्रम में",
+      "(c) सीधे",
+      "(d) लाइन में"
+    ],
+    o_en: [
+      "(a) Series",
+      "(b) Parallel",
+      "(c) Directly",
+      "(d) In line"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q789. घरेलू वायरिंग में परिपथ कैसे जुड़े होते हैं?",
+    q_en: "Q789. How are circuits connected in domestic wiring?",
+    tag: "RRB JE 24/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) सीधे",
+      "(b) श्रेणी क्रम में",
+      "(c) क्रमिक रूप में",
+      "(d) समानांतर क्रम में"
+    ],
+    o_en: [
+      "(a) Directly",
+      "(b) In series",
+      "(c) Sequentially",
+      "(d) In parallel"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q790. स्विच ऑन होने पर बल्ब कैसे जल जाता है?",
+    q_en: "Q790. How does a bulb glow when the switch is turned on?",
+    tag: "RRB JE 24/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) तंतु फैल जाता है",
+      "(b) परिपथ में धारा प्रवाहित नहीं होती है",
+      "(c) धारा की वजह से तंतु गर्म हो जाते हैं और जलने लगते हैं",
+      "(d) तंतु एक दूसरे को स्पर्श करते हैं"
+    ],
+    o_en: [
+      "(a) The filament expands",
+      "(b) No current flows in the circuit",
+      "(c) Due to current, the filament gets hot and starts glowing",
+      "(d) The filaments touch each other"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q791. एमीटर का प्रतिरोध_____होता है, जिससे अधिकतम धारा इससे होकर प्रवाहित हो सके।",
+    q_en: "Q791. The resistance of an ammeter is _____ so that maximum current can pass through it.",
+    tag: "RRB JE 25/05/2019 (Evening)",
+    o_hi: [
+      "(a) अत्यधिक",
+      "(b) बहुत कम",
+      "(c) अनंत",
+      "(d) अधिक"
+    ],
+    o_en: [
+      "(a) Very high",
+      "(b) Very low",
+      "(c) Infinite",
+      "(d) High"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q792. विद्युत स्विच की मरम्मत करते समय इलेक्ट्रीशियन को रबर के दस्ताने क्यों पहनने चाहिए ?",
+    q_en: "Q792. Why should an electrician wear rubber gloves while repairing an electric switch?",
+    tag: "RRB JE 26/05/2019 (Morning)",
+    o_hi: [
+      "(a) सामग्री को फिसलने से बचाने के लिए",
+      "(b) बिजली के झटके से बचने के लिए",
+      "(c) स्विच को साफ करने के लिए",
+      "(d) उपकरणों को आसानी से हैंडल करने के लिए"
+    ],
+    o_en: [
+      "(a) To prevent the material from slipping",
+      "(b) To avoid electric shock",
+      "(c) To clean the switch",
+      "(d) To handle tools easily"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q793. इनमें से किसका उपयोग परिपथ को विच्छेदित या विद्युत् परिपथ को बंद करने के लिए किया जाता है?",
+    q_en: "Q793. Which of these is used to disconnect or close an electric circuit?",
+    tag: "RRB JE 26/05/2019 (Evening)",
+    o_hi: [
+      "(a) स्विच",
+      "(b) तार",
+      "(c) बैटरी",
+      "(d) बल्ब"
+    ],
+    o_en: [
+      "(a) Switch",
+      "(b) Wire",
+      "(c) Battery",
+      "(d) Bulb"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q794. अगर किसी चालक का प्रतिरोध आधा कर दिया जाए तो इसका उष्मीय प्रभाव______हो जाएगा।",
+    q_en: "Q794. If the resistance of a conductor is halved, its heating effect will become ______.",
+    tag: "RRB ALP Tier - I (21/08/2018) Morning",
+    o_hi: [
+      "(a) आधा",
+      "(b) चार गुना",
+      "(c) दोगुना",
+      "(d) एक चौथाई"
+    ],
+    o_en: [
+      "(a) Half",
+      "(b) Four times",
+      "(c) Double",
+      "(d) One-fourth"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q795. स्रोत प्रतिरोध R, प्रतिरोधक में एक करंट बनाए रखता है। यदि प्रतिरोधक में विभवांतर V है, तो समय t में क्षय हुई विद्युत ऊर्जा….. द्वारा दर्शाई जाती है।",
+    q_en: "Q795. A source maintains a current in a resistor of resistance R. If the potential difference across the resistor is V, the electrical energy dissipated in time t is represented by …..",
+    tag: "RRB ALP Tier - I (21/08/2018) Evening",
+    o_hi: [
+      "(a) V²It",
+      "(b) VIt",
+      "(c) VI²t",
+      "(d) IR²t"
+    ],
+    o_en: [
+      "(a) V²It",
+      "(b) VIt",
+      "(c) VI²t",
+      "(d) IR²t"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q796. तार की लंबाई दुगुनी करने पर एम्मीटर की रीडिंग किस प्रकार प्रभावित होती है?",
+    q_en: "Q796. How is the ammeter reading affected when the length of the wire is doubled?",
+    tag: "RRB ALP Tier - I (29/08/2018) Morning",
+    o_hi: [
+      "(a) यह आधी रह जाती है",
+      "(b) यह तीन-चौथाई तक घट जाती है।",
+      "(c) यह समान रहती है",
+      "(d) यह दुगुनी हो जाती है"
+    ],
+    o_en: [
+      "(a) It becomes half",
+      "(b) It decreases to three-fourths",
+      "(c) It remains the same",
+      "(d) It doubles"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q797. निम्न में से कौन बिजली के कुचालक हैं ?<br>(A) मायका और क्वार्ट्ज<br>(B) धातु और रबर<br>(C) धातु और मायका",
+    q_en: "Q797. Which of the following are insulators of electricity?<br>(A) Mica and quartz<br>(B) Metal and rubber<br>(C) Metal and mica",
+    tag: "RRB ALP Tier - I (29/08/2018) Afternoon",
+    o_hi: [
+      "(a) A केवल",
+      "(b) A और C केवल",
+      "(c) A और B केवल",
+      "(d) B और C केवल"
+    ],
+    o_en: [
+      "(a) A only",
+      "(b) A and C only",
+      "(c) A and B only",
+      "(d) B and C only"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q798. किसी समांतर परिपथ में यदि किसी खराबी के कारण एक विद्युतीय उपकरण कार्य करना बंद कर दे तो सभी अन्य विद्युतीय उपकरण -",
+    q_en: "Q798. In a parallel circuit, if one electrical appliance stops working due to a fault, all the other electrical appliances -",
+    tag: "RRB ALP Tier - I (29/08/2018) Evening",
+    o_hi: [
+      "(a) अपनी आधी क्षमता से कार्य करते रहेंगे।",
+      "(b) कार्य नहीं करेंगे।",
+      "(c) सामान्य रूप से कार्य करते रहेंगे।",
+      "(d) दोगुने क्षमता से कार्य करते रहेंगे।"
+    ],
+    o_en: [
+      "(a) will continue to work at half their capacity.",
+      "(b) will not work.",
+      "(c) will continue to work normally.",
+      "(d) will continue to work at double capacity."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
