@@ -4191,6 +4191,7 @@ function showEmptyState() {
   }
 
   function redraw(){
+    clearTip();
     if(!ctx) return;
     ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
     if(starCtx) starCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
@@ -4328,6 +4329,38 @@ function showEmptyState() {
     return !!target.closest(EXCLUDED_ZONE_SELECTOR);
   }
 
+  // A replaceable tip layer reaches the latest real sample without baking
+  // temporary straight stubs into the saved, midpoint-smoothed stroke.
+  let tipCanvas=null, tipCtx=null;
+  function clearTip(){
+    if(tipCtx){tipCtx.setTransform(1,0,0,1,0,0);tipCtx.clearRect(0,0,tipCanvas.width,tipCanvas.height);}
+  }
+  function showTip(rawX,rawY){
+    clearTip();
+    if(tool!=='pen'||!currentStroke||currentStroke.points.length<2) return;
+    if(!tipCanvas){
+      tipCanvas=document.createElement('canvas');
+      tipCanvas.setAttribute('aria-hidden','true');
+      canvas.parentNode.insertBefore(tipCanvas,canvas.nextSibling);
+      tipCtx=tipCanvas.getContext('2d',{alpha:true,desynchronized:true});
+    }
+    tipCanvas.style.cssText=canvas.style.cssText;
+    const layout=getComputedStyle(canvas);
+    tipCanvas.style.position=layout.position;
+    tipCanvas.style.top=layout.top; tipCanvas.style.left=layout.left;
+    tipCanvas.style.zIndex=layout.zIndex;
+    tipCanvas.style.pointerEvents='none';
+    tipCanvas.style.touchAction='none';
+    if(tipCanvas.width!==canvas.width) tipCanvas.width=canvas.width;
+    if(tipCanvas.height!==canvas.height) tipCanvas.height=canvas.height;
+    tipCtx.setTransform(dpr,0,0,dpr,0,0);
+    const pts=currentStroke.points, b=pts[pts.length-1], a=pts[pts.length-2], m=mid(a,b);
+    tipCtx.lineCap='round';tipCtx.lineJoin='round';
+    tipCtx.lineWidth=b.w;tipCtx.strokeStyle=currentStroke.color;
+    tipCtx.beginPath();tipCtx.moveTo(m.x,m.y);
+    tipCtx.quadraticCurveTo(b.x,b.y,rawX,rawY);tipCtx.stroke();
+  }
+
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
     const rawX=ev.clientX, rawY=ev.clientY, t=ev.timeStamp||performance.now();
@@ -4336,13 +4369,17 @@ function showEmptyState() {
     // slightly different timeStamp values, so this also dedupes across the
     // two fallback streams, not just repeats within one stream.
     if(t<lastTime || (rawX===lastX && rawY===lastY)) return;
+    const dt=Math.max(1,t-lastTime);
+    const speed=Math.hypot(rawX-lastX,rawY-lastY)/dt;
+    // More filtering at low speed; catch up quickly on fast handwriting.
+    const alpha=1-Math.exp(-dt/(2.8/(1+speed*1.8)));
     lastX=rawX; lastY=rawY; lastTime=t;
 
     // Low-pass filter the raw touch position: softens hand-tremor jitter so
     // the ink comes out steady/rounded like Apple Notes, instead of tracking
     // every tiny wobble of the raw sensor data 1:1.
-    smoothX += SMOOTH_ALPHA*(rawX-smoothX);
-    smoothY += SMOOTH_ALPHA*(rawY-smoothY);
+    smoothX += alpha*(rawX-smoothX);
+    smoothY += alpha*(rawY-smoothY);
     const next={x:smoothX,y:smoothY,w:widthFor(ev.pressure)};
     currentStroke.points.push(next);
 
@@ -4370,6 +4407,7 @@ function showEmptyState() {
 
   function appendEvents(events){
     for(const ev of events) appendSample(ev);
+    showTip(lastX,lastY);
   }
 
   // Safari can suppress secondary pen PointerEvents after an earlier finger.
@@ -4489,9 +4527,16 @@ function showEmptyState() {
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
     e.stopPropagation();
+    clearTip();
     if(e.type!=='pointercancel'){
       if(tool==='laser') appendLaserSample(e);
-      else if(tool!=='star') appendSample(e);
+      else if(tool!=='star'){
+        appendSample(e);
+        if(currentStroke&&currentStroke.points.length){
+          const tail=currentStroke.points[currentStroke.points.length-1];
+          tail.x=lastX;tail.y=lastY;
+        }
+      }
     }
     try{document.documentElement.releasePointerCapture(e.pointerId);}catch(_){}
     drawing=false;
@@ -4645,6 +4690,7 @@ function showEmptyState() {
   // is backgrounded or the OS eats the event mid-stroke), force-finalize the
   // stroke so drawing state can never stay stuck until the pen is re-lifted.
   function forceEndStroke(){
+    clearTip();
     stylusTouchId=null;
     if(!drawing) return;
     try{document.documentElement.releasePointerCapture(activePointerId);}catch(_){}
@@ -7543,6 +7589,7 @@ if ('serviceWorker' in navigator) {
 
 
   function redraw(){
+    clearTip();
     if(!ctx||!canvas) return;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     for(const s of strokes) drawStroke(s);
@@ -7583,6 +7630,7 @@ if ('serviceWorker' in navigator) {
   function isPen(e){ return e.pointerType==='pen'; }
 
   function forceEndStroke(){
+    clearTip();
     stylusTouchId=null;
     if(!drawing) return;
     try{document.documentElement.releasePointerCapture(activePointerId);}catch(_){}
@@ -7664,16 +7712,52 @@ if ('serviceWorker' in navigator) {
     drawDot(p,tool,p.w,penColor);
   }
 
+  // A replaceable tip layer reaches the latest real sample without baking
+  // temporary straight stubs into the saved, midpoint-smoothed stroke.
+  let tipCanvas=null, tipCtx=null;
+  function clearTip(){
+    if(tipCtx){tipCtx.setTransform(1,0,0,1,0,0);tipCtx.clearRect(0,0,tipCanvas.width,tipCanvas.height);}
+  }
+  function showTip(rawX,rawY){
+    clearTip();
+    if(tool!=='pen'||!currentStroke||currentStroke.points.length<2) return;
+    if(!tipCanvas){
+      tipCanvas=document.createElement('canvas');
+      tipCanvas.setAttribute('aria-hidden','true');
+      canvas.parentNode.insertBefore(tipCanvas,canvas.nextSibling);
+      tipCtx=tipCanvas.getContext('2d',{alpha:true,desynchronized:true});
+    }
+    tipCanvas.style.cssText=canvas.style.cssText;
+    const layout=getComputedStyle(canvas);
+    tipCanvas.style.position=layout.position;
+    tipCanvas.style.top=layout.top; tipCanvas.style.left=layout.left;
+    tipCanvas.style.zIndex=layout.zIndex;
+    tipCanvas.style.pointerEvents='none';
+    tipCanvas.style.touchAction='none';
+    if(tipCanvas.width!==canvas.width) tipCanvas.width=canvas.width;
+    if(tipCanvas.height!==canvas.height) tipCanvas.height=canvas.height;
+    tipCtx.setTransform(dpr,0,0,dpr,0,0);
+    const pts=currentStroke.points, b=pts[pts.length-1], a=pts[pts.length-2], m=mid(a,b);
+    tipCtx.lineCap='round';tipCtx.lineJoin='round';
+    tipCtx.lineWidth=b.w;tipCtx.strokeStyle=currentStroke.color;
+    tipCtx.beginPath();tipCtx.moveTo(m.x,m.y);
+    tipCtx.quadraticCurveTo(b.x,b.y,rawX,rawY);tipCtx.stroke();
+  }
+
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||!isPen(ev)) return;
     if(tool==='star') return;
     const r=canvas.getBoundingClientRect();
     const rawX=ev.clientX-r.left, rawY=ev.clientY-r.top, t=ev.timeStamp||performance.now();
     if(t<lastTime || (rawX===lastX && rawY===lastY)) return;
+    const dt=Math.max(1,t-lastTime);
+    const speed=Math.hypot(rawX-lastX,rawY-lastY)/dt;
+    // More filtering at low speed; catch up quickly on fast handwriting.
+    const alpha=1-Math.exp(-dt/(2.8/(1+speed*1.8)));
     lastX=rawX; lastY=rawY; lastTime=t;
 
-    smoothX += SMOOTH_ALPHA*(rawX-smoothX);
-    smoothY += SMOOTH_ALPHA*(rawY-smoothY);
+    smoothX += alpha*(rawX-smoothX);
+    smoothY += alpha*(rawY-smoothY);
     const next={x:smoothX,y:smoothY,w:widthFor(ev.pressure)};
     currentStroke.points.push(next);
 
@@ -7698,7 +7782,7 @@ if ('serviceWorker' in navigator) {
       ctx.globalCompositeOperation='source-over';
     }
   }
-  function appendEvents(events){ for(const ev of events) appendSample(ev); }
+  function appendEvents(events){ for(const ev of events) appendSample(ev); showTip(lastX,lastY); }
 
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
@@ -7727,9 +7811,16 @@ if ('serviceWorker' in navigator) {
     if(stylusTouchId!==null && !e.stylusTouch) return;
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
+    clearTip();
     if(e.type!=='pointercancel'){
       if(tool==='laser') appendLaserSample(e);
-      else if(tool!=='star') appendSample(e);
+      else if(tool!=='star'){
+        appendSample(e);
+        if(currentStroke&&currentStroke.points.length){
+          const tail=currentStroke.points[currentStroke.points.length-1];
+          tail.x=lastX;tail.y=lastY;
+        }
+      }
     }
     try{document.documentElement.releasePointerCapture(e.pointerId);}catch(_){}
     drawing=false;
