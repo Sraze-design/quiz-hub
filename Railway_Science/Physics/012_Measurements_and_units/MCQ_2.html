@@ -1,0 +1,902 @@
+const data = [
+  {
+    q_hi: "Q1511. दीप्त तीव्रता (Luminous Intensity) की एस. आई. (SI) इकाई क्या है?",
+    q_en: "Q1511. What is the SI unit of luminous intensity?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) कैन्डेला (candela)",
+      "(b) केल्विन (kelvin)",
+      "(c) वाट (watt)",
+      "(d) जूल (joules)"
+    ],
+    o_en: [
+      "(a) Candela",
+      "(b) Kelvin",
+      "(c) Watt",
+      "(d) Joule"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1512. अंतर्राष्ट्रीय इकाई प्रणाली (SI) में, किस भौतिक कारक का मान 6.62607015 × 10⁻³⁴ जूल-हर्ट्ज़⁻¹ होता है?",
+    q_en: "Q1512. In the International System of Units (SI), which physical constant has the value 6.62607015 × 10⁻³⁴ joule-hertz⁻¹?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) वॉन क्लिट्ज़िंग स्थिरांक (Von Klitzing constant)",
+      "(b) आवोगाद्रो स्थिरांक (Avogadro constant)",
+      "(c) प्लैंक स्थिरांक (Planck's constant)",
+      "(d) स्टीफन-बोल्ट्ज़मैन स्थिरांक (Stefan-Boltzmann constant)"
+    ],
+    o_en: [
+      "(a) Von Klitzing constant",
+      "(b) Avogadro constant",
+      "(c) Planck's constant",
+      "(d) Stefan-Boltzmann constant"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1513. निम्नलिखित में से कौन-सा, अंतर्राष्ट्रीय मात्रक प्रणाली (SI) में ऊर्जा का मानक मात्रक है?",
+    q_en: "Q1513. Which of the following is the standard SI unit of energy?",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) जूल (J)",
+      "(b) पास्कल (Pa)",
+      "(c) वाट (W)",
+      "(d) न्यूटन (N)"
+    ],
+    o_en: [
+      "(a) Joule (J)",
+      "(b) Pascal (Pa)",
+      "(c) Watt (W)",
+      "(d) Newton (N)"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1514. विद्युत आवेश की SI इकाई क्या है?",
+    q_en: "Q1514. What is the SI unit of electric charge?",
+    tag: "RPF S.I. 13/12/2024 (Evening)",
+    o_hi: [
+      "(a) कूलॉम",
+      "(b) ओम",
+      "(c) एम्पीयर",
+      "(d) हर्ट्ज़"
+    ],
+    o_en: [
+      "(a) Coulomb",
+      "(b) Ohm",
+      "(c) Ampere",
+      "(d) Hertz"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1515. कौन सी भौतिक मात्रा उस दर को दर्शाती है जिस पर विद्युत परिपथ में विद्युत ऊर्जा का क्षय या उपभोग होता है?",
+    q_en: "Q1515. Which physical quantity represents the rate at which electrical energy is dissipated or consumed in an electric circuit?",
+    tag: "RRB ALP 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) विद्युत ऊर्जा",
+      "(b) विद्युत शक्ति",
+      "(c) विभवांतर",
+      "(d) ऊष्मा ऊर्जा"
+    ],
+    o_en: [
+      "(a) Electrical energy",
+      "(b) Electrical power",
+      "(c) Potential difference",
+      "(d) Heat energy"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1516. निम्नलिखित में से कौन-सा किए गए कार्य का SI मात्रक है?",
+    q_en: "Q1516. Which of the following is the SI unit of work done?",
+    tag: "RRB ALP 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) अर्ग",
+      "(b) मीटर",
+      "(c) न्यूटन",
+      "(d) जूल"
+    ],
+    o_en: [
+      "(a) Erg",
+      "(b) Metre",
+      "(c) Newton",
+      "(d) Joule"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1517. निम्नलिखित में से कौन-सी त्वरण की इकाई है?",
+    q_en: "Q1517. Which of the following is a unit of acceleration?",
+    tag: "RRB ALP 27/11/2024 (Evening)",
+    o_hi: [
+      "(a) ms",
+      "(b) ms²",
+      "(c) m/s²",
+      "(d) m/s"
+    ],
+    o_en: [
+      "(a) ms",
+      "(b) ms²",
+      "(c) m/s²",
+      "(d) m/s"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1518. विद्युत ऊर्जा की 1 व्यावसायिक इकाई ______ जूल के बराबर होती है।",
+    q_en: "Q1518. One commercial unit of electrical energy is equal to ______ joules.",
+    tag: "RRC Group D 19/09/2022 (Morning)",
+    o_hi: [
+      "(a) 3.6 × 10⁷",
+      "(b) 3.6 × 10⁸",
+      "(c) 3.6 × 10⁵",
+      "(d) 3.6 × 10⁶"
+    ],
+    o_en: [
+      "(a) 3.6 × 10⁷",
+      "(b) 3.6 × 10⁸",
+      "(c) 3.6 × 10⁵",
+      "(d) 3.6 × 10⁶"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1519. आवर्धन की इकाई क्या है?",
+    q_en: "Q1519. What is the unit of magnification?",
+    tag: "RRC Group D 19/09/2022 (Evening)",
+    o_hi: [
+      "(a) सेमी",
+      "(b) न्यूटन",
+      "(c) डायोप्टर",
+      "(d) इसकी कोई इकाई नहीं है"
+    ],
+    o_en: [
+      "(a) cm",
+      "(b) Newton",
+      "(c) Dioptre",
+      "(d) It has no unit"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1520. निम्न में से कौन सी इकाई, SI इकाई नहीं है?",
+    q_en: "Q1520. Which of the following is not an SI unit?",
+    tag: "RRB NTPC CBT - II (13/06/2022) Shift 2",
+    o_hi: [
+      "(a) ओम",
+      "(b) एम्पीयर",
+      "(c) न्यूटन",
+      "(d) कैलोरी"
+    ],
+    o_en: [
+      "(a) Ohm",
+      "(b) Ampere",
+      "(c) Newton",
+      "(d) Calorie"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1521. विद्युत प्रतिरोध का मात्रक निम्न में से क्या है?",
+    q_en: "Q1521. Which of the following is the unit of electrical resistance?",
+    tag: "RRB NTPC CBT - II (15/06/2022) Shift 3",
+    o_hi: [
+      "(a) न्यूटन",
+      "(b) वाट",
+      "(c) कूलॉम",
+      "(d) ओम"
+    ],
+    o_en: [
+      "(a) Newton",
+      "(b) Watt",
+      "(c) Coulomb",
+      "(d) Ohm"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1522. लंबाई का SI मात्रक _____ है।",
+    q_en: "Q1522. The SI unit of length is _____.",
+    tag: "RRB NTPC CBT - II (17/06/2022) Shift 3",
+    o_hi: [
+      "(a) मीटर",
+      "(b) इंच",
+      "(c) फीट",
+      "(d) मील"
+    ],
+    o_en: [
+      "(a) Metre",
+      "(b) Inch",
+      "(c) Foot",
+      "(d) Mile"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1523. निम्नलिखित में से किस इकाई का उपयोग किसी पदार्थ की मात्रा को मापने के लिए किया जाता है?",
+    q_en: "Q1523. Which of the following units is used to measure the amount of substance?",
+    tag: "RRB NTPC CBT - I (28/12/2020) Morning",
+    o_hi: [
+      "(a) मोल",
+      "(b) टेस्ला",
+      "(c) जूल",
+      "(d) लक्स"
+    ],
+    o_en: [
+      "(a) Mole",
+      "(b) Tesla",
+      "(c) Joule",
+      "(d) Lux"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1524. निम्नलिखित में से किस उपकरण का उपयोग अपेक्षाकृत उच्च तापमान को मापने के लिए किया जाता है जो भट्टियों में पाया जाता है?",
+    q_en: "Q1524. Which of the following instruments is used to measure relatively high temperatures found in furnaces?",
+    tag: "RRB NTPC CBT - I (07/01/2021) Evening",
+    o_hi: [
+      "(a) एमीटर",
+      "(b) फ्लक्स मीटर",
+      "(c) पाइरोमीटर",
+      "(d) बोलोमीटर"
+    ],
+    o_en: [
+      "(a) Ammeter",
+      "(b) Flux meter",
+      "(c) Pyrometer",
+      "(d) Bolometer"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1525. वोल्टमीटर एक उपकरण है जो_____ की उपस्थिति का पता लगा सकता है",
+    q_en: "Q1525. A voltmeter is an instrument that can detect the presence of _____.",
+    tag: "RRB NTPC CBT - I (17/01/2021) Morning",
+    o_hi: [
+      "(a) विभवांतर",
+      "(b) ऊष्मा",
+      "(c) स्पंदन",
+      "(d) चुम्बकीय क्षेत्र"
+    ],
+    o_en: [
+      "(a) Potential difference",
+      "(b) Heat",
+      "(c) Vibration",
+      "(d) Magnetic field"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1526. किसी परिपथ में धारा के प्रवाह की दिशा दिखाने के लिए किस यंत्र का प्रयोग किया जाता है?",
+    q_en: "Q1526. Which instrument is used to indicate the direction of current flow in a circuit?",
+    tag: "RRB NTPC CBT - I (19/01/2021) Morning",
+    o_hi: [
+      "(a) वोल्टमीटर",
+      "(b) एमीटर",
+      "(c) गैल्वेनोमीटर",
+      "(d) रियोस्टेट"
+    ],
+    o_en: [
+      "(a) Voltmeter",
+      "(b) Ammeter",
+      "(c) Galvanometer",
+      "(d) Rheostat"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1527. निम्नलिखित में से किसका उपयोग धातु के ब्लॉकों में छिद्र एवं दरार का पता लगाने के लिए किया जाता है?",
+    q_en: "Q1527. Which of the following is used to detect holes and cracks in metal blocks?",
+    tag: "RRB NTPC CBT - I (19/01/2021) Evening",
+    o_hi: [
+      "(a) अनुनादन",
+      "(b) पराध्वनि",
+      "(c) प्रतिध्वनि",
+      "(d) ध्वनि नेविगेशन और रेंजिंग (SONAR)"
+    ],
+    o_en: [
+      "(a) Resonance",
+      "(b) Ultrasound",
+      "(c) Echo",
+      "(d) Sound Navigation and Ranging (SONAR)"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1528. ऑटोमोबाइल में एक उपकरण लगा होता है जो तय की गई दूरी को दर्शाता है, इसे चुनिए।",
+    q_en: "Q1528. An automobile has an instrument that indicates the distance travelled; choose it.",
+    tag: "RRB NTPC CBT - I (23/01/2021) Evening",
+    o_hi: [
+      "(a) ओडोमीटर",
+      "(b) ऑटोमीटर",
+      "(c) RPM मीटर",
+      "(d) स्पीडोमीटर"
+    ],
+    o_en: [
+      "(a) Odometer",
+      "(b) Autometer",
+      "(c) RPM meter",
+      "(d) Speedometer"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1529. हवा की गति मापने के लिए निम्न में से किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q1529. Which of the following instruments is used to measure wind speed?",
+    tag: "RRB NTPC CBT - I (25/01/2021) Morning",
+    o_hi: [
+      "(a) यूडोमीटर",
+      "(b) एनीमोमीटर",
+      "(c) एमीटर",
+      "(d) हाइग्रोमीटर"
+    ],
+    o_en: [
+      "(a) Udometer",
+      "(b) Anemometer",
+      "(c) Ammeter",
+      "(d) Hygrometer"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1530. ध्वनि की तीव्रता को मापने के लिए निम्नलिखित में से किस इकाई का उपयोग किया जाता है?",
+    q_en: "Q1530. Which of the following units is used to measure sound intensity?",
+    tag: "RRB NTPC CBT - I (25/01/2021) Morning",
+    o_hi: [
+      "(a) डेसीबल",
+      "(b) पास्कल",
+      "(c) क्यूरी",
+      "(d) जूल"
+    ],
+    o_en: [
+      "(a) Decibel",
+      "(b) Pascal",
+      "(c) Curie",
+      "(d) Joule"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1531. भूकम्प की तीव्रता____में मापी जाती है।",
+    q_en: "Q1531. Earthquake intensity is measured in _____.",
+    tag: "RRB NTPC CBT - I (25/01/2021) Evening",
+    o_hi: [
+      "(a) बार",
+      "(b) रिक्टर स्केल",
+      "(c) मर्कल्ली स्केल",
+      "(d) किलोग्राम"
+    ],
+    o_en: [
+      "(a) Bar",
+      "(b) Richter scale",
+      "(c) Mercalli scale",
+      "(d) Kilogram"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1532. 'जूल' में क्या मापा जाता है?",
+    q_en: "Q1532. What is measured in 'joules'?",
+    tag: "RRB NTPC CBT - I (28/01/2021) Morning",
+    o_hi: [
+      "(a) वेग",
+      "(b) बल",
+      "(c) ऊर्जा",
+      "(d) शक्ति"
+    ],
+    o_en: [
+      "(a) Velocity",
+      "(b) Force",
+      "(c) Energy",
+      "(d) Power"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1533. निम्नलिखित में से कौन सा उपकरण मुख्य रूप से सैन्य पनडुब्बियों में उपयोग किया जाता है?",
+    q_en: "Q1533. Which of the following instruments is mainly used in military submarines?",
+    tag: "RRB NTPC CBT - I (31/01/2021) Morning",
+    o_hi: [
+      "(a) पेरिस्कोप",
+      "(b) एण्डोस्कोप",
+      "(c) माइक्रोस्कोप",
+      "(d) टेलिस्कोप"
+    ],
+    o_en: [
+      "(a) Periscope",
+      "(b) Endoscope",
+      "(c) Microscope",
+      "(d) Telescope"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1534. एक प्रकाश वर्ष ____की एक इकाई है",
+    q_en: "Q1534. A light-year is a unit of ____.",
+    tag: "RRB NTPC CBT - I (01/02/2021) Morning",
+    o_hi: [
+      "(a) दूरी",
+      "(b) प्रकाश की तीव्रता",
+      "(c) समय",
+      "(d) द्रव्यमान"
+    ],
+    o_en: [
+      "(a) Distance",
+      "(b) Intensity of light",
+      "(c) Time",
+      "(d) Mass"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1535. एक असत्य का पता लगाने वाले उपकरण को______के रूप में भी जाना जाता है।",
+    q_en: "Q1535. An instrument used to detect a lie is also known as a ______.",
+    tag: "RRB NTPC CBT - I (01/02/2021) Evening",
+    o_hi: [
+      "(a) पॉलीग्राफ",
+      "(b) सिस्मोग्राफ",
+      "(c) बारोग्राफ",
+      "(d) पोलारिमीटर"
+    ],
+    o_en: [
+      "(a) Polygraph",
+      "(b) Seismograph",
+      "(c) Barograph",
+      "(d) Polarimeter"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1536. ______एक उपकरण है जिसके द्वारा एक ही वस्तु के दो अलग-अलग फोटोग्राफ एक साथ देखे जा सकते हैं",
+    q_en: "Q1536. ______ is an instrument by which two different photographs of the same object can be viewed together.",
+    tag: "RRB NTPC CBT - I (05/02/2021) Morning",
+    o_hi: [
+      "(a) स्टिरियोस्कोप",
+      "(b) स्ट्रोबोस्कोप",
+      "(c) स्टैथोस्कोप",
+      "(d) स्पेक्ट्रोस्कोप"
+    ],
+    o_en: [
+      "(a) Stereoscope",
+      "(b) Stroboscope",
+      "(c) Stethoscope",
+      "(d) Spectroscope"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1537. न्यूटन _______को मापने की इकाई है।",
+    q_en: "Q1537. Newton is the unit used to measure _______.",
+    tag: "RRB NTPC CBT - I (08/02/2021) Evening",
+    o_hi: [
+      "(a) दबाव",
+      "(b) प्रतिरोध",
+      "(c) बल",
+      "(d) शक्ति"
+    ],
+    o_en: [
+      "(a) Pressure",
+      "(b) Resistance",
+      "(c) Force",
+      "(d) Power"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1538. कार्य करने की दर को शक्ति कहते हैं। शक्ति का मात्रक है:",
+    q_en: "Q1538. The rate of doing work is called power. The unit of power is:",
+    tag: "RRB NTPC CBT - I (11/02/2021) Morning",
+    o_hi: [
+      "(a) केल्विन",
+      "(b) वाट",
+      "(c) ऐंपियर",
+      "(d) वोल्ट"
+    ],
+    o_en: [
+      "(a) Kelvin",
+      "(b) Watt",
+      "(c) Ampere",
+      "(d) Volt"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1539. निम्नलिखित में से कौन सुमेलित नही है?",
+    q_en: "Q1539. Which of the following is not correctly matched?",
+    tag: "RRB NTPC CBT - I (23/02/2021) Morning",
+    o_hi: [
+      "(a) कम्पास - नेविगेशन के लिए उपयोग किया जाता है और उत्तर-दक्षिण दिशाओं को इंगित करता है",
+      "(b) साइक्लोट्रॉन - छोटे परिमाण वाले चक्रवातों को मापता है।",
+      "(c) एक्टिनोमीटर - विकिरण की तीव्रता को मापता है",
+      "(d) इलेक्ट्रोस्कोप - विद्युत आवेश की उपस्थिति का पता लगाता है"
+    ],
+    o_en: [
+      "(a) Compass - used for navigation and indicates north-south directions",
+      "(b) Cyclotron - measures cyclones of small magnitude",
+      "(c) Actinometer - measures intensity of radiation",
+      "(d) Electroscope - detects the presence of electric charge"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1540. मानव शरीर की ऊर्जा आवश्यकताओं को मापने के लिए उपयोग की जाने वाली माप की इकाई क्या है?",
+    q_en: "Q1540. What unit of measurement is used to measure the energy requirements of the human body?",
+    tag: "RRB NTPC CBT - I (09/03/2021) Evening",
+    o_hi: [
+      "(a) अर्ग",
+      "(b) जूल",
+      "(c) ओह्म",
+      "(d) कैलोरी"
+    ],
+    o_en: [
+      "(a) Erg",
+      "(b) Joule",
+      "(c) Ohm",
+      "(d) Calorie"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1541. किसी वस्तु पर कार्य करने वाले बल द्वारा किया गया कार्य बल की दिशा में तय की गई दूरी से गुणा किए गए बल की मात्रा के बराबर होता है। निम्नलिखित में से कौन कार्य का मात्रक नहीं है?",
+    q_en: "Q1541. The work done by a force acting on an object is equal to the force multiplied by the distance moved in the direction of the force. Which of the following is not a unit of work?",
+    tag: "RRB NTPC CBT - I (13/03/2021) Morning",
+    o_hi: [
+      "(a) Kg m²/sec²",
+      "(b) Kg m/sec²",
+      "(c) न्यूटन मीटर",
+      "(d) जूल"
+    ],
+    o_en: [
+      "(a) Kg m²/sec²",
+      "(b) Kg m/sec²",
+      "(c) Newton metre",
+      "(d) Joule"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1542. रेडियोधर्मिता की SI इकाई क्या है?",
+    q_en: "Q1542. What is the SI unit of radioactivity?",
+    tag: "RRB NTPC CBT - I (13/03/2021) Evening",
+    o_hi: [
+      "(a) बेक्वेरेल",
+      "(b) फैराडे",
+      "(c) क्यूरी",
+      "(d) रदरफोर्ड"
+    ],
+    o_en: [
+      "(a) Becquerel",
+      "(b) Farad",
+      "(c) Curie",
+      "(d) Rutherford"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1543. ओजोन परत की मोटाई मापी जाती है:",
+    q_en: "Q1543. The thickness of the ozone layer is measured in:",
+    tag: "RRB NTPC CBT - I (15/03/2021) Morning",
+    o_hi: [
+      "(a) सीवर्ट इकाई",
+      "(b) डॉब्सन इकाई",
+      "(c) डेसीबल",
+      "(d) डेल इकाई"
+    ],
+    o_en: [
+      "(a) Sievert unit",
+      "(b) Dobson unit",
+      "(c) Decibel",
+      "(d) Del unit"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1544. किसी वस्तु पर विद्युत आवेश की उपस्थिति की पहचान करने के लिए किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q1544. Which instrument is used to detect the presence of electric charge on an object?",
+    tag: "RRB NTPC CBT - I (19/03/2021) Morning",
+    o_hi: [
+      "(a) एम्पीयर मीटर",
+      "(b) इलेक्ट्रोस्कोप",
+      "(c) मल्टीमीटर",
+      "(d) ओममीटर"
+    ],
+    o_en: [
+      "(a) Ampere meter",
+      "(b) Electroscope",
+      "(c) Multimeter",
+      "(d) Ohmmeter"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1545. किसी परिपथ में बहने वाली धारा को मापने के लिए एमीटर को कैसे जोड़ा जाता है?",
+    q_en: "Q1545. How is an ammeter connected to measure the current flowing in a circuit?",
+    tag: "RRB JE 25/05/2019 (Evening)",
+    o_hi: [
+      "(a) श्रेणी में",
+      "(b) समानांतर में",
+      "(c) लाइन में",
+      "(d) आर-पार में"
+    ],
+    o_en: [
+      "(a) In series",
+      "(b) In parallel",
+      "(c) In line",
+      "(d) Across"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1546. प्रणोद (thrust) का SI मात्रक क्या है?",
+    q_en: "Q1546. What is the SI unit of thrust?",
+    tag: "RRB JE 27/05/2019 (Evening)",
+    o_hi: [
+      "(a) न्यूटन (N)",
+      "(b) न्यूटन मीटर (N m)",
+      "(c) पास्कल (Pa)",
+      "(d) न्यूटन प्रति मीटर (N/m)"
+    ],
+    o_en: [
+      "(a) Newton (N)",
+      "(b) Newton metre (N m)",
+      "(c) Pascal (Pa)",
+      "(d) Newton per metre (N/m)"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1547. तरंग वेग का SI मात्रक क्या है?",
+    q_en: "Q1547. What is the SI unit of wave velocity?",
+    tag: "RRB JE 28/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) मीटर - m",
+      "(b) हर्ट्ज - Hz",
+      "(c) मीटर प्रति सेकंड (m s⁻¹)",
+      "(d) सेकंड - s"
+    ],
+    o_en: [
+      "(a) Metre - m",
+      "(b) Hertz - Hz",
+      "(c) Metre per second (m s⁻¹)",
+      "(d) Second - s"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1548. सापेक्ष घनत्व का मात्रक क्या है?",
+    q_en: "Q1548. What is the unit of relative density?",
+    tag: "RPF Constable 17/01/2019 (Morning)",
+    o_hi: [
+      "(a) कोई मात्रक नहीं",
+      "(b) kg m⁻¹",
+      "(c) kg m⁻²",
+      "(d) kg m⁻³"
+    ],
+    o_en: [
+      "(a) No unit",
+      "(b) kg m⁻¹",
+      "(c) kg m⁻²",
+      "(d) kg m⁻³"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1549. किसी वस्तु के आवेश वाहक होने अथवा नही होने का पता लगाने के लिए किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q1549. Which instrument is used to determine whether an object carries charge or not?",
+    tag: "RPF Constable 19/01/2019 (Evening)",
+    o_hi: [
+      "(a) इलेक्ट्रोस्कोप",
+      "(b) पेरिस्कोप",
+      "(c) एंडोस्कोप",
+      "(d) कैलिडिस्कोप"
+    ],
+    o_en: [
+      "(a) Electroscope",
+      "(b) Periscope",
+      "(c) Endoscope",
+      "(d) Kaleidoscope"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1550. द्रव के सापेक्ष घनत्व को मापने के लिए किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q1550. Which instrument is used to measure the relative density of a liquid?",
+    tag: "RPF Constable 25/01/2019 (Morning)",
+    o_hi: [
+      "(a) हाइग्रोमीटर",
+      "(b) हाइड्रोमीटर",
+      "(c) लैक्टोमीटर",
+      "(d) वेंचुरीमीटर"
+    ],
+    o_en: [
+      "(a) Hygrometer",
+      "(b) Hydrometer",
+      "(c) Lactometer",
+      "(d) Venturimeter"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1551. विकिरण को मापने के लिए किस उपकरण का उपयोग किया जाता है?",
+    q_en: "Q1551. Which instrument is used to measure radiation?",
+    tag: "RPF Constable 25/01/2019 (Morning)",
+    o_hi: [
+      "(a) वोल्टमीटर",
+      "(b) अमीटर",
+      "(c) गीगर-मुलर काउंटर",
+      "(d) स्पेक्ट्रोमीटर"
+    ],
+    o_en: [
+      "(a) Voltmeter",
+      "(b) Ammeter",
+      "(c) Geiger-Muller counter",
+      "(d) Spectrometer"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1552. वाट / स्टेरेडियन______की इकाई है।",
+    q_en: "Q1552. Watt / steradian is the unit of ______.",
+    tag: "RRB ALP Tier - II (21/01/2019) Afternoon",
+    o_hi: [
+      "(a) पारगम्यता",
+      "(b) विद्युतशीलता",
+      "(c) विद्युत चालकता",
+      "(d) विकिरण तीव्रता"
+    ],
+    o_en: [
+      "(a) Permeability",
+      "(b) Permittivity",
+      "(c) Electrical conductivity",
+      "(d) Radiant intensity"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1553. ऊर्जा की व्यावसायिक मात्रक______है।",
+    q_en: "Q1553. The commercial unit of energy is ______.",
+    tag: "RRB Group D 18/09/2018 (Afternoon)",
+    o_hi: [
+      "(a) जूल",
+      "(b) वाट-घंटा",
+      "(c) किलोवाट-घंटा",
+      "(d) किलोवाट"
+    ],
+    o_en: [
+      "(a) Joule",
+      "(b) Watt-hour",
+      "(c) Kilowatt-hour",
+      "(d) Kilowatt"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1554. त्वरण की विमा ______होती है।",
+    q_en: "Q1554. The dimension of acceleration is ______.",
+    tag: "RRB Group D 18/09/2018 (Evening)",
+    o_hi: [
+      "(a) [L¹M⁰T⁻²]",
+      "(b) [L¹M¹T²]",
+      "(c) [L¹M²T⁻²]",
+      "(d) [L¹M⁰T²]"
+    ],
+    o_en: [
+      "(a) [L¹M⁰T⁻²]",
+      "(b) [L¹M¹T²]",
+      "(c) [L¹M²T⁻²]",
+      "(d) [L¹M⁰T²]"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q1555. संवेग की SI पद्धति में मात्रक क्या है?",
+    q_en: "Q1555. What is the SI unit of momentum?",
+    tag: "RRB Group D 19/09/2018 (Evening)",
+    o_hi: [
+      "(a) g-m/s",
+      "(b) kg-m/s²",
+      "(c) kg-m/s",
+      "(d) kg-cm/s"
+    ],
+    o_en: [
+      "(a) g-m/s",
+      "(b) kg-m/s²",
+      "(c) kg-m/s",
+      "(d) kg-cm/s"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
