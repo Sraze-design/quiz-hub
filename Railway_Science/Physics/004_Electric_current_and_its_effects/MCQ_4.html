@@ -1,0 +1,1005 @@
+const Q643_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q609. एक श्रेणी परिपथ में, यदि किसी एक प्रतिरोधक को हटा दिया जाए या तोड़ दिया जाए, तो परिपथ में धारा _______।",
+    q_en: "Q609. In a series circuit, if any one resistor is removed or broken, the current in the circuit _______.",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) घट जाएगी",
+      "(b) बढ़ जाएगी",
+      "(c) शून्य हो जाएगी",
+      "(d) उतनी ही रहेगी"
+    ],
+    o_en: [
+      "(a) will decrease",
+      "(b) will increase",
+      "(c) will become zero",
+      "(d) will remain the same"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q610. परिनालिका (solenoid) के अंदर चुंबकीय क्षेत्र रेखाओं की आकृति कैसी होती है?",
+    q_en: "Q610. What is the shape of magnetic field lines inside a solenoid?",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) दीर्घवृत्ताकार (Elliptical)",
+      "(b) सरल और समांतर (Straight and parallel)",
+      "(c) यादृच्छिक रूप से अभिविन्यस्त (Randomly oriented)",
+      "(d) वृत्ताकार (Circular)"
+    ],
+    o_en: [
+      "(a) Elliptical",
+      "(b) Straight and parallel",
+      "(c) Randomly oriented",
+      "(d) Circular"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q611. परिनालिका (solenoid) में चुंबकीय क्षेत्र, ____ |",
+    q_en: "Q611. In a solenoid, the magnetic field ____.",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) सभी बिंदुओं पर समान होता है",
+      "(b) केंद्र पर अधिकतम और किनारे पर न्यूनतम होता है",
+      "(c) केंद्र पर शून्य होता है",
+      "(d) किनारे से दूरी के साथ बदलता रहता है"
+    ],
+    o_en: [
+      "(a) is the same at all points",
+      "(b) is maximum at the centre and minimum at the edge",
+      "(c) is zero at the centre",
+      "(d) keeps changing with distance from the edge"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q612. फ्लेमिंग के दाएँ हाथ के नियम में अंगूठा किसे निरूपित करता है?",
+    q_en: "Q612. In Fleming's right-hand rule, what does the thumb represent?",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) चुंबकीय क्षेत्र की दिशा",
+      "(b) प्रेरित धारा की दिशा",
+      "(c) गति की दिशा",
+      "(d) वोल्टता की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of magnetic field",
+      "(b) Direction of induced current",
+      "(c) Direction of motion",
+      "(d) Direction of voltage"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q613. एक तार के वृत्ताकार लूप (circular loop) का अग्र फलक (front face) उत्तरी ध्रुव है। लूप के इस फलक में धारा की दिशा _____होगी।",
+    q_en: "Q613. The front face of a circular wire loop is the north pole. The direction of current on this face of the loop will be _____.",
+    tag: "RRB JE 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) दक्षिणावर्त (clockwise)",
+      "(b) दक्षिण की ओर (towards south)",
+      "(c) उत्तर की ओर (towards north)",
+      "(d) वामावर्त (anti-clockwise)"
+    ],
+    o_en: [
+      "(a) Clockwise",
+      "(b) Towards south",
+      "(c) Towards north",
+      "(d) Anti-clockwise"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q614. विद्युत चुम्बकीय प्रेरण की खोज का श्रेय किस वैज्ञानिक को दिया जाता है?",
+    q_en: "Q614. Which scientist is credited with the discovery of electromagnetic induction?",
+    tag: "RRB JE 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) थॉमस एडिसन (Thomas Edison)",
+      "(b) आइजैक न्यूटन (Isaac Newton)",
+      "(c) माइकल फैराडे (Michael Faraday)",
+      "(d) निकोला टेस्ला (Nikola Tesla)"
+    ],
+    o_en: [
+      "(a) Thomas Edison",
+      "(b) Isaac Newton",
+      "(c) Michael Faraday",
+      "(d) Nikola Tesla"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q615. निम्नलिखित में से कौन-सा सुरक्षा उपकरण, विद्युत परिपथों में अत्यधिक धारा के प्रवाह को रोकने के लिए उपयोग किया जाता है?",
+    q_en: "Q615. Which of the following safety devices is used to prevent excessive current flow in electrical circuits?",
+    tag: "RRB JE 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) संधारित्र (Capacitor)",
+      "(b) प्रतिरोधक (Resistor)",
+      "(c) फ्यूज़ (Fuse)",
+      "(d) ट्रांसफार्मर (Transformer)"
+    ],
+    o_en: [
+      "(a) Capacitor",
+      "(b) Resistor",
+      "(c) Fuse",
+      "(d) Transformer"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q616. फ्लेमिंग के वामहस्त नियम का उपयोग _______निर्धारित करने के लिए किया जाता है।",
+    q_en: "Q616. Fleming's left-hand rule is used to determine _______.",
+    tag: "RRB JE 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) धारावाही चालक पर बल का परिमाण",
+      "(b) चालक में प्रवाहित धारा की मात्रा",
+      "(c) धारावाही चालक पर बल की दिशा",
+      "(d) चुंबकीय क्षेत्र का सामर्थ्य"
+    ],
+    o_en: [
+      "(a) Magnitude of force on a current-carrying conductor",
+      "(b) Amount of current flowing through the conductor",
+      "(c) Direction of force on a current-carrying conductor",
+      "(d) Strength of the magnetic field"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q617. इलेक्ट्रिक पंखा, लगातार लंबे समय तक उपयोग किए जाने पर गर्म हो जाता है। ऐसा ________के कारण होता है।",
+    q_en: "Q617. An electric fan becomes hot when used continuously for a long time. This happens due to ________.",
+    tag: "RRB JE 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) पंखे से प्रवाहित होने वाली विद्युत धारा के ऊष्मीय प्रभाव",
+      "(b) पंखे की धीमी गति से घूमने",
+      "(c) गर्मियों में उच्च तापमान",
+      "(d) पंखे के तेज़ घूमने"
+    ],
+    o_en: [
+      "(a) the heating effect of electric current flowing through the fan",
+      "(b) the slow rotation of the fan",
+      "(c) high temperature in summer",
+      "(d) the fast rotation of the fan"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q618. प्रेरित धारा का दाएँ हाथ का नियम किसके द्वारा दिया गया था ?",
+    q_en: "Q618. Who gave the right-hand rule for induced current?",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) ओस्टैंड (Oersted)",
+      "(b) ऐम्पियर (Ampere)",
+      "(c) फ्लेमिंग (Fleming)",
+      "(d) फैराडे (Faraday)"
+    ],
+    o_en: [
+      "(a) Oersted",
+      "(b) Ampere",
+      "(c) Fleming",
+      "(d) Faraday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q619. इस्त्री (laundry iron), इलेक्ट्रिक टोस्टर, इलेक्ट्रिक ओवन, इलेक्ट्रिक केतली और इलेक्ट्रिक हीटर जैसे विद्युत उपकरण विद्युत धारा के किस प्रभाव पर आधारित होते हैं?",
+    q_en: "Q619. Electrical appliances such as a laundry iron, electric toaster, electric oven, electric kettle and electric heater are based on which effect of electric current?",
+    tag: "RRB ALP 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) रासायनिक प्रभाव",
+      "(b) चुंबकीय प्रभाव",
+      "(c) क्रियात्मक प्रभाव",
+      "(d) ऊष्मीय प्रभाव"
+    ],
+    o_en: [
+      "(a) Chemical effect",
+      "(b) Magnetic effect",
+      "(c) Physiological effect",
+      "(d) Heating effect"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q620. निम्नलिखित में से कौन-सा उपकरण विद्युत धारा के चुंबकीय प्रभाव का उपयोग नहीं करता है?",
+    q_en: "Q620. Which of the following devices does not use the magnetic effect of electric current?",
+    tag: "RRB ALP 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) चुम्बकीय दिक्सूचक (Magnetic compass)",
+      "(b) विद्युत जनित्र (Electric generator)",
+      "(c) विद्युत मोटर (Electric motor)",
+      "(d) माइक्रोफ़ोन (Microphone)"
+    ],
+    o_en: [
+      "(a) Magnetic compass",
+      "(b) Electric generator",
+      "(c) Electric motor",
+      "(d) Microphone"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q621. निम्नलिखित में से कौन-सा उपकरण चुंबकीय क्षेत्र में विद्युत धारावाही चालक की गति का उपयोग नहीं करता है?",
+    q_en: "Q621. Which of the following devices does not use the motion of a current-carrying conductor in a magnetic field?",
+    tag: "RRB ALP 25/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) विद्युत मोटर (Electric motor)",
+      "(b) विद्युत पंखा (Electric fan)",
+      "(c) विद्युत जनित्र (Electric generator)",
+      "(d) विद्युत हीटर (Electric heater)"
+    ],
+    o_en: [
+      "(a) Electric motor",
+      "(b) Electric fan",
+      "(c) Electric generator",
+      "(d) Electric heater"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q622. वृत्ताकार विद्युत धारावाही कुंडली के केंद्र पर चुंबकीय क्षेत्र रेखाओं का पैटर्न कैसा होता है?",
+    q_en: "Q622. What is the pattern of magnetic field lines at the centre of a circular current-carrying coil?",
+    tag: "RRB ALP 25/11/2024 (Evening)",
+    o_hi: [
+      "(a) संवाहक का पदार्थ",
+      "(b) धारा की दिशा",
+      "(c) संवाहक का आकार",
+      "(d) संवाहक का रंग"
+    ],
+    o_en: [
+      "(a) Material of the conductor",
+      "(b) Direction of current",
+      "(c) Shape of the conductor",
+      "(d) Colour of the conductor"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q623. निम्नलिखित में से कौन-सा/कौन-से कथन सही है/हैं?<br>कथनः<br>I) विद्युत चुम्बक एक उपकरण है जिसका उपयोग चुंबकीय क्षेत्र को विद्युत ऊर्जा में परिवर्तित करने के लिए किया जाता है।<br>II) विद्युत चुम्बक एक उपकरण है जिसका उपयोग यांत्रिक ऊर्जा को चुंबकीय ऊर्जा में परिवर्तित करने के लिए किया जाता है।",
+    q_en: "Q623. Which of the following statement(s) is/are correct?<br>Statements:<br>I) An electromagnet is a device used to convert a magnetic field into electrical energy.<br>II) An electromagnet is a device used to convert mechanical energy into magnetic energy.",
+    tag: "RRB ALP 26/11/2024 (Morning)",
+    o_hi: [
+      "(a) कथन II सही है",
+      "(b) न तो कथन I और न ही II सही हैं",
+      "(c) कथन I और II दोनों सही हैं",
+      "(d) कथन I सही है"
+    ],
+    o_en: [
+      "(a) Statement II is correct",
+      "(b) Neither statement I nor II is correct",
+      "(c) Both statements I and II are correct",
+      "(d) Statement I is correct"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q624. निम्नलिखित में से कौन-सा/कौन-से कथन सही है/हैं?<br>कथन:<br>I) एक विद्युत धारावाही चालक चुंबक की तरह कार्य करता है।<br>II) इलेक्ट्रॉनों को चुंबकीय क्षेत्र के लंबवत ले जाने पर किसी भी बल का अनुभव नहीं होता है।",
+    q_en: "Q624. Which of the following statement(s) is/are correct?<br>Statements:<br>I) A current-carrying conductor acts like a magnet.<br>II) Electrons experience no force when moved perpendicular to a magnetic field.",
+    tag: "RRB ALP 26/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) कथन I सही है",
+      "(b) कथन II सही है",
+      "(c) न तो कथन I और न ही II सही है",
+      "(d) कथन I और II दोनों सही हैं"
+    ],
+    o_en: [
+      "(a) Statement I is correct",
+      "(b) Statement II is correct",
+      "(c) Neither statement I nor II is correct",
+      "(d) Both statements I and II are correct"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q625. फ्लेमिंग के वामहस्त नियम (Fleming’s left hand rule) में मध्यमा अंगुली किस भौतिक राशि को दर्शाती है?",
+    q_en: "Q625. In Fleming's left-hand rule, which physical quantity is represented by the middle finger?",
+    tag: "RRB ALP 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) चुंबकीय क्षेत्र की दिशा",
+      "(b) विद्युत धारा की दिशा",
+      "(c) बल की दिशा",
+      "(d) चालक की गति की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of magnetic field",
+      "(b) Direction of electric current",
+      "(c) Direction of force",
+      "(d) Direction of motion of conductor"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q626. चुंबकीय क्षेत्र के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+    q_en: "Q626. Which of the following statements about a magnetic field is correct?",
+    tag: "RRB ALP 27/11/2024 (Morning)",
+    o_hi: [
+      "(a) किसी भी बिंदु पर इसकी दिशा चुंबकीय दिक्सूचक द्वारा मापी जाती है।",
+      "(b) यह एक अदिश राशि है।",
+      "(c) यह सदैव सीधी रेखाओं के रूप में होता है।",
+      "(d) यह केवल चुंबक के बाहर स्थित होता है।"
+    ],
+    o_en: [
+      "(a) Its direction at any point is measured using a magnetic compass.",
+      "(b) It is a scalar quantity.",
+      "(c) It is always in the form of straight lines.",
+      "(d) It exists only outside a magnet."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q627. किसी बिंदु पर चुंबकीय क्षेत्र रेखाओं की दिशा बताने के लिए किस उपकरण का उपयोग किया जा सकता है?",
+    q_en: "Q627. Which device can be used to indicate the direction of magnetic field lines at a point?",
+    tag: "RRB ALP 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) परिनालिका",
+      "(b) जनित्र",
+      "(c) चुम्बकीय दिक्सूचक",
+      "(d) विद्युत मोटर"
+    ],
+    o_en: [
+      "(a) Solenoid",
+      "(b) Generator",
+      "(c) Magnetic compass",
+      "(d) Electric motor"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q628. किसी विद्युत धारावाही चालक द्वारा उत्पन्न चुंबकीय क्षेत्र रेखाओं का पैटर्न ______",
+    q_en: "Q628. The pattern of magnetic field lines produced by a current-carrying conductor ______.",
+    tag: "RRB ALP 27/11/2024 (Evening)",
+    o_hi: [
+      "(a) चालक की लंबाई पर निर्भर करता है",
+      "(b) चालक की आकृति पर निर्भर करता है",
+      "(c) चालक से संबंधित किसी भी मापदंड पर निर्भर नहीं करता है",
+      "(d) चालक की मोटाई पर निर्भर करता है"
+    ],
+    o_en: [
+      "(a) depends on the length of the conductor",
+      "(b) depends on the shape of the conductor",
+      "(c) does not depend on any parameter related to the conductor",
+      "(d) depends on the thickness of the conductor"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q629. यदि किसी चालक की लंबाई तीन गुना कर दी जाए, तथा अन्य कारकों में परिवर्तन न किया जाए, तो चालक का प्रतिरोध कितना होगा ?",
+    q_en: "Q629. If the length of a conductor is made three times while the other factors are unchanged, what will its resistance be?",
+    tag: "RRB ALP 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) एक-छठवां (one sixth)",
+      "(b) तीन गुना (tripled)",
+      "(c) एक-तिहाई (one third)",
+      "(d) एक समान (same)"
+    ],
+    o_en: [
+      "(a) One sixth",
+      "(b) Tripled",
+      "(c) One third",
+      "(d) Same"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q630. विद्युत धारावाही वृत्ताकार पाश के लिए, क्षेत्र सामर्थ्य ______होता है।",
+    q_en: "Q630. For a current-carrying circular loop, the field strength is ______.",
+    tag: "RRB ALP 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) केंद्र पर अधिकतम",
+      "(b) परिधि पर अधिकतम",
+      "(c) परिधि पर अज्ञात",
+      "(d) केंद्र पर न्यूनतम"
+    ],
+    o_en: [
+      "(a) maximum at the centre",
+      "(b) maximum at the circumference",
+      "(c) unknown at the circumference",
+      "(d) minimum at the centre"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q631. एक वस्तु को अवतल दर्पण के फोकस और ध्रुव के बीच रखा जाता है, निर्मित प्रतिबिंब कैसा होगा ?",
+    q_en: "Q631. An object is placed between the focus and pole of a concave mirror. What will the image formed be like?",
+    tag: "RRB ALP 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) वास्तविक, उल्टा और बड़ा",
+      "(b) वास्तविक, उल्टा और छोटा",
+      "(c) आभासी, सीधा और छोटा",
+      "(d) आभासी, सीधा और बड़ा"
+    ],
+    o_en: [
+      "(a) Real, inverted and enlarged",
+      "(b) Real, inverted and diminished",
+      "(c) Virtual, erect and diminished",
+      "(d) Virtual, erect and enlarged"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q632. विभवांतर K वाले दो बिंदुओं पर +Q आवेश को गतिमान करने में किया गया कार्य कितना है?",
+    q_en: "Q632. What is the work done in moving a +Q charge between two points having potential difference K?",
+    tag: "RRB ALP 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) QK",
+      "(b) 2QK",
+      "(c) QK/4",
+      "(d) QK/2"
+    ],
+    o_en: [
+      "(a) QK",
+      "(b) 2QK",
+      "(c) QK/4",
+      "(d) QK/2"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q633. एक लंबी विद्युत धारावाही परिनालिका (solenoid) है। यदि राहुल इस लंबी विद्युत धारावाही परिनालिका (solenoid) के अंदर चुंबकीय क्षेत्र रेखाएं अंकित करता है, तो यह ______दिखाई देती है।",
+    q_en: "Q633. There is a long current-carrying solenoid. If Rahul draws the magnetic field lines inside this long current-carrying solenoid, they appear ______.",
+    tag: "RRB ALP 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) सिरों पर सघन",
+      "(b) एक सिरे से दूसरे सिरे तक बढ़ती हुई",
+      "(c) सभी बिंदुओं पर एकसमान",
+      "(d) बीच में सघन"
+    ],
+    o_en: [
+      "(a) dense at the ends",
+      "(b) increasing from one end to the other",
+      "(c) uniform at all points",
+      "(d) dense in the middle"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q634. एक सीधी धारा ले जाने वाले कंडक्टर के चारों ओर चुंबकीय क्षेत्र रेखाएं इस तरह दिखती हैंः",
+    q_en: "Q634. The magnetic field lines around a straight current-carrying conductor appear as:",
+    tag: "RRB ALP 28/11/2024 (Evening)",
+    o_hi: [
+      "(a) सीधी रेखाएँ",
+      "(b) दीर्घवृत्त",
+      "(c) हाइपरबोलस",
+      "(d) संकेंद्रित वृत्त"
+    ],
+    o_en: [
+      "(a) Straight lines",
+      "(b) Ellipses",
+      "(c) Hyperbolas",
+      "(d) Concentric circles"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q635. निम्नलिखित में से कौन-सी घरेलू वस्तु विद्युत धारा के तापीय प्रभाव का उपयोग नहीं करती है?",
+    q_en: "Q635. Which of the following household items does not use the heating effect of electric current?",
+    tag: "RRB ALP 29/11/2024 (Morning)",
+    o_hi: [
+      "(a) इलेक्ट्रिक स्टोव (हीटर)",
+      "(b) इलेक्ट्रिक वाटर हीटर",
+      "(c) इलेक्ट्रिक आयरन बॉक्स",
+      "(d) इलेक्ट्रिक मोटर"
+    ],
+    o_en: [
+      "(a) Electric stove (heater)",
+      "(b) Electric water heater",
+      "(c) Electric iron box",
+      "(d) Electric motor"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q636. किसी दिए गए बिंदु पर विद्युत धारावाही तार द्वारा उत्पन्न चुंबकीय क्षेत्र निम्नलिखित में से किस कारक पर निर्भर करता है?",
+    q_en: "Q636. At a given point, the magnetic field produced by a current-carrying wire depends on which of the following factors?",
+    tag: "RRB ALP 29/11/2024 (Morning)",
+    o_hi: [
+      "(a) न तार से दूरी, न ही तार में प्रवाहित धारा",
+      "(b) केवल तार में प्रवाहित धारा",
+      "(c) केवल तार से दूरी",
+      "(d) तार से दूरी और तार में प्रवाहित धारा दोनों"
+    ],
+    o_en: [
+      "(a) Neither the distance from the wire nor the current flowing through the wire",
+      "(b) Only the current flowing through the wire",
+      "(c) Only the distance from the wire",
+      "(d) Both the distance from the wire and the current flowing through the wire"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q637. पास-पास सटाकर लिपटे विद्युतरोधी तांबे के तार की बेलन की अनेक फेरों वाली कुंडली से क्या बनाया जा सकता है?",
+    q_en: "Q637. What can be made from a coil having many turns of insulated copper wire closely wound around a cylinder?",
+    tag: "RRB ALP 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) वृत्ताकार कुंडल (Circular coil)",
+      "(b) परिनालिका (Solenoid)",
+      "(c) सीधा चालक (Straight conductor)",
+      "(d) टोरॉयड (Toroid)"
+    ],
+    o_en: [
+      "(a) Circular coil",
+      "(b) Solenoid",
+      "(c) Straight conductor",
+      "(d) Toroid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q638. लंबाई 'L' और अनुप्रस्थ काट क्षेत्रफल (cross-section area) 'A' के एक चालक का प्रतिरोध _______ के अनुक्रमानुपाती होता है।",
+    q_en: "Q638. The resistance of a conductor of length 'L' and cross-sectional area 'A' is directly proportional to _______.",
+    tag: "RRB ALP 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) A",
+      "(b) L²",
+      "(c) L/A",
+      "(d) A/L"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) L²",
+      "(c) L/A",
+      "(d) A/L"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q639. दो वृत्ताकार कुंडलियाँ A और B, जिनकी त्रिज्या R समान है, और उनमें समान विद्युत धारा (I) प्रवाहित होती है, लेकिन उनमें क्रमशः 50 और 100 फेरे हैं। A और B द्वारा उत्पन्न चुंबकीय क्षेत्र को निम्नलिखित में से किस विकल्प के द्वारा व्यक्त किया जाएगा ?",
+    q_en: "Q639. Two circular coils A and B have the same radius R and carry the same current I, but have 50 and 100 turns respectively. Which option correctly represents the magnetic fields produced by A and B?",
+    tag: "RRB ALP 29/11/2024 (Evening)",
+    o_hi: [
+      "(a) A द्वारा उत्पन्न चुंबकीय क्षेत्र = B द्वारा उत्पन्न चुंबकीय क्षेत्र",
+      "(b) B द्वारा उत्पन्न चुंबकीय क्षेत्र > A द्वारा उत्पन्न चुंबकीय क्षेत्र",
+      "(c) A द्वारा उत्पन्न चुंबकीय क्षेत्र और B द्वारा उत्पन्न चुंबकीय क्षेत्र अज्ञात हैं",
+      "(d) A द्वारा उत्पन्न चुंबकीय क्षेत्र > B द्वारा उत्पन्न चुंबकीय क्षेत्र"
+    ],
+    o_en: [
+      "(a) Magnetic field produced by A = magnetic field produced by B",
+      "(b) Magnetic field produced by B > magnetic field produced by A",
+      "(c) Magnetic fields produced by A and B are unknown",
+      "(d) Magnetic field produced by A > magnetic field produced by B"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q640. यदि किसी चालक का प्रतिरोध तीन गुना तक बढ़ा दिया जाए, तो विद्युत धारा _____हो जाएगी।<br>(वोल्टता V स्थिर रहेगी )",
+    q_en: "Q640. If the resistance of a conductor is increased to three times, the electric current will become _____.<br>(Voltage V remains constant.)",
+    tag: "RRB ALP 29/11/2024 (Evening)",
+    o_hi: [
+      "(a) एक-नौवीं",
+      "(b) तीन गुना",
+      "(c) एक तिहाई",
+      "(d) नौ गुना"
+    ],
+    o_en: [
+      "(a) One-ninth",
+      "(b) Three times",
+      "(c) One-third",
+      "(d) Nine times"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q641. बल्ब के फिलामेंट को ______ प्राप्त करने के लिए अत्यंत पतला और लंबा बनाया जाता है:",
+    q_en: "Q641. The filament of a bulb is made extremely thin and long in order to obtain ______:",
+    tag: "RRC Group D 17/08/2022 (Morning)",
+    o_hi: [
+      "(a) उच्च प्रतिरोध",
+      "(b) उच्च धारा",
+      "(c) उच्च प्रतिरोधकता",
+      "(d) उच्च वोल्टेज"
+    ],
+    o_en: [
+      "(a) High resistance",
+      "(b) High current",
+      "(c) High resistivity",
+      "(d) High voltage"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q642. निम्नलिखित में से कौन सा कथन एक धारावाही परिनालिका के लिए सही है/हैं?<br>(i) इसका उपयोग मृदु लोहे के टुकड़े को चुम्बकित करने के लिए किया जा सकता है।<br>(ii) यह छड़ चुम्बक की भाँति कार्य करता है<br>(iii) क्षेत्र रेखाएं संकेंद्रित वृत्त होती हैं",
+    q_en: "Q642. Which of the following statement(s) is/are correct for a current-carrying solenoid?<br>(i) It can be used to magnetise a piece of soft iron.<br>(ii) It behaves like a bar magnet.<br>(iii) The field lines are concentric circles.",
+    tag: "RRC Group D 17/08/2022 (Morning)",
+    o_hi: [
+      "(a) केवल (i)",
+      "(b) (i) और (iii) दोनों",
+      "(c) केवल (ii)",
+      "(d) (i) और (ii) दोनों"
+    ],
+    o_en: [
+      "(a) Only (i)",
+      "(b) Both (i) and (iii)",
+      "(c) Only (ii)",
+      "(d) Both (i) and (ii)"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q643. नीचे दिए गए चित्र में तीन प्रतिरोधों R1, R2 और R3 का I-V ग्राफ दिखाया गया है। R1, R2 और R3 के बीच सही संबंध है:<br><div style='text-align:center;margin:14px 0;'><img src='" + Q643_IMAGE + "' alt='Q643 figure' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    q_en: "Q643. The I-V graph of three resistors R1, R2 and R3 is shown in the figure below. The correct relation among R1, R2 and R3 is:<br><div style='text-align:center;margin:14px 0;'><img src='" + Q643_IMAGE + "' alt='Q643 figure' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    tag: "RRC Group D 17/08/2022 (Afternoon)",
+    image: Q643_IMAGE,
+    o_hi: [
+      "(a) R3 > R1 > R2",
+      "(b) R3 < R1 < R2",
+      "(c) R1 < R2 < R3",
+      "(d) R1 > R2 > R3"
+    ],
+    o_en: [
+      "(a) R3 > R1 > R2",
+      "(b) R3 < R1 < R2",
+      "(c) R1 < R2 < R3",
+      "(d) R1 > R2 > R3"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q644. चुंबकीय क्षेत्र के लंबवत स्थित कुंडली की गति के कारण उसमे प्रेरित धारा की दिशा निर्धारित करने के लिए निम्नलिखित में से किस नियम का उपयोग किया जाता है?",
+    q_en: "Q644. Which of the following rules is used to determine the direction of induced current due to the motion of a coil placed perpendicular to a magnetic field?",
+    tag: "RRC Group D 17/08/2022 (Evening)",
+    o_hi: [
+      "(a) फ्लेमिंग का दाएं हाथ का नियम",
+      "(b) मैक्सवेल का कॉर्कस्क्रू नियम",
+      "(c) दाएं हाथ के अंगूठे का नियम",
+      "(d) फ्लेमिंग का बाएं हाथ का नियम"
+    ],
+    o_en: [
+      "(a) Fleming's right-hand rule",
+      "(b) Maxwell's corkscrew rule",
+      "(c) Right-hand thumb rule",
+      "(d) Fleming's left-hand rule"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q645. निम्नलिखित में से कौन सी स्थिति संभव है/हैं?<br>(A) चुंबकीय क्षेत्र रेखाएं एक दूसरे के समानांतर हो सकती हैं।<br>(B) चुम्बकीय क्षेत्र रेखाएँ संकेंद्रित वृत्त हो सकती हैं।<br>(C) चुम्बकीय क्षेत्र रेखाएँ एक दूसरे को प्रतिच्छेद कर सकती हैं।",
+    q_en: "Q645. Which of the following situations is/are possible?<br>(A) Magnetic field lines can be parallel to each other.<br>(B) Magnetic field lines can be concentric circles.<br>(C) Magnetic field lines can intersect each other.",
+    tag: "RRC Group D 17/08/2022 (Evening)",
+    o_hi: [
+      "(a) (A) और (B) दोनों",
+      "(b) केवल (A)",
+      "(c) (A) और (C) दोनों",
+      "(d) केवल (B)"
+    ],
+    o_en: [
+      "(a) Both (A) and (B)",
+      "(b) Only (A)",
+      "(c) Both (A) and (C)",
+      "(d) Only (B)"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q646. निम्नलिखित में से कौन सा/से कथन सही है/हैं?<br>(i) चुम्बकीय क्षेत्र की प्रबलता छड़ चुम्बक के केंद्र में सर्वाधिक प्रबल होती है।<br>(ii) कोई भी दो चुंबकीय बल रेखाएँ प्रतिच्छेद नहीं कर सकती हैं।<br>(iii) चुंबकीय बल रेखाएँ बंद सतत वक्र (closed continuous curves) निर्मित करती हैं।",
+    q_en: "Q646. Which of the following statement(s) is/are correct?<br>(i) The magnetic field strength is maximum at the centre of a bar magnet.<br>(ii) No two magnetic field lines can intersect.<br>(iii) Magnetic field lines form closed continuous curves.",
+    tag: "RRC Group D 18/08/2022 (Morning)",
+    o_hi: [
+      "(a) (ii) और (iii) दोनों",
+      "(b) (i) और (ii) दोनों",
+      "(c) केवल (i)",
+      "(d) केवल (ii)"
+    ],
+    o_en: [
+      "(a) Both (ii) and (iii)",
+      "(b) Both (i) and (ii)",
+      "(c) Only (i)",
+      "(d) Only (ii)"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q647. AC जनरेटर किस सिद्धांत पर काम करता है:",
+    q_en: "Q647. On which principle does an AC generator work?",
+    tag: "RRC Group D 18/08/2022 (Morning)",
+    o_hi: [
+      "(a) विद्युत चुम्बकीय प्रेरण",
+      "(b) विद्युत प्रवाह का तापीय प्रभाव",
+      "(c) धारावाही चालक पर बल",
+      "(d) विद्युत चुंबकत्व"
+    ],
+    o_en: [
+      "(a) Electromagnetic induction",
+      "(b) Heating effect of electric current",
+      "(c) Force on a current-carrying conductor",
+      "(d) Electromagnetism"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q648. ρ प्रतिरोधकता वाले धातु के तार को चार बराबर भागों में काटा जाता है। प्रत्येक भाग की प्रतिरोधकता क्या है?",
+    q_en: "Q648. A metal wire of resistivity ρ is cut into four equal parts. What is the resistivity of each part?",
+    tag: "RRC Group D 18/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) ρ/2",
+      "(b) ρ/4",
+      "(c) ρ",
+      "(d) 4ρ"
+    ],
+    o_en: [
+      "(a) ρ/2",
+      "(b) ρ/4",
+      "(c) ρ",
+      "(d) 4ρ"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q649. कई प्रतिरोधों को समानांतर क्रम में संयोजित करने को इनमें से किसके समतुल्य माना जा सकता है?",
+    q_en: "Q649. Connecting several resistors in parallel can be considered equivalent to which of the following?",
+    tag: "RRC Group D 18/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) चालक की लम्बाई में वृद्धि करना",
+      "(b) चालक की अनुप्रस्थ काट के क्षेत्रफल में कमी करना",
+      "(c) चालक के प्रतिरोध में वृद्धि करना",
+      "(d) चालक की अनुप्रस्थ काट के क्षेत्रफल में वृद्धि करना"
+    ],
+    o_en: [
+      "(a) Increasing the length of the conductor",
+      "(b) Decreasing the cross-sectional area of the conductor",
+      "(c) Increasing the resistance of the conductor",
+      "(d) Increasing the cross-sectional area of the conductor"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q650. छह फेरों वाली एक वृत्ताकार धारावाही कुंडली के कारण उत्पन्न चुंबकीय क्षेत्र, समान धारा प्रवाह वाले एकल वृत्ताकार पाश (loop) के कारण उत्पन्न चुंबकीय क्षेत्र _____के बराबर होगा।",
+    q_en: "Q650. The magnetic field produced by a six-turn circular current-carrying coil will be equal to _____ the magnetic field produced by a single circular loop carrying the same current.",
+    tag: "RRC Group D 18/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) 2 गुने",
+      "(b) 4 गुने",
+      "(c) 8 गुने",
+      "(d) 6 गुने"
+    ],
+    o_en: [
+      "(a) 2 times",
+      "(b) 4 times",
+      "(c) 8 times",
+      "(d) 6 times"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q651. एक क्षैतिज सीधे तार में धारा पश्चिम से पूर्व की ओर प्रवाहित होती है। तो पूर्वी सिरे से देखे जाने पर चुम्बकीय क्षेत्र रेखाओं की दिशा क्या होगी?",
+    q_en: "Q651. Current flows from west to east in a horizontal straight wire. When viewed from the eastern end, what will be the direction of the magnetic field lines?",
+    tag: "RRC Group D 18/08/2022 (Evening)",
+    o_hi: [
+      "(a) तार के लंबवत तल में वामावर्त",
+      "(b) तार के तल में वामावर्त",
+      "(c) तार के लंबवत तल में दक्षिणावर्त",
+      "(d) तार के तल में दक्षिणावर्त"
+    ],
+    o_en: [
+      "(a) Anticlockwise in a plane perpendicular to the wire",
+      "(b) Anticlockwise in the plane of the wire",
+      "(c) Clockwise in a plane perpendicular to the wire",
+      "(d) Clockwise in the plane of the wire"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q652. DC मोटर के लिए इनमें से कौन से कथन सत्य हैं?<br>(i) विभक्त वलय (split rings) का कार्य धारा के प्रवाह को उलटना है।<br>(ii) चुंबकीय क्षेत्र के समानांतर संरेखित कुंडली की भुजाओं पर अधिकतम बल लगता है।<br>(iii) प्रत्येक आधे घूर्णन के बाद धारा को उलटने की वजह से कुंडली में निरंतर घूर्णन होता रहता है।",
+    q_en: "Q652. Which of the following statements are true for a DC motor?<br>(i) The function of split rings is to reverse the flow of current.<br>(ii) Maximum force acts on the arms of a coil aligned parallel to the magnetic field.<br>(iii) Reversing the current after every half rotation causes continuous rotation of the coil.",
+    tag: "RRC Group D 22/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) केवल (i)",
+      "(b) केवल (ii)",
+      "(c) (i) और (ii) दोनों",
+      "(d) (i) और (iii) दोनों"
+    ],
+    o_en: [
+      "(a) Only (i)",
+      "(b) Only (ii)",
+      "(c) Both (i) and (ii)",
+      "(d) Both (i) and (iii)"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q653. निम्नलिखित में से कौन से उपकरण विद्युत धारा के तापीय प्रभाव पर आधारित हैं?<br>(i) तापदीप्त लैंप<br>(ii) इलेक्ट्रिक गीजर<br>(iii) विद्युत जेनरेटर",
+    q_en: "Q653. Which of the following devices are based on the heating effect of electric current?<br>(i) Incandescent lamp<br>(ii) Electric geyser<br>(iii) Electric generator",
+    tag: "RRC Group D 22/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) केवल (i)",
+      "(b) केवल (ii)",
+      "(c) (i) और (ii) दोनों",
+      "(d) (i) और (iii) दोनों"
+    ],
+    o_en: [
+      "(a) Only (i)",
+      "(b) Only (ii)",
+      "(c) Both (i) and (ii)",
+      "(d) Both (i) and (iii)"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q654. रमेश एक बल्ब का फिलामेंट बनाने के लिए एक पदार्थ का चयन करना चाहता है। चयनित पदार्थ में इनमें से कौन से गुण होने चाहिए?<br>(i) निम्न गलनांक<br>(ii) उच्च तापमानों पर चमकने की क्षमता<br>(iii) उच्च प्रतिरोध",
+    q_en: "Q654. Ramesh wants to select a material for making a bulb filament. Which of the following properties should the selected material have?<br>(i) Low melting point<br>(ii) Ability to glow at high temperatures<br>(iii) High resistance",
+    tag: "RRC Group D 22/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) (ii) और (iii) दोनों",
+      "(b) केवल (ii)",
+      "(c) केवल (i)",
+      "(d) (i) और (ii) दोनों"
+    ],
+    o_en: [
+      "(a) Both (ii) and (iii)",
+      "(b) Only (ii)",
+      "(c) Only (i)",
+      "(d) Both (i) and (ii)"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q655. जब किसी चुंबक को किसी कुंडली (coil) के पास ले जाया जाता है, तो यह कुंडली (coil) में एक प्रेरित विभवांतर उत्पन्न करता है। जब हम कुंडली (coil) के पास चुंबक की गति बढ़ाते हैं, तो क्या होता है?",
+    q_en: "Q655. When a magnet is moved near a coil, it produces an induced potential difference in the coil. What happens when the speed of the magnet near the coil is increased?",
+    tag: "RRC Group D 22/08/2022 (Evening)",
+    o_hi: [
+      "(a) प्रेरित विभवांतर समान रहता है।",
+      "(b) कुंडली (coil) में प्रेरित विभवांतर बढ़ता है।",
+      "(c) कुंडली (coil) में प्रेरित धारा समान रहती है।",
+      "(d) कुंडली (coil) में प्रेरित विभवान्तर कम हो जाता है।"
+    ],
+    o_en: [
+      "(a) The induced potential difference remains the same.",
+      "(b) The induced potential difference in the coil increases.",
+      "(c) The induced current in the coil remains the same.",
+      "(d) The induced potential difference in the coil decreases."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q656. निम्नलिखित में से कौन सा घरेलू उपकरण, विद्युत मोटर का उपयोग नहीं करता है?",
+    q_en: "Q656. Which of the following household appliances does not use an electric motor?",
+    tag: "RRC Group D 23/08/2022 (Morning)",
+    o_hi: [
+      "(a) विद्युत वाशिंग मशीन",
+      "(b) विद्युत मिक्सर",
+      "(c) विद्युत आयरन",
+      "(d) बिजली के पंखे"
+    ],
+    o_en: [
+      "(a) Electric washing machine",
+      "(b) Electric mixer",
+      "(c) Electric iron",
+      "(d) Electric fans"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q657. स्वतंत्र रूप से लटका हुआ छड़ चुंबक किस दिशा में इंगित करता है?",
+    q_en: "Q657. In which direction does a freely suspended bar magnet point?",
+    tag: "RRC Group D 23/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) भौगोलिक उत्तर-भौगोलिक दक्षिण",
+      "(b) भौगोलिक उत्तर-भौगोलिक पश्चिम",
+      "(c) भौगोलिक दक्षिण-भौगोलिक पश्चिम",
+      "(d) भौगोलिक दक्षिण-भौगोलिक पूर्व"
+    ],
+    o_en: [
+      "(a) Geographical north-geographical south",
+      "(b) Geographical north-geographical west",
+      "(c) Geographical south-geographical west",
+      "(d) Geographical south-geographical east"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q658. एक सीधे धारावाही चालक के लिए इनमें से कौन से कथन सत्य हैं?<br>(i) चुंबकीय बल रेखाएं केंद्र में चालक युक्त संकेंद्रित वृत्त होती हैं।<br>(ii) जैसे-जैसे हम चालक से दूर जाते हैं, चुंबकीय क्षेत्र की प्रबलता बढ़ती जाती है।<br>(iii) चुंबकीय क्षेत्र की दिशा दाएं हाथ के अंगूठे के नियम का उपयोग करके निर्धारित की जा सकती है।",
+    q_en: "Q658. Which of the following statements are true for a straight current-carrying conductor?<br>(i) Magnetic field lines are concentric circles with the conductor at the centre.<br>(ii) As we move away from the conductor, the magnetic field strength increases.<br>(iii) The direction of the magnetic field can be determined using the right-hand thumb rule.",
+    tag: "RRC Group D 23/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) (i) और (ii) दोनों",
+      "(b) (i) और (iii) दोनों",
+      "(c) केवल (i)",
+      "(d) केवल (ii)"
+    ],
+    o_en: [
+      "(a) Both (i) and (ii)",
+      "(b) Both (i) and (iii)",
+      "(c) Only (i)",
+      "(d) Only (ii)"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
