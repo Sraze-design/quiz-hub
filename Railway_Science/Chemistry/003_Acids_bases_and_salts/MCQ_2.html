@@ -1,0 +1,1005 @@
+const Q353_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q304. जब सोडियम क्लोराइड के जलीय विलयन में विद्युत प्रवाहित की जाती है तो निम्नलिखित में से कौन-सा उत्पाद नहीं बनता है?",
+    q_en: "Q304. When electric current is passed through an aqueous solution of sodium chloride, which of the following products is not formed?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Morning)",
+    o_hi: [
+      "(a) हाइड्रोजन गैस",
+      "(b) क्लोरीन गैस",
+      "(c) ऑक्सीजन गैस",
+      "(d) सोडियम हाइड्राइड"
+    ],
+    o_en: [
+      "(a) Hydrogen gas",
+      "(b) Chlorine gas",
+      "(c) Oxygen gas",
+      "(d) Sodium hydride"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q305. क्लोर-क्षार प्रक्रिया (chlor-alkali process) में कौन-सा उत्पाद बनता है?",
+    q_en: "Q305. Which product is formed in the chlor-alkali process?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) सोडियम हाइड्रॉक्साइड",
+      "(b) बेकिंग सोडा",
+      "(c) धावन सोडा",
+      "(d) सोडियम क्लोराइड"
+    ],
+    o_en: [
+      "(a) Sodium hydroxide",
+      "(b) Baking soda",
+      "(c) Washing soda",
+      "(d) Sodium chloride"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q306. अमोनियम सल्फेट का रासायनिक सूत्र ___________ है।",
+    q_en: "Q306. The chemical formula of ammonium sulphate is ___________.",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) Na₂SO₄",
+      "(b) (NH₄)SO₄",
+      "(c) (NH₄)₂SO₄",
+      "(d) Ca₂SO₄"
+    ],
+    o_en: [
+      "(a) Na₂SO₄",
+      "(b) (NH₄)SO₄",
+      "(c) (NH₄)₂SO₄",
+      "(d) Ca₂SO₄"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q307. मैग्नीशियम और मैंगनीज के नाइट्रिक अम्ल के साथ अभिक्रिया करने पर निम्नलिखित में से कौन-सी गैस निकलती है।",
+    q_en: "Q307. Which of the following gases is evolved when magnesium and manganese react with nitric acid?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) हाइड्रोजन गैस",
+      "(b) नाइट्रोजन गैस",
+      "(c) हीलियम गैस",
+      "(d) ऑक्सीजन गैस"
+    ],
+    o_en: [
+      "(a) Hydrogen gas",
+      "(b) Nitrogen gas",
+      "(c) Helium gas",
+      "(d) Oxygen gas"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q308. निम्नलिखित में से कौन-सी धातु अम्ल के साथ न्यूनतम अभिक्रियाशील है?",
+    q_en: "Q308. Which of the following metals is least reactive with acid?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) तांबा (Copper)",
+      "(b) एल्युमिनियम (Aluminium)",
+      "(c) लोहा (Iron)",
+      "(d) जस्ता (Zinc)"
+    ],
+    o_en: [
+      "(a) Copper",
+      "(b) Aluminium",
+      "(c) Iron",
+      "(d) Zinc"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q309. कैल्शियम सल्फेट हेमीहाइड्रेट (calcium sulphate hemihydrate) के निर्माण में किसका उपयोग किया जाता है?",
+    q_en: "Q309. Which of the following is used in the preparation of calcium sulphate hemihydrate?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) जिप्सम",
+      "(b) सोडियम कार्बोनेट",
+      "(c) कॉपर सल्फेट",
+      "(d) सोडियम हाइड्रोजन कार्बोनेट"
+    ],
+    o_en: [
+      "(a) Gypsum",
+      "(b) Sodium carbonate",
+      "(c) Copper sulphate",
+      "(d) Sodium hydrogen carbonate"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q310. किस अम्ल के सोडियम या पोटेशियम लवण को साबुन के रूप में परिभाषित किया जाता है?",
+    q_en: "Q310. The sodium or potassium salts of which acid are defined as soap?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Evening)",
+    o_hi: [
+      "(a) नाइट्रिक अम्ल (Nitric acid)",
+      "(b) कार्बोक्सिलिक अम्ल (Carboxylic acid)",
+      "(c) सल्फ्यूरिक अम्ल (Sulphuric acid)",
+      "(d) हाइड्रोक्लोरिक अम्ल (Hydrochloric acid)"
+    ],
+    o_en: [
+      "(a) Nitric acid",
+      "(b) Carboxylic acid",
+      "(c) Sulphuric acid",
+      "(d) Hydrochloric acid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q311. बेकिंग पाउडर (baking powder) बनाने के लिए बेकिंग सोडा (baking soda) में निम्नलिखित में से कौन-सा खाद्य अम्ल मिलाया जाता है?",
+    q_en: "Q311. Which of the following edible acids is added to baking soda to make baking powder?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Evening)",
+    o_hi: [
+      "(a) सोडियम क्लोराइड (Sodium chloride)",
+      "(b) सिरका (Vinegar)",
+      "(c) टार्टरिक अम्ल (Tartaric acid)",
+      "(d) दुग्धाम्ल (Lactic acid)"
+    ],
+    o_en: [
+      "(a) Sodium chloride",
+      "(b) Vinegar",
+      "(c) Tartaric acid",
+      "(d) Lactic acid"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q312. अम्ल और क्षार के बीच होने वाली उस अभिक्रिया को क्या कहा जाता है जिसके परिणामस्वरूप लवण और जल बनता है?",
+    q_en: "Q312. What is the reaction between an acid and a base called in which salt and water are formed?",
+    tag: "RRB Tech. - (III) 29/12/2024 (Evening)",
+    o_hi: [
+      "(a) उदासीनीकरण अभिक्रिया",
+      "(b) बहुलकीकरण अभिक्रिया",
+      "(c) जल अपघटन अभिक्रिया",
+      "(d) प्रकाश संश्लेषण अभिक्रिया"
+    ],
+    o_en: [
+      "(a) Neutralization reaction",
+      "(b) Polymerization reaction",
+      "(c) Hydrolysis reaction",
+      "(d) Photosynthesis reaction"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q313. जब कोई अम्ल जल में घुल जाता है तो उसके संबंध में निम्नलिखित में से कौन-सा कथन सही है?<br>A. जल की अनुपस्थिति में HCl अणुओं से H⁺ आयनों का पृथक्करण नहीं हो सकता है।<br>B. हाइड्रोजन आयनों को हमेशा H⁺ (aq) या हाइड्रोनियम आयन (H₃O⁺) के रूप में दिखाया जाना चाहिए।",
+    q_en: "Q313. When an acid dissolves in water, which of the following statements is correct?<br>A. In the absence of water, H⁺ ions cannot dissociate from HCl molecules.<br>B. Hydrogen ions should always be shown as H⁺ (aq) or as hydronium ions (H₃O⁺).",
+    tag: "RRB Tech. - (III) 29/12/2024 (Evening)",
+    o_hi: [
+      "(a) न तो A और न ही B",
+      "(b) केवल A",
+      "(c) केवल B",
+      "(d) A और B दोनों"
+    ],
+    o_en: [
+      "(a) Neither A nor B",
+      "(b) Only A",
+      "(c) Only B",
+      "(d) Both A and B"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q314. प्लास्टर ऑफ पेरिस (plaster of Paris) में जल के कितने अणु उपस्थित होते हैं?",
+    q_en: "Q314. How many water molecules are present in Plaster of Paris?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) जल के तीन अणु",
+      "(b) जल का आधा अणु",
+      "(c) जल का शून्य अणु",
+      "(d) जल का एक अणु"
+    ],
+    o_en: [
+      "(a) Three molecules of water",
+      "(b) Half a molecule of water",
+      "(c) Zero molecule of water",
+      "(d) One molecule of water"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q315. निम्नलिखित में से कौन-सा विकल्प धात्विक ऑक्साइड और अम्ल के बीच होने वाली अभिक्रिया के लिए सही और संतुलित रासायनिक समीकरण दर्शाता है?<br>CuO + HCl → _______ + _______",
+    q_en: "Q315. Which of the following options represents the correct and balanced chemical equation for the reaction between a metallic oxide and an acid?<br>CuO + HCl → _______ + _______",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) CuO + HCl → CuCl + H₂",
+      "(b) CuO + HCl → CuOH + HCl",
+      "(c) CuO + 2HCl → CuCl₂ + O₂",
+      "(d) CuO + 2HCl → CuCl₂ + H₂O"
+    ],
+    o_en: [
+      "(a) CuO + HCl → CuCl + H₂",
+      "(b) CuO + HCl → CuOH + HCl",
+      "(c) CuO + 2HCl → CuCl₂ + O₂",
+      "(d) CuO + 2HCl → CuCl₂ + H₂O"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q316. निम्नलिखित में से किस यौगिक का उपयोग प्रति-अम्ल (antacid) के रूप में किया जाता है?",
+    q_en: "Q316. Which of the following compounds is used as an antacid?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) मैग्नीशियम हाइड्रॉक्साइड",
+      "(b) कैल्शियम ऑक्साइड",
+      "(c) सोडियम क्लोराइड",
+      "(d) कैल्शियम हाइड्रॉक्साइड"
+    ],
+    o_en: [
+      "(a) Magnesium hydroxide",
+      "(b) Calcium oxide",
+      "(c) Sodium chloride",
+      "(d) Calcium hydroxide"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q317. जब अम्ल, क्षार के साथ अभिक्रिया करता है, तो निम्नलिखित में से किस उत्पाद का निर्माण होता है?",
+    q_en: "Q317. When an acid reacts with a base, which of the following products are formed?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) लवण और जल",
+      "(b) केवल जल",
+      "(c) लवण और हाइड्रोजन आयन",
+      "(d) लवण और हाइड्रोजन गैस"
+    ],
+    o_en: [
+      "(a) Salt and water",
+      "(b) Only water",
+      "(c) Salt and hydrogen ions",
+      "(d) Salt and hydrogen gas"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q318. निम्नलिखित में से कौन-सा ऑक्साइड उभयधर्मी (amphoteric) प्रकृति का होता है?",
+    q_en: "Q318. Which of the following oxides is amphoteric in nature?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) कॉपर ऑक्साइड",
+      "(b) एल्युमिनियम ऑक्साइड",
+      "(c) सोडियम परॉक्साइड",
+      "(d) कैल्शियम ऑक्साइड"
+    ],
+    o_en: [
+      "(a) Copper oxide",
+      "(b) Aluminium oxide",
+      "(c) Sodium peroxide",
+      "(d) Calcium oxide"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q319. जब सोडियम हाइड्रॉक्साइड जल के साथ अभिक्रिया करता है, तो निम्नलिखित में से किस उत्पाद का निर्माण होता है?",
+    q_en: "Q319. When sodium hydroxide reacts with water, which of the following products is formed?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) दोनों Na⁺ (aq) और Cl₂",
+      "(b) केवल Na⁺ (aq) आयन",
+      "(c) दोनों आयन Na⁺ (aq) और OH⁻ (aq)",
+      "(d) केवल OH⁻ (aq) आयन"
+    ],
+    o_en: [
+      "(a) Both Na⁺ (aq) and Cl₂",
+      "(b) Only Na⁺ (aq) ion",
+      "(c) Both ions Na⁺ (aq) and OH⁻ (aq)",
+      "(d) Only OH⁻ (aq) ion"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q320. क्लोरीन की शुष्क Ca(OH)₂ के साथ अभिक्रिया करने पर निम्नलिखित में से किस उत्पाद का निर्माण होता है?",
+    q_en: "Q320. Which of the following products is formed when chlorine reacts with dry Ca(OH)₂?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) कैल्शियम ऑक्साइड",
+      "(b) विरंजक चूर्ण",
+      "(c) हाइड्रोक्लोरिक अम्ल",
+      "(d) कैल्शियम क्लोराइड"
+    ],
+    o_en: [
+      "(a) Calcium oxide",
+      "(b) Bleaching powder",
+      "(c) Hydrochloric acid",
+      "(d) Calcium chloride"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q321. निम्नलिखित में से कौन-सा युग्म pH मान के संदर्भ में सही है?<br>a. मनुष्यों में दांतों की सड़न: मुंह का pH > 5.5<br>b. मानव शरीर का pH परास: 7.0 से 7.8<br>c. अम्लीय वर्षा: वर्षा जल का pH > 8",
+    q_en: "Q321. Which of the following is correct with respect to pH values?<br>a. Tooth decay in humans: mouth pH > 5.5<br>b. Human body pH range: 7.0 to 7.8<br>c. Acid rain: rainwater pH > 8",
+    tag: "RRB Tech. - (III) 30/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल (a) सही है।",
+      "(b) केवल (b) सही है।",
+      "(c) केवल (c) सही है।",
+      "(d) (a), (b) और (c) सही हैं।"
+    ],
+    o_en: [
+      "(a) Only (a) is correct.",
+      "(b) Only (b) is correct.",
+      "(c) Only (c) is correct.",
+      "(d) (a), (b) and (c) are correct."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q322. धावन सोडा के उपयोग के बारे में निम्नलिखित में से कौन-सा कथन गलत है?",
+    q_en: "Q322. Which of the following statements about the uses of washing soda is incorrect?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) इसका उपयोग कागज उद्योग में नहीं किया जाता है।",
+      "(b) इसका उपयोग बोरेक्स जैसे सोडियम यौगिकों के उत्पादन में किया जाता है।",
+      "(c) इसका उपयोग जल की स्थायी कठोरता को दूर करने के लिए किया जाता है।",
+      "(d) सोडियम कार्बोनेट का उपयोग घरों में साफ-सफाई के लिए किया जा सकता है।"
+    ],
+    o_en: [
+      "(a) It is not used in the paper industry.",
+      "(b) It is used in the production of sodium compounds such as borax.",
+      "(c) It is used to remove permanent hardness of water.",
+      "(d) Sodium carbonate can be used for cleaning in homes."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q323. प्रयोगशाला में एक छात्र ने एक विलयन का pH मान 10 लिखा। उस विलयन के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+    q_en: "Q323. In a laboratory, a student recorded the pH of a solution as 10. Which of the following statements about the solution is correct?",
+    tag: "RRB Tech. - (III) 30/12/2024 (Evening)",
+    o_hi: [
+      "(a) हाइड्रोजन आयन की उच्च सांद्रता वाला विलयन क्षारीय होता है।",
+      "(b) हाइड्रोजन आयन की उच्च सांद्रता वाला विलयन अम्लीय होता है।",
+      "(c) हाइड्रॉक्साइड आयन की उच्च सांद्रता वाला विलयन क्षारीय होता है।",
+      "(d) हाइड्रॉक्साइड आयन की उच्च सांद्रता वाला विलयन अम्लीय होता है।"
+    ],
+    o_en: [
+      "(a) A solution with a high concentration of hydrogen ions is basic.",
+      "(b) A solution with a high concentration of hydrogen ions is acidic.",
+      "(c) A solution with a high concentration of hydroxide ions is basic.",
+      "(d) A solution with a high concentration of hydroxide ions is acidic."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q324. निम्नलिखित में से कौन सी अभिक्रिया, उदासीनीकरण अभिक्रिया को निरुपित (represent) नहीं करती है?",
+    q_en: "Q324. Which of the following reactions does not represent a neutralization reaction?",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) Na₂CO₃ + HCl → NaCl + CO₂ + H₂O",
+      "(b) CH₃COOH + NaOH → CH₃COONa + H₂O",
+      "(c) H₂SO₄ + Ca(OH)₂ → CaSO₄ + 2H₂O",
+      "(d) HCl + NaOH → NaCl + H₂O"
+    ],
+    o_en: [
+      "(a) Na₂CO₃ + HCl → NaCl + CO₂ + H₂O",
+      "(b) CH₃COOH + NaOH → CH₃COONa + H₂O",
+      "(c) H₂SO₄ + Ca(OH)₂ → CaSO₄ + 2H₂O",
+      "(d) HCl + NaOH → NaCl + H₂O"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q325. निम्नलिखित में से कौन-सा, सोडियम हाइड्रॉक्साइड (NaOH) के साथ हाइड्रोक्लोरिक अम्ल (HCl) के उदासीनीकरण का उत्पाद है?",
+    q_en: "Q325. Which of the following is the product of neutralization of hydrochloric acid (HCl) with sodium hydroxide (NaOH)?",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) सोडियम क्लोराइड और हाइड्रोजन गैस",
+      "(b) सोडियम हाइड्रॉक्साइड और जल",
+      "(c) सोडियम हाइड्रॉक्साइड और हाइड्रोक्लोरिक अम्ल",
+      "(d) सोडियम क्लोराइड और जल"
+    ],
+    o_en: [
+      "(a) Sodium chloride and hydrogen gas",
+      "(b) Sodium hydroxide and water",
+      "(c) Sodium hydroxide and hydrochloric acid",
+      "(d) Sodium chloride and water"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q326. प्रबल अम्लीय विलयन (strongly acidic solution) का pH रेंज कितना होता है?",
+    q_en: "Q326. What is the pH range of a strongly acidic solution?",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) 12-14",
+      "(b) 0-3",
+      "(c) 7-8",
+      "(d) 10-11"
+    ],
+    o_en: [
+      "(a) 12-14",
+      "(b) 0-3",
+      "(c) 7-8",
+      "(d) 10-11"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q327. pH पैमाने में गहरा नीला रंग _________ को दर्शाता है।",
+    q_en: "Q327. In the pH scale, dark blue colour indicates _________.",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) उदासीन विलयन",
+      "(b) प्रबल अम्लीय विलयन",
+      "(c) प्रबल क्षारीय विलयन",
+      "(d) दुर्बल क्षारीय विलयन"
+    ],
+    o_en: [
+      "(a) Neutral solution",
+      "(b) Strongly acidic solution",
+      "(c) Strongly basic solution",
+      "(d) Weakly basic solution"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q328. सोल्वे (Solvay) प्रक्रिया में धावन सोडा (Na₂CO₃·10H₂O) किस यौगिक से प्राप्त किया जाता है?",
+    q_en: "Q328. In the Solvay process, washing soda (Na₂CO₃·10H₂O) is obtained from which compound?",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) सोडियम क्लोराइड",
+      "(b) सोडियम बाइकार्बोनेट",
+      "(c) सोडियम हाइड्रॉक्साइड",
+      "(d) सोडियम सल्फेट"
+    ],
+    o_en: [
+      "(a) Sodium chloride",
+      "(b) Sodium bicarbonate",
+      "(c) Sodium hydroxide",
+      "(d) Sodium sulphate"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q329. 25°C पर शुद्ध जल का pH मान कितना होता है?",
+    q_en: "Q329. What is the pH value of pure water at 25°C?",
+    tag: "RRB JE 16/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 7",
+      "(b) 5",
+      "(c) 3",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 7",
+      "(b) 5",
+      "(c) 3",
+      "(d) 1"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q330. 25°C पर उदासीन विलयन के pH के संबंध में, निम्नलिखित में से कौन-सा कथन सत्य है?",
+    q_en: "Q330. Which of the following statements is true regarding the pH of a neutral solution at 25°C?",
+    tag: "RRB JE 16/12/2024 (Evening)",
+    o_hi: [
+      "(a) pH, 7 से कम है।",
+      "(b) pH, 7 से अधिक है।",
+      "(c) pH, 7 के बराबर नहीं है।",
+      "(d) pH, 7 के बराबर है।"
+    ],
+    o_en: [
+      "(a) pH is less than 7.",
+      "(b) pH is greater than 7.",
+      "(c) pH is not equal to 7.",
+      "(d) pH is equal to 7."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q331. निम्नलिखित में से किस अभिक्रिया के परिणामस्वरूप ब्लीचिंग पाउडर का उत्पादन होता है?",
+    q_en: "Q331. Which of the following reactions results in the production of bleaching powder?",
+    tag: "RRB JE 16/12/2024 (Evening)",
+    o_hi: [
+      "(a) CaCO₃ + HCl → CaCl₂ + CO₂ + H₂O",
+      "(b) CaO + H₂O → Ca(OH)₂",
+      "(c) Ca(OH)₂ + CO₂ → CaCO₃ + H₂O",
+      "(d) Ca(OH)₂ + Cl₂ → CaOCl₂ + H₂O"
+    ],
+    o_en: [
+      "(a) CaCO₃ + HCl → CaCl₂ + CO₂ + H₂O",
+      "(b) CaO + H₂O → Ca(OH)₂",
+      "(c) Ca(OH)₂ + CO₂ → CaCO₃ + H₂O",
+      "(d) Ca(OH)₂ + Cl₂ → CaOCl₂ + H₂O"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q332. निम्नलिखित में से कौन-सा कथन धावन सोडा के सामान्य औद्योगिक उपयोग का सबसे अच्छा वर्णन करता है?",
+    q_en: "Q332. Which of the following best describes a common industrial use of washing soda?",
+    tag: "RRB JE 17/12/2024 (Morning)",
+    o_hi: [
+      "(a) उर्वरक निर्माण (Fertiliser manufacturing)",
+      "(b) सीमेंट उत्पादन (Cement production)",
+      "(c) कांच निर्माण (Glass manufacturing)",
+      "(d) सिरका उत्पादन (Vinegar production)"
+    ],
+    o_en: [
+      "(a) Fertiliser manufacturing",
+      "(b) Cement production",
+      "(c) Glass manufacturing",
+      "(d) Vinegar production"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q333. यदि NaOH के 20 ml को HNO₃ के 10 ml द्वारा उदासीन किया जाता है। HNO₃ के 15 ml को उदासीन करने के लिए कितने NaOH की आवश्यकता होगी?",
+    q_en: "Q333. If 20 ml of NaOH is neutralized by 10 ml of HNO₃, how much NaOH will be required to neutralize 15 ml of HNO₃?",
+    tag: "RRB JE 17/12/2024 (Morning)",
+    o_hi: [
+      "(a) 20 ml",
+      "(b) 25 ml",
+      "(c) 40 ml",
+      "(d) 30 ml"
+    ],
+    o_en: [
+      "(a) 20 ml",
+      "(b) 25 ml",
+      "(c) 40 ml",
+      "(d) 30 ml"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q334. H⁺ आयनों की सार्थक सांद्रता वाले एक विलयन का pH मान कितना होगा?",
+    q_en: "Q334. What will be the pH value of a solution having a significant concentration of H⁺ ions?",
+    tag: "RRB JE 17/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 7",
+      "(b) 7 से कम",
+      "(c) 7 से अधिक",
+      "(d) निर्धारित नहीं किया जा सकता है"
+    ],
+    o_en: [
+      "(a) 7",
+      "(b) Less than 7",
+      "(c) Greater than 7",
+      "(d) Cannot be determined"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q335. जब वर्षा जल का pH मान 5.6 से नीचे चला जाता है, तो इसे सामान्यतः क्या कहा जाता है?",
+    q_en: "Q335. When the pH value of rainwater falls below 5.6, what is it generally called?",
+    tag: "RRB JE 17/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) क्षारीय वर्षा",
+      "(b) अम्लीय वर्षा",
+      "(c) खनिज वर्षा",
+      "(d) कठोर जल"
+    ],
+    o_en: [
+      "(a) Alkaline rain",
+      "(b) Acid rain",
+      "(c) Mineral rain",
+      "(d) Hard water"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q336. बेकिंग पाउडर और बेकिंग सोडा में क्या अंतर होता है?",
+    q_en: "Q336. What is the difference between baking powder and baking soda?",
+    tag: "RRB JE 17/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) बेकिंग पाउडर, बेकिंग सोडा और हाइड्रोक्लोरिक अम्ल का मिश्रण है।",
+      "(b) बेकिंग सोडा, बेकिंग पाउडर और टार्टरिक अम्ल का मिश्रण है।",
+      "(c) बेकिंग सोडा, बेकिंग पाउडर और हाइड्रोक्लोरिक अम्ल का मिश्रण है।",
+      "(d) बेकिंग पाउडर, बेकिंग सोडा और टार्टरिक अम्ल का मिश्रण है।"
+    ],
+    o_en: [
+      "(a) Baking powder is a mixture of baking soda and hydrochloric acid.",
+      "(b) Baking soda is a mixture of baking powder and tartaric acid.",
+      "(c) Baking soda is a mixture of baking powder and hydrochloric acid.",
+      "(d) Baking powder is a mixture of baking soda and tartaric acid."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q337. विरंजक चूर्ण के विरचन में क्लोरीन गैस की क्या भूमिका होती है?",
+    q_en: "Q337. What is the role of chlorine gas in the preparation of bleaching powder?",
+    tag: "RRB JE 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) इसका उपयोग अभिक्रिया के लिए उत्प्रेरक के रूप में किया जाता है।",
+      "(b) यह शुष्क बुझे चूने के साथ अभिक्रिया करके विरंजक चूर्ण बनाती है।",
+      "(c) इसका उपयोग कैल्शियम हाइड्रॉक्साइड को उदासीन करने के लिए किया जाता है।",
+      "(d) यह जल के साथ अभिक्रिया करके हाइड्रोजन परॉक्साइड उत्पन्न करती है।"
+    ],
+    o_en: [
+      "(a) It is used as a catalyst for the reaction.",
+      "(b) It reacts with dry slaked lime to form bleaching powder.",
+      "(c) It is used to neutralize calcium hydroxide.",
+      "(d) It reacts with water to produce hydrogen peroxide."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q338. अम्लीय वर्षा का pH मान कितना होता है?",
+    q_en: "Q338. What is the pH value of acid rain?",
+    tag: "RRB JE 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) 7 के बराबर",
+      "(b) 5.6 से कम",
+      "(c) 7 से अधिक",
+      "(d) 5.6 से अधिक लेकिन 7 से कम"
+    ],
+    o_en: [
+      "(a) Equal to 7",
+      "(b) Less than 5.6",
+      "(c) Greater than 7",
+      "(d) Greater than 5.6 but less than 7"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q339. हाइड्रोनियम आयनों की सांद्रता बढ़ने के साथ pH मान _______ ।",
+    q_en: "Q339. As the concentration of hydronium ions increases, the pH value _______.",
+    tag: "RRB JE 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) घटता है और फिर बढ़ता है",
+      "(b) घटता है",
+      "(c) समान रहता है",
+      "(d) बढ़ता है"
+    ],
+    o_en: [
+      "(a) decreases and then increases",
+      "(b) decreases",
+      "(c) remains the same",
+      "(d) increases"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q340. यदि किसी पदार्थ का pH मान 11 है, तो निम्नलिखित में से कौन-सा कथन सत्य है?",
+    q_en: "Q340. If a substance has a pH value of 11, which of the following statements is true?",
+    tag: "RRB JE 18/12/2024 (Morning)",
+    o_hi: [
+      "(a) यह उदासीन है और लिटमस का रंग नहीं परिवर्तित करता है।",
+      "(b) यह अम्लीय है तथा लिटमस पेपर का रंग नहीं परिवर्तित करता है।",
+      "(c) यह क्षारीय है और लाल लिटमस पेपर को नीला कर सकता है।",
+      "(d) यह अम्लीय है और नीले लिटमस पेपर को लाल कर सकता है।"
+    ],
+    o_en: [
+      "(a) It is neutral and does not change the colour of litmus.",
+      "(b) It is acidic and does not change the colour of litmus paper.",
+      "(c) It is basic and can turn red litmus paper blue.",
+      "(d) It is acidic and can turn blue litmus paper red."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q341. मृदा और जल पारिस्थितिकी तंत्र पर अम्लीय वर्षा के प्रभावों को समझने के लिए pH का अनुवीक्षण करना क्यों महत्वपूर्ण होता है?",
+    q_en: "Q341. Why is monitoring pH important for understanding the effects of acid rain on soil and aquatic ecosystems?",
+    tag: "RRB JE 18/12/2024 (Morning)",
+    o_hi: [
+      "(a) अम्लीय वर्षा से मृदा और जल निकायों का pH बढ़ जाता है।",
+      "(b) अम्लीय वर्षा, मृदा और जल पारिस्थितिकी तंत्र को प्रभावित नहीं करती है।",
+      "(c) अम्लीय वर्षा से जल का स्वाद खट्टा हो जाता है।",
+      "(d) अम्लीय वर्षा से pH कम हो जाता है, जिससे जलीय जीवन और मृदा पोषक तत्वों की उपलब्धता को हानि पहुंचती है।"
+    ],
+    o_en: [
+      "(a) Acid rain increases the pH of soil and water bodies.",
+      "(b) Acid rain does not affect soil and aquatic ecosystems.",
+      "(c) Acid rain makes water taste sour.",
+      "(d) Acid rain lowers pH, harming aquatic life and the availability of soil nutrients."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q342. अम्लों के अम्लीय गुणधर्मों के लिए कौन-सा आयन उत्तरदायी होता है?",
+    q_en: "Q342. Which ion is responsible for the acidic properties of acids?",
+    tag: "RRB JE 18/12/2024 (Morning)",
+    o_hi: [
+      "(a) H⁺",
+      "(b) OH⁻",
+      "(c) Cl⁻",
+      "(d) Na⁺"
+    ],
+    o_en: [
+      "(a) H⁺",
+      "(b) OH⁻",
+      "(c) Cl⁻",
+      "(d) Na⁺"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q343. वॉशिंग सोडा को Na₂CO₃·xH₂O द्वारा दर्शाया जाता है। 'x' का मान _______ के बराबर है।",
+    q_en: "Q343. Washing soda is represented by Na₂CO₃·xH₂O. The value of 'x' is equal to _______.",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 6",
+      "(b) 10",
+      "(c) 8",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 6",
+      "(b) 10",
+      "(c) 8",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q344. एसिडिटी की समस्या वाले लोगों का इलाज एंटासिड (antacids) से किया जाता है। इसमें निम्नलिखित में से कौन-सा तत्व होता है?",
+    q_en: "Q344. People suffering from acidity are treated with antacids. Which of the following is present in it?",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) चूना जल (Lime water)",
+      "(b) मिल्क ऑफ मैग्नेशिया (Milk of magnesia)",
+      "(c) अशमित चूना (Quick lime)",
+      "(d) हाइड्रोक्लोरिक अम्ल (Hydrochloric acid)"
+    ],
+    o_en: [
+      "(a) Lime water",
+      "(b) Milk of magnesia",
+      "(c) Quick lime",
+      "(d) Hydrochloric acid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q345. सोडियम कार्बोनेट (Na₂CO₃) को जल में घोलने पर, परिणामी विलयन _______ हो जाता है।",
+    q_en: "Q345. When sodium carbonate (Na₂CO₃) is dissolved in water, the resulting solution becomes _______.",
+    tag: "RRB JE 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) उदासीन",
+      "(b) क्षारीय",
+      "(c) अम्लीय",
+      "(d) सोडियम क्लोराइड के साथ अत्यधिक अभिक्रियाशील"
+    ],
+    o_en: [
+      "(a) Neutral",
+      "(b) Basic",
+      "(c) Acidic",
+      "(d) Highly reactive with sodium chloride"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q346. चींटी के डंक (ant bite) की प्रकृति अम्लीय होती है। चींटी के डंक में कौन-सा अम्ल पाया जाता है?",
+    q_en: "Q346. An ant bite is acidic in nature. Which acid is found in an ant bite?",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) लैक्टिक अम्ल (Lactic acid)",
+      "(b) एसीटिक अम्ल (Acetic acid)",
+      "(c) फॉर्मिक अम्ल (Formic acid)",
+      "(d) ऑक्सैलिक अम्ल (Oxalic acid)"
+    ],
+    o_en: [
+      "(a) Lactic acid",
+      "(b) Acetic acid",
+      "(c) Formic acid",
+      "(d) Oxalic acid"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q347. यदि हेंडरसन-हैसलबैच समीकरण में pH=pKa है तो सही विकल्प चुनें।",
+    q_en: "Q347. If pH = pKa in the Henderson-Hasselbalch equation, choose the correct option.",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) [HA]<[A-]",
+      "(b) [HA]>[A-]",
+      "(c) [HA]=log[A-]",
+      "(d) [HA]=[A-]"
+    ],
+    o_en: [
+      "(a) [HA]<[A-]",
+      "(b) [HA]>[A-]",
+      "(c) [HA]=log[A-]",
+      "(d) [HA]=[A-]"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q348. प्राथमिक ऐमीन को किस ब्रंसटेड अम्ल (Brønsted acid) के साथ उपचारित करके डाइऐज़ोनियम लवण (Diazonium salt) बनता है?",
+    q_en: "Q348. Treatment of a primary amine with which Brønsted acid forms a diazonium salt?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) सल्फ्यूरस अम्ल",
+      "(b) फ़ॉस्फोरस अम्ल",
+      "(c) क्लोरस अम्ल",
+      "(d) नाइट्रस अम्ल"
+    ],
+    o_en: [
+      "(a) Sulphurous acid",
+      "(b) Phosphorous acid",
+      "(c) Chlorous acid",
+      "(d) Nitrous acid"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q349. निम्नलिखित में से कौन-सा pH मान किसी विलयन में उदासीनता को दर्शाता है?",
+    q_en: "Q349. Which of the following pH values indicates neutrality in a solution?",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) 14",
+      "(b) 7",
+      "(c) 0",
+      "(d) -14"
+    ],
+    o_en: [
+      "(a) 14",
+      "(b) 7",
+      "(c) 0",
+      "(d) -14"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q350. ________ सिरका अम्ल का एक प्राकृतिक स्रोत है।",
+    q_en: "Q350. ________ is a natural source of acetic acid.",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) विनेगर",
+      "(b) टमाटर",
+      "(c) संतरा",
+      "(d) इमली"
+    ],
+    o_en: [
+      "(a) Vinegar",
+      "(b) Tomato",
+      "(c) Orange",
+      "(d) Tamarind"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q351. निम्नलिखित में से कौन-सा पदार्थ जल में घुलने पर हाइड्रॉक्साइड आयन उत्पन्न करता है?",
+    q_en: "Q351. Which of the following substances produces hydroxide ions when dissolved in water?",
+    tag: "RPF S.I. 12/12/2024 (Morning)",
+    o_hi: [
+      "(a) सल्फर डाइऑक्साइड",
+      "(b) नाइट्रोजन डाइऑक्साइड",
+      "(c) अमोनिया",
+      "(d) कार्बन डाइऑक्साइड"
+    ],
+    o_en: [
+      "(a) Sulphur dioxide",
+      "(b) Nitrogen dioxide",
+      "(c) Ammonia",
+      "(d) Carbon dioxide"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q352. 6.0 - 7.6 के बीच pH वाले अम्ल की उपस्थिति में कौन-सी संवेदनशील रंजक (dye) पीली हो जाती है?",
+    q_en: "Q352. Which sensitive dye turns yellow in the presence of an acid in the pH range 6.0 - 7.6?",
+    tag: "RPF S.I. 12/12/2024 (Evening)",
+    o_hi: [
+      "(a) ब्रोमोथाइमॉल ब्लू (Bromothymol blue)",
+      "(b) एलिजारिन येल्लो आर (Alizarin yellow R)",
+      "(c) मिथाइल ऑरेंज (Methyl orange)",
+      "(d) थाइमोल्फ्थेलिन (Thymolphthalein)"
+    ],
+    o_en: [
+      "(a) Bromothymol blue",
+      "(b) Alizarin yellow R",
+      "(c) Methyl orange",
+      "(d) Thymolphthalein"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q353. निम्नलिखित अम्लों को अम्लीय शक्ति के बढ़ते क्रम में व्यवस्थित कीजिए।<br><div style='text-align:center;margin:14px 0;'><img src='" + Q353_IMAGE + "' alt='Q353 figure' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    q_en: "Q353. Arrange the following acids in increasing order of acidic strength.<br><div style='text-align:center;margin:14px 0;'><img src='" + Q353_IMAGE + "' alt='Q353 figure' style='display:block;max-width:100%;width:auto;height:auto;max-height:430px;margin:0 auto;object-fit:contain;'></div>",
+    tag: "RPF S.I. 13/12/2024 (Afternoon)",
+    image: Q353_IMAGE,
+    o_hi: [
+      "(a) III<II<I",
+      "(b) III<I<I",
+      "(c) II<III<I",
+      "(d) I<II<III"
+    ],
+    o_en: [
+      "(a) III<II<I",
+      "(b) III<I<I",
+      "(c) II<III<I",
+      "(d) I<II<III"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
