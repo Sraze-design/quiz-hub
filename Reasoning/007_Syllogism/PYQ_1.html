@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q1. कथन:<br>कुछ कैलकुलेटर, पत्थर हैं।<br>सभी कैलकुलेटर, पेन हैं।<br>कोई भी कैलकुलेटर, ऑक्टोपस नहींंं है।<br>निष्कर्ष:<br>(I): कोई भी ऑक्टोपस, पत्थर नहींंं है।<br>(II): कुछ पेन, ऑक्टोपस हैं।",
+    q_en: "Q1. Statements:<br>Some calculators are stones.<br>All calculators are pens.<br>No calculators are octopuses.<br>Conclusions:<br>(I) No octopuses are stones.<br>(II): Some pens are octopuses.",
+    tag: "NTPC CBT 2 (GL) 13/10/2025 (Morning)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है",
+      "(d) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q2. कथन:<br>कुछ हिरण शेर हैं।<br>कुछ मेंढक हिरण हैं।<br>कुछ घोड़े शेर हैं।<br>निष्कर्ष:<br>(I) कम से कम कुछ शेर मेंढक हैं।<br>(II) कुछ हिरण घोड़े हैं।",
+    q_en: "Q2. Statements:<br>Some deer are lions.<br>Some frogs are deer.<br>Some horses are lions.<br>Conclusions:<br>(I) At least some lions are frogs.<br>(II) Some deer are horses.",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) दोनों निष्कर्ष (I) और (II) अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q3. कथनः<br>कुछ चम्मच, प्लेट हैं।<br>कुछ प्लेट, कटोरे हैं।<br>कोई कटोरे, गिलास नहींंं है।<br>निष्कर्षः<br>I) कुछ चम्मच, गिलास हैं।<br>II) कुछ प्लेट, गिलास हैं।<br>III) कुछ प्लेट, गिलास नहींंं हैं।",
+    q_en: "Q3. Statements:<br>Some spoons are plates.<br>Some plates are bowls.<br>No bowls are glasses.<br>Conclusions:<br>I) Some spoons are glasses.<br>II) Some plates are glasses.<br>III) Some plates are not glasses.",
+    tag: "RPF Constable 18/03/2025 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है।",
+      "(b) या तो निष्कर्ष II या निष्कर्ष III अनुसरण करता है।",
+      "(c) निष्कर्ष I और III दोनों अनुसरण करते हैं।",
+      "(d) केवल निष्कर्ष III अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Either conclusion II or III follows.",
+      "(c) Both conclusions I and III follow.",
+      "(d) Only conclusion III follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q4. कथनः<br>कुछ जूते, क्रॉक्स हैं।<br>सभी क्रॉक्स, फॉर्मल हैं।<br>कुछ क्रॉक्स, कंबल हैं।<br>निष्कर्षः<br>I. कुछ जूते, कंबल हैं।<br>II. कम से कम कुछ कंबल, फॉर्मल हैं।",
+    q_en: "Q4. Statements:<br>Some shoes are Crocs.<br>All Crocs are formal shoes.<br>Some Crocs are blankets.<br>Conclusions:<br>I.<br>Some shoes are blankets. II.<br>At least some blankets are formal shoes.",
+    tag: "RPF Constable 12/03/2025 (Morning)",
+    o_hi: [
+      "(a) न तो। और न ही II अनुसरण करता है",
+      "(b) I और II, दोनों अनुसरण करते हैं",
+      "(c) केवल I। अनुसरण करता है",
+      "(d) केवल I अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Both conclusions I and II follow.",
+      "(c) Only conclusion II follows.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q5. कथन:<br>1. सभी बर्तन, रेत हैं।<br>2. कुछ रेत, मिट्टी हैं।<br>3. सभी ग्रे, मिट्टी हैं।<br>निष्कर्ष:<br>I. कुछ ग्रे, बर्तन हैं।<br>II. सभी मिट्टियों के रेत होने की संभावना है।<br>III. कुछ मिट्टियाँ, बर्तन हैं।",
+    q_en: "Q5. Statements:<br>1.<br>All utensils are sand. 2.<br>Some sand are soil. 3.<br>All grey objects are soil.<br>Conclusions:<br>I.<br>Some grey objects are utensils. II.<br>All soil being sand is a possibility. III.<br>Some soil are utensils.",
+    tag: "Group - D 02/09/2022 ( Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I और II सत्य हैं।",
+      "(b) केवल निष्कर्ष III सत्य है।",
+      "(c) केवल निष्कर्ष II सत्य है।",
+      "(d) केवल निष्कर्ष I सत्य है।"
+    ],
+    o_en: [
+      "(a) Only conclusions I and II are true.",
+      "(b) Only conclusion III is true.",
+      "(c) Only conclusion II is true.",
+      "(d) Only conclusion I is true."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q6. कथन:<br>1. सभी गौरैया पक्षी हैं।<br>2. कुछ पक्षी, जानवर हैं।<br>3. सभी कुत्ते, जानवर हैं।<br>निष्कर्ष:<br>I. कुछ कुत्ते, गौरैया हैं।<br>II. सभी जानवरों के पक्षी होने की संभावना है।<br>III. कुछ जानवर, गौरैया हैं।",
+    q_en: "Q6. Statements:<br>1.<br>All sparrows are birds. 2.<br>Some birds are animals. 3.<br>All dogs are animals.<br>Conclusions:<br>I.<br>Some dogs are sparrows. II.<br>All animals being birds is a possibility. III.<br>Some animals are sparrows.",
+    tag: "Group - D 05/09/2022 ( Morning )",
+    o_hi: [
+      "(a) केवल निष्कर्ष I और II सत्य हैं।",
+      "(b) केवल निष्कर्ष II सत्य है।",
+      "(c) केवल निष्कर्ष III सत्य है।",
+      "(d) केवल निष्कर्ष I सत्य है।"
+    ],
+    o_en: [
+      "(a) Only conclusions I and II follow.",
+      "(b) Only conclusion II follows.",
+      "(c) Only conclusion III follows.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q7. कथन:<br>1. कुछ माउंटेनस, हिल्स हैं।<br>2. कुछ हिल्स, रॉक्स हैं।<br>3. सभी रॉक्स, ब्लैक हैं।<br>निष्कर्षः<br>I. कुछ ब्लैक, हिल्स हैं।<br>II. सभी हिल्स के माउंटेनस होने की संभावना है।<br>III. कुछ रॉक्स, माउंटेन नहींंं हैं।",
+    q_en: "Q7. Statements:<br>1.<br>Some mountains are hills. 2.<br>Some hills are rocks. 3.<br>All rocks are black objects.<br>Conclusions:<br>I.<br>Some black objects are hills. II.<br>All hills being mountains is a possibility. III.<br>Some rocks are not mountains.",
+    tag: "Group - D 05/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) केवल निष्कर्ष II सत्य है।",
+      "(b) केवल निष्कर्ष I सत्य है।",
+      "(c) केवल निष्कर्ष III सत्य है।",
+      "(d) केवल निष्कर्ष I और II सत्य हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Only conclusion III follows.",
+      "(d) Only conclusions I and II follow."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q8. कथन:<br>1. कुछ स्पोर्ट्स, क्रिकेट हैं।<br>2. कुछ क्रिकेट, टेनिस हैं।<br>3. सभी टेनिस, बाल्स हैं।<br>निष्कर्ष:<br>I. कुछ टेनिस स्पोर्ट्स हैं।<br>II. कुछ बाल्स स्पोर्ट्स हैं।<br>III. कुछ बाल्स क्रिकेट हैं।",
+    q_en: "Q8. Statements:<br>1.<br>Some sports are cricket. 2.<br>Some cricket are tennis. 3.<br>All tennis are balls.<br>Conclusions:<br>I.<br>Some tennis are sports. II.<br>Some balls are sports. III.<br>Some balls are cricket.",
+    tag: "Group - D 05/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) केवल निष्कर्ष I सत्य है।",
+      "(b) केवल निष्कर्ष I और II सत्य हैं।",
+      "(c) केवल निष्कर्ष II सत्य है।",
+      "(d) केवल निष्कर्ष III सत्य है"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Only conclusions I and II follow.",
+      "(c) Only conclusion II follows.",
+      "(d) Only conclusion III follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q9. कथन:<br>1. सभी हरे, लाल हैं।<br>2. कुछ लाल, भूरे हैं।<br>3. सभी ग्रे, भूरे हैं।<br>निष्कर्ष:<br>I. कुछ ग्रे, हरे हैं।<br>II. सभी भूरों के लाल होने की संभावना है।<br>III. कुछ भूरे, हरे हैं।",
+    q_en: "Q9. Statements:<br>1.<br>All green things are red things. 2.<br>Some red things are brown objects. 3.<br>All grey objects are brown objects.<br>Conclusions:<br>I.<br>Some grey objects are green things. II.<br>All brown things being red things is a possibility. III.<br>Some brown objects are green things.",
+    tag: "Group - D 06/09/2022 ( Morning )",
+    o_hi: [
+      "(a) केवल निष्कर्ष II सत्य है।",
+      "(b) केवल निष्कर्ष I और II सत्य हैं।",
+      "(c) केवल निष्कर्ष III सत्य है।",
+      "(d) केवल निष्कर्ष I सत्य है।"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusions I and II follow.",
+      "(c) Only conclusion III follows.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q10. कथन:<br>1. सभी बिल्लियाँ, कुत्ते हैं।<br>2. कुछ कुत्ते, पक्षी हैं।<br>3. सभी भालू, पक्षी हैं।<br>निष्कर्ष:<br>I. कुछ भालू बिल्लियाँ हैं।<br>II. सभी पक्षियों के कुत्ते होने की संभावना है।<br>III. कुछ पक्षी, बिल्लियाँ हैं।",
+    q_en: "Q10. Statements:<br>1.<br>All cats are dogs. 2.<br>Some dogs are birds. 3.<br>All bears are birds.<br>Conclusions:<br>I.<br>Some bears are cats. II.<br>All birds being dogs is a possibility. III.<br>Some birds are cats.",
+    tag: "Group - D 06/09/2022 ( Evening )",
+    o_hi: [
+      "(a) केवल निष्कर्ष III सत्य है।",
+      "(b) केवल निष्कर्ष I सत्य है।",
+      "(c) केवल निष्कर्ष I और II सत्य हैं।",
+      "(d) केवल निष्कर्ष II सत्य है।"
+    ],
+    o_en: [
+      "(a) Only conclusion III follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Only conclusions I and II follow.",
+      "(d) Only conclusion II follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q11. कथन:<br>कुछ मैट, अंजीर हैं।<br>सभी अंजीर , क्लिप हैं।<br>कोई भी क्लिप, स्टैंड नहींंं है।<br>निष्कर्ष:<br>I. सभी मैट के स्टैंड होने की संभावना है।<br>II. कुछ क्लिप, मैट हैं।",
+    q_en: "Q11. Statements:<br>Some mats are figs.<br>All figs are clips.<br>No clips are stands.<br>Conclusions:<br>I.<br>All mats being stands is a possibility. II.<br>Some clips are mats.",
+    tag: "Group - D 08/09/2022 ( Evening )",
+    o_hi: [
+      "(a) निष्कर्ष I और II दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष II अनुसरण करता है।",
+      "(c) केवल निष्कर्ष I अनुसरण करता है।",
+      "(d) न तो निष्कर्ष I और न ही ॥ अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions I and II follow.",
+      "(b) Only conclusion II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q12. कथन:<br>1. कुछ छात्र, पुरुष हैं।<br>2. कुछ पुरुष, ईमानदार हैं।<br>3. सभी ईमानदार, सच्चे हैं।<br>निष्कर्ष:<br>I. कुछ सच्चे, पुरुष हैं।<br>II. सभी पुरुषों के छात्र होने की संभावना है।<br>III. कुछ ईमानदार छात्र नहींंं हैं।",
+    q_en: "Q12. Statements:<br>1.<br>Some students are men. 2.<br>Some men are honest people. 3.<br>All honest people are truthful people.<br>Conclusions:<br>I.<br>Some truthful people are men. II.<br>All men being students is a possibility. III.<br>Some honest people are not students.",
+    tag: "Group - D 08/09/2022 ( Evening )",
+    o_hi: [
+      "(a) केवल निष्कर्ष II सत्य है",
+      "(b) केवल निष्कर्ष III सत्य है",
+      "(c) केवल निष्कर्ष I और II सत्य हैं",
+      "(d) केवल निष्कर्ष I सत्य है"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion III follows.",
+      "(c) Only conclusions I and II follow.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q13. कथन:<br>कुछ मोबाइल लैपटॉप हैं।<br>कोई लैपटॉप कंप्यूटर नहींंं है।<br>सभी फोन कंप्यूटर हैं।<br>निष्कर्ष:<br>I. कम से कम कुछ मोबाइल कंप्यूटर हैं।<br>II. कम से कम कुछ फोन लैपटॉप हैं।",
+    q_en: "Q13. Statements:<br>Some mobiles are laptops.<br>No laptops are computers.<br>All phones are computers.<br>Conclusions:<br>I.<br>At least some mobiles are computers. II.<br>At least some phones are laptops.",
+    tag: "NTPC CBT II Level 5 (12/06/2022) Shift 2",
+    o_hi: [
+      "(a) निष्कर्ष I और II दोनों पालन करते हैं।",
+      "(b) या तो निष्कर्ष I या || पालन करता है।",
+      "(c) केवल निष्कर्ष I पालन करता है।",
+      "(d) न तो निष्कर्ष I और न ही ॥ पालन करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions I and II follow.",
+      "(b) Either conclusion I or II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q14. कथन:<br>कुछ पेंसिल पेन हैं।<br>कोई पेन शार्पनर नहींंं है<br>सभी शार्पनर स्टेपलर हैं<br>निष्कर्ष:<br>I. कम से कम कुछ स्टेपलर पेन हैं।<br>II. सभी पेंसिल पेन हैं।",
+    q_en: "Q14. Statements:<br>Some pencils are pens.<br>No pens are sharpeners.<br>All sharpeners are staplers.<br>Conclusions:<br>I.<br>At least some staplers are pens. II.<br>All pencils are pens.",
+    tag: "NTPC CBT II Level 2 (13/06/2022) Shift 1",
+    o_hi: [
+      "(a) न तो निष्कर्ष I न ही II अनुसरण करता है",
+      "(b) केवल निष्कर्ष II अनुसरण करता है",
+      "(c) निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "(d) केवल निष्कर्ष I अनुसरण करता हैं"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q15. कथन:<br>कुछ बैट बॉल हैं।<br>सभी बॉल कैप हैं।<br>सभी कैप खिलाड़ी(प्लेयर) हैं।<br>कोई खिलाड़ी(प्लेयर) हैट नहींंं है।<br>निष्कर्ष:<br>I. कोई बैट कैप नहींंं है।<br>II. सभी कैप बॉल हैं।<br>III. कुछ हैट कैप हैं।<br>IV. कोई हैट बॉल नहींंं है।",
+    q_en: "Q15. Statements:<br>Some bats are balls.<br>All balls are caps.<br>All caps are players.<br>No players are hats.<br>Conclusions:<br>I.<br>No bats are caps. II.<br>All caps are balls. III.<br>Some hats are caps. IV.<br>No hats are balls.",
+    tag: "NTPC CBT II Level 5 (15/06/2022) Shift 1",
+    o_hi: [
+      "(a) निष्कर्ष I और III दोनों पालन करते हैं।",
+      "(b) केवल निष्कर्ष II पालन करता है।",
+      "(c) केवल निष्कर्ष I पालन करता है।",
+      "(d) केवल निष्कर्ष IV पालन करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions I and III follow.",
+      "(b) Only conclusion II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Only conclusion IV follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q16. कथन:<br>1. कोई पायलट अनुभवहीन नहींंं हैं।<br>2. कुछ अनुभवहीन खिलाड़ी हैं।",
+    q_en: "Q16. Statements:<br>1.<br>No pilots are inexperienced people. 2.<br>Some inexperienced people are players.",
+    tag: "NTPC CBT - I 28/12/2020 (Evening)",
+    o_hi: [
+      "(a) कुछ अनुभवहीन खिलाड़ी नहींंं हैं।",
+      "(b) कुछ पायलट खिलाड़ी हैं।",
+      "(c) कुछ खिलाड़ी पायलट हैं।",
+      "(d) कुछ पायलट खिलाड़ी नहींंं हैं।"
+    ],
+    o_en: [
+      "(a) Some inexperienced people are not players.",
+      "(b) Some pilots are players.",
+      "(c) Some players are pilots.",
+      "(d) Some pilots are not players."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q17. कथन:<br>सभी D, A हैं<br>कोई A, C नहींंं है<br>निष्कर्ष:<br>I. कोई D, C नहींंं है<br>II. कुछ C, D हैं",
+    q_en: "Q17. Statements:<br>All D are A.<br>No A are C.<br>Conclusions:<br>I.<br>No D are C. II.<br>Some C are D.",
+    tag: "NTPC CBT - I 30/12/2020 (Evening)",
+    o_hi: [
+      "(a) कोई निष्कर्ष अनुसरण नहींं करता है",
+      "(b) निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "(c) केवल निष्कर्ष II अनुसरण करता है",
+      "(d) केवल निष्कर्ष I अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) No conclusion follows.",
+      "(b) Both conclusions I and II follow.",
+      "(c) Only conclusion II follows.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q18. यदि कुछ कलाकार हस्तियांहैंऔरसभी<br>हस्तियां करोड़पति हैं, तो निम्नलिखित में से कौन<br>सा निष्कर्ष निकलता है ?",
+    q_en: "Q18. If some artists are celebrities and all celebrities are millionaires, which of the following conclusions follows?",
+    tag: "NTPC CBT - I 04/01/2021 (Evening)",
+    o_hi: [
+      "(a) कोई हस्तियां करोड़पति नहींंं हैं।",
+      "(b) कुछ कलाकार करोड़पति हैं।",
+      "(c) कोई करोड़पति हस्तियां नहींंं हैं।",
+      "(d) सभी कलाकार करोड़पति हैं।"
+    ],
+    o_en: [
+      "(a) No celebrities are millionaires.",
+      "(b) Some artists are millionaires.",
+      "(c) No millionaires are celebrities.",
+      "(d) All artists are millionaires."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q19. कथनों के 3 समूह A, B और C नीचे दिए गए हैं। उन समुच्चयों को चुनें जिनमें तीसरा कथन पहले दो कथनों का तार्किक निष्कर्ष है।<br>A. कुछ कारें सुजुकी हैं। सभी सुजुकी MPVs हैं। कुछ कारें MPVs हैं।<br>B. सभी पुरुष इंसान हैं। कोई इंसान लाल नहीं है। कोई पुरुष लाल नहीं है।<br>C. हर पुरुष अपनी पत्नी से प्यार करता है। सभी पत्नियां सुंदर हैं। किसी सुंदर का पति नहीं है।",
+    q_en: "Q19. Three sets of statements A, B and C are given below. Select the set(s) in which the third statement is a logical conclusion of the first two. A.<br>Some cars are Suzukis.<br>All Suzukis are MPVs.<br>Some cars are MPVs. B.<br>All men are humans.<br>No human is red.<br>No man is red. C.<br>Every man loves his wife.<br>All wives are beautiful.<br>No beautiful person has a husband.",
+    tag: "NTPC CBT - I 07/01/2021 (Morning)",
+    o_hi: [
+      "(a) केवल B",
+      "(b) केवल A",
+      "(c) केवल A और B",
+      "(d) केवल B और C"
+    ],
+    o_en: [
+      "(a) Only B",
+      "(b) Only A",
+      "(c) Only A and B",
+      "(d) Only B and C"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q20. दिए गए कथन को पढ़ें और बताइये कि<br>दिया गया निष्कर्ष कथनों के संबंध में सत्य, असत्य<br>या अप्रासंगिक है।<br>कथन :<br>A, B की बहन है।<br>B, C की पुत्री है<br>निष्कर्ष :B, C की दुश्मन है",
+    q_en: "Q20. Read the statements and decide whether the given conclusion is true, false or irrelevant with respect to them.<br>Statements:<br>A is B's sister. B is C's daughter.<br>Conclusion:<br>B is C's enemy.",
+    tag: "NTPC CBT - I 11/01/2021 (Evening)",
+    o_hi: [
+      "(a) निकाला गया निष्कर्ष निश्चित रूप से सत्य है",
+      "(b) निष्कर्ष नहींंं निकाला जा सकता",
+      "(c) निकाला गया निष्कर्ष शायद सत्य है",
+      "(d) निकाला गया निष्कर्ष निश्चित रूप से असत्य है"
+    ],
+    o_en: [
+      "(a) The conclusion drawn is definitely true.",
+      "(b) The conclusion cannot be drawn.",
+      "(c) The conclusion drawn is probably true.",
+      "(d) The conclusion drawn is definitely false."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q21. उस निष्कर्ष का चयनकीजियेजोकथनों<br>से तार्किक रूप से अनुसरण नहींंं करता है।<br>कथन:<br>I. सभी गेंद फूल हैं.<br>II. सभी बैट गेंद हैं",
+    q_en: "Q21. Select the conclusion that does not logically follow from the statements.<br>Statements:<br>I.<br>All balls are flowers. II.<br>All bats are balls.",
+    tag: "NTPC CBT - I 12/01/2021 (Morning)",
+    o_hi: [
+      "(a) कुछ फूल बैट हैं",
+      "(b) कुछ गेंद बैट हैं।",
+      "(c) सभी बैट फूल हैं",
+      "(d) कोई गेंद फूल नहींंं है"
+    ],
+    o_en: [
+      "(a) Some flowers are bats.",
+      "(b) Some balls are bats.",
+      "(c) All bats are flowers.",
+      "(d) No ball is a flower."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q22. दिए गए कथनों पर विचार कीजिये और<br>बताइये कि दिए गए अनुमानों में से कौन सा<br>कथनों में निहित नहींंं हैं।<br>कथन :<br>कुछ घास हरी है।<br>सभी हरे रंग लाल है",
+    q_en: "Q22. Consider the statements and identify which assumption is not implicit.<br>Statements:<br>Some grass is green.<br>All green things are red.",
+    tag: "NTPC CBT - I 20/01/2021 (Morning)",
+    o_hi: [
+      "(a) सभी लाल हरे रंग की है",
+      "(b) कुछ हरी घास है",
+      "(c) कुछ घास लाल और हरे रंग की है",
+      "(d) कुछ घास लाल है"
+    ],
+    o_en: [
+      "(a) All red things are green.",
+      "(b) Some green things are grass.",
+      "(c) Some grass is both red and green.",
+      "(d) Some grass is red."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q23. कथन:<br>कुछ गेंदें उछलती हैं।<br>सभी गेंदें कंपन करती हैं।<br>निष्कर्ष:<br>I. जो गेंदें उछलती नहींंं हैं, वे भी कंपन करती हैं।<br>II. जो गेंदें उछलती नहींंं हैं, जरूरी नहींंं कि वे<br>कंपन करें।",
+    q_en: "Q23. Statements:<br>Some balls bounce.<br>All balls vibrate.<br>Conclusions:<br>I. Balls that do not bounce also vibrate.<br>II. Balls that do not bounce need not necessarily vibrate.",
+    tag: "NTPC CBT - I 02/02/2021 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I अनुसरण करता है",
+      "(b) कवल निष्कर्ष II अनुसरण करता है",
+      "(c) न तो निष्कर्ष I और न ही II अनुसरण करता है",
+      "(d) निष्कर्ष I और II दोनों अनुसरण करते हैं"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Neither conclusion I nor II follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q24. उस विकल्प का चयन करें जो दिए गए<br>कथनों से निष्कर्ष नहींंंनिकाला जा सकता है<br>कथन:<br>(1) सभी चप्पल जूते हैं.<br>(2) कुछ हील्स चप्पल हैं<br>(3) सभी कैनवास हील्स हैं<br>(4)सभी हील्स जूते हैं",
+    q_en: "Q24. Select the option that cannot be concluded from the given statements.<br>Statements:<br>(1) All slippers are shoes. (2) Some heels are slippers. (3) All canvas shoes are heels. (4) All heels are shoes.",
+    tag: "NTPC CBT - I 15/02/2021 (Morning)",
+    o_hi: [
+      "(a) सभी हील्स जूते हैं",
+      "(b) कुछ हील्स कैनवास हैं।",
+      "(c) सभी चप्पल हील्स हैं",
+      "(d) कुछ जूते कैनवास हैं।"
+    ],
+    o_en: [
+      "(a) All heels are shoes.",
+      "(b) Some heels are canvas shoes.",
+      "(c) All slippers are heels.",
+      "(d) Some shoes are canvas shoes."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q25. आपको निम्नलिखित दो कथन दिए गए हैं<br>1. सभी गैंडे सूअर हैं<br>2. कुछ मक्खियाँ सुअर हैं<br>निम्नलिखित में से कौन-सा निष्कर्ष सत्य हैं<br>A. कोई मक्खी गैंडा नहींंं है<br>B. कुछ मक्खी गैंडे हैं",
+    q_en: "Q25. You are given the following two statements: 1.<br>All rhinoceroses are pigs. 2.<br>Some flies are pigs. Which of the following conclusions is true? A.<br>No fly is a rhinoceros. B.<br>Some flies are rhinoceroses.",
+    tag: "NTPC CBT - I 15/02/2021 (Evening)",
+    o_hi: [
+      "(a) A और B दोनों नहींंं",
+      "(b) या तो A या B",
+      "(c) केवल B",
+      "(d) केवल A"
+    ],
+    o_en: [
+      "(a) Neither A nor B.",
+      "(b) Either A or B.",
+      "(c) Only B.",
+      "(d) Only A."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q26. दिए गए कथनों को पढ़ें और तय करें कि विकल्पों में से कौन सा निष्कर्ष कथनों का तार्किक रूप से अनुसरण नहीं करता है।<br>कथन:<br>1. सभी खरगोश पुरुष हैं<br>2. कुछ पुरुष बैटमैन हैं<br>3. कोई बैटमैन खरगोश नहीं है",
+    q_en: "Q26. Read the statements and decide which conclusion does not logically follow from them.<br>Statements:<br>1.<br>All rabbits are men. 2.<br>Some men are Batmen. 3.<br>No Batman is a rabbit.",
+    tag: "NTPC CBT - I 12/03/2021 (Evening)",
+    o_hi: [
+      "(a) कुछ बैटमैन खरगोश नहींंं हैं लेकिन वे पुरुष हैं",
+      "(b) कुछ बैटमैन न तो पुरुष हैं और न ही खरगोश",
+      "(c) कुछ पुरुष न तो बैटमैन हैं और न ही खरगोश।",
+      "(d) कुछ बैटमैन पुरुष और खरगोश दोनों हैं।"
+    ],
+    o_en: [
+      "(a) Some Batmen are not rabbits but are men.",
+      "(b) Some Batmen are neither men nor rabbits.",
+      "(c) Some men are neither Batmen nor rabbits.",
+      "(d) Some Batmen are both men and rabbits."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q27. कथन :<br>1. इस चाय की दुकान पर बेचीं जाने वालीकुछ<br>चाय टाटा चाय है।<br>2. इस चाय की दुकान पर बेचीं जाने वालीकोई<br>भी चाय अहमत चाय नहींंं है।<br>3. इसचाय की दुकान पर बेचीं जाने वालीसारी<br>चाय बहुत ही सुगंधित और स्वादिष्ट है।<br>निष्कर्ष:<br>I. इस चाय की दुकान पर बेचीं जाने वालीकुछ<br>चाय टाटा चाय नहींंं है, परन्तु सुगन्धित है ।<br>II. इस<br>चाय<br>की<br>दुकान पर बेचीं जाने<br>वाली अहमत चाय अत्यंत सुगन्धित है ।<br>III. इसचाय की दुकान पर बेचीं जाने वालीटाटा<br>चाय अत्यंत स्वादिष्ट है।",
+    q_en: "Q27. Statements:<br>1.<br>Some tea sold at this tea shop is Tata tea. 2.<br>No tea sold at this tea shop is Ahmad tea. 3.<br>All tea sold at this tea shop is highly aromatic and tasty.<br>Conclusions:<br>I.<br>Some tea sold at this tea shop is not Tata tea but is aromatic.<br>II. Ahmad tea sold at this tea shop is highly aromatic.<br>III. Tata tea sold at this tea shop is highly tasty.",
+    tag: "NTPC CBT - I 12/03/2021 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) और (II) अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (I) और (III) अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (III) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusions I and II follow.",
+      "(b) Only conclusions I and III follow.",
+      "(c) Only conclusion I follows.",
+      "(d) Only conclusion III follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q28. इस प्रश्न में, दो कथन दिए गए हैंजिसके<br>बाद एक निष्कर्ष दिया गया है।उसविकल्पको<br>चुनें जो दिए निष्कर्ष को उचित ठहराता है।<br>कथन:<br>(1) कोयला कार्बन का परमाणु है।<br>(2) हीरा कार्बन का परमाणु है।<br>निष्कर्ष:हीरे कोयला हैं।",
+    q_en: "Q28. In this question, two statements are followed by a conclusion. Select the option that justifies the given conclusion.<br>Statements:<br>(1) Coal is an atom of carbon. (2) Diamond is an atom of carbon.<br>Conclusion:<br>Diamonds are coal.",
+    tag: "RRB JE 23/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) निकाला गया निष्कर्ष गलत है।",
+      "(b) निकाला गया निष्कर्ष निश्चित रूप से सही है।",
+      "(c) निकाला गया निष्कर्ष संभवतः सही है।",
+      "(d) निकाला गया निष्कर्ष अप्रासंगिक है।"
+    ],
+    o_en: [
+      "(a) The conclusion drawn is false.",
+      "(b) The conclusion drawn is definitely true.",
+      "(c) The conclusion drawn is possibly true.",
+      "(d) The conclusion drawn is irrelevant."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q29. कथन<br>1. सभी प्लास्टिक पॉलीमर हैं।<br>2. कोई प्लास्टिक रबर नहींंं है, लेकिन कुछ<br>पॉलीमर रबर है।<br>निष्कर्ष<br>I: कुछ रबर पॉलीमर हैं।<br>II: सभी पॉलीमर रबर है।<br>III: कोई भी रबर प्लास्टिक नहींंं हैं।",
+    q_en: "Q29. Statements:<br>1.<br>All plastics are polymers. 2.<br>No plastic is rubber, but some polymers are rubber.<br>Conclusions:<br>I.<br>Some rubber is polymer. II.<br>All polymers are rubber. III.<br>No rubber is plastic.",
+    tag: "ALP Tier II 08/02/2019 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष III अनुसरण करता है।",
+      "(b) केवल निष्कर्ष I और III अनुसरण करते हैं।",
+      "(c) सभी निष्कर्ष I, II और III अनुसरण करते हैं।",
+      "(d) केवल निष्कर्ष I अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion III follows.",
+      "(b) Only conclusions I and III follow.",
+      "(c) All conclusions I, II and III follow.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q30. कथन:<br>कुछ कीड़ा बिंदु हैं।<br>सभी अखरोट बिंदु हैं<br>निष्कर्ष:<br>i) कुछ कीड़ा बिंदु हैं।<br>ii) सभी बिंदु अखरोट हैं।<br>iii) कुछ बिंदु अखरोट हैं।<br>iv) सभी कीड़ा बिंदु हैं।",
+    q_en: "Q30. Statements:<br>Some insects are points.<br>All walnuts are points.<br>Conclusions:<br>i) Some insects are points. ii) All points are walnuts. iii) Some points are walnuts. iv) All insects are points.",
+    tag: "RPF Constable 19/01/2019 (Morning)",
+    o_hi: [
+      "(a) केवल i) और iii) अनुसरण करते हैं",
+      "(b) केवल iii) और iv) अनुसरण करते हैं",
+      "(c) केवल i) और ii)अनुसरण करते हैं",
+      "(d) केवल ii) और iv) अनुसरण करते हैं"
+    ],
+    o_en: [
+      "(a) Only conclusions i) and iii) follow.",
+      "(b) Only conclusions iii) and iv) follow.",
+      "(c) Only conclusions i) and ii) follow.",
+      "(d) Only conclusions ii) and iv) follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q31. कथन:<br>कुछ बिल्लियाँ कुत्ते हैं।<br>सभी कुत्ते चूहे हैं।<br>निष्कर्ष:<br>i) कुछ चूहे बिल्लियाँ हैं।<br>ii) सभी चूहे बिल्लियाँ हैं।<br>निम्न विकल्पों में सबसे उपयुक्त एक का चयन<br>कीजिए:<br>A. केवल निष्कर्ष i अनुसरण करता है।<br>B. केवल निष्कर्ष ii अनुसरण करता है।<br>C. या तो निष्कर्ष i अथवा ii अनुसरण करता है।<br>D. न तो निष्कर्ष i और न ही ii अनुसरण करता है।<br>E. i और ii दोनों निष्कर्ष अनुसरण करते हैं।",
+    q_en: "Q31. Statements:<br>Some cats are dogs.<br>All dogs are mice.<br>Conclusions:<br>i) Some mice are cats. ii) All mice are cats. Select the most appropriate option: A. Only conclusion i follows.<br>B. Only conclusion ii follows.<br>C. Either conclusion i or ii follows.<br>D. Neither conclusion i nor ii follows.<br>E. Both conclusions i and ii follow.",
+    tag: "RPF S.I. 19/12/2018 (Morning)",
+    o_hi: [
+      "(a) E",
+      "(b) B",
+      "(c) C",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) E",
+      "(b) B",
+      "(c) C",
+      "(d) A"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q32. कथन:<br>कोई भी आम संतरा नहींंं है।<br>कोई भी संतरा सेब नहींंं है।<br>कुछ आम सेब है।<br>निष्कर्षः<br>1. कोई भी सेब आम नहींंं है।<br>2. कोई भी सेब संतरा नहींंं है।<br>3. कुछ संतरे आम है।<br>4. सभी सेब आम है।",
+    q_en: "Q32. Statements:<br>No mangoes are oranges.<br>No oranges are apples.<br>Some mangoes are apples.<br>Conclusions:<br>1.<br>No apples are mangoes. 2.<br>No apples are oranges. 3.<br>Some oranges are mangoes. 4.<br>All apples are mangoes.",
+    tag: "RRB ALP 17/08/2018 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष 2 और 3 दोनों का पालन हो रहा है।",
+      "(b) केवल निष्कर्ष 1 या 3 का पालन हो रहा है",
+      "(c) केवल निष्कर्ष 1 का पालन हो रहा है",
+      "(d) केवल निष्कर्ष 2 का पालन हो रहा है"
+    ],
+    o_en: [
+      "(a) Only conclusions 2 and 3 follow.",
+      "(b) Only conclusion 1 or 3 follows.",
+      "(c) Only conclusion 1 follows.",
+      "(d) Only conclusion 2 follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q33. कथन:<br>कुछ तालाब झीलें हैं ।<br>कुछ झीलें नदियाँ हैं ।<br>कुछ नदियाँ समुद्र हैं ।<br>निष्कर्ष:<br>1. कुछ समुद्र झीलें हैं ।<br>2. कोई समुद्र झील नहींंं है ।",
+    q_en: "Q33. Statements:<br>Some ponds are lakes.<br>Some lakes are rivers.<br>Some rivers are seas.<br>Conclusions:<br>1.<br>Some seas are lakes. 2.<br>No sea is a lake.",
+    tag: "RRB ALP 31/08/2018 (Evening)",
+    o_hi: [
+      "(a) या तो 1 या 2 अनुसरण करता है ।",
+      "(b) 1 और 2 दोनों अनुसरण करते हैं ।",
+      "(c) केवल निष्कर्ष 1 अनुसरण करता है ।",
+      "(d) केवल निष्कर्ष 2 अनुसरण करता है ।"
+    ],
+    o_en: [
+      "(a) Either conclusion 1 or 2 follows.",
+      "(b) Both conclusions 1 and 2 follow.",
+      "(c) Only conclusion 1 follows.",
+      "(d) Only conclusion 2 follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q34. कथन:<br>कोई भी नेल, कटर नहींंं है।<br>सभी कटर, चाकू हैं।<br>कोई भी कटर, कैंची नहींंं है।<br>निष्कर्ष:<br>(I) कोई भी कैंची, चाकू नहींंं है।<br>(II) कुछ नेल, चाकू हैं।",
+    q_en: "Q34. Statements:<br>No nails are cutters.<br>All cutters are knives.<br>No cutters are scissors.<br>Conclusions:<br>(I) No scissors are knives.<br>(II) Some nails are knives.",
+    tag: "NTPC CBT 2 (GL) 13/10/2025 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q35. कथनः<br>सभी चाय, डिब्बे हैं।<br>कोई चाय, मोजा नहींंं है।<br>निष्कर्षः<br>(I): कुछ मोजे, डिब्बे हैं।<br>(II): सभी डिब्बे, मोजे हैं।",
+    q_en: "Q35. Statements:<br>All teas are boxes.<br>No tea is a sock.<br>Conclusions:<br>(I) Some socks are boxes.<br>(II) All boxes are socks.",
+    tag: "NTPC CBT - I (UG) 07/08/2025 (Morning)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q36. कथनः<br>सभी गोभी, मटर हैं।<br>कोई मटर, ब्रोकली नहींंं है।<br>निष्कर्षः<br>I. कोई ब्रोकली, गोभी नहींंं है।<br>II. कुछ ब्रोकली, गोभी हैं।",
+    q_en: "Q36. Statements:<br>All cabbages are peas.<br>No peas are broccoli.<br>Conclusions:<br>I.<br>No broccoli are cabbages. II.<br>Some broccoli are cabbages.",
+    tag: "NTPC CBT - I (UG) 07/08/2025 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Neither conclusion (I) nor (II) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q37. कथन:<br>सभी घड़ियाँ, बेल्ट हैं।<br>कोई बेल्ट, टाई नहींंं है।<br>निष्कर्ष<br>(I):कुछ घड़ियाँ, टाई हैं।<br>(II):सभी टाई, बेल्ट हैं।",
+    q_en: "Q37. Statements:<br>All watches are belts.<br>No belts are ties.<br>Conclusions:<br>(I)Some watches are ties. (II):All ties are belts.",
+    tag: "NTPC CBT - I (UG) 11/08/2025 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) दोनों निष्कर्ष (I) और (II) अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q38. कथन:<br>कुछ पेंटिंग, फ्रेम हैं।<br>सभी फ्रेम, डेकोरेटिव हैं।<br>निष्कर्ष:<br>(I) कुछ पेंटिंग, डेकोरेटिव हैं।<br>(II) सभी डेकोरेटिव, फ्रेम हैं।",
+    q_en: "Q38. Statements:<br>Some paintings are frames.<br>All frames are decorative items.<br>Conclusions:<br>(I) Some paintings are decorative items.<br>(II) All decorative items are frames.",
+    tag: "NTPC CBT - I (UG) 11/08/2025 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Neither conclusion (I) nor (II) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q39. कथनः<br>सभी जंगल, पहाड़ियाँ हैं।<br>कुछ पहाड़ियाँ, रेगिस्तान हैं।<br>निष्कर्षः<br>(I): सभी पहाड़ियाँ, जंगल हैं।<br>(II): कुछ रेगिस्तान, पहाड़ियाँ हैं।",
+    q_en: "Q39. Statements:<br>All forests are hills.<br>Some hills are deserts.<br>Conclusions:<br>(I) All hills are forests.<br>(II): Some deserts are hills.",
+    tag: "NTPC CBT - I (UG) 12/08/2025 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है",
+      "(b) केवल निष्कर्ष I अनुसरण करता है",
+      "(c) निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "(d) न तो निष्कर्ष I और न ही II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q40. कथनः<br>कुछ पेड़, कुर्सियाँ हैं।<br>कुछ कुर्सियाँ, ग्राफ हैं।<br>निष्कर्ष<br>(I):कुछ पेड़, ग्राफ हैं।<br>(II):सभी ग्राफ, कुर्सियाँ हैं।",
+    q_en: "Q40. Statements:<br>Some trees are chairs.<br>Some chairs are graphs.<br>Conclusions:<br>(I)Some trees are graphs. (II):All graphs are chairs.",
+    tag: "NTPC CBT - I (UG) 13/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Both conclusions (I) and (II) follow.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q41. कथनः<br>सभी बाल्टी, मग हैं।<br>सभी मग, कैन हैं।<br>निष्कर्षः<br>(I) कुछ कैन, मग हैं।<br>(II) सभी बाल्टी, कैन हैं।",
+    q_en: "Q41. Statements:<br>All buckets are mugs.<br>All mugs are cans.<br>Conclusions:<br>(I) Some cans are mugs.<br>(II) All buckets are cans.",
+    tag: "NTPC CBT - I (UG) 14/08/2025 (Morning)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(b) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q42. कथनः<br>सभी खेल, लीवर हैं।<br>सभी लीवर, ड्रम हैं।<br>निष्कर्षः<br>(I) कुछ ड्रम, लीवर हैं।<br>(II) सभी खेल, ड्रम हैं",
+    q_en: "Q42. Statements:<br>All games are levers.<br>All levers are drums.<br>Conclusions:<br>(I) Some drums are levers.<br>(II) All games are drums.",
+    tag: "NTPC CBT - I (UG) 14/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(b) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (I) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Neither conclusion (I) nor (II) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q43. कथन:<br>सभी प्रिंट, बैनर हैं।<br>सभी प्रिंट, फ्लेक्स हैं।<br>निष्कर्ष:<br>(I) कुछ बैनर, फ्लेक्स हैं।<br>(II) सभी फ्लेक्स, प्रिंट हैं।",
+    q_en: "Q43. Statements:<br>All prints are banners.<br>All prints are flex banners.<br>Conclusions:<br>(I) Some banners are flex banners.<br>(II) All flex banners are prints.",
+    tag: "NTPC CBT - I (UG) 14/08/2025 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q44. कथन:<br>सभी भालू, चींटियाँ हैं।<br>कोई भालू , घोड़ा नहींंं है।<br>निष्कर्ष:<br>(I) कोई चींटी, घोड़ा नहींंं है।<br>(II) कोई घोड़ा, भालू नहींंं है।",
+    q_en: "Q44. Statements:<br>All bears are ants.<br>No bears are horses.<br>Conclusions:<br>(I) No ants are horses.<br>(II) No horses are bears.",
+    tag: "NTPC CBT - I (UG) 18/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(b) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (I) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q45. कथनः<br>सभी पेंसिलें, रबड़ हैं।<br>कुछ रबड़, क्रेयॉन हैं।<br>निष्कर्ष<br>(I):कुछ पेंसिलें, क्रेयॉन हैं।<br>(II):कुछ रबड़, पेंसिलें हैं।",
+    q_en: "Q45. Statements:<br>All pencils are erasers.<br>Some erasers are crayons.<br>Conclusions:<br>(I)Some pencils are crayons. (II):Some erasers are pencils.",
+    tag: "NTPC CBT - I (UG) 18/08/2025 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) दोनों निष्कर्ष (I) और (II) अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q46. कथन:<br>सभी छेनी, हथौड़ा हैं।<br>कोई भी हथौड़ा, मक्का नहींंं है।<br>निष्कर्ष<br>(I):कोई भी छेनी, मक्का नहींंं है।<br>(II):कुछ मक्का, हथौड़ा हैं।",
+    q_en: "Q46. Statements:<br>All chisels are hammers.<br>No hammers are maize.<br>Conclusions:<br>(I)No chisels are maize. (II):Some maize are hammers.",
+    tag: "NTPC CBT - I (UG) 19/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों अनुसरण करते है।",
+      "(b) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Neither conclusion (I) nor (II) follows.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q47. कथन:<br>सभी पिता, भाई हैं।<br>सभी भाई, पुत्र हैं।<br>निष्कर्ष:<br>(I) सभी पिता, पुत्र हैं।<br>(II) सभी भाई, पिता हैं।",
+    q_en: "Q47. Statements:<br>All fathers are brothers.<br>All brothers are sons.<br>Conclusions:<br>(I) All fathers are sons.<br>(II) All brothers are fathers.",
+    tag: "NTPC CBT - I (UG) 20/08/2025 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है।",
+      "(b) केवल निष्कर्ष I अनुसरण करता है।",
+      "(c) निष्कर्ष I और II दोनों अनुसरण करते हैं।",
+      "(d) न तो निष्कर्ष I और न ही II अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q48. कथनः<br>सभी फ्लैट, विला हैं।<br>कोई भी विला, अपार्टमेंट नहींंं है।<br>निष्कर्षः<br>(I) कोई भी फ्लैट, अपार्टमेंट नहींंं है।<br>(II) कोई भी अपार्टमेंट, विला नहींंं है।",
+    q_en: "Q48. Statements:<br>All flats are villas.<br>No villas are apartments.<br>Conclusions:<br>(I) No flats are apartments.<br>(II) No apartments are villas.",
+    tag: "NTPC CBT - I (UG) 21/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है।",
+      "(b) केवल निष्कर्ष I अनुसरण करता है।",
+      "(c) न तो निष्कर्ष I और न ही II अनुसरण करता है।",
+      "(d) निष्कर्ष I और II दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Neither conclusion I nor II follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q49. कथन:<br>सभी कीवी, केले हैं।<br>सभी केले, अंगूर हैं।<br>निष्कर्ष:<br>(I)सभी कीवी, अंगूर हैं।<br>(II)कुछ अंगूर, केले हैं।",
+    q_en: "Q49. Statements:<br>All kiwis are bananas.<br>All bananas are grapes.<br>Conclusions:<br>(I)All kiwis are grapes. (II)Some grapes are bananas.",
+    tag: "NTPC CBT - I (UG) 21/08/2025 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) दोनों निष्कर्ष (I) और (II) अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q50. कथनः<br>कुछ पतंग, टोपी हैं।<br>कोई भी टोपी, चींटी नहींंं है।<br>निष्कर्ष:<br>(I):कुछ पतंग, चींटी हैं।<br>(II):कुछ टोपी, पतंग हैं।",
+    q_en: "Q50. Statements:<br>Some kites are caps.<br>No caps are ants.<br>Conclusions:<br>(I)Some kites are ants. (II):Some caps are kites.",
+    tag: "NTPC CBT - I (UG) 22/08/2025 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];

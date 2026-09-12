@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q101. कथन:<br>कुछ चप्पल, जूते है।<br>कुछ जूते, बेल्ट है।<br>निष्कर्ष :<br>(I) कुछ बेल्ट, चप्पल हैं।<br>(II) कोई बेल्ट, चप्पल नहींंं है।",
+    q_en: "Q101. Statements:<br>Some slippers are shoes.<br>Some shoes are belts.<br>Conclusions:<br>(I) Some belts are slippers.<br>(II) No belts are slippers.",
+    tag: "RRB Tech. - (III) 27/12/2024 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) कथनों के अनुसार है",
+      "(b) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार नहींंं है",
+      "(c) केवल निष्कर्ष (II) कथनों के अनुसार है",
+      "(d) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows from the statements.",
+      "(b) Neither conclusion (I) nor (II) follows from the statements.",
+      "(c) Only conclusion (II) follows from the statements.",
+      "(d) Both conclusions (I) and (II) follow from the statements."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q102. कथनः<br>कुछ पेन, स्केच पेन है।<br>सभी स्केच पेन, इरेज़र है।<br>कुछ इरेज़र, रूलर हैं।<br>निष्कर्ष:<br>(I) कुछ रूलर, स्केच पेन है।<br>(II) कुछ इरेज़र, पेन हैं।",
+    q_en: "Q102. Statements:<br>Some pens are sketch pens.<br>All sketch pens are erasers.<br>Some erasers are rulers.<br>Conclusions:<br>(I) Some rulers are sketch pens.<br>(II) Some erasers are pens.",
+    tag: "RRB Tech. - (III) 28/12/2024 (Morning)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(c) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार हैं।",
+      "(d) केवल निष्कर्ष (I) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows from the statements.",
+      "(b) Only conclusion (II) follows from the statements.",
+      "(c) Both conclusions (I) and (II) follow from the statements.",
+      "(d) Only conclusion (I) follows from the statements."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q103. कथनः<br>कुछ चट्टानें, सेब हैं।<br>कुछ सेब, घोड़े हैं।<br>कुछ घोड़े, नाखून हैं।<br>निष्कर्षः<br>(I) कुछ नाखून, सेब हैं।<br>(II) कुछ घोड़े, चट्टानें हैं।",
+    q_en: "Q103. Statements:<br>Some rocks are apples.<br>Some apples are horses.<br>Some horses are nails.<br>Conclusions:<br>(I) Some nails are apples.<br>(II) Some horses are rocks.",
+    tag: "RRB Tech. - (III) 28/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q104. कथनः<br>सभी घड़ियाँ, परफ्यूम हैं।<br>कोई घड़ियाँ, टाई नहींंं है।<br>निष्कर्षः<br>(I) सभी परफ्यूम, घड़ियाँ है |<br>(II) कोई परफ्यूम, टाई नहींंं है।",
+    q_en: "Q104. Statements:<br>All watches are perfumes.<br>No watch is a tie.<br>Conclusions:<br>(I) All perfumes are watches.<br>(II) No perfume is a tie.",
+    tag: "RRB Tech. - (III) 28/12/2024 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I अनुसरण करता है",
+      "(b) केवल निष्कर्ष II अनुसरण करता है",
+      "(c) निष्कर्षI और II, दोनों अनुसरण करते हैं",
+      "(d) न तो निष्कर्ष I और न ही II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q105. कथनः<br>सभी विला, इमारत हैं।<br>कुछ इमारत, अपार्टमेंट हैं।<br>निष्कर्षः<br>(I) सभी इमारत, विला हैं।<br>(II) कुछ विला, अपार्टमेंट नहींंं हैंI",
+    q_en: "Q105. Statements:<br>All villas are buildings.<br>Some buildings are apartments.<br>Conclusions:<br>(I) All buildings are villas.<br>(II) Some villas are not apartments.",
+    tag: "RRB Tech. - (III) 29/12/2024 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I अनुसरण करता हैI",
+      "(b) केवल निष्कर्ष II अनुसरण करता हैI",
+      "(c) निष्कर्ष I और II दोनों अनुसरण करते हैंI",
+      "(d) न तो निष्कर्ष I और न ही II अनुसरण करता है I"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q106. कथन:<br>कुछ बाघ, शेर है।<br>कुछ शेर, चीते हैं।<br>निष्कर्ष:<br>I. कुछ शेर, बाघ है।<br>II. कुछ बाघ, चीते हैं।",
+    q_en: "Q106. Statements:<br>Some tigers are lions.<br>Some lions are cheetahs.<br>Conclusions:<br>I.<br>Some lions are tigers. II.<br>Some tigers are cheetahs.",
+    tag: "RRB Tech. - (III) 29/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Both conclusions (I) and (II) follow.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q107. कथन:<br>कुछ टैबलेट, लैपटॉप हैं।<br>सभी लैपटॉप, डेस्कटॉप हैं।<br>निष्कर्ष:<br>(I) कुछ डेस्कटॉप, टैबलेट है।<br>(II) कोई डेस्कटॉप, टैबलेट नहींंं है।",
+    q_en: "Q107. Statements:<br>Some tablets are laptops.<br>All laptops are desktops.<br>Conclusions:<br>(I) Some desktops are tablets.<br>(II) No desktops are tablets.",
+    tag: "RRB Tech. - (III) 30/12/2024 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) कथनों के अनुसार है",
+      "(b) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है",
+      "(c) केवल निष्कर्ष (I) कथनों के अनुसार है",
+      "(d) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Both conclusions (I) and (II) follow from the statements.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q108. कथनः<br>कुछ दाल, आटा हैं।<br>सभी बिस्कुट, दही हैं।<br>सभी बिस्कुट, आटा हैं।<br>निष्कर्षः<br>(I) सभी आटा, दही हैं।<br>(II) कुछ बिस्कुट, दाल हैं।",
+    q_en: "Q108. Statements:<br>Some pulses are flour.<br>All biscuits are curd.<br>All biscuits are flour.<br>Conclusions:<br>(I) All flour are curd.<br>(II) Some biscuits are pulses.",
+    tag: "RRB Tech. - (III) 30/12/2024 (Evening)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (I) कथनों के अनुसार है।",
+      "(c) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है।",
+      "(d) केवल निष्कर्ष (II) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows from the statements.",
+      "(b) Only conclusion (I) follows from the statements.",
+      "(c) Both conclusions (I) and (II) follow from the statements.",
+      "(d) Only conclusion (II) follows from the statements."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q109. कथनः<br>सभी छत, शेड हैं।<br>कोई भी शेड, खिड़की नहींंं है।<br>कोई भी शेड, दरवाजा नहींंं है।.<br>निष्कर्ष:<br>(I) कोई भी छत, खिड़की नहींंं है।<br>(II) कुछ दरवाजे, खिड़कियाँ हैं।",
+    q_en: "Q109. Statements:<br>All roofs are sheds.<br>No sheds are windows.<br>No sheds are doors.<br>Conclusions:<br>(I) No roofs are windows.<br>(II) Some doors are windows.",
+    tag: "RRB Tech. - (I) 19/12/2024 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और (II), दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q110. कथन :<br>सभी पार्क मैदान हैं।<br>कुछ मैदान, संग्रहालय हैं।<br>कोई संग्रहालय, थिएटर नहींंं है।<br>निष्कर्ष :<br>(I) सभी संग्रहालय, पार्क हैं।<br>(II) कोई मैदान, थिएटर नहींंं है।",
+    q_en: "Q110. Statements:<br>All parks are grounds.<br>Some grounds are museums.<br>No museum is a theatre.<br>Conclusions:<br>(I) All museums are parks.<br>(II) No ground is a theatre.",
+    tag: "RRB Tech. - (I) 19/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष I और II दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष I। अनुसरण करता है।",
+      "(c) केवल निष्कर्ष I अनुसरण करता है।",
+      "(d) न तो निष्कर्ष I और न ही II अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions I and II follow.",
+      "(b) Only conclusion II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q111. कथन:<br>सभी ओवल, डिब्बे हैं।<br>कोई डिब्बा, कार नहींंं है।<br>कोई डिब्बा, बेर नहींंं है।<br>निष्कर्ष:<br>(I): कोई ओवल, कार नहींंं है।<br>(II): कुछ बेर, कार हैं।",
+    q_en: "Q111. Statements:<br>All ovals are boxes.<br>No box is a car.<br>No box is a plum.<br>Conclusions:<br>(I) No oval is a car.<br>(II) Some plums are cars.",
+    tag: "RRB JE 16/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और निष्कर्ष (II) दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q112. कथनः<br>सभी जल, तरल पदार्थ हैं।<br>सभी तरल पदार्थ, रस हैं।<br>सभी रस, फल हैं।<br>निष्कर्षः<br>(I) सभी जल, फल हैं।<br>(II) कुछ फल, तरल पदार्थ हैं।",
+    q_en: "Q112. Statements:<br>All water is liquid.<br>All liquids are juice.<br>All juice is fruit.<br>Conclusions:<br>(I) All water is fruit.<br>(II) Some fruit is liquid.",
+    tag: "RRB J.E. 17/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q113. कथनः<br>सभी मुर्गियाँ, जूस हैं।<br>कुछ जूस, घोंसले हैं।<br>सभी पिन, घोंसले हैं।<br>निष्कर्षः<br>(I) : कुछ पिन, मुर्गियाँ हैं।<br>(II) : कुछ पिन, जूस हैं",
+    q_en: "Q113. Statements:<br>All hens are juice.<br>Some juice is nests.<br>All pins are nests.<br>Conclusions:<br>(I) Some pins are hens.<br>(II) Some pins are juice.",
+    tag: "RRB J.E. 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और निष्कर्ष (II) दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q114. कथनः<br>सभी संतरे, सेब हैं।<br>सभी सेब, कीवी हैं।<br>कुछ सेब, अंगूर हैं।<br>निष्कर्षः<br>(I) कुछ कीवी, अंगूर हैं।<br>(II) कुछ संतरे, अंगूर हैं।",
+    q_en: "Q114. Statements:<br>All oranges are apples.<br>All apples are kiwis.<br>Some apples are grapes.<br>Conclusions:<br>(I) Some kiwis are grapes.<br>(II) Some oranges are grapes.",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है",
+      "(b) केवल निष्कर्ष I अनुसरण करता है",
+      "(c) निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "(d) न तो निष्कर्ष I और न ही II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Neither conclusion I nor II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q115. कथनः<br>सभी वेफर्स , कैंडी हैं।<br>सभी कैंडी, बिस्किट हैं।<br>कुछ वेफर्स , जूस हैं।<br>निष्कर्षः<br>(I) कुछ कैंडी, जूस हैं।<br>(II) कुछ बिस्किट, जूस हैं।",
+    q_en: "Q115. Statements:<br>All wafers are candies.<br>All candies are biscuits.<br>Some wafers are juice.<br>Conclusions:<br>(I) Some candies are juice.<br>(II) Some biscuits are juice.",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है",
+      "(b) केवल निष्कर्ष I अनुसरण करता है",
+      "(c) निष्कर्षI और II दोनों अनुसरण करते हैं",
+      "(d) न तो निष्कर्ष I और न ही निष्कर्ष II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q116. कथन :<br>सभी स्टोव, सिलेंडर हैं।<br>सभी सिलेंडर, मिक्सर हैं।<br>कुछ सिलेंडर, ग्राइंडर हैं।<br>निष्कर्ष :<br>(I) कुछ ग्राइंडर, सिलेंडर हैं।<br>(II) कुछ मिक्सर, ग्राइंडर हैं।",
+    q_en: "Q116. Statements:<br>All stoves are cylinders.<br>All cylinders are mixers.<br>Some cylinders are grinders.<br>Conclusions:<br>(I) Some grinders are cylinders.<br>(II) Some mixers are grinders.",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II), दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (I) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q117. कथनः<br>सभी वेफर, बिस्किट हैं।<br>सभी बिस्किट, कुकीज हैं।<br>सभी कुकीज, पेस्ट्री हैं।<br>निष्कर्षः<br>(I) सभी बिस्किट, वेफर हैं।<br>(II) सभी पेस्ट्री, कुकीज हैं।",
+    q_en: "Q117. Statements:<br>All wafers are biscuits.<br>All biscuits are cookies.<br>All cookies are pastries.<br>Conclusions:<br>(I) All biscuits are wafers.<br>(II) All pastries are cookies.",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) निष्कर्ष (I) और (II), दोनों अनुसरण करते हैं।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Both conclusions (I) and (II) follow.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q118. कथनः<br>सभी टेबल, डेस्क हैं।<br>सभी डेस्क, बोर्ड हैं।<br>कुछ टेबल, कुर्सियाँ हैं।<br>निष्कर्षः<br>(I) कुछ डेस्क, कुर्सियाँ हैं।<br>(II) कुछ बोर्ड, कुर्सियाँ हैं।",
+    q_en: "Q118. Statements:<br>All tables are desks.<br>All desks are boards.<br>Some tables are chairs.<br>Conclusions:<br>(I) Some desks are chairs.<br>(II) Some boards are chairs.",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (II) अनुसरण करता हैं।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता हैं।",
+      "(d) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Both conclusions (I) and (II) follow."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q119. कथनः<br>सभी मटर, गाजर हैं।<br>सभी गाजर, प्याज हैं।<br>कुछ प्याज, बैंगन हैं।<br>निष्कर्ष:<br>(I) कुछ मटर, बैंगन हैं।<br>(II) कुछ गाजर, बैंगन हैं।",
+    q_en: "Q119. Statements:<br>All peas are carrots.<br>All carrots are onions.<br>Some onions are brinjals.<br>Conclusions:<br>(I) Some peas are brinjals.<br>(II) Some carrots are brinjals.",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "(b) केवल निष्कर्ष I अनुसरण करता है",
+      "(c) न तो निष्कर्ष I और न ही II अनुसरण करता है",
+      "(d) केवल निष्कर्ष II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q120. कथनः<br>सभी जींस, ट्राउजर हैं।<br>सभी ट्राउजर, पैंट हैं।<br>कोई भी पैंट, टाई नहींंं है।<br>निष्कर्षः<br>(I) कोई भी जींस, टाई नहींंं है।<br>(II) कोई भी ट्राउजर, टाई नहींंं है।",
+    q_en: "Q120. Statements:<br>All jeans are trousers.<br>All trousers are pants.<br>No pant is a tie.<br>Conclusions:<br>(I) No jeans are ties.<br>(II) No trousers are ties.",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II), दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q121. कथनः<br>सभी कंप्यूटर, डेस्कटॉप हैं।<br>सभी डेस्कटॉप, लैपटॉप हैं।<br>कोई भी कंप्यूटर, फोन नहींंं है।<br>निष्कर्षः<br>(I) कोई भी डेस्कटॉप, फोन नहींंं है।<br>(II) कोई भी लैपटॉप, फोन नहींंं है।",
+    q_en: "Q121. Statements:<br>All computers are desktops.<br>All desktops are laptops.<br>No computers are phones.<br>Conclusions:<br>(I) No desktops are phones.<br>(II) No laptops are phones.",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(b) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Neither conclusion (I) nor (II) follows.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q122. कथनः<br>सभी चम्मच, कांटे हैं।<br>सभी कांटे, जार हैं।<br>कुछ जार, प्लेट हैं<br>निष्कर्षः<br>(I): कुछ कांटे, प्लेट हैं।<br>(II): कुछ चम्मच, प्लेट हैं।",
+    q_en: "Q122. Statements:<br>All spoons are forks.<br>All forks are jars.<br>Some jars are plates.<br>Conclusions:<br>(I) Some forks are plates.<br>(II): Some spoons are plates.",
+    tag: "RPF S.I. 12/12/2024 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I अनुसरण करता है",
+      "(b) केवल निष्कर्ष II अनुसरण करता है",
+      "(c) निष्कर्ष I और निष्कर्ष II दोनों अनुसरण करते हैं",
+      "(d) न तो निष्कर्ष I और न ही निष्कर्ष II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Both conclusions I and II follow.",
+      "(d) Neither conclusion I nor II follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q123. कथनः<br>सभी पिन, शेर हैं।<br>कुछ शेर, चूहे हैं।<br>कुछ चूहे, मुर्गी हैं।<br>निष्कर्षः<br>(I) कुछ मुर्गी, पिन हैं।<br>(II) कुछ चूहे, पिन हैं।",
+    q_en: "Q123. Statements:<br>All pins are lions.<br>Some lions are mice.<br>Some mice are hens.<br>Conclusions:<br>(I) Some hens are pins.<br>(II) Some mice are pins.",
+    tag: "RPF S.I. 13/12/2024 (Morning)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(b) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं।",
+      "(c) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q124. कथनः<br>सभी हूडी, जैकेट हैं।<br>सभी जैकेट, कोट हैं।<br>कोई भी जैकेट, सूट नहींंं है।<br>निष्कर्षः<br>(I) कोई भी कोट, सूट नहींंं है।<br>(II) कोई भी हूडी, सूट नहींंं है।",
+    q_en: "Q124. Statements:<br>All hoodies are jackets.<br>All jackets are coats.<br>No jackets are suits.<br>Conclusions:<br>(I) No coats are suits.<br>(II) No hoodies are suits.",
+    tag: "RPF S.I. 13/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) निष्कर्ष (I) और (II), दोनों अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q125. कथनः<br>सभी मछलियां, पक्षी हैं।<br>सभी पक्षी, जानवर हैं।<br>निष्कर्षः<br>(I) सभी जानवर, मछलियां है।<br>(II) कुछ पक्षी, मछलियां हैं।",
+    q_en: "Q125. Statements:<br>All fish are birds.<br>All birds are animals.<br>Conclusions:<br>(I) All animals are fish.<br>(II) Some birds are fish.",
+    tag: "RRB ALP Tier - I 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(d) केवल निष्कर्ष (I) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow from the statements.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q126. कथनः<br>सभी नींबू, आलू हैं।<br>कुछ नींबू, पपीते हैं।<br>निष्कर्षः<br>(I) कुछ आलू, पपीते हैं।<br>(II) सभी पपीते, आलू हैं।",
+    q_en: "Q126. Statements:<br>All lemons are potatoes.<br>Some lemons are papayas.<br>Conclusions:<br>(I) Some potatoes are papayas.<br>(II) All papayas are potatoes.",
+    tag: "RRB ALP Tier - I 25/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (I) कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(c) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार हैं।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (I) follows.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Both conclusions (I) and (II) follow.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q127. कथनः<br>कुछ जिराफ़, गैंडे हैं.<br>सभी गैंडे, बाघ हैं।<br>निष्कर्षः<br>(I) कुछ बाघ, जिराफ़ हैं।<br>(II) सभी बाघ, गैंडे हैं।",
+    q_en: "Q127. Statements:<br>Some giraffes are rhinoceroses.<br>All rhinoceroses are tigers.<br>Conclusions:<br>(I) Some tigers are giraffes.<br>(II) All tigers are rhinoceroses.",
+    tag: "RRB ALP Tier - I 25/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष Il कथनों के अनुसार है",
+      "(b) न तो निष्कर्ष I और न ही II कथनों के अनुसार है",
+      "(c) केवल निष्कर्ष I कथनों के अनुसार है",
+      "(d) निष्कर्ष I और II दोनों कथनों के अनुसार हैं"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows from the statements.",
+      "(b) Neither conclusion I nor II follows from the statements.",
+      "(c) Only conclusion I follows from the statements.",
+      "(d) Both conclusions I and II follow from the statements."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q128. कथनः<br>कुछ माइक्रोफोन, स्पीकर हैं।<br>कोई स्पीकर, पियानो नहींंं।<br>निष्कर्षः<br>(I) कोई माइक्रोफोन, पियानो नहींंं है।<br>(II) कुछ स्पीकर, माइक्रोफोन हैं।",
+    q_en: "Q128. Statements:<br>Some microphones are speakers.<br>No speaker is a piano.<br>Conclusions:<br>(I) No microphone is a piano.<br>(II) Some speakers are microphones.",
+    tag: "RRB ALP Tier - I 25/11/2024 (Evening )",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है",
+      "(b) केवल निष्कर्ष (I) कथनों के अनुसार है",
+      "(c) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार हैं",
+      "(d) केवल निष्कर्ष (II) कथनों के अनुसार है"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Both conclusions (I) and (II) follow.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q129. कथनः<br>सभी मधुमक्खियां, कीट हैं।<br>सभी मधुमक्खियां, छत्ते हैं।<br>निष्कर्षः<br>(I) कुछ छत्ते, कीट हैं।<br>(II) सभी छत्ते, मधुमक्खियां हैं।",
+    q_en: "Q129. Statements:<br>All bees are insects.<br>All bees are hives.<br>Conclusions:<br>(I) Some hives are insects.<br>(II) All hives are bees.",
+    tag: "RRB ALP Tier - I 26/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II कथनों के अनुसार है",
+      "(b) केवल निष्कर्ष I कथनों के अनुसार है",
+      "(c) न तो निष्कर्ष I और न ही II कथनों के अनुसार है",
+      "(d) निष्कर्षI और II दोनों कथनों के अनुसार हैं"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows from the statements.",
+      "(b) Neither conclusion I nor II follows from the statements.",
+      "(c) Only conclusion I follows from the statements.",
+      "(d) Both conclusions I and II follow from the statements."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q130. कथनः<br>सभी समुद्र, नदियाँ हैं।<br>कुछ नदियाँ, तालाब हैं।<br>निष्कर्षः<br>(I) सभी तालाब, समुद्र हैं।<br>(II) कुछ समुद्र, तालाब हैं।",
+    q_en: "Q130. Statements:<br>All seas are rivers.<br>Some rivers are ponds.<br>Conclusions:<br>(I) All ponds are seas.<br>(II) Some seas are ponds.",
+    tag: "RRB ALP Tier - I 26/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष (II) कथनों के अनुसार है",
+      "(b) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(d) केवल निष्कर्ष (I) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Only conclusion (II) follows.",
+      "(b) Both conclusions (I) and (II) follow from the statements.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q131. कथन:<br>सभी कपड़े, अंगूठियाँ हैं।<br>कोई कपड़े, बोतलें नहींंं है।<br>निष्कर्ष:<br>(I) कुछ अंगूठियाँ, बोतलें हैं।<br>(II) कुछ अंगूठियाँ, कपड़े हैं।",
+    q_en: "Q131. Statements:<br>All clothes are rings.<br>No clothes are bottles.<br>Conclusions:<br>(I) Some rings are bottles.<br>(II) Some rings are clothes.",
+    tag: "RRB ALP Tier - I 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार हैं",
+      "(b) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है",
+      "(c) केवल निष्कर्ष (II) कथनों के अनुसार है",
+      "(d) केवल निष्कर्ष (I) कथनों के अनुसार है"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Neither conclusion (I) nor (II) follows.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q132. कथन:<br>कुछ बल्ब, रेत हैं।<br>सभी बल्ब, मोमबत्तियां हैं।<br>निष्कर्ष:<br>(I) कुछ मोमबत्तियां, बल्ब हैं।<br>(II) कोई मोमबत्ती, रेत नहींंं है।",
+    q_en: "Q132. Statements:<br>Some bulbs are sand.<br>All bulbs are candles.<br>Conclusions:<br>(I) Some candles are bulbs.<br>(II) No candles are sand.",
+    tag: "RRB ALP Tier - I 27/11/2024 (Morning)",
+    o_hi: [
+      "(a) न तो निष्कर्ष I और न ही II कथनों के अनुसार है",
+      "(b) केवल निष्कर्ष II कथनों के अनुसार है",
+      "(c) केवल निष्कर्ष I कथनों के अनुसार है",
+      "(d) निष्कर्ष I और II दोनों कथनों के अनुसार हैं"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q133. कथन:<br>कुछ राजा, नौकर हैं।<br>कुछ नौकर, लड़ाके हैं।<br>निष्कर्ष:<br>(I) कुछ लड़ाके, राजा है।<br>(II) सभी नौकर, राजा हैं।",
+    q_en: "Q133. Statements:<br>Some kings are servants.<br>Some servants are fighters.<br>Conclusions:<br>(I) Some fighters are kings.<br>(II) All servants are kings.",
+    tag: "RRB ALP Tier - I 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) न तो निष्कर्ष I और न ही II कथनों के अनुसार है",
+      "(b) निष्कर्ष I और II दोनों कथनों के अनुसार हैं",
+      "(c) केवल निष्कर्ष I कथनों के अनुसार है",
+      "(d) केवल निष्कर्ष II कथनों के अनुसार है"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Both conclusions I and II follow.",
+      "(c) Only conclusion I follows.",
+      "(d) Only conclusion II follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q134. कथनः<br>सभी कुर्सियाँ, मेज हैं।<br>कुछ मेज, पलंग हैं।<br>निष्कर्षः<br>(I) सभी पलंग, कुर्सियाँ हैं।<br>(II) कुछ मेज, कुर्सियाँ हैं।",
+    q_en: "Q134. Statements:<br>All chairs are tables.<br>Some tables are beds.<br>Conclusions:<br>(I) All beds are chairs.<br>(II) Some tables are chairs.",
+    tag: "RRB ALP Tier - I 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार हैं।",
+      "(b) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(c) केवल निष्कर्ष (I) कथनों के अनुसार है।",
+      "(d) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Neither conclusion (I) nor (II) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q135. कथन:<br>कोई घोड़े, दर्पण नहींंं हैं।<br>कुछ छिपकलियां, घोड़े हैं।<br>निष्कर्ष<br>(I) कुछ घोड़े, छिपकलियां नहींंं हैं।<br>(II) कुछ छिपकलियां, दर्पण नहींंं हैं",
+    q_en: "Q135. Statements:<br>No horses are mirrors.<br>Some lizards are horses.<br>Conclusions:<br>(I) Some horses are not lizards.<br>(II) Some lizards are not mirrors.",
+    tag: "RRB ALP Tier - I 27/11/2024 (Evening)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है",
+      "(b) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं",
+      "(c) केवल निष्कर्ष (II) अनुसरण करता है",
+      "(d) केवल निष्कर्ष (I) अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Both conclusions (I) and (II) follow.",
+      "(c) Only conclusion (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q136. कथनः<br>कुछ पेड़, फूल है।<br>सभी फूल, पत्तियां है।<br>निष्कर्षः<br>(I) सभी पत्तियां, पेड़ हैं।<br>(II) सभी फूल, पेड़ हैं।",
+    q_en: "Q136. Statements:<br>Some trees are flowers.<br>All flowers are leaves.<br>Conclusions:<br>(I) All leaves are trees.<br>(II) All flowers are trees.",
+    tag: "RRB ALP Tier - I 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(c) केवल निष्कर्ष (I) कथनों के अनुसार है।",
+      "(d) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Only conclusion (I) follows.",
+      "(d) Both conclusions (I) and (II) follow from the statements."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q137. कथन:<br>कुछ तोते, बंदर हैं।<br>कुछ भालू, बंदर है।<br>निष्कर्ष:<br>(I) सभी भालू, तोते हैं।<br>(II) कुछ बंदर, भालू नहींंं है",
+    q_en: "Q137. Statements:<br>Some parrots are monkeys.<br>Some bears are monkeys.<br>Conclusions:<br>(I) All bears are parrots.<br>(II) Some monkeys are not bears.",
+    tag: "RRB ALP Tier - I 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II), दोनों अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (II) अनुसरण करता है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है।",
+      "(d) केवल निष्कर्ष (I) अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q138. कथन:<br>कोई कुत्ते, सूअर नहींंं है।<br>सभी सूअर, पत्थर है।<br>निष्कर्ष:<br>(I) कुछ पत्थर, सूअर है।<br>(II) कोई पत्थर, कुत्ते नहींंं है।",
+    q_en: "Q138. Statements:<br>No dogs are pigs.<br>All pigs are stones.<br>Conclusions:<br>(I) Some stones are pigs.<br>(II) No stones are dogs.",
+    tag: "RRB ALP Tier - I 28/11/2024 (Evening)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों अनुसरण करते हैं",
+      "(b) केवल निष्कर्ष (I) अनुसरण करता है",
+      "(c) न तो निष्कर्ष (I) और न ही (II) अनुसरण करता है",
+      "(d) केवल निष्कर्ष (II) अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q139. कथन:<br>कुछ सोना, चांदी हैं।<br>कुछ चांदी, हीरे हैं।<br>निष्कर्ष:<br>(I) कुछ हीरे, सोना हैं।<br>(II) कुछ चांदी, सोना हैं।",
+    q_en: "Q139. Statements:<br>Some gold are silver.<br>Some silver are diamonds.<br>Conclusions:<br>(I) Some diamonds are gold.<br>(II) Some silver are gold.",
+    tag: "RRB ALP Tier - I 29/11/2024 (Morning)",
+    o_hi: [
+      "(a) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (I) कथनों के अनुसार है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(d) केवल निष्कर्ष (II) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow from the statements.",
+      "(b) Only conclusion (I) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (II) follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q140. कथनः<br>सभी पानी, दूध है।<br>कोई दूध, तेल नहींंं है।<br>निष्कर्षः<br>(I) कुछ दूध, पानी हैं।<br>(II) कोई तेल, पानी नहींंं है।",
+    q_en: "Q140. Statements:<br>All water are milk.<br>No milk are oil.<br>Conclusions:<br>(I) Some milk are water.<br>(II) No oil are water.",
+    tag: "RRB ALP Tier - I 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) दोनों निष्कर्ष (I) और (II) अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(c) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(d) केवल निष्कर्ष (I) कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Both conclusions (I) and (II) follow.",
+      "(b) Only conclusion (II) follows.",
+      "(c) Neither conclusion (I) nor (II) follows.",
+      "(d) Only conclusion (I) follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q141. कथनः<br>कुछ सब्जियां, फल हैं।<br>कुछ फल, मिठाइयां हैं।<br>निष्कर्षः<br>(I) कुछ फल, सब्जियां हैं।<br>(II) कुछ मिठाइयां, सब्जियां हैं।",
+    q_en: "Q141. Statements:<br>Some vegetables are fruits.<br>Some fruits are sweets.<br>Conclusions:<br>(I) Some fruits are vegetables.<br>(II) Some sweets are vegetables.",
+    tag: "RRB ALP Tier - I 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) न तो निष्कर्ष (I) और न ही (II) कथनों के अनुसार है।",
+      "(b) केवल निष्कर्ष (I) कथनों के अनुसार है।",
+      "(c) केवल निष्कर्ष (II) कथनों के अनुसार है।",
+      "(d) निष्कर्ष (I) और (II) दोनों कथनों के अनुसार है।"
+    ],
+    o_en: [
+      "(a) Neither conclusion (I) nor (II) follows from the statements.",
+      "(b) Only conclusion (I) follows from the statements.",
+      "(c) Only conclusion (II) follows from the statements.",
+      "(d) Both conclusions (I) and (II) follow from the statements."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q142. कथन:<br>कोई संगणक मार्कर नहींंं है|<br>सभी रबड़ मार्कर हैं।<br>सभी कलम रबड़ हैं।<br>निष्कर्ष:<br>I. कोई कलम संगणक नहींंं है|<br>II.कुछ रबड़ संगणक हैं।",
+    q_en: "Q142. Statements:<br>No computer is a marker.<br>All erasers are markers.<br>All pens are erasers.<br>Conclusions:<br>I.<br>No pen is a computer. II.<br>Some erasers are computers.",
+    tag: "Group - D 17/08/2022 ( Morning )",
+    o_hi: [
+      "(a) केवल निष्कर्ष I अनुसरण करता है|",
+      "(b) केवल निष्कर्ष II अनुसरण करता है|",
+      "(c) न तो निष्कर्ष I और न ही II अनुसरण करता है|",
+      "(d) निष्कर्ष I और II दोनों अनुसरण करते हैं|"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Only conclusion II follows.",
+      "(c) Neither conclusion I nor II follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q143. कथन:<br>1. कुछ गुलनार पिटुनिया हैं।<br>2. सभी पिटुनिया सूरजमुखी हैं।<br>3. कुछ सूरजमुखी गुलनार नहींंं हैं।<br>निष्कर्ष:<br>I. कुछ सूरजमुखी गुलनार हैं।<br>II. सभी गुलनार सूरजमुखी हैं।<br>III. सभी पिटुनिया गुलनार हैं।<br>IV. कोई सूरजमुखी गुलनार नहींंं है।",
+    q_en: "Q143. Statements:<br>1.<br>Some Gulnar flowers are petunias. 2.<br>All petunias are sunflowers. 3.<br>Some sunflowers are not Gulnar flowers.<br>Conclusions:<br>I.<br>Some sunflowers are Gulnar flowers. II.<br>All Gulnar flowers are sunflowers. III.<br>All petunias are Gulnar flowers. IV.<br>No sunflower is a Gulnar flower.",
+    tag: "Group - D 17/08/2022 (Evening)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II और III अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष IV अनुसरण करता है।",
+      "(c) केवल निष्कर्ष I अनुसरण करता है",
+      "(d) केवल निष्कर्ष I और IV अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusions II and III follow.",
+      "(b) Only conclusion IV follows.",
+      "(c) Only conclusion I follows.",
+      "(d) Only conclusions I and IV follow."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q144. कथन:<br>1. कुछ हिमस्खलन वर्षण हैं।<br>2. कुछ प्रलय हिमस्खलन हैं।<br>3. सभी हिमस्खलन तूफान हैं।<br>निष्कर्ष:<br>I. कुछ तूफान प्रलय हैं।<br>II. कोई वर्षण तूफान नहींंं है।",
+    q_en: "Q144. Statements:<br>1.<br>Some avalanches are precipitation. 2.<br>Some catastrophes are avalanches. 3.<br>All avalanches are storms.<br>Conclusions:<br>I.<br>Some storms are catastrophes. II.<br>No precipitation are storms.",
+    tag: "Group - D 18/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) न तो निष्कर्ष I और न ही II अनुसरण करता है",
+      "(b) दोनों निष्कर्ष I और II अनुसरण करते हैं",
+      "(c) केवल निष्कर्ष II अनुसरण करता है",
+      "(d) केवल निष्कर्ष I अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Both conclusions I and II follow.",
+      "(c) Only conclusion II follows.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q145. कथन:<br>कुछ पेड़ झाड़ियाँ हैं।<br>कुछ झाड़ियाँ लताएँ हैं।<br>कुछ लताएँ तने हैं।<br>निष्कर्ष:<br>I. कुछ तने पेड़ हैं।<br>II कुछ लताएँ पेड़ हैं।<br>III कुछ तने झाड़ियाँ हैं।",
+    q_en: "Q145. Statements:<br>Some trees are bushes.<br>Some bushes are vines.<br>Some vines are stems.<br>Conclusions:<br>I.<br>Some stems are trees. II Some vines are trees. III Some stems are bushes.",
+    tag: "Group - D 18/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I अनुसरण करता है",
+      "(b) निष्कर्ष II और III अनुसरण करते हैं",
+      "(c) कोई भी निष्कर्ष अनुसरण नहींंं करता है",
+      "(d) निष्कर्ष I और II अनुसरण करते हैं"
+    ],
+    o_en: [
+      "(a) Only conclusion I follows.",
+      "(b) Conclusion II and III follow.",
+      "(c) No conclusion follows.",
+      "(d) Conclusion I and II follow."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q146. कथन:<br>1. सभी बाघ शेर हैं।<br>2. कोई बिल्ली शेर नहींंं है।<br>3. कुछ जगुआर बिल्लियाँ हैं।<br>निष्कर्ष:<br>I. कुछ जगुआर शेर हैं।<br>II. कोई जगुआर बाघ नहींंं है।<br>III. कुछ शेर बाघ हैं।",
+    q_en: "Q146. Statements:<br>1.<br>All tigers are lions. 2.<br>No cats are lions. 3.<br>Some jaguars are cats.<br>Conclusions:<br>I.<br>Some jaguars are lions. II.<br>No jaguars are tigers. III.<br>Some lions are tigers.",
+    tag: "Group - D 22/08/2022 ( Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II और III अनुसरण करते हैं।",
+      "(b) केवल निष्कर्ष III अनुसरण करता है।",
+      "(c) केवल निष्कर्ष I और II अनुसरण करते हैं।",
+      "(d) केवल निष्कर्ष I अनुसरण करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusions II and III follow.",
+      "(b) Only conclusion III follows.",
+      "(c) Only conclusions I and II follow.",
+      "(d) Only conclusion I follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q147. कथन:<br>कुछ बेड मेजें हैं।<br>कुछ मेजें अलमारियाँ हैं।<br>कुछ अलमारियाँ कुर्सियाँ हैं।<br>निष्कर्ष:<br>I. कुछ कुर्सियाँ बेड हैं।<br>II. कुछ बेड अलमारियाँ हैं।",
+    q_en: "Q147. Statements:<br>Some beds are tables.<br>Some tables are cupboards.<br>Some cupboards are chairs.<br>Conclusions:<br>I.<br>Some chairs are beds. II.<br>Some beds are cupboards.",
+    tag: "Group - D 22/08/2022 ( Evening)",
+    o_hi: [
+      "(a) न तो निष्कर्ष I और न ही ॥ पालन करता है।",
+      "(b) केवल निष्कर्ष I पालन करता है।",
+      "(c) केवल निष्कर्ष II पालन करता है।",
+      "(d) निष्कर्ष I और II दोनों पालन करते हैं।"
+    ],
+    o_en: [
+      "(a) Neither conclusion I nor II follows.",
+      "(b) Only conclusion I follows.",
+      "(c) Only conclusion II follows.",
+      "(d) Both conclusions I and II follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q148. कथन:<br>1. सभी ब्लेज़र डंगरी हैं।<br>2. कोई भी डंगरी स्कार्फ़ नहींंं है।<br>3. सभी पजामा डंगरी हैं।<br>निष्कर्ष:<br>I. कोई भी ब्लेज़र स्कार्फ़ नहींंं है।<br>II. कोई भी ब्लेज़र पजामा नहींंं है।<br>III. कुछ ब्लेज़र पजामा हैं।",
+    q_en: "Q148. Statements:<br>1.<br>All blazers are dungarees. 2.<br>No dungarees are scarves. 3.<br>All pyjamas are dungarees.<br>Conclusions:<br>I.<br>No blazers are scarves. II.<br>No blazers are pyjamas. III.<br>Some blazers are pyjamas.",
+    tag: "Group - D 23/08/2022 ( Morning)",
+    o_hi: [
+      "(a) केवल निष्कर्ष I और III पालन करते हैं।",
+      "(b) केवल निष्कर्ष I पालन करता है।",
+      "(c) केवल निष्कर्ष I और II पालन करते हैं।",
+      "(d) कोई भी निष्कर्ष पालन नहींंं करता है।"
+    ],
+    o_en: [
+      "(a) Only conclusions I and III follow.",
+      "(b) Only conclusion I follows.",
+      "(c) Only conclusions I and II follow.",
+      "(d) No conclusion follows."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q149. कथन:<br>1. कोई पेंट, भित्तिचित्र नहींंं है।<br>2. कोई भित्तिचित्र, रोगन नहींंं है।<br>3. कुछ पेंट, रोगन हैं।<br>निष्कर्ष:<br>I. कोई रोगन, पेंट नहींंं है।<br>II. कोई रोगन, भित्तिचित्र नहींंं है।<br>III. कुछ भित्तिचित्र, पेंट हैं।<br>IV. सभी रोगन, पेंट हैं।",
+    q_en: "Q149. Statements:<br>1.<br>No paint are murals. 2.<br>No murals are paints. 3.<br>Some paint are paints.<br>Conclusions:<br>I.<br>No paints are paint. II.<br>No paints are murals. III.<br>Some murals are paint. IV.<br>All paints are paint.",
+    tag: "Group - D 23/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) केवल निष्कर्ष II अनुसरण करता है।",
+      "(b) केवल निष्कर्ष IV अनुसरण करता है।",
+      "(c) केवल निष्कर्ष I और IV अनुसरण करते हैं।",
+      "(d) केवल निष्कर्ष I और II अनुसरण करते हैं।"
+    ],
+    o_en: [
+      "(a) Only conclusion II follows.",
+      "(b) Only conclusion IV follows.",
+      "(c) Only conclusions I and IV follow.",
+      "(d) Only conclusions I and II follow."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q150. कथन:<br>सभी कैंडी, खरबूजे हैं।<br>सभी बिस्किट, खरबूजे हैं।<br>सभी केक, बिस्किट हैं।<br>निष्कर्ष:<br>I. सभी केक, खरबूजे हैं।<br>II. कुछ कैंडी, बिस्किट हैं।<br>III. कुछ कैंडी, बिस्किट नहींंं हैं।",
+    q_en: "Q150. Statements:<br>All candies are melons.<br>All biscuits are melons.<br>All cakes are biscuits.<br>Conclusions:<br>I.<br>All cakes are melons. II.<br>Some candies are biscuits. III.<br>Some candies are not biscuits.",
+    tag: "Group - D 24/08/2022 ( Morning)",
+    o_hi: [
+      "(a) निष्कर्ष I और या तो निष्कर्ष II या निष्कर्ष III पालन करता है।",
+      "(b) केवल निष्कर्ष I पालन करता है।",
+      "(c) कोई भी निष्कर्ष पालन नहींंं करता है।",
+      "(d) केवल निष्कर्ष III पालन करता है।"
+    ],
+    o_en: [
+      "(a) Conclusion I and either conclusion II or conclusion III follow.",
+      "(b) Only conclusion I follows.",
+      "(c) No conclusion follows.",
+      "(d) Only conclusion III follows."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];
