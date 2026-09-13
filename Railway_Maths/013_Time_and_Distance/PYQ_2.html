@@ -1,0 +1,1002 @@
+const data = [
+  {
+    "q_hi": "Q51. एक आदमी 11 घंटे में एक यात्रा पूरी करता है। वह यात्रा के पहले आधे भाग को 25 किमी/घंटा की चाल से और दूसरे भाग को 30 किमी/घंटा की चाल से तय करता है। यात्रा की कुल दूरी ज्ञात कीजिए।",
+    "q_en": "Q51. A man completes a journey in 11 hours. He covers the first half at 25 km/h and the second half at 30 km/h. Find the total distance.",
+    "tag": "NTPC CBT-I 04/02/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 300 किमी",
+      "(b) 265 किमी",
+      "(c) 250 किमी",
+      "(d) 285 किमी"
+    ],
+    "o_en": [
+      "(a) 300 km",
+      "(b) 265 km",
+      "(c) 250 km",
+      "(d) 285 km"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q52. एक स्कूटर सवार 5 घंटे के लिए यात्रा करता है, दूरी का पहला आधा हिस्सा 21 किमी/घंटा और शेष 24 किमी/घंटा पर यात्रा करता है। तय की गई दूरी का पता लगाएँ।",
+    "q_en": "Q52. A scooter rider travels for 5 hours, covering the first half of the distance at 21 km/h and the remaining half at 24 km/h. Find the distance travelled.",
+    "tag": "NTPC CBT-I 03/03/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 112 किमी",
+      "(b) 56 किमी",
+      "(c) 224 किमी",
+      "(d) 225 किमी"
+    ],
+    "o_en": [
+      "(a) 112 km",
+      "(b) 56 km",
+      "(c) 224 km",
+      "(d) 225 km"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q53. एक आदमी 4 घंटे की यात्रा करता है। यात्रा का आधा हिस्सा बस द्वारा 40 किमी प्रति घंटे की रफ्तार से और शेष 30 किमी प्रति घंटे की रफ्तार से स्कूटर से तय किया जाता है। उसने कितनी दूरी तय की?",
+    "q_en": "Q53. A man makes a 4-hour journey. Half the distance is covered by bus at 40 km/h and the rest by scooter at 30 km/h. How far did he travel?",
+    "tag": "",
+    "o_hi": [
+      "(a) 17.5 किमी",
+      "(b) 37.14 किमी",
+      "(c) 137.14 किमी",
+      "(d) 50 किमी"
+    ],
+    "o_en": [
+      "(a) 17.5 km",
+      "(b) 37.14 km",
+      "(c) 137.14 km",
+      "(d) 50 km"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q54. एक ट्रेन 8 घंटे में एक यात्रा पूरी करती है, यात्रा का पहला आधा भाग 45 किमी/घंटा पर पूरा होता है और यात्रा का दूसरा आधा भाग 55 किमी/घंटा पर पूरा होता है। यात्रा की कुल दूरी कितनी थी?",
+    "q_en": "Q54. A train completes a journey in 8 hours. The first half of the distance is covered at 45 km/h and the second half at 55 km/h. What was the total distance?",
+    "tag": "Group-D 24/09/2018 (Shift-02)",
+    "o_hi": [
+      "(a) 395 किमी",
+      "(b) 296 किमी",
+      "(c) 396 किमी",
+      "(d) 391 किमी"
+    ],
+    "o_en": [
+      "(a) 395 km",
+      "(b) 296 km",
+      "(c) 396 km",
+      "(d) 391 km"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q55. दो बिंदुओं के बीच की दूरी जाते समय 72 किमी/घंटा की चाल से और वापसी यात्रा के दौरान 54 किमी/घंटा की चाल से तय की जाती है। यदि इसमें कुल 7 घंटे लगते हैं, तो एक तरफ के दो बिंदुओं के बीच की दूरी है:",
+    "q_en": "Q55. The distance between two points is covered at 72 km/h on the onward journey and at 54 km/h on return. If the total time is 7 hours, what is the one-way distance?",
+    "tag": "Group-D 22/10/2018 (Shift-02)",
+    "o_hi": [
+      "(a) 324 किमी",
+      "(b) 180 किमी",
+      "(c) 189 किमी",
+      "(d) 216 किमी"
+    ],
+    "o_en": [
+      "(a) 324 km",
+      "(b) 180 km",
+      "(c) 189 km",
+      "(d) 216 km"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q56. यदि एक व्यक्ति 12 किमी/घंटा की चाल से चलता है, तो उसकी ट्रेन 7 मिनट से छूट जाती है। हालाँकि, यदि वह 30 किमी/घंटा की चाल से चलता है, तो वह ट्रेन के आने से 5 मिनट पहले स्टेशन पहुँच जाता है। स्टेशन पहुँचने के लिए उसके द्वारा तय की गई दूरी ज्ञात कीजिए।",
+    "q_en": "Q56. At 12 km/h a person misses his train by 7 minutes, while at 30 km/h he reaches the station 5 minutes before the train arrives. Find the distance to the station.",
+    "tag": "RRB S.C. 11/02/2026 (Shift-01)",
+    "o_hi": [
+      "(a) 12 किमी",
+      "(b) 4 किमी",
+      "(c) 14 किमी",
+      "(d) 8 किमी"
+    ],
+    "o_en": [
+      "(a) 12 km",
+      "(b) 4 km",
+      "(c) 14 km",
+      "(d) 8 km"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q57. यदि एक व्यक्ति 48 किमी/घंटा की गति से यात्रा करता है, तो उसकी ट्रेन 19 मिनट से छूट जाती है। हालाँकि, यदि वह 50 किमी/घंटा की गति से यात्रा करता है, तो वह ट्रेन के आने से 8 मिनट पहले स्टेशन पहुँच जाता है। स्टेशन पहुँचने के लिए उसके द्वारा तय की गई दूरी ज्ञात कीजिए।",
+    "q_en": "Q57. At 48 km/h a person misses his train by 19 minutes. At 50 km/h he reaches the station 8 minutes before the train. Find the distance to the station.",
+    "tag": "RRB S.C. 12/02/2026 (Shift-02)",
+    "o_hi": [
+      "(a) 534 किमी",
+      "(b) 546 किमी",
+      "(c) 531 किमी",
+      "(d) 540 किमी"
+    ],
+    "o_en": [
+      "(a) 534 km",
+      "(b) 546 km",
+      "(c) 531 km",
+      "(d) 540 km"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q58. विनोद 30 किमी/घंटा की चाल से यात्रा करके 5 मिनट देरी से कार्यालय पहुँचता है। यदि उसकी चाल 40 किमी/घंटा है, तो वह कार्यालय 30 मिनट पहले पहुँच जाता है। वह दूरी ज्ञात कीजिए जो वह अपने घर और कार्यालय के बीच तय करता है।",
+    "q_en": "Q58. Vinod reaches office 5 minutes late at 30 km/h. At 40 km/h he reaches 30 minutes early. Find the distance between his home and office.",
+    "tag": "NTPC CBT-I 04/01/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 70 किमी",
+      "(b) 15 किमी",
+      "(c) 16 किमी",
+      "(d) 18 किमी"
+    ],
+    "o_en": [
+      "(a) 70 km",
+      "(b) 15 km",
+      "(c) 16 km",
+      "(d) 18 km"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q59. यदि कोई व्यक्ति अपने स्कूटर को 45 किमी/घंटा की चाल से चलाता है, वह गंतव्य पर 10 मिनट देरी से पहुँचता है। यदि वह 60 किमी/घंटा की चाल से गाड़ी चलाता है, तो वह सिर्फ 5 मिनट देरी से पहुँचता है। ठीक समय पर गंतव्य तक पहुँचने के लिए व्यक्ति को कितने मिनट में यात्रा पूरी करनी चाहिए?",
+    "q_en": "Q59. If a person rides at 45 km/h, he reaches 10 minutes late; at 60 km/h, he reaches only 5 minutes late. In how many minutes should he complete the journey to arrive on time?",
+    "tag": "NTPC CBT-I 01/04/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 25",
+      "(b) 20",
+      "(c) 15",
+      "(d) 10"
+    ],
+    "o_en": [
+      "(a) 25",
+      "(b) 20",
+      "(c) 15",
+      "(d) 10"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q60. एक बस 80 किमी/घंटा की चाल से चलती है और 10 मिनट की देरी से अपने गंतव्य तक पहुँचती है। यदि यह 90 किमी/घंटा की चाल से चलती, तो यह केवल 8 मिनट की देरी से पहुँचती। बस से यात्रा पूरी करने के लिए सही समय क्या है?",
+    "q_en": "Q60. A bus travelling at 80 km/h reaches its destination 10 minutes late. At 90 km/h it would be only 8 minutes late. What is the scheduled travel time?",
+    "tag": "NTPC CBT-I 01/01/2021 (Shift-01)",
+    "o_hi": [
+      "(a) 8 मिनट",
+      "(b) 10 मिनट",
+      "(c) 12 मिनट",
+      "(d) 15 मिनट"
+    ],
+    "o_en": [
+      "(a) 8 minutes",
+      "(b) 10 minutes",
+      "(c) 12 minutes",
+      "(d) 15 minutes"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q61. 57 किमी/घंटा की गति से यात्रा कर मानव गंतव्य पर 3 मिनट पहले पहुँच गया। यदि उसने 51 किमी/घंटा की गति से यात्रा की होती तो वह 1 मिनट की देरी से पहुँचता। मानव द्वारा तय की गई दूरी क्या है?",
+    "q_en": "Q61. Travelling at 57 km/h, Manav reaches 3 minutes early. At 51 km/h, he would reach 1 minute late. What distance does he travel?",
+    "tag": "Group-D 26/10/2018 (Shift-03)",
+    "o_hi": [
+      "(a) 31.5 किमी",
+      "(b) 32.3 किमी",
+      "(c) 31.9 किमी",
+      "(d) 32.8 किमी"
+    ],
+    "o_en": [
+      "(a) 31.5 km",
+      "(b) 32.3 km",
+      "(c) 31.9 km",
+      "(d) 32.8 km"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q62. एक ट्रेन जब औसतन 40 किमी/घंटा की चाल से चलती है, तो वह समय पर अपने गंतव्य स्थान पर पहुँच जाती है। जब इसकी औसत चाल 35 किमी/घंटा हो जाती है, फिर वह अपने गंतव्य स्थान पर 15 मिनट देरी से पहुँचती है। दूरी ज्ञात कीजिए।",
+    "q_en": "Q62. A train reaches its destination on time at an average speed of 40 km/h. At 35 km/h, it arrives 15 minutes late. Find the distance.",
+    "tag": "NTPC CBT-I 12/03/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 30 किमी",
+      "(b) 80 किमी",
+      "(c) 40 किमी",
+      "(d) 70 किमी"
+    ],
+    "o_en": [
+      "(a) 30 km",
+      "(b) 80 km",
+      "(c) 40 km",
+      "(d) 70 km"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q63. एक छात्र अपने घर से 2.5 किमी/घंटा की चाल से चलता है और स्कूल समय से 6 मिनट बाद पहुँचता है। अगली दिन वह अपनी चाल 1 किमी/घंटा बढ़ा देता है और स्कूल समय से 6 मिनट पहले पहुँच जाता है। उसके घर से स्कूल कितनी दूरी है?",
+    "q_en": "Q63. A student walks from home at 2.5 km/h and reaches school 6 minutes late. The next day he increases his speed by 1 km/h and reaches 6 minutes early. Find the distance from home to school.",
+    "tag": "NTPC CBT-II 17/06/2022 (Shift-02)",
+    "o_hi": [
+      "(a) 2.5 किमी",
+      "(b) 1.75 किमी",
+      "(c) 2.25 किमी",
+      "(d) 2 किमी"
+    ],
+    "o_en": [
+      "(a) 2.5 km",
+      "(b) 1.75 km",
+      "(c) 2.25 km",
+      "(d) 2 km"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q64. एक आदमी स्कूटर पर अपने घर और कार्यालय के बीच एक निश्चित दूरी तय करता है। 30 किमी/घंटा की औसत गति होने के कारण, वह 10 मिनट देर से आता है। हालाँकि, 40 किमी/घंटा की गति से, वह 5 मिनट पहले अपने कार्यालय पहुँच जाता है। घर और कार्यालय के बीच की दूरी क्या है?",
+    "q_en": "Q64. A man covers a fixed distance between home and office by scooter. At 30 km/h he is 10 minutes late, while at 40 km/h he is 5 minutes early. Find the distance.",
+    "tag": "NTPC CBT-I 27/01/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 30 किमी",
+      "(b) 35 किमी",
+      "(c) 20 किमी",
+      "(d) 40 किमी"
+    ],
+    "o_en": [
+      "(a) 30 km",
+      "(b) 35 km",
+      "(c) 20 km",
+      "(d) 40 km"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q65. राम एक ट्रेन में एक निश्चित दूरी तय करता है। यदि ट्रेन 8 किमी/घंटा तेज चलती, तो उसे 20 मिनट कम लगते। यदि वह 4 किमी/घंटा धीमी चलती, तो उसे 40 मिनट अधिक लगते। दूरी का पता लगाएँ।",
+    "q_en": "Q65. Ram travels a fixed distance by train. If the train were 8 km/h faster, it would take 20 minutes less; if 4 km/h slower, it would take 40 minutes more. Find the distance.",
+    "tag": "NTPC CBT-I 08/04/2021 (Shift-01)",
+    "o_hi": [
+      "(a) 20/3 किमी",
+      "(b) 16/3 किमी",
+      "(c) 17/3 किमी",
+      "(d) 19/3 किमी"
+    ],
+    "o_en": [
+      "(a) 20/3 km",
+      "(b) 16/3 km",
+      "(c) 17/3 km",
+      "(d) 19/3 km"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q66. एक आदमी ने 8 घंटे में 28 किमी की दूरी तय की। उसने आंशिक रूप से 4 किमी/घंटा की चाल से पैदल यात्रा की और आंशिक रूप से साइकिल पर 6 किमी/घंटा की चाल से यात्रा की। पैदल तय की गई दूरी कितनी थी?",
+    "q_en": "Q66. A man covered 28 km in 8 hours, partly walking at 4 km/h and partly cycling at 6 km/h. How much distance did he walk?",
+    "tag": "NTPC CBT-I 30/01/2021 (Shift-02)",
+    "o_hi": [
+      "(a) 16 किमी",
+      "(b) 18 किमी",
+      "(c) 10 किमी",
+      "(d) 12 किमी"
+    ],
+    "o_en": [
+      "(a) 16 km",
+      "(b) 18 km",
+      "(c) 10 km",
+      "(d) 12 km"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q67. चन्द्रिमा 8 किमी/घंटा पैदल और 13 किमी/घंटा साइकिल से चलती है। वह 84 किमी की दूरी 8 घंटे में तय करती है। वह कितने घंटे साइकिल चलाती है?",
+    "q_en": "Q67. Chandrima walks at 8 km/h and cycles at 13 km/h. She covers 84 km in 8 hours. For how many hours does she cycle?",
+    "tag": "Group-D 27/09/2018 (Shift-01)",
+    "o_hi": [
+      "(a) 4",
+      "(b) 3",
+      "(c) 5",
+      "(d) 2"
+    ],
+    "o_en": [
+      "(a) 4",
+      "(b) 3",
+      "(c) 5",
+      "(d) 2"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q68. स्मृति 21 किमी/घंटा की चाल से एक शॉपिंग मॉल जाती है और 69 किमी/घंटा की चाल से वापस आती है। पूरी यात्रा के लिए उसकी औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q68. Smriti goes to a shopping mall at 21 km/h and returns at 69 km/h. Find her average speed for the whole trip.",
+    "tag": "RRB Group D 27/11/2025 (Shift-01)",
+    "o_hi": [
+      "(a) 40.2",
+      "(b) 30.3",
+      "(c) 32.2",
+      "(d) 23.4"
+    ],
+    "o_en": [
+      "(a) 40.2",
+      "(b) 30.3",
+      "(c) 32.2",
+      "(d) 23.4"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q69. निधि 21 किमी/घंटा की चाल से एक शॉपिंग मॉल जाती है और 77 किमी/घंटा की चाल से वापस आती है। पूरी यात्रा के लिए उसकी औसत चाल कितनी है?",
+    "q_en": "Q69. Nidhi goes to a shopping mall at 21 km/h and returns at 77 km/h. Find her average speed.",
+    "tag": "RRB Group D 28/11/2025 (Shift-03)",
+    "o_hi": [
+      "(a) 23",
+      "(b) 34",
+      "(c) 33",
+      "(d) 39"
+    ],
+    "o_en": [
+      "(a) 23",
+      "(b) 34",
+      "(c) 33",
+      "(d) 39"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q70. एक व्यक्ति बिंदु A से बिंदु B तक 13 किमी/घंटा की चाल से जाता है और उसी रास्ते बिंदु B से बिंदु A तक 10 किमी/घंटा की चाल से वापस आता है। संपूर्ण यात्रा के लिए औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q70. A person travels from A to B at 13 km/h and returns along the same route at 10 km/h. Find the average speed for the whole trip.",
+    "tag": "RRB ALP CBT-I 16/02/2026 (Shift-03)",
+    "o_hi": [
+      "(a) 11\\frac{7}{23}",
+      "(b) 11\\frac{16}{23}",
+      "(c) 10\\frac{22}{23}",
+      "(d) 12\\frac{1}{23}"
+    ],
+    "o_en": [
+      "(a) 11\\frac{7}{23}",
+      "(b) 11\\frac{16}{23}",
+      "(c) 10\\frac{22}{23}",
+      "(d) 12\\frac{1}{23}"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q71. यदि जॉन 30 किमी/घंटा की गति से 90 किमी यात्रा करता है और 60 किमी/घंटा की गति से वापस आता है, तो उसकी औसत गति क्या होगी?",
+    "q_en": "Q71. John travels 90 km at 30 km/h and returns at 60 km/h. What is his average speed?",
+    "tag": "RRB Tech. G-III 28/12/2024 (Shift-02)",
+    "o_hi": [
+      "(a) 30 किमी/घंटा",
+      "(b) 60 किमी/घंटा",
+      "(c) 40 किमी/घंटा",
+      "(d) 45 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 30 km/h",
+      "(b) 60 km/h",
+      "(c) 40 km/h",
+      "(d) 45 km/h"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q72. हरिराज 4 किमी/घंटा की गति से अपने स्कूल गया और 20 किमी/घंटा की गति से स्कूटर पर लौटा। दोनों तरफ की यात्रा के दौरान उसकी औसत गति कितनी है?",
+    "q_en": "Q72. Hariraj goes to school at 4 km/h and returns by scooter at 20 km/h. What is his average speed for the round trip?",
+    "tag": "RRB Tech. G-III 28/12/2024 (Shift-01)",
+    "o_hi": [
+      "(a) 12 किमी/घंटा",
+      "(b) 6 किमी/घंटा",
+      "(c) 20/3 किमी/घंटा",
+      "(d) 8 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 12 km/h",
+      "(b) 6 km/h",
+      "(c) 20/3 km/h",
+      "(d) 8 km/h"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q73. A और B के बीच की दूरी 1089 किमी है। विराट A से B तक 104 किमी/घंटा की चाल से जाता है और फिर 125 किमी/घंटा की चाल से वापस A तक आता है। विराट की औसत चाल ज्ञात कीजिए। (दो दशमलव स्थान तक)",
+    "q_en": "Q73. The distance between A and B is 1089 km. Virat travels from A to B at 104 km/h and returns at 125 km/h. Find his average speed, rounded to two decimal places.",
+    "tag": "RRB JE 17/12/2024 (Shift-03)",
+    "o_hi": [
+      "(a) 111.79 किमी/घंटा",
+      "(b) 113.54 किमी/घंटा",
+      "(c) 117.44 किमी/घंटा",
+      "(d) 120.89 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 111.79 km/h",
+      "(b) 113.54 km/h",
+      "(c) 117.44 km/h",
+      "(d) 120.89 km/h"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q74. A और B के बीच की दूरी 1253 किमी है। चमन A से B तक 93 किमी/घंटा की चाल से जाता है और फिर 95 किमी/घंटा की चाल से वापस A तक आता है। चमन की औसत चाल ज्ञात कीजिए। (दो दशमलव स्थान तक)",
+    "q_en": "Q74. The distance between A and B is 1253 km. Chaman travels from A to B at 93 km/h and returns at 95 km/h. Find his average speed to two decimal places.",
+    "tag": "RRB JE 17/12/2024 (Shift-02)",
+    "o_hi": [
+      "(a) 93.99 किमी/घंटा",
+      "(b) 90.46 किमी/घंटा",
+      "(c) 103.98 किमी/घंटा",
+      "(d) 94.47 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 93.99 km/h",
+      "(b) 90.46 km/h",
+      "(c) 103.98 km/h",
+      "(d) 94.47 km/h"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q75. उस ट्रक की औसत चाल कितनी है जो आधी दूरी 20 किमी/घंटा की चाल से और शेष आधी दूरी 80 किमी/घंटा की चाल से तय करता है?",
+    "q_en": "Q75. What is the average speed of a truck that covers half the distance at 20 km/h and the other half at 80 km/h?",
+    "tag": "RRB Group D 02/12/2025 (Shift-03)",
+    "o_hi": [
+      "(a) 37 किमी/घंटा",
+      "(b) 32 किमी/घंटा",
+      "(c) 40 किमी/घंटा",
+      "(d) 41 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 37 km/h",
+      "(b) 32 km/h",
+      "(c) 40 km/h",
+      "(d) 41 km/h"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q76. उस बाइक की औसत चाल कितनी होगी, जो आधी दूरी 42 किमी/घंटा की चाल से और शेष आधी दूरी 84 किमी/घंटा की चाल से तय करती है?",
+    "q_en": "Q76. What is the average speed of a bike that covers half the distance at 42 km/h and the other half at 84 km/h?",
+    "tag": "RRB Group D 05/12/2025 (Shift-02)",
+    "o_hi": [
+      "(a) 57 किमी/घंटा",
+      "(b) 63 किमी/घंटा",
+      "(c) 56 किमी/घंटा",
+      "(d) 47 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 57 km/h",
+      "(b) 63 km/h",
+      "(c) 56 km/h",
+      "(d) 47 km/h"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q77. 600 किमी की यात्रा में, एक ट्रक पहले 300 किमी को 40 किमी/घंटा की चाल से तय करता है। शेष दूरी उसे किस चाल से तय करनी चाहिए, ताकि औसत चाल 70 किमी/घंटा हो जाए?",
+    "q_en": "Q77. On a 600 km journey, a truck covers the first 300 km at 40 km/h. At what speed should it cover the remaining distance so that the average speed is 70 km/h?",
+    "tag": "RRB Group D 28/11/2025 (Shift-03)",
+    "o_hi": [
+      "(a) 280",
+      "(b) 295",
+      "(c) 255",
+      "(d) 260"
+    ],
+    "o_en": [
+      "(a) 280",
+      "(b) 295",
+      "(c) 255",
+      "(d) 260"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q78. एक कार x किमी/घंटा की अज्ञात चाल से 120 किमी की यात्रा करती है और फिर (x + 20) किमी/घंटा की चाल से वापस लौटती है। संपूर्ण यात्रा की औसत चाल 60 किमी/घंटा है। x का मान ज्ञात कीजिए। (उत्तर को एक दशमलव स्थान तक पूर्णांकित कीजिए)",
+    "q_en": "Q78. A car travels 120 km at x km/h and returns at (x+20) km/h. The average speed for the whole trip is 60 km/h. Find x to one decimal place.",
+    "tag": "RRB Tech. G-III 09/03/2026 (Shift-03)",
+    "o_hi": [
+      "(a) 54.5",
+      "(b) 51.6",
+      "(c) 50.2",
+      "(d) 52.4"
+    ],
+    "o_en": [
+      "(a) 54.5",
+      "(b) 51.6",
+      "(c) 50.2",
+      "(d) 52.4"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q79. एक व्यक्ति क्रमशः 20 किमी/घंटा, x किमी/घंटा और 20 किमी/घंटा की चाल से 100 किमी, 408 किमी और 1460 किमी की दूरी तय करता है। यदि पूरी यात्रा के लिए उसकी औसत चाल 20 किमी/घंटा है, तो x का मान ज्ञात कीजिए।",
+    "q_en": "Q79. A person travels 100 km, 408 km and 1460 km at 20 km/h, x km/h and 20 km/h respectively. If his average speed for the entire journey is 20 km/h, find x.",
+    "tag": "RRB NTPC G CBT-I 10/06/2025 (Shift-02)",
+    "o_hi": [
+      "(a) 22",
+      "(b) 25",
+      "(c) 20",
+      "(d) 15"
+    ],
+    "o_en": [
+      "(a) 22",
+      "(b) 25",
+      "(c) 20",
+      "(d) 15"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q80. एक व्यक्ति 63 किमी/घंटा, x किमी/घंटा और 81 किमी/घंटा की चाल से क्रमशः 819 किमी, 1476 किमी और 1053 किमी की दूरी तय करता है। यदि पूरी यात्रा के लिए उसकी औसत चाल 54 किमी/घंटा है, तो x का मान ज्ञात कीजिए।",
+    "q_en": "Q80. A person travels 819 km, 1476 km and 1053 km at 63 km/h, x km/h and 81 km/h respectively. If his average speed is 54 km/h, find x.",
+    "tag": "RRB NTPC G CBT-I 13/06/2025 (Shift-02)",
+    "o_hi": [
+      "(a) 43",
+      "(b) 41",
+      "(c) 46",
+      "(d) 38"
+    ],
+    "o_en": [
+      "(a) 43",
+      "(b) 41",
+      "(c) 46",
+      "(d) 38"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q81. 600 किमी की यात्रा में, एक ट्रक पहले 300 किमी की दूरी 42 किमी/घंटा की चाल से तय करता है। उसे शेष दूरी किस चाल से तय करनी चाहिए, ताकि संपूर्ण यात्रा की औसत चाल 63 किमी/घंटा हो?",
+    "q_en": "Q81. On a 600 km journey, a truck covers the first 300 km at 42 km/h. At what speed must it cover the remaining distance for an average speed of 63 km/h?",
+    "tag": "RRB Group D 01/12/2025 (Shift-03)",
+    "o_hi": [
+      "(a) 126",
+      "(b) 141",
+      "(c) 106",
+      "(d) 101"
+    ],
+    "o_en": [
+      "(a) 126",
+      "(b) 141",
+      "(c) 106",
+      "(d) 101"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q82. राजू घर से 3.5 किमी दूर अपने कार्यालय तक पैदल जाता है। सुबह, वह यह दूरी 1.5 घंटे में तय करता है, जबकि शाम को घर लौटते समय उसे वही दूरी तय करने में 30 मिनट अधिक लगते हैं। दोनों तरफ की यात्रा के दौरान उसकी औसत चाल क्या है?",
+    "q_en": "Q82. Raju walks to his office 3.5 km from home. In the morning he takes 1.5 hours; in the evening return he takes 30 minutes more. What is his average speed for the round trip?",
+    "tag": "RRB Group D 01/12/2025 (Shift-01)",
+    "o_hi": [
+      "(a) 3.5",
+      "(b) 2",
+      "(c) 3",
+      "(d) 2.5"
+    ],
+    "o_en": [
+      "(a) 3.5",
+      "(b) 2",
+      "(c) 3",
+      "(d) 2.5"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q83. एक दौड़ में, एक एथलीट पहले चक्कर में 408 मीटर की दूरी 68 सेकंड में तय करता है। वह समान लंबाई का दूसरा चक्कर 136 सेकंड में तय करता है। एथलीट की औसत चाल (मीटर/सेकंड में) ज्ञात कीजिए।",
+    "q_en": "Q83. In a race, an athlete covers the first 408 m lap in 68 seconds and an equal second lap in 136 seconds. Find the average speed in m/s.",
+    "tag": "RPF Constable 18/03/2025 (Shift-03)",
+    "o_hi": [
+      "(a) 7",
+      "(b) 1",
+      "(c) 6",
+      "(d) 4"
+    ],
+    "o_en": [
+      "(a) 7",
+      "(b) 1",
+      "(c) 6",
+      "(d) 4"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q84. एक कार पहले घंटे में 101 किमी और दूसरे घंटे में 55 किमी की यात्रा करती है। पूरे यात्रा के दौरान कार की औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q84. A car travels 101 km in the first hour and 55 km in the second hour. Find its average speed for the whole journey.",
+    "tag": "RPF Constable 06/03/2025 (Shift-01)",
+    "o_hi": [
+      "(a) 78",
+      "(b) 81",
+      "(c) 79",
+      "(d) 73"
+    ],
+    "o_en": [
+      "(a) 78",
+      "(b) 81",
+      "(c) 79",
+      "(d) 73"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q85. एक महिला 80 मिनट तक 20 मी/मिनट की चाल से और 60 मिनट तक 55 मी/मिनट की चाल से यात्रा करती है। उसकी औसत चाल (मी/मिनट में) ज्ञात कीजिए।",
+    "q_en": "Q85. A woman travels for 80 minutes at 20 m/min and for 60 minutes at 55 m/min. Find her average speed in m/min.",
+    "tag": "RRB Group D 01/12/2025 (Shift-02)",
+    "o_hi": [
+      "(a) 35",
+      "(b) 41",
+      "(c) 28",
+      "(d) 39"
+    ],
+    "o_en": [
+      "(a) 35",
+      "(b) 41",
+      "(c) 28",
+      "(d) 39"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q86. एक महिला ने 80 मिनट के लिए 20 मी/मिनट की चाल से और 64 मिनट के लिए 65 मी/मिनट की चाल से यात्रा की। उसकी औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q86. A woman travels for 80 minutes at 20 m/min and 64 minutes at 65 m/min. Find her average speed.",
+    "tag": "RRB NTPC G CBT-I 20/06/2025 (Shift-2)",
+    "o_hi": [
+      "(a) 40",
+      "(b) 44",
+      "(c) 46",
+      "(d) 33"
+    ],
+    "o_en": [
+      "(a) 40",
+      "(b) 44",
+      "(c) 46",
+      "(d) 33"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q87. एक व्यक्ति 3 किमी/घंटा की गति से 13 घंटे में कुछ दूरी तय करता है और 6 किमी/घंटा की गति से 15 घंटे में कुछ और दूरी तय करता है। यात्रा की कुल दूरी के लिए उसकी औसत गति ज्ञात कीजिए।",
+    "q_en": "Q87. A person travels for 13 hours at 3 km/h and for 15 hours at 6 km/h. Find his average speed for the total journey.",
+    "tag": "NTPC CBT-II 13/10/2025 (Shift-02)",
+    "o_hi": [
+      "(a) 4\\frac{17}{28}",
+      "(b) 11\\frac{17}{28}",
+      "(c) 8\\frac{17}{28}",
+      "(d) 5\\frac{17}{28}"
+    ],
+    "o_en": [
+      "(a) 4\\frac{17}{28}",
+      "(b) 11\\frac{17}{28}",
+      "(c) 8\\frac{17}{28}",
+      "(d) 5\\frac{17}{28}"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q88. एक जीप 80 किमी की दूरी 40 किमी/घंटा की चाल से और अगली 32 किमी की दूरी 16 किमी/घंटा की चाल से तय करती है। इसकी औसत चाल कितनी है?",
+    "q_en": "Q88. A jeep covers 80 km at 40 km/h and the next 32 km at 16 km/h. Find its average speed.",
+    "tag": "RRB Group D 02/12/2025 (Shift-01)",
+    "o_hi": [
+      "(a) 32",
+      "(b) 22",
+      "(c) 34",
+      "(d) 28"
+    ],
+    "o_en": [
+      "(a) 32",
+      "(b) 22",
+      "(c) 34",
+      "(d) 28"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q89. एक रेलगाड़ी 60 किमी/घंटा की चाल से 120 किमी की दूरी और तत्पश्चात 30 किमी/घंटा की चाल से 60 किमी की एक और दूरी तय करती है। संपूर्ण यात्रा के लिए औसत चाल क्या है?",
+    "q_en": "Q89. A train covers 120 km at 60 km/h and then another 60 km at 30 km/h. What is its average speed?",
+    "tag": "RRB JE CBT-I 20/02/2026 (Shift-03)",
+    "o_hi": [
+      "(a) 40 किमी/घंटा",
+      "(b) 45 किमी/घंटा",
+      "(c) 50 किमी/घंटा",
+      "(d) 30 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 40 km/h",
+      "(b) 45 km/h",
+      "(c) 50 km/h",
+      "(d) 30 km/h"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q90. मिस्टर W ने 5 किमी/घंटा, 43 किमी/घंटा और 34 किमी/घंटा की चाल से क्रमशः 425 किमी, 946 किमी और 340 किमी की यात्रा की। उनकी औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q90. Mr W travelled 425 km, 946 km and 340 km at 5 km/h, 43 km/h and 34 km/h respectively. Find his average speed.",
+    "tag": "RRB JE CBT-I 25/02/2026 (Shift-03)",
+    "o_hi": [
+      "(a) 14\\frac{71}{117}",
+      "(b) 14\\frac{75}{117}",
+      "(c) 14\\frac{73}{117}",
+      "(d) 14\\frac{70}{117}"
+    ],
+    "o_en": [
+      "(a) 14\\frac{71}{117}",
+      "(b) 14\\frac{75}{117}",
+      "(c) 14\\frac{73}{117}",
+      "(d) 14\\frac{70}{117}"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q91. मिस्टर Y ने 6 किमी/घंटा, 20 किमी/घंटा और 27 किमी/घंटा की चाल से क्रमशः 438 किमी, 820 किमी और 972 किमी की यात्रा की। उनकी औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q91. Mr Y travelled 438 km, 820 km and 972 km at 6 km/h, 20 km/h and 27 km/h respectively. Find his average speed.",
+    "tag": "RRB JE CBT-I 19/02/2026 (Shift-03)",
+    "o_hi": [
+      "(a) 14\\frac{11}{15}",
+      "(b) 14\\frac{13}{15}",
+      "(c) 14\\frac{8}{14}",
+      "(d) 14\\frac{14}{15}"
+    ],
+    "o_en": [
+      "(a) 14\\frac{11}{15}",
+      "(b) 14\\frac{13}{15}",
+      "(c) 14\\frac{8}{14}",
+      "(d) 14\\frac{14}{15}"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q92. एक व्यक्ति कार से 50 किमी/घंटा की चाल से 60 किमी, फिर बस से 40 किमी/घंटा की चाल से 80 किमी और अंत में ट्रेन से 80 किमी/घंटा की चाल से 100 किमी की यात्रा करता है। पूरी यात्रा के लिए उसकी औसत चाल कितनी है?",
+    "q_en": "Q92. A person travels 60 km by car at 50 km/h, then 80 km by bus at 40 km/h, and finally 100 km by train at 80 km/h. Find the average speed for the whole journey.",
+    "tag": "RRB Group-D 19/12/2025 (Shift-02)",
+    "o_hi": [
+      "(a) 48.93 किमी/घंटा",
+      "(b) 53.93 किमी/घंटा",
+      "(c) 61.93 किमी/घंटा",
+      "(d) 59.93 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 48.93 km/h",
+      "(b) 53.93 km/h",
+      "(c) 61.93 km/h",
+      "(d) 59.93 km/h"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q93. एक व्यक्ति ने 2.5 घंटे तक 53 किमी/घंटा की चाल से गाड़ी चलाई, फिर अपनी चाल में 28 किमी/घंटा की वृद्धि की तथा एक और घंटे में गंतव्य पर पहुँच गया। संपूर्ण यात्रा के दौरान व्यक्ति की औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q93. A person drives for 2.5 hours at 53 km/h, then increases his speed by 28 km/h and reaches the destination in another hour. Find his average speed.",
+    "tag": "RRB ALP CBT-I 13/02/2026 (Shift-01)",
+    "o_hi": [
+      "(a) 59",
+      "(b) 61",
+      "(c) 60",
+      "(d) 58"
+    ],
+    "o_en": [
+      "(a) 59",
+      "(b) 61",
+      "(c) 60",
+      "(d) 58"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q94. एक व्यक्ति 59 किमी/घंटा की चाल से 3.5 घंटे तक ड्राइव करता है, फिर अपनी चाल 9 किमी/घंटा बढ़ा देता है और अगले एक घंटे में अपने गंतव्य पर पहुँच जाता है। संपूर्ण यात्रा के दौरान उसकी औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q94. A person drives for 3.5 hours at 59 km/h, then increases speed by 9 km/h and reaches the destination in the next hour. Find the average speed.",
+    "tag": "RRB ALP CBT-I 17/02/2026 (Shift-02)",
+    "o_hi": [
+      "(a) 61",
+      "(b) 57",
+      "(c) 59",
+      "(d) 66"
+    ],
+    "o_en": [
+      "(a) 61",
+      "(b) 57",
+      "(c) 59",
+      "(d) 66"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q95. एक व्यक्ति ने 2.5 घंटे तक 71 किमी/घंटा की गति से गाड़ी चलाई, फिर उसने अपनी गति 21 किमी/घंटा बढ़ा दी और अगले 1 घंटे में गंतव्य तक पहुँच गया। पूरी यात्रा में व्यक्ति की औसत गति ज्ञात कीजिए।",
+    "q_en": "Q95. A person drives for 2.5 hours at 71 km/h, then increases his speed by 21 km/h and reaches the destination in the next hour. Find the average speed.",
+    "tag": "RRB ALP CBT-I 11/03/2026 (Shift-01)",
+    "o_hi": [
+      "(a) 80",
+      "(b) 82",
+      "(c) 74",
+      "(d) 77"
+    ],
+    "o_en": [
+      "(a) 80",
+      "(b) 82",
+      "(c) 74",
+      "(d) 77"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q96. एक व्यक्ति ने 6.5 घंटे तक 71 किमी/घंटा की चाल से गाड़ी चलाई, फिर अपनी चाल 15 किमी/घंटा घटा दी और ठीक अगले एक घंटे में गंतव्य तक पहुँच गया। पूरी यात्रा के दौरान उस व्यक्ति की औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q96. A person drives for 6.5 hours at 71 km/h, then reduces speed by 15 km/h and reaches the destination in the next hour. Find the average speed.",
+    "tag": "RPF SI 13/12/2024 (Shift-03)",
+    "o_hi": [
+      "(a) 73",
+      "(b) 69",
+      "(c) 70",
+      "(d) 75"
+    ],
+    "o_en": [
+      "(a) 73",
+      "(b) 69",
+      "(c) 70",
+      "(d) 75"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q97. एक व्यक्ति ने 6.5 घंटे तक 55 किमी/घंटा की चाल से गाड़ी चलाई, फिर अपनी चाल 15 किमी/घंटा बढ़ा दी और ठीक अगले एक घंटे में गंतव्य तक पहुँच गया। पूरी यात्रा के दौरान उस व्यक्ति की औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q97. A person drives for 6.5 hours at 55 km/h, then increases speed by 15 km/h and reaches the destination in the next hour. Find the average speed.",
+    "tag": "RPF SI 13/12/2024 (Shift-03)",
+    "o_hi": [
+      "(a) 57",
+      "(b) 59",
+      "(c) 53",
+      "(d) 60"
+    ],
+    "o_en": [
+      "(a) 57",
+      "(b) 59",
+      "(c) 53",
+      "(d) 60"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q98. एक व्यक्ति 3.5 घंटे तक 39 किमी/घंटा की चाल से गाड़ी चलाता है, फिर अपनी चाल 9 किमी/घंटा बढ़ा देता है और अगले एक घंटे में गंतव्य तक पहुँच जाता है। उस व्यक्ति की कुल यात्रा की औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q98. A person drives for 3.5 hours at 39 km/h, then increases speed by 9 km/h and reaches the destination in the next hour. Find the average speed.",
+    "tag": "RPF SI 12/12/2024 (Shift-01)",
+    "o_hi": [
+      "(a) 43",
+      "(b) 45",
+      "(c) 41",
+      "(d) 47"
+    ],
+    "o_en": [
+      "(a) 43",
+      "(b) 45",
+      "(c) 41",
+      "(d) 47"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q99. एक रेसिंग कार पहले 160 किमी की दूरी 80 किमी/घंटा की चाल से, अगले 160 किमी की दूरी 120 किमी/घंटा की चाल से और अंतिम 160 किमी की दूरी 80 किमी/घंटा की चाल से तय करती है। संपूर्ण यात्रा के लिए रेसिंग कार की औसत चाल ज्ञात कीजिए।",
+    "q_en": "Q99. A racing car covers the first 160 km at 80 km/h, the next 160 km at 120 km/h, and the last 160 km at 80 km/h. Find the average speed.",
+    "tag": "RRB ALP CBT-I 17/02/2026 (Shift-01)",
+    "o_hi": [
+      "(a) 90 किमी/घंटा",
+      "(b) 100 किमी/घंटा",
+      "(c) 105 किमी/घंटा",
+      "(d) 95 किमी/घंटा"
+    ],
+    "o_en": [
+      "(a) 90 km/h",
+      "(b) 100 km/h",
+      "(c) 105 km/h",
+      "(d) 95 km/h"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q100. एक व्यक्ति 19 किमी/घंटा, 8 किमी/घंटा और 5 किमी/घंटा की गति से समान दूरी तय करता है। पूरी यात्रा के लिए उसकी औसत गति ज्ञात कीजिए।",
+    "q_en": "Q100. A person covers equal distances at 19 km/h, 8 km/h and 5 km/h. Find his average speed for the whole journey.",
+    "tag": "NTPC CBT-II 13/10/2025 (Shift-01)",
+    "o_hi": [
+      "(a) 3\\frac{271}{287}",
+      "(b) 13\\frac{271}{287}",
+      "(c) 7\\frac{271}{287}",
+      "(d) 5\\frac{271}{287}"
+    ],
+    "o_en": [
+      "(a) 3\\frac{271}{287}",
+      "(b) 13\\frac{271}{287}",
+      "(c) 7\\frac{271}{287}",
+      "(d) 5\\frac{271}{287}"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }
+];
