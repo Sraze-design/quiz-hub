@@ -1,0 +1,602 @@
+const data = [
+  {
+    q_hi: "Q201. गणितीय चिह्नों के उस संयोजन का चयन करें जिसे दिए गए समीकरण के रिक्त स्थानों में क्रमानुसार रखने पर समीकरण संतुलित हो जाएगा 12 _ 3 _ 12 _ 24",
+    q_en: "Q201. Select the combination of mathematical signs which, when placed in order in the blanks of the given equation, will make the equation balanced: 12 _ 3 _ 12 _ 24",
+    tag: "RRB NTPC 08/02/2021 (Evening)",
+    o_hi: [
+      "(a) × - =",
+      "(b) × = ÷",
+      "(c) × = _",
+      "(d) ÷ + ="
+    ],
+    o_en: [
+      "(a) × - =",
+      "(b) × = ÷",
+      "(c) × = _",
+      "(d) ÷ + ="
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q202. यदि '+' का अर्थ भाग है, '-' का अर्थ जोड़ है, '×' का अर्थ घटाव है और '/' का अर्थ गुणा है, तो निम्नलिखित व्यंजक का मान क्या होगा? [{(15 × 10) − (3/5)} + (12 − 8)] / 1",
+    q_en: "Q202. If '+' means division, '-' means addition, '×' means subtraction, and '/' means multiplication, what is the value of the following expression: [{(15 × 10) − (3/5)} + (12 − 8)] / 1?",
+    tag: "RRB NTPC 09/02/2021 (Morning)",
+    o_hi: [
+      "(a) 1",
+      "(b) 0",
+      "(c) 10",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) 0",
+      "(c) 10",
+      "(d) 2"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q203. दिए गए विकल्पों में से कौन-सा व्यंजक का मान हो सकता है 2 + 2 × 2 - 3 ÷ 3 × 3 - 4 × 4 ÷ 4 =?",
+    q_en: "Q203. Which of the given options can be the value of the expression 2 + 2 × 2 - 3 ÷ 3 × 3 - 4 × 4 ÷ 4 = ?",
+    tag: "RRB NTPC 12/02/2021 (Morning)",
+    o_hi: [
+      "(a) 1",
+      "(b) -2",
+      "(c) 2",
+      "(d) -1"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) -2",
+      "(c) 2",
+      "(d) -1"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q204. दिए गए अक्षर निम्न प्रतीकों को दर्शाते हैं: P : +, Q : −, R : ×, S : ÷, T : =, U : >, V : <. उस विकल्प का चयन करें जो उपरोक्त अक्षर-प्रतीकों के अनुसार सही है।",
+    q_en: "Q204. The letters represent the following symbols: P = +, Q = −, R = ×, S = ÷, T = =, U = >, V = <. Select the option that is correct according to these letter-symbol meanings.",
+    tag: "RRB NTPC 01/03/2021 (Evening)",
+    o_hi: [
+      "(a) 4 R 12 S 3 T 2 S 8",
+      "(b) 4 R 12 S 3 T 2 R 8",
+      "(c) 4 R 12 P 3 T 2 R 8",
+      "(d) 4 R 12 S 3 U 2 R 8"
+    ],
+    o_en: [
+      "(a) 4 R 12 S 3 T 2 S 8",
+      "(b) 4 R 12 S 3 T 2 R 8",
+      "(c) 4 R 12 P 3 T 2 R 8",
+      "(d) 4 R 12 S 3 U 2 R 8"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q205. यदि हम ‘+’ और ‘×’ को परस्पर बदल दें तथा संख्या 3 और 2 को परस्पर बदल दें, तो निम्नलिखित में से कौन सा समीकरण सही होगा ?",
+    q_en: "Q205. If '+' and '×' are interchanged and the numbers 3 and 2 are interchanged, which of the following equations will be correct?",
+    tag: "RRB NTPC 07/03/2021 (Evening)",
+    o_hi: [
+      "(a) 4 + 6 ÷ 3 - 3 × 2 = 13",
+      "(b) 4 + 6 ÷ 3 - 3 × 2 = 12",
+      "(c) 4 + 6 ÷ 3 - 3 × 2 = 17",
+      "(d) 4 + 6 ÷ 3 - 3 × 2 = 11"
+    ],
+    o_en: [
+      "(a) 4 + 6 ÷ 3 - 3 × 2 = 13",
+      "(b) 4 + 6 ÷ 3 - 3 × 2 = 12",
+      "(c) 4 + 6 ÷ 3 - 3 × 2 = 17",
+      "(d) 4 + 6 ÷ 3 - 3 × 2 = 11"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q206. दिए गए समीकरण को सही बनाने के लिए किन दो चिह्नों को आपस में बदला जाना है ? 36 - 3 ÷ 3 + 2 × 4 = 34",
+    q_en: "Q206. Which two signs should be interchanged to make the given equation correct? 36 - 3 ÷ 3 + 2 × 4 = 34",
+    tag: "RRB NTPC 08/03/2021 (Evening)",
+    o_hi: [
+      "(a) + और ÷",
+      "(b) - और ×",
+      "(c) - और +",
+      "(d) ÷ और -"
+    ],
+    o_en: [
+      "(a) + and ÷",
+      "(b) - and ×",
+      "(c) - and +",
+      "(d) ÷ and -"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q207. यदि '*' का अर्थ 'जोड़' है, '/' का अर्थ 'घटाव' है, '+' का अर्थ 'गुणा' है और '-' का अर्थ 'भाग' है, तो 22 * 10/10 - 2 + 4 का मान ज्ञात कीजिए।",
+    q_en: "Q207. If '*' means addition, '/' means subtraction, '+' means multiplication, and '-' means division, find the value of 22 * 10/10 - 2 + 4.",
+    tag: "RRB NTPC 14/03/2021 (Evening)",
+    o_hi: [
+      "(a) 16",
+      "(b) 10",
+      "(c) 12",
+      "(d) 14"
+    ],
+    o_en: [
+      "(a) 16",
+      "(b) 10",
+      "(c) 12",
+      "(d) 14"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q208. प्रतीकों के उस संयोजन का चयन करें जिसे दिए गए समीकरण के रिक्त स्थानों में क्रमिक रूप से रखने पर समीकरण पूरा हो जाएगा। 9 _ 3 _ 0 _ 8 _ 2 = 23",
+    q_en: "Q208. Select the combination of symbols which, when placed successively in the blanks of the given equation, will complete the equation. 9 _ 3 _ 0 _ 8 _ 2 = 23",
+    tag: "RRB NTPC 21/03/2021 (Evening)",
+    o_hi: [
+      "(a) ÷ + - ×",
+      "(b) × + - ÷",
+      "(c) - + ÷ ×",
+      "(d) + - × ÷"
+    ],
+    o_en: [
+      "(a) ÷ + - ×",
+      "(b) × + - ÷",
+      "(c) - + ÷ ×",
+      "(d) + - × ÷"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q209. यदि 'A' का अर्थ '+', 'B' का अर्थ '-', 'C' का अर्थ '×' और 'D' का अर्थ '÷' है, तो निम्नलिखित व्यंजक का मान क्या होगा ? 24 D 8 A 12 C 4 B 6",
+    q_en: "Q209. If A means '+', B means '-', C means '×', and D means '÷', what will be the value of the following expression? 24 D 8 A 12 C 4 B 6",
+    tag: "RRB NTPC 03/04/2021 (Evening)",
+    o_hi: [
+      "(a) 45",
+      "(b) 53",
+      "(c) 189",
+      "(d) 57"
+    ],
+    o_en: [
+      "(a) 45",
+      "(b) 53",
+      "(c) 189",
+      "(d) 57"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q210. यदि '>' का अर्थ '+', '<' का अर्थ '-', '+’ का अर्थ '÷', '^' का अर्थ '×', '-' का अर्थ '=', '=' का अर्थ '<' और '×' का अर्थ '>' है। तो कौन सा विकल्प सही है ?",
+    q_en: "Q210. If '>' means '+', '<' means '-', '+’ means '÷', '^' means '×', '-' means '=', '=' means '<' and '×' means '>', then which option is correct ?",
+    tag: "RRB NTPC 06/04/2021 (Morning)",
+    o_hi: [
+      "(a) 4 > 6 + 2 × 32 + 4 < 1",
+      "(b) 14 + 7 > 3 = 6 + 3 > 2",
+      "(c) 8 < 4 + 2 = 6 > 3",
+      "(d) 6 + 3 > 8 = 4 + 2 < 1"
+    ],
+    o_en: [
+      "(a) 4 > 6 + 2 × 32 + 4 < 1",
+      "(b) 14 + 7 > 3 = 6 + 3 > 2",
+      "(c) 8 < 4 + 2 = 6 > 3",
+      "(d) 6 + 3 > 8 = 4 + 2 < 1"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q211. यदि योग का अर्थ भाग है, घटाव का अर्थ गुणा है, गुणा का अर्थ है जोड़ना और भाग का अर्थ घटाना है, तो 13 - 2 × 4 ÷ 9 + 3 का मान क्या होगा?",
+    q_en: "Q211. If addition means division, subtraction means multiplication, multiplication means addition, and division means subtraction, what is the value of 13 - 2 × 4 ÷ 9 + 3?",
+    tag: "RRB NTPC 08/04/2021 (Morning)",
+    o_hi: [
+      "(a) 33",
+      "(b) 27",
+      "(c) 19",
+      "(d) 30"
+    ],
+    o_en: [
+      "(a) 33",
+      "(b) 27",
+      "(c) 19",
+      "(d) 30"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q212. यदि 'S' का अर्थ '×' है, 'B' का अर्थ '-' है, 'R' का अर्थ '+' है, और 'V' का अर्थ ' ÷ ' है, तो निम्नलिखित व्यंजक का मान क्या होगा ? 14 S 63 V 21 R 19 B 22",
+    q_en: "Q212. If S means '×', B means '-', R means '+', and V means '÷', what will be the value of the following expression? 14 S 63 V 21 R 19 B 22",
+    tag: "RRB NTPC 26/07/2021 (Morning)",
+    o_hi: [
+      "(a) 37",
+      "(b) 0",
+      "(c) 39",
+      "(d) 14"
+    ],
+    o_en: [
+      "(a) 37",
+      "(b) 0",
+      "(c) 39",
+      "(d) 14"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q213. निम्नलिखित समीकरण को सही बनाने के लिए किन दो चिह्नों को आपस में बदला जाना चाहिए ? 17 ÷ 65 × 13 + 11 - 10 = 86",
+    q_en: "Q213. Which two signs should be interchanged to make the following equation correct? 17 ÷ 65 × 13 + 11 - 10 = 86",
+    tag: "RRB NTPC 26/07/2021 (Evening)",
+    o_hi: [
+      "(a) - और ÷",
+      "(b) ÷ और ×",
+      "(c) + और -",
+      "(d) × और +"
+    ],
+    o_en: [
+      "(a) - and ÷",
+      "(b) ÷ and ×",
+      "(c) + and -",
+      "(d) × and +"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q214. यदि '-' का अर्थ 'भाग', '+' का अर्थ 'घटाव', '×' का अर्थ 'जोड़' और ‘ ÷ ’ का अर्थ 'गुणा है, तो 15 + 32 × 4 ÷ 8 − 2 . का मान ज्ञात कीजिए।",
+    q_en: "Q214. If '-' means division, '+' means subtraction, '×' means addition, and '÷' means multiplication, find the value of 15 + 32 × 4 ÷ 8 − 2.",
+    tag: "RRB NTPC 31/07/2021 (Evening)",
+    o_hi: [
+      "(a) 1",
+      "(b) -1",
+      "(c) 21",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) -1",
+      "(c) 21",
+      "(d) 15"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q215. निम्नलिखित प्रश्न में दो चिन्हों को आपस में बदलकर समीकरण को सही करें। 7 + 10 ÷ 5 - 5 = 10",
+    q_en: "Q215. In the following question, interchange two signs to make the equation correct. 7 + 10 ÷ 5 - 5 = 10",
+    tag: "RRB JE 22/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) ÷ और +",
+      "(b) ÷ और =",
+      "(c) + और -",
+      "(d) ÷ और -"
+    ],
+    o_en: [
+      "(a) ÷ and +",
+      "(b) ÷ and =",
+      "(c) + and -",
+      "(d) ÷ and -"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q216. यदि '+' का मतलब '÷' है, '-' का मतलब '+' है, '÷' का मतलब ' × ' है और ' × ' का मतलब '-' है, तो 32 + 4 - 8 × 4 ÷ 3 = ?",
+    q_en: "Q216. If '+' means '÷', '-' means '+', '÷' means '×', and '×' means '-', what is the value of 32 + 4 - 8 × 4 ÷ 3?",
+    tag: "RRB JE 22/05/2019 (Evening)",
+    o_hi: [
+      "(a) 7",
+      "(b) 4",
+      "(c) 5",
+      "(d) 6"
+    ],
+    o_en: [
+      "(a) 7",
+      "(b) 4",
+      "(c) 5",
+      "(d) 6"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q217. समीकरण को सही करने के लिए विकल्पों में से चिन्हों का सही क्रम चुनें। 18 – 5 × 50 = 40",
+    q_en: "Q217. Choose the correct sequence of signs from the options to make the equation correct. 18 – 5 × 50 = 40",
+    tag: "RRB JE 24/05/2019 (Evening)",
+    o_hi: [
+      "(a) –, × , =",
+      "(b) × , =, -",
+      "(c) =, -, ×",
+      "(d) × , -, ="
+    ],
+    o_en: [
+      "(a) –, × , =",
+      "(b) × , =, -",
+      "(c) =, -, ×",
+      "(d) × , -, ="
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q218. निम्नलिखित प्रश्न में, दो चिह्नों को परस्पर बदलकर समीकरण को संतुलित करें। 4 × 3 − 6 ÷ 2 + 7 = 8",
+    q_en: "Q218. In the following question, interchange two signs to balance the equation. 4 × 3 − 6 ÷ 2 + 7 = 8",
+    tag: "RRB JE 25/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) - और ×",
+      "(b) + और ÷",
+      "(c) + और -",
+      "(d) × और ÷"
+    ],
+    o_en: [
+      "(a) - and ×",
+      "(b) + and ÷",
+      "(c) + and -",
+      "(d) × and ÷"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q219. निम्नलिखित प्रश्न में से दो चिन्हों को आपस में बदलकर समीकरण को संतुलित करें। 5 + 6 ÷ 3 - 2 × 5 = 13",
+    q_en: "Q219. In the following question, interchange two signs to balance the equation. 5 + 6 ÷ 3 - 2 × 5 = 13",
+    tag: "RRB JE 28/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) + और ×",
+      "(b) ÷ और —",
+      "(c) ÷ और ×",
+      "(d) + और ÷"
+    ],
+    o_en: [
+      "(a) + and ×",
+      "(b) ÷ and —",
+      "(c) ÷ and ×",
+      "(d) + and ÷"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q220. यदि '+' का मतलब '-', '-' का मतलब '×', '×' का मतलब '÷' और '÷' का मतलब '+' है, तो 15 × 3 ÷ 15 + 5 - 2 = ?",
+    q_en: "Q220. If '+' means '-', '-' means '×', '×' means '÷', and '÷' means '+', what is the value of 15 × 3 ÷ 15 + 5 - 2?",
+    tag: "RRB JE 01/06/2019 (Morning)",
+    o_hi: [
+      "(a) 6",
+      "(b) 10",
+      "(c) 5",
+      "(d) 20"
+    ],
+    o_en: [
+      "(a) 6",
+      "(b) 10",
+      "(c) 5",
+      "(d) 20"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q221. किसी कूटभाषा में '+’ ‘ × ’ को निरूपित करता है, ‘ –’ ,‘+’ को निरूपित करता है, ' × ’, ' ÷ ' को निरूपित करता है और ‘ ÷ ’, ‘–’ को निरूपित करता है। उसी कूटभाषा में निम्नलिखित गणितीय व्यंजक का उत्तर ज्ञात कीजिए: 2 – 6 × 3 + 4 = ?",
+    q_en: "Q221. In a code language, '+' represents '×', '−' represents '+', '×' represents '÷', and '÷' represents '−'. In the same code language, find the answer to the following mathematical expression: 2 − 6 × 3 + 4 = ?",
+    tag: "ALP Tier II 21/01/2019 (Morning)",
+    o_hi: [
+      "(a) 12",
+      "(b) 10",
+      "(c) 2",
+      "(d) 8"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 10",
+      "(c) 2",
+      "(d) 8"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q222. निम्नलिखित समीकरण को गणितीय रूप से सही बनाने के लिए कौन से दो चिन्हों को आपस में बदला जाना चाहिए ? 12 – 3 + 8 × 2 ÷ 4 = 16",
+    q_en: "Q222. Which two signs should be interchanged to make the following equation mathematically correct? 12 − 3 + 8 × 2 ÷ 4 = 16",
+    tag: "ALP Tier II 21/01/2019 (Morning)",
+    o_hi: [
+      "(a) × और –",
+      "(b) ÷ और –",
+      "(c) + और –",
+      "(d) ÷ और ×"
+    ],
+    o_en: [
+      "(a) × and –",
+      "(b) ÷ and –",
+      "(c) + and –",
+      "(d) ÷ and ×"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q223. एक निश्चित कूटभाषा में '+', ‘ × ’ को निरूपित करता है, तो ‘ ÷ ’ '+' को निरूपित करता है, ‘-’ ‘ ÷ ’ को निरूपित करता है और ‘×’ ‘-’को निरूपित करता है, तो उसी कूटभाषा के आधार पर निम्नलिखित व्यंजक का मान ज्ञात कीजिए। 9 × 3 ÷ 4 + 10 - 8 =?",
+    q_en: "Q223. In a certain code language, '+' represents '×', '÷' represents '+', '-' represents '÷', and '×' represents '-'. Based on the same code language, find the value of the following expression: 9 × 3 ÷ 4 + 10 - 8 = ?",
+    tag: "ALP Tier II 21/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) 13",
+      "(b) 12",
+      "(c) 11",
+      "(d) 30"
+    ],
+    o_en: [
+      "(a) 13",
+      "(b) 12",
+      "(c) 11",
+      "(d) 30"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q224. दिए गए समीकरण को सही करने के लिए कौन से दो संकेत बदलने चाहिए ? 15 ÷ 3 + 2 × 10 - 6 = 14",
+    q_en: "Q224. Which two signs should be interchanged to make the given equation correct? 15 ÷ 3 + 2 × 10 - 6 = 14",
+    tag: "ALP Tier II 21/01/2019 (Evening )",
+    o_hi: [
+      "(a) + और ×",
+      "(b) + और -",
+      "(c) ÷ और -",
+      "(d) ÷ और +"
+    ],
+    o_en: [
+      "(a) + and ×",
+      "(b) + and -",
+      "(c) ÷ and -",
+      "(d) ÷ and +"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q225. एक निश्चित कोड भाषा में, '+' '×' का प्रतिनिधित्व करता है, ‘-’ ' + ' का प्रतिनिधित्व करता है ,' × ' '÷' का प्रतिनिधित्व करता है और ‘ ÷ ’ ‘-’ का प्रतिनिधित्व करता है , निम्नलिखित समीकरण के उत्तर की गणना करें। 8 + 3 × 4 - 2 = ?",
+    q_en: "Q225. In a certain code language, '+' represents '×', '-' represents '+', '×' represents '÷', and '÷' represents '-'. Calculate the answer to the following equation: 8 + 3 × 4 - 2 = ?",
+    tag: "ALP Tier II 21/01/2019 (Evening )",
+    o_hi: [
+      "(a) 12",
+      "(b) 8",
+      "(c) 6",
+      "(d) 10"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 8",
+      "(c) 6",
+      "(d) 10"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q226. यदि '+' '×' को निरूपित करता है, '÷' '+' को निरूपित करता है, '-' '÷' को निरूपित करता है और '×' '-' को निरूपित करता है, तो निम्नलिखित व्यंजक का मान ज्ञात कीजिए। 8 + 4 ÷ 15 - 3 × 1",
+    q_en: "Q226. If '+' represents '×', '÷' represents '+', '-' represents '÷', and '×' represents '-', find the value of the following expression: 8 + 4 ÷ 15 - 3 × 1.",
+    tag: "ALP Tier II 23/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) 14",
+      "(b) 17",
+      "(c) 36",
+      "(d) 10"
+    ],
+    o_en: [
+      "(a) 14",
+      "(b) 17",
+      "(c) 36",
+      "(d) 10"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q227. नीचे दिए गए समीकरण में एक ही तरफ किन दो अंकों को प्रतिस्थापित कर दिया जाए ताकि समीकरण का वामहस्त और दामहस्त दोनों बराबर हो जाए। 5 + 3 × 6 - 4 ÷ 2 = 4 × 3 - 10 ÷ 2 + 7",
+    q_en: "Q227. Which two digits on the same side of the equation should be interchanged so that the left-hand side and right-hand side become equal? 5 + 3 × 6 - 4 ÷ 2 = 4 × 3 - 10 ÷ 2 + 7",
+    tag: "RRB ALP 09/08/2018 (Evening)",
+    o_hi: [
+      "(a) 4 और 7",
+      "(b) 5 और 2",
+      "(c) 3 और 7",
+      "(d) 6 और 4"
+    ],
+    o_en: [
+      "(a) 4 and 7",
+      "(b) 5 and 2",
+      "(c) 3 and 7",
+      "(d) 6 and 4"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q228. यदि − का अर्थ ÷ है, ÷ का अर्थ + है, × का अर्थ − है एवं + का अर्थ × है, तो 35 - 7 × 14 ÷ 28 का मान निर्धारित करें।",
+    q_en: "Q228. If − means ÷, ÷ means +, × means −, and + means ×, determine the value of 35 - 7 × 14 ÷ 28.",
+    tag: "RRB ALP 13/08/2018 (Morning)",
+    o_hi: [
+      "(a) 20",
+      "(b) 15",
+      "(c) 24",
+      "(d) 19"
+    ],
+    o_en: [
+      "(a) 20",
+      "(b) 15",
+      "(c) 24",
+      "(d) 19"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q229. यदि × का अर्थ -, ÷ का अर्थ + , + का अर्थ ÷ और - का अर्थ × हो , तो 125 - 50 ÷ 10 + 20 × 4 का मान निम्न में से क्या होगा ?",
+    q_en: "Q229. If × means −, ÷ means +, + means ÷, and − means ×, what is the value of 125 - 50 ÷ 10 + 20 × 4?",
+    tag: "RRB ALP 20/08/2018 (Evening)",
+    o_hi: [
+      "(a) 360",
+      "(b) 6246.5",
+      "(c) 315",
+      "(d) 420"
+    ],
+    o_en: [
+      "(a) 360",
+      "(b) 6246.5",
+      "(c) 315",
+      "(d) 420"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q230. यदि + का अर्थ - है, - का अर्थ × , × का अर्थ ÷ है एवं ÷ का अर्थ + है, तो 16 + 4 - 3 ÷ 8 × 6 का मान क्या होगा ?",
+    q_en: "Q230. If + means −, − means ×, × means ÷, and ÷ means +, what is the value of 16 + 4 - 3 ÷ 8 × 6?",
+    tag: "RRB ALP 29/08/2018 (Evening)",
+    o_hi: [
+      "(a) 7",
+      "(b) 16/3",
+      "(c) 71/4",
+      "(d) 6"
+    ],
+    o_en: [
+      "(a) 7",
+      "(b) 16/3",
+      "(c) 71/4",
+      "(d) 6"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
