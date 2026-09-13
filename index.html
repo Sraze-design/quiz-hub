@@ -2251,6 +2251,24 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Dream To Destiny">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<style>
+#pencilInputCheck { display: none !important; visibility: hidden !important; }
+</style>
+<script>
+(function removePencilDiagnostic(){
+  function clean(){
+    document.querySelectorAll('#pencilInputCheck').forEach(node => node.remove());
+    document.querySelectorAll('button, pre').forEach(node => {
+      const text=(node.textContent || '').trim();
+      if (text === 'Pencil check' || text === 'Close check' || text.startsWith('PENCIL INPUT CHECK') || text.startsWith('PENCIL CHECK')) node.remove();
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clean, {once:true});
+  else clean();
+  new MutationObserver(clean).observe(document.documentElement, {childList:true, subtree:true});
+})();
+</script>
 </head>
 <body>
 <div id="pullToRefreshIndicator" aria-hidden="true"><span class="ptr-arrow">↓</span></div>
@@ -4318,7 +4336,7 @@ function showEmptyState() {
   // mid-word when shifting to the next letter. Now the pencil can write
   // anywhere outside the named control zones, without interruption.
   var EXCLUDED_ZONE_SELECTOR = [
-    '.floating-quiz-header', '#controls', '#pencilTools', '#pencilInputCheck',
+    '.floating-quiz-header', '#controls', '#pencilTools',
     '#exitConfirmModal', '#exitConfirmFade',
     '#pauseModal', '#pauseFade',
     '#submitConfirmModal', '#submitConfirmFade',
@@ -7367,12 +7385,14 @@ document.addEventListener('click',function(e){
 </script>
 
 <script>
+// Remove the old PWA worker/cache that can keep serving an outdated index.html.
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js')
-      .then(() => console.log('PWA Service Worker registered'))
-      .catch(err => console.error('PWA registration failed:', err));
-  });
+  navigator.serviceWorker.getRegistrations().then(registrations =>
+    Promise.all(registrations.map(registration => registration.unregister()))
+  ).catch(() => {});
+}
+if ('caches' in window) {
+  caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))).catch(() => {});
 }
 </script>
 
@@ -7935,7 +7955,7 @@ if ('serviceWorker' in navigator) {
   // is on, so a resting palm can't make WebKit cancel the pen's stream.
   function blockGesture(e){
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools, #pencilInputCheck')) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
     e.preventDefault();
   }
 
@@ -7943,7 +7963,7 @@ if ('serviceWorker' in navigator) {
   function blockAllTouch(e){
     routeStylusTouch(e);
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools, #pencilInputCheck')) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
       // Do not cancel a finger-first touch sequence; CSS disables gestures.
     e.stopPropagation();
   }
@@ -8183,50 +8203,7 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 
-<script>
-(function(){
-  const button=document.createElement('button');
-  button.id='pencilInputCheck';
-  button.textContent='Pencil check';
-  button.style.cssText='position:fixed;left:8px;top:64px;z-index:1000001;font:12px system-ui;padding:7px;border:1px solid #777;border-radius:6px;background:white;color:#111;touch-action:manipulation';
-  const panel=document.createElement('pre');
-  panel.style.cssText='display:none;position:fixed;left:8px;top:100px;z-index:1000001;max-width:90vw;white-space:pre-wrap;pointer-events:none;background:rgba(255,255,255,.97);color:#111;border:1px solid #777;border-radius:6px;padding:8px;font:11px/1.35 monospace';
-  document.body.append(button,panel);
-  let opened=true,rows=[],counts={},lastMove={};
-  panel.style.display='block';
-  panel.textContent='PENCIL CHECK v2 — Ready. Pehle finger rakhein, phir Pencil se likhein.';
-  button.textContent='Close check';
-  const base=performance.now();
-  function record(e){
-    if(!opened) return;
-    const pen=e.pointerType||'';
-    const kind=e.type+':'+pen;
-    counts[kind]=(counts[kind]||0)+1;
-    const now=performance.now();
-    if(e.type==='pointermove'||e.type==='pointerrawupdate'||e.type==='touchmove'){
-      if(now-(lastMove[kind]||0)<200)return;
-      lastMove[kind]=now;
-    }
-    let detail='';
-    if(e.changedTouches)detail=Array.from(e.changedTouches).map(t=>t.identifier+':'+(t.touchType||'unknown')).join(',');
-    else detail=pen+' id='+e.pointerId+' primary='+e.isPrimary+' buttons='+e.buttons;
-    rows.push(((now-base)/1000).toFixed(1)+' '+e.type+' '+detail);
-    rows=rows.slice(-12);
-  }
-  ['pointerdown','pointermove','pointerrawupdate','pointerup','pointercancel','touchstart','touchmove','touchend','touchcancel','gesturestart'].forEach(type=>window.addEventListener(type,record,{capture:true,passive:true}));
-  button.addEventListener('click',()=>{
-    opened=!opened;panel.style.display=opened?'block':'none';button.textContent=opened?'Close check':'Pencil check';
-    if(opened){rows=[];counts={};lastMove={};}
-  });
-  setInterval(()=>{
-    if(!opened)return;
-    const state=window.__pencilInputState||{};
-    panel.textContent='PENCIL INPUT CHECK v2\n'+navigator.userAgent+'\n'+
-      Object.entries(state).map(([name,get])=>name+' '+JSON.stringify(get())).join('\n')+'\n'+
-      'Counts '+JSON.stringify(counts)+'\n'+rows.join('\n');
-  },250);
-})();
-</script>
+
 
 </body>
 
