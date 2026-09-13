@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q1. आज बुधवार है। 75 दिन बाद सप्ताह का कौन सा दिन होगा?",
+    q_en: "Q1. Today is Wednesday. What day of the week will it be after 75 days?",
+    tag: "Group - D 24/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) शुक्रवार",
+      "(b) बुधवार",
+      "(c) मंगलवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Friday",
+      "(b) Wednesday",
+      "(c) Tuesday",
+      "(d) Monday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q2. निम्नलिखित में से कौन सा वर्ष लीप वर्ष है?",
+    q_en: "Q2. Which of the following years is a leap year?",
+    tag: "Group - D 24/08/2022 ( Evening)",
+    o_hi: [
+      "(a) 2006",
+      "(b) 2002",
+      "(c) 2018",
+      "(d) 2012"
+    ],
+    o_en: [
+      "(a) 2006",
+      "(b) 2002",
+      "(c) 2018",
+      "(d) 2012"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q3. राम को याद है कि वह शनिवार को अपने भाई से मिली थी, जो विशेष महीने के 20वें दिन के बाद था। यदि उस महीने का पहला दिन मंगलवार था, तो राम ने अपने भाई से किस तारीख को मुलाकात की थी?",
+    q_en: "Q3. Ram remembers that she met her brother on a Saturday after the 20th day of a particular month. If the first day of that month was Tuesday, on which date did Ram meet her brother?",
+    tag: "NTPC CBT II Level 4 (10/05/2022) Shift 1",
+    o_hi: [
+      "(a) 26th",
+      "(b) 23rd",
+      "(c) 25th",
+      "(d) 24th"
+    ],
+    o_en: [
+      "(a) 26th",
+      "(b) 23rd",
+      "(c) 25th",
+      "(d) 24th"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q4. एक प्रश्न दिया गया है, जिसके बाद 1 और 2 लेबल वाले दो कथन दिए गए हैं। पहचानें कि कौन सा कथन प्रश्न का उत्तर देने के लिए पर्याप्त / आवश्यक है। प्रश्न: दिए गए महीने की 17 तारीख को कौन सा दिन है? कथन: 1. माह का अंतिम दिन सोमवार है। 2. महीने का दूसरा शनिवार 12 तारीख को है।",
+    q_en: "Q4. A question is given followed by two statements labelled 1 and 2. Identify which statement is sufficient/necessary to answer the question. Question: What day is the 17th of the given month? Statements: 1. The last day of the month is Monday. 2. The second Saturday of the month falls on the 12th.",
+    tag: "NTPC CBT II Level 3 (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) न तो 1 और न ही 2 पर्याप्त है",
+      "(b) 1 और 2 दोनों आवश्यक हैं",
+      "(c) 2 अकेला पर्याप्त है जबकि 1 अकेला पर्याप्त नहीं है",
+      "(d) अकेले 1 पर्याप्त है जबकि 2 अकेला पर्याप्त नहीं है"
+    ],
+    o_en: [
+      "(a) Neither 1 nor 2 is sufficient",
+      "(b) Both 1 and 2 are necessary",
+      "(c) Statement 2 alone is sufficient, while statement 1 alone is not sufficient",
+      "(d) Statement 1 alone is sufficient, while statement 2 alone is not sufficient"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q5. रजत 26 फरवरी 2020, बुधवार को स्कूल में भर्ती हुआ था, और उसकी परीक्षा 26 मई 2020 को होनी निर्धारित थी। रविवार को छोड़कर, कोई अन्य अवकाश या छुट्टी नहीं थी। परीक्षा से पहले, वह कितने सक्रिय कार्य दिवसों के लिए स्कूल गया था?",
+    q_en: "Q5. Rajat joined school on Wednesday, 26 February 2020, and his examination was scheduled for 26 May 2020. There were no holidays or vacations other than Sundays. Before the examination, for how many working days did he attend school?",
+    tag: "NTPC CBT II Level 2 (16/06/2022) Shift 1",
+    o_hi: [
+      "(a) 74",
+      "(b) 76",
+      "(c) 72",
+      "(d) 77"
+    ],
+    o_en: [
+      "(a) 74",
+      "(b) 76",
+      "(c) 72",
+      "(d) 77"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q6. रामू और रवि की मुलाकात महीने की 5 तारीख को बाजार में हुई थी। रामू हर चौथे दिन बाजार जाता है और रवि हर पांचवें दिन बाजार जाता है। वे महीने के किस दिन फिर मिलेंगे?",
+    q_en: "Q6. Ramu and Ravi met at the market on the 5th day of the month. Ramu goes to the market every fourth day and Ravi every fifth day. On which day of the month will they meet again?",
+    tag: "NTPC CBT - I 19/01/2021 (Morning)",
+    o_hi: [
+      "(a) 20th दिन",
+      "(b) 14th दिन",
+      "(c) 10th दिन",
+      "(d) 25th दिन"
+    ],
+    o_en: [
+      "(a) 20th day",
+      "(b) 14th day",
+      "(c) 10th day",
+      "(d) 25th day"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q7. निम्नलिखित वर्ग से संबंधित विकल्पों में से दिन की पहचान कीजिये। 15-08, 02-10, 26-01",
+    q_en: "Q7. Identify the day from the options that belongs to the following class: 15-08, 02-10, 26-01.",
+    tag: "NTPC CBT - I 22/01/2021 (Morning)",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) मंगलवार",
+      "(c) सोमवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Tuesday",
+      "(c) Monday",
+      "(d) Sunday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q8. रवि हर महीने के पहले बुधवार को एक फिल्म देखने जाता हैं। पिछले महीने वह 6 अगस्त को फिल्म देखने गया था। आज वह एक फिल्म देखने के लिए जा रहे हैं। आज की तारीख क्या है?",
+    q_en: "Q8. Ravi goes to watch a movie on the first Wednesday of every month. Last month he went to watch a movie on 6 August. Today he is going to watch a movie. What is today's date?",
+    tag: "NTPC CBT - I 15/02/2021 (Evening)",
+    o_hi: [
+      "(a) 2 सितंबर",
+      "(b) 4 सितंबर",
+      "(c) 3 सितंबर",
+      "(d) 1 सितंबर"
+    ],
+    o_en: [
+      "(a) 2 September",
+      "(b) 4 September",
+      "(c) 3 September",
+      "(d) 1 September"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q9. फरवरी 2020 में किन तिथियों को रविवार होगा।",
+    q_en: "Q9. On which dates in February 2020 will it be Sunday?",
+    tag: "RRB JE 26/05/2019 (Morning)",
+    o_hi: [
+      "(a) फरवरी 5, 12, 19, 26",
+      "(b) फरवरी 2, 9, 16, 23",
+      "(c) फरवरी 8, 15, 22, 29",
+      "(d) फरवरी 3, 10, 17, 24"
+    ],
+    o_en: [
+      "(a) February 5, 12, 19, 26",
+      "(b) February 2, 9, 16, 23",
+      "(c) February 8, 15, 22, 29",
+      "(d) February 3, 10, 17, 24"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q10. 94 वर्ष में कितने विषम दिन होते हैं?",
+    q_en: "Q10. How many odd days are there in 94 years?",
+    tag: "RRB JE 27/06/2019 (Morning)",
+    o_hi: [
+      "(a) 4",
+      "(b) 5",
+      "(c) 3",
+      "(d) 0"
+    ],
+    o_en: [
+      "(a) 4",
+      "(b) 5",
+      "(c) 3",
+      "(d) 0"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q11. एक साल में कौन से दो महीनों में एक ही कैलेंडर होगा?",
+    q_en: "Q11. Which two months in a year will have the same calendar?",
+    tag: "RRB JE 27/06/2019 (Evening)",
+    o_hi: [
+      "(a) अप्रैल, जुलाई",
+      "(b) अक्टूबर, दिसंबर",
+      "(c) अप्रैल, नवंबर",
+      "(d) जून, अक्टूबर"
+    ],
+    o_en: [
+      "(a) April, July",
+      "(b) October, December",
+      "(c) April, November",
+      "(d) June, October"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q12. 26 जनवरी 1989 को सप्ताह का दिन क्या था?",
+    q_en: "Q12. What day of the week was 26 January 1989?",
+    tag: "ALP Tier II 21/01/2019 (Evening )",
+    o_hi: [
+      "(a) मंगलवार",
+      "(b) वृहस्पतिवार",
+      "(c) रविवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Tuesday",
+      "(b) Thursday",
+      "(c) Sunday",
+      "(d) Monday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q13. 3 जनवरी, 2018 को बुधवार था। निम्नलिखित में से कौन से वर्ष में फिर 3 जनवरी को बुधवार होगा?",
+    q_en: "Q13. 3 January 2018 was a Wednesday. In which of the following years will 3 January again be a Wednesday?",
+    tag: "RRB ALP Tier - I 10/08/2018 (Evening)",
+    o_hi: [
+      "(a) 2020",
+      "(b) 2024",
+      "(c) 2023",
+      "(d) 2022"
+    ],
+    o_en: [
+      "(a) 2020",
+      "(b) 2024",
+      "(c) 2023",
+      "(d) 2022"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q14. एजाज का जन्म 5 जनवरी 2015 को हुआ था जबकि फैज का जन्म उसके 553 दिनों के बाद हुआ। फैज़ का जन्म किस तारीख को हुआ था?",
+    q_en: "Q14. Ejaz was born on 5 January 2015, while Faiz was born 553 days after him. On what date was Faiz born?",
+    tag: "RRB ALP Tier - I 17/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 12 जुलाई 2016",
+      "(b) 11 जुलाई 2016",
+      "(c) 9 जुलाई 2016",
+      "(d) 10 जुलाई 2016"
+    ],
+    o_en: [
+      "(a) 12 July 2016",
+      "(b) 11 July 2016",
+      "(c) 9 July 2016",
+      "(d) 10 July 2016"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q15. अमित के बेटे का जन्म 10 जनवरी 2012 को हुआ था। उसका जन्म सप्ताह के किस दिन हुआ था?",
+    q_en: "Q15. Amit's son was born on 10 January 2012. On which day of the week was he born?",
+    tag: "Group - D 17/08/2022 (Evening)",
+    o_hi: [
+      "(a) मंगलवार",
+      "(b) बुधवार",
+      "(c) सोमवार",
+      "(d) गुरुवार"
+    ],
+    o_en: [
+      "(a) Tuesday",
+      "(b) Wednesday",
+      "(c) Monday",
+      "(d) Thursday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q16. 10 जनवरी 2006 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q16. What day of the week was 10 January 2006?",
+    tag: "Group - D 23/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) सोमवार",
+      "(c) मंगलवार",
+      "(d) गुरुवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Monday",
+      "(c) Tuesday",
+      "(d) Thursday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q17. यदि 10 अगस्त 2021 को मंगलवार था, तो 18 सितंबर 2021 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q17. If 10 August 2021 was a Tuesday, what day of the week was 18 September 2021?",
+    tag: "Group - D 24/08/2022 ( Morning)",
+    o_hi: [
+      "(a) रविवार",
+      "(b) शनिवार",
+      "(c) मंगलवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Sunday",
+      "(b) Saturday",
+      "(c) Tuesday",
+      "(d) Monday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q18. यदि 5 मार्च 2009 को गुरुवार है, तो 11 मार्च 2016 को सप्ताह का कौन-सा दिन होगा?",
+    q_en: "Q18. If 5 March 2009 is a Thursday, what day of the week will 11 March 2016 be?",
+    tag: "Group - D 13/09/2022 ( Evening )",
+    o_hi: [
+      "(a) गुरुवार",
+      "(b) बुधवार",
+      "(c) सोमवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Thursday",
+      "(b) Wednesday",
+      "(c) Monday",
+      "(d) Friday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q19. यदि 5 अगस्त 2012 को रविवार है, तो 17 सितंबर 2015 को सप्ताह का कौन-सा दिन होगा?",
+    q_en: "Q19. If 5 August 2012 is a Sunday, what day of the week will 17 September 2015 be?",
+    tag: "Group - D 14/09/2022 ( Morning )",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) गुरुवार",
+      "(c) सोमवार",
+      "(d) मंगलवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Thursday",
+      "(c) Monday",
+      "(d) Tuesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q20. यदि आज गुरुवार है, तो आज से 560 दिन बाद कौन-सा दिन होगा?",
+    q_en: "Q20. If today is Thursday, what day will it be 560 days from today?",
+    tag: "Group - D 27/09/2022 ( Afternoon)",
+    o_hi: [
+      "(a) गुरुवार",
+      "(b) शुक्रवार",
+      "(c) बुधवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Thursday",
+      "(b) Friday",
+      "(c) Wednesday",
+      "(d) Sunday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q21. यदि कल रविवार है, तो आज से 121 दिन बाद सप्ताह का कौन सा दिन होगा?",
+    q_en: "Q21. If tomorrow is Sunday, what day of the week will it be 121 days from today?",
+    tag: "Group - D 29/09/2022 ( Morning)",
+    o_hi: [
+      "(a) रविवार",
+      "(b) बुधवार",
+      "(c) मंगलवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Sunday",
+      "(b) Wednesday",
+      "(c) Tuesday",
+      "(d) Monday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q22. यदि आज सोमवार 22 जनवरी 2020 है, तो आज से 100 दिन बाद कौन-सी तिथि और दिन होगा?",
+    q_en: "Q22. If today is Monday, 22 January 2020, what date and day will it be 100 days from today?",
+    tag: "Group - D 06/10/2022 ( Morning)",
+    o_hi: [
+      "(a) 3 मई 2020, गुरुवार",
+      "(b) 1 मई 2020, बुधवार",
+      "(c) 1 मई 2020, सोमवार",
+      "(d) 2 मई 2020, बुधवार"
+    ],
+    o_en: [
+      "(a) 3 May 2020, Thursday",
+      "(b) 1 May 2020, Wednesday",
+      "(c) 1 May 2020, Monday",
+      "(d) 2 May 2020, Wednesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q23. यदि कल सोमवार था, तो आज से 89 दिन बाद सप्ताह का कौन सा दिन होगा?",
+    q_en: "Q23. If yesterday was Monday, what day of the week will it be 89 days from today?",
+    tag: "Group - D 11/10/2022 ( Evening )",
+    o_hi: [
+      "(a) रविवार",
+      "(b) शनिवार",
+      "(c) सोमवार",
+      "(d) मंगलवार"
+    ],
+    o_en: [
+      "(a) Sunday",
+      "(b) Saturday",
+      "(c) Monday",
+      "(d) Tuesday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q24. यदि पहली जनवरी 2017 को गुरुवार था, तो उस वर्ष के 31 मार्च को सप्ताह का कौन सा दिन था?",
+    q_en: "Q24. If 1 January 2017 was a Thursday, what day of the week was 31 March of that year?",
+    tag: "Level 6 (09/05/2022) Shift 1",
+    o_hi: [
+      "(a) शुक्रवार",
+      "(b) मंगलवार",
+      "(c) गुरुवार",
+      "(d) बुधवार"
+    ],
+    o_en: [
+      "(a) Friday",
+      "(b) Tuesday",
+      "(c) Thursday",
+      "(d) Wednesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q25. शमिता का जन्मदिन 15 मार्च 2020 को था, उस दिन रविवार था। यदि उनके पति का जन्मदिन 31 मई 2020 को होता, तो वह किस दिन पड़ता?",
+    q_en: "Q25. Shamita's birthday was on 15 March 2020, which was a Sunday. If her husband's birthday was on 31 May 2020, on which day would it fall?",
+    tag: "Level 6 (09/05/2022) Shift 1",
+    o_hi: [
+      "(a) शुक्रवार",
+      "(b) रविवार",
+      "(c) बुधवार",
+      "(d) मंगलवार"
+    ],
+    o_en: [
+      "(a) Friday",
+      "(b) Sunday",
+      "(c) Wednesday",
+      "(d) Tuesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q26. 01 जनवरी 2012 को बेंकट का जन्मदिन रविवार था। उनका अगला जन्मदिन किस दिन होगा?",
+    q_en: "Q26. On 1 January 2012, Venkat's birthday was on a Sunday. On which day will his next birthday fall?",
+    tag: "Level 6 (09/05/2022) Shift 2",
+    o_hi: [
+      "(a) सोमवार",
+      "(b) मंगलवार",
+      "(c) शनिवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Monday",
+      "(b) Tuesday",
+      "(c) Saturday",
+      "(d) Sunday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q27. 16 अप्रैल 2021 को अमित का जन्मदिन शनिवार को था। 3 जून 2021 को उनकी पत्नी का जन्मदिन किस दिन था?",
+    q_en: "Q27. Amit's birthday was on Saturday, 16 April 2021. On which day was his wife's birthday on 3 June 2021?",
+    tag: "Level 4 (10/05/2022) Shift 1",
+    o_hi: [
+      "(a) मंगलवार",
+      "(b) शुक्रवार",
+      "(c) सोमवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Tuesday",
+      "(b) Friday",
+      "(c) Monday",
+      "(d) Sunday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q28. 1 फरवरी 2007 को गुरुवार था। 2 फरवरी 2006 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q28. 1 February 2007 was a Thursday. What day of the week was 2 February 2006?",
+    tag: "Level 5 (12/06/2022) Shift 1",
+    o_hi: [
+      "(a) शनिवार",
+      "(b) गुरुवार",
+      "(c) शुक्रवार",
+      "(d) बुधवार"
+    ],
+    o_en: [
+      "(a) Saturday",
+      "(b) Thursday",
+      "(c) Friday",
+      "(d) Wednesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q29. अमित का जन्मदिन 16 अप्रैल 2020 को गुरुवार के दिन था। उसकी पत्नी का जन्मदिन, जो 2 जून 2020 को था, कौन सा दिन था?",
+    q_en: "Q29. Amit's birthday was on Thursday, 16 April 2020. On which day was his wife's birthday, which was on 2 June 2020?",
+    tag: "Level 5 (12/06/2022) Shift 2",
+    o_hi: [
+      "(a) रविवार",
+      "(b) मंगलवार",
+      "(c) बुधवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Sunday",
+      "(b) Tuesday",
+      "(c) Wednesday",
+      "(d) Friday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q30. एक व्यक्ति कहता है कि किसी महीने का 26वां दिन शुक्रवार है। उसी महीने का 5वां दिन इनमें से कौन सा था?",
+    q_en: "Q30. A person says that the 26th day of a month is Friday. Which of the following was the 5th day of the same month?",
+    tag: "Level 2 (13/06/2022) Shift 1",
+    o_hi: [
+      "(a) गुरुवार",
+      "(b) मंगलवार",
+      "(c) शनिवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Thursday",
+      "(b) Tuesday",
+      "(c) Saturday",
+      "(d) Friday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q31. 10 मार्च 2020 को अर्पित का जन्मदिन मंगलवार को था। 25 मई 2020 को उनकी पत्नी का जन्मदिन किस दिन था?",
+    q_en: "Q31. Arpit's birthday was on Tuesday, 10 March 2020. On which day was his wife's birthday on 25 May 2020?",
+    tag: "Level 2 (13/06/2022) Shift 2",
+    o_hi: [
+      "(a) मंगलवार",
+      "(b) बुधवार",
+      "(c) रविवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Tuesday",
+      "(b) Wednesday",
+      "(c) Sunday",
+      "(d) Monday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q32. दोनों दिनों को मिलाकर 20 फरवरी 2020 से 15 अप्रैल 2020 तक कुल कितने दिन होंगे?",
+    q_en: "Q32. Including both days, how many days are there in total from 20 February 2020 to 15 April 2020?",
+    tag: "Level 3 (14/06/2022) Shift 1",
+    o_hi: [
+      "(a) 55",
+      "(b) 54",
+      "(c) 56",
+      "(d) 57"
+    ],
+    o_en: [
+      "(a) 55",
+      "(b) 54",
+      "(c) 56",
+      "(d) 57"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q33. यह मानते हुए कि 8 मार्च 2013 को बुधवार था, 8 मार्च 2014 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q33. Assuming that 8 March 2013 was a Wednesday, what day of the week was 8 March 2014?",
+    tag: "Level 3 (14/06/2022) Shift 1",
+    o_hi: [
+      "(a) मंगलवार",
+      "(b) सोमवार",
+      "(c) गुरुवार",
+      "(d) बुधवार"
+    ],
+    o_en: [
+      "(a) Tuesday",
+      "(b) Monday",
+      "(c) Thursday",
+      "(d) Wednesday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q34. यह मानते हुए कि 13 जून 2005 को शुक्रवार था, 5 जुलाई 2005 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q34. Assuming that 13 June 2005 was a Friday, what day of the week was 5 July 2005?",
+    tag: "Level 3 (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) रविवार",
+      "(b) गुरुवार",
+      "(c) मंगलवार",
+      "(d) शनिवार"
+    ],
+    o_en: [
+      "(a) Sunday",
+      "(b) Thursday",
+      "(c) Tuesday",
+      "(d) Saturday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q35. अजीत का जन्म सोमवार, 24 मार्च 1980 को हुआ था। वर्ष 2021 में जब उसने अपना जन्मदिन मनाया तो वह सप्ताह का कौन सा दिन था?",
+    q_en: "Q35. Ajit was born on Monday, 24 March 1980. In 2021, when he celebrated his birthday, what day of the week was it?",
+    tag: "Level 3 (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) सोमवार",
+      "(b) रविवार",
+      "(c) बुधवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Monday",
+      "(b) Sunday",
+      "(c) Wednesday",
+      "(d) Friday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q36. 10 अप्रैल 2020 से 25 जुलाई 2020 तक, दोनों दिनों को मिलाकर, दिनों की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q36. Find the total number of days from 10 April 2020 to 25 July 2020, including both days.",
+    tag: "Level 5 (15/06/2022) Shift 1",
+    o_hi: [
+      "(a) 107",
+      "(b) 108",
+      "(c) 106",
+      "(d) 105"
+    ],
+    o_en: [
+      "(a) 107",
+      "(b) 108",
+      "(c) 106",
+      "(d) 105"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q37. आमिश की वर्षगांठ 25 फरवरी 2020 को मंगलवार के दिन थी। उसके भाई की वर्षगांठ, जो 13 मई 2020 को थी, कौन सा दिन था?",
+    q_en: "Q37. Aamish's anniversary was on Tuesday, 25 February 2020. On which day was his brother's anniversary, which was on 13 May 2020?",
+    tag: "Level 5 (15/06/2022) Shift 1",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) मंगलवार",
+      "(c) सोमवार",
+      "(d) गुरुवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Tuesday",
+      "(c) Monday",
+      "(d) Thursday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q38. यदि वर्ष 2005 में राहुल का जन्मदिन बुधवार को था, तो उसके अगले जन्मदिन पर सप्ताह का कौन सा दिन रहा होगा?",
+    q_en: "Q38. If Rahul's birthday in the year 2005 was on a Wednesday, what day of the week would his next birthday have been?",
+    tag: "Level 5 (15/06/2022) Shift 2",
+    o_hi: [
+      "(a) शनिवार",
+      "(b) शुक्रवार",
+      "(c) गुरुवार",
+      "(d) मंगलवार"
+    ],
+    o_en: [
+      "(a) Saturday",
+      "(b) Friday",
+      "(c) Thursday",
+      "(d) Tuesday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q39. यह मानते हुए कि 5 अगस्त 1994 को बुधवार है तो 2 सितंबर 1995 को सप्ताह का कौन सा दिन होगा?",
+    q_en: "Q39. Assuming that 5 August 1994 is a Wednesday, what day of the week will 2 September 1995 be?",
+    tag: "Level 5 (15/06/2022) Shift 3",
+    o_hi: [
+      "(a) सोमवार",
+      "(b) बुधवार",
+      "(c) मंगलवार",
+      "(d) गुरुवार"
+    ],
+    o_en: [
+      "(a) Monday",
+      "(b) Wednesday",
+      "(c) Tuesday",
+      "(d) Thursday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q40. राहुल का जन्म 10 जून 1992 को हुआ था। उनका जन्म सप्ताह के किस दिन हुआ था?",
+    q_en: "Q40. Rahul was born on 10 June 1992. On which day of the week was he born?",
+    tag: "Level 5 (15/06/2022) Shift 3",
+    o_hi: [
+      "(a) गुरुवार",
+      "(b) मंगलवार",
+      "(c) शुक्रवार",
+      "(d) बुधवार"
+    ],
+    o_en: [
+      "(a) Thursday",
+      "(b) Tuesday",
+      "(c) Friday",
+      "(d) Wednesday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q41. यदि 19 जुलाई 2019 को शुक्रवार था, तो 21 सितंबर 2019 को कौन सा दिन था?",
+    q_en: "Q41. If 19 July 2019 was a Friday, what day was 21 September 2019?",
+    tag: "Level 2 (16/06/2022) Shift 2",
+    o_hi: [
+      "(a) गुरुवार",
+      "(b) मंगलवार",
+      "(c) बुधवार",
+      "(d) शनिवार"
+    ],
+    o_en: [
+      "(a) Thursday",
+      "(b) Tuesday",
+      "(c) Wednesday",
+      "(d) Saturday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q42. यदि 3 फरवरी 2015 को मंगलवार था, तो 6 जून 2015 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q42. If 3 February 2015 was a Tuesday, what day of the week was 6 June 2015?",
+    tag: "Level 2 (16/06/2022) Shift 2",
+    o_hi: [
+      "(a) सोमवार",
+      "(b) मंगलवार",
+      "(c) शुक्रवार",
+      "(d) शनिवार"
+    ],
+    o_en: [
+      "(a) Monday",
+      "(b) Tuesday",
+      "(c) Friday",
+      "(d) Saturday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q43. यदि किसी विशिष्ट वर्ष में 12 अगस्त को सोमवार था, तो उसी वर्ष में 26 सितंबर को कौन सा दिन होगा?",
+    q_en: "Q43. If 12 August was a Monday in a particular year, what day will 26 September be in the same year?",
+    tag: "Level 2 (16/06/2022) Shift 3",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) मंगलवार",
+      "(c) गुरुवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Tuesday",
+      "(c) Thursday",
+      "(d) Friday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q44. यदि 12 जुलाई 1965 को सोमवार था, तो 14 अगस्त 1966 को सप्ताह का कौन सा दिन था?",
+    q_en: "Q44. If 12 July 1965 was a Monday, what day of the week was 14 August 1966?",
+    tag: "Level 3 (17/06/2022) Shift 1",
+    o_hi: [
+      "(a) मंगलवार",
+      "(b) रविवार",
+      "(c) बुधवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Tuesday",
+      "(b) Sunday",
+      "(c) Wednesday",
+      "(d) Monday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q45. यदि 1 अगस्त 2021 को रविवार था, तो 1 नवंबर 2021 को कौन सा दिन था?",
+    q_en: "Q45. If 1 August 2021 was a Sunday, what day was 1 November 2021?",
+    tag: "Level 3 (17/06/2022) Shift 1",
+    o_hi: [
+      "(a) रविवार",
+      "(b) सोमवार",
+      "(c) मंगलवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Sunday",
+      "(b) Monday",
+      "(c) Tuesday",
+      "(d) Friday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q46. यदि 21 मार्च 2021 को रविवार था, तो 12 जनवरी 2022 को कौन सा दिन होगा?",
+    q_en: "Q46. If 21 March 2021 was a Sunday, what day will 12 January 2022 be?",
+    tag: "Level 3 (17/06/2022) Shift 2",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) सोमवार",
+      "(c) रविवार",
+      "(d) शुक्रवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Monday",
+      "(c) Sunday",
+      "(d) Friday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q47. यदि 12 अक्टूबर 1997 को शनिवार था, तो वर्ष 2008 में उसी तिथि को कौन सा दिन था?",
+    q_en: "Q47. If 12 October 1997 was a Saturday, what day was the same date in the year 2008?",
+    tag: "RRB NTPC 30/12/2020 (Evening)",
+    o_hi: [
+      "(a) शनिवार",
+      "(b) गुरूवार",
+      "(c) सोमवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Saturday",
+      "(b) Thursday",
+      "(c) Monday",
+      "(d) Sunday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q48. मोना 17 फरवरी 2012 से 27 अप्रैल 2012 तक 'X' स्थान पर रहती थी। यदि दोनों दिनों को शामिल कर लिया जाए, तो वह स्थान \"X\" पर कितने दिनों तक रह रही थी?",
+    q_en: "Q48. Mona stayed at place 'X' from 17 February 2012 to 27 April 2012. If both days are included, for how many days did she stay at place 'X'?",
+    tag: "RRB NTPC 30/01/2021 (Morning)",
+    o_hi: [
+      "(a) 69",
+      "(b) 68",
+      "(c) 71",
+      "(d) 70"
+    ],
+    o_en: [
+      "(a) 69",
+      "(b) 68",
+      "(c) 71",
+      "(d) 70"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q49. यदि 15 मार्च 2015 को सोमवार था, तो 10 जुलाई 2015 को कौन सा दिन होगा?",
+    q_en: "Q49. If 15 March 2015 was a Monday, what day will 10 July 2015 be?",
+    tag: "RRB NTPC 13/03/2021 (Evening)",
+    o_hi: [
+      "(a) सोमवार",
+      "(b) शुक्रवार",
+      "(c) शनिवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Monday",
+      "(b) Friday",
+      "(c) Saturday",
+      "(d) Sunday"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q50. 2018 में 4 मार्च को बुधवार मानें। 2019 में 7 मार्च को सप्ताह का कौन सा दिन होगा?",
+    q_en: "Q50. Assume that 4 March 2018 was a Wednesday. What day of the week will 7 March 2019 be?",
+    tag: "RRB NTPC 15/03/2021 (Morning)",
+    o_hi: [
+      "(a) बुधवार",
+      "(b) मंगलवार",
+      "(c) सोमवार",
+      "(d) रविवार"
+    ],
+    o_en: [
+      "(a) Wednesday",
+      "(b) Tuesday",
+      "(c) Monday",
+      "(d) Sunday"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
