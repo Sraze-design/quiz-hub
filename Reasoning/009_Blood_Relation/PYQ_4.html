@@ -1,0 +1,1005 @@
+const Q171_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q151. रोहन, सुमित का भाई है। सुमित ,सुजाता से शादी करना चाहता है। सुजाता, हरिचंद की पुत्री है। रोहन, सुनीता को तलाक देना चाहता है। सुजाता और सुनीता बहनें हैं। हरिचंद, रोहन से किस प्रकार संबंधित है ?",
+    q_en: "Q151. Rohan is Sumit's brother. Sumit wants to marry Sujata. Sujata is Harichand's daughter. Rohan wants to divorce Sunita. Sujata and Sunita are sisters. How is Harichand related to Rohan?",
+    tag: "RRB NTPC 16/01/2021 (Morning)",
+    o_hi: [
+      "(a) ससुर",
+      "(b) पत्नी के चाचा",
+      "(c) पिता",
+      "(d) भाई के ससुर"
+    ],
+    o_en: [
+      "(a) father-in-law",
+      "(b) wife's paternal uncle",
+      "(c) father",
+      "(d) brother's father-in-law"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. एक आदमी की तस्वीर की ओर इशारा करते हुए, एक महिला ने कहा, \"वह आदमी मेरे पति के इकलौते भाई का बेटा है\"। तस्वीर में दिख रहे आदमी से महिला का क्या संबंध है ?",
+    q_en: "Q152. Pointing to a photograph of a man, a woman said, 'That man is the son of my husband's only brother.' How is the woman related to the man in the photograph?",
+    tag: "RRB NTPC 20/01/2021 (Evening)",
+    o_hi: [
+      "(a) मामी",
+      "(b) मां",
+      "(c) बहन",
+      "(d) चाची"
+    ],
+    o_en: [
+      "(a) maternal uncle's wife",
+      "(b) mother",
+      "(c) sister",
+      "(d) paternal aunt"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. पार्क में घूम रही एक महिला को देखकर एक आदमी ने कहा, \"यह महिला मेरे पिता की बहन की बेटी है\"। महिला का आदमी से क्या संबंध है ?",
+    q_en: "Q153. Seeing a woman walking in a park, a man said, 'This woman is the daughter of my father's sister.' How is the woman related to the man?",
+    tag: "RRB NTPC 22/01/2021 (Evening)",
+    o_hi: [
+      "(a) चाची",
+      "(b) बहन",
+      "(c) भांजी",
+      "(d) फुफेरी बहन"
+    ],
+    o_en: [
+      "(a) paternal aunt",
+      "(b) sister",
+      "(c) niece",
+      "(d) female cousin"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. एक तस्वीर की ओर इशारा करते हुए जॉन ने कहा, \"वह मेरी मां की बहन के पति की इकलौती पोती है। तस्वीर में दिख रहा व्यक्ति जॉन से किस प्रकार संबंधित है?",
+    q_en: "Q154. Pointing to a photograph, John said, 'She is the only granddaughter of my mother's sister's husband.' How is the person in the photograph related to John?",
+    tag: "RRB NTPC 22/01/2021 (Evening)",
+    o_hi: [
+      "(a) पोती",
+      "(b) बहन",
+      "(c) भतीजी",
+      "(d) पुत्री"
+    ],
+    o_en: [
+      "(a) granddaughter",
+      "(b) sister",
+      "(c) niece",
+      "(d) daughter"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. यदि A + B का अर्थ है कि A, B का पति है, A / B का अर्थ है कि A, B की बहन है और A * B का अर्थ है कि A, B का पुत्र है, तो निम्नलिखित में से कौन दर्शाता है कि M, N की पुत्री है?",
+    q_en: "Q155. If A + B means 'A is B's husband', A / B means 'A is B's sister', and A * B means 'A is B's son', which of the following represents that M is N's daughter?",
+    tag: "RRB NTPC 28/01/2021 (Morning)",
+    o_hi: [
+      "(a) P * M + O / N",
+      "(b) M + O * N",
+      "(c) M / P * N",
+      "(d) M * N / O"
+    ],
+    o_en: [
+      "(a) P * M + O / N",
+      "(b) M + O * N",
+      "(c) M / P * N",
+      "(d) M * N / O"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. एक तस्वीर की ओर इशारा करते हुए रजत ने कहा, \"वह मेरी सास की इकलौती बेटी का ्र्र्र बेटा है।\" तस्वीर में दिख रहा व्यक्ति रजत से किस प्रकार संबंधित है?",
+    q_en: "Q156. Pointing to a photograph, Rajat said, 'He is the son of my mother-in-law's only daughter.' How is the person in the photograph related to Rajat?",
+    tag: "RRB NTPC 30/01/2021 (Evening)",
+    o_hi: [
+      "(a) बहन का बेटा",
+      "(b) पिता का भाई",
+      "(c) भाई",
+      "(d) पुत्र"
+    ],
+    o_en: [
+      "(a) sister's son",
+      "(b) father's brother",
+      "(c) brother",
+      "(d) son"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. ''R $ S' का अर्थ है कि R, S का भाई है। R@S' का अर्थ है कि R, S की पत्नी है। R # S' का अर्थ है कि R, S की पुत्री है। R > S' का अर्थ है कि R, S का पिता है। उपरोक्त के आधार पर, कौन सा विकल्प दर्शाता है कि D, A का ससुर है?",
+    q_en: "Q157. 'R $ S' means R is S's brother. 'R @ S' means R is S's wife. 'R # S' means R is S's daughter. 'R > S' means R is S's father. Based on the above, which option shows that D is A's father-in-law?",
+    tag: "RRB NTPC 01/02/2021 (Morning)",
+    o_hi: [
+      "(a) A @ E $ B > C # D",
+      "(b) A @ B $ E > C # D",
+      "(c) A @ B $ C # D > E",
+      "(d) A @ B $ C # E >D"
+    ],
+    o_en: [
+      "(a) A @ E $ B > C # D",
+      "(b) A @ B $ E > C # D",
+      "(c) A @ B $ C # D > E",
+      "(d) A @ B $ C # E >D"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. Mo > No का अर्थ Mo, No की पुत्री है। Mo # No’ का अर्थ Mo, No का पिता है। Mo $ No का अर्थ Mo, No की माता है। Mo / No’ का अर्थ Mo, No का भाई है। उपरोक्त के आधार पर, दिए गए व्यंजक में Po, Ko से किस प्रकार संबंधित है ? Po $ Qo # Ro / To > Ko",
+    q_en: "Q158. Mo > No means Mo is No's daughter. Mo # No means Mo is No's father. Mo $ No means Mo is No's mother. Mo / No means Mo is No's brother. Based on the above, in the expression Po $ Qo # Ro / To > Ko, how is Po related to Ko?",
+    tag: "RRB NTPC 01/02/2021 (Evening)",
+    o_hi: [
+      "(a) पति की बहन",
+      "(b) पुत्र की पत्नी",
+      "(c) पिता की बहन",
+      "(d) पति की माता"
+    ],
+    o_en: [
+      "(a) husband's sister",
+      "(b) son's wife",
+      "(c) father's sister",
+      "(d) husband's mother"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. A, B, C, D, E, F और G में से A, B की माता है, B, C की बहन का पुत्र है। C, D का इकलौता पुत्र है, D, B की नानी है और E, F का दामाद है। यदि F की केवल एक पुत्री है और वह D का पति है, तो E, A से किस प्रकार संबंधित है?",
+    q_en: "Q159. Among A, B, C, D, E, F and G, A is B's mother; B is the son of C's sister. C is D's only son; D is B's maternal grandmother; and E is F's son-in-law. If F has only one daughter and F is D's husband, how is E related to A?",
+    tag: "RRB NTPC 02/02/2021 (Morning)",
+    o_hi: [
+      "(a) बेटा",
+      "(b) पति",
+      "(c) मां का भाई",
+      "(d) बहन का पति"
+    ],
+    o_en: [
+      "(a) son",
+      "(b) husband",
+      "(c) mother's brother",
+      "(d) sister's husband"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. अविनाश हर्ष का मित्र है। एक बूढ़े आदमी की ओर इशारा करते हुए अविनाश ने हर्ष से पूछा, \"वह कौन है\"? हर्ष ने उत्तर दिया, \"उसका पुत्र मेरे पुत्र का चाचा है\"। बूढ़े आदमी का हर्ष से क्या संबंध है?",
+    q_en: "Q160. Avinash is Harsh's friend. Pointing to an old man, Avinash asked Harsh, 'Who is he?' Harsh replied, 'His son is my son's uncle.' How is the old man related to Harsh?",
+    tag: "RRB NTPC 03/02/2021 (Morning)",
+    o_hi: [
+      "(a) पिता",
+      "(b) पिता का पिता",
+      "(c) भाई",
+      "(d) पिता का भाई"
+    ],
+    o_en: [
+      "(a) father",
+      "(b) father's father",
+      "(c) brother",
+      "(d) father's brother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. एक महिला की ओर इशारा करते हुए, रमन ने कहा, \"उसके इकलौते भाई का बेटा मेरी पत्नी का भाई है\"। वह महिला रमन से किस प्रकार संबंधित है?",
+    q_en: "Q161. Pointing to a woman, Raman said, 'Her only brother's son is my wife's brother.' How is that woman related to Raman?",
+    tag: "RRB NTPC 04/02/2021 (Morning)",
+    o_hi: [
+      "(a) पत्नी की माँ",
+      "(b) पत्नी के पिता की बहन",
+      "(c) पत्नी के भाई की पत्नी",
+      "(d) पिता की बहन"
+    ],
+    o_en: [
+      "(a) wife's mother",
+      "(b) wife's father's sister",
+      "(c) wife's brother's wife",
+      "(d) father's sister"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. सोहन ने राजू से कहा, \"कल मैं तुम्हारी माँ के पिता की इकलौती पोती सुनीता से मिला,\" राजू ने कहा कि उसकी माँ अपने माता-पिता की इकलौती संतान थी। राजू ,सुनीता से किस प्रकार संबंधित है?",
+    q_en: "Q162. Sohan said to Raju, 'Yesterday I met Sunita, the only granddaughter of your mother's father.' Raju said that his mother was the only child of her parents. How is Raju related to Sunita?",
+    tag: "RRB NTPC 04/02/2021 (Evening)",
+    o_hi: [
+      "(a) भतीजा",
+      "(b) पिता",
+      "(c) बहन",
+      "(d) भाई"
+    ],
+    o_en: [
+      "(a) nephew",
+      "(b) father",
+      "(c) sister",
+      "(d) brother"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. अबी और जैक क्रमशः पिता और पुत्र हैं। जैक पॉलिनो का पोता है। सबरीना और मार्था क्रमशः बेटी और माँ हैं, सबरीना अगाथा की पोती हैं। यदि अगाथा और पॉलिनो विवाहित हैं और उनका एक ही बच्चा है, तो जैक ,सबरीना से किस प्रकार संबंधित है?",
+    q_en: "Q163. Abhi and Jack are father and son respectively. Jack is Paulino's grandson. Sabrina and Martha are daughter and mother respectively, and Sabrina is Agatha's granddaughter. If Agatha and Paulino are married and have only one child, how is Jack related to Sabrina?",
+    tag: "RRB NTPC 08/02/2021 (Evening)",
+    o_hi: [
+      "(a) पति",
+      "(b) भाई",
+      "(c) पिता",
+      "(d) चाचा"
+    ],
+    o_en: [
+      "(a) husband",
+      "(b) brother",
+      "(c) father",
+      "(d) paternal uncle"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. एक महिला का परिचय देते हुए, रमन ने कहा, \"वह मेरे दादा की बहू की बहू है\"। निम्नलिखित में से किस तरीके से महिला रमन से संबंधित है?",
+    q_en: "Q164. Introducing a woman, Raman said, 'She is the daughter-in-law of my grandfather's daughter-in-law.' How is the woman related to Raman?",
+    tag: "RRB NTPC 09/02/2021 (Evening)",
+    o_hi: [
+      "(a) बुआ",
+      "(b) बहन",
+      "(c) भाई की पत्नी",
+      "(d) माता"
+    ],
+    o_en: [
+      "(a) paternal aunt",
+      "(b) sister",
+      "(c) brother's wife",
+      "(d) mother"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. X ने O से कहा, \"मेरे दादाजी के केवल तीन बेटे हैं, और मेरा केवल एक भाई है और कोई बेटी नहीं है। आप मेरे चाचा के भाई हैं। ‘O’ ने ‘X’ से कहा,\" हालांकि मैं अविवाहित हूं, मेरी केवल दो भतीजी हैं V और P, और केवल दो भतीजे हैं, जिनमें से एक R है। R, X से किस प्रकार संबंधित है?",
+    q_en: "Q165. X said to O, 'My grandfather has only three sons, and I have only one brother and no sister. You are my uncle's brother.' O said to X, 'Although I am unmarried, I have only two nieces, V and P, and only two nephews, one of whom is R.' How is R related to X?",
+    tag: "RRB NTPC 10/02/2021 (Morning)",
+    o_hi: [
+      "(a) बहन",
+      "(b) भाई",
+      "(c) भतीजा",
+      "(d) बेटा"
+    ],
+    o_en: [
+      "(a) sister",
+      "(b) brother",
+      "(c) nephew",
+      "(d) son"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. W और X भाई हैं। S, X और Q का पुत्र है। R, U से विवाहित है और Q का भाई है। T और V, U की संतान हैं। P, Q की माता है और Y, X की माता है। T, S से किस प्रकार संबंधित है? ?",
+    q_en: "Q166. W and X are brothers. S is the son of X and Q. R is married to U and is Q's brother. T and V are U's children. P is Q's mother and Y is X's mother. How is T related to S?",
+    tag: "RRB NTPC 16/02/2021 (Evening)",
+    o_hi: [
+      "(a) चाचा",
+      "(b) माँ के भाई का बेटा",
+      "(c) मामा",
+      "(d) पिता के भाई का बेटा"
+    ],
+    o_en: [
+      "(a) paternal uncle",
+      "(b) mother's brother's son",
+      "(c) maternal uncle",
+      "(d) father's brother's son"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. यदि L + M का अर्थ है 'L, M का पुत्र है', L - M का अर्थ है 'L, M का पति है', L × M का अर्थ है 'L, M का भाई है' और L ÷ M का अर्थ है L, M की माता है, A × B ÷ C का क्या अर्थ है?",
+    q_en: "Q167. If L + M means 'L is M's son', L - M means 'L is M's husband', L × M means 'L is M's brother', and L ÷ M means 'L is M's mother', what does A × B ÷ C mean?",
+    tag: "RRB NTPC 17/02/2021 (Morning)",
+    o_hi: [
+      "(a) A, C का मामा है।",
+      "(b) A, C का भतीजा है।",
+      "(c) A, C की माता है।",
+      "(d) A, C का पिता है।"
+    ],
+    o_en: [
+      "(a) A is C's maternal uncle.",
+      "(b) A is C's nephew.",
+      "(c) A is C's mother.",
+      "(d) A is C's father."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. सुल्तान ने रमेश से कहा कि ‘’मैं तुम्हारे भाई की पत्नी के इकलौते भाई / बहन के इकलौते भांजे का दादा हूँ’’ I रमेश का सुल्तान से क्या सम्बन्ध हो सकता है ?",
+    q_en: "Q168. Sultan said to Ramesh, 'I am the grandfather of the only nephew of the only sibling of your brother's wife.' What relation can Ramesh have with Sultan?",
+    tag: "RRB NTPC 01/03/2021 (Morning)",
+    o_hi: [
+      "(a) भतीजा /भांजा",
+      "(b) पिता",
+      "(c) चचेरा/ ममेरा / फुफेरा /मौसेरा भाई",
+      "(d) पुत्र"
+    ],
+    o_en: [
+      "(a) nephew",
+      "(b) father",
+      "(c) male cousin",
+      "(d) son"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. मनप्रीत मनोज से कहता है, “तुम्हारे पिता मेरी माँ की इकलौती संतान हैं। “मनप्रीत मनोज से किस प्रकार संबंधित है?",
+    q_en: "Q169. Manpreet says to Manoj, 'Your father is the only child of my mother.' How is Manpreet related to Manoj?",
+    tag: "RRB NTPC 02/03/2021 (Morning)",
+    o_hi: [
+      "(a) पिता",
+      "(b) चाचा",
+      "(c) पुत्र",
+      "(d) भाई"
+    ],
+    o_en: [
+      "(a) father",
+      "(b) paternal uncle",
+      "(c) son",
+      "(d) brother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. एक तस्वीर की ओर इशारा करते हुए दीपक, जो अपने माता-पिता का इकलौता बेटा है, ने अभिषेक को बताया कि तस्वीर में दिख रही महिला उसकी बहन की मां की इकलौती बहू थी। तस्वीर में दिख रही महिला का दीपक से क्या संबंध था?",
+    q_en: "Q170. Pointing to a photograph, Deepak, who is the only son of his parents, told Abhishek that the woman in the picture was the only daughter-in-law of his sister's mother. How was the woman in the photograph related to Deepak?",
+    tag: "RRB NTPC 02/03/2021 (Evening)",
+    o_hi: [
+      "(a) माँ की बहन",
+      "(b) पत्नी की बहन",
+      "(c) पत्नी",
+      "(d) माता"
+    ],
+    o_en: [
+      "(a) mother's sister",
+      "(b) wife's sister",
+      "(c) wife",
+      "(d) mother"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. निम्नलिखित संबंध चार्ट में A→B का अर्थ है कि A, B की माता (या कोई अन्य संबंध) है। अब चार्ट का उपयोग करते हुए ज्ञात कीजिए कि F, E से किस प्रकार संबंधित है।<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + Q171_IMAGE + "\" alt=\"Q171 figure\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    q_en: "Q171. In the following relationship chart, A → B means that A is B's mother (or another relation). Using the chart, determine how F is related to E.<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + Q171_IMAGE + "\" alt=\"Q171 figure\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    tag: "RRB NTPC 04/03/2021 (Evening)",
+    image: Q171_IMAGE,
+    o_hi: [
+      "(a) पति/पत्नी",
+      "(b) पुत्री",
+      "(c) पिता",
+      "(d) सहोदर"
+    ],
+    o_en: [
+      "(a) spouse",
+      "(b) daughter",
+      "(c) father",
+      "(d) sibling"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. यदि A#B का अर्थ है 'A, B का भाई है', A^B का अर्थ है 'A, B की पुत्री है', A*B का अर्थ है 'A, B की चाची/मौसी है' और A%B का अर्थ है 'A , B की मां है ', तो, ‘S*G%U^Z#X’ में Z, G से किस प्रकार संबंधित है?",
+    q_en: "Q172. If A # B means 'A is B's brother', A ^ B means 'A is B's daughter', A * B means 'A is B's aunt', and A % B means 'A is B's mother', then in 'S * G % U ^ Z # X', how is Z related to G?",
+    tag: "RRB NTPC 09/03/2021 (Evening)",
+    o_hi: [
+      "(a) पिता",
+      "(b) पति",
+      "(c) भाई",
+      "(d) पत्नी"
+    ],
+    o_en: [
+      "(a) father",
+      "(b) husband",
+      "(c) brother",
+      "(d) wife"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. एक व्यक्ति की तस्वीर देखकर एक लड़की ने कहा, \"उसकी बेटी के चाचा की पत्नी मेरी माँ है।\" फोटो में दिख रहे व्यक्ति की मां से उस लड़की का क्या संबंध है?",
+    q_en: "Q173. Looking at a person's photograph, a girl said, 'The wife of his daughter's uncle is my mother.' How is the girl related to the mother of the person in the photograph?",
+    tag: "RRB NTPC 14/03/2021 (Morning)",
+    o_hi: [
+      "(a) भाई की पुत्री",
+      "(b) पुत्री की पुत्री",
+      "(c) पिता की मा",
+      "(d) पुत्र की पुत्री"
+    ],
+    o_en: [
+      "(a) brother's daughter",
+      "(b) daughter's daughter",
+      "(c) father's mother",
+      "(d) son's daughter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q174. एक तस्वीर की ओर इशारा करते हुए, एक महिला ने एक पुरुष से कहा, \"वह आपके दादा के इकलौते बेटे की बहन की इकलौती संतान है\"। वह आदमी चित्र में दिख रही लड़की से किस प्रकार संबंधित है?",
+    q_en: "Q174. Pointing to a photograph, a woman said to a man, 'She is the only child of the sister of your grandfather's only son.' How is the man related to the girl in the photograph?",
+    tag: "RRB NTPC 15/03/2021 (Morning)",
+    o_hi: [
+      "(a) बहन",
+      "(b) भाई",
+      "(c) पिता की बहन का बेटा",
+      "(d) मां के भाई का बेटा"
+    ],
+    o_en: [
+      "(a) sister",
+      "(b) brother",
+      "(c) father's sister's son",
+      "(d) mother's brother's son"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q175. दी गई जानकारी को पढ़िए और नीचे दिए गए प्रश्न का उत्तर दीजिए। C, F की बहन है। A, B का पिता है, E का पति है और D का इकलौता पुत्र है। D, F का दादा है और A की कोई बहन नहीं है। A के कितने बच्चे हैं?",
+    q_en: "Q175. Read the given information and answer the question. C is F's sister. A is B's father, E's husband and D's only son. D is F's grandfather, and A has no sister. How many children does A have?",
+    tag: "RRB NTPC 15/03/2021 (Morning)",
+    o_hi: [
+      "(a) 4",
+      "(b) 3",
+      "(c) 2",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 4",
+      "(b) 3",
+      "(c) 2",
+      "(d) 1"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q176. A, F की बहन है और B की पत्नी है। C, D के दादा का पुत्र है। B, E का पिता है। C, F का पुत्र है। A, C से किस प्रकार संबंधित है?",
+    q_en: "Q176. A is F's sister and B's wife. C is the son of D's grandfather. B is E's father. C is F's son. How is A related to C?",
+    tag: "RRB NTPC 21/03/2021 (Morning)",
+    o_hi: [
+      "(a) पिता की मां",
+      "(b) मां की बहन",
+      "(c) पिता की बहन",
+      "(d) भाई का बेटा"
+    ],
+    o_en: [
+      "(a) father's mother",
+      "(b) mother's sister",
+      "(c) father's sister",
+      "(d) brother's son"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q177. एक तस्वीर की ओर इशारा करते हुए, एक महिला ने एक पुरुष से कहा, \"वह आपके दादा के इकलौते बेटे की बहन की इकलौती संतान है\"। पुरुष, चित्र में दिख रही लड़की से किस प्रकार संबंधित है?",
+    q_en: "Q177. Pointing to a photograph, a woman said to a man, 'She is the only child of the sister of your grandfather's only son.' How is the man related to the girl in the photograph?",
+    tag: "RRB NTPC 03/04/2021 (Morning)",
+    o_hi: [
+      "(a) बेटा",
+      "(b) मां के भाई का बेटा",
+      "(c) पिता",
+      "(d) पिता की बहन का बेटा"
+    ],
+    o_en: [
+      "(a) son",
+      "(b) mother's brother's son",
+      "(c) father",
+      "(d) father's sister's son"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q178. आधार और पैन ऐसी बहनें हैं जिनकी मां के रूप में संसद है। पैसे के दो भाई हैं, सिक्काा और नोट। संसद के पति समाचार भी पैसे के पिता हैं। पैन , पैसे से किस प्रकार संबंधित है ?",
+    q_en: "Q178. Aadhaar and PAN are sisters whose mother is Parliament. Money has two brothers, Coin and Note. Parliament's husband News is also Money's father. How is PAN related to Money?",
+    tag: "RRB NTPC 07/04/2021 (Evening)",
+    o_hi: [
+      "(a) बहन",
+      "(b) चाची",
+      "(c) भाई",
+      "(d) मौसी"
+    ],
+    o_en: [
+      "(a) sister",
+      "(b) paternal aunt",
+      "(c) brother",
+      "(d) maternal aunt"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q179. दिल, फेफड़े की पुत्री है। साथ ही, दिल का केवल एक सहोदर है, भाई जिसका नाम किडनी है। पेट फेफड़ा का पति है। आँख और दिल एक दूसरे से विवाहित हैं। अग्न्यााशय किडनी का मामा है। अग्न्यााशय , फेफड़े से किस प्रकार संबंधित है?",
+    q_en: "Q179. Heart is Lung's daughter. Heart has only one sibling, a brother named Kidney. Stomach is Lung's husband. Eye and Heart are married to each other. Pancreas is Kidney's maternal uncle. How is Pancreas related to Lung?",
+    tag: "RRB NTPC 08/04/2021 (Morning)",
+    o_hi: [
+      "(a) माँ के भाई",
+      "(b) पत्नी के भाई",
+      "(c) पिता",
+      "(d) भाई"
+    ],
+    o_en: [
+      "(a) mother's brother",
+      "(b) wife's brother",
+      "(c) father",
+      "(d) brother"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q180. गुज्जो उमरा की मां है। मुन्नी सुम्मो की माँ है। शाहिद हिफजान के पिता हैं। मुन्नी हिफजान की बुआ और उमरा की मौसी है। गुज्जो का शाहिद से क्या संबंध है?",
+    q_en: "Q180. Gujjo is Umra's mother. Munni is Summo's mother. Shahid is Hifzan's father. Munni is Hifzan's paternal aunt and Umra's maternal aunt. How is Gujjo related to Shahid?",
+    tag: "RRB NTPC 08/04/2021 (Evening)",
+    o_hi: [
+      "(a) बहन",
+      "(b) भाई की पत्नी",
+      "(c) बहन की बेटी",
+      "(d) भाई की बेटी"
+    ],
+    o_en: [
+      "(a) sister",
+      "(b) brother's wife",
+      "(c) sister's daughter",
+      "(d) brother's daughter"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q181. अमन और बरुन भाई हैं। ईवा दिवा की बेटी है। दिवा फिजा के पति बरुन की बहन है। ईवा अमन से किस प्रकार संबंधित है?",
+    q_en: "Q181. Aman and Barun are brothers. Eva is Diva's daughter. Diva is the sister of Barun, who is Fiza's husband. How is Eva related to Aman?",
+    tag: "RRB NTPC 31/07/2021 (Morning)",
+    o_hi: [
+      "(a) बेटी",
+      "(b) भाई की बेटी",
+      "(c) भाई की पत्नी की बहन",
+      "(d) बहन की बेटी"
+    ],
+    o_en: [
+      "(a) daughter",
+      "(b) brother's daughter",
+      "(c) brother's wife's sister",
+      "(d) sister's daughter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. यदि C % D का अर्थ है कि C, D की मां है, C ＄ D का अर्थ है कि C, D की पत्नी है, और यदि C & D का अर्थ है कि C, D का दामाद है, तो ‘W % X ＄Y & Z’ का अर्थ क्या होगा ?",
+    q_en: "Q182. If C % D means C is D's mother, C $ D means C is D's wife, and C & D means C is D's son-in-law, what does 'W % X $ Y & Z' mean?",
+    tag: "ALP Tier II 21/01/2019 (Morning)",
+    o_hi: [
+      "(a) Z, W की पत्नी है",
+      "(b) Z, W की पुत्री है",
+      "(c) W, Z के पुत्र की पुत्री है",
+      "(d) Z, W का पति है"
+    ],
+    o_en: [
+      "(a) Z is W's wife.",
+      "(b) Z is W's daughter.",
+      "(c) W is Z's son's daughter.",
+      "(d) Z is W's husband."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. यदि A $ B का अर्थ है कि A, B की बहन है, A # B का अर्थ है कि A, B की माँ है और A × B का अर्थ है कि A, B का पिता है, तो 'P × Q $ R # S' का क्या अर्थ है?",
+    q_en: "Q183. If A $ B means A is B's sister, A # B means A is B's mother, and A × B means A is B's father, what does 'P × Q $ R # S' mean?",
+    tag: "ALP Tier II 21/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) P, S का दामाद है",
+      "(b) P, S का नाना है",
+      "(c) P, S का पिता है",
+      "(d) P, S का पुत्र है"
+    ],
+    o_en: [
+      "(a) P is S's son-in-law.",
+      "(b) P is S's maternal grandfather.",
+      "(c) P is S's father.",
+      "(d) P is S's son."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. यदि G + H का अर्थ है कि G, H की बेटी है:, G -H का अर्थ है कि G, H का ससुर है; और G* H का अर्थ है कि G, H का पति है, तो निम्न में से कौन दर्शाता है कि O, L की बहन है?",
+    q_en: "Q184. If G + H means G is H's daughter, G - H means G is H's father-in-law, and G * H means G is H's husband, then which of the following shows that O is L's sister?",
+    tag: "ALP Tier II 21/01/2019 (Evening )",
+    o_hi: [
+      "(a) O + M - N * L",
+      "(b) O * N - M + L",
+      "(c) O - N + M * L",
+      "(d) O - N * M + L"
+    ],
+    o_en: [
+      "(a) O + M - N * L",
+      "(b) O * N - M + L",
+      "(c) O - N + M * L",
+      "(d) O - N * M + L"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. यदि C%D का अर्थ है C, D की पत्नी है; C & D का अर्थ है C, D का पिता है; और यदि C D ＄ का अर्थ है C, D की बेटी है, यदि W की केवल एक बेटी है तो ‘X Y% W & Z’ का क्या अर्थ होगा? ＄",
+    q_en: "Q185. If C % D means C is D's wife, C & D means C is D's father, and C $ D means C is D's daughter, then if W has only one daughter, what does 'X $ Y % W & Z' mean?",
+    tag: "ALP Tier II 21/01/2019 (Evening )",
+    o_hi: [
+      "(a) X, Z का पुत्र है",
+      "(b) Z, X की माँ की बहन है",
+      "(c) X, Z की बहन है",
+      "(d) Z, X की बहन है"
+    ],
+    o_en: [
+      "(a) X is Z's son.",
+      "(b) Z is X's mother's sister.",
+      "(c) X is Z's sister.",
+      "(d) Z is X's sister."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. यदि A $ B का अर्थ है कि A, B की बहन है, A # B का अर्थ है कि A, B का पति है और A * B का अर्थ है कि A, B की पुत्री है, तो ‘P $ Q * R # S’ का क्या अर्थ है?",
+    q_en: "Q186. If A $ B means A is B's sister, A # B means A is B's husband, and A * B means A is B's daughter, what does 'P $ Q * R # S' mean?",
+    tag: "ALP Tier II 23/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) S, P की भाभी है।",
+      "(b) S, P की माँ है।",
+      "(c) S, P की दादी है।",
+      "(d) S, P की बहन है।"
+    ],
+    o_en: [
+      "(a) S is P's sister-in-law.",
+      "(b) S is P's mother.",
+      "(c) S is P's grandmother.",
+      "(d) S is P's sister."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. A ने B से कहा, \"आप मेरी मां के पिता के दामाद के बेटे हैं।\" B का A से क्या रिश्ता है, यदि B की माँ का कोई भाई- बहन नहीं है?",
+    q_en: "Q187. A said to B, 'You are the son of my mother's father's son-in-law.' What is B's relationship to A, if B's mother has no sibling?",
+    tag: "ALP Tier II 08/02/2019 (Morning)",
+    o_hi: [
+      "(a) B, A का पिता है",
+      "(b) B, A का भाई है",
+      "(c) B, A का पुत्र है",
+      "(d) B, A का ससुर है"
+    ],
+    o_en: [
+      "(a) B is A's father.",
+      "(b) B is A's brother.",
+      "(c) B is A's son.",
+      "(d) B is A's father-in-law."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. यदि P $ Q का अर्थ है कि P, Q का पति है , P ! O का मतलब है P, Q की मां है और P*Q का अर्थ है P, Q की पत्नी है। निम्नलिखित में से कौन सा समीकरण यह दर्शाता है कि A, D का ससुर है?",
+    q_en: "Q188. If P $ Q means P is Q's husband, P ! Q means P is Q's mother, and P * Q means P is Q's wife, which of the following equations shows that A is D's father-in-law?",
+    tag: "ALP Tier II 08/02/2019 (Morning)",
+    o_hi: [
+      "(a) A $ B * C ! D",
+      "(b) A ! B * C $ D",
+      "(c) A $ B ! C * D",
+      "(d) A ! B $ C * D"
+    ],
+    o_en: [
+      "(a) A $ B * C ! D",
+      "(b) A ! B * C $ D",
+      "(c) A $ B ! C * D",
+      "(d) A ! B $ C * D"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. निम्न कथनों को पढ़िए और उनके आधार पर प्रश्न का उत्तर दीजिए। A@B का अर्थ है A, B की माँ है। A#B का अर्थ है A, B का पिता है। A$B का अर्थ है A, B का भाई है। A%B का अर्थ है A, B की बहन है। समीकरण P$Q$R@S के अनुसार P, S से किस प्रकार संबंधित है ?",
+    q_en: "Q189. Read the following statements and answer the question.<br>A @ B means A is B's mother.<br>A # B means A is B's father.<br>A $ B means A is B's brother.<br>A % B means A is B's sister.<br>According to the equation P $ Q $ R @ S, how is P related to S?",
+    tag: "RPF S.I. 19/12/2018 (Morning)",
+    o_hi: [
+      "(a) अंकल",
+      "(b) चाची",
+      "(c) दादा",
+      "(d) पिता"
+    ],
+    o_en: [
+      "(a) uncle",
+      "(b) paternal aunt",
+      "(c) grandfather",
+      "(d) father"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. निम्न कथनों को पढ़िए और उनके आधार पर प्रश्न का उत्तर दीजिए। A@B का अर्थ है A, B की माँ है A#B का अर्थ है A, B का पिता है A$B का अर्थ है A, B का भाई है A%B का अर्थ है A, B की बहन है समीकरण ‘P@Q@R%S’ के अनुसार यदि S एक पुरुष है तो S, P से किस प्रकार संबंधित है?",
+    q_en: "Q190. Read the following statements and answer the question.<br>A @ B means A is B's mother.<br>A # B means A is B's father.<br>A $ B means A is B's brother.<br>A % B means A is B's sister.<br>According to the equation 'P @ Q @ R % S', if S is male, how is S related to P?",
+    tag: "RPF S.I. 19/12/2018 (Evening)",
+    o_hi: [
+      "(a) पोती",
+      "(b) 2 अथवा 3",
+      "(c) पोता",
+      "(d) दादा"
+    ],
+    o_en: [
+      "(a) granddaughter",
+      "(b) 2 or 3",
+      "(c) grandson",
+      "(d) grandfather"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. निम्न कथनों को पढ़िए और उनके आधार पर प्रश्न का उत्तर दीजिए। A @ B का अर्थ है A, B की माँ है। A # B का अर्थ है A, B का पिता है। A $ B का अर्थ है A, B का भाई है। A % B का अर्थ है A, B की बहन है। समीकरण P $ Q @ R $ S के अनुसार P, S से किस प्रकार संबंधित है?",
+    q_en: "Q191. Read the following statements and answer the question.<br>A @ B means A is B's mother.<br>A # B means A is B's father.<br>A $ B means A is B's brother.<br>A % B means A is B's sister.<br>According to the equation P $ Q @ R $ S, how is P related to S?",
+    tag: "RPF S.I. 24/12/2018 (Morning)",
+    o_hi: [
+      "(a) आंट",
+      "(b) मामा",
+      "(c) कजिन",
+      "(d) पिता"
+    ],
+    o_en: [
+      "(a) aunt",
+      "(b) maternal uncle",
+      "(c) cousin",
+      "(d) father"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. निम्नलिखित तर्क को पढ़िए और दिए गए प्रश्न का उत्तर दीजिए। A @ B का अर्थ है A, B का पति है। A # B का अर्थ है A, B की पत्नी है। A $ B का अर्थ है A, B का पुत्र है। A % B का अर्थ है A, B की पुत्री है। समीकरण X% Y @Z% W, में, X के पिता का W से क्या संबंध है?",
+    q_en: "Q192. Read the following statements and answer the question.<br>A @ B means A is B's husband.<br>A # B means A is B's wife.<br>A $ B means A is B's son.<br>A % B means A is B's daughter.<br>In the equation X % Y @ Z % W, how is X's father related to W?",
+    tag: "RPF S.I. 05/01/2019 (Morning)",
+    o_hi: [
+      "(a) दामाद",
+      "(b) चाचा / मामा",
+      "(c) पिता",
+      "(d) भतीजा"
+    ],
+    o_en: [
+      "(a) son-in-law",
+      "(b) uncle",
+      "(c) father",
+      "(d) nephew"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q193. कीर्ति की दादी विवेक की माँ की माँ हैं वेणु कीर्ति के पिता हैं। कीर्ति की माँ, विवेक की माँ से किस प्रकार संबंधित है?",
+    q_en: "Q193. Kirti's grandmother is the mother of Vivek's mother. Venu is Kirti's father. How is Kirti's mother related to Vivek's mother?",
+    tag: "RPF S.I. 05/01/2019 (Morning)",
+    o_hi: [
+      "(a) दादी",
+      "(b) भाभी",
+      "(c) माँ",
+      "(d) चाची"
+    ],
+    o_en: [
+      "(a) grandmother",
+      "(b) sister-in-law",
+      "(c) mother",
+      "(d) paternal aunt"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q194. निम्नलिखित तर्क को पढ़िए और दिए गए प्रश्न का उत्तर दीजिए। A + B मतलब A, B की माता है। A – B मतलब A, B का पिता है। A * B मतलब A, B की बहन है। A/B मतलब A, B का भाई है। समीकरण ‘W + X / Y – Z’ में, X की पत्नी का Z से क्या संबंध है?",
+    q_en: "Q194. Read the following statements and answer the question.<br>A + B means A is B's mother.<br>A – B means A is B's father.<br>A * B means A is B's sister.<br>A / B means A is B's brother.<br>In the equation 'W + X / Y – Z', how is X's wife related to Z?",
+    tag: "RPF S.I. 10/01/2019 (Morning)",
+    o_hi: [
+      "(a) चचेरे भाई / बहन",
+      "(b) चाची",
+      "(c) दादी",
+      "(d) माता"
+    ],
+    o_en: [
+      "(a) cousin",
+      "(b) paternal aunt",
+      "(c) grandmother",
+      "(d) mother"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q195. निम्नलिखित कथनों को पढ़ें और उन पर आधारित प्रश्न का उत्तर दें। A @ B का अर्थ है A, B की माँ है। A # B का अर्थ है A, B का पिता है। A $ B का अर्थ है A, B की पत्नी है। A % B का अर्थ है A, B का पति है। निम्न में से कौन दर्शाता है कि 'O, M की पुत्रवधू है'?",
+    q_en: "Q195. Read the following statements and answer the question.<br>A @ B means A is B's mother.<br>A # B means A is B's father.<br>A $ B means A is B's wife.<br>A % B means A is B's husband.<br>Which of the following shows that 'O is M's daughter-in-law'?",
+    tag: "RPF S.I. 10/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) M% N@O",
+      "(b) M#N@O",
+      "(c) M@N%O",
+      "(d) M@N＄O"
+    ],
+    o_en: [
+      "(a) M% N@O",
+      "(b) M#N@O",
+      "(c) M@N%O",
+      "(d) M@N＄O"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q196. एक लड़की की तस्वीर को देखकर, शीशा नामक एक लड़की ने कहा, \"उसकी मां मेरे नाना की इकलौती बेटी है, और उनकी केवल एक बेटी है और कोई बेटा नहीं है। \" शीशा तस्वीर की लड़की से कैसे संबंधित है ?",
+    q_en: "Q196. Looking at a girl's photograph, a girl named Sheesha said, 'Her mother is my maternal grandfather's only daughter, and she has only one daughter and no son.' How is Sheesha related to the girl in the photograph?",
+    tag: "RRB ALP 09/08/2018 (Morning)",
+    o_hi: [
+      "(a) तस्वीर में लड़की खुद शीशा है",
+      "(b) भांजी /भतीजी",
+      "(c) बहन",
+      "(d) चाची /मामी / फूफी /बुआ / मौसी / ताई (Aunt)"
+    ],
+    o_en: [
+      "(a) The girl in the picture is Sheesha herself.",
+      "(b) niece",
+      "(c) sister",
+      "(d) aunt"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q197. यदि V, U का भाई है; U, W की बहन है और X, U का पति है, तो U का V से क्या संबंध है?",
+    q_en: "Q197. If V is U's brother, U is W's sister, and X is U's husband, how is U related to V?",
+    tag: "RRB ALP 10/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) माँ",
+      "(b) चाची/ मामी/ फूफी / बुआ / मौसी / ताई",
+      "(c) बहन",
+      "(d) ननद / भाभी / साली / जेठानी/ देवरानी"
+    ],
+    o_en: [
+      "(a) mother",
+      "(b) aunt",
+      "(c) sister",
+      "(d) sister-in-law"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q198. एक आदमी एक चित्र को देखकर कहता है, \"वह मेरे ससुर की इकलौती पोती है\"। चित्र में जो लड़की है वह इस आदमी की पत्नी से कैसे संबंधित है?",
+    q_en: "Q198. A man looks at a picture and says, 'She is my father-in-law's only granddaughter.' How is the girl in the picture related to the man's wife?",
+    tag: "RRB ALP 13/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) बेटी",
+      "(b) बहन",
+      "(c) भांजी /भतीजा",
+      "(d) माँ"
+    ],
+    o_en: [
+      "(a) daughter",
+      "(b) sister",
+      "(c) niece/nephew",
+      "(d) mother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q199. श्री X , कुमारी Y के दादा का इकलौता बेटा है । यदि श्री X का कोई भाई या बहन नहीं हैं और उनके पिता कुमारी Y के दादा हैं तो श्री X का कुमारी Y से क्या संबंध है ू",
+    q_en: "Q199. Mr X is the only son of Miss Y's grandfather. If Mr X has no brother or sister and his father is Miss Y's grandfather, how is Mr X related to Miss Y?",
+    tag: "RRB ALP 21/08/2018 (Morning)",
+    o_hi: [
+      "(a) चाचा/मामा/फूफा/मौसा/ताऊ",
+      "(b) भाई",
+      "(c) पिता",
+      "(d) ससुर"
+    ],
+    o_en: [
+      "(a) uncle",
+      "(b) brother",
+      "(c) father",
+      "(d) father-in-law"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q200. श्रीमती X के पति श्रीमती Y की माँ के इकलौते बेटे हैं। यदि श्रीमती X के भाई और श्रीमती Y के पति चचेरे भाई हैं तो श्रीमती X का श्रीमती Y से क्या संबंध है ?",
+    q_en: "Q200. Mrs X's husband is the only son of Mrs Y's mother. If Mrs X's brother and Mrs Y's husband are cousins, how is Mrs X related to Mrs Y?",
+    tag: "RRB ALP 21/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) चाची /मामी / फूफी / बुआ / मौसी / ताई",
+      "(b) माँ",
+      "(c) ननद / भाभी / साली /जेठानी/ देवरानी",
+      "(d) बहन"
+    ],
+    o_en: [
+      "(a) aunt",
+      "(b) mother",
+      "(c) sister-in-law",
+      "(d) sister"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];

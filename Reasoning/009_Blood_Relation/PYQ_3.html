@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q101. Q के भाई R की बहन P है। Q का पति S है और S का पुत्र T है। P का T के साथ क्या संबंध है?",
+    q_en: "Q101. P is the sister of Q's brother R. Q's husband is S, and S's son is T. How is P related to T?",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) मां की बहन",
+      "(b) मां की मां",
+      "(c) मां",
+      "(d) बहन"
+    ],
+    o_en: [
+      "(a) mother's sister",
+      "(b) mother's mother",
+      "(c) mother",
+      "(d) sister"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q102. K का भाई L है। Q का विवाह N के साथ हुआ है। L की मां Z है। Z की पुत्री N है। K की पत्नी P है। Q का K के साथ क्या संबंध है ?",
+    q_en: "Q102. L is K's brother. Q is married to N. L's mother is Z. N is Z's daughter. K's wife is P. How is Q related to K?",
+    tag: "RRB JE 16/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) बहन का पति",
+      "(b) मां का पिता",
+      "(c) पिता का भाई",
+      "(d) भाई"
+    ],
+    o_en: [
+      "(a) sister's husband",
+      "(b) mother's father",
+      "(c) father's brother",
+      "(d) brother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q103. Q के भाई R का पुत्र P है। Q की पत्नी S है और S का पुत्र T है। P का T के साथ क्या संबंध है?",
+    q_en: "Q103. P is the son of Q's brother R. Q's wife is S, and S's son is T. How is P related to T?",
+    tag: "RRB JE 16/12/2024 (Evening)",
+    o_hi: [
+      "(a) पिता का भाई",
+      "(b) भाई का पुत्र",
+      "(c) पिता के भाई का पुत्र",
+      "(d) पिता का पुत्र"
+    ],
+    o_en: [
+      "(a) father's brother",
+      "(b) brother's son",
+      "(c) father's brother's son",
+      "(d) father's son"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q104. एक निश्चित कूट भाषा में, 'A + B' का अर्थ है ‘A, B का पुत्र है’, 'A − B' का अर्थ है ‘A, B का भाई है’, 'A × B' का अर्थ है ‘A, B की पत्नी है’ और 'A % B' का अर्थ है ‘A, B का पिता है’। यदि ‘S × D + F % G − H’ है, तो S का H के साथ क्या संबंध है ?",
+    q_en: "Q104. In a certain code language, 'A + B' means 'A is B's son', 'A − B' means 'A is B's brother', 'A × B' means 'A is B's wife', and 'A % B' means 'A is B's father'. If 'S × D + F % G − H', how is S related to H?",
+    tag: "RRB J.E. 17/12/2024 (Morning)",
+    o_hi: [
+      "(a) भाई की पत्नी",
+      "(b) पुत्री",
+      "(c) पत्नी",
+      "(d) भाई की पुत्री"
+    ],
+    o_en: [
+      "(a) brother's wife",
+      "(b) daughter",
+      "(c) wife",
+      "(d) brother's daughter"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q105. Q की बहन R की पुत्री P है। Q की पत्नी S है और S का पुत्र T है। P का T के साथ क्या संबंध है ?",
+    q_en: "Q105. P is the daughter of Q's sister R. Q's wife is S, and S's son is T. How is P related to T?",
+    tag: "RRB J.E. 17/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) बहन की पुत्री",
+      "(b) पिता की पुत्री",
+      "(c) पिता की मां",
+      "(d) पिता की बहन की पुत्री"
+    ],
+    o_en: [
+      "(a) sister's daughter",
+      "(b) father's daughter",
+      "(c) father's mother",
+      "(d) father's sister's daughter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q106. एक निश्चित कूट भाषा में, 'A + B' का अर्थ है 'A, B का पुत्र है', 'A - B' का अर्थ है 'A, B का भाई है', 'A × B' का अर्थ है 'A, B की पत्नी है' और 'A ÷ B' का अर्थ है 'A, B का पिता है'। यदि 'S - D + F ÷ G × H' है, तो S का H के साथ क्या संबंध है ?",
+    q_en: "Q106. In a certain code language, 'A + B' means 'A is B's son', 'A - B' means 'A is B's brother', 'A × B' means 'A is B's wife', and 'A ÷ B' means 'A is B's father'. If 'S - D + F ÷ G × H', how is S related to H?",
+    tag: "RRB J.E. 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) पत्नी का भाई",
+      "(b) पिता",
+      "(c) भाई",
+      "(d) पत्नी का पिता"
+    ],
+    o_en: [
+      "(a) wife's brother",
+      "(b) father",
+      "(c) brother",
+      "(d) wife's father"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q107. A का पिता B है। A का भाई C है। C की पत्नी D है और D का पुत्र E है। B का E के साथ क्या संबंध है ?",
+    q_en: "Q107. B is A's father. C is A's brother. D is C's wife, and E is D's son. How is B related to E?",
+    tag: "RRB J.E. 18/12/2024 (Morning)",
+    o_hi: [
+      "(a) पिता का पिता",
+      "(b) पिता का भाई",
+      "(c) पिता",
+      "(d) भाई"
+    ],
+    o_en: [
+      "(a) father's father",
+      "(b) father's brother",
+      "(c) father",
+      "(d) brother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q108. एक निश्चित कूट भाषा में, 'A + B का अर्थ है 'A, B का पुत्र है', 'A - B का अर्थ है 'A, B का भाई है', 'A × B का अर्थ है 'A, B की पत्नी है' और 'A ÷ B का अर्थ है 'A, B का पिता है'। यदि 'S + D × F ÷ G − H’ है, तो S का H के साथ क्या संबंध है?",
+    q_en: "Q108. In a certain code language, 'A + B' means 'A is B's son', 'A - B' means 'A is B's brother', 'A × B' means 'A is B's wife', and 'A ÷ B' means 'A is B's father'. If 'S + D × F ÷ G − H', how is S related to H?",
+    tag: "RRB J.E. 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) पति",
+      "(b) भाई",
+      "(c) पिता",
+      "(d) पुत्र"
+    ],
+    o_en: [
+      "(a) husband",
+      "(b) brother",
+      "(c) father",
+      "(d) son"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q109. एक निश्चित कूट भाषा में, 'A + B' का अर्थ है 'A, B का पुत्र है', 'A − B' का अर्थ है 'A, B का भाई है', 'A × B' का अर्थ है 'A, B की पत्नी है' और 'A ÷ B' का अर्थ है 'A, B का पिता है'। यदि ‘S − D × F + G ÷ H’ है, तो S का H के साथ क्या संबंध है ?",
+    q_en: "Q109. In a certain code language, 'A + B' means 'A is B's son', 'A − B' means 'A is B's brother', 'A × B' means 'A is B's wife', and 'A ÷ B' means 'A is B's father'. If 'S − D × F + G ÷ H', how is S related to H?",
+    tag: "RRB J.E. 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) पत्नी का भाई",
+      "(b) पत्नी का पिता",
+      "(c) भाई की पत्नी के पिता",
+      "(d) भाई की पत्नी का भाई"
+    ],
+    o_en: [
+      "(a) wife's brother",
+      "(b) wife's father",
+      "(c) brother's wife's father",
+      "(d) brother's wife's brother"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q110. S , D का भाई है। D, F का पिता है। F, G की माता है। G, H की पत्नी है। S का H से क्या संबंध है ?",
+    q_en: "Q110. S is D's brother. D is F's father. F is G's mother. G is H's wife. How is S related to H?",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) पत्नी की माता के पिता के भाई",
+      "(b) पत्नी की माता के पिता के पिता",
+      "(c) पत्नी की माता की माता के पिता",
+      "(d) पत्नी की माता की माता के भाई"
+    ],
+    o_en: [
+      "(a) wife's mother's father's brother",
+      "(b) wife's mother's father's father",
+      "(c) wife's mother's mother's father",
+      "(d) wife's mother's mother's brother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q111. G, F की पुत्री है। F, K की बहन है। K, H का पुत्र है। H, E का पति है। G का E से क्या संबंध है?",
+    q_en: "Q111. G is F's daughter. F is K's sister. K is H's son. H is E's husband. How is G related to E?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) पुत्री का पुत्र",
+      "(b) पुत्री की पुत्री",
+      "(c) माता की बहन",
+      "(d) माता की माता"
+    ],
+    o_en: [
+      "(a) daughter's son",
+      "(b) daughter's daughter",
+      "(c) mother's sister",
+      "(d) mother's mother"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q112. एक निश्चित कूट भाषा में, A + B का अर्थ है कि, 'A, B की पुत्री है', A - B का अर्थ है कि, 'A, B का भाई है', A × B का अर्थ है कि, 'A, B की पत्नी है', और A % B का अर्थ है कि, 'A, B का पिता है'। यदि 'S + D × F - G% H' है, तो S का H से क्या संबंध है ?",
+    q_en: "Q112. In a certain code language, A + B means 'A is B's daughter', A - B means 'A is B's brother', A × B means 'A is B's wife', and A % B means 'A is B's father'. If 'S + D × F - G % H', how is S related to H?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) माता के भाई की पुत्री",
+      "(b) पिता के भाई की पत्नी",
+      "(c) माता के भाई की पत्नी",
+      "(d) पिता के भाई की पुत्री"
+    ],
+    o_en: [
+      "(a) mother's brother's daughter",
+      "(b) father's brother's wife",
+      "(c) mother's brother's wife",
+      "(d) father's brother's daughter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q113. A, C की बहन B की पुत्री है। D, C के पति E का पिता है। A का D से क्या संबंध है ?",
+    q_en: "Q113. A is the daughter of B, who is C's sister. D is the father of C's husband E. How is A related to D?",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) पुत्र की पत्नी की बहन की पुत्री",
+      "(b) पुत्र की पत्नी के भाई की बहन",
+      "(c) पत्नी के भाई की बहन",
+      "(d) पत्नी की बहन की पुत्री"
+    ],
+    o_en: [
+      "(a) son's wife's sister's daughter",
+      "(b) son's wife's brother's sister",
+      "(c) wife's brother's sister",
+      "(d) wife's sister's daughter"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q114. किसी निश्चित कूट भाषा में, A + B का अर्थ है कि 'A, B की बहन है', A - B का अर्थ है कि 'A, B का पिता है', A × B का अर्थ है कि 'A, B का भाई है' और A ÷ B का अर्थ है कि 'A, B की पत्नी है'। यदि ‘P × Q ÷ R – S + T’ है, तो P का T से क्या संबंध है ?",
+    q_en: "Q114. In a certain code language, A + B means 'A is B's sister', A - B means 'A is B's father', A × B means 'A is B's brother', and A ÷ B means 'A is B's wife'. If 'P × Q ÷ R – S + T', how is P related to T?",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) पुत्री का पुत्र",
+      "(b) बहन का पति",
+      "(c) माँ का भाई",
+      "(d) पिता का भाई"
+    ],
+    o_en: [
+      "(a) daughter's son",
+      "(b) sister's husband",
+      "(c) mother's brother",
+      "(d) father's brother"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q115. एक निश्चित कूट भाषा में, A + B का अर्थ है कि, 'A, B का पुत्र है', A - B का अर्थ है कि, 'A, B का भाई है', A × B का अर्थ है कि, 'A, B की पत्नी है', और A % B का अर्थ है कि, 'A, B का पिता है'। यदि 'S % D - F × G + H' है, तो S का H से क्या संबंध है ?",
+    q_en: "Q115. In a certain code language, A + B means 'A is B's son', A - B means 'A is B's brother', A × B means 'A is B's wife', and A % B means 'A is B's father'. If 'S % D - F × G + H', how is S related to H?",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) पत्नी का पिता",
+      "(b) पुत्र की पत्नी का पिता",
+      "(c) पत्नी का भाई",
+      "(d) पुत्र की पत्नी का भाई"
+    ],
+    o_en: [
+      "(a) wife's father",
+      "(b) son's wife's father",
+      "(c) wife's brother",
+      "(d) son's wife's brother"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q116. G, H का पिता है। H, J की माता है। J, K का भाई है। K, L का पुत्र है। G का L से क्या संबंध है ?",
+    q_en: "Q116. G is H's father. H is J's mother. J is K's brother. K is L's son. How is G related to L?",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) पत्नी का पिता",
+      "(b) पति की माता",
+      "(c) पत्नी का भाई",
+      "(d) पति का पिता"
+    ],
+    o_en: [
+      "(a) wife's father",
+      "(b) husband's mother",
+      "(c) wife's brother",
+      "(d) husband's father"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q117. A - B का अर्थ है कि 'A, B का पुत्र है', A $ B का अर्थ है कि 'A, B की बहन है', A @ B का अर्थ है कि 'A, B की पुत्री है', और A * B का अर्थ है कि 'A, B का पिता है। उपरोक्त जानकारी के आधार पर, निम्नलिखित में से किसका अर्थ यह है कि W, S की बहन का पुत्र है ?",
+    q_en: "Q117. A - B means 'A is B's son', A $ B means 'A is B's sister', A @ B means 'A is B's daughter', and A * B means 'A is B's father'. Based on the above, which of the following means that W is the son of S's sister?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) W * E - A $ K @ S",
+      "(b) W $ E * A - K @ S",
+      "(c) W - E @ A * K $ S",
+      "(d) W @ E - A $ K * S"
+    ],
+    o_en: [
+      "(a) W * E - A $ K @ S",
+      "(b) W $ E * A - K @ S",
+      "(c) W - E @ A * K $ S",
+      "(d) W @ E - A $ K * S"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q118. B, A का पुत्र है। C, B की पत्नी है। D, C की पुत्री है। E, B का पुत्र है। E का A से क्या संबंध है ?",
+    q_en: "Q118. B is A's son. C is B's wife. D is C's daughter. E is B's son. How is E related to A?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) भाई",
+      "(b) पुत्री",
+      "(c) भाई का पुत्र",
+      "(d) पुत्र का पुत्र"
+    ],
+    o_en: [
+      "(a) brother",
+      "(b) daughter",
+      "(c) brother's son",
+      "(d) son's son"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q119. A, B की पुत्री C की बहन है। K, C की माता है और L, K का पिता है। A का L से क्या संबंध है ?",
+    q_en: "Q119. A is the sister of C, who is B's daughter. K is C's mother and L is K's father. How is A related to L?",
+    tag: "RPF S.I. 03/12/2024 (Evening)",
+    o_hi: [
+      "(a) बेटी का बेटा",
+      "(b) बेटे का बेटा",
+      "(c) बेटे की बेटी",
+      "(d) बेटी की बेटी"
+    ],
+    o_en: [
+      "(a) daughter's son",
+      "(b) son's son",
+      "(c) son's daughter",
+      "(d) daughter's daughter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q120. A $ B का अर्थ है कि 'A, B की बहन है', A @ B का अर्थ है कि 'A, B की' पुत्री है', A - B का अर्थ है कि 'A, B का पुत्र है' और A * B का अर्थ है कि 'A, B का पिता है'। उपरोक्त जानकारी के आधार पर, निम्नलिखित में से किसका अर्थ यह है कि S, M की बहन का पुत्र है ?",
+    q_en: "Q120. A $ B means 'A is B's sister', A @ B means 'A is B's daughter', A - B means 'A is B's son', and A * B means 'A is B's father'. Based on the above, which of the following means that S is the son of M's sister?",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) S - T $ E @ A * M",
+      "(b) S @ T - E $ A * M",
+      "(c) S * T - E $ A @ M",
+      "(d) S $ T * E - A @ M"
+    ],
+    o_en: [
+      "(a) S - T $ E @ A * M",
+      "(b) S @ T - E $ A * M",
+      "(c) S * T - E $ A @ M",
+      "(d) S $ T * E - A @ M"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q121. एक निश्चित कूट भाषा में, A < B का अर्थ है कि, 'A, B का पुत्र है', A + B का अर्थ है कि, 'A, B का पिता है', A; B का अर्थ है कि, 'A, B की बहन है', और A = B का अर्थ है कि, 'A, B की पुत्री है'। यदि 'P + O < S ; T = E’ है तो P का E से क्या संबंध है ?",
+    q_en: "Q121. In a certain code language, A < B means 'A is B's son', A + B means 'A is B's father', A ; B means 'A is B's sister', and A = B means 'A is B's daughter'. If 'P + O < S ; T = E', how is P related to E?",
+    tag: "RPF S.I. 09/12/2024 (Evening)",
+    o_hi: [
+      "(a) पिता की बहन",
+      "(b) पुत्री का पति",
+      "(c) माता की बहन",
+      "(d) बहन का पुत्र"
+    ],
+    o_en: [
+      "(a) father's sister",
+      "(b) daughter's husband",
+      "(c) mother's sister",
+      "(d) sister's son"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q122. A, B की पुत्री C की बहन है। K, C का पिता है और L, K का पिता है। A का L से क्या संबंध है ?",
+    q_en: "Q122. A is the sister of C, who is B's daughter. K is C's father and L is K's father. How is A related to L?",
+    tag: "RPF S.I. 09/12/2024 (Evening)",
+    o_hi: [
+      "(a) पुत्री की पुत्री",
+      "(b) पुत्र का पुत्र",
+      "(c) पुत्र की पत्नी",
+      "(d) पुत्र की पुत्री"
+    ],
+    o_en: [
+      "(a) daughter's daughter",
+      "(b) son's son",
+      "(c) son's wife",
+      "(d) son's daughter"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q123. A * B का अर्थ है कि 'A, B का पिता है', A - B का अर्थ है कि 'A, B का पुत्र है', A $ B का अर्थ है कि 'A, B की बहन है' और A @ B का अर्थ है कि 'A, B की पुत्री है'। उपरोक्त जानकारी के आधार पर, निम्नलिखित में से किसका अर्थ यह है कि D, R की बहन की पुत्री है ?",
+    q_en: "Q123. A * B means 'A is B's father', A - B means 'A is B's son', A $ B means 'A is B's sister', and A @ B means 'A is B's daughter'. Based on the above, which of the following means that D is the daughter of R's sister?",
+    tag: "RPF S.I. 12/12/2024 (Morning)",
+    o_hi: [
+      "(a) D @ U - S * T $ R",
+      "(b) D $ U * S - T @ R",
+      "(c) D * U @ S $ T - R",
+      "(d) D @ U * S - T $ R"
+    ],
+    o_en: [
+      "(a) D @ U - S * T $ R",
+      "(b) D $ U * S - T @ R",
+      "(c) D * U @ S $ T - R",
+      "(d) D @ U * S - T $ R"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q124. किसी निश्चित कूट भाषा में, A; B का अर्थ है कि, 'A, B की बहन है', A = B का अर्थ है कि, 'A, B की पुत्री है', A < B का अर्थ है कि, 'A, B का पुत्र है', और A + B का अर्थ है कि, 'A, B का पिता है'। यदि 'T < A ; N = G + O' है, तो T का O से क्या संबंध है ?",
+    q_en: "Q124. In a certain code language, A ; B means 'A is B's sister', A = B means 'A is B's daughter', A < B means 'A is B's son', and A + B means 'A is B's father'. If 'T < A ; N = G + O', how is T related to O?",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) बहन का पुत्र",
+      "(b) बहन के पिता",
+      "(c) बहन की माता",
+      "(d) बहन की पुत्री"
+    ],
+    o_en: [
+      "(a) sister's son",
+      "(b) sister's father",
+      "(c) sister's mother",
+      "(d) sister's daughter"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q125. G, H की माता है। H, J की माता है। J, K का भाई है। K, L का पुत्र है। G का L से क्या संबंध है ?",
+    q_en: "Q125. G is H's mother. H is J's mother. J is K's brother. K is L's son. How is G related to L?",
+    tag: "RPF S.I. 13/12/2024 (Morning)",
+    o_hi: [
+      "(a) पत्नी का भाई",
+      "(b) पत्नी के पिता",
+      "(c) पत्नी की माता",
+      "(d) पति की माता"
+    ],
+    o_en: [
+      "(a) wife's brother",
+      "(b) wife's father",
+      "(c) wife's mother",
+      "(d) husband's mother"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q126. A, B की माता है। G, B के पिता C की बहन है। K, G का पुत्र है। A का K से क्या संबंध है?",
+    q_en: "Q126. A is B's mother. G is the sister of B's father C. K is G's son. How is A related to K?",
+    tag: "RPF S.I. 13/12/2024 (Evening)",
+    o_hi: [
+      "(a) माता के भाई का पुत्र",
+      "(b) माता के पिता",
+      "(c) माता के भाई की पुत्री",
+      "(d) माता के भाई की पत्नी"
+    ],
+    o_en: [
+      "(a) mother's brother's son",
+      "(b) mother's father",
+      "(c) mother's brother's daughter",
+      "(d) mother's brother's wife"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q127. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B का भाई है', A - B का अर्थ 'A, B का बेटा है', A × B का अर्थ 'A, B की पत्नी है' और A ÷ B का अर्थ 'A, B का पिता है'। उपरोक्त के आधार पर, यदि 'P - Q ÷ R × S + T’ है, तो Q का S से क्या संबंध है?",
+    q_en: "Q127. In a certain code language, A + B means 'A is B's brother', A - B means 'A is B's son', A × B means 'A is B's wife', and A ÷ B means 'A is B's father'. Based on the above, if 'P - Q ÷ R × S + T', how is Q related to S?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) पति का भाई",
+      "(b) पत्नी के पिता",
+      "(c) पत्नी का भाई",
+      "(d) पिता"
+    ],
+    o_en: [
+      "(a) husband's brother",
+      "(b) wife's father",
+      "(c) wife's brother",
+      "(d) father"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q128. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B की माँ है', A - B का अर्थ 'A, B का भाई है', - A × B का अर्थ 'A, B की पत्नी है', A ÷ B का अर्थ 'A, B का पिता है', और A # B का अर्थ 'A, B की बेटी है'। यदि 'Q # R × P ÷ K × T' है, तो R का T से क्या संबंध है?",
+    q_en: "Q128. In a certain code language, A + B means 'A is B's mother', A - B means 'A is B's brother', A × B means 'A is B's wife', A ÷ B means 'A is B's father', and A # B means 'A is B's daughter'. If 'Q # R × P ÷ K × T', how is R related to T?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) बेटी की बेटी",
+      "(b) पत्नी की माँ",
+      "(c) बेटे की पत्नी",
+      "(d) बेटे की बेटी"
+    ],
+    o_en: [
+      "(a) daughter's daughter",
+      "(b) wife's mother",
+      "(c) son's wife",
+      "(d) son's daughter"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q129. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B की मां है', A - B का अर्थ 'A, B का भाई है', A × B का अर्थ 'A, B की पत्नी है', A ÷ B का अर्थ 'A, B का पिता है', और A # B का अर्थ 'A, B की बेटी है'। यदि 'Q - S + P - T # R ÷ K' है, तो P का K से क्या संबंध है?",
+    q_en: "Q129. In a certain code language, A + B means 'A is B's mother', A - B means 'A is B's brother', A × B means 'A is B's wife', A ÷ B means 'A is B's father', and A # B means 'A is B's daughter'. If 'Q - S + P - T # R ÷ K', how is P related to K?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Evening )",
+    o_hi: [
+      "(a) भाई",
+      "(b) बहन",
+      "(c) पिता",
+      "(d) मां"
+    ],
+    o_en: [
+      "(a) brother",
+      "(b) sister",
+      "(c) father",
+      "(d) mother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q130. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B की मां है', A - B का अर्थ 'A, B का भाई है', A × B का अर्थ 'A, B की पत्नी है', A ÷ B का अर्थ 'A, B का पिता है', और A # B का अर्थ है कि 'A, B की बेटी है'। यदि 'P × Q ÷ T + Z - S # K' है, तो K का Q से क्या संबंध है?",
+    q_en: "Q130. In a certain code language, A + B means 'A is B's mother', A - B means 'A is B's brother', A × B means 'A is B's wife', A ÷ B means 'A is B's father', and A # B means 'A is B's daughter'. If 'P × Q ÷ T + Z - S # K', how is K related to Q?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Morning)",
+    o_hi: [
+      "(a) पति की मां",
+      "(b) पत्नी का भाई",
+      "(c) पत्नी के पिता",
+      "(d) बेटी का पति"
+    ],
+    o_en: [
+      "(a) husband's mother",
+      "(b) wife's brother",
+      "(c) wife's father",
+      "(d) daughter's husband"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q131. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B की मां है', A − B का अर्थ 'A, B का भाई है', A × B का अर्थ 'A, B की पत्नी है' और A ÷ B का अर्थ 'A, B का पिता है'। उपरोक्त के आधार पर यदि 'P + Q − R × S ÷ T' है, तो Q का T से क्या संबंध है?",
+    q_en: "Q131. In a certain code language, A + B means 'A is B's mother', A − B means 'A is B's brother', A × B means 'A is B's wife', and A ÷ B means 'A is B's father'. Based on the above, if 'P + Q − R × S ÷ T', how is Q related to T?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) पिता का भाई",
+      "(b) भाई",
+      "(c) मां की मां",
+      "(d) मां का भाई"
+    ],
+    o_en: [
+      "(a) father's brother",
+      "(b) brother",
+      "(c) mother's mother",
+      "(d) mother's brother"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q132. एक निश्चित कूट भाषा में, A + B का अर्थ है 'A, B की माँ है', A − B का अर्थ है 'A, B का भाई है', A × B का अर्थ है 'A, B की पत्नी है' और A ÷ B का अर्थ है 'A, B का पिता है'। उपरोक्त के आधार पर, यदि 'P − Q × R ÷ S + T' है तो Q का T से क्या संबंध है?",
+    q_en: "Q132. In a certain code language, A + B means 'A is B's mother', A − B means 'A is B's brother', A × B means 'A is B's wife', and A ÷ B means 'A is B's father'. Based on the above, if 'P − Q × R ÷ S + T', how is Q related to T?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) माँ का भाई",
+      "(b) माँ",
+      "(c) माँ की माँ",
+      "(d) बेटी"
+    ],
+    o_en: [
+      "(a) mother's brother",
+      "(b) mother",
+      "(c) mother's mother",
+      "(d) daughter"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q133. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B की मां है', A - B का अर्थ 'A, B का भाई है', A × B का अर्थ 'A, B की पत्नी है' और A ÷ B का अर्थ 'A, B का पिता है'। यदि 'M − N ÷ P + S × T' है, तो M का T से क्या संबंध है?",
+    q_en: "Q133. In a certain code language, A + B means 'A is B's mother', A - B means 'A is B's brother', A × B means 'A is B's wife', and A ÷ B means 'A is B's father'. If 'M − N ÷ P + S × T', how is M related to T?",
+    tag: "RRB ALP Tier - I 27/11/2024 (Evening)",
+    o_hi: [
+      "(a) पत्नी की मां के पिता के भाई",
+      "(b) पत्नी के पिता के भाई",
+      "(c) पत्नी की मां की मां के पिता",
+      "(d) पत्नी के पिता के पिता के भाई"
+    ],
+    o_en: [
+      "(a) wife's mother's father's brother",
+      "(b) wife's father's brother",
+      "(c) wife's mother's mother's father",
+      "(d) wife's father's father's brother"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q134. एक निश्चित कूट भाषा में, 'A + B' का अर्थ 'A, B की मां है', 'A - B' का अर्थ 'A, B का भाई है', 'A × B' का अर्थ 'A, B की पत्नी है' और 'A ÷ B' का अर्थ 'A, B का पिता है'। यदि 'M - N + P ÷ S × T' है, तो M का T से क्या संबंध है?",
+    q_en: "Q134. In a certain code language, 'A + B' means 'A is B's mother', 'A - B' means 'A is B's brother', 'A × B' means 'A is B's wife', and 'A ÷ B' means 'A is B's father'. If 'M - N + P ÷ S × T', how is M related to T?",
+    tag: "RRB ALP Tier - I 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) पत्नी के पिता का भाई",
+      "(b) पत्नी के पिता के पिता का भाई",
+      "(c) पत्नी के पिता की माँ के पिता",
+      "(d) पत्नी के पिता की माँ के भाई"
+    ],
+    o_en: [
+      "(a) wife's father's brother",
+      "(b) wife's father's father's brother",
+      "(c) wife's father's mother's father",
+      "(d) wife's father's mother's brother"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q135. एक निश्चित कूट भाषा में, A + B का अर्थ 'A, B की मां है', A − B का अर्थ 'A, B का भाई है', A × B का अर्थ 'A, B की पत्नी है' और A ÷ B का अर्थ 'A, B का पिता है'। यदि 'M ÷ N × P − S + T' है, तो M का T से क्या संबंध है?",
+    q_en: "Q135. In a certain code language, A + B means 'A is B's mother', A − B means 'A is B's brother', A × B means 'A is B's wife', and A ÷ B means 'A is B's father'. If 'M ÷ N × P − S + T', how is M related to T?",
+    tag: "RRB ALP Tier - I 28/11/2024 (Evening)",
+    o_hi: [
+      "(a) मां के भाई की पत्नी का भाई",
+      "(b) मां के भाई की पत्नी के पिता",
+      "(c) मां के भाई",
+      "(d) मां के पिता"
+    ],
+    o_en: [
+      "(a) mother's brother's wife's brother",
+      "(b) mother's brother's wife's father",
+      "(c) mother's brother",
+      "(d) mother's father"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q136. एक निश्चित कूट भाषा में, ‘A + B’ का अर्थ 'A, B की मां है', ‘A - B’ का अर्थ 'A, B का भाई है', ‘A × B’ का अर्थ 'A, B की पत्नी है' और ‘A ÷ B’ का अर्थ 'A, B का पिता है'। यदि 'M + N × P − S ÷ T' है, तो M का T से क्या संबंध है?",
+    q_en: "Q136. In a certain code language, A + B means 'A is B's mother', A - B means 'A is B's brother', A × B means 'A is B's wife', and A ÷ B means 'A is B's father'. If 'M + N × P − S ÷ T', how is M related to T?",
+    tag: "RRB ALP Tier - I 29/11/2024 (Evening)",
+    o_hi: [
+      "(a) पिता की बहन की बेटी",
+      "(b) पिता के भाई की पत्नी की माँ",
+      "(c) पिता के भाई की पत्नी",
+      "(d) पिता के भाई की पत्नी की बहन"
+    ],
+    o_en: [
+      "(a) father's sister's daughter",
+      "(b) father's brother's wife's mother",
+      "(c) father's brother's wife",
+      "(d) father's brother's wife's sister"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q137. G, M, P, V, Z और D एक परिवार के छह सदस्य हैं। Z, V का बेटा है। M V का भाई है। D और V एक विवाहित जोड़े हैं। P, D की बेटी है। D, G की बहन है। Z, P से किस प्रकार संबंधित है?",
+    q_en: "Q137. G, M, P, V, Z and D are six members of a family. Z is V's son. M is V's brother. D and V are a married couple. P is D's daughter. D is G's sister. How is Z related to P?",
+    tag: "Level 6 (09/05/2022) Shift 1",
+    o_hi: [
+      "(a) माँ",
+      "(b) बहन",
+      "(c) भाई",
+      "(d) पिता"
+    ],
+    o_en: [
+      "(a) mother",
+      "(b) sister",
+      "(c) brother",
+      "(d) father"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q138. यदि 'P&Q' इंगित करता है कि 'P, Q का पुत्र है', और 'P$Q' इंगित करता है कि 'P, Q की बहन है', तो निम्नलिखित में से कौन सा व्यंजक यह दर्शाता है कि 'Y, Z की माँ है'?",
+    q_en: "Q138. If 'P & Q' indicates that 'P is Q's son', and 'P $ Q' indicates that 'P is Q's sister', then which of the following expressions shows that 'Y is Z's mother'?",
+    tag: "Level 4 (10/05/2022) Shift 1",
+    o_hi: [
+      "(a) Z$Y&X",
+      "(b) X&Y$Z",
+      "(c) X$Y&Z",
+      "(d) Z&Y$X"
+    ],
+    o_en: [
+      "(a) Z$Y&X",
+      "(b) X&Y$Z",
+      "(c) X$Y&Z",
+      "(d) Z&Y$X"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q139. रूबी और जूही बहनें हैं। कृष्ण जूही के पिता के पिता हैं। रेशमा अरविंद की मां है। अरविंद, रूबी के इकलौते भाई रोहित के पिता हैं,। कृष्ण का रोहित से क्या संबंध है?",
+    q_en: "Q139. Ruby and Juhi are sisters. Krishna is the father of Juhi's father. Reshma is Arvind's mother. Arvind is the father of Rohit, Ruby's only brother. How is Krishna related to Rohit?",
+    tag: "Level 5 (12/06/2022) Shift 1",
+    o_hi: [
+      "(a) मां का भाई",
+      "(b) पिता के पिता",
+      "(c) पिता",
+      "(d) मां के पिता"
+    ],
+    o_en: [
+      "(a) mother's brother",
+      "(b) father's father",
+      "(c) father",
+      "(d) mother's father"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q140. C, K की माता है। K, H की पत्नी है। R, K का भाई है। P, R का पिता है। C, P से किस प्रकार संबंधित है?",
+    q_en: "Q140. C is K's mother. K is H's wife. R is K's brother. P is R's father. How is C related to P?",
+    tag: "Level 2 (13/06/2022) Shift 1",
+    o_hi: [
+      "(a) भाई की पत्नी",
+      "(b) पत्नी",
+      "(c) बेटी",
+      "(d) बहन"
+    ],
+    o_en: [
+      "(a) brother's wife",
+      "(b) wife",
+      "(c) daughter",
+      "(d) sister"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q141. 'X, Y की माँ है' को 'X < Y' द्वारा दर्शाया गया है 'X, Y का पति है' को 'X>Y' द्वारा दर्शाया गया है 'X, Y की बहन है' को 'X @ Y' द्वारा दर्शाया गया है 'X, Y का पुत्र है' को 'X $ Y' द्वारा दर्शाया गया है निम्नलिखित में से कौन सा संबंध 'R, Q की पुत्री है' को इंगित करता है?",
+    q_en: "Q141. 'X is Y's mother' is represented by 'X < Y'. 'X is Y's husband' is represented by 'X > Y'. 'X is Y's sister' is represented by 'X @ Y'. 'X is Y's son' is represented by 'X $ Y'. Which of the following relations indicates that 'R is Q's daughter'?",
+    tag: "Level 3 (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) R @ H > K < Q",
+      "(b) R @ H $ K > Q",
+      "(c) Q > K @ R $ H",
+      "(d) Q < K @ H $ R"
+    ],
+    o_en: [
+      "(a) R @ H > K < Q",
+      "(b) R @ H $ K > Q",
+      "(c) Q > K @ R $ H",
+      "(d) Q < K @ H $ R"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q142. B की माता, F की पुत्री है। C, F और D का पुत्र है। G, C और E का पुत्र है। D, R की माता है। F, G से किस प्रकार संबंधित है?",
+    q_en: "Q142. B's mother is F's daughter. C is the son of F and D. G is the son of C and E. D is R's mother. How is F related to G?",
+    tag: "Level 5 (15/06/2022) Shift 1",
+    o_hi: [
+      "(a) पिता की मां",
+      "(b) भाई",
+      "(c) माता के पिता",
+      "(d) पिता के पिता"
+    ],
+    o_en: [
+      "(a) father's mother",
+      "(b) brother",
+      "(c) mother's father",
+      "(d) father's father"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q143. एक परिवार में सात सदस्य हैं। D, Fकी मां है। D, G के पिता की मां है। G, A और C का भाई है। F, E का इकलौता पुत्र है। E का C से क्या संबंध है?",
+    q_en: "Q143. There are seven members in a family. D is F's mother. D is the mother of G's father. G is the brother of A and C. F is E's only son. How is E related to C?",
+    tag: "Level 5 (15/06/2022) Shift 2",
+    o_hi: [
+      "(a) भाई",
+      "(b) मां का भाई",
+      "(c) पिता",
+      "(d) पिता के पिता"
+    ],
+    o_en: [
+      "(a) brother",
+      "(b) mother's brother",
+      "(c) father",
+      "(d) father's father"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q144. B की मां R की केवल एक पुत्री है। A, R का इकलौता पुत्र है। B का A से क्या संबंध है?",
+    q_en: "Q144. B's mother is the only daughter of R. A is R's only son. How is B related to A?",
+    tag: "Level 2 (16/06/2022) Shift 2",
+    o_hi: [
+      "(a) बहन",
+      "(b) पिता",
+      "(c) भाई",
+      "(d) मां की बहन"
+    ],
+    o_en: [
+      "(a) sister",
+      "(b) father",
+      "(c) brother",
+      "(d) mother's sister"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q145. यदि 'S # T' का अर्थ है - 'S, T का पिता है', 'S $ T' का अर्थ है - 'S, T की मां है', 'S @ T' का अर्थ है - 'S, T का पति है', 'S = T' का अर्थ है - 'S, T का पुत्र है', तो निम्नलिखित व्यंजक के अनुसार E का L से क्या संबंध है? L $ Q = B # D @ E $ O",
+    q_en: "Q145. If 'S # T' means 'S is T's father', 'S $ T' means 'S is T's mother', 'S @ T' means 'S is T's husband', and 'S = T' means 'S is T's son', then according to the expression L $ Q = B # D @ E $ O, how is E related to L?",
+    tag: "Level 3 (17/06/2022) Shift 1",
+    o_hi: [
+      "(a) पुत्री`",
+      "(b) मां",
+      "(c) सास",
+      "(d) पुत्रवधू"
+    ],
+    o_en: [
+      "(a) daughter",
+      "(b) mother",
+      "(c) mother-in-law",
+      "(d) daughter-in-law"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q146. एक तस्वीर की ओर इशारा करते हुए युविका ने कहा कि तस्वीर में मौजूद लड़का, उसके पिता की मां की पुत्री का पुत्र है। उस लड़के का युविका से क्या संबंध है?",
+    q_en: "Q146. Pointing to a photograph, Yuvika said that the boy in the picture is the son of her father's mother's daughter. How is that boy related to Yuvika?",
+    tag: "Level 3 (17/06/2022) Shift 2",
+    o_hi: [
+      "(a) भाई",
+      "(b) मां के भाई का पुत्र",
+      "(c) पिता की बहन का पुत्र",
+      "(d) पिता का भाई"
+    ],
+    o_en: [
+      "(a) brother",
+      "(b) mother's brother's son",
+      "(c) father's sister's son",
+      "(d) father's brother"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q147. 'P + Q' का अर्थ है 'P, Q की पुत्री है', ‘P × Q' का अर्थ है 'P, Q का पुत्र हैं', P - Q' का अर्थ है 'P, Q की पत्नी है दिए गए व्यंजक के लिए निम्नलिखित में से कौन सा विकल्प सही है? ‘A + B - C × D",
+    q_en: "Q147. 'P + Q' means 'P is Q's daughter', 'P × Q' means 'P is Q's son', and 'P - Q' means 'P is Q's wife'. Which of the following options is correct for the expression 'A + B - C × D'?",
+    tag: "Level 3 (17/06/2022) Shift 3",
+    o_hi: [
+      "(a) B, D का पुत्र है।",
+      "(b) A, D के पुत्र की पुत्री है।",
+      "(c) B, D की पुत्री है।",
+      "(d) C, D की पत्नी है।"
+    ],
+    o_en: [
+      "(a) B is D's son.",
+      "(b) A is D's son's daughter.",
+      "(c) B is D's daughter.",
+      "(d) C is D's wife."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q148. शांति की बेटी चांदिनी की शादी अभि से हुई है। आंचल की शादी शांति के पोते सैंडी से हुई है। अभि का पोता करण है। रश्मि करण की मां हैं। शौर्य आंचल का पुत्र है। शौर्य, करण से किस प्रकार संबंधित है?",
+    q_en: "Q148. Shanti's daughter Chandini is married to Abhi. Aanchal is married to Shanti's grandson Sandy. Karan is Abhi's grandson. Rashmi is Karan's mother. Shaurya is Aanchal's son. How is Shaurya related to Karan?",
+    tag: "RRB NTPC 28/12/2020 (Evening)",
+    o_hi: [
+      "(a) पुत्र",
+      "(b) भाई",
+      "(c) भतीजा",
+      "(d) चचेरा भाई"
+    ],
+    o_en: [
+      "(a) son",
+      "(b) brother",
+      "(c) nephew",
+      "(d) male cousin"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q149. एक महिला की ओर इशारा करते हुए, एक आदमी ने कहा \"उसके पिता मेरे पिता के इकलौते पुत्र हैं।\" आदमी का महिला से क्या संबंध है?",
+    q_en: "Q149. Pointing to a woman, a man said, 'Her father is the only son of my father.' How is the man related to the woman?",
+    tag: "RRB NTPC 05/01/2021 (Morning)",
+    o_hi: [
+      "(a) दादा",
+      "(b) भाई",
+      "(c) पुत्र",
+      "(d) पिता"
+    ],
+    o_en: [
+      "(a) grandfather",
+      "(b) brother",
+      "(c) son",
+      "(d) father"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q150. मनोज सपना का पति है, सपना की मां नीलम है। नीलम का पोता आदित्य है, जो शेफाली का भाई है। शेफाली विजय की पुत्री है जो मनोज की पत्नी का भाई है। सपना का शेफाली से क्या संबंध है ?",
+    q_en: "Q150. Manoj is Sapna's husband, and Sapna's mother is Neelam. Aditya is Neelam's grandson and is Shefali's brother. Shefali is Vijay's daughter, and Vijay is the brother of Manoj's wife. How is Sapna related to Shefali?",
+    tag: "RRB NTPC 05/01/2021 (Evening)",
+    o_hi: [
+      "(a) बहन",
+      "(b) मामी",
+      "(c) बुआ",
+      "(d) बहन"
+    ],
+    o_en: [
+      "(a) sister",
+      "(b) maternal uncle's wife",
+      "(c) paternal aunt",
+      "(d) sister"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
