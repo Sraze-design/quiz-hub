@@ -1,0 +1,802 @@
+const data = [
+  {
+    q_hi: "Q201. करियप्पा, कारगिल, कटारी, मानेकशॉ और सुब्रतो एक सैनिक स्कूल में पांच अलग-अलग सदन में हैं। कारगिल सुब्रतो के दाईं ओर है और कटारी करियप्पा के बाईं ओर है और कारगिल के दाईं ओर है। सुब्रत, मानेकशॉ के दायीं ओर है। बीच में कौन सा सदन है?",
+    q_en: "Q201. Cariappa, Kargil, Katari, Manekshaw and Subroto are in five different houses in a military school. Kargil is to the right of Subroto, and Katari is to the left of Cariappa and to the right of Kargil. Subroto is to the right of Manekshaw. Which house is in the middle?",
+    tag: "RRB NTPC 05/01/2021 (Morning)",
+    o_hi: [
+      "(a) कटारी",
+      "(b) सुब्रतो",
+      "(c) कारगिल",
+      "(d) करियप्पा"
+    ],
+    o_en: [
+      "(a) Katari",
+      "(b) Subroto",
+      "(c) Kargil",
+      "(d) Cariappa"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q202. 47 छात्रों की एक कक्षा में अनुराग का रोल नंबर अंत से अठारहवां है। उसका रोल नंबर शुरू से कितना है?",
+    q_en: "Q202. In a class of 47 students, Anurag's roll number is 18th from the end. What is his roll number from the beginning?",
+    tag: "RRB NTPC 07/01/2021 (Evening)",
+    o_hi: [
+      "(a) 30",
+      "(b) 29",
+      "(c) 27",
+      "(d) 28"
+    ],
+    o_en: [
+      "(a) 30",
+      "(b) 29",
+      "(c) 27",
+      "(d) 28"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q203. 12 छात्रों की एक पंक्ति में, जब करण को दायें ओर तीन स्थान खिसकाया गया, तो वह दायें छोर से पाँचवाँ हो गया। बाएं छोर से उसका पहले का स्थान क्या था?",
+    q_en: "Q203. In a row of 12 students, when Karan moves three places to the right, he becomes 5th from the right end. What was his original position from the left end?",
+    tag: "RRB NTPC 09/01/2021 (Morning)",
+    o_hi: [
+      "(a) सातवीं",
+      "(b) छठी",
+      "(c) आठवीं",
+      "(d) पांचवीं"
+    ],
+    o_en: [
+      "(a) Seventh",
+      "(b) Sixth",
+      "(c) Eighth",
+      "(d) Fifth"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q204. P, Q से लंबा है और R, S से लंबा है। यदि S, Q से लंबा है लेकिन P से छोटा है और P, R से छोटा है। सबसे लंबा कौन है?",
+    q_en: "Q204. P is taller than Q and R is taller than S. If S is taller than Q but shorter than P, and P is shorter than R, who is the tallest?",
+    tag: "RRB NTPC 09/01/2021 (Evening)",
+    o_hi: [
+      "(a) Q",
+      "(b) S",
+      "(c) P",
+      "(d) R"
+    ],
+    o_en: [
+      "(a) Q",
+      "(b) S",
+      "(c) P",
+      "(d) R"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q205. एक कक्षा में रेणु का स्थान नीचे से 15वां है। यदि कक्षा में 30 विद्यार्थी हैं, तो ऊपर से उसका स्थान कौन सा है?",
+    q_en: "Q205. Renu is 15th from the bottom in a class. If there are 30 students in the class, what is her position from the top?",
+    tag: "RRB NTPC 10/01/2021 (Morning)",
+    o_hi: [
+      "(a) 15",
+      "(b) 14",
+      "(c) 16",
+      "(d) 17"
+    ],
+    o_en: [
+      "(a) 15",
+      "(b) 14",
+      "(c) 16",
+      "(d) 17"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q206. A को याद है कि P की पहली नियुक्ति 17 तारीख के बाद है लेकिन 20 मार्च से पहले है। जबकि B को याद है कि P की पहली नियुक्ति 18 तारीख के बाद लेकिन 22 मार्च से पहले की है। दोनों को सही मानते हुए, निम्नलिखित में से कौन सी नियुक्ति P की नौकरी पर पहली नियुक्ति होने की सबसे अधिक संभावना है ।",
+    q_en: "Q206. A remembers that P's first appointment was after the 17th but before 20 March. B remembers that P's first appointment was after the 18th but before 22 March. Assuming both are correct, which date is most likely to be P's first appointment on the job?",
+    tag: "RRB NTPC 10/01/2021 (Evening)",
+    o_hi: [
+      "(a) 18 मार्च",
+      "(b) 20 मार्च",
+      "(c) 21 मार्च",
+      "(d) 19 मार्च"
+    ],
+    o_en: [
+      "(a) 18 March",
+      "(b) 20 March",
+      "(c) 21 March",
+      "(d) 19 March"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q207. दी गई जानकारी का अध्ययन कीजिये और निम्नलिखित प्रश्नों के उत्तर दीजिये I) छह छात्र P, Q, R, S, T और U एक कक्षा में हैं। II) Q और R, U से हल्के हैं लेकिन P से लम्बे हैं। III) S, Q से लंबा और R से भारी है। IV) T, S से हल्का है लेकिन U से भारी है। V) U, S से लम्बा है VI) P, T से हल्का है लेकिन U से भारी है। VII) P, T से लम्बा है। विद्यार्थियों में सबसे छोटा कौन है ?",
+    q_en: "Q207. Study the information and answer the question. I) Six students P, Q, R, S, T and U are in a class. II) Q and R are lighter than U but taller than P. III) S is taller than Q and heavier than R. IV) T is lighter than S but heavier than U. V) U is taller than S. VI) P is lighter than T but heavier than U. VII) P is taller than T. Who is the shortest among the students?",
+    tag: "RRB NTPC 12/01/2021 (Morning)",
+    o_hi: [
+      "(a) P",
+      "(b) R",
+      "(c) T",
+      "(d) Q"
+    ],
+    o_en: [
+      "(a) P",
+      "(b) R",
+      "(c) T",
+      "(d) Q"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q208. सात छात्र A, B, C, D, E, F और G परीक्षा की एक श्रृंृंखला में शामिल होते हैं। कोई भी दो छात्र समान अंक प्राप्त नहीं कर सकते हैं। A हमेशा B से अधिक अंक प्राप्त करता है। G हमेशा A से अधिक अंक प्राप्त करता है। हर बार या तो C उच्चतम अंक प्राप्त करता है और E सबसे कम अंक प्राप्त करता है या D उच्चतम अंक प्राप्त करता है और F या B सबसे कम अंक प्राप्त करता है। यदि D का स्थान छठा है और B उनके अंकों के अनुसार पांचवें स्थान पर है, तो निम्नलिखित में से कौन सा सत्य हो सकता है?",
+    q_en: "Q208. Seven students A, B, C, D, E, F and G take a series of tests. No two students can score the same marks. A always scores more than B. G always scores more than A. Each time either C scores the highest and E the lowest, or D scores the highest and either F or B scores the lowest. If D is ranked sixth and B is ranked fifth according to their marks, which of the following could be true?",
+    tag: "RRB NTPC 12/01/2021 (Morning)",
+    o_hi: [
+      "(a) A दूसरे या सातवें स्थान पर है",
+      "(b) E चौथे या तीसरे स्थान पर है",
+      "(c) F तीसरे या चौथे स्थान पर है",
+      "(d) G पहले या चौथे स्थान पर है"
+    ],
+    o_en: [
+      "(a) A is in second or seventh position",
+      "(b) E is in fourth or third position",
+      "(c) F is in third or fourth position",
+      "(d) G is in first or fourth position"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q209. 7 सदस्य, A, B, C, D, E, F और G एक विशेष क्रम में कार्यालय जा रहे हैं (जरूरी नहीं इसी क्रम में हो)। Cअंत में कार्यालय पहुचा । उनमें से कोई भी एक ही समय में कार्यालय नहीं पहुंचा। उनमें से कम से कम 3, G के बाद कार्यालय पहुँचे। E, A के ठीक बाद कार्यालय पहुँचा और G, E के ठीक बाद कार्यालय पहुँचा। F, A से ठीक पहले कार्यालय पहुँचा, लेकिन D के बाद कार्यालय नहीं पहुँचा। उनमें से कौन सबसे पहले कार्यालय पहुंचा ?",
+    q_en: "Q209. Seven members A, B, C, D, E, F and G reach the office in a certain order, not necessarily the same as listed. C reaches the office last. No two reach at the same time. At least three persons reach after G. E reaches immediately after A and G reaches immediately after E. F reaches immediately before A, but not after D. Who reaches the office first?",
+    tag: "RRB NTPC 12/01/2021 (Morning)",
+    o_hi: [
+      "(a) G",
+      "(b) F",
+      "(c) B",
+      "(d) D"
+    ],
+    o_en: [
+      "(a) G",
+      "(b) F",
+      "(c) B",
+      "(d) D"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q210. राम ,सुमित से तेज दौड़ता है जबकि सुमित ,हार्दिक और तरुण से तेज दौड़ता है। तीन महीने की ट्रेनिंग के बाद हार्दिक ,राम को मात देने में सक्षम हो जाएगा । लेकिन तरुण , सुमित को नहीं हरा पायेगा। यदि तीन महीने के प्रशिक्षण के बाद प्रतिस्पर्धात्मक दौड़ होती है, तो निम्नलिखित में से कौन सा शीर्ष तीन धावकों का क्रम हो सकता है?",
+    q_en: "Q210. Ram runs faster than Sumit, while Sumit runs faster than Hardik and Tarun. After three months of training, Hardik will be able to beat Ram, but Tarun will not be able to beat Sumit. If a competitive race is held after three months of training, which of the following could be the order of the top three runners?",
+    tag: "RRB NTPC 13/01/2021 (Morning)",
+    o_hi: [
+      "(a) राम, सुमित और हार्दिक",
+      "(b) हार्दिक, राम और सुमित",
+      "(c) हार्दिक, राम और तरुण",
+      "(d) राम, हार्दिक और सुमित"
+    ],
+    o_en: [
+      "(a) Ram, Sumit and Hardik",
+      "(b) Hardik, Ram and Sumit",
+      "(c) Hardik, Ram and Tarun",
+      "(d) Ram, Hardik and Sumit"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q211. यदि मोहन ,सोहन से लंबा है, रमेश, सोहन से छोटा है और संगीता ,तूलिका से लंबी है लेकिन सोहन से छोटी है, तो उनमें से सबसे लंबा कौन है?",
+    q_en: "Q211. If Mohan is taller than Sohan, Ramesh is shorter than Sohan, and Sangeeta is taller than Tulika but shorter than Sohan, who is the tallest among them?",
+    tag: "RRB NTPC 17/01/2021 (Morning)",
+    o_hi: [
+      "(a) संगीता",
+      "(b) मोहन",
+      "(c) रमेश",
+      "(d) सोहन"
+    ],
+    o_en: [
+      "(a) Sangeeta",
+      "(b) Mohan",
+      "(c) Ramesh",
+      "(d) Sohan"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q212. एक विशेष कक्षा के छात्र एक पंक्ति में खड़े होते हैं। यदि एक छात्र का क्रमांक इक्यावन की उस कक्षा में पंक्ति के प्रारंभ से तेईस है, तो पंक्ति में अंतिम छात्र से उसका क्रमांक कितना है?",
+    q_en: "Q212. Students of a class stand in a row. If a student's number from the beginning is 23 in a class of 51 students, what is the student's number from the last position in the row?",
+    tag: "RRB NTPC 18/01/2021 (Evening)",
+    o_hi: [
+      "(a) सत्ताईस",
+      "(b) पच्चीस",
+      "(c) उनतीस",
+      "(d) तेईस"
+    ],
+    o_en: [
+      "(a) Twenty-seven",
+      "(b) Twenty-five",
+      "(c) Twenty-nine",
+      "(d) Twenty-three"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q213. 16 लड़कियों की एक पंक्ति में, जब सीमा को दो स्थान बायीं ओर खिसकाया जाता है, तो वह बायें छोर से 7वीं हो जाती है। पंक्ति के दायें छोर से उसकी पहले की स्थिति क्या थी?",
+    q_en: "Q213. In a row of 16 girls, when Seema is moved two places to the left, she becomes 7th from the left end. What was her original position from the right end?",
+    tag: "RRB NTPC 20/01/2021 (Morning)",
+    o_hi: [
+      "(a) 8वाँ",
+      "(b) 7वाँ",
+      "(c) 10वाँ",
+      "(d) 9वाँ"
+    ],
+    o_en: [
+      "(a) 8th",
+      "(b) 7th",
+      "(c) 10th",
+      "(d) 9th"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q214. सात लड़कियों A, B, C, D, E, F और G की लंबाई की तुलना की जाती है। D की लंबाई कम से कम चार लड़कियों से अधिक है लेकिन वह सबसे लंबी नहीं है। A की लंबाई B और F से अधिक है और F की लंबाई E से कम है। A की लंबाई D से कम है। G की लंबाई C और D दोनों से अधिक है | निम्नलिखित में से कौन सा कथन सही नहीं है?",
+    q_en: "Q214. The heights of seven girls A, B, C, D, E, F and G are compared. D is taller than at least four girls but is not the tallest. A is taller than B and F, and F is shorter than E. A is shorter than D. G is taller than both C and D. Which of the following statements is NOT correct?",
+    tag: "RRB NTPC 21/01/2021 (Morning)",
+    o_hi: [
+      "(a) G दूसरा सबसे लंबा हो सकता है",
+      "(b) A पांचवां सबसे लंबा हो सकता है",
+      "(c) C चौथा सबसे लंबा हो सकता है",
+      "(d) G पांचवां सबसे लंबा हो सकता है"
+    ],
+    o_en: [
+      "(a) G can be the second tallest",
+      "(b) A can be the fifth tallest",
+      "(c) C can be the fourth tallest",
+      "(d) G can be the fifth tallest"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q215. अरुण कक्षा में 27वें स्थान पर है। विजय, अरुण से 7 रैंक आगे है। नीचे से विजय की रैंक 36वीं है। कक्षा में कितने छात्र हैं?",
+    q_en: "Q215. Arun is ranked 27th in the class. Vijay is 7 ranks ahead of Arun. Vijay is 36th from the bottom. How many students are there in the class?",
+    tag: "RRB NTPC 25/01/2021 (Morning)",
+    o_hi: [
+      "(a) 56",
+      "(b) 55",
+      "(c) 51",
+      "(d) 61"
+    ],
+    o_en: [
+      "(a) 56",
+      "(b) 55",
+      "(c) 51",
+      "(d) 61"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q216. चार मित्र U, V, W और X एक गेराज में काम करते हैं W, V से अधिक जानता हैI U, W से अधिक लेकिन X से कम जानता है। सभी में सबसे अधिक ज्ञानी व्यक्ति कौन है?",
+    q_en: "Q216. Four friends U, V, W and X work in a garage. W knows more than V. U knows more than W but less than X. Who is the most knowledgeable among them?",
+    tag: "RRB NTPC 28/01/2021 (Evening)",
+    o_hi: [
+      "(a) U",
+      "(b) V",
+      "(c) X",
+      "(d) W"
+    ],
+    o_en: [
+      "(a) U",
+      "(b) V",
+      "(c) X",
+      "(d) W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q217. एक आदमी के पास पांच पत्थर A, B, C, D और E हैं और प्रत्येक पत्थर का वजन अलग-अलग है। E का वजन A से कम है लेकिन C से अधिक है। A, D और B से भारी है, B, D से भारी है। यदि B और E का वजन क्रमशः 120 g और 155 g है, तो दिए गए विकल्पों में से कौन सा C का संभावित वजन हो सकता है?",
+    q_en: "Q217. A man has five stones A, B, C, D and E, each of a different weight. E weighs less than A but more than C. A is heavier than D and B, and B is heavier than D. If B and E weigh 120 g and 155 g respectively, which of the following could be the weight of C?",
+    tag: "RRB NTPC 28/01/2021 (Evening)",
+    o_hi: [
+      "(a) 156 g",
+      "(b) 162 g",
+      "(c) 152 g",
+      "(d) 159 g"
+    ],
+    o_en: [
+      "(a) 156 g",
+      "(b) 162 g",
+      "(c) 152 g",
+      "(d) 159 g"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q218. A, B, C, D, E पांच दोस्त हैं। B की आयु C से अधिक है लेकिन समूह में सबसे काम लंबा है। C, B से लंबा है, लेकिन उसकी आयु D से कम है। A, की आयु D से अधिक है, लेकिन E जितना लंबा नहीं है। E की आयु C से कम है और B और D से लंबा है। निम्नलिखित में से उनकी आयु का कौन-सा क्रम संभव नहीं हो सकता है?",
+    q_en: "Q218. A, B, C, D and E are five friends. B is older than C but is the shortest in the group. C is taller than B but younger than D. A is older than D but not as tall as E. E is younger than C and taller than B and D. Which of the following age orders is NOT possible?",
+    tag: "RRB NTPC 03/02/2021 (Morning)",
+    o_hi: [
+      "(a) A > D > B > C > E",
+      "(b) A > D > C > B > E",
+      "(c) B > A > D > C > E",
+      "(d) A > B > D > C > E"
+    ],
+    o_en: [
+      "(a) A > D > B > C > E",
+      "(b) A > D > C > B > E",
+      "(c) B > A > D > C > E",
+      "(d) A > B > D > C > E"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q219. यदि एक लड़का पाता है कि वह लड़कों की एक पंक्ति में दायें से 11वें और बायें से 5वें स्थान पर है, तो पंक्ति में कितने लड़कों को जोड़ा जाना चाहिए ताकि पंक्ति में 29 लड़के हों?",
+    q_en: "Q219. A boy finds that he is 11th from the right and 5th from the left in a row of boys. How many boys should be added so that the row contains 29 boys?",
+    tag: "RRB NTPC 03/02/2021 (Evening)",
+    o_hi: [
+      "(a) 12",
+      "(b) 13",
+      "(c) 15",
+      "(d) 14"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 13",
+      "(c) 15",
+      "(d) 14"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q220. पांच दोस्तों P, Q, R, S और T की तुलना उनकी लंबाई के आधार पर की जाती है (जरूरी नहीं कि इसी क्रम में), T की लंबाई P और Q के बीच है। T, S से लंबा है। R की लंबाई P और T से अधिक है। निम्नलिखित में से उनकी लंबाई का कौन-सा क्रम संभव नहीं हो सकता है? I. R > P > T > Q > S II. R > S > Q > T > P III. Q > R > T > S > P",
+    q_en: "Q220. Five friends P, Q, R, S and T are compared by height, not necessarily in the same order. T's height is between P and Q. T is taller than S. R is taller than P and T. Which of the following height orders cannot be possible? I. R > P > T > Q > S II. R > S > Q > T > P III. Q > R > T > S > P",
+    tag: "RRB NTPC 04/02/2021 (Morning)",
+    o_hi: [
+      "(a) केवल II",
+      "(b) II और III",
+      "(c) I और III",
+      "(d) केवल I"
+    ],
+    o_en: [
+      "(a) Only II",
+      "(b) II and III",
+      "(c) I and III",
+      "(d) Only I"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q221. पांच भाई बहन हैं- राज, रोहन, राम, रितिका और रानी। सभी भाई-बहन की लम्बाई अलग-अलग है। राज की लम्बाई सिर्फ एक भाई-बहन से ज्यादा है। रोहन की लम्बाई राज और रितिका से ज्यादा है लेकिन राम से ज्यादा नहीं। रितिका की लम्बाई राज से ज्यादा है। राम सबसे छोटा नहीं है। उनमें से सबसे छोटा कौन है?",
+    q_en: "Q221. There are five siblings—Raj, Rohan, Ram, Ritika and Rani—and all have different heights. Raj is taller than only one sibling. Rohan is taller than Raj and Ritika but not taller than Ram. Ritika is taller than Raj. Ram is not the shortest. Who is the shortest among them?",
+    tag: "RRB NTPC 27/02/2021 (Morning)",
+    o_hi: [
+      "(a) रितिका",
+      "(b) रानी",
+      "(c) राम",
+      "(d) राज"
+    ],
+    o_en: [
+      "(a) Ritika",
+      "(b) Rani",
+      "(c) Ram",
+      "(d) Raj"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q222. एक कक्षा में मध्यावधि परीक्षा उत्तीर्ण करने वालों में प्रसाद ऊपर से ग्यारहवें और नीचे से चौबीसवें स्थान पर थे। यदि चार छात्र मध्यावधि परीक्षा में अनुत्तीर्ण हो गए थे, तो उस कक्षा में छात्रों की कुल संख्या कितनी थी?",
+    q_en: "Q222. Among the students who passed the mid-term examination in a class, Prasad was 11th from the top and 24th from the bottom. If four students failed the mid-term examination, what was the total number of students in the class?",
+    tag: "RRB NTPC 27/02/2021 (Evening)",
+    o_hi: [
+      "(a) 37",
+      "(b) 36",
+      "(c) 35",
+      "(d) 38"
+    ],
+    o_en: [
+      "(a) 37",
+      "(b) 36",
+      "(c) 35",
+      "(d) 38"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q223. एक रैंकिंग सूची में जिसमें केवल एक व्यक्ति विशिष्ट रैंक रखता है, 40 फुटबॉल खिलाड़ियों की सूची में जतिन का स्थान 15वां है। यदि सूची में मनोज के नीचे केवल 8 खिलाड़ी हैं, तो जतिन और मनोज के बीच कितने फुटबॉल खिलाड़ी हैं?",
+    q_en: "Q223. In a ranking list where only one person holds each distinct rank, Jatin is 15th among 40 football players. If only 8 players are below Manoj in the list, how many football players are between Jatin and Manoj?",
+    tag: "RRB NTPC 02/03/2021 (Morning)",
+    o_hi: [
+      "(a) 17",
+      "(b) 15",
+      "(c) 16",
+      "(d) 14"
+    ],
+    o_en: [
+      "(a) 17",
+      "(b) 15",
+      "(c) 16",
+      "(d) 14"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q224. एक बेकर द्वारा A, B, C, D, और E लेबल वाले पांच चॉकलेट केक बनाए जाते हैं। D, B जितना मीठा नहीं है। A, E से मीठा है, लेकिन D जितना मीठा नहीं है। B, C से मीठा है। निम्नलिखित में से कौन सबसे मीठा है?",
+    q_en: "Q224. A baker makes five chocolate cakes labelled A, B, C, D and E. D is not as sweet as B. A is sweeter than E but not as sweet as D. B is sweeter than C. Which of the following is the sweetest?",
+    tag: "RRB NTPC 03/03/2021 (Evening)",
+    o_hi: [
+      "(a) E",
+      "(b) C",
+      "(c) B",
+      "(d) D"
+    ],
+    o_en: [
+      "(a) E",
+      "(b) C",
+      "(c) B",
+      "(d) D"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q225. दी गई जानकारी के आधार पर नीचे दिए गए प्रश्नों के उत्तर दीजिए। एक जौहरी के पास पाँच सोने की वस्तुएँ 'P', 'Q', 'R', 'S', और 'T' हैं, जिनमें से प्रत्येक का वजन अलग-अलग है। 'T' का वजन 'S' से तीन गुना है 'S' का भार 'R' से चार गुना अधिक है 'R' का वजन 'Q' से आधा है 'Q' का वजन 'P' से आधा है 'P' का भार 'T' से कम लेकिन 'R' से अधिक है निम्नलिखित में से कौन सी सोने की वस्तु वजन में सबसे हल्की है?",
+    q_en: "Q225. Answer the question based on the information. A jeweller has five gold items P, Q, R, S and T, each of a different weight. T weighs three times S. S weighs four times R. R weighs half as much as Q. Q weighs half as much as P. P weighs less than T but more than R. Which gold item is the lightest?",
+    tag: "RRB NTPC 03/03/2021 (Evening)",
+    o_hi: [
+      "(a) P",
+      "(b) R",
+      "(c) T",
+      "(d) S"
+    ],
+    o_en: [
+      "(a) P",
+      "(b) R",
+      "(c) T",
+      "(d) S"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q226. लड़कों के समूह में रोहन, जीशान जितना मजबूत नहीं है। मैथ्यू ,पॉल से ज्यादा मजबूत है। सुभाष, रोहन से कमजोर है लेकिन पॉल से मजबूत है । अखिल, जीशान जितना मजबूत है लेकिन सुजीत से कमजोर है। मैथ्यू ,रोहन जितना मजबूत नहीं है। दिए गए लड़कों के समूह में सबसे मजबूत कौन है?",
+    q_en: "Q226. In a group of boys, Rohan is not as strong as Zeeshan. Matthew is stronger than Paul. Subhash is weaker than Rohan but stronger than Paul. Akhil is as strong as Zeeshan but weaker than Sujit. Matthew is not as strong as Rohan. Who is the strongest in the group?",
+    tag: "RRB NTPC 05/03/2021 (Morning)",
+    o_hi: [
+      "(a) सुजीत",
+      "(b) मैथ्यू",
+      "(c) अखिल",
+      "(d) जीशान"
+    ],
+    o_en: [
+      "(a) Sujit",
+      "(b) Matthew",
+      "(c) Akhil",
+      "(d) Zeeshan"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q227. एक सूची में 50 व्यक्तियों को स्थान दिया गया है, जिसमें प्रत्येक रैंक पर केवल एक व्यक्ति है। मोहन 23वें स्थान पर है। यदि सूची में संजय के नीचे केवल 18 खिलाड़ी हैं, तो मोहन और संजय के बीच कितने खिलाड़ी हैं?",
+    q_en: "Q227. Fifty persons are ranked in a list, with only one person at each rank. Mohan is ranked 23rd. If only 18 players are below Sanjay in the list, how many players are between Mohan and Sanjay?",
+    tag: "RRB NTPC 09/03/2021 (Morning)",
+    o_hi: [
+      "(a) 9",
+      "(b) 8",
+      "(c) 14",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 9",
+      "(b) 8",
+      "(c) 14",
+      "(d) 15"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q228. दी गई जानकारी को पढ़िए और नीचे दिए गए प्रश्न का उत्तर दीजिए। 1. एक परीक्षा में, मयंक ने शीतल से अधिक अंक प्राप्त किए। 2. शीतल को रोहित से अधिक अंक मिले। 3. शीतल को तान्या से अधिक अंक मिले। 4. तान्या को प्रवीण से कम अंक मिले। 5. आर्य ने मयंक से अधिक अंक प्राप्त किए। 6. रोहित को तान्या और प्रवीण दोनों से अधिक अंक मिले। परीक्षा में सर्वाधिक अंक किसने प्राप्त किए हैं?",
+    q_en: "Q228. Read the information and answer the question. 1. In an examination, Mayank scored more than Sheetal. 2. Sheetal scored more than Rohit. 3. Sheetal scored more than Tanya. 4. Tanya scored less than Praveen. 5. Arya scored more than Mayank. 6. Rohit scored more than both Tanya and Praveen. Who scored the highest in the examination?",
+    tag: "RRB NTPC 21/03/2021 (Evening)",
+    o_hi: [
+      "(a) प्रवीण",
+      "(b) मयंकी",
+      "(c) आर्य",
+      "(d) शीतल"
+    ],
+    o_en: [
+      "(a) Praveen",
+      "(b) Mayanki",
+      "(c) Arya",
+      "(d) Sheetal"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q229. मीरा-नमित और कविता-पुनीत दो जोड़े हैं। मीरा और नमित के वेतन का योग कविता और पुनीत के वेतन के योग से अधिक है। मीरा और कविता के वेतन का योग नमित और पुनीत के वेतन के योग के समान है। इसके अलावा, मीरा नमित और पुनीत के वेतन के योग का आधा कमाती है। किसका वेतन सबसे ज्यादा है?",
+    q_en: "Q229. Meera-Namit and Kavita-Puneet are two couples. The sum of Meera's and Namit's salaries is greater than the sum of Kavita's and Puneet's salaries. The sum of Meera's and Kavita's salaries is equal to the sum of Namit's and Puneet's salaries. Also, Meera earns half the combined salary of Namit and Puneet. Who has the highest salary?",
+    tag: "RRB NTPC 27/03/2021 (Morning)",
+    o_hi: [
+      "(a) पुनीत",
+      "(b) मीरा",
+      "(c) नमित",
+      "(d) कविता"
+    ],
+    o_en: [
+      "(a) Puneet",
+      "(b) Meera",
+      "(c) Namit",
+      "(d) Kavita"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q230. छह लड़के A, B, C, D, E और F गणित की परीक्षा देते हैं और अलग-अलग अंक प्राप्त करते हैं। C केवल दो लड़कों से अधिक अंक प्राप्त करता है। D के अंक A और E से कम हैं लेकिन C और F से अधिक हैं। E और F के अंक क्रमशः उच्चतम और निम्नतम नहीं हैं। छह लड़कों में से कौन सबसे कम अंक प्राप्त करता है?",
+    q_en: "Q230. Six boys A, B, C, D, E and F take a mathematics test and score different marks. C scores more than only two boys. D scores less than A and E but more than C and F. E and F do not have the highest and lowest scores respectively. Who scores the least among the six boys?",
+    tag: "RRB NTPC 03/04/2021 (Evening)",
+    o_hi: [
+      "(a) A",
+      "(b) D",
+      "(c) E",
+      "(d) B"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) D",
+      "(c) E",
+      "(d) B"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q231. छह टीमों DD, MI, RCB, KKR, RR और CSK की तुलना 2019 में उनके द्वारा जीते गए मैचों की संख्या के आधार पर की जाती है। DD ने RR और RCB से अधिक मैच जीते लेकिन MI और CSK से कम मैच जीते। KKR ने MI से अधिक मैच जीते लेकिन CSK से कम मैच जीते। सबसे ज्यादा मैच किसने जीते?",
+    q_en: "Q231. Six teams DD, MI, RCB, KKR, RR and CSK are compared on the basis of the number of matches they won in 2019. DD won more matches than RR and RCB but fewer than MI and CSK. KKR won more matches than MI but fewer than CSK. Who won the most matches?",
+    tag: "RRB NTPC 05/04/2021 (Morning)",
+    o_hi: [
+      "(a) MI",
+      "(b) KKR",
+      "(c) RCB",
+      "(d) CSK"
+    ],
+    o_en: [
+      "(a) MI",
+      "(b) KKR",
+      "(c) RCB",
+      "(d) CSK"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q232. एक कक्षा में 48 विद्यार्थी हैं। लड़कियों की संख्या लड़कों की संख्या से आधी है। यदि रश्मि एक लड़की है जिसका रैंक ऊपर से 15वां है और पांच लड़कियों का रैंक रश्मि से बेहतर है, तो रश्मि का रैंक कितने लड़कों से बेहतर है?",
+    q_en: "Q232. There are 48 students in a class. The number of girls is half the number of boys. Rashmi is a girl ranked 15th from the top, and five girls rank better than Rashmi. Rashmi's rank is better than how many boys?",
+    tag: "RRB NTPC 06/04/2021 (Morning)",
+    o_hi: [
+      "(a) 26",
+      "(b) 20",
+      "(c) 30",
+      "(d) 23"
+    ],
+    o_en: [
+      "(a) 26",
+      "(b) 20",
+      "(c) 30",
+      "(d) 23"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q233. P, Q, R, S, T और U मित्र हैं जो एक BPO संगठन में कार्य करते हैं। P, T से अधिक कमाता है। R, Q से अधिक कमाता है लेकिन U से कम कमाता है, P, Q जितना नहीं कमाता है लेकिन S से अधिक कमाता है। इन छह मित्रों में से कौन सबसे अधिक कमाता है?",
+    q_en: "Q233. P, Q, R, S, T and U are friends working in a BPO organization. P earns more than T. R earns more than Q but less than U. P does not earn as much as Q but earns more than S. Who earns the most among the six friends?",
+    tag: "RRB NTPC 08/04/2021 (Morning)",
+    o_hi: [
+      "(a) Q",
+      "(b) S",
+      "(c) U",
+      "(d) R"
+    ],
+    o_en: [
+      "(a) Q",
+      "(b) S",
+      "(c) U",
+      "(d) R"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q234. सुबह की सभा के दौरान बच्चों की एक पंक्ति में, राहुल दोनों छोर से 16वें स्थान पर है। पंक्ति में कितने बच्चे हैं?",
+    q_en: "Q234. During morning assembly, Rahul is 16th from both ends of a row of children. How many children are there in the row?",
+    tag: "RRB NTPC 08/04/2021 (Morning)",
+    o_hi: [
+      "(a) 31",
+      "(b) 35",
+      "(c) 32",
+      "(d) 36"
+    ],
+    o_en: [
+      "(a) 31",
+      "(b) 35",
+      "(c) 32",
+      "(d) 36"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q235. A, B, C, D और E की अलग-अलग ऊंचाई है। केवल 2 व्यक्ति D से छोटे हैं, E, B से लंबा है, लेकिन A से छोटा है। A सबसे लंबा नहीं है। C से कितने व्यक्ति लम्बे हैं?",
+    q_en: "Q235. A, B, C, D and E have different heights. Only 2 persons are shorter than D. E is taller than B but shorter than A. A is not the tallest. How many persons are taller than C?",
+    tag: "RRB NTPC 31/07/2021 (Morning)",
+    o_hi: [
+      "(a) 4, क्योंोंकि C सबसे छोटा है।",
+      "(b) कोई नहीं, क्योंोंकि C सबसे लंबा है।",
+      "(c) 1",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 4, because C is the shortest.",
+      "(b) None, because C is the tallest.",
+      "(c) 1",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q236. निम्नलिखित जानकारी को ध्यान से पढ़ें और नीचे दिए गए प्रश्न का उत्तर दें। पांच दोस्त हैं- परम, निखिल, बॉबी, हेमू और ललित। हेमू, निखिल से छोटा और परम से लंबा है। बॉबी पाँच दोस्तों में सबसे लम्बा है। परम, निखिल से छोटा है लेकिन ललित से लंबा है। दूसरा सबसे लंबा कौन है?",
+    q_en: "Q236. Read the following information carefully and answer the question. There are five friends—Param, Nikhil, Bobby, Hemu and Lalit. Hemu is shorter than Nikhil and taller than Param. Bobby is the tallest among the five. Param is shorter than Nikhil but taller than Lalit. Who is the second tallest?",
+    tag: "RRB NTPC 31/07/2021 (Evening)",
+    o_hi: [
+      "(a) परम",
+      "(b) बॉबी",
+      "(c) निखिल",
+      "(d) हेमू"
+    ],
+    o_en: [
+      "(a) Param",
+      "(b) Bobby",
+      "(c) Nikhil",
+      "(d) Hemu"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q237. उत्तर की ओर मुंह करके खड़े 21 बच्चों की एक पंक्ति में, नितिन सीता के दाईं ओर तीसरे स्थान पर हैं, जो पंक्ति के दाईं छोर से नौवें स्थान पर हैं। बाई छोर से नितिन की स्थिति ज्ञात कीजिए",
+    q_en: "Q237. In a row of 21 children facing north, Nitin is third to the right of Sita, who is 9th from the right end. Find Nitin's position from the left end.",
+    tag: "RRB JE 28/06/2019 (Evening)",
+    o_hi: [
+      "(a) 16 वां",
+      "(b) 15 वां",
+      "(c) 12 वां",
+      "(d) 6 वां"
+    ],
+    o_en: [
+      "(a) 16th",
+      "(b) 15th",
+      "(c) 12th",
+      "(d) 6th"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q238. कुछ छात्र एक पंक्ति में बैठे हैं। इस पंक्ति में X का स्थान बाएं से 17वां है जबकि Y का स्थान दाहिने से 14वां है। यदि वे दोनों अपने स्थान आपस में बदल ले तो X का स्थान बाएं से 7वां हो जाता है। पंक्ति में कुल कितने छात्र हैं?",
+    q_en: "Q238. Some students are sitting in a row. X is 17th from the left while Y is 14th from the right. If they interchange positions, X becomes 7th from the left. How many students are there in the row?",
+    tag: "RRB ALP 13/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 21",
+      "(b) 19",
+      "(c) 22",
+      "(d) 20"
+    ],
+    o_en: [
+      "(a) 21",
+      "(b) 19",
+      "(c) 22",
+      "(d) 20"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q239. कक्षा के 42 छात्रों में नितिन की ऊपर से तेईसवीं रैंक है। नीचे से उसकी क्या रैंक होगी ?",
+    q_en: "Q239. Among 42 students in a class, Nitin is ranked 23rd from the top. What is his rank from the bottom?",
+    tag: "RRB ALP 20/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 23वीं",
+      "(b) 25वीं",
+      "(c) 20वीं",
+      "(d) 27वीं"
+    ],
+    o_en: [
+      "(a) 23rd",
+      "(b) 25th",
+      "(c) 20th",
+      "(d) 27th"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q240. X की रैंक ऊपर से 15वीं है और कक्षा में कुल 40 छात्र है। कक्षा में X की नीचे से कौनसी रैंक है:",
+    q_en: "Q240. X is ranked 15th from the top in a class of 40 students. What is X's rank from the bottom?",
+    tag: "RRB ALP 29/08/2018 (Evening)",
+    o_hi: [
+      "(a) 25",
+      "(b) 24",
+      "(c) 27",
+      "(d) 26"
+    ],
+    o_en: [
+      "(a) 25",
+      "(b) 24",
+      "(c) 27",
+      "(d) 26"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
