@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q51. मि. सोल, बिंदु A से ड्राइव करना शुरू करता है और पूर्व की ओर 6 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 3 km ड्राइव करता है, फिर दाएं मुड़ता है और 7 km ड्राइव करता है। वह फिर से दाएं मुड़ता है और 14 km ड्राइव करता है। वह अंतिम बार दाएं मुड़ता है और 1 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 - डिग्री के मोड़ हैं।)",
+    q_en: "Q51. Mr Sol starts driving from point A and drives 6 km east. He then turns right and drives 3 km, turns right and drives 7 km, turns right again and drives 14 km, and finally turns right and drives 1 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (UG) 08/09/2025 (Evening)",
+    o_hi: [
+      "(a) 13 km, उत्तर की ओर",
+      "(b) 11 km, पूर्व की ओर",
+      "(c) 12 km, दक्षिण की ओर",
+      "(d) 11 km, दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 13 km, north",
+      "(b) 11 km, east",
+      "(c) 12 km, south",
+      "(d) 11 km, south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q52. प्रिया बिंदु Y से यात्रा शुरू करके पूर्व की ओर 12 km ड्राइव करती है। फिर वह दाएं मुड़ती है, 10 km ड्राइव करती है। फिर वह दाएं मुड़ती है और 15 km ड्राइव करती है। अंततः वह दाएं मुड़ती है, 10 km ड्राइव करती है और बिंदु Z पर रुकती है। बिंदु Y पर फिर से पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक अन्यथा विनिर्दिष्ट न किया गया हो, सभी मोड़ केवल 90° के मोड़ हैं)",
+    q_en: "Q52. Priya starts from point Y and drives 12 km east. She then turns right and drives 10 km, turns right and drives 15 km, and finally turns right and drives 10 km to stop at point Z. How far and in which direction should she drive to reach point Y again by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (UG) 09/09/2025 (Evening)",
+    o_hi: [
+      "(a) 9 km उत्तर की ओर",
+      "(b) 3 km पूर्व की ओर",
+      "(c) 7 km दक्षिण की ओर",
+      "(d) 2 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 9 km north",
+      "(b) 3 km east",
+      "(c) 7 km south",
+      "(d) 2 km west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q53. फरदीन बिंदु A से ड्राइव करना शुरू करता है और पश्चिम की ओर 13 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 7 km ड्राइव करता है, फिर दाएं मुड़ता है और 6 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 8 km ड्राइव करता है। वह अंतिम बार बाएं मुड़ता है और 19 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए?",
+    q_en: "Q53. Fardeen starts driving from point A and drives 13 km west. He then turns left and drives 7 km, turns right and drives 6 km, turns left and drives 8 km, and finally turns left and drives 19 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route?",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Morning)",
+    o_hi: [
+      "(a) 15 km, दक्षिण",
+      "(b) 12 km, दक्षिण",
+      "(c) 10 km, उत्तर",
+      "(d) 15 km, उत्तर"
+    ],
+    o_en: [
+      "(a) 15 km, south",
+      "(b) 12 km, south",
+      "(c) 10 km, north",
+      "(d) 15 km, north"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q54. उदय बिंदु A से ड्राइव करना आरंभ करता है और दक्षिण की ओर 3 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 2 km ड्राइव करता है, फिर वह बाएं मुड़ता है और 5 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 3 km ड्राइव करता है। वह अंत में दाएं मुड़ता है, 8 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर पुनः वापस पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए (सभी मोड़ केवल 90° के मोड़ हैं जब तक कि निर्दिष्ट न किया गया हो)?",
+    q_en: "Q54. Uday starts driving from point A and drives 3 km south. He then turns right and drives 2 km, turns left and drives 5 km, turns right and drives 3 km, and finally turns right and drives 8 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 3 km; पूर्व",
+      "(b) 5 km; पूर्व",
+      "(c) 5 km; पश्चिम",
+      "(d) 4 km; पूर्व"
+    ],
+    o_en: [
+      "(a) 3 km; east",
+      "(b) 5 km; east",
+      "(c) 5 km; west",
+      "(d) 4 km; east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q55. सुदीप बिंदु A से ड्राइव करना आरंभ करता है और दक्षिण की ओर 3 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 4 km ड्राइव करता है, फिर दाएं मुड़ता है और 4 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 3 km ड्राइव करता है। वह अंत में बाएं मुड़ता है, 7 km ड्राइव करता है और फिर वह बिंदु P पर रुक जाता है। बिंदु A पर फिर से वापस पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए(सभी मोड़ केवल 90° के मोड़ हैं जब तक कि निर्दिष्ट न किया गया हो)?",
+    q_en: "Q55. Sudeep starts driving from point A and drives 3 km south. He then turns left and drives 4 km, turns right and drives 4 km, turns left and drives 3 km, and finally turns left and drives 7 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Evening)",
+    o_hi: [
+      "(a) 7 km; पश्चिम",
+      "(b) 7 km; पूर्व",
+      "(c) 6 km; पूर्व",
+      "(d) 6 km; पश्चिम"
+    ],
+    o_en: [
+      "(a) 7 km; west",
+      "(b) 7 km; east",
+      "(c) 6 km; east",
+      "(d) 6 km; west"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q56. श्याम बिंदु A से चलना शुरू करता है और 11 किमी पूर्व दिशा की ओर ड्राइव करता है। फिर वह दाएं मुड़ता है, 5 किमी ड्राइव करता है, फिर वह दाएं मुड़ता है और 12 किमी ड्राइव करता है। फिर वह दाएं मुड़ता है और 10 किमी ड्राइव करता है। वह अंत में दाएं मुड़ता है, 1 किमी ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर फिर से पहुंचने के लिए उसे कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q56. Shyam starts from point A and drives 11 km east. He then turns right and drives 5 km, turns right and drives 12 km, turns right again and drives 10 km, and finally turns right and drives 1 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Morning)",
+    o_hi: [
+      "(a) उत्तर में 5 किमी",
+      "(b) उत्तर में 4 किमी",
+      "(c) दक्षिण में 4 किमी",
+      "(d) दक्षिण में 5 किमी"
+    ],
+    o_en: [
+      "(a) 5 km north",
+      "(b) north 4 km",
+      "(c) south 4 km",
+      "(d) 5 km south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q57. राजू बिंदु A से चलना शुरू करता है और पश्चिम की ओर 9 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 7 km ड्राइव करता है, फिर वह बाएं मुड़ता है और 11 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 13 km ड्राइव करता है। वह अंतिम बार फिर बाएं मुड़ता है,फिर वह 2 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर फिर से पहुँचने के लिए उसे कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q57. Raju starts from point A and drives 9 km west. He then turns left and drives 7 km, turns left and drives 11 km, turns left again and drives 13 km, and finally turns left and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 5 km उत्तर की ओर",
+      "(b) 5 km दक्षिण की ओर",
+      "(c) 6 km दक्षिण की ओर",
+      "(d) 6 km उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 5 km north",
+      "(b) 5 km south",
+      "(c) 6 km south",
+      "(d) 6 km north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q58. प्रवीणेश, बिंदु A से ड्राइव करना शुरू करता है और दक्षिण की ओर 12 km ड्राइव करता है। फिर वह दाएं मुड़ता है, और 7 km ु ड्राइव करता है, वह फिर दाएं मुड़ता है और 14 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 10 km ड्राइव करता है। वह अंतिम बार दाएं मुड़ता है, और 2 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर फिर से पहुंचने के लिए उसे कितनी दूरी (सबसे छोटी दूरी) तक और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q58. Praveenesh starts driving from point A and drives 12 km south. He then turns right and drives 7 km, turns right and drives 14 km, turns right again and drives 10 km, and finally turns right and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Evening)",
+    o_hi: [
+      "(a) 3 km, पूर्व की ओर",
+      "(b) 2 km, पूर्व की ओर",
+      "(c) 4 km, पूर्व की ओर",
+      "(d) 3 km, पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 3 km, east",
+      "(b) 2 km, east",
+      "(c) 4 km, east",
+      "(d) 3 km, west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q59. सनी बिंदु A से ड्राइव करना प्रारंभ करता है और 11 km पूर्व की ओर ड्राइव करता है। फिर बाएं मुड़ता है और 8 km ड्राइव करता है फिर से बाएं मुड़ता है और 12 km ड्राइव करता है। फिर से वह बाएं मुड़ता है और 10 km ड्राइव करता है। वह अंतिम बार बाएं मुड़ता है और 1 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q59. Sunny starts driving from point A and drives 11 km east. He then turns left and drives 8 km, turns left and drives 12 km, turns left again and drives 10 km, and finally turns left and drives 1 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 09/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 2 km उत्तर की ओर",
+      "(b) 1 km दक्षिण की ओर",
+      "(c) 2 km दक्षिण की ओर",
+      "(d) 4 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 2 km north",
+      "(b) 1 km south",
+      "(c) 2 km south",
+      "(d) 4 km south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q60. प्रबीन बिंदु A से ड्राइव करना प्रारंभ करता है और पश्चिम की ओर 12 km ड्राइव करता है। फिर दाएं मुड़ता है और 8 km ड्राइव करता है, फिर से दाएं मुड़ता है और 14 km ड्राइव करता है। वह फिर से दाएं मुड़ता है और 12 km ड्राइव करता है। वह अंतिम बार दाएं मुड़ता है और 2 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q60. Prabin starts driving from point A and drives 12 km west. He then turns right and drives 8 km, turns right and drives 14 km, turns right again and drives 12 km, and finally turns right and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 09/06/2025 (Evening)",
+    o_hi: [
+      "(a) 4 km उत्तर की ओर",
+      "(b) 3 km उत्तर की ओर",
+      "(c) 5 km उत्तर की ओर",
+      "(d) 4 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 4 km north",
+      "(b) 3 km north",
+      "(c) 5 km north",
+      "(d) 4 km south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q61. श्रीमान Y बिंदु B से ड्राइव करना शुरू करता है और दक्षिण की ओर 4 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 7 km ड्राइव करता है, फिर दाएं मुड़ता है और 7 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 9 km ड्राइव करता है। वह अंतिम बार बाएं मुड़ता है और 11 km ड्राइव करके बिंदु A पर रुक जाता है। बिंदु B तक पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q61. Mr Y starts driving from point B and drives 4 km south. He then turns left and drives 7 km, turns right and drives 7 km, turns left and drives 9 km, and finally turns left and drives 11 km to stop at point A. How far and in which direction should he drive to return to point B by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 10/06/2025 (Morning)",
+    o_hi: [
+      "(a) 16 km, पश्चिम",
+      "(b) 16 km, पूर्व कीओर",
+      "(c) 11 km, उत्तर की ओर",
+      "(d) 7 km, दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 16 km west",
+      "(b) 16 km east",
+      "(c) 11 km north",
+      "(d) 7 km south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q62. श्रीमान। बिंदु M से ड्राइव करना शुरू करता है और दक्षिण की ओर 5 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 8 km ड्राइव करता है, फिर बाएं मुड़ता है और 7 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 12 km ड्राइव करता है। वह अंत में बाएं मुड़ता है, और 12 km ड्राइव करके बिंदु N पर रुक जाता है। बिंदु M पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q62. Mr I starts driving from point M and drives 5 km south. He then turns right and drives 8 km, turns left and drives 7 km, turns left and drives 12 km, and finally turns left and drives 12 km to stop at point N. How far and in which direction should he drive to return to point M by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 10/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 4 km, पश्चिम की ओर",
+      "(b) 4 km, पूर्व की ओर",
+      "(c) 5 km, दक्षिण की ओर",
+      "(d) 12 km, उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 4 km, west",
+      "(b) 4 km, east",
+      "(c) 5 km, south",
+      "(d) 12 km, north"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q63. टाउन A, टाउन B के दक्षिण में है। टाउन C, टाउन B के पूर्व में है। टाउन D, टाउन C के पश्चिम में है। टाउन E, टाउन D के उत्तर में है। टाउन A, टाउन E के दक्षिण-पूर्व में है। टाउन D के संबंध में टाउन B की स्थिति क्याा है?",
+    q_en: "Q63. Town A is south of Town B. Town C is east of Town B. Town D is west of Town C. Town E is north of Town D. Town A is south-east of Town E. What is the position of Town B with respect to Town D?",
+    tag: "NTPC CBT - I (GL) 10/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) उत्तर",
+      "(c) दक्षिण",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) north",
+      "(c) south",
+      "(d) west"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q64. श्रीमान Q बिंदु Z से ड्राइव करना शुरू करता है और उत्तर की ओर 7 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 9 km ड्राइव करता है, दाएं मुड़ता है और 6 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 7 km ड्राइव करता है। वह अंतिम बार बाएं मुड़ता है और 13 km ड्राइव करके बिंदु A पर रुक जाता है। बिंदु Z तक पुनः पहुंचने के लिए उसे कितनी दूर (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q64. Mr Q starts driving from point Z and drives 7 km north. He then turns left and drives 9 km, turns right and drives 6 km, turns left and drives 7 km, and finally turns left and drives 13 km to stop at point A. How far and in which direction should he drive to return to point Z by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 10/06/2025 (Evening)",
+    o_hi: [
+      "(a) 14 km पश्चिम की ओर",
+      "(b) 16 km पूर्व की ओर",
+      "(c) 11 km दक्षिण की ओर",
+      "(d) 13 km उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 14 km west",
+      "(b) 16 km east",
+      "(c) 11 km south",
+      "(d) 13 km north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q65. Q बिंदु P से ड्राइव करना शुरू करता है और दक्षिण की ओर 2 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 3 km ड्राइव करता है, फिर दाएं मुड़ता है और 11 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 4 km ड्राइव करता है, फिर बाएं मुड़ता है और 3 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 2 km ड्राइव करता है। वह अंत में दाएं मुड़ता है और 12 km ड्राइव करके बिंदु O पर रुक जाता है। बिंदु P पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ है।)",
+    q_en: "Q65. Q starts driving from point P and drives 2 km south. He then turns right and drives 3 km, turns right and drives 11 km, turns right again and drives 4 km, turns left and drives 3 km, turns right and drives 2 km, and finally turns right and drives 12 km to stop at point O. How far and in which direction should he drive to return to point P by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 11/06/2025 (Morning)",
+    o_hi: [
+      "(a) 3 km, पूर्व की ओर",
+      "(b) 5 km, दक्षिण की ओर",
+      "(c) 7 km, उत्तर की ओर",
+      "(d) 3 km, पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 3 km, east",
+      "(b) 5 km, south",
+      "(c) 7 km, north",
+      "(d) 3 km, west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q66. टाउन P, टाउन Q के पूर्व में है। टाउन Q, टाउन R के दक्षिण में है। टाउन R, टाउन S के पूर्व में है। टाउन S, टाउन T के पश्चिम में है। टाउन P, टाउन T के दक्षिण-पश्चिम में है। टाउन T के संबंध में टाउन R की स्थिति क्याा है? ूु्ट",
+    q_en: "Q66. Town P is east of Town Q. Town Q is south of Town R. Town R is east of Town S. Town S is west of Town T. Town P is south-west of Town T. What is the position of Town R with respect to Town T?",
+    tag: "NTPC CBT - I (GL) 11/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) उत्तर",
+      "(c) पूर्व",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) south",
+      "(b) north",
+      "(c) east",
+      "(d) west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q67. श्रीमान T बिंदु D से ड्राइव करना शुरू करता है और पूर्व की ओर 3 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 7 km ड्राइव करता है, फिर दाएं मुड़ता है और 6 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 4 km ड्राइव करता है, और फिर दाएं मुड़ता है और 3 km ड्राइव करता है। वह अंत में बाएं मुड़ता है, 1 km ड्राइव करके बिंदु H पर रुक जाता है। बिंदु D पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q67. Mr T starts driving from point D and drives 3 km east. He then turns right and drives 7 km, turns right and drives 6 km, turns right again and drives 4 km, turns right and drives 3 km, and finally turns left and drives 1 km to stop at point H. How far and in which direction should he drive to return to point D by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 11/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 7 km, पश्चिम की ओर",
+      "(b) 5 km, पूर्व की ओर",
+      "(c) 2 km, दक्षिण की ओर",
+      "(d) 2 km, उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 7 km, west",
+      "(b) 5 km, east",
+      "(c) 2 km, south",
+      "(d) 2 km, north"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q68. श्रीमान P बिंदु C से ड्राइव करना शुरू करता है और पश्चिम की ओर 5 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 6 km ड्राइव करता है, फिर बाएं मुड़ता है और 8 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 2 km ड्राइव करता है, फिर बाएं मुड़ता है और 4 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 12 km ड्राइव करता है। वह अंत में बाएं मुड़ता है और 7 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु C पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q68. Mr P starts driving from point C and drives 5 km west. He then turns left and drives 6 km, turns left and drives 8 km, turns right and drives 2 km, turns left and drives 4 km, turns left and drives 12 km, and finally turns left and drives 7 km to stop at point P. How far and in which direction should he drive to return to point C by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Morning)",
+    o_hi: [
+      "(a) 4 km, उत्तर की ओर",
+      "(b) 4 km, दक्षिण की ओर",
+      "(c) 2 km, पश्चिम की ओर",
+      "(d) 2 km, पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 4 km, north",
+      "(b) 4 km, south",
+      "(c) 2 km, west",
+      "(d) 2 km, east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q69. श्रीमान O बिंदु L से ड्राइव करना शुरू करता है और दक्षिण की ओर 3 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 3 km ड्राइव करता है, फिर दाएं मुड़ता है और 4 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 4 km ड्राइव करता है। वह अंत में बाएं मुड़ता है और 7 km ड्राइव करके बिंदु M पर रुक जाता है। बिंदु L पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q69. Mr O starts driving from point L and drives 3 km south. He then turns left and drives 3 km, turns right and drives 4 km, turns left and drives 4 km, and finally turns left and drives 7 km to stop at point M. How far and in which direction should he drive to return to point L by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 4 km, दक्षिण की ओर",
+      "(b) 3 km, उत्तर की ओर",
+      "(c) 7 km, पूर्व की ओर",
+      "(d) 7 km, पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 4 km, south",
+      "(b) 3 km, north",
+      "(c) 7 km, east",
+      "(d) 7 km, west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q70. श्रीमान I बिंदु J से ड्राइव करना शुरू करता है और पश्चिम की ओर 5 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 7 किमी ड्राइव करता है, फिर दाएं मुड़ता है और 11 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 2 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 4 km ड्राइव करता है। फिर वह अंतिम दाएं मुड़ता है और 9 km ड्राइव करके बिंदु K पर रुक जाता है। बिंदु J पर पुनः पहुंचने के लिए उसे कितनी दूर ्युुु (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q70. Mr I starts driving from point J and drives 5 km west. He then turns right and drives 7 km, turns right and drives 11 km, turns left and drives 2 km, turns right and drives 4 km, and finally turns right and drives 9 km to stop at point K. How far and in which direction should he drive to return to point J by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Evening)",
+    o_hi: [
+      "(a) 10 km, पूर्व की ओर",
+      "(b) 10 km, पश्चिम की ओर",
+      "(c) 13 km, दक्षिण की ओर",
+      "(d) 11 km, उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 10 km, east",
+      "(b) 10 km, west",
+      "(c) 13 km, south",
+      "(d) 11 km, north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q71. शान बिंदु A से शुरू करता है और उत्तर की ओर 6 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 7 km ड्राइव करता है, दाएं मुड़ता है और 12 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 8 km ड्राइव करता है। अंत में वह दाएं मुड़ता है, 6 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुँचने के लिए उसे कितनी दूर (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90° के मोड़ हैं)",
+    q_en: "Q71. Shaan starts from point A and drives 6 km north. He then turns right and drives 7 km, turns right and drives 12 km, turns right again and drives 8 km, and finally turns right and drives 6 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Evening)",
+    o_hi: [
+      "(a) 4 km, पूर्व की ओर",
+      "(b) 1 km, पूर्व की ओर",
+      "(c) 2 km, पूर्व की ओर",
+      "(d) 3 km, पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 4 km, east",
+      "(b) 1 km, east",
+      "(c) 2 km, east",
+      "(d) 3 km, east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q72. राघव बिंदु A से ड्राइव करना शुरू करता है और दक्षिण की ओर 8 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 6 km ड्राइव करता है, फिर बाएं मुड़ता है और 11 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 12 km ड्राइव करता है। अंत में वह बाएं मुड़ता है, 3 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक कि निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90° मोड़ हैं।)",
+    q_en: "Q72. Raghav starts driving from point A and drives 8 km south. He then turns left and drives 6 km, turns left and drives 11 km, turns left again and drives 12 km, and finally turns left and drives 3 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 13/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 3 km, पूर्व की ओर",
+      "(b) 4 km, पूर्व की ओर",
+      "(c) 6 km, पूर्व की ओर",
+      "(d) 5 km, पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 3 km, east",
+      "(b) 4 km, east",
+      "(c) 6 km, east",
+      "(d) 5 km, east"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q73. राधे बिंदु A से ड्राइव करना शुरू करता है और उत्तर की ओर 8 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 9 km ड्राइव करता है, फिर बाएं मुड़ता है और 12 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 11 km ड्राइव करता है। अंत में वह बाएं मुड़ता है, 4 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक कि निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90° के मोड़ हैं)",
+    q_en: "Q73. Radhe starts driving from point A and drives 8 km north. He then turns left and drives 9 km, turns left and drives 12 km, turns left again and drives 11 km, and finally turns left and drives 4 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 13/06/2025 (Evening)",
+    o_hi: [
+      "(a) 3 km, पश्चिम की ओर",
+      "(b) 1 km, पश्चिम की ओर",
+      "(c) 4 km, पश्चिम की ओर",
+      "(d) 2 km, पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 3 km, west",
+      "(b) 1 km, west",
+      "(c) 4 km, west",
+      "(d) 2 km, west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q74. गणेश बिंदु A से ड्राइव करना प्रारंभ करता है और दक्षिण की ओर 11 km ड्राइव करता है। फिर दाएं मुड़ता है और 8 km ड्राइव करता है फिर से दाएं मुड़ता है और 15 km ड्राइव करता है। फिर से वह दाएं मुड़ता है और 12 km ड्राइव करता है। वह अंतिम बार दाएं मुड़ता है और 4 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री के मोड़ हैं।)",
+    q_en: "Q74. Ganesh starts driving from point A and drives 11 km south. He then turns right and drives 8 km, turns right and drives 15 km, turns right again and drives 12 km, and finally turns right and drives 4 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT -I(GL) 14/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 4 km, पूर्व की ओर",
+      "(b) 4 km, पश्चिम की ओर",
+      "(c) 3 km, पूर्व की ओर",
+      "(d) 3 km, पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 4 km, east",
+      "(b) 4 km, west",
+      "(c) 3 km, east",
+      "(d) 3 km, west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q75. अनुज बिंदु A से चलना शुरू करता है और पूर्व की ओर 12 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 8 km ड्राइव करता है, दाएं मुड़ता है और 14 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 11 km ड्राइव करता है। अंत में वह दाएं मुड़ता है, 2 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर फिर से पहुँचने के लिए उसे कितनी दूर (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90° के मोड़ हैं, जब तक कि निर्दिष्ट न किया गया हो।)",
+    q_en: "Q75. Anuj starts from point A and drives 12 km east. He then turns right and drives 8 km, turns right and drives 14 km, turns right again and drives 11 km, and finally turns right and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 16/06/2025 (Morning)",
+    o_hi: [
+      "(a) 2 किमी दक्षिण की ओर",
+      "(b) 3 किमी दक्षिण की ओर",
+      "(c) 4 किमी दक्षिण की ओर",
+      "(d) 1 किमी दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 2 km south",
+      "(b) 3 km south",
+      "(c) 4 km south",
+      "(d) 1 km south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q76. मानव बिंदु A से ड्राइव करना प्रारंभ करता है और 10 km पूर्व की ओर ड्राइव करता है। फिर वह दाएं मुड़ता है और 9 km ड्राइव करता है फिर दाएं मुड़ता है और 12 km ड्राइव करता है। फिर से वह दाएं मुड़ता है और 13 km ड्राइव करता है। वह अंतिम बार दाएं मुड़ता है और 2 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर पुनः पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री के मोड़ हैं।)",
+    q_en: "Q76. Manav starts driving from point A and drives 10 km east. He then turns right and drives 9 km, turns right and drives 12 km, turns right again and drives 13 km, and finally turns right and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 16/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 4 km, दक्षिण की ओर",
+      "(b) 3 km, दक्षिण की ओर",
+      "(c) 4 km, उत्तर की ओर",
+      "(d) 3 km, उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 4 km, south",
+      "(b) 3 km, south",
+      "(c) 4 km, north",
+      "(d) 3 km, north"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q77. सचदेव बिंदु A से चलना शुरू करता है और पश्चिम की ओर 11 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 9 km ड्राइव करता है, दाएं मुड़ता है और 13 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 14 km ड्राइव करता है। अंत में वह दाएं मुड़ता है, 2 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर फिर से पहुँचने के लिए उसे कितनी दूर (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90° के मोड़ हैं, जब तक कि निर्दिष्ट न किया गया हो।)",
+    q_en: "Q77. Sachdev starts from point A and drives 11 km west. He then turns right and drives 9 km, turns right and drives 13 km, turns right again and drives 14 km, and finally turns right and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 16/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 4 km,उत्तर की ओर",
+      "(b) 6 km,उत्तर की ओर",
+      "(c) 5 km,उत्तर की ओर",
+      "(d) 7 km,उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 4 km,north",
+      "(b) 6 km,north",
+      "(c) 5 km,north",
+      "(d) 7 km,north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q78. बरुण बिंदु Y से ड्राइव करना शुरू करता है और पूर्व की ओर 19 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 28 km ड्राइव करता है, बाएं मुड़ता है और 17 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 59 km ड्राइव करता है। वह बाएं मुड़ता है, 36 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 9 km ड्राइव करता है और बिंदु Z पर रुकता है। बिंदु Y पर फिर से पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं।) ्ट",
+    q_en: "Q78. Barun starts driving from point Y and drives 19 km east. He then turns right and drives 28 km, turns left and drives 17 km, turns left and drives 59 km, turns left and drives 36 km, then turns right and drives 9 km to stop at point Z. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 17/06/2025 (Morning)",
+    o_hi: [
+      "(a) 40 km दक्षिण की ओर",
+      "(b) 29 km उत्तर की ओर",
+      "(c) 36 km उत्तर की ओर",
+      "(d) 22 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 40 km south",
+      "(b) 29 km north",
+      "(c) 36 km north",
+      "(d) 22 km south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q79. श्रीी छोटू बिंदु A से शुरू करते हैं और उत्तर की ओर 16 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं, 8 km ड्राइव करते हैं, बाएं मुड़ते हैं और 7 km ड्राइव करते हैं। फिर वह दाएं मुड़ते हैं, 4 km ड्राइव करते हैं, बाएं मुड़ते हैं और 12 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं और 18 km ड्राइव करते हैं। वह अंत में बाएं मुड़ते हैं, 3 km ड्राइव करते हैं और बिंदु P पर रुकते हैं। बिंदु A पर फिर से पहुंचने के लिए उसे कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं)।",
+    q_en: "Q79. Mr Chhotu starts from point A and drives 16 km north. He then turns left and drives 8 km, turns left and drives 7 km, turns right and drives 4 km, turns left and drives 12 km, turns left and drives 18 km, and finally turns left and drives 3 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 17/06/2025 (Evening)",
+    o_hi: [
+      "(a) उत्तर की ओर 1 km",
+      "(b) दक्षिण की ओर 9 km",
+      "(c) पश्चिम की ओर 6 km",
+      "(d) पूर्व की ओर 4 km"
+    ],
+    o_en: [
+      "(a) north 1 km",
+      "(b) south 9 km",
+      "(c) west 6 km",
+      "(d) east 4 km"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q80. ज्ञानेश बिंदु Y से शुरू करता है और दक्षिण की ओर 11 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 45 km ड्राइव करता है, दाएं मुड़ता है और 29 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 18 km ड्राइव करता है। वह दाएं मुड़ता है, 13 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 29 km ड्राइव करता है, बाएं मुड़ता है और बिंदु Z पर रुकने के लिए 27 km ड्राइव करता है। बिंदु Y पर फिर से पहुंचने के लिए उसे कितनी दूर (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए,सभी मोड़ केवल 90-डिग्री मोड़ हैं।)",
+    q_en: "Q80. Gyanesh starts from point Y and drives 11 km south. He then turns left and drives 45 km, turns right and drives 29 km, turns right and drives 18 km, turns right and drives 13 km, turns right and drives 29 km, then turns left and drives 27 km to stop at point Z. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 18/06/2025 (Morning)",
+    o_hi: [
+      "(a) 51 km पूर्व की ओर",
+      "(b) 61 km पश्चिम की ओर",
+      "(c) 56 km पश्चिम की ओर",
+      "(d) 53 km उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 51 km east",
+      "(b) 61 km west",
+      "(c) 56 km west",
+      "(d) 53 km north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q81. ईश्वर बिंदु Y से शुरू करता है और दक्षिण की ओर 13 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 27 km ड्राइव करता है, दाएं मुड़ता है और 51 km ड्राइव करता है। वह बाएं मुड़ता है और 18 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 35 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 45 km ड्राइव करता है, बाएं मुड़ता है और बिंदु Z पर रुकने के लिए 18 km ड्राइव करता है। बिंदु Y पर फिर से पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं।)",
+    q_en: "Q81. Ishwar starts from point Y and drives 13 km south. He then turns left and drives 27 km, turns right and drives 51 km, turns left and drives 18 km, turns left and drives 35 km, turns left and drives 45 km, then turns left and drives 18 km to stop at point Z. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 18/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 47 किमी उत्तर की ओर",
+      "(b) 36 किमी दक्षिण की ओर",
+      "(c) 51 किमी पश्चिम की ओर",
+      "(d) 42 किमी पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 47 km north",
+      "(b) 36 km south",
+      "(c) 51 km west",
+      "(d) 42 km east"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q82. मि. एलेक्स बिंदु A से शुरू करते हैं और दक्षिण की ओर 9 km ड्राइव करते हैं। फिर वे बाएं मुड़ते हैं, 3 km ड्राइव करते हैं, फिर बाएं मुड़ते हैं और 19 km ड्राइव करते हैं। फिर वे बाएं मुड़ते हैं और 7 km ड्राइव करते हैं, फिर बाएं मुड़ते हैं और 5 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं और 4 km ड्राइव करते हैं। वे अंत में बाएं मुड़ते हैं, 5 km ड्राइव करते हैं और बिंदु P पर रुकते हैं। बिंदु A पर फिर से पहुँचने के लिए उन्हें कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।",
+    q_en: "Q82. Mr Alex starts from point A and drives 9 km south. He then turns left and drives 3 km, turns left and drives 19 km, turns left and drives 7 km, turns left and drives 5 km, turns right and drives 4 km, and finally turns left and drives 5 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT -I(GL) 18/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 6 किमी पश्चिम की ओर",
+      "(b) 8 किमी पूर्व की ओर",
+      "(c) 4 किमी पश्चिम की ओर",
+      "(d) 10 किमी पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 6 km west",
+      "(b) 8 km east",
+      "(c) 4 km west",
+      "(d) 10 km east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q83. श्रीी यांकी बिंदु A से शुरू करते हैं और दक्षिण की ओर 17 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं, 19 km ड्राइव करते हैं, दाएं मुड़ते हैं और 29 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं और 15 km ड्राइव करते हैं, दाएं मुड़ते हैं और 1 km ड्राइव करते हैं। फिर वे बाएं मुड़ते हैं और 6 km ड्राइव करते हैं। वे अंत में दाएं मुड़ते हैं, 11 km ड्राइव करते हैं और बिंदु P पर रुकते हैं। बिंदु A पर फिर से पहुंचने के लिए उन्हें कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q83. Mr Yankee starts from point A and drives 17 km south. He then turns right and drives 19 km, turns right and drives 29 km, turns right again and drives 15 km, turns right and drives 1 km, turns left and drives 6 km, and finally turns right and drives 11 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 18/06/2025 (Evening)",
+    o_hi: [
+      "(a) पूर्व की ओर 6 km",
+      "(b) दक्षिण की ओर 4 km",
+      "(c) उत्तर की ओर 8 km",
+      "(d) पश्चिम की ओर 2 km"
+    ],
+    o_en: [
+      "(a) east 6 km",
+      "(b) south 4 km",
+      "(c) north 8 km",
+      "(d) west 2 km"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q84. इशान बिंदु Y से ड्राइव करना शुरू करता है और उत्तर की ओर 21 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 42 km करता है, फिर बाएं मुड़ता है और 41 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 17 km ड्राइव करता है। वह दाएं मुड़ता है, 59 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 18 km ड्राइव करता है। फिर दाएं मुड़ता है, 39 km ड्राइव करता है, और बिंदु Z पर रुकता है। बिंदु Y पर फिर से पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं।)",
+    q_en: "Q84. Ishan starts driving from point Y and drives 21 km north. He then turns left and drives 42 km, turns left and drives 41 km, turns right and drives 17 km, turns right and drives 59 km, turns right and drives 18 km, then turns right and drives 39 km to stop at point Z. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 19/06/2025 (Morning)",
+    o_hi: [
+      "(a) 39 km पूर्व की ओर",
+      "(b) 41 km पूर्व की ओर",
+      "(c) 43 km पश्चिम की ओर",
+      "(d) 45 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 39 km east",
+      "(b) 41 km east",
+      "(c) 43 km west",
+      "(d) 45 km south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q85. हरित बिंदु Y से ड्राइव करना शुरू करता है और पूर्व की ओर 47 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 23 km ड्राइव करता है, दाएं मुड़ता है और 26 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 52 km ड्राइव करता है। वह बाएं मुड़ता है, 21 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 11 km ड्राइव करता है, और बिंदु Z पर रुकता है। बिंदु Y पर फिर से पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं।)",
+    q_en: "Q85. Harit starts driving from point Y and drives 47 km east. He then turns right and drives 23 km, turns right and drives 26 km, turns right and drives 52 km, turns left and drives 21 km, then turns left and drives 11 km to stop at point Z. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 19/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 20 km दक्षिण की ओर",
+      "(b) 24 km पूर्व की ओर",
+      "(c) 19 km उत्तर की ओर",
+      "(d) 18 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 20 km south",
+      "(b) 24 km east",
+      "(c) 19 km north",
+      "(d) 18 km south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q86. श्रीमान Z बिंदु Y से शुरू करते हैं और उत्तर की ओर 12 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं, 2 km ड्राइव करते हैं, दाएं मुड़ते हैं और 1 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं और 14 km ड्राइव करते हैं। वह अंतिम बार बाएं मुड़ते हैं, 13 km ड्राइव करते हैं और बिंदु X पर रुकते हैं। बिंदु Y पर फिर से पहुंचने के लिए उन्हें कितनी दूर (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं।)",
+    q_en: "Q86. Mr Z starts from point Y and drives 12 km north. He then turns left and drives 2 km, turns right and drives 1 km, turns left and drives 14 km, and finally turns left and drives 13 km to stop at point X. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 19/06/2025 (Evening)",
+    o_hi: [
+      "(a) 11 km दक्षिण की ओर",
+      "(b) 13 km उत्तर की ओर",
+      "(c) 14 km पश्चिम की ओर",
+      "(d) 16 km पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 11 km south",
+      "(b) 13 km north",
+      "(c) 14 km west",
+      "(d) 16 km east"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q87. श्रीमान Y बिंदु B से शुरू करते हैं और दक्षिण की ओर 1 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं, 9 km ड्राइव करते हैं, दाएं मुड़ते हैं और 2 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं और 13 km ड्राइव करते हैं। वह अंतिम बार बाएं मुड़ते हैं, 3 km ड्राइव करते हैं और बिंदु A पर रुकते हैं। बिंदु B पर फिर से पहुंचने के लिए उन्हें कितनी दूर (निकटतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं।)",
+    q_en: "Q87. Mr Y starts from point B and drives 1 km south. He then turns left and drives 9 km, turns right and drives 2 km, turns left and drives 13 km, and finally turns left and drives 3 km to stop at point A. How far and in which direction should he drive to return to point B by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 20/06/2025 (Evening)",
+    o_hi: [
+      "(a) 1 km उत्तर की ओर",
+      "(b) 22 km पश्चिम की ओर",
+      "(c) 9 km दक्षिण की ओर",
+      "(d) 18 km पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 1 km north",
+      "(b) 22 km west",
+      "(c) 9 km south",
+      "(d) 18 km east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q88. मिस्टर C बिंदु A से ड्राइव करना शुरू करते हैं और पश्चिम की ओर 5 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं, 11 km ड्राइव करते हैं, दाएं मुड़ते हैं और 3 km ड्राइव करते हैं। फिर वे बाएं मुड़ते हैं और 4 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं, 3 km ड्राइव करते हैं। फिर वे अंतिम दाएं मुड़ते हैं, 15 km ड्राइव करते हैं और बिंदु B पर रुकते हैं। बिंदु A पर फिर से पहुंचने के लिए उन्हें कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q88. Mr C starts driving from point A and drives 5 km west. He then turns right and drives 11 km, turns right and drives 3 km, turns left and drives 4 km, turns right and drives 3 km, and finally turns right and drives 15 km to stop at point B. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 21/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) 3 km दक्षिण की ओर",
+      "(b) 1 km उत्तर की ओर",
+      "(c) 1 km पूर्व की ओर",
+      "(d) 1 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 3 km south",
+      "(b) 1 km north",
+      "(c) 1 km east",
+      "(d) 1 km west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q89. श्रीी जीएचआई बिंदु A से शुरू करते हैं और पूर्व की ओर 16 km ड्राइव करते हैं। फिर वह दाएं मुड़ते हैं, 18 km ड्राइव करते हैं, दाएं मुड़ते हैं और 26 km ड्राइव करते हैं। फिर वह दाएं मुड़ते हैं और 26 km ड्राइव करते हैं। वह अंतिम बार दाएं मुड़ते हैं, 10 km ड्राइव करते हैं और बिंदु P पर रुकते हैं। बिंदु A तक फिर से पहुंचने के लिए उन्हें कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90-डिग्री मोड़ हैं जब तक कि निर्दिष्ट न किया गया हो)",
+    q_en: "Q89. Mr GHI starts from point A and drives 16 km east. He then turns right and drives 18 km, turns right and drives 26 km, turns right again and drives 26 km, and finally turns right and drives 10 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 23/06/2025 (Morning)",
+    o_hi: [
+      "(a) 4 km पश्चिम की ओर",
+      "(b) 5 km दक्षिण की ओर",
+      "(c) 8 km दक्षिण की ओर",
+      "(d) 6 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 4 km west",
+      "(b) 5 km south",
+      "(c) 8 km south",
+      "(d) 6 km west"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q90. श्रीी HIJ बिंदु A से शुरू करते हैं और दक्षिण की ओर 21 km ड्राइव करते हैं। फिर वह दाएं मुड़ते हैं, 19 km ड्राइव करते हैं, दाएं मुड़ते हैं और 26 km ड्राइव करतेहैं। फिर वह दाएं मुड़ते हैं और 19 km ड्राइव करते हैं, दाएं मुड़ते हैं और 2 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं और 4 km ड्राइव करते हैं। वह अंत में दाएं मुड़ते हैं, 3 km ड्राइव करते हैं और बिंदु P पर रुकते हैं। बिंदु A पर फिर से पहुंचने के लिए उसे कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं)",
+    q_en: "Q90. Mr HIJ starts from point A and drives 21 km south. He then turns right and drives 19 km, turns right and drives 26 km, turns right and drives 19 km, turns right and drives 2 km, turns left and drives 4 km, and finally turns right and drives 3 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 24/06/2025 (Morning)",
+    o_hi: [
+      "(a) दक्षिण में 5 km",
+      "(b) उत्तर में 6 km",
+      "(c) पूर्व में 7 km",
+      "(d) पश्चिम में 4 km"
+    ],
+    o_en: [
+      "(a) 5 km south",
+      "(b) north 6 km",
+      "(c) east 7 km",
+      "(d) west 4 km"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q91. श्रीी आरएसटी बिंदु A से शुरू करते हैं और दक्षिण की ओर 16 km ड्राइव करते हैं। फिर वे बाएं मुड़ते हैं, 6 km ड्राइव करते हैं, फिर बाएं मुड़ते हैं और 23 km ड्राइव करते हैं। फिर वे बाएं मुड़ते हैं और 8 km ड्राइव करते हैं, फिर बाएं मुड़ते हैं और 3 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं और 4 km ड्राइव करते हैं। वे अंत में बाएं मुड़ते हैं, 4 km ड्राइव करते हैं और बिंदु P पर रुकते हैं। बिंदु A पर फिर से पहुंचने के लिए उन्हें कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री मोड़ हैं)",
+    q_en: "Q91. Mr RST starts from point A and drives 16 km south. He then turns left and drives 6 km, turns left and drives 23 km, turns left and drives 8 km, turns left and drives 3 km, turns right and drives 4 km, and finally turns left and drives 4 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "NTPC CBT - I (GL) 24/06/2025 (Evening)",
+    o_hi: [
+      "(a) 2 km दक्षिण की ओर",
+      "(b) 6 km पूर्व की ओर",
+      "(c) 3 km पश्चिम की ओर",
+      "(d) 5km उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 2 km south",
+      "(b) 6 km east",
+      "(c) 3 km west",
+      "(d) 5km north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q92. गणपत बिंदु A से चलना शुरू करता है और पश्चिम की ओर 18 m चलता है। है। वह बाएं मुड़ता है, 32 m चलता है, फिर बाएं मुड़ता है, 26 m चलता है, फिर बाएं मुड़ता है, 61 m चलता है और बिंदु B पर रुक जाता है। मीना बिंदु Z से चलना शुरू करती है, जो बिंदु A के पूर्व में में 22 m की दूरी पर है। वह उत्तर की ओर 42 m चलती है, दाएं मुड़ती है, 35m चलती है, दाएं मुड़ती है और 13 m चलती है और बिंदु Y पर रुक जाती है। बिंदु B और बिंदु Y के बीच न्यूनतम दूरी ज्ञात कीजिए। (सभी मोड़ केवल 90-डिग्री के मोड़ हैं।)",
+    q_en: "Q92. Ganpat starts walking from point A and walks 18 m west. He turns left and walks 32 m, then turns left and walks 26 m, turns left and walks 61 m, and stops at point B. Meena starts from point Z, which is 22 m east of point A. She walks 42 m north, turns right and walks 35 m, turns right and walks 13 m, and stops at point Y. Find the minimum distance between point B and point Y. (All turns are 90-degree turns only.)",
+    tag: "ALP CBT II 02/05/2025 (Morning)",
+    o_hi: [
+      "(a) 52 m",
+      "(b) 49 m",
+      "(c) 57 m",
+      "(d) 43 m"
+    ],
+    o_en: [
+      "(a) 52 m",
+      "(b) 49 m",
+      "(c) 57 m",
+      "(d) 43 m"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q93. कौशिक बिंदु A से चलना शुरू करता है और पूर्व की ओर 32 m चलता है। वह दाएं मुड़ता है, 16 m चलता है और फिर दाएं मुड़ता है, 14 m चलता है, बिंदु B पर पहुंचता है और रुक जाता है। चित्रा बिंदु Z से चलना शुरू करती है जो बिंदु A से 60 m पूर्व की ओर है। वह उत्तर की ओर 18 m चलती है, दाएं मुड़ती है, 19 m चलती है, दाएं मुड़ती है और 65 m चलती है, दाएं मुड़ती है और 61 m चलती है और बिंदु Y पर रुक जाती है। बिंदु B और बिंदु Y के बीच की न्यूनतम दूरी कितनी है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q93. Kaushik starts walking from point A and walks 32 m east. He turns right and walks 16 m, then turns right and walks 14 m, reaches point B and stops. Chitra starts from point Z, which is 60 m east of point A. She walks 18 m north, turns right and walks 19 m, turns right and walks 65 m, turns right and walks 61 m, and stops at point Y. What is the minimum distance between point B and point Y? (All turns are 90-degree turns only.)",
+    tag: "ALP CBT II 02/05/2025 (Afternoon) ुु्युुुु",
+    o_hi: [
+      "(a) 29 m",
+      "(b) 33 m",
+      "(c) 25 m",
+      "(d) 31 m"
+    ],
+    o_en: [
+      "(a) 29 m",
+      "(b) 33 m",
+      "(c) 25 m",
+      "(d) 31 m"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q94. मंगल स्थान A से चलना शुरू करता है और उत्तर की ओर 14 m चलता है। वह दाएं मुड़ता है, 9m चलता है और फिर दाएं मुड़ता है, 37 m चलता है, स्थान B पर पहुंच जाता है और रुक जाता है। जयंती स्थान Z से चलना शुरू करती है जो स्थान B से 15m पूर्व की ओर है। वह पूर्व की ओर 11m चलती है, बाएं मुड़ती है,42 m चलती है, बाएं मुड़ती है और 63m चलती है, बाएं मुड़ती है और 19 m चलती है और स्थान Y पर रुक जाती है। स्थान A और स्थान Y के बीच न्यूनतम दूरी क्याा है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q94. Mangal starts walking from point A and walks 14 m north. He turns right and walks 9 m, then turns right and walks 37 m, reaches point B and stops. Jayanti starts from point Z, which is 15 m east of point B. She walks 11 m east, turns left and walks 42 m, turns left and walks 63 m, turns left and walks 19 m, and stops at point Y. What is the minimum distance between point A and point Y? (All turns are 90-degree turns only.)",
+    tag: "ALP CBT II 06/05/2025 (Morning)",
+    o_hi: [
+      "(a) 31 m",
+      "(b) 26 m",
+      "(c) 28 m",
+      "(d) 25 m"
+    ],
+    o_en: [
+      "(a) 31 m",
+      "(b) 26 m",
+      "(c) 28 m",
+      "(d) 25 m"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q95. मुकेश स्थान A से गाड़ी चलाना शुरू करता है और पश्चिम की ओर 5 km गाड़ी चलाता है। फिर वह बाएँ मुड़ता है, 6 km गाड़ी चलाता है, बाएँ मुड़ता है और 11 km गाड़ी चलाता है। फिर वह बाएँ मुड़ता है और 12 km गाड़ी चलाता है। वह अंतिम बार बाएँ मुड़ता है, 6 km गाड़ी चलाता है और स्थान P पर रुक जाता है। स्थान A पर पुनः पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा की ओर गाड़ी चलानी चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q95. Mukesh starts driving from point A and drives 5 km west. He then turns left and drives 6 km, turns left and drives 11 km, turns left and drives 12 km, and finally turns left and drives 6 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 5 km, उत्तर की ओर",
+      "(b) 6 km, उत्तर की ओर",
+      "(c) 6 km, दक्षिण की ओर",
+      "(d) 5 km, दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 5 km, north",
+      "(b) 6 km, north",
+      "(c) 6 km, south",
+      "(d) 5 km, south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q96. मि. F, बिंदु A से ड्राइव करना शुरू करते हैं और पश्चिम की ओर 1 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं और 6 km ड्राइव करते हैं, फिर वह बाएं मुड़ते हैं और 3 km ड्राइव करते हैं। वह फिर से बाएं मुड़ते हैं और 9 km ड्राइव करते हैं। वह अंतिम बार बाएं मुड़ते हैं, 2 km ड्राइव करते हैं और बिंदु P पर रुक जाते हैं। बिंदु A पर पुनः पहुँचने के लिए उन्हें कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना होगा? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90° के मोड़ हैं।)",
+    q_en: "Q96. Mr F starts driving from point A and drives 1 km west. He then turns left and drives 6 km, turns left and drives 3 km, turns left again and drives 9 km, and finally turns left and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 4 km पूर्व की ओर",
+      "(b) 3 km उत्तर की ओर",
+      "(c) 3 km पश्चिम की ओर",
+      "(d) 3 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 4 km east",
+      "(b) 3 km north",
+      "(c) 3 km west",
+      "(d) 3 km south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q97. एलेक्स बिंदु A से ड्राइव करना शुरू करते हुए और पूर्व की ओर 9 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 5 km ड्राइव करता है फिर बाएं मुड़ता है और 11 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 7 km ड्राइव करता है। वह अंतिम बार बाएं मुड़ता है, 2 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुँचने के लिए उसे कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना होगा? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q97. Alex starts driving from point A and drives 9 km east. He then turns left and drives 5 km, turns left and drives 11 km, turns left again and drives 7 km, and finally turns left and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 3 km दक्षिण की ओर",
+      "(b) 2 km उत्तर की ओर",
+      "(c) 3 km उत्तर की ओर",
+      "(d) 2 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 3 km south",
+      "(b) 2 km north",
+      "(c) 3 km north",
+      "(d) 2 km south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q98. श्रीी मैक्सिमिलियन बिंदु A से ड्राइव करना आरंभ करते हैं और दक्षिण की ओर 26 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं, 23 km ड्राइव करते हैं, दाएं मुड़ते हैं और 32 km ड्राइव करते हैं। फिर वे दाएं मुड़ते हैं और 31 km ड्राइव करते हैं। वे अंतिम बार दाएं मुड़ते हैं, 6 km ड्राइव करते हैं और बिंदु P पर रुक जाते हैं। बिंदु A पर दोबारा पहुंचने के लिए उन्हें कितनी दूर (न्यूनतम दूरी) तक और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-अंश के मोड़ हैं।)",
+    q_en: "Q98. Mr Maximilian starts driving from point A and drives 26 km south. He then turns right and drives 23 km, turns right and drives 32 km, turns right again and drives 31 km, and finally turns right and drives 6 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 8 km पश्चिम की ओर",
+      "(b) 8 km पूर्व की ओर",
+      "(c) 6 km दक्षिण की ओर",
+      "(d) 6 km उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 8 km west",
+      "(b) 8 km east",
+      "(c) 6 km south",
+      "(d) 6 km north"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q99. मिस्टर W, बिंदु A से ड्राइव करना शुरू करते हैं और दक्षिण की ओर 5 km ड्राइव करते हैं। फिर वह बाएं मुड़ते हैं और 6 km ड्राइव करते हैं, फिर वह बाएं मुड़ते हैं और 7 km ड्राइव करते हैं। वह फिर से बाएं मुड़ते हैं और 8 km ड्राइव करते हैं। वह अंतिम बार बाएं मुड़ते हैं और 2 km ड्राइव करते हैं और बिंदु P पर रुक जाते हैं। बिंदु A पर पुनः पहुँचने के लिए उन्हें कितनी दूरी (सबसे छोटी दूरी) और किस दिशा में ड्राइव करना होगा? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90° के मोड़ हैं।)",
+    q_en: "Q99. Mr W starts driving from point A and drives 5 km south. He then turns left and drives 6 km, turns left and drives 7 km, turns left again and drives 8 km, and finally turns left and drives 2 km to stop at point P. How far and in which direction should he drive to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 2 km दक्षिण की ओर",
+      "(b) 5 km उत्तर की ओर",
+      "(c) 2 km पूर्व की ओर",
+      "(d) 6 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 2 km south",
+      "(b) 5 km north",
+      "(c) 2 km east",
+      "(d) 6 km west"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q100. अशोक, बिंदु M से गाड़ी चलाना शुरु करता है और पूर्व की ओर 9 km चलता है। वह फिर दाएँ मुड़ता है और 11 km चलता है तथा वह फिर से दाएँ मुड़ता है और 3 km चलता है। वह फिर से दाएँ मुड़ता है और 7 km चलता है। अंत में, वह बाएँ मुड़ता है और 6 km चलता है तथा बिंदु N पर रुकता है। फिर से बिंदु M पर पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में गाड़ी चलाना चाहिए?",
+    q_en: "Q100. Ashok starts driving from point M and drives 9 km east. He then turns right and drives 11 km, turns right again and drives 3 km, turns right again and drives 7 km. Finally, he turns left and drives 6 km to stop at point N. How far and in which direction should he drive to return to point M by the shortest route?",
+    tag: "",
+    o_hi: [
+      "(a) 7 km उत्तर की ओर",
+      "(b) 5 km उत्तर की ओर",
+      "(c) 4 km उत्तर की ओर",
+      "(d) 4 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 7 km north",
+      "(b) 5 km north",
+      "(c) 4 km north",
+      "(d) 4 km south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];

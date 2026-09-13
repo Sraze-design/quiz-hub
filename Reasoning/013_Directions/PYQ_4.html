@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q151. Q बिंदु A से चलना आरंभ करता है और दक्षिण की ओर 14 km चलता है। फिर वह बाईं ओर मुड़ता है, 10 km चलता है, बाईं ओर मुड़ता है और 9 km चलता है। फिर वह बाईं ओर मुड़ता है और 7 km चलता है। अंतिम बार वह दाईं ओर मुड़ता है, 5 km चलता है और बिंदु P पर रुक जाता है। बिंदु A पर दोबारा पहुंचने के लिए उसे कितनी दूरी तक (न्यूनतम दूरी) और किस दिशा में गाड़ी चलानी चाहिए? (जब तक निर्दिष्ट नें किए जाएं, सभी मोड़ 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q151. Q starts from point A and walks 14 km south. He then turns left and walks 10 km, turns left and walks 9 km, turns left again and walks 7 km, and finally turns right and walks 5 km to stop at point P. How far and in which direction should he travel to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 3 km दक्षिण की ओर",
+      "(b) 3 km पूर्व की ओर",
+      "(c) 3 km उत्तर की ओर",
+      "(d) 3 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 3 km south",
+      "(b) 3 km east",
+      "(c) 3 km north",
+      "(d) 3 km west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. विनीत बिंदु Y से चलना आरंभ करता है और उत्तर की ओर 10 km चलता है। फिर वह दाईं ओर मुड़ता है और 29 km चलता है, दाईं ओर मुड़ता है और 34 km चलता है। फिर वह दाईं ओर मुड़ता है और 13 km चलता है। वह अंतिम बार दाईं ओर मुड़ता है और 24 km चलता है और बिंदु Z पर ठहरता है। बिंदु Y पर दोबारा पहुंचने के लिए उसे कितनी दूर तक (न्यूनतम दूरी) और किस दिशा में गाड़ी चलानी चाहिए? (जब तक निर्दिष्ट न किए जाएं, सभी मोड़ केवल 90 डिग्री के हैं)",
+    q_en: "Q152. Vineet starts from point Y and walks 10 km north. He then turns right and walks 29 km, turns right and walks 34 km, turns right again and walks 13 km, and finally turns right and walks 24 km to stop at point Z. How far and in which direction should he travel to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 24 km दक्षिण की ओर",
+      "(b) 19 km पूर्व की ओर",
+      "(c) 16 km पश्चिम की ओर",
+      "(d) 14 km उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 24 km south",
+      "(b) 19 km east",
+      "(c) 16 km west",
+      "(d) 14 km north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. वेणु बिंदु Y से गाड़ी चलाना प्रारंभ करता है और दक्षिण की ओर 7 km चलता है। फिर वह बाईं ओर मुड़ता है, 15 km चलता है, दाईं ओर मुड़ता है और 38 km चलता है। फिर वह बाईं ओर मुड़ता है और 13 km चलता है। वह बाईं ओर मुड़ता है, 31 km चलता है। फिर वह बाईं ओर मुड़ता है, 28 km चलता है, बाईं ओर मुड़ता है और बिंदु Z पर रुकने के लिए 13 km चलता है। पुनः बिंदु Y तक पहुंचने के लिए उसे कितनी दूरी तक (न्यूनतम दूरी) और किस दिशा में गाड़ी चलानी चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के मोड़ है)",
+    q_en: "Q153. Venu starts driving from point Y and drives 7 km south. He then turns left and drives 15 km, turns right and drives 38 km, turns left and drives 13 km, turns left and drives 31 km, turns left and drives 28 km, then turns left and drives 13 km to stop at point Z. How far and in which direction should he drive to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) दक्षिण की ओर 24 km",
+      "(b) पूर्व की ओर 28 km",
+      "(c) दक्षिण की ओर 20 km",
+      "(d) उत्तर की ओर 27 km"
+    ],
+    o_en: [
+      "(a) south 24 km",
+      "(b) east 28 km",
+      "(c) south 20 km",
+      "(d) north 27 km"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. एंथनी बिंदु A से चलना आरंभ करता है और पश्चिम की ओर 9 km चलता है। वह बाईं ओर मुड़ता है, 3 km चलता है, फिर से बाईं ओर मुड़ता है और 13 km चलता है। फिर वह दाईं ओर मुड़ता है और 2 km चलता है। वह अंतिम बार दाईं ओर मुड़ता है, 4 km चलता है और बिंदु P पर रुक जाता है। बिंदु A पर दोबारा पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) तक और किस दिशा में चलना चाहिए? (जब तक निर्दिष्ट न किए जाएं, सभी मोड़ 90 डिग्री के मोड़ है।)",
+    q_en: "Q154. Anthony starts from point A and walks 9 km west. He turns left and walks 3 km, turns left again and walks 13 km, then turns right and walks 2 km. Finally, he turns right and walks 4 km to stop at point P. How far and in which direction should he walk to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 5 km उत्तर की ओर",
+      "(b) 13 km पश्चिम की ओर",
+      "(c) 9 km उत्तर की ओर",
+      "(d) 7 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 5 km north",
+      "(b) 13 km west",
+      "(c) 9 km north",
+      "(d) 7 km south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. शरद बिंदु Y से चलना आरंभ करता है और 9 km दक्षिण की ओर चलता है। फिर वह बाईं ओर मुड़ता है और 19 km चलता है, दाईं ओर मुड़ता है और 23 km चलता है। फिर वह दाईं ओर मुड़ता है और 8 km चलता है। वह दाईं ओर मुड़ता है और 17 km चलता है। फिर वह बाईं ओर मुड़ता है और 11 km चलता है, बाईं ओर मुड़ता है और बिंदु Z पर ठहरने के लिए 6 km चलता है। बिंदु Y पर दोबारा पहुंचने के लिए उसे कितनी दूर तक (न्यूनतम दूरी) और किस दिशा में गाड़ी चलानी चाहिए? (जब तक निर्दिष्ट न किए जाएं, सभी मोड़ केवल 90 डिग्री के हैं)",
+    q_en: "Q155. Sharad starts from point Y and walks 9 km south. He then turns left and walks 19 km, turns right and walks 23 km, turns right again and walks 8 km, turns right and walks 17 km, turns left and walks 11 km, then turns left and walks 6 km to stop at point Z. How far and in which direction should he travel to return to point Y by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 15 km दक्षिण की ओर",
+      "(b) 26 km उत्तर की ओर",
+      "(c) 21 km उत्तर की ओर",
+      "(d) 23 km दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 15 km south",
+      "(b) 26 km north",
+      "(c) 21 km north",
+      "(d) 23 km south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. जॉनी, बिंदु A से चलना आरंभ करता है और उत्तर की ओर 6 km चलता है। फिर वह दाईं ओर मुड़ता है और 17 km चलता है, दाईं ओर मुड़ता है और 13 km चलता है। फिर वह दाईं ओर मुड़ता है और 8 km चलता है। अंतिम बार वह दाईं ओर मुड़ता है, 7 km चलता है और बिंदु P पर रुक जाता है। बिंदु A पर दोबारा पहुंचने के लिए उसे कितनी दूरी तक (न्यूनतम दूरी) और किस दिशा में गाड़ी चलानी चाहिए? (जब तक निर्दिष्ट न किए जाएं, सभी मोड़ 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q156. Johnny starts from point A and walks 6 km north. He then turns right and walks 17 km, turns right and walks 13 km, turns right again and walks 8 km, and finally turns right and walks 7 km to stop at point P. How far and in which direction should he travel to return to point A by the shortest route? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 9 km पूर्व की ओर",
+      "(b) 9 km पश्चिम की ओर",
+      "(c) 10 km पूर्व की ओर",
+      "(d) 10 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 9 km east",
+      "(b) 9 km west",
+      "(c) 10 km east",
+      "(d) 10 km west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. सैली बिंदु A से चलना आरंभ करती है और उत्तर की ओर 12 किमी चलती है। वह दाईं ओर मुड़ती है, 5 किमी चलती है, और फिर से दाईं ओर मुड़ती है और 24 किमी चलती है। वह फिर से दाएं मुड़ती है और 17 किमी चलती है, वह अंतिम बार दाईं ओर मुड़ती है, 12 किमी चलती है और बिंदु P पर रुक जाती है। वह अपने आरंभिक बिंदु से कितनी दुरी (न्यूनतम दूरी) और किस दिशा में है? (जब तक निर्दिष्ट न किए जाए, सभी मोड़ 90 डिग्री के ही मोड़ हैं।)",
+    q_en: "Q157. Sally starts from point A and walks 12 km north. She turns right and walks 5 km, turns right again and walks 24 km, turns right again and walks 17 km, and finally turns right and walks 12 km to stop at point P. How far and in which direction is she from her starting point? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "",
+    o_hi: [
+      "(a) 12 किमी पूर्व की ओर",
+      "(b) 12 किमी पश्चिम की ओर",
+      "(c) 5 किमी पूर्व की ओर",
+      "(d) 22 किमी उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 12 km east",
+      "(b) 12 km west",
+      "(c) 5 km east",
+      "(d) 22 km north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. सुनीत उत्तर की ओर 10 मीटर चलता है, फिर वह बाएं मुड़ता है और 11 मीटर चलता है, फिर वहां से वह दाएं मुड़ता है और 13 मीटर चलता है, और फिर वह पुनः दाएं मुड़ता है और 25 मीटर चलता है। सुनीत का मुख अब किस दिशा में है? (सभी मोड़ केवल 90 डिग्री मोड़ हैं)",
+    q_en: "Q158. Sunit walks 10 metres north, then turns left and walks 11 metres. From there he turns right and walks 13 metres, and then turns right again and walks 25 metres. Which direction is Sunit facing now? (All turns are 90-degree turns only.)",
+    tag: "Group - D 17/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) पश्चिम",
+      "(c) दक्षिण",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) west",
+      "(c) south",
+      "(d) north"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. विकास ने एक बस स्टॉप से बस पकड़ी। बस ने पश्चिम की ओर 50 मीटर की दूरी तय की। फिर, वह दायें मुड़ती है और 70 मीटर चलती है। फिर, वह बाएं मुड़ी और 15 मीटर चली। फिर, वह पुनः बाएं मुड़ी और 30 मीटर चली। फिर, वह पुनः बाएं मुड़ी और 35 मीटर चली। फिर, वह दायें मुड़ती है और 10 मीटर चलती है। अंत में, वह बाएं मुड़ी और 30 मीटर चलकर स्कूल पहुंची। स्कूल से बस स्टॉप कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q159. Vikas boarded a bus at a bus stop. The bus travelled 50 metres west. It then turned right and travelled 70 metres. Next, it turned left and travelled 15 metres, turned left again and travelled 30 metres, turned left again and travelled 35 metres, turned right and travelled 10 metres, and finally turned left and travelled 30 metres to reach a school. How far and in which direction is the bus stop from the school? (All turns are 90-degree turns only.)",
+    tag: "Group - D 18/08/2022 ( Afternoon )",
+    o_hi: [
+      "(a) 40 मीटर, पूर्व",
+      "(b) 30 मीटर, उत्तर",
+      "(c) 30 मीटर, दक्षिण",
+      "(d) 40 मीटर, दक्षिण"
+    ],
+    o_en: [
+      "(a) 40 metres, east",
+      "(b) 30 metres, north",
+      "(c) 30 metres, south",
+      "(d) 40 metres, south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. बिंदु X से, एक व्यक्ति पूर्व की ओर 45 मीटर चलता है। फिर वह बाएं मुड़ता है और 40 मीटर चलता है। फिर वह दाएं मुड़ता है और 90 मीटर चलता है। फिर वह पुनः दायें मुड़ता है और 60 मीटर चलता है। अंत में, वह दाएं मुड़ता है और बिंदु Y पर पहुंचने के लिए 135 मीटर चलता है। बिंदु Y से बिंदु X कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q160. From point X, a person walks 45 metres east. He then turns left and walks 40 metres, turns right and walks 90 metres, turns right again and walks 60 metres, and finally turns right and walks 135 metres to reach point Y. How far and in which direction is point X from point Y? (All turns are 90-degree turns only.)",
+    tag: "Group - D 18/08/2022 ( Evening )",
+    o_hi: [
+      "(a) 15 मीटर, दक्षिण",
+      "(b) 20 मीटर, उत्तर",
+      "(c) 15 मीटर, उत्तर",
+      "(d) 20 मीटर, दक्षिण"
+    ],
+    o_en: [
+      "(a) 15 metres, south",
+      "(b) 20 metres, north",
+      "(c) 15 metres, north",
+      "(d) 20 metres, south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. बिंदु L से शुरू करते हुए, एक व्यक्ति दक्षिण की ओर 125 मीटर चलता है। फिर वह बाएं मुड़ता है और 70 मीटर चलता है। वहां से वह ्तक्ति बाएं मुड़ता है और 80 मीटर चलता है। उसके बाद, वह बाएं मुड़ता है और 115 मीटर चलता है। अंत में, वह दाएं मुड़ता है और बिंदु M पर पहुंचने के लिए 45 मीटर चलता है। बिंदु L से बिंदु M कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q161. Starting from point L, a person walks 125 metres south. He then turns left and walks 70 metres. From there he turns left and walks 80 metres. After that he turns left and walks 115 metres. Finally, he turns right and walks 45 metres to reach point M. How far and in which direction is point M from point L? (All turns are 90-degree turns only.)",
+    tag: "Group - D 23/08/2022 ( Morning )",
+    o_hi: [
+      "(a) 45 मीटर, पूर्व",
+      "(b) 90 मीटर, पूर्व",
+      "(c) 45 मीटर, पश्चिम",
+      "(d) 90 मीटर, उत्तर"
+    ],
+    o_en: [
+      "(a) 45 metres, east",
+      "(b) 90 metres, east",
+      "(c) 45 metres, west",
+      "(d) 90 metres, north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. B सुबह की सैर कर रही थी। वह एक बिंदु से चलना शुरू करती है, और पूर्व की ओर 50m चलती है। फिर वह दाएं मुड़ती है, 30m चलती है, पुनः दाएं मुड़ती है, और 50m चलती है। वह अंततः बाएं मुड़ती है, 10m चलती है, और रुक जाती है। वह मूल बिंदु से कितनी दूर है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q162. B was out for a morning walk. She starts from a point and walks 50 m east. She then turns right and walks 30 m, turns right again and walks 50 m, and finally turns left and walks 10 m before stopping. How far is she from the original point? (All turns are 90-degree turns only.)",
+    tag: "Group - D 24/08/2022 ( Morning )",
+    o_hi: [
+      "(a) 20 m",
+      "(b) 50 m",
+      "(c) 40 m",
+      "(d) 30 m"
+    ],
+    o_en: [
+      "(a) 20 m",
+      "(b) 50 m",
+      "(c) 40 m",
+      "(d) 30 m"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. शोभा बिंदु A से चलना शुरू करती है, और पूर्व की ओर 10m चलती है। फिर वह बाएं मुड़ती है, और 10m चलती है। फिर वह दाएं मुँड़ती है, और 30m चलती है। वह पुनः दाएं मुड़ती है, और 15m चलती है। फिर वह दाएं मुड़ती है, और 40m चलती है। फिर वह बाएं मुड़ती है, और 5m चलकर एक शॉपिंग मॉल तक पहुंचती है। बिंदु A शॉपिंग मॉल से कितनी दूर और किस दिशा में हैं? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q163. Shobha starts from point A and walks 10 m east. She then turns left and walks 10 m, turns right and walks 30 m, turns right again and walks 15 m, turns right and walks 40 m, then turns left and walks 5 m to reach a shopping mall. How far and in which direction is point A from the shopping mall? (All turns are 90-degree turns only.)",
+    tag: "Group - D 24/08/2022 ( Morning )",
+    o_hi: [
+      "(a) 5 मीटर, दक्षिण",
+      "(b) 5 मीटर, उत्तर",
+      "(c) 10 मीटर, उत्तर",
+      "(d) 10 मीटर, दक्षिण"
+    ],
+    o_en: [
+      "(a) 5 metres, south",
+      "(b) 5 metres, north",
+      "(c) 10 metres, north",
+      "(d) 10 metres, south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. अनुज एक बिंदु A से चलना शुरू करता है, और उत्तर की ओर 10 m चलता है, और फिर बाएं मुड़ता है और 5 m चलता है। फिर वह दाएं मुड़ता है, और 5 m चलता है, और पुन- दाएं मुड़ता है और 5 m की दूरी तय करके बिंदु P पर पहुंचकर रुक जाता है। बिंदु P से शुरू करके बिंदु A तक पहुंचने के लिए उसे कितनी दूर और किस दिशा में चलना चाहिए? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q164. Anuj starts from point A and walks 10 m north, then turns left and walks 5 m. He then turns right and walks 5 m, turns right again and walks 5 m to reach point P and stops. Starting from point P, how far and in which direction should he walk to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 24/08/2022 ( Afternoon )",
+    o_hi: [
+      "(a) 10 m पश्चिम की ओर",
+      "(b) 5 m पूर्व की ओर",
+      "(c) 15 m उत्तर की ओर",
+      "(d) 15 m दक्षिण की ओर"
+    ],
+    o_en: [
+      "(a) 10 m west",
+      "(b) 5 m east",
+      "(c) 15 m north",
+      "(d) 15 m south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. पार्वती बिंदु A से चलना शुरू करती है, और दक्षिण की ओर 35m की दूरी तय करती है। वहां से वह बाएं मुड़ती है, और 60 m चलती है। फिर वह बाएं मुड़ती है, और 15m चलती है। उसके बाद, वह बाएं मुड़ती है, और 90m चलती है। अंत में, वह दाएं मुड़ती है, और 20m चलकर बिंदु D पर पहुंचती है। बिंदु D, बिंदु A से कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q165. Parvati starts from point A and walks 35 m south. From there she turns left and walks 60 m, turns left and walks 15 m, then turns left and walks 90 m. Finally, she turns right and walks 20 m to reach point D. How far and in which direction is point D from point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 25/08/2022 ( Morning )",
+    o_hi: [
+      "(a) 20 मीटर, दक्षिण",
+      "(b) 30 मीटर, पूर्व",
+      "(c) 30 मीटर, पश्चिम",
+      "(d) 20 मीटर, पश्चिम"
+    ],
+    o_en: [
+      "(a) 20 metres, south",
+      "(b) 30 metres, east",
+      "(c) 30 metres, west",
+      "(d) 20 metres, west"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. सैम अपने घर से बाहर निकलता है और 160 मीटर पूर्व की ओर चलता है। फिर वह दायें मुड़ता है और 50 मीटर चलता है। फिर वह दायें मुड़ता है और 70 मीटर चलता है। फिर वह बाएं मुड़ता है और 35 मीटर चलता है। फिर वह दायें मुड़ता है और एक उपहार की दुकान तक पहुँचने के लिए 90 मीटर चलता है। उपहार की दुकान सैम के घर से कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q166. Sam leaves his house and walks 160 metres east. He then turns right and walks 50 metres, turns right and walks 70 metres, turns left and walks 35 metres, and finally turns right and walks 90 metres to reach a gift shop. How far and in which direction is the gift shop from Sam's house? (All turns are 90-degree turns only.)",
+    tag: "Group - D 25/08/2022 ( Evening )",
+    o_hi: [
+      "(a) 85 m, उत्तर",
+      "(b) 120 m, दक्षिण",
+      "(c) 85 m, दक्षिण",
+      "(d) 120 m, उत्तर"
+    ],
+    o_en: [
+      "(a) 85 m, north",
+      "(b) 120 m, south",
+      "(c) 85 m, south",
+      "(d) 120 m, north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. करण अपने घर से बाहर निकलता है और 200 मीटर पूर्व की ओर चलता है। फिर, वह दायें मुड़ता है और 50 मीटर चलता है। फिर, वह दायें मुड़ता है और 70 मीटर चलता है। फिर, वह बाएं मुड़ता है और 35 मीटर चलता है। फिर, वह दाएं मुड़ता है और 130 मीटर चलता है। अंत में, वह दायें मुड़ता है और अपने कॉलेज तक पहुँचने के लिए 45 मीटर चलता है। करण के घर से कॉलेज कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q167. Karan leaves his house and walks 200 metres east. He then turns right and walks 50 metres, turns right and walks 70 metres, turns left and walks 35 metres, turns right and walks 130 metres, and finally turns right and walks 45 metres to reach his college. How far and in which direction is the college from Karan's house? (All turns are 90-degree turns only.)",
+    tag: "Group - D 26/08/2022 ( Morning )",
+    o_hi: [
+      "(a) 40 मीटर, उत्तर",
+      "(b) 40 मीटर, दक्षिण",
+      "(c) 50 मीटर, उत्तर",
+      "(d) 50 मीटर, दक्षिण"
+    ],
+    o_en: [
+      "(a) 40 metres, north",
+      "(b) 40 metres, south",
+      "(c) 50 metres, north",
+      "(d) 50 metres, south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. शहनाज अपने घर से निकलकर पश्चिम की ओर 500 m चलती है। वहां से वह बाएं मुड़ती है, और 250 m चलती है। फिर वह बाएं मुड़ती है, और 750 m चलती है। फिर वह पुनः बाएं मुड़ती है, और 250m चलती है। अब वह अपने घर से किस दिशा में और कितनी दूर है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q168. Shahnaz leaves her house and walks 500 m west. From there she turns left and walks 250 m, turns left and walks 750 m, then turns left again and walks 250 m. In which direction and how far is she now from her house? (All turns are 90-degree turns only.)",
+    tag: "Group - D 26/08/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर, 250m",
+      "(b) पूर्व 250m",
+      "(c) पश्चिम, 250m",
+      "(d) पश्चिम, 500m"
+    ],
+    o_en: [
+      "(a) north, 250m",
+      "(b) east 250m",
+      "(c) west, 250m",
+      "(d) west, 500m"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. अरुण अपने कार्यालय से शुरू करता हैऔर 5 km पूर्व की ओर ड्राइव करता है। फिर वह दाएं मुड़ता है, 4 km ड्राइव करता है, दाएं मुड़ता है और 5 km ड्राइव करता है। फिर वह दायें मुड़ता है और 3 km ड्राइव करता है और एक दुकान पर रुकता है। दुकान से अपने कार्यालय तक पहुँचने के लिए उसे अब किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q169. Arun starts from his office and drives 5 km east. He then turns right and drives 4 km, turns right and drives 5 km, and then turns right and drives 3 km before stopping at a shop. In which direction should he drive from the shop to reach his office? (All turns are 90-degree turns only.)",
+    tag: "Group - D 29/08/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर",
+      "(b) उत्तर-पूर्व",
+      "(c) उत्तर-पश्चिम",
+      "(d) दक्षिण"
+    ],
+    o_en: [
+      "(a) north",
+      "(b) north-east",
+      "(c) north-west",
+      "(d) south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. नरेंद्र, बिंदु L से चलना शुरू करके, उत्तर की ओर 100 m चलता है। वहां से, वह दाएं मुड़ता है, और 900 m चलता है। वह पुनः दाएं मुड़ता है, और 750 m चलता है। फिर, वह दाएं मुड़ता है, और 900 m चलकर बिंदु M पर पहुंचता है। बिंदु M, बिंदु L से कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90° डिग्री वाले मोड़ हैं।)",
+    q_en: "Q170. Narendra starts from point L and walks 100 m north. From there he turns right and walks 900 m, turns right again and walks 750 m, then turns right and walks 900 m to reach point M. How far and in which direction is point M from point L? (All turns are 90-degree turns only.)",
+    tag: "Group - D 30/08/2022 ( Afternoon )",
+    o_hi: [
+      "(a) 700 मीटर, उत्तर",
+      "(b) 650 मीटर, उत्तर",
+      "(c) 650 मीटर, दक्षिण",
+      "(d) 700 मीटर, दक्षिण"
+    ],
+    o_en: [
+      "(a) 700 metres, north",
+      "(b) 650 metres, north",
+      "(c) 650 metres, south",
+      "(d) 700 metres, south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. आदित्य बिंदु X से शुरू करके दक्षिण की ओर 30m चलता है। फिर वह बाएं मुड़ता है, और 20m चलता है। फिर, वह दाएं मुड़ा है, और 10m चलता है। वह पुनः दाएं मुड़ता है, और 40m चलता है। अंत में, वह दाएं मुँड़ता है, और 40m चलकर बिंदु Y पर पहुंचता है। बिंदु X, बिंदु Y से कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q171. Aditya starts from point X and walks 30 m south. He then turns left and walks 20 m, turns right and walks 10 m, turns right again and walks 40 m, and finally turns right and walks 40 m to reach point Y. How far and in which direction is point X from point Y? (All turns are 90-degree turns only.)",
+    tag: "Group - D 30/08/2022 ( Evening )",
+    o_hi: [
+      "(a) 40 मीटर, पूर्व",
+      "(b) 20 मीटर, पूर्व",
+      "(c) 40 मीटर, पश्चिम",
+      "(d) 20 मीटर, पश्चिम"
+    ],
+    o_en: [
+      "(a) 40 metres, east",
+      "(b) 20 metres, east",
+      "(c) 40 metres, west",
+      "(d) 20 metres, west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. श्रीी अमरदीप ने अपने कार्यालय से ड्राइव करना शुरू किया, और दक्षिण की ओर 8 km की दूरी तय की। फिर वह बाएं मुड़े, और 15 km की दूरी तय करके सिटी सेंटर पहुंचे। फिर वह वामावर्त दिशा में 90° मुड़े, और 8 km की दूरी तय करके सिटी पैलेस पहुंचे। सिटी पैलेस से, वह बाएं मुड़े, और 8 km की दूरी तय करके अपने घर पहुंचे। अमरदीप का कार्यालय, सिटी सेंटर और उसके घर से क्रमशः किस दिशा में है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q172. Mr Amardeep starts driving from his office and travels 8 km south. He then turns left and travels 15 km to reach the City Centre. He then turns 90° anticlockwise and travels 8 km to reach the City Palace. From the City Palace, he turns left and travels 8 km to reach his home. In which directions is Amardeep's office from the City Centre and from his home, respectively? (All turns are 90-degree turns only.)",
+    tag: "Group - D 01/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) दक्षिण-पश्चिम और पश्चिम",
+      "(b) उत्तर-पश्चिम और पश्चिम",
+      "(c) उत्तर-पूर्व और पूर्व",
+      "(d) दक्षिण-पूर्व और उत्तर"
+    ],
+    o_en: [
+      "(a) South-west and west",
+      "(b) North-west and west",
+      "(c) North-east and east",
+      "(d) South-east and north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. राघव, बिंदु A से ड्राइव करना शुरू करता है और 16 km उत्तर की ओर ड्राइव करता है। फिर वह दाईं ओर मुड़ता है, 10 km ड्राइव करता है, दाईं ओर मुड़ता है और 17 km ड्राइव करता है। फिर वह दाईं ओर मुड़ता है और 13 km ड्राइव करता है। वह अंत में दाईं ओर मुड़ता है, 1 km ड्राइव करता है और बिंदु P पर रुकता है। बिंदु P से एक सीधी रेखा में बिंदु A तक पहुंचने के लिए उसे कितनी दूर और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q173. Raghav starts driving from point A and drives 16 km north. He then turns right and drives 10 km, turns right and drives 17 km, turns right again and drives 13 km, and finally turns right and drives 1 km to stop at point P. How far and in which direction should he drive in a straight line from point P to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 02/09/2022 ( Morning )",
+    o_hi: [
+      "(a) 1.5 km, उत्तर की ओर",
+      "(b) 1 km, दक्षिण की ओर",
+      "(c) 3 km, पश्चिम की ओर",
+      "(d) 3 km, पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 1.5 km, north",
+      "(b) 1 km, south",
+      "(c) 3 km, west",
+      "(d) 3 km, east"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q174. हर्ष 45m पश्चिम की ओर चलता है, फिर वह बाईं ओर मुड़ता है, और 25m चलता है। वह फिर बाईं ओर मुड़ता है, और 21 m चलता है। वह फिर बाएं मुड़ता है, और 18m चलता है। उसके बाद वह दाएं मुड़ता है, और 23m चलता है, और अंत में, वह बाएं मुड़ता है, और 37m चलता है। हर्ष का मुख अब किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q174. Harsh walks 45 m west, then turns left and walks 25 m. He again turns left and walks 21 m, turns left and walks 18 m, then turns right and walks 23 m, and finally turns left and walks 37 m. Which direction is Harsh facing now? (All turns are 90-degree turns only.)",
+    tag: "Group - D 02/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) उत्तर",
+      "(c) दक्षिण",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) north",
+      "(c) south",
+      "(d) west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q175. शीतल, बिंदु P से चलना शुरू करके, 50m पश्चिम की ओर चलती है। वहां से वह दाएं मुड़ती है, और 20 m चलती है। फिर, वह बाएं मुड़ती है, और 47m चलती है। वह पुनः बाएं मुड़ती है, और 75 m चलती है। फिर, वह बाएं मुड़ती है, और 47 m चलती है। वह पुनः बाएं मुड़ती है, और 20m चलती है। फिर, वह दाएं मुड़ती है, और 50m चलती है। अंततः, वह बाएं मुड़ती है, और 10m चलकर बिंदु Q पर पहुंचती है। बिंदु P, बिंदु Q से कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90° डिग्री वाले मोड़ हैं।)",
+    q_en: "Q175. Sheetal starts from point P and walks 50 m west. From there she turns right and walks 20 m, turns left and walks 47 m, turns left again and walks 75 m, turns left and walks 47 m, turns left again and walks 20 m, then turns right and walks 50 m. Finally, she turns left and walks 10 m to reach point Q. How far and in which direction is point P from point Q? (All turns are 90-degree turns only.)",
+    tag: "Group - D 05/09/2022 ( Morning )",
+    o_hi: [
+      "(a) 35m उत्तर की ओर",
+      "(b) 25m उत्तर की ओर",
+      "(c) 25m दक्षिण की ओर",
+      "(d) 15m उत्तर की ओर"
+    ],
+    o_en: [
+      "(a) 35m north",
+      "(b) 25m north",
+      "(c) 25m south",
+      "(d) 15m north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q176. सुषमा दक्षिण की ओर चलना शुरू करती है। 40 मीटर चलने के बाद, वह दाएं मुड़ती है, ूु और 15 मीटर चलती है। वहां से वह पुनः दाएं मुड़ती है, और 50 मीटर चलती है। वह एक बार पुनः दाएं मुड़ती है, और 15 मीटर चलती है। अंत में वह उस रास्ते पर चली, जो उसके बाईं ओर 45° के कोण पर था। वह अब किस दिशा में चल रही है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं, जब तक की अन्य निर्दिष्ट न किया जाए)",
+    q_en: "Q176. Sushma starts walking south. After walking 40 metres, she turns right and walks 15 metres. From there she again turns right and walks 50 metres. She turns right once more and walks 15 metres. Finally, she takes a path at an angle of 45° to her left. In which direction is she walking now? (Unless otherwise specified, all turns are 90-degree turns only.)",
+    tag: "Group - D 06/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर-पश्चिम",
+      "(b) दक्षिण-पश्चिम",
+      "(c) उत्तर-पूर्व",
+      "(d) दक्षिण-पूर्व"
+    ],
+    o_en: [
+      "(a) north-west",
+      "(b) south-west",
+      "(c) north-east",
+      "(d) south-east"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q177. जब राजेश खिलौने की दुकान पर पहुंचा, तो उसने देखा कि उसने अपने भाई अनूप को बाज़ार में खो दिया है। वह पूर्व की ओर 60 m चला, और फिर दाएं मुड़कर 10 m चला। फिर वह पुनः दाएं मुड़ा, और 10 m चलकर अपने भाई को खोजने के लिए आइसक्रीम की दुकान पर पहुंचा, लेकिन उसका भाई वहां नहीं था। फिर वह उत्तर की ओर मुड़ा, और गली में अपने भाई को देखने से पहले वह 10 m चला। खिलौने की दुकान, राजेश की वर्तमान स्थिति से किस दिशा में है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q177. When Rajesh reached a toy shop, he realised that he had lost his brother Anoop in the market. He walked 60 m east and then turned right and walked 10 m. He then turned right again and walked 10 m to reach an ice-cream shop to look for his brother, but his brother was not there. He then turned north and walked 10 m before seeing his brother in the lane. In which direction is the toy shop from Rajesh's present position? (All turns are 90-degree turns only.)",
+    tag: "Group - D 06/09/2022 ( Evening )",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) दक्षिण",
+      "(c) उत्तर",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) south",
+      "(c) north",
+      "(d) west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q178. बिंदु A से बिंदु B तक पहुंचने के लिए दीपक ने उत्तर दिशा में अपनी साइकिल चलाई, वहां से वह बाएं मुड़ता है, और बिंदु C तक पहुंचने के लिए 3 km साइकिल चलाता है, वह फिर से बाएं मुड़ता है, और बिंदु D तक पहुंचने के लिए 4 km साइकिल चलाता है। इस समय वह अपने आरंभिक स्थान से 3 km पश्चिम में है। बिंदु A से बिंदु B तक उसके द्वाारा तय की गई दूरी कितनी है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q178. To reach point B from point A, Deepak rode his bicycle north. From there he turned left and cycled 3 km to reach point C. He again turned left and cycled 4 km to reach point D. At this point, he is 3 km west of his starting position. What distance did he cover from point A to point B? (All turns are 90-degree turns only.)",
+    tag: "Group - D 08/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) 4 kms",
+      "(b) 5 kms",
+      "(c) 10 kms",
+      "(d) 7 kms"
+    ],
+    o_en: [
+      "(a) 4 kms",
+      "(b) 5 kms",
+      "(c) 10 kms",
+      "(d) 7 kms"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q179. राघव, बिंदु A से ड्राइव करना शुरू करता है और 20 km उत्तर की ओर ड्राइव करता है। फिर वह दाईं ओर मुड़ता है, 40 km ड्राइव करता है, दाईं ओर मुड़ता है और 50 km ड्राइव करता है। फिर वह दाईं ओर मुड़ता है और 120 km ड्राइव करता है। वह अंत में दाईं ओर मुड़ता है, 30km ड्राइव करता है और बिंदु P पर रुकता है। बिंदु P से एक सीधी रेखा में बिंदु A तक पहुंचने के लिए उसे कितनी दूर और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q179. Raghav starts driving from point A and drives 20 km north. He then turns right and drives 40 km, turns right and drives 50 km, turns right again and drives 120 km, and finally turns right and drives 30 km to stop at point P. How far and in which direction should he drive in a straight line from point P to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 08/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) 80 km, पश्चिम की ओर",
+      "(b) 120 km, दक्षिण की ओर",
+      "(c) 100 km, पश्चिम की ओर",
+      "(d) 80 km, पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 80 km, west",
+      "(b) 120 km, south",
+      "(c) 100 km, west",
+      "(d) 80 km, east"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q180. राघव, बिंदु A से ड्राइव करना शुरू करता है और 30km उत्तर की ओर ड्राइव करता है। फिर वह दाईं ओर मुड़ता है, 34 km ड्राइव करता है, दाई ओर मुड़ता है और 41 km ड्राइव करता है। फिर वह दाई ओर मुड़ता है और 47 km ड्राइव करता है। वह अंत में दाईं ओर मुड़ता है, 11 km ड्राइव करता है और बिंदु P पर रुकता है। बिंदु P से एक सीधी रेखा में बिंदु A तक पहुंचने के लिए उसे कितनी दूर और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q180. Raghav starts driving from point A and drives 30 km north. He then turns right and drives 34 km, turns right and drives 41 km, turns right again and drives 47 km, and finally turns right and drives 11 km to stop at point P. How far and in which direction should he drive in a straight line from point P to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 09/09/2022 ( Evening )",
+    o_hi: [
+      "(a) 13 km, दक्षिण की ओर",
+      "(b) 13 km, पूर्व की ओर",
+      "(c) 15 km, पश्चिम की ओर",
+      "(d) 23 km, पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 13 km, south",
+      "(b) 13 km, east",
+      "(c) 15 km, west",
+      "(d) 23 km, east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q181. अवधेश बिंदु A से शुरू करता है और पूर्व की ओर 10 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 10 km ड्राइव करता है। वह फिर से बाएं मुड़ता है और 10 km ड्राइव करता है। अंत में वह बाएं मुड़ता है, 3 km ड्राइव करता है और बिंदु M पर रुक जाता है। बिंदु M से बिंदु A तक पहुंचने के लिए उसे किस दिशा में और कितनी दूरी तय करनी होगी? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q181. Awadhesh starts from point A and drives 10 km east. He then turns left and drives 10 km, turns left again and drives 10 km, and finally turns left and drives 3 km to stop at point M. In which direction and how far should he travel from point M to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 12/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर की ओर 7 किमी",
+      "(b) दक्षिण की ओर 7 कि.मी",
+      "(c) 13 किमी पूर्व की ओर",
+      "(d) पूर्व की ओर 4.7 किमी"
+    ],
+    o_en: [
+      "(a) 7 km north",
+      "(b) 7 km south",
+      "(c) 13 km east",
+      "(d) 4.7 km east"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. एक सुबह योगेश अपने घर से दूसरे शहर में रहने वाली अपनी बहन से मिलने के लिए निकला। वह पहले 20 m उत्तर की ओर चला, और फिर पूर्व की ओर मुड़कर 10 m आगे चला। इसके बाद वह उत्तर की ओर मुड़ा, और 30 m चला। अंत में वह पूर्व की ओर मुड़ा, और अपनी बहन के घर पहुंचने के लिए 20 m चला। उसका घर, उसकी बहन के घर से किस दिशा में है?",
+    q_en: "Q182. One morning, Yogesh leaves his house to visit his sister who lives in another city. He first walks 20 m north, then turns east and walks 10 m. After that, he turns north and walks 30 m. Finally, he turns east and walks 20 m to reach his sister's house. In which direction is his house from his sister's house?",
+    tag: "Group - D 13/09/2022 ( Morning )",
+    o_hi: [
+      "(a) दक्षिण-पश्चिम",
+      "(b) उत्तर",
+      "(c) दक्षिण",
+      "(d) उत्तर-पूर्व"
+    ],
+    o_en: [
+      "(a) south-west",
+      "(b) north",
+      "(c) south",
+      "(d) north-east"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. फरहान अपने घर से पैदल चलना शुरू करता है और पूर्व की ओर 'Y' दूरी तय करता है। फिर वह दाएं मुड़ता है और 10m पैदल चलता है। उसके बाद, वह फिर से दाएं मुड़ता है और 25m पैदल चलता है। फिर, वह बाएं मुड़ता है और 10 m पैदल चलता है, उसके बाद दाएं मुड़कर 15 m पैदल चलता है। अंत में वह दाएं मुड़ता है और अपने घर पहुंचने के लिए 20m पैदल चलता है। Y का मान ज्ञात कीजिए।",
+    q_en: "Q183. Farhan starts walking from his house and covers a distance Y towards the east. He then turns right and walks 10 m. After that, he turns right again and walks 25 m. Then he turns left and walks 10 m, turns right and walks 15 m, and finally turns right and walks 20 m to reach his house. Find the value of Y.",
+    tag: "Group - D 13/09/2022 ( Evening )",
+    o_hi: [
+      "(a) 30m",
+      "(b) 55m",
+      "(c) 40m",
+      "(d) 50m"
+    ],
+    o_en: [
+      "(a) 30m",
+      "(b) 55m",
+      "(c) 40m",
+      "(d) 50m"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. आलोक बिंदु B से शुरू करता है और उत्तर की ओर 5 km गाड़ी चलाता है। फिर वह दाएं मुड़कर 10 km गाड़ी चलाता है, फिर से दाएं मुड़ता है और 5 km गाड़ी चलाता है। अंत में दाएं मुड़कर 3 km गाड़ी चलाता है और बिंदु X पर रुक जाता है। बिंदु X से बिंदु B तक पहुंचने के लिए उसे किस दिशा में और कितनी दूरी तय करनी होगी? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q184. Alok starts from point B and drives 5 km north. He then turns right and drives 10 km, turns right again and drives 5 km, and finally turns right and drives 3 km to stop at point X. In which direction and how far should he travel from point X to reach point B? (All turns are 90-degree turns only.)",
+    tag: "Group - D 14/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) पश्चिम की ओर 7 km",
+      "(b) पूर्व की ओर 5 km",
+      "(c) पश्चिम की ओर 6km",
+      "(d) पूर्व की ओर 7 km"
+    ],
+    o_en: [
+      "(a) west 7 km",
+      "(b) 5 km east",
+      "(c) west 6km",
+      "(d) east 7 km"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. ज्योति मॉल से निकलती है और पश्चिम की ओर 4 km ड्राइव करती है। फिर वह बाएं मुड़ती है और 8 km ड्राइव करती है, वहां से बाएं मुड़ती है और 24 km ड्राइव करती है। फिर वह बाएं मुड़ती है और 6 km ड्राइव करती है। फिर वह बाईं ओर मुड़ती है, 6 km ड्राइव करती है और अपने घर पहुंचती है। उसके घर के सापेक्ष मॉल किस दिशा में है?",
+    q_en: "Q185. Jyoti leaves a mall and drives 4 km west. She then turns left and drives 8 km, turns left and drives 24 km, turns left and drives 6 km, and then turns left again and drives 6 km to reach her home. In which direction is the mall with respect to her home?",
+    tag: "Group - D 14/09/2022 ( Evening )",
+    o_hi: [
+      "(a) उत्तर - पश्चिम",
+      "(b) दक्षिण - पूर्व",
+      "(c) दक्षिण - पश्चिम",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) north-west",
+      "(b) south-east",
+      "(c) south-west",
+      "(d) north"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. काव्या अपनी सहेली के घर से सीधे 1 km चली, फिर बाएं मुड़कर 3 km सीधे चली। वह फिर से बाएं मुड़ी और 4 km चली,फिर वहां से वह बाएं मुड़ी और 1 km चली। यदि वह अंत में पश्चिम दिशा में चल रही थी, तो वह अपनी सहेली के घर से शुरू में किस दिशा में चली थी?",
+    q_en: "Q186. Kavya walks straight for 1 km from her friend's house, then turns left and walks straight for 3 km. She turns left again and walks 4 km, then turns left and walks 1 km. If she is finally walking towards the west, in which direction did she initially start from her friend's house?",
+    tag: "Group - D 15/09/2022 ( Morning )",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) पश्चिम",
+      "(c) उत्तर",
+      "(d) दक्षिण"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) west",
+      "(c) north",
+      "(d) south"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. श्याम बिंदु A से शुरू करता है और 15 km उत्तर की ओर ड्राइव करता है। फिर वह दाएं मुड़ता है, 5 km ड्राइव करता है, दाएं मुड़ता है और 20 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 10 km ड्राइव करता है। वह अंत में दायें मुड़ता है, 5 km ड्राइव करता है और बिंदु P पर रुकता है। बिंदु P से एक सीधी रेखा में बिंदु A तक पहुँचने के लिए उसे कितनी दूर और किस दिशा में गाड़ी चलानी चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q187. Shyam starts from point A and drives 15 km north. He then turns right and drives 5 km, turns right and drives 20 km, turns right again and drives 10 km, and finally turns right and drives 5 km to stop at point P. How far and in which direction should he drive in a straight line from point P to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 15/09/2022 ( Morning )",
+    o_hi: [
+      "(a) पश्चिम की ओर 7 km",
+      "(b) पश्चिम की ओर 5 km",
+      "(c) पूर्व की ओर 5 km",
+      "(d) पूर्व की ओर 4 km"
+    ],
+    o_en: [
+      "(a) west 7 km",
+      "(b) 5 km west",
+      "(c) 5 km east",
+      "(d) east 4 km"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. अवध बिंदु F से चलना प्रारंभ करता है और पश्चिम की ओर 5 km चलता है। फिर वह दाएं मुड़ता है, 5 km ड्राइव करता है, फिर से वह दाएं मुड़ता है और 5 km ड्राइव करता है। फिर वह अंतिम बाएँ मुड़ता है, 2 km ड्राइव करता है और बिंदु D पर रुकता है। बिंदु D से बिंदु F तक पहुँचने के लिए उसे कितनी दूर और किस दिशा में गाड़ी चलानी चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q188. Awadh starts from point F and travels 5 km west. He then turns right and drives 5 km, turns right again and drives 5 km, and finally turns left and drives 2 km to stop at point D. How far and in which direction should he drive from point D to reach point F? (All turns are 90-degree turns only.)",
+    tag: "Group - D 15/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) दक्षिण की ओर 7 km",
+      "(b) पूर्व की ओर 2 km",
+      "(c) पूर्व की ओर 7 km",
+      "(d) पश्चिम की ओर 2 km"
+    ],
+    o_en: [
+      "(a) south 7 km",
+      "(b) east 2 km",
+      "(c) east 7 km",
+      "(d) west 2 km"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. सुमित बिंदु F से शुरू होता है और पूर्व की ओर 5 km ड्राइव करता है। फिर वह बाएं मुड़ता है, 10 km ड्राइव करता है, फिर बाएं मुड़ता है और 8 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 3 km ड्राइव करता है। वह अंत में बाएँ मुड़ता है, 3 km ड्राइव करता है और बिंदु G पर रुकता है। बिंदु G से बिंदु F तक पहुँचने के लिए उसे कितनी दूर और किस दिशा में गाड़ी ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q189. Sumit starts from point F and drives 5 km east. He then turns left and drives 10 km, turns left and drives 8 km, turns left again and drives 3 km, and finally turns left and drives 3 km to stop at point G. How far and in which direction should he drive from point G to reach point F? (All turns are 90-degree turns only.)",
+    tag: "Group - D 15/09/2022 ( Evening )",
+    o_hi: [
+      "(a) पूर्व की ओर 7 km",
+      "(b) दक्षिण की ओर 7 km",
+      "(c) पश्चिम की ओर 5 km",
+      "(d) पूर्व की ओर 8 km"
+    ],
+    o_en: [
+      "(a) east 7 km",
+      "(b) south 7 km",
+      "(c) 5 km west",
+      "(d) east 8 km"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. अमित बिंदु A से चलना शुरू करता है और 6 km दक्षिण की ओर ड्राइव करता है। फिर वह बाएं मुड़ता है, 4 km ड्राइव करता है, फिर वह दाएं मुड़ता है और 3 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 7 km ड्राइव करता है। वह अंतिम दायें मुड़ता है, 9 km ड्राइव करता है और बिंदु B पर रुकता है। बिंदु B से बिंदु A तक पहुँचने के लिए उसे कितनी दूर और किस दिशा में गाड़ी ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q190. Amit starts from point A and drives 6 km south. He then turns left and drives 4 km, turns right and drives 3 km, turns right again and drives 7 km, and finally turns right and drives 9 km to stop at point B. How far and in which direction should he drive from point B to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 17/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) पूर्व की ओर 3 km",
+      "(b) पश्चिम की ओर 2 km",
+      "(c) उत्तर की ओर 3 km",
+      "(d) पूर्व की ओर 2 km"
+    ],
+    o_en: [
+      "(a) east 3 km",
+      "(b) west 2 km",
+      "(c) north 3 km",
+      "(d) east 2 km"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. अमन, उत्तर दिशा में 12 km की दूरी तय करता है और वह पूर्व की ओर मुड़ता है और 5 km की दूरी तय करता है। वह आगे उत्तर की ओर मुड़ता है और 3 km की दूरी तय करता है और फिर वह पूर्व दिशा की ओर मुड़ता है और 4 km की दूरी तय करता है। अंत में वह दक्षिण दिशा की ओर मुड़ता है और 15 Km की दूरी तय करता है। उसकी आरंभिक और अंतिम स्थिति के बीच न्यूनतम दूरी कितनी है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं)",
+    q_en: "Q191. Aman travels 12 km north, then turns east and travels 5 km. He then turns north and travels 3 km, turns east and travels 4 km, and finally turns south and travels 15 km. What is the minimum distance between his starting and ending positions? (All turns are 90-degree turns only.)",
+    tag: "Group - D 18/09/2022 ( Morning )",
+    o_hi: [
+      "(a) 12 Km",
+      "(b) 9 km",
+      "(c) 11 km",
+      "(d) 15 km"
+    ],
+    o_en: [
+      "(a) 12 Km",
+      "(b) 9 km",
+      "(c) 11 km",
+      "(d) 15 km"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. रोहित ने अपने घर से अपनी साइकिल पर चलना प्रारंभ किया और दक्षिण दिशा में 5 km की दूरी तय की। फिर वह दाएँ मुड़ता है और 2.5 km की दूरी तय करता है, और फिर से दाएँ मुड़ता है और 5 km की दूरी तय करता है। अंत में, बाएँ मुड़ने के बाद, उसने 5 km की दूरी तय की। उसके वर्तमान स्थान और उसके घर के बीच न्यूनतम दूरी कितनी है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q192. Rohit starts from his house on his bicycle and travels 5 km south. He then turns right and travels 2.5 km, turns right again and travels 5 km. Finally, after turning left, he travels 5 km. What is the minimum distance between his present position and his house? (All turns are 90-degree turns only.)",
+    tag: "Group - D 19/09/2022 ( Morning )",
+    o_hi: [
+      "(a) 9.5 km",
+      "(b) 7.5 km",
+      "(c) 8.5 km",
+      "(d) 6.5 km"
+    ],
+    o_en: [
+      "(a) 9.5 km",
+      "(b) 7.5 km",
+      "(c) 8.5 km",
+      "(d) 6.5 km"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q193. आकाश बिंदु O से चलना शुरू करता है और उत्तर की ओर 3 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 5km ड्राइव करता है। वह फिर से दाएं मुड़ता है और 10 km ड्राइव करता है। वह फिर से दाएं मुड़ता है और 5 km ड्राइव करता है। अंत में वह दाएं मुड़ता है, 3 km ड्राइव करता है और बिंदु Z पर रुक जाता है। बिंदु Z से बिंदु O तक पहुंचने के लिए उसे किस दिशा में और कितनी दूरी तय करनी होगी? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q193. Akash starts from point O and drives 3 km north. He then turns right and drives 5 km, turns right again and drives 10 km, turns right again and drives 5 km, and finally turns right and drives 3 km to stop at point Z. In which direction and how far should he travel from point Z to reach point O? (All turns are 90-degree turns only.)",
+    tag: "Group - D 19/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर की ओर 4 km",
+      "(b) पूर्व की ओर 2 km",
+      "(c) पश्चिम की ओर 2 km",
+      "(d) पूर्व की ओर 3 km"
+    ],
+    o_en: [
+      "(a) north 4 km",
+      "(b) east 2 km",
+      "(c) west 2 km",
+      "(d) east 3 km"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q194. गरिमा उत्तर की ओर 15 m चलती है और फिर दायें मुड़कर 20 m चलती है। वह फिर बायीं ओर मुड़ी और 5 m चली। अंत में, वह फिर से बायीं ओर मुड़ी और 20 m चली। वह अब शुरुआती बिंदु से कितनी दूर और किस दिशा में है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q194. Garima walks 15 m north and then turns right and walks 20 m. She then turns left and walks 5 m. Finally, she again turns left and walks 20 m. How far and in which direction is she now from the starting point? (All turns are 90-degree turns only.)",
+    tag: "Group - D 20/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) 20 m, दक्षिण",
+      "(b) 15 m, दक्षिण",
+      "(c) 15 m, उत्तर",
+      "(d) 20 m, उत्तर"
+    ],
+    o_en: [
+      "(a) 20 m, south",
+      "(b) 15 m, south",
+      "(c) 15 m, north",
+      "(d) 20 m, north"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q195. मोहित, बिंदु X से चलना शुरू करता है, और उत्तर की ओर 2 km की दूरी तय करता है, और फिर दायें मुड़ता है, और आगे 1 km की दूरी तय करता है। फिर वह दायीं ओर मुड़ता है और 3 km की दूरी तय करता है। फिर वह पुनः दायीं ओर मुड़ता है और 1 km की दूरी तय करता है, और अंत में फिर से दायीं ओर मुड़ता है, और 1 km की दूरी तय करता है। यात्रा के आरंभ बिंदु, X के सापेक्ष मोहित की वर्तमान स्थिति क्याा है? (सभी मोड़ केवल 90 डिग्री वाले मोड़ हैं।)",
+    q_en: "Q195. Mohit starts from point X and travels 2 km north, then turns right and travels 1 km. He then turns right and travels 3 km, turns right again and travels 1 km, and finally turns right again and travels 1 km. What is Mohit's present position with respect to the starting point X? (All turns are 90-degree turns only.)",
+    tag: "Group - D 22/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) बिंदु X ही",
+      "(b) 1 km पूर्व",
+      "(c) 1 km उत्तर",
+      "(d) 1 km दक्षिण"
+    ],
+    o_en: [
+      "(a) Point X itself",
+      "(b) 1 km east",
+      "(c) 1 km north",
+      "(d) 1 km south"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q196. ज्योति ने एक विशेष दिशा में 3 km की दूरी तय की और फिर अपने दाहिनी ओर मुड़ गई। उसने आगे 1 km की यात्रा की और उसके बाद वह बाईं ओर मुड़ गई और 5 km चली और अंत में वह दाईं ओर मुड़ गई और उत्तर दिशा में चली गई। जब उसने अपनी यात्रा शुरू की तो उसका मुख किस दिशा की ओर था? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q196. Jyoti travels 3 km in a certain direction and then turns right. She travels another 1 km, then turns left and walks 5 km, and finally turns right and starts moving north. Which direction was she facing when she began her journey? (All turns are 90-degree turns only.)",
+    tag: "Group - D 22/09/2022 ( Evening )",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) उत्तर",
+      "(c) पश्चिम",
+      "(d) पूर्व"
+    ],
+    o_en: [
+      "(a) south",
+      "(b) north",
+      "(c) west",
+      "(d) east"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q197. माधव बिंदु A से चलना प्रारंभ करता है और 16 km पूर्व की ओर ड्राइव करता है। फिर वह दाएं मुड़ता है, 4 km ड्राइव करता है, दाएं मुड़ता है और 12 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 11 km चलता है, बाएं मुड़ता है और 4 km चलता है और बिंदु B पर रुकता है। बिंदु B से बिंदु A तक पहुंचने के लिए उसे कितनी दूर और किस दिशा में गाड़ी चलानी चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    q_en: "Q197. Madhav starts from point A and drives 16 km east. He then turns right and drives 4 km, turns right and drives 12 km, turns right again and travels 11 km, turns left and travels 4 km, and stops at point B. How far and in which direction should he drive from point B to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 26/09/2022 ( Morning )",
+    o_hi: [
+      "(a) पश्चिम की ओर 12 km",
+      "(b) पूर्व की ओर 6 km",
+      "(c) दक्षिण की ओर 7 km",
+      "(d) दक्षिण की ओर 8 km"
+    ],
+    o_en: [
+      "(a) west 12 km",
+      "(b) east 6 km",
+      "(c) south 7 km",
+      "(d) south 8 km"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q198. सूरज 9 m पूर्व की ओर चलना प्रारंभ करता है, फिर बाएं मुड़ता है। वह 5 m चलता है, दाएं मुड़ता है और फिर 5 m चलता है। फिर वह दायें मुड़ता है और 8 m चलता है। वह फिर दायें मुड़ता है और 5 m चलता है। फिर से वह दायें मुड़ता है और 3 m चलता है। अब उसका मुख किस दिशा की ओर है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q198. Suraj starts by walking 9 m east and then turns left. He walks 5 m, turns right and walks another 5 m. He then turns right and walks 8 m, turns right and walks 5 m, and again turns right and walks 3 m. Which direction is he facing now? (All turns are 90-degree turns only.)",
+    tag: "Group - D 26/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर",
+      "(b) पश्चिम",
+      "(c) दक्षिण",
+      "(d) पूर्व"
+    ],
+    o_en: [
+      "(a) north",
+      "(b) west",
+      "(c) south",
+      "(d) east"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q199. अमित अपने शुरुआती स्थान से उत्तर दिशा में चलना शुरू करता है। अपने अंतिम गंतव्य तक पहुँचने से पहले, वह दो बार दाएँ और एक बार बाएँ मुड़ता है और फिर एक बार दाएँ मुड़ता है। वह अब किस दिशा में चल रहा है? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q199. Amit starts walking north from his starting point. Before reaching his final destination, he turns right twice, left once, and then right once more. Which direction is he moving now? (All turns are 90-degree turns only.)",
+    tag: "Group - D 28/09/2022 ( Afternoon )",
+    o_hi: [
+      "(a) उत्तर",
+      "(b) दक्षिण",
+      "(c) पूर्व",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) north",
+      "(b) south",
+      "(c) east",
+      "(d) west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q200. वीर बिंदु A से ड्राइव करना शुरू करता है और उत्तर की ओर 7 km ड्राइव करता है। फिर वह दाएं मुड़ता है, 8 km ड्राइव करता है, फिर दाएं मुड़ता है और 19 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 3 km ड्राइव करता है, फिर दाएं मुड़ता है और 12 km ड्राइव करके बिंदु B पर रुकता है। बिंदु B से बिंदु A तक पहुंचने के लिए उसे कितनी दूर और किस दिशा में ड्राइव करना चाहिए? (सभी मोड़ केवल 90 डिग्री के मोड़ हैं)",
+    q_en: "Q200. Veer starts driving from point A and drives 7 km north. He then turns right and drives 8 km, turns right and drives 19 km, turns right again and drives 3 km, then turns right and drives 12 km to stop at point B. How far and in which direction should he drive from point B to reach point A? (All turns are 90-degree turns only.)",
+    tag: "Group - D 29/09/2022 ( Morning )",
+    o_hi: [
+      "(a) 8 किमी दक्षिण की ओर",
+      "(b) 9 किमी दक्षिण की ओर",
+      "(c) 5 किमी पश्चिम की ओर",
+      "(d) 6 किमी पूर्व की ओर"
+    ],
+    o_en: [
+      "(a) 8 km south",
+      "(b) 9 km south",
+      "(c) 5 km west",
+      "(d) 6 km east"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];

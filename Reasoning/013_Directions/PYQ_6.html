@@ -1,0 +1,582 @@
+const data = [
+  {
+    q_hi: "Q251. रवि अपने घर से 2 किमी पूर्व की ओर चलता है। बाईं ओर मुड़ने के बाद, वह 0.5 किमी चलकर पार्क पहुंचता है। उसके घर से पार्क की दिशा ज्ञात करें।",
+    q_en: "Q251. Ravi walks 2 km east from his house. After turning left, he walks 0.5 km to reach a park. Find the direction of the park from his house.",
+    tag: "RRB JE 24/05/2019 (Morning)",
+    o_hi: [
+      "(a) दक्षिण पश्चिम",
+      "(b) उत्तर पूर्व",
+      "(c) दक्षिण पूर्व",
+      "(d) उत्तर पश्चिम"
+    ],
+    o_en: [
+      "(a) south-west",
+      "(b) north-east",
+      "(c) south-east",
+      "(d) north-west"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q252. राम स्थान A से उत्तर की ओर 5 किमी की दूरी तय करता है, और फिर बाईं ओर मुड़ता है और 3 किमी चलता है, फिर दाईं ओर मुड़ता है और 2 किमी चलता है। अंत में, वह दाईं ओर मुड़ता है और 3 किमी चलकर स्थान B तक पहुँचता है। A और B के बीच की दूरी ज्ञात करें।",
+    q_en: "Q252. Ram travels 5 km north from point A, then turns left and walks 3 km, then turns right and walks 2 km. Finally, he turns right and walks 3 km to reach point B. Find the distance between A and B.",
+    tag: "पहुँचता है। A और B के बीच की दूरी ज्ञात करें। RRB JE 24/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) 10 किमी",
+      "(b) 7 किमी",
+      "(c) 13 किमी",
+      "(d) 2 किमी"
+    ],
+    o_en: [
+      "(a) 10 km",
+      "(b) 7 km",
+      "(c) 13 km",
+      "(d) 2 km"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q253. एक लड़का एक प्लेटफार्म पर खड़ा हैऔर अपनी घड़ी में शाम 3:45 का समय देखता है। घंटे वाली सुई पूर्व की ओर इंगित करती है और मिनट वाली सुई पश्चिम की इंगित करती है। लड़का किस दिशा की ओर मुंह किये खड़ा है?",
+    q_en: "Q253. A boy is standing on a platform and looks at his watch at 3:45 p.m. The hour hand points east and the minute hand points west. Which direction is the boy facing?",
+    tag: "RRB JE 24/05/2019 (Evening)",
+    o_hi: [
+      "(a) दक्षिण पूर्व",
+      "(b) उत्तर",
+      "(c) दक्षिण पश्चिम",
+      "(d) पूर्व"
+    ],
+    o_en: [
+      "(a) South-east",
+      "(b) North",
+      "(c) South-west",
+      "(d) East"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q254. 'A', 'C 'के दक्षिण पूर्व में है, 'B', 'C’ के पूर्व में है और 'A' के उत्तर पूर्व में है। यदि 'D', 'A' के उत्तर में है और 'B' के उत्तर पश्चिम में है, तो 'D' के सापेक्ष 'C' की दिशा क्याा है?",
+    q_en: "Q254. A is south-east of C, B is east of C and north-east of A. If D is north of A and north-west of B, then in which direction is C with respect to D?",
+    tag: "RRB JE 25/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) दक्षिण पश्चिम",
+      "(b) उत्तर पश्चिम",
+      "(c) दक्षिण पूर्व",
+      "(d) उत्तर पूर्व"
+    ],
+    o_en: [
+      "(a) south-west",
+      "(b) north-west",
+      "(c) south-east",
+      "(d) north-east"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q255. एक व्यक्ति एक जगह से चलना शुरू करता है। एक किलोमीटर चलने के बाद, वह बाएं मुड़ता है। फिर आधा किलोमीटर चलने के बाद, वह पुनः बाएं मुड़ता है। वह अब पूर्व की ओर जा रहा है तो उसने वास्तव में किस दिशा में चलना शुरू किया था?",
+    q_en: "Q255. A person starts walking from a place. After walking one kilometre, he turns left. After walking another half kilometre, he again turns left. He is now moving east. In which direction had he actually started walking?",
+    tag: "RRB JE 25/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) दक्षिण",
+      "(c) पश्चिम",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) south",
+      "(c) west",
+      "(d) north"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q256. स्नेहा बाजार जाना चाहती है। वह अपने घर से जो उत्तर में है, चलना शुरू करती है, और चौराहे पर जाती है। उसकी बाईं ओर जाने वाली सड़क पार्क को जाती है और उससे सीधे आगे जाने पर कार्यालय परिसर स्थित है और पार्क के ठीक सामने बाजार है। बाजार चौराहे से किस दिशा में है?",
+    q_en: "Q256. Sneha wants to go to the market. She starts from her house, which is to the north, and reaches a crossroads. The road to her left leads to a park, straight ahead is an office complex, and the market is directly opposite the park. In which direction is the market from the crossroads?",
+    tag: "RRB JE 25/05/2019 (Evening )",
+    o_hi: [
+      "(a) उत्तर",
+      "(b) पूर्व",
+      "(c) दक्षिण",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) North",
+      "(b) East",
+      "(c) South",
+      "(d) West"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q257. गौतम दक्षिण की ओर मुंह करके आगे बढ़ता है। फिर वह अपने बायीं ओर 135° पर मुड़ता है l अब वह किस दिशा का सामना कर रहा है?",
+    q_en: "Q257. Gautam moves forward facing south. He then turns 135° to his left. Which direction is he facing now?",
+    tag: "RRB JE 27/05/2019 (Evening)",
+    o_hi: [
+      "(a) उत्तर पूर्व",
+      "(b) उत्तर पश्चिम",
+      "(c) दक्षिण पूर्व",
+      "(d) दक्षिण पश्चिम"
+    ],
+    o_en: [
+      "(a) north-east",
+      "(b) north-west",
+      "(c) south-east",
+      "(d) south-west"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q258. रघु बस स्टॉप तक जाने के लिए अपने घर से सीधे चलता है। कुछ दूर चलने के बाद, वह बाई ओर मुड़ा और बस स्टॉप पर पहुंचा जो पूर्व दिशा में है। उसके घर से बस स्टॉप की दिशा ज्ञात करें।",
+    q_en: "Q258. Raghu walks straight from his house to go to the bus stop. After walking some distance, he turns left and reaches the bus stop, which is in the east direction. Find the direction of the bus stop from his house.",
+    tag: "RRB JE 29/05/2019 (Morning)",
+    o_hi: [
+      "(a) दक्षिण पश्चिम",
+      "(b) उत्तर पश्चिम",
+      "(c) उत्तर पूर्व",
+      "(d) दक्षिण पूर्व"
+    ],
+    o_en: [
+      "(a) south-west",
+      "(b) north-west",
+      "(c) north-east",
+      "(d) south-east"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q259. Y को X के पूर्व में रखा गया है, और Z को X के दक्षिण में रखा गया है। Y के सापेक्ष Z की दिशा क्याा है?",
+    q_en: "Q259. Y is placed east of X, and Z is placed south of X. In which direction is Z with respect to Y?",
+    tag: "RRB JE 30/05/2019 (Morning)",
+    o_hi: [
+      "(a) उत्तर पूर्व",
+      "(b) दक्षिण पूर्व",
+      "(c) दक्षिण पश्चिम",
+      "(d) उत्तर पश्चिम"
+    ],
+    o_en: [
+      "(a) north-east",
+      "(b) south-east",
+      "(c) south-west",
+      "(d) north-west"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q260. एक आदमी पूर्व की ओर 5 किमी जाता है, फिर वह 120 डिग्री दाई ओर मुड़कर 5 किमी जाता है वह फिर से 120 डिग्री दाई ओर मुड़ता है और 5 किमी जाता है। प्रारंभिक बिंदु के सापेक्ष, वह अब कहां है?",
+    q_en: "Q260. A man walks 5 km east, then turns 120° to the right and walks 5 km. He again turns 120° to the right and walks 5 km. Where is he now with respect to the starting point?",
+    tag: "RRB JE 30/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) पश्चिम",
+      "(b) पूर्व",
+      "(c) उत्तर पूर्व",
+      "(d) प्रारंभिक बिंदु पर ू्त्ष"
+    ],
+    o_en: [
+      "(a) West",
+      "(b) East",
+      "(c) North-east",
+      "(d) At the starting point"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q261. विजयन दक्षिण की ओर चलना शुरू करता है। 15 मीटर चलने के बाद, वह बाईं ओर मुड़ा और 15 मीटर चला। वह फिर से बाईं ओर मुड़ा और 15 मीटर चला। वह अपने प्रारंभिक बिंदु से कितनी दूर और किस दिशा में है?",
+    q_en: "Q261. Vijayan starts walking south. After walking 15 metres, he turns left and walks 15 metres. He again turns left and walks 15 metres. How far and in which direction is he from his starting point?",
+    tag: "RRB JE 31/05/2019 (Morning)",
+    o_hi: [
+      "(a) 30 मीटर, पूर्व",
+      "(b) 15 मीटर, पूर्व",
+      "(c) 15 मीटर, पश्चिम",
+      "(d) 15 मीटर, दक्षिण"
+    ],
+    o_en: [
+      "(a) 30 metres, east",
+      "(b) 15 metres, east",
+      "(c) 15 metres, west",
+      "(d) 15 metres, south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q262. बिंदु S से शुरू करके महेश दक्षिण की ओर 25 मीटर चला। वह अपनी बाई ओर मुड़ा और 50 मीटर चला। वह फिर से अपनी बाईं ओर मुड़ा और 25 मीटर चला। वह फिर से अपनी बाईं ओर मुड़कर 60 मीटर चला और बिंदु T पर पहुंचा। महेश बिंदु S से कितनी दूर और किस दिशा में है?",
+    q_en: "Q262. Starting from point S, Mahesh walks 25 metres south. He turns left and walks 50 metres. He again turns left and walks 25 metres. He again turns left and walks 60 metres to reach point T. How far and in which direction is Mahesh from point S?",
+    tag: "RRB JE 31/05/2019 (Evening)",
+    o_hi: [
+      "(a) 10 मीटर, पूर्व",
+      "(b) 10 मीटर, पश्चिम",
+      "(c) 25 मीटर, पश्चिम",
+      "(d) 25 मीटर, उत्तर"
+    ],
+    o_en: [
+      "(a) 10 metres, east",
+      "(b) 10 metres, west",
+      "(c) 25 metres, west",
+      "(d) 25 metres, north"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q263. विग्नेश एक मेज पर एक घड़ी को कुछ इस तरह रखता है कि सुबह के 9 : 15 के समय घंटे वाली सुई दक्षिण दिशा की ओर इंगित करती है। मिनट वाली सुई किस दिशा में है?",
+    q_en: "Q263. Vignesh places a clock on a table in such a way that at 9:15 a.m. the hour hand points south. In which direction is the minute hand pointing?",
+    tag: "RRB JE 01/06/2019 (Morning)",
+    o_hi: [
+      "(a) पश्चिम",
+      "(b) पूर्व",
+      "(c) उत्तर",
+      "(d) दक्षिण"
+    ],
+    o_en: [
+      "(a) west",
+      "(b) east",
+      "(c) north",
+      "(d) south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q264. एक ग्रामीण व्यक्ति 8 km उत्तर की ओर चलता है, फिर पूर्व की ओर मुड़ता है और 2 km चलता है, फिर दक्षिण की ओर मुड़ता है और 5 km चलता है, फिर अपने दाई ओर मुड़ता है और 2 km चलता है। प्रारंभिक स्थिति के सापेक्ष उसकी वर्तमान स्थिति क्याा होगी?",
+    q_en: "Q264. A villager walks 8 km north, then turns east and walks 2 km, then turns south and walks 5 km, then turns right and walks 2 km. What is his present position with respect to the starting point?",
+    tag: "ALP Tier II 21/01/2019 (Morning)",
+    o_hi: [
+      "(a) 13 km उत्तर",
+      "(b) 13 km दक्षिण",
+      "(c) 3 km उत्तर",
+      "(d) 3 km दक्षिण"
+    ],
+    o_en: [
+      "(a) 13 km north",
+      "(b) 13 km south",
+      "(c) 3 km north",
+      "(d) 3 km south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q265. एक विक्रेता अपनी दिनचर्या शुरू करती है वह उत्तर दिशा में 7 km चलती है, फिर पश्चिम की ओर मुड़ती है और 6 km चलती है, फिर दक्षिण की ओर मुड़ती है और 2 km चलती है, फिर पश्चिम की ओर मुड़ती है और 3 km चलती है, फिर बाईं ओर मुड़ती है और 5 km चलती है। अब वह अपनी प्रारंभिक स्थिति के सापेक्ष कहां पर है?",
+    q_en: "Q265. A salesperson begins her routine by walking 7 km north, then turns west and walks 6 km, turns south and walks 2 km, turns west and walks 3 km, then turns left and walks 5 km. Where is she now with respect to her starting position?",
+    tag: "ALP Tier II 21/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) 3 km पूर्व में",
+      "(b) 3 km पश्चिम में",
+      "(c) 9 km पूर्व में",
+      "(d) 9 km पश्चिम में"
+    ],
+    o_en: [
+      "(a) 3 km east",
+      "(b) 3 km west",
+      "(c) 9 km east",
+      "(d) 9 km west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q266. एक जॉगर 1 km पूर्व में दौड़ता है, फिर उत्तर की ओर मुड़ता है और 4 km की दूरी तय करता है, फिर पश्चिम की ओर मुड़ता है और 6 km की दूरी तय करता है, फिर अपनी बाईं ओर मुड़ता है और 4 km की दूरी तय करता है। अब वह अपनी प्रारंभिक स्थिति के संदर्भ में कहां है?",
+    q_en: "Q266. A jogger runs 1 km east, then turns north and covers 4 km, turns west and covers 6 km, then turns left and covers 4 km. Where is he now with respect to his starting position?",
+    tag: "ALP Tier II 21/01/2019 (Evening )",
+    o_hi: [
+      "(a) 5 km पश्चिम में",
+      "(b) 7 km पश्चिम में",
+      "(c) 5 km पूर्व में",
+      "(d) 7 km पूर्व में"
+    ],
+    o_en: [
+      "(a) 5 km west",
+      "(b) 7 km west",
+      "(c) 5 km east",
+      "(d) 7 km east"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q267. एक तीर्थयात्री अपने घर से विभिन्न स्थानों पर जाने के लिए यात्रा शुरू करती है। वह पूर्व की ओर 13 km चलती है, फिर उत्तर की ओर मुड़ती है और 11 km चलती है, फिर पश्चिम की ओर मुड़ती है और 7 km चलती है, फिर दक्षिण की ओर मुड़ती है और 6 km चलती है और अंत में अपने दाई ओर मुड़ती है और 6 km चलती है। अब वह अपनी प्रारंभिक स्थिति के सापेक्ष कहां पर है?",
+    q_en: "Q267. A pilgrim starts a journey from her house to visit different places. She walks 13 km east, then turns north and walks 11 km, turns west and walks 7 km, turns south and walks 6 km, and finally turns right and walks 6 km. Where is she now with respect to her starting position?",
+    tag: "ALP Tier II 23/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) 16 km दक्षिण में",
+      "(b) 5 km उत्तर में",
+      "(c) 16 km उत्तर में",
+      "(d) 5 km दक्षिण में"
+    ],
+    o_en: [
+      "(a) 16 km south",
+      "(b) 5 km north",
+      "(c) 16 km north",
+      "(d) 5 km south"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q268. A और B एक ही बिंदु से साइकिल चलाना शुरू करती हैं। A, 8 किमी पश्चिम की ओर साइकिल चलाकर जाती है, फिर अपनी दाई ओर मुड़ जाती है और फिर 7 किमी साइकिल चलाती है। B साइकिल चलाकर 3 किमी पूर्व की ओर जाती है, फिर उत्तर की ओर मुड़ती है और 4 किमी तक साइकिल चलाती है। उसके बाद पश्चिम की ओर मुड़ जाती है और 15 किमी की दूरी साइकिल से तय करती है, फिर अपनी दाई ओर मुड़ती है और 3 किमी तक साइकिल चलाती है। B अभी A के सापेक्ष कहाँ पर है?",
+    q_en: "Q268. A and B start cycling from the same point. A cycles 8 km west, then turns right and cycles 7 km. B cycles 3 km east, then turns north and cycles 4 km. After that, B turns west and cycles 15 km, then turns right and cycles 3 km. Where is B now with respect to A?",
+    tag: "ALP Tier II 08/02/2019 (Morning)",
+    o_hi: [
+      "(a) 4 km पूर्व की ओर",
+      "(b) 26 km पूर्व की ओर",
+      "(c) 4 km पश्चिम की ओर",
+      "(d) 26 km पश्चिम की ओर"
+    ],
+    o_en: [
+      "(a) 4 km east",
+      "(b) 26 km east",
+      "(c) 4 km west",
+      "(d) 26 km west"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q269. समर्थ 10 मीटर उत्तर की ओर चलता है और फिर दाएं मुड़ता है। एक बार फिर वह दाएं मुड़ता है, 4 मीटर तक चलता है, बाएं मुड़ता है और 6 किलोमीटर तक चलता है। अब समर्थ का मुख किस दिशा की ओर है?",
+    q_en: "Q269. Samarth walks 10 metres north and then turns right. He turns right once again, walks 4 metres, turns left and walks 6 kilometres. Which direction is Samarth facing now?",
+    tag: "RRB ALP 10/08/2018 (Morning)",
+    o_hi: [
+      "(a) पश्चिम",
+      "(b) उत्तर",
+      "(c) पूर्व",
+      "(d) दक्षिण"
+    ],
+    o_en: [
+      "(a) west",
+      "(b) north",
+      "(c) east",
+      "(d) south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q270. X अपने घर से पश्चिम की ओर मुंह करके निकलता है, उसी दिशा में 100 किलोमीटर गाड़ी चलाने के बाद वह दाएँ मुड़ता है और पुनः 100 किलोमीटर गाड़ी चलाता है। इसके बाद वह बाएँ मुड़कर 50 किलोमीटर चलता है। अपने शुरुआती बिंदु के सापेक्ष X किस दिशा के सम्मुख खड़ा है?",
+    q_en: "Q270. X leaves his house facing west and drives 100 km in the same direction. He then turns right and drives another 100 km. After that, he turns left and travels 50 km. Which direction is X facing with respect to his starting point?",
+    tag: "RRB ALP 10/08/2018 (Evening)",
+    o_hi: [
+      "(a) दक्षिण पश्चिम",
+      "(b) उत्तर पूर्व",
+      "(c) दक्षिण पूर्व",
+      "(d) उत्तर पश्चिम"
+    ],
+    o_en: [
+      "(a) South-west",
+      "(b) North-east",
+      "(c) South-east",
+      "(d) North-west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q271. X पश्चिम की ओर 3 किलोमीटर चलता है और फिर मुड़कर 4 किलोमीटर उत्तर की ओर चलता है। X की यात्रा के आरंभिक तथा अंतिम बिंदु के बीच की न्यूनतम दूरी ___________है।",
+    q_en: "Q271. X walks 3 km west and then turns and walks 4 km north. The minimum distance between the starting and ending points of X's journey is ______.",
+    tag: "RRB ALP 13/08/2018 (Morning)",
+    o_hi: [
+      "(a) 8 किलोमीटर",
+      "(b) 6 किलोमीटर",
+      "(c) 5 किलोमीटर",
+      "(d) 7 किलोमीटर"
+    ],
+    o_en: [
+      "(a) 8 km",
+      "(b) 6 km",
+      "(c) 5 km",
+      "(d) 7 km"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q272. किसी सुबह X और Y किसी पार्क में एक दूसरे की तरफ चलना शुरू करते है। वे दोनों जब एक दूसरे से मिलते हैं उस समय Y की छाया X के दाहिनी ओर बनती है। X किस दिशा की ओर खड़ा था?",
+    q_en: "Q272. One morning, X and Y start walking towards each other in a park. When they meet, Y's shadow falls to the right of X. Which direction was X facing?",
+    tag: "RRB ALP 13/08/2018 (Evening)",
+    o_hi: [
+      "(a) उत्तर",
+      "(b) पूर्व",
+      "(c) दक्षिण",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) north",
+      "(b) east",
+      "(c) south",
+      "(d) west"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q273. पूर्व की ओर मुख करते हुए, X, 150° दक्षिणावर्त और 105° वामावर्त घूमता है। X अब किस दिशा की तरफ मुख करते हुए खड़ा है?",
+    q_en: "Q273. Facing east, X turns 150° clockwise and then 105° anticlockwise. Which direction is X facing now?",
+    tag: "RRB ALP 20/08/2018 (Morning)",
+    o_hi: [
+      "(a) उत्तर - पश्चिम में",
+      "(b) उत्तर-पूर्व में",
+      "(c) दक्षिण-पश्चिम में",
+      "(d) दक्षिण-पूर्व में"
+    ],
+    o_en: [
+      "(a) North-west",
+      "(b) North-east",
+      "(c) South-west",
+      "(d) South-east"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q274. ममता उत्तर दिशा की ओर चल रही है। 4 kms चलने के बाद वह दाएं मुड़कर 3 kms चलती है। अब वह अपने आरंभिक बिंदु से कितनी दूर और किस दिशा में है?",
+    q_en: "Q274. Mamta is walking north. After walking 4 km, she turns right and walks 3 km. How far and in which direction is she from her starting point?",
+    tag: "RRB ALP 20/08/2018 (Evening)",
+    o_hi: [
+      "(a) उत्तर पूर्व - 5 kms",
+      "(b) दक्षिण पूर्व -5kms",
+      "(c) पश्चिम -7 kms",
+      "(d) उत्तरपश्चिम- 6 kms"
+    ],
+    o_en: [
+      "(a) north-east - 5 kms",
+      "(b) south-east -5kms",
+      "(c) west -7 kms",
+      "(d) north-west- 6 kms"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q275. X जिसका मुख दक्षिण की ओर है, घड़ी की सुई की दिशा में 225° मुड़ता है और फिर घड़ी की सुई के विपरीत 90° मुड़ता है। अब X का मुख किस दिशा में है?",
+    q_en: "Q275. X is facing south. He turns 225° clockwise and then 90° anticlockwise. Which direction is X facing now?",
+    tag: "RRB ALP 21/08/2018 (Evening)",
+    o_hi: [
+      "(a) दक्षिण पूर्व",
+      "(b) उत्तर पूर्व",
+      "(c) दक्षिण पश्चिम",
+      "(d) उत्तर पश्चिम"
+    ],
+    o_en: [
+      "(a) south-east",
+      "(b) north-east",
+      "(c) south-west",
+      "(d) north-west"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q276. एक आदमी पूर्व की ओर 15 किलोमीटर यात्रा करता है, फिर दाएँ मुड़ता है और 20 किलोमीटर चलता है। इसके बाद वह बाएँ मुड़ता है और 30 किलोमीटर यात्रा करता है। अंत में, वह दाहिने मुड़ता है और 40 किलोमीटर चलता है। आरंभ बिंदु और गंतव्य के बीच न्यूनतम कितनीदूरी है:",
+    q_en: "Q276. A man travels 15 km east, then turns right and walks 20 km. After that, he turns left and travels 30 km. Finally, he turns right and walks 40 km. What is the minimum distance between the starting point and the destination?",
+    tag: "RRB ALP 29/08/2018 (Morning)",
+    o_hi: [
+      "(a) 75 km",
+      "(b) 50 km",
+      "(c) 80 km",
+      "(d) 100 km"
+    ],
+    o_en: [
+      "(a) 75 km",
+      "(b) 50 km",
+      "(c) 80 km",
+      "(d) 100 km"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q277. एक व्यक्ति बिंदु 'O' से यात्रा शुरू करता है, बिन्दुदु 'A' तक पहुँचने के लिए 20 किलोमीटर पूर्व दिशा की ओर चलता है, दाहिने मुड़ता है और बिंदु 'B' तक पहुँचने के लिए 10 किलोमीटर की दूरी तय करता है, दाहिने मुड़ता है और बिंदु 'C' तक पहुँचने के लिए 9 किलोमीटर की यात्रा करता है, दाहिने मुड़कर बिंदु 'D' तक पहुँचने के लिए वह 5 किलोमीटर की यात्रा करता है, अब बाईं ओर मुड़कर बिंदु 'E' तक पहुँचने के लिए 12 किलोमीटर की यात्रा करता है और फिर दाहिने मुड़ते हुए बिंदु 'F' तक पहुंचने के लिए 6 किलोमीटर की यात्रा करता है। उसके शुरुआती और अंतिम बिंदुओं के बीच सबसे कम दूरी क्याा है?",
+    q_en: "Q277. A person starts from point O and walks 20 km east to reach point A, turns right and travels 10 km to reach point B, turns right and travels 9 km to reach point C, turns right and travels 5 km to reach point D, then turns left and travels 12 km to reach point E, and finally turns right and travels 6 km to reach point F. What is the shortest distance between his starting and ending points?",
+    tag: "",
+    o_hi: [
+      "(a) 13",
+      "(b) 2",
+      "(c) 20",
+      "(d) 145"
+    ],
+    o_en: [
+      "(a) 13",
+      "(b) 2",
+      "(c) 20",
+      "(d) 145"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q278. X जिसका मुख उत्तर की ओर है, घड़ी की सुई की दिशा में 205° मुड़ता है और फिर घड़ी की दिशा के विपरीत 160° मुड़ता है। अब X का मुख किस दिशा में है?",
+    q_en: "Q278. X is facing north. He turns 205° clockwise and then 160° anticlockwise. Which direction is X facing now?",
+    tag: "RRB ALP 31/08/2018 (Morning)",
+    o_hi: [
+      "(a) उत्तर पूर्व",
+      "(b) दक्षिण पूर्व",
+      "(c) दक्षिण पश्चिम",
+      "(d) उत्तर पश्चिम"
+    ],
+    o_en: [
+      "(a) north-east",
+      "(b) south-east",
+      "(c) south-west",
+      "(d) north-west"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q279. एक व्यक्ति 'O' बिंदु से शुरुआत करते हुए बिंदु 'A' तक पूर्व की ओर 20 किलोमीटर की यात्रा करता है, वह फिर दाईं ओर मुड़ता है तथा बिंदु 'B' तक पहुँचने के लिए 10 किलोमीटर की यात्रा करता है, तथा फिर दाईं ओर मुड़कर बिंदु 'C' तक पहुँचने के लिए 9 किलोमीटर की यात्रा करता है और फिर दाईं ओर मुड़कर बिंदु 'D' तक पहुँचने के लिए 5 किलोमीटर की यात्रा करता है। तत्पश्चात्, बाईं ओर मुड़कर 12 किलोमीटर की ्र यात्रा करके 'बिंदु E' तक पहुँचता है और फिर दाईं ओर मुड़कर बिंदु 'F' तक पहुँचने के लिए 6 किलोमीटर की यात्रा करता है। अब उस व्यक्ति का मुख किस दिशा की ओर है?",
+    q_en: "Q279. A person starts from point O and travels 20 km east to point A. He then turns right and travels 10 km to point B, turns right and travels 9 km to point C, turns right and travels 5 km to point D. Thereafter, he turns left and travels 12 km to point E, then turns right and travels 6 km to point F. Which direction is the person facing now?",
+    tag: "RRB ALP 31/08/2018 (Evening)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) पश्चिम",
+      "(c) उत्तर",
+      "(d) दक्षिण"
+    ],
+    o_en: [
+      "(a) east",
+      "(b) west",
+      "(c) north",
+      "(d) south"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
