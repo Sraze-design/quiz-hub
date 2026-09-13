@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q1. A, B, C, D, E, F, G और H किसी वर्गाकार मेज के चारों ओर केंद्र के अभिमुख होकर बैठे हैं। उनमें से कुछ कोनों पर बैठे हैं, जबकि कुछ भुजाओं के ठीक बीच में बैठे हैं। F, G के दाएं दूसरे स्थान पर बैठा है। F किसी एक कोने पर बैठा है। G के बाएं से गिनने पर, G और E के बीच केवल तीन व्यक्ति बैठे हैं। H, E के बाएं तीसरे स्थान पर बैठा है। H के बाएं से गिनने पर, H और B के बीच केवल तीन व्यक्ति बैठे हैं। C, B के दाएं दूसरे स्थान पर बैठा है। D, E का निकटतम पड़ोसी नहीं है। D के बाएं से गिनने पर, E और D के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q1. A, B, C, D, E, F, G and H are sitting around a square table facing the centre. Some of them sit at the corners, while the others sit exactly at the middle of the sides. F sits second to the right of G. F sits at one of the corners. Counting to the left of G, only three persons sit between G and E. H sits third to the left of E. Counting to the left of H, only three persons sit between H and B. C sits second to the right of B. D is not an immediate neighbour of E. Counting to the left of D, how many persons sit between E and D?",
+    tag: "NTPC CBT 2 (GL) 13/10/2025 (Morning)",
+    o_hi: [
+      "(a) कोई नहीं",
+      "(b) एक",
+      "(c) दो",
+      "(d) दो से अधिक"
+    ],
+    o_en: [
+      "(a) None",
+      "(b) One",
+      "(c) Two",
+      "(d) More than two"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q2. सात व्यक्ति A, B, C, D, E, F और G उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। F के बाईं ओर केवल तीन व्यक्ति बैठे हैं। D के दाईं ओर केवल B बैठा है। D और A के बीच केवल तीन व्यक्ति बैठे हैं। E, G के बायीं ओर किसी स्थान पर लेकिन C के दायीं ओर किसी स्थान पर बैठा है। F के दायीं ओर कितने व्यक्ति बैठे हैं?",
+    q_en: "Q2. Seven persons A, B, C, D, E, F and G are sitting in a row facing north. Only three persons sit to the left of F. Only B sits to the right of D. Only three persons sit between D and A. E sits somewhere to the left of G but somewhere to the right of C. How many persons sit to the right of F?",
+    tag: "NTPC CBT - I (UG) 03/09/2025 (Afternoon)",
+    o_hi: [
+      "(a) 1",
+      "(b) 4",
+      "(c) 3",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) 4",
+      "(c) 3",
+      "(d) 2"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q3. A, B, C, D, R, S और T एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। S, C के बाईं ओर चौथे स्थान पर बैठा है। R, A के दाईं ओर चौथे स्थान पर बैठा है। C के बाईं ओर से गिनती करने पर C और A के बीच केवल दो व्यक्ति बैठे हैं। R या C का निकटतम पड़ोसी D नहीं है। B, D का निकटतम पड़ोसी नहीं है। T के दाईं ओर चौथे स्थान पर कौन बैठा है?",
+    q_en: "Q3. A, B, C, D, R, S and T are sitting around a circular table facing the centre. S sits fourth to the left of C. R sits fourth to the right of A. Counting to the left of C, only two persons sit between C and A. D is not an immediate neighbour of either R or C. B is not an immediate neighbour of D. Who sits fourth to the right of T?",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) C",
+      "(b) A",
+      "(c) S",
+      "(d) R"
+    ],
+    o_en: [
+      "(a) C",
+      "(b) A",
+      "(c) S",
+      "(d) R"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q4. दस व्यक्ति दो समानांतर पंक्तियों में, प्रत्येक पंक्ति में पाँच व्यक्ति इस प्रकार बैठे हैं कि आसन्न व्यक्तियों के बीच समान दूरी है। पंक्ति I में A, B, C, D और E बैठे हैं और वे सभी दक्षिण की ओर अभिमुख है। पंक्ति II में R, S, T, U और V बैठे हैं और वे सभी उत्तर की ओर अभिमुख है। इस प्रकार प्रत्येक व्यक्ति, दूसरी पंक्ति के किसी एक व्यक्ति के सम्मुख बैठा है। A अपनी पंक्ति के दाहिने छोर पर बैठा है और U के सम्मुख है। R अपनी पंक्ति के मध्य में बैठा है और C के सम्मुख है। C और D के बीच में में E बैठा है और वह T के सम्मुख है। S अपनी पंक्ति के दाहिने छोर पर बैठा है। B के ठीक सम्मुख कौन बैठा है?",
+    q_en: "Q4. Ten persons are sitting in two parallel rows of five persons each, with equal distance between adjacent persons. In row I, A, B, C, D and E are sitting facing south. In row II, R, S, T, U and V are sitting facing north. Thus, each person in one row faces one person in the other row. A sits at the right end of his row and faces U. R sits in the middle of his row and faces C. E sits between C and D and faces T. S sits at the right end of his row. Who sits exactly opposite B?",
+    tag: "ALP CBT II 02/05/2025 (Morning)",
+    o_hi: [
+      "(a) U",
+      "(b) T",
+      "(c) R",
+      "(d) V"
+    ],
+    o_en: [
+      "(a) U",
+      "(b) T",
+      "(c) R",
+      "(d) V"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q5. E, F, G, H, I, J और K एक सीधी पंक्ति में उत्तर की ओर उन्मुख होकर बैठे हैं। H, G के दायें से दूसरे स्थान पर है। F और K निकटतम पडोसी हैं। F और E दोनों I के निकटतम पड़ोसी हैं। H और E निकटतम पड़ोसी हैं। K पंक्ति के अंतिम दायें छोर पर है। J, H के ठीक बायें है। J के ठीक बायें कौन है?",
+    q_en: "Q5. E, F, G, H, I, J and K are sitting in a straight row facing north. H sits second to the right of G. F and K are immediate neighbours. Both F and E are immediate neighbours of I. H and E are immediate neighbours. K sits at the extreme right end of the row. J sits immediately to the left of H. Who sits immediately to the left of J?",
+    tag: "Group - D 17/08/2022 ( Morning )",
+    o_hi: [
+      "(a) H",
+      "(b) F",
+      "(c) G",
+      "(d) E"
+    ],
+    o_en: [
+      "(a) H",
+      "(b) F",
+      "(c) G",
+      "(d) E"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q6. दिविज, पलक, रवनीत, सेजल और तर्पण एक वृत्ताकार मेज के परितः मेज के केंद्र की ओर मुख करके बैठे हैं। रवनीत और तर्पण के बीच में केवल पलक बैठी है। तर्पण, सेजल के दाईं ओर दूसरे स्थान पर है। रवनीत और दिविज के बीच में केवल सेजल है। तर्पण के बाईं ओर ठीक बगल में कौन बैठा / बैठी है?",
+    q_en: "Q6. Divij, Palak, Ravneet, Sejal and Tarpan are sitting around a circular table facing the centre. Only Palak sits between Ravneet and Tarpan. Tarpan sits second to the right of Sejal. Only Sejal sits between Ravneet and Divij. Who sits immediately to the left of Tarpan?",
+    tag: "Group - D 17/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) सेजल",
+      "(b) पलक",
+      "(c) दिविज",
+      "(d) रवनीत"
+    ],
+    o_en: [
+      "(a) Sejal",
+      "(b) Palak",
+      "(c) Divij",
+      "(d) Ravneet"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q7. आठ मित्र - कृति, दुर्गा, मानसी, सूर्या, ताहिरा वृत्ति, आहना और योशिता एक वर्गाकार मेज के चारों ओर इस प्रकार बैठे हैं, कि चार मित्र मेज के कोनों पर बैठे हैं, जबकि अन्य चार मेज के भुजाओं के ठीक मध्य में बैठे हैं। सभी का मुख मेज के केंद्र की ओर है। सूर्या, दुर्गा के दाईं ओर तीसरे स्थान पर बैठा है। कृति और दुर्गा के बीच में केवल ताहिरा है। मानसी, दुर्गा के बाईं ओर दूसरे स्थान पर है। सूर्य और योशिता के बीच में केवल वृत्ति बैठी है। योशिता, आहना के बाईं ओर दूसरे स्थान पर है। वृत्ति मानसी के बाईं ओर दूसरे स्थान पर है। ताहिरा के बाईं ओर तीसरे स्थान पर कौन बैठा / बैठी है?",
+    q_en: "Q7. Eight friends Kriti, Durga, Mansi, Surya, Tahira, Vritti, Ahana and Yoshita are sitting around a square table such that four friends sit at the corners and the other four sit exactly at the middle of the sides. All face the centre of the table. Surya sits third to the right of Durga. Only Tahira sits between Kriti and Durga. Mansi sits second to the left of Durga. Only Vritti sits between Surya and Yoshita. Yoshita sits second to the left of Ahana. Vritti sits second to the left of Mansi. Who sits third to the left of Tahira?",
+    tag: "Group - D 18/08/2022 ( Morning )",
+    o_hi: [
+      "(a) अहाना",
+      "(b) योशिता",
+      "(c) सूर्या",
+      "(d) मानसी"
+    ],
+    o_en: [
+      "(a) Ahana",
+      "(b) Yoshita",
+      "(c) Surya",
+      "(d) Mansi"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q8. एक समारोह में, मुख्य अतिथि के साथ कुछ लोग थे, और सभी दर्शक गैलरी में पश्चिम की ओर मुख करके बैठे थे। P, मुख्य अतिथि के बायें से दूसरे स्थान पर बैठा है और Q, P के दायें से चौथे स्थान पर बैठा है। Q के दायीं ओर बैठे व्यक्तियों की संख्या, Q के बायीं ओर बैठे व्यक्तियों की संख्या से ठीक एक कम है। P के बायें ओर कोई नहीं बैठा है । दर्शक गैलरी में कुल कितने लोग बैठे थे?",
+    q_en: "Q8. At a function, some people including the chief guest were seated in an audience gallery facing west. P sits second to the left of the chief guest and Q sits fourth to the right of P. The number of persons sitting to the right of Q is exactly one less than the number sitting to the left of Q. No one sits to the left of P. How many people in total were seated in the audience gallery?",
+    tag: "Group - D 22/08/2022 ( Morning)",
+    o_hi: [
+      "(a) 7",
+      "(b) 8",
+      "(c) 10",
+      "(d) 9"
+    ],
+    o_en: [
+      "(a) 7",
+      "(b) 8",
+      "(c) 10",
+      "(d) 9"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q9. कुछ व्यक्ति उत्तर दिशा की ओर मुख करके एक पंक्ति में बैठे हैं। M बाएं सिरे पर बैठा है। K, M के दाईं ओर ठीक बगल में बैठा है। G, K के दाईं ओर ठीक बगल में बैठा है। G और D के बीच में केवल पांच व्यक्ति बैठे हैं। D, दाएं सिरे से छठवें स्थान पर बैठा है। G, D के बाईं ओर किसी स्थान पर बैठा है। यदि पंक्ति में कोई अन्य व्यक्ति नहीं बैठा है, तो पंक्ति में बैठे व्यक्तियों की कुल संख्या कितनी है ?",
+    q_en: "Q9. Some persons are sitting in a row facing north. M sits at the left end. K sits immediately to the right of M. G sits immediately to the right of K. Only five persons sit between G and D. D sits sixth from the right end. G sits somewhere to the left of D. If no other person sits in the row, how many persons are there in total?",
+    tag: "Group - D 22/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) 12",
+      "(b) 13",
+      "(c) 14",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 13",
+      "(c) 14",
+      "(d) 15"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q10. चार सहेलियां - हिमानी, शलाका, मिताली और बृंदा, एक वर्गाकार मेज के चारों ओर मेज के केंद्र की ओर मुख करके बैठी हैं। वे चारों मेज के कोनों पर बैठी हैं। हिमानी, बृंदा के दाईं ओर ठीक बगल में है। मिताली, शलाका के बाईं ओर ठीक बगल में है। हिमानी, शलाका के बाईं ओर दूसरे स्थान पर है। कुछ समय के बाद, हिमानी अपना स्थान छोड़ देती है, और कामिनी उसका स्थान ले लेती है। इसी तरह तारा, वृंदा का स्थान ले लेती है। अब तारा के बाईं ओर ठीक बगल में कौन बैठा है?",
+    q_en: "Q10. Four friends Himani, Shalaka, Mitali and Brinda are sitting at the four corners of a square table facing the centre. Himani sits immediately to the right of Brinda. Mitali sits immediately to the left of Shalaka. Himani sits second to the left of Shalaka. After some time, Himani leaves her place and Kamini takes her seat. Similarly, Tara takes Brinda's place. Who now sits immediately to the left of Tara?",
+    tag: "Group - D 23/08/2022 ( Morning)",
+    o_hi: [
+      "(a) मिताली",
+      "(b) शलाका",
+      "(c) बृंदा",
+      "(d) कामिनी"
+    ],
+    o_en: [
+      "(a) Mitali",
+      "(b) Shalaka",
+      "(c) Brinda",
+      "(d) Kamini"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q11. आठ मित्र - P, Q, R, S, T, U, V और W, एक वर्गाकार मेज के चारों ओर मेज के केंद्र की ओर मुख करके बैठे हैं। उनमें से चार मित्र इसके कोनों पर बैठे हैं, जबकि अन्य चार मित्र मेज की भुजाओं के ठीक मध्य में बैठे हैं। T मेज के एक कोने पर बैठा है। U, T के दाईं ओर तीसरे स्थान पर है। S, V के बाईं ओर ठीक बगल में है। T, V के दाईं ओर दूसरे स्थान पर है। R और P के बीच में केवल U है। T और R के बीच में केवल W है। T के बाईं ओर ठीक बगल में कौन बैठा है?",
+    q_en: "Q11. Eight friends P, Q, R, S, T, U, V and W are sitting around a square table facing the centre. Four sit at the corners and the other four sit exactly at the middle of the sides. T sits at one corner. U sits third to the right of T. S sits immediately to the left of V. T sits second to the right of V. Only U sits between R and P. Only W sits between T and R. Who sits immediately to the left of T?",
+    tag: "Group - D 23/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) P",
+      "(b) W",
+      "(c) R",
+      "(d) Q"
+    ],
+    o_en: [
+      "(a) P",
+      "(b) W",
+      "(c) R",
+      "(d) Q"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q12. सात बच्चे - P, Q, R, S T U और V, एक वर्गाकार मेज के चारों ओर मेज के केंद्र की ओर मुख करके बैठे थे। उनमें से तीन मेज के कोनों पर बैठे थे, जबकि अन्य चार मेज की भुजाओं के ठीक मध्य में बैठे थे। एक कोना खाली था। U, जोकि मेज की किसी एक भुजा के मध्य में बैठा था, T के दाईं ओर दूसरे स्थान पर बैठा था। P और U के बीच एक खाली कुर्सी मौजूद थी। R और Q एक-दूसरे के विकर्णतः सामने बैठे थे। T, Q के बाईं ओर ठीक बगल में बैठा था। S, V के बाईं ओर ठीक बगल में बैठा था। निम्नलिखित में से कौन सा बच्चाा मेज के एक कोने पर बैठा था?",
+    q_en: "Q12. Seven children P, Q, R, S, T, U and V are sitting around a square table facing the centre. Three of them sit at the corners and the other four sit exactly at the middle of the sides; one corner is vacant. U, who sits at the middle of one side, sits second to the right of T. There is one vacant chair between P and U. R and Q sit diagonally opposite each other. T sits immediately to the left of Q. S sits immediately to the left of V. Which of the following children sits at a corner of the table?",
+    tag: "Group - D 24/08/2022 ( Morning)",
+    o_hi: [
+      "(a) T",
+      "(b) S",
+      "(c) U",
+      "(d) V"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) S",
+      "(c) U",
+      "(d) V"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q13. कुछ व्यक्ति उत्तर दिशा की ओर मुख करके एक पंक्ति में बैठे हैं। राहुल पंक्ति के बाएं सिरे से 8वें स्थान पर बैठा है। राहुल और समर के बीच में केवल 11 व्यक्ति बैठे हैं। समर, राहुल के दाईं ओर किसी स्थान पर बैठा है। मोहित, जीशान जोकि दाएं सिरे पर बैठा है, के बाईं ओर ठीक बगल में बैठा है, । समर दाएं सिरे से 9वें स्थान पर बैठा है। यदि पंक्ति में कोई अन्य व्यक्ति नहीं बैठा है, तो पंक्ति में बैठे व्यक्तियों की कुल संख्या कितनी है?",
+    q_en: "Q13. Some persons are sitting in a row facing north. Rahul sits eighth from the left end. Only 11 persons sit between Rahul and Samar. Samar sits somewhere to the right of Rahul. Mohit sits immediately to the left of Zeeshan, who sits at the right end. Samar sits ninth from the right end. If no other person sits in the row, how many persons are there in total?",
+    tag: "Group - D 25/08/2022 ( Morning)",
+    o_hi: [
+      "(a) 27",
+      "(b) 29",
+      "(c) 26",
+      "(d) 28"
+    ],
+    o_en: [
+      "(a) 27",
+      "(b) 29",
+      "(c) 26",
+      "(d) 28"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q14. पांच छात्र- 1, 2, 3, 4 और 5, एक वृत्ताकार मेज के चारों ओर: केंद्र की ओर मुख करके बैठे हैं। 4, 1 के दाईं ओर ठीक बगल में, और 2 के बाईं ओर ठीक बगल में बैठा है। 5, 1 के बाईं ओर दूसरे स्थान पर बैठा है। निम्नलिखित में से कौन सा कथन सत्य है?",
+    q_en: "Q14. Five students 1, 2, 3, 4 and 5 are sitting around a circular table facing the centre. 4 sits immediately to the right of 1 and immediately to the left of 2. 5 sits second to the left of 1. Which of the following statements is true?",
+    tag: "Group - D 25/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) 3, 5 और 1 के बीच में बैठा है।",
+      "(b) 1, 5 के ठीक बगल में बैठा है।",
+      "(c) 2, 4 और 1 के बीच में बैठा है।",
+      "(d) 5, 3 के दाईं ओर तीसरे स्थान पर बैठा है।"
+    ],
+    o_en: [
+      "(a) 3 sits between 5 and 1.",
+      "(b) 1 sits immediately next to 5.",
+      "(c) 2 sits between 4 and 1.",
+      "(d) 5 sits third to the right of 3."
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q15. एक वर्गाकार मेज़ आठ कुर्सियों से घिरी हुई थी, उनमें से चार मेज के कोनों पर थीं, जबकि अन्य चार मेज की भुजाओं के ठीक मध्य में थीं। छह क्लर्क D, E, F, G H और I इस वर्गाकार मेज के चारों ओर मेज के केंद्र की ओर मुख करके बैठे थे। मेज के दो कोनों पर पड़ीी कुर्सियां खाली थी। E और I एक-दूसरे के विकर्णतः सम्मुख कोनों पर बैठे थे। H, G के बाईं ओर दूसरे स्थान पर था। D, F के दाईं ओर दूसरे स्थान पर था। G, E के दाईं और ठीक बगल में बैठा था। इनमें से कौन H के सामने था?",
+    q_en: "Q15. A square table is surrounded by eight chairs, four at the corners and four exactly at the middle of the sides. Six clerks D, E, F, G, H and I are sitting around the table facing the centre. The chairs at two corners are vacant. E and I sit at diagonally opposite corners. H sits second to the left of G. D sits second to the right of F. G sits immediately to the right of E. Who is sitting opposite H?",
+    tag: "Group - D 26/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) ।",
+      "(b) खाली कुर्सी",
+      "(c) D",
+      "(d) F"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) Vacant chair",
+      "(c) D",
+      "(d) F"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q16. पांच विद्याार्थी- 1, 2, 3, 4 और 5- एक वृत्ताकार मेज के चारों ओर केंद्र से बाहर की ओर मुख करके बैठे हैं। 3, 4 के दायें से दूसरे और 5 के ठीक बायें बैठा है। 3 और 4, 1 के निकटतम पडोसी हैं। निम्नलिखित में से कौन सा कथन सत्य है?",
+    q_en: "Q16. Five students 1, 2, 3, 4 and 5 are sitting around a circular table facing away from the centre. 3 sits second to the right of 4 and immediately to the left of 5. 3 and 4 are immediate neighbours of 1. Which of the following statements is true?",
+    tag: "Group - D 29/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) 2, 5 के ठीक बायें बैठा है।",
+      "(b) 1, 5 के बायें से तीसरे स्थान पर बैठा है।",
+      "(c) 1 और 2, 4 के निकटतम पड़ोसी हैं।",
+      "(d) 2, 1 के दायें से दूसरे स्थान पर बैठा है।"
+    ],
+    o_en: [
+      "(a) 2 sits immediately to the left of 5.",
+      "(b) 1 sits third to the left of 5.",
+      "(c) 1 and 2 are immediate neighbours of 4.",
+      "(d) 2 sits second to the right of 1."
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q17. कुछ व्यक्ति एक पंक्ति में उत्तर की ओर मुख करके बैठे हैं। K, G के बाईं ओर ठीक बगल में बैठा है। L, P के दाईं ओर ठीक बगल में बैठा है। P, G के दाईं ओर चौथे स्थान पर बैठा है। L, H के बाईं ओर चौथे स्थान पर बैठा है। यदि पंक्ति में कोई अन्य व्यक्ति नहीं बैठा है, तो पंक्ति में कुल कितने व्यक्ति बैठे हैं?",
+    q_en: "Q17. Some persons are sitting in a row facing north. K sits immediately to the left of G. L sits immediately to the right of P. P sits fourth to the right of G. L sits fourth to the left of H. If no other person sits in the row, how many persons are there in total?",
+    tag: "Group - D 30/08/2022 ( Morning)",
+    o_hi: [
+      "(a) 12",
+      "(b) 11",
+      "(c) 13",
+      "(d) 10"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 11",
+      "(c) 13",
+      "(d) 10"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q18. I, J, K, L, M, N और O एक वृत्ताकार व्यवस्था में केंद्र की ओर मुख करके बैठे हुए ताश खेल रहे हैं। M, I और L दोनों के ठीक बगल में बैठा है। J, O के बाईं ओर दूसरे स्थान पर बैठा है। N, I के दाई ओर ठीक बगल में बैठा है। N किस स्थान पर बैठा हुआ है?",
+    q_en: "Q18. I, J, K, L, M, N and O are playing cards while sitting in a circular arrangement facing the centre. M is an immediate neighbour of both I and L. J sits second to the left of O. N sits immediately to the right of I. At which position is N sitting?",
+    tag: "Group - D 08/09/2022 ( Evening )",
+    o_hi: [
+      "(a) K के दाईं ओर दूसरे स्थान पर",
+      "(b) L के बाईं ओर दूसरे स्थान पर",
+      "(c) J के बाईं ओर ठीक बगल में",
+      "(d) O के दाईं ओर तीसरे स्थान पर"
+    ],
+    o_en: [
+      "(a) Second to the right of K",
+      "(b) Second to the left of L",
+      "(c) Immediately to the left of J",
+      "(d) Third to the right of O"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q19. पांच व्यक्ति - A, B, C, D और E एक वृत्ताकार मेज के परितः बैठे हैं। उनमें से एक का मुख बाहर की ओर (मेज के केंद्र के विपरीत दिशा में) है, और अन्य चार का मुख केंद्र की ओर है। C का मुख केंद्र की ओर है, और वह D के बाईं ओर दूसरे स्थान पर बैठा है। B, D के दाईं ओर दूसरे स्थान पर बैठा है। A, C और D दोनों के बाईं ओर ठीक बगल में बैठा है। E, B के दाईं ओर ठीक बगल में बैठा है। इनमें से किसका मुख बाहर की ओर है?",
+    q_en: "Q19. Five persons A, B, C, D and E are sitting around a circular table. One of them faces outward and the other four face the centre. C faces the centre and sits second to the left of D. B sits second to the right of D. A sits immediately to the left of both C and D. E sits immediately to the right of B. Who among them faces outward?",
+    tag: "Group - D 09/09/2022 ( Morning )",
+    o_hi: [
+      "(a) D",
+      "(b) C",
+      "(c) E",
+      "(d) B"
+    ],
+    o_en: [
+      "(a) D",
+      "(b) C",
+      "(c) E",
+      "(d) B"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q20. छह दोस्त, E, F, G, H, I और J एक गोल मेज के चारों ओर मेज के केंद्र की ओर मुख करके बैठे हैं। E, I के दाईं ओर दूसरे स्थान पर बेठा है। H और J के बीच में केवल G बैठा है। F कहां बैठा है ?",
+    q_en: "Q20. Six friends E, F, G, H, I and J are sitting around a round table facing the centre. E sits second to the right of I. Only G sits between H and J. Where does F sit?",
+    tag: "Group - D 12/09/2022 ( Morning )",
+    o_hi: [
+      "(a) G के बाईं ओर तीसरे स्थान पर",
+      "(b) । के बाईं ओर दूसरे स्थान",
+      "(c) G के दाईं ओर दूसरे स्थान",
+      "(d) । के दाईं ओर दूसरे स्थान"
+    ],
+    o_en: [
+      "(a) Third to the left of G",
+      "(b) Second to the left of I",
+      "(c) Second to the right of G",
+      "(d) Second to the right of I"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q21. पाँच व्यक्ति एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। अमन, अंसु और अजित दोनों का निकटतम पड़ोसी है। आकाश, अमन के बायें से दूसरे स्थान पर बैठा है। अंश, अमन के दायें से दूसरे स्थान पर बैठा है। आकाश , अंसु और अंश दोनों का निकटतम पड़ोसी है। अजित और आकाश दोनों का निकटतम पड़ोसी कौन है?",
+    q_en: "Q21. Six persons are sitting around a circular table facing the centre. Aman is an immediate neighbour of both Ansu and Ajit. Akash sits second to the left of Aman. Ansh sits second to the right of Aman. Akash is an immediate neighbour of both Ansu and Ansh. Who is an immediate neighbour of both Ajit and Akash?",
+    tag: "Group - D 15/09/2022 ( Evening )",
+    o_hi: [
+      "(a) अंसु",
+      "(b) अमन",
+      "(c) अंश",
+      "(d) निर्धारित नहीं किया जा सकता है।"
+    ],
+    o_en: [
+      "(a) Ansu",
+      "(b) Aman",
+      "(c) Ansh",
+      "(d) Cannot be determined"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q22. छह लड़कियों- A, C, F, H, J और K में से प्रत्येक की लम्बाई अलग-अलग है। वे अपनी लम्बाई के आरोही क्रम में खड़ी हैं, सबसे आगे सबसे छोटी और पीछे सबसे लम्बी लड़की हैं। C पंक्ति की शुरुआत में है। F से केवल एक व्यक्ति लंबा है। H लम्बाई में A से ठीक आगे है। C और H दोनों K से छोटी हैं। A और C के बीच केवल एक अन्य लड़की है। यदि H और F पंक्ति के आरंभ से क्रमशः चौथे और पांचवें स्थान पर हैं, तो पंक्ति के आरंभ से दूसरे स्थान पर कौन है?",
+    q_en: "Q22. Each of six girls A, C, F, H, J and K has a different height. They are standing in ascending order of height, with the shortest in front and the tallest at the back. C is at the beginning of the row. Only one person is taller than F. H is immediately ahead of A in height. Both C and H are shorter than K. Only one girl stands between A and C. If H and F are fourth and fifth respectively from the beginning of the row, who is second from the beginning?",
+    tag: "Group - D 17/09/2022 ( Morning )",
+    o_hi: [
+      "(a) K",
+      "(b) J",
+      "(c) C",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) K",
+      "(b) J",
+      "(c) C",
+      "(d) A"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q23. पांच विद्याार्थी एक वर्गाकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। राम और सोनू, दोनों बाईं ओर के दो कोनों पर बैठे हैं (लेकिन उनका इसी क्रम में होना अनिवार्य नहीं है)। सीता और कमल, दोनों दाईं ओर के दो कोनों पर बैठे हैं (लेकिन उनका इसी क्रम में होना अनिवार्य नहीं है)। ऋतु, सीता और कमल दोनों के ठीक बगल में बैठी है। सीता, कमल के बाईं ओर दूसरे स्थान पर बैठी है। कमल के बाई ओर ठीक बगल में कौन बैठा है?",
+    q_en: "Q23. Five students are sitting around a square table facing the centre. Ram and Sonu sit at the two left-side corners, not necessarily in that order. Sita and Kamal sit at the two right-side corners, not necessarily in that order. Ritu sits immediately next to both Sita and Kamal. Sita sits second to the left of Kamal. Who sits immediately to the left of Kamal?",
+    tag: "Group - D 18/09/2022 ( Morning)",
+    o_hi: [
+      "(a) राम",
+      "(b) ऋतु",
+      "(c) सीता",
+      "(d) सोनू"
+    ],
+    o_en: [
+      "(a) Ram",
+      "(b) Ritu",
+      "(c) Sita",
+      "(d) Sonu"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q24. A, B, C, D, J, K, L और M एक वर्गाकार मेज के चारों ओर मेज के केंद्र के सम्मुख बैठे हैं। उनमें से चार कोनों पर बैठे हैं जबकि अन्य चार भुजाओं के ठीक मध्य में बैठे हैं। D मेज के किसी कोने पर बैठा है। D और C के बीच में केवल दो व्यक्ति बैठे हैं, जब D के बायीं ओर से गिना जाता है। C और B के बीच केवल तीन व्यक्ति बैठे हैं। M , B के बाएं से तीसरे स्थान पर बैठा है। K, M के ठीक दायीं ओर बैठा है। A न तो B और न ही C का निकटतम पड़ोसी है। J, A के ठीक बायीं ओर बैठा है। L के दायीं ओर से दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q24. A, B, C, D, J, K, L and M are sitting around a square table facing the centre. Four sit at the corners and the other four exactly at the middle of the sides. D sits at a corner. Counting to the left of D, only two persons sit between D and C. Only three persons sit between C and B. M sits third to the left of B. K sits immediately to the right of M. A is an immediate neighbour of neither B nor C. J sits immediately to the left of A. Who sits second to the right of L?",
+    tag: "NTPC CBT II Level 6 (09/05/2022) Shift 2",
+    o_hi: [
+      "(a) C",
+      "(b) K",
+      "(c) J",
+      "(d) M"
+    ],
+    o_en: [
+      "(a) C",
+      "(b) K",
+      "(c) J",
+      "(d) M"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q25. दस व्यक्ति दो समानांतर पंक्तियों 1 और 2 में बैठे हैं। J, K, L, M, और N पंक्ति 1 में दक्षिण की ओर उन्मुख होकर बैठे हैं, तथा Q, R, S, T और U पंक्ति 2 में उत्तर की ओर उन्मुख होकर बैठे हैं, इस तरह से कि पंक्ति 1 में प्रत्येक सदस्य पंक्ति 2 के किसी सदस्य के सम्मुख है। Q के बायीं ओर केवल दो व्यक्ति बैठे हैं। J, Q के निकटतम पड़ोसी के सम्मुख है. M, J के ठीक बायीं ओर बैठा है। जो व्यक्ति K के सम्मुख बैठा है, वह S के ठीक बायीं ओर बैठा है। न तो K और न ही S किसी भी अंतिम छोर पर बैठे हैं। S और T के बीच में केवल दो व्यक्ति बैठे हैं। N, U के निकटतम पड़ोसी के सम्मुख है। R के सम्मुख कौन है?",
+    q_en: "Q25. Ten persons are sitting in two parallel rows 1 and 2. J, K, L, M and N sit in row 1 facing south, while Q, R, S, T and U sit in row 2 facing north, so that each member of row 1 faces a member of row 2. Only two persons sit to the left of Q. J faces an immediate neighbour of Q. M sits immediately to the left of J. The person facing K sits immediately to the left of S. Neither K nor S sits at an extreme end. Only two persons sit between S and T. N faces an immediate neighbour of U. Who faces R?",
+    tag: "NTPC CBT II Level 6 (09/05/2022) Shift 2",
+    o_hi: [
+      "(a) M",
+      "(b) J",
+      "(c) N",
+      "(d) K"
+    ],
+    o_en: [
+      "(a) M",
+      "(b) J",
+      "(c) N",
+      "(d) K"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q26. एक नाव में सवार व्यक्ति दो समानांतर पंक्तियों में बैठे हैं, प्रत्येक पंक्ति में पांच व्यक्ति इस प्रकार बैठे हैं कि आसन्न व्यक्तियों के बीच दूरी एक समान है। पहली पंक्ति में, मणि, नैनी, एलेक्स, पुरी और तुली बैठे हैं (उनका इसी क्रम में होना अनिवार्य नहीं है) और उन सभी का मुख दक्षिण की ओर है। दूसरी पंक्ति में, शर्मा, एटकिन, पुतिन, नेहा और प्रिया बैठे हैं (उनका इसी क्रम में होना अनिवार्य नहीं है) और उन सभी का मुख उत्तर की ओर है। अतः, इस व्यवस्था में सम्मुख पंक्तियों में बैठे व्यक्तियों के मुख एक दूसरे की ओर हैं। प्रिया, एटकिन के दाईं ओर तीसरे स्थान पर बैठी है। एटकिन किसी एक सिरे पर बैठा है । शर्मा, प्रिया के बाईं ओर दूसरे स्थान पर बैठा है। शर्मा की ओर मुख करके बैठा व्यक्ति, नैनी के दाईं ओर ठीक बगल में बैठा है। पुरी नैनी के बाईं ओर दूसरे स्थान पर बैठा है। मणि, नैनी के ठीक बगल में नहीं बैठा है। मणि और एलेक्स के बीच केवल दो व्यक्ति बैठे हैं। न तो नैनी का और न ही मणि का मुख नेहा की ओर है। इनमें से किसका मुख तुली की ओर है ?",
+    q_en: "Q26. People in a boat are seated in two parallel rows of five persons each, with equal distance between adjacent persons. In the first row, Mani, Naini, Alex, Puri and Tuli sit facing south, not necessarily in that order. In the second row, Sharma, Atkin, Putin, Neha and Priya sit facing north, not necessarily in that order. Thus, persons in opposite rows face each other. Priya sits third to the right of Atkin, who sits at one end. Sharma sits second to the left of Priya. The person facing Sharma sits immediately to the right of Naini. Puri sits second to the left of Naini. Mani is not an immediate neighbour of Naini. Only two persons sit between Mani and Alex. Neither Naini nor Mani faces Neha. Who faces Tuli?",
+    tag: "NTPC CBT II Level 5 (12/06/2022) Shift 1",
+    o_hi: [
+      "(a) शर्मा",
+      "(b) प्रिया",
+      "(c) नेहा",
+      "(d) एटकिन"
+    ],
+    o_en: [
+      "(a) Sharma",
+      "(b) Priya",
+      "(c) Neha",
+      "(d) Atkin"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q27. आठ मित्र जानकी, कोमली, लोकेश, मनु, निर्वाण, राजन, पारु और शिल्पा एक वर्गाकार मेज के चारों ओर इस प्रकार बैठे हैं कि उनमें से चार, मेज के चारों कोनों पर बैठे हैं, जबकि चार, चारों भुजाओं में से प्रत्येक के मध्य में बैठे हैं। भुजाओं के मध्य में बैठे मित्रों का मुख केंद्र की ओर है, जबकि चारों कोनों पर बैठे मित्रों का मुख बाहर की ओर (अर्थात केंद्र के विपरीत) है। लोकेश मनु के दाईं ओर तीसरे स्थान पर बैठा है। मनु मेज की किसी एक भुजा के मध्य में बैठा है। लोकेश और शिल्पा के बीच ठीक तीन व्यक्ति बैठे हैं। पारु, शिल्पा के दाईं ओर दूसरे स्थान पर बैठी है। निर्वाण, पारु के ठीक बगल में बैठे मित्रों में से एक है। निर्वाण और कोमली के बीच ठीक तीन मित्र बैठे हैं। जानकी कोमली के दाईं ओर दूसरे स्थान पर बैठी है। राजन के संबंध में निम्नलिखित में से कौन सा कथन सत्य है ?",
+    q_en: "Q27. Eight friends Janaki, Komali, Lokesh, Manu, Nirvan, Rajan, Paru and Shilpa are sitting around a square table. Four sit at the corners and four at the middle of the sides. Those at the middle of the sides face the centre, while those at the corners face outward. Lokesh sits third to the right of Manu, who sits at the middle of a side. Exactly three persons sit between Lokesh and Shilpa. Paru sits second to the right of Shilpa. Nirvan is one of Paru's immediate neighbours. Exactly three friends sit between Nirvan and Komali. Janaki sits second to the right of Komali. Which statement about Rajan is true?",
+    tag: "NTPC CBT II Level 5 (12/06/2022) Shift 2",
+    o_hi: [
+      "(a) निर्वाण, राजन के बाईं ओर दूसरे स्थान पर बैठा है।",
+      "(b) मनु और कोमली दोनों राजन के ठीक बगल में बैठे हैं।",
+      "(c) राजन और जानकी के बीच केवल तीन व्यक्ति बैठे हैं।",
+      "(d) राजन किसी एक भुजा के मध्य में बैठा है।"
+    ],
+    o_en: [
+      "(a) Nirvan sits second to the left of Rajan.",
+      "(b) Both Manu and Komali are immediate neighbours of Rajan.",
+      "(c) Only three persons sit between Rajan and Janaki.",
+      "(d) Rajan sits at the middle of one of the sides."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q28. यहाँ दो बेंच A और B और एक कुर्सी है। इनमें से प्रत्येक बेंच पर तीन व्यक्ति और एक कुर्सी पर बैठ सकते हैं। सात व्यक्तियों अमन, भास्कर, चेतन, डब्लू, एकता, फौजिया और गणेश को इन बेंचों पर बैठाया जाना है और कुछ शर्तों के अनुसार कुर्सी दी जानी है।<br>(I) फौज़िया उस बेंच पर नहीं बैठती जिसमें डबलू बैठा है।<br>(II) एकता उस बेंच पर नहीं बैठती जिसमें डबलू बैठा है<br>(III) चेतन अमन के साथ बैठ सकता है लेकिन गणेश के साथ नहीं<br>(IV) अमन डब्लू के साथ बैठ सकता है लेकिन भास्कर या गणेश के साथ नहीं<br>(V) गणेश, फौज़िया के समान बेंच पर नहीं बैठता है यदि फौजिया बेंच A पर बैठती है और चेतन बेंच B पर बैठता है, तो कुर्सी पर कौन बैठा है?",
+    q_en: "Q28. There are two benches A and B and one chair. Three persons can sit on each bench and one person on the chair. Seven persons Aman, Bhaskar, Chetan, W, Ekta, Fauzia and Ganesh are to be seated subject to the following conditions:<br>(I) Fauzia does not sit on the bench on which W sits.<br>(II) Ekta does not sit on the bench on which W sits.<br>(III) Chetan can sit with Aman but not with Ganesh.<br>(IV) Aman can sit with W but not with Bhaskar or Ganesh.<br>(V) Ganesh does not sit on the same bench as Fauzia. If Fauzia sits on bench A and Chetan sits on bench B, who sits on the chair?",
+    tag: "NTPC CBT II Level 2 (13/06/2022) Shift 2",
+    o_hi: [
+      "(a) भास्कर",
+      "(b) एकता",
+      "(c) गणेश",
+      "(d) डबलू"
+    ],
+    o_en: [
+      "(a) Bhaskar",
+      "(b) Ekta",
+      "(c) Ganesh",
+      "(d) W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q29. आठ मित्र एक वृत्ताकार मेज के चारों ओर समान दूरी पर बैठे हैं और उनकी पीठ मेज के केंद्र की ओर है। ईशिन, अंशु के ठीक दायें बैठा है। अमीना, ध्रुव की निकटतम पडोसी नहीं है. हरमीत और फ़िज़ाा के बीच केवल तीन व्यक्ति बैठे हैं। ध्रुव, वरुण के ठीक बायें है। मोहित और हरमीत के मध्य केवल दो व्यक्ति हैं। फिजा, अंशु के ठीक बायें बैठी है। ईशिन और वरुण के मध्य केवल तीन व्यक्ति बैठे हैं। हरमीत के ठीक बायें कौन बैठा है?",
+    q_en: "Q29. Eight friends are sitting at equal distances around a circular table with their backs toward the centre. Ishin sits immediately to the right of Anshu. Amina is not an immediate neighbour of Dhruv. Only three persons sit between Harmeet and Fiza. Dhruv sits immediately to the left of Varun. Only two persons sit between Mohit and Harmeet. Fiza sits immediately to the left of Anshu. Only three persons sit between Ishin and Varun. Who sits immediately to the left of Harmeet?",
+    tag: "NTPC CBT II Level 3 (14/06/2022) Shift 2",
+    o_hi: [
+      "(a) ध्रुव",
+      "(b) वरुण",
+      "(c) अमीना",
+      "(d) ईशिन"
+    ],
+    o_en: [
+      "(a) Dhruv",
+      "(b) Varun",
+      "(c) Amina",
+      "(d) Ishin"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q30. दस व्यक्ति दो समानांतर पंक्तियों 1 और 2 में बैठे हैं। A, B, C, D और E पंक्ति 1 में दक्षिण की ओर मुख करके बैठे हैं, और V, W, X, Y और Z पंक्ति 2 में उत्तर की ओर मुख करके बैठे हैं, इस प्रकार पंक्ति 1 में बैठे प्रत्येक सदस्य का मुख, पंक्ति 2 में बैठे एक सदस्य की ओर है। W पंक्ति के बाएं सिरे पर बैठा है। W, B के ठीक बगल में बैठे व्यक्ति की ओर मुख करके बैठा है। C, B के बाईं ओर किसी एक स्थान पर बैठा है, किंंतु पंक्ति के किसी भी सिरे पर नहीं बैठा है। C की ओर मुख करके बैठा व्यक्ति, Y के बाईं ओर ठीक बगल में बैठा है। D, A के दाईं ओर तीसरे स्थान पर बैठा है। V X के दाईं ओर ठीक बगल में बैठा है। इनमें से कौन Z की ओर मुख करके बैठा है?",
+    q_en: "Q30. Ten persons are sitting in two parallel rows 1 and 2. A, B, C, D and E sit in row 1 facing south, and V, W, X, Y and Z sit in row 2 facing north, so that each person in row 1 faces a person in row 2. W sits at the left end of the row. W faces a person who is an immediate neighbour of B. C sits somewhere to the left of B but not at either end. The person facing C sits immediately to the left of Y. D sits third to the right of A. V sits immediately to the right of X. Who faces Z?",
+    tag: "NTPC CBT II Level 5 (15/06/2022) Shift 2",
+    o_hi: [
+      "(a) D",
+      "(b) E",
+      "(c) B",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) D",
+      "(b) E",
+      "(c) B",
+      "(d) A"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q31. पांच व्यक्ति - राम, रोहन, सुनीता, सीमा और चंदन, एक पंचभुज के सभी पांच कोनों पर एक विशिष्ट क्रम में केंद्र की ओर मुख करके बैठे हैं। राम, रोहन के बाईं ओर ठीक बगल में बैठा है। सुनीता, राम के ठीक बगल में नहीं बैठी है। चंदन, सुनीता और सीमा दोनों के ठीक बगल में बैठा है। राम के सापेक्ष सुनीता की स्थिति क्या होगी ?",
+    q_en: "Q31. Five persons Ram, Rohan, Sunita, Seema and Chandan are sitting at the five corners of a pentagon in a particular order facing the centre. Ram sits immediately to the left of Rohan. Sunita is not an immediate neighbour of Ram. Chandan is an immediate neighbour of both Sunita and Seema. What is Sunita's position with respect to Ram?",
+    tag: "NTPC CBT II Level 2 (16/06/2022) Shift 1",
+    o_hi: [
+      "(a) सुनीता राम के वामावर्त दिशा में तीसरे स्थान पर बैठेगी।",
+      "(b) सुनीता राम के दक्षिणावर्त दिशा में तीसरे स्थान पर बैठेगी।",
+      "(c) सुनीता राम के दक्षिणावर्त दिशा में दूसरे स्थान पर बैठेगी।",
+      "(d) सुनीता राम के वामावर्त दिशा में पहले स्थान पर बैठेगी।"
+    ],
+    o_en: [
+      "(a) Sunita is third anticlockwise from Ram.",
+      "(b) Sunita is third clockwise from Ram.",
+      "(c) Sunita is second clockwise from Ram.",
+      "(d) Sunita is first anticlockwise from Ram."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q32. पांच लड़के आनंद, बालू, चरण, दिनेश और टॉम एक सीढ़ीी पर इस प्रकार बैठे हैं कि आनंद, टॉम के ठीक नीचे बैठे हैं, जो बालू के ठीक नीचे बैठा है। चरण, आनंद और दिनेश के ठीक बीच में बैठा है। सीढ़ीी पर टॉम और चरण के ठीक बीच में कौन बैठा है?",
+    q_en: "Q32. Five boys Anand, Balu, Charan, Dinesh and Tom are sitting on a staircase such that Anand sits immediately below Tom, who sits immediately below Balu. Charan sits exactly between Anand and Dinesh. Who sits exactly between Tom and Charan on the staircase?",
+    tag: "NTPC CBT II Level 2 (16/06/2022) Shift 2",
+    o_hi: [
+      "(a) आनंद",
+      "(b) निर्धारित नहीं किया जा सकता है",
+      "(c) बालू",
+      "(d) दिनेश"
+    ],
+    o_en: [
+      "(a) Anand",
+      "(b) Cannot be determined",
+      "(c) Balu",
+      "(d) Dinesh"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q33. A, B, C, D, E और F क्रमांक वाले छः घोड़े, एक घुड़दौड़ में भाग ले रहे हैं। रेस ट्रैक पर, घोड़ाा C, घोड़ाा A और घोड़ाा E के बीच में इस प्रकार खड़ा है कि वे दोनों इसके ठीक बगल में खड़े हैं। घोड़ाा D किसी भी किनारे पर नहीं खड़ा है। घोड़ाा B, घोड़ाा E के दाईं ओर ठीक बगल में खड़ा है। घोड़ाा F दाएं किनारे पर नहीं खड़ा है। घोड़ाा D, घोड़ाा B के बाईं ओर चौथे स्थान पर खड़ा है। यदि सभी घोड़ोंों का मुख उत्तर दिशा की ओर है, तो कौन सा घोड़ाा बाएं सिरे पर खड़ा है ?",
+    q_en: "Q33. Six horses A, B, C, D, E and F are taking part in a horse race. On the race track, horse C stands between horses A and E so that both are immediately next to it. Horse D is not at either end. Horse B stands immediately to the right of horse E. Horse F is not at the right end. Horse D stands fourth to the left of horse B. If all horses face north, which horse stands at the left end?",
+    tag: "NTPC CBT II Level 3 (17/06/2022) Shift 2",
+    o_hi: [
+      "(a) A",
+      "(b) B",
+      "(c) F",
+      "(d) C"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) B",
+      "(c) F",
+      "(d) C"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q34. गणेश, राजू, रोहित, ईशा, जनक, प्रीति, चंदन और मधुर आठ कर्मचारी हैं, जो किसी चर्चा के लिए एक वृत्ताकार मेज के परितः केंद्र की ओर मुख करके बैठे हैं। उनके पेशे - पायलट, चिकित्सक, प्रकाशक, इंजीनियर, महाप्रबंधक, यूनियन लीडर, शोधकर्ता और डीन हैं, लेकिन उनका इसी क्रम में होना अनिवार्य नहीं है। राजू, प्रीति के बाईं ओर दूसरे स्थान पर बैठा है। डीन, प्रीति के बाईं ओर ठीक बगल में बैठा है। डीन और गणेश के बीच केवल तीन व्यक्ति बैठे हैं। इंजीनियर और गणेश के बीच केवल एक व्यक्ति बैठा है। प्रकाशक, इंजीनियर के दाईं ओर ठीक बगल में बैठा है। मधुर, प्रीति के दाईं ओर दूसरे स्थान पर बैठा है। ईशा डीन है। रोहित और जनक एक दूसरे के ठीक बगल में बैठे हैं। न तो रोहित और न ही जनक इंजीनियर है। महाप्रबंधक, राजू के बाईं ओर ठीक बगल में बैठा है। यूनियन लीडर, प्रकाशक के दाईं ओर दूसरे स्थान पर बैठा है। शोधकर्ता, इंजीनियर के ठीक बगल में बैठा है। रोहित, पायलट के दाईं ओर दूसरे स्थान पर बैठा है। डीन के सापेक्ष चंदन का स्थान कौन सा है?",
+    q_en: "Q34. Ganesh, Raju, Rohit, Isha, Janak, Preeti, Chandan and Madhur are eight employees sitting around a circular table facing the centre for a discussion. Their professions are pilot, doctor, publisher, engineer, general manager, union leader, researcher and dean, not necessarily in that order. Raju sits second to the left of Preeti. The dean sits immediately to the left of Preeti. Only three persons sit between the dean and Ganesh. Only one person sits between the engineer and Ganesh. The publisher sits immediately to the right of the engineer. Madhur sits second to the right of Preeti. Isha is the dean. Rohit and Janak are immediate neighbours. Neither Rohit nor Janak is the engineer. The general manager sits immediately to the left of Raju. The union leader sits second to the right of the publisher. The researcher sits immediately next to the engineer. Rohit sits second to the right of the pilot. What is Chandan's position with respect to the dean?",
+    tag: "NTPC CBT II Level 3 (17/06/2022) Shift 2",
+    o_hi: [
+      "(a) दाईं ओर दूसरा",
+      "(b) बाईं ओर तीसरा",
+      "(c) दाईं ओर तीसरा",
+      "(d) बाईं ओर दूसरा"
+    ],
+    o_en: [
+      "(a) Second to the right",
+      "(b) Third to the left",
+      "(c) Third to the right",
+      "(d) Second to the left"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q35. दोस्तों का एक समूह एक अष्टभुज के कोने पर एक के साथ एक व्यवस्था में बैठा है। सभी का मुख केंद्र की ओर हैं। मेधा राधा के विकर्ण रूप से सामने बैठी है। मेधा सीमा के बाईं ओर है। रमन सीमा के बगल में और गोविंद के सामने है। गोविंद चंद्रा के दाहिनी ओर है, शांति मेधा के दायीं ओर नहीं है बल्कि शशि के सामने है। चंद्रा के विपरीत कौन है?",
+    q_en: "Q35. A group of friends is seated one at each corner of an octagon, all facing the centre. Medha sits diagonally opposite Radha. Medha sits to the left of Seema. Raman sits next to Seema and opposite Govind. Govind sits to the right of Chandra. Shanti is not to the right of Medha but sits opposite Shashi. Who sits opposite Chandra?",
+    tag: "NTPC CBT - I 28/12/2020 (Morning)",
+    o_hi: [
+      "(a) सीमा",
+      "(b) राधा",
+      "(c) शांति",
+      "(d) रमन"
+    ],
+    o_en: [
+      "(a) Seema",
+      "(b) Radha",
+      "(c) Shanti",
+      "(d) Raman"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q36. सात दोस्त अंदर की ओर एक मेहराब आकार में बैठे हैं । R और V कोने की तरफ बैठे हैं । T कहता है कि, मेरे दाहिने हाथ की ओर से दो से अधिक व्यक्ति बैठे हैं और R अंतिम है । Q कहता है कि, मेरे बाएं हाथ की ओर तीन व्यक्ति बैठे हैं जिनमें V अंतिम है । S और V एक दूसरे के पास बैठे हैं । कितने लोग क्रमशः T के बाईं और दाईं ओर बैठे हैं?",
+    q_en: "Q36. Seven friends are seated in an inward-facing arc. R and V sit at the corners. T says, 'More than two persons sit to my right and R is at the end.' Q says, 'Three persons sit to my left, with V at the end.' S and V sit next to each other. How many persons sit to the left and right of T respectively?",
+    tag: "NTPC CBT - I 16/01/2021 (Evening)",
+    o_hi: [
+      "(a) तीन और तीन",
+      "(b) चार और दो",
+      "(c) एक और पांच",
+      "(d) दो और चार"
+    ],
+    o_en: [
+      "(a) Three and three",
+      "(b) Four and two",
+      "(c) One and five",
+      "(d) Two and four"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q37. तीन जोड़े एक गोल मेज पर केंद्र की ओर मुख करके बैठे हैं। दो से अधिक पुरुष (या दो महिलाएं) एक दूसरे के बगल में नहीं बैठे हैं। कोई भी पुरुष अपनी पत्नी के बगल में नहीं बैठा है। B, C के ठीक बायें बैठा है, जिसकी पत्नी C के ठीक विपरीत बैठी है। A और उसकी पत्नी, C की पत्नी के दोनों ओर बगल में बैठे हैं। A के ठीक बायें और ठीक दायें कौन बैठे हैं?",
+    q_en: "Q37. Three couples are sitting around a round table facing the centre. No more than two men, or two women, sit next to one another. No man sits next to his wife. B sits immediately to the left of C, whose wife sits exactly opposite C. A and his wife sit on either side of C's wife. Who sit immediately to the left and immediately to the right of A?",
+    tag: "NTPC CBT - I 15/02/2021 (Evening)",
+    o_hi: [
+      "(a) B और C की पत्नी",
+      "(b) C और B की पत्नियाँ",
+      "(c) B और C की पत्नियाँ",
+      "(d) C और B की पत्नी"
+    ],
+    o_en: [
+      "(a) B and C's wife",
+      "(b) C and B's wife",
+      "(c) B and C's wife",
+      "(d) C and B's wife"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q38. सात व्यक्ति A, B, C, D, E, F और G एक पंक्ति में उत्तर की ओर मुख करके बैठे हैं (जरूरी नहीं कि इसी क्रम में)। C, E के बाएं से तीसरे स्थान पर बैठा है। E, A का पड़ोसी है। A और B के बीच केवल दो व्यक्ति बैठे हैं। C और F के बीच केवल तीन व्यक्ति बैठे हैं। F और G के बीच केवल दो व्यक्ति बैठे हैं। निम्नलिखित में से कौन सी बैठने की व्यवस्था संभव नहीं हो सकती (बाएं से दाएं)?",
+    q_en: "Q38. Seven persons A, B, C, D, E, F and G are sitting in a row facing north, not necessarily in that order. C sits third to the left of E. E is a neighbour of A. Only two persons sit between A and B. Only three persons sit between C and F. Only two persons sit between F and G. Which of the following seating arrangements cannot be possible from left to right?",
+    tag: "NTPC CBT - I 13/03/2021 (Morning)",
+    o_hi: [
+      "(a) C, G, A, E, F, B,D",
+      "(b) B, D, C, G, A, E, F",
+      "(c) D, C, G, A, E, F, B",
+      "(d) D, B, C, G, A, E, F"
+    ],
+    o_en: [
+      "(a) C, G, A, E, F, B, D",
+      "(b) B, D, C, G, A, E, F",
+      "(c) D, C, G, A, E, F, B",
+      "(d) D, B, C, G, A, E, F"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q39. आठ दोस्त P, Q, R, S, T, U, V और W एक वृत्ताकार मेज के चारों ओर केंद्र की मुंह करके बैठे हैं लेकिन जरूरी नहीं कि वे इसी क्रम में हों। इनमें से प्रत्येक अलग-अलग, जैसे- नीला, हरा, लाल, काला, पीला, सफेद, बैंगनी और गुलाबी, रंग की शर्ट के पहनते हैं । P, गुलाबी शर्ट पहने हुए व्यक्ति के दाई ओर तीसरे स्थान पर बैठा है, और गुलाबी शर्ट पहने हुए व्यक्ति और W के बीच केवल दो लोग बैठे हैं। जो लोग पीले और हरे रंग की शर्ट पहने हैं, वे एक दूसरे के निकटतम पड़ोसी हैं। न तो P और न ही W पीले या हरे रंग की शर्ट पहने है। जिसने पीले रंग की शर्ट पहनी है, वह गुलाबी शर्ट पहने हुए व्यक्ति के बगल में नहीं है। जिसने नीली शर्ट पहनी है वह T के बाईं ओर दूसरे स्थान पर बैठा है। T, W का निकटतम पड़ोसी नहीं है। जिसने नीली शर्ट पहनी है, वह सफेद और बैंगनी शर्ट पहनने वाले दोनों का निकटतम पड़ोसी है जिसने बैंगनी शर्ट पहनी है वह Q के दाई ओर तीसरे स्थान पर बैठा है। Q ने पीली शर्ट नहीं पहनी है। R, लाल शर्ट पहनने वाले व्यक्ति के दाई बगल में बैठा है। P ने लाल शर्ट नहीं पहनी है। U, P का निकटतम पड़ोसी नहीं है। V नीली शर्ट पहनने वाले का निकटतम पड़ोसी नहीं है। जिस व्यक्ति ने _____शर्ट पहनी है, वह गुलाबी और सफेद शर्ट पहनने वाले व्यक्तियों के ठीक बीच में बैठा है।",
+    q_en: "Q39. Eight friends P, Q, R, S, T, U, V and W are sitting around a circular table facing the centre, not necessarily in that order. Each wears a shirt of a different colour: blue, green, red, black, yellow, white, purple and pink. P sits third to the right of the person wearing the pink shirt, and only two persons sit between the pink-shirted person and W. The persons wearing yellow and green shirts are immediate neighbours. Neither P nor W wears yellow or green. The yellow-shirted person is not adjacent to the pink-shirted person. The person in blue sits second to the left of T. T is not an immediate neighbour of W. The person in blue is an immediate neighbour of both the persons in white and purple. The person in purple sits third to the right of Q. Q does not wear yellow. R sits immediately to the right of the person in red. P does not wear red. U is not an immediate neighbour of P. V is not an immediate neighbour of the person in blue. The person wearing which colour sits exactly between the persons in pink and white?",
+    tag: "RRB JE 22/05/2019 (Evening)",
+    o_hi: [
+      "(a) नीला",
+      "(b) हरा",
+      "(c) पीला",
+      "(d) लाल"
+    ],
+    o_en: [
+      "(a) Blue",
+      "(b) Green",
+      "(c) Yellow",
+      "(d) Red"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q40. A, B, C, D, E, F, G और H एक वृताकार मेज के चारों तरफ केंद्राभिमुख होकर बैठे हैं। कोई भी दो पुरुष या दो महिला एक-दूसरे के बगल में नहीं बैठे हैं। A, H की पत्नी है और H के ठीक बाई ओर बैठी है। A, E के बाई ओर तीसरे स्थान पर बैठी है F, D के दाई ओर दूसरे स्थान पर बैठा है। D, A या E के ठीक पड़ोस में नहीं बैठा है। H और C एक दूसरे के ठीक पड़ोस में बैठे हैं। F, अपनी पत्नी B के ठीक पड़ोस में नहीं बैठा है। B से वामावर्त दिशा में गिने जाने पर B और F के बीच कितने लोग बैठे हैं?",
+    q_en: "Q40. A, B, C, D, E, F, G and H are sitting around a circular table facing the centre. No two men or two women sit next to each other. A is H's wife and sits immediately to the left of H. A sits third to the left of E. F sits second to the right of D. D is not an immediate neighbour of A or E. H and C are immediate neighbours. F does not sit next to his wife B. Counting anticlockwise from B, how many people sit between B and F?",
+    tag: "RRB JE 23/05/2019 (Evening)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) पांच",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) Five",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q41. दस मित्र प्रत्येक छह सीटों वाली दो समानांतर पंक्तियों में बैठे हैं। प्रत्येक पंक्ति में एक सीट खाली है। पंक्ति - 1 में V, W, X, Y और Z दक्षिण की ओर मुंह किये बैठे हैं। पंक्ति - 2 में H, I, J, K और L उत्तर की ओर मुंह किये बैठे हैं। प्रत्येक को अलग-अलग ब्रांड के लैपटॉप जैसे-एचपी, लेनोवो, डेल, आसुस, एसर, i-बॉल , एप्पल, वाइल्डक्राफ्ट, माइक्रोमैक्स और हैरिसन्स पसंद हैं। K, J के दाईं ओर तीसरे स्थान पर बैठा है और आसुस ब्रांड पसंद करता है। I और खाली सीट के बीच केवल दो लोग बैठे हैं। I को एसर या डेल ब्रांड पसंद नहीं है। Z, X के ठीक बगल में नहीं बैठा है। W को हैरिसन्स ब्रांड पसंद है जिसको डेल ब्रांड पसंद है, वह वाइल्डक्राफ्ट ब्रांड पसंद करने वाले की ओर मुंह किये हुए हैं जो डेल ब्रांड पसंद करता है वह K के सामने बैठे व्यक्ति के दाई ओर तीसरे स्थान पर बैठे व्यक्ति के सामने बैठा है। X, Y के ठीक बगल में नहीं बैठा है L जिसे न तो एसर और न ही i-बॉल ब्रांड पसंद है, खाली सीट की ओर मुंह किये हुए नहीं बैठा है। पंक्ति के किसी भी छोर पर न तो K और ना ही J बैठा है Y, J की ओर मुंह किये हुए बैठा है। खाली सीटें एक-दूसरे के सामने नहीं हैं। X और W के बीच में दो सीटें हैं, और W एप्पल ब्रांड पसंद करने वाले के दाई ओर तीसरे स्थान पर बैठा है , जो माइक्रोमैक्स ब्रांड पसंद करता है वह आसुस ब्रांड पसंद करने वाले की ओर मुंह किये हुए बैठा है। एचपी और वाइल्डक्राफ्ट ब्रांड पसंद करने वाले व्यक्ति एक दूसरे के ठीक बगल में बैठे हैं। पंक्ति - 1 की खाली सीट Y के ठीक बगल में नहीं है। I पंक्ति के किसी एक छोर पर बैठा है। J को एचपी और वाइल्डक्राफ्ट ब्रांड पसंद नहीं है। पंक्ति-1 की खाली सीट K के सामने नहीं है जो पंक्ति के किसी भी छोर पर नहीं बैठा है। निम्नलिखित में से कौन Z के विपरीत बैठा है?",
+    q_en: "Q41. Ten friends are sitting in two parallel rows with six seats in each row; one seat in each row is vacant. In row 1, V, W, X, Y and Z sit facing south. In row 2, H, I, J, K and L sit facing north. Each person likes a different laptop brand: HP, Lenovo, Dell, Asus, Acer, i-Ball, Apple, Wildcraft, Micromax and Harrisons. K sits third to the right of J and likes Asus. Only two persons sit between I and a vacant seat. I likes neither Acer nor Dell. Z is not an immediate neighbour of X. W likes Harrisons. The person who likes Dell faces the person who likes Wildcraft, and the Dell lover faces the person sitting third to the right of the person facing K. X is not an immediate neighbour of Y. L, who likes neither Acer nor i-Ball, does not face the vacant seat. Neither K nor J sits at an end. Y faces J. The vacant seats do not face each other. Two seats lie between X and W, and W sits third to the right of the Apple lover. The person who likes Micromax faces the person who likes Asus. The HP and Wildcraft lovers are immediate neighbours. The vacant seat in row 1 is not adjacent to Y. I sits at one end. J likes neither HP nor Wildcraft. The vacant seat in row 1 does not face K, who is not at an end. Who sits opposite Z?",
+    tag: "RRB JE 29/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) J",
+      "(b) H",
+      "(c) L",
+      "(d) I"
+    ],
+    o_en: [
+      "(a) J",
+      "(b) H",
+      "(c) L",
+      "(d) I"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q42. 10 व्यक्ति दो समानांतर पंक्तियों में बैठे हुए हैं। प्रत्येक पंक्ति में 5 लोग इस प्रकार बैठे हुए हैं कि एक-दूसरे की बगल में बैठे हुए लोगों के बीच अंतराल समान है। पंक्ति 1 में- A, B, C, D और E सभी दक्षिण की ओर मुंह करके बैठे हुए हैं। पंक्ति 2 में - P, Q, R, S और T सभी उत्तर की ओर मुंह करके बैठे हुए हैं। इस प्रकार, बैठने की इस व्यवस्था में दोनों पंक्तियों में बैठे लोगों के मुंह आमने-सामने हैं।<br>(I) E पंक्ति में एकदम किनारे बैठा हुआ है।<br>(II) B का स्थान E के बायीं और दूसरा है और वह Q के बिलकुल सामने बैठा हुआ है।<br>(III) Q, P का पड़ोसी नहीं है जो E के सामने नहीं बैठा हुआ है।<br>(IV) C और T विकर्ण बनाते हुए एक-दूसरे के विपरीत बैठे हुए हैं।<br>(V) A, S के विपरीत बैठा हुआ है जो P और Q के बीच में बैठा हुआ है। यदि E का स्थान A से ; D का स्थान C से और S का स्थान Q से बदल दिया जाये, तो बैठने की नयी व्यवस्था के संबंध में कौनसा कथन सत्य होगा?",
+    q_en: "Q42. Ten persons are sitting in two parallel rows of five persons each, with equal distance between adjacent persons. In row 1, A, B, C, D and E face south. In row 2, P, Q, R, S and T face north, so that persons in the two rows face each other.<br>(I) E sits at an extreme end.<br>(II) B sits second to the left of E and faces Q.<br>(III) Q is not a neighbour of P, who does not face E.<br>(IV) C and T sit diagonally opposite each other.<br>(V) A faces S, who sits between P and Q. If E swaps places with A, D swaps with C, and S swaps with Q, which statement will be true in the new arrangement?",
+    tag: "RPF S.I. 19/12/2018 (Morning)",
+    o_hi: [
+      "(a) B, A के दायीं ओर दूसरे स्थान पर है",
+      "(b) T, S के बायीं ओर दूसरे स्थान पर है",
+      "(c) C और T पंक्ति के किनारों पर बैठे हुए हैं",
+      "(d) D और R एक-दूसरे के आमने-सामने बैठे हुए हैं"
+    ],
+    o_en: [
+      "(a) B is second to the right of A.",
+      "(b) T is second to the left of S.",
+      "(c) C and T sit at the ends of their rows.",
+      "(d) D and R face each other."
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q43. 5 बच्चे P, Q, R, S और T एक पंक्ति में उत्तर की ओर मुंह करके बैठे हुए हैं। सभी बच्चों को अलग-अलग प्रकार के फल, जैसे- सेब, केला, संतरा, आम, अंगूर पसंद हैं।<br>(I) जिस बच्चे को केले पसंद हैं वह पंक्ति के बीच में बैठा हुआ है।<br>(II) R को आम पसंद हैं।<br>(III) सेब और संतरे पसंद करने वाले बच्चे पंक्ति के दोनों छोरों पर बैठे हुए हैं।<br>(IV) जिस बच्चे को संतरे पसंद हैं वह R की बगल में नहीं बैठा हुआ है।<br>(V) T का स्थान R के दाहिने तीसरा है।<br>(VI) P को केले नहीं पसंद हैं और वह T के बगल में नहीं बैठा हुआ है।<br>(VII) Q को अंगूर नहीं पसंद हैं। केले और संतरे पसंद करने वाले बच्चों के बीच में कौन बैठा हुआ है?",
+    q_en: "Q43. Five children P, Q, R, S and T are sitting in a row facing north. Each likes a different fruit: apple, banana, orange, mango and grapes.<br>(I) The child who likes bananas sits in the middle of the row.<br>(II) R likes mangoes.<br>(III) The children who like apples and oranges sit at the two ends.<br>(IV) The child who likes oranges does not sit next to R.<br>(V) T sits third to the right of R.<br>(VI) P does not like bananas and does not sit next to T.<br>(VII) Q does not like grapes. Who sits between the children who like bananas and oranges?",
+    tag: "RPF S.I. 19/12/2018 (Evening)",
+    o_hi: [
+      "(a) जिसे अंगूर पसंद हैं",
+      "(b) P",
+      "(c) जिसे आम पसंद हैं",
+      "(d) Q"
+    ],
+    o_en: [
+      "(a) The one who likes grapes",
+      "(b) P",
+      "(c) The one who likes mangoes",
+      "(d) Q"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q44. आठ मित्र अनूप, गीता, अनिल, कृति, नाइला, काजल, पिंटू और विनोद एक वृत्ताकार मेज पर केंद्राभिमुख बैठे हुए हैं।<br>(I) अनिल का स्थान नाइला के दायीं ओर से तीसरा और कृति के बायीं ओर से दूसरा है।<br>(II) नाइला और अनूप के बीच में एक ही कोई बैठा हुआ है।<br>(III) गीता, अनूप के बगल में बैठी हुयी है।<br>(IV) काजल, अनिल के साथ नहीं बैठी है।<br>(V) विनोद कृति के बगल में नहीं बैठा हुआ है लेकिन वह अनूप के बिलकुल सामने है। निम्न में से उन मित्रों का युग्म कौनसा है जिसमें पहला और दूसरा दोनों एक-दूसरे के आमने-सामने बैठे हुए है ?",
+    q_en: "Q44. Eight friends Anoop, Geeta, Anil, Kriti, Naila, Kajal, Pintu and Vinod are sitting around a circular table facing the centre.<br>(I) Anil sits third to the right of Naila and second to the left of Kriti.<br>(II) Only one person sits between Naila and Anoop.<br>(III) Geeta sits next to Anoop.<br>(IV) Kajal does not sit next to Anil.<br>(V) Vinod does not sit next to Kriti but sits exactly opposite Anoop. Which pair of friends sit opposite each other?",
+    tag: "RPF S.I. 24/12/2018 (Morning)",
+    o_hi: [
+      "(a) गीता और पिंटू",
+      "(b) विनोद और नाइला",
+      "(c) अनिल और नाइला",
+      "(d) कृति और काजल"
+    ],
+    o_en: [
+      "(a) Geeta and Pintu",
+      "(b) Vinod and Naila",
+      "(c) Anil and Naila",
+      "(d) Kriti and Kajal"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q45. 8 व्यक्ति M, N, O, P, Q, R, S और T केंद्र की ओर मुंह करके बैठे हैं (जरूरी नहीं कि इसी क्रम में हों) इस प्रकार कि उनमें से प्रत्येक के बीच एक समान दूरी है। इनमें 5 पुरुष और 3 महिलाएं हैं । कोई भी दो महिलाएँ एक साथ नहीं बैठी हैं।<br>(I) M, जो एक पुरुष है, S के विपरीत बैठा है, जो एक महिला है।<br>(II) T और N पड़ोसी हैं।<br>(III) N, O के दायें से तीसरे स्थान पर बैठी है, जो कि एक महिला है।<br>(IV) M न तो N और न ही Q का पड़ोसी है।<br>(V) एक व्यक्ति S और N के बीच बैठा है।<br>(VI) P, M का पड़ोसी नहीं है लेकिन N के सामने बैठा है।<br>(VII) R एक पुरुष है। निम्नलिखित में से कौन सा विकल्प पुरुषों की जोड़ी है?",
+    q_en: "Q45. Eight persons M, N, O, P, Q, R, S and T are sitting facing the centre at equal distances, not necessarily in the same order. There are five men and three women, and no two women sit together.<br>(I) M, a man, sits opposite S, a woman.<br>(II) T and N are neighbours.<br>(III) N sits third to the right of O, who is a woman.<br>(IV) M is a neighbour of neither N nor Q.<br>(V) One person sits between S and N.<br>(VI) P is not a neighbour of M but sits opposite N.<br>(VII) R is a man. Which option gives a pair of men?",
+    tag: "RPF S.I. 05/01/2019 (Morning)",
+    o_hi: [
+      "(a) RO",
+      "(b) TS",
+      "(c) NP",
+      "(d) QM"
+    ],
+    o_en: [
+      "(a) R and O",
+      "(b) T and S",
+      "(c) N and P",
+      "(d) Q and M"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q46. 6 छात्र अनिल, सीता, मानसी, काजल, गोविंद और वरु एक गोलाकार मेज के केंद्र के चारों ओर देखते हुए बैठते हैं (जरूरी नहीं कि इसी क्रम में हों)। सभी छह छात्र गणित, भौतिकी, इतिहास, भूगोल, रसायन विज्ञान और जीव विज्ञान जैसे विभिन्न विषयों को पसंद करते हैं।<br>(I) जो गणित पसंद करता है वह काजल और मानसी के बीच बैठता है।<br>(II) रसायन विज्ञान पसंद करने वाला व्यक्ति काजल के दाहिनी ओर तीसरे स्थान पर है।<br>(III) वरु, जो गोविंद का पड़ोसी नहीं है, जीव विज्ञान पसंद करता है।<br>(IV) काजल वरु के ठीक बाईं ओर बैठती है।<br>(V) गोविन्द को गणित पसंद है।<br>(VI) सीता इतिहास पसंद करने वाले व्यक्ति के दाहिनी ओर तीसरे स्थान पर है।<br>(VII) जिसे भौतिकी पसंद है और जिसे जीव विज्ञान पसंद है वे पड़ोसी हैं निम्नलिखित में से कौन सा कथन व्यवस्था के संबंध में सही है?",
+    q_en: "Q46. Six students Anil, Sita, Mansi, Kajal, Govind and Varu are sitting around a circular table facing the centre, not necessarily in that order. All six like different subjects: Mathematics, Physics, History, Geography, Chemistry and Biology.<br>(I) The person who likes Mathematics sits between Kajal and Mansi.<br>(II) The person who likes Chemistry sits third to the right of Kajal.<br>(III) Varu, who is not Govind's neighbour, likes Biology.<br>(IV) Kajal sits immediately to the left of Varu.<br>(V) Govind likes Mathematics.<br>(VI) Sita sits third to the right of the person who likes History.<br>(VII) The persons who like Physics and Biology are neighbours. Which of the following statements is correct about the arrangement?",
+    tag: "RPF S.I. 06/01/2019 (Morning)",
+    o_hi: [
+      "(a) अनिल गोविंद के दाहिनी ओर दूसरे स्थान पर बैठा है |",
+      "(b) गोविंद रसायन विज्ञान पसंद करता है |",
+      "(c) सीता और वरु पड़ोसी हैं |",
+      "(d) जिसे रसायन विज्ञान पसंद है वह अनिल और मानसी के बीच बैठता है |"
+    ],
+    o_en: [
+      "(a) Anil sits second to the right of Govind.",
+      "(b) Govind likes Chemistry.",
+      "(c) Sita and Varu are neighbours.",
+      "(d) The person who likes Chemistry sits between Anil and Mansi."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q47. आठ लोग दो समानांतर पंक्तियों में से प्रत्येक पंक्ति में 4 व्यक्ति इस प्रकार बैठे हैं कि आसन्न व्यक्तियों के बीच की दूरी समान हो। पंक्ति 1 में – A, D, O और P बैठे हैं और सभी दक्षिण की ओर अभिमुख हैं। पंक्ति 2 में – U, W, Y और F बैठे हैं और सभी उत्तर की ओर अभिमुख हैं। इस प्रकार प्रत्येक व्यक्ति, दूसरी पंक्ति के किसी अन्य व्यक्ति के सम्मुख है। U, Y के बायीं ओर तीसरे स्थान पर बैठा है। P के सम्मुख व्यक्ति, Y का निकटतम पड़ोसी है। A, P के दायीं ओर किसी स्थान पर बैठा है और W के सम्मुख नहीं है। D, O के दायीं ओर तीसरे स्थान पर बैठा है। निम्नलिखित में से कौन, F के सम्मुख है?",
+    q_en: "Q47. Eight persons are sitting in two parallel rows of four persons each, with equal distance between adjacent persons. In row 1, A, D, O and P face south. In row 2, U, W, Y and F face north. Thus, each person faces one person in the other row. U sits third to the left of Y. The person facing P is an immediate neighbour of Y. A sits somewhere to the right of P and does not face W. D sits third to the right of O. Who faces F?",
+    tag: "NTPC CBT 2 (GL) 13/10/2025 (Morning)",
+    o_hi: [
+      "(a) U",
+      "(b) D",
+      "(c) A",
+      "(d) W"
+    ],
+    o_en: [
+      "(a) U",
+      "(b) D",
+      "(c) A",
+      "(d) W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q48. सात व्यक्ति, A, B, C, T, U, V और W उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। C के दाईं ओर केवल दो व्यक्ति बैठे हैं। C और U के बीच केवल दो व्यक्ति बैठे हैं। A और V के बीच केवल दो व्यक्ति बैठे हैं। C के ठीक बाईं ओर पड़ोस में V बैठा है। W के ठीक दाईं ओर पड़ोस में T बैठा है। पंक्ति के बाएं छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q48. Seven persons A, B, C, T, U, V and W are sitting in a row facing north. Only two persons sit to the right of C. Only two persons sit between C and U. Only two persons sit between A and V. V sits immediately to the left of C. T sits immediately to the right of W. Who sits third from the left end of the row?",
+    tag: "NTPC CBT - I (UG) 07/08/2025 (Morning)",
+    o_hi: [
+      "(a) T",
+      "(b) U",
+      "(c) A",
+      "(d) B"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) U",
+      "(c) A",
+      "(d) B"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q49. H, I, J, K, U, V और W एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। U के दाईं ओर से गिनती करने पर U और V के बीच केवल चार व्यक्ति बैठे हैं। U, W के बाईं ओर तीसरे स्थान पर बैठा है। K, H के बाईं ओर तीसरे स्थान पर बैठा है। V और W दोनों का निकटतम पड़ोसी। है। J के दाईं ओर से गिनती करने पर J और I के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q49. H, I, J, K, U, V and W are sitting around a circular table facing the centre. Counting to the right of U, only four persons sit between U and V. U sits third to the left of W. K sits third to the left of H. V and W have a common immediate neighbour. Counting to the right of J, how many persons sit between J and I?",
+    tag: "NTPC CBT - I (UG) 07/08/2025(Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक",
+      "(c) तीन",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) One",
+      "(c) Three",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q50. H, I, J, K, U, V और W एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। U, V के बाईं ओर चौथे स्थान पर बैठा है। H, J के दाईं ओर चौथे स्थान पर बैठा है। V के बाईं ओर से गिनती करने पर V और J के बीच केवल दो व्यक्ति बैठे हैं। H या V का निकटतम पड़ोसी K नहीं है। I, K का निकटतम पड़ोसी नहीं है। W के दाईं ओर तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q50. H, I, J, K, U, V and W are sitting around a round table facing the centre. U sits fourth to the left of V. H sits fourth to the right of J. Counting to the left of V, only two persons sit between V and J. K is not an immediate neighbour of H or V. I is not an immediate neighbour of K. Who sits third to the right of W?",
+    tag: "NTPC CBT - I (UG) 08/08/2025 (Morning)",
+    o_hi: [
+      "(a) K",
+      "(b) I",
+      "(c) U",
+      "(d) H"
+    ],
+    o_en: [
+      "(a) K",
+      "(b) I",
+      "(c) U",
+      "(d) H"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];

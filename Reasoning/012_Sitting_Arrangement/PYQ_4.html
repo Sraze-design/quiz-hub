@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q151. सात व्यक्ति, B, D, E, F, P, Q और R, एक पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। R और E के बीच केवल तीन व्यक्ति बैठे हैं। F, E के बायीं ओर ठीक पड़ोस में बैठा है। B के दायीं ओर कोई नहीं बैठा है। B और F के बीच केवल दो व्यक्ति बैठे हैं। P, Q के दायीं ओर ठीक पड़ोस में बैठा है। D और P के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q151. Seven persons B, D, E, F, P, Q and R are sitting in a row facing north. Only three persons sit between R and E. F sits immediately to the left of E. No one sits to the right of B. Only two persons sit between B and F. P sits immediately to the right of Q. How many persons sit between D and P?",
+    tag: "RRB J.E. 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. सात व्यक्ति, W, X, Y, Z, E, F और G, एक पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। Y के दायीं ओर केवल दो व्यक्ति बैठे हैं। Y और F के बीच केवल दो व्यक्ति बैठे हैं। E और W के बीच केवल दो व्यक्ति बैठे हैं। W, Y के बायीं ओर ठीक पास में बैठा है। Z, X के दायीं ओर ठीक पास में बैठा है। पंक्ति के बायें छोर से तीसरे स्थान पर कौन बैठा है ?",
+    q_en: "Q152. Seven persons W, X, Y, Z, E, F and G are sitting in a row facing north. Only two persons sit to the right of Y. Only two persons sit between Y and F. Only two persons sit between E and W. W sits immediately to the left of Y. Z sits immediately to the right of X. Who sits third from the left end of the row?",
+    tag: "RRB J.E. 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) W",
+      "(b) Y",
+      "(c) G",
+      "(d) Z"
+    ],
+    o_en: [
+      "(a) W",
+      "(b) Y",
+      "(c) G",
+      "(d) Z"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. G, H, I, J, K, L और O एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। L, G के बाएं तीसरे स्थान पर बैठा है। H, O के बाएं दूसरे स्थान पर बैठा है। J और H के बीच में केवल G बैठा है। K, L का पडोसी नहीं है। जब । के दाएं से गिनने पर, । और K के बीच में कितने लोग बैठे हैं?",
+    q_en: "Q153. G, H, I, J, K, L and O are sitting around a circular table facing the centre. L sits third to the left of G. H sits second to the left of O. Only G sits between J and H. K is not an immediate neighbour of L. Counting to the right of I, how many persons sit between I and K?",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) दो",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Two",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. सात व्यक्ति, R, S, T, U, V, W और Y, एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। W, R के ठीक बाईं ओर पड़ोस में बैठा है। U, T के ठीक बाईं ओर पड़ोस में बैठा है। S, T के दाईं ओर दूसरे स्थान पर बैठा है। R, V के दाईं ओर तीसरे स्थान पर बैठा है। Y के दाईं ओर दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q154. Seven persons R, S, T, U, V, W and Y are sitting around a circular table facing the centre. W sits immediately to the left of R. U sits immediately to the left of T. S sits second to the right of T. R sits third to the right of V. Who sits second to the right of Y?",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) S",
+      "(b) U",
+      "(c) T",
+      "(d) W"
+    ],
+    o_en: [
+      "(a) S",
+      "(b) U",
+      "(c) T",
+      "(d) W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. A, B, C, D, E, F और G एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। F, G के ठीक बाएं पड़ोस में बैठा है। E, C के ठीक बाएं पड़ोस में बैठा है। C, A के बाएं से दूसरे स्थान पर बैठा है। B, G के बाएं से तीसरे स्थान पर बैठा है। E के बाएं से गिनने पर F और E के बीच कितने लोग बैठे हैं?",
+    q_en: "Q155. A, B, C, D, E, F and G are sitting around a circular table facing the centre. F sits immediately to the left of G. E sits immediately to the left of C. C sits second to the left of A. B sits third to the left of G. Counting to the left of E, how many persons sit between F and E?",
+    tag: "RPF S.I. 02/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 1",
+      "(b) 2",
+      "(c) 3",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) 2",
+      "(c) 3",
+      "(d) 4"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. I, J, K, L, P, Q और R, एक वर्गाकार मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। K के दाएं केवल दो व्यक्ति बैठे हैं। K और R के बीच केवल दो व्यक्ति बैठे हैं, । और Q के बीच केवल दो व्यक्ति बैठे हैं। Q, K के ठीक बाएं पड़ोस में बैठा है। L, P के ठीक दाएं पड़ोस में बैठा है। L के दाईं तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q156. I, J, K, L, P, Q and R are sitting around a square table facing the centre. Only two persons sit to the right of K. Only two persons sit between K and R. Only two persons sit between I and Q. Q sits immediately to the left of K. L sits immediately to the right of P. Who sits third to the right of L?",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) K",
+      "(b) J",
+      "(c) I",
+      "(d) P"
+    ],
+    o_en: [
+      "(a) K",
+      "(b) J",
+      "(c) I",
+      "(d) P"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. A, B, C, D, E, F और G एक सीधी पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। G के दाईं ओर केवल दो व्यक्ति बैठे हैं। G और E के बीच केवल दो व्यक्ति बैठे हैं। D और B के बीच केवल दो व्यक्ति बैठे हैं। B, G के ठीक बाईं ओर बगल में बैठा है। A, F के ठीक दाईं ओर बगल में बैठा है। D और F के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q157. A, B, C, D, E, F and G are sitting in a straight row facing north. Only two persons sit to the right of G. Only two persons sit between G and E. Only two persons sit between D and B. B sits immediately to the left of G. A sits immediately to the right of F. How many persons sit between D and F?",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) 3",
+      "(b) 4",
+      "(c) 2",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 4",
+      "(c) 2",
+      "(d) 1"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. सात व्यक्ति, M, N, O, P, Q, R और T, एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। T के दाईं ओर से गणना करने पर T और N के बीच केवल दो व्यक्ति बैठे हैं। R के दाईं ओर से गिनने करने पर R और P के बीच केवल दो व्यक्ति बैठे हैं। M, P के ठीक दाईं ओर पड़ोस में बैठा है। M, T के बाईं ओर दूसरे स्थान पर बैठा है। Q, R का निकटतम पड़ोसी नहीं है। O के ठीक बाईं ओर पड़ोस में कौन बैठा है?",
+    q_en: "Q158. Seven persons M, N, O, P, Q, R and T are sitting around a circular table facing the centre. Counting to the right of T, only two persons sit between T and N. Counting to the right of R, only two persons sit between R and P. M sits immediately to the right of P. M sits second to the left of T. Q is not an immediate neighbour of R. Who sits immediately to the left of O?",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) R",
+      "(b) N",
+      "(c) Q",
+      "(d) P"
+    ],
+    o_en: [
+      "(a) R",
+      "(b) N",
+      "(c) Q",
+      "(d) P"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. I, J, K, L, M, N और W एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। L के दाईं ओर से गिने जाने पर L और J के बीच केवल एक व्यक्ति बैठा है। J और N के बीच केवल एक व्यक्ति बैठा है। L और W के बीच केवल एक व्यक्ति बैठा है। M और N के बीच केवल दो व्यक्ति बैठे हैं। K और W के बीच केवल एक व्यक्ति बैठा है। । के दाईं ओर से गिने जाने पर । और J के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q159. I, J, K, L, M, N and W are sitting around a circular table facing the centre. Counting to the right of L, only one person sits between L and J. Only one person sits between J and N. Only one person sits between L and W. Only two persons sit between M and N. Only one person sits between K and W. Counting to the right of I, how many persons sit between I and J?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) तीन",
+      "(b) चार",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Four",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. G, H, I, J, M, N और O, एक वर्गाकार मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। J के बाएं केवल G बैठा है। G और H के बीच केवल चार व्यक्ति बैठे हैं। N और I के बीच केवल O बैठा है, तथा N, H का निकटतम पड़ोसी नहीं है। O के दाईं ओर तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q160. G, H, I, J, M, N and O are sitting around a square table facing the centre. Only G sits to the left of J. Only four persons sit between G and H. Only O sits between N and I, and N is not an immediate neighbour of H. Who sits third to the right of O?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) I",
+      "(b) G",
+      "(c) O",
+      "(d) M"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) G",
+      "(c) O",
+      "(d) M"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. A, B, C, D, E, F और G एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। A के दाईं ओर से गिनने पर, A और D के बीच केवल दो व्यक्ति बैठे हैं। D और G के बीच केवल दो व्यक्ति बैठे हैं। A और C के बीच केवल तीन व्यक्ति बैठे हैं। F, E के ठीक बाईं ओर पड़ोस में बैठा है। G के बाईं ओर से गिनने पर C और G के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q161. A, B, C, D, E, F and G are sitting around a circular table facing the centre. Counting to the right of A, only two persons sit between A and D. Only two persons sit between D and G. Only three persons sit between A and C. F sits immediately to the left of E. Counting to the left of G, how many persons sit between C and G?",
+    tag: "RPF S.I. 03/12/2024 (Evening)",
+    o_hi: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 4",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 4",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. D, E, F, G, H, I और T, एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। F, H के बाईं ओर तीसरे स्थान पर बैठा है। T के बाई ओर से गणना करने पर H और T के बीच केवल एक व्यक्ति बैठा है।। के दाईं ओर से गणना करने पर G और। के बीच केवल दो व्यक्ति बैठे हैं। D, G का निकटतम पड़ोसी है। E के दाईं ओर तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q162. D, E, F, G, H, I and T are sitting around a circular table facing the centre. F sits third to the left of H. Counting to the left of T, only one person sits between H and T. Counting to the right of I, only two persons sit between G and I. D is an immediate neighbour of G. Who sits third to the right of E?",
+    tag: "RPF S.I. 03/12/2024 (Evening)",
+    o_hi: [
+      "(a) I",
+      "(b) T",
+      "(c) F",
+      "(d) D"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) T",
+      "(c) F",
+      "(d) D"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. A, B, C, D, E, F और G एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। जब D के बाई ओर से गिनने पर, A और D के बीच केवल दो व्यक्ति बैठे हैं। E, B के बाई ओर तीसरे स्थान पर बैठा है। C, B के ठीक दाईं ओर पड़ोस में बैठा है। C, A के बाई ओर दूसरे स्थान पर बैठा है। G, E का निकटतम पड़ोसी है। B के बाई ओर से गिनने पर B और E के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q163. A, B, C, D, E, F and G are sitting around a circular table facing the centre. Counting to the left of D, only two persons sit between A and D. E sits third to the left of B. C sits immediately to the right of B. C sits second to the left of A. G is an immediate neighbour of E. Counting to the left of B, how many persons sit between B and E?",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) 3",
+      "(b) 2",
+      "(c) 1",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 2",
+      "(c) 1",
+      "(d) 4"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. G, H, I, J, M, N और O एक वर्गाकार मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं H और G के बीच केवल पाँच व्यक्ति बैठे हैं। O, G के ठीक बाएं पड़ोस में बैठा है। O और I के बीच केवल एक व्यक्ति बैठा है। J, N के बाएं किसी स्थान पर लेकिन M के दाएं किसी स्थान पर बैठा है। पंक्ति के बाएं छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q164. G, H, I, J, M, N and O are sitting around a square table facing the centre. Only five persons sit between H and G. O sits immediately to the left of G. Only one person sits between O and I. J sits somewhere to the left of N but somewhere to the right of M. Who sits third from the left end of the row?",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) I",
+      "(b) J",
+      "(c) G",
+      "(d) O"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) J",
+      "(c) G",
+      "(d) O"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. सात व्यक्ति, Q, R, S, T, U, V और Y, एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। Q के बाईं ओर से गणना करने पर U और Q के बीच केवल एक व्यक्ति बैठा है। S, T के बाईं ओर चौथे स्थान पर बैठा है। V, R के बाईं ओर तीसरे स्थान पर बैठा है। V, S के ठीक बाईं ओर पड़ोस में बैठा है। Y, V का निकटतम पड़ोसी नहीं है। Y के दाई ओर से गणना करने पर Y और Q के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q165. Seven persons Q, R, S, T, U, V and Y are sitting around a circular table facing the centre. Counting to the left of Q, only one person sits between U and Q. S sits fourth to the left of T. V sits third to the left of R. V sits immediately to the left of S. Y is not an immediate neighbour of V. Counting to the right of Y, how many persons sit between Y and Q?",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) चार",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Four",
+      "(d) Two"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. A, B, C, D, E, F और G एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। F के दाई ओर से गिने जाने पर F और D के बीच केवल दो व्यक्ति बैठे हैं। G के दाईं ओर से गिने जाने पर B और G के बीच केवल तीन व्यक्ति बैठे हैं। D, G के ठीक दाईं ओर पड़ोस में बैठा है। A, E के ठीक दाईं ओर पड़ोस में बैठा है। G के दाईं ओर से गिने जाने पर A और G के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q166. A, B, C, D, E, F and G are sitting around a circular table facing the centre. Counting to the right of F, only two persons sit between F and D. Counting to the right of G, only three persons sit between B and G. D sits immediately to the right of G. A sits immediately to the right of E. Counting to the right of G, how many persons sit between A and G?",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 3",
+      "(b) 2",
+      "(c) 4",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 2",
+      "(c) 4",
+      "(d) 1"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. सात व्यक्ति, E, F, G, H, I, J और U, एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। H के दाई ओर से गिनने पर H और E के बीच केवल एक व्यक्ति बैठा है। E और U के बीच केवल एक व्यक्ति बैठा है। H और । के बीच केवल एक व्यक्ति बैठा है। J, । के दाईं ओर तीसरे स्थान पर बैठा है। F और। केबीच केवल एक व्यक्ति बैठा है। G के दाईं ओर दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q167. Seven persons E, F, G, H, I, J and U are sitting around a circular table facing the centre. Counting to the right of H, only one person sits between H and E. Only one person sits between E and U. Only one person sits between H and I. J sits third to the right of I. Only one person sits between F and I. Who sits second to the right of G?",
+    tag: "RPF S.I. 09/12/2024 (Evening)",
+    o_hi: [
+      "(a) I",
+      "(b) E",
+      "(c) U",
+      "(d) J"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) E",
+      "(c) U",
+      "(d) J"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. सात व्यक्ति, A, B, C, D, E, F और G, उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। F और A के बीच केवल पाँच व्यक्ति बैठे हैं। E, A के ठीक बायीं ओर पड़ोस में बैठा है। E और B के बीच केवल एक व्यक्ति बैठा है। G, D के बायीं ओर किसी एक स्थान पर लेकिन C के दायीं ओर किसी एक स्थान पर बैठा है। A और C के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q168. Seven persons A, B, C, D, E, F and G are sitting in a row facing north. Only five persons sit between F and A. E sits immediately to the left of A. Only one person sits between E and B. G sits somewhere to the left of D but somewhere to the right of C. How many persons sit between A and C?",
+    tag: "RPF S.I. 12/12/2024 (Morning)",
+    o_hi: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 2",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 2",
+      "(d) 4"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. G, H, I, J, M, N और O, एक वर्गाकार मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। M के दाएं कोई नहीं बैठा है। M और O के बीच केवल तीन व्यक्ति बैठे हैं। O और H के बीच केवल दो व्यक्ति बैठे हैं। G, N के बाएं तीसरे स्थान पर बैठा है। J, N के ठीक दाएं पड़ोस में बैठा है। । और H के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q169. G, H, I, J, M, N and O are sitting around a square table facing the centre. No one sits to the right of M. Only three persons sit between M and O. Only two persons sit between O and H. G sits third to the left of N. J sits immediately to the right of N. How many persons sit between I and H?",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. सात व्यक्ति, B, C, D, E, F, G और Q, एक गोल मेज के परितः मेज के केंद्र की ओर अभिमुख होकर बैठे हैं। D, B के दाईं ओर चौथे स्थान पर बैठा है। Q और E के बीच केवल D बैठा है। B और E के बीच केवल F बैठा है। E, G के बाई ओर तीसरे स्थान पर बैठा है। F के दाईं ओर से गिनने पर F और C के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q170. Seven persons B, C, D, E, F, G and Q are sitting around a circular table facing the centre. D sits fourth to the right of B. Only D sits between Q and E. Only F sits between B and E. E sits third to the left of G. Counting to the right of F, how many persons sit between F and C?",
+    tag: "RPF S.I. 12/12/2024 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. A, B, C, D, E, F और G एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। A के बाएं से गिनने पर A और C के बीच केवल तीन व्यक्ति बैठे हैं। G के दाएं से गिनने पर E और G के बीच केवल तीन व्यक्ति बैठे हैं। B, E के ठीक दाएं पड़ोस में बैठा है। D, G के साथ-साथ C का भी निकटतम पड़ोसी है। F के दाएं से गिनने पर B और F के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q171. A, B, C, D, E, F and G are sitting around a circular table facing the centre. Counting to the left of A, only three persons sit between A and C. Counting to the right of G, only three persons sit between E and G. B sits immediately to the right of E. D is an immediate neighbour of both G and C. Counting to the right of F, how many persons sit between B and F?",
+    tag: "RPF S.I. 12/12/2024 (Evening)",
+    o_hi: [
+      "(a) 4",
+      "(b) 1",
+      "(c) 2",
+      "(d) 3"
+    ],
+    o_en: [
+      "(a) 4",
+      "(b) 1",
+      "(c) 2",
+      "(d) 3"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. A, B, C, D, E, F और G एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। A, E के बाईं ओर तीसरे स्थान पर बैठा है। B, F के बाईं ओर दूसरे स्थान पर बैठा है। D और B के बीच में केवल E बैठा है। C, A का निकटतम पड़ोसी नहीं है। F के बाईं ओर से गणना करने पर, D और F के बीच कितने व्यक्ति बैठे हैं ?",
+    q_en: "Q172. A, B, C, D, E, F and G are sitting around a circular table facing the centre. A sits third to the left of E. B sits second to the left of F. Only E sits between D and B. C is not an immediate neighbour of A. Counting to the left of F, how many persons sit between D and F?",
+    tag: "RPF S.I. 13/12/2024 (Morning)",
+    o_hi: [
+      "(a) 1",
+      "(b) 3",
+      "(c) 4",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) 3",
+      "(c) 4",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. I, J, K, L, P, Q और R, एक वर्गाकार मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। K के बाएं केवल तीन व्यक्ति बैठे हैं। Q के दाएं केवल R बैठा है। Q और L के बीच केवल तीन व्यक्ति बैठे हैं। P, । के बाएं किसी स्थान पर लेकिन J के दाएं किसी स्थान पर बैठा है। J और। के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q173. I, J, K, L, P, Q and R are sitting around a square table facing the centre. Only three persons sit to the left of K. Only R sits to the right of Q. Only three persons sit between Q and L. P sits somewhere to the left of I but somewhere to the right of J. How many persons sit between J and I?",
+    tag: "RPF S.I. 13/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक",
+      "(c) तीन",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) One",
+      "(c) Three",
+      "(d) Four"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q174. P, Q, R, S, T, U और W एक गोल मेज के परितः केंद्र की ओर मुख करके बैठे हैं। R, Q के ठीक दाईं ओर बैठा है। R के बाईं ओर से गिने जाने पर, R और U के बीच केवल तीन व्यक्ति बैठे हैं। Q और T के बीच केवल तीन व्यक्ति बैठे हैं। W, S के ठीक दाईं ओर बैठा है। S के बाईं ओर से गिने जाने पर R और S के बिच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q174. P, Q, R, S, T, U and W are sitting around a circular table facing the centre. R sits immediately to the right of Q. Counting to the left of R, only three persons sit between R and U. Only three persons sit between Q and T. W sits immediately to the right of S. Counting to the left of S, how many persons sit between R and S?",
+    tag: "RPF S.I. 13/12/2024 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) दो",
+      "(c) चार",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Two",
+      "(c) Four",
+      "(d) One"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q175. A, B, C, D, E और F एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। B, D के दाईं ओर से दूसरे स्थान पर बैठा है। A, E और C का निकटतम पड़ोसी है। E, F के बाईं ओर से दूसरे स्थान पर बैठा है। B के सापेक्ष में F का स्थान क्या है ?",
+    q_en: "Q175. A, B, C, D, E and F are sitting around a circular table facing the centre. B sits second to the right of D. A is an immediate neighbour of both E and C. E sits second to the left of F. What is F's position with respect to B?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) दाईं ओर से तीसरा",
+      "(b) ठीक दाईं ओर",
+      "(c) ठीक बाईं ओर",
+      "(d) बाईं ओर से दूसरा"
+    ],
+    o_en: [
+      "(a) Third to the right",
+      "(b) Immediately to the right",
+      "(c) Immediately to the left",
+      "(d) Second to the left"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q176. सात व्यक्ति, B, C, D, E, F, G और K एक सीधी पंक्ति में उत्तर की ओर मुख करके बैठे हैं। B के बाईं ओर केवल तीन व्यक्ति बैठे हैं। G के दाईं ओर केवल K बैठा है। G और D के बीच केवल तीन व्यक्ति बैठे हैं। C, F के बाईं ओर किसी स्थान पर लेकिन E के दाईं ओर किसी स्थान पर बैठा है। E और F के बीच में कितने व्यक्ति बैठे हैं ?",
+    q_en: "Q176. Seven persons B, C, D, E, F, G and K are sitting in a straight row facing north. Only three persons sit to the left of B. Only K sits to the right of G. Only three persons sit between G and D. C sits somewhere to the left of F but somewhere to the right of E. How many persons sit between E and F?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q177. L, P, R, V, X, Y और Z एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं । V के दाईं ओर से गिनने पर, V और L के बीच में केवल एक व्यक्ति बैठा है। L और X के बीच में केवल एक व्यक्ति बैठा है।V और Z के बीच में केवल एक व्यक्ति बैठा है। R और X के बीच में केवल दो व्यक्ति बैठे हैं। P और Z के बीच में केवल एक व्यक्ति बैठा है। क्रमशः Y के ठीक दाईं ओर तथा बाईं ओर कौन बैठा है",
+    q_en: "Q177. L, P, R, V, X, Y and Z are sitting around a circular table facing the centre. Counting to the right of V, only one person sits between V and L. Only one person sits between L and X. Only one person sits between V and Z. Only two persons sit between R and X. Only one person sits between P and Z. Who sit immediately to the right and immediately to the left of Y, respectively?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) Z और V",
+      "(b) V और X",
+      "(c) V और Z",
+      "(d) X और Z"
+    ],
+    o_en: [
+      "(a) Z and V",
+      "(b) V and X",
+      "(c) V and Z",
+      "(d) X and Z"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q178. A, B, C, D, E और F एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। F और C के बीच केवल दो व्यक्ति बैठे हैं। D, F के ठीक दाईं ओर बैठा है। A, B और C का निकटतम पड़ोसी है। B के सापेक्ष में E का स्थान क्या है ?",
+    q_en: "Q178. A, B, C, D, E and F are sitting around a circular table facing the centre. Only two persons sit between F and C. D sits immediately to the right of F. A is an immediate neighbour of both B and C. What is E's position with respect to B?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Evening)",
+    o_hi: [
+      "(a) ठीक दाईं ओर",
+      "(b) बाईं ओर से दूसरा",
+      "(c) ठीक बाईं ओर",
+      "(d) दाईं ओर से तीसरा"
+    ],
+    o_en: [
+      "(a) Immediately to the right",
+      "(b) Second to the left",
+      "(c) Immediately to the left",
+      "(d) Third to the right"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q179. सात व्यक्ति, B, C, D, E, F, G और K एक सीधी पंक्ति में उत्तर की ओर मुख करके बैठे हैं। G के दाईं ओर कोई नहीं बैठा है। G और E के बीच केवल तीन व्यक्ति बैठे हैं। E और F के बीच केवल दो व्यक्ति बैठे हैं। C, D के बाईं ओर से तीसरे स्थान पर बैठा है। K, D के ठीक दाईं ओर बैठा है। B और F के बीच में कितने व्यक्ति बैठे हैं?",
+    q_en: "Q179. Seven persons B, C, D, E, F, G and K are sitting in a straight row facing north. No one sits to the right of G. Only three persons sit between G and E. Only two persons sit between E and F. C sits third to the left of D. K sits immediately to the right of D. How many persons sit between B and F?",
+    tag: "RRB ALP Tier - I 25/11/2024 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) दो",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Two",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q180. सात व्यक्ति, B, C, D, E, F, G और K एक सीधी पंक्ति में उत्तर की ओर मुख करके बैठे हैं। B के बाईं ओर केवल दो व्यक्ति बैठे हैं। B और K के बीच केवल तीन व्यक्ति बैठे हैं। F, B के दाईं ओर दूसरे स्थान पर बैठा है। F और C के बीच केवल दो व्यक्ति बैठे हैं। G, E के दाईं ओर से किसी स्थान पर लेकिन D के बाईं ओर से किसी स्थान पर बैठा है। G के दाईं ओर कितने व्यक्ति बैठे हैं ?",
+    q_en: "Q180. Seven persons B, C, D, E, F, G and K are sitting in a straight row facing north. Only two persons sit to the left of B. Only three persons sit between B and K. F sits second to the right of B. Only two persons sit between F and C. G sits somewhere to the right of E but somewhere to the left of D. How many persons sit to the right of G?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) तीन",
+      "(c) दो",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Three",
+      "(c) Two",
+      "(d) Four"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q181. A, B, E, F, L, M और P एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। F, E के बाईं ओर से दूसरे स्थान पर बैठा है। A, B के दाईं ओर से तीसरे स्थान पर बैठा है। M, L के बाईं ओर से तीसरे स्थान पर बैठा है। A, M के ठीक दाईं ओर बैठा है। P, M का निकटतम पड़ोसी नहीं है। F के बाईं ओर से दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q181. A, B, E, F, L, M and P are sitting around a circular table facing the centre. F sits second to the left of E. A sits third to the right of B. M sits third to the left of L. A sits immediately to the right of M. P is not an immediate neighbour of M. Who sits second to the left of F?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Morning)",
+    o_hi: [
+      "(a) A",
+      "(b) M",
+      "(c) B",
+      "(d) P"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) M",
+      "(c) B",
+      "(d) P"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. सात व्यक्ति, A, B, C, D, E, F और G, एक पंक्ति में उत्तर की ओर मुख करके बैठे हैं। A दाएं छोर से पांचवें स्थान पर बैठा है। E और A के बीच केवल दो व्यक्ति बैठे हैं। C, G और E का निकटतम पड़ोसी है। B, F के ठीक दाईं ओर बैठा है। D और B के बीच कितने व्यक्ति बैठे हैं ?",
+    q_en: "Q182. Seven persons A, B, C, D, E, F and G are sitting in a row facing north. A sits fifth from the right end. Only two persons sit between E and A. C is an immediate neighbour of both G and E. B sits immediately to the right of F. How many persons sit between D and B?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) चार",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) Four",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. A, B, C, D, E और F एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। A, B के बाईं ओर दूसरे स्थान पर बैठा है। E, A के ठीक बाईं ओर बैठा है। C, F के ठीक दाईं ओर बैठा है। D के सापेक्ष में C का स्थान क्या है ?",
+    q_en: "Q183. A, B, C, D, E and F are sitting around a circular table facing the centre. A sits second to the left of B. E sits immediately to the left of A. C sits immediately to the right of F. What is C's position with respect to D?",
+    tag: "RRB ALP Tier - I 26/11/2024 (Evening)",
+    o_hi: [
+      "(a) ठीक दाईं ओर",
+      "(b) बाईं ओर से दूसरा",
+      "(c) दाईं ओर से दूसरा",
+      "(d) बाईं ओर से तीसरा"
+    ],
+    o_en: [
+      "(a) Immediately to the right",
+      "(b) Second to the left",
+      "(c) Second to the right",
+      "(d) Third to the left"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. A, B, C, D, E और F एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। F, C के दाईं ओर से दूसरे स्थान पर बैठा है। D, E और F का निकटतम पड़ोसी है। A, B के बाईं ओर से दूसरे स्थान पर बैठा है। C के सापेक्ष में E का स्थान क्या है ?",
+    q_en: "Q184. A, B, C, D, E and F are sitting around a circular table facing the centre. F sits second to the right of C. D is an immediate neighbour of both E and F. A sits second to the left of B. What is E's position with respect to C?",
+    tag: "RRB ALP Tier - I 27/11/2024 (Morning)",
+    o_hi: [
+      "(a) ठीक दाईं ओर",
+      "(b) दाईं ओर से दूसरा",
+      "(c) बाईं ओर से तीसरा",
+      "(d) बाईं ओर से दूसरा"
+    ],
+    o_en: [
+      "(a) Immediately to the right",
+      "(b) Second to the right",
+      "(c) Third to the left",
+      "(d) Second to the left"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. सात व्यक्ति, A, B, C, D, E, F और G, एक पंक्ति में उत्तर की ओर मुख करके बैठे हैं। E बाएं छोर से तीसरे स्थान पर बैठा है। D के दाईं ओर केवल एक व्यक्ति बैठा है। G, D के बाईं ओर से दूसरे स्थान पर बैठा है। B, C के ठीक दाईं ओर बैठा है। F, A के दाईं ओर नहीं बैठा है। F और E के बीच कितने व्यक्ति बैठे हैं ?",
+    q_en: "Q185. Seven persons A, B, C, D, E, F and G are sitting in a row facing north. E sits third from the left end. Only one person sits to the right of D. G sits second to the left of D. B sits immediately to the right of C. F does not sit to the right of A. How many persons sit between F and E?",
+    tag: "RRB ALP Tier - I 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. L, P, R, V, X, Y और Z एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। R, V के ठीक दाईं ओर बैठा है। R के बाईं ओर से गिनने पर R और Z के बीच में केवल तीन व्यक्ति बैठे हैं। V और P के बीच में केवल तीन व्यक्ति बैठे हैं। X, Y के ठीक दाईं ओर बैठा है। Y के बाईं ओर से गिनने पर L और Y के बीच में कितने व्यक्ति बैठे हैं ?",
+    q_en: "Q186. L, P, R, V, X, Y and Z are sitting around a circular table facing the centre. R sits immediately to the right of V. Counting to the left of R, only three persons sit between R and Z. Only three persons sit between V and P. X sits immediately to the right of Y. Counting to the left of Y, how many persons sit between L and Y?",
+    tag: "RRB ALP Tier - I 27/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. सात व्यक्ति A, B, C, D, E, F और G एक पंक्ति में उत्तर की ओर मुख करके बैठे हैं। E बाएं छोर से तीसरे स्थान पर बैठा है। G और E के बीच केवल तीन व्यक्ति बैठे हैं। B, C और F का निकटतम पड़ोसी है। D, C के बाएं से दूसरे स्थान पर बैठा है। A और F के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q187. Seven persons A, B, C, D, E, F and G are sitting in a row facing north. E sits third from the left end. Only three persons sit between G and E. B is an immediate neighbour of both C and F. D sits second to the left of C. How many persons sit between A and F?",
+    tag: "RRB ALP Tier - I 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. A, B, C, D, E और F एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। D, F के ठीक बाईं ओर बैठा है। B, C और F का निकटतम पड़ोसी है। A, E और C का निकटतम पड़ोसी है। E के सापेक्ष में D का स्थान क्या है ?",
+    q_en: "Q188. A, B, C, D, E and F are sitting around a circular table facing the centre. D sits immediately to the left of F. B is an immediate neighbour of both C and F. A is an immediate neighbour of both E and C. What is D's position with respect to E?",
+    tag: "RRB ALP Tier - I 28/11/2024 (Morning)",
+    o_hi: [
+      "(a) बाईं ओर से तीसरा",
+      "(b) दाईं ओर से तीसरा",
+      "(c) बाईं ओर से दूसरा",
+      "(d) ठीक दाईं ओर"
+    ],
+    o_en: [
+      "(a) Third to the left",
+      "(b) Third to the right",
+      "(c) Second to the left",
+      "(d) Immediately to the right"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. सात व्यक्ति A, B, C, D, E, F और G एक सीधी पंक्ति में उत्तर की ओर मुख करके बैठे हैं। D के बाईं ओर केवल दो व्यक्ति बैठे हैं। F, D के बाईं ओर दूसरे स्थान पर बैठा है। G, E के दाईं ओर दूसरे स्थान पर बैठा है। E, D के दाईं ओर दूसरे स्थान पर बैठा है। A, B के बाईं ओर दूसरे स्थान पर बैठा है। A, F का निकटतम पड़ोसी नहीं है। पंक्ति के दाएं छोर पर कौन बैठा है ?",
+    q_en: "Q189. Seven persons A, B, C, D, E, F and G are sitting in a straight row facing north. Only two persons sit to the left of D. F sits second to the left of D. G sits second to the right of E. E sits second to the right of D. A sits second to the left of B. A is not an immediate neighbour of F. Who sits at the right end of the row?",
+    tag: "RRB ALP Tier - I 28/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) C",
+      "(b) B",
+      "(c) G",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) C",
+      "(b) B",
+      "(c) G",
+      "(d) A"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. A, B, E, F, L, M और P एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। P के बाईं ओर से गिनने पर P और E के बीच केवल तीन व्यक्ति बैठे हैं। A के दाईं ओर से गिनने पर M और A के बीच केवल तीन व्यक्ति बैठे हैं। L, M के ठीक दाईं ओर बैठा है। F, A के साथ-साथ E का भी निकटतम पड़ोसी है। B के बाईं ओर से दूसरे स्थान पर कौन बैठा है ?",
+    q_en: "Q190. A, B, E, F, L, M and P are sitting around a circular table facing the centre. Counting to the left of P, only three persons sit between P and E. Counting to the right of A, only three persons sit between M and A. L sits immediately to the right of M. F is an immediate neighbour of both A and E. Who sits second to the left of B?",
+    tag: "RRB ALP Tier - I 29/11/2024 (Morning)",
+    o_hi: [
+      "(a) F",
+      "(b) P",
+      "(c) E",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) F",
+      "(b) P",
+      "(c) E",
+      "(d) A"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. सात व्यक्ति, B, C, D, E, F, G और K एक सीधी पंक्ति में उत्तर की ओर मुख करके बैठे हैं। D और G के बीच केवल दो व्यक्ति बैठे हैं। K के दाईं ओर केवल E बैठा है। G और K के बीच में केवल एक व्यक्ति बैठा है। C, B के दाईं ओर किसी स्थान पर लेकिन F के बाईं ओर किसी स्थान पर बैठा है। पंक्ति के दाईं छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q191. Seven persons B, C, D, E, F, G and K are sitting in a straight row facing north. Only two persons sit between D and G. Only E sits to the right of K. Only one person sits between G and K. C sits somewhere to the right of B but somewhere to the left of F. Who sits third from the right end of the row?",
+    tag: "RRB ALP Tier - I 29/11/2024 (Afternoon)",
+    o_hi: [
+      "(a) F",
+      "(b) C",
+      "(c) G",
+      "(d) B"
+    ],
+    o_en: [
+      "(a) F",
+      "(b) C",
+      "(c) G",
+      "(d) B"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. A, B, C, D, E, F और G एक वृत्ताकार मेज के चारों ओर केंद्र की ओर मुख करके बैठे हैं। D, F के बाईं ओर से तीसरे स्थान पर बैठा है। G, D के बाईं ओर से दूसरे स्थान पर बैठा है। G, E के ठीक दाईं ओर बैठा है। B, A के ठीक बाईं ओर बैठा है। B के सापेक्ष में D का स्थान कौन-सा है ?",
+    q_en: "Q192. A, B, C, D, E, F and G are sitting around a circular table facing the centre. D sits third to the left of F. G sits second to the left of D. G sits immediately to the right of E. B sits immediately to the left of A. What is D's position with respect to B?",
+    tag: "RRB ALP Tier - I 29/11/2024 (Evening)",
+    o_hi: [
+      "(a) बाईं ओर से दूसरा",
+      "(b) ठीक बाईं ओर",
+      "(c) दाईं ओर से दूसरा",
+      "(d) ठीक दाईं ओर"
+    ],
+    o_en: [
+      "(a) Second to the left",
+      "(b) Immediately to the left",
+      "(c) Second to the right",
+      "(d) Immediately to the right"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q193. सात मित्र, P, Q, R, S, T, U और V, एक वृत्ताकार मेज के चारों ओर बैठे हैं। सभी केंद्र की ओर मुख करके बैठे हैं । Q और S के बीच केवल R बैठा है। P और V के बीच केवल T बैठा है। Q के दायें से तीसरे स्थान पर V बैठा है। V, U के बायें से तीसरे स्थान पर है। R के ठीक दायें कौन बैठा है?",
+    q_en: "Q193. Seven friends P, Q, R, S, T, U and V are sitting around a circular table facing the centre. Only R sits between Q and S. Only T sits between P and V. V sits third to the right of Q. V sits third to the left of U. Who sits immediately to the right of R?",
+    tag: "Group - D 17/08/2022 (Afternoon)",
+    o_hi: [
+      "(a) P",
+      "(b) T",
+      "(c) S",
+      "(d) V"
+    ],
+    o_en: [
+      "(a) P",
+      "(b) T",
+      "(c) S",
+      "(d) V"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q194. आठ मित्र - A, B, C, D, E, F, G और H, एक वर्गाकार मेज के चारों और मेज के केंद्र की ओर मुख करके बैठे हैं। उनमें से चार मित्र मेज के कोनों पर बैठे हैं, जबकि अन्य चार मित्र मेज की भुजाओं के ठीक मध्य में बैठे हैं। A और C दोनों सम्मुख कोनों पर बैठे हैं। F और D सम्मुख कोनों पर बैठे हैं। A और F के बीच में केबल G है। A और D के बीच में केवल B है। H, C के बाईं ओर ठीक बगल में है। G, F के दाई ओर ठीक बगल में है। E, H के दाएं ओर दूसरे स्थान पर है। D, C के बाईं ओर दूसरे स्थान पर है। D, E के बाईं ओर तीसरे स्थान पर है। B के बाईं ओर दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q194. Eight friends A, B, C, D, E, F, G and H are sitting around a square table facing the centre. Four sit at the corners and the other four sit exactly at the middle of the sides. A and C sit at opposite corners. F and D sit at opposite corners. Only G sits between A and F. Only B sits between A and D. H sits immediately to the left of C. G sits immediately to the right of F. E sits second to the right of H. D sits second to the left of C. D sits third to the left of E. Who sits second to the left of B?",
+    tag: "Group - D 17/08/2022 (Evening)",
+    o_hi: [
+      "(a) E",
+      "(b) F",
+      "(c) G",
+      "(d) H"
+    ],
+    o_en: [
+      "(a) E",
+      "(b) F",
+      "(c) G",
+      "(d) H"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q195. कुछ व्यक्ति उत्तर दिशा की ओर एक पंक्ति में बैठे हैं। F और U के बीच में केवल 7 व्यक्ति बैठे हैं। F पंक्ति के किसी एक सिरे पर बैठा है। H और U के बिच में केवल 9 व्यक्ति बैठे हैं। E और H के बिच में केवल 12 व्यक्ति बैठे हैं। E दायें सिरे पर बैठा है। H बाएं सिरे से 19वें स्थान पर बैठा है। H दायें सिरे से 14वें स्थान पर बैठा है। यदि पंक्ति में कोई अन्य व्यक्ति नहीं बैठा है, तो पंक्ति में बैठे व्यक्तियों की कुल संख्या कितनी है?",
+    q_en: "Q195. Some persons are sitting in a row facing north. Only 7 persons sit between F and U. F sits at one end of the row. Only 9 persons sit between H and U. Only 12 persons sit between E and H. E sits at the right end. H sits 19th from the left end and 14th from the right end. If no other person sits in the row, how many persons are there in total?",
+    tag: "Group - D 18/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) 31",
+      "(b) 33",
+      "(c) 32",
+      "(d) 34"
+    ],
+    o_en: [
+      "(a) 31",
+      "(b) 33",
+      "(c) 32",
+      "(d) 34"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q196. सात गिफ्ट बॉक्स, X, Y, Z, A, B, C और D एक सीधी पंक्ति में एक-दूसरे के बगल में उत्तर की ओर मुख करके रखे गए हैं, किंंतु उनका इसी क्रम में होना अनिवार्य नहीं है। Y को B के दाईं ओर ठीक बगल में रखा गया है। X को D और A दोनों के ठीक बगल में रखा गया है। C को Z के बाईं ओर ठीक बगल में रखा गया है। B को X के दाई ओर दूसरे स्थान पर रखा गया है। Y और C को एक-दूसरे के ठीक बगल में रखा गया है। पंक्ति के दाएं सिरे पर कौन सा गिफ्ट बॉक्स रखा गया है?",
+    q_en: "Q196. Seven gift boxes X, Y, Z, A, B, C and D are placed next to one another in a straight row facing north, not necessarily in that order. Y is placed immediately to the right of B. X is placed immediately next to both D and A. C is placed immediately to the left of Z. B is placed second to the right of X. Y and C are placed immediately next to each other. Which gift box is at the right end of the row?",
+    tag: "Group - D 18/08/2022 ( Afternoon)",
+    o_hi: [
+      "(a) B",
+      "(b) Z",
+      "(c) Y",
+      "(d) X"
+    ],
+    o_en: [
+      "(a) B",
+      "(b) Z",
+      "(c) Y",
+      "(d) X"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q197. छह विद्याार्थी P, Q, R, S, T और U एक सीधी रेखा में उत्तर की ओर मुख करके बैठे हैं। P और S पंक्ति के अंतिम छोर पर बैठे हैं। T, P के सन्निकट बैठा है, जबकि U, S के सन्निकट बैठा है। Q और S के मध्य केवल एक व्यक्ति बैठा है। R के अलावा Q के निकट कौन बैठा है?",
+    q_en: "Q197. Six students P, Q, R, S, T and U are sitting in a straight line facing north. P and S sit at the two ends of the row. T sits next to P, while U sits next to S. Only one person sits between Q and S. Other than R, who sits next to Q?",
+    tag: "Group - D 22/08/2022 ( Morning)",
+    o_hi: [
+      "(a) T",
+      "(b) U",
+      "(c) R",
+      "(d) S"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) U",
+      "(c) R",
+      "(d) S"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q198. कुछ पक्षी (नारंगी, पीले, काले, हरे, धूसर, लाल रंग के प्रत्येक एक और तीन सफेद रंग के) उत्तर की ओर मुंह करके एक पंक्ति में बैठे थे। काला पक्षी लाल और धूसर पक्षी दोनों के बगल में बैठा था। पीला पक्षी हरे पक्षी के ठीक दाएं बैठा था। नारंगी और लाल पक्षी के बीच केवल तीन पक्षी बैठे थे और ये तीनों पक्षी सफेद थे। पीला पक्षी काले पक्षी के दाएं तीसरे स्थान पर बैठा था। क्रमशः कौन से रंग के पक्षी पंक्ति के बाएं और दाएं सिरे पर बैठे थे?",
+    q_en: "Q198. Some birds—one each of orange, yellow, black, green, grey and red, and three white birds—are sitting in a row facing north. The black bird sits next to both the red and grey birds. The yellow bird sits immediately to the right of the green bird. Only three birds sit between the orange and red birds, and all three are white. The yellow bird sits third to the right of the black bird. What colours are the birds at the left and right ends respectively?",
+    tag: "Group - D 22/08/2022 ( Evening)",
+    o_hi: [
+      "(a) नारंगी (बाएं) और पीला (दाएं)",
+      "(b) ग्रे (बाएं) और लाल (दाएं)",
+      "(c) सफेद (बाएं) और नारंगी (दाएं)",
+      "(d) पीला (बाएं) और सफेद (दाएं)"
+    ],
+    o_en: [
+      "(a) Orange (left) and Yellow (right)",
+      "(b) Grey (left) and Red (right)",
+      "(c) White (left) and Orange (right)",
+      "(d) Yellow (left) and White (right)"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q199. कुछ व्यक्ति उत्तर की ओर मुख करके एक पंक्ति में बैठे हैं। D, H के दाईं ओर ठीक बगल में बैठा है। A, C के बाईं और तीसरे स्थान पर बैठा है। H और L के बीच केवल तीन व्यक्ति बैठे हैं। L, C के दाईं ओर पांचवें स्थान पर बैठा है। D पंक्ति के दाएं सिरे पर बैठा है। यदि पंक्ति में कोई अन्य व्यक्ति नहीं बैठा है, तो पंक्ति में कुल कितने व्यक्ति बैठे हैं?",
+    q_en: "Q199. Some persons are sitting in a row facing north. D sits immediately to the right of H. A sits third to the left of C. Only three persons sit between H and L. L sits fifth to the right of C. D sits at the right end of the row. If no other person sits in the row, how many persons are there in total?",
+    tag: "Group - D 22/08/2022 ( Evening)",
+    o_hi: [
+      "(a) 16",
+      "(b) 14",
+      "(c) 18",
+      "(d) 12"
+    ],
+    o_en: [
+      "(a) 16",
+      "(b) 14",
+      "(c) 18",
+      "(d) 12"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q200. A, B, C और D नामक 4 व्यक्ति एक सीधी पंक्ति में उत्तर दिशा की ओर मुख करके बैठे हैं। A और C एक दूसरे के ठीक बगल में नहीं बैठे हैं, जबकि C और B एक दूसरे के ठीक बगल में बैठे हैं। निम्नलिखित में से कौन-सी बैठक व्यवस्था संभव नहीं है?",
+    q_en: "Q200. Four persons A, B, C and D are sitting in a straight row facing north. A and C do not sit immediately next to each other, whereas C and B do. Which of the following seating arrangements is not possible?",
+    tag: "Group - D 23/08/2022 ( Morning)",
+    o_hi: [
+      "(a) CBAD",
+      "(b) DABC",
+      "(c) BCAD",
+      "(d) ABCD"
+    ],
+    o_en: [
+      "(a) CBAD",
+      "(b) DABC",
+      "(c) BCAD",
+      "(d) ABCD"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];

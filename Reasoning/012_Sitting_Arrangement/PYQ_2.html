@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q51. A, B, C, D, Q, R और S एक गोल मेज के परितः उसके केंद्र की ओर मुंह करके बैठे हुए हैं। Q, D के दाएं ठीक पड़ोस में बैठा है। Q के बाएं गिनने पर Q और S के बीच केवल तीन व्यक्ति बैठे हैं। D और C के बीच केवल तीन व्यक्ति बैठे हैं। A, R के दाएं ठीक पड़ोस में बैठा है। R के दाएं गिनने पर D और R के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q51. A, B, C, D, Q, R and S are sitting around a circular table facing the centre. Q sits immediately to the right of D. Counting to the left of Q, only three persons sit between Q and S. Only three persons sit between D and C. A sits immediately to the right of R. Counting to the right of R, how many persons sit between D and R?",
+    tag: "NTPC CBT - I (UG) 12/08/2025 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q52. आठ व्यक्ति, S, T, U, V, W, X, Y और Z एक सीधी पंक्ति में बैठे हैं। सभी उत्तर की ओर अभिमुख होकर बैठे हैं। S पंक्ति के बाएं छोर से तीसरे स्थान पर बैठा है। W, V का निकटतम पड़ोसी है। S और W के बीच केवल U बैठा है। Z पंक्ति के दाएं छोर पर बैठा है। T, Y और S दोनों का निकटतम पड़ोसी है। W के दाएं कितने व्यक्ति बैठे हैं?",
+    q_en: "Q52. Eight persons S, T, U, V, W, X, Y and Z are sitting in a straight row facing north. S sits third from the left end. W is an immediate neighbour of V. Only U sits between S and W. Z sits at the right end. T is an immediate neighbour of both Y and S. How many persons sit to the right of W?",
+    tag: "NTPC CBT - I (UG) 12/08/2025 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) चार",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Four",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q53. छह व्यक्ति, D, E, F, G, H और Y, एक गोल मेज के परितः उसके केंद्र की ओर मुंह करके बैठे हैं। F, G के बाएं से तीसरे स्थान पर बैठा है। F के दाएं से गिनने पर F और Y के बीच केवल एक व्यक्ति बैठा है। Y और H के बीच केवल दो व्यक्ति बैठे हैं। D, H का निकटतम पड़ोसी है। E के दाएं से गिनने पर D और E के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q53. Six persons D, E, F, G, H and Y are sitting around a circular table facing the centre. F sits third to the left of G. Counting to the right of F, only one person sits between F and Y. Only two persons sit between Y and H. D is an immediate neighbour of H. Counting to the right of E, how many persons sit between D and E?",
+    tag: "NTPC CBT - I (UG) 13/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक",
+      "(c) शून्य",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) One",
+      "(c) Zero",
+      "(d) Three"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q54. सात व्यक्ति I, J, K, L, U, V और W उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। K के दाईं ओर केवल दो व्यक्ति बैठे हैं। K और U के बीच केवल दो व्यक्ति बैठे हैं। I और V के बीच केवल दो व्यक्ति बैठे हैं। V, K के ठीक बाईं ओर पड़ोस में बैठा है। L, W के ठीक दाईं ओर पड़ोस में बैठा है। पंक्ति के बाएं छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q54. Seven persons I, J, K, L, U, V and W are sitting in a row facing north. Only two persons sit to the right of K. Only two persons sit between K and U. Only two persons sit between I and V. V sits immediately to the left of K. L sits immediately to the right of W. Who sits third from the left end of the row?",
+    tag: "NTPC CBT - I (UG) 13/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) I",
+      "(b) L",
+      "(c) J",
+      "(d) W"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) L",
+      "(c) J",
+      "(d) W"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q55. छह यात्री L, M, N, P, Q और R एक बेंच पर एक सीधी रेखा में बैठे हैं। वे सभी उत्तर की ओर अभिमुख होकर बैठे हैं। L और R के ठीक बीच में M बैठा है। Q पंक्ति के दाएं छोर पर बैठा है। M, Q के बाएं से दूसरे स्थान पर बैठा है। R, Q के ठीक बाएं पड़ोस में बैठा है। P, L का निकटतम पड़ोसी नहीं है। L के ठीक बाएं पड़ोस में कौन बैठा है?",
+    q_en: "Q55. Six passengers L, M, N, P, Q and R are sitting in a straight line on a bench facing north. M sits exactly between L and R. Q sits at the right end. M sits second to the left of Q. R sits immediately to the left of Q. P is not an immediate neighbour of L. Who sits immediately to the left of L?",
+    tag: "NTPC CBT - I (UG) 18/08/2025 (Morning)",
+    o_hi: [
+      "(a) N",
+      "(b) R",
+      "(c) P",
+      "(d) M"
+    ],
+    o_en: [
+      "(a) N",
+      "(b) R",
+      "(c) P",
+      "(d) M"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q56. छह व्यक्ति A, B, C, D, E और F एक सीधी पंक्ति में बैठे हैं। सभी उत्तर की ओर अभिमुख होकर बैठे हैं। B, पंक्ति के दाहिने छोर से तीसरे स्थान पर बैठा है। B और E के बीच केवल दो व्यक्ति बैठे हैं। C, B के दाएं से दूसरे स्थान पर बैठा है। B और C का निकटतम पड़ोसी F है। A, D के ठीक दाएं पड़ोस में बैठा है। D और F के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q56. Six persons A, B, C, D, E and F are sitting in a straight row facing north. B sits third from the right end. Only two persons sit between B and E. C sits second to the right of B. F is an immediate neighbour of both B and C. A sits immediately to the right of D. How many persons sit between D and F?",
+    tag: "NTPC CBT - I (UG) 18/08/2025 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) दो",
+      "(c) चार",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Two",
+      "(c) Four",
+      "(d) One"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q57. सात व्यक्ति, I, J, K, L, M, N और O, एक पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। M के बाईं ओर केवल तीन व्यक्ति बैठे हैं। O के दाईं ओर केवल I बैठा है। O और N के बीच केवल तीन व्यक्ति बैठे हैं। J, K के बाईं ओर किसी स्थान पर लेकिन L के दाईं ओर किसी स्थान पर बैठा है। L और K के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q57. Seven persons I, J, K, L, M, N and O are sitting in a row facing north. Only three persons sit to the left of M. Only I sits to the right of O. Only three persons sit between O and N. J sits somewhere to the left of K but somewhere to the right of L. How many persons sit between L and K?",
+    tag: "NTPC CBT - I (UG) 19/08/2025 (Morning)",
+    o_hi: [
+      "(a) तीन",
+      "(b) दो",
+      "(c) एक",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Two",
+      "(c) One",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q58. सात व्यक्ति, A, B, C, D, P, Q और R, उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। Q के बाईं ओर कोई नहीं बैठा है। Q और D के बीच केवल चार व्यक्ति बैठे हैं। R के दाईं ओर केवल तीन व्यक्ति बैठे हैं। C, P के ठीक बाईं ओर पड़ोस में बैठा है। B, R का निकटतम पड़ोसी नहीं है। B के बाईं ओर तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q58. Seven persons A, B, C, D, P, Q and R are sitting in a row facing north. No one sits to the left of Q. Only four persons sit between Q and D. Only three persons sit to the right of R. C sits immediately to the left of P. B is not an immediate neighbour of R. Who sits third to the left of B?",
+    tag: "NTPC CBT - I (UG) 19/08/2025 (Afternoon)",
+    o_hi: [
+      "(a) A",
+      "(b) R",
+      "(c) D",
+      "(d) C"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) R",
+      "(c) D",
+      "(d) C"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q59. सात व्यक्ति, G, H, I, J, K, L और S, उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। K और G के बीच केवल पाँच व्यक्ति बैठे हैं। H, G के ठीक बाएँ पड़ोस में बैठा है। H और S के बीच केवल एक व्यक्ति बैठा है। L, J के बाएँ लेकिन I के दाएँ किसी स्थान पर बैठा है। पंक्ति के बाएँ छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q59. Seven persons G, H, I, J, K, L and S are sitting in a row facing north. Only five persons sit between K and G. H sits immediately to the left of G. Only one person sits between H and S. L sits somewhere to the left of J but somewhere to the right of I. Who sits third from the left end of the row?",
+    tag: "NTPC CBT - I (UG) 20/08/2025 (Morning)",
+    o_hi: [
+      "(a) S",
+      "(b) H",
+      "(c) I",
+      "(d) L"
+    ],
+    o_en: [
+      "(a) S",
+      "(b) H",
+      "(c) I",
+      "(d) L"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q60. A, B, C, D, E, F और G एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। C, D के ठीक दाईं ओर बैठा है। C के बाईं ओर से गिनने पर C और G के बीच केवल तीन लोग बैठे हैं। D और B के बीच केवल तीन लोग बैठे हैं। A, F के ठीक दाईं ओर बैठा है। C के दाईं ओर से गिनने पर C और A के बीच कितने लोग बैठे हैं?",
+    q_en: "Q60. A, B, C, D, E, F and G are sitting around a circular table facing the centre. C sits immediately to the right of D. Counting to the left of C, only three persons sit between C and G. Only three persons sit between D and B. A sits immediately to the right of F. Counting to the right of C, how many persons sit between C and A?",
+    tag: "NTPC CBT - I (UG) 20/08/2025 (Evening)",
+    o_hi: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 4",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 4",
+      "(d) 2"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q61. सात व्यक्ति, A, B, C, T, U, V और W उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। V के बायीं ओर केवल तीन व्यक्ति बैठे हैं। U के दायीं ओर केवल A बैठा है। U और W के बीच केवल तीन व्यक्ति बैठे हैं। T, B के बायीं ओर किसी स्थान पर परन्तु C के दायीं ओर किसी स्थान पर बैठा है। C और B के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q61. Seven persons A, B, C, T, U, V and W are sitting in a row facing north. Only three persons sit to the left of V. Only A sits to the right of U. Only three persons sit between U and W. T sits somewhere to the left of B but somewhere to the right of C. How many persons sit between C and B?",
+    tag: "NTPC CBT - I (UG) 21/08/2025 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) दो",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Two",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q62. सात व्यक्ति A, B, C, D, P, Q और R एक पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। R के बाईं ओर केवल तीन व्यक्ति बैठे हैं। C के दाईं ओर केवल A बैठा है। C और Q के बीच केवल तीन व्यक्ति बैठे हैं। B, P के बाईं ओर किसी स्थान पर लेकिन D के दाईं ओर किसी स्थान पर बैठा है। D और P के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q62. Seven persons A, B, C, D, P, Q and R are sitting in a row facing north. Only three persons sit to the left of R. Only A sits to the right of C. Only three persons sit between C and Q. B sits somewhere to the left of P but somewhere to the right of D. How many persons sit between D and P?",
+    tag: "NTPC CBT - I (UG) 22/08/2025 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) एक",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) One",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q63. टीना, बीना, मीरा, लीना, मीनू और रीना एक वृत्त के परितः केंद्र की ओर अभिमुख होकर बैठी हैं। रीना, टीना के बाएं दूसरे स्थान पर बैठी है। मीनू, रीना के बाएं तीसरे स्थान पर बैठी है। लीना, मीरा के बाएं दूसरे स्थान पर बैठी है। बीना के बाएं दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q63. Tina, Beena, Meera, Leena, Meenu and Reena are sitting around a circle facing the centre. Reena sits second to the left of Tina. Meenu sits third to the left of Reena. Leena sits second to the left of Meera. Who sits second to the left of Beena?",
+    tag: "NTPC CBT - I (UG) 22/08/2025 (Evening)",
+    o_hi: [
+      "(a) रीना",
+      "(b) टीना",
+      "(c) लीना",
+      "(d) मीरा"
+    ],
+    o_en: [
+      "(a) Reena",
+      "(b) Tina",
+      "(c) Leena",
+      "(d) Meera"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q64. सात व्यक्ति A, B, C, D, E, F और G उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। B के दाएं केवल एक व्यक्ति बैठा है। E पंक्ति के बाएं छोर से तीसरे स्थान पर बैठा है। F और B का निकटतम पड़ोसी G है। C, A के ठीक बाएं पड़ोस में बैठा है। D के बाएं कितने व्यक्ति बैठे हैं?",
+    q_en: "Q64. Seven persons A, B, C, D, E, F and G are sitting in a row facing north. Only one person sits to the right of B. E sits third from the left end. G is an immediate neighbour of both F and B. C sits immediately to the left of A. How many persons sit to the left of D?",
+    tag: "NTPC CBT - I (UG) 28/08/2025 (Morning)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) छह",
+      "(d) पांच"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Six",
+      "(d) Five"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q65. छह व्यक्ति, A, B, C, D, E और F उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। C के दाईं ओर केवल दो व्यक्ति बैठे हैं। A, D के बाईं ओर दूसरे स्थान पर बैठा है। B, E के ठीक दाएं पड़ोस में बैठा है। F पंक्ति के दाहिने छोर पर बैठा है। B और F के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q65. Six persons A, B, C, D, E and F are sitting in a row facing north. Only two persons sit to the right of C. A sits second to the left of D. B sits immediately to the right of E. F sits at the right end. How many persons sit between B and F?",
+    tag: "NTPC CBT - I (UG) 28/08/2025 (Evening)",
+    o_hi: [
+      "(a) एक",
+      "(b) दो",
+      "(c) चार",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Two",
+      "(c) Four",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q66. L, M, N, O, Q, R, और S एक गोल मेज के परितः उसके केंद्र की ओर मुंह करके बैठे हुए हैं। Q के दाएं से गिनने पर Q और M के बीच केवल चार व्यक्ति बैठे हैं। O के बाएं तीसरे स्थान पर Q बैठा है। L के बाएं तीसरे स्थान पर R बैठा है। S, M और O दोनों का निकटतम पड़ोसी है। N के दाएं गिनने पर N और S के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q66. L, M, N, O, Q, R and S are sitting around a circular table facing the centre. Counting to the right of Q, only four persons sit between Q and M. Q sits third to the left of O. R sits third to the left of L. S is an immediate neighbour of both M and O. Counting to the right of N, how many persons sit between N and S?",
+    tag: "NTPC CBT - I (UG) 29/08/2025 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) चार",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Four",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q67. A, B, C, D, Q, R और S एक गोल मेज के परितः उसके केंद्र की ओर मुंह करके बैठे हुए हैं। A के बाएं गिनने पर D और A के बीच केवल दो व्यक्ति बैठे हैं। Q, S के बाएं से तीसरे स्थान पर बैठा है। R, S के दाएं ठीक पड़ोस में बैठा है। R, D के बाएं दूसरे स्थान पर बैठा है। B, Q का निकटतम पड़ोसी नहीं है। C के दाएं तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q67. A, B, C, D, Q, R and S are sitting around a circular table facing the centre. Counting to the left of A, only two persons sit between D and A. Q sits third to the left of S. R sits immediately to the right of S. R sits second to the left of D. B is not an immediate neighbour of Q. Who sits third to the right of C?",
+    tag: "NTPC CBT - I (UG) 02/09/2025 (Afternoon)",
+    o_hi: [
+      "(a) D",
+      "(b) S",
+      "(c) R",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) D",
+      "(b) S",
+      "(c) R",
+      "(d) A"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q68. सात व्यक्ति, I, J, K, L, M, N और O, एक पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। K के बाईं ओर केवल दो व्यक्ति बैठे हैं। K और L के बीच केवल तीन व्यक्ति बैठे हैं। L और J के बीच केवल एक व्यक्ति बैठा है। N, I के बाईं ओर ठीक पड़ोस में बैठा है। M, L का निकटतम पड़ोसी नहीं है। O के दाईं ओर कितने व्यक्ति बैठे हैं?",
+    q_en: "Q68. Seven persons I, J, K, L, M, N and O are sitting in a row facing north. Only two persons sit to the left of K. Only three persons sit between K and L. Only one person sits between L and J. N sits immediately to the left of I. M is not an immediate neighbour of L. How many persons sit to the right of O?",
+    tag: "NTPC CBT - I (UG) 04/09/2025 (Morning)",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) तीन",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) Three",
+      "(d) One"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q69. H, I, J, K, U, V और W एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। V के दाईं ओर से गिनती करने पर V और I के बीच केवल दो व्यक्ति बैठे हैं। J के दाईं ओर से गिनती करने पर H और J के बीच केवल तीन व्यक्ति बैठे हैं। I, J के ठीक दाईं ओर बैठा है। W, K के ठीक दाईं ओर बैठा है। U के दाईं ओर चौथे स्थान पर कौन बैठा है?",
+    q_en: "Q69. H, I, J, K, U, V and W are sitting around a circular table facing the centre. Counting to the right of V, only two persons sit between V and I. Counting to the right of J, only three persons sit between H and J. I sits immediately to the right of J. W sits immediately to the right of K. Who sits fourth to the right of U?",
+    tag: "NTPC CBT - I (UG) 08/09/2025 (Evening)",
+    o_hi: [
+      "(a) W",
+      "(b) K",
+      "(c) H",
+      "(d) J"
+    ],
+    o_en: [
+      "(a) W",
+      "(b) K",
+      "(c) H",
+      "(d) J"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q70. छह व्यक्ति A, B, C, D, E और F उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। C के दाईं ओर केवल दो व्यक्ति बैठे हैं। A, D के बाईं ओर दूसरे स्थान पर बैठा है। B, A के ठीक दाएं पड़ोस में बैठा है। F, D के दाईं ओर दूसरे स्थान पर बैठा है। E के बाईं ओर दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q70. Six persons A, B, C, D, E and F are sitting in a row facing north. Only two persons sit to the right of C. A sits second to the left of D. B sits immediately to the right of A. F sits second to the right of D. Who sits second to the left of E?",
+    tag: "NTPC CBT - I (UG) 09/09/2025 (Afternoon)",
+    o_hi: [
+      "(a) A",
+      "(b) D",
+      "(c) F",
+      "(d) C"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) D",
+      "(c) F",
+      "(d) C"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q71. P, Q, R, S, T, U और V एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। T के दाएं से गिनने पर T और S के बीच केवल दो लोग बैठे हैं। Q के दाएं से गिनने पर V और Q के बीच केवल तीन लोग बैठे हैं। S, Q के ठीक दाएं पड़ोस में बैठा है। U, R के ठीक दाएं पड़ोस में बैठा है। Q के दाएं से गिनने पर Q और U के बीच कितने लोग बैठे हैं?",
+    q_en: "Q71. P, Q, R, S, T, U and V are sitting around a circular table facing the centre. Counting to the right of T, only two persons sit between T and S. Counting to the right of Q, only three persons sit between V and Q. S sits immediately to the right of Q. U sits immediately to the right of R. Counting to the right of Q, how many persons sit between Q and U?",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Morning)",
+    o_hi: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 1"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q72. सात व्यक्ति N, O, P, Q, R, S और T, उत्तर की ओर अभिमुख होकर एक सीधी पंक्ति में बैठे हैं। T पंक्ति के एक छोर पर बैठा है। R के बाईं ओर केवल दो व्यक्ति बैठे हैं। P, R के ठीक दाईं ओर पड़ोस में और S के ठीक बाईं ओर पड़ोस में बैठा है। Q, O के ठीक बाईं ओर पड़ोस में बैठा है। Q पंक्ति के छोर पर नहीं बैठा है। O और N के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q72. Seven persons N, O, P, Q, R, S and T are sitting in a straight row facing north. T sits at one end. Only two persons sit to the left of R. P sits immediately to the right of R and immediately to the left of S. Q sits immediately to the left of O. Q does not sit at an end. How many persons sit between O and N?",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Morning)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक भी नही",
+      "(c) चार",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) None",
+      "(c) Four",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q73. सात व्यक्ति, I, J, K, L, O, P और Q उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। L और Q के बीच केवल पाँच व्यक्ति बैठे हैं। P, Q के ठीक बाएँ पड़ोस में बैठा है। P और I के बीच केवल एक व्यक्ति बैठा है। O, K के बाएँ किसी स्थान पर लेकिन J के दाएँ किसी स्थान पर बैठा है। पंक्ति के बाएँ छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q73. Seven persons I, J, K, L, O, P and Q are sitting in a row facing north. Only five persons sit between L and Q. P sits immediately to the left of Q. Only one person sits between P and I. O sits somewhere to the left of K but somewhere to the right of J. Who sits third from the left end?",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Evening)",
+    o_hi: [
+      "(a) J",
+      "(b) O",
+      "(c) Q",
+      "(d) P"
+    ],
+    o_en: [
+      "(a) J",
+      "(b) O",
+      "(c) Q",
+      "(d) P"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q74. L, M, N, O, P, Q और R, एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। Q के ठीक दाएं पड़ोस में और O के ठीक बाएं पड़ोस में M बैठा है। N, O के ठीक दाएं पड़ोस में बैठा है। P, L के ठीक बाएं पड़ोस में बैठा है। L के ठीक दाएं पड़ोस में और Q के ठीक बाएं पड़ोस में R बैठा है। यदि सभी व्यक्तियों को L (L सहित) से शुरू करते हुए घड़ीी की सुई की दिशा में वर्णानुक्रम में व्यवस्थित किया जाए, तो कितने व्यक्तियों का स्थान अपरिवर्तित रहेगा?",
+    q_en: "Q74. L, M, N, O, P, Q and R are sitting around a circular table facing the centre. M sits immediately to the right of Q and immediately to the left of O. N sits immediately to the right of O. P sits immediately to the left of L. R sits immediately to the right of L and immediately to the left of Q. If all persons are rearranged alphabetically in clockwise order starting from L, including L, how many persons will remain in the same position?",
+    tag: "NTPC CBT - I (GL) 05/06/2025 (Evening)",
+    o_hi: [
+      "(a) 5",
+      "(b) 1",
+      "(c) 3",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 5",
+      "(b) 1",
+      "(c) 3",
+      "(d) 4"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q75. P, Q, R, S, T, U और V एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। R के बाएं से गिनने पर R और Q के बीच केवल तीन लोग बैठते हैं। U के दाएं से गिनने पर V और U के बीच केवल तीन लोग बैठते हैं। S, V के ठीक दाएं बैठता है। T, U और Q का निकटतम पड़ोसी है। P के दाएं से गिनने पर T और P के बीच कितने लोग बैठे हैं?",
+    q_en: "Q75. P, Q, R, S, T, U and V are sitting around a circular table facing the centre. Counting to the left of R, only three persons sit between R and Q. Counting to the right of U, only three persons sit between V and U. S sits immediately to the right of V. T is an immediate neighbour of both U and Q. Counting to the right of P, how many persons sit between T and P?",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Morning)",
+    o_hi: [
+      "(a) 1",
+      "(b) 4",
+      "(c) 2",
+      "(d) 3"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) 4",
+      "(c) 2",
+      "(d) 3"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q76. सात व्यक्ति, I, J, K, L, O, P और Q उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। केवल J, Q के बाईं ओर बैठा है। J और। के बीच केवल चार व्यक्ति बैठे हैं। P और K के बीच केवल O बैठा है और P, I का निकटतम पड़ोसी नहीं है। पंक्ति के सबसे दाहिने छोर पर कौन बैठा है",
+    q_en: "Q76. Seven persons I, J, K, L, O, P and Q are sitting in a row facing north. Only J sits to the left of Q. Only four persons sit between J and I. Only O sits between P and K, and P is not an immediate neighbour of I. Who sits at the extreme right end of the row?",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) K",
+      "(b) L",
+      "(c) O",
+      "(d) I"
+    ],
+    o_en: [
+      "(a) K",
+      "(b) L",
+      "(c) O",
+      "(d) I"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q77. A, B, C, D, G, H और I, एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। A के बाएं से गिनने पर, D और A के बीच केवल दो लोग बैठे हैं। G के बाएं तीसरे स्थान पर H बैठा है। G के ठीक दाएं पड़ोस में I बैठा है। D के बाएं दूसरे स्थान पर I बैठा है। B, H का निकटतम पड़ोसी नहीं है। C के दाएं तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q77. A, B, C, D, G, H and I are sitting around a circular table facing the centre. Counting to the left of A, only two persons sit between D and A. H sits third to the left of G. I sits immediately to the right of G. I sits second to the left of D. B is not an immediate neighbour of H. Who sits third to the right of C?",
+    tag: "NTPC CBT - I (GL) 06/06/2025 (Evening)",
+    o_hi: [
+      "(a) A",
+      "(b) D",
+      "(c) I",
+      "(d) H"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) D",
+      "(c) I",
+      "(d) H"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q78. F, G, H, I, J, K और X एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। H, F के ठीक दाएं पड़ोस में बैठा है। H के बाईं ओर से गिनती करने पर H और G के बीच केवल तीन व्यक्ति बैठे हैं। X, F के दाईं ओर तीसरे स्थान पर बैठा है। I, K के ठीक दाएं पड़ोस में बैठा है। K के बाईं ओर से गिनती करने पर J और K के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q78. F, G, H, I, J, K and X are sitting around a circular table facing the centre. H sits immediately to the right of F. Counting to the left of H, only three persons sit between H and G. X sits third to the right of F. I sits immediately to the right of K. Counting to the left of K, how many persons sit between J and K?",
+    tag: "NTPC CBT - I (GL) 09/06/2025 (Morning)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक",
+      "(c) चार",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) One",
+      "(c) Four",
+      "(d) Three"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q79. A, B, C, D, G, H और । एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। H के दाईं ओर गिनने पर H और । के बीच केवल एक व्यक्ति बैठा है। C और । के बीच केवल एक व्यक्ति बैठा है। H और G के बीच केवल एक व्यक्ति बैठा है। A और C के बीच केवल दो व्यक्ति बैठे हैं। B और G के बीच केवल एक व्यक्ति बैठा है। D के दाएं तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q79. A, B, C, D, G, H and I are sitting around a circular table facing the centre. Counting to the right of H, only one person sits between H and I. Only one person sits between C and I. Only one person sits between H and G. Only two persons sit between A and C. Only one person sits between B and G. Who sits third to the right of D?",
+    tag: "NTPC CBT - I (GL) 09/06/2025 (Evening)",
+    o_hi: [
+      "(a) I",
+      "(b) A",
+      "(c) G",
+      "(d) C"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) A",
+      "(c) G",
+      "(d) C"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q80. I, J, K, L, M, N और R एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। K, L के दाईं ओर से चौथे स्थान पर बैठा है। M के बाईं ओर से गिनती करने पर M और I के बीच केवल दो व्यक्ति बैठे हैं। J, R के बाईं ओर से तीसरे स्थान पर बैठा है। R और I का ठीक निकटतम पड़ोसी N है। N के बाईं ओर से गिनती करने पर K और N के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q80. I, J, K, L, M, N and R are sitting around a circular table facing the centre. K sits fourth to the right of L. Counting to the left of M, only two persons sit between M and I. J sits third to the left of R. N is an immediate neighbour of both R and I. Counting to the left of N, how many persons sit between K and N?",
+    tag: "NTPC CBT - I (GL) 10/06/2025 (Morning)",
+    o_hi: [
+      "(a) तीन",
+      "(b) दो",
+      "(c) एक",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Two",
+      "(c) One",
+      "(d) Four"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q81. सात व्यक्ति, I, J, K, L, O, P और Q उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। Q और O के बीच केवल दो व्यक्ति बैठे हैं। केवल I, P के दाईं ओर बैठा है। O और P के बीच केवल एक व्यक्ति बैठा है। K, L के दाईं ओर किसी स्थान पर लेकिन J के बाईं ओर किसी स्थान पर बैठा है। J और L के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q81. Seven persons I, J, K, L, O, P and Q are sitting in a row facing north. Only two persons sit between Q and O. Only I sits to the right of P. Only one person sits between O and P. K sits somewhere to the right of L but somewhere to the left of J. How many persons sit between J and L?",
+    tag: "NTPC CBT - I (GL) 10/06/2025 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q82. सात व्यक्ति I, J, K, L, O, P और Q उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। P के बाईं ओर केवल दो व्यक्ति बैठे हैं। P और I के बीच तीन व्यक्ति बैठे हैं। I और O के बीच केवल एक व्यक्ति बैठा है। Q, K के ठीक बाईं ओर बैठा है। J, I का निकटतम पड़ोसी नहीं है। L के दाईं ओर कितने व्यक्ति बैठे हैं?",
+    q_en: "Q82. Seven persons I, J, K, L, O, P and Q are sitting in a row facing north. Only two persons sit to the left of P. Three persons sit between P and I. Only one person sits between I and O. Q sits immediately to the left of K. J is not an immediate neighbour of I. How many persons sit to the right of L?",
+    tag: "NTPC CBT - I (GL) 11/06/2025 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) तीन",
+      "(c) दो",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Three",
+      "(c) Two",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q83. आठ मित्र P, Q, R, S, T, U, V और W एक पंक्ति में उत्तर की ओर मुख करके बैठे हैं। I. Q, P के ठीक दायें बैठा है, जो पंक्ति के किसी एक अंतिम छोर पर बैठा है। II. Q, T के बायें से तीसरे स्थान पर बैठा है। III. W और T के मध्य दो व्यक्ति हैं। IV., U, S का निकटतम पडोसी नहीं है और V के ठीक बायें बैठा है. V. V और R के बीच तीन व्यक्ति हैं। Q और T के मध्य कौन बैठा है?",
+    q_en: "Q83. Eight friends P, Q, R, S, T, U, V and W are sitting in a row facing north. I. Q sits immediately to the right of P, who sits at one of the ends. II. Q sits third to the left of T. III. Two persons sit between W and T. IV. U is not an immediate neighbour of S and sits immediately to the left of V. V. Three persons sit between V and R. Who sits between Q and T?",
+    tag: "NTPC CBT - I (GL) 11/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) R और S",
+      "(b) U और V",
+      "(c) R और U",
+      "(d) V और S"
+    ],
+    o_en: [
+      "(a) R and S",
+      "(b) U and V",
+      "(c) R and U",
+      "(d) V and S"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q84. P, Q, R, S, T, U और V एक गोल मेज के परितः केन्द्र की ओर अभिमुख होकर बैठे हैं। P के दाईं ओर से गिनने पर P और T के बीच केवल दो लोग बैठे हैं। T और V के बीच केवल दो लोग बैठे हैं। P और Q के बीच केवल तीन लोग बैठे हैं। R, U के ठीक बाएं पड़ोस में बैठा है। Q के बाईं ओर से गिनने पर Q और U के बीच कितने लोग बैठे हैं?",
+    q_en: "Q84. P, Q, R, S, T, U and V are sitting around a circular table facing the centre. Counting to the right of P, only two persons sit between P and T. Only two persons sit between T and V. Only three persons sit between P and Q. R sits immediately to the left of U. Counting to the left of Q, how many persons sit between Q and U?",
+    tag: "NTPC CBT - I (GL) 11/06/2025 (Evening)",
+    o_hi: [
+      "(a) 2",
+      "(b) 1",
+      "(c) 4",
+      "(d) 3"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 1",
+      "(c) 4",
+      "(d) 3"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q85. सात व्यक्ति, D, E, F, G, Q, R और S, उत्तर की ओर मुंह करके एक पंक्ति में बैठे हैं। F के बाईं ओर कोई नहीं बैठा है। F और D के बीच केवल चार व्यक्ति बैठे हैं। Q के दाईं ओर केवल तीन व्यक्ति बैठे हैं। G, S के ठीक बाईं ओर पड़ोस में बैठा है। E, Q का निकटतम पड़ोसी नहीं है। पंक्ति के दाहिने छोर पर कौन बैठा है?",
+    q_en: "Q85. Seven persons D, E, F, G, Q, R and S are sitting in a row facing north. No one sits to the left of F. Only four persons sit between F and D. Only three persons sit to the right of Q. G sits immediately to the left of S. E is not an immediate neighbour of Q. Who sits at the right end of the row?",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Morning)",
+    o_hi: [
+      "(a) D",
+      "(b) F",
+      "(c) S",
+      "(d) E"
+    ],
+    o_en: [
+      "(a) D",
+      "(b) F",
+      "(c) S",
+      "(d) E"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q86. A, B, C, D, R, S और T एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। A के दाईं ओर से गिनती करने पर A और R के बीच केवल दो व्यक्ति बैठे हैं। R और D के बीच केवल दो व्यक्ति बैठे हैं। A और B के बीच केवल तीन व्यक्ति बैठे हैं। C, T के ठीक बाईं ओर बैठा है। S के बाईं ओर तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q86. A, B, C, D, R, S and T are sitting around a circular table facing the centre. Counting to the right of A, only two persons sit between A and R. Only two persons sit between R and D. Only three persons sit between A and B. C sits immediately to the left of T. Who sits third to the left of S?",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Evening)",
+    o_hi: [
+      "(a) A",
+      "(b) C",
+      "(c) T",
+      "(d) D"
+    ],
+    o_en: [
+      "(a) A",
+      "(b) C",
+      "(c) T",
+      "(d) D"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q87. सात व्यक्ति, I, J, K, L, O, P और Q उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। J के बाईं ओर कोई नहीं बैठा है। J और K के बीच केवल चार व्यक्ति बैठे हैं। O के दाईं ओर केवल तीन व्यक्ति बैठे हैं। I, L के ठीक बाईं ओर बैठा है। P, O का निकटतम पड़ोसी नहीं है। पंक्ति के सबसे दाहिने छोर पर कौन बैठा है?",
+    q_en: "Q87. Seven persons I, J, K, L, O, P and Q are sitting in a row facing north. No one sits to the left of J. Only four persons sit between J and K. Only three persons sit to the right of O. I sits immediately to the left of L. P is not an immediate neighbour of O. Who sits at the extreme right end?",
+    tag: "NTPC CBT - I (GL) 12/06/2025 (Evening)",
+    o_hi: [
+      "(a) P",
+      "(b) L",
+      "(c) J",
+      "(d) I"
+    ],
+    o_en: [
+      "(a) P",
+      "(b) L",
+      "(c) J",
+      "(d) I"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q88. A, B, C, D, G, H और। एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। G के बाएं से गिनने पर D और G के बीच केवल एक व्यक्ति बैठा है। H,। के दाएं तीसरे स्थान पर बैठा है। C, A के बाएं तीसरे स्थान पर बैठा है। H, C के ठीक दाएं पड़ोस में बैठा है। B, C का निकटतम पड़ोसी नहीं है। B के दाएं से गिनने पर B और G के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q88. A, B, C, D, G, H and I are sitting around a circular table facing the centre. Counting to the left of G, only one person sits between D and G. H sits third to the right of I. C sits third to the left of A. H sits immediately to the right of C. B is not an immediate neighbour of C. Counting to the right of B, how many persons sit between B and G?",
+    tag: "NTPC CBT - I (GL) 13/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) दो",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) Two",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q89. A, B, C, D, G, H और I एक गोल मेज के परितः उसके केंद्र की और अभिमुख होकर बैठे हैं। H के दाईं ओर से गिनने पर H और B के बीच केवल दो व्यक्ति बैठे हैं। C के दाईं ओर से गिनने पर A और C के बीच केवल तीन व्यक्ति बैठे हैं। B, C के ठीक दाईं ओर पड़ोस में बैठा है। G, I के ठीक दाईं ओर पड़ोस में बैठा है। D के दाईं ओर चौथे स्थान पर कौन बैठा है?",
+    q_en: "Q89. A, B, C, D, G, H and I are sitting around a circular table facing the centre. Counting to the right of H, only two persons sit between H and B. Counting to the right of C, only three persons sit between A and C. B sits immediately to the right of C. G sits immediately to the right of I. Who sits fourth to the right of D?",
+    tag: "NTPC CBT - I (GL) 13/06/2025 (Evening)",
+    o_hi: [
+      "(a) C",
+      "(b) G",
+      "(c) I",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) C",
+      "(b) G",
+      "(c) I",
+      "(d) A"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q90. A, B, C, D, E, F और G एक गोल मेज़ के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। C, B के बाएं तीसरे स्थान पर बैठा है। A, G के बाएं दूसरे स्थान पर बैठा है। G, C का निकटतम पड़ोसी नहीं है। D, E के बाएं ठीक पड़ोस में बैठा है। A के बाएं गिनने पर, A और E के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q90. A, B, C, D, E, F and G are sitting around a circular table facing the centre. C sits third to the left of B. A sits second to the left of G. G is not an immediate neighbour of C. D sits immediately to the left of E. Counting to the left of A, how many persons sit between A and E?",
+    tag: "NTPC CBT - I (GL) 14/06/2025 (Morning)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) एक भी नहीं",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) None",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q91. सात व्यक्ति, I, J, K, L, O, P और Q उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। I के दाईं ओर केवल दो व्यक्ति बैठे हैं। I और O के बीच केवल दो व्यक्ति बैठे हैं। J और P के बीच केवल दो व्यक्ति बैठे हैं। P, I के ठीक बाएं पड़ोस में बैठा है। Q, L के ठीक दाएं पड़ोस में बैठा है। पंक्ति के बाएं छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q91. Seven persons I, J, K, L, O, P and Q are sitting in a row facing north. Only two persons sit to the right of I. Only two persons sit between I and O. Only two persons sit between J and P. P sits immediately to the left of I. Q sits immediately to the right of L. Who sits third from the left end?",
+    tag: "NTPC CBT - I (GL) 16/06/2025 (Morning)",
+    o_hi: [
+      "(a) I",
+      "(b) K",
+      "(c) O",
+      "(d) Q"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) K",
+      "(c) O",
+      "(d) Q"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q92. A, B, C, D, R, S और T एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। B, T के बाएं तीसरे स्थान पर बैठा है। R, S के बाएं दूसरे स्थान पर बैठा है। A और R के बीच में केवल T बैठा है। C, B का निकटतम पड़ोसी नहीं है। D के दाएं से गिनने पर D और R के बीच में कितने व्यक्ति बैठे हैं?",
+    q_en: "Q92. A, B, C, D, R, S and T are sitting around a circular table facing the centre. B sits third to the left of T. R sits second to the left of S. Only T sits between A and R. C is not an immediate neighbour of B. Counting to the right of D, how many persons sit between D and R?",
+    tag: "NTPC CBT - I (GL) 16/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) चार",
+      "(c) तीन",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Four",
+      "(c) Three",
+      "(d) One"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q93. करन, ज्योोति, शिव, राम, पूरन, ओम और लव एक गोल मेज के परितः इसके केंद्र की ओर अभिमुख होकर बैठे हैं। शिव, लव के बाएं तीसरे स्थान पर बैठा है। करन , शिव के बाएं दूसरे स्थान पर बैठी है। ज्योोति, पूरन के दाएं तीसरे स्थान पर बैठी है। राम, ज्योोति के दाएं दूसरे स्थान पर बैठा है। राम, शिव का निकटतम पड़ोसी नहीं है। राम के बाएं ठीक पड़ोस में कौन बैठा है?",
+    q_en: "Q93. Karan, Jyoti, Shiv, Ram, Puran, Om and Lav are sitting around a circular table facing the centre. Shiv sits third to the left of Lav. Karan sits second to the left of Shiv. Jyoti sits third to the right of Puran. Ram sits second to the right of Jyoti. Ram is not an immediate neighbour of Shiv. Who sits immediately to the left of Ram?",
+    tag: "NTPC CBT - I (GL) 16/06/2025 (Evening)",
+    o_hi: [
+      "(a) लव",
+      "(b) ओम",
+      "(c) करन",
+      "(d) पूरन"
+    ],
+    o_en: [
+      "(a) Lav",
+      "(b) Om",
+      "(c) Karan",
+      "(d) Puran"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q94. कबीर, जसबीर, उर्मिला, ऋचा, प्रेम, दीप और सोनिका एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। सोनिका, प्रेम के दाएं तीसरे स्थान पर बैठी है। कबीर, दीप के दाएं ठीक पड़ोस में बैठा है। जसबीर, सोनिका के बाएं दूसरे स्थान पर बैठा है। उर्मिला, जसबीर के दाएं तीसरे स्थान पर बैठी है। उर्मिला के बाएं दूसरे स्थान पर कौन बैठा है?",
+    q_en: "Q94. Kabir, Jasbir, Urmila, Richa, Prem, Deep and Sonika are sitting around a circular table facing the centre. Sonika sits third to the right of Prem. Kabir sits immediately to the right of Deep. Jasbir sits second to the left of Sonika. Urmila sits third to the right of Jasbir. Who sits second to the left of Urmila?",
+    tag: "NTPC CBT - I (GL) 17/06/2025 (Morning)",
+    o_hi: [
+      "(a) कबीर",
+      "(b) जसबीर",
+      "(c) ऋचा",
+      "(d) प्रेम"
+    ],
+    o_en: [
+      "(a) Kabir",
+      "(b) Jasbir",
+      "(c) Richa",
+      "(d) Prem"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q95. A, B, C, D, R, S और T एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। T, D के ठीक दाईं पड़ोस में ओर बैठा है। T के बाईं ओर से गिनने पर T और S के बीच केवल तीन व्यक्ति बैठे हैं। D और C के बीच केवल तीन व्यक्ति बैठे हैं। A, R के ठीक दाईं ओर पड़ोस में बैठा है। R के बाईं ओर से गिनने पर B और R के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q95. A, B, C, D, R, S and T are sitting around a circular table facing the centre. T sits immediately to the right of D. Counting to the left of T, only three persons sit between T and S. Only three persons sit between D and C. A sits immediately to the right of R. Counting to the left of R, how many persons sit between B and R?",
+    tag: "NTPC CBT - I (GL) 17/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q96. सात मित्र, D, E, F, G, M, N और O, उत्तर की ओर मुख करके एक पंक्ति में बैठे हैं। G और D के बीच केवल पाँच व्यक्ति बैठे हैं। F, D के ठीक बाएँ पड़ोस में बैठा है। F और M के बीच केवल एक व्यक्ति बैठा है। O, E के बाएँ किसी स्थान पर, लेकिन N के दाएँ किसी स्थान पर बैठा है। पंक्ति के बाएँ छोर से तीसरे स्थान पर कौन बैठा है?",
+    q_en: "Q96. Seven friends D, E, F, G, M, N and O are sitting in a row facing north. Only five persons sit between G and D. F sits immediately to the left of D. Only one person sits between F and M. O sits somewhere to the left of E but somewhere to the right of N. Who sits third from the left end of the row?",
+    tag: "NTPC CBT - I (GL) 17/06/2025 (Evening)",
+    o_hi: [
+      "(a) O",
+      "(b) F",
+      "(c) M",
+      "(d) N"
+    ],
+    o_en: [
+      "(a) O",
+      "(b) F",
+      "(c) M",
+      "(d) N"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q97. सात मित्र, K, L, M, N, O, P और S, उत्तर की ओर मुख करके एक पंक्ति में बैठे हैं। S के बाईं ओर केवल दो व्यक्ति बैठे हैं। S और O के बीच केवल तीन व्यक्ति बैठे हैं। K, S के दाईं ओर दूसरे स्थान पर बैठा हैं। K और M के बीच केवल दो व्यक्ति बैठे हैं। L, N के दाईं ओर किसी स्थान पर लेकिन P के बाईं ओर किसी स्थान पर बैठा है। L के दाईं ओर कितने लोग बैठे हैं?",
+    q_en: "Q97. Seven friends K, L, M, N, O, P and S are sitting in a row facing north. Only two persons sit to the left of S. Only three persons sit between S and O. K sits second to the right of S. Only two persons sit between K and M. L sits somewhere to the right of N but somewhere to the left of P. How many persons sit to the right of L?",
+    tag: "NTPC CBT - I (GL) 18/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) दो",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Two",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q98. A, B, C, D, E, F और G एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। A, G के बाएं ठीक पड़ोस बैठा है। D, B के बाएं ठीक पड़ोस में बैठा है। B, F के बाएं दूसरे स्थान पर बैठा है। E, G के बाएं तीसरे स्थान पर बैठा है। C के बाएं गिनने पर C और F के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q98. A, B, C, D, E, F and G are sitting around a circular table facing the centre. A sits immediately to the left of G. D sits immediately to the left of B. B sits second to the left of F. E sits third to the left of G. Counting to the left of C, how many persons sit between C and F?",
+    tag: "NTPC CBT - I (GL) 18/06/2025 (Evening)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) एक",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) One",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q99. A, B, C, D, R, S और T एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। T के बाएं से गिनने पर D और T के बीच केवल एक व्यक्ति बैठा है। S, R के दाएं से तीसरे स्थान पर बैठा है। C, A के बाएं से तीसरे स्थान पर बैठा है। S, C के ठीक दाएं पड़ोस में बैठा है। B, C का निकटतम पड़ोसी नहीं है। B के दाएं से गिनने पर B और T के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q99. A, B, C, D, R, S and T are sitting around a circular table facing the centre. Counting to the left of T, only one person sits between D and T. S sits third to the right of R. C sits third to the left of A. S sits immediately to the right of C. B is not an immediate neighbour of C. Counting to the right of B, how many persons sit between B and T?",
+    tag: "NTPC CBT - I (GL) 19/06/2025 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) दो",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) Two",
+      "(d) Three"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q100. A, B, C, D, E, F और G एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। D, B के ठीक दाएँ पड़ोस में बैठा है। D के बाएँ से गिनने पर D और E के बीच केवल तीन व्यक्ति बैठे हैं। B और C के बीच केवल तीन व्यक्ति बैठे हैं। F, A के ठीक दाएँ पड़ोस में बैठता है। A के बाएँ से गिनने पर A और B के बीच कितने व्यक्ति बैठे हैं?",
+    q_en: "Q100. A, B, C, D, E, F and G are sitting around a circular table facing the centre. D sits immediately to the right of B. Counting to the left of D, only three persons sit between D and E. Only three persons sit between B and C. F sits immediately to the right of A. Counting to the left of A, how many persons sit between A and B?",
+    tag: "NTPC CBT - I (GL) 19/06/2025 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) एक",
+      "(c) दो",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) One",
+      "(c) Two",
+      "(d) Three"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];
