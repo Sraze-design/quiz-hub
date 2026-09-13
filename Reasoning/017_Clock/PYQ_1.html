@@ -1,0 +1,742 @@
+const data = [
+  {
+    q_hi: "Q1. सही समय बताने वाली घड़ी में घंटे और मिनट वाली सुइयां 48 घंटे में विपरीत दिशाओं में कितनी बार सीधी होंगी?",
+    q_en: "Q1. In a clock showing the correct time, how many times in 48 hours will the hour and minute hands be in a straight line in opposite directions?",
+    tag: "Group - D 23/08/2022 (Evening )",
+    o_hi: [
+      "(a) 88",
+      "(b) 276",
+      "(c) 94",
+      "(d) 102"
+    ],
+    o_en: [
+      "(a) 88",
+      "(b) 276",
+      "(c) 94",
+      "(d) 102"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q2. दोपहर 2 : 30 बजे से 3 : 30 बजे के बीच घड़ी की सुईयाँ किस समय एक साथ (एक के ऊपर एक) होंगी?",
+    q_en: "Q2. Between 2:30 PM and 3:30 PM, at what time will the hands of the clock coincide (one over the other)?",
+    tag: "Group - D 26/09/2022 (Evening )",
+    o_hi: [
+      "(a) 11 + 4/16",
+      "(b) 16 + 4/11",
+      "(c) 14 + 16/11",
+      "(d) 14 + 6/11"
+    ],
+    o_en: [
+      "(a) 11 + 4/16",
+      "(b) 16 + 4/11",
+      "(c) 14 + 16/11",
+      "(d) 14 + 6/11"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q3. यदि 12 घंटे वाली घड़ी के दर्पण प्रतिबिंब में प्रदर्शित समय 3:25 बजे है, तो वास्तविक समय क्या है?",
+    q_en: "Q3. If the time shown in the mirror image of a 12-hour clock is 3:25, what is the actual time?",
+    tag: "Group - D 30/09/2022 (Morning)",
+    o_hi: [
+      "(a) 9 : 35",
+      "(b) 8 : 35",
+      "(c) 8 : 45",
+      "(d) 7 : 45"
+    ],
+    o_en: [
+      "(a) 9 : 35",
+      "(b) 8 : 35",
+      "(c) 8 : 45",
+      "(d) 7 : 45"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q4. एक चालू घड़ी को एक मेज पर इस तरह से रखा गया है कि रात 9:00 pm, इसकी घंटे की सुई उत्तर की ओर इशारा कर रही है। यदि वही घड़ी उसी स्थिति में रहती है, तो मिनट की सुई किस दिशा में 2.00 a.m पर इंगित करेगी?",
+    q_en: "Q4. A working clock is placed on a table such that at 9:00 PM its hour hand points north. If the clock remains in the same position, in which direction will the minute hand point at 2:00 AM?",
+    tag: "NTPC CBT II Level 4 (10/05/2022) Shift 1",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) उत्तर",
+      "(c) दक्षिण",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) East",
+      "(b) North",
+      "(c) South",
+      "(d) West"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q5. रिक की घड़ी के अनुसार समय सवा आठ बजे है। यदि मिनट की सुई पूर्व की ओर इंगित करती है, तो घंटे की सुई किस दिशा की ओर इंगित करेगी?",
+    q_en: "Q5. According to Rick's clock, the time is quarter past eight. If the minute hand points east, in which direction will the hour hand point?",
+    tag: "NTPC CBT - I 19/01/2021 (Morning)",
+    o_hi: [
+      "(a) उत्तर पश्चिम",
+      "(b) दक्षिण - पश्चिम",
+      "(c) उत्तर पूर्व",
+      "(d) दक्षिण - पूर्व"
+    ],
+    o_en: [
+      "(a) North-West",
+      "(b) South-West",
+      "(c) North-East",
+      "(d) South-East"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q6. आप 7.17 घंटे को घंटे, मिनट और सेकंड में कैसे लिखेंगे?",
+    q_en: "Q6. How will you write 7.17 hours in hours, minutes and seconds?",
+    tag: "NTPC CBT - I 14/03/2021 (Morning)",
+    o_hi: [
+      "(a) 7 घंटे, 17 सेकंड",
+      "(b) 7 घंटे, 7 मिनट, 10 सेकंड",
+      "(c) 7 घंटे, 17 मिनट",
+      "(d) 7 घंटे, 10 मिनट, 12 सेकंड"
+    ],
+    o_en: [
+      "(a) 7 hours, 17 seconds",
+      "(b) 7 hours, 7 minutes, 10 seconds",
+      "(c) 7 hours, 17 minutes",
+      "(d) 7 hours, 10 minutes, 12 seconds"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q7. एक घड़ी को गुरुवार को प्रातः 4:00 बजे सही समय पर सेट किया जाता है। यदि यह घड़ी प्रत्येक 3 घंटे में 20 सेकंड बढ़ जाती है, तो शुक्रवार रात 8:30 बजे इस घड़ी में कितना समय होगा?",
+    q_en: "Q7. A clock is set to the correct time at 4:00 AM on Thursday. If it gains 20 seconds every 3 hours, what time will it show at 8:30 PM on Friday?",
+    tag: "RRB JE 22/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) 8 बजकर 30 मिनट 30 सेकंड अपराह्न",
+      "(b) 9 बजकर 34 मिनट अपराह्न",
+      "(c) 8 बजकर 34 मिनट अपराह्न",
+      "(d) 8 बजकर 34 मिनट 30 सेकंड अपराह्न"
+    ],
+    o_en: [
+      "(a) 8:30:30 PM",
+      "(b) 9:34 PM",
+      "(c) 8:34 PM",
+      "(d) 8:34:30 PM"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q8. एक घड़ी 4:30 का समय दर्शाती है। यदि मिनट वाली सुई पूर्व की ओर इंगित करती है, तो घंटे वाली सुई किस दिशा में होगी?",
+    q_en: "Q8. A clock shows 4:30. If the minute hand points east, in which direction will the hour hand point?",
+    tag: "RRB JE 02/06/2019 (Afternoon)",
+    o_hi: [
+      "(a) दक्षिण पूर्व",
+      "(b) उत्तर पश्चिम",
+      "(c) उत्तर",
+      "(d) उत्तर पूर्व"
+    ],
+    o_en: [
+      "(a) South-East",
+      "(b) North-West",
+      "(c) North",
+      "(d) North-East"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q9. 16 मिनट में, मिनट की सुई, घंटे की सुई के सापेक्ष ________ आगे बढ़ती है।",
+    q_en: "Q9. In 16 minutes, the minute hand advances ________ relative to the hour hand.",
+    tag: "RRB JE 28/06/2019 (Evening)",
+    o_hi: [
+      "(a) 88°",
+      "(b) 16°",
+      "(c) 80°",
+      "(d) 96°"
+    ],
+    o_en: [
+      "(a) 88°",
+      "(b) 16°",
+      "(c) 80°",
+      "(d) 96°"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q10. 4 : 45 बजे घड़ी की घंटे और मिनट की सुइयों के बीच का कोण कितना होता है?",
+    q_en: "Q10. What is the angle between the hour and minute hands of a clock at 4:45?",
+    tag: "ALP Tier II 21/01/2019 (Afternoon)",
+    o_hi: [
+      "(a) 135.5°",
+      "(b) 115.5°",
+      "(c) 127.5°",
+      "(d) 147.5°"
+    ],
+    o_en: [
+      "(a) 135.5°",
+      "(b) 115.5°",
+      "(c) 127.5°",
+      "(d) 147.5°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q11. अगर घड़ी पर नंबर 1 को 'M' द्वारा, नंबर 2 को 'N' द्वारा बदल दिया जाता है और इसी तरह अन्य अंकों को, तो जब समय 21:00 होता है, घंटे की सुई ___________ अक्षर पर होगी।",
+    q_en: "Q11. If number 1 on a clock is replaced by 'M', number 2 by 'N', and so on for the other numbers, then at 21:00 the hour hand will be on the letter ___________.",
+    tag: "RRB ALP Tier - I 09/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) T",
+      "(b) S",
+      "(c) V",
+      "(d) U"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) S",
+      "(c) V",
+      "(d) U"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q12. एक सप्ताह में घड़ी की दोनों सुइयां एक-दूसरे से कितनी बार मिलती हैं?",
+    q_en: "Q12. How many times do the two hands of a clock coincide in one week?",
+    tag: "RRB ALP 13/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 154",
+      "(b) 160",
+      "(c) 84",
+      "(d) 56"
+    ],
+    o_en: [
+      "(a) 154",
+      "(b) 160",
+      "(c) 84",
+      "(d) 56"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q13. एक सप्ताह में, एक घड़ी की दोनों सुईयाँ एक दूसरे के साथ कितनी बार समकोण बनाती हैं?",
+    q_en: "Q13. In one week, how many times do the two hands of a clock form a right angle with each other?",
+    tag: "RRB ALP Tier - I 21/08/2018 (Morning)",
+    o_hi: [
+      "(a) 308",
+      "(b) 44",
+      "(c) 24",
+      "(d) 154"
+    ],
+    o_en: [
+      "(a) 308",
+      "(b) 44",
+      "(c) 24",
+      "(d) 154"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q14. दोपहर के 3:47 बजे घंटे की सुई और मिनट की सुई द्वारा बनाए गए दो कोणों में से छोटा कोण कितना होगा?",
+    q_en: "Q14. At 3:47 PM, what is the smaller of the two angles formed by the hour and minute hands?",
+    tag: "RRB ALP Tier - I 21/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 168.5°",
+      "(b) 162°",
+      "(c) 166.5°",
+      "(d) 165°"
+    ],
+    o_en: [
+      "(a) 168.5°",
+      "(b) 162°",
+      "(c) 166.5°",
+      "(d) 165°"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q15. दो दिनों की अवधि में घड़ी की घंटे और मिनट की सुई कितनी बार एक समकोण पर होती हैं?",
+    q_en: "Q15. During a period of two days, how many times are the hour and minute hands of a clock at right angles?",
+    tag: "Group - D 18/08/2022 (Morning )",
+    o_hi: [
+      "(a) 88",
+      "(b) 48",
+      "(c) 92",
+      "(d) 77"
+    ],
+    o_en: [
+      "(a) 88",
+      "(b) 48",
+      "(c) 92",
+      "(d) 77"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q16. एक सही समय बताने वाली घड़ी की मिनट वाली सुई, 3 घंटे 10 मिनट की अवधि में कितनी कोणीय दूरी तय करेगी?",
+    q_en: "Q16. What angular distance will the minute hand of a clock showing the correct time cover in a period of 3 hours 10 minutes?",
+    tag: "Group - D 22/08/2022 (Evening)",
+    o_hi: [
+      "(a) 1000°",
+      "(b) 1202°",
+      "(c) 978°",
+      "(d) 1140°"
+    ],
+    o_en: [
+      "(a) 1000°",
+      "(b) 1202°",
+      "(c) 978°",
+      "(d) 1140°"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q17. एक सही समय बताने वाली घड़ी की सेकंड वाली सुई द्वारा 12 मिनट में तय की गई कोणीय दूरी कितनी होगी?",
+    q_en: "Q17. What angular distance is covered by the second hand of a clock showing the correct time in 12 minutes?",
+    tag: "Group - D 23/08/2022 (Morning)",
+    o_hi: [
+      "(a) 4762°",
+      "(b) 5120°",
+      "(c) 4320°",
+      "(d) 5611°"
+    ],
+    o_en: [
+      "(a) 4762°",
+      "(b) 5120°",
+      "(c) 4320°",
+      "(d) 5611°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q18. यदि 12 घंटे वाली घड़ी के दर्पण प्रतिबिंब में 3 : 55 बजे है, तो वास्तविक समय ज्ञात कीजिए।",
+    q_en: "Q18. If the mirror image of a 12-hour clock shows 3:55, find the actual time.",
+    tag: "Group - D 25/08/2022 (Morning )",
+    o_hi: [
+      "(a) 8 : 05",
+      "(b) 8 : 25",
+      "(c) 7 : 05",
+      "(d) 7 : 25"
+    ],
+    o_en: [
+      "(a) 8 : 05",
+      "(b) 8 : 25",
+      "(c) 7 : 05",
+      "(d) 7 : 25"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q19. जब 9 : 25 बजे हो, तो 12 घंटे वाली घड़ी की मिनट वाली सुई और घंटे वाली सुई के बीच बना कोण लगभग कितना होगा?",
+    q_en: "Q19. At 9:25, approximately what angle is formed between the minute hand and the hour hand of a 12-hour clock?",
+    tag: "Group - D 25/08/2022 (Afternoon )",
+    o_hi: [
+      "(a) 150°",
+      "(b) 190°",
+      "(c) 100°",
+      "(d) 130°"
+    ],
+    o_en: [
+      "(a) 150°",
+      "(b) 190°",
+      "(c) 100°",
+      "(d) 130°"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q20. 2 बजे से 3 बजे के बीच घड़ी की सुइयां किस समय एक साथ होंगी?",
+    q_en: "Q20. Between 2 o'clock and 3 o'clock, at what time will the hands of the clock coincide?",
+    tag: "Group - D 26/08/2022 (Evening)",
+    o_hi: [
+      "(a) 2 बजकर 3 5/11",
+      "(b) 2 बजकर 6 5/11",
+      "(c) 2 बजकर 11 12/11",
+      "(d) 2 बजकर 10 10/11"
+    ],
+    o_en: [
+      "(a) 2:03 5/11",
+      "(b) 2:06 5/11",
+      "(c) 2:11 12/11",
+      "(d) 2:10 10/11"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q21. 24 घंटे के प्रारूप में सवा आठ को कैसे दर्शाया जाएगा?",
+    q_en: "Q21. How will 'quarter past eight' be represented in the 24-hour format?",
+    tag: "Group - D 29/08/2022 (Evening)",
+    o_hi: [
+      "(a) 20 : 15 घंटे",
+      "(b) 19 : 45 घंटे",
+      "(c) 19 : 15 घंटे",
+      "(d) 20 : 45 घंटे"
+    ],
+    o_en: [
+      "(a) 20:15 hours",
+      "(b) 19:45 hours",
+      "(c) 19:15 hours",
+      "(d) 20:45 hours"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q22. यदि 12 घंटे वाली घड़ी के दर्पण प्रतिबिंब में 5 : 40 बजे हो, तो वास्तविक समय ज्ञात कीजिए।",
+    q_en: "Q22. If the mirror image of a 12-hour clock shows 5:40, find the actual time.",
+    tag: "Group - D 30/08/2022 (Morning)",
+    o_hi: [
+      "(a) 2 : 10",
+      "(b) 2 : 50",
+      "(c) 6 : 20",
+      "(d) 6 : 10"
+    ],
+    o_en: [
+      "(a) 2 : 10",
+      "(b) 2 : 50",
+      "(c) 6 : 20",
+      "(d) 6 : 10"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q23. यदि 6 : 00 am बजे एक हाथ घड़ी की घंटे वाली सुई उत्तर-पश्चिम दिशा को दर्शाती है, तो 9:00 pm बजे घंटे वाली सुई किस दिशा को दर्शाएगी?",
+    q_en: "Q23. If at 6:00 AM the hour hand of a wristwatch points north-west, in which direction will the hour hand point at 9:00 PM?",
+    tag: "Group - D 13/09/2022 (Afternoon )",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) उत्तर-पूर्व",
+      "(c) उत्तर-पश्चिम",
+      "(d) दक्षिण-पश्चिम"
+    ],
+    o_en: [
+      "(a) South",
+      "(b) North-East",
+      "(c) North-West",
+      "(d) South-West"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q24. एक मेज पर एक कार्यशील घड़ी इस प्रकार रखी गई है कि 9.00 pm बजे इसकी घंटे की सुई उत्तर दिशा की ओर इंगित कर रही है। यदि इस घड़ी की स्थिति समान बनी रहती है, तो 6.00 am बजे इसकी मिनट की सुई किस दिशा की ओर इंगित करेगी?",
+    q_en: "Q24. A working clock is placed on a table such that at 9:00 PM its hour hand points north. If the position of the clock remains unchanged, in which direction will its minute hand point at 6:00 AM?",
+    tag: "Level 2 (13/06/2022) Shift 1",
+    o_hi: [
+      "(a) उत्तर",
+      "(b) पूर्व",
+      "(c) दक्षिण",
+      "(d) पश्चिम"
+    ],
+    o_en: [
+      "(a) North",
+      "(b) East",
+      "(c) South",
+      "(d) West"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q25. रेखा की घड़ी के अनुसार सवा नौ बज रहे हैं और घंटे की सुई पश्चिम दिशा की ओर इंगित कर रही है। मिनट की सुई 75 मिनट के बाद किस दिशा में होगी?",
+    q_en: "Q25. According to Rekha's clock, the time is quarter past nine and the hour hand points west. In which direction will the minute hand point after 75 minutes?",
+    tag: "RRB NTPC 13/01/2021 (Evening)",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) पश्चिम",
+      "(c) पूर्व",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) South",
+      "(b) West",
+      "(c) East",
+      "(d) North"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q26. निहाल की घड़ी से समय के अनुसार 1 बजकर 30 मिनट हुई है और घंटे की सुई उत्तर-पूर्व की ओर इशारा कर रही है। यह मानते हुए कि निहाल की स्थिति में कोई परिवर्तन नहीं हुआ है, 30 मिनट के बाद मिनट की सुई किस दिशा में इंगित करेगी?",
+    q_en: "Q26. According to Nihal's clock, the time is 1:30 and the hour hand points north-east. Assuming Nihal's position does not change, in which direction will the minute hand point after 30 minutes?",
+    tag: "RRB NTPC 21/01/2021 (Evening)",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) पूर्व",
+      "(c) पश्चिम",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) South",
+      "(b) East",
+      "(c) West",
+      "(d) North"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q27. रजनी की घड़ी में समय के अनुसार सवा छह बजे हैं। यदि घंटे की सुई दक्षिण की ओर इशारा करती है, तो मिनट की सुई किस दिशा में है?",
+    q_en: "Q27. According to Rajni's clock, the time is quarter past six. If the hour hand points south, in which direction is the minute hand?",
+    tag: "RRB NTPC 22/01/2021 (Evening)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) पश्चिम",
+      "(c) दक्षिण",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) East",
+      "(b) West",
+      "(c) South",
+      "(d) North"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q28. एक कलाई घड़ी में 7:30 am बजे है। यदि घंटे की सुई दक्षिण-पश्चिम की ओर इंगित करती है, तो 15 मिनट के बाद मिनट की सुई किस दिशा में इंगित करेगी?",
+    q_en: "Q28. A wristwatch shows 7:30 AM. If the hour hand points south-west, in which direction will the minute hand point after 15 minutes?",
+    tag: "RRB NTPC 01/02/2021 (Evening)",
+    o_hi: [
+      "(a) दक्षिण",
+      "(b) दक्षिण पश्चिम",
+      "(c) पश्चिम",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) South",
+      "(b) South-West",
+      "(c) West",
+      "(d) North"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q29. आप 1.11 घंटे को घंटे, मिनट और सेकंड में कैसे लिखेंगे?",
+    q_en: "Q29. How will you write 1.11 hours in hours, minutes and seconds?",
+    tag: "RRB NTPC 07/04/2021 (Evening)",
+    o_hi: [
+      "(a) 1 घंटा, 6 मिनट, 36 सेकंड",
+      "(b) 1 घंटा, 10 मिनट, 1 सेकंड",
+      "(c) 1 घंटा, 10 मिनट, 10 सेकंड",
+      "(d) 1 घंटा, 11 मिनट"
+    ],
+    o_en: [
+      "(a) 1 hour, 6 minutes, 36 seconds",
+      "(b) 1 hour, 10 minutes, 1 second",
+      "(c) 1 hour, 10 minutes, 10 seconds",
+      "(d) 1 hour, 11 minutes"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q30. आप 9.11 घंटे को घंटे, मिनट और सेकंड में कैसे लिखेंगे?",
+    q_en: "Q30. How will you write 9.11 hours in hours, minutes and seconds?",
+    tag: "RRB NTPC 08/04/2021 (Morning)",
+    o_hi: [
+      "(a) 9 घंटे, 11 मिनट",
+      "(b) 9 घंटे, 49 मिनट",
+      "(c) 9 घंटे, 10 मिनट, 10 सेकंड",
+      "(d) 9 घंटे, 6 मिनट, 36 सेकंड"
+    ],
+    o_en: [
+      "(a) 9 hours, 11 minutes",
+      "(b) 9 hours, 49 minutes",
+      "(c) 9 hours, 10 minutes, 10 seconds",
+      "(d) 9 hours, 6 minutes, 36 seconds"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q31. रविवार को सुबह 8 बजे, एक घड़ी 5 मिनट पीछे पाई जाती है। इसके बाद यह बढ़ने लगती है और सोमवार को शाम 8 बजे, 5 मिनट तेज पाई जाती है। किस समय यह एकदम सही थी?",
+    q_en: "Q31. At 8 AM on Sunday, a clock is found to be 5 minutes slow. It then starts gaining, and at 8 PM on Monday it is found to be 5 minutes fast. At what time was it exactly correct?",
+    tag: "RRB JE 31/05/2019 (Afternoon)",
+    o_hi: [
+      "(a) सुबह 2 बजे, सोमवार",
+      "(b) शाम 8 बजे, सोमवार",
+      "(c) सुबह 8 बजे, सोमवार",
+      "(d) सुबह 6 बजे, सोमवार"
+    ],
+    o_en: [
+      "(a) 2 AM, Monday",
+      "(b) 8 PM, Monday",
+      "(c) 8 AM, Monday",
+      "(d) 6 AM, Monday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q32. अपराह्न 3:30 बजे घड़ी की सुइयों के बीच का कोण ज्ञात कीजिए।",
+    q_en: "Q32. Find the angle between the hands of a clock at 3:30 PM.",
+    tag: "RRB JE 28/06/2019 (Evening)",
+    o_hi: [
+      "(a) 120°",
+      "(b) 75°",
+      "(c) 90°",
+      "(d) 105°"
+    ],
+    o_en: [
+      "(a) 120°",
+      "(b) 75°",
+      "(c) 90°",
+      "(d) 105°"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q33. ढाई बजे घंटे की सूई और मिनट की सूई के बीच कोण क्या होगा?",
+    q_en: "Q33. What will be the angle between the hour hand and the minute hand at 2:30?",
+    tag: "ALP Tier II 23/01/2019 (Morning )",
+    o_hi: [
+      "(a) 120°",
+      "(b) 90°",
+      "(c) 105°",
+      "(d) 75°"
+    ],
+    o_en: [
+      "(a) 120°",
+      "(b) 90°",
+      "(c) 105°",
+      "(d) 75°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q34. 8 बजे घड़ी की दोनों सुइयों के बीच बने कोण का मान (डिग्री में) क्या होगा?",
+    q_en: "Q34. What is the value (in degrees) of the angle formed between the two hands of a clock at 8 o'clock?",
+    tag: "RRB ALP 10/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 60",
+      "(b) 120",
+      "(c) 50",
+      "(d) 240"
+    ],
+    o_en: [
+      "(a) 60",
+      "(b) 120",
+      "(c) 50",
+      "(d) 240"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q35. यदि एक घड़ी की घंटे वाली सूई 18° आगे घूमती है, तो उसी दौरान मिनट वाली सुई कितने डिग्री घूमेगी?",
+    q_en: "Q35. If the hour hand of a clock moves forward by 18°, through how many degrees will the minute hand move during the same interval?",
+    tag: "RRB ALP 14/08/2018 (Evening)",
+    o_hi: [
+      "(a) 168°",
+      "(b) 276°",
+      "(c) 196°",
+      "(d) 216°"
+    ],
+    o_en: [
+      "(a) 168°",
+      "(b) 276°",
+      "(c) 196°",
+      "(d) 216°"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q36. एक घड़ी में शाम के 6 बजे घंटे की सुई पूर्व दिशा की ओर संकेत करती है तो रात के 9:15 बजे मिनट की सुई किस दिशा में होगी?",
+    q_en: "Q36. In a clock, if the hour hand points east at 6 PM, in which direction will the minute hand point at 9:15 PM?",
+    tag: "RRB ALP 21/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) पूर्व",
+      "(b) दक्षिण",
+      "(c) पश्चिम",
+      "(d) उत्तर"
+    ],
+    o_en: [
+      "(a) East",
+      "(b) South",
+      "(c) West",
+      "(d) North"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q37. एक घड़ी प्रत्येक घंटे में 5 मिनट पीछे हो जाती है और सोमवार प्रातः 6 बजे घड़ी सही समय पर सेट की गयी थी। यह दोबारा सही समय कब दिखायेगी?",
+    q_en: "Q37. A clock loses 5 minutes every hour and was set to the correct time at 6 AM on Monday. When will it show the correct time again?",
+    tag: "RRB ALP 30/08/2018 (Morning)",
+    o_hi: [
+      "(a) अगले रविवार शाम 6 बजे",
+      "(b) अगले सोमवार शाम 6 बजे",
+      "(c) अगले रविवार प्रातः 3 बजे",
+      "(d) अगले सोमवार प्रातः 3 बजे"
+    ],
+    o_en: [
+      "(a) Next Sunday at 6 PM",
+      "(b) Next Monday at 6 PM",
+      "(c) Next Sunday at 3 AM",
+      "(d) Next Monday at 3 AM"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];
