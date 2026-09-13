@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q101. A, B, C, S, W, Y और Z में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन है। C की परीक्षा शुक्रवार को है। Y और C के बीच केवल दो व्यक्तियों की परीक्षा है। W और Y के बीच केवल चार व्यक्तियों की परीक्षा है। B की परीक्षा Z के ठीक बाद है। S की परीक्षा सोमवार को नहीं है। S के पहले और A के बाद कितने व्यक्तियों की परीक्षा है ?",
+    q_en: "Q101. The examinations of A, B, C, S, W, Y and Z are on different days of the same week starting Monday and ending Sunday. C's exam is on Friday. There are exams of only two persons between Y and C. There are exams of only four persons between W and Y. B's exam is immediately after Z's. S's exam is not on Monday. How many persons have their exams before S and after A?",
+    tag: "RPF Constable 12/03/2025 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक",
+      "(c) चार",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) One",
+      "(c) Four",
+      "(d) Three"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q102. A, F, J, K, P और Q एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे निचले तल का क्रमांक 1 है, उसके ठीक ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपरी तल का क्रमांक 6 है। F और Q के बीच केवल दो व्यक्ति रहते हैं। K और P के बीच केवल दो व्यक्ति रहते हैं। K के ऊपर कोई नहीं रहता है। Q, P के नीचे लेकिन A के ऊपर रहता है। J के नीचे कितने व्यक्ति रहते हैं?",
+    q_en: "Q102. A, F, J, K, P and Q live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. Only two persons live between F and Q. Only two persons live between K and P. No one lives above K. Q lives below P but above A. How many persons live below J?",
+    tag: "RPF Constable 12/03/2025 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) दो",
+      "(c) शून्य",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Two",
+      "(c) Zero",
+      "(d) One"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q103. सात बॉक्स D, E, F, H, I, J और K एक के ऊपर एक रखे गए हैं, लेकिन जरूरी नहीं कि वे इसी क्रम में हों। J के ऊपर केवल K को रखा गया है। J और F के बीच केवल दो बॉक्स रखे गए हैं। D के नीचे केवल E को रखा गया है। I को F के ठीक ऊपर नहीं रखा गया है। H और E के बीच कितने बॉक्स रखे गए हैं ?",
+    q_en: "Q103. Seven boxes D, E, F, H, I, J and K are kept one above another, not necessarily in the same order. Only K is kept above J. Only two boxes are kept between J and F. Only E is kept below D. I is not kept immediately above F. How many boxes are kept between H and E?",
+    tag: "RPF Constable 17/03/2025 (Evening)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) चार",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) Four",
+      "(d) One"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q104. D, E, F, H, I, J और K में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन है। F से पहले किसी की भी परीक्षा नहीं है। F और E के बीच केवल तीन व्यक्तियों की परीक्षा है। E और K के बीच केवल एक व्यक्ति की परीक्षा है। I की परीक्षा बुधवार को है। J की परीक्षा H के बाद के किसी दिन लेकिन D के पहले किसी दिन है। J की परीक्षा सप्ताह के किस दिन है?",
+    q_en: "Q104. The examinations of D, E, F, H, I, J and K are on different days of the same week starting Monday and ending Sunday. No one has an exam before F. There are exams of only three persons between F and E. There is the exam of only one person between E and K. I's exam is on Wednesday. J's exam is on a day after H's but before D's. On which day of the week is J's exam?",
+    tag: "RPF Constable 18/03/2025 (Afternoon)",
+    o_hi: [
+      "(a) शनिवार",
+      "(b) गुरुवार",
+      "(c) शुक्रवार",
+      "(d) मंगलवार"
+    ],
+    o_en: [
+      "(a) Saturday",
+      "(b) Thursday",
+      "(c) Friday",
+      "(d) Tuesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q105. सात बॉक्स A, B, C, D, E, F और G एक के ऊपर एक रखे गए हैं लेकिन जरूरी नहीं कि वे इसी क्रम में रखे गए हों। केवल G को D के ऊपर रखा गया है। D और B के बीच केवल दो बॉक्स रखे गए हैं। केवल F को C के नीचे रखा गया है। A को B के ठीक ऊपर नहीं रखा गया है। G और E के बीच कितने बॉक्स रखे गए हैं ?",
+    q_en: "Q105. Seven boxes A, B, C, D, E, F and G are kept one above another, not necessarily in the same order. Only G is kept above D. Only two boxes are kept between D and B. Only F is kept below C. A is not kept immediately above B. How many boxes are kept between G and E?",
+    tag: "RPF Constable 18/03/2025 (Evening)",
+    o_hi: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 4",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 1",
+      "(c) 4",
+      "(d) 2"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q106. सात बक्से A, B, C, L, X, Y और Z एक-दूसरे के ऊपर रखे गए हैं लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों। L के नीचे केवल तीन बक्से रखे गए हैं। L और Z के बीच केवल दो बक्से रखे गए हैं। केवल A, B के ठीक ऊपर रखा गया है। X को Y के नीचे किसी स्थान पर और C के ऊपर किसी स्थान पर रखा गया है। कौन-सा बक्सा नीचे से दूसरे स्थान पर रखा गया है?",
+    q_en: "Q106. Seven boxes A, B, C, L, X, Y and Z are kept one above another, not necessarily in the same order. Only three boxes are kept below L. Only two boxes are kept between L and Z. Only A is kept immediately above B. X is kept somewhere below Y and somewhere above C. Which box is placed second from the bottom?",
+    tag: "RRB Tech. - (III) 20/12/2024 (Evening)",
+    o_hi: [
+      "(a) C",
+      "(b) X",
+      "(c) Y",
+      "(d) A"
+    ],
+    o_en: [
+      "(a) C",
+      "(b) X",
+      "(c) Y",
+      "(d) A"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q107. सात बक्से A, B, C, D, E, F और G, एक-दूसरे के ऊपर रखे गए हैं लेकिन जरूरी नहीं है कि वे इसी क्रम में रखे हों। F को नीचे से दूसरे स्थान पर रखा गया है। F और E के बीच में केवल तीन बक्से रखे गए हैं। D को F के नीचे किसी एक स्थान पर रखा गया है। E और C के बीच में केवल A को रखा गया है। B को E के ऊपर किसी एक स्थान पर रखा गया है। E और D के बीच में कितने बक्से रखे गए हैं ?",
+    q_en: "Q107. Seven boxes A, B, C, D, E, F and G are kept one above another, not necessarily in the same order. F is placed second from the bottom. Only three boxes are kept between F and E. D is kept somewhere below F. Only A is kept between E and C. B is kept somewhere above E. How many boxes are kept between E and D?",
+    tag: "RRB Tech. - (III) 23/12/2024 (Morning)",
+    o_hi: [
+      "(a) 3",
+      "(b) 4",
+      "(c) 1",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 4",
+      "(c) 1",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q108. सात बक्से A, B, C, L, X, Y और Z एक-दूसरे के ऊपर रखे गए हैं लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों। A और Z के बीच केवल चार बक्से रखे गए हैं। केवल B को A के ऊपर रखा गया है। L और Y के बीच केवल दो बक्से रखे गए है | C को X के ठीक ऊपर रखा गया है। Y को C के ठीक ऊपर नहीं रखा गया है। कौन-सा बक्सा ऊपर से चौथे स्थान पर रखा गया है?",
+    q_en: "Q108. Seven boxes A, B, C, L, X, Y and Z are kept one above another, not necessarily in the same order. Only four boxes are kept between A and Z. Only B is kept above A. Only two boxes are kept between L and Y. C is kept immediately above X. Y is not kept immediately above C. Which box is placed fourth from the top?",
+    tag: "RRB Tech. - (III) 24/12/2024 (Morning)",
+    o_hi: [
+      "(a) L",
+      "(b) A",
+      "(c) C",
+      "(d) X"
+    ],
+    o_en: [
+      "(a) L",
+      "(b) A",
+      "(c) C",
+      "(d) X"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q109. सात बक्से A, B, C, L, X, Y और Z एक-दूसरे के ऊपर रखे गए हैं लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों। A को B के ठीक ऊपर रखा गया है। Z को C के ठीक ऊपर रखा गया है। केवल X को Y के ऊपर रखा गया है। A के ऊपर केवल दो बक्से रखे गए हैं। Z को नीचे से तीसरे स्थान पर नहीं रखा गया है। L और X के बीच कितने बक्से रखे गए हैं?",
+    q_en: "Q109. Seven boxes A, B, C, L, X, Y and Z are kept one above another, not necessarily in the same order. A is kept immediately above B. Z is kept immediately above C. Only X is kept above Y. Only two boxes are kept above A. Z is not placed third from the bottom. How many boxes are kept between L and X?",
+    tag: "RRB Tech. - (III) 24/12/2024 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) चार",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Four",
+      "(d) Two"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q110. सात बक्से A, B, C, L, X, Y और Z एक-दूसरे के ऊपर रखे गए हैं लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों। X के ऊपर केवल तीन बक्से रखे गए हैं। Z और X के बीच केवल एक बक्सा रखा गया है। Z और A के बीच केवल तीन बक्से रखे गए हैं। A को X के ऊपर किसी स्थान पर रखा गया है। C को A के ठीक नीचे रखा गया है। L को Y के ऊपर किसी एक स्थान पर रखा गया है। B को Z के ठीक ऊपर या नीचे नहीं रखा गया है। कौन-सा बक्सा सबसे नीचे रखा गया है?",
+    q_en: "Q110. Seven boxes A, B, C, L, X, Y and Z are kept one above another, not necessarily in the same order. Only three boxes are kept above X. Only one box is kept between Z and X. Only three boxes are kept between Z and A. A is kept somewhere above X. C is kept immediately below A. L is kept somewhere above Y. B is not kept immediately above or below Z. Which box is placed at the bottommost position?",
+    tag: "RRB Tech. - (III) 26/12/2024 (Morning)",
+    o_hi: [
+      "(a) B",
+      "(b) Z",
+      "(c) C",
+      "(d) Y"
+    ],
+    o_en: [
+      "(a) B",
+      "(b) Z",
+      "(c) C",
+      "(d) Y"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q111. छ: बक्से, G, H, I, J, K और L एक-दूसरे के ऊपर रखे गए हैं, परंतु जरूरी नहीं कि वे इसी क्रम में रखे हों। G को नीचे से तीसरे स्थान पर रखा गया है। G और H के बीच केवल दो डिब्बे रखे गए हैं। H और I के बीच केवल तीन डिब्बे रखे गए हैं। J को G के ठीक ऊपर रखा गया है। K को I के ठीक नीचे रखा गया है। H और L के बीच कितने डिब्बे रखे गए हैं ?",
+    q_en: "Q111. Six boxes G, H, I, J, K and L are kept one above another, not necessarily in the same order. G is placed third from the bottom. Only two boxes are kept between G and H. Only three boxes are kept between H and I. J is kept immediately above G. K is kept immediately below I. How many boxes are kept between H and L?",
+    tag: "RRB Tech. - (III) 26/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) एक भी नहीं",
+      "(b) एक",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) None",
+      "(b) One",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q112. छ: डिब्बे, P, Q, R, S, T और U एक-दूसरे के ऊपर रखे गए हैं, परंतु जरूरी नहीं कि वे इसी क्रम में रखे हों। P को नीचे से तीसरे स्थान पर रखा गया है। P और Q के बीच केवल दो डिब्बे रखे गए हैं। Q और R के बीच केवल तीन डिब्बे रखे गए हैं। S को R के ठीक नीचे रखा गया है। T को Q के ठीक नीचे रखा गया है। U और S के बीच कितने डिब्बे रखे गए हैं?",
+    q_en: "Q112. Six boxes P, Q, R, S, T and U are kept one above another, not necessarily in the same order. P is placed third from the bottom. Only two boxes are kept between P and Q. Only three boxes are kept between Q and R. S is kept immediately below R. T is kept immediately below Q. How many boxes are kept between U and S?",
+    tag: "RRB Tech. - (III) 28/12/2024 (Morning)",
+    o_hi: [
+      "(a) एक",
+      "(b) दो",
+      "(c) तीन",
+      "(d) एक भी नहीं"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Two",
+      "(c) Three",
+      "(d) None"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q113. सात बक्से A, B, E, F, L, M और P, एक-दूसरे के ऊपर रखे हुए है, लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों। M को नीचे से दूसरे स्थान पर रखा गया है। M और B के बीच केवल तीन बक्से रखे गए हैं। P को M के नीचे किसी एक स्थान पर रखा गया है। B और F के बीच केवल E को रखा गया है। A को B के ऊपर किसी एक स्थान पर रखा गया है। L और P के बीच कितने बक्से रखे गए हैं?",
+    q_en: "Q113. Seven boxes A, B, E, F, L, M and P are kept one above another, not necessarily in the same order. M is placed second from the bottom. Only three boxes are kept between M and B. P is kept somewhere below M. Only E is kept between B and F. A is kept somewhere above B. How many boxes are kept between L and P?",
+    tag: "RRB Tech. - (III) 28/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) तीन",
+      "(b) चार",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Four",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q114. सात बक्से A, B, E, F, L, M और P, एक-दूसरे के ऊपर रखे हुए है, लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों। केवल A को E के ऊपर रखा गया है। E और F के बीच केवल दो बक्से रखे गए हैं। केवल P को M के नीचे रखा गया है। B को F के ठीक ऊपर नहीं रखा गया है। L के ऊपर दूसरे स्थान पर कौन-सा बक्सा रखा गया है ?",
+    q_en: "Q114. Seven boxes A, B, E, F, L, M and P are kept one above another, not necessarily in the same order. Only A is kept above E. Only two boxes are kept between E and F. Only P is kept below M. B is not kept immediately above F. Which box is placed second above L?",
+    tag: "RRB Tech. - (III) 28/12/2024 (Evening)",
+    o_hi: [
+      "(a) B",
+      "(b) A",
+      "(c) F",
+      "(d) E"
+    ],
+    o_en: [
+      "(a) B",
+      "(b) A",
+      "(c) F",
+      "(d) E"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q115. छ: व्यक्ति P, Q, R, S, T और U एक ही इमारत की छ: अलग-अलग मंजिलों पर रहते हैं । इमारत की सबसे निचली मंजिल की संख्या 1 है; इसके ऊपर की मंजिल को 2 के रूप में और इसी तरह आगे भी संख्यांांकित किया गया है। सबसे ऊपरी मंजिल की संख्या 6 है। P एक सम संख्या वाली मंजिल पर रहता है, लेकिन मंजिल संख्या 4 पर नहीं। S और P के बीच केवल दो व्यक्ति रहते हैं। R, T के ठीक नीचे रहता है। U एक सम संख्या वाली मंजिल पर रहता है। Q सबसे निचली मंजिल पर नहीं रहता है। Q और S के बीच कितने व्यक्ति रहते हैं?",
+    q_en: "Q115. Six persons P, Q, R, S, T and U live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. P lives on an even-numbered floor but not floor 4. Only two persons live between S and P. R lives immediately below T. U lives on an even-numbered floor. Q does not live on the lowermost floor. How many persons live between Q and S?",
+    tag: "RRB Tech. - (I) 19/12/2024 (Morning)",
+    o_hi: [
+      "(a) दो",
+      "(b) एक",
+      "(c) चार",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) One",
+      "(c) Four",
+      "(d) Three"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q116. D, E, F, G, H, I, और J, में से प्रत्येक की परीक्षा एक सप्ताह के अलग-अलग दिन है, जो कि सोमवार से शुरू होकर उसी सप्ताह के रविवार को समाप्त होगी। E की परीक्षा शुक्रवार को है। E और D के बीच केवल एक व्यक्ति की परीक्षा है। J की परीक्षा E के ठीक बाद वाले दिन है। H की परीक्षा D के ठीक बाद वाले दिन है। H और G के बीच केवल दो लोगों की परीक्षा है। F की परीक्षा D से ठीक पहले वाले दिन है। I की परीक्षा सोमवार को नहीं है। J और F के बीच कितने लोगों की परीक्षा है?",
+    q_en: "Q116. The examinations of D, E, F, G, H, I and J are on different days of a week from Monday to Sunday. E's exam is on Friday. There is the exam of only one person between E and D. J's exam is on the day immediately after E's. H's exam is on the day immediately after D's. There are exams of only two persons between H and G. F's exam is on the day immediately before D's. I's exam is not on Monday. How many persons have their exams between J and F?",
+    tag: "RRB Tech. - (I) 19/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) तीन",
+      "(d) पाँच"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) Three",
+      "(d) Five"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q117. छः व्यक्ति A, B, C, D, E और F एक ही इमारत की छः अलग-अलग मंजिलों पर रहते हैं। इमारत की सबसे निचली मंजिल की संख्या 1 है; इसके ऊपर की मंजिल को 2 के रूप में और इसी तरह आगे भी संख्यांांकित किया गया है। सबसे ऊपरी मंजिल की संख्या 6 है। A सम संख्या वाली मंजिल पर रहता है। A और B के बीच केवल तीन व्यक्ति रहते हैं। F, E के ठीक ऊपर रहता है। B मंजिल संख्या 2 पर नहीं रहता है। F और D के बीच केवल दो व्यक्ति रहते हैं। F एक सम संख्या वाली मंजिल पर रहता है। मंजिल संख्या 3 पर कौन रहता है?",
+    q_en: "Q117. Six persons A, B, C, D, E and F live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. A lives on an even-numbered floor. Only three persons live between A and B. F lives immediately above E. B does not live on floor 2. Only two persons live between F and D. F lives on an even-numbered floor. Who lives on floor 3?",
+    tag: "RRB Tech. - (I) 19/12/2024 (Evening)",
+    o_hi: [
+      "(a) E",
+      "(b) C",
+      "(c) D",
+      "(d) B"
+    ],
+    o_en: [
+      "(a) E",
+      "(b) C",
+      "(c) D",
+      "(d) B"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q118. एक निश्चित विभाग के प्रत्येक सदस्य, P, Q, R, S, T, U और V को सोमवार से आरंभ करके रविवार तक एक ही सप्ताह के अलग-अलग दिनों में एक सेमिनार में भाग लेना है। T को P से ठीक पहले सेमिनार में भाग लेना है। Q को मंगलवार को सेमिनार में भाग लेना है। V को रविवार को सेमिनार में भाग लेना है। P और R के बीच में केवल U को सेमिनार में भाग लेना है। S को Q से पहले किसी एक दिन सेमिनार में भाग लेना है। निम्नलिखित में से किसे सोमवार को सेमिनार में भाग लेना है?",
+    q_en: "Q118. Each member P, Q, R, S, T, U and V of a certain department has to attend a seminar on a different day of the same week from Monday to Sunday. T attends immediately before P. Q attends on Tuesday. V attends on Sunday. Only U attends between P and R. S attends on a day before Q. Who among the following has to attend the seminar on Monday?",
+    tag: "RRB Tech. - (I) 20/12/2024 (Morning)",
+    o_hi: [
+      "(a) T",
+      "(b) P",
+      "(c) S",
+      "(d) R"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) P",
+      "(c) S",
+      "(d) R"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q119. सात बॉक्स, D, E, F, R, S, T और U, एक के ऊपर एक रखे गए हैं, लेकिन आवश्यक नहीं है कि इसी क्रम में रखे गए हों। U को T के ठीक ऊपर रखा गया है। E को D के ठीक ऊपर रखा गया है। S के ऊपर केवल F को रखा गया है। U के ऊपर केवल दो बॉक्स रखे गए हैं। E को नीचे से तीसरे स्थान पर नहीं रखा गया है। R और F के बीच कितने बॉक्स रखे गए हैं?",
+    q_en: "Q119. Seven boxes D, E, F, R, S, T and U are kept one above another, not necessarily in the same order. U is kept immediately above T. E is kept immediately above D. Only F is kept above S. Only two boxes are kept above U. E is not placed third from the bottom. How many boxes are kept between R and F?",
+    tag: "RRB JE 16/12/2024 (Morning)",
+    o_hi: [
+      "(a) तीन",
+      "(b) चार",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Four",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q120. A, B, C, D, E और F एक ही भवन के छ: विभिन्न तलों पर रहते हैं। भवन में सबसे निचले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है, और इसी प्रकार क्रमांकित अन्य तलों के साथ सबसे ऊपर वाले तल का क्रमांक 6 है। E एक सम संख्या वाले तल पर रहता है, किंतु 6 पर नहीं। A और E जिन तलों पर रहते हैं उनका योगफल 7 है। B के ठीक ऊपर F रहता है। E और D जिन तलों पर रहते हैं उनका योगफल 3 है। A और D के बीच कितने व्यक्ति रहते हैं?",
+    q_en: "Q120. A, B, C, D, E and F live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. E lives on an even-numbered floor but not floor 6. The sum of the floor numbers on which A and E live is 7. F lives immediately above B. The sum of the floor numbers on which E and D live is 3. How many persons live between A and D?",
+    tag: "RRB JE 16/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 1",
+      "(b) 2",
+      "(c) 3",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 1",
+      "(b) 2",
+      "(c) 3",
+      "(d) 4"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q121. A, B, C, D, E, F और G एक ही भवन के सात विभिन्न तलों पर रहते हैं। भवन के सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार क्रमांकित तलों के साथ सबसे ऊपर वाले तल का क्रमांक 7 है। C छठे तल पर रहता है। C और F के बीच केवल तीन व्यक्ति रहते हैं। A सम क्रमांक वाले तल पर रहता है। B के नीचे किसी तल पर किंतु F के ठीक ऊपर D रहता है। C के ऊपर किसी तल पर E रहता है। सबसे निचले तल पर कौन रहता है?",
+    q_en: "Q121. A, B, C, D, E, F and G live on seven different floors of the same building, numbered 1 at the bottom through 7 at the top. C lives on the sixth floor. Only three persons live between C and F. A lives on an even-numbered floor. D lives on a floor below B but immediately above F. E lives on a floor above C. Who lives on the lowermost floor?",
+    tag: "RRB JE 16/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) G",
+      "(b) F",
+      "(c) E",
+      "(d) B"
+    ],
+    o_en: [
+      "(a) G",
+      "(b) F",
+      "(c) E",
+      "(d) B"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q122. Q, R, S, T, U और V एक ही भवन के छः विभिन्न तलों पर रहते हैं। भवन में सबसे निचले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार क्रमांकित अन्य तलों के साथ सबसे ऊपर वाले तल का क्रमांक 6 है। S तीसरे तल पर रहता है। S और U के बीच केवल दो व्यक्ति रहते हैं। U के नीचे किसी तल पर किंतु Q के ठीक ऊपर R रहता है। Q चौथे तल पर नहीं रहता है। V एक विषम क्रमांक वाले तल पर रहता है। T और Q के बीच कितने व्यक्ति रहते हैं?",
+    q_en: "Q122. Q, R, S, T, U and V live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. S lives on the third floor. Only two persons live between S and U. R lives on a floor below U but immediately above Q. Q does not live on the fourth floor. V lives on an odd-numbered floor. How many persons live between T and Q?",
+    tag: "RRB JE 16/12/2024 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q123. सात बॉक्स, R, S, T, U, X, Y और Z, एक के ऊपर एक रखे गए हैं, लेकिन आवश्यक नहीं है कि इसी क्रम में रखे गए हों। केवल T को X के ऊपर रखा गया है। केवल Z को X और Y के बीच में रखा गया है। R के नीचे केवल U को रखा गया है। S और U के बीच कितने बॉक्स रखे गए हैं?",
+    q_en: "Q123. Seven boxes R, S, T, U, X, Y and Z are kept one above another, not necessarily in the same order. Only T is kept above X. Only Z is kept between X and Y. Only U is kept below R. How many boxes are kept between S and U?",
+    tag: "RRB J.E. 17/12/2024 (Morning)",
+    o_hi: [
+      "(a) तीन",
+      "(b) दो",
+      "(c) एक",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Two",
+      "(c) One",
+      "(d) Four"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q124. D, E, F, K, L, M और N में से प्रत्येक की परीक्षा सप्ताह के अलग-अलग दिन है, जो उसी सप्ताह के सोमवार से शुरू होकर रविवार को समाप्त होती है। N की परीक्षा गुरुवार को है। L की परीक्षा, N की परीक्षा से दो दिन पहले है। F और L की परीक्षाओं के बीच केवल चार व्यक्तियों की परीक्षा है। M की परीक्षा, L की परीक्षा के बाद किसी दिन है। D की परीक्षा, E की परीक्षा से ठीक पहले वाले दिन है। E और M की परीक्षाओं के बीच कितने व्यक्तियों की परीक्षा है?",
+    q_en: "Q124. The examinations of D, E, F, K, L, M and N are on different days of the week from Monday to Sunday. N's exam is on Thursday. L's exam is two days before N's. There are exams of only four persons between F and L. M's exam is on a day after L's. D's exam is on the day immediately before E's. How many persons have their exams between E and M?",
+    tag: "RRB J.E. 17/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) तीन",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) Three",
+      "(d) One"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q125. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे निचले तल का क्रमांक 1 है, उसके ऊपर के तल का क्रमांक 2 है और इसी प्रकार सबसे ऊपर के तल का क्रमांक 6 है। D और F के बीच केवल चार व्यक्ति रहते हैं। C एक सम क्रमांक वाले तल पर रहता है लेकिन तल क्रमांक 2 पर नहीं रहता है। E, A के ठीक नीचे लेकिन D के ऊपर रहता है। B के नीचे कितने व्यक्ति रहते हैं?",
+    q_en: "Q125. A, B, C, D, E and F live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. Only four persons live between D and F. C lives on an even-numbered floor but not floor 2. E lives immediately below A but above D. How many persons live below B?",
+    tag: "RRB J.E. 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) दो",
+      "(b) चार",
+      "(c) तीन",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Four",
+      "(c) Three",
+      "(d) One"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q126. सात बॉक्स, I, J, K, L, W, X और Y, एक के ऊपर एक रखे गए हैं, लेकिन आवश्यक नहीं है कि इसी क्रम में रखे गए हों। W के ऊपर केवल K को रखा गया है। W और J के बीच केवल दो बॉक्स रखे गए हैं। केवल L को I के नीचे रखा गया है। J को Y के ठीक नीचे नहीं रखा गया है। X और L के बीच कितने बॉक्स रखे गए हैं?",
+    q_en: "Q126. Seven boxes I, J, K, L, W, X and Y are kept one above another, not necessarily in the same order. Only K is kept above W. Only two boxes are kept between W and J. Only L is kept below I. J is not kept immediately below Y. How many boxes are kept between X and L?",
+    tag: "RRB J.E. 17/12/2024 (Evening)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) एक",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) One",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q127. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन होती है। Q की परीक्षा शनिवार को है। U के बाद केवल चार व्यक्तियों की परीक्षा है। R की परीक्षा T से ठीक पहले है लेकिन सोमवार को नहीं। S की परीक्षा P के बाद, लेकिन U से पहले है। R और V की परीक्षाओं के बीच कितने व्यक्तियों की परीक्षा है?",
+    q_en: "Q127. The examinations of P, Q, R, S, T, U and V are on different days of the same week starting Monday and ending Sunday. Q's exam is on Saturday. Only four persons have their exams after U. R's exam is immediately before T's but not on Monday. S's exam is after P's but before U's. How many persons have their exams between R and V?",
+    tag: "RRB J.E. 18/12/2024 (Morning)",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) पाँच",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) Five",
+      "(d) Three"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q128. G, H, I, J, K, L और M एक ही इमारत की सात अलग-अलग मंजिलों पर रहते हैं। इमारत में सबसे निचली मंजिल का क्रमांक 1 है, उसके ऊपर वाली मंजिल का क्रमांक 2 है और इसी प्रकार सबसे ऊपरी मंजिल का क्रमांक 7 है। H एक सम संख्या वाली मंजिल पर रहता है, लेकिन दूसरी मंजिल पर नहीं। H और M के बीच केवल तीन व्यक्ति रहते हैं। J, H के नीचे किसी मंजिल पर रहता है, लेकिन M के ठीक ऊपर। G, J के नीचे किसी मंजिल पर रहता है। G और K के बीच केवल तीन व्यक्ति रहते हैं। L, J के ऊपर किसी मंजिल पर रहता है, लेकिन I के नीचे। पाँचवीं मंजिल पर कौन रहता है?",
+    q_en: "Q128. G, H, I, J, K, L and M live on seven different floors of the same building, numbered 1 at the bottom through 7 at the top. H lives on an even-numbered floor but not floor 2. Only three persons live between H and M. J lives on a floor below H but immediately above M. G lives on a floor below J. Only three persons live between G and K. L lives on a floor above J but below I. Who lives on the fifth floor?",
+    tag: "RRB J.E. 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) L",
+      "(b) H",
+      "(c) K",
+      "(d) M"
+    ],
+    o_en: [
+      "(a) L",
+      "(b) H",
+      "(c) K",
+      "(d) M"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q129. सात बॉक्स, A, B, C, D, X, Y और Z, एक के ऊपर एक रखे गए हैं, लेकिन आवश्यक नहीं है कि इसी क्रम में रखे गए हों। B के ऊपर केवल तीन बॉक्स रखे गए हैं। C और B के बीच में केवल एक बॉक्स रखा गया है। C और Y के बीच में केवल तीन बॉक्स रखे गए हैं। Y को B के ऊपर किसी एक स्थान पर रखा गया है। Z को Y के ठीक नीचे रखा गया है। A को X के ऊपर किसी एक स्थान पर रखा गया है। D को C के ठीक ऊपर या ठीक नीचे नहीं रखा गया है। कौन-सा बॉक्स सबसे निचले स्थान पर रखा गया है?",
+    q_en: "Q129. Seven boxes A, B, C, D, X, Y and Z are kept one above another, not necessarily in the same order. Only three boxes are kept above B. Only one box is kept between C and B. Only three boxes are kept between C and Y. Y is kept somewhere above B. Z is kept immediately below Y. A is kept somewhere above X. D is not kept immediately above or immediately below C. Which box is placed at the bottommost position?",
+    tag: "RRB J.E. 18/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) B",
+      "(b) C",
+      "(c) X",
+      "(d) Z"
+    ],
+    o_en: [
+      "(a) B",
+      "(b) C",
+      "(c) X",
+      "(d) Z"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q130. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन होती है। P की परीक्षा के बाद केवल पाँच लोगों की परीक्षा है। T की परीक्षा से पहले केवल तीन लोगों की परीक्षा है। Q की परीक्षा, V की परीक्षा के ठीक बाद लेकिन U की परीक्षा से पहले है। S की परीक्षा सोमवार को नहीं है। Q और R की परीक्षाओं के बीच कितने लोगों की परीक्षा है ?",
+    q_en: "Q130. The examinations of P, Q, R, S, T, U and V are on different days of the same week starting Monday and ending Sunday. Only five persons have their exams after P. Only three persons have their exams before T. Q's exam is immediately after V's but before U's. S's exam is not on Monday. How many persons have their exams between Q and R?",
+    tag: "RRB J.E. 18/12/2024 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q131. F, G, H, I, J और Q एक ही भवन के छह अलग-अलग तलों पर रहते हैं। भवन में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार सबसे ऊपर वाले तल का क्रमांक 6 है। J के तल के नीचे कोई भी व्यक्ति नहीं रहता है। J और G के तलों के बीच के तलों पर केवल दो व्यक्ति रहते हैं। Q के तल के ऊपर वाले तल पर केवल I रहता है। H एक सम क्रमांक वाले तल पर रहता है। F और Q के तलों के बीच के तलों पर कितने व्यक्ति रहते हैं ?",
+    q_en: "Q131. F, G, H, I, J and Q live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. No person lives below J. Only two persons live on floors between J and G. Only I lives on the floor immediately above Q. H lives on an even-numbered floor. How many persons live on floors between F and Q?",
+    tag: "RPF S.I. 02/12/2024 (Morning)",
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) चार",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Four",
+      "(d) Two"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q132. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन है। R की परीक्षा बुधवार को है। R और U के बीच ठीक 3 व्यक्तियों की परीक्षा है। V की परीक्षा S के ठीक बाद है और Q की परीक्षा S से ठीक पहले है। P और S के बीच केवल 3 व्यक्तियों की परीक्षा है। सोमवार को किसकी परीक्षा है ?",
+    q_en: "Q132. The examinations of P, Q, R, S, T, U and V are on different days of the same week starting Monday and ending Sunday. R's exam is on Wednesday. There are exams of exactly three persons between R and U. V's exam is immediately after S's and Q's exam is immediately before S's. There are exams of only three persons between P and S. Whose exam is on Monday?",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) V",
+      "(b) U",
+      "(c) Q",
+      "(d) P"
+    ],
+    o_en: [
+      "(a) V",
+      "(b) U",
+      "(c) Q",
+      "(d) P"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q133. P, Q, R, S, T, U और V में से प्रत्येक सोमवार से शुरू होकर रविवार को समाप्त होने वाले सप्ताह के अलग-अलग दिन तैरने जाते हैं। P शनिवार को तैरने जाता है। P और U के बीच केवल तीन व्यक्ति तैरने जाते हैं। U और T के बीच केवल दो व्यक्ति तैरने जाते हैं। Q और R के बीच केवल दो व्यक्ति तैरने जाते हैं। S और V के बीच केवल तीन व्यक्ति तैरने जाते हैं। S और R के बीच केवल दो व्यक्ति तैरने जाते हैं हैं। T कब तैरने जाता है ?",
+    q_en: "Q133. P, Q, R, S, T, U and V each go swimming on different days of the week from Monday to Sunday. P goes swimming on Saturday. Only three persons go swimming between P and U. Only two persons go swimming between U and T. Only two persons go swimming between Q and R. Only three persons go swimming between S and V. Only two persons go swimming between S and R. On which day does T go swimming?",
+    tag: "RPF S.I. 02/12/2024 (Evening)",
+    o_hi: [
+      "(a) शुक्रवार",
+      "(b) रविवार",
+      "(c) मंगलवार",
+      "(d) सोमवार"
+    ],
+    o_en: [
+      "(a) Friday",
+      "(b) Sunday",
+      "(c) Tuesday",
+      "(d) Monday"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q134. P, Q, R, S, T, U और V में से प्रत्येक सोमवार से शुरू होकर रविवार को समाप्त होने वाले सप्ताह के अलग-अलग दिन खेलने जाते हैं। S मंगलवार को खेलने जाता है। S और P के बीच केवल दो व्यक्ति खेलने जाते हैं। V और U के बीच केवल दो व्यक्ति खेलने जाते हैं। Q, V के ठीक बाद वाले दिन खेलने जाता है। R और V के बीच केवल एक व्यक्ति खेलने जाता है। Q, P के बाद किसी एक दिन खेलने जाता है। कौन सोमवार को खेलने जाता है ?",
+    q_en: "Q134. P, Q, R, S, T, U and V each go to play on different days of the week from Monday to Sunday. S goes to play on Tuesday. Only two persons go to play between S and P. Only two persons go to play between V and U. Q goes to play on the day immediately after V. Only one person goes to play between R and V. Q goes to play on a day after P. Who goes to play on Monday?",
+    tag: "RPF S.I. 03/12/2024 (Morning)",
+    o_hi: [
+      "(a) U",
+      "(b) R",
+      "(c) T",
+      "(d) V"
+    ],
+    o_en: [
+      "(a) U",
+      "(b) R",
+      "(c) T",
+      "(d) V"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q135. A, B, C, D, P, Q और R में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले सप्ताह के अलग-अलग दिन है। D की परीक्षा से पहले किसी की भी परीक्षा नहीं है। D और Q की परीक्षाओं के बीच केवल तीन व्यक्तियों की परीक्षा है। Q और R की परीक्षाओं के बीच केवल एक व्यक्ति की परीक्षा है। B की परीक्षा बुधवार को है। A की परीक्षा, C की परीक्षा के बाद, लेकिन P की परीक्षा से पहले किसी एक दिन है। A की परीक्षा सप्ताह के किस दिन है ?",
+    q_en: "Q135. The examinations of A, B, C, D, P, Q and R are on different days of the week from Monday to Sunday. No one has an exam before D. There are exams of only three persons between D and Q. There is the exam of only one person between Q and R. B's exam is on Wednesday. A's exam is on a day after C's but before P's. On which day of the week is A's exam?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) शनिवार",
+      "(b) गुरुवार",
+      "(c) सोमवार",
+      "(d) मंगलवार"
+    ],
+    o_en: [
+      "(a) Saturday",
+      "(b) Thursday",
+      "(c) Monday",
+      "(d) Tuesday"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q136. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन है। R की परीक्षा गुरुवार को है। U और Q के बीच ठीक 4 व्यक्तियों की परीक्षा है, जिनमें से किसी की भी परीक्षा रविवार को नहीं है। P की परीक्षा S से ठीक पहले है। V की परीक्षा शुक्रवार को नहीं है। U की परीक्षा S के बाद नहीं है। Q के बाद कितने व्यक्तियों की परीक्षा है ?",
+    q_en: "Q136. The examinations of P, Q, R, S, T, U and V are on different days of the same week starting Monday and ending Sunday. R's exam is on Thursday. There are exams of exactly four persons between U and Q, and neither exam is on Sunday. P's exam is immediately before S's. V's exam is not on Friday. U's exam is not after S's. How many persons have their exams after Q?",
+    tag: "RPF S.I. 03/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 1",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 1",
+      "(d) 4"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q137. सात डिब्बों C, D, E, F, G, H और P को एक केऊपर एक रखा गया है, लेकिन जरूरी नहीं कि ये डिब्बे इसी क्रम में रखे गए हों। डिब्बे C के नीचे केवल एक डिब्बे को रखा गया है। डिब्बों C और H के बीच केवल तीन डिब्बों को रखा गया है। डिब्बे F को डिब्बे C के नीचे किसी एक स्थान पर रखा गया है। डिब्बों H और G के बीच केवल डिब्बे P को रखा गया है। डिब्बे E को डिब्बे H के ऊपर किसी एक स्थान पर रखा गया है। डिब्बों D और F के बीच कितने डिब्बों को रखा गया है ?",
+    q_en: "Q137. Seven boxes C, D, E, F, G, H and P are kept one above another, not necessarily in the same order. Only one box is kept below C. Only three boxes are kept between C and H. F is kept somewhere below C. Only P is kept between H and G. E is kept somewhere above H. How many boxes are kept between D and F?",
+    tag: "RPF S.I. 03/12/2024 (Evening)",
+    o_hi: [
+      "(a) तीन",
+      "(b) चार",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) Four",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q138. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले एक ही सप्ताह के अलग-अलग दिन है। S की शुक्रवार को परीक्षा है। S और R के बीच केवल 2 व्यक्तियों की परीक्षा है। Q की परीक्षा T से ठीक पहले है और U की परीक्षा V के ठीक बाद है। P और T के बीच केवल 2 व्यक्तियों की परीक्षा है। T से पहले कितने व्यक्तियों की परीक्षा है ?",
+    q_en: "Q138. The examinations of P, Q, R, S, T, U and V are on different days of the same week starting Monday and ending Sunday. S's exam is on Friday. There are exams of only two persons between S and R. Q's exam is immediately before T's and U's exam is immediately after V's. There are exams of only two persons between P and T. How many persons have their exams before T?",
+    tag: "RPF S.I. 09/12/2024 (Morning)",
+    o_hi: [
+      "(a) 4",
+      "(b) 3",
+      "(c) 1",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 4",
+      "(b) 3",
+      "(c) 1",
+      "(d) 2"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q139. सात डिब्बे, A, B, C, D, E, F और G, एक के ऊपर एक रखे गए हैं, लेकिन जरूरी नहीं कि वे इसी क्रम में हों। G को E के ठीक ऊपर रखा गया है। F को D के ठीक ऊपर रखा गया है। B के ऊपर केवल A को रखा गया है। G के ऊपर केवल दो डिब्बे रखे गए हैं। F को सबसे नीचे से तीसरे स्थान पर नहीं रखा गया है। F के ऊपर कितने डिब्बे रखे गए हैं ?",
+    q_en: "Q139. Seven boxes A, B, C, D, E, F and G are kept one above another, not necessarily in the same order. G is kept immediately above E. F is kept immediately above D. Only A is kept above B. Only two boxes are kept above G. F is not placed third from the bottom. How many boxes are kept above F?",
+    tag: "RPF S.I. 09/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 5"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 5"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q140. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले सप्ताह केअलग-अलग दिन है। R और V की परीक्षाओं के बीच केवल दो व्यक्तियों की परीक्षा है। U की परीक्षा मंगलवार को है। P की परीक्षा, V की परीक्षा से ठीक पहले वाले दिन है और U की परीक्षा के ठीक बाद वाले दिन है। S की परीक्षा सोमवार को है। T की परीक्षा, R की परीक्षा से पहले वाले दिन है और Q की परीक्षा के बाद वाले दिन है। Q की परीक्षा शुक्रवार को है। निम्नलिखित में से किसकी परीक्षा बुधवार को है ?",
+    q_en: "Q140. The examinations of P, Q, R, S, T, U and V are on different days of the week from Monday to Sunday. There are exams of only two persons between R and V. U's exam is on Tuesday. P's exam is on the day immediately before V's and immediately after U's. S's exam is on Monday. T's exam is on the day before R's and after Q's. Q's exam is on Friday. Whose exam is on Wednesday?",
+    tag: "RPF S.I. 09/12/2024 (Evening)",
+    o_hi: [
+      "(a) T",
+      "(b) R",
+      "(c) V",
+      "(d) P"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) R",
+      "(c) V",
+      "(d) P"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q141. छह व्यक्ति, जिन के नाम W, X, Y, Z, T और U हैं, प्रत्येक अलग-अलग आयु के हैंI W की आयु 30 है। U की आयु, T की आयु की एक-चौथाई है। Y की आयु, X की आयु की दो गुनी हैI T की आयु, Y की आयु की पांच गुनी है। W की आयु, U की आयु की दो गुनी है। यदि X की आयु, Z की आयु की एक-चौथाई है, तो Z की आयु कितनी है ?",
+    q_en: "Q141. Six persons W, X, Y, Z, T and U each have different ages. W is 30 years old. U's age is one-fourth of T's age. Y's age is twice X's age. T's age is five times Y's age. W's age is twice U's age. If X's age is one-fourth of Z's age, what is Z's age?",
+    tag: "RPF S.I. 12/12/2024 (Morning)",
+    o_hi: [
+      "(a) 24",
+      "(b) 45",
+      "(c) 25",
+      "(d) 35"
+    ],
+    o_en: [
+      "(a) 24",
+      "(b) 45",
+      "(c) 25",
+      "(d) 35"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q142. P, Q, R, S, T, U और V में से प्रत्येक सोमवार से शुरू होकर रविवार को समाप्त होने वाले सप्ताह के अलग-अलग दिन बाजार जाते हैं। P बुधवार को बाजार जाता है। P और Q के बीच केवल दो व्यक्ति बाजार जाते हैं। Q और S के बीच केवल तीन व्यक्ति बाजार जाते हैं। R और T के बीच केवल दो व्यक्ति बाजार जाते हैं। U, T के ठीक बाद वाले दिन बाजार जाता है। V, U के बाद किसी एक दिन बाजार जाता है। कौन गुरुवार को बाजार जाता है ?",
+    q_en: "Q142. P, Q, R, S, T, U and V each go to the market on different days of the week from Monday to Sunday. P goes on Wednesday. Only two persons go between P and Q. Only three persons go between Q and S. Only two persons go between R and T. U goes on the day immediately after T. V goes on a day after U. Who goes to the market on Thursday?",
+    tag: "RPF S.I. 12/12/2024 (Morning)",
+    o_hi: [
+      "(a) T",
+      "(b) S",
+      "(c) V",
+      "(d) U"
+    ],
+    o_en: [
+      "(a) T",
+      "(b) S",
+      "(c) V",
+      "(d) U"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q143. सात डिब्बे, A, B, C, D, E, F और G, एक के ऊपर एक रखे गए हैं, लेकिन जरूरी नहीं कि वे इसी क्रम में हों। F के ऊपर केवल तीन डिब्बे रखे गए हैं। D और F के बीच केवल एक डिब्बा रखा गया है। D और B के बीच केवल तीन डिब्बे रखे गए हैं। B को F के ऊपर किसी स्थान पर रखा गया है। G को B के ठीक नीचे रखा गया है। E को A के ऊपर किसी स्थान पर रखा गया गए है। C को D के ठीक ऊपर या नीचे नहीं रखा गया है। G के ऊपर कितने डिब्बे रखे हैं ?",
+    q_en: "Q143. Seven boxes A, B, C, D, E, F and G are kept one above another, not necessarily in the same order. Only three boxes are kept above F. Only one box is kept between D and F. Only three boxes are kept between D and B. B is kept somewhere above F. G is kept immediately below B. E is kept somewhere above A. C is not kept immediately above or below D. How many boxes are kept above G?",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) 2",
+      "(b) 4",
+      "(c) 3",
+      "(d) 1"
+    ],
+    o_en: [
+      "(a) 2",
+      "(b) 4",
+      "(c) 3",
+      "(d) 1"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q144. सात डिब्बों U, V, W, X, P, Q और R को एक के ऊपर एक रखा गया है, लेकिन जरूरी नहीं कि ये डिब्बे इसी क्रम में हों। डिब्बा V को नीचे से दूसरे स्थान पर रखा गया है। डिब्बों V और R के बीच केवल तीन डिब्बों को रखा गया है। डिब्बा X को डिब्बा V के नीचे किसी एक स्थान पर रखा गया है। डिब्बों R और W के बीच केवल डिब्बा U को रखा गया है। डिब्बा P को डिब्बा R के ऊपर किसी एक स्थान पर रखा गया है। डिब्बों X और P के बीच कितने डिब्बों को रखा गया है ?",
+    q_en: "Q144. Seven boxes U, V, W, X, P, Q and R are kept one above another, not necessarily in the same order. V is placed second from the bottom. Only three boxes are kept between V and R. X is kept somewhere below V. Only U is kept between R and W. P is kept somewhere above R. How many boxes are kept between X and P?",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) एक",
+      "(b) चार",
+      "(c) तीन",
+      "(d) पांच"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Four",
+      "(c) Three",
+      "(d) Five"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q145. P, Q, R, U, V और W, एक ही बिल्डिंग के छह अलग-अलग तलों पर रहते हैं। बिल्डिंग के सबसे निचले तल का नंबर 1 है, उसके ऊपर के तल का नंबर 2 है और इसी तरह, सबसे ऊपर के तल का नंबर 6 है। U सम नंबर वाले तल पर रहता है लेकिन तल नंबर 4 पर नहीं रहता है। U और V के बीच केवल दो व्यक्ति रहते हैं। Q विषम नंबर वाले तल पर रहता है लेकिन सबसे निचले तल पर नहीं रहता है। Q और P के बीच केवल दो व्यक्ति रहते हैं। W, Q के ठीक नीचे रहता है। R और W के बीच कितने व्यक्ति रहते हैं ?",
+    q_en: "Q145. P, Q, R, U, V and W live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. U lives on an even-numbered floor but not floor 4. Only two persons live between U and V. Q lives on an odd-numbered floor but not the lowermost floor. Only two persons live between Q and P. W lives immediately below Q. How many persons live between R and W?",
+    tag: "RPF S.I. 12/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) एक",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) One",
+      "(d) Four"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q146. सात डिब्बों O, P, Q, R, S, T और D को एक के ऊपर एक रखा गया है, लेकिन जरूरी नहीं कि ये डिब्बे इसी क्रम में रखे गए हों। डिब्बे T के ऊपर केवल तीन डिब्बों को रखा गया है। डिब्बे O और T के बीच केवल एक डिब्बे को रखा गया है। डिब्बों O और D के बीच केवल तीन डिब्बों को रखा गया है। डिब्बे D को डिब्बे T के ऊपर किसी स्थान पर रखा गया है। डिब्बे P को डिब्बे D के ठीक नीचे रखा गया है। डिब्बे S को डिब्बे R के ऊपर किसी स्थान पर रखा गया है। डिब्बे Q को डिब्बे O के ठीक ऊपर या नीचे नहीं रखा गया है। डिब्बों Q और R के बीच कितने डिब्बों को रखा गया है ?",
+    q_en: "Q146. Seven boxes O, P, Q, R, S, T and D are kept one above another, not necessarily in the same order. Only three boxes are kept above T. Only one box is kept between O and T. Only three boxes are kept between O and D. D is kept somewhere above T. P is kept immediately below D. S is kept somewhere above R. Q is not kept immediately above or below O. How many boxes are kept between Q and R?",
+    tag: "RPF S.I. 12/12/2024 (Evening)",
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) पांच",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Five",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q147. A, B, C, D, E और F एक ही भवन के छह अलग-अलग तलों पर रहते हैं। भवन में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार सबसे ऊपर वाले तल का क्रमांक 6 है। D एक अभाज्य क्रमांक वाले तल पर रहता है। जिन तलों पर D और A रहते हैं, उन तलों के क्रमांकों का गुणनफल 8 है। E, B के तल के ठीक ऊपर वाले तल पर रहता है। जिन तलों पर A और C रहते हैं, उन तलों के क्रमांकों का योगफल 7 है। D और E के तलों के बीच के तलों पर कितने व्यक्ति रहते हैं ?",
+    q_en: "Q147. A, B, C, D, E and F live on six different floors of the same building, numbered 1 at the bottom through 6 at the top. D lives on a prime-numbered floor. The product of the floor numbers on which D and A live is 8. E lives immediately above B. The sum of the floor numbers on which A and C live is 7. How many persons live on floors between D and E?",
+    tag: "RPF S.I. 13/12/2024 (Morning)",
+    o_hi: [
+      "(a) 4",
+      "(b) 1",
+      "(c) 2",
+      "(d) 3"
+    ],
+    o_en: [
+      "(a) 4",
+      "(b) 1",
+      "(c) 2",
+      "(d) 3"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q148. सात डिब्बों U, V, W, X, P, Q और R को एक के ऊपर एक रखा गया है, लेकिन जरूरी नहीं कि ये डिब्बे इसी क्रम में हों। डिब्बा X के नीचे केवल दो डिब्बों को रखा गया है। डिब्बा Q के ऊपर केवल एक डिब्बे को रखा गया है। डिब्बों Q और U के बीच केवल एक डिब्बे को रखा गया है। डिब्बा V को डिब्बा P के ठीक ऊपर रखा गया है। डिब्बा R को डिब्बा W के नीचे किसी स्थान पर रखा गया है। डिब्बों W और V के बीच कितने डिब्बों को रखा गया है ?",
+    q_en: "Q148. Seven boxes U, V, W, X, P, Q and R are kept one above another, not necessarily in the same order. Only two boxes are kept below X. Only one box is kept above Q. Only one box is kept between Q and U. V is kept immediately above P. R is kept somewhere below W. How many boxes are kept between W and V?",
+    tag: "RPF S.I. 13/12/2024 (Morning)",
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) दो",
+      "(d) चार"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Two",
+      "(d) Four"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q149. सात डिब्बों E, F, G, H, I, J और W को एक के ऊपर एक रखा गया है, लेकिन जरूरी नहीं कि ये डिब्बे इसी क्रम में रखे गए हों। डिब्बे J के ऊपर केवल एक डिब्बे को रखा गया है। डिब्बों E और J के बीच केवल तीन डिब्बों को रखा गया है। डिब्बे I को डिब्बे E के नीचे किसी एक स्थान पर रखा गया है। डिब्बों J और F के बीच केवल डिब्बे W को रखा गया है। डिब्बे H को डिब्बे J के ऊपर किसी एक स्थान पर रखा गया है। डिब्बों I और H के बीच कितने डिब्बों को रखा गया है ?",
+    q_en: "Q149. Seven boxes E, F, G, H, I, J and W are kept one above another, not necessarily in the same order. Only one box is kept above J. Only three boxes are kept between E and J. I is kept somewhere below E. Only W is kept between J and F. H is kept somewhere above J. How many boxes are kept between I and H?",
+    tag: "RPF S.I. 13/12/2024 (Afternoon)",
+    o_hi: [
+      "(a) दो",
+      "(b) तीन",
+      "(c) पांच",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Three",
+      "(c) Five",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q150. P, Q, R, S, T, U और V में से प्रत्येक की परीक्षा सोमवार से शुरू होकर रविवार को समाप्त होने वाले सप्ताह के अलग-अलग दिन है। P और T परीक्षाओं बीच केवल एक व्यक्ति की परीक्षा है। S की परीक्षा मंगलवार को है। P की परीक्षा, Q की परीक्षा से ठीक पहले वाले दिन है। V की परीक्षा, U की परीक्षा के ठीक पहले और R की परीक्षा के ठीक बाद वाले दिन है। T की परीक्षा सोमवार को है। R के बाद कितने व्यक्तियों की परीक्षा है ?",
+    q_en: "Q150. The examinations of P, Q, R, S, T, U and V are on different days of the week from Monday to Sunday. There is the exam of only one person between P and T. S's exam is on Tuesday. P's exam is on the day immediately before Q's. V's exam is immediately before U's and immediately after R's. T's exam is on Monday. How many persons have their exams after R?",
+    tag: "RPF S.I. 13/12/2024 (Evening)",
+    o_hi: [
+      "(a) एक भी नहीं",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) None",
+      "(b) Three",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
