@@ -1940,6 +1940,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   user-select: none !important;
   -webkit-touch-callout: none !important;
 }
+#ai-bottom-sheet.ai-pencil-on #ai-chat-body,
+#ai-bottom-sheet.ai-pencil-on .ai-chat-body,
+#ai-bottom-sheet.ai-pencil-on .ai-chat-body * { touch-action:none !important; }
 #ai-bottom-sheet.ai-pencil-on {
   touch-action: none !important;
   overscroll-behavior: none !important;
@@ -2925,42 +2928,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 <!-- RE-ENGINEERED DYNAMIC PREMIUM VIEW RENDERING CORE INTERFACE LAYER -->
 <script>
-// Read quiz data together with its image constants, without running its quiz UI.
-function parseQuizSource(source) {
-  let code = source.replace(/^\uFEFF/, '');
-  if (/^\s*</.test(code)) {
-    const doc = new DOMParser().parseFromString(code, 'text/html');
-    code = Array.from(doc.querySelectorAll('script:not([src])'))
-      .filter(script => !script.type || /^(?:text|application)\/javascript$/i.test(script.type))
-      .map(script => script.textContent).join('\n');
-  }
-  const declaration = /\b(?:const|let|var)\s+data\s*=\s*\[/.exec(code);
-  if (!declaration) throw new Error('Quiz file has no data array.');
-  const start = declaration.index + declaration[0].lastIndexOf('[');
-  let depth = 0, quote = null, escaped = false, comment = null, end = -1;
-  for (let i = start; i < code.length; i++) {
-    const ch = code[i], next = code[i + 1];
-    if (comment === 'line') { if (ch === '\n' || ch === '\r') comment = null; continue; }
-    if (comment === 'block') { if (ch === '*' && next === '/') { comment = null; i++; } continue; }
-    if (quote) {
-      if (escaped) escaped = false;
-      else if (ch === '\\') escaped = true;
-      else if (ch === quote) quote = null;
-      continue;
-    }
-    if (ch === '/' && next === '/') { comment = 'line'; i++; continue; }
-    if (ch === '/' && next === '*') { comment = 'block'; i++; continue; }
-    if (ch === '"' || ch === "'" || ch === '`') { quote = ch; continue; }
-    if (ch === '[') depth++;
-    if (ch === ']' && --depth === 0) { end = i + 1; break; }
-  }
-  if (end < 0) throw new Error('Quiz data array is incomplete.');
-  const questions = new Function(code.slice(0, end) + ';\nreturn data;')();
-  if (!Array.isArray(questions) || !questions.length) throw new Error('Quiz data must be a non-empty array.');
-  return questions;
-}
-
-
 
 // Move blur-overlay modals to <body> so they escape #quizEngineBox's
 // position:fixed + overflow:hidden wrapper — iOS Safari fails to render
@@ -3227,7 +3194,13 @@ async function openBookmarkedQuestion(bookmark){
       const response = await fetch(`./${bookmark.path}`);
       if(!response.ok) throw new Error('File Download Failed');
       const source = await response.text();
-      const quizQuestions = parseQuizSource(source);
+      let quizQuestions;
+      try{ quizQuestions = new Function(source + "\nreturn data;")(); }
+      catch(e){
+        const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+        if(!match) throw e;
+        quizQuestions = new Function('return ' + match[1])();
+      }
       if(!Array.isArray(quizQuestions) || !quizQuestions[bookmark.questionIndex]) throw new Error('Saved question not found');
       item = JSON.parse(JSON.stringify(quizQuestions[bookmark.questionIndex]));
     }
@@ -3311,7 +3284,13 @@ async function startBookmarkedTestQuiz(bookmarks){
             const response = await fetch(`./${b.path}`);
             if(!response.ok) throw new Error('File Download Failed');
             const source = await response.text();
-            const quizQuestions = parseQuizSource(source);
+            let quizQuestions;
+            try{ quizQuestions = new Function(source + "\nreturn data;")(); }
+            catch(e){
+              const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+              if(!match) throw e;
+              quizQuestions = new Function('return ' + match[1])();
+            }
             fileCache[b.path]=Array.isArray(quizQuestions)?quizQuestions:[];
           }
           const quizQuestions=fileCache[b.path];
@@ -4167,7 +4146,7 @@ function showEmptyState() {
   function appendLaserSample(ev){
     if(!drawing||!currentLaserPts||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
     const rawX=ev.clientX, rawY=ev.clientY;
-    if(rawX===lastX&&rawY===lastY) return;
+    if(ev.timeStamp<lastTime || (rawX===lastX&&rawY===lastY)) return;
     lastX=rawX; lastY=rawY; lastTime=ev.timeStamp||performance.now();
     smoothLX+=SMOOTH_ALPHA*(rawX-smoothLX);
     smoothLY+=SMOOTH_ALPHA*(rawY-smoothLY);
@@ -4215,6 +4194,7 @@ function showEmptyState() {
   }
 
   function redraw(){
+    clearTip();
     if(!ctx) return;
     ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
     if(starCtx) starCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
@@ -4338,7 +4318,7 @@ function showEmptyState() {
   // mid-word when shifting to the next letter. Now the pencil can write
   // anywhere outside the named control zones, without interruption.
   var EXCLUDED_ZONE_SELECTOR = [
-    '.floating-quiz-header', '#controls', '#pencilTools',
+    '.floating-quiz-header', '#controls', '#pencilTools', '#pencilInputCheck',
     '#exitConfirmModal', '#exitConfirmFade',
     '#pauseModal', '#pauseFade',
     '#submitConfirmModal', '#submitConfirmFade',
@@ -4352,6 +4332,38 @@ function showEmptyState() {
     return !!target.closest(EXCLUDED_ZONE_SELECTOR);
   }
 
+  // A replaceable tip layer reaches the latest real sample without baking
+  // temporary straight stubs into the saved, midpoint-smoothed stroke.
+  let tipCanvas=null, tipCtx=null;
+  function clearTip(){
+    if(tipCtx){tipCtx.setTransform(1,0,0,1,0,0);tipCtx.clearRect(0,0,tipCanvas.width,tipCanvas.height);}
+  }
+  function showTip(rawX,rawY){
+    clearTip();
+    if(tool!=='pen'||!currentStroke||currentStroke.points.length<2) return;
+    if(!tipCanvas){
+      tipCanvas=document.createElement('canvas');
+      tipCanvas.setAttribute('aria-hidden','true');
+      canvas.parentNode.insertBefore(tipCanvas,canvas.nextSibling);
+      tipCtx=tipCanvas.getContext('2d',{alpha:true,desynchronized:true});
+    }
+    tipCanvas.style.cssText=canvas.style.cssText;
+    const layout=getComputedStyle(canvas);
+    tipCanvas.style.position=layout.position;
+    tipCanvas.style.top=layout.top; tipCanvas.style.left=layout.left;
+    tipCanvas.style.zIndex=layout.zIndex;
+    tipCanvas.style.pointerEvents='none';
+    tipCanvas.style.touchAction='none';
+    if(tipCanvas.width!==canvas.width) tipCanvas.width=canvas.width;
+    if(tipCanvas.height!==canvas.height) tipCanvas.height=canvas.height;
+    tipCtx.setTransform(dpr,0,0,dpr,0,0);
+    const pts=currentStroke.points, b=pts[pts.length-1], a=pts[pts.length-2], m=mid(a,b);
+    tipCtx.lineCap='round';tipCtx.lineJoin='round';
+    tipCtx.lineWidth=b.w;tipCtx.strokeStyle=currentStroke.color;
+    tipCtx.beginPath();tipCtx.moveTo(m.x,m.y);
+    tipCtx.quadraticCurveTo(b.x,b.y,rawX,rawY);tipCtx.stroke();
+  }
+
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||ev.pointerType!=='pen') return;
     const rawX=ev.clientX, rawY=ev.clientY, t=ev.timeStamp||performance.now();
@@ -4359,14 +4371,18 @@ function showEmptyState() {
     // pointerrawupdate can both report the exact same physical sample with
     // slightly different timeStamp values, so this also dedupes across the
     // two fallback streams, not just repeats within one stream.
-    if(rawX===lastX && rawY===lastY) return;
+    if(t<=lastTime || (rawX===lastX && rawY===lastY)) return;
+    const dt=Math.max(1,t-lastTime);
+    const speed=Math.hypot(rawX-lastX,rawY-lastY)/dt;
+    // More filtering at low speed; catch up quickly on fast handwriting.
+    const alpha=1-Math.exp(-dt/(2.8/(1+speed*1.8)));
     lastX=rawX; lastY=rawY; lastTime=t;
 
     // Low-pass filter the raw touch position: softens hand-tremor jitter so
     // the ink comes out steady/rounded like Apple Notes, instead of tracking
     // every tiny wobble of the raw sensor data 1:1.
-    smoothX += SMOOTH_ALPHA*(rawX-smoothX);
-    smoothY += SMOOTH_ALPHA*(rawY-smoothY);
+    smoothX += alpha*(rawX-smoothX);
+    smoothY += alpha*(rawY-smoothY);
     const next={x:smoothX,y:smoothY,w:widthFor(ev.pressure)};
     currentStroke.points.push(next);
 
@@ -4386,15 +4402,7 @@ function showEmptyState() {
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
-      // Live tip stub: the smoothed curve above always stops at the
-      // midpoint, one half-sample behind the real pen position. Extend
-      // the same stroke with a short straight segment out to the RAW
-      // pen position (rawX/rawY — not the smoothed p2) so the ink
-      // visibly reaches wherever the pen actually is right now instead
-      // of trailing behind it. The next sample's curve starts fresh
-      // from this same midpoint, so it simply overlays this stub with
-      // the properly smoothed version — no visual glitch.
-      ctx.lineTo(rawX,rawY);
+      // Paint each curve once; permanent raw-tip stubs cause spikes.
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
@@ -4402,9 +4410,46 @@ function showEmptyState() {
 
   function appendEvents(events){
     for(const ev of events) appendSample(ev);
+    showTip(lastX,lastY);
   }
 
+  // Safari can suppress secondary pen PointerEvents after an earlier finger.
+  // Use explicitly identified stylus Touch events for that contact only.
+  let stylusTouchId=null;
+  function routeStylusTouch(e){
+    if(!enabled) return;
+    const ending=e.type==='touchend'||e.type==='touchcancel';
+    for(const t of Array.from(e.changedTouches||[])){
+      if(stylusTouchId!==null ? t.identifier!==stylusTouchId : t.touchType!=='stylus') continue;
+      if(stylusTouchId===null && ending) continue;
+      const ev={
+        type:ending?(e.type==='touchcancel'?'pointercancel':'pointerup'):'pointermove',
+        pointerType:'pen', pointerId:activePointerId===null?-(t.identifier+1):activePointerId,
+        clientX:t.clientX, clientY:t.clientY, pressure:t.force>0?t.force:0.5,
+        timeStamp:e.timeStamp, target:t.target, stylusTouch:true,
+        preventDefault(){},
+        stopPropagation(){e.stopPropagation();}
+      };
+      if(stylusTouchId===null){
+        if(!drawing){ ev.type='pointerdown'; start(ev); }
+        if(!drawing) continue;
+        stylusTouchId=t.identifier;
+      }
+      if(ending){end(ev);stylusTouchId=null;}
+      else move(ev);
+    }
+  }
+
+  window.__pencilInputState=window.__pencilInputState||{};
+  window.__pencilInputState.main=()=>({enabled,drawing,activePointerId,stylusTouchId,points:currentStroke?currentStroke.points.length:0});
   function start(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        move(e); return;
+      }
+    }
     if(!isPencil(e)) return;
     if(isInExcludedZone(e.target)) return;
     e.preventDefault();
@@ -4420,16 +4465,13 @@ function showEmptyState() {
 
     drawing=true;
     activePointerId=e.pointerId;
+    try{document.documentElement.setPointerCapture(e.pointerId);}catch(_){}
     usingRawStream=false;
 
     if(tool==='star'){
       // Star is a tap-to-place stamp, not a dragged stroke: just remember
       // where the pencil first touched down and decide on release whether
       // it was a tap (place the star) or a drag (cancel, no star).
-      // No setPointerCapture here: our listeners are already on document
-      // at the capture phase, so they see every pen event regardless of
-      // target — capture isn't needed to keep receiving them, and holding
-      // it adds a failure mode if release ever gets skipped.
       starTapStart=point(e);
       return;
     }
@@ -4451,12 +4493,6 @@ function showEmptyState() {
     lastX=p.x; lastY=p.y; lastTime=e.timeStamp||performance.now();
     drawDot(p,tool,p.w,penColor); // immediate first contact
 
-    // No setPointerCapture here (removed): our pointerdown/move/up/cancel
-    // listeners are all on document at the capture phase already, so they
-    // receive every pen event regardless of which element it targets or
-    // where on screen it moves — capture was redundant for that purpose,
-    // and holding it opened a failure mode (a capture that never gets
-    // released cleanly can block delivery for that pointerId).
   }
 
   // Safari on newer iPadOS delivers Apple Pencil samples via a dedicated
@@ -4476,6 +4512,13 @@ function showEmptyState() {
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
@@ -4486,6 +4529,13 @@ function showEmptyState() {
   }
 
   function rawMove(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||e.pointerType!=='pen') return;
     e.preventDefault();
@@ -4496,9 +4546,27 @@ function showEmptyState() {
   }
 
   function end(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      // Pointer cancellation can coexist with valid stylus touches. An actual
+      // matching pen release still closes the stroke if touchend is missing.
+      if(e.type!=='pointerup'||e.pointerType!=='pen'||e.pointerId!==activePointerId) return;
+      stylusTouchId=null;
+    }
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
     e.stopPropagation();
+    clearTip();
+    if(e.type!=='pointercancel'){
+      if(tool==='laser') appendLaserSample(e);
+      else if(tool!=='star'){
+        appendSample(e);
+        if(currentStroke&&currentStroke.points.length){
+          const tail=currentStroke.points[currentStroke.points.length-1];
+          tail.x=lastX;tail.y=lastY;
+        }
+      }
+    }
+    try{document.documentElement.releasePointerCapture(e.pointerId);}catch(_){}
     drawing=false;
     activePointerId=null;
     usingRawStream=false;
@@ -4506,7 +4574,7 @@ function showEmptyState() {
 
     if(tool==='star'){
       const p=point(e);
-      if(starTapStart && Math.hypot(p.x-starTapStart.x,p.y-starTapStart.y)<TAP_THRESHOLD){
+      if(e.type!=='pointercancel' && starTapStart && Math.hypot(p.x-starTapStart.x,p.y-starTapStart.y)<TAP_THRESHOLD){
         const st={tool:'star',color:penColor,points:[{x:starTapStart.x,y:starTapStart.y}]};
         strokes.push(st);
         redoStack=[];
@@ -4533,7 +4601,7 @@ function showEmptyState() {
 
     if(currentStroke&&currentStroke.points.length){
       const pts=currentStroke.points;
-      if(pts.length>=3){
+      if(pts.length>=2){
         // Cap the smoothed live curve with a short straight tail so it
         // actually reaches the final raw point instead of stopping short
         // at the last midpoint.
@@ -4584,7 +4652,7 @@ function showEmptyState() {
     tools.style.display=enabled?'flex':'none';
     toggle.classList.toggle('active',enabled);
     if(enabled) load();
-    else { drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); resetClearConfirm(); clearLaser(); }
+    else { forceEndStroke(); drawing=false; activePointerId=null; usingRawStream=false; hideEraserCursor(); resetClearConfirm(); clearLaser(); }
   }
 
   function undo(){
@@ -4601,6 +4669,7 @@ function showEmptyState() {
 
   function forceDisable(){
     if(!enabled) return;
+    forceEndStroke();
     enabled=false;
     drawing=false; activePointerId=null; usingRawStream=false; currentStroke=null;
     document.body.classList.remove('pencil-mode');
@@ -4649,7 +4718,10 @@ function showEmptyState() {
   // is backgrounded or the OS eats the event mid-stroke), force-finalize the
   // stroke so drawing state can never stay stuck until the pen is re-lifted.
   function forceEndStroke(){
+    clearTip();
+    stylusTouchId=null;
     if(!drawing) return;
+    try{document.documentElement.releasePointerCapture(activePointerId);}catch(_){}
     drawing=false; activePointerId=null; usingRawStream=false; starTapStart=null;
     if(currentStroke&&currentStroke.points.length){
       strokes.push(currentStroke);
@@ -4674,23 +4746,8 @@ function showEmptyState() {
     if(e.pointerType==='pen') lastPenEventTime=performance.now();
   }
 
-  // Extra safety net, independent of blur/visibilitychange: sometimes
-  // WebKit's pointer stream can silently stop delivering events mid-stroke
-  // with no blur, no tab-hide, and no palm/second-touch involved at all —
-  // just a rare stream hiccup. Previously the only way out was physically
-  // lifting the pencil and touching down again (which produces a fresh
-  // pointerdown that resets state). This watchdog checks periodically
-  // whether the stream has gone stale (no pen event at all in a while,
-  // despite drawing=true) and force-finalizes it on its own, so a fresh
-  // touch is never blocked waiting for a stuck stroke to be cleaned up.
-  // Keyed off lastPenEventTime (any event) rather than lastTime (only
-  // accepted/deduped samples) so a legitimate run of same-position events
-  // — pen held still — doesn't get mistaken for the stream dying.
-  setInterval(function(){
-    if(!drawing) return;
-    const idle=(performance.now()-lastPenEventTime);
-    if(idle>500) forceEndStroke();
-  },200);
+  // A stationary pen produces no moves: never end contact on an idle timer.
+  // pointerup/cancel, blur and visibilitychange own stroke cleanup.
 
   function init(){
     canvas=document.getElementById('pencilCanvas');
@@ -4741,19 +4798,18 @@ function showEmptyState() {
     document.addEventListener('selectstart',blockOptionAndSelection,{capture:true,passive:false});
     document.addEventListener('selectionchange',clearNativeSelection,{capture:true,passive:true});
 
-    // Palm-rejection fix: while pencil mode is active, suppress the browser's
-    // own touch handling for EVERY touch (including a resting palm), not just
-    // the pen. If we don't do this, WebKit sometimes treats the extra palm
-    // touch as a gesture candidate and pauses/cancels the pen's pointer
-    // stream mid-stroke until the pen is lifted and put down again.
+    // Keep app touch gestures away from ink without canceling finger contact.
     function blockAllTouch(e){
+    routeStylusTouch(e);
       if(!enabled) return;
       if(isInExcludedZone(e.target)) return;
-      e.preventDefault();
+      // Do not cancel a finger-first touch sequence; CSS disables gestures.
+    e.stopPropagation();
     }
     document.addEventListener('touchstart',blockAllTouch,{capture:true,passive:false});
     document.addEventListener('touchmove',blockAllTouch,{capture:true,passive:false});
     document.addEventListener('touchend',blockAllTouch,{capture:true,passive:false});
+    document.addEventListener('touchcancel',blockAllTouch,{capture:true,passive:false});
 
     // Second half of the palm-rejection fix: touch-action:none stops the
     // *page* from scrolling/zooming on a second touch, but Safari's native
@@ -4803,7 +4859,14 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     const response = await fetch(`./${quizPath}`);
     if (!response.ok) throw new Error("File Download Failed");
     const source = await response.text();
-    const quizQuestions = parseQuizSource(source);
+    let quizQuestions;
+    try{
+      quizQuestions = new Function(source + "\nreturn data;")();
+    }catch(e){
+      const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+      if(!match) throw e;
+      quizQuestions = new Function("return " + match[1])();
+    }
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
@@ -5106,12 +5169,32 @@ let answered = [];
 let selectedAnswers=[];
 let answerCorrect=[];
 
+// Accept both inline <img> questions and questions with a shared image field.
+function renderQuestionContent(container, item) {
+  container.innerHTML = formatContent(T(item, 'q'));
+  const source = typeof item.image === 'string' ? item.image.trim() : '';
+  if (!source) return;
+  // The same figure may already be embedded in the selected language's HTML.
+  const alreadyEmbedded = Array.from(container.querySelectorAll('img')).some(img =>
+    (img.getAttribute('src') || '').trim() === source || img.src === source
+  );
+  if (alreadyEmbedded) return;
+  const figure = document.createElement('div');
+  figure.style.cssText = 'text-align:center;margin:14px 0;';
+  const img = document.createElement('img');
+  img.src = source;
+  img.alt = 'Question diagram';
+  img.style.cssText = 'display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;';
+  figure.appendChild(img);
+  container.appendChild(figure);
+}
+
 function showQ() {
 if(data.length === 0) return;
 const item = data[currentQ];
 updateBookmarkButton();
 const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>व्याख्या:</b> ";
-document.getElementById('q-text').innerHTML = formatContent(T(item, 'q'));
+renderQuestionContent(document.getElementById('q-text'), item);
 const tagBox=document.getElementById('exam-tag');
 const tagText = T(item, 'tag');
 if(tagText){tagBox.innerHTML=formatContent(tagText);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
@@ -7469,7 +7552,7 @@ if ('serviceWorker' in navigator) {
   function appendLaserSample(ev){
     if(!drawing||!currentLaserPts||ev.pointerId!==activePointerId||!isPen(ev)) return;
     const p=point(ev);
-    if(p.x===lastX&&p.y===lastY) return;
+    if(ev.timeStamp<lastTime || (p.x===lastX&&p.y===lastY)) return;
     lastX=p.x; lastY=p.y; lastTime=ev.timeStamp||performance.now();
     smoothLX+=SMOOTH_ALPHA*(p.x-smoothLX);
     smoothLY+=SMOOTH_ALPHA*(p.y-smoothLY);
@@ -7550,9 +7633,11 @@ if ('serviceWorker' in navigator) {
 
 
   function redraw(){
+    clearTip();
     if(!ctx||!canvas) return;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     for(const s of strokes) drawStroke(s);
+    if(currentStroke) drawStroke(currentStroke);
   }
 
   function drawStroke(s){
@@ -7589,7 +7674,10 @@ if ('serviceWorker' in navigator) {
   function isPen(e){ return e.pointerType==='pen'; }
 
   function forceEndStroke(){
+    clearTip();
+    stylusTouchId=null;
     if(!drawing) return;
+    try{document.documentElement.releasePointerCapture(activePointerId);}catch(_){}
     drawing=false; activePointerId=null; starTapStart=null;
     if(currentStroke&&currentStroke.points.length){
       strokes.push(currentStroke);
@@ -7605,16 +7693,45 @@ if ('serviceWorker' in navigator) {
     redraw();
   }
 
-  // Same self-healing watchdog as the main engine: if the pointer stream
-  // ever silently stops (no event at all, not even a duplicate), finalize
-  // the stroke automatically rather than requiring the pencil to be
-  // physically lifted and replaced.
-  setInterval(function(){
-    if(!drawing) return;
-    if(performance.now()-lastPenEventTime>500) forceEndStroke();
-  },200);
+  // Keep stationary contact alive until release/cancel or backgrounding.
 
+  // Safari can suppress secondary pen PointerEvents after an earlier finger.
+  // Use explicitly identified stylus Touch events for that contact only.
+  let stylusTouchId=null;
+  function routeStylusTouch(e){
+    if(!enabled) return;
+    const ending=e.type==='touchend'||e.type==='touchcancel';
+    for(const t of Array.from(e.changedTouches||[])){
+      if(stylusTouchId!==null ? t.identifier!==stylusTouchId : t.touchType!=='stylus') continue;
+      if(stylusTouchId===null && ending) continue;
+      const ev={
+        type:ending?(e.type==='touchcancel'?'pointercancel':'pointerup'):'pointermove',
+        pointerType:'pen', pointerId:activePointerId===null?-(t.identifier+1):activePointerId,
+        clientX:t.clientX, clientY:t.clientY, pressure:t.force>0?t.force:0.5,
+        timeStamp:e.timeStamp, target:t.target, stylusTouch:true,
+        preventDefault(){},
+        stopPropagation(){e.stopPropagation();}
+      };
+      if(stylusTouchId===null){
+        if(!drawing){ ev.type='pointerdown'; start(ev); }
+        if(!drawing) continue;
+        stylusTouchId=t.identifier;
+      }
+      if(ending){end(ev);stylusTouchId=null;}
+      else move(ev);
+    }
+  }
+
+  window.__pencilInputState=window.__pencilInputState||{};
+  window.__pencilInputState.ai=()=>({enabled,drawing,activePointerId,stylusTouchId,points:currentStroke?currentStroke.points.length:0});
   function start(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        move(e); return;
+      }
+    }
     if(!enabled||!canvas||e.target!==canvas||!isPen(e)) return;
     e.preventDefault();
     notePenEvent(e);
@@ -7622,6 +7739,7 @@ if ('serviceWorker' in navigator) {
 
     drawing=true;
     activePointerId=e.pointerId;
+    try{document.documentElement.setPointerCapture(e.pointerId);}catch(_){}
 
     if(tool==='star'){
       starTapStart=point(e);
@@ -7646,16 +7764,52 @@ if ('serviceWorker' in navigator) {
     drawDot(p,tool,p.w,penColor);
   }
 
+  // A replaceable tip layer reaches the latest real sample without baking
+  // temporary straight stubs into the saved, midpoint-smoothed stroke.
+  let tipCanvas=null, tipCtx=null;
+  function clearTip(){
+    if(tipCtx){tipCtx.setTransform(1,0,0,1,0,0);tipCtx.clearRect(0,0,tipCanvas.width,tipCanvas.height);}
+  }
+  function showTip(rawX,rawY){
+    clearTip();
+    if(tool!=='pen'||!currentStroke||currentStroke.points.length<2) return;
+    if(!tipCanvas){
+      tipCanvas=document.createElement('canvas');
+      tipCanvas.setAttribute('aria-hidden','true');
+      canvas.parentNode.insertBefore(tipCanvas,canvas.nextSibling);
+      tipCtx=tipCanvas.getContext('2d',{alpha:true,desynchronized:true});
+    }
+    tipCanvas.style.cssText=canvas.style.cssText;
+    const layout=getComputedStyle(canvas);
+    tipCanvas.style.position=layout.position;
+    tipCanvas.style.top=layout.top; tipCanvas.style.left=layout.left;
+    tipCanvas.style.zIndex=layout.zIndex;
+    tipCanvas.style.pointerEvents='none';
+    tipCanvas.style.touchAction='none';
+    if(tipCanvas.width!==canvas.width) tipCanvas.width=canvas.width;
+    if(tipCanvas.height!==canvas.height) tipCanvas.height=canvas.height;
+    tipCtx.setTransform(dpr,0,0,dpr,0,0);
+    const pts=currentStroke.points, b=pts[pts.length-1], a=pts[pts.length-2], m=mid(a,b);
+    tipCtx.lineCap='round';tipCtx.lineJoin='round';
+    tipCtx.lineWidth=b.w;tipCtx.strokeStyle=currentStroke.color;
+    tipCtx.beginPath();tipCtx.moveTo(m.x,m.y);
+    tipCtx.quadraticCurveTo(b.x,b.y,rawX,rawY);tipCtx.stroke();
+  }
+
   function appendSample(ev){
     if(!drawing||!currentStroke||ev.pointerId!==activePointerId||!isPen(ev)) return;
     if(tool==='star') return;
     const r=canvas.getBoundingClientRect();
     const rawX=ev.clientX-r.left, rawY=ev.clientY-r.top, t=ev.timeStamp||performance.now();
-    if(rawX===lastX && rawY===lastY) return;
+    if(t<=lastTime || (rawX===lastX && rawY===lastY)) return;
+    const dt=Math.max(1,t-lastTime);
+    const speed=Math.hypot(rawX-lastX,rawY-lastY)/dt;
+    // More filtering at low speed; catch up quickly on fast handwriting.
+    const alpha=1-Math.exp(-dt/(2.8/(1+speed*1.8)));
     lastX=rawX; lastY=rawY; lastTime=t;
 
-    smoothX += SMOOTH_ALPHA*(rawX-smoothX);
-    smoothY += SMOOTH_ALPHA*(rawY-smoothY);
+    smoothX += alpha*(rawX-smoothX);
+    smoothY += alpha*(rawY-smoothY);
     const next={x:smoothX,y:smoothY,w:widthFor(ev.pressure)};
     currentStroke.points.push(next);
 
@@ -7675,20 +7829,23 @@ if ('serviceWorker' in navigator) {
       ctx.beginPath();
       ctx.moveTo(m1.x,m1.y);
       ctx.quadraticCurveTo(p1.x,p1.y,m2.x,m2.y);
-      // Live tip stub, matching the main engine's latency fix: extend to
-      // the RAW pen position (rawX/rawY) so ink visibly reaches the
-      // actual pen position each sample instead of trailing behind at
-      // the smoothed point.
-      ctx.lineTo(rawX,rawY);
+      // Paint each curve once; permanent raw-tip stubs cause spikes.
       ctx.stroke();
       ctx.globalCompositeOperation='source-over';
     }
   }
-  function appendEvents(events){ for(const ev of events) appendSample(ev); }
+  function appendEvents(events){ for(const ev of events) appendSample(ev); showTip(lastX,lastY); }
 
   const supportsRawUpdate = 'onpointerrawupdate' in window;
 
   function move(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
@@ -7698,6 +7855,13 @@ if ('serviceWorker' in navigator) {
     appendEvents(events.length?events:[e]);
   }
   function rawMove(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      if(e.pointerType!=='pen') return;
+      if(drawing){
+        activePointerId=e.pointerId;
+        // Continue accepting real pen samples alongside the touch fallback.
+      }
+    }
     notePenEvent(e);
     if(!drawing||e.pointerId!==activePointerId||!isPen(e)) return;
     e.preventDefault();
@@ -7708,14 +7872,32 @@ if ('serviceWorker' in navigator) {
   }
 
   function end(e){
+    if(stylusTouchId!==null && !e.stylusTouch){
+      // Pointer cancellation can coexist with valid stylus touches. An actual
+      // matching pen release still closes the stroke if touchend is missing.
+      if(e.type!=='pointerup'||e.pointerType!=='pen'||e.pointerId!==activePointerId) return;
+      stylusTouchId=null;
+    }
     if(!drawing||e.pointerId!==activePointerId) return;
     e.preventDefault();
+    clearTip();
+    if(e.type!=='pointercancel'){
+      if(tool==='laser') appendLaserSample(e);
+      else if(tool!=='star'){
+        appendSample(e);
+        if(currentStroke&&currentStroke.points.length){
+          const tail=currentStroke.points[currentStroke.points.length-1];
+          tail.x=lastX;tail.y=lastY;
+        }
+      }
+    }
+    try{document.documentElement.releasePointerCapture(e.pointerId);}catch(_){}
     drawing=false;
     activePointerId=null;
 
     if(tool==='star'){
       const p=point(e);
-      if(starTapStart && Math.hypot(p.x-starTapStart.x,p.y-starTapStart.y)<TAP_THRESHOLD){
+      if(e.type!=='pointercancel' && starTapStart && Math.hypot(p.x-starTapStart.x,p.y-starTapStart.y)<TAP_THRESHOLD){
         strokes.push({tool:'star',color:penColor,points:[{x:starTapStart.x,y:starTapStart.y}]});
         redoStack=[];
         redraw();
@@ -7735,6 +7917,13 @@ if ('serviceWorker' in navigator) {
     }
 
     if(currentStroke&&currentStroke.points.length){
+      const pts=currentStroke.points;
+      if(pts.length>=2){
+        const p1=pts[pts.length-2], p2=pts[pts.length-1], m=mid(p1,p2);
+        applyStyle(tool,avgW(p1,p2),currentStroke.color);
+        ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
+        ctx.globalCompositeOperation='source-over';
+      }
       strokes.push(currentStroke);
       redoStack=[];
     }
@@ -7746,26 +7935,22 @@ if ('serviceWorker' in navigator) {
   // is on, so a resting palm can't make WebKit cancel the pen's stream.
   function blockGesture(e){
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools, #pencilInputCheck')) return;
     e.preventDefault();
   }
 
-  // Same palm-rejection fix as the main engine, previously missing here:
-  // suppress the browser's own touch handling for EVERY touch (including a
-  // finger placed on screen BEFORE the pencil touches down), not just the
-  // pen. Without this, WebKit can treat that earlier finger touch as a
-  // gesture candidate and hold/cancel the pencil's pointer stream so
-  // nothing gets written until the pencil is lifted and put down again —
-  // this was the specific "finger first, then pencil doesn't write" bug in
-  // the AI sheet (the main quiz page already had this layer).
+  // Preserve the browser contact stream; CSS blocks pan/zoom in the ink area.
   function blockAllTouch(e){
+    routeStylusTouch(e);
     if(!enabled) return;
-    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools')) return;
-    e.preventDefault();
+    if(e.target&&e.target.closest&&e.target.closest('.ai-sheet-header, .ai-input-area, #aiPencilTools, #pencilInputCheck')) return;
+      // Do not cancel a finger-first touch sequence; CSS disables gestures.
+    e.stopPropagation();
   }
   document.addEventListener('touchstart', blockAllTouch, {capture:true, passive:false});
   document.addEventListener('touchmove', blockAllTouch, {capture:true, passive:false});
   document.addEventListener('touchend', blockAllTouch, {capture:true, passive:false});
+  document.addEventListener('touchcancel', blockAllTouch, {capture:true, passive:false});
 
   // ---- Toolbar wiring: pen/color/eraser/star/undo/redo/clear ----
   function setTool(next){
@@ -7827,6 +8012,7 @@ if ('serviceWorker' in navigator) {
   }
 
   function setEnabled(v){
+    if(!v) forceEndStroke();
     enabled=!!v;
     ensureCanvas();
     resize();
@@ -7864,6 +8050,8 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('gesturechange', blockGesture, {capture:true, passive:false});
   document.addEventListener('gestureend', blockGesture, {capture:true, passive:false});
   window.addEventListener('resize', function(){ if(enabled) resize(); }, {passive:true});
+  window.addEventListener('blur',forceEndStroke,{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden) forceEndStroke();},{passive:true});
 
   document.getElementById('aiPencilPenBtn')?.addEventListener('click',()=>setTool('pen'));
   document.getElementById('aiPencilColorRedBtn')?.addEventListener('click',()=>setColor('#dc2626'));
@@ -7994,6 +8182,52 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('touchcancel',onEnd,{passive:true,capture:true});
 })();
 </script>
+
+<script>
+(function(){
+  const button=document.createElement('button');
+  button.id='pencilInputCheck';
+  button.textContent='Pencil check';
+  button.style.cssText='position:fixed;left:8px;top:64px;z-index:1000001;font:12px system-ui;padding:7px;border:1px solid #777;border-radius:6px;background:white;color:#111;touch-action:manipulation';
+  const panel=document.createElement('pre');
+  panel.style.cssText='display:none;position:fixed;left:8px;top:100px;z-index:1000001;max-width:90vw;white-space:pre-wrap;pointer-events:none;background:rgba(255,255,255,.97);color:#111;border:1px solid #777;border-radius:6px;padding:8px;font:11px/1.35 monospace';
+  document.body.append(button,panel);
+  let opened=true,rows=[],counts={},lastMove={};
+  panel.style.display='block';
+  panel.textContent='PENCIL CHECK v2 — Ready. Pehle finger rakhein, phir Pencil se likhein.';
+  button.textContent='Close check';
+  const base=performance.now();
+  function record(e){
+    if(!opened) return;
+    const pen=e.pointerType||'';
+    const kind=e.type+':'+pen;
+    counts[kind]=(counts[kind]||0)+1;
+    const now=performance.now();
+    if(e.type==='pointermove'||e.type==='pointerrawupdate'||e.type==='touchmove'){
+      if(now-(lastMove[kind]||0)<200)return;
+      lastMove[kind]=now;
+    }
+    let detail='';
+    if(e.changedTouches)detail=Array.from(e.changedTouches).map(t=>t.identifier+':'+(t.touchType||'unknown')).join(',');
+    else detail=pen+' id='+e.pointerId+' primary='+e.isPrimary+' buttons='+e.buttons;
+    rows.push(((now-base)/1000).toFixed(1)+' '+e.type+' '+detail);
+    rows=rows.slice(-12);
+  }
+  ['pointerdown','pointermove','pointerrawupdate','pointerup','pointercancel','touchstart','touchmove','touchend','touchcancel','gesturestart'].forEach(type=>window.addEventListener(type,record,{capture:true,passive:true}));
+  button.addEventListener('click',()=>{
+    opened=!opened;panel.style.display=opened?'block':'none';button.textContent=opened?'Close check':'Pencil check';
+    if(opened){rows=[];counts={};lastMove={};}
+  });
+  setInterval(()=>{
+    if(!opened)return;
+    const state=window.__pencilInputState||{};
+    panel.textContent='PENCIL INPUT CHECK v2\n'+navigator.userAgent+'\n'+
+      Object.entries(state).map(([name,get])=>name+' '+JSON.stringify(get())).join('\n')+'\n'+
+      'Counts '+JSON.stringify(counts)+'\n'+rows.join('\n');
+  },250);
+})();
+</script>
+
 </body>
 
 </html>
