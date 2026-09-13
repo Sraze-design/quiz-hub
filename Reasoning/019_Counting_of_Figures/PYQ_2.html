@@ -1,0 +1,201 @@
+const Q51_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAB2CAIAAACGfKziAAAFJklEQVR42u1d227kIAydWPz/L6cPUUejEMAY3wNP21WbgO1zfMGQ4zzPT9hxHMf336EXcg347LGVwQuL+setjD1eqYwEOEiIjF+/HV1D4ZWRCSKQTAGhdbMduCcjC5crtRK9BAlgBmSkcRuBlXGZ/1cTuxziIqJNo5JjFwo3Mvhdxa5NeaSsrQwzWOxyyM7AtzLaBJWDqSAuLG4K+P4YFxy7NrWVQcVEP7mLDo60yIioj5DK6Ljr0JEuRDFqfPUpbmQFsQw/N1nFoKnZouzeXPKFmIiRFQSCxc4zghFUaHC8JQMPoQ/ICouInrxoirUWzeP/HwfPZvD1nPM8kbB4/DVNdYIhV7RkxNX20WpamOKx34LYS2mKd/1RPHn5+B7sLDHkQMPqluvaFKMmQnjyYiVoE5Bdb++Dw3CG8AZYREk7wLMm2EVGVrCO8oo+V2BW+E0RRBXf37vVB5BlNHVLx5y0a3KlnAlDWxO5W9lBsZVFa/1ytkkTtA5WLB04foVypop5shpr2Z/PuJ2xaJUUJQI26XdlyMC/IpMDhM+OHsuqbQsWavzgrUaiqoxh85lCbuE5IbekKSsRuApn3fkMQ+m4Yiowh4Ve4NjdWPQAjuTtnVGY01IZhrAYFgffpQy89WnaqQeycloOMTHVqW6SDMogEBSjUJAvtSqTBGjvNEGJCVnBG2CBf4itJwe3tsYul9mDNvl9xifRvSvhlUHQxKKFEv7cChyFZZFX9Zu9MwzfQC7KrlMx2IrZAWFydWM2ci/IkKBm9To11cdOdYIZgY5xLWqChg+urSraWQLCtGFxecOs1ba5luvPkavACEQEGZi7njwwPq86Ow9cv/wKWGY5nIftoTy5owUtJqAppsjZHW+d3KrrEnmQoJa+RjSFVI9+dU+OJNXSDlCwLFsHwIsnfH/JYw4gooxfZuyEEGkqH7O+kBiLz8qrvvG6jnfVGjsuHp8tyk5NeNhahxGIhjJeO/ApyJR4gQuweDgz5mJTYTc+LRi+Ankh/rSh00RTm0N9rQH5Cv/HP5z1Q3UNhubJWt3Aw3yQUp+WiHYeY0GaCGppYp7TvymdvM8o/fkUqdD20TCV/c2isG6WVNMa+3JACBYtRl5fwPAJLK/oU2XUpO8j3+ivNvOpuqGZMjA0um5fw4CSHRM6WT2nMggiWPcfw5bZ9c122m6rF5rCZAAsh+mmunUJ17BheFWCsoALFnhLFA2x1jdoCQvhagcF/ZWvuHRyiorcqbYt1/PQ1KJk2fGBp/vFEJbXk4M+LKYCpKm3cyF1SiuMWQhYwaKvj1vmyJIonP/jg/hIjWgIK6UM9oYBlnIePorjnf/ixQ5gyFG0EGuxCin9OdiVxglY0QTvYlr2u3JfM8ZdC4UMqu2dQnyKqZkTWF7hVpL1tAPMCYoxxOLKrq0GsddW876bjgvBUJnmN8MXw1xwhYkOk2B4poaU4dfblXyG2qpWCou3/WrNOQvSlPKFXH2VII8c6G/xspAVIB/tp11qqA9z6yGTFUw90fYcWD/krY3GMHCivTfqd/qGx+gi3pMEco9WcOlDTZhM/lblxM8B1qXgjQQYW0mVPXlBfoXKIWW1Wkw9j+HVfPEchufcKPEMXzTO8+zFrLE4auoXbKfdKiuUrMCJMvlfuzmCLsbzPSXDabd2osJ/WSaT38v5CeqgBw9Lyrgq1nK+plNSgiCobZXH5e0ExIRFtwP37cCjLy+i977qsMVnspoYK7270oLigPGSiJ1n7PEw/gAGGS/0HCpxyQAAAABJRU5ErkJggg==";
+const Q52_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAABICAIAAABUVW1sAAADJklEQVR42u1c25IFEQxE+f9fnn04tVPKGCJyZfK4lxGtdYIQr+sKqhZjDCGUbvx+srdldQ/UB17FkjWHTiC7Mt9jjDfZn2qz03R5kkmT7xXou5K92aloJK4SDqT64EHcUMP9JzJvzlW/gmc7dmSn6efdr2SW6RWC9x9f19UBN8ZoQazeQNeMqzjCVj9/xoa3QTJC/x/Tb3+yC9AJF2VGwlW24w0OnU6QaLbOOgadcKWAOzfHjewxwEGXwF1YWIY5nLD0v7WSWBHXyvn6OY/YzOgE/6RCcxm6QaCnQv/5nbL1pydJEvRf8yUZuUl3/Rsr+n3QafKZMgmdovkNusrycjjS6Iyz+iDwC4lq8nrZ0oJwH9iXlYmSBOQlGNutXYm6VJlCUqeYWfSbdO7o1VQ3MxPBzcJdxafhcre51l0EfYnvHkFvOgbJecour4OO57sXKadd61KBjuT7lqAj6A9JTzG4V996m2XwJGFjm+17nhrMQ4osgCE3LOyy5WHodxo/5dMkufx9b9ARkxv+L/kDfQpBqv39PNv8FzzhGWcHq0wyv87UFtxat417v5DoWEGHVJdMjVmEZP7CdRDPWSzjwLDYiHDGJBfaouUe33jrn4JyrEq0yP5Fys8+++yz081uXGXNI6dqGQnz47vdBG9JODqzQqCSkpYLz9Tv4VQ9yX47AXyWK3Lh6ka8gy4vp8nUQukQ0EPz3ANX/viBvop76B5Se5R7gw5nSBQWTvLEQFf0fHzOBwm5ZqG3Ji8DnXk6N1tFZRZ0I3U+0HoCC9eFvGs6BveALVw2ZXb0MONcHxYyGNnY2YHvs9y3FkhNBX+aerFml+Rlx2z2QqAzuHirdUBqdnlBdr/JyAm4FxN9j4NpbDhKATzhPlxncaDvdKuO6x6lzKamL02XwF2ApK6PYhhxbz5IQJVler/bxsv3PvQBe6dig7tt+u8ykwRbd8eTSQzW4buP4SRjxx3+4Azk0mLz3o8Xspd+2nqHvIS1eWt5G9N8H3idPu6u/ty9zuqTbmUA/Fb76OsM+plUj3CrvQ/cUYy9E5g6XFkjziEJZbKG8iH3wf8AOK9YxJyuthgAAAAASUVORK5CYII=";
+const Q53_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF8AAABcCAIAAACHuv4MAAAEeElEQVR42u1c2Y6FIAzFxv//ZedhEmNYyulpi5orT5PrAKX7BqV84xvfiB/b6MNxHMM523b9um0bPleZpQ8EHh2SCmwEns0KCrI0OB1HEA7PdU3nKUopOw73udmVVsdxIIfk+AtB5ZSnKs4acVmYZIG8Q3CyU7I8vNOFZ/dQWz+/lTvoQWwE0kaue1iPiv94Bet/VFOqWe0v11ntH1Zm1E96ft1xZDt5wSpKXbgr3UGDBAKzjyAYrcgBROjUVoNWf7Ts5sdLtcg+helHRhe5+5SNR7h30grnwRG1Wqd0qvKsakju99bHQE/51+P7MXonUMQIWoEquTVVtGOlQ7LjAlltQ5gMqwfQ6t1/uw466H4XSUwrtj7IMH5zhw4gDETIhkOyh2uNu4xdBiSSxJM0uVLXtE5Jt1mp0ZZpcQKS+y36k4ekUmxBmA5uwUEieTA9J4NBQ2LGDhhJLEONJzZOtFm6vVxm11PJIB6KZSd0wvM1K7CDg7IGQUiwykEiL6UqcWwCEllw2iQELYBEXqoX1sisONmYq1KuQU03FjMJYwDvTIstsQhSUrHh1l1orilBZTZT5pTIUo/yQaPFr79LFMtkxGLdZFu2Y3ndVLI3W6BQp/nvrDhrKlNcTtvqnilgeGL0atl2C1HmIELuiY/RNpEtpsmI4GUZ/atOq6iSvl+aTChWkvbdgwtOTM8hY82tiXk97Lxbl/svJ3FHbetQenZGUXnWtE63JWHKd2JNSiTlU7pYUw7ZbflBkGvKvWwhWsPUVUlbdCsk/tZX8QDUNW15Wd6McGxywJADtAhyFv9N9nhUVo9qa/3G8ojhG9/4xicm/ZwJ54wq12zOqwnLbgLobhfYbdn1nrcQViK6GzOwEw6JmGY6855ccscza3oEl688pYa1iw9326J4UAnHDFFouBT4O2tS+2CQQ4k18WHizKloWIOy7hWdWNT0s+5TQK13N0CeV5ZN6s3BhVHaD2fqBMyYTPfQuQaRLGdJUz/Cedg2ZyRW3UGUE27MUVQlBwU1pFb29JZHlRPw8yv8S4Ah6wlL56SnG91TRyfYJ0OgOAvgaQKQDO7IKNr6TWQW7xRLUSUPNQSCnNItfrDwXiOPJS53XLqUKLqBEz1FUWcJlNh9xQ2k946do0DG8yccnUxynaWVuc2ec8cm12YRYP3iHZtnqqdpKMvZSh47D7ljg/jKtK2UWyC+MVJfgR1njB6Il9Qt3n1r1nQPYZHeeVH2azXvEJnzDP5H1hw9TZGCHbyocEu0gYemi+7YmFATyEELErJQnEUka86W3VHLZ+zLYdOYqwsJWG6XJDKWiNdgopISAZGEKbGmVJqQcmAUgvDSo+lO3fnLsBa62JFTCtDZLl8ZNxWLVX0mvb9jfTww/P2d7kWSWrIIPZLntky5huAp/RTVguJXXYEcZF0hG+aYBGjs7QSPUOOQmPt3RrTKeLVrwRRkQZ2joS4Dj8mINTf0k8GcXxrgktMPHIQXNpyPHEK3ZgvWFjm1JoHmxrnU014L+sYPjD865g7//uQDhQAAAABJRU5ErkJggg==";
+const Q54_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIkAAABiCAIAAADrxWffAAADoklEQVR42u2d246DMAxEwdr//2X2oRKKgDpjk4udjp/aitKSk/Etod2P49hWsX3ft21b5opko5ENjWzIhkY2ZEMjGxrZkA2NbMiGRjY0siGbOPZpQpNNOColmGUgrenT1sAjq2JYAI8sA+a+3Jkdj6wH5jiO82lqPJIdzEliPecm2RXzzaeVT5PikXRU9Bij4ElHKKtP+7iyallTxh7qpmNpUsYYRDd3AeWSjgQUhC+kg5wSObcEPs0UY0ByKfAkizdvgscl9sTHIzGFotQxDekGxyORxXEP/ghRU2SKjCeuT/OBWQlPUJ9mAuOjHh/PHq00s6Zk+rCerTYkNY82FBIKRhMwd0Eop4qsnvlsHot2K5hLFmca8bB4osQb6ypZNbe24gnY15H4YNxVvVUQ0fBIfDC+418mYxHabhINjN6Hdize4Ks40W6zlghgSnePDA3ev3kc7m947qedKx2JoJjmbQJdPSb2E3clyhQq1g5mk0F5E3umFKc51m8QkI959uXFXIn10J5NNZJfmiv48QqD98nhrL6OxAGjzGv9eKUybdu5WFM3nYoYHUN29UheMNVyp1o/guFnVt0j0cBUJ36192zaqQOWU1195hyfhoAp43m5HRBMyZQVgfupylzj8jigc5MxYHRfcXmgKMaaj13e+O0jYq4p9NJNp6QWWUr41ndJlxrIAFeGf3X8YNM526YGw9QjvcEgR4LX5u6dOEBGwCOzwJzeHwz+L5taiHocuXLXvo40pOL215coXeXtGwV8muNu0FpRzckFHPMamacO3i9P+Nija9vLGKcbx2QB39IjF6qqp1zyMfmr5tla43jTfMG/x2X7Aj6SubidYXs2b1bJ8MWYHtWDL8VCfGbD5O1VvLHGGPD4KQtZSEtpcOyRaGCmGLIp1x173FPNoxvHpBgDpnczf3DmJp2mmxtMGXKjbR53bxT1qUfcc8cKxnr9MX8aYCSeHSnogtRi032aMkerH+3w6lJNkX1gfsdOKmBujXd4BZGkQzHN72/O7twc+pbmYLq2MX4q9uwNW40TK8f4dZJjSIVgOhVACj+wjN2RfUZZXFOu/ymsTn1potMfFJC/E4PvLdE3xuUK5hn/31MZbVGoso6Zmz78MYyH1b3oiQRtjHQeSx/Zcv4G7C9UsvKorFyoet8b1fvLUxs0WkNJrRT2M9Y3ivH/1siGRjZkQyMbsqGRDY1syIZGNmRDIxsa2ZANjWzIhkY2NMz+ATG2WAPKowTNAAAAAElFTkSuQmCC";
+const Q55_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABiCAIAAACXj7lDAAADTUlEQVR42u1c2ZKEIAyUFP//y+6DVZbLZQLdAazxadZxlaZzJ044z/NwOUIIzz/dnis+2BJ4+cn8AtjT2XupWTp1DeJG3RNGAolH4HEc0Ye3nKXrzH3l9YFBZvTHlnybayMWZ0QBS9aqX2VCJhynoHgzwUuE8/qXXDkh+jlqS01e7onHzXNGH2xWgQcaIelbBC9AuW+FEloZp45h4m/exnEa9HCcN6UeQvyQTQ+77w48up1KXB/bIE6ZrnJ9OPWRbVyfNyWfNTJlU3iNNCWBEKfn4GzljDvypklT2Gnn73A86PJ5R9KDMU139BM8S0NshEXFE//SkAN1z5Ag+peG2NQlaxarA90LXjlqY5eG4HarrdvRFChMB5mv6nXrY0d0O5HPjtBSlDu3grEtWsvXlYhVQqYYIX0LZAhhm0xSjynHZr1JHFd3vaU1cY7KePorwrymCjabG+pbMCwQvDgE6MwkizBZoEQKGHUGWP+wT2hrFh/ob5Fd7j6hZdcs8V1uvaX1qX1R+viNcK8WoPCiBe48TU3kavAYQZLHxFCNohw/g0wPhNhYZwmEysqsU+mN9ww9M9TSm/gIXqJyI2HQEt5C6Ql8qnsCx2Z1dOzEWnjY8maQXg+BICPDotRmYjQg4UIrQN5MBSJ9LjYN4au1RIVBg5q53NQX3ALFcep4HhWinNJNHXu8BjUXvuvUl55MMcG77jixP9NBplgDlBXaTw1Lm2NWTX0d6zWDa0J7ny90uZ1NpQPOFOFnpr6STm7cHd6rdYwmfVuh0a2P3X/HV45PqV9RD4WUWS8C7zxPgWecS8E7ipN7+4IsFsFCA9tGatlYeWjXubabTXx/G+EbkvnvghpLWzCpWaRocs01bY+SA1Em1KuBLJvNxpz3XiBNU3zaXGH6ZGm3P9Pa0qckzCJTU8vM1ybK3TJ9O9GuGPxh8ZcsrGqJ2ogR12X2+CaQpGFMLkJnAzveR+iM2pQgB/E3fjWDjrAB8mlsR6QU5Z8AtTN4BIu9ofDUZpH9okxBrwMPyeE4SFK+Bp6C7gbJS0fBetgHkpptB4dXchuPcKgkCAOSkswcHiNCCm4vjjda8DtNsiuZ9CxzES1NDaRzFc+p4zlxIsepIjyxuvMH/o0ZBJF94joAAAAASUVORK5CYII=";
+const Q56_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABnCAIAAAD3zjnRAAAC8UlEQVR42u1c25aDIAyUOf7/L7MPPdt1gSBCEkKEp55WhWFymQA2xBgP9RZC+HyY0juO9zVMJDn5/CKe9WHDPUKj/qw8EXgbyTtuTyU5hFC8gPp+YZ5vNUmMkV234FWePIfnnDR9+QlT9qxjDrBg2MpUQxNwCzYFqmHBpJNfpWFvTTI1RalRDTuerBbM7Nq2HNWwQ7Ia1bBMkRDVkIZa563jFuv+PD56CarBjrA7P3muMabnambM3eHaA8/jgOWo3nrbWFoWohoGDZu6nQs2DHqydDIDr2GbjdX8mEXLXXavhnHAlIWPdLperhp3IjCSLOrMjA/fmkSF5G5X/HYxGEFgzfAOYv+V2qnteX7HcEMIMcYRTx45HzYeQTDO6hI6hMG2Te0na/uzPsnjsgwrkjw40ViLZBYC8CpPHuVZc8eYt3c8IpbKq2pGrlRLFvHMsvDbZaOWM3Tom2ML0at4XK5lYGCcbCMB/HZ40HQkI7kaPkh+RAxaHuEgJ68tvHbbrdHtKbsdXwwpBojkLAL7olKLdAF1kYS6NCJR0X3nuiEWpvjRoRrO6uQHeruCcN2cTIECFbSdpKUSENivGdmbwz26pK7Oqd77ki8w7BSzJ8AV84bjmpFC8RZ/vlINfzk5L+PudZib0EUJLf+2nVMIl9GrSW+7FNsUkch/8+rPu+3mX58oOMN1ibe41kuJh/bg/GjNI+1bJwYo/E9cDvu7XH8Wv61M4aI5+YoC+cTndrJKxqbesk0QnUUbSwi3z/mjd4pRiQq8b0FoAq6HNPLqayxlfzObMYY9irufix/0fTudmpj7BvNvX7JPvqqZejG4dM/+2aHaJ+YzFls7OzrWR84rmXjOuIpm8vDbbmdBkOd6x4yc3+YLvXdQjoY1w3HCc2K/kmHQoMBi2LwChrLkvLtHx3kLmoQrArWEVgoSowTIi9m/CZKo6W6Lm8Z/LBAa1XkINCqoUmsD0mhrawaaBa3C+gyD9uzmvB3GXp3dja/9AB1gB+jN5qXcAAAAAElFTkSuQmCC";
+const Q57_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKIAAAA9CAIAAAChoCXaAAACyElEQVR42u1c0XLDIAxL9P//nD30lsulLSOAbInBy3a9DUu2ZQxJ2bY11lhjjrG/fhzHMX7qfT9/Z8z/bohqhceIh/+cGUHZdHHQ8MGObgAF9kCYU6zdRKVDStMrwgg1x6gtnoha4hbwgGfvY3QdNe2C+erwG2ZEItj33VfZV+QuLE6cCM59OzU70nmvpiA5pZDvRpEu0PEqS6DWituHphW7DFuzEbthRq5KrDsvo6wFO4/cN1c1gHWy9hsSZAlUXNCV8KSyttBJID73z7+RjXTDIbN41iJFyhaluxKkGpePeBDvF/fOS03QL7tl60j0i3KtM0rZ4zj+XGWQ5RfNFboNjAiXQgiQKGU1xfQ83hdXP1KkrFy67bjUHFegh0k/JR0RmHKphI1+A0PoiQjalMufsJGetgqCHhUY2RUaCsTOlw62NUavyl1hJoUkJdKM92cDiDwygXQp55a74TEOJlJpDmqpmiJo9rcR0idHevq/+zos0iRDYYKuNwQpJimlm2GU2lQ2TAuF9NdvYQStPMpONCCmdqSaLYzOzG15k/PKX40vAlqYOb4bQAlzgGsiv7/qVbebp4KmawLOxQIae51qAXHcw2OQ0g0MYdHTG0FQygFHFoJbW+qEUJYyKcmUHwyT/h2aUmYsn1lE+ln0FyGIS9m3XEvVf4jvL+d49zudBTTLNQlMursbWAwhDn3XjFrbcom0WR+11mBzGD0kje77SSjamqe+zT5SIPIUw8C2ERYK6Cx60yQrpWhrdrn1PrJO1rE7QFh4p4ewdbKOAg8v79Q/uTJK1gCocPGOKc62sjycHYykXI9N/Ggz/roL+Epkgnu7PlJg7A7g6J3yuZjFe17f4JGUhplWu22Wi5yH5yjspFwjaKMLqa74eTkKXxGk7ExkjwceqNn04e4tul53PcUYwkr8/8AIk7lsyht+11hjjTV+xw+/N9p+frNFsQAAAABJRU5ErkJggg==";
+const Q58_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAAB7CAIAAAApNf/IAAABiElEQVR42u3dwQ6CMBBF0UL4/1/GhSsTF4VOy7Scu3FjiOH6JsxTQikA2tm+L+d5OhcZ9WxbKWV3IvJDEkkgiSSQBJJIAkn45ahcehFOfcsjSUsk6YZ5xE4mSXLhAJJIAkkgiSRk3ZN6bwNT03WJlCTjDpnH3Zg58HfAjqyvxkx1STLuQBJJIAkkkQSSQNJ0HBk+ROze3qMFePZPOJIkSQO/rT26uyQ/uEiSCweQRBJIAkkk4a17UtTKcnW5yX9Lz76YIeMOxl3baLpaC02UTkkiCSSRBJJAEkkgCYOX2djOLeo9vY8pScYdXjjuapq07zBp7OVud3ctx3Q7JkgiCSSRBJJAEkkgCSTNymR/6crfWEuSJCWmvqUtKz6uQZJIAkkkgSSQ5BL8sUV15HEkCSQZd+GEdAQaB5AEkkgCSSCJJJBkmY1ifJOmuwNJGDnu1ivQJAkkkQSSQBJJIIkkkASSluJCLfTyB0ZIEtokqUrnGHc8GXcgiSSQBJJIAkkkgSSQRBIATMkHf7dMM4DKzqQAAAAASUVORK5CYII=";
+const Q59_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGoAAAB7CAIAAAATyYL+AAAFhklEQVR42u1d25LkIAiNVP//L2cfpiqV8YIKh4u9k6eu6R6FIwgCknLf95XgKaVs/T4L2YF07EKWEMoA+EaobVECGeQk+LoMQ2ZvR/ZjymGmij27Gf1xLG7MeKqV34IZDf1moJ2ilPm8/Ah6GpLChyI62zge8D20KoeF72IowqqHNKS8mSylyEhskfr5yzPIzwelk/iMhnI25fBVjCkVpPp9hR3QzX5TiwKRgAqr36RG2KFk575vrBgSCrs3ZRZ7E1B2gAiSXljc9nWg7KDGoViFFdhEuCJrxFmrvCH+hJEZdXVclJud0hdLosW0paeyabr/AvRjAxGkLfVU6hoWu64lkUEpRpDWl9fZzso4v+/bE0HaFZ+EZ88WQbfdgLZGhBwqLCIfEEsi8CvJBzugr+Nmi00sb6p4ERbBisiVQchBZHyw0yPIeAhC+JSiZ7rfmQamFqkloNQwzpdz+hU4Hb8Aw2C9UmogQgcx95oRplyQxTL6KyxPv1iLp/QTfMvLgx2QjBEghJ04G3Z6GeQZIaDo5cRu3aGZWInet4QSvczYLSI4TbPI3WZ+HfJj10UQnypasfTdzGx+7FoE16Nbo2McMlF5HfJUCMKkb1eYT8ROfDTuCiCJjQYqYXQQghjTcSXIEAYGF34VRrWLsFW4+GXPIu/Pz4j5fz7B+Pdc1/XZWgq76nijiMvuLvTYYt4oP9/SIqFM9di58sio1+IJhMTTTNX8IOx+eBHY4o1UUeujwKsN/bGrmHqXXQHgWzHHxyHYMtW9BzLyZt5QEKPt667MQQi+mWKqn6Yc/fydUAey/Ai2ab92L9rliICH2VNkcJ2paYCLsIGAtAiKT+h8eIZG+i9OdCRE0K7yioABKP66zLnYtf7ZY5rp2URNqxZjbYUdRwSsHB3dogVegtI4dxYIUvW1sryQEftDseNvVtPo3Ad3FJTV22LsUFXjw1PHZZ+seB+DfAJQrR2z0GJyUygHY+K/w5LnZKYIou525oXPDsGolKk3fBYIBqabA+ADIhhSO+0NHx90FDvVIZtdAHzrhV+CXHVs6ipGeUdavNhAg1dYT0kMhu9ayM5kroeLh29kCrrSl62mKwt8bUztiBrWXNLXjYxXqp2qHo5SaW4XwXDn7gz4prH+hHWYH2WIVClub8WsPvM2xM29F/q0f88KdJ/AuUeVJV3R6+6JqLXfzSg95H0EYohKX43ODKOyuyqd8Oc2Lx1mIb26/pdTRytZ+i5QtvBBmoMayR1zLAmnM5H0dcvu+J4IsSD+Kg1PJXe8cUiiK1mkTxD4TNf+0GFJsV38ohCcXwm0PtLqsWvHcasAqQj+xCqsBruuxoTled225PUM2QoWnlrcHrcoSu5My+6+0/JOsdN37HJGkNxcqq0LSgkR7AZKvq39obNTPe9hBaxvDXldkSmUBFSfJNhV1TOQbESbTpgoL6SJWlSGrArPYGefOC6QMHKG7CKwDG7ExVLzTexZzXP7szbHBOS50tnwDjniK/aLoncBO+c+m3TC26h2MkioKatbcdnSx7J3K6j6Nstet3ZE+8Ottzxq2x9OF+GUJhDrkC1KA6DxcKWz+W/iMwc7vruBRPr4UySfXUwuht0Lv1u3gGlrsuP2u0XFcnrRWOYyY40MipnafuFEm1v4vpZ0G9VSgqqsr39M4LuaOOA7HPT+cLm03tOfhR/6xZ0wyvd1B9ec1neZIoFgO/cmSIvdpcy0ZdZQH2Uizd5xHd55U78RlZxvnM8vdxj4TkQQSDCgyuAsRcYuNtltKF+PHUZ5R051TuCwtBW7vHgSEE3pseoolQFEh8rJYt1xPgREt6mLA1eekui8ZsVNKEwZi5L04rwxAV9Z4fz2ixTw8czrXXdvLpI4aPC3R/o8/wCfAmfsW3tIRAAAAABJRU5ErkJggg==";
+
+const data = [
+  {
+    q_hi: "Q51. नीचे दी गई आकृति में कितने त्रिभुज हैं?",
+    q_en: "Q51. How many triangles are there in the figure given below?",
+    tag: "RRB ALP 14/08/2018 (Morning)",
+    o_hi: [
+      "(a) 16",
+      "(b) 19",
+      "(c) 18",
+      "(d) 17"
+    ],
+    o_en: [
+      "(a) 16",
+      "(b) 19",
+      "(c) 18",
+      "(d) 17"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: "",
+    image: Q51_IMAGE
+  },
+  {
+    q_hi: "Q52. निम्नलिखित चित्र में कितने त्रिभुज हैं ?",
+    q_en: "Q52. How many triangles are there in the following figure?",
+    tag: "RRB ALP 14/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 16",
+      "(b) 12",
+      "(c) 14",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 16",
+      "(b) 12",
+      "(c) 14",
+      "(d) 15"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: "",
+    image: Q52_IMAGE
+  },
+  {
+    q_hi: "Q53. निम्नलिखित चित्र की रचना के लिए आवश्यक न्यूनतम सीधी रेखाओं की संख्या क्या है?",
+    q_en: "Q53. What is the minimum number of straight lines required to construct the following figure?",
+    tag: "RRB ALP 20/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 12",
+      "(b) 14",
+      "(c) 13",
+      "(d) 15"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 14",
+      "(c) 13",
+      "(d) 15"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: "",
+    image: Q53_IMAGE
+  },
+  {
+    q_hi: "Q54. नीचे दी गई आकृति में त्रिभुजों की संख्या कितनी है ?",
+    q_en: "Q54. How many triangles are there in the figure given below?",
+    tag: "RRB ALP 29/08/2018 (Morning)",
+    o_hi: [
+      "(a) 6",
+      "(b) 9",
+      "(c) 7",
+      "(d) 10"
+    ],
+    o_en: [
+      "(a) 6",
+      "(b) 9",
+      "(c) 7",
+      "(d) 10"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: "",
+    image: Q54_IMAGE
+  },
+  {
+    q_hi: "Q55. उस विकल्प का चयन करें जो दिए गए चित्र में त्रिकोण की संख्या का प्रतिनिधित्व करता है।",
+    q_en: "Q55. Select the option that represents the number of triangles in the given figure.",
+    tag: "RRB ALP 29/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 14",
+      "(b) 16",
+      "(c) 18",
+      "(d) 17"
+    ],
+    o_en: [
+      "(a) 14",
+      "(b) 16",
+      "(c) 18",
+      "(d) 17"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: "",
+    image: Q55_IMAGE
+  },
+  {
+    q_hi: "Q56. दिए गए चित्र में त्रिभुजों की संख्या को दर्शाने वाला विकल्प चुनें।",
+    q_en: "Q56. Choose the option that represents the number of triangles in the given figure.",
+    tag: "RRB ALP 30/08/2018 (Morning)",
+    o_hi: [
+      "(a) 13",
+      "(b) 15",
+      "(c) 17",
+      "(d) 14"
+    ],
+    o_en: [
+      "(a) 13",
+      "(b) 15",
+      "(c) 17",
+      "(d) 14"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: "",
+    image: Q56_IMAGE
+  },
+  {
+    q_hi: "Q57. उस विकल्प का चयन करें जो दिए गए चित्र में त्रिकोणों की संख्या को दर्शाता है।",
+    q_en: "Q57. Select the option that represents the number of triangles in the given figure.",
+    tag: "RRB ALP 31/08/2018 (Morning)",
+    o_hi: [
+      "(a) 12",
+      "(b) 15",
+      "(c) 10",
+      "(d) 14"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 15",
+      "(c) 10",
+      "(d) 14"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: "",
+    image: Q57_IMAGE
+  },
+  {
+    q_hi: "Q58. उस विकल्प का चयन करें जो दिए गए चित्र में वर्गों की संख्या का प्रतिनिधित्व करता हो ।",
+    q_en: "Q58. Select the option that represents the number of squares in the given figure.",
+    tag: "RRB ALP 31/08/2018 (Afternoon)",
+    o_hi: [
+      "(a) 15",
+      "(b) 14",
+      "(c) 13",
+      "(d) 17"
+    ],
+    o_en: [
+      "(a) 15",
+      "(b) 14",
+      "(c) 13",
+      "(d) 17"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: "",
+    image: Q58_IMAGE
+  },
+  {
+    q_hi: "Q59. उस विकल्प का चयन करें जो प्रस्तुत चित्र में वर्गों की संख्या का प्रतिनिधित्व करता है।",
+    q_en: "Q59. Select the option that represents the number of squares in the given figure.",
+    tag: "RRB ALP 31/08/2018 (Evening)",
+    o_hi: [
+      "(a) 7",
+      "(b) 4",
+      "(c) 5",
+      "(d) 6"
+    ],
+    o_en: [
+      "(a) 7",
+      "(b) 4",
+      "(c) 5",
+      "(d) 6"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: "",
+    image: Q59_IMAGE
+  }
+];
