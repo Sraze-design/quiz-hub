@@ -1,0 +1,842 @@
+const data = [
+  {
+    q_hi: "Q151. वायुमंडलीय अपवर्तन सूर्य की आभासी स्थिति पर क्या प्रभाव डालता है?",
+    q_en: "Q151. What effect does atmospheric refraction have on the apparent position of the Sun?",
+    tag: "",
+    o_hi: [
+      "(a) सूर्य क्षैतिज रूप से दोगुना दूर दिखाई देता है",
+      "(b) सूर्य वास्तविक स्थिति से थोड़ा ऊँचा दिखाई देता है",
+      "(c) सूर्य की आभासी स्थिति नहीं बदलती",
+      "(d) सूर्य वास्तविक स्थिति से बहुत नीचे दिखाई देता है"
+    ],
+    o_en: [
+      "(a) The Sun appears twice as far horizontally",
+      "(b) The Sun appears slightly higher than its actual position",
+      "(c) The apparent position does not change",
+      "(d) The Sun appears far below its actual position"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. अल्पेनग्लो में पहाड़ कब गुलाबी या लालिमा लिए चमकते हुए दिखाई देते हैं?",
+    q_en: "Q152. When do mountains appear pinkish or reddish in alpenglow?",
+    tag: "",
+    o_hi: [
+      "(a) दोपहर या मध्याह्न के समय",
+      "(b) सूर्योदय या सूर्यास्त के समय",
+      "(c) घने बादल और वर्षा के भीतर",
+      "(d) आधी रात या भोर से बहुत पहले"
+    ],
+    o_en: [
+      "(a) At noon or midday",
+      "(b) At sunrise or sunset",
+      "(c) Inside dense clouds and rain",
+      "(d) At midnight or long before dawn"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. प्रकाश का प्रकीर्णन कब होता है?",
+    q_en: "Q153. When does scattering of light occur?",
+    tag: "",
+    o_hi: [
+      "(a) जब प्रकाश धातु में पूरी तरह अवशोषित होता है",
+      "(b) जब प्रकाश निर्वात में अकेला चलता है",
+      "(c) जब प्रकाश स्थिर दर्पण के भीतर रुक जाता है",
+      "(d) जब प्रकाश वायुमंडल के छोटे कणों से टकराता है"
+    ],
+    o_en: [
+      "(a) When light is completely absorbed in metal",
+      "(b) When light travels alone in vacuum",
+      "(c) When light stops inside a stationary mirror",
+      "(d) When light strikes small particles in the atmosphere"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. प्रकीर्णन से प्रकाश की दिशा पर क्या प्रभाव पड़ता है?",
+    q_en: "Q154. What happens to the direction of light during scattering?",
+    tag: "",
+    o_hi: [
+      "(a) दिशा बदल जाती है",
+      "(b) प्रकाश की दिशा समाप्त हो जाती है",
+      "(c) दिशा स्थिर रहती है",
+      "(d) दिशा 180° बदलती है"
+    ],
+    o_en: [
+      "(a) It changes direction",
+      "(b) The light has no direction",
+      "(c) It remains unchanged",
+      "(d) It changes by 180°"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. वायुमंडल में प्रकाश का प्रकीर्णन किन कणों से हो सकता है?",
+    q_en: "Q155. Which particles in the atmosphere can scatter light?",
+    tag: "",
+    o_hi: [
+      "(a) धूल, जल की बूंदें और गैस के अणु",
+      "(b) धातु, काँच और पत्थर के बड़े टुकड़े",
+      "(c) चुंबक, तार और बैटरी के घटक",
+      "(d) लकड़ी, रबर और प्लास्टिक के ठोस टुकड़े"
+    ],
+    o_en: [
+      "(a) Dust, water droplets and gas molecules",
+      "(b) Large pieces of metal, glass and stone",
+      "(c) Magnets, wires and battery components",
+      "(d) Solid pieces of wood, rubber and plastic"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. 1871 में प्रकाश के प्रकीर्णन की व्याख्या किस वैज्ञानिक ने की?",
+    q_en: "Q156. Which scientist explained scattering of light in 1871?",
+    tag: "",
+    o_hi: [
+      "(a) रेले",
+      "(b) विल्हेम कॉनराड रॉन्टजन",
+      "(c) हेनरिक रुडोल्फ हर्ट्ज़",
+      "(d) सर आइजैक न्यूटन"
+    ],
+    o_en: [
+      "(a) Lord Rayleigh",
+      "(b) Wilhelm Conrad Röntgen",
+      "(c) Heinrich Rudolf Hertz",
+      "(d) Sir Isaac Newton"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. दिन में आकाश नीला दिखाई देने का मुख्य कारण क्या है?",
+    q_en: "Q157. What is the main reason the sky appears blue during the day?",
+    tag: "",
+    o_hi: [
+      "(a) नीली रोशनी का अधिक प्रकीर्णन",
+      "(b) पीली रोशनी का पूर्ण परावर्तन",
+      "(c) हरी रोशनी का पूर्ण अवशोषण",
+      "(d) लाल रोशनी का अधिक प्रकीर्णन"
+    ],
+    o_en: [
+      "(a) Greater scattering of blue light",
+      "(b) Complete reflection of yellow light",
+      "(c) Complete absorption of green light",
+      "(d) Greater scattering of red light"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. नीली रोशनी की तरंगदैर्ध्य लाल रोशनी की तुलना में कैसी होती है?",
+    q_en: "Q158. How is the wavelength of blue light compared with red light?",
+    tag: "",
+    o_hi: [
+      "(a) कम",
+      "(b) अधिक",
+      "(c) समान",
+      "(d) अनंत"
+    ],
+    o_en: [
+      "(a) Shorter",
+      "(b) Longer",
+      "(c) Equal",
+      "(d) Infinite"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. नीली रोशनी लाल रोशनी की तुलना में कैसी प्रकीर्णित होती है?",
+    q_en: "Q159. How does blue light scatter compared with red light?",
+    tag: "",
+    o_hi: [
+      "(a) बिल्कुल नहीं",
+      "(b) कम",
+      "(c) अधिक",
+      "(d) समान"
+    ],
+    o_en: [
+      "(a) Not at all",
+      "(b) Less",
+      "(c) More",
+      "(d) Equally"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. दिन में नीली रोशनी सभी दिशाओं में प्रकीर्णित होने से आकाश कैसा दिखाई देता है?",
+    q_en: "Q160. How does the sky appear because blue light is scattered in all directions during the day?",
+    tag: "",
+    o_hi: [
+      "(a) नीला",
+      "(b) लाल",
+      "(c) काला",
+      "(d) पीला"
+    ],
+    o_en: [
+      "(a) Blue",
+      "(b) Red",
+      "(c) Black",
+      "(d) Yellow"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. वायुमंडल न हो तो आकाश कैसा दिखाई देगा?",
+    q_en: "Q161. How would the sky appear without an atmosphere?",
+    tag: "",
+    o_hi: [
+      "(a) लाल",
+      "(b) नीला",
+      "(c) काला",
+      "(d) हरा"
+    ],
+    o_en: [
+      "(a) Red",
+      "(b) Blue",
+      "(c) Black",
+      "(d) Green"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. सूर्योदय और सूर्यास्त के समय सूर्य क्षितिज के पास होने से प्रकाश को क्या करना पड़ता है?",
+    q_en: "Q162. When the Sun is near the horizon at sunrise or sunset, what does its light have to do?",
+    tag: "",
+    o_hi: [
+      "(a) निर्वात में स्थिर रहना पड़ता है",
+      "(b) वायुमंडल से गुजरे बिना आँख तक पहुँचना पड़ता है",
+      "(c) वायुमंडल में बहुत छोटी दूरी तय करनी पड़ती है",
+      "(d) वायुमंडल में लंबी दूरी तय करनी पड़ती है"
+    ],
+    o_en: [
+      "(a) Remain stationary in vacuum",
+      "(b) Reach the eye without passing through the atmosphere",
+      "(c) Travel a very short distance through the atmosphere",
+      "(d) Travel a long distance through the atmosphere"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. सूर्योदय और सूर्यास्त के समय कौन-से रंग मार्ग में अधिक प्रकीर्णित हो जाते हैं?",
+    q_en: "Q163. Which colours are scattered more along the path at sunrise and sunset?",
+    tag: "",
+    o_hi: [
+      "(a) नीली और बैंगनी छोटी तरंगदैर्ध्य वाली रोशनी",
+      "(b) लाल और नारंगी लंबी तरंगदैर्ध्य वाली रोशनी",
+      "(c) पीली और हरी मध्यम तरंगदैर्ध्य वाली रोशनी",
+      "(d) लाल और पीली लंबी तरंगदैर्ध्य वाली रोशनी"
+    ],
+    o_en: [
+      "(a) Blue and violet short-wavelength light",
+      "(b) Red and orange long-wavelength light",
+      "(c) Yellow and green medium-wavelength light",
+      "(d) Red and yellow long-wavelength light"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. सूर्योदय और सूर्यास्त के समय कौन-सा प्रकाश सबसे कम प्रकीर्णित होकर आँखों तक पहुँचता है?",
+    q_en: "Q164. Which light is least scattered and reaches our eyes at sunrise and sunset?",
+    tag: "",
+    o_hi: [
+      "(a) हरा प्रकाश",
+      "(b) बैंगनी प्रकाश",
+      "(c) नीला प्रकाश",
+      "(d) लाल प्रकाश"
+    ],
+    o_en: [
+      "(a) Green light",
+      "(b) Violet light",
+      "(c) Blue light",
+      "(d) Red light"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. सूर्योदय और सूर्यास्त के समय आकाश लाल-नारंगी क्यों दिखाई देता है?",
+    q_en: "Q165. Why does the sky appear red-orange at sunrise and sunset?",
+    tag: "",
+    o_hi: [
+      "(a) लाल प्रकाश वायुमंडल में पूर्णतः अवशोषित हो जाता है",
+      "(b) सभी रंग समान मात्रा में पहुँचते हैं",
+      "(c) नीला प्रकाश कम प्रकीर्णित होकर आँखों तक पहुँचता है",
+      "(d) लाल प्रकाश कम प्रकीर्णित होकर आँखों तक पहुँचता है"
+    ],
+    o_en: [
+      "(a) Red light is completely absorbed in the atmosphere",
+      "(b) All colours reach in equal amounts",
+      "(c) Blue light is scattered less and reaches the eyes",
+      "(d) Red light is scattered less and reaches the eyes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. टिंडल प्रभाव किसे कहते हैं?",
+    q_en: "Q166. What is the Tyndall effect?",
+    tag: "",
+    o_hi: [
+      "(a) सघन माध्यम के भीतर प्रकाश का पूर्ण आंतरिक परावर्तन",
+      "(b) कोलॉइड या निलंबन के कणों द्वारा प्रकाश का प्रकीर्णन",
+      "(c) दर्पण या चमकीली सतह से प्रकाश का परावर्तन",
+      "(d) प्रिज्म या काँच से गुजरते प्रकाश का अपवर्तन"
+    ],
+    o_en: [
+      "(a) Total internal reflection of light inside a denser medium",
+      "(b) Scattering of light by particles in a colloid or suspension",
+      "(c) Reflection of light from a mirror or shiny surface",
+      "(d) Refraction of light through a prism or glass"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. टिंडल प्रभाव में प्रकाश की किरण क्यों दिखाई देने लगती है?",
+    q_en: "Q167. Why does the light beam become visible in the Tyndall effect?",
+    tag: "",
+    o_hi: [
+      "(a) कण प्रकाश को सभी दिशाओं में प्रकीर्णित करते हैं",
+      "(b) कण प्रकाश को पूर्णतः अवशोषित करते हैं",
+      "(c) कण प्रकाश को ध्वनि में बदल देते हैं",
+      "(d) कण प्रकाश की गति शून्य कर देते हैं"
+    ],
+    o_en: [
+      "(a) Particles scatter light in all directions",
+      "(b) Particles completely absorb light",
+      "(c) Particles convert light into sound",
+      "(d) Particles reduce light speed to zero"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. विलयन में प्रकाश किरण की दृश्यता कैसी होती है?",
+    q_en: "Q168. How is the visibility of a light beam in a solution described?",
+    tag: "",
+    o_hi: [
+      "(a) दृश्यमान नहीं",
+      "(b) रंगीन पट्टी के रूप में",
+      "(c) दृश्यमान",
+      "(d) बहुत चमकीली"
+    ],
+    o_en: [
+      "(a) Not visible",
+      "(b) As a coloured band",
+      "(c) Visible",
+      "(d) Very bright"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. कोलॉइड में प्रकाश किरण की दृश्यता कैसी होती है?",
+    q_en: "Q169. How is the visibility of a light beam in a colloid described?",
+    tag: "",
+    o_hi: [
+      "(a) दृश्यमान",
+      "(b) लाल रंग में",
+      "(c) दृश्यमान नहीं",
+      "(d) पूर्णतः अवशोषित"
+    ],
+    o_en: [
+      "(a) Visible",
+      "(b) In red",
+      "(c) Not visible",
+      "(d) Completely absorbed"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. निलंबन में प्रकाश किरण की दृश्यता कैसी होती है?",
+    q_en: "Q170. How is the visibility of a light beam in a suspension described?",
+    tag: "",
+    o_hi: [
+      "(a) नीले रंग में",
+      "(b) दृश्यमान नहीं",
+      "(c) पूर्णतः अवशोषित",
+      "(d) दृश्यमान"
+    ],
+    o_en: [
+      "(a) In blue",
+      "(b) Not visible",
+      "(c) Completely absorbed",
+      "(d) Visible"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. विलयन का उदाहरण कौन-सा है?",
+    q_en: "Q171. Which example is given for a solution?",
+    tag: "",
+    o_hi: [
+      "(a) पानी",
+      "(b) आटा और पानी",
+      "(c) दूध",
+      "(d) धुआँ"
+    ],
+    o_en: [
+      "(a) Water",
+      "(b) Flour and water",
+      "(c) Milk",
+      "(d) Smoke"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. कोलॉइड का उदाहरण कौन-सा है?",
+    q_en: "Q172. Which example is given for a colloid?",
+    tag: "",
+    o_hi: [
+      "(a) पानी",
+      "(b) आटा और पानी",
+      "(c) दूध",
+      "(d) नमक का क्रिस्टल"
+    ],
+    o_en: [
+      "(a) Water",
+      "(b) Flour and water",
+      "(c) Milk",
+      "(d) Salt crystal"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. निलंबन का उदाहरण कौन-सा है?",
+    q_en: "Q173. Which example is given for a suspension?",
+    tag: "",
+    o_hi: [
+      "(a) आटा और पानी का मिश्रण",
+      "(b) दूध और पानी का मिश्रण",
+      "(c) चीनी और पानी का विलयन",
+      "(d) नमक और पानी का विलयन"
+    ],
+    o_en: [
+      "(a) Mixture of flour and water",
+      "(b) Mixture of milk and water",
+      "(c) Solution of sugar and water",
+      "(d) Solution of salt and water"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q174. खतरे के संकेत अक्सर लाल रंग में क्यों होते हैं?",
+    q_en: "Q174. Why are danger signals often red?",
+    tag: "",
+    o_hi: [
+      "(a) लाल रंग की गति निर्वात में सबसे कम होती है",
+      "(b) लाल रंग की तरंगदैर्ध्य सबसे अधिक और प्रकीर्णन सबसे कम होता है",
+      "(c) लाल रंग की तरंगदैर्ध्य सबसे कम और प्रकीर्णन सबसे अधिक होता है",
+      "(d) लाल रंग का अपवर्तनांक हर माध्यम में शून्य होता है"
+    ],
+    o_en: [
+      "(a) Red light has the lowest speed in vacuum",
+      "(b) Red has the longest wavelength and undergoes the least scattering",
+      "(c) Red has the shortest wavelength and undergoes the most scattering",
+      "(d) Red has zero refractive index in every medium"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q175. कोहरे या धुएँ में दूर से दिखाई देने के लिए कौन-सा रंग अधिक उपयुक्त है?",
+    q_en: "Q175. Which colour is stated to be more suitable for visibility from a distance in fog or smoke?",
+    tag: "",
+    o_hi: [
+      "(a) हरा",
+      "(b) नीला",
+      "(c) लाल",
+      "(d) बैंगनी"
+    ],
+    o_en: [
+      "(a) Green",
+      "(b) Blue",
+      "(c) Red",
+      "(d) Violet"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q176. यातायात में रुकने के संकेत के लिए किस रंग का उपयोग होता है?",
+    q_en: "Q176. Which colour is used for stop signals in traffic?",
+    tag: "",
+    o_hi: [
+      "(a) बैंगनी",
+      "(b) नीला",
+      "(c) हरा",
+      "(d) लाल"
+    ],
+    o_en: [
+      "(a) Violet",
+      "(b) Blue",
+      "(c) Green",
+      "(d) Red"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q177. चेतावनी या सतर्कता के संकेत के लिए आदर्श रंग कौन-सा है?",
+    q_en: "Q177. Which colour is described as ideal for warning or caution signals?",
+    tag: "",
+    o_hi: [
+      "(a) हरा",
+      "(b) लाल",
+      "(c) बैंगनी",
+      "(d) नीला"
+    ],
+    o_en: [
+      "(a) Green",
+      "(b) Red",
+      "(c) Violet",
+      "(d) Blue"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q178. पूर्ण आंतरिक परावर्तन में प्रकाश किस प्रकार के माध्यम से किस प्रकार के माध्यम की ओर जाता है?",
+    q_en: "Q178. In total internal reflection, light travels from which type of medium to which?",
+    tag: "",
+    o_hi: [
+      "(a) निर्वात से धातु की ओर",
+      "(b) सघन माध्यम से कम सघन माध्यम की ओर",
+      "(c) विरल माध्यम से सघन माध्यम की ओर",
+      "(d) समान घनत्व वाले माध्यमों के बीच"
+    ],
+    o_en: [
+      "(a) From vacuum to metal",
+      "(b) From a denser medium to a less dense medium",
+      "(c) From a rarer medium to a denser medium",
+      "(d) Between media of equal density"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q179. पूर्ण आंतरिक परावर्तन में प्रकाश अपवर्तित होने के बजाय क्या करता है?",
+    q_en: "Q179. In total internal reflection, what does light do instead of refracting out?",
+    tag: "",
+    o_hi: [
+      "(a) पूरी तरह अवशोषित हो जाता है",
+      "(b) ध्वनि में बदल जाता है",
+      "(c) कम सघन माध्यम में बिना मुड़े चला जाता है",
+      "(d) सघन माध्यम में वापस परावर्तित हो जाता है"
+    ],
+    o_en: [
+      "(a) It is completely absorbed",
+      "(b) It converts into sound",
+      "(c) It passes into the rarer medium without bending",
+      "(d) It is reflected back into the denser medium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q180. पूर्ण आंतरिक परावर्तन का एक अन्य उदाहरण कौन-सा है?",
+    q_en: "Q180. Which is another example of total internal reflection?",
+    tag: "",
+    o_hi: [
+      "(a) समतल काँच की पट्टी",
+      "(b) समतल दर्पण",
+      "(c) उत्तल लेंस",
+      "(d) ऑप्टिकल फाइबर"
+    ],
+    o_en: [
+      "(a) Plane glass slab",
+      "(b) Plane mirror",
+      "(c) Convex lens",
+      "(d) Optical fibre"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q181. पूर्ण आंतरिक परावर्तन किस दृष्टि भ्रम के लिए जिम्मेदार है?",
+    q_en: "Q181. Total internal reflection is stated to be responsible for which optical illusion?",
+    tag: "",
+    o_hi: [
+      "(a) मृगमरीचिका",
+      "(b) रंगांधता",
+      "(c) मायोपिया",
+      "(d) प्रेसबायोपिया"
+    ],
+    o_en: [
+      "(a) Mirage",
+      "(b) Colour blindness",
+      "(c) Myopia",
+      "(d) Presbyopia"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. पूर्ण आंतरिक परावर्तन की दूसरी आवश्यक शर्त क्या है?",
+    q_en: "Q182. What is the second necessary condition for total internal reflection?",
+    tag: "",
+    o_hi: [
+      "(a) आपतन कोण 90° से अधिक हो",
+      "(b) आपतन कोण क्रांतिक कोण से अधिक हो",
+      "(c) आपतन कोण शून्य हो",
+      "(d) आपतन कोण क्रांतिक कोण से कम हो"
+    ],
+    o_en: [
+      "(a) Angle of incidence must exceed 90°",
+      "(b) Angle of incidence must exceed the critical angle",
+      "(c) Angle of incidence must be zero",
+      "(d) Angle of incidence must be less than the critical angle"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. क्रांतिक कोण किसे कहते हैं?",
+    q_en: "Q183. How is the critical angle defined here?",
+    tag: "",
+    o_hi: [
+      "(a) वह अधिकतम आपतन कोण जिस पर प्रकाश बिना मुड़े दूसरे माध्यम में चला जाए",
+      "(b) वह कोण जिस पर आपतित और अपवर्तित किरणें समानांतर हो जाएँ",
+      "(c) वह न्यूनतम अपवर्तन कोण जिस पर प्रकाश विरल माध्यम में पूरी तरह निकल जाए",
+      "(d) वह न्यूनतम आपतन कोण जिस पर प्रकाश सघन माध्यम के अंदर पूर्णतः परावर्तित हो"
+    ],
+    o_en: [
+      "(a) The maximum angle of incidence at which light enters the second medium without bending",
+      "(b) The angle at which incident and refracted rays become parallel",
+      "(c) The minimum angle of refraction at which light fully enters the rarer medium",
+      "(d) The minimum angle of incidence at which light is completely reflected inside the denser medium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. गर्म दिन में मृगमरीचिका बनने का प्रमुख कारण क्या है?",
+    q_en: "Q184. What is the main cause of a mirage on a hot day?",
+    tag: "",
+    o_hi: [
+      "(a) समान तापमान वाली वायु परतों में प्रकाश का परावर्तन",
+      "(b) ठंडी जल परतों में ध्वनि का अपवर्तन",
+      "(c) विभिन्न तापमान वाली वायु परतों में प्रकाश का अपवर्तन",
+      "(d) समान घनत्व वाली काँच परतों में प्रकाश का प्रकीर्णन"
+    ],
+    o_en: [
+      "(a) Reflection of light through air layers at the same temperature",
+      "(b) Refraction of sound through cold water layers",
+      "(c) Refraction of light through air layers at different temperatures",
+      "(d) Scattering of light through glass layers of equal density"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. गर्म दिन में जमीन के पास की हवा ऊपरी हवा की तुलना में कैसी होती है?",
+    q_en: "Q185. On a hot day, how is the air near the ground compared with the air above?",
+    tag: "",
+    o_hi: [
+      "(a) अधिक ठंडी और कम सघन",
+      "(b) समान तापमान और समान घनत्व",
+      "(c) अधिक गर्म और कम सघन",
+      "(d) ठंडी और अधिक सघन"
+    ],
+    o_en: [
+      "(a) Colder and less dense",
+      "(b) Same temperature and density",
+      "(c) Hotter and less dense",
+      "(d) Colder and denser"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. प्रकाश गर्म हवा की परत में प्रवेश करने पर क्या करता है?",
+    q_en: "Q186. What happens when light enters the layer of hot air?",
+    tag: "",
+    o_hi: [
+      "(a) ध्वनि में बदलता है",
+      "(b) पूर्णतः अवशोषित होता है",
+      "(c) अपवर्तित होता है",
+      "(d) स्थिर हो जाता है"
+    ],
+    o_en: [
+      "(a) It turns into sound",
+      "(b) It is completely absorbed",
+      "(c) It refracts",
+      "(d) It becomes stationary"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. मृगमरीचिका में वस्तु की आभासी प्रतिकृति सामान्यतः कहाँ दिखाई देती है?",
+    q_en: "Q187. Where is the apparent image of an object shown in a mirage?",
+    tag: "",
+    o_hi: [
+      "(a) वस्तु के ठीक ऊपर",
+      "(b) वस्तु के सामने ऊपर की ओर",
+      "(c) वस्तु के पीछे समान ऊँचाई पर",
+      "(d) वस्तु के नीचे"
+    ],
+    o_en: [
+      "(a) Directly above the object",
+      "(b) In front of and above the object",
+      "(c) Behind the object at the same height",
+      "(d) Below the object"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. मृगमरीचिका चमकती हुई क्यों दिखाई दे सकती है?",
+    q_en: "Q188. Why can a mirage appear shiny?",
+    tag: "",
+    o_hi: [
+      "(a) वर्ण-विक्षेपण के कारण",
+      "(b) पूर्ण आंतरिक परावर्तन के कारण",
+      "(c) दर्पणीय परावर्तन के कारण",
+      "(d) वायुमंडलीय प्रकीर्णन के कारण"
+    ],
+    o_en: [
+      "(a) Because of dispersion",
+      "(b) Because of total internal reflection",
+      "(c) Because of mirror reflection",
+      "(d) Because of atmospheric scattering"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. हीरा किस घटना के कारण चमकता है?",
+    q_en: "Q189. Diamond shines because of which phenomenon?",
+    tag: "",
+    o_hi: [
+      "(a) वर्ण-विक्षेपण",
+      "(b) पूर्ण आंतरिक परावर्तन",
+      "(c) टिंडल प्रकीर्णन",
+      "(d) वायुमंडलीय अपवर्तन"
+    ],
+    o_en: [
+      "(a) Dispersion",
+      "(b) Total internal reflection",
+      "(c) Tyndall scattering",
+      "(d) Atmospheric refraction"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. ऑप्टिकल फाइबर का प्रमुख उपयोग किस क्षेत्र में होता है?",
+    q_en: "Q190. What major field of use is stated for optical fibre?",
+    tag: "",
+    o_hi: [
+      "(a) धातु गलाना",
+      "(b) कृषि सिंचाई",
+      "(c) दूरसंचार",
+      "(d) वायु दाब मापन"
+    ],
+    o_en: [
+      "(a) Metal smelting",
+      "(b) Agricultural irrigation",
+      "(c) Telecommunication",
+      "(d) Air-pressure measurement"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. ऑप्टिकल फाइबर का उपयोग किस डिजिटल संचार क्षेत्र में होता है?",
+    q_en: "Q191. In which digital communication field is optical fibre stated to be used?",
+    tag: "",
+    o_hi: [
+      "(a) यांत्रिक ड्रिलिंग",
+      "(b) तापीय धातुकर्म",
+      "(c) कंप्यूटर नेटवर्किंग",
+      "(d) रेडियोधर्मी इमेजिंग"
+    ],
+    o_en: [
+      "(a) Mechanical drilling",
+      "(b) Thermal metallurgy",
+      "(c) Computer networking",
+      "(d) Radioactive imaging"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. ऑप्टिकल फाइबर का उपयोग किस प्रकार के उपकरणों में होता है?",
+    q_en: "Q192. In what type of instruments is optical fibre used?",
+    tag: "",
+    o_hi: [
+      "(a) यांत्रिक हथौड़ों में",
+      "(b) कृषि उपकरणों में",
+      "(c) चिकित्सा उपकरणों में",
+      "(d) दाब कुकर में"
+    ],
+    o_en: [
+      "(a) In mechanical hammers",
+      "(b) In agricultural implements",
+      "(c) In medical instruments",
+      "(d) In pressure cookers"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
