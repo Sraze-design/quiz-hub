@@ -1,0 +1,502 @@
+const data = [
+  {
+    q_hi: "Q51. आवृत्ति की SI इकाई क्या है?",
+    q_en: "Q51. What is the SI unit of frequency?",
+    tag: "",
+    o_hi: ["(a) मीटर (m) या सेंटीमीटर", "(b) हर्ट्ज़ (Hz) या s⁻¹", "(c) डेसिबल (dB) या बेल", "(d) मीटर/सेकंड (m/s) या km/h"],
+    o_en: ["(a) Metre (m) or centimetre", "(b) Hertz (Hz) or s⁻¹", "(c) Decibel (dB) or bel", "(d) Metre/second (m/s) or km/h"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q52. आवृत्ति और समय का संबंध क्या है?",
+    q_en: "Q52. What is the relation between frequency and time period?",
+    tag: "",
+    o_hi: ["(a) ν = समय", "(b) ν = 2 × समय", "(c) ν = समय²", "(d) ν = 1/समय"],
+    o_en: ["(a) ν = time", "(b) ν = 2 × time", "(c) ν = time²", "(d) ν = 1/time"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q53. उच्च तारत्व वाली ध्वनि में कंपन कैसा होता है?",
+    q_en: "Q53. How is vibration in a high-pitched sound?",
+    tag: "",
+    o_hi: ["(a) तेज", "(b) स्थिर", "(c) धीमा", "(d) अनियमित और शून्य औसत"],
+    o_en: ["(a) Rapid", "(b) Stationary", "(c) Slow", "(d) Irregular with zero average"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q54. उच्च तारत्व वाली ध्वनि की आवृत्ति कैसी होती है?",
+    q_en: "Q54. How is the frequency of a high-pitched sound?",
+    tag: "",
+    o_hi: ["(a) शून्य", "(b) कम", "(c) माध्यम से असंबंधित और स्थिर", "(d) अधिक"],
+    o_en: ["(a) Zero", "(b) Low", "(c) Fixed and unrelated to the medium", "(d) High"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q55. कम तारत्व वाली ध्वनि में कंपन कैसा होता है?",
+    q_en: "Q55. How is vibration in a low-pitched sound?",
+    tag: "",
+    o_hi: ["(a) तेज", "(b) प्रकाश की गति वाला", "(c) शून्य समय वाला", "(d) धीमा"],
+    o_en: ["(a) Rapid", "(b) At the speed of light", "(c) Zero-period", "(d) Slow"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q56. कम तारत्व वाली ध्वनि की आवृत्ति कैसी होती है?",
+    q_en: "Q56. How is the frequency of a low-pitched sound?",
+    tag: "",
+    o_hi: ["(a) अधिक", "(b) अनंत", "(c) प्रकाश की आवृत्ति के बराबर", "(d) कम"],
+    o_en: ["(a) High", "(b) Infinite", "(c) Equal to light frequency", "(d) Low"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q57. आयाम किसे कहते हैं?",
+    q_en: "Q57. What is amplitude?",
+    tag: "",
+    o_hi: ["(a) कण का संतुलन स्थिति से अधिकतम विस्थापन", "(b) एक सेकंड में कण द्वारा किए गए कुल दोलनों की संख्या", "(c) दो क्रमागत शिखरों या संपीडनों के बीच की दूरी", "(d) तरंग द्वारा एक निश्चित समय में तय की गई कुल दूरी"],
+    o_en: ["(a) Maximum displacement of a particle from its equilibrium position", "(b) Total number of oscillations made by a particle in one second", "(c) Distance between two successive crests or compressions", "(d) Total distance travelled by a wave in a fixed time"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q58. ध्वनि तरंग का आयाम किस गुण को दर्शाता है?",
+    q_en: "Q58. What property of a sound wave is represented by amplitude?",
+    tag: "",
+    o_hi: ["(a) माध्यम में ध्वनि की गति", "(b) ध्वनि की आवृत्ति या पिच", "(c) ध्वनि की प्रबलता या तीव्रता", "(d) ध्वनि का तरंगदैर्ध्य"],
+    o_en: ["(a) Speed of sound in the medium", "(b) Frequency or pitch of sound", "(c) Loudness or intensity of sound", "(d) Wavelength of sound"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q59. अधिक आयाम वाली ध्वनि कैसी होती है?",
+    q_en: "Q59. How is a sound with greater amplitude perceived?",
+    tag: "",
+    o_hi: ["(a) कम आवृत्ति वाली", "(b) अश्रव्य", "(c) अधिक तेज", "(d) अधिक मंद"],
+    o_en: ["(a) Lower in frequency", "(b) Inaudible", "(c) Louder", "(d) Softer"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q60. आयाम की SI इकाई क्या है?",
+    q_en: "Q60. What is the SI unit of amplitude?",
+    tag: "",
+    o_hi: ["(a) हर्ट्ज़", "(b) मीटर", "(c) डेसिबल", "(d) सेकंड⁻¹"],
+    o_en: ["(a) Hertz", "(b) Metre", "(c) Decibel", "(d) Second⁻¹"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q61. ध्वनि तीव्रता के स्तर को किस इकाई में मापा जाता है?",
+    q_en: "Q61. In which unit is the sound intensity level measured?",
+    tag: "",
+    o_hi: ["(a) हर्ट्ज़ (Hz)", "(b) मीटर (m)", "(c) मीटर/सेकंड (m/s)", "(d) डेसिबल (dB)"],
+    o_en: ["(a) Hertz (Hz)", "(b) Metre (m)", "(c) Metre per second (m/s)", "(d) Decibel (dB)"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q62. मानव कान सामान्यतः किस सीमा तक ध्वनि तीव्रता सुन सकता है?",
+    q_en: "Q62. Up to what sound-intensity range can the human ear generally hear?",
+    tag: "",
+    o_hi: ["(a) 20 से 200 dB", "(b) 0 से 20 dB", "(c) 0 से 130 dB", "(d) 130 से 260 dB"],
+    o_en: ["(a) 20 to 200 dB", "(b) 0 to 20 dB", "(c) 0 to 130 dB", "(d) 130 to 260 dB"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q63. 130 dB से अधिक तीव्रता वाली ध्वनि को क्या माना जाता है?",
+    q_en: "Q63. How is sound above 130 dB described?",
+    tag: "",
+    o_hi: ["(a) शोर", "(b) अनुनाद", "(c) अवश्रव्य ध्वनि", "(d) पराश्रव्य ध्वनि"],
+    o_en: ["(a) Noise", "(b) Resonance", "(c) Infrasonic sound", "(d) Ultrasonic sound"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q64. ध्वनि तरंग का आयाम मुख्यतः किस पर निर्भर करता है?",
+    q_en: "Q64. What mainly determines the amplitude of a sound wave?",
+    tag: "",
+    o_hi: ["(a) माध्यम में प्रकाश की चाल पर", "(b) वस्तु को कंपन कराने वाले बल पर", "(c) स्थानीय गुरुत्वीय त्वरण के मान पर", "(d) तरंग की मैक संख्या के मान पर"],
+    o_en: ["(a) The speed of light in the medium", "(b) The force used to make the object vibrate", "(c) The value of local gravitational acceleration", "(d) The value of the wave's Mach number"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q65. किसी वस्तु पर हल्का प्रहार करने से कैसी ध्वनि सुनाई देती है?",
+    q_en: "Q65. What kind of sound is heard when a vibrating object is struck lightly?",
+    tag: "",
+    o_hi: ["(a) निर्वात में चलने वाली ध्वनि", "(b) कम ऊर्जा (कम आयाम) की हल्की ध्वनि", "(c) उच्च आवृत्ति की पराश्रव्य ध्वनि", "(d) अधिक आयाम की तेज ध्वनि"],
+    o_en: ["(a) A sound travelling through vacuum", "(b) A low-energy, low-amplitude soft sound", "(c) An ultrasonic sound of high frequency", "(d) A loud sound of large amplitude"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q66. किसी वस्तु पर अधिक बल से प्रहार करने पर क्या परिणाम होता है?",
+    q_en: "Q66. What happens when a vibrating object is struck with greater force?",
+    tag: "",
+    o_hi: ["(a) आयाम बढ़ता है और ध्वनि अधिक तेज होती है", "(b) आयाम घटता है और ध्वनि मंद होती है", "(c) ध्वनि निर्वात में यात्रा करने लगती है", "(d) आवृत्ति शून्य हो जाती है"],
+    o_en: ["(a) Amplitude increases and the sound becomes louder", "(b) Amplitude decreases and the sound becomes softer", "(c) Sound begins to travel in vacuum", "(d) Frequency becomes zero"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q67. लय (स्वर गुणवत्ता/स्वर रंग) का मुख्य कार्य क्या है?",
+    q_en: "Q67. What is the main role of timbre or sound quality?",
+    tag: "",
+    o_hi: ["(a) समान तारत्व और तीव्रता वाली ध्वनियों में भेद करना", "(b) समान माध्यम में ध्वनि की गति निर्धारित करना", "(c) तरंग की आवृत्ति और तरंगदैर्ध्य का अनुपात निकालना", "(d) किसी वस्तु की मैक संख्या निर्धारित करना"],
+    o_en: ["(a) Distinguishing sounds having the same pitch and intensity", "(b) Determining sound speed in the same medium", "(c) Finding the ratio of wave frequency to wavelength", "(d) Determining the Mach number of an object"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q68. स्वर के बारे में सही कथन कौन-सा है?",
+    q_en: "Q68. Which statement about a tone/note is given?",
+    tag: "",
+    o_hi: ["(a) यह तरंग की गति और माध्यम के घनत्व का संयुक्त गुण है", "(b) यह माध्यम के बिना चलने वाली दाब तरंग का रूप है", "(c) यह मूलभूत तथा अतिरिक्त तरंगों सहित कई आवृत्तियों का मिश्रण हो सकता है", "(d) यह आयाम और दाब से स्वतंत्र स्थिर क्षेत्र का रूप है"],
+    o_en: ["(a) It is a combined property of wave speed and medium density", "(b) It is a form of pressure wave travelling without a medium", "(c) It may be a mixture of many frequencies including the fundamental and overtones", "(d) It is a fixed field independent of amplitude and pressure"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q69. मनुष्य की श्रव्य आवृत्ति सीमा क्या है?",
+    q_en: "Q69. What is the audible frequency range for humans?",
+    tag: "",
+    o_hi: ["(a) 0 Hz से 20 Hz", "(b) 20,000 Hz से 40,000 Hz", "(c) 1 Hz से 10 Hz", "(d) 20 Hz से 20,000 Hz"],
+    o_en: ["(a) 0 Hz to 20 Hz", "(b) 20,000 Hz to 40,000 Hz", "(c) 1 Hz to 10 Hz", "(d) 20 Hz to 20,000 Hz"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q70. 20 Hz से कम आवृत्ति वाली ध्वनि क्या कहलाती है?",
+    q_en: "Q70. What is sound with frequency below 20 Hz called?",
+    tag: "",
+    o_hi: ["(a) प्रतिध्वनि", "(b) अश्रव्य ध्वनि", "(c) श्रव्य ध्वनि", "(d) पराश्रव्य ध्वनि"],
+    o_en: ["(a) Echo", "(b) Infrasonic sound", "(c) Audible sound", "(d) Ultrasonic sound"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q71. अश्रव्य ध्वनियों के बारे में मनुष्य की सुनने की क्षमता कैसी है?",
+    q_en: "Q71. Can humans hear infrasonic sounds?",
+    tag: "",
+    o_hi: ["(a) मनुष्य उन्हें नहीं सुन सकता", "(b) वे 20 kHz पर सुनाई देती हैं", "(c) वे पानी में सुनाई देती हैं", "(d) मनुष्य उन्हें सामान्य श्रव्य ध्वनि की तरह सुनता है"],
+    o_en: ["(a) Humans cannot hear them", "(b) They are heard at 20 kHz", "(c) They are heard in water", "(d) Humans hear them like ordinary audible sound"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q72. अश्रव्य ध्वनियों को कौन सुन सकता है?",
+    q_en: "Q72. Who may hear infrasonic sounds?",
+    tag: "",
+    o_hi: ["(a) कई जानवर", "(b) प्रकाश-संवेदी कोशिकाएँ", "(c) निर्जीव वस्तुएँ", "(d) मानव कान 20–20,000 Hz सीमा में ही उन्हें पहचानता है"],
+    o_en: ["(a) Many animals", "(b) Light-sensitive cells", "(c) Inanimate objects", "(d) The human ear detects them within 20–20,000 Hz"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q73. अश्रव्य ध्वनि का उदाहरण कौन-सा है?",
+    q_en: "Q73. Which is given as an example of infrasonic sound?",
+    tag: "",
+    o_hi: ["(a) मानव भाषण से उत्पन्न सामान्य ध्वनियाँ", "(b) श्रव्य ट्यूनिंग फोर्क से उत्पन्न ध्वनियाँ", "(c) भूकंप से उत्पन्न निम्न आवृत्ति ध्वनियाँ", "(d) सामान्य संगीत वाद्य से उत्पन्न ध्वनियाँ"],
+    o_en: ["(a) Ordinary sounds produced by human speech", "(b) Sounds produced by an audible tuning fork", "(c) Low-frequency sounds produced by earthquakes", "(d) Sounds produced by ordinary musical instruments"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q74. 20,000 Hz से अधिक आवृत्ति वाली ध्वनि क्या कहलाती है?",
+    q_en: "Q74. What is sound with frequency above 20,000 Hz called?",
+    tag: "",
+    o_hi: ["(a) अवश्रव्य ध्वनि तरंगें", "(b) श्रव्य ध्वनि तरंगें", "(c) पराश्रव्य ध्वनि तरंगें", "(d) प्रतिध्वनि वाली ध्वनि तरंगें"],
+    o_en: ["(a) Infrasonic sound waves", "(b) Audible sound waves", "(c) Ultrasonic sound waves", "(d) Echo-producing sound waves"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q75. पराश्रव्य ध्वनियों के बारे में मनुष्य की सुनने की क्षमता कैसी है?",
+    q_en: "Q75. Can humans hear ultrasonic sounds?",
+    tag: "",
+    o_hi: ["(a) वे निर्वात में सुनाई देती हैं", "(b) मनुष्य उन्हें सामान्य श्रव्य ध्वनि की तरह सुनता है", "(c) मनुष्य उन्हें नहीं सुन सकता", "(d) वे 20 Hz से कम पर सुनाई देती हैं"],
+    o_en: ["(a) They are heard in vacuum", "(b) Humans hear them like ordinary audible sound", "(c) Humans cannot hear them", "(d) They are heard below 20 Hz"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q76. पराश्रव्य ध्वनि किसके द्वारा उत्पन्न की जाती है?",
+    q_en: "Q76. Which animals are stated to produce ultrasonic sound?",
+    tag: "",
+    o_hi: ["(a) मनुष्य और घोड़े", "(b) गाय और भेड़", "(c) कुत्ते और बिल्लियाँ", "(d) चमगादड़ और डॉल्फिन"],
+    o_en: ["(a) Humans and horses", "(b) Cows and sheep", "(c) Dogs and cats", "(d) Bats and dolphins"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q77. भ्रूण के लिंग निर्धारण में पराश्रव्य (अल्ट्रासाउंड) का प्रयोग कैसा है?",
+    q_en: "Q77. What is the status of using ultrasound for fetal sex determination?",
+    tag: "",
+    o_hi: ["(a) प्रतिबंधित है", "(b) अनिवार्य है", "(c) नियमित रूप से आवश्यक है", "(d) सभी मामलों में प्रोत्साहित है"],
+    o_en: ["(a) It is prohibited", "(b) It is mandatory", "(c) It is routinely required", "(d) It is encouraged in all cases"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q78. पराश्रव्य ध्वनि का भ्रूण संबंधी उपयोग क्या है?",
+    q_en: "Q78. What is a fetal application of ultrasound?",
+    tag: "",
+    o_hi: ["(a) भ्रूण की आवृत्ति को 20 Hz से कम करना", "(b) भ्रूण की हड्डियों को चुंबकीय बनाना", "(c) भ्रूण की वृद्धि और विकास की निगरानी", "(d) भ्रूण में प्रकाश की गति मापना"],
+    o_en: ["(a) Reducing fetal frequency below 20 Hz", "(b) Magnetizing fetal bones", "(c) Monitoring fetal growth and development", "(d) Measuring the speed of light in the fetus"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q79. पराश्रव्य ध्वनि का गुर्दे की पथरी में क्या उपयोग है?",
+    q_en: "Q79. How is ultrasound used for kidney stones?",
+    tag: "",
+    o_hi: ["(a) रक्त में ऑक्सीजन बढ़ाने में", "(b) पथरी का रंग बदलने में", "(c) गुर्दे की गति बढ़ाने में", "(d) पथरी की पहचान और उसे तोड़ने में"],
+    o_en: ["(a) Increasing oxygen in blood", "(b) Changing the colour of stones", "(c) Increasing kidney motion", "(d) Detecting and breaking kidney stones"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q80. पराश्रव्य ध्वनि से आंतरिक अंगों के बारे में क्या पता लगाया जा सकता है?",
+    q_en: "Q80. What can ultrasound reveal about internal organs?",
+    tag: "",
+    o_hi: ["(a) उनकी चुंबकीय ध्रुवता", "(b) उनकी स्थिति", "(c) उनकी प्रकाशीय चमक", "(d) उनकी मैक संख्या"],
+    o_en: ["(a) Their magnetic polarity", "(b) Their condition", "(c) Their optical brightness", "(d) Their Mach number"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q81. मैक संख्या किस अनुपात के बराबर होती है?",
+    q_en: "Q81. Mach number is equal to which ratio?",
+    tag: "",
+    o_hi: ["(a) माध्यम में ध्वनि की गति / वस्तु की गति", "(b) वस्तु की गति / माध्यम में ध्वनि की गति", "(c) तरंग की आवृत्ति / तरंग का आयाम", "(d) तरंग का तरंगदैर्ध्य / दोलन का समय"],
+    o_en: ["(a) Speed of sound in the medium / speed of object", "(b) Speed of object / speed of sound in the medium", "(c) Wave frequency / wave amplitude", "(d) Wave wavelength / oscillation time"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q82. मैक संख्या 1 से कम होने पर गति किस श्रेणी में आती है?",
+    q_en: "Q82. A Mach number below 1 belongs to which speed category?",
+    tag: "",
+    o_hi: ["(a) अधिध्वनिक (सुपरसोनिक)", "(b) अवध्वनिक (सब्सोनिक)", "(c) अत्यधिध्वनिक (हाइपरसोनिक)", "(d) संधिध्वनिक (ट्रांसोनिक)"],
+    o_en: ["(a) Supersonic", "(b) Subsonic", "(c) Hypersonic", "(d) Transonic"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q83. मैक संख्या 1 से 5 के बीच होने पर गति किस श्रेणी में आती है?",
+    q_en: "Q83. A Mach number from 1 to 5 belongs to which speed category?",
+    tag: "",
+    o_hi: ["(a) अत्यधिध्वनिक (हाइपरसोनिक)", "(b) संधिध्वनिक (ट्रांसोनिक)", "(c) अधिध्वनिक (सुपरसोनिक)", "(d) अवध्वनिक (सब्सोनिक)"],
+    o_en: ["(a) Hypersonic", "(b) Transonic", "(c) Supersonic", "(d) Subsonic"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q84. मैक संख्या 5 से अधिक होने पर गति किस श्रेणी में आती है?",
+    q_en: "Q84. A Mach number above 5 belongs to which speed category?",
+    tag: "",
+    o_hi: ["(a) अवध्वनिक (सब्सोनिक)", "(b) संधिध्वनिक (ट्रांसोनिक)", "(c) अत्यधिध्वनिक (हाइपरसोनिक)", "(d) अधिध्वनिक (सुपरसोनिक)"],
+    o_en: ["(a) Subsonic", "(b) Transonic", "(c) Hypersonic", "(d) Supersonic"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q85. लगभग मैक 1 की गति किस श्रेणी में आती है?",
+    q_en: "Q85. A speed of about Mach 1 belongs to which category?",
+    tag: "",
+    o_hi: ["(a) अवध्वनिक (सब्सोनिक)", "(b) अधिध्वनिक (सुपरसोनिक)", "(c) अत्यधिध्वनिक (हाइपरसोनिक)", "(d) संधिध्वनिक (ट्रांसोनिक)"],
+    o_en: ["(a) Subsonic", "(b) Supersonic", "(c) Hypersonic", "(d) Transonic"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q86. ध्वनि का परावर्तन किस प्रक्रिया को कहते हैं?",
+    q_en: "Q86. What is reflection of sound?",
+    tag: "",
+    o_hi: ["(a) ध्वनि तरंगों का स्थायी रूप से अवशोषित हो जाना", "(b) ध्वनि तरंगों का प्रकाश में बदलना", "(c) ध्वनि तरंगों का निर्वात में प्रवेश करना", "(d) ध्वनि तरंगों का सतह से टकराकर उसी माध्यम में लौटना"],
+    o_en: ["(a) Sound waves being permanently absorbed", "(b) Sound waves converting into light", "(c) Sound waves entering vacuum", "(d) Sound waves striking a surface and returning into the same medium"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q87. ध्वनि के परावर्तन के बाद तरंग किस माध्यम में वापस आती है?",
+    q_en: "Q87. After reflection, into which medium does the sound wave return?",
+    tag: "",
+    o_hi: ["(a) प्रकाशीय माध्यम में", "(b) किसी नए माध्यम में अनिवार्य रूप से", "(c) उसी माध्यम में", "(d) निर्वात में"],
+    o_en: ["(a) Into an optical medium", "(b) Necessarily into a new medium", "(c) Into the same medium", "(d) Into vacuum"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q88. ध्वनि का परावर्तन किन नियमों का पालन करता है?",
+    q_en: "Q88. Reflection of sound follows laws similar to those of what?",
+    tag: "",
+    o_hi: ["(a) ऊष्मा का चालन", "(b) प्रकाश का अपवर्तन", "(c) विद्युत का प्रेरण", "(d) प्रकाश का परावर्तन"],
+    o_en: ["(a) Conduction of heat", "(b) Refraction of light", "(c) Electrical induction", "(d) Reflection of light"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q89. ध्वनि के परावर्तन से कौन-सी घटनाएँ उत्पन्न हो सकती हैं?",
+    q_en: "Q89. Which phenomena may arise from reflection of sound?",
+    tag: "",
+    o_hi: ["(a) विद्युत अपघटन, आयनीकरण और चुंबकीकरण", "(b) अनुरणन, प्रतिध्वनि और विवर्तन", "(c) चालन, संवहन और विकिरण", "(d) अपवर्तन, ध्रुवण और फोटोविद्युत प्रभाव"],
+    o_en: ["(a) Electrolysis, ionization and magnetization", "(b) Reverberation, echo and diffraction", "(c) Conduction, convection and radiation", "(d) Refraction, polarization and photoelectric effect"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q90. प्रतिध्वनि क्या है?",
+    q_en: "Q90. What is an echo?",
+    tag: "",
+    o_hi: ["(a) परावर्तित ध्वनि की पुनरावृत्ति जो मूल ध्वनि के बाद फिर सुनाई दे", "(b) बंद स्थान में अनेक परावर्तनों से धीरे-धीरे क्षीण होती ध्वनि", "(c) अवरोध के आसपास मुड़कर श्रोता तक पहुँचने वाली ध्वनि", "(d) सापेक्ष गति से आवृत्ति बदलने के कारण सुनाई देने वाली ध्वनि"],
+    o_en: ["(a) A repetition of reflected sound heard again after the original sound", "(b) Sound that gradually fades after multiple reflections in an enclosed space", "(c) Sound reaching a listener after bending around an obstacle", "(d) Sound heard with changed frequency because of relative motion"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q91. प्रतिध्वनि सुनाई देने का मूल कारण क्या है?",
+    q_en: "Q91. What is the basic cause of an echo?",
+    tag: "",
+    o_hi: ["(a) ध्वनि तरंगों का सतह से परावर्तित होकर श्रोता तक लौटना", "(b) बंद कमरे में ध्वनि तरंगों का बार-बार परावर्तित होना", "(c) अवरोध के किनारों से ध्वनि तरंगों का मुड़कर फैलना", "(d) स्रोत और प्रेक्षक की गति से ध्वनि की आवृत्ति बदलना"],
+    o_en: ["(a) Sound waves reflecting from a surface and returning to the listener", "(b) Sound waves reflecting repeatedly in an enclosed room", "(c) Sound waves bending and spreading around the edges of an obstacle", "(d) Sound frequency changing due to motion of source and observer"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q92. अनुरणन किस कारण होता है?",
+    q_en: "Q92. What causes reverberation?",
+    tag: "",
+    o_hi: ["(a) निर्वात में ध्वनि का प्रसार", "(b) बंद स्थान में ध्वनि का बार-बार परावर्तन", "(c) ध्वनि का विद्युत संकेत में बदलना", "(d) तरंग का माध्यम से बाहर निकलना"],
+    o_en: ["(a) Propagation of sound in vacuum", "(b) Repeated reflection of sound in an enclosed space", "(c) Conversion of sound into an electrical signal", "(d) A wave leaving the medium"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q93. अनुरणन में ध्वनि किन सतहों से बार-बार परावर्तित हो सकती है?",
+    q_en: "Q93. From which surfaces may sound repeatedly reflect during reverberation?",
+    tag: "",
+    o_hi: ["(a) दीवारें, छत और फर्नीचर", "(b) जल सतह, धातु और काँच", "(c) भूमि, पेड़ और खुला आकाश", "(d) दर्पण, लेंस और प्रिज्म"],
+    o_en: ["(a) Walls, ceiling and furniture", "(b) Water surface, metal and glass", "(c) Ground, trees and open sky", "(d) Mirrors, lenses and prisms"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q94. अनुरणन में ध्वनि स्रोत बंद होने के बाद क्या होता है?",
+    q_en: "Q94. What happens after the sound source stops in reverberation?",
+    tag: "",
+    o_hi: ["(a) ध्वनि कुछ समय बनी रहती है और धीरे-धीरे क्षीण होती है", "(b) ध्वनि तुरंत समाप्त होकर विद्युत संकेत में बदल जाती है", "(c) ध्वनि की गति बढ़ती है और तीव्रता स्थिर बनी रहती है", "(d) ध्वनि का आयाम बढ़ता है और आवृत्ति बदलती रहती है"],
+    o_en: ["(a) Sound persists for some time and gradually fades", "(b) Sound ends immediately and converts into an electrical signal", "(c) Sound speed increases while intensity remains constant", "(d) Sound amplitude increases while frequency keeps changing"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q95. ध्वनि का विवर्तन क्या है?",
+    q_en: "Q95. What is diffraction of sound?",
+    tag: "",
+    o_hi: ["(a) ध्वनि का अवरोधों के आसपास या छिद्रों से होकर निकलना", "(b) ध्वनि का कठोर सतह से टकराकर उसी माध्यम में लौटना", "(c) ध्वनि का बंद कमरे में अनेक बार परावर्तित होते रहना", "(d) ध्वनि की आवृत्ति का सापेक्ष गति के कारण बदलना"],
+    o_en: ["(a) Sound passing around obstacles or through openings", "(b) Sound striking a hard surface and returning into the same medium", "(c) Sound undergoing repeated reflections in an enclosed room", "(d) Sound frequency changing because of relative motion"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q96. ध्वनि का विवर्तन हमें किस स्थिति में सुनने में मदद करता है?",
+    q_en: "Q96. In what situation does sound diffraction help us hear?",
+    tag: "",
+    o_hi: ["(a) जब माध्यम के कण स्थिर हों", "(b) जब ध्वनि स्रोत दृष्टि से छिपा हो", "(c) जब प्रकाश की गति कम हो रही हो", "(d) जब ध्वनि निर्वात में चल रही हो"],
+    o_en: ["(a) When particles of the medium are stationary", "(b) When the sound source is hidden from view", "(c) When the speed of light is decreasing", "(d) When sound is travelling in vacuum"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q97. स्पष्ट प्रतिध्वनि सुनने के लिए स्रोत से बाधा की न्यूनतम दूरी कितनी होनी चाहिए?",
+    q_en: "Q97. What minimum distance between source and obstacle is given for hearing a clear echo?",
+    tag: "",
+    o_hi: ["(a) 34.4 मीटर", "(b) 8.6 मीटर", "(c) 17.2 मीटर", "(d) 1.72 मीटर"],
+    o_en: ["(a) 34.4 metres", "(b) 8.6 metres", "(c) 17.2 metres", "(d) 1.72 metres"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q98. SONAR का पूर्ण रूप क्या है?",
+    q_en: "Q98. What is the full form of SONAR?",
+    tag: "",
+    o_hi: ["(a) साउंड नंबर एंड रेजोनेंस", "(b) साउंड नेटवर्क एंड रिफ्लेक्शन", "(c) सिग्नल नेविगेशन एंड रडार", "(d) साउंड नेविगेशन एंड रेंजिंग"],
+    o_en: ["(a) Sound Number and Resonance", "(b) Sound Network and Reflection", "(c) Signal Navigation and Radar", "(d) Sound Navigation and Ranging"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q99. SONAR का प्रमुख उपयोग किसके लिए होता है?",
+    q_en: "Q99. What is the principal use of SONAR?",
+    tag: "",
+    o_hi: ["(a) पानी के नीचे वस्तुओं का पता लगाने के लिए", "(b) वायु में तापमान का मान निर्धारित करने के लिए", "(c) निर्वात में प्रकाश की गति का मान मापने के लिए", "(d) ठोस पदार्थों का द्रव्यमान सीधे मापने के लिए"],
+    o_en: ["(a) To locate objects under water", "(b) To determine air temperature", "(c) To measure the speed of light in vacuum", "(d) To directly measure the mass of solids"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q100. SONAR किन उद्देश्यों में उपयोग किया जाता है?",
+    q_en: "Q100. For which purposes is SONAR used?",
+    tag: "",
+    o_hi: ["(a) चालन, संवहन और विकिरण", "(b) वाष्पीकरण, संघनन और उर्ध्वपातन", "(c) ध्रुवण, अपवर्तन और विकिरण", "(d) दिशानिर्देशन, संचार और मानचित्रण"],
+    o_en: ["(a) Conduction, convection and radiation", "(b) Evaporation, condensation and sublimation", "(c) Polarization, refraction and radiation", "(d) Navigation, communication and mapping"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];

@@ -1,0 +1,502 @@
+const data = [
+  {
+    q_hi: "Q1. ध्वनि किसका एक रूप है?",
+    q_en: "Q1. Sound is a form of what?",
+    tag: "",
+    o_hi: ["(a) द्रव्यमान", "(b) बलाघूर्ण", "(c) ऊर्जा", "(d) आवेश"],
+    o_en: ["(a) Mass", "(b) Torque", "(c) Energy", "(d) Charge"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q2. ध्वनि माध्यम में किस रूप में यात्रा करती है?",
+    q_en: "Q2. In what form does sound travel through a medium?",
+    tag: "",
+    o_hi: ["(a) विद्युत धारा", "(b) स्थिर विद्युत क्षेत्र", "(c) चुंबकीय फ्लक्स", "(d) यांत्रिक तरंग"],
+    o_en: ["(a) Electric current", "(b) Static electric field", "(c) Magnetic flux", "(d) Mechanical wave"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q3. ध्वनि किन माध्यमों में यात्रा कर सकती है?",
+    q_en: "Q3. Which group correctly lists media through which sound can travel?",
+    tag: "",
+    o_hi: ["(a) प्रकाश, ऊष्मा और निर्वात", "(b) हवा, पानी और ठोस", "(c) निर्वात, हवा और प्रकाश", "(d) निर्वात, पानी और अंतरिक्ष"],
+    o_en: ["(a) Light, heat and vacuum", "(b) Air, water and solids", "(c) Vacuum, air and light", "(d) Vacuum, water and space"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q4. मनुष्य ध्वनि का अनुभव मुख्यतः किस इंद्रिय से करता है?",
+    q_en: "Q4. Humans mainly perceive sound through which sense?",
+    tag: "",
+    o_hi: ["(a) दृष्टि", "(b) श्रवण", "(c) स्वाद", "(d) गंध"],
+    o_en: ["(a) Vision", "(b) Hearing", "(c) Taste", "(d) Smell"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q5. ध्वनि तरंग सामान्यतः कब उत्पन्न होती है?",
+    q_en: "Q5. When is a sound wave generally produced?",
+    tag: "",
+    o_hi: ["(a) जब तापमान अपरिवर्तित रहता है", "(b) जब प्रकाश अवशोषित होता है", "(c) जब वस्तु स्थिर रहती है", "(d) जब कोई वस्तु कंपन करती है"],
+    o_en: ["(a) When temperature remains constant", "(b) When light is absorbed", "(c) When an object remains stationary", "(d) When an object vibrates"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q6. कंपन करने वाली वस्तु माध्यम में क्या उत्पन्न करती है?",
+    q_en: "Q6. What does a vibrating object produce in a medium?",
+    tag: "",
+    o_hi: ["(a) चुंबकीय ध्रुव", "(b) निर्वात क्षेत्र", "(c) स्थिर विद्युत क्षेत्र", "(d) दाब तरंग"],
+    o_en: ["(a) Magnetic pole", "(b) Vacuum region", "(c) Static electric field", "(d) Pressure wave"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q7. ध्वनि की दाब तरंग माध्यम में आगे कैसे बढ़ती है?",
+    q_en: "Q7. How does a sound pressure wave move through a medium?",
+    tag: "",
+    o_hi: ["(a) स्थिर विद्युत आवेशों के माध्यम से", "(b) निर्वात की परतों के माध्यम से", "(c) प्रकाश किरणों के माध्यम से", "(d) माध्यम के कणों के माध्यम से"],
+    o_en: ["(a) Through stationary electric charges", "(b) Through layers of vacuum", "(c) Through light rays", "(d) Through the particles of the medium"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q8. ध्वनि तरंग में उच्च दाब वाला क्षेत्र क्या कहलाता है?",
+    q_en: "Q8. What is the high-pressure region of a sound wave called?",
+    tag: "",
+    o_hi: ["(a) संपीडन", "(b) अनुनाद", "(c) विवर्तन", "(d) विरलन"],
+    o_en: ["(a) Compression", "(b) Resonance", "(c) Diffraction", "(d) Rarefaction"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q9. ध्वनि तरंग में निम्न दाब वाला क्षेत्र क्या कहलाता है?",
+    q_en: "Q9. What is the low-pressure region of a sound wave called?",
+    tag: "",
+    o_hi: ["(a) अनुरणन", "(b) विरलन", "(c) परावर्तन", "(d) संपीडन"],
+    o_en: ["(a) Reverberation", "(b) Rarefaction", "(c) Reflection", "(d) Compression"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q10. वायु में ध्वनि किस प्रकार की तरंग के रूप में चलती है?",
+    q_en: "Q10. In air, sound travels as which type of wave?",
+    tag: "",
+    o_hi: ["(a) अनुप्रस्थ तरंग", "(b) अनुदैर्ध्य तरंग", "(c) विद्युतचुंबकीय तरंग", "(d) स्थिर तरंग"],
+    o_en: ["(a) Transverse wave", "(b) Longitudinal wave", "(c) Electromagnetic wave", "(d) Stationary wave"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q11. वायु में ध्वनि के प्रसार के समय कणों का कंपन किस दिशा में होता है?",
+    q_en: "Q11. During sound propagation in air, in which direction do particles vibrate?",
+    tag: "",
+    o_hi: ["(a) तरंग के प्रसार की दिशा के लंबवत", "(b) तरंग के प्रसार की दिशा के समानांतर", "(c) तरंग के प्रसार की दिशा से 45° कोण पर", "(d) तरंग के प्रसार के विपरीत स्थिर दिशा में"],
+    o_en: ["(a) Perpendicular to the direction of wave propagation", "(b) Parallel to the direction of wave propagation", "(c) At 45° to the direction of wave propagation", "(d) In a fixed direction opposite to wave propagation"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q12. जल में ध्वनि मुख्यतः किस प्रकार की तरंग के रूप में यात्रा करती है?",
+    q_en: "Q12. In water, sound mainly travels as which type of wave?",
+    tag: "",
+    o_hi: ["(a) प्रकाश तरंग", "(b) अनुदैर्ध्य तरंग", "(c) अनुप्रस्थ तरंग", "(d) स्थिर तरंग"],
+    o_en: ["(a) Light wave", "(b) Longitudinal wave", "(c) Transverse wave", "(d) Stationary wave"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q13. ठोस पदार्थों में ध्वनि किस प्रकार चल सकती है?",
+    q_en: "Q13. How can sound travel in solids?",
+    tag: "",
+    o_hi: ["(a) अनुदैर्ध्य और अनुप्रस्थ दोनों तरंगों के रूप में", "(b) अनुप्रस्थ और विद्युतचुंबकीय दोनों तरंगों के रूप में", "(c) अनुदैर्ध्य और विद्युतचुंबकीय दोनों तरंगों के रूप में", "(d) स्थिर और विद्युतचुंबकीय दोनों तरंगों के रूप में"],
+    o_en: ["(a) As both longitudinal and transverse waves", "(b) As both transverse and electromagnetic waves", "(c) As both longitudinal and electromagnetic waves", "(d) As both stationary and electromagnetic waves"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q14. ध्वनि की गति का सही क्रम कौन-सा है?",
+    q_en: "Q14. Which is the correct order of the speed of sound?",
+    tag: "",
+    o_hi: ["(a) गैस > ठोस > द्रव", "(b) गैस > द्रव > ठोस", "(c) द्रव > गैस > ठोस", "(d) ठोस > द्रव > गैस"],
+    o_en: ["(a) Gas > solid > liquid", "(b) Gas > liquid > solid", "(c) Liquid > gas > solid", "(d) Solid > liquid > gas"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q15. ठोसों में ध्वनि का प्रसार अपेक्षाकृत तेज होने का मुख्य कारण क्या है?",
+    q_en: "Q15. Why does sound generally propagate faster in solids?",
+    tag: "",
+    o_hi: ["(a) ठोस ध्वनि को विद्युतचुंबकीय तरंग में बदल देते हैं", "(b) ठोसों में माध्यम के कण अनुपस्थित होते हैं", "(c) कण पास-पास होते हैं और ऊर्जा जल्दी स्थानांतरित करते हैं", "(d) कण बहुत दूर-दूर होते हैं और ऊर्जा धीमे स्थानांतरित करते हैं"],
+    o_en: ["(a) Solids convert sound into electromagnetic waves", "(b) Solids have no particles in the medium", "(c) Particles are closely packed and transfer energy rapidly", "(d) Particles are widely separated and transfer energy slowly"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q16. प्रकाश की गति कितनी है?",
+    q_en: "Q16. What value is given for the speed of light?",
+    tag: "",
+    o_hi: ["(a) 3 × 10⁴ m/s", "(b) 3 × 10⁶ m/s", "(c) 3 × 10⁸ m/s", "(d) 3 × 10² m/s"],
+    o_en: ["(a) 3 × 10⁴ m/s", "(b) 3 × 10⁶ m/s", "(c) 3 × 10⁸ m/s", "(d) 3 × 10² m/s"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q17. ध्वनि की गति लगभग कितनी है?",
+    q_en: "Q17. What general value is given for the speed of sound?",
+    tag: "",
+    o_hi: ["(a) 343 m/s", "(b) 1498 m/s", "(c) 213 m/s", "(d) 965 m/s"],
+    o_en: ["(a) 343 m/s", "(b) 1498 m/s", "(c) 213 m/s", "(d) 965 m/s"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q18. प्रकाश और ध्वनि की गति के बारे में सही कथन कौन-सा है?",
+    q_en: "Q18. Which statement correctly compares the speeds of light and sound?",
+    tag: "",
+    o_hi: ["(a) प्रकाश की गति ध्वनि की गति से अधिक होती है", "(b) दोनों की गति माध्यम से स्वतंत्र और समान रहती है", "(c) ध्वनि की गति प्रकाश की गति से अधिक होती है", "(d) दोनों की गति समान होती है"],
+    o_en: ["(a) Light travels faster than sound", "(b) Both have the same medium-independent speed", "(c) Sound travels faster than light", "(d) Both travel at the same speed"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q19. एल्युमिनियम में ध्वनि की गति कितनी है?",
+    q_en: "Q19. What speed of sound is given for aluminium?",
+    tag: "",
+    o_hi: ["(a) 4700 m/s", "(b) 5960 m/s", "(c) 6040 m/s", "(d) 6420 m/s"],
+    o_en: ["(a) 4700 m/s", "(b) 5960 m/s", "(c) 6040 m/s", "(d) 6420 m/s"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q20. निकेल में ध्वनि की गति कितनी है?",
+    q_en: "Q20. What speed of sound is given for nickel?",
+    tag: "",
+    o_hi: ["(a) 6040 m/s", "(b) 6420 m/s", "(c) 3980 m/s", "(d) 5950 m/s"],
+    o_en: ["(a) 6040 m/s", "(b) 6420 m/s", "(c) 3980 m/s", "(d) 5950 m/s"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q21. इस्पात में ध्वनि की गति कितनी है?",
+    q_en: "Q21. What is the speed of sound in steel?",
+    tag: "",
+    o_hi: ["(a) 4700 m/s", "(b) 6040 m/s", "(c) 5960 m/s", "(d) 5950 m/s"],
+    o_en: ["(a) 4700 m/s", "(b) 6040 m/s", "(c) 5960 m/s", "(d) 5950 m/s"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q22. पीतल में ध्वनि की गति कितनी है?",
+    q_en: "Q22. What speed of sound is given for brass?",
+    tag: "",
+    o_hi: ["(a) 4700 m/s", "(b) 5960 m/s", "(c) 5950 m/s", "(d) 3980 m/s"],
+    o_en: ["(a) 4700 m/s", "(b) 5960 m/s", "(c) 5950 m/s", "(d) 3980 m/s"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q23. लौह में ध्वनि की गति कितनी है?",
+    q_en: "Q23. What is the speed of sound in iron?",
+    tag: "",
+    o_hi: ["(a) 5950 m/s", "(b) 6040 m/s", "(c) 3980 m/s", "(d) 4700 m/s"],
+    o_en: ["(a) 5950 m/s", "(b) 6040 m/s", "(c) 3980 m/s", "(d) 4700 m/s"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q24. काँच (क्राउन पत्थर) में ध्वनि की गति कितनी है?",
+    q_en: "Q24. What speed of sound is given for glass?",
+    tag: "",
+    o_hi: ["(a) 1498 m/s", "(b) 4700 m/s", "(c) 1207 m/s", "(d) 3980 m/s"],
+    o_en: ["(a) 1498 m/s", "(b) 4700 m/s", "(c) 1207 m/s", "(d) 3980 m/s"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q25. समुद्री पानी में ध्वनि की गति कितनी है?",
+    q_en: "Q25. What speed of sound is given for sea water?",
+    tag: "",
+    o_hi: ["(a) 1531 m/s", "(b) 1103 m/s", "(c) 1207 m/s", "(d) 1498 m/s"],
+    o_en: ["(a) 1531 m/s", "(b) 1103 m/s", "(c) 1207 m/s", "(d) 1498 m/s"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q26. आसुत जल में ध्वनि की गति कितनी है?",
+    q_en: "Q26. What speed of sound is given for distilled water?",
+    tag: "",
+    o_hi: ["(a) 1498 m/s", "(b) 1103 m/s", "(c) 1531 m/s", "(d) 1207 m/s"],
+    o_en: ["(a) 1498 m/s", "(b) 1103 m/s", "(c) 1531 m/s", "(d) 1207 m/s"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q27. इथेनॉल में ध्वनि की गति कितनी है?",
+    q_en: "Q27. What speed of sound is given for ethanol?",
+    tag: "",
+    o_hi: ["(a) 1498 m/s", "(b) 1207 m/s", "(c) 965 m/s", "(d) 1103 m/s"],
+    o_en: ["(a) 1498 m/s", "(b) 1207 m/s", "(c) 965 m/s", "(d) 1103 m/s"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q28. मेथेनॉल में ध्वनि की गति कितनी है?",
+    q_en: "Q28. What speed of sound is given for methanol?",
+    tag: "",
+    o_hi: ["(a) 1284 m/s", "(b) 1207 m/s", "(c) 965 m/s", "(d) 1103 m/s"],
+    o_en: ["(a) 1284 m/s", "(b) 1207 m/s", "(c) 965 m/s", "(d) 1103 m/s"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q29. हाइड्रोजन गैस में ध्वनि की गति कितनी है?",
+    q_en: "Q29. What speed of sound is given for hydrogen gas?",
+    tag: "",
+    o_hi: ["(a) 316 m/s", "(b) 346 m/s", "(c) 965 m/s", "(d) 1284 m/s"],
+    o_en: ["(a) 316 m/s", "(b) 346 m/s", "(c) 965 m/s", "(d) 1284 m/s"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q30. हीलियम में ध्वनि की गति कितनी है?",
+    q_en: "Q30. What speed of sound is given for helium?",
+    tag: "",
+    o_hi: ["(a) 965 m/s", "(b) 316 m/s", "(c) 1284 m/s", "(d) 346 m/s"],
+    o_en: ["(a) 965 m/s", "(b) 316 m/s", "(c) 1284 m/s", "(d) 346 m/s"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q31. वायु में ध्वनि की गति कितनी है?",
+    q_en: "Q31. What speed of sound is given for air?",
+    tag: "",
+    o_hi: ["(a) 213 m/s", "(b) 316 m/s", "(c) 346 m/s", "(d) 965 m/s"],
+    o_en: ["(a) 213 m/s", "(b) 316 m/s", "(c) 346 m/s", "(d) 965 m/s"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q32. ऑक्सीजन में ध्वनि की गति कितनी है?",
+    q_en: "Q32. What speed of sound is given for oxygen?",
+    tag: "",
+    o_hi: ["(a) 965 m/s", "(b) 316 m/s", "(c) 213 m/s", "(d) 346 m/s"],
+    o_en: ["(a) 965 m/s", "(b) 316 m/s", "(c) 213 m/s", "(d) 346 m/s"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q33. सल्फर डाइऑक्साइड में ध्वनि की गति कितनी है?",
+    q_en: "Q33. What speed of sound is given for sulfur dioxide?",
+    tag: "",
+    o_hi: ["(a) 316 m/s", "(b) 213 m/s", "(c) 1284 m/s", "(d) 346 m/s"],
+    o_en: ["(a) 316 m/s", "(b) 213 m/s", "(c) 1284 m/s", "(d) 346 m/s"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q34. ध्रुवण के संबंध में सही कथन कौन-सा है?",
+    q_en: "Q34. Which statement about polarization is correct?",
+    tag: "",
+    o_hi: ["(a) ध्वनि तरंगें ध्रुवित नहीं हो सकतीं, प्रकाश तरंगें हो सकती हैं", "(b) ध्वनि ध्रुवित हो सकती है, प्रकाश नहीं", "(c) ध्वनि और प्रकाश दोनों एक ही प्रकार से ध्रुवित होते हैं", "(d) ध्वनि और प्रकाश दोनों ध्रुवित नहीं हो सकते"],
+    o_en: ["(a) Sound waves cannot be polarized, while light waves can be", "(b) Sound can be polarized, but light cannot", "(c) Sound and light are polarized in the same way", "(d) Neither sound nor light can be polarized"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q35. ध्वनि तरंगें किसके परिणामस्वरूप उत्पन्न विक्षोभ हैं?",
+    q_en: "Q35. Sound waves are disturbances produced as a result of what?",
+    tag: "",
+    o_hi: ["(a) स्थिर विद्युत आवेश", "(b) चुंबकीय संतुलन", "(c) निर्वात में स्थिरता", "(d) माध्यम में कंपन"],
+    o_en: ["(a) Static electric charge", "(b) Magnetic equilibrium", "(c) Rest in vacuum", "(d) Vibration in a medium"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q36. यांत्रिक तरंगों के प्रसार के लिए क्या आवश्यक है?",
+    q_en: "Q36. What is required for the propagation of mechanical waves?",
+    tag: "",
+    o_hi: ["(a) चुंबकीय क्षेत्र", "(b) माध्यम", "(c) स्थिर विद्युत क्षेत्र", "(d) निर्वात"],
+    o_en: ["(a) A magnetic field", "(b) A medium", "(c) A static electric field", "(d) Vacuum"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q37. यांत्रिक तरंग का उदाहरण कौन-सा है?",
+    q_en: "Q37. Which is an example of a mechanical wave?",
+    tag: "",
+    o_hi: ["(a) प्रकाश तरंग", "(b) ध्वनि तरंग", "(c) रेडियो तरंग", "(d) एक्स-किरण"],
+    o_en: ["(a) Light wave", "(b) Sound wave", "(c) Radio wave", "(d) X-ray"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q38. गैर-यांत्रिक तरंगों के प्रसार के लिए माध्यम की स्थिति क्या है?",
+    q_en: "Q38. What is the medium requirement for non-mechanical waves?",
+    tag: "",
+    o_hi: ["(a) माध्यम की आवश्यकता नहीं होती", "(b) द्रव माध्यम आवश्यक होता है", "(c) गैसीय माध्यम आवश्यक होता है", "(d) ठोस माध्यम आवश्यक होता है"],
+    o_en: ["(a) A medium is not required", "(b) A liquid medium is required", "(c) A gaseous medium is required", "(d) A solid medium is required"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q39. गैर-यांत्रिक तरंग का उदाहरण कौन-सा है?",
+    q_en: "Q39. Which is an example of a non-mechanical wave?",
+    tag: "",
+    o_hi: ["(a) दाब तरंग", "(b) ध्वनि तरंग", "(c) जल में ध्वनि तरंग", "(d) प्रकाश तरंग"],
+    o_en: ["(a) Pressure wave", "(b) Sound wave", "(c) Sound wave in water", "(d) Light wave"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q40. अनुप्रस्थ तरंग में माध्यम के कण किस दिशा में कंपन करते हैं?",
+    q_en: "Q40. In a transverse wave, in which direction do particles vibrate?",
+    tag: "",
+    o_hi: ["(a) प्रसार की दिशा के लंबवत", "(b) स्थिर बिंदु पर बिना दिशा के", "(c) प्रसार की दिशा के समानांतर", "(d) प्रसार की दिशा में आगे-पीछे"],
+    o_en: ["(a) Perpendicular to the direction of propagation", "(b) At a fixed point with no direction", "(c) Parallel to the direction of propagation", "(d) Back and forth along the direction of propagation"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q41. अनुप्रस्थ तरंग की पहचान किन भागों से होती है?",
+    q_en: "Q41. Which features characterize a transverse wave?",
+    tag: "",
+    o_hi: ["(a) ध्रुव और अक्ष", "(b) शिखर और गर्त", "(c) संपीडन और विरलन", "(d) नोड और एंटीनोड"],
+    o_en: ["(a) Poles and axes", "(b) Crests and troughs", "(c) Compressions and rarefactions", "(d) Nodes and antinodes"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q42. अनुप्रस्थ तरंग का उदाहरण कौन-सा है?",
+    q_en: "Q42. Which is given as an example of a transverse wave?",
+    tag: "",
+    o_hi: ["(a) ध्वनि", "(b) दाब तरंग", "(c) SONAR संकेत", "(d) प्रकाश"],
+    o_en: ["(a) Sound", "(b) Pressure wave", "(c) SONAR signal", "(d) Light"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q43. अनुदैर्ध्य तरंग में माध्यम के कण कैसे कंपन करते हैं?",
+    q_en: "Q43. How do particles vibrate in a longitudinal wave?",
+    tag: "",
+    o_hi: ["(a) वृत्ताकार पथ में आगे बढ़ते हुए", "(b) प्रसार की दिशा के समानांतर आगे-पीछे", "(c) प्रसार की दिशा के लंबवत ऊपर-नीचे", "(d) प्रसार की दिशा से कोण बनाकर आगे-पीछे"],
+    o_en: ["(a) While moving along a circular path", "(b) Back and forth parallel to the direction of propagation", "(c) Up and down perpendicular to the direction of propagation", "(d) Back and forth at an angle to the direction of propagation"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q44. अनुदैर्ध्य तरंग का उदाहरण कौन-सा है?",
+    q_en: "Q44. Which is an example of a longitudinal wave?",
+    tag: "",
+    o_hi: ["(a) ध्वनि या दाब तरंग", "(b) प्रकाश या रेडियो तरंग", "(c) एक्स-किरण या गामा किरण", "(d) पराबैंगनी या अवरक्त तरंग"],
+    o_en: ["(a) Sound or pressure wave", "(b) Light or radio wave", "(c) X-ray or gamma ray", "(d) Ultraviolet or infrared wave"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q45. λ प्रतीक किस राशि को दर्शाता है?",
+    q_en: "Q45. What quantity is represented by the symbol λ?",
+    tag: "",
+    o_hi: ["(a) तरंग का आयाम", "(b) तरंग की आवृत्ति", "(c) ध्वनि का तीव्रता स्तर", "(d) तरंग का तरंगदैर्ध्य"],
+    o_en: ["(a) Amplitude of the wave", "(b) Frequency of the wave", "(c) Intensity level of sound", "(d) Wavelength of the wave"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q46. अनुदैर्ध्य तरंग में संपीडन किस क्षेत्र को कहते हैं?",
+    q_en: "Q46. In a longitudinal wave, what is a compression?",
+    tag: "",
+    o_hi: ["(a) जहाँ कण एक-दूसरे के सबसे निकट होते हैं", "(b) जहाँ तरंग समाप्त हो जाती है", "(c) जहाँ कण स्थायी रूप से रुक जाते हैं", "(d) जहाँ कण एक-दूसरे से अधिक दूर होते हैं"],
+    o_en: ["(a) A region where particles are closest together", "(b) A region where the wave ends", "(c) A region where particles stop permanently", "(d) A region where particles are farther apart"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q47. अनुदैर्ध्य तरंग में विरलन किस क्षेत्र को कहते हैं?",
+    q_en: "Q47. In a longitudinal wave, what is a rarefaction?",
+    tag: "",
+    o_hi: ["(a) जहाँ माध्यम समाप्त होता है", "(b) जहाँ कण अत्यधिक पास होते हैं", "(c) जहाँ दाब अधिकतम और कण सघन होते हैं", "(d) जहाँ कण एक-दूसरे से दूर-दूर होते हैं"],
+    o_en: ["(a) A region where the medium ends", "(b) A region where particles are very close", "(c) A region of maximum pressure and dense particles", "(d) A region where particles are farther apart"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q48. आवृत्ति किसे कहते हैं?",
+    q_en: "Q48. What is frequency?",
+    tag: "",
+    o_hi: ["(a) कण का अधिकतम विस्थापन", "(b) प्रति सेकंड कंपन या दोलनों की संख्या", "(c) एक तरंग द्वारा तय की गई कुल दूरी", "(d) दो संपीडनों के बीच का दाब अंतर"],
+    o_en: ["(a) Maximum displacement of a particle", "(b) Number of vibrations or oscillations per second", "(c) Total distance travelled by a wave", "(d) Pressure difference between two compressions"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q49. ध्वनि की आवृत्ति मुख्यतः किस गुण को निर्धारित करती है?",
+    q_en: "Q49. Which property of sound is mainly determined by frequency?",
+    tag: "",
+    o_hi: ["(a) तारत्व", "(b) परावर्तन", "(c) आयाम", "(d) माध्यम का घनत्व"],
+    o_en: ["(a) Pitch", "(b) Reflection", "(c) Amplitude", "(d) Density of the medium"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q50. लड़कियों की आवाज़ सामान्यतः अधिक तीखी होने का कारण क्या है?",
+    q_en: "Q50. Why is a girl's voice generally described as sharper in pitch?",
+    tag: "",
+    o_hi: ["(a) ध्वनि की गति कम हो जाती है", "(b) स्वर-रज्जुएँ धीमे कंपन करती हैं", "(c) स्वर-रज्जुएँ तेजी से कंपन करती हैं", "(d) आयाम शून्य हो जाता है"],
+    o_en: ["(a) The speed of sound decreases", "(b) The vocal cords vibrate more slowly", "(c) The vocal cords vibrate faster", "(d) The amplitude becomes zero"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
