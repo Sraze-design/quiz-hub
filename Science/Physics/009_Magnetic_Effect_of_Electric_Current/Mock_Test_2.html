@@ -1,0 +1,622 @@
+const data = [
+  {
+    q_hi: "Q51. यदि चालक की लंबाई L और चुंबकीय क्षेत्र B के बीच कोण θ हो, तो चुंबकीय बल का परिमाण क्या होगा?",
+    q_en: "Q51. If the angle between conductor length L and magnetic field B is θ, what is the magnetic-force magnitude?",
+    tag: "",
+    o_hi: [
+      "(a) F = IB/L",
+      "(b) F = IL/B",
+      "(c) F = ILB cosθ",
+      "(d) F = ILB sinθ"
+    ],
+    o_en: [
+      "(a) F = IB/L",
+      "(b) F = IL/B",
+      "(c) F = ILB cosθ",
+      "(d) F = ILB sinθ"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q52. धारावाही चालक और चुंबकीय क्षेत्र के बीच किस कोण पर चुंबकीय बल अधिकतम होता है?",
+    q_en: "Q52. At what angle between a current-carrying conductor and magnetic field is the force maximum?",
+    tag: "",
+    o_hi: [
+      "(a) 45°",
+      "(b) 0°",
+      "(c) 90°",
+      "(d) 180°"
+    ],
+    o_en: [
+      "(a) 45°",
+      "(b) 0°",
+      "(c) 90°",
+      "(d) 180°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q53. 90° पर चुंबकीय बल अधिकतम होने का कारण क्या है?",
+    q_en: "Q53. Why is magnetic force maximum at 90°?",
+    tag: "",
+    o_hi: [
+      "(a) sin 90° = 1",
+      "(b) sin 90° = 0",
+      "(c) tan 90° = 0",
+      "(d) cos 90° = 1"
+    ],
+    o_en: [
+      "(a) sin 90° = 1",
+      "(b) sin 90° = 0",
+      "(c) tan 90° = 0",
+      "(d) cos 90° = 1"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q54. चालक और चुंबकीय क्षेत्र के बीच 0° या 180° कोण होने पर बल कितना होता है?",
+    q_en: "Q54. What is the force when the angle between conductor and magnetic field is 0° or 180°?",
+    tag: "",
+    o_hi: [
+      "(a) अधिकतम, क्योंकि दोनों स्थितियों में sinθ = 1",
+      "(b) आधा अधिकतम, क्योंकि sinθ = 1/2",
+      "(c) बल कोण से स्वतंत्र रहता है",
+      "(d) शून्य, क्योंकि दोनों स्थितियों में sinθ = 0"
+    ],
+    o_en: [
+      "(a) Maximum, because sinθ = 1 in both cases",
+      "(b) Half maximum, because sinθ = 1/2",
+      "(c) Force is independent of angle",
+      "(d) Zero, because sinθ = 0 in both cases"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q55. फ्लेमिंग के बाएँ हाथ के नियम में अंगूठा किस दिशा को दर्शाता है?",
+    q_en: "Q55. In Fleming's left-hand rule, what does the thumb indicate?",
+    tag: "",
+    o_hi: [
+      "(a) विद्युत धारा की दिशा",
+      "(b) चुंबकीय क्षेत्र की दिशा",
+      "(c) बल या गति की दिशा",
+      "(d) विद्युत विभव की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of electric current",
+      "(b) Direction of magnetic field",
+      "(c) Direction of force or motion",
+      "(d) Direction of electric potential"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q56. फ्लेमिंग के बाएँ हाथ के नियम में तर्जनी किस दिशा को दर्शाती है?",
+    q_en: "Q56. In Fleming's left-hand rule, what does the forefinger indicate?",
+    tag: "",
+    o_hi: [
+      "(a) चालक की लंबाई",
+      "(b) बल या गति की दिशा",
+      "(c) चुंबकीय क्षेत्र की दिशा",
+      "(d) विद्युत धारा की दिशा"
+    ],
+    o_en: [
+      "(a) Length of conductor",
+      "(b) Direction of force or motion",
+      "(c) Direction of magnetic field",
+      "(d) Direction of electric current"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q57. फ्लेमिंग के बाएँ हाथ के नियम में मध्यमा किस दिशा को दर्शाती है?",
+    q_en: "Q57. In Fleming's left-hand rule, what does the middle finger indicate?",
+    tag: "",
+    o_hi: [
+      "(a) चुंबकीय क्षेत्र की दिशा",
+      "(b) बल या गति की दिशा",
+      "(c) चालक की लंबाई",
+      "(d) विद्युत धारा की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of magnetic field",
+      "(b) Direction of force or motion",
+      "(c) Length of conductor",
+      "(d) Direction of electric current"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q58. फ्लेमिंग के बाएँ हाथ का नियम मुख्यतः किसके लिए उपयोग किया जाता है?",
+    q_en: "Q58. What is Fleming's left-hand rule mainly used for?",
+    tag: "",
+    o_hi: [
+      "(a) धारावाही चालक के चारों ओर चुंबकीय क्षेत्र की दिशा ज्ञात करने के लिए",
+      "(b) कुंडली में उत्पन्न चुंबकीय क्षेत्र की ताकत का मान ज्ञात करने के लिए",
+      "(c) चुंबकीय क्षेत्र में धारावाही चालक पर बल/गति की दिशा ज्ञात करने के लिए",
+      "(d) चुंबकीय क्षेत्र में गतिशील चालक में प्रेरित धारा की दिशा ज्ञात करने के लिए"
+    ],
+    o_en: [
+      "(a) To determine magnetic-field direction around a current-carrying conductor",
+      "(b) To determine magnetic-field strength produced in a coil",
+      "(c) To determine force or motion direction on a current-carrying conductor in a magnetic field",
+      "(d) To determine induced-current direction in a moving conductor in a magnetic field"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q59. विद्युत मोटर में ऊर्जा का रूपांतरण किस प्रकार होता है?",
+    q_en: "Q59. What energy conversion occurs in an electric motor?",
+    tag: "",
+    o_hi: [
+      "(a) विद्युत ऊर्जा से यांत्रिक ऊर्जा",
+      "(b) रासायनिक ऊर्जा से प्रकाश ऊर्जा",
+      "(c) ऊष्मीय ऊर्जा से विद्युत ऊर्जा",
+      "(d) यांत्रिक ऊर्जा से विद्युत ऊर्जा"
+    ],
+    o_en: [
+      "(a) Electrical energy to mechanical energy",
+      "(b) Chemical energy to light energy",
+      "(c) Thermal energy to electrical energy",
+      "(d) Mechanical energy to electrical energy"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q60. विद्युत मोटर किस नियम के सिद्धांत पर कार्य करती है?",
+    q_en: "Q60. An electric motor works on the principle of which rule?",
+    tag: "",
+    o_hi: [
+      "(a) दाएँ हाथ के अंगूठे का नियम",
+      "(b) स्नेल का नियम",
+      "(c) फ्लेमिंग का बायाँ हाथ नियम",
+      "(d) फ्लेमिंग का दायाँ हाथ नियम"
+    ],
+    o_en: [
+      "(a) Right-hand thumb rule",
+      "(b) Snell's law",
+      "(c) Fleming's left-hand rule",
+      "(d) Fleming's right-hand rule"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q61. फ्लेमिंग के दाएँ हाथ का नियम किस उपकरण से विशेष रूप से संबंधित है?",
+    q_en: "Q61. Fleming's right-hand rule is especially associated with which device?",
+    tag: "",
+    o_hi: [
+      "(a) विद्युत जनित्र",
+      "(b) विद्युत फ्यूज, जो अधिक धारा पर परिपथ को तोड़ता है",
+      "(c) विद्युत हीटर, जो विद्युत ऊर्जा को ऊष्मीय ऊर्जा में बदलता है",
+      "(d) विद्युत मोटर, जो विद्युत ऊर्जा को यांत्रिक ऊर्जा में बदलती है"
+    ],
+    o_en: [
+      "(a) Electric generator",
+      "(b) Electric fuse, which breaks a circuit during excess current",
+      "(c) Electric heater, which converts electrical energy into heat",
+      "(d) Electric motor, which converts electrical energy into mechanical energy"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q62. विद्युत जनित्र में ऊर्जा का रूपांतरण किस प्रकार होता है?",
+    q_en: "Q62. What energy conversion occurs in an electric generator?",
+    tag: "",
+    o_hi: [
+      "(a) यांत्रिक ऊर्जा से विद्युत ऊर्जा",
+      "(b) विद्युत ऊर्जा से यांत्रिक ऊर्जा",
+      "(c) प्रकाश ऊर्जा से ध्वनि ऊर्जा",
+      "(d) विद्युत ऊर्जा से ऊष्मीय ऊर्जा"
+    ],
+    o_en: [
+      "(a) Mechanical energy to electrical energy",
+      "(b) Electrical energy to mechanical energy",
+      "(c) Light energy to sound energy",
+      "(d) Electrical energy to thermal energy"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q63. फ्लेमिंग के दाएँ हाथ के नियम में अंगूठा किस दिशा को दर्शाता है?",
+    q_en: "Q63. In Fleming's right-hand rule, what does the thumb indicate?",
+    tag: "",
+    o_hi: [
+      "(a) चालक की गति की दिशा",
+      "(b) प्रेरित धारा की दिशा",
+      "(c) चुंबकीय क्षेत्र की दिशा",
+      "(d) विद्युत विभव की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of motion of the conductor",
+      "(b) Direction of induced current",
+      "(c) Direction of magnetic field",
+      "(d) Direction of electric potential"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q64. फ्लेमिंग के दाएँ हाथ के नियम में तर्जनी किस दिशा को दर्शाती है?",
+    q_en: "Q64. In Fleming's right-hand rule, what does the forefinger indicate?",
+    tag: "",
+    o_hi: [
+      "(a) प्रेरित धारा की दिशा",
+      "(b) चुंबकीय क्षेत्र की दिशा",
+      "(c) चालक की गति की दिशा",
+      "(d) विद्युत शक्ति की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of induced current",
+      "(b) Direction of magnetic field",
+      "(c) Direction of conductor motion",
+      "(d) Direction of electric power"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q65. फ्लेमिंग के दाएँ हाथ के नियम में मध्यमा किस दिशा को दर्शाती है?",
+    q_en: "Q65. In Fleming's right-hand rule, what does the middle finger indicate?",
+    tag: "",
+    o_hi: [
+      "(a) चुंबकीय क्षेत्र में चालक की गति की दिशा",
+      "(b) प्रेरित विद्युत धारा की दिशा",
+      "(c) चालक पर लगने वाले यांत्रिक बल की दिशा",
+      "(d) चुंबकीय क्षेत्र रेखाओं की दिशा"
+    ],
+    o_en: [
+      "(a) Direction of conductor motion in a magnetic field",
+      "(b) Direction of induced electric current",
+      "(c) Direction of mechanical force on the conductor",
+      "(d) Direction of magnetic field lines"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q66. फ्लेमिंग के दाएँ हाथ के नियम का उपयोग किसके लिए किया जाता है?",
+    q_en: "Q66. What is Fleming's right-hand rule used for?",
+    tag: "",
+    o_hi: [
+      "(a) प्रतिरोध की दिशा ज्ञात करने के लिए",
+      "(b) चालक पर बल की दिशा ज्ञात करने के लिए",
+      "(c) प्रेरित धारा की दिशा ज्ञात करने के लिए",
+      "(d) विद्युत शक्ति की दिशा ज्ञात करने के लिए"
+    ],
+    o_en: [
+      "(a) To determine direction of resistance",
+      "(b) To determine force direction on a conductor",
+      "(c) To determine the direction of induced current",
+      "(d) To determine direction of electric power"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q67. विद्युत-चुंबकीय प्रेरण किस प्रक्रिया को कहते हैं?",
+    q_en: "Q67. What is electromagnetic induction?",
+    tag: "",
+    o_hi: [
+      "(a) परिवर्तित चुंबकीय क्षेत्र के कारण वोल्टेज उत्पन्न होना और धारा प्रवाहित होना",
+      "(b) स्थिर चुंबकीय क्षेत्र के कारण चालक का प्रतिरोध बदलना और ऊष्मा उत्पन्न होना",
+      "(c) स्थिर चालक में बिना क्षेत्र परिवर्तन के विद्युत धारा स्वतः उत्पन्न होना",
+      "(d) विद्युत धारा के कारण स्थायी चुंबक में विभवांतर समाप्त हो जाना"
+    ],
+    o_en: [
+      "(a) Generation of voltage and current due to a changing magnetic field",
+      "(b) Change in conductor resistance and heat production due to a static magnetic field",
+      "(c) Spontaneous production of current in a stationary conductor without field change",
+      "(d) Disappearance of potential difference in a permanent magnet due to electric current"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q68. विद्युत-चुंबकीय प्रेरण कब हो सकता है?",
+    q_en: "Q68. When can electromagnetic induction occur?",
+    tag: "",
+    o_hi: [
+      "(a) जब चालक और चुंबकीय क्षेत्र दोनों स्थिर हों और कोई सापेक्ष परिवर्तन न हो",
+      "(b) जब चुंबकीय क्षेत्र शून्य हो और चालक भी पूरी तरह स्थिर हो",
+      "(c) चालक बदलते चुंबकीय क्षेत्र में हो या चालक स्थिर चुंबकीय क्षेत्र में गति करे",
+      "(d) जब चालक का प्रतिरोध बढ़े पर चुंबकीय क्षेत्र और स्थिति स्थिर रहें"
+    ],
+    o_en: [
+      "(a) When both conductor and magnetic field are stationary with no relative change",
+      "(b) When magnetic field is zero and the conductor is completely stationary",
+      "(c) When a conductor is in a changing magnetic field or moves through a stationary magnetic field",
+      "(d) When conductor resistance increases while field and position remain fixed"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q69. विद्युत-चुंबकीय प्रेरण की खोज किसने की थी?",
+    q_en: "Q69. Who discovered electromagnetic induction?",
+    tag: "",
+    o_hi: [
+      "(a) हैंस क्रिश्चियन ऑर्स्टेड",
+      "(b) जॉर्ज साइमन ओम",
+      "(c) माइकल फैराडे",
+      "(d) जेम्स प्रेस्कॉट जूल"
+    ],
+    o_en: [
+      "(a) Hans Christian Oersted",
+      "(b) Georg Simon Ohm",
+      "(c) Michael Faraday",
+      "(d) James Prescott Joule"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q70. माइकल फैराडे ने विद्युत-चुंबकीय प्रेरण की खोज किस वर्ष की थी?",
+    q_en: "Q70. In which year did Michael Faraday discover electromagnetic induction?",
+    tag: "",
+    o_hi: [
+      "(a) 1820",
+      "(b) 1831",
+      "(c) 1840",
+      "(d) 1887"
+    ],
+    o_en: [
+      "(a) 1820",
+      "(b) 1831",
+      "(c) 1840",
+      "(d) 1887"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q71. कुंडली की ओर चुंबक को धकेलने पर गैल्वेनोमीटर का संकेतक क्यों विचलित होता है?",
+    q_en: "Q71. Why does the galvanometer deflect when a magnet is pushed toward a coil?",
+    tag: "",
+    o_hi: [
+      "(a) चुंबक का द्रव्यमान बढ़ जाता है",
+      "(b) गैल्वेनोमीटर स्थायी चुंबक बन जाता है",
+      "(c) कुंडली का प्रतिरोध शून्य हो जाता है",
+      "(d) कुंडली में प्रेरित विद्युत धारा उत्पन्न होती है"
+    ],
+    o_en: [
+      "(a) The magnet mass increases",
+      "(b) The galvanometer becomes a permanent magnet",
+      "(c) The coil resistance becomes zero",
+      "(d) An induced electric current is produced in the coil"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q72. चुंबक और कुंडली के बीच आपेक्षिक गति के बारे में सही कथन कौन-सा है?",
+    q_en: "Q72. Which statement about relative motion between a magnet and a coil is correct?",
+    tag: "",
+    o_hi: [
+      "(a) आपेक्षिक गति होने पर प्रेरित धारा रुक जाती है; स्थिर रहने पर अधिकतम धारा उत्पन्न होती है",
+      "(b) आपेक्षिक गति से कुंडली का प्रतिरोध बदलता है, लेकिन प्रेरित धारा उत्पन्न नहीं होती",
+      "(c) आपेक्षिक गति से प्रेरित धारा उत्पन्न होती है; गति न हो तो धारा उत्पन्न नहीं होती",
+      "(d) प्रेरित धारा चुंबक और कुंडली की आपेक्षिक गति से स्वतंत्र रहती है"
+    ],
+    o_en: [
+      "(a) Relative motion stops induced current; maximum current is produced when stationary",
+      "(b) Relative motion changes coil resistance but does not produce induced current",
+      "(c) Relative motion produces induced current; without it, no induced current is produced",
+      "(d) Induced current remains independent of relative motion between magnet and coil"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q73. शॉर्ट सर्किट कब होता है?",
+    q_en: "Q73. When does a short circuit generally occur?",
+    tag: "",
+    o_hi: [
+      "(a) जब लाइव तार और भू-संपर्क तार के बीच कोई विद्युत संपर्क न हो",
+      "(b) जब फेज और उदासीन तारों के बीच प्रतिरोध बहुत अधिक हो जाए",
+      "(c) जब तारों की अवरोधन टूट जाती है और फेज व उदासीन तार के बीच संपर्क बन जाता है",
+      "(d) जब परिपथ में स्विच बंद हो लेकिन अवरोधन पूरी तरह सुरक्षित रहे"
+    ],
+    o_en: [
+      "(a) When there is no electrical contact between live and earth wires",
+      "(b) When resistance between phase and neutral wires becomes very high",
+      "(c) When wire insulation breaks and phase and neutral wires come into contact",
+      "(d) When a circuit switch is closed but insulation remains fully intact"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q74. शॉर्ट सर्किट के दौरान परिपथ की धारा पर क्या प्रभाव पड़ता है?",
+    q_en: "Q74. What happens to circuit current during a short circuit?",
+    tag: "",
+    o_hi: [
+      "(a) धारा अचानक बहुत अधिक बढ़ जाती है",
+      "(b) धारा की दिशा ही बदलती है, मान नहीं",
+      "(c) धारा धीरे-धीरे शून्य हो जाती है",
+      "(d) धारा सामान्य मान पर स्थिर रहती है"
+    ],
+    o_en: [
+      "(a) Current suddenly increases to a very high value",
+      "(b) current direction changes, not its magnitude",
+      "(c) Current gradually becomes zero",
+      "(d) Current stays at its normal value"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q75. शॉर्ट सर्किट में बहुत अधिक धारा प्रवाहित होने का मुख्य कारण क्या है?",
+    q_en: "Q75. What is the main reason for very high current during a short circuit?",
+    tag: "",
+    o_hi: [
+      "(a) विद्युत आवेश समाप्त हो जाता है",
+      "(b) विभवांतर शून्य से कम हो जाता है",
+      "(c) बहुत अधिक प्रतिरोध वाला मार्ग बनता है",
+      "(d) बहुत कम प्रतिरोध वाला मार्ग बन जाता है"
+    ],
+    o_en: [
+      "(a) Electric charge disappears",
+      "(b) Potential difference becomes less than zero",
+      "(c) A very high-resistance path is formed",
+      "(d) A very low-resistance path is formed"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q76. DC धारा की दिशा कैसी होती है?",
+    q_en: "Q76. How does the direction of DC current behave?",
+    tag: "",
+    o_hi: [
+      "(a) एक साथ दोनों दिशाओं में प्रवाहित होती है",
+      "(b) एक ही दिशा में प्रवाहित होती है",
+      "(c) यादृच्छिक रूप से दिशा बदलती है",
+      "(d) हर 1/100 सेकंड में दिशा बदलती है"
+    ],
+    o_en: [
+      "(a) It flows in both directions simultaneously",
+      "(b) It flows in one direction",
+      "(c) It changes direction randomly",
+      "(d) It changes direction every 1/100 second"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q77. AC धारा की दिशा कैसी होती है?",
+    q_en: "Q77. What is stated about the direction of AC current?",
+    tag: "",
+    o_hi: [
+      "(a) यह प्रत्येक 1/100 सेकंड में अपनी दिशा बदलती है",
+      "(b) यह दिशा नहीं बदलती, वोल्टेज बदलता है",
+      "(c) यह एक ही दिशा में निरंतर प्रवाहित होती है",
+      "(d) यह प्रत्येक 1 सेकंड में एक बार रुकती है"
+    ],
+    o_en: [
+      "(a) It changes its direction every 1/100 second",
+      "(b) Its direction does not change; voltage changes",
+      "(c) It continuously flows in one direction",
+      "(d) It stops once every second"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q78. दिष्टकारी का कार्य क्या है?",
+    q_en: "Q78. What is the function of a rectifier?",
+    tag: "",
+    o_hi: [
+      "(a) DC को AC में बदलना",
+      "(b) AC को DC में बदलना",
+      "(c) DC को यांत्रिक ऊर्जा में बदलना",
+      "(d) AC को चुंबकीय क्षेत्र में बदलना"
+    ],
+    o_en: [
+      "(a) Convert DC to AC",
+      "(b) Convert AC to DC",
+      "(c) Convert DC into mechanical energy",
+      "(d) Convert AC into a magnetic field"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q79. इन्वर्टर का कार्य क्या है?",
+    q_en: "Q79. What is the function of an inverter?",
+    tag: "",
+    o_hi: [
+      "(a) DC को AC में बदलना",
+      "(b) AC को DC में बदलना",
+      "(c) AC को स्थिर आवेश में बदलना",
+      "(d) DC को प्रतिरोध में बदलना"
+    ],
+    o_en: [
+      "(a) Convert DC to AC",
+      "(b) Convert AC to DC",
+      "(c) Convert AC into static charge",
+      "(d) Convert DC into resistance"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q80. लाइव तार का रंग और विभव क्या है?",
+    q_en: "Q80. What colour and potential are given for the live wire?",
+    tag: "",
+    o_hi: [
+      "(a) लाल रंग, 220 V",
+      "(b) लाल रंग, 0 V",
+      "(c) हरा रंग, 220 V",
+      "(d) काला रंग, 0 V"
+    ],
+    o_en: [
+      "(a) Red, 220 V",
+      "(b) Red, 0 V",
+      "(c) Green, 220 V",
+      "(d) Black, 0 V"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q81. उदासीन तार का रंग और विभव क्या है?",
+    q_en: "Q81. What colour and potential are given for the neutral wire?",
+    tag: "",
+    o_hi: [
+      "(a) हरा रंग, 220 V",
+      "(b) काला रंग, 220 V",
+      "(c) काला रंग, 0 V",
+      "(d) लाल रंग, 220 V"
+    ],
+    o_en: [
+      "(a) Green, 220 V",
+      "(b) Black, 220 V",
+      "(c) Black, 0 V",
+      "(d) Red, 220 V"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
