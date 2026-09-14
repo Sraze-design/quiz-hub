@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q51. AIDS की जाँच के लिए स्रोत में कौन-सा परीक्षण दिया गया है?",
+    q_en: "Q51. Which test is given in the source for AIDS?",
+    tag: "",
+    o_hi: [
+      "(a) Widal test",
+      "(b) Gram staining",
+      "(c) ELISA टेस्ट (Enzyme-Linked Immunosorbent Assay)",
+      "(d) Pap smear"
+    ],
+    o_en: [
+      "(a) Widal test",
+      "(b) Gram staining",
+      "(c) ELISA test (Enzyme-Linked Immunosorbent Assay)",
+      "(d) Pap smear"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q52. एन्सेफलाइटिस के बारे में सही कथन कौन-सा है?",
+    q_en: "Q52. Which statement about encephalitis is correct?",
+    tag: "",
+    o_hi: [
+      "(a) कारण E. coli; छोटी आंत में सूजन",
+      "(b) कारण H1N1; त्वचा में सूजन",
+      "(c) कारण प्लास्मोडियम; RBC में सूजन",
+      "(d) कारण हर्पीस सिम्प्लेक्स; मस्तिष्क में सूजन"
+    ],
+    o_en: [
+      "(a) Caused by E. coli; small-intestine swelling",
+      "(b) Caused by H1N1; skin swelling",
+      "(c) Caused by Plasmodium; RBC swelling",
+      "(d) Caused by herpes simplex; swelling occurs in the brain"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q53. स्वाइन फ्लू और बर्ड फ्लू के कारकों का सही मिलान कौन-सा है?",
+    q_en: "Q53. Which correctly matches the causes of swine flu and bird flu?",
+    tag: "",
+    o_hi: [
+      "(a) स्वाइन फ्लू — H5N1; बर्ड फ्लू — H1N1",
+      "(b) स्वाइन फ्लू — H1N1; बर्ड फ्लू — H5N1",
+      "(c) दोनों — HIV",
+      "(d) दोनों — DENV 1–4"
+    ],
+    o_en: [
+      "(a) Swine flu — H5N1; bird flu — H1N1",
+      "(b) Swine flu — H1N1; bird flu — H5N1",
+      "(c) Both — HIV",
+      "(d) Both — DENV 1–4"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q54. निम्न में से कौन-सा समूह स्रोत के अनुसार जीवाणुजनित रोगों में रखा गया है?",
+    q_en: "Q54. Which group is listed as bacterial diseases in the source?",
+    tag: "",
+    o_hi: [
+      "(a) गंजापन, एथलीट फुट, रिंगवर्म, स्केबीज, दमा, एर्गॉट",
+      "(b) मलेरिया, कालाजार, निद्रा रोग, जिआर्डियासिस, टॉक्सोप्लाज्मोसिस, अमीबायसिस",
+      "(c) डेंगू, खसरा, इन्फ्लुएंजा, मम्प्स, पोलियो, रेबीज",
+      "(d) टिटनेस, काली खाँसी, गोनोरिया, कुष्ठ रोग, निमोनिया और एंथ्रेक्स"
+    ],
+    o_en: [
+      "(a) Baldness, athlete's foot, ringworm, scabies, asthma, ergot",
+      "(b) Malaria, kala-azar, sleeping sickness, giardiasis, toxoplasmosis, amoebiasis",
+      "(c) Dengue, measles, influenza, mumps, polio, rabies",
+      "(d) Tetanus, whooping cough, gonorrhoea, leprosy, pneumonia and anthrax"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q55. निम्न में से कौन-सा दूसरा समूह भी स्रोत में जीवाणुजनित रोगों के अंतर्गत है?",
+    q_en: "Q55. Which second group is also listed under bacterial diseases in the source?",
+    tag: "",
+    o_hi: [
+      "(a) दाद, खुजली, एथलीट फुट, गंजापन, दमा",
+      "(b) मलेरिया, कालाजार, निद्रा रोग, अमीबायसिस, जिआर्डियासिस",
+      "(c) चेचक, चिकनपॉक्स, AIDS, हेपेटाइटिस, स्वाइन फ्लू",
+      "(d) तपेदिक, हैजा, प्लेग, सिफिलिस और डिप्थीरिया"
+    ],
+    o_en: [
+      "(a) Ringworm, scabies, athlete's foot, baldness, asthma",
+      "(b) Malaria, kala-azar, sleeping sickness, amoebiasis, giardiasis",
+      "(c) Smallpox, chickenpox, AIDS, hepatitis, swine flu",
+      "(d) Tuberculosis, cholera, plague, syphilis and diphtheria"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q56. हैजा (Cholera) के बारे में सही कथन कौन-सा है?",
+    q_en: "Q56. Which statement about cholera is correct?",
+    tag: "",
+    o_hi: [
+      "(a) कारक Yersinia pestis और इसे काली मृत्यु कहा जाता है",
+      "(b) कारक Vibrio cholerae है; यह जलजनित रोग है और हैजा से मृत्यु को 'नीली मृत्यु' कहा गया है",
+      "(c) कारक Streptococcus pneumoniae और यह वायुजनित त्वचा रोग है",
+      "(d) कारक Mycobacterium leprae और इसे Hansen disease कहते हैं"
+    ],
+    o_en: [
+      "(a) Caused by Yersinia pestis and called Black Death",
+      "(b) It is caused by Vibrio cholerae; it is water-borne and death due to cholera is referred to as 'blue death'",
+      "(c) Caused by Streptococcus pneumoniae and is an airborne skin disease",
+      "(d) Caused by Mycobacterium leprae and called Hansen disease"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q57. प्लेग का कारक और उससे जुड़ा नाम क्या है?",
+    q_en: "Q57. What causes plague and what name is associated with it?",
+    tag: "",
+    o_hi: [
+      "(a) HIV; लाल मृत्यु",
+      "(b) Mycobacterium leprae; Hansen रोग",
+      "(c) Yersinia pestis; प्लेग से मृत्यु को 'काली मृत्यु' कहा गया है",
+      "(d) Vibrio cholerae; नीली मृत्यु"
+    ],
+    o_en: [
+      "(a) HIV; Red Death",
+      "(b) Mycobacterium leprae; Hansen disease",
+      "(c) Yersinia pestis; death due to plague is referred to as the 'Black Death'",
+      "(d) Vibrio cholerae; Blue Death"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q58. स्रोत के अनुसार 1897–1906 के दौरान भारत में प्लेग से लगभग कितनी मृत्यु दर्ज की गई?",
+    q_en: "Q58. According to the source, approximately how many plague deaths were recorded in India during 1897–1906?",
+    tag: "",
+    o_hi: [
+      "(a) 1.2 लाख",
+      "(b) 12 लाख",
+      "(c) 1.2 करोड़",
+      "(d) 2.5 करोड़"
+    ],
+    o_en: [
+      "(a) 1.2 lakh",
+      "(b) 12 lakh",
+      "(c) 1.2 crore",
+      "(d) 2.5 crore"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q59. कुष्ठ रोग (Leprosy) के बारे में सही कथन कौन-सा है?",
+    q_en: "Q59. Which statement about leprosy is correct?",
+    tag: "",
+    o_hi: [
+      "(a) कारक Vibrio cholerae; इसे Blue Death कहते हैं",
+      "(b) कारक Mycobacterium leprae है; यह त्वचा को प्रभावित करता है और Hansen रोग भी कहलाता है",
+      "(c) कारक H1N1; यह केवल यकृत को प्रभावित करता है",
+      "(d) कारक Streptococcus pneumoniae; इसे Black Death कहते हैं"
+    ],
+    o_en: [
+      "(a) Caused by Vibrio cholerae; called Blue Death",
+      "(b) It is caused by Mycobacterium leprae; it affects the skin and is also called Hansen's disease",
+      "(c) Caused by H1N1; affects only the liver",
+      "(d) Caused by Streptococcus pneumoniae; called Black Death"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q60. निमोनिया का कारक क्या है?",
+    q_en: "Q60. What causes pneumonia?",
+    tag: "",
+    o_hi: [
+      "(a) Yersinia pestis",
+      "(b) Treponema pallidum",
+      "(c) Streptococcus pneumoniae",
+      "(d) Bordetella pertussis"
+    ],
+    o_en: [
+      "(a) Yersinia pestis",
+      "(b) Treponema pallidum",
+      "(c) Streptococcus pneumoniae",
+      "(d) Bordetella pertussis"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q61. ब्रोंकाइटिस के बारे में सही कथन कौन-सा है?",
+    q_en: "Q61. Which statement about bronchitis is correct?",
+    tag: "",
+    o_hi: [
+      "(a) यह त्वचा का कवकीय संक्रमण है",
+      "(b) यह केवल यकृत का रोग है",
+      "(c) कारक Bordetella pertussis बताया गया है; यह ब्रोंकियल नलिकाओं की परत में सूजन पैदा करता है, जो फेफड़ों तक हवा ले जाती हैं",
+      "(d) यह छोटी आंत की सूजन है और Salmonella से होती है"
+    ],
+    o_en: [
+      "(a) It is a fungal skin infection",
+      "(b) It is only a liver disease",
+      "(c) The source gives Bordetella pertussis as the cause; it inflames the lining of bronchial tubes that carry air to the lungs",
+      "(d) It is inflammation of the small intestine caused by Salmonella"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q62. तपेदिक (TB) का कारक और उसके विरुद्ध टीका क्या है?",
+    q_en: "Q62. What causes tuberculosis (TB) and which vaccine is used against it?",
+    tag: "",
+    o_hi: [
+      "(a) Salmonella typhi; MMR",
+      "(b) Mycobacterium tuberculosis; BCG (Bacillus Calmette–Guérin)",
+      "(c) Vibrio cholerae; OPV",
+      "(d) HIV; BCG"
+    ],
+    o_en: [
+      "(a) Salmonella typhi; MMR",
+      "(b) Mycobacterium tuberculosis; BCG (Bacillus Calmette–Guérin)",
+      "(c) Vibrio cholerae; OPV",
+      "(d) HIV; BCG"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q63. डिप्थीरिया के बारे में सही कथन कौन-सा है?",
+    q_en: "Q63. Which statement about diphtheria is correct?",
+    tag: "",
+    o_hi: [
+      "(a) कारक E. coli और छोटी आंत प्रभावित",
+      "(b) कारक H. pylori और पेट प्रभावित",
+      "(c) कारक Corynebacterium diphtheriae है और यह श्वसन तंत्र में नाक व गले की श्लेष्म झिल्ली को प्रभावित करता है",
+      "(d) कारक Plasmodium और RBC प्रभावित"
+    ],
+    o_en: [
+      "(a) Caused by E. coli and affects small intestine",
+      "(b) Caused by H. pylori and affects stomach",
+      "(c) It is caused by Corynebacterium diphtheriae and affects the mucous membrane of the nose and throat in the respiratory system",
+      "(d) Caused by Plasmodium and affects RBCs"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q64. दस्त (Diarrhoea) का कारक स्रोत में क्या दिया गया है?",
+    q_en: "Q64. What cause of diarrhoea is given in the source?",
+    tag: "",
+    o_hi: [
+      "(a) E. coli (Escherichia coli)",
+      "(b) Salmonella typhi",
+      "(c) Clostridium tetani",
+      "(d) Helicobacter pylori"
+    ],
+    o_en: [
+      "(a) E. coli (Escherichia coli)",
+      "(b) Salmonella typhi",
+      "(c) Clostridium tetani",
+      "(d) Helicobacter pylori"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q65. E. coli के बारे में बॉक्स में कौन-सा विवरण दिया गया है?",
+    q_en: "Q65. What description of E. coli is given in the source box?",
+    tag: "",
+    o_hi: [
+      "(a) ग्राम-पॉजिटिव गोलाकार अनिवार्य वायवीय",
+      "(b) एकल-सूत्री RNA विषाणु",
+      "(c) यह ग्राम-निगेटिव, छड़ के आकार का, कोलीफॉर्म जीवाणु है जो वैकल्पिक रूप से अवायवीय है",
+      "(d) कवकीय बहुकोशिकीय परजीवी"
+    ],
+    o_en: [
+      "(a) Gram-positive spherical obligate aerobe",
+      "(b) Single-stranded RNA virus",
+      "(c) It is a Gram-negative, rod-shaped coliform bacterium that is facultatively anaerobic",
+      "(d) Multicellular fungal parasite"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q66. पेप्टिक अल्सर का कारक क्या है?",
+    q_en: "Q66. What causes peptic ulcers?",
+    tag: "",
+    o_hi: [
+      "(a) Salmonella typhi",
+      "(b) Staphylococcus",
+      "(c) Treponema pallidum",
+      "(d) Helicobacter pylori"
+    ],
+    o_en: [
+      "(a) Salmonella typhi",
+      "(b) Staphylococcus",
+      "(c) Treponema pallidum",
+      "(d) Helicobacter pylori"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q67. टाइफाइड के बारे में सही कथन कौन-सा है?",
+    q_en: "Q67. Which statement about typhoid is correct?",
+    tag: "",
+    o_hi: [
+      "(a) कारक Mycobacterium leprae और त्वचा प्रभावित",
+      "(b) कारक Plasmodium और RBC प्रभावित",
+      "(c) कारक Salmonella typhi है और यह छोटी आंत को प्रभावित करता है",
+      "(d) कारक H1N1 और फेफड़े प्रभावित"
+    ],
+    o_en: [
+      "(a) Caused by Mycobacterium leprae and affects skin",
+      "(b) Caused by Plasmodium and affects RBCs",
+      "(c) It is caused by Salmonella typhi and affects the small intestine",
+      "(d) Caused by H1N1 and affects lungs"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q68. टाइफाइड की पहचान और पुष्टि के बारे में सही कथन कौन-सा है?",
+    q_en: "Q68. Which statement about diagnosis and confirmation of typhoid is correct?",
+    tag: "",
+    o_hi: [
+      "(a) BCG और X-ray",
+      "(b) ELISA और Gram stain केवल",
+      "(c) Pap smear और MRI",
+      "(d) पता लगाने के लिए Widal test और पुष्टि विशेष रूप से serological विधि से की जाती है"
+    ],
+    o_en: [
+      "(a) BCG and X-ray",
+      "(b) ELISA and Gram stain only",
+      "(c) Pap smear and MRI",
+      "(d) Widal test is used for detection and confirmation is especially done by a serological method"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q69. मुहाँसे (Acne) का कारक स्रोत में क्या दिया गया है?",
+    q_en: "Q69. What cause of acne is given in the source?",
+    tag: "",
+    o_hi: [
+      "(a) Staphylococcus जीवाणु",
+      "(b) Varicella zoster virus",
+      "(c) Tinea capitis",
+      "(d) Plasmodium"
+    ],
+    o_en: [
+      "(a) Staphylococcus bacteria",
+      "(b) Varicella zoster virus",
+      "(c) Tinea capitis",
+      "(d) Plasmodium"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q70. टिटनेस का कारक और प्रमुख लक्षण का सही युग्म कौन-सा है?",
+    q_en: "Q70. Which correctly pairs the cause and key symptom of tetanus?",
+    tag: "",
+    o_hi: [
+      "(a) Bordetella pertussis; hydrophobia",
+      "(b) Clostridium tetani; जबड़ा अकड़ जाना (locked jaw)",
+      "(c) Treponema pallidum; jaundice",
+      "(d) E. coli; webbed neck"
+    ],
+    o_en: [
+      "(a) Bordetella pertussis; hydrophobia",
+      "(b) Clostridium tetani; locked jaw",
+      "(c) Treponema pallidum; jaundice",
+      "(d) E. coli; webbed neck"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q71. काली खाँसी (Whooping cough) के बारे में सही कथन कौन-सा है?",
+    q_en: "Q71. Which statement about whooping cough is correct?",
+    tag: "",
+    o_hi: [
+      "(a) कारक Yersinia pestis",
+      "(b) कारक Plasmodium falciparum",
+      "(c) कारक Bordetella pertussis है और स्रोत में इसे धीरे-धीरे pertussis का रूप लेने वाला बताया गया है",
+      "(d) कारक Vibrio cholerae"
+    ],
+    o_en: [
+      "(a) Caused by Yersinia pestis",
+      "(b) Caused by Plasmodium falciparum",
+      "(c) It is caused by Bordetella pertussis and the source states that it gradually takes the form of pertussis",
+      "(d) Caused by Vibrio cholerae"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q72. सिफिलिस का कारक क्या है?",
+    q_en: "Q72. What causes syphilis?",
+    tag: "",
+    o_hi: [
+      "(a) Treponema pallidum",
+      "(b) Streptococcus pneumoniae",
+      "(c) Corynebacterium diphtheriae",
+      "(d) Mycobacterium tuberculosis"
+    ],
+    o_en: [
+      "(a) Treponema pallidum",
+      "(b) Streptococcus pneumoniae",
+      "(c) Corynebacterium diphtheriae",
+      "(d) Mycobacterium tuberculosis"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q73. सिफिलिस के उपचार के इतिहास से संबंधित सही तथ्य कौन-सा है?",
+    q_en: "Q73. Which historical fact about syphilis treatment is correct?",
+    tag: "",
+    o_hi: [
+      "(a) Paul Ehrlich को 1908 में पहले chemotherapy agent Salvarsan की खोज के लिए Nobel Prize मिला; यह सिफिलिस का पहला सफल इलाज था",
+      "(b) Edward Jenner को 1796 में penicillin के लिए Nobel मिला",
+      "(c) Banting को 1928 में BCG के लिए Nobel मिला",
+      "(d) Jonas Salk को 2014 में Salvarsan के लिए Nobel मिला"
+    ],
+    o_en: [
+      "(a) Paul Ehrlich received the Nobel Prize in 1908 for discovering the first chemotherapy agent Salvarsan; it was the first successful treatment of syphilis",
+      "(b) Edward Jenner received a Nobel in 1796 for penicillin",
+      "(c) Banting received a Nobel in 1928 for BCG",
+      "(d) Jonas Salk received a Nobel in 2014 for Salvarsan"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q74. Gram staining का मुख्य उपयोग क्या है?",
+    q_en: "Q74. What is the main use of Gram staining?",
+    tag: "",
+    o_hi: [
+      "(a) विषाणु को DNA/RNA के आधार पर वर्गीकृत करना",
+      "(b) रक्त समूह निर्धारित करना",
+      "(c) यह microbiology की differential staining तकनीक है जो bacterial cell wall की संरचना के आधार पर bacteria को Gram-positive और Gram-negative समूहों में वर्गीकृत करती है",
+      "(d) कैंसर कोशिकाओं का आकार मापना"
+    ],
+    o_en: [
+      "(a) Classifying viruses by DNA/RNA",
+      "(b) Determining blood groups",
+      "(c) It is a differential staining technique in microbiology that classifies bacteria as Gram-positive or Gram-negative based on cell-wall structure",
+      "(d) Measuring cancer-cell size"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q75. Gram staining में रंग के आधार पर सही पहचान क्या है?",
+    q_en: "Q75. What is the correct colour identification in Gram staining?",
+    tag: "",
+    o_hi: [
+      "(a) Gram-positive — बैंगनी; Gram-negative — गुलाबी/लाल",
+      "(b) दोनों — काला",
+      "(c) Gram-positive — हरा; Gram-negative — नीला",
+      "(d) Gram-positive — गुलाबी; Gram-negative — बैंगनी"
+    ],
+    o_en: [
+      "(a) Gram-positive — purple; Gram-negative — pink/red",
+      "(b) Both — black",
+      "(c) Gram-positive — green; Gram-negative — blue",
+      "(d) Gram-positive — pink; Gram-negative — purple"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q76. Gram staining की चार-चरणीय प्रक्रिया का सही क्रम कौन-सा है?",
+    q_en: "Q76. What is the correct four-step sequence of Gram staining?",
+    tag: "",
+    o_hi: [
+      "(a) Crystal violet → Iodine → Decolorizer (alcohol/acetone) → Safranin",
+      "(b) Safranin → Iodine → Crystal violet → Water",
+      "(c) Iodine → Water → Safranin → Methanol",
+      "(d) Alcohol → Safranin → Iodine → Crystal violet"
+    ],
+    o_en: [
+      "(a) Crystal violet → Iodine → Decolorizer (alcohol/acetone) → Safranin",
+      "(b) Safranin → Iodine → Crystal violet → Water",
+      "(c) Iodine → Water → Safranin → Methanol",
+      "(d) Alcohol → Safranin → Iodine → Crystal violet"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q77. Gram staining का चिकित्सकीय उद्देश्य क्या बताया गया है?",
+    q_en: "Q77. What clinical purpose of Gram staining is given?",
+    tag: "",
+    o_hi: [
+      "(a) बैक्टीरिया के प्रकारों की पहचान करना और नैदानिक उपचार को दिशा देना",
+      "(b) केवल शरीर का तापमान मापना",
+      "(c) केवल रक्तचाप मापना",
+      "(d) केवल वायरस का आकार मापना"
+    ],
+    o_en: [
+      "(a) To identify types of bacteria and guide clinical treatment",
+      "(b) Only measuring body temperature",
+      "(c) Only measuring blood pressure",
+      "(d) Only measuring virus size"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q78. स्रोत के अनुसार Gram-negative bacteria की एक विशेषता क्या है?",
+    q_en: "Q78. According to the source, what is one feature of Gram-negative bacteria?",
+    tag: "",
+    o_hi: [
+      "(a) उनमें कोई cell wall नहीं होती",
+      "(b) वे हमेशा antibiotics के प्रति सबसे कम resistant होते हैं",
+      "(c) वे केवल वायरस होते हैं",
+      "(d) वे antibiotics के प्रति अधिक resistant होते हैं"
+    ],
+    o_en: [
+      "(a) They have no cell wall",
+      "(b) They are always least resistant to antibiotics",
+      "(c) They are only viruses",
+      "(d) They are more resistant to antibiotics"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q79. स्रोत में Gram-positive bacteria के उदाहरण कौन-से दिए गए हैं?",
+    q_en: "Q79. Which examples of Gram-positive bacteria are given in the source?",
+    tag: "",
+    o_hi: [
+      "(a) Staphylococcus, Streptococcus और Bacillus",
+      "(b) E. coli, Salmonella और Vibrio cholerae",
+      "(c) HIV, H1N1 और H5N1",
+      "(d) Plasmodium, Trypanosoma और Leishmania"
+    ],
+    o_en: [
+      "(a) Staphylococcus, Streptococcus and Bacillus",
+      "(b) E. coli, Salmonella and Vibrio cholerae",
+      "(c) HIV, H1N1 and H5N1",
+      "(d) Plasmodium, Trypanosoma and Leishmania"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q80. स्रोत में Gram-negative bacteria के उदाहरण कौन-से दिए गए हैं?",
+    q_en: "Q80. Which examples of Gram-negative bacteria are given in the source?",
+    tag: "",
+    o_hi: [
+      "(a) Variola, Rhinovirus और HIV",
+      "(b) Escherichia, Salmonella और Vibrio cholerae",
+      "(c) Staphylococcus, Streptococcus और Bacillus",
+      "(d) Tinea, Sarcoptes और Plasmodium"
+    ],
+    o_en: [
+      "(a) Variola, Rhinovirus and HIV",
+      "(b) Escherichia, Salmonella and Vibrio cholerae",
+      "(c) Staphylococcus, Streptococcus and Bacillus",
+      "(d) Tinea, Sarcoptes and Plasmodium"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q81. चित्र के अनुसार Gram-positive और Gram-negative cell wall में सही अंतर कौन-सा है?",
+    q_en: "Q81. According to the diagram, what is the correct difference between Gram-positive and Gram-negative cell walls?",
+    tag: "",
+    o_hi: [
+      "(a) Gram-positive में कोई peptidoglycan नहीं होता",
+      "(b) दोनों में केवल outer membrane होती है",
+      "(c) Gram-positive में मोटी peptidoglycan परत व cytoplasmic membrane; Gram-negative में outer membrane, periplasm, पतली peptidoglycan परत और cytoplasmic membrane",
+      "(d) Gram-negative में केवल capsule होता है"
+    ],
+    o_en: [
+      "(a) Gram-positive has no peptidoglycan",
+      "(b) Both have only an outer membrane",
+      "(c) Gram-positive has a thick peptidoglycan layer and cytoplasmic membrane; Gram-negative has an outer membrane, periplasm, thin peptidoglycan and cytoplasmic membrane",
+      "(d) Gram-negative has only a capsule"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q82. स्रोत के 'BARSA' mnemonic में किन रोगों को कवक से होने वाले रोगों के अंतर्गत रखा गया है?",
+    q_en: "Q82. Which diseases are placed under fungal diseases in the source's 'BARSA' mnemonic?",
+    tag: "",
+    o_hi: [
+      "(a) Malaria, Kala-azar, Sleeping sickness, Giardiasis, Amoebiasis",
+      "(b) Dengue, Measles, Influenza, Rabies, Polio",
+      "(c) Baldness, Athlete's foot, Ringworm, Scabies और Asthma",
+      "(d) TB, Cholera, Plague, Syphilis, Diphtheria"
+    ],
+    o_en: [
+      "(a) Malaria, kala-azar, sleeping sickness, giardiasis, amoebiasis",
+      "(b) Dengue, measles, influenza, rabies, polio",
+      "(c) Baldness, Athlete's foot, Ringworm, Scabies and Asthma",
+      "(d) TB, cholera, plague, syphilis, diphtheria"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q83. गंजापन (Baldness) के बारे में स्रोत का सही कथन कौन-सा है?",
+    q_en: "Q83. Which statement about baldness is correct according to the source?",
+    tag: "",
+    o_hi: [
+      "(a) यह H1N1 से होने वाला श्वसन रोग है",
+      "(b) यह Salmonella से होने वाला आंत्र रोग है",
+      "(c) यह एक fungal infection, विशेष रूप से Tinea capitis/Scalp ringworm, है जो patchy hair loss का कारण बन सकता है",
+      "(d) यह केवल आनुवंशिक रक्त रोग है"
+    ],
+    o_en: [
+      "(a) It is a respiratory disease caused by H1N1",
+      "(b) It is an intestinal disease caused by Salmonella",
+      "(c) It is a fungal infection, especially Tinea capitis/Scalp ringworm, that may cause patchy hair loss",
+      "(d) It is only a genetic blood disorder"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q84. Athlete's foot के बारे में सही कथन कौन-सा है?",
+    q_en: "Q84. Which statement about athlete's foot is correct?",
+    tag: "",
+    o_hi: [
+      "(a) यह ringworm का एक प्रकार है जो पैरों को प्रभावित करता है",
+      "(b) यह malaria का एक रूप है",
+      "(c) यह केवल सिर की त्वचा को प्रभावित करता है",
+      "(d) यह liver infection है"
+    ],
+    o_en: [
+      "(a) It is a type of ringworm that affects the feet",
+      "(b) It is a form of malaria",
+      "(c) It affects only the scalp",
+      "(d) It is a liver infection"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q85. दाद (Ringworm) का स्रोत में क्या वर्णन है?",
+    q_en: "Q85. How is ringworm described in the source?",
+    tag: "",
+    o_hi: [
+      "(a) एक सामान्य त्वचा संक्रमण जो लाल, खुजलीदार दाने पैदा कर सकता है",
+      "(b) यकृत का वायरल रोग",
+      "(c) RBC को फोड़ने वाला protozoan रोग",
+      "(d) छोटी आंत का bacterial रोग"
+    ],
+    o_en: [
+      "(a) A common skin infection that can produce a red, itchy rash",
+      "(b) A viral liver disease",
+      "(c) A protozoan disease that ruptures RBCs",
+      "(d) A bacterial disease of the small intestine"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q86. खुजली (Scabies) का कारक क्या है?",
+    q_en: "Q86. What causes scabies?",
+    tag: "",
+    o_hi: [
+      "(a) Sarcoptes scabiei नामक सूक्ष्म परजीवी mite",
+      "(b) Tinea capitis fungus",
+      "(c) HIV",
+      "(d) Plasmodium falciparum"
+    ],
+    o_en: [
+      "(a) The microscopic parasitic mite Sarcoptes scabiei",
+      "(b) Tinea capitis fungus",
+      "(c) HIV",
+      "(d) Plasmodium falciparum"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q87. Scabies में परजीवी mite क्या करता है और मुख्य पहचान क्या है?",
+    q_en: "Q87. What does the parasitic mite do in scabies, and what is its main identifying feature?",
+    tag: "",
+    o_hi: [
+      "(a) त्वचा में सुरंग बनाकर अंडे देता है जो वयस्क mite में बदलते हैं; तीव्र खुजली और त्वचा पर चकत्ते प्रमुख पहचान हैं",
+      "(b) यकृत में copper जमा करता है",
+      "(c) फेफड़ों के alveoli तोड़ता है",
+      "(d) RBC में बढ़ता है और ज्वर पैदा करता है"
+    ],
+    o_en: [
+      "(a) It burrows into the skin and lays eggs that develop into adult mites; intense itching and skin rashes are key features",
+      "(b) It deposits copper in the liver",
+      "(c) It destroys lung alveoli",
+      "(d) It multiplies in RBCs and causes fever"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q88. Asthma के संदर्भ में कवक से जुड़ा कौन-सा तथ्य दिया गया है?",
+    q_en: "Q88. What fungus-related fact is given for asthma?",
+    tag: "",
+    o_hi: [
+      "(a) कवक के संपर्क में आने से asthma के लक्षण बढ़ सकते हैं या उनमें योगदान हो सकता है",
+      "(b) asthma केवल chromosome 21 से होता है",
+      "(c) asthma केवल bacteria से होता है",
+      "(d) कवक asthma को हमेशा पूरी तरह ठीक करता है"
+    ],
+    o_en: [
+      "(a) Exposure to fungi may worsen or contribute to asthma symptoms",
+      "(b) Asthma is caused only by chromosome 21",
+      "(c) Asthma is caused only by bacteria",
+      "(d) Fungi always cure asthma completely"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q89. मलेरिया दिवस कब मनाया जाता है और मलेरिया का protozoan कौन-सा है?",
+    q_en: "Q89. When is Malaria Day observed and which protozoan causes malaria?",
+    tag: "",
+    o_hi: [
+      "(a) 25 अप्रैल; Plasmodium",
+      "(b) 1 दिसंबर; Trypanosoma",
+      "(c) 25 मई; E. coli",
+      "(d) 2 अक्टूबर; Leishmania"
+    ],
+    o_en: [
+      "(a) 25 April; Plasmodium",
+      "(b) 1 December; Trypanosoma",
+      "(c) 25 May; E. coli",
+      "(d) 2 October; Leishmania"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q90. मनुष्यों में मलेरिया का सबसे घातक कारण बनने वाली Plasmodium species कौन-सी बताई गई है?",
+    q_en: "Q90. Which Plasmodium species is stated to be the most deadly cause of malaria in humans?",
+    tag: "",
+    o_hi: [
+      "(a) Trypanosoma gambiense",
+      "(b) Plasmodium falciparum",
+      "(c) Leishmania donovani",
+      "(d) Plasmodium vivax"
+    ],
+    o_en: [
+      "(a) Trypanosoma gambiense",
+      "(b) Plasmodium falciparum",
+      "(c) Leishmania donovani",
+      "(d) Plasmodium vivax"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q91. मलेरिया में merozoites का क्या प्रभाव बताया गया है?",
+    q_en: "Q91. What effect of merozoites is described in malaria?",
+    tag: "",
+    o_hi: [
+      "(a) वे केवल त्वचा में रहते हैं",
+      "(b) वे केवल liver में copper जमा करते हैं",
+      "(c) वे केवल bone marrow में cancer करते हैं",
+      "(d) वे शरीर के अंदर परिपक्व होकर संख्या बढ़ाते हैं और लाल रक्त कोशिकाओं (RBCs) के फटने का कारण बनते हैं"
+    ],
+    o_en: [
+      "(a) They remain only in the skin",
+      "(b) They only deposit copper in the liver",
+      "(c) They cause cancer only in bone marrow",
+      "(d) They mature and increase in number inside the body and cause red blood cells (RBCs) to rupture"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q92. मलेरिया में बार-बार बुखार आने का स्रोत में क्या कारण बताया गया है?",
+    q_en: "Q92. What cause of recurrent fever in malaria is given in the source?",
+    tag: "",
+    o_hi: [
+      "(a) केवल हड्डियों की कमजोरी",
+      "(b) कुछ दिनों में RBCs का फटना और toxins का निकलना, जिससे cyclical fever बनता है और बुखार रुक-रुककर आता है",
+      "(c) केवल त्वचा की खुजली",
+      "(d) केवल पेट में acid बढ़ना"
+    ],
+    o_en: [
+      "(a) Only bone weakness",
+      "(b) RBC rupture and toxin release every few days, producing cyclical fever that recurs at intervals",
+      "(c) Only skin itching",
+      "(d) Only increased stomach acid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q93. मलेरिया का वाहक कौन-सा है?",
+    q_en: "Q93. What is the vector of malaria?",
+    tag: "",
+    o_hi: [
+      "(a) Tsetse fly",
+      "(b) Aedes aegypti",
+      "(c) मादा Anopheles मच्छर",
+      "(d) Sandfly"
+    ],
+    o_en: [
+      "(a) Tsetse fly",
+      "(b) Aedes aegypti",
+      "(c) Female Anopheles mosquito",
+      "(d) Sandfly"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q94. मलेरिया के उपचार और cinchona से संबंधित सही तथ्य कौन-सा है?",
+    q_en: "Q94. Which fact about malaria treatment and cinchona is correct?",
+    tag: "",
+    o_hi: [
+      "(a) Insulin का उपयोग; neem bark में पाया जाता है",
+      "(b) Penicillin का उपयोग; tobacco bark में पाया जाता है",
+      "(c) BCG का उपयोग; pine bark में पाया जाता है",
+      "(d) Quinine का उपयोग; यह cinchona पेड़ की छाल में पाया जाता है, और स्रोत में cinchona पेड़ को सदाबहार वन में पाया जाना बताया गया है"
+    ],
+    o_en: [
+      "(a) Insulin is used; found in neem bark",
+      "(b) Penicillin is used; found in tobacco bark",
+      "(c) BCG is used; found in pine bark",
+      "(d) Quinine is used; it is found in cinchona bark, and the source states that cinchona trees are found in evergreen forests"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q95. निद्रा रोग (Sleeping sickness) के protozoan और vector का सही युग्म कौन-सा है?",
+    q_en: "Q95. Which correctly pairs the protozoan and vector of sleeping sickness?",
+    tag: "",
+    o_hi: [
+      "(a) Leishmania; sandfly",
+      "(b) Trypanosoma; Tsetse fly",
+      "(c) Flavivirus; Aedes aegypti",
+      "(d) Plasmodium; female Anopheles"
+    ],
+    o_en: [
+      "(a) Leishmania; sandfly",
+      "(b) Trypanosoma; tsetse fly",
+      "(c) Flavivirus; Aedes aegypti",
+      "(d) Plasmodium; female Anopheles"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q96. कालाजार (Kala-azar) के protozoan, vector और चित्र में दिखाए प्रभाव का सही संयोजन कौन-सा है?",
+    q_en: "Q96. Which correctly combines the protozoan, vector and illustrated effect of kala-azar?",
+    tag: "",
+    o_hi: [
+      "(a) Trypanosoma; tsetse fly; केवल त्वचा पर दाने",
+      "(b) HIV; Aedes; locked jaw",
+      "(c) Leishmania; sandfly; spleen और liver का बढ़ना",
+      "(d) Plasmodium; Anopheles; webbed neck"
+    ],
+    o_en: [
+      "(a) Trypanosoma; tsetse fly; only skin rash",
+      "(b) HIV; Aedes; locked jaw",
+      "(c) Leishmania; sandfly; enlargement of the spleen and liver",
+      "(d) Plasmodium; Anopheles; webbed neck"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q97. निम्न में से कौन-सा समूह स्रोत की तालिका में जलजनित रोगों में है?",
+    q_en: "Q97. Which group is listed as water-borne diseases in the source table?",
+    tag: "",
+    o_hi: [
+      "(a) Hepatitis A, diarrhoea, typhoid, cholera और giardiasis",
+      "(b) Baldness, ringworm, asthma, scabies, athlete's foot",
+      "(c) Dengue, rabies, polio, mumps, AIDS",
+      "(d) Influenza, TB, measles, whooping cough, chickenpox"
+    ],
+    o_en: [
+      "(a) Hepatitis A, diarrhoea, typhoid, cholera and giardiasis",
+      "(b) Baldness, ringworm, asthma, scabies, athlete's foot",
+      "(c) Dengue, rabies, polio, mumps, AIDS",
+      "(d) Influenza, TB, measles, whooping cough, chickenpox"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q98. स्रोत की तालिका में कौन-से रोग वायुजनित बताए गए हैं?",
+    q_en: "Q98. Which diseases are listed as airborne in the source table?",
+    tag: "",
+    o_hi: [
+      "(a) Malaria, kala-azar, sleeping sickness, dengue, rabies",
+      "(b) Influenza, tuberculosis, measles, whooping cough, chickenpox और COVID-19",
+      "(c) Hepatitis A, diarrhoea, typhoid, cholera, giardiasis",
+      "(d) Wilson disease, Patau syndrome, Turner syndrome, glaucoma, epilepsy"
+    ],
+    o_en: [
+      "(a) Malaria, kala-azar, sleeping sickness, dengue, rabies",
+      "(b) Influenza, tuberculosis, measles, whooping cough, chickenpox and COVID-19",
+      "(c) Hepatitis A, diarrhoea, typhoid, cholera, giardiasis",
+      "(d) Wilson disease, Patau syndrome, Turner syndrome, glaucoma, epilepsy"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q99. यौन संचारित रोगों के चित्र में कौन-सा वर्गीकरण दिखाया गया है?",
+    q_en: "Q99. What classification is shown in the sexually transmitted diseases diagram?",
+    tag: "",
+    o_hi: [
+      "(a) CNS में ringworm और scabies; bacterial में dengue और mumps",
+      "(b) CNS में malaria और typhoid; bacterial में polio और rabies",
+      "(c) Central nervous system के अंतर्गत HIV-AIDS और warts; bacterial infection के अंतर्गत gonorrhoea और syphilis",
+      "(d) CNS में cholera और plague; bacterial में influenza और hepatitis"
+    ],
+    o_en: [
+      "(a) CNS: ringworm and scabies; bacterial: dengue and mumps",
+      "(b) CNS: malaria and typhoid; bacterial: polio and rabies",
+      "(c) Under Central Nervous System: HIV-AIDS and warts; under Bacterial Infection: gonorrhoea and syphilis",
+      "(d) CNS: cholera and plague; bacterial: influenza and hepatitis"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q100. गुणसूत्री विकार (Chromosomal disorders) किस कारण होते हैं?",
+    q_en: "Q100. What causes chromosomal disorders?",
+    tag: "",
+    o_hi: [
+      "(a) केवल vitamin deficiency",
+      "(b) केवल high blood pressure",
+      "(c) केवल fungal infection",
+      "(d) गुणसूत्रों में गड़बड़ी के कारण"
+    ],
+    o_en: [
+      "(a) Only vitamin deficiency",
+      "(b) Only high blood pressure",
+      "(c) Only fungal infection",
+      "(d) Due to abnormalities in chromosomes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
