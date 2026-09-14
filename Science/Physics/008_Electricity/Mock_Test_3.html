@@ -1,0 +1,922 @@
+const data = [
+  {
+    q_hi: "Q101. जूल के तापन नियम में R क्या दर्शाता है?",
+    q_en: "Q101. In Joule's heating law, what does R represent?",
+    tag: "",
+    o_hi: [
+      "(a) धारा, एम्पियर में",
+      "(b) समय, सेकंड में",
+      "(c) प्रतिरोध, ओम में",
+      "(d) ऊष्मा, जूल में"
+    ],
+    o_en: [
+      "(a) Current in amperes",
+      "(b) Time in seconds",
+      "(c) Resistance in ohms",
+      "(d) Heat in joules"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q102. जूल के तापन नियम में t क्या दर्शाता है?",
+    q_en: "Q102. In Joule's heating law, what does t represent?",
+    tag: "",
+    o_hi: [
+      "(a) ऊष्मा, जूल में",
+      "(b) धारा, एम्पियर में",
+      "(c) प्रतिरोध, ओम में",
+      "(d) समय, सेकंड में"
+    ],
+    o_en: [
+      "(a) Heat in joules",
+      "(b) Current in amperes",
+      "(c) Resistance in ohms",
+      "(d) Time in seconds"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q103. ओम के नियम का उपयोग करके जूल के तापन नियम का एक वैकल्पिक रूप क्या है?",
+    q_en: "Q103. Using Ohm's law, what is one alternative form of Joule's heating law?",
+    tag: "",
+    o_hi: [
+      "(a) H = IR",
+      "(b) H = VI/t",
+      "(c) H = V/I",
+      "(d) H = VIt"
+    ],
+    o_en: [
+      "(a) H = IR",
+      "(b) H = VI/t",
+      "(c) H = V/I",
+      "(d) H = VIt"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q104. जूल के तापन नियम का V और R वाला वैकल्पिक रूप कौन-सा है?",
+    q_en: "Q104. Which is the alternative form of Joule's heating law involving V and R?",
+    tag: "",
+    o_hi: [
+      "(a) H = VR/t",
+      "(b) H = V²t/R",
+      "(c) H = V²R/t",
+      "(d) H = Rt/V²"
+    ],
+    o_en: [
+      "(a) H = VR/t",
+      "(b) H = V²t/R",
+      "(c) H = V²R/t",
+      "(d) H = Rt/V²"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q105. विद्युत हीटर में हीटिंग एलिमेंट के रूप में किस तार का उपयोग किया जाता है?",
+    q_en: "Q105. Which wire is used as a heating element in an electric heater?",
+    tag: "",
+    o_hi: [
+      "(a) तांबा",
+      "(b) एल्युमीनियम",
+      "(c) चाँदी",
+      "(d) नाइक्रोम"
+    ],
+    o_en: [
+      "(a) Copper",
+      "(b) Aluminium",
+      "(c) Silver",
+      "(d) Nichrome"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q106. विद्युत बल्ब में किस धातु का फिलामेंट उपयोग किया जाता है?",
+    q_en: "Q106. Which metal is used as the filament in an electric bulb?",
+    tag: "",
+    o_hi: [
+      "(a) मैंगनीन",
+      "(b) तांबा",
+      "(c) मरकरी",
+      "(d) टंगस्टन"
+    ],
+    o_en: [
+      "(a) Manganin",
+      "(b) Copper",
+      "(c) Mercury",
+      "(d) Tungsten"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q107. टंगस्टन को बल्ब फिलामेंट के लिए उपयुक्त बनाने वाला प्रमुख गुण क्या है?",
+    q_en: "Q107. Which property makes tungsten suitable for a bulb filament?",
+    tag: "",
+    o_hi: [
+      "(a) कम गलनांक",
+      "(b) कम घनत्व",
+      "(c) उच्च गलनांक",
+      "(d) उच्च चालकता मात्र"
+    ],
+    o_en: [
+      "(a) Low melting point",
+      "(b) Low density",
+      "(c) High melting point",
+      "(d) High conductivity alone"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q108. विद्युत प्रेस कपड़े प्रेस करने के लिए किस प्रभाव का उपयोग करती है?",
+    q_en: "Q108. Which effect is used by an electric iron to press clothes?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाश का प्रकाश-विद्युत प्रभाव",
+      "(b) विद्युत धारा का रासायनिक प्रभाव",
+      "(c) विद्युत धारा का तापीय प्रभाव",
+      "(d) विद्युत धारा का चुंबकीय प्रभाव"
+    ],
+    o_en: [
+      "(a) Photoelectric effect of light",
+      "(b) Chemical effect of electric current",
+      "(c) Heating effect of electric current",
+      "(d) Magnetic effect of electric current"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q109. फ्यूज तार की मुख्य विशेषता क्या होती है?",
+    q_en: "Q109. What is a main characteristic of fuse wire?",
+    tag: "",
+    o_hi: [
+      "(a) उच्च गलनांक वाला तांबे का तार",
+      "(b) उच्च गलनांक वाला मोटा तार",
+      "(c) शून्य प्रतिरोध वाला तार",
+      "(d) कम गलनांक वाला पतला तार"
+    ],
+    o_en: [
+      "(a) A high-melting copper wire",
+      "(b) A thick wire with a high melting point",
+      "(c) A zero-resistance wire",
+      "(d) A thin wire with a low melting point"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q110. नाइक्रोम का उपयोग हीटिंग उपकरणों में क्यों किया जाता है?",
+    q_en: "Q110. Why is nichrome used in heating devices?",
+    tag: "",
+    o_hi: [
+      "(a) यह विद्युत का कुचालक है",
+      "(b) यह कमरे के तापमान पर पिघलता है",
+      "(c) इसकी विशिष्ट प्रतिरोधकता अधिक होती है",
+      "(d) इसकी प्रतिरोधकता बहुत कम होती है"
+    ],
+    o_en: [
+      "(a) It is an electrical insulator",
+      "(b) It melts at room temperature",
+      "(c) It has high specific resistivity",
+      "(d) It has very low resistivity"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q111. उच्च तापमान पर नाइक्रोम का कौन-सा गुण उपयोगी है?",
+    q_en: "Q111. Which property of nichrome is useful at high temperature?",
+    tag: "",
+    o_hi: [
+      "(a) यह शून्य प्रतिरोध वाला हो जाता है",
+      "(b) यह पारदर्शी हो जाता है",
+      "(c) यह तेजी से वाष्पित होता है",
+      "(d) यह आसानी से ऑक्सीकरण नहीं करता"
+    ],
+    o_en: [
+      "(a) It becomes zero-resistance",
+      "(b) It becomes transparent",
+      "(c) It evaporates rapidly",
+      "(d) It does not oxidize easily"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q112. अत्यधिक धारा प्रवाहित होने पर फ्यूज तार क्या करता है?",
+    q_en: "Q112. What does a fuse wire do when excessive current flows?",
+    tag: "",
+    o_hi: [
+      "(a) बैटरी को चार्ज करता है",
+      "(b) प्रतिरोध शून्य कर देता है",
+      "(c) पिघलकर परिपथ तोड़ देता है",
+      "(d) वोल्टेज बढ़ा देता है"
+    ],
+    o_en: [
+      "(a) It charges the battery",
+      "(b) It makes resistance zero",
+      "(c) It melts and breaks the circuit",
+      "(d) It increases voltage"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q113. फ्यूज का मुख्य सुरक्षा उद्देश्य क्या है?",
+    q_en: "Q113. What is the main safety purpose of a fuse?",
+    tag: "",
+    o_hi: [
+      "(a) उपकरणों को अत्यधिक धारा, शॉर्ट सर्किट और वोल्टेज स्पाइक से बचाना",
+      "(b) उपकरणों को कम वोल्टेज, कम धारा और कम आवृत्ति से बचाना",
+      "(c) उपकरणों में धारा, वोल्टेज और विद्युत शक्ति को लगातार बढ़ाते रहना",
+      "(d) उपकरणों के प्रतिरोध को घटाकर धारा और शक्ति को अधिक करना"
+    ],
+    o_en: [
+      "(a) Protect appliances from excessive current, short circuit and voltage spikes",
+      "(b) Protect appliances from low voltage, low current and low frequency",
+      "(c) Continuously increase current, voltage and electrical power in appliances",
+      "(d) Reduce appliance resistance to increase current and power"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q114. स्विच चालू होने पर साधारण परिपथ में बल्ब की स्थिति क्या होती है?",
+    q_en: "Q114. What is the state of the bulb in a simple circuit with a closed switch?",
+    tag: "",
+    o_hi: [
+      "(a) तार में धारा शून्य होती है",
+      "(b) बल्ब बुझा रहता है",
+      "(c) बल्ब जलता है",
+      "(d) बैटरी निष्क्रिय हो जाती है"
+    ],
+    o_en: [
+      "(a) Current in the wire is zero",
+      "(b) The bulb remains off",
+      "(c) The bulb glows",
+      "(d) The battery becomes inactive"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q115. स्विच बंद होने पर साधारण परिपथ में बल्ब की स्थिति क्या होती है?",
+    q_en: "Q115. What is the state of the bulb in a simple circuit with an open switch?",
+    tag: "",
+    o_hi: [
+      "(a) बल्ब जलता है",
+      "(b) बल्ब बुझा रहता है",
+      "(c) धारा बढ़ जाती है",
+      "(d) प्रतिरोध शून्य हो जाता है"
+    ],
+    o_en: [
+      "(a) The bulb glows",
+      "(b) The bulb remains off",
+      "(c) Current increases",
+      "(d) Resistance becomes zero"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q116. विद्युत शक्ति किसे कहते हैं?",
+    q_en: "Q116. What is electric power?",
+    tag: "",
+    o_hi: [
+      "(a) विद्युत ऊर्जा के उपयोग या उत्पादन की दर",
+      "(b) किसी चालक द्वारा विद्युत धारा को दिया गया कुल विरोध",
+      "(c) एक परिपथ में विद्युत आवेश के प्रवाह की कुल मात्रा",
+      "(d) दो बिंदुओं के बीच विद्युत विभव का कुल अंतर"
+    ],
+    o_en: [
+      "(a) Rate of use or production of electrical energy",
+      "(b) Total opposition offered by a conductor to current",
+      "(c) Total amount of electric charge flowing in a circuit",
+      "(d) Total electric potential difference between two points"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q117. विद्युत शक्ति का मूल सूत्र क्या है?",
+    q_en: "Q117. What is the basic formula for electric power?",
+    tag: "",
+    o_hi: [
+      "(a) P = V/I",
+      "(b) P = I/V",
+      "(c) P = V + I",
+      "(d) P = VI"
+    ],
+    o_en: [
+      "(a) P = V/I",
+      "(b) P = I/V",
+      "(c) P = V + I",
+      "(d) P = VI"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q118. ओम के नियम का उपयोग करने पर विद्युत शक्ति का I और R वाला सूत्र क्या है?",
+    q_en: "Q118. Using Ohm's law, what is the electric power formula in terms of I and R?",
+    tag: "",
+    o_hi: [
+      "(a) P = R/I²",
+      "(b) P = IR²",
+      "(c) P = I²R",
+      "(d) P = I/R"
+    ],
+    o_en: [
+      "(a) P = R/I²",
+      "(b) P = IR²",
+      "(c) P = I²R",
+      "(d) P = I/R"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q119. विद्युत शक्ति का V और R वाला सूत्र क्या है?",
+    q_en: "Q119. What is the electric power formula in terms of V and R?",
+    tag: "",
+    o_hi: [
+      "(a) P = R/V²",
+      "(b) P = V²/R",
+      "(c) P = V/R²",
+      "(d) P = VR²"
+    ],
+    o_en: [
+      "(a) P = R/V²",
+      "(b) P = V²/R",
+      "(c) P = V/R²",
+      "(d) P = VR²"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q120. विद्युत ऊर्जा की वाणिज्यिक इकाई क्या है?",
+    q_en: "Q120. What is the commercial unit of electrical energy?",
+    tag: "",
+    o_hi: [
+      "(a) जूल प्रति सेकंड (J/s)",
+      "(b) किलोवाट-घंटा (kWh)",
+      "(c) वाट-सेकंड (Ws)",
+      "(d) किलोवाट (kW)"
+    ],
+    o_en: [
+      "(a) Joule per second (J/s)",
+      "(b) Kilowatt-hour (kWh)",
+      "(c) Watt-second (Ws)",
+      "(d) Kilowatt (kW)"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q121. 1 यूनिट विद्युत ऊर्जा किसके बराबर होती है?",
+    q_en: "Q121. One unit of electrical energy is equal to what?",
+    tag: "",
+    o_hi: [
+      "(a) 1 kWh",
+      "(b) 1 kW",
+      "(c) 1 J",
+      "(d) 1 Wh"
+    ],
+    o_en: [
+      "(a) 1 kWh",
+      "(b) 1 kW",
+      "(c) 1 J",
+      "(d) 1 Wh"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q122. 1 kWh का जूल तथा वाट-सेकंड में मान क्या है?",
+    q_en: "Q122. What is the value of 1 kWh in joules and watt-seconds?",
+    tag: "",
+    o_hi: [
+      "(a) 3.6 × 10³ J = 3,600 Ws",
+      "(b) 3.6 × 10⁷ J = 36,000,000 Ws",
+      "(c) 3.6 × 10⁵ J = 360,000 Ws",
+      "(d) 3.6 × 10⁶ J = 3,600,000 Ws"
+    ],
+    o_en: [
+      "(a) 3.6 × 10³ J = 3,600 Ws",
+      "(b) 3.6 × 10⁷ J = 36,000,000 Ws",
+      "(c) 3.6 × 10⁵ J = 360,000 Ws",
+      "(d) 3.6 × 10⁶ J = 3,600,000 Ws"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q123. घरेलू तारों में लाइव तार का रंग कौन-सा है?",
+    q_en: "Q123. Which colour is given for the live wire in domestic wiring?",
+    tag: "",
+    o_hi: [
+      "(a) काला/नीला",
+      "(b) लाल/भूरा",
+      "(c) सफेद/धूसर",
+      "(d) हरा/पीला"
+    ],
+    o_en: [
+      "(a) Black/Blue",
+      "(b) Red/Brown",
+      "(c) White/Grey",
+      "(d) Green/Yellow"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q124. घरेलू तारों में लाइव तार का वोल्टेज कैसा होता है?",
+    q_en: "Q124. How is the potential of the live wire in domestic wiring?",
+    tag: "",
+    o_hi: [
+      "(a) अर्थ के समान",
+      "(b) वोल्टेज से स्वतंत्र",
+      "(c) उच्च वोल्टेज पर",
+      "(d) शून्य वोल्ट पर"
+    ],
+    o_en: [
+      "(a) Same as earth",
+      "(b) Independent of voltage",
+      "(c) At high voltage",
+      "(d) At zero voltage"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q125. घरेलू तारों में न्यूट्रल/उदासीन तार का रंग कौन-सा है?",
+    q_en: "Q125. Which colour is given for the neutral wire in domestic wiring?",
+    tag: "",
+    o_hi: [
+      "(a) सफेद/लाल",
+      "(b) काला/नीला",
+      "(c) लाल/भूरा",
+      "(d) हरा/पीला"
+    ],
+    o_en: [
+      "(a) White/Red",
+      "(b) Black/Blue",
+      "(c) Red/Brown",
+      "(d) Green/Yellow"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q126. न्यूट्रल/उदासीन तार का वोल्टेज कितना होता है?",
+    q_en: "Q126. What potential is assigned to the neutral wire?",
+    tag: "",
+    o_hi: [
+      "(a) 220 V",
+      "(b) 50 V",
+      "(c) 110 V",
+      "(d) 0 V"
+    ],
+    o_en: [
+      "(a) 220 V",
+      "(b) 50 V",
+      "(c) 110 V",
+      "(d) 0 V"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q127. घरेलू तारों में ग्राउंड/अर्थ/भूसंपर्क तार का रंग कौन-सा है?",
+    q_en: "Q127. Which colour is given for the earth/ground wire in domestic wiring?",
+    tag: "",
+    o_hi: [
+      "(a) लाल/भूरा",
+      "(b) हरा/पीला",
+      "(c) सफेद/काला",
+      "(d) काला/नीला"
+    ],
+    o_en: [
+      "(a) Red/Brown",
+      "(b) Green/Yellow",
+      "(c) White/Black",
+      "(d) Black/Blue"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q128. घरेलू विद्युत उपकरणों के लिए वोल्टेज कितना है?",
+    q_en: "Q128. What voltage is given for household electrical appliances?",
+    tag: "",
+    o_hi: [
+      "(a) 110 V",
+      "(b) 440 V",
+      "(c) 50 V",
+      "(d) 220 V"
+    ],
+    o_en: [
+      "(a) 110 V",
+      "(b) 440 V",
+      "(c) 50 V",
+      "(d) 220 V"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q129. घरेलू विद्युत उपकरणों की आवृत्ति कितनी है?",
+    q_en: "Q129. What frequency is given for domestic AC supply?",
+    tag: "",
+    o_hi: [
+      "(a) 25 Hz",
+      "(b) 50 Hz",
+      "(c) 60 Hz",
+      "(d) 100 Hz"
+    ],
+    o_en: [
+      "(a) 25 Hz",
+      "(b) 50 Hz",
+      "(c) 60 Hz",
+      "(d) 100 Hz"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q130. तीन-पिन प्लग में फ्यूज किस तार के साथ जोड़ा जाता है?",
+    q_en: "Q130. In a three-pin plug, the fuse is connected with which wire?",
+    tag: "",
+    o_hi: [
+      "(a) अर्थ तार",
+      "(b) न्यूट्रल और अर्थ दोनों",
+      "(c) लाइव तार",
+      "(d) न्यूट्रल तार"
+    ],
+    o_en: [
+      "(a) Earth wire",
+      "(b) Both neutral and earth",
+      "(c) Live wire",
+      "(d) Neutral wire"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q131. भूसंपर्क तार को मोटा क्यों बनाया जाता है?",
+    q_en: "Q131. Why is the earthing wire made thick?",
+    tag: "",
+    o_hi: [
+      "(a) कम प्रतिरोध के साथ उच्च धारा वहन करने के लिए",
+      "(b) उच्च प्रतिरोध के साथ कम धारा वहन करने के लिए",
+      "(c) वोल्टेज उत्पन्न करने के लिए",
+      "(d) फ्यूज की तरह पिघलने के लिए"
+    ],
+    o_en: [
+      "(a) To carry high current with low resistance",
+      "(b) To carry low current with high resistance",
+      "(c) To generate voltage",
+      "(d) To melt like a fuse"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q132. व्हीटस्टोन ब्रिज में कितने प्रतिरोधक प्रयुक्त होते हैं?",
+    q_en: "Q132. How many resistors are used in a Wheatstone bridge?",
+    tag: "",
+    o_hi: [
+      "(a) चार",
+      "(b) दो",
+      "(c) छह",
+      "(d) तीन"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Two",
+      "(c) Six",
+      "(d) Three"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q133. व्हीटस्टोन ब्रिज का प्रमुख उपयोग क्या है?",
+    q_en: "Q133. What is the main use of a Wheatstone bridge?",
+    tag: "",
+    o_hi: [
+      "(a) अज्ञात धारा को सीधे बिना मीटर के सटीक रूप से मापना",
+      "(b) ज्ञात प्रतिरोधों से विद्युत शक्ति को सटीक रूप से मापना",
+      "(c) अज्ञात प्रतिरोध को सटीक रूप से मापना",
+      "(d) बैटरी के अज्ञात विद्युत वाहक बल को प्रतिरोध से स्वतंत्र रूप से मापना"
+    ],
+    o_en: [
+      "(a) Accurately measure unknown current directly without a meter",
+      "(b) Accurately measure electric power using known resistors",
+      "(c) Accurately measuring an unknown resistance",
+      "(d) Measure unknown battery emf independently of resistance"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q134. व्हीटस्टोन ब्रिज किस सिद्धांत पर दो भुजाओं को संतुलित करता है?",
+    q_en: "Q134. What does a Wheatstone bridge balance between its two arms?",
+    tag: "",
+    o_hi: [
+      "(a) वोल्टेज का गुणनफल",
+      "(b) प्रतिरोधों का अनुपात",
+      "(c) धाराओं का योग",
+      "(d) शक्तियों का अंतर"
+    ],
+    o_en: [
+      "(a) Product of voltages",
+      "(b) Ratio of resistances",
+      "(c) Sum of currents",
+      "(d) Difference of powers"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q135. संतुलित व्हीटस्टोन ब्रिज का सही संबंध कौन-सा है?",
+    q_en: "Q135. Which is the correct relation for a balanced Wheatstone bridge?",
+    tag: "",
+    o_hi: [
+      "(a) PR = Q + S",
+      "(b) P/R = Q/S",
+      "(c) P + R = Q/S",
+      "(d) P/Q = R + S"
+    ],
+    o_en: [
+      "(a) PR = Q + S",
+      "(b) P/R = Q/S",
+      "(c) P + R = Q/S",
+      "(d) P/Q = R + S"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q136. 1200 W टोस्टर की शक्ति किलोवाट में कितनी होती है?",
+    q_en: "Q136. What is the power of a 1200 W toaster in kilowatts?",
+    tag: "",
+    o_hi: [
+      "(a) 0.12 kW",
+      "(b) 12 kW",
+      "(c) 120 kW",
+      "(d) 1.2 kW"
+    ],
+    o_en: [
+      "(a) 0.12 kW",
+      "(b) 12 kW",
+      "(c) 120 kW",
+      "(d) 1.2 kW"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q137. 30 मिनट कितने घंटे के बराबर होते हैं?",
+    q_en: "Q137. 30 minutes is equal to how many hours?",
+    tag: "",
+    o_hi: [
+      "(a) 2 घंटे",
+      "(b) 0.25 घंटा",
+      "(c) 0.5 घंटा",
+      "(d) 1 घंटा"
+    ],
+    o_en: [
+      "(a) 2 hours",
+      "(b) 0.25 hour",
+      "(c) 0.5 hour",
+      "(d) 1 hour"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q138. 1.2 kW टोस्टर को 0.5 घंटे चलाने पर दैनिक ऊर्जा खपत कितनी होगी?",
+    q_en: "Q138. How much daily energy is consumed by a 1.2 kW toaster used for 0.5 hour?",
+    tag: "",
+    o_hi: [
+      "(a) 0.6 kWh",
+      "(b) 1.2 kWh",
+      "(c) 2.4 kWh",
+      "(d) 0.5 kWh"
+    ],
+    o_en: [
+      "(a) 0.6 kWh",
+      "(b) 1.2 kWh",
+      "(c) 2.4 kWh",
+      "(d) 0.5 kWh"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q139. यदि टोस्टर प्रतिदिन 0.6 kWh ऊर्जा 30 दिन उपयोग करे, तो मासिक ऊर्जा खपत कितनी होगी?",
+    q_en: "Q139. If a toaster uses 0.6 kWh daily for 30 days, what is the monthly energy consumption?",
+    tag: "",
+    o_hi: [
+      "(a) 24 kWh",
+      "(b) 12 kWh",
+      "(c) 30 kWh",
+      "(d) 18 kWh"
+    ],
+    o_en: [
+      "(a) 24 kWh",
+      "(b) 12 kWh",
+      "(c) 30 kWh",
+      "(d) 18 kWh"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q140. यदि 1 यूनिट बिजली की कीमत ₹4 हो और मासिक खपत 18 यूनिट हो, तो कुल लागत कितनी होगी?",
+    q_en: "Q140. If electricity costs ₹4 per unit and monthly consumption is 18 units, what is the total cost?",
+    tag: "",
+    o_hi: [
+      "(a) ₹18",
+      "(b) ₹36",
+      "(c) ₹72",
+      "(d) ₹90"
+    ],
+    o_en: [
+      "(a) ₹18",
+      "(b) ₹36",
+      "(c) ₹72",
+      "(d) ₹90"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q141. किरचॉफ का धारा नियम किस बिंदु पर लागू किया जाता है?",
+    q_en: "Q141. Kirchhoff's current law is applied at what point?",
+    tag: "",
+    o_hi: [
+      "(a) नोड/जंक्शन",
+      "(b) खुले स्विच के बाहर",
+      "(c) बैटरी के अंदर",
+      "(d) प्रतिरोधक के मध्य"
+    ],
+    o_en: [
+      "(a) Node/junction",
+      "(b) Outside an open switch",
+      "(c) Inside a battery",
+      "(d) Middle of a resistor"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q142. किरचॉफ के धारा नियम में नोड पर कुल प्रवेश धारा कुल निकास धारा के बराबर होती है; इसका गणितीय रूप क्या है?",
+    q_en: "Q142. Kirchhoff's current law states that total current entering a node equals total current leaving it; what is its mathematical form?",
+    tag: "",
+    o_hi: [
+      "(a) ΣIᵢₙ = ΣIₒᵤₜ",
+      "(b) ΣVₗₒₒₚ = 0",
+      "(c) ΣPᵢₙ = ΣPₒᵤₜ",
+      "(d) ΣRₛₑᵣᵢₑₛ = ΣRₚₐᵣₐₗₗₑₗ"
+    ],
+    o_en: [
+      "(a) ΣIin = ΣIout",
+      "(b) ΣVloop = 0",
+      "(c) ΣPin = ΣPout",
+      "(d) ΣRseries = ΣRparallel"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q143. किसी जंक्शन पर I₁ और I₅ अंदर तथा I₂, I₃, I₄ बाहर हों तो सही संबंध क्या होगा?",
+    q_en: "Q143. At a junction, if I₁ and I₅ enter while I₂, I₃ and I₄ leave, what is the correct relation?",
+    tag: "",
+    o_hi: [
+      "(a) I₁ + I₅ + I₂ + I₃ + I₄ = 0",
+      "(b) I₁ + I₂ = I₃ + I₄ + I₅",
+      "(c) I₁ = I₂ + I₃ + I₄ + I₅",
+      "(d) I₁ + I₅ = I₂ + I₃ + I₄"
+    ],
+    o_en: [
+      "(a) I₁ + I₅ + I₂ + I₃ + I₄ = 0",
+      "(b) I₁ + I₂ = I₃ + I₄ + I₅",
+      "(c) I₁ = I₂ + I₃ + I₄ + I₅",
+      "(d) I₁ + I₅ = I₂ + I₃ + I₄"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q144. यदि किसी नोड में 10 A धारा प्रवेश करे और 5 A व 3 A की दो धाराएँ बाहर निकलें, तो तीसरी बाहर जाने वाली धारा कितनी होगी?",
+    q_en: "Q144. If 10 A enters a node and two outgoing currents are 5 A and 3 A, what is the third outgoing current?",
+    tag: "",
+    o_hi: [
+      "(a) 3 A",
+      "(b) 2 A",
+      "(c) 1 A",
+      "(d) 8 A"
+    ],
+    o_en: [
+      "(a) 3 A",
+      "(b) 2 A",
+      "(c) 1 A",
+      "(d) 8 A"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q145. किरचॉफ का वोल्टेज नियम किस प्रकार के पथ पर लागू होता है?",
+    q_en: "Q145. Kirchhoff's voltage law is applied to what type of path?",
+    tag: "",
+    o_hi: [
+      "(a) तार का मुक्त सिरा",
+      "(b) एकल नोड",
+      "(c) खुला परिपथ",
+      "(d) बंद लूप"
+    ],
+    o_en: [
+      "(a) Free end of a wire",
+      "(b) Single node",
+      "(c) Open circuit",
+      "(d) Closed loop"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q146. किरचॉफ के वोल्टेज नियम में बंद लूप के चारों ओर सभी वोल्टेज (emf और वोल्टेज की कमी) का योग शून्य होता है; इसका गणितीय रूप क्या है?",
+    q_en: "Q146. Kirchhoff's voltage law states that the algebraic sum of all emfs and voltage drops in a closed loop is zero; what is its mathematical form?",
+    tag: "",
+    o_hi: [
+      "(a) ΣR = 1",
+      "(b) ΣIᵢₙ = ΣIₒᵤₜ",
+      "(c) ΣV = 0",
+      "(d) P = VI"
+    ],
+    o_en: [
+      "(a) ΣR = 1",
+      "(b) ΣIin = ΣIout",
+      "(c) ΣV = 0",
+      "(d) P = VI"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
