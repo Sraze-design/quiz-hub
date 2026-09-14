@@ -1,0 +1,742 @@
+const data = [
+  {
+    q_hi: "Q251. मैलार्ड अभिक्रिया से भोजन में क्या परिवर्तन होता है?",
+    q_en: "Q251. What change does the Maillard reaction cause in food?",
+    tag: "",
+    o_hi: [
+      "(a) भोजन पूर्णतः रंगहीन हो जाता है",
+      "(b) भोजन का जल तुरंत जम जाता है",
+      "(c) भोजन धातु में बदल जाता है",
+      "(d) भूरापन और स्वादिष्ट स्वाद उत्पन्न होता है"
+    ],
+    o_en: [
+      "(a) Food becomes completely colourless",
+      "(b) Water in food freezes immediately",
+      "(c) Food turns into metal",
+      "(d) It produces browning and a savoury flavour"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q252. मैलार्ड अभिक्रिया में गर्मी के कारण कौन-से पदार्थ आपस में अभिक्रिया करते हैं?",
+    q_en: "Q252. Which substances react due to heat in the Maillard reaction?",
+    tag: "",
+    o_hi: [
+      "(a) नाइट्रोजन और हीलियम",
+      "(b) लवण और क्षार",
+      "(c) धातु और अम्ल",
+      "(d) शर्करा और प्रोटीन"
+    ],
+    o_en: [
+      "(a) Nitrogen and helium",
+      "(b) Salts and bases",
+      "(c) Metals and acids",
+      "(d) Sugars and proteins"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q253. ग्रिग्नार्ड अभिक्रिया किस प्रकार की अभिक्रिया है?",
+    q_en: "Q253. What type of reaction is the Grignard reaction?",
+    tag: "",
+    o_hi: [
+      "(a) योगात्मक अभिक्रिया",
+      "(b) उदासीनीकरण अभिक्रिया",
+      "(c) विस्थापन अभिक्रिया",
+      "(d) दहन अभिक्रिया"
+    ],
+    o_en: [
+      "(a) Addition reaction",
+      "(b) Neutralization reaction",
+      "(c) Displacement reaction",
+      "(d) Combustion reaction"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q254. ग्रिग्नार्ड अभिकर्मक की सामान्य संरचना क्या है?",
+    q_en: "Q254. What is the general formula of a Grignard reagent?",
+    tag: "",
+    o_hi: [
+      "(a) R-NH₂",
+      "(b) R-COOH",
+      "(c) R-O-R",
+      "(d) R-Mg-X"
+    ],
+    o_en: [
+      "(a) R-NH₂",
+      "(b) R-COOH",
+      "(c) R-O-R",
+      "(d) R-Mg-X"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q255. ग्रिग्नार्ड अभिकर्मक में R क्या दर्शाता है?",
+    q_en: "Q255. What does R represent in a Grignard reagent?",
+    tag: "",
+    o_hi: [
+      "(a) एल्काइल या एरिल समूह",
+      "(b) सोडियम आयन",
+      "(c) हैलाइड आयन",
+      "(d) ऑक्सीजन परमाणु"
+    ],
+    o_en: [
+      "(a) An alkyl or aryl group",
+      "(b) A sodium ion",
+      "(c) A halide ion",
+      "(d) An oxygen atom"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q256. ग्रिग्नार्ड अभिकर्मक में X क्या दर्शाता है?",
+    q_en: "Q256. What does X represent in a Grignard reagent?",
+    tag: "",
+    o_hi: [
+      "(a) कार्बोक्सिल समूह",
+      "(b) एल्काइल समूह",
+      "(c) हैलाइड",
+      "(d) हाइड्रॉक्सिल समूह"
+    ],
+    o_en: [
+      "(a) A carboxyl group",
+      "(b) An alkyl group",
+      "(c) A halide",
+      "(d) A hydroxyl group"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q257. ग्रिग्नार्ड अभिकर्मक की कीटोन के साथ अभिक्रिया से सामान्यतः किस प्रकार का अल्कोहल बनता है?",
+    q_en: "Q257. What type of alcohol is generally formed when a Grignard reagent reacts with a ketone?",
+    tag: "",
+    o_hi: [
+      "(a) फिनॉल",
+      "(b) प्राथमिक अल्कोहल",
+      "(c) तृतीयक अल्कोहल",
+      "(d) द्वितीयक अल्कोहल"
+    ],
+    o_en: [
+      "(a) Phenol",
+      "(b) Primary alcohol",
+      "(c) Tertiary alcohol",
+      "(d) Secondary alcohol"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q258. ग्रिग्नार्ड अभिकर्मक की एल्डिहाइड के साथ अभिक्रिया से सामान्यतः किस प्रकार का अल्कोहल बनता है?",
+    q_en: "Q258. What type of alcohol is generally formed when a Grignard reagent reacts with an aldehyde?",
+    tag: "",
+    o_hi: [
+      "(a) तृतीयक अल्कोहल",
+      "(b) द्वितीयक अल्कोहल",
+      "(c) ईथर",
+      "(d) प्राथमिक अल्कोहल"
+    ],
+    o_en: [
+      "(a) Tertiary alcohol",
+      "(b) Secondary alcohol",
+      "(c) Ether",
+      "(d) Primary alcohol"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q259. ग्रिग्नार्ड अभिकर्मक की फॉर्मेल्डिहाइड के साथ अभिक्रिया से किस प्रकार का अल्कोहल बनता है?",
+    q_en: "Q259. What type of alcohol is formed when a Grignard reagent reacts with formaldehyde?",
+    tag: "",
+    o_hi: [
+      "(a) प्राथमिक अल्कोहल",
+      "(b) एस्टर",
+      "(c) तृतीयक अल्कोहल",
+      "(d) द्वितीयक अल्कोहल"
+    ],
+    o_en: [
+      "(a) Primary alcohol",
+      "(b) Ester",
+      "(c) Tertiary alcohol",
+      "(d) Secondary alcohol"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q260. सैंडमेयर अभिक्रिया में कौन-सा उत्प्रेरक प्रयुक्त होता है?",
+    q_en: "Q260. Which catalyst is used in the Sandmeyer reaction?",
+    tag: "",
+    o_hi: [
+      "(a) पोटैशियम परमैंगनेट",
+      "(b) कॉपर(I) हैलाइड",
+      "(c) सोडियम हाइड्रॉक्साइड",
+      "(d) निकेल ऑक्साइड"
+    ],
+    o_en: [
+      "(a) Potassium permanganate",
+      "(b) Copper(I) halide",
+      "(c) Sodium hydroxide",
+      "(d) Nickel oxide"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q261. सैंडमेयर अभिक्रिया में एरिल डायजोनियम लवण किसमें परिवर्तित होता है?",
+    q_en: "Q261. In the Sandmeyer reaction, an aryl diazonium salt is converted into what?",
+    tag: "",
+    o_hi: [
+      "(a) एस्टर",
+      "(b) एरिल हैलाइड",
+      "(c) अल्कोहल",
+      "(d) एल्केन"
+    ],
+    o_en: [
+      "(a) Ester",
+      "(b) Aryl halide",
+      "(c) Alcohol",
+      "(d) Alkane"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q262. साबुन बनाने की अभिक्रिया क्या कहलाती है?",
+    q_en: "Q262. What is the reaction used to make soap called?",
+    tag: "",
+    o_hi: [
+      "(a) बहुलकीकरण",
+      "(b) हाइड्रोजनीकरण",
+      "(c) साबुनीकरण",
+      "(d) एस्टरीकरण"
+    ],
+    o_en: [
+      "(a) Polymerization",
+      "(b) Hydrogenation",
+      "(c) Saponification",
+      "(d) Esterification"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q263. साबुनीकरण में एस्टर की अभिक्रिया किस क्षार से कराई जाती है?",
+    q_en: "Q263. Which base is used to react with an ester in saponification?",
+    tag: "",
+    o_hi: [
+      "(a) सोडियम क्लोराइड",
+      "(b) सोडियम हाइड्रॉक्साइड",
+      "(c) कैल्शियम कार्बोनेट",
+      "(d) हाइड्रोक्लोरिक अम्ल"
+    ],
+    o_en: [
+      "(a) Sodium chloride",
+      "(b) Sodium hydroxide",
+      "(c) Calcium carbonate",
+      "(d) Hydrochloric acid"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q264. साबुनीकरण में एस्टर टूटकर किन उत्पादों में बदलता है?",
+    q_en: "Q264. Into which products does an ester break down during saponification?",
+    tag: "",
+    o_hi: [
+      "(a) अल्कोहल और कार्बोक्सिलिक अम्ल का सोडियम लवण",
+      "(b) एल्केन और कार्बोक्सिलिक अम्ल का कैल्शियम लवण",
+      "(c) अल्कीन और सल्फोनिक अम्ल का पोटैशियम लवण",
+      "(d) एल्काइन और खनिज अम्ल का अमोनियम लवण"
+    ],
+    o_en: [
+      "(a) An alcohol and the sodium salt of a carboxylic acid",
+      "(b) An alkane and the calcium salt of a carboxylic acid",
+      "(c) An alkene and the potassium salt of a sulfonic acid",
+      "(d) An alkyne and the ammonium salt of a mineral acid"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q265. साबुनीकरण की सही पूर्ण अभिक्रिया कौन-सी है?",
+    q_en: "Q265. Which complete saponification reaction is given?",
+    tag: "",
+    o_hi: [
+      "(a) CH₃COOC₂H₅ + NaOH → C₂H₄ + NaCl",
+      "(b) CH₃COOC₂H₅ + NaOH → CH₄ + Na₂CO₃",
+      "(c) CH₃COOC₂H₅ + NaOH → CH₃COONa + C₂H₅OH",
+      "(d) CH₃COOC₂H₅ + NaOH → CH₃COOH + C₂H₆"
+    ],
+    o_en: [
+      "(a) CH₃COOC₂H₅ + NaOH → C₂H₄ + NaCl",
+      "(b) CH₃COOC₂H₅ + NaOH → CH₄ + Na₂CO₃",
+      "(c) CH₃COOC₂H₅ + NaOH → CH₃COONa + C₂H₅OH",
+      "(d) CH₃COOC₂H₅ + NaOH → CH₃COOH + C₂H₆"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q266. लंबी शृंखला वाले कार्बोक्सिलिक या वसा अम्ल का सोडियम अथवा पोटैशियम लवण क्या कहलाता है?",
+    q_en: "Q266. What is a sodium or potassium salt of a long-chain carboxylic or fatty acid called?",
+    tag: "",
+    o_hi: [
+      "(a) एस्टर",
+      "(b) अपमार्जक",
+      "(c) अल्कोहल",
+      "(d) साबुन"
+    ],
+    o_en: [
+      "(a) Ester",
+      "(b) Detergent",
+      "(c) Alcohol",
+      "(d) Soap"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q267. साबुन के अणु का कौन-सा सिरा जल की ओर आकर्षित होता है?",
+    q_en: "Q267. Which end of a soap molecule is attracted toward water?",
+    tag: "",
+    o_hi: [
+      "(a) धात्विक सिरा",
+      "(b) ध्रुवीय जलरागी सिरा",
+      "(c) अध्रुवीय जलविरोधी सिरा",
+      "(d) कार्बन नाभिक"
+    ],
+    o_en: [
+      "(a) Metallic end",
+      "(b) Polar hydrophilic end",
+      "(c) Non-polar hydrophobic end",
+      "(d) Carbon nucleus"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q268. साबुन के अणु का कौन-सा सिरा गंदगी या तेल की ओर आकर्षित होता है?",
+    q_en: "Q268. Which end of a soap molecule is attracted toward dirt or oil?",
+    tag: "",
+    o_hi: [
+      "(a) आयनिक नाभिक",
+      "(b) ध्रुवीय जलरागी सिरा",
+      "(c) अध्रुवीय जलविरोधी सिरा",
+      "(d) ऑक्सीजन नाभिक"
+    ],
+    o_en: [
+      "(a) Ionic nucleus",
+      "(b) Polar hydrophilic end",
+      "(c) Non-polar hydrophobic end",
+      "(d) Oxygen nucleus"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q269. साबुन की सफाई क्रिया किस संरचना के निर्माण के कारण होती है?",
+    q_en: "Q269. Soap cleans because of the formation of what structure?",
+    tag: "",
+    o_hi: [
+      "(a) परमाणु नाभिक",
+      "(b) क्रिस्टल जाल",
+      "(c) धात्विक जाल",
+      "(d) मिसेल"
+    ],
+    o_en: [
+      "(a) Atomic nucleus",
+      "(b) Crystal lattice",
+      "(c) Metallic lattice",
+      "(d) Micelles"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q270. साबुन किस रूप में प्राप्त होता है?",
+    q_en: "Q270. In what form is soap obtained?",
+    tag: "",
+    o_hi: [
+      "(a) शुद्ध गैस के रूप में",
+      "(b) धातु के रूप में",
+      "(c) कोलॉइडी रूप में",
+      "(d) एकल परमाणु रूप में"
+    ],
+    o_en: [
+      "(a) As a pure gas",
+      "(b) As a metal",
+      "(c) In colloidal form",
+      "(d) As a monatomic form"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q271. साबुन को विलयन से अवक्षेपित करने के लिए क्या मिलाया जाता है?",
+    q_en: "Q271. What is added to precipitate soap from the solution?",
+    tag: "",
+    o_hi: [
+      "(a) NaCl",
+      "(b) KMnO₄",
+      "(c) H₂SO₄",
+      "(d) HCl"
+    ],
+    o_en: [
+      "(a) NaCl",
+      "(b) KMnO₄",
+      "(c) H₂SO₄",
+      "(d) HCl"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q272. साबुन हटाने के बाद बचे विलयन से कौन-सा पदार्थ प्राप्त किया जाता है?",
+    q_en: "Q272. Which substance is recovered from the solution left after removing soap?",
+    tag: "",
+    o_hi: [
+      "(a) ग्लिसरॉल",
+      "(b) बेंजीन",
+      "(c) मीथेन",
+      "(d) क्लोरीन"
+    ],
+    o_en: [
+      "(a) Glycerol",
+      "(b) Benzene",
+      "(c) Methane",
+      "(d) Chlorine"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q273. ग्लिसरॉल को पुनः प्राप्त करने के लिए कौन-सी विधि अपनाई जाती है?",
+    q_en: "Q273. Which method is given for recovering glycerol?",
+    tag: "",
+    o_hi: [
+      "(a) भर्जन",
+      "(b) प्रभाजी आसवन",
+      "(c) उर्ध्वपातन",
+      "(d) छानना"
+    ],
+    o_en: [
+      "(a) Roasting",
+      "(b) Fractional distillation",
+      "(c) Sublimation",
+      "(d) Filtration"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q274. साबुन कठोर जल में प्रभावी क्यों नहीं रहता?",
+    q_en: "Q274. Why is soap ineffective in hard water?",
+    tag: "",
+    o_hi: [
+      "(a) यह जल को गैस में बदल देता है",
+      "(b) यह कैल्शियम और मैग्नीशियम के अघुलनशील लवण बनाता है",
+      "(c) यह NaCl को धातु बना देता है",
+      "(d) यह सभी खनिज घोल देता है"
+    ],
+    o_en: [
+      "(a) It converts water into gas",
+      "(b) It forms insoluble calcium and magnesium salts",
+      "(c) It converts NaCl into metal",
+      "(d) It dissolves all minerals"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q275. कठोर जल में साबुन से बनने वाले अघुलनशील पदार्थ को क्या कहा जाता है?",
+    q_en: "Q275. What is the insoluble material formed by soap in hard water called?",
+    tag: "",
+    o_hi: [
+      "(a) एल्केन",
+      "(b) अल्कोहल",
+      "(c) झाग या स्कम",
+      "(d) एस्टर"
+    ],
+    o_en: [
+      "(a) Alkane",
+      "(b) Alcohol",
+      "(c) Scum",
+      "(d) Ester"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q276. अम्लीय स्थिति में साबुन काम क्यों नहीं करता?",
+    q_en: "Q276. Why does soap not work in acidic conditions?",
+    tag: "",
+    o_hi: [
+      "(a) यह अघुलनशील लंबी शृंखला वाला वसा अम्ल बनाता है",
+      "(b) यह ग्रेफाइट में बदल जाता है",
+      "(c) यह अत्यधिक घुलनशील लवण बनाता है",
+      "(d) यह ऑक्सीजन गैस बनाता है"
+    ],
+    o_en: [
+      "(a) It forms an insoluble long-chain fatty acid",
+      "(b) It turns into graphite",
+      "(c) It forms a highly soluble salt",
+      "(d) It forms oxygen gas"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q277. साबुन की सफाई क्रिया में मिसेल जल में फैले क्यों रहते हैं?",
+    q_en: "Q277. Why do soap micelles remain dispersed in water during cleaning?",
+    tag: "",
+    o_hi: [
+      "(a) गुरुत्वाकर्षण उन्हें जल की सतह से बाहर खींचकर सुखा देता है",
+      "(b) आयन-आयन आकर्षण उन्हें बड़े ठोस क्रिस्टल बनाने पर मजबूर करता है",
+      "(c) वे जल से अभिक्रिया करके धात्विक कणों में बदल जाते हैं",
+      "(d) आयन-आयन प्रतिकर्षण उन्हें एकत्र होकर अवक्षेपित होने से रोकता है"
+    ],
+    o_en: [
+      "(a) Gravity pulls them out of water and dries them",
+      "(b) Ion-ion attraction forces them to form large solid crystals",
+      "(c) They react with water and turn into metallic particles",
+      "(d) Ion-ion repulsion prevents them from aggregating and precipitating"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q278. साबुन के मिसेल किस प्रकाशीय प्रभाव को दिखाते हैं?",
+    q_en: "Q278. Which optical effect is shown by soap micelles?",
+    tag: "",
+    o_hi: [
+      "(a) प्रकाश-विद्युत प्रभाव",
+      "(b) डॉप्लर प्रभाव",
+      "(c) टिंडल प्रभाव",
+      "(d) जूल प्रभाव"
+    ],
+    o_en: [
+      "(a) Photoelectric effect",
+      "(b) Doppler effect",
+      "(c) Tyndall effect",
+      "(d) Joule effect"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q279. साबुन का घोल धुँधला क्यों दिखाई देता है?",
+    q_en: "Q279. Why does a soap solution appear cloudy?",
+    tag: "",
+    o_hi: [
+      "(a) जल का रंग स्थायी रूप से बदल जाता है",
+      "(b) मिसेल टिंडल प्रभाव दिखाते हैं",
+      "(c) साबुन धातु बन जाता है",
+      "(d) साबुन पूर्णतः वाष्पित हो जाता है"
+    ],
+    o_en: [
+      "(a) Water colour changes permanently",
+      "(b) Micelles show the Tyndall effect",
+      "(c) Soap becomes a metal",
+      "(d) Soap completely evaporates"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q280. सल्फोनिक अम्लों के सोडियम लवण अथवा क्लोराइड/ब्रोमाइड आयनों वाले अमोनियम लवण क्या कहलाते हैं?",
+    q_en: "Q280. What are sodium salts of sulfonic acids or ammonium salts with chloride/bromide ions called?",
+    tag: "",
+    o_hi: [
+      "(a) अल्कोहल",
+      "(b) अपमार्जक",
+      "(c) एस्टर",
+      "(d) साबुन"
+    ],
+    o_en: [
+      "(a) Alcohols",
+      "(b) Detergents",
+      "(c) Esters",
+      "(d) Soaps"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q281. अपमार्जकों की जल के प्रति कार्यक्षमता के बारे में सही कथन कौन-सा है?",
+    q_en: "Q281. Which statement about detergent performance in water is correct?",
+    tag: "",
+    o_hi: [
+      "(a) वे मृदु जल में काम करते हैं, कठोर जल में नहीं",
+      "(b) वे कठोर और मृदु दोनों जल में काम करते हैं",
+      "(c) वे कठोर जल में काम करते हैं, मृदु जल में नहीं",
+      "(d) वे आसुत जल में काम करते हैं, अन्य जल में नहीं"
+    ],
+    o_en: [
+      "(a) They work in soft water but not hard water",
+      "(b) They work in both hard and soft water",
+      "(c) They work in hard water but not soft water",
+      "(d) They work in distilled water but not other water"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q282. साबुन की तुलना में अपमार्जक जल में कैसे घुलते हैं?",
+    q_en: "Q282. Compared with soap, how do detergents dissolve in water?",
+    tag: "",
+    o_hi: [
+      "(a) बिल्कुल नहीं",
+      "(b) अधिक धीमे",
+      "(c) अधिक तेजी से",
+      "(d) समान रूप से पर गर्म जल में"
+    ],
+    o_en: [
+      "(a) Not at all",
+      "(b) More slowly",
+      "(c) More rapidly",
+      "(d) At the same rate but in hot water"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q283. सोडियम बेंजोएट का उपयोग किस रूप में किया जाता है?",
+    q_en: "Q283. How is sodium benzoate used?",
+    tag: "",
+    o_hi: [
+      "(a) धातु के रूप में",
+      "(b) ईंधन के रूप में",
+      "(c) उत्प्रेरक के रूप में",
+      "(d) परिरक्षक के रूप में"
+    ],
+    o_en: [
+      "(a) As a metal",
+      "(b) As a fuel",
+      "(c) As a catalyst",
+      "(d) As a preservative"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q284. सोडियम बेंजोएट के उपयोगों का सही समूह कौन-सा है?",
+    q_en: "Q284. Which is the correct group of uses of sodium benzoate?",
+    tag: "",
+    o_hi: [
+      "(a) परमाणु ईंधन, ग्रेफाइट और भारी जल",
+      "(b) लोहा, इस्पात और ताँबा गलाना",
+      "(c) सीमेंट, ईंट और कंक्रीट",
+      "(d) खाद्य पदार्थ, दवाएँ और सौंदर्य प्रसाधन"
+    ],
+    o_en: [
+      "(a) Nuclear fuel, graphite and heavy water",
+      "(b) Smelting iron, steel and copper",
+      "(c) Cement, bricks and concrete",
+      "(d) Foods, medicines and cosmetics"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q285. 1828 में अमोनियम साइनेट से यूरिया का संश्लेषण करने वाले वैज्ञानिक कौन थे?",
+    q_en: "Q285. Which scientist synthesized urea from ammonium cyanate in 1828?",
+    tag: "",
+    o_hi: [
+      "(a) हेनरी मोसले",
+      "(b) दिमित्री मेंडलीव",
+      "(c) फ्रेडरिक वोहलर",
+      "(d) हरमन कोल्बे"
+    ],
+    o_en: [
+      "(a) Henry Moseley",
+      "(b) Dmitri Mendeleev",
+      "(c) Friedrich Wohler",
+      "(d) Hermann Kolbe"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q286. वोहलर ने किस अकार्बनिक यौगिक से यूरिया का संश्लेषण किया?",
+    q_en: "Q286. From which inorganic compound did Wohler synthesize urea?",
+    tag: "",
+    o_hi: [
+      "(a) सोडियम क्लोराइड, NaCl",
+      "(b) पोटैशियम नाइट्रेट, KNO₃",
+      "(c) अमोनियम साइनेट, NH₄CNO",
+      "(d) कैल्शियम कार्बोनेट, CaCO₃"
+    ],
+    o_en: [
+      "(a) Sodium chloride, NaCl",
+      "(b) Potassium nitrate, KNO₃",
+      "(c) Ammonium cyanate, NH₄CNO",
+      "(d) Calcium carbonate, CaCO₃"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q287. वोहलर द्वारा संश्लेषित कार्बनिक यौगिक कौन-सा था?",
+    q_en: "Q287. Which organic compound was synthesized by Wohler?",
+    tag: "",
+    o_hi: [
+      "(a) यूरिया, NH₂CONH₂",
+      "(b) एसीटिक अम्ल, CH₃COOH",
+      "(c) मीथेन, CH₄",
+      "(d) एथेनॉल, C₂H₅OH"
+    ],
+    o_en: [
+      "(a) Urea, NH₂CONH₂",
+      "(b) Acetic acid, CH₃COOH",
+      "(c) Methane, CH₄",
+      "(d) Ethanol, C₂H₅OH"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];
