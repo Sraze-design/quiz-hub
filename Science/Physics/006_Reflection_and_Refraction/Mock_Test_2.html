@@ -1,0 +1,502 @@
+const data = [
+  {
+    q_hi: "Q51. अवतल दर्पण में वस्तु अनंत पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q51. For a concave mirror, where is the image formed when the object is at infinity?",
+    tag: "",
+    o_hi: ["(a) दर्पण के पीछे", "(b) वक्रता केंद्र C पर", "(c) ध्रुव P पर", "(d) फोकस F पर"],
+    o_en: ["(a) Behind the mirror", "(b) At centre of curvature C", "(c) At pole P", "(d) At focus F"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q52. अवतल दर्पण में वस्तु अनंत पर हो तो प्रतिबिंब की प्रकृति क्या होती है?",
+    q_en: "Q52. For a concave mirror with object at infinity, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) वास्तविक और सीधा", "(b) आभासी और सीधा", "(c) वास्तविक और उल्टा", "(d) आभासी और उल्टा"],
+    o_en: ["(a) Real and erect", "(b) Virtual and erect", "(c) Real and inverted", "(d) Virtual and inverted"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q53. अवतल दर्पण में वस्तु अनंत पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q53. For a concave mirror with object at infinity, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक बड़ा", "(b) लगभग समान आकार", "(c) अत्यधिक छोटा", "(d) मध्यम आकार"],
+    o_en: ["(a) Highly enlarged", "(b) Approximately same size", "(c) Highly diminished", "(d) Moderate size"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q54. अवतल दर्पण में वस्तु C से परे हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q54. For a concave mirror, where is the image formed when the object is beyond C?",
+    tag: "",
+    o_hi: ["(a) F और P के बीच", "(b) C से परे", "(c) C और F के बीच", "(d) दर्पण के पीछे"],
+    o_en: ["(a) Between F and P", "(b) Beyond C", "(c) Between C and F", "(d) Behind the mirror"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q55. अवतल दर्पण में वस्तु C से परे हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q55. For a concave mirror with object beyond C, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और सीधा", "(b) वास्तविक और सीधा", "(c) आभासी और उल्टा", "(d) वास्तविक और उल्टा"],
+    o_en: ["(a) Virtual and erect", "(b) Real and erect", "(c) Virtual and inverted", "(d) Real and inverted"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q56. अवतल दर्पण में वस्तु C से परे हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q56. For a concave mirror with object beyond C, how is the image size?",
+    tag: "",
+    o_hi: ["(a) समान आकार", "(b) अत्यधिक बड़ा", "(c) छोटा", "(d) बड़ा"],
+    o_en: ["(a) Same size", "(b) Highly enlarged", "(c) Diminished", "(d) Enlarged"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q57. अवतल दर्पण में वस्तु C पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q57. For a concave mirror, where is the image formed when the object is at C?",
+    tag: "",
+    o_hi: ["(a) F पर", "(b) C पर", "(c) P पर", "(d) दर्पण के पीछे"],
+    o_en: ["(a) At F", "(b) At C", "(c) At P", "(d) Behind the mirror"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q58. अवतल दर्पण में वस्तु C पर हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q58. For a concave mirror with object at C, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और सीधा", "(b) आभासी और उल्टा", "(c) वास्तविक और उल्टा", "(d) वास्तविक और सीधा"],
+    o_en: ["(a) Virtual and erect", "(b) Virtual and inverted", "(c) Real and inverted", "(d) Real and erect"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q59. अवतल दर्पण में वस्तु C पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q59. For a concave mirror with object at C, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक छोटा", "(b) छोटा", "(c) अत्यधिक बड़ा", "(d) समान आकार"],
+    o_en: ["(a) Highly diminished", "(b) Diminished", "(c) Highly enlarged", "(d) Same size"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q60. अवतल दर्पण में वस्तु C और F के बीच हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q60. For a concave mirror, where is the image formed when the object lies between C and F?",
+    tag: "",
+    o_hi: ["(a) F और P के बीच", "(b) दर्पण के पीछे", "(c) C से परे", "(d) F पर"],
+    o_en: ["(a) Between F and P", "(b) Behind the mirror", "(c) Beyond C", "(d) At F"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q61. अवतल दर्पण में वस्तु C और F के बीच हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q61. For a concave mirror with object between C and F, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और उल्टा", "(b) आभासी और सीधा", "(c) वास्तविक और सीधा", "(d) वास्तविक और उल्टा"],
+    o_en: ["(a) Virtual and inverted", "(b) Virtual and erect", "(c) Real and erect", "(d) Real and inverted"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q62. अवतल दर्पण में वस्तु C और F के बीच हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q62. For a concave mirror with object between C and F, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक छोटा", "(b) छोटा", "(c) समान आकार", "(d) बड़ा"],
+    o_en: ["(a) Highly diminished", "(b) Diminished", "(c) Same size", "(d) Enlarged"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q63. अवतल दर्पण में वस्तु F पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q63. For a concave mirror, where is the image formed when the object is at F?",
+    tag: "",
+    o_hi: ["(a) C पर", "(b) दर्पण के पीछे", "(c) P पर", "(d) अनंत पर"],
+    o_en: ["(a) At C", "(b) Behind the mirror", "(c) At P", "(d) At infinity"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q64. अवतल दर्पण में वस्तु F पर हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q64. For a concave mirror with object at F, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और सीधा", "(b) वास्तविक और उल्टा", "(c) वास्तविक और सीधा", "(d) आभासी और उल्टा"],
+    o_en: ["(a) Virtual and erect", "(b) Real and inverted", "(c) Real and erect", "(d) Virtual and inverted"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q65. अवतल दर्पण में वस्तु F पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q65. For a concave mirror with object at F, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक बड़ा", "(b) लगभग समान आकार", "(c) मध्यम आकार", "(d) अत्यधिक बड़ा"],
+    o_en: ["(a) Highly enlarged", "(b) Approximately same size", "(c) Moderate size", "(d) Highly enlarged"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q66. अवतल दर्पण में वस्तु F और P के बीच हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q66. For a concave mirror, where is the image formed when the object lies between F and P?",
+    tag: "",
+    o_hi: ["(a) वक्रता केंद्र C के निकट", "(b) दर्पण के पीछे", "(c) ध्रुव P के सामने", "(d) फोकस F और C के बीच"],
+    o_en: ["(a) Near centre of curvature C", "(b) Behind the mirror", "(c) In front of pole P", "(d) Between focus F and C"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q67. अवतल दर्पण में वस्तु F और P के बीच हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q67. For a concave mirror with object between F and P, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और उल्टा", "(b) वास्तविक और सीधा", "(c) वास्तविक और उल्टा", "(d) आभासी और सीधा"],
+    o_en: ["(a) Virtual and inverted", "(b) Real and erect", "(c) Real and inverted", "(d) Virtual and erect"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q68. अवतल दर्पण में वस्तु F और P के बीच हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q68. For a concave mirror with object between F and P, how is the image size?",
+    tag: "",
+    o_hi: ["(a) समान आकार", "(b) बड़ा", "(c) अत्यधिक छोटा", "(d) छोटा"],
+    o_en: ["(a) Same size", "(b) Enlarged", "(c) Highly diminished", "(d) Diminished"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q69. उत्तल दर्पण में वस्तु अनंत पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q69. For a convex mirror, where is the image formed when the object is at infinity?",
+    tag: "",
+    o_hi: ["(a) ध्रुव P पर, दर्पण के सामने", "(b) अनंत पर, दर्पण के सामने", "(c) वक्रता केंद्र C पर, दर्पण के सामने", "(d) फोकस F पर, दर्पण के पीछे"],
+    o_en: ["(a) At pole P, in front of the mirror", "(b) At infinity, in front of the mirror", "(c) At C, in front of the mirror", "(d) At focus F, behind the mirror"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q70. उत्तल दर्पण में वस्तु अनंत पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q70. For a convex mirror with object at infinity, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक छोटा, बिंदु आकार का", "(b) वस्तु के लगभग समान आकार का", "(c) बहुत बड़ा और फैला हुआ", "(d) मध्यम आकार का प्रतिबिंब"],
+    o_en: ["(a) Highly diminished, point-sized", "(b) Approximately the same size as the object", "(c) Highly enlarged and spread out", "(d) A moderately sized image"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q71. उत्तल दर्पण में वस्तु अनंत और P के बीच हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q71. For a convex mirror, where is the image formed when the object lies between infinity and P?",
+    tag: "",
+    o_hi: ["(a) C और F के बीच, दर्पण के सामने", "(b) P और F के बीच, दर्पण के पीछे", "(c) F से परे, दर्पण के सामने", "(d) C के पास, दर्पण के सामने"],
+    o_en: ["(a) Between C and F, in front of the mirror", "(b) Between P and F, behind the mirror", "(c) Beyond F, in front of the mirror", "(d) Near C, in front of the mirror"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q72. उत्तल दर्पण में वस्तु अनंत और P के बीच हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q72. For a convex mirror with object between infinity and P, how is the image size?",
+    tag: "",
+    o_hi: ["(a) समान आकार", "(b) बड़ा", "(c) अत्यधिक बड़ा", "(d) छोटा"],
+    o_en: ["(a) Same size", "(b) Enlarged", "(c) Highly enlarged", "(d) Diminished"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q73. दर्पणों के संकेत परिपाटी में सभी दूरियाँ कहाँ से मापी जाती हैं?",
+    q_en: "Q73. In the mirror sign convention, from where are all distances measured?",
+    tag: "",
+    o_hi: ["(a) फोकस से", "(b) मुख्य अक्ष के किसी भी बिंदु से", "(c) वक्रता केंद्र से", "(d) दर्पण के ध्रुव से"],
+    o_en: ["(a) From the focus", "(b) From any point on the principal axis", "(c) From the centre of curvature", "(d) From the pole of the mirror"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q74. दर्पण के ध्रुव के दाईं ओर की दूरी को किस चिह्न से लिया जाता है?",
+    q_en: "Q74. What sign is assigned to distances to the right of the pole?",
+    tag: "",
+    o_hi: ["(a) धनात्मक", "(b) शून्य", "(c) ऋणात्मक", "(d) परिवर्ती"],
+    o_en: ["(a) Positive", "(b) Zero", "(c) Negative", "(d) Variable"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q75. दर्पण के ध्रुव के बाईं ओर की दूरी को किस चिह्न से लिया जाता है?",
+    q_en: "Q75. What sign is assigned to distances to the left of the pole?",
+    tag: "",
+    o_hi: ["(a) परिवर्ती", "(b) शून्य", "(c) ऋणात्मक", "(d) धनात्मक"],
+    o_en: ["(a) Variable", "(b) Zero", "(c) Negative", "(d) Positive"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q76. मुख्य अक्ष के ऊपर की दूरी को किस चिह्न से लिया जाता है?",
+    q_en: "Q76. What sign is assigned to distances above the principal axis?",
+    tag: "",
+    o_hi: ["(a) धनात्मक", "(b) ऋणात्मक", "(c) शून्य", "(d) अपरिभाषित"],
+    o_en: ["(a) Positive", "(b) Negative", "(c) Zero", "(d) Undefined"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q77. मुख्य अक्ष के नीचे की दूरी को किस चिह्न से लिया जाता है?",
+    q_en: "Q77. What sign is assigned to distances below the principal axis?",
+    tag: "",
+    o_hi: ["(a) शून्य", "(b) अपरिभाषित", "(c) ऋणात्मक", "(d) धनात्मक"],
+    o_en: ["(a) Zero", "(b) Undefined", "(c) Negative", "(d) Positive"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q78. दर्पणों में वस्तु दूरी u का चिह्न सामान्यतः क्या होता है?",
+    q_en: "Q78. What is the usual sign of object distance u for mirrors?",
+    tag: "",
+    o_hi: ["(a) ऋणात्मक", "(b) शून्य", "(c) परिवर्ती", "(d) धनात्मक"],
+    o_en: ["(a) Negative", "(b) Zero", "(c) Variable", "(d) Positive"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q79. दर्पणों में वस्तु दूरी u को ऋणात्मक क्यों लिया जाता है?",
+    q_en: "Q79. Why is object distance u taken as negative for mirrors?",
+    tag: "",
+    o_hi: ["(a) वस्तु फोकस पर रखी जाती है", "(b) वस्तु दर्पण के सामने रखी जाती है", "(c) वस्तु दर्पण के पीछे रखी जाती है", "(d) वस्तु वक्रता केंद्र पर रखी जाती है"],
+    o_en: ["(a) The object is placed at the focus", "(b) The object is placed in front of the mirror", "(c) The object is placed behind the mirror", "(d) The object is placed at the centre of curvature"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q80. अवतल दर्पण में वास्तविक प्रतिबिंब के लिए v का चिह्न क्या होता है?",
+    q_en: "Q80. For a real image in a concave mirror, what is the sign of v?",
+    tag: "",
+    o_hi: ["(a) शून्य", "(b) धनात्मक", "(c) ऋणात्मक", "(d) परिवर्ती"],
+    o_en: ["(a) Zero", "(b) Positive", "(c) Negative", "(d) Variable"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q81. अवतल दर्पण में आभासी प्रतिबिंब के लिए v का चिह्न क्या होता है?",
+    q_en: "Q81. For a virtual image in a concave mirror, what is the sign of v?",
+    tag: "",
+    o_hi: ["(a) ऋणात्मक", "(b) धनात्मक", "(c) परिवर्ती", "(d) शून्य"],
+    o_en: ["(a) Negative", "(b) Positive", "(c) Variable", "(d) Zero"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q82. उत्तल दर्पण में प्रतिबिंब दूरी v का चिह्न क्या होता है?",
+    q_en: "Q82. What is the sign of image distance v for a convex mirror?",
+    tag: "",
+    o_hi: ["(a) ऋणात्मक", "(b) धनात्मक", "(c) शून्य", "(d) वस्तु की स्थिति पर निर्भर"],
+    o_en: ["(a) Negative", "(b) Positive", "(c) Zero", "(d) Depends on object position"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q83. अवतल दर्पण की फोकस दूरी f का चिह्न क्या होता है?",
+    q_en: "Q83. What is the sign of focal length f for a concave mirror?",
+    tag: "",
+    o_hi: ["(a) धनात्मक", "(b) शून्य", "(c) ऋणात्मक", "(d) परिवर्ती"],
+    o_en: ["(a) Positive", "(b) Zero", "(c) Negative", "(d) Variable"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q84. उत्तल दर्पण की फोकस दूरी f का चिह्न क्या होता है?",
+    q_en: "Q84. What is the sign of focal length f for a convex mirror?",
+    tag: "",
+    o_hi: ["(a) ऋणात्मक", "(b) धनात्मक", "(c) शून्य", "(d) परिवर्ती"],
+    o_en: ["(a) Negative", "(b) Positive", "(c) Zero", "(d) Variable"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q85. गोलाकार दर्पण में वक्रता त्रिज्या R का चिह्न किसके समान होता है?",
+    q_en: "Q85. In a spherical mirror, the sign of radius of curvature R is the same as which quantity?",
+    tag: "",
+    o_hi: ["(a) फोकस दूरी f", "(b) प्रतिबिंब ऊँचाई hᵢ", "(c) वस्तु दूरी u", "(d) आवर्धन M"],
+    o_en: ["(a) Focal length f", "(b) Image height hᵢ", "(c) Object distance u", "(d) Magnification M"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q86. गोलाकार दर्पण की वक्रता त्रिज्या R और फोकस दूरी f का संबंध क्या है?",
+    q_en: "Q86. What is the relation between radius of curvature R and focal length f of a spherical mirror?",
+    tag: "",
+    o_hi: ["(a) R = f/2", "(b) R = f²", "(c) R = 2f", "(d) R = 1/f"],
+    o_en: ["(a) R = f/2", "(b) R = f²", "(c) R = 2f", "(d) R = 1/f"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q87. दर्पण सूत्र कौन-सा है?",
+    q_en: "Q87. Which is the mirror formula?",
+    tag: "",
+    o_hi: ["(a) uv = f", "(b) v + u = f", "(c) 1/v + 1/u = 1/f", "(d) 1/v - 1/u = 1/f"],
+    o_en: ["(a) uv = f", "(b) v + u = f", "(c) 1/v + 1/u = 1/f", "(d) 1/v - 1/u = 1/f"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q88. दर्पण का आवर्धन M किस अनुपात के बराबर है?",
+    q_en: "Q88. Mirror magnification M equals which ratio?",
+    tag: "",
+    o_hi: ["(a) hᵢ/h₀ = -v/u", "(b) hᵢ/h₀ = v/u", "(c) hᵢ/h₀ = u/v", "(d) h₀/hᵢ = -v/u"],
+    o_en: ["(a) hᵢ/h₀ = -v/u", "(b) hᵢ/h₀ = v/u", "(c) hᵢ/h₀ = u/v", "(d) h₀/hᵢ = -v/u"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q89. दर्पण के लिए M = 2 होने का अर्थ क्या है?",
+    q_en: "Q89. What does M = 2 mean for a mirror?",
+    tag: "",
+    o_hi: ["(a) प्रतिबिंब का आकार वस्तु के बराबर है", "(b) प्रतिबिंब का आकार वस्तु से दोगुना है", "(c) प्रतिबिंब का आकार वस्तु का चार गुना है", "(d) प्रतिबिंब का आकार वस्तु का आधा है"],
+    o_en: ["(a) The image is the same size as the object", "(b) The image is twice the size of the object", "(c) The image is four times the size of the object", "(d) The image is half the size of the object"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q90. दर्पण के लिए M = -2 होने का अर्थ क्या है?",
+    q_en: "Q90. What is the meaning of M = -2 for a mirror?",
+    tag: "",
+    o_hi: ["(a) प्रतिबिंब आभासी, सीधा और दोगुना है", "(b) प्रतिबिंब वास्तविक, उल्टा और दोगुना है", "(c) प्रतिबिंब आभासी, उल्टा और आधा है", "(d) प्रतिबिंब वास्तविक, सीधा और आधा है"],
+    o_en: ["(a) The image is virtual, erect and twice the size", "(b) The image is real, inverted and twice the size", "(c) The image is virtual, inverted and half-sized", "(d) The image is real, erect and half-sized"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q91. दर्पण के लिए M = 0.2 होने का अर्थ क्या है?",
+    q_en: "Q91. What does M = 0.2 mean for a mirror?",
+    tag: "",
+    o_hi: ["(a) प्रतिबिंब वस्तु से छोटा है", "(b) प्रतिबिंब अनंत पर है", "(c) प्रतिबिंब वस्तु से बड़ा है", "(d) प्रतिबिंब वस्तु के बराबर है"],
+    o_en: ["(a) The image is smaller than the object", "(b) The image is at infinity", "(c) The image is larger than the object", "(d) The image equals the object"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q92. 4 सेमी ऊँची वस्तु के लिए f = -15 सेमी और u = -25 सेमी वाले अवतल दर्पण में प्रतिबिंब दूरी v कितनी होगी?",
+    q_en: "Q92. For a 4 cm object with a concave mirror of f = -15 cm and u = -25 cm, what is v?",
+    tag: "",
+    o_hi: ["(a) +37.5 सेमी", "(b) -37.5 सेमी", "(c) -15 सेमी", "(d) -25 सेमी"],
+    o_en: ["(a) +37.5 cm", "(b) -37.5 cm", "(c) -15 cm", "(d) -25 cm"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q93. f = -15 सेमी, u = -25 सेमी और v = -37.5 सेमी होने पर दर्पण का आवर्धन M कितना होगा?",
+    q_en: "Q93. In the same example, what is the mirror magnification M?",
+    tag: "",
+    o_hi: ["(a) -1.5", "(b) +1.5", "(c) +0.5", "(d) -0.5"],
+    o_en: ["(a) -1.5", "(b) +1.5", "(c) +0.5", "(d) -0.5"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q94. 4 सेमी ऊँची वस्तु के लिए M = -1.5 होने पर प्रतिबिंब की ऊँचाई hᵢ कितनी होगी?",
+    q_en: "Q94. In the same example, what is the image height hᵢ?",
+    tag: "",
+    o_hi: ["(a) +4 सेमी", "(b) +6 सेमी", "(c) -6 सेमी", "(d) -4 सेमी"],
+    o_en: ["(a) +4 cm", "(b) +6 cm", "(c) -6 cm", "(d) -4 cm"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q95. अवतल दर्पण में f = -15 सेमी और u = -25 सेमी होने पर बनने वाले प्रतिबिंब की प्रकृति क्या होगी?",
+    q_en: "Q95. What is the nature of the image obtained in the example?",
+    tag: "",
+    o_hi: ["(a) आभासी, उल्टा और बड़ा", "(b) वास्तविक, सीधा और समान आकार", "(c) वास्तविक, उल्टा और बड़ा", "(d) आभासी, सीधा और छोटा"],
+    o_en: ["(a) Virtual, inverted and enlarged", "(b) Real, erect and same size", "(c) Real, inverted and enlarged", "(d) Virtual, erect and diminished"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q96. दाढ़ी बनाने वाले दर्पण में किस प्रकार का दर्पण उपयोगी है?",
+    q_en: "Q96. Which mirror is useful as a shaving mirror?",
+    tag: "",
+    o_hi: ["(a) उत्तल दर्पण", "(b) अवतल दर्पण", "(c) समतल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Convex mirror", "(b) Concave mirror", "(c) Plane mirror", "(d) Concave lens"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q97. दंत चिकित्सक किस प्रकार के दर्पण का उपयोग करते हैं?",
+    q_en: "Q97. Which type of mirror is used by dentists?",
+    tag: "",
+    o_hi: ["(a) उत्तल दर्पण", "(b) अवतल दर्पण", "(c) समतल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Convex mirror", "(b) Concave mirror", "(c) Plane mirror", "(d) Concave lens"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q98. कार की हेडलाइट में किस प्रकार का दर्पण उपयोगी है?",
+    q_en: "Q98. Which mirror is useful in a car headlight?",
+    tag: "",
+    o_hi: ["(a) समतल दर्पण", "(b) उत्तल दर्पण", "(c) अवतल लेंस", "(d) अवतल दर्पण"],
+    o_en: ["(a) Plane mirror", "(b) Convex mirror", "(c) Concave lens", "(d) Concave mirror"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q99. दूरबीन में किस प्रकार का दर्पण उपयोग किया जा सकता है?",
+    q_en: "Q99. Which type of mirror may be used in telescopes?",
+    tag: "",
+    o_hi: ["(a) अवतल लेंस", "(b) उत्तल दर्पण", "(c) समतल दर्पण", "(d) अवतल दर्पण"],
+    o_en: ["(a) Concave lens", "(b) Convex mirror", "(c) Plane mirror", "(d) Concave mirror"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q100. सौर भट्ठी में किस प्रकार का दर्पण उपयोगी है?",
+    q_en: "Q100. Which mirror is useful in a solar furnace?",
+    tag: "",
+    o_hi: ["(a) अवतल दर्पण", "(b) उत्तल दर्पण", "(c) समतल काँच", "(d) समतल दर्पण"],
+    o_en: ["(a) Concave mirror", "(b) Convex mirror", "(c) Plane glass", "(d) Plane mirror"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];

@@ -1,0 +1,502 @@
+const data = [
+  {
+    q_hi: "Q101. वाहनों में पीछे देखने के लिए किस प्रकार का दर्पण उपयोग किया जाता है?",
+    q_en: "Q101. Which mirror is used as a rear-view mirror in vehicles?",
+    tag: "",
+    o_hi: ["(a) उत्तल लेंस", "(b) उत्तल दर्पण", "(c) अवतल दर्पण", "(d) समतल दर्पण"],
+    o_en: ["(a) Convex lens", "(b) Convex mirror", "(c) Concave mirror", "(d) Plane mirror"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q102. एटीएम और दुकानों में सुरक्षा निगरानी के लिए किस प्रकार का दर्पण उपयोग किया जाता है?",
+    q_en: "Q102. Which mirror is used for security monitoring in ATMs and shops?",
+    tag: "",
+    o_hi: ["(a) अवतल दर्पण", "(b) उत्तल दर्पण", "(c) समतल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Concave mirror", "(b) Convex mirror", "(c) Plane mirror", "(d) Concave lens"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q103. धूप के चश्मों में किस प्रकार का दर्पण उपयोग किया जाता है?",
+    q_en: "Q103. Which mirror type is mentioned in relation to sunglasses?",
+    tag: "",
+    o_hi: ["(a) अवतल दर्पण", "(b) समतल दर्पण", "(c) उत्तल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Concave mirror", "(b) Plane mirror", "(c) Convex mirror", "(d) Concave lens"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q104. प्रकाश का अपवर्तन किसे कहते हैं?",
+    q_en: "Q104. What is refraction of light?",
+    tag: "",
+    o_hi: ["(a) माध्यम में प्रकाश ऊर्जा का अवशोषित हो जाना", "(b) सतह से टकराकर प्रकाश का उसी माध्यम में लौटना", "(c) अवरोध के किनारों के आसपास प्रकाश का फैलना", "(d) एक माध्यम से दूसरे में जाने पर प्रकाश की दिशा बदलना"],
+    o_en: ["(a) Light energy being absorbed in a medium", "(b) Light returning to the same medium after striking a surface", "(c) Light spreading around the edges of an obstacle", "(d) Change in direction of light when it passes from one medium to another"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q105. अपवर्तन का मूल कारण क्या है?",
+    q_en: "Q105. What is the basic cause of refraction?",
+    tag: "",
+    o_hi: ["(a) प्रकाश के रंग का अनिवार्य परिवर्तन", "(b) प्रकाश के द्रव्यमान में परिवर्तन", "(c) फोटॉन के आवेश में परिवर्तन", "(d) प्रकाश की गति में परिवर्तन"],
+    o_en: ["(a) Mandatory change in colour", "(b) Change in mass of light", "(c) Change in photon charge", "(d) Change in the speed of light"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q106. प्रकाश एक माध्यम से दूसरे माध्यम में जाने पर कौन-सी राशि बदल सकती है?",
+    q_en: "Q106. Which quantity can change when light passes from one medium to another?",
+    tag: "",
+    o_hi: ["(a) आवृत्ति", "(b) प्रकाश का मूल स्वभाव", "(c) फोटॉन का आवेश", "(d) तरंगदैर्ध्य"],
+    o_en: ["(a) Frequency", "(b) Basic nature of light", "(c) Photon charge", "(d) Wavelength"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q107. प्रकाश एक माध्यम से दूसरे में जाने पर कौन-सी राशि स्थिर रहती है?",
+    q_en: "Q107. Which quantity remains unchanged when light passes from one medium to another?",
+    tag: "",
+    o_hi: ["(a) आवृत्ति", "(b) दिशा हर स्थिति में", "(c) तरंगदैर्ध्य", "(d) चाल"],
+    o_en: ["(a) Frequency", "(b) Direction in every case", "(c) Wavelength", "(d) Speed"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q108. अपवर्तन की घटना से कौन-सा उपकरण कार्य करता है?",
+    q_en: "Q108. Which device works using refraction?",
+    tag: "",
+    o_hi: ["(a) लेंस", "(b) समतल दर्पण", "(c) प्रतिरोधक", "(d) चुंबक"],
+    o_en: ["(a) Lens", "(b) Plane mirror", "(c) Resistor", "(d) Magnet"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q109. आवर्धक काँच किस घटना पर आधारित है?",
+    q_en: "Q109. A magnifying glass is based on which phenomenon?",
+    tag: "",
+    o_hi: ["(a) अपवर्तन", "(b) विद्युत अपघटन", "(c) चुंबकीय प्रेरण", "(d) रेडियोधर्मिता"],
+    o_en: ["(a) Refraction", "(b) Electrolysis", "(c) Magnetic induction", "(d) Radioactivity"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q110. प्रिज्म में प्रकाश का मुड़ना मुख्यतः किस घटना से संबंधित है?",
+    q_en: "Q110. The bending of light in a prism is mainly related to which phenomenon?",
+    tag: "",
+    o_hi: ["(a) परावर्तन", "(b) अपवर्तन", "(c) चालन", "(d) अनुनाद"],
+    o_en: ["(a) Reflection", "(b) Refraction", "(c) Conduction", "(d) Resonance"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q111. इंद्रधनुष बनने में प्रकाश की दिशा बदलने वाली प्रमुख घटना कौन-सी है?",
+    q_en: "Q111. Which major phenomenon changes the direction of light in rainbow formation?",
+    tag: "",
+    o_hi: ["(a) चुंबकीकरण", "(b) अपवर्तन", "(c) ध्वनि अनुनाद", "(d) विद्युत प्रेरण"],
+    o_en: ["(a) Magnetization", "(b) Refraction", "(c) Sound resonance", "(d) Electrical induction"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q112. अपवर्तन के प्रथम नियम के अनुसार आपतित किरण, अपवर्तित किरण और अभिलंब कहाँ होते हैं?",
+    q_en: "Q112. According to the first law of refraction, where do the incident ray, refracted ray and normal lie?",
+    tag: "",
+    o_hi: ["(a) तीन अलग तलों में", "(b) दो समानांतर तलों में", "(c) एक ही तल में", "(d) परस्पर लंबवत तलों में"],
+    o_en: ["(a) In three different planes", "(b) In two parallel planes", "(c) In the same plane", "(d) In mutually perpendicular planes"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q113. स्नेल के नियम के अनुसार sin i / sin r का मान कैसा रहता है?",
+    q_en: "Q113. According to Snell's law, how does sin i / sin r behave?",
+    tag: "",
+    o_hi: ["(a) अनंत", "(b) यादृच्छिक", "(c) शून्य", "(d) स्थिर"],
+    o_en: ["(a) Infinite", "(b) Random", "(c) Zero", "(d) Constant"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q114. स्नेल के नियम में sin i / sin r किसके बराबर माना जाता है?",
+    q_en: "Q114. In Snell's law, sin i / sin r is taken as equal to what?",
+    tag: "",
+    o_hi: ["(a) अपवर्तनांक μ", "(b) आवर्धन M", "(c) वक्रता त्रिज्या R", "(d) फोकस दूरी f"],
+    o_en: ["(a) Refractive index μ", "(b) Magnification M", "(c) Radius of curvature R", "(d) Focal length f"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q115. अपवर्तनांक μ किस माध्यम के सापेक्ष किस माध्यम का होता है?",
+    q_en: "Q115. Refractive index μ is of which medium relative to which?",
+    tag: "",
+    o_hi: ["(a) दूसरे माध्यम का पहले माध्यम के सापेक्ष", "(b) दोनों माध्यमों के औसत का निर्वात के सापेक्ष", "(c) पहले माध्यम का निर्वात के सापेक्ष", "(d) पहले माध्यम का दूसरे के सापेक्ष"],
+    o_en: ["(a) The second medium relative to the first", "(b) The average of both media relative to vacuum", "(c) the first medium relative to vacuum", "(d) The first medium relative to the second"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q116. अपवर्तनांक का सूत्र क्या है?",
+    q_en: "Q116. What is the formula for refractive index?",
+    tag: "",
+    o_hi: ["(a) निर्वात में प्रकाश की गति / तरंग की आवृत्ति", "(b) निर्वात में प्रकाश की गति / माध्यम में प्रकाश की गति", "(c) तरंग की आवृत्ति / माध्यम में प्रकाश की गति", "(d) माध्यम में प्रकाश की गति / निर्वात में प्रकाश की गति"],
+    o_en: ["(a) Speed of light in vacuum / wave frequency", "(b) Speed of light in vacuum / speed of light in medium", "(c) Wave frequency / speed of light in medium", "(d) Speed of light in medium / speed of light in vacuum"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q117. सघन माध्यम से विरल माध्यम में जाते समय प्रकाश किस ओर मुड़ता है?",
+    q_en: "Q117. When light passes from a denser to a rarer medium, which way does it bend?",
+    tag: "",
+    o_hi: ["(a) अभिलंब से दूर", "(b) अभिलंब की ओर", "(c) मुख्य अक्ष की ओर", "(d) दर्पण के ध्रुव की ओर"],
+    o_en: ["(a) Away from the normal", "(b) Toward the normal", "(c) Toward the principal axis", "(d) Toward the mirror pole"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q118. विरल माध्यम से सघन माध्यम में जाते समय प्रकाश किस ओर मुड़ता है?",
+    q_en: "Q118. When light passes from a rarer to a denser medium, which way does it bend?",
+    tag: "",
+    o_hi: ["(a) अभिलंब से दूर", "(b) मुख्य अक्ष से दूर", "(c) सतह के समानांतर", "(d) अभिलंब की ओर"],
+    o_en: ["(a) Away from the normal", "(b) Away from the principal axis", "(c) Parallel to the surface", "(d) Toward the normal"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q119. वायु का अपवर्तनांक कितना है?",
+    q_en: "Q119. What refractive index is given for Air?",
+    tag: "",
+    o_hi: ["(a) 1.36", "(b) 1.31", "(c) 1.0003", "(d) 1.33"],
+    o_en: ["(a) 1.36", "(b) 1.31", "(c) 1.0003", "(d) 1.33"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q120. बर्फ का अपवर्तनांक कितना है?",
+    q_en: "Q120. What refractive index is given for Ice?",
+    tag: "",
+    o_hi: ["(a) 1.36", "(b) 1.31", "(c) 1.33", "(d) 1.44"],
+    o_en: ["(a) 1.36", "(b) 1.31", "(c) 1.33", "(d) 1.44"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q121. जल का अपवर्तनांक कितना है?",
+    q_en: "Q121. What refractive index is given for Water?",
+    tag: "",
+    o_hi: ["(a) 1.44", "(b) 1.33", "(c) 1.31", "(d) 1.36"],
+    o_en: ["(a) 1.44", "(b) 1.33", "(c) 1.31", "(d) 1.36"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q122. एल्कोहल का अपवर्तनांक कितना है?",
+    q_en: "Q122. What refractive index is given for Alcohol?",
+    tag: "",
+    o_hi: ["(a) 1.33", "(b) 1.44", "(c) 1.36", "(d) 1.31"],
+    o_en: ["(a) 1.33", "(b) 1.44", "(c) 1.36", "(d) 1.31"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q123. किरोसिन का अपवर्तनांक कितना है?",
+    q_en: "Q123. What refractive index is given for Kerosene?",
+    tag: "",
+    o_hi: ["(a) 1.50", "(b) 1.44", "(c) 1.46", "(d) 1.47"],
+    o_en: ["(a) 1.50", "(b) 1.44", "(c) 1.46", "(d) 1.47"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q124. संगलित क्वार्ट्ज का अपवर्तनांक कितना है?",
+    q_en: "Q124. What refractive index is given for Fused quartz?",
+    tag: "",
+    o_hi: ["(a) 1.46", "(b) 1.44", "(c) 1.50", "(d) 1.47"],
+    o_en: ["(a) 1.46", "(b) 1.44", "(c) 1.50", "(d) 1.47"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q125. तारपीन का तेल का अपवर्तनांक कितना है?",
+    q_en: "Q125. What refractive index is given for Turpentine oil?",
+    tag: "",
+    o_hi: ["(a) 1.50", "(b) 1.47", "(c) 1.46", "(d) 1.44"],
+    o_en: ["(a) 1.50", "(b) 1.47", "(c) 1.46", "(d) 1.44"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q126. बेंजीन का अपवर्तनांक कितना है?",
+    q_en: "Q126. What refractive index is given for Benzene?",
+    tag: "",
+    o_hi: ["(a) 1.53", "(b) 1.47", "(c) 1.50", "(d) 1.52"],
+    o_en: ["(a) 1.53", "(b) 1.47", "(c) 1.50", "(d) 1.52"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q127. क्राउन काँच का अपवर्तनांक कितना है?",
+    q_en: "Q127. What refractive index is given for Crown glass?",
+    tag: "",
+    o_hi: ["(a) 1.50", "(b) 1.52", "(c) 1.53", "(d) 1.54"],
+    o_en: ["(a) 1.50", "(b) 1.52", "(c) 1.53", "(d) 1.54"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q128. कनाडा बालसम का अपवर्तनांक कितना है?",
+    q_en: "Q128. What refractive index is given for Canada balsam?",
+    tag: "",
+    o_hi: ["(a) 1.50", "(b) 1.52", "(c) 1.53", "(d) 1.54"],
+    o_en: ["(a) 1.50", "(b) 1.52", "(c) 1.53", "(d) 1.54"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q129. खनिज नमक का अपवर्तनांक कितना है?",
+    q_en: "Q129. What refractive index is given for Rock salt?",
+    tag: "",
+    o_hi: ["(a) 1.50", "(b) 1.54", "(c) 1.53", "(d) 1.52"],
+    o_en: ["(a) 1.50", "(b) 1.54", "(c) 1.53", "(d) 1.52"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q130. कार्बन डाइसल्फाइड का अपवर्तनांक कितना है?",
+    q_en: "Q130. What refractive index is given for Carbon disulfide?",
+    tag: "",
+    o_hi: ["(a) 1.71", "(b) 1.63", "(c) 1.54", "(d) 1.65"],
+    o_en: ["(a) 1.71", "(b) 1.63", "(c) 1.54", "(d) 1.65"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q131. सघन फ्लिंट काँच का अपवर्तनांक कितना है?",
+    q_en: "Q131. What refractive index is given for Dense flint glass?",
+    tag: "",
+    o_hi: ["(a) 1.65", "(b) 1.71", "(c) 1.54", "(d) 1.63"],
+    o_en: ["(a) 1.65", "(b) 1.71", "(c) 1.54", "(d) 1.63"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q132. रूबी (माणिक्य) का अपवर्तनांक कितना है?",
+    q_en: "Q132. What refractive index is given for Ruby?",
+    tag: "",
+    o_hi: ["(a) 1.77", "(b) 1.71", "(c) 1.63", "(d) 1.65"],
+    o_en: ["(a) 1.77", "(b) 1.71", "(c) 1.63", "(d) 1.65"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q133. नीलम का अपवर्तनांक कितना है?",
+    q_en: "Q133. What refractive index is given for Sapphire?",
+    tag: "",
+    o_hi: ["(a) 1.63", "(b) 1.65", "(c) 1.71", "(d) 1.77"],
+    o_en: ["(a) 1.63", "(b) 1.65", "(c) 1.71", "(d) 1.77"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q134. हीरा का अपवर्तनांक कितना है?",
+    q_en: "Q134. What refractive index is given for Diamond?",
+    tag: "",
+    o_hi: ["(a) 1.65", "(b) 1.71", "(c) 2.42", "(d) 1.77"],
+    o_en: ["(a) 1.65", "(b) 1.71", "(c) 2.42", "(d) 1.77"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q135. समान प्रकाशीय घनत्व वाले दो माध्यमों के बीच प्रकाश का पथ कैसा रहता है?",
+    q_en: "Q135. How does light travel between two media of equal optical density?",
+    tag: "",
+    o_hi: ["(a) अभिलंब से दूर मुड़ता है", "(b) सीधी रेखा में", "(c) पूर्णतः परावर्तित हो जाता है", "(d) अभिलंब की ओर मुड़ता है"],
+    o_en: ["(a) It bends away from the normal", "(b) In a straight line", "(c) It is totally reflected", "(d) It bends toward the normal"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q136. समान प्रकाशीय घनत्व वाले माध्यमों का उदाहरण कौन-सा है?",
+    q_en: "Q136. Which is an example of media having the same optical density?",
+    tag: "",
+    o_hi: ["(a) हीरा से हवा", "(b) हवा से हवा या पानी से पानी", "(c) काँच से हवा", "(d) हवा से काँच या पानी"],
+    o_en: ["(a) Diamond to air", "(b) Air to air or water to water", "(c) Glass to air", "(d) Air to glass or water"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q137. समान प्रकाशीय घनत्व वाले माध्यमों के बीच प्रकाश की दिशा पर क्या प्रभाव पड़ता है?",
+    q_en: "Q137. What happens to the direction of light between media of equal optical density?",
+    tag: "",
+    o_hi: ["(a) कोई परिवर्तन नहीं होता", "(b) अभिलंब से दूर बदलती है", "(c) अभिलंब की ओर बदलती है", "(d) 90° घूम जाती है"],
+    o_en: ["(a) There is no change", "(b) It changes away from the normal", "(c) It changes toward the normal", "(d) It turns by 90°"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q138. समान प्रकाशीय घनत्व वाले माध्यमों के बीच प्रकाश की गति कैसी रहती है?",
+    q_en: "Q138. How does the speed of light behave between media of equal optical density?",
+    tag: "",
+    o_hi: ["(a) दोगुनी हो जाती है", "(b) शून्य हो जाती है", "(c) स्थिर रहती है", "(d) आधी हो जाती है"],
+    o_en: ["(a) It doubles", "(b) It becomes zero", "(c) It remains unchanged", "(d) It becomes half"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q139. विरल से सघन माध्यम में जाते समय आपतन कोण i और अपवर्तन कोण r का संबंध क्या होता है?",
+    q_en: "Q139. For light passing from a rarer to a denser medium, what is the relation between i and r?",
+    tag: "",
+    o_hi: ["(a) i > r", "(b) i = r", "(c) i = 2r", "(d) i < r"],
+    o_en: ["(a) i > r", "(b) i = r", "(c) i = 2r", "(d) i < r"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q140. विरल से सघन माध्यम में जाने का उदाहरण कौन-सा है?",
+    q_en: "Q140. Which is an example of light passing from a rarer to a denser medium?",
+    tag: "",
+    o_hi: ["(a) काँच से हवा", "(b) हीरा से हवा", "(c) हवा से काँच या पानी", "(d) पानी से हवा"],
+    o_en: ["(a) Glass to air", "(b) Diamond to air", "(c) Air to glass or water", "(d) Water to air"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q141. विरल से सघन माध्यम में जाने पर प्रकाश की गति पर क्या प्रभाव पड़ता है?",
+    q_en: "Q141. What happens to light speed when it passes from a rarer to a denser medium?",
+    tag: "",
+    o_hi: ["(a) कम हो जाती है", "(b) बढ़ जाती है", "(c) शून्य हो जाती है", "(d) अपरिवर्तित रहती है"],
+    o_en: ["(a) It decreases", "(b) It increases", "(c) It becomes zero", "(d) It remains unchanged"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q142. सघन से विरल माध्यम में जाते समय आपतन कोण i और अपवर्तन कोण r का संबंध क्या होता है?",
+    q_en: "Q142. For light passing from a denser to a rarer medium, what is the relation between i and r?",
+    tag: "",
+    o_hi: ["(a) i > r", "(b) i = r", "(c) i = 2r", "(d) i < r"],
+    o_en: ["(a) i > r", "(b) i = r", "(c) i = 2r", "(d) i < r"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q143. सघन से विरल माध्यम में जाने का उदाहरण कौन-सा है?",
+    q_en: "Q143. Which is an example of light passing from a denser to a rarer medium?",
+    tag: "",
+    o_hi: ["(a) वायु से हीरा", "(b) हवा से पानी", "(c) हवा से काँच", "(d) काँच से हवा"],
+    o_en: ["(a) Air to diamond", "(b) Air to water", "(c) Air to glass", "(d) Glass to air"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q144. सघन से विरल माध्यम में जाने पर प्रकाश की गति पर क्या प्रभाव पड़ता है?",
+    q_en: "Q144. What happens to light speed when it passes from a denser to a rarer medium?",
+    tag: "",
+    o_hi: ["(a) बढ़ जाती है", "(b) अपरिवर्तित रहती है", "(c) कम हो जाती है", "(d) शून्य हो जाती है"],
+    o_en: ["(a) It increases", "(b) It remains unchanged", "(c) It decreases", "(d) It becomes zero"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q145. काँच की पट्टी में प्रवेश करते समय प्रकाश किस ओर मुड़ता है?",
+    q_en: "Q145. When light enters a glass slab, which way does it bend?",
+    tag: "",
+    o_hi: ["(a) अभिलंब से दूर", "(b) सतह के समानांतर", "(c) अभिलंब की ओर", "(d) पीछे की ओर"],
+    o_en: ["(a) Away from the normal", "(b) Parallel to the surface", "(c) Toward the normal", "(d) Backward"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q146. काँच की पट्टी से बाहर निकलते समय प्रकाश किस ओर मुड़ता है?",
+    q_en: "Q146. When light emerges from a glass slab, which way does it bend?",
+    tag: "",
+    o_hi: ["(a) मुख्य अक्ष की ओर", "(b) अभिलंब की ओर", "(c) अभिलंब से दूर", "(d) पीछे की ओर"],
+    o_en: ["(a) Toward the principal axis", "(b) Toward the normal", "(c) Away from the normal", "(d) Backward"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q147. समांतर सतहों वाली काँच की पट्टी से निकलने वाली किरण आपतित किरण की तुलना में कैसी होती है?",
+    q_en: "Q147. How is the emergent ray from a parallel-sided glass slab related to the incident ray?",
+    tag: "",
+    o_hi: ["(a) समानांतर", "(b) उसी रेखा पर", "(c) विपरीत दिशा में", "(d) लंबवत"],
+    o_en: ["(a) Parallel", "(b) On the same line", "(c) Opposite in direction", "(d) Perpendicular"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q148. काँच की पट्टी से अपवर्तन के बाद आपतित और निर्गत किरणों के बीच पार्श्व दूरी को क्या कहते हैं?",
+    q_en: "Q148. What is the lateral separation between incident and emergent rays through a glass slab called?",
+    tag: "",
+    o_hi: ["(a) वक्रता त्रिज्या", "(b) क्रांतिक कोण", "(c) फोकस दूरी", "(d) पार्श्व विस्थापन"],
+    o_en: ["(a) Radius of curvature", "(b) Critical angle", "(c) Focal length", "(d) Lateral displacement"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q149. यदि प्रकाश काँच की सतह पर अभिलंबवत गिरता है तो क्या होता है?",
+    q_en: "Q149. What happens if light is incident normally on a glass surface?",
+    tag: "",
+    o_hi: ["(a) यह 90° मुड़ता है", "(b) यह पूर्णतः अवशोषित होता है", "(c) अपवर्तन से दिशा नहीं बदलती", "(d) यह वापस उसी माध्यम में लौटता है"],
+    o_en: ["(a) It bends by 90°", "(b) It is completely absorbed", "(c) Its direction does not change by refraction", "(d) It returns to the same medium"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q150. गोलाकार लेंस किस प्रकार के प्रकाशीय उपकरण होते हैं?",
+    q_en: "Q150. What kind of optical devices are spherical lenses?",
+    tag: "",
+    o_hi: ["(a) विद्युत प्रवाह मापने वाले उपकरण", "(b) वक्र गोलाकार सतह वाले प्रकाशीय उपकरण", "(c) ध्वनि दाब मापने वाले उपकरण", "(d) समतल चुंबकीय सतह वाले उपकरण"],
+    o_en: ["(a) Devices that measure electric current", "(b) Optical devices with curved spherical surfaces", "(c) Devices that measure sound pressure", "(d) Devices with flat magnetic surfaces"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];

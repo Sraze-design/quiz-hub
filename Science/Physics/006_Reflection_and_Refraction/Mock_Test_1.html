@@ -1,0 +1,502 @@
+const data = [
+  {
+    q_hi: "Q1. प्रकाश को किस प्रकार के विकिरण के रूप में परिभाषित किया गया है?",
+    q_en: "Q1. Light is defined as which type of radiation?",
+    tag: "",
+    o_hi: ["(a) यांत्रिक तरंग विकिरण", "(b) विद्युतस्थैतिक विकिरण", "(c) विद्युतचुंबकीय विकिरण", "(d) गुरुत्वीय तरंग विकिरण"],
+    o_en: ["(a) Mechanical-wave radiation", "(b) Electrostatic radiation", "(c) Electromagnetic radiation", "(d) Gravitational-wave radiation"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q2. प्रकाश का कौन-सा भाग मानव आँख को दिखाई देता है?",
+    q_en: "Q2. Which part of light is visible to the human eye?",
+    tag: "",
+    o_hi: ["(a) विद्युतचुंबकीय विकिरण का रेडियो भाग", "(b) विद्युतचुंबकीय विकिरण का अवरक्त भाग", "(c) विद्युतचुंबकीय विकिरण का पराबैंगनी भाग", "(d) विद्युतचुंबकीय विकिरण का दृश्यमान भाग"],
+    o_en: ["(a) The radio part of electromagnetic radiation", "(b) The infrared part of electromagnetic radiation", "(c) The ultraviolet part of electromagnetic radiation", "(d) The visible part of electromagnetic radiation"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q3. प्रकाश की द्वैध प्रकृति का अर्थ क्या है?",
+    q_en: "Q3. What does the dual nature of light mean?",
+    tag: "",
+    o_hi: ["(a) यह द्रव और गैस दोनों की तरह व्यवहार करता है", "(b) यह तरंग और कण दोनों की तरह व्यवहार करता है", "(c) यह विद्युत और चुंबकीय क्षेत्र दोनों की तरह व्यवहार करता है", "(d) यह ऊर्जा और द्रव्यमान दोनों की तरह व्यवहार करता है"],
+    o_en: ["(a) It behaves as both a liquid and a gas", "(b) It behaves as both a wave and a particle", "(c) It behaves as both electric and magnetic fields", "(d) It behaves as both energy and mass"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q4. प्रकाश को कणों की धारा के रूप में व्यक्त करने पर उन कणों को क्या कहा जाता है?",
+    q_en: "Q4. What are the particles called when light is described as a stream of particles?",
+    tag: "",
+    o_hi: ["(a) प्रोटॉन", "(b) फोटॉन", "(c) न्यूट्रॉन", "(d) फोनॉन"],
+    o_en: ["(a) Protons", "(b) Photons", "(c) Neutrons", "(d) Phonons"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q5. फोटॉन के द्रव्यमान के बारे में कौन-सा कथन सही है?",
+    q_en: "Q5. What is stated about the mass of a photon?",
+    tag: "",
+    o_hi: ["(a) इसका द्रव्यमान माध्यम पर निर्भर करता है", "(b) इसका द्रव्यमान प्रोटॉन के बराबर होता है", "(c) इसका द्रव्यमान इलेक्ट्रॉन के बराबर होता है", "(d) इसका द्रव्यमान नहीं होता"],
+    o_en: ["(a) Its mass depends on the medium", "(b) Its mass equals that of a proton", "(c) Its mass equals that of an electron", "(d) It has no mass"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q6. निर्वात में प्रकाश किस पथ में यात्रा करता है?",
+    q_en: "Q6. Along what path does light travel in vacuum?",
+    tag: "",
+    o_hi: ["(a) वृत्ताकार पथ में", "(b) सर्पिल पथ में", "(c) सीधी रेखा में", "(d) अनियमित वक्र में"],
+    o_en: ["(a) Along a circular path", "(b) Along a helical path", "(c) In a straight line", "(d) Along an irregular curve"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q7. निर्वात में प्रकाश की चाल लगभग कितनी है?",
+    q_en: "Q7. What is the approximate speed of light in vacuum?",
+    tag: "",
+    o_hi: ["(a) 3 × 10² m/s", "(b) 3 × 10⁶ m/s", "(c) 3 × 10⁸ m/s", "(d) 3 × 10⁴ m/s"],
+    o_en: ["(a) 3 × 10² m/s", "(b) 3 × 10⁶ m/s", "(c) 3 × 10⁸ m/s", "(d) 3 × 10⁴ m/s"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q8. निर्वात में प्रकाश किस प्रकार की तरंग है?",
+    q_en: "Q8. What type of wave is light in vacuum?",
+    tag: "",
+    o_hi: ["(a) स्थिर ध्वनि तरंग", "(b) यांत्रिक दाब तरंग", "(c) अनुदैर्ध्य तरंग", "(d) अनुप्रस्थ तरंग"],
+    o_en: ["(a) Stationary sound wave", "(b) Mechanical pressure wave", "(c) Longitudinal wave", "(d) Transverse wave"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q9. प्रकाश के ध्रुवण के बारे में कौन-सा कथन सही है?",
+    q_en: "Q9. Which statement about polarization of light is correct?",
+    tag: "",
+    o_hi: ["(a) ध्रुवण द्रवों में होता है", "(b) प्रकाश को ध्रुवित किया जा सकता है", "(c) प्रकाश का ध्रुवण संभव नहीं है", "(d) ध्रुवण ध्वनि में होता है"],
+    o_en: ["(a) Polarization occurs in liquids", "(b) Light can be polarized", "(c) Light cannot be polarized", "(d) Polarization occurs in sound"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q10. यंग का द्वि-स्लिट प्रयोग किस वर्ष किया गया था?",
+    q_en: "Q10. In which year was Young's double-slit experiment performed?",
+    tag: "",
+    o_hi: ["(a) 1887", "(b) 1905", "(c) 1801", "(d) 1787"],
+    o_en: ["(a) 1887", "(b) 1905", "(c) 1801", "(d) 1787"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q11. यंग का द्वि-स्लिट प्रयोग किस वैज्ञानिक ने किया था?",
+    q_en: "Q11. Who performed Young's double-slit experiment?",
+    tag: "",
+    o_hi: ["(a) हेनरिक हर्ट्ज़", "(b) अल्बर्ट आइंस्टीन", "(c) आइजैक न्यूटन", "(d) थॉमस यंग"],
+    o_en: ["(a) Heinrich Hertz", "(b) Albert Einstein", "(c) Isaac Newton", "(d) Thomas Young"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q12. यंग का द्वि-स्लिट प्रयोग प्रकाश की किस प्रकृति को दर्शाता है?",
+    q_en: "Q12. Young's double-slit experiment demonstrates which nature of light?",
+    tag: "",
+    o_hi: ["(a) तरंग प्रकृति", "(b) कण प्रकृति", "(c) गुरुत्वीय प्रकृति", "(d) स्थिर प्रकृति"],
+    o_en: ["(a) Wave nature", "(b) Particle nature", "(c) Gravitational nature", "(d) Static nature"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q13. यंग के द्वि-स्लिट प्रयोग में स्क्रीन पर किस प्रकार का पैटर्न बनता है?",
+    q_en: "Q13. What type of pattern is formed on the screen in Young's double-slit experiment?",
+    tag: "",
+    o_hi: ["(a) विभिन्न रंगों की निरंतर पट्टियों वाला स्पेक्ट्रम", "(b) उज्ज्वल वृत्तों और अंधेरे केंद्र वाला पैटर्न", "(c) एक उज्ज्वल केंद्रीय धब्बे और धुंधली सीमा वाला पैटर्न", "(d) उज्ज्वल और अंधेरी फ्रिंजों का व्यतिकरण पैटर्न"],
+    o_en: ["(a) A spectrum of continuous coloured bands", "(b) A pattern of bright rings and a dark centre", "(c) A bright central spot with a diffuse boundary", "(d) An interference pattern of bright and dark fringes"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q14. प्रकाश-विद्युत प्रभाव में पर्याप्त आवृत्ति का प्रकाश धातु की सतह पर पड़ने से क्या होता है?",
+    q_en: "Q14. What happens in the photoelectric effect when light of sufficient frequency falls on a metal surface?",
+    tag: "",
+    o_hi: ["(a) न्यूट्रॉन उत्सर्जित होते हैं", "(b) धातु का द्रव्यमान दोगुना होता है", "(c) प्रोटॉन उत्सर्जित होते हैं", "(d) इलेक्ट्रॉन उत्सर्जित होते हैं"],
+    o_en: ["(a) Neutrons are emitted", "(b) The metal mass doubles", "(c) Protons are emitted", "(d) Electrons are emitted"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q15. प्रकाश-विद्युत प्रभाव प्रकाश ऊर्जा के किस रूप को दर्शाता है?",
+    q_en: "Q15. The photoelectric effect supports which form of light energy?",
+    tag: "",
+    o_hi: ["(a) पैकेट या क्वांटम", "(b) स्थिर दाब", "(c) चुंबकीय ध्रुव", "(d) निरंतर द्रव प्रवाह"],
+    o_en: ["(a) Packets or quanta", "(b) Static pressure", "(c) Magnetic poles", "(d) Continuous fluid flow"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q16. प्रकाश-विद्युत प्रभाव का अवलोकन पहली बार किसने किया?",
+    q_en: "Q16. Who first observed the photoelectric effect?",
+    tag: "",
+    o_hi: ["(a) अल्बर्ट आइंस्टीन", "(b) हेनरिक रुडोल्फ हर्ट्ज़", "(c) मैक्स प्लांक", "(d) थॉमस यंग"],
+    o_en: ["(a) Albert Einstein", "(b) Heinrich Rudolf Hertz", "(c) Max Planck", "(d) Thomas Young"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q17. हेनरिक रुडोल्फ हर्ट्ज़ ने प्रकाश-विद्युत प्रभाव का अवलोकन किस वर्ष किया?",
+    q_en: "Q17. In which year did Heinrich Rudolf Hertz observe the photoelectric effect?",
+    tag: "",
+    o_hi: ["(a) 1887", "(b) 1905", "(c) 1921", "(d) 1801"],
+    o_en: ["(a) 1887", "(b) 1905", "(c) 1921", "(d) 1801"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q18. आइंस्टीन ने फोटॉन की अवधारणा से प्रकाश-विद्युत प्रभाव की व्याख्या किस वर्ष की?",
+    q_en: "Q18. In which year did Einstein explain the photoelectric effect using the photon concept?",
+    tag: "",
+    o_hi: ["(a) 1905", "(b) 1887", "(c) 1921", "(d) 1801"],
+    o_en: ["(a) 1905", "(b) 1887", "(c) 1921", "(d) 1801"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q19. प्रकाश-विद्युत प्रभाव की व्याख्या से जुड़े कार्य के लिए आइंस्टीन को नोबेल पुरस्कार किस वर्ष मिला?",
+    q_en: "Q19. In which year did Einstein receive the Nobel Prize for work related to the photoelectric effect?",
+    tag: "",
+    o_hi: ["(a) 1915", "(b) 1931", "(c) 1921", "(d) 1905"],
+    o_en: ["(a) 1915", "(b) 1931", "(c) 1921", "(d) 1905"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q20. प्रकाश का परावर्तन कब होता है?",
+    q_en: "Q20. When does reflection of light occur?",
+    tag: "",
+    o_hi: ["(a) जब प्रकाश किसी माध्यम में ऊर्जा के रूप में अवशोषित होता है", "(b) जब प्रकाश दूसरे माध्यम में प्रवेश करके दिशा बदलता है", "(c) जब प्रकाश अवरोध के किनारे से होकर फैलता है", "(d) जब प्रकाश सतह से टकराकर दिशा बदलते हुए उसी माध्यम में लौटता है"],
+    o_en: ["(a) When light is absorbed as energy in a medium", "(b) When light enters another medium and changes direction", "(c) When light spreads around the edge of an obstacle", "(d) When light strikes a surface, changes direction and returns to the same medium"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q21. परावर्तन के प्रथम नियम के अनुसार आपतन कोण किसके बराबर होता है?",
+    q_en: "Q21. According to the first law of reflection, the angle of incidence equals what?",
+    tag: "",
+    o_hi: ["(a) विचलन कोण", "(b) क्रांतिक कोण", "(c) अपवर्तन कोण", "(d) परावर्तन कोण"],
+    o_en: ["(a) Angle of deviation", "(b) Critical angle", "(c) Angle of refraction", "(d) Angle of reflection"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q22. परावर्तन के द्वितीय नियम के अनुसार आपतित किरण, परावर्तित किरण और अभिलंब कहाँ होते हैं?",
+    q_en: "Q22. According to the second law of reflection, where do the incident ray, reflected ray and normal lie?",
+    tag: "",
+    o_hi: ["(a) एक ही तल में", "(b) दो समानांतर तलों में", "(c) तीन अलग-अलग तलों में", "(d) परस्पर लंबवत तीन तलों में"],
+    o_en: ["(a) In the same plane", "(b) In two parallel planes", "(c) In three different planes", "(d) In three mutually perpendicular planes"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q23. दर्पणों को सामान्य रूप से किन तीन प्रकारों में वर्गीकृत किया जाता है?",
+    q_en: "Q23. Into which three types are mirrors commonly classified?",
+    tag: "",
+    o_hi: ["(a) अवतल, उत्तल और अपवर्तक", "(b) समतल, अवतल और उत्तल", "(c) समतल, गोलाकार और ध्रुवित", "(d) समतल, बेलनाकार और प्रिज्मीय"],
+    o_en: ["(a) Concave, convex and refracting", "(b) Plane, concave and convex", "(c) Plane, spherical and polarized", "(d) Plane, cylindrical and prismatic"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q24. समतल दर्पण की परावर्तक सतह कैसी होती है?",
+    q_en: "Q24. How is the reflecting surface of a plane mirror?",
+    tag: "",
+    o_hi: ["(a) दाँतेदार", "(b) अंदर की ओर वक्र", "(c) सपाट", "(d) बाहर की ओर वक्र"],
+    o_en: ["(a) Serrated", "(b) Curved inward", "(c) Flat", "(d) Curved outward"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q25. समतल दर्पण द्वारा बने प्रतिबिंब की प्रकृति क्या होती है?",
+    q_en: "Q25. What is the nature of the image formed by a plane mirror?",
+    tag: "",
+    o_hi: ["(a) आभासी और सीधा", "(b) वास्तविक और सीधा", "(c) वास्तविक और उल्टा", "(d) आभासी और उल्टा"],
+    o_en: ["(a) Virtual and erect", "(b) Real and erect", "(c) Real and inverted", "(d) Virtual and inverted"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q26. समतल दर्पण में प्रतिबिंब का पार्श्व परिवर्तन कैसा होता है?",
+    q_en: "Q26. What lateral change occurs in a plane-mirror image?",
+    tag: "",
+    o_hi: ["(a) पार्श्व उलटाव", "(b) ऊर्ध्वाधर उलटाव", "(c) रंग उलटाव", "(d) कोई दिशा परिवर्तन नहीं"],
+    o_en: ["(a) Lateral inversion", "(b) Vertical inversion", "(c) Colour inversion", "(d) No directional reversal"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q27. अवतल दर्पण की परावर्तक सतह किस ओर होती है?",
+    q_en: "Q27. Where is the reflecting surface of a concave mirror?",
+    tag: "",
+    o_hi: ["(a) सपाट सतह पर", "(b) किनारे की बाहरी सतह पर", "(c) अंदर की ओर वक्र सतह पर", "(d) बाहर की ओर वक्र सतह पर"],
+    o_en: ["(a) On a flat surface", "(b) On the outer edge surface", "(c) On the inward-curved surface", "(d) On the outward-curved surface"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q28. अवतल दर्पण द्वारा बनने वाले प्रतिबिंब की प्रकृति किस पर निर्भर करती है?",
+    q_en: "Q28. On what does the nature of an image formed by a concave mirror depend?",
+    tag: "",
+    o_hi: ["(a) कमरे के तापमान पर", "(b) दर्पण के द्रव्यमान पर", "(c) दर्पण के रंग पर", "(d) वस्तु की स्थिति पर"],
+    o_en: ["(a) Room temperature", "(b) Mass of the mirror", "(c) Colour of the mirror", "(d) Position of the object"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q29. अवतल दर्पण किस प्रकार के प्रतिबिंब बना सकता है?",
+    q_en: "Q29. What types of images can a concave mirror form?",
+    tag: "",
+    o_hi: ["(a) वास्तविक-सीधा या आभासी-उल्टा", "(b) आभासी-सीधा या आभासी-उल्टा", "(c) वास्तविक-उल्टा या आभासी-सीधा", "(d) वास्तविक-उल्टा या वास्तविक-सीधा"],
+    o_en: ["(a) Real-erect or virtual-inverted", "(b) Virtual-erect or virtual-inverted", "(c) Real-inverted or virtual-erect", "(d) Real-inverted or real-erect"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q30. उत्तल दर्पण की परावर्तक सतह किस ओर होती है?",
+    q_en: "Q30. Where is the reflecting surface of a convex mirror?",
+    tag: "",
+    o_hi: ["(a) अंदर की ओर वक्र सतह पर", "(b) दर्पण के केंद्र में", "(c) सपाट सतह पर", "(d) बाहर की ओर वक्र सतह पर"],
+    o_en: ["(a) On the inward-curved surface", "(b) At the centre of the mirror", "(c) On a flat surface", "(d) On the outward-curved surface"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q31. उत्तल दर्पण द्वारा बना प्रतिबिंब सामान्यतः कैसा होता है?",
+    q_en: "Q31. How is the image formed by a convex mirror generally?",
+    tag: "",
+    o_hi: ["(a) आभासी, सीधा और छोटा", "(b) वास्तविक, उल्टा और बड़ा", "(c) वास्तविक, सीधा और समान आकार", "(d) आभासी, उल्टा और बड़ा"],
+    o_en: ["(a) Virtual, erect and diminished", "(b) Real, inverted and enlarged", "(c) Real, erect and same size", "(d) Virtual, inverted and enlarged"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q32. वास्तविक प्रतिबिंब के बारे में सही कथन कौन-सा है?",
+    q_en: "Q32. Which statement about a real image is correct?",
+    tag: "",
+    o_hi: ["(a) यह सामान्यतः सीधा प्रतिबिंब होता है", "(b) इसे स्क्रीन पर प्राप्त किया जा सकता है", "(c) यह स्क्रीन पर प्राप्त नहीं किया जा सकता", "(d) यह किरणों के आभासी मिलन से बनता है"],
+    o_en: ["(a) It is generally an erect image", "(b) It can be obtained on a screen", "(c) It cannot be obtained on a screen", "(d) It is formed by apparent convergence of rays"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q33. वास्तविक प्रतिबिंब कब बनता है?",
+    q_en: "Q33. When is a real image formed?",
+    tag: "",
+    o_hi: ["(a) जब किरणें पूर्णतः अवशोषित होती हैं", "(b) जब किरणें मिलती हुई प्रतीत होती हैं", "(c) जब किरणें समानांतर रहती हैं", "(d) जब प्रकाश किरणें वास्तव में मिलती हैं"],
+    o_en: ["(a) When rays are fully absorbed", "(b) When rays appear to converge", "(c) When rays remain parallel", "(d) When light rays actually converge"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q34. वास्तविक प्रतिबिंब की दिशा सामान्यतः कैसी होती है?",
+    q_en: "Q34. What is the usual orientation of a real image?",
+    tag: "",
+    o_hi: ["(a) सीधा", "(b) क्षैतिज", "(c) उल्टा", "(d) घूर्णित"],
+    o_en: ["(a) Erect", "(b) Horizontal", "(c) Inverted", "(d) Rotated"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q35. निम्न में से कौन वास्तविक प्रतिबिंब बना सकता है?",
+    q_en: "Q35. Which of the following can form a real image?",
+    tag: "",
+    o_hi: ["(a) समतल दर्पण", "(b) अवतल दर्पण", "(c) अवतल लेंस", "(d) उत्तल दर्पण"],
+    o_en: ["(a) Plane mirror", "(b) Concave mirror", "(c) Concave lens", "(d) Convex mirror"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q36. वास्तविक प्रतिबिंब बनाने वाला लेंस कौन-सा है?",
+    q_en: "Q36. Which lens can form a real image?",
+    tag: "",
+    o_hi: ["(a) उत्तल लेंस", "(b) समतल दर्पण", "(c) उत्तल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Convex lens", "(b) Plane mirror", "(c) Convex mirror", "(d) Concave lens"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q37. आभासी प्रतिबिंब के बारे में सही कथन कौन-सा है?",
+    q_en: "Q37. Which statement about a virtual image is correct?",
+    tag: "",
+    o_hi: ["(a) यह उल्टा होता है", "(b) इसे स्क्रीन पर प्राप्त किया जा सकता है", "(c) यह किरणों के वास्तविक मिलन से बनता है", "(d) इसे स्क्रीन पर प्राप्त नहीं किया जा सकता"],
+    o_en: ["(a) It is inverted", "(b) It can be obtained on a screen", "(c) It is formed by actual convergence of rays", "(d) It cannot be obtained on a screen"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q38. आभासी प्रतिबिंब कब बनता है?",
+    q_en: "Q38. When is a virtual image formed?",
+    tag: "",
+    o_hi: ["(a) जब किरणें किसी बिंदु से आती हुई प्रतीत होती हैं", "(b) जब किरणें वास्तव में उसी बिंदु पर मिलती हैं", "(c) जब सभी किरणें अवशोषित होती हैं", "(d) जब प्रकाश की चाल शून्य होती है"],
+    o_en: ["(a) When rays appear to come from a point", "(b) When rays actually meet at that point", "(c) When all rays are absorbed", "(d) When light speed is zero"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q39. आभासी प्रतिबिंब की दिशा सामान्यतः कैसी होती है?",
+    q_en: "Q39. What is the usual orientation of a virtual image?",
+    tag: "",
+    o_hi: ["(a) क्षैतिज", "(b) सीधी", "(c) उल्टी", "(d) घूर्णित"],
+    o_en: ["(a) Horizontal", "(b) Erect", "(c) Inverted", "(d) Rotated"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q40. उत्तल दर्पण किस प्रकार का प्रतिबिंब बनाता है?",
+    q_en: "Q40. What type of image does a convex mirror form?",
+    tag: "",
+    o_hi: ["(a) वास्तविक", "(b) वास्तविक-बड़ा", "(c) वास्तविक-उल्टा", "(d) आभासी"],
+    o_en: ["(a) Real", "(b) Real-enlarged", "(c) Real-inverted", "(d) Virtual"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q41. अवतल लेंस किस प्रकार का प्रतिबिंब बनाता है?",
+    q_en: "Q41. What type of image does a concave lens form?",
+    tag: "",
+    o_hi: ["(a) वास्तविक-उल्टा", "(b) आभासी", "(c) वास्तविक-बड़ा", "(d) वास्तविक"],
+    o_en: ["(a) Real-inverted", "(b) Virtual", "(c) Real-enlarged", "(d) Real"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q42. समतल दर्पण द्वारा बना प्रतिबिंब किस श्रेणी का होता है?",
+    q_en: "Q42. Which type of image is formed by a plane mirror?",
+    tag: "",
+    o_hi: ["(a) वास्तविक", "(b) वास्तविक-बड़ा", "(c) आभासी", "(d) वास्तविक-उल्टा"],
+    o_en: ["(a) Real", "(b) Real-enlarged", "(c) Virtual", "(d) Real-inverted"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q43. वास्तविक वस्तु किसे कहा जाता है?",
+    q_en: "Q43. What is called a real object?",
+    tag: "",
+    o_hi: ["(a) वह बिंदु जहाँ किरणें रुक जाती हैं", "(b) वह बिंदु जिसकी ओर किरणें जाती हुई प्रतीत होती हैं", "(c) वह बिंदु जहाँ प्रकाश की चाल शून्य होती है", "(d) वह बिंदु जिससे प्रकाश किरणें वास्तव में निकलती हैं"],
+    o_en: ["(a) A point where rays stop", "(b) A point toward which rays appear to travel", "(c) A point where light speed is zero", "(d) A point from which light rays actually diverge"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q44. आभासी वस्तु किसे कहा जाता है?",
+    q_en: "Q44. What is called a virtual object?",
+    tag: "",
+    o_hi: ["(a) वह बिंदु जहाँ परावर्तन रुकता है", "(b) वह बिंदु जिससे किरणें वास्तव में निकलती हैं", "(c) वह बिंदु जिसकी ओर प्रकाश किरणें अभिसरित होती हैं", "(d) वह बिंदु जहाँ प्रकाश अवशोषित होता है"],
+    o_en: ["(a) A point where reflection stops", "(b) A point from which rays actually diverge", "(c) A point toward which light rays converge", "(d) A point where light is absorbed"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q45. समतल दर्पण द्वारा बना प्रतिबिंब दर्पण के किस ओर बनता है?",
+    q_en: "Q45. On which side of a plane mirror is the image formed?",
+    tag: "",
+    o_hi: ["(a) दर्पण के किनारे पर", "(b) दर्पण के पीछे", "(c) दर्पण के सामने", "(d) दर्पण की सतह पर"],
+    o_en: ["(a) At the edge of the mirror", "(b) Behind the mirror", "(c) In front of the mirror", "(d) On the mirror surface"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q46. समतल दर्पण में प्रतिबिंब का आकार वस्तु की तुलना में कैसा होता है?",
+    q_en: "Q46. How does the size of a plane-mirror image compare with the object?",
+    tag: "",
+    o_hi: ["(a) आधा", "(b) दोगुना", "(c) तीन गुना", "(d) समान"],
+    o_en: ["(a) Half", "(b) Double", "(c) Three times", "(d) Same size"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q47. समतल दर्पण में वस्तु-दर्पण दूरी और प्रतिबिंब-दर्पण दूरी का संबंध क्या है?",
+    q_en: "Q47. What is the relation between object-mirror distance and image-mirror distance in a plane mirror?",
+    tag: "",
+    o_hi: ["(a) दोनों बराबर होती हैं", "(b) दोनों का कोई संबंध नहीं होता", "(c) प्रतिबिंब दूरी आधी होती है", "(d) प्रतिबिंब दूरी दोगुनी होती है"],
+    o_en: ["(a) They are equal", "(b) They are unrelated", "(c) Image distance is half", "(d) Image distance is double"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q48. अवतल दर्पण में C किसे दर्शाता है?",
+    q_en: "Q48. What does C represent in a concave mirror?",
+    tag: "",
+    o_hi: ["(a) वक्रता केंद्र", "(b) दर्पण का ध्रुव", "(c) मुख्य फोकस", "(d) मुख्य अक्ष"],
+    o_en: ["(a) Centre of curvature", "(b) Pole of the mirror", "(c) Principal focus", "(d) Principal axis"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q49. अवतल दर्पण में F किसे दर्शाता है?",
+    q_en: "Q49. What does F represent in a concave mirror?",
+    tag: "",
+    o_hi: ["(a) ध्रुव", "(b) वस्तु दूरी", "(c) वक्रता केंद्र", "(d) फोकस"],
+    o_en: ["(a) Pole", "(b) Object distance", "(c) Centre of curvature", "(d) Focus"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q50. अवतल दर्पण में P किसे दर्शाता है?",
+    q_en: "Q50. What does P represent in a concave mirror?",
+    tag: "",
+    o_hi: ["(a) वक्रता केंद्र", "(b) फोकस", "(c) ध्रुव", "(d) आवर्धन"],
+    o_en: ["(a) Centre of curvature", "(b) Focus", "(c) Pole", "(d) Magnification"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];

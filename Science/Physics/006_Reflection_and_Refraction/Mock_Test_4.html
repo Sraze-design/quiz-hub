@@ -1,0 +1,502 @@
+const data = [
+  {
+    q_hi: "Q151. गोलाकार लेंस प्रकाश के साथ क्या कर सकते हैं?",
+    q_en: "Q151. What can spherical lenses do to light?",
+    tag: "",
+    o_hi: ["(a) प्रकाश को द्रव में बदलना", "(b) प्रकाश की आवृत्ति शून्य करना", "(c) अभिसरित या अपसरित", "(d) प्रकाश को विद्युत में बदलना"],
+    o_en: ["(a) Convert light into liquid", "(b) Make its frequency zero", "(c) Converge or diverge it", "(d) Convert light into electricity"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. गोलाकार लेंस के दो मुख्य प्रकार कौन-से हैं?",
+    q_en: "Q152. What are the two main types of spherical lenses?",
+    tag: "",
+    o_hi: ["(a) समतल और बेलनाकार लेंस", "(b) अवतल और समतल दर्पण", "(c) उत्तल और अवतल लेंस", "(d) प्रिज्म और समतल काँच"],
+    o_en: ["(a) Plane and cylindrical lenses", "(b) Concave and plane mirrors", "(c) Convex and concave lenses", "(d) Prism and plane glass"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. उत्तल लेंस की मोटाई केंद्र और किनारों पर कैसी होती है?",
+    q_en: "Q153. How is a convex lens shaped at the centre and edges?",
+    tag: "",
+    o_hi: ["(a) हर जगह समान मोटाई", "(b) केंद्र पर मोटा, किनारों पर पतला", "(c) केंद्र और किनारों दोनों पर पतला", "(d) केंद्र पर पतला, किनारों पर मोटा"],
+    o_en: ["(a) Uniform thickness throughout", "(b) Thick at the centre and thin at the edges", "(c) Thin at both centre and edges", "(d) Thin at the centre and thick at the edges"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. अवतल लेंस की मोटाई केंद्र और किनारों पर कैसी होती है?",
+    q_en: "Q154. How is a concave lens shaped at the centre and edges?",
+    tag: "",
+    o_hi: ["(a) केंद्र और किनारों दोनों पर मोटा", "(b) हर जगह समान मोटाई", "(c) केंद्र पर पतला, किनारों पर मोटा", "(d) केंद्र पर मोटा, किनारों पर पतला"],
+    o_en: ["(a) Thick at both centre and edges", "(b) Uniform thickness throughout", "(c) Thin at the centre and thick at the edges", "(d) Thick at the centre and thin at the edges"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. उत्तल लेंस की प्रकाशीय क्रिया किस दर्पण के समान मानी जाती है?",
+    q_en: "Q155. The optical action of a convex lens is considered analogous to which mirror?",
+    tag: "",
+    o_hi: ["(a) अवतल दर्पण", "(b) समतल दर्पण", "(c) उत्तल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Concave mirror", "(b) Plane mirror", "(c) Convex mirror", "(d) Concave lens"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. अवतल लेंस की प्रकाशीय क्रिया किस दर्पण के समान मानी जाती है?",
+    q_en: "Q156. The optical action of a concave lens is considered analogous to which mirror?",
+    tag: "",
+    o_hi: ["(a) उत्तल लेंस", "(b) समतल दर्पण", "(c) अवतल दर्पण", "(d) उत्तल दर्पण"],
+    o_en: ["(a) Convex lens", "(b) Plane mirror", "(c) Concave mirror", "(d) Convex mirror"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. उत्तल लेंस में वस्तु अनंत पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q157. For a convex lens, where is the image formed when the object is at infinity?",
+    tag: "",
+    o_hi: ["(a) F₁ पर", "(b) फोकस F₂ पर", "(c) लेंस की वस्तु वाली ओर", "(d) 2F₂ पर"],
+    o_en: ["(a) At F₁", "(b) At focus F₂", "(c) On the object side of the lens", "(d) At 2F₂"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. उत्तल लेंस में वस्तु अनंत पर हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q158. For a convex lens with object at infinity, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और सीधा", "(b) वास्तविक और उल्टा", "(c) आभासी और उल्टा", "(d) वास्तविक और सीधा"],
+    o_en: ["(a) Virtual and erect", "(b) Real and inverted", "(c) Virtual and inverted", "(d) Real and erect"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. उत्तल लेंस में वस्तु अनंत पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q159. For a convex lens with object at infinity, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक छोटा", "(b) अत्यधिक बड़ा", "(c) लगभग समान आकार", "(d) मध्यम आकार"],
+    o_en: ["(a) Highly diminished", "(b) Highly enlarged", "(c) Approximately same size", "(d) Moderate size"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. उत्तल लेंस में वस्तु 2F₁ से परे हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q160. For a convex lens, where is the image formed when the object is beyond 2F₁?",
+    tag: "",
+    o_hi: ["(a) 2F₂ से परे", "(b) F₂ और 2F₂ के बीच", "(c) F₁ और O के बीच", "(d) वस्तु वाली ओर"],
+    o_en: ["(a) Beyond 2F₂", "(b) Between F₂ and 2F₂", "(c) Between F₁ and O", "(d) On the object side"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. उत्तल लेंस में वस्तु 2F₁ से परे हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q161. For a convex lens with object beyond 2F₁, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) आभासी और सीधा", "(b) वास्तविक और सीधा", "(c) आभासी और उल्टा", "(d) वास्तविक और उल्टा"],
+    o_en: ["(a) Virtual and erect", "(b) Real and erect", "(c) Virtual and inverted", "(d) Real and inverted"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. उत्तल लेंस में वस्तु 2F₁ से परे हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q162. For a convex lens with object beyond 2F₁, how is the image size?",
+    tag: "",
+    o_hi: ["(a) बड़ा", "(b) छोटा", "(c) अत्यधिक बड़ा", "(d) समान आकार"],
+    o_en: ["(a) Enlarged", "(b) Diminished", "(c) Highly enlarged", "(d) Same size"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. उत्तल लेंस में वस्तु 2F₁ पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q163. For a convex lens, where is the image formed when the object is at 2F₁?",
+    tag: "",
+    o_hi: ["(a) लेंस की वस्तु वाली ओर", "(b) F₂ पर", "(c) 2F₂ पर", "(d) F₁ पर"],
+    o_en: ["(a) On the object side", "(b) At F₂", "(c) At 2F₂", "(d) At F₁"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. उत्तल लेंस में वस्तु 2F₁ पर हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q164. For a convex lens with object at 2F₁, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) वास्तविक और उल्टा", "(b) आभासी और उल्टा", "(c) वास्तविक और सीधा", "(d) आभासी और सीधा"],
+    o_en: ["(a) Real and inverted", "(b) Virtual and inverted", "(c) Real and erect", "(d) Virtual and erect"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. उत्तल लेंस में वस्तु 2F₁ पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q165. For a convex lens with object at 2F₁, how is the image size?",
+    tag: "",
+    o_hi: ["(a) बड़ा", "(b) अत्यधिक छोटा", "(c) समान आकार", "(d) छोटा"],
+    o_en: ["(a) Enlarged", "(b) Highly diminished", "(c) Same size", "(d) Diminished"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. उत्तल लेंस में वस्तु F₁ और 2F₁ के बीच हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q166. For a convex lens, where is the image formed when the object lies between F₁ and 2F₁?",
+    tag: "",
+    o_hi: ["(a) 2F₂ से परे", "(b) वस्तु वाली ओर", "(c) F₂ पर", "(d) F₂ और 2F₂ के बीच"],
+    o_en: ["(a) Beyond 2F₂", "(b) On the object side", "(c) At F₂", "(d) Between F₂ and 2F₂"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. उत्तल लेंस में वस्तु F₁ और 2F₁ के बीच हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q167. For a convex lens with object between F₁ and 2F₁, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) वास्तविक और सीधा", "(b) वास्तविक और उल्टा", "(c) आभासी और उल्टा", "(d) आभासी और सीधा"],
+    o_en: ["(a) Real and erect", "(b) Real and inverted", "(c) Virtual and inverted", "(d) Virtual and erect"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. उत्तल लेंस में वस्तु F₁ और 2F₁ के बीच हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q168. For a convex lens with object between F₁ and 2F₁, how is the image size?",
+    tag: "",
+    o_hi: ["(a) समान आकार", "(b) छोटा", "(c) बड़ा", "(d) अत्यधिक छोटा"],
+    o_en: ["(a) Same size", "(b) Diminished", "(c) Enlarged", "(d) Highly diminished"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. उत्तल लेंस में वस्तु F₁ पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q169. For a convex lens, where is the image formed when the object is at F₁?",
+    tag: "",
+    o_hi: ["(a) 2F₂ पर", "(b) अनंत पर", "(c) F₂ पर", "(d) वस्तु वाली ओर"],
+    o_en: ["(a) At 2F₂", "(b) At infinity", "(c) At F₂", "(d) On the object side"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. उत्तल लेंस में वस्तु F₁ पर हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q170. For a convex lens with object at F₁, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) वास्तविक और उल्टा", "(b) आभासी और उल्टा", "(c) वास्तविक और सीधा", "(d) आभासी और सीधा"],
+    o_en: ["(a) Real and inverted", "(b) Virtual and inverted", "(c) Real and erect", "(d) Virtual and erect"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. उत्तल लेंस में वस्तु F₁ पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q171. For a convex lens with object at F₁, how is the image size?",
+    tag: "",
+    o_hi: ["(a) मध्यम आकार", "(b) अत्यधिक बड़ा", "(c) अत्यधिक बड़ा", "(d) लगभग समान आकार"],
+    o_en: ["(a) Moderate size", "(b) Highly enlarged", "(c) Highly enlarged", "(d) Approximately same size"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. उत्तल लेंस में वस्तु F₁ और O के बीच हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q172. For a convex lens, where is the image formed when the object lies between F₁ and O?",
+    tag: "",
+    o_hi: ["(a) लेंस की उसी ओर जहाँ वस्तु है", "(b) लेंस के दूसरी ओर F₂ और 2F₂ के बीच", "(c) लेंस के दूसरी ओर फोकस F₂ पर", "(d) लेंस के दूसरी ओर 2F₂ से परे"],
+    o_en: ["(a) On the same side of the lens as the object", "(b) Between F₂ and 2F₂ on the other side of the lens", "(c) At focus F₂ on the other side of the lens", "(d) Beyond 2F₂ on the other side of the lens"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. उत्तल लेंस में वस्तु F₁ और O के बीच हो तो प्रतिबिंब की प्रकृति कैसी होती है?",
+    q_en: "Q173. For a convex lens with object between F₁ and O, what is the image nature?",
+    tag: "",
+    o_hi: ["(a) वास्तविक और सीधा", "(b) आभासी और सीधा", "(c) वास्तविक और उल्टा", "(d) आभासी और उल्टा"],
+    o_en: ["(a) Real and erect", "(b) Virtual and erect", "(c) Real and inverted", "(d) Virtual and inverted"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q174. उत्तल लेंस में वस्तु F₁ और O के बीच हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q174. For a convex lens with object between F₁ and O, how is the image size?",
+    tag: "",
+    o_hi: ["(a) समान आकार", "(b) अत्यधिक छोटा", "(c) बड़ा", "(d) छोटा"],
+    o_en: ["(a) Same size", "(b) Highly diminished", "(c) Enlarged", "(d) Diminished"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q175. अवतल लेंस सामान्यतः किस प्रकार का प्रतिबिंब बनाता है?",
+    q_en: "Q175. What type of image does a concave lens generally form?",
+    tag: "",
+    o_hi: ["(a) वास्तविक, सीधा और समान आकार", "(b) आभासी, सीधा और छोटा", "(c) आभासी, उल्टा और बड़ा", "(d) वास्तविक, उल्टा और बड़ा"],
+    o_en: ["(a) Real, erect and same size", "(b) Virtual, erect and diminished", "(c) Virtual, inverted and enlarged", "(d) Real, inverted and enlarged"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q176. अवतल लेंस में वस्तु अनंत पर हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q176. For a concave lens, where is the image formed when the object is at infinity?",
+    tag: "",
+    o_hi: ["(a) अनंत पर", "(b) F₂ पर", "(c) 2F₂ पर", "(d) F₁ पर"],
+    o_en: ["(a) At infinity", "(b) At F₂", "(c) At 2F₂", "(d) At F₁"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q177. अवतल लेंस में वस्तु अनंत पर हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q177. For a concave lens with object at infinity, how is the image size?",
+    tag: "",
+    o_hi: ["(a) मध्यम आकार", "(b) लगभग समान आकार", "(c) अत्यधिक बड़ा", "(d) अत्यधिक छोटा"],
+    o_en: ["(a) Moderate size", "(b) Approximately same size", "(c) Highly enlarged", "(d) Highly diminished"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q178. अवतल लेंस में वस्तु अनंत और O के बीच हो तो प्रतिबिंब कहाँ बनता है?",
+    q_en: "Q178. For a concave lens, where is the image formed when the object lies between infinity and O?",
+    tag: "",
+    o_hi: ["(a) F₁ और O के बीच", "(b) अनंत पर", "(c) F₂ और 2F₂ के बीच", "(d) 2F₂ से परे"],
+    o_en: ["(a) Between F₁ and O", "(b) At infinity", "(c) Between F₂ and 2F₂", "(d) Beyond 2F₂"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q179. अवतल लेंस में वस्तु अनंत और O के बीच हो तो प्रतिबिंब का आकार कैसा होता है?",
+    q_en: "Q179. For a concave lens with object between infinity and O, how is the image size?",
+    tag: "",
+    o_hi: ["(a) अत्यधिक बड़ा", "(b) बड़ा", "(c) समान आकार", "(d) छोटा"],
+    o_en: ["(a) Highly enlarged", "(b) Enlarged", "(c) Same size", "(d) Diminished"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q180. लेंस सूत्र कौन-सा है?",
+    q_en: "Q180. Which is the lens formula?",
+    tag: "",
+    o_hi: ["(a) v + u = f", "(b) 1/v - 1/u = 1/f", "(c) 1/v + 1/u = 1/f", "(d) uv = f"],
+    o_en: ["(a) v + u = f", "(b) 1/v - 1/u = 1/f", "(c) 1/v + 1/u = 1/f", "(d) uv = f"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q181. लेंस सूत्र में f क्या दर्शाता है?",
+    q_en: "Q181. In the lens formula, what does f represent?",
+    tag: "",
+    o_hi: ["(a) लेंस से वस्तु की दूरी", "(b) लेंस की प्रकाशीय शक्ति", "(c) लेंस से प्रतिबिंब की दूरी", "(d) लेंस की फोकस दूरी"],
+    o_en: ["(a) Object distance from the lens", "(b) Optical power of the lens", "(c) Image distance from the lens", "(d) Focal length of the lens"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. लेंस सूत्र में v क्या दर्शाता है?",
+    q_en: "Q182. In the lens formula, what does v represent?",
+    tag: "",
+    o_hi: ["(a) लेंस से वस्तु की दूरी", "(b) लेंस की वक्रता त्रिज्या", "(c) लेंस से प्रतिबिंब की दूरी", "(d) लेंस की फोकस दूरी"],
+    o_en: ["(a) Object distance from the lens", "(b) Radius of curvature of the lens", "(c) Image distance from the lens", "(d) Focal length of the lens"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. लेंस सूत्र में u क्या दर्शाता है?",
+    q_en: "Q183. In the lens formula, what does u represent?",
+    tag: "",
+    o_hi: ["(a) लेंस से प्रतिबिंब की दूरी", "(b) लेंस से वस्तु की दूरी", "(c) लेंस का व्यास", "(d) लेंस की फोकस दूरी"],
+    o_en: ["(a) Image distance from the lens", "(b) Object distance from the lens", "(c) Diameter of the lens", "(d) Focal length of the lens"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. लेंस का आवर्धन M किस अनुपात के बराबर है?",
+    q_en: "Q184. Lens magnification M equals which ratio?",
+    tag: "",
+    o_hi: ["(a) v/u", "(b) f/u", "(c) -v/u", "(d) u/v"],
+    o_en: ["(a) v/u", "(b) f/u", "(c) -v/u", "(d) u/v"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. लेंस के लिए M = 1 होने का अर्थ क्या है?",
+    q_en: "Q185. What does M = 1 mean for a lens?",
+    tag: "",
+    o_hi: ["(a) प्रतिबिंब वस्तु से छोटा है", "(b) प्रतिबिंब और वस्तु का आकार समान है", "(c) प्रतिबिंब वस्तु से बड़ा है", "(d) प्रतिबिंब अनिवार्य रूप से उल्टा है"],
+    o_en: ["(a) Image is smaller than the object", "(b) Image and object are the same size", "(c) Image is larger than the object", "(d) Image must be inverted"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. लेंस के लिए M > 1 होने का अर्थ क्या है?",
+    q_en: "Q186. What does M > 1 mean for a lens?",
+    tag: "",
+    o_hi: ["(a) प्रतिबिंब समान आकार का है", "(b) प्रतिबिंब नहीं बनता", "(c) प्रतिबिंब वस्तु से छोटा है", "(d) प्रतिबिंब वस्तु से बड़ा है"],
+    o_en: ["(a) Image is the same size", "(b) No image is formed", "(c) Image is smaller than the object", "(d) Image is larger than the object"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. लेंस के लिए M < 1 होने का अर्थ क्या है?",
+    q_en: "Q187. What does M < 1 mean for a lens?",
+    tag: "",
+    o_hi: ["(a) प्रतिबिंब वस्तु से छोटा है", "(b) प्रतिबिंब वस्तु से बड़ा है", "(c) प्रतिबिंब अनंत पर होता है", "(d) प्रतिबिंब समान आकार का है"],
+    o_en: ["(a) Image is smaller than the object", "(b) Image is larger than the object", "(c) Image is at infinity", "(d) Image is the same size"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. दूरदृष्टि दोष (हाइपरमेट्रोपिया) के सुधार में किस लेंस का उपयोग किया जाता है?",
+    q_en: "Q188. Which lens is used to correct hypermetropia?",
+    tag: "",
+    o_hi: ["(a) समतल दर्पण", "(b) उत्तल लेंस", "(c) अवतल लेंस", "(d) उत्तल दर्पण"],
+    o_en: ["(a) Plane mirror", "(b) Convex lens", "(c) Concave lens", "(d) Convex mirror"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. आवर्धक काँच में किस प्रकार का लेंस उपयोग किया जाता है?",
+    q_en: "Q189. Which lens is used in a magnifying glass?",
+    tag: "",
+    o_hi: ["(a) समतल काँच", "(b) उत्तल लेंस", "(c) अवतल लेंस", "(d) उत्तल दर्पण"],
+    o_en: ["(a) Plane glass", "(b) Convex lens", "(c) Concave lens", "(d) Convex mirror"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. सूक्ष्मदर्शी में किस प्रकार का लेंस उपयोगी है?",
+    q_en: "Q190. Which lens is useful in a microscope?",
+    tag: "",
+    o_hi: ["(a) अवतल लेंस", "(b) उत्तल दर्पण", "(c) उत्तल लेंस", "(d) समतल दर्पण"],
+    o_en: ["(a) Concave lens", "(b) Convex mirror", "(c) Convex lens", "(d) Plane mirror"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. कैमरे में किस प्रकार का लेंस उपयोगी है?",
+    q_en: "Q191. Which lens is useful in a camera?",
+    tag: "",
+    o_hi: ["(a) उत्तल लेंस", "(b) समतल काँच", "(c) उत्तल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Convex lens", "(b) Plane glass", "(c) Convex mirror", "(d) Concave lens"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. दूरबीन में किस प्रकार का लेंस उपयोगी है?",
+    q_en: "Q192. Which lens is useful in a telescope?",
+    tag: "",
+    o_hi: ["(a) समतल काँच", "(b) उत्तल दर्पण", "(c) अवतल लेंस", "(d) उत्तल लेंस"],
+    o_en: ["(a) Plane glass", "(b) Convex mirror", "(c) Concave lens", "(d) Convex lens"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q193. निकटदृष्टि दोष (मायोपिया) के सुधार में किस लेंस का उपयोग किया जाता है?",
+    q_en: "Q193. Which lens is used to correct myopia?",
+    tag: "",
+    o_hi: ["(a) उत्तल दर्पण", "(b) उत्तल लेंस", "(c) समतल दर्पण", "(d) अवतल लेंस"],
+    o_en: ["(a) Convex mirror", "(b) Convex lens", "(c) Plane mirror", "(d) Concave lens"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q194. लेंस की शक्ति P और फोकस दूरी f(m) का संबंध क्या है?",
+    q_en: "Q194. What is the relation between lens power P and focal length f(m)?",
+    tag: "",
+    o_hi: ["(a) P = f(m)", "(b) P = f²(m)", "(c) P = 2f(m)", "(d) P = 1/f(m)"],
+    o_en: ["(a) P = f(m)", "(b) P = f²(m)", "(c) P = 2f(m)", "(d) P = 1/f(m)"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q195. यदि फोकस दूरी सेंटीमीटर में हो तो लेंस की शक्ति का सूत्र क्या है?",
+    q_en: "Q195. If focal length is in centimetres, what is the formula for lens power?",
+    tag: "",
+    o_hi: ["(a) P = 1/f(cm)", "(b) P = f(cm)/100", "(c) P = 100/f(cm)", "(d) P = 100 × f(cm)"],
+    o_en: ["(a) P = 1/f(cm)", "(b) P = f(cm)/100", "(c) P = 100/f(cm)", "(d) P = 100 × f(cm)"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q196. लेंस की शक्ति की SI इकाई क्या है?",
+    q_en: "Q196. What is the SI unit of lens power?",
+    tag: "",
+    o_hi: ["(a) न्यूटन (N)", "(b) डायोप्टर (D)", "(c) हर्ट्ज़ (Hz)", "(d) मीटर (m)"],
+    o_en: ["(a) Newton (N)", "(b) Dioptre (D)", "(c) Hertz (Hz)", "(d) Metre (m)"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q197. 1 डायोप्टर किसके बराबर होता है?",
+    q_en: "Q197. What is 1 dioptre equal to?",
+    tag: "",
+    o_hi: ["(a) 1 m/s", "(b) 1 s⁻¹", "(c) 1 m⁻¹", "(d) 1 m"],
+    o_en: ["(a) 1 m/s", "(b) 1 s⁻¹", "(c) 1 m⁻¹", "(d) 1 m"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q198. उत्तल लेंस की शक्ति का चिह्न क्या होता है?",
+    q_en: "Q198. What is the sign of power of a convex lens?",
+    tag: "",
+    o_hi: ["(a) शून्य", "(b) वस्तु पर निर्भर", "(c) ऋणात्मक", "(d) धनात्मक"],
+    o_en: ["(a) Zero", "(b) Depends on the object", "(c) Negative", "(d) Positive"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q199. अवतल लेंस की शक्ति का चिह्न क्या होता है?",
+    q_en: "Q199. What is the sign of power of a concave lens?",
+    tag: "",
+    o_hi: ["(a) ऋणात्मक", "(b) शून्य", "(c) वस्तु पर निर्भर", "(d) धनात्मक"],
+    o_en: ["(a) Negative", "(b) Zero", "(c) Depends on the object", "(d) Positive"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q200. f = -15 सेमी और v = -10 सेमी वाले अवतल लेंस में वस्तु दूरी u कितनी होगी?",
+    q_en: "Q200. In the concave-lens example with f = -15 cm and v = -10 cm, what is object distance u?",
+    tag: "",
+    o_hi: ["(a) -30 सेमी", "(b) -10 सेमी", "(c) +30 सेमी", "(d) -15 सेमी"],
+    o_en: ["(a) -30 cm", "(b) -10 cm", "(c) +30 cm", "(d) -15 cm"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];
