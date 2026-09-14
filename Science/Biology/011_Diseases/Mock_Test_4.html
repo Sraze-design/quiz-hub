@@ -1,0 +1,1002 @@
+const data = [
+  {
+    q_hi: "Q151. लिंग-संबंधी विकार किसे प्रभावित करने वाले विकार हैं?",
+    q_en: "Q151. Sex-linked disorders affect which chromosomes?",
+    tag: "",
+    o_hi: [
+      "(a) Mitochondrial DNA, जो mitochondria के भीतर पाया जाता है",
+      "(b) Bacterial plasmids, जो bacteria में extra-chromosomal DNA होते हैं",
+      "(c) Autosomes, जिन्हें non-sex chromosomes कहा जाता है",
+      "(d) लिंग गुणसूत्र, अर्थात X या Y chromosomes"
+    ],
+    o_en: [
+      "(a) Mitochondrial DNA, which is present inside mitochondria",
+      "(b) Bacterial plasmids, which are extra-chromosomal DNA in bacteria",
+      "(c) Autosomes, also called non-sex chromosomes",
+      "(d) Sex chromosomes, i.e. X or Y chromosomes"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. Turner syndrome का chromosome pattern क्या है?",
+    q_en: "Q152. What is the chromosome pattern of Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) XXX",
+      "(b) XYY",
+      "(c) XO",
+      "(d) XXY"
+    ],
+    o_en: [
+      "(a) XXX",
+      "(b) XYY",
+      "(c) XO",
+      "(d) XXY"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. Klinefelter syndrome का chromosome pattern क्या है?",
+    q_en: "Q153. What is the chromosome pattern of Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) XO",
+      "(b) XYY",
+      "(c) XXY",
+      "(d) XXX"
+    ],
+    o_en: [
+      "(a) XO",
+      "(b) XYY",
+      "(c) XXY",
+      "(d) XXX"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. Turner syndrome में शरीर की ऊँचाई से संबंधित सामान्य लक्षण क्या है?",
+    q_en: "Q154. What is the typical stature-related feature of Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) बहुत लंबा कद",
+      "(b) छोटा कद",
+      "(c) लंबी भुजाएँ और टाँगें",
+      "(d) सामान्य से अधिक muscular"
+    ],
+    o_en: [
+      "(a) Very tall stature",
+      "(b) Short stature",
+      "(c) Long arms and legs",
+      "(d) More muscular than normal"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. Turner syndrome में गर्दन की प्रमुख विशेषता क्या है?",
+    q_en: "Q155. What is a major neck feature of Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) Swollen neck",
+      "(b) Stiff neck",
+      "(c) Webbed neck",
+      "(d) Long neck"
+    ],
+    o_en: [
+      "(a) Swollen neck",
+      "(b) Stiff neck",
+      "(c) Webbed neck",
+      "(d) Long neck"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. Turner syndrome में छाती से संबंधित प्रमुख लक्षण क्या है?",
+    q_en: "Q156. What is a major chest-related feature of Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) संकरी छाती और पास-पास nipples",
+      "(b) चौड़ी छाती और दूर-दूर nipples",
+      "(c) Pigeon chest",
+      "(d) Barrel chest"
+    ],
+    o_en: [
+      "(a) Narrow chest with closely spaced nipples",
+      "(b) Broad chest with widely spaced nipples",
+      "(c) Pigeon chest",
+      "(d) Barrel chest"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. Turner syndrome में कोहनी से संबंधित कौन-सा लक्षण पाया जाता है?",
+    q_en: "Q157. Which elbow-related feature is found in Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) Foot drop",
+      "(b) Cubitus valgus",
+      "(c) Locked jaw",
+      "(d) Clubbing"
+    ],
+    o_en: [
+      "(a) Foot drop",
+      "(b) Cubitus valgus",
+      "(c) Locked jaw",
+      "(d) Clubbing"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. Turner syndrome में हृदय/रक्तवाहिका से संबंधित कौन-सा लक्षण पाया जाता है?",
+    q_en: "Q158. Which cardiovascular feature is found in Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) महाधमनी का संकुचन",
+      "(b) Aortic rupture",
+      "(c) Varicose veins",
+      "(d) Pulmonary embolism"
+    ],
+    o_en: [
+      "(a) Coarctation of the aorta",
+      "(b) Aortic rupture",
+      "(c) Varicose veins",
+      "(d) Pulmonary embolism"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. Turner syndrome में प्रजनन से संबंधित कौन-सी समस्या स्रोत में दी गई है?",
+    q_en: "Q159. Which reproductive problem is given for Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) जल-विमुखता",
+      "(b) अत्यधिक प्रजनन क्षमता",
+      "(c) बांझपन/रजोरोध",
+      "(d) लॉक्ड जॉ"
+    ],
+    o_en: [
+      "(a) Hydrophobia",
+      "(b) Excess fertility",
+      "(c) Infertility/amenorrhoea",
+      "(d) Locked jaw"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. Turner syndrome में जन्म के समय कौन-सा peripheral लक्षण दिया गया है?",
+    q_en: "Q160. Which peripheral feature at birth is given in Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) Lymphedema",
+      "(b) Jaundice",
+      "(c) Cyanosis",
+      "(d) Ascites"
+    ],
+    o_en: [
+      "(a) Lymphedema",
+      "(b) Jaundice",
+      "(c) Cyanosis",
+      "(d) Ascites"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. Turner syndrome में त्वचा पर किस प्रकार के nevi पाए जा सकते हैं?",
+    q_en: "Q161. What type of nevi may be found on the skin in Turner syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) Viral warts",
+      "(b) Ringworm lesions",
+      "(c) Scabies burrows",
+      "(d) रंजित nevi"
+    ],
+    o_en: [
+      "(a) Viral warts",
+      "(b) Ringworm lesions",
+      "(c) Scabies burrows",
+      "(d) Pigmented nevi"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. Hemophilia के बारे में स्रोत का सही कथन कौन-सा है?",
+    q_en: "Q162. Which statement about hemophilia is correct according to the source?",
+    tag: "",
+    o_hi: [
+      "(a) X chromosome पर स्थित abnormal gene इसे प्रभावित करता है; यह recessive disorder है जिसमें blood clot नहीं बनता",
+      "(b) यह Y chromosome पर स्थित dominant gene से होने वाला inherited disorder है, जिसमें clotting बढ़ जाता है",
+      "(c) यह chromosome 21 की अतिरिक्त प्रति से होने वाला autosomal disorder है, जिसमें Trisomy 21 पाया जाता है",
+      "(d) यह bacterial infection से होने वाला रक्तस्रावी रोग है, जिसमें platelets तेजी से नष्ट होते हैं"
+    ],
+    o_en: [
+      "(a) An abnormal gene on the X chromosome is involved; it is a recessive disorder in which blood clotting does not occur",
+      "(b) It is an inherited disorder caused by a dominant gene on the Y chromosome, in which clotting increases",
+      "(c) It is an autosomal disorder caused by an extra copy of chromosome 21, producing Trisomy 21",
+      "(d) It is a bleeding disorder caused by bacterial infection in which platelets are rapidly destroyed"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. Klinefelter syndrome में शरीर की बनावट कैसी बताई गई है?",
+    q_en: "Q163. How is body build described in Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) छोटा और बहुत muscular",
+      "(b) छोटा और अधिक muscular",
+      "(c) लंबा और कम muscular",
+      "(d) सामान्य कद और अधिक muscular"
+    ],
+    o_en: [
+      "(a) Short and very muscular",
+      "(b) Short and more muscular",
+      "(c) Tall and less muscular",
+      "(d) Normal height and more muscular"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. Klinefelter syndrome में कौन-सा स्तन-संबंधी लक्षण दिया गया है?",
+    q_en: "Q164. Which breast-related feature is given in Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) nipple pain",
+      "(b) स्तन में fungal rash",
+      "(c) स्तन ऊतक का अभाव",
+      "(d) बड़े स्तन"
+    ],
+    o_en: [
+      "(a) Nipple pain",
+      "(b) Fungal rash on breast",
+      "(c) Absent breast tissue",
+      "(d) Enlarged breasts"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. Klinefelter syndrome में हड्डियों और ऊर्जा से जुड़ा कौन-सा समूह दिया गया है?",
+    q_en: "Q165. Which bone-and-energy feature is given in Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) मजबूत हड्डियाँ और अधिक ऊर्जा",
+      "(b) कमजोर हड्डियाँ और कम ऊर्जा",
+      "(c) हड्डियों में तांबा और अधिक ऊर्जा",
+      "(d) हड्डियों में iron और normal energy"
+    ],
+    o_en: [
+      "(a) Strong bones and high energy",
+      "(b) Weak bones and low energy",
+      "(c) Copper in bones and high energy",
+      "(d) Iron in bones and normal energy"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. Klinefelter syndrome में जननांगों से संबंधित कौन-सा लक्षण दिया गया है?",
+    q_en: "Q166. Which genital feature is given in Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) enlarged prostate",
+      "(b) छोटा penis और testes",
+      "(c) बड़े penis और testes",
+      "(d) scrotal swelling"
+    ],
+    o_en: [
+      "(a) Enlarged prostate",
+      "(b) Small penis and testes",
+      "(c) Large penis and testes",
+      "(d) Scrotal swelling"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. Klinefelter syndrome में शरीर के अनुपात से संबंधित कौन-सा लक्षण दिया गया है?",
+    q_en: "Q167. Which body-proportion feature is given in Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) चौड़े कूल्हे और लंबी टाँगें",
+      "(b) संकरी छाती और छोटी भुजाएँ",
+      "(c) चौड़ी छाती और छोटी टाँगें",
+      "(d) संकरे कूल्हे और छोटी टाँगें"
+    ],
+    o_en: [
+      "(a) Broad hips and long legs",
+      "(b) Narrow chest and short arms",
+      "(c) Broad chest and short legs",
+      "(d) Narrow hips and short legs"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. Klinefelter syndrome में puberty के बाद बालों के बारे में क्या बताया गया है?",
+    q_en: "Q168. What is stated about hair after puberty in Klinefelter syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) चेहरे और शरीर पर अत्यधिक बाल",
+      "(b) सिर के बाल कम",
+      "(c) बालों में fungal infection",
+      "(d) चेहरे और शरीर पर कम बाल"
+    ],
+    o_en: [
+      "(a) Excess facial and body hair",
+      "(b) Reduced scalp hair only",
+      "(c) Fungal infection of hair",
+      "(d) Reduced facial and body hair"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. Mendelian disorders मुख्यतः किस कारण से हो सकते हैं?",
+    q_en: "Q169. Mendelian disorders can mainly result from what?",
+    tag: "",
+    o_hi: [
+      "(a) संक्रमण से",
+      "(b) एकल gene में mutation",
+      "(c) पोषक तत्व की कमी से",
+      "(d) पूरे chromosome की संख्या बढ़ने से"
+    ],
+    o_en: [
+      "(a) Infection",
+      "(b) Mutation in a single gene",
+      "(c) Nutrient deficiency",
+      "(d) Increase in the number of whole chromosomes"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. निम्न में से कौन-सा युग्म Mendelian disorders के उदाहरण हैं?",
+    q_en: "Q170. Which pair is an example of Mendelian disorders?",
+    tag: "",
+    o_hi: [
+      "(a) Hypertension और Diabetes",
+      "(b) Sickle-cell anaemia और Thalassemia",
+      "(c) Cholera और Typhoid",
+      "(d) Glaucoma और Trachoma"
+    ],
+    o_en: [
+      "(a) Hypertension and diabetes",
+      "(b) Sickle-cell anaemia and thalassemia",
+      "(c) Cholera and typhoid",
+      "(d) Glaucoma and trachoma"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. निम्न में से कौन-सा युग्म Mendelian disorders के उदाहरण हैं?",
+    q_en: "Q171. Which pair is an example of Mendelian disorders?",
+    tag: "",
+    o_hi: [
+      "(a) Color blindness और Hemophilia",
+      "(b) Coronary heart disease और Diabetes",
+      "(c) Influenza और Measles",
+      "(d) Ringworm और Scabies"
+    ],
+    o_en: [
+      "(a) Color blindness and hemophilia",
+      "(b) Coronary heart disease and diabetes",
+      "(c) Influenza and measles",
+      "(d) Ringworm and scabies"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. निम्न में से कौन-सा युग्म Polygenic disorders के उदाहरण हैं?",
+    q_en: "Q172. Which pair is an example of polygenic disorders?",
+    tag: "",
+    o_hi: [
+      "(a) उच्च रक्तचाप और Coronary heart disease",
+      "(b) Ringworm और Scabies",
+      "(c) Cholera और Typhoid",
+      "(d) Hemophilia और Color blindness"
+    ],
+    o_en: [
+      "(a) Hypertension and coronary heart disease",
+      "(b) Ringworm and scabies",
+      "(c) Cholera and typhoid",
+      "(d) Hemophilia and color blindness"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. स्रोत में निम्न में से किसे Polygenic disorder का उदाहरण दिया गया है?",
+    q_en: "Q173. Which is given in the source as an example of a polygenic disorder?",
+    tag: "",
+    o_hi: [
+      "(a) मधुमेह",
+      "(b) Polio",
+      "(c) Rabies",
+      "(d) Diphtheria"
+    ],
+    o_en: [
+      "(a) Diabetes",
+      "(b) Polio",
+      "(c) Rabies",
+      "(d) Diphtheria"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q174. Glaucoma मुख्यतः किस तंत्रिका को नुकसान पहुँचाता है?",
+    q_en: "Q174. Glaucoma mainly damages which nerve?",
+    tag: "",
+    o_hi: [
+      "(a) Sciatic nerve",
+      "(b) Optic nerve",
+      "(c) Vagus nerve",
+      "(d) Auditory nerve"
+    ],
+    o_en: [
+      "(a) Sciatic nerve",
+      "(b) Optic nerve",
+      "(c) Vagus nerve",
+      "(d) Auditory nerve"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q175. Glaucoma के कारण क्या हो सकता है?",
+    q_en: "Q175. What may result from glaucoma?",
+    tag: "",
+    o_hi: [
+      "(a) Locked jaw",
+      "(b) Hydrophobia",
+      "(c) Patchy hair loss",
+      "(d) Vision loss या blindness"
+    ],
+    o_en: [
+      "(a) Locked jaw",
+      "(b) Hydrophobia",
+      "(c) Patchy hair loss",
+      "(d) Vision loss or blindness"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q176. स्रोत में Glaucoma को सामान्यतः किस प्रकार का विकार बताया गया है?",
+    q_en: "Q176. How is glaucoma generally described in the source?",
+    tag: "",
+    o_hi: [
+      "(a) Fungal disease",
+      "(b) Protozoan disease",
+      "(c) Water-borne disease",
+      "(d) Hereditary disorder"
+    ],
+    o_en: [
+      "(a) Fungal disease",
+      "(b) Protozoan disease",
+      "(c) Water-borne disease",
+      "(d) Hereditary disorder"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q177. Glaucoma कब होता है, स्रोत के अनुसार?",
+    q_en: "Q177. According to the source, when does glaucoma occur?",
+    tag: "",
+    o_hi: [
+      "(a) जब नेत्र के तरल पदार्थ का दबाव बढ़ जाता है",
+      "(b) जब skin में mite प्रवेश करे",
+      "(c) जब chromosome 21 घटे",
+      "(d) जब blood sugar शून्य हो"
+    ],
+    o_en: [
+      "(a) When the pressure of the fluid in the eye increases",
+      "(b) When a mite enters the skin",
+      "(c) When chromosome 21 decreases",
+      "(d) When blood sugar becomes zero"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q178. स्रोत में Trachoma का कारक कौन-सा जीवाणु दिया गया है?",
+    q_en: "Q178. Which bacterium is given as the cause of trachoma in the source?",
+    tag: "",
+    o_hi: [
+      "(a) Yersinia pestis",
+      "(b) Vibrio cholerae",
+      "(c) Chlamydia trachomatis",
+      "(d) Salmonella typhi"
+    ],
+    o_en: [
+      "(a) Yersinia pestis",
+      "(b) Vibrio cholerae",
+      "(c) Chlamydia trachomatis",
+      "(d) Salmonella typhi"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q179. Trachoma के संदर्भ में स्रोत में नेत्र के किस बदलाव का उल्लेख है?",
+    q_en: "Q179. What eye-related change is mentioned in the source for trachoma?",
+    tag: "",
+    o_hi: [
+      "(a) Lens में fungal growth",
+      "(b) Retina में RBC rupture",
+      "(c) नेत्र के तरल दबाव में वृद्धि",
+      "(d) Cornea में copper deposition"
+    ],
+    o_en: [
+      "(a) Fungal growth in the lens",
+      "(b) RBC rupture in the retina",
+      "(c) Increase in intraocular fluid pressure",
+      "(d) Copper deposition in the cornea"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q180. वैश्विक महामारी (Pandemic) का सही अर्थ क्या है?",
+    q_en: "Q180. What is the correct meaning of a pandemic?",
+    tag: "",
+    o_hi: [
+      "(a) किसी निश्चित क्षेत्र में किसी रोग का लगातार अपेक्षित स्तर पर मौजूद रहना",
+      "(b) किसी एक शहर या जिले में सामान्य स्तर से अधिक मामलों की अचानक वृद्धि",
+      "(c) कई देशों, महाद्वीपों या विश्व में मामलों में अचानक वृद्धि",
+      "(d) किसी परिवार या छोटे समूह में एक समान आनुवंशिक विकार के कई मामले मिलना"
+    ],
+    o_en: [
+      "(a) Continuous presence of a disease at an expected level in a defined region",
+      "(b) A sudden rise in cases above the usual level within one city or district",
+      "(c) A sudden rise in cases across many countries, continents or the world",
+      "(d) Occurrence of several cases of the same inherited disorder within a family or small group"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q181. महामारी (Epidemic) का स्रोत में क्या अर्थ दिया गया है?",
+    q_en: "Q181. What meaning of epidemic is given in the source?",
+    tag: "",
+    o_hi: [
+      "(a) किसी क्षेत्र में रोग का लंबे समय तक अपेक्षित स्तर पर बना रहना",
+      "(b) कई देशों और महाद्वीपों में एक साथ व्यापक प्रसार होना",
+      "(c) एक परिवार में inherited disorder के मामलों का पीढ़ी-दर-पीढ़ी बने रहना",
+      "(d) बड़ी आबादी में फैलने वाले मामलों में अचानक वृद्धि"
+    ],
+    o_en: [
+      "(a) Long-term persistence of a disease at an expected level in a region",
+      "(b) Simultaneous widespread transmission across many countries and continents",
+      "(c) Persistence of cases of an inherited disorder across generations within a family",
+      "(d) A sudden increase in cases spreading through a large population"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. स्थानिक (Endemic) रोग किसे कहा गया है?",
+    q_en: "Q182. What is an endemic disease?",
+    tag: "",
+    o_hi: [
+      "(a) वह रोग जो किसी बड़ी आबादी में सामान्य से अधिक मामलों के साथ अचानक बढ़े",
+      "(b) वह रोग जो किसी परिवार में genetic inheritance के कारण पीढ़ियों तक बना रहे",
+      "(c) वह रोग जो किसी आबादी या क्षेत्र में लगातार मौजूद रहे और अपेक्षाकृत कम फैले",
+      "(d) वह रोग जो अनेक देशों में अचानक बढ़कर वैश्विक स्तर पर फैल जाए"
+    ],
+    o_en: [
+      "(a) A disease that suddenly rises above the normal number of cases in a large population",
+      "(b) A disease that persists through generations in a family because of genetic inheritance",
+      "(c) A disease that remains continuously present in a population or region and spreads relatively little",
+      "(d) A disease that suddenly increases across many countries and spreads globally"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. Wilson disease का inheritance pattern क्या बताया गया है?",
+    q_en: "Q183. What inheritance pattern is stated for Wilson disease?",
+    tag: "",
+    o_hi: [
+      "(a) Autosomal recessive",
+      "(b) Autosomal dominant",
+      "(c) X-linked dominant",
+      "(d) Y-linked"
+    ],
+    o_en: [
+      "(a) Autosomal recessive",
+      "(b) Autosomal dominant",
+      "(c) X-linked dominant",
+      "(d) Y-linked"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. Wilson disease में किस धातु का असामान्य संचय होता है?",
+    q_en: "Q184. Which metal accumulates abnormally in Wilson disease?",
+    tag: "",
+    o_hi: [
+      "(a) Iron",
+      "(b) Mercury",
+      "(c) Copper",
+      "(d) Cadmium"
+    ],
+    o_en: [
+      "(a) Iron",
+      "(b) Mercury",
+      "(c) Copper",
+      "(d) Cadmium"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. Wilson disease में copper विशेष रूप से किन अंगों में जमा हो सकता है?",
+    q_en: "Q185. In Wilson disease, copper may especially accumulate in which organs?",
+    tag: "",
+    o_hi: [
+      "(a) Bone, muscle और intestine",
+      "(b) Heart, spleen और pancreas",
+      "(c) Brain, liver और cornea",
+      "(d) Kidney, skin और lung"
+    ],
+    o_en: [
+      "(a) Bone, muscle and intestine",
+      "(b) Heart, spleen and pancreas",
+      "(c) Brain, liver and cornea",
+      "(d) Kidney, skin and lung"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. Mad Hatter disease किस धातु की toxicity से जुड़ा है?",
+    q_en: "Q186. Mad Hatter disease is associated with toxicity of which metal?",
+    tag: "",
+    o_hi: [
+      "(a) Mercury",
+      "(b) Copper",
+      "(c) Cadmium",
+      "(d) Iron"
+    ],
+    o_en: [
+      "(a) Mercury",
+      "(b) Copper",
+      "(c) Cadmium",
+      "(d) Iron"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. Mad Hatter disease में मुख्यतः किस प्रकार के लक्षण बताए गए हैं?",
+    q_en: "Q187. What type of symptoms are mainly described in Mad Hatter disease?",
+    tag: "",
+    o_hi: [
+      "(a) Water-borne symptoms",
+      "(b) Neurological symptoms",
+      "(c) Gastrointestinal symptoms",
+      "(d) Fungal skin symptoms"
+    ],
+    o_en: [
+      "(a) Water-borne symptoms",
+      "(b) Neurological symptoms",
+      "(c) Gastrointestinal symptoms",
+      "(d) Fungal skin symptoms"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. स्रोत में Mercury को किस अन्य रोग से भी जोड़ा गया है?",
+    q_en: "Q188. Mercury is also linked in the source with which disease?",
+    tag: "",
+    o_hi: [
+      "(a) Minamata disease",
+      "(b) Wilson disease",
+      "(c) Patau syndrome",
+      "(d) Blue baby syndrome"
+    ],
+    o_en: [
+      "(a) Minamata disease",
+      "(b) Wilson disease",
+      "(c) Patau syndrome",
+      "(d) Blue baby syndrome"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. लौह संचय रोग का कारण क्या है?",
+    q_en: "Q189. What causes iron overload disease?",
+    tag: "",
+    o_hi: [
+      "(a) शरीर के tissues में अत्यधिक copper जमा होना, विशेषकर liver और brain में",
+      "(b) शरीर के ऊतकों में अत्यधिक iron जमा होना",
+      "(c) शरीर में cadmium जमा होना और bones तथा kidneys पर toxic प्रभाव पड़ना",
+      "(d) रक्त में nitrate की मात्रा बढ़ना और oxygen transport का प्रभावित होना"
+    ],
+    o_en: [
+      "(a) Excess copper accumulation in body tissues, especially the liver and brain",
+      "(b) Excessive iron accumulation in body tissues",
+      "(c) Cadmium accumulation in the body with toxic effects on bones and kidneys",
+      "(d) Increased nitrate in blood with impairment of oxygen transport"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. Itai-itai disease किसके संचय से होता है?",
+    q_en: "Q190. Itai-itai disease is caused by accumulation of what?",
+    tag: "",
+    o_hi: [
+      "(a) Nitrate",
+      "(b) Cadmium",
+      "(c) Mercury",
+      "(d) Copper"
+    ],
+    o_en: [
+      "(a) Nitrate",
+      "(b) Cadmium",
+      "(c) Mercury",
+      "(d) Copper"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. Blue baby syndrome किसके संचय से जुड़ा है?",
+    q_en: "Q191. Blue baby syndrome is associated with accumulation of what?",
+    tag: "",
+    o_hi: [
+      "(a) Iron",
+      "(b) Cadmium",
+      "(c) Nitrate",
+      "(d) Mercury"
+    ],
+    o_en: [
+      "(a) Iron",
+      "(b) Cadmium",
+      "(c) Nitrate",
+      "(d) Mercury"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. Patau syndrome को किस trisomy के नाम से जाना जाता है?",
+    q_en: "Q192. Patau syndrome is known as which trisomy?",
+    tag: "",
+    o_hi: [
+      "(a) Trisomy 18",
+      "(b) Trisomy 13",
+      "(c) Monosomy X",
+      "(d) Trisomy 21"
+    ],
+    o_en: [
+      "(a) Trisomy 18",
+      "(b) Trisomy 13",
+      "(c) Monosomy X",
+      "(d) Trisomy 21"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q193. Patau syndrome में किस chromosome की अतिरिक्त प्रति होती है?",
+    q_en: "Q193. Which chromosome has an extra copy in Patau syndrome?",
+    tag: "",
+    o_hi: [
+      "(a) Chromosome 21",
+      "(b) X chromosome",
+      "(c) Chromosome 13",
+      "(d) Chromosome 17"
+    ],
+    o_en: [
+      "(a) Chromosome 21",
+      "(b) X chromosome",
+      "(c) Chromosome 13",
+      "(d) Chromosome 17"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q194. Charcot-Marie-Tooth disease में PMP22 gene किस chromosome पर स्थित बताया गया है?",
+    q_en: "Q194. In Charcot-Marie-Tooth disease, on which chromosome is the PMP22 gene stated to be located?",
+    tag: "",
+    o_hi: [
+      "(a) Chromosome 13",
+      "(b) X chromosome",
+      "(c) Chromosome 21",
+      "(d) Chromosome 17"
+    ],
+    o_en: [
+      "(a) Chromosome 13",
+      "(b) X chromosome",
+      "(c) Chromosome 21",
+      "(d) Chromosome 17"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q195. Charcot-Marie-Tooth disease में किस gene की duplicate copy बताई गई है?",
+    q_en: "Q195. Which gene is stated to have a duplicated copy in Charcot-Marie-Tooth disease?",
+    tag: "",
+    o_hi: [
+      "(a) CFTR",
+      "(b) HBB",
+      "(c) F8",
+      "(d) PMP22"
+    ],
+    o_en: [
+      "(a) CFTR",
+      "(b) HBB",
+      "(c) F8",
+      "(d) PMP22"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q196. पौधों में Citrus canker के बारे में सही मिलान कौन-सा है?",
+    q_en: "Q196. Which correctly matches citrus canker in plants?",
+    tag: "",
+    o_hi: [
+      "(a) कारक — जीवाणु; प्रभावित — citrus फल",
+      "(b) कारक — protozoa; प्रभावित — तंबाकू",
+      "(c) कारक — कवक; प्रभावित — बाजरा",
+      "(d) कारक — विषाणु; प्रभावित — गेहूँ"
+    ],
+    o_en: [
+      "(a) Cause — bacterium; affects — citrus fruit",
+      "(b) Cause — protozoa; affects tobacco",
+      "(c) Cause — fungus; affects millet",
+      "(d) Cause — virus; affects wheat"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q197. गेहूँ का rust रोग स्रोत की तालिका में किस कारक से जोड़ा गया है?",
+    q_en: "Q197. Which causal agent is wheat rust linked to in the source table?",
+    tag: "",
+    o_hi: [
+      "(a) प्रोटोजोआ (Protozoan)",
+      "(b) कवक (Fungus)",
+      "(c) विषाणु (Virus)",
+      "(d) जीवाणु (Bacterium)"
+    ],
+    o_en: [
+      "(a) Protozoan",
+      "(b) Fungus",
+      "(c) Virus",
+      "(d) Bacterium"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q198. Yellow vein mosaic के बारे में सही मिलान कौन-सा है?",
+    q_en: "Q198. Which correctly matches yellow vein mosaic?",
+    tag: "",
+    o_hi: [
+      "(a) कारक — prion; प्रभावित — गेहूँ",
+      "(b) कारक — विषाणु; प्रभावित — भिंडी के पौधे",
+      "(c) कारक — जीवाणु; प्रभावित — citrus फल",
+      "(d) कारक — कवक; प्रभावित — बाजरा"
+    ],
+    o_en: [
+      "(a) Cause — prion; affects wheat",
+      "(b) Cause — virus; affects — okra plants",
+      "(c) Cause — bacterium; affects citrus fruit",
+      "(d) Cause — fungus; affects millet"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q199. Aster yellow और Crown gall के कारक स्रोत की तालिका में क्या दिए गए हैं?",
+    q_en: "Q199. What causes are given for Aster yellow and Crown gall in the source table?",
+    tag: "",
+    o_hi: [
+      "(a) दोनों के लिए कवक",
+      "(b) दोनों के लिए जीवाणु",
+      "(c) दोनों के लिए protozoa",
+      "(d) दोनों के लिए विषाणु"
+    ],
+    o_en: [
+      "(a) Fungi for both",
+      "(b) Bacteria for both",
+      "(c) Protozoa for both",
+      "(d) Viruses for both"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q200. Ergot और Snow mold किस प्रकार के रोगजनक से जोड़े गए हैं?",
+    q_en: "Q200. Ergot and snow mold are associated with which type of pathogen?",
+    tag: "",
+    o_hi: [
+      "(a) जीवाणु",
+      "(b) कवक",
+      "(c) प्रोटोजोआ",
+      "(d) विषाणु"
+    ],
+    o_en: [
+      "(a) Bacterium",
+      "(b) Fungus",
+      "(c) Protozoa",
+      "(d) Virus"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];

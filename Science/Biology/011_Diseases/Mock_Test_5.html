@@ -1,0 +1,542 @@
+const data = [
+  {
+    q_hi: "Q201. स्रोत की plant-disease table में Ergot से कौन-सा पौधा प्रभावित बताया गया है?",
+    q_en: "Q201. In the source plant-disease table, which plant is stated to be affected by ergot?",
+    tag: "",
+    o_hi: [
+      "(a) सिट्रस",
+      "(b) भिंडी",
+      "(c) बाजरा",
+      "(d) तंबाकू"
+    ],
+    o_en: [
+      "(a) Citrus",
+      "(b) Okra",
+      "(c) Pearl millet",
+      "(d) Tobacco"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q202. Black wart disease और Blight के कारक स्रोत की तालिका में कैसे दिए गए हैं?",
+    q_en: "Q202. How are the causes of black wart disease and blight given in the source table?",
+    tag: "",
+    o_hi: [
+      "(a) Black wart — bacterium; Blight — virus/fungus",
+      "(b) Black wart — prion; Blight — virus/bacterium",
+      "(c) Black wart — virus; Blight — protozoa/bacterium",
+      "(d) Black wart — fungus; Blight — fungus/bacterium"
+    ],
+    o_en: [
+      "(a) Black wart — bacterium; Blight — virus/fungus",
+      "(b) Black wart — prion; Blight — virus/bacterium",
+      "(c) Black wart — virus; Blight — protozoa/bacterium",
+      "(d) Black wart — fungus; Blight — fungus/bacterium"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q203. स्रोत की plant-disease table में 'तंबाकू मोजेक विषाणु' वाली पंक्ति में क्या दिया है?",
+    q_en: "Q203. What is given in the 'tobacco mosaic virus' row of the source plant-disease table?",
+    tag: "",
+    o_hi: [
+      "(a) कारक जीव — कवक; प्रभावित — तंबाकू का पौधा",
+      "(b) कारक — protozoa; प्रभावित — गेहूँ",
+      "(c) कारक — prion; प्रभावित — भिंडी",
+      "(d) कारक — जीवाणु; प्रभावित — citrus"
+    ],
+    o_en: [
+      "(a) Causal organism — fungus; affected — tobacco plant",
+      "(b) Cause — protozoa; affects wheat",
+      "(c) Cause — prion; affects okra",
+      "(d) Cause — bacterium; affects citrus"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q204. Red biotechnology का उपयोग स्रोत में किन चीजों के निर्माण से जोड़ा गया है?",
+    q_en: "Q204. Red biotechnology is linked in the source with production of which items?",
+    tag: "",
+    o_hi: [
+      "(a) Insulin, antibiotics और vaccines जैसे pharmaceutical products",
+      "(b) Fuels, plastics और synthetic fibres जैसे petrochemical products",
+      "(c) Fertilizers, pesticides और soil conditioners जैसे agricultural inputs",
+      "(d) Metals, alloys और industrial ceramics जैसे engineering products"
+    ],
+    o_en: [
+      "(a) Pharmaceutical products such as insulin, antibiotics and vaccines",
+      "(b) Petrochemical products such as fuels, plastics and synthetic fibres",
+      "(c) Agricultural inputs such as fertilizers, pesticides and soil conditioners",
+      "(d) Engineering products such as metals, alloys and industrial ceramics"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q205. दाँतों में सड़न से किस bacterium को जोड़ा गया है?",
+    q_en: "Q205. Which bacterium is associated with tooth decay?",
+    tag: "",
+    o_hi: [
+      "(a) Streptococcus mutans",
+      "(b) Vibrio cholerae",
+      "(c) Treponema pallidum",
+      "(d) Mycobacterium leprae"
+    ],
+    o_en: [
+      "(a) Streptococcus mutans",
+      "(b) Vibrio cholerae",
+      "(c) Treponema pallidum",
+      "(d) Mycobacterium leprae"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q206. Mesothelioma किससे विशेष रूप से जुड़ा हुआ बताया गया है?",
+    q_en: "Q206. Mesothelioma is stated to be particularly associated with what?",
+    tag: "",
+    o_hi: [
+      "(a) Nitrate",
+      "(b) Asbestos",
+      "(c) Plasmodium",
+      "(d) Cinchona"
+    ],
+    o_en: [
+      "(a) Nitrate",
+      "(b) Asbestos",
+      "(c) Plasmodium",
+      "(d) Cinchona"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q207. Nipah virus का natural host कौन-सा बताया गया है?",
+    q_en: "Q207. What is stated to be the natural host of Nipah virus?",
+    tag: "",
+    o_hi: [
+      "(a) Fruit bats",
+      "(b) Female Anopheles mosquitoes",
+      "(c) Tsetse flies",
+      "(d) Sandflies"
+    ],
+    o_en: [
+      "(a) Fruit bats",
+      "(b) Female Anopheles mosquitoes",
+      "(c) Tsetse flies",
+      "(d) Sandflies"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q208. लाल सिंधी नस्ल की गायों की कौन-सी विशेषता दी गई है?",
+    q_en: "Q208. What feature is given for Red Sindhi cows?",
+    tag: "",
+    o_hi: [
+      "(a) इनमें infectious diseases के प्रति susceptibility अधिक और resistance कम बताई गई है",
+      "(b) इनमें copper accumulation के कारण liver और brain disorders सामान्य बताए गए हैं",
+      "(c) इनमें melanin production कम होने से albinism सामान्य characteristic बताया गया है",
+      "(d) वे रोगों के प्रति resistant होती हैं"
+    ],
+    o_en: [
+      "(a) They are stated to have high susceptibility and low resistance to infectious diseases",
+      "(b) Copper accumulation is stated to make liver and brain disorders common in them",
+      "(c) Low melanin production is stated to make albinism a common characteristic in them",
+      "(d) They are resistant to diseases"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q209. भेड़ों में Prion से होने वाला रोग कौन-सा है?",
+    q_en: "Q209. Which prion disease occurs in sheep?",
+    tag: "",
+    o_hi: [
+      "(a) BSE",
+      "(b) Scabies",
+      "(c) CJD",
+      "(d) Scrapie"
+    ],
+    o_en: [
+      "(a) BSE",
+      "(b) Scabies",
+      "(c) CJD",
+      "(d) Scrapie"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q210. Bovine Spongiform Encephalopathy (BSE) किसमें होता है?",
+    q_en: "Q210. Bovine Spongiform Encephalopathy (BSE) occurs in which animal?",
+    tag: "",
+    o_hi: [
+      "(a) Mosquitoes",
+      "(b) Humans",
+      "(c) Cattle",
+      "(d) Sheep"
+    ],
+    o_en: [
+      "(a) Mosquitoes",
+      "(b) Humans",
+      "(c) Cattle",
+      "(d) Sheep"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q211. मनुष्यों में Prion से संबंधित रोग कौन-सा है?",
+    q_en: "Q211. Which prion-related disease occurs in humans?",
+    tag: "",
+    o_hi: [
+      "(a) Ringworm",
+      "(b) Scrapie",
+      "(c) BSE",
+      "(d) Creutzfeldt-Jakob disease (CJD)"
+    ],
+    o_en: [
+      "(a) Ringworm",
+      "(b) Scrapie",
+      "(c) BSE",
+      "(d) Creutzfeldt-Jakob disease (CJD)"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q212. Japanese encephalitis के बारे में स्रोत में क्या बताया गया है?",
+    q_en: "Q212. What does the source state about Japanese encephalitis?",
+    tag: "",
+    o_hi: [
+      "(a) यह nitrate accumulation से होता है",
+      "(b) यह virus मच्छरों द्वारा फैलता है और मस्तिष्क में सूजन ला सकता है",
+      "(c) यह fungus से पैरों में ringworm करता है",
+      "(d) यह bacteria से small intestine प्रभावित करता है"
+    ],
+    o_en: [
+      "(a) It is caused by nitrate accumulation",
+      "(b) Its virus is spread by mosquitoes and can cause swelling of the brain",
+      "(c) It is fungal and causes ringworm on feet",
+      "(d) It is bacterial and affects the small intestine"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q213. टीकाकरण में शरीर में क्या प्रवेश कराया जा सकता है?",
+    q_en: "Q213. What may be introduced into the body during vaccination?",
+    tag: "",
+    o_hi: [
+      "(a) glucose solution",
+      "(b) antibiotics",
+      "(c) Antigenic protein या inactive/weakened pathogen",
+      "(d) mineral salts"
+    ],
+    o_en: [
+      "(a) Glucose solution",
+      "(b) Antibiotics",
+      "(c) Antigenic protein or inactive/weakened pathogen",
+      "(d) Mineral salts"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q214. टीकाकरण से कौन-सी memory cells बनने की बात स्रोत में दी गई है?",
+    q_en: "Q214. Which memory cells are stated to form after vaccination?",
+    tag: "",
+    o_hi: [
+      "(a) Monocytes और basophils",
+      "(b) Neutrophils और eosinophils",
+      "(c) RBCs और platelets",
+      "(d) Memory-B और T-cells"
+    ],
+    o_en: [
+      "(a) Monocytes and basophils",
+      "(b) Neutrophils and eosinophils",
+      "(c) RBCs and platelets",
+      "(d) Memory-B and T-cells"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q215. Anorexia nervosa में व्यक्ति अपने वजन के बारे में कैसी धारणा रख सकता है?",
+    q_en: "Q215. In anorexia nervosa, what kind of perception may a person have about body weight?",
+    tag: "",
+    o_hi: [
+      "(a) विकृत धारणा",
+      "(b) कोई धारणा नहीं",
+      "(c) सटीक वैज्ञानिक धारणा",
+      "(d) संक्रमण-आधारित धारणा"
+    ],
+    o_en: [
+      "(a) Distorted perception",
+      "(b) No perception",
+      "(c) Accurate scientific perception",
+      "(d) Infection-based perception"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q216. Anorexia nervosa में वजन कम करने के लिए कौन-सा व्यवहार स्रोत में दिया गया है?",
+    q_en: "Q216. Which behavior for weight loss is given in anorexia nervosa?",
+    tag: "",
+    o_hi: [
+      "(a) अत्यधिक भोजन",
+      "(b) बार-बार antibiotics लेना",
+      "(c) अधिक नींद",
+      "(d) अत्यधिक व्यायाम"
+    ],
+    o_en: [
+      "(a) Excessive eating",
+      "(b) Frequent antibiotic use",
+      "(c) Excessive sleep",
+      "(d) Excessive exercise"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q217. Bulimia nervosa में स्रोत के अनुसार कौन-सी प्रवृत्ति होती है?",
+    q_en: "Q217. According to the source, what tendency occurs in bulimia nervosa?",
+    tag: "",
+    o_hi: [
+      "(a) अत्यधिक मात्रा में भोजन करना",
+      "(b) भोजन से पूर्ण परहेज",
+      "(c) व्यायाम करना",
+      "(d) पानी पीना"
+    ],
+    o_en: [
+      "(a) Eating excessive amounts of food",
+      "(b) Complete avoidance of food",
+      "(c) Exercising only",
+      "(d) Drinking water"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q218. Emphysema के बारे में सही कथन कौन-सा है?",
+    q_en: "Q218. Which statement about emphysema is correct?",
+    tag: "",
+    o_hi: [
+      "(a) यह chronic lung disease है जिसमें alveoli की inner walls क्षतिग्रस्त होकर अंततः फट जाती हैं",
+      "(b) यह copper accumulation disorder है जिसमें liver, brain और cornea प्रभावित हो सकते हैं",
+      "(c) यह chromosomal disorder है जिसमें chromosome 21 की अतिरिक्त copy पाई जाती है",
+      "(d) यह scalp का fungal infection है जिसमें patchy hair loss और scaling हो सकती है"
+    ],
+    o_en: [
+      "(a) It is a chronic lung disease in which the inner walls of alveoli are damaged and eventually rupture",
+      "(b) It is a copper-accumulation disorder that may affect the liver, brain and cornea",
+      "(c) It is a chromosomal disorder in which an extra copy of chromosome 21 is present",
+      "(d) It is a fungal infection of the scalp that may cause patchy hair loss and scaling"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q219. पीलिया का दूसरा नाम क्या दिया गया है?",
+    q_en: "Q219. What other name is given for jaundice?",
+    tag: "",
+    o_hi: [
+      "(a) Icterus",
+      "(b) Hydrophobia",
+      "(c) Pertussis",
+      "(d) Trisomy"
+    ],
+    o_en: [
+      "(a) Icterus",
+      "(b) Hydrophobia",
+      "(c) Pertussis",
+      "(d) Trisomy"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q220. Epilepsy के बारे में सही कथन कौन-सा है?",
+    q_en: "Q220. Which statement about epilepsy is correct?",
+    tag: "",
+    o_hi: [
+      "(a) मस्तिष्क की कोशिकाओं से abnormal electrical discharges निकलने के कारण दौरे पड़ सकते हैं",
+      "(b) आंत्र जीवाणु संक्रमण के कारण बार-बार दस्त और dehydration के episode होना",
+      "(c) brain और liver में copper accumulation के कारण neurological symptoms उत्पन्न होना",
+      "(d) त्वचा में fungal infection के कारण recurrent itching और circular lesions बनना"
+    ],
+    o_en: [
+      "(a) Seizures may occur because of abnormal electrical discharges from brain cells",
+      "(b) Repeated episodes of diarrhoea and dehydration due to a bacterial intestinal infection",
+      "(c) Neurological symptoms caused by copper accumulation in the brain and liver",
+      "(d) Recurrent itching and circular lesions caused by a fungal skin infection"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q221. Carcinoma और Sarcoma के उद्गम का सही मिलान कौन-सा है?",
+    q_en: "Q221. Which correctly matches the origin of carcinoma and sarcoma?",
+    tag: "",
+    o_hi: [
+      "(a) Carcinoma — epithelial cells; Sarcoma — connective tissues",
+      "(b) Carcinoma — lymphocytes; Sarcoma — alveolar cells",
+      "(c) Carcinoma — plasma cells; Sarcoma — melanocytes",
+      "(d) Carcinoma — bone-marrow cells; Sarcoma — red-blood-cell precursors"
+    ],
+    o_en: [
+      "(a) Carcinoma — epithelial cells; Sarcoma — connective tissues",
+      "(b) Carcinoma — lymphocytes; Sarcoma — alveolar cells",
+      "(c) Carcinoma — plasma cells; Sarcoma — melanocytes",
+      "(d) Carcinoma — bone-marrow cells; Sarcoma — red-blood-cell precursors"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q222. Leukemia मुख्यतः किस ऊतक का cancer है?",
+    q_en: "Q222. Leukemia is mainly a cancer of which tissue?",
+    tag: "",
+    o_hi: [
+      "(a) रक्त बनाने वाले ऊतक, विशेषकर bone marrow",
+      "(b) Melanocytes",
+      "(c) Epithelial tissue",
+      "(d) Connective tissue"
+    ],
+    o_en: [
+      "(a) Blood-forming tissue, especially bone marrow",
+      "(b) Melanocytes",
+      "(c) Epithelial tissue",
+      "(d) Connective tissue"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q223. Lymphoma किस प्रकार की कोशिकाओं में शुरू होता है?",
+    q_en: "Q223. Lymphoma begins in which type of cells?",
+    tag: "",
+    o_hi: [
+      "(a) Melanocytes",
+      "(b) Bone-forming cells",
+      "(c) Lymphocytes (T या B cells)",
+      "(d) Plasma cells"
+    ],
+    o_en: [
+      "(a) Melanocytes",
+      "(b) Bone-forming cells",
+      "(c) Lymphocytes (T or B cells)",
+      "(d) Plasma cells"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q224. Melanoma और Multiple myeloma का सही मिलान कौन-सा है?",
+    q_en: "Q224. Which correctly matches melanoma and multiple myeloma?",
+    tag: "",
+    o_hi: [
+      "(a) Melanoma — RBC precursor cells से; Multiple myeloma — nerve cells से",
+      "(b) Melanoma — bone marrow cells से; Multiple myeloma — epithelial cells से",
+      "(c) Melanoma — lymphocytes से; Multiple myeloma — connective tissue cells से",
+      "(d) Melanoma — melanocytes से; Multiple myeloma — plasma cells में शुरू होता है"
+    ],
+    o_en: [
+      "(a) Melanoma — from RBC precursor cells; Multiple myeloma — from nerve cells",
+      "(b) Melanoma — from bone-marrow cells; Multiple myeloma — from epithelial cells",
+      "(c) Melanoma — from lymphocytes; Multiple myeloma — from connective-tissue cells",
+      "(d) Melanoma — from melanocytes; Multiple myeloma — begins in plasma cells"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q225. पहले वास्तविक antibiotic penicillin की खोज से संबंधित सही तथ्य कौन-सा है?",
+    q_en: "Q225. Which fact about discovery of the first true antibiotic penicillin is correct?",
+    tag: "",
+    o_hi: [
+      "(a) Jonas Salk ने 1955 में खोज की",
+      "(b) Frederick Banting ने 1922 में खोज की",
+      "(c) Edward Jenner ने 1796 में खोज की",
+      "(d) Alexander Fleming ने 1928 में penicillin की खोज की"
+    ],
+    o_en: [
+      "(a) Jonas Salk discovered it in 1955",
+      "(b) Frederick Banting discovered it in 1922",
+      "(c) Edward Jenner discovered it in 1796",
+      "(d) Alexander Fleming discovered penicillin in 1928"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q226. Insulin की खोज किस अवधि में बताई गई है?",
+    q_en: "Q226. During which period is the discovery of insulin stated?",
+    tag: "",
+    o_hi: [
+      "(a) 1921–1922",
+      "(b) 1954–1955",
+      "(c) 1928–1929",
+      "(d) 1796–1797"
+    ],
+    o_en: [
+      "(a) 1921–1922",
+      "(b) 1954–1955",
+      "(c) 1928–1929",
+      "(d) 1796–1797"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q227. Insulin की खोज से स्रोत में किन वैज्ञानिकों को जोड़ा गया है?",
+    q_en: "Q227. Which scientists are linked with the discovery of insulin in the source?",
+    tag: "",
+    o_hi: [
+      "(a) Alexander Fleming और Paul Ehrlich",
+      "(b) Frederick Banting और Charles Best",
+      "(c) Edward Jenner और Jonas Salk",
+      "(d) Robert Koch और Louis Pasteur"
+    ],
+    o_en: [
+      "(a) Alexander Fleming and Paul Ehrlich",
+      "(b) Frederick Banting and Charles Best",
+      "(c) Edward Jenner and Jonas Salk",
+      "(d) Robert Koch and Louis Pasteur"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
