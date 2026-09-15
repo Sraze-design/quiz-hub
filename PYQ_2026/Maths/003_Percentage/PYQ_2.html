@@ -1,0 +1,555 @@
+const Q91_IMAGE = "data:image/png;base64,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";
+
+const data = [
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q51. किसी कंपनी का लाभ एक वर्ष में ₹11,10,000 से बढ़कर ₹13,10,000 हो गया। कंपनी के लाभ में हुई प्रतिशत वृद्धि की गणना (दशमलव के दो स्थाानों तक पूर्णांकित) कीजिए।",
+    q_en: "Q51. किसी कंपनी का लाभ एक वर्ष में ₹11,10,000 से बढ़कर ₹13,10,000 हो गया। कंपनी के लाभ में हुई प्रतिशत वृद्धि की गणना (दशमलव के दो स्थाानों तक पूर्णांकित) कीजिए।",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 18.47%", "(b) 18.02%", "(c) 18.26%", "(d) 18.12%"],
+    o_en: ["(a) 18.47%", "(b) 18.02%", "(c) 18.26%", "(d) 18.12%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q48
+  {
+    q_hi: "Q52. एक वॉशिंग मशीन की कीमत एक टीवी की कीमत से 40% कम है। यदि वॉशिंग मशीन की कीमत में 80% की वृद्धि होती है और टीवी की कीमत में 22% की कमी होती है, तो 7 वॉशिंग मशीनों और 6 टीवी की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q52. The price of a washing machine is 40% less than the price of a TV. If the washing-machine price increases by 80% and the TV price decreases by 22%, what is the percentage change in the total price of 7 washing machines and 6 TVs?",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 15% की कमी", "(b) 18% की कमी", "(c) 20% की वृद्धि", "(d) 24% की वृद्धि"],
+    o_en: ["(a) 15% decrease", "(b) 18% decrease", "(c) 20% increase", "(d) 24% increase"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q53. रमन की आय ₹50,400 है और वह 7.5% की बचत करता है। यदि उसकी आय में 26% की वृद्धि होती है और उसके खर्च में 20% की वृद्धि होती है, तो उसकी बचत में कितने प्रतिशत की वृद्धि होगी?",
+    q_en: "Q53. Raman's income is ₹50,400 and he saves 7.5% of it. If his income increases by 26% and his expenditure increases by 20%, by what percentage will his savings increase?",
+    tag: "RRB Group D, 13/08/2026 (Shift-03)",
+    o_hi: ["(a) 100%", "(b) 50%", "(c) 125%", "(d) 75%"],
+    o_en: ["(a) 100%", "(b) 50%", "(c) 125%", "(d) 75%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-01) | Original Q28
+  {
+    q_hi: "Q54. एक शहर में, X और Y उम्मीीदवारों के बीच हुए चुनाव में 75% पंजीकृत वोटरों ने वोट डाले। उम्मीीदवार X ने 840 वोटों से चुनाव जीता। यदि उम्मीीदवार Y को 50% अधिक वोट प्राप्त हुए होते, तो चुनाव बराबरी पर समाप्त होता। शहर में पंजीकृत वोटरों की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q54. In a city election between candidates X and Y, 75% of the registered voters cast their votes. Candidate X won by 840 votes. If candidate Y had received 50% more votes, the election would have ended in a tie. Find the total number of registered voters in the city.",
+    tag: "RRB Group D, 14/08/2026 (Shift-01)",
+    o_hi: ["(a) 4800", "(b) 5230", "(c) 5700", "(d) 5600"],
+    o_en: ["(a) 4800", "(b) 5230", "(c) 5700", "(d) 5600"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-01) | Original Q42
+  {
+    q_hi: "Q55. एक वॉशिंग मशीन की कीमत एक टीवी की कीमत से 50% कम है। यदि वॉशिंग मशीन की कीमत में 81% की वृद्धि होती है और टीवी की कीमत में 47% की कमी होती है, तो 4 वॉशिंग मशीनों और 3 टीवी की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q55. The price of a washing machine is 50% less than the price of a TV. If the washing-machine price increases by 81% and the TV price decreases by 47%, what is the percentage change in the total price of 4 washing machines and 3 TVs?",
+    tag: "RRB Group D, 14/08/2026 (Shift-01)",
+    o_hi: ["(a) 2.1% की कमी", "(b) 3.2% की वृद्धि", "(c) 5.4% की कमी", "(d) 4.2% की वृद्धि"],
+    o_en: ["(a) 2.1% decrease", "(b) 3.2% increase", "(c) 5.4% decrease", "(d) 4.2% increase"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q56. रमन की आय ₹43,000 है। वह अपनी आय के 26% की बचत करता है। यदि उसकी आय में 20% की वृद्धि होती है और व्यय में 40% की वृद्धि होती है, तो उसकी बचत में ____ होगी।",
+    q_en: "Q56. Raman's income is ₹43,000. He saves 26% of his income. If his income increases by 20% and his expenditure increases by 40%, what will be the change in his savings?",
+    tag: "RRB Group D, 14/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹4,133 की वृद्धि", "(b) ₹4,128 की कमी", "(c) ₹4,133 की कमी", "(d) ₹4,131 की वृद्धि"],
+    o_en: ["(a) ₹4,133 increase", "(b) ₹4,128 decrease", "(c) ₹4,133 decrease", "(d) ₹4,131 increase"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-02) | Original Q47
+  {
+    q_hi: "Q57. एक स्थाानीय क्लब के चुनाव में, दो उम्मीीदवारों को 7 : 5 के अनुपात में वोट मिले। यदि डाले गए कुल वोटों की संख्या 360 थी, तो विजयी उम्मीीदवार को कितने वोट मिले?",
+    q_en: "Q57. In a local club election, two candidates received votes in the ratio 7:5. If the total number of votes cast was 360, how many votes did the winning candidate receive?",
+    tag: "RRB Group D, 14/08/2026 (Shift-02)",
+    o_hi: ["(a) 240", "(b) 180", "(c) 200", "(d) 210"],
+    o_en: ["(a) 240", "(b) 180", "(c) 200", "(d) 210"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q37
+  {
+    q_hi: "Q58. वॉशिंग मशीन की लागत टीवी की लागत से 44% कम है। यदि वॉशिंग मशीन की लागत 78% बढ़ जाती है और टीवी की लागत 70% कम हो जाती है, तो 7 वॉशिंग मशीनों और 2 टीवी की कुल लागत में प्रतिशत परिवर्तन कितना है?",
+    q_en: "Q58. The cost of a washing machine is 44% less than the cost of a TV. If the washing-machine cost increases by 78% and the TV cost decreases by 70%, what is the percentage change in the total cost of 7 washing machines and 2 TVs?",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 34% की कमी", "(b) 21% की वृद्धि", "(c) 30% की कमी", "(d) 28% की वृद्धि"],
+    o_en: ["(a) 34% decrease", "(b) 21% increase", "(c) 30% decrease", "(d) 28% increase"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q48
+  {
+    q_hi: "Q59. दो उम्मीीदवारों के बीच हुए चुनाव में, कुल वोटों में से 10% वोट अमान्य घोषित कर दिए गए, और सभी वैध वोट दोनों उम्मीीदवारों में से किसी एक के पक्ष में पड़े। यदि विजेता को वैध वोटों का 53% प्राप्त हुआ और वह 1,620 वोटों से चुनाव जीत गया, तो डाले गए कुल वोटों की संख्या ज्ञाात कीजिए।",
+    q_en: "Q59. In an election between two candidates, 10% of the total votes were declared invalid and every valid vote was cast for one of the two candidates. If the winner received 53% of the valid votes and won by 1,620 votes, find the total number of votes cast.",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 30,000", "(b) 27,000", "(c) 32,000", "(d) 28,000"],
+    o_en: ["(a) 30,000", "(b) 27,000", "(c) 32,000", "(d) 28,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q27
+  {
+    q_hi: "Q60. रमन की आय ₹68,800 है। वह अपनी आय के 18.5% की बचत करता है। यदि उसकी आय में 17% की वृद्धि होती है और व्यय में 25% की वृद्धि होती है, तो उसकी बचत में ____ होगी।",
+    q_en: "Q60. Raman's income is ₹68,800. He saves 18.5% of his income. If his income increases by 17% and his expenditure increases by 25%, what will be the change in his savings?",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹2,322 की कमी", "(b) ₹2,319 की वृद्धि", "(c) ₹2,325 की कमी", "(d) ₹2,325 की वृद्धि"],
+    o_en: ["(a) ₹2,322 decrease", "(b) ₹2,319 increase", "(c) ₹2,325 decrease", "(d) ₹2,325 increase"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q61. एक शहर की जनसंख्या 80,000 है। पहले वर्ष में जनसंख्या में 10% की वृद्धि होती है, दूसरे वर्ष में 5% की कमी होती है और तीसरे वर्ष में फिर से 20% की वृद्धि होती है। अंतिम जनसंख्या कितनी होगी?",
+    q_en: "Q61. The population of a city is 80,000. It increases by 10% in the first year, decreases by 5% in the second year, and again increases by 20% in the third year. What will be the final population?",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) 1,10,320", "(b) 1,01,320", "(c) 1,07,320", "(d) 1,00,320"],
+    o_en: ["(a) 1,10,320", "(b) 1,01,320", "(c) 1,07,320", "(d) 1,00,320"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q47
+  {
+    q_hi: "Q62. एक परिवार जिसकी मासिक आय ₹60,000 है, इस धनराशि का 30% भोजन पर व्यय करता है। इस व्यय का मौद्रिक मूल्य ज्ञाात कीजिए।",
+    q_en: "Q62. A family with a monthly income of ₹60,000 spends 30% of this amount on food. Find the monetary value of this expenditure.",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹18,000", "(b) ₹15,000", "(c) ₹10,000", "(d) ₹12,000"],
+    o_en: ["(a) ₹18,000", "(b) ₹15,000", "(c) ₹10,000", "(d) ₹12,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q63. एक व्यक्ति अपने मासिक वेतन का 45% घरेलू खर्चों पर और शेष का 20% परिवहन पर खर्च करता है तथा शेष ₹88,000 की बचत करता है। उसका मासिक वेतन (₹ में) कितना है?",
+    q_en: "Q63. A person spends 45% of his monthly salary on household expenses and 20% of the remaining amount on transport, and saves the remaining ₹88,000. What is his monthly salary?",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) 2,00,000", "(b) 2,40,000", "(c) 2,22,500", "(d) 2,50,000"],
+    o_en: ["(a) 2,00,000", "(b) 2,40,000", "(c) 2,22,500", "(d) 2,50,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q46
+  {
+    q_hi: "Q64. एक वॉशिंग मशीन की कीमत एक टीवी की कीमत से 23% कम है। यदि वॉशिंग मशीन की कीमत में 73% की वृद्धि होती है और टीवी की कीमत में 54% की कमी होती है, तो 6 वॉशिंग मशीनों और 3 टीवी की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q64. The price of a washing machine is 23% less than the price of a TV. If the washing-machine price increases by 73% and the TV price decreases by 54%, what is the percentage change in the total price of 6 washing machines and 3 TVs?",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) 23% की वृद्धि", "(b) 20% की वृद्धि", "(c) 22% की कमी", "(d) 26% की कमी"],
+    o_en: ["(a) 23% increase", "(b) 20% increase", "(c) 22% decrease", "(d) 26% decrease"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q39
+  {
+    q_hi: "Q65. सुधा का व्यय उसकी बचत से 100% अधिक है। यदि उसका व्यय 2% कम हो जाता है और बचत 22% बढ़ जाती है, तो उसकी आय कितने प्रतिशत बढ़ जाती है?",
+    q_en: "Q65. Sudha's expenditure is 100% more than her savings. If her expenditure decreases by 2% and her savings increase by 22%, by what percentage does her income increase?",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 2%", "(b) 3%", "(c) 6%", "(d) 1%"],
+    o_en: ["(a) 2%", "(b) 3%", "(c) 6%", "(d) 1%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q66. यदि किसी संख्या में से 36 घटाया जाए, तो वह संख्या मूल संख्या की 90% रह जाती है। वह संख्या क्याा है?",
+    q_en: "Q66. If 36 is subtracted from a number, the result becomes 90% of the original number. What is the number?",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 630", "(b) 840", "(c) 480", "(d) 360"],
+    o_en: ["(a) 630", "(b) 840", "(c) 480", "(d) 360"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q37
+  {
+    q_hi: "Q67. सुधा का व्यय उसकी बचत से 150% अिधक है। यिद उसके व्यय म 7% की कमी हो जाती है और बचत म 21% की वृİद्ध हो जाती है, तो उसकी आय म िकतने प्रितशत की वृİद्ध होगी?",
+    q_en: "Q67. Sudha's expenditure is 150% more than her savings. If her expenditure decreases by 7% and her savings increase by 21%, by what percentage will her income increase?",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) 5%", "(b) 3%", "(c) 6%", "(d) 1%"],
+    o_en: ["(a) 5%", "(b) 3%", "(c) 6%", "(d) 1%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q44
+  {
+    q_hi: "Q68. िकसी शहर की जनसंख्या एक वष म 64,000 से बढ़कर 93,500 हो जाती है। जनसंख्या म हुई प्रितशत वृİद्ध (दशमलव के दो स्थानो ंतक पूणािकत) की गणना कीिजए।",
+    q_en: "Q68. The population of a city increases from 64,000 to 93,500 in one year. Calculate the percentage increase in population, rounded to two decimal places.",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) 46.56%", "(b) 46.09%", "(c) 46.39%", "(d) 46.64%"],
+    o_en: ["(a) 46.56%", "(b) 46.09%", "(c) 46.39%", "(d) 46.64%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q69. किसी कंपनी की कार की कीमत प्रति वर्ष 20% कम हो जाती है। तीन वर्ष बाद, कार की कीमत ₹32,768 है। कार की प्रारंभिक कीमत क्या थी?",
+    q_en: "Q69. A company's car loses 20% of its value every year. After three years, the car is worth ₹32,768. What was its initial price?",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹64,000", "(b) ₹59,800", "(c) ₹67,800", "(d) ₹61,200"],
+    o_en: ["(a) ₹64,000", "(b) ₹59,800", "(c) ₹67,800", "(d) ₹61,200"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q42
+  {
+    q_hi: "Q70. एक संख्या में पहले 30% की वृद्धि की जाती है और फिर 20% की कमी की जाती है। संख्या में समग्र प्रतिशत परिवर्तन ज्ञाात कीजिए।",
+    q_en: "Q70. A number is first increased by 30% and then decreased by 20%. Find the overall percentage change in the number.",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) 4% की कमी", "(b) 4% की वृद्धि", "(c) 10% की वृद्धि", "(d) 8% की कमी"],
+    o_en: ["(a) 4% decrease", "(b) 4% increase", "(c) 10% increase", "(d) 8% decrease"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q71. सुधा का व्यय उसकी बचत से 100% अधिक है। यदि उसका व्यय 4% कम हो जाता है और बचत 35% बढ़ जाती है, तो उसकी आय कितने प्रतिशत बढ़ जाती है?",
+    q_en: "Q71. Sudha's expenditure is 100% more than her savings. If her expenditure decreases by 4% and her savings increase by 35%, by what percentage does her income increase?",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) 14%", "(b) 9%", "(c) 12%", "(d) 11%"],
+    o_en: ["(a) 14%", "(b) 9%", "(c) 12%", "(d) 11%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-03) | Original Q33
+  {
+    q_hi: "Q72. प्रिया अपनी आय का 27% मकान के किराए पर, 22% किराने के सामान पर और 18% शिक्षा पर खर्च करती है। यदि वह प्रति माह ₹12,400 की बचत करती है, तो उसकी मासिक आय (निकटतम पूर्णांक तक पूर्णांकित) कितनी है?",
+    q_en: "Q72. Priya spends 27% of her income on house rent, 22% on groceries and 18% on education. If she saves ₹12,400 per month, what is her monthly income, rounded to the nearest integer?",
+    tag: "RRB Group D, 18/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹37,216", "(b) ₹37,446", "(c) ₹37,356", "(d) ₹37,576"],
+    o_en: ["(a) ₹37,216", "(b) ₹37,446", "(c) ₹37,356", "(d) ₹37,576"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q73. निर्मल का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹6,000 और यूटिलिटी बिलों पर ₹1,500 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q73. निर्मल का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹6,000 और यूटिलिटी बिलों पर ₹1,500 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञाात कीजिए।",
+    tag: "RRB Group D, 18/08/2026 (Shift-03)",
+    o_hi: ["(a) 90,000", "(b) 67,500", "(c) 82,500", "(d) 75,000"],
+    o_en: ["(a) 90,000", "(b) 67,500", "(c) 82,500", "(d) 75,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q74. एक संख्या में 25% की वृद्धि की जाती है और फिर 10% की कमी की जाती है। संख्या में कितने प्रतिशत की वृद्धि हुई है?",
+    q_en: "Q74. A number is increased by 25% and then decreased by 10%. By what percentage has the number increased overall?",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) 12.5%", "(b) 10.4%", "(c) 13.9%", "(d) 15.6%"],
+    o_en: ["(a) 12.5%", "(b) 10.4%", "(c) 13.9%", "(d) 15.6%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q49
+  {
+    q_hi: "Q75. एक जिले की जनसंख्या 3,35,000 है, जिसमें से 2,14,000 पुरुष हैं। कुल जनसंख्या का 31% साक्षर है। यदि 31% पुरुष साक्षर हैं, तो साक्षर महिलाओं का प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q75. The population of a district is 3,35,000, of which 2,14,000 are men. 31% of the total population is literate. If 31% of the men are literate, find the percentage of literate women.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) 33%", "(b) 31%", "(c) 30%", "(d) 28%"],
+    o_en: ["(a) 33%", "(b) 31%", "(c) 30%", "(d) 28%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q76. सचिन का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹5,500 और यूटिलिटी बिलों पर ₹2,000 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञात कीजिए।",
+    q_en: "Q76. सचिन का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹5,500 और यूटिलिटी बिलों पर ₹2,000 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञात कीजिए।",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) 90,000", "(b) 67,500", "(c) 75,000", "(d) 82,500"],
+    o_en: ["(a) 90,000", "(b) 67,500", "(c) 75,000", "(d) 82,500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q33
+  {
+    q_hi: "Q77. राजन अपनी आय का 60% घरेलू व्ययो ंपर खच करता है। शेष आय म से वह 50% की बचत करता है। यिद उसकी बचत ₹8,000 है, तो उसकी कुल आय ज्ञात कीिजए।",
+    q_en: "Q77. Rajan spends 60% of his income on household expenses. He saves 50% of the remaining income. If his savings are ₹8,000, find his total income.",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹32,000", "(b) ₹40,000", "(c) ₹45,000", "(d) ₹35,000"],
+    o_en: ["(a) ₹32,000", "(b) ₹40,000", "(c) ₹45,000", "(d) ₹35,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q29
+  {
+    q_hi: "Q78. दो उम्मीदवारों के बीच हुए एक चुनाव में, पंजीकृ त मतदाताओं में से 80% मतदाताओं ने अपने मत डाले और डाले गए मतों में से 10% मत अवैध पाए गए। विजयी उम्मीदवार को वैध मतों में से 55% मत मिले और वह 378 मतों के अंतर से चुनाव जीत गया। कु ल कितने मतदाता पंजीकृ त थे?",
+    q_en: "Q78. In an election between two candidates, 80% of the registered voters cast their votes and 10% of the votes cast were found invalid. The winner received 55% of the valid votes and won by 378 votes. Find the total number of registered voters.",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 5250", "(b) 5249", "(c) 5251", "(d) 5253"],
+    o_en: ["(a) 5250", "(b) 5249", "(c) 5251", "(d) 5253"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q79. एक चुनाव में, A को डाले गए मतों के 63.2% मत प्राप्त हुए। यदि डाले गए मतों की कुल संख्याा 5000 है, तो A को कितने मत प्राप्त हुए?",
+    q_en: "Q79. In an election, A received 63.2% of the votes cast. If the total number of votes cast was 5,000, how many votes did A receive?",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 3160", "(b) 2580", "(c) 3580", "(d) 2760"],
+    o_en: ["(a) 3160", "(b) 2580", "(c) 3580", "(d) 2760"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-01) | Original Q30
+  {
+    q_hi: "Q80. सुधा का व्यय उसकी बचत से 150% अधिक है। यदि उसका व्यय 3% कम हो जाता है और बचत 21.5% बढ़ जाती है, तो उसकी आय कितने प्रतिशत बढ़ जाती है?",
+    q_en: "Q80. Sudha's expenditure is 150% more than her savings. If her expenditure decreases by 3% and her savings increase by 21.5%, by what percentage does her income increase?",
+    tag: "RRB Group D, 20/08/2026 (Shift-01)",
+    o_hi: ["(a) 4%", "(b) 3%", "(c) 6%", "(d) 1%"],
+    o_en: ["(a) 4%", "(b) 3%", "(c) 6%", "(d) 1%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q26
+  {
+    q_hi: "Q81. दो उम्मीदवारों के बीच हुए चुनाव में, पंजीकृ त मतदाताओं में से 18% ने मतदान नहीं किया और डाले गए 750 वोट अवैध घोषित कर दिए गए। विजयी उम्मीदवार को वैध वोटों का 70% प्राप्त हुआ और उसने 4,620 वोटों के अंतर से जीत हासिल की। ​पंजीकृ त मतदाताओं की कु ल संख्या ज्ञात कीजिए।",
+    q_en: "Q81. In an election between two candidates, 18% of the registered voters did not vote and 750 of the votes cast were declared invalid. The winner received 70% of the valid votes and won by 4,620 votes. Find the total number of registered voters.",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 16,700", "(b) 16,200", "(c) 15,000", "(d) 15,600"],
+    o_en: ["(a) 16,700", "(b) 16,200", "(c) 15,000", "(d) 15,600"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q82. अरविंद की आय में पहले 19% की वृद्धि हुई और बाद में 10% की और वृद्धि हुई। कुल प्रतिशत वृद्धि ज्ञाात कीजिए।",
+    q_en: "Q82. Arvind's income first increases by 19% and then increases by another 10%. Find the total percentage increase.",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 30.9%", "(b) 30%", "(c) 29%", "(d) 28.2%"],
+    o_en: ["(a) 30.9%", "(b) 30%", "(c) 29%", "(d) 28.2%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q83. सुधा का व्यय उसकी बचत से 150% अधिक है। यदि उसका व्यय 12% कम हो जाता है और बचत 37% बढ़ जाती है, तो उसकी आय कितने प्रतिशत बढ़ जाती है?",
+    q_en: "Q83. Sudha's expenditure is 150% more than her savings. If her expenditure decreases by 12% and her savings increase by 37%, by what percentage does her income increase?",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 5%", "(b) 7%", "(c) 2%", "(d) 3%"],
+    o_en: ["(a) 5%", "(b) 7%", "(c) 2%", "(d) 3%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q26
+  {
+    q_hi: "Q84. एक आयताकार पार्क की भुजाओं को मापते समय, यदि एक भुजा को 6% अधिक और दू सरी भुजा को 5% कम मापा जाता है, तो क्षेत्रफल की गणना में कितने प्रतिशत की त्रुटि होगी?",
+    q_en: "Q84. While measuring the sides of a rectangular park, one side is measured 6% more and the other 5% less than the actual values. Find the percentage error in the calculated area.",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) कोई परिवर्तन नहीं", "(b) 0.2% की वृद्धि", "(c) 0.7% की वृद्धि", "(d) 0.7% की कमी"],
+    o_en: ["(a) No change", "(b) 0.2% increase", "(c) 0.7% increase", "(d) 0.7% decrease"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q46
+  {
+    q_hi: "Q85. नेहा के कमरों में से एक कमरे को पेंट करवाने का लागत ₹5000 है। अगले वर्ष, यह लागत बढ़कर ₹5500 हो जाती है। प्रतिशत परिवर्तन ज्ञाात कीजिए।",
+    q_en: "Q85. नेहा के कमरों में से एक कमरे को पेंट करवाने का लागत ₹5000 है। अगले वर्ष, यह लागत बढ़कर ₹5500 हो जाती है। प्रतिशत परिवर्तन ज्ञाात कीजिए।",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) की वृद्धि", "(b) की वृद्धि", "(c) की वृद्धि", "(d) की वृद्धि"],
+    o_en: ["(a) की वृद्धि", "(b) की वृद्धि", "(c) की वृद्धि", "(d) की वृद्धि"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q86. शीला की मासिक आय ₹48,000 है। वह अपनी आय का 75% व्यय करती है और शेष की बचत करती है। यदि उसके व्यय में 10% की वृद्धि होती है, तो उसकी नई मासिक बचत (₹ में) क्याा होगी?",
+    q_en: "Q86. Sheela's monthly income is ₹48,000. She spends 75% of her income and saves the rest. If her expenditure increases by 10%, what will be her new monthly savings?",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 12,000", "(b) 10,800", "(c) 8,400", "(d) 9,600"],
+    o_en: ["(a) 12,000", "(b) 10,800", "(c) 8,400", "(d) 9,600"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q49
+  {
+    q_hi: "Q87. किरन का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹5,500 और यूटिलिटी बिलों पर ₹3,000 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q87. किरन का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹5,500 और यूटिलिटी बिलों पर ₹3,000 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञाात कीजिए।",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 78,000", "(b) 71,500", "(c) 58,500", "(d) 65,000"],
+    o_en: ["(a) 78,000", "(b) 71,500", "(c) 58,500", "(d) 65,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q88. एक आयत की लंबाई में 40% की वृद्धि की जाती है। क्षेत्रफल को स्थिर रखने के लिए चौड़ााई में कितने प्रतिशत की कमी करनी होगी? (2 दशमलव स्थाानों तक पूर्णांकित)",
+    q_en: "Q88. The length of a rectangle is increased by 40%. By what percentage must its breadth be decreased to keep the area unchanged? Round to two decimal places.",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 31.57%", "(b) 27.57%", "(c) 28.57%", "(d) 30.57%"],
+    o_en: ["(a) 31.57%", "(b) 27.57%", "(c) 28.57%", "(d) 30.57%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q45
+  {
+    q_hi: "Q89. एक कार की प्रारंभिक कीमत ₹5,00,000 थी। 12% मूल्य वृद्धि के बाद, अब इसे ₹5,60,000 में बेचा जा रहा है। यदि कीमत में 5% की और कमी जाए, तो कार की अंतिम कीमत कितनी होगी?",
+    q_en: "Q89. The initial price of a car was ₹5,00,000. After a 12% price increase, it is now priced at ₹5,60,000. If this price is further reduced by 5%, what will be the final price of the car?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹5,32,000", "(b) ₹5,25,000", "(c) ₹5,30,000", "(d) ₹5,35,000"],
+    o_en: ["(a) ₹5,32,000", "(b) ₹5,25,000", "(c) ₹5,30,000", "(d) ₹5,35,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q48
+  {
+    q_hi: "Q90. दो संख्याओं का योगफल 1040 है। यदि बड़ीी संख्या में 4% की कमी कर दी जाए और छोटी संख्या में 12% की वृद्धि कर दी जाए, तो प्राप्त संख्याएं बराबर होंगी। वह दोनों संख्याएं ज्ञाात कीजिए।",
+    q_en: "Q90. The sum of two numbers is 1040. If the larger number is decreased by 4% and the smaller number is increased by 12%, the resulting numbers become equal. Find the two numbers.",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 600, 440", "(b) 500, 640", "(c) 560, 480", "(d) 520, 520"],
+    o_en: ["(a) 600, 440", "(b) 500, 640", "(c) 560, 480", "(d) 520, 520"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q33
+  {
+    q_hi: "Q91. किसी वस्तु की कीमत में 12.5% ​की वृद्धि होने पर नई कीमत ₹18,000 हो जाती है। वस्तु की मूल कीमत ज्ञात कीजिए।",
+    q_en: "Q91. किसी वस्तु की कीमत में 12.5% ​की वृद्धि होने पर नई कीमत ₹18,000 हो जाती है। वस्तु की मूल कीमत ज्ञात कीजिए।",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) विकल्प A", "(b) विकल्प B", "(c) विकल्प C", "(d) विकल्प D"],
+    o_en: ["(a) Option A", "(b) Option B", "(c) Option C", "(d) Option D"],
+    a: 2,
+    image: Q91_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q46
+  {
+    q_hi: "Q92. पीटर की आय ₹6,000 थी। जिस कंपनी में उसने काम किया, वह घाटे में आ गई और उसका वेतन 20% कम हो गया। एक वर्ष बाद, कंपनी ने उसे घटी हुई आय पर 30% की वृद्धि दी। पीटर की अंतिम आय की तुलना उसकी मूल आय से कीजिए और ज्ञात कीजिए कि उसकी अंतिम आय उसकी मूल आय से कितनी अधिक या कम है।",
+    q_en: "Q92. Peter's income was ₹6,000. The company he worked for suffered losses and his salary was reduced by 20%. One year later, the company increased the reduced salary by 30%. Compare Peter's final income with his original income and find how much more or less it is.",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹240 अधिक", "(b) ₹240 कम", "(c) ₹200 कम", "(d) ₹200 अधिक"],
+    o_en: ["(a) ₹240 more", "(b) ₹240 less", "(c) ₹200 less", "(d) ₹200 more"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q27
+  {
+    q_hi: "Q93. दो उम्मीीदवारों के बीच हुए चुनाव में, 25% पंजीकृत मतदाताओं ने मतदान नहीं किया तथा डाले गए 795 मतों को अवैध घोषित कर दिया गया। विजयी उम्मीीदवार ने 70% वैध मत प्राप्त किए और दूसरे उम्मीीदवार को 3,600 मतों के अंतर से हराया। मतदाता सूची में कुल मतदाताओं की संख्या ज्ञात कीजिए।",
+    q_en: "Q93. In an election between two candidates, 25% of the registered voters did not vote and 795 of the votes cast were declared invalid. The winner received 70% of the valid votes and defeated the other candidate by 3,600 votes. Find the total number of voters on the electoral roll.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 13,456", "(b) 12,680", "(c) 13,060", "(d) 12,090"],
+    o_en: ["(a) 13,456", "(b) 12,680", "(c) 13,060", "(d) 12,090"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q35
+  {
+    q_hi: "Q94. केशव का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹5,500 और यूटिलिटी बिलों पर ₹2,500 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञात कीजिए।",
+    q_en: "Q94. केशव का मासिक वेतन ₹15,000 है। वह प्रत्येक माह घर के किराए पर ₹5,500 और यूटिलिटी बिलों पर ₹2,500 का व्यय करता है तथा शेष राशि की बचत करता है। यदि, अपने जन्मदिवस वाले महीने के दौरान, वह अपनी संपूर्ण मासिक बचत अपने जन्मदिवस के उत्सव पर व्यय कर देता है, तो वर्ष के लिए उसकी कुल बचत (₹ में) ज्ञात कीजिए।",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 63,000", "(b) 77,000", "(c) 70,000", "(d) 84,000"],
+    o_en: ["(a) 63,000", "(b) 77,000", "(c) 70,000", "(d) 84,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q38
+  {
+    q_hi: "Q95. मार्गरेट के वेतन में 12% की वृद्धि होती है। यदि उसका नया वेतन ₹22,400 हो जाता है, तो मार्गरेट का मूल वेतन ज्ञात कीजिए।",
+    q_en: "Q95. Margaret's salary increases by 12%. If her new salary becomes ₹22,400, find her original salary.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹21,500", "(b) ₹19,500", "(c) ₹20,000", "(d) ₹19,800"],
+    o_en: ["(a) ₹21,500", "(b) ₹19,500", "(c) ₹20,000", "(d) ₹19,800"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q47
+  {
+    q_hi: "Q96. यदि किसी ठोस गोले के आयतन में 119.7% की वृद्धि होती है, तो उसके पृष्ठीय क्षेत्रफल में प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q96. If the volume of a solid sphere increases by 119.7%, find the percentage increase in its surface area.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 76%", "(b) 69%", "(c) 81%", "(d) 56%"],
+    o_en: ["(a) 76%", "(b) 69%", "(c) 81%", "(d) 56%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q97. किसी जिले की जनसंख्या 3,54,000 है, जिसमें से 2,30,000 पुरुष हैं। 17% जनसंख्या साक्षर है। यदि 17% पुरुष साक्षर हैं, तो साक्षर महिलाओं का प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q97. The population of a district is 3,54,000, of which 2,30,000 are men. 17% of the population is literate. If 17% of the men are literate, find the percentage of literate women.",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 16%", "(b) 15%", "(c) 20%", "(d) 17%"],
+    o_en: ["(a) 16%", "(b) 15%", "(c) 20%", "(d) 17%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q44
+  {
+    q_hi: "Q98. किसी कस्बे की जनसंख्या 60,000 से बढ़कर 61,260 हो जाती है। प्रतिशत वृद्धि कितनी है?",
+    q_en: "Q98. The population of a town increases from 60,000 to 61,260. What is the percentage increase?",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 2.2%", "(b) 2.0%", "(c) 2.3%", "(d) 2.1%"],
+    o_en: ["(a) 2.2%", "(b) 2.0%", "(c) 2.3%", "(d) 2.1%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q2
+  {
+    q_hi: "Q99. एक कक्षा में 46 लड़के और 36 लड़कियां हैं। यदि लड़कियों की संख्या में क्रमिक रूप से 25% और उसके बाद 20% की वृद्धि होती है, तो लड़कियों की संख्या, लड़कों की संख्या से कितनी अधिक होगी?",
+    q_en: "Q99. In a class there are 46 boys and 36 girls. If the number of girls increases successively by 25% and then 20%, by how many will the number of girls exceed the number of boys?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 10", "(b) 8", "(c) 12", "(d) 6"],
+    o_en: ["(a) 10", "(b) 8", "(c) 12", "(d) 6"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q14
+  {
+    q_hi: "Q100. एक मशीन के मूल्य में पहले 20% की कमी की जाती है। फिर उसमें 25% की वृद्धि की जाती है और अंत में 10% की कमी की जाती है। इसके मूल्य में समग्र प्रतिशत परिवर्तन ज्ञाात कीजिए।",
+    q_en: "Q100. The value of a machine is first decreased by 20%, then increased by 25%, and finally decreased by 10%. Find the overall percentage change in its value.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 12% कमी", "(b) 8% कमी", "(c) 10% कमी", "(d) 5% कमी"],
+    o_en: ["(a) 12% lessी", "(b) 8% lessी", "(c) 10% lessी", "(d) 5% lessी"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];

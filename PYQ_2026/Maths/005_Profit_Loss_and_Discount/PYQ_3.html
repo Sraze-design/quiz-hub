@@ -1,0 +1,555 @@
+const Q132_IMAGE = "data:image/png;base64,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";
+
+const data = [
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q13
+  {
+    q_hi: "Q101. एक दुकानदार पंखे का मूल्य उसके लागत मूल्य से 36% अधिक अंकित करता है और अंकित मूल्य पर 25% की छूट देता है। यदि उसे ₹134 का लाभ प्राप्त होता है, तो पंखे का अंकित मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q101. A shopkeeper marks the price of a fan 36% above its cost price and gives a discount of 25% on the marked price. If he earns a profit of ₹134, find the marked price of the fan.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 9,112", "(b) 8,851", "(c) 9,135", "(d) 8,987"],
+    o_en: ["(a) 9,112", "(b) 8,851", "(c) 9,135", "(d) 8,987"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q18
+  {
+    q_hi: "Q102. एक सेल के दौरान, कुल वस्तुओं में से 60% वस्तुओं को 21% लाभ पर बेचा जाता है। शेष वस्तुओं में से 40% वस्तुओं को 46% लाभ पर बेचा जाता है, और शेष वस्तुएं 29% हानि पर बेची जाती है। यदि समग्र लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q102. During a sale, 60% of the goods are sold at a profit of 21%. Of the remaining goods, 40% are sold at a profit of 46%, and the rest are sold at a loss of 29%. If the overall profit is x%, find x.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 13", "(b) 3.5", "(c) 9.5", "(d) 3"],
+    o_en: ["(a) 13", "(b) 3.5", "(c) 9.5", "(d) 3"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q5
+  {
+    q_hi: "Q103. एक दुकानदार ने एक पुस्तक 7% की हानि पर बेची। यदि विक्रय मूल्य में ₹120 की वृद्धि कर दी जाती, तो उसे 17% का लाभ होता। पुस्तक का क्रय मूल्य (₹ में) कितना था?",
+    q_en: "Q103. A shopkeeper sold a book at a loss of 7%. If the selling price were increased by ₹120, he would make a profit of 17%. What was the cost price of the book?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 505", "(b) 510", "(c) 495", "(d) 500"],
+    o_en: ["(a) 505", "(b) 510", "(c) 495", "(d) 500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q7
+  {
+    q_hi: "Q104. एक व्यापारी दो वस्तुएँ X और Y, ₹1,200 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 80% और 44% की दो क्रमिक छूट देकर बेचता है और फिर भी ₹172 का लाभ अर्जित करता है। यदि वह Y को 88% की एकल छूट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q104. A dealer buys two articles X and Y at ₹1,200 each and marks both at the same price. He sells X after successive discounts of 80% and 44% and still earns a profit of ₹172. If he sells Y at a single discount of 88%, find the profit percentage on Y.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 21.5%", "(b) 22%", "(c) 22.5%", "(d) 21%"],
+    o_en: ["(a) 21.5%", "(b) 22%", "(c) 22.5%", "(d) 21%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q3
+  {
+    q_hi: "Q105. एक डीलर दो वस्तुएँ X और Y, ₹700 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 60% और 20% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹630 का लाभ अर्जित करता है। यदि वह Y को 76% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q105. एक डीलर दो वस्तुएँ X और Y, ₹700 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 60% और 20% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹630 का लाभ अर्जित करता है। यदि वह Y को 76% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) 41.5%", "(b) 42%", "(c) 41%", "(d) 42.5%"],
+    o_en: ["(a) 41.5%", "(b) 42%", "(c) 41%", "(d) 42.5%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q23
+  {
+    q_hi: "Q106. एक व्यक्ति ₹42000 प्रति वस्‍तु की दर से दो वस्तुएँ बेचता है। उसे एक वस्तु पर 45% का लाभ होता है और दूसरी वस्तु पर 45% की हानि होती है। इस लेन-देन में उसका समग्र लाभ या हानि (निकटतम पूर्णांक तक) ज्ञाात कीजिए।",
+    q_en: "Q106. A person sells two articles at ₹42,000 each. He earns a profit of 45% on one article and incurs a loss of 45% on the other. Find the overall profit or loss in this transaction, rounded to the nearest integer.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹21429 का लाभ", "(b) ₹21429 की हानि", "(c) ₹21329 का लाभ", "(d) ₹21329 की हानि"],
+    o_en: ["(a) ₹21429 profit", "(b) ₹21429 loss", "(c) ₹21329 profit", "(d) ₹21329 loss"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q1
+  {
+    q_hi: "Q107. एक डीलर दो वस्तुएँ X और Y, ₹800 प्रति वस्तु की दर से खरीदता है। वह दोनों पर समान मूल्य अंकित करता है। वह X को 73% और 37% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹901 का लाभ अर्जित करता है। यदि वह Y को 89% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q107. एक डीलर दो वस्तुएँ X और Y, ₹800 प्रति वस्तु की दर से खरीदता है। वह दोनों पर समान मूल्य अंकित करता है। वह X को 73% और 37% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹901 का लाभ अर्जित करता है। यदि वह Y को 89% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 36%", "(b) 37.5%", "(c) 37%", "(d) 36.5%"],
+    o_en: ["(a) 36%", "(b) 37.5%", "(c) 37%", "(d) 36.5%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q12
+  {
+    q_hi: "Q108. एक व्यापारी मसाले को 15% के लाभ पर बेचने का दावा करता है, लेकिन बेईमानी से बांट पर लिखे वजन से 14% कम वजन का उपयोग करता है। व्यापारी द्वाारा अर्जित कुल लाभ प्रतिशत ज्ञाात कीजिए। (उत्तर को निकटतम पूर्णांक तक पूर्णांकित कीजिए)",
+    q_en: "Q108. A trader claims to sell spices at a profit of 15%, but dishonestly uses a weight that is 14% less than the stated weight. Find the total profit percentage earned by the trader. (Round to the nearest integer.)",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 34%", "(b) 36%", "(c) 31%", "(d) 39%"],
+    o_en: ["(a) 34%", "(b) 36%", "(c) 31%", "(d) 39%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q16
+  {
+    q_hi: "Q109. एक डीलर दो वस्तुएं X और Y ₹3,400 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 10% और 50% की दो क्रमागत छूट देकर बेचता है और फिर भी ₹323 का लाभ अर्जित करता है। यदि वह Y को 28% की एकल छूट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q109. A dealer buys two articles X and Y at ₹3,400 each and marks both at the same price. He sells X after successive discounts of 10% and 50% and still earns a profit of ₹323. If he sells Y at a single discount of 28%, find the profit percentage on Y.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 74%", "(b) 74.2%", "(c) 75.2%", "(d) 75%"],
+    o_en: ["(a) 74%", "(b) 74.2%", "(c) 75.2%", "(d) 75%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q22
+  {
+    q_hi: "Q110. एक बिक्री के दौरान, 44% माल 47% लाभ पर बेचा जाता है। शेष माल का 25% माल 22% लाभ पर बेचा जाता है, और शेष माल 38% हानि पर बेचा जाता है। यदि समग्र लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q110. During a sale, 44% of the goods are sold at a profit of 47%. Of the remaining goods, 25% are sold at a profit of 22%, and the rest are sold at a loss of 38%. If the overall profit is x%, find x.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 12.4", "(b) 7.8", "(c) 18", "(d) 18.5"],
+    o_en: ["(a) 12.4", "(b) 7.8", "(c) 18", "(d) 18.5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q2
+  {
+    q_hi: "Q111. एक वस्तु 38% लाभ पर बेची जाती है। यदि क्रय मूल्य में ₹68 की वृद्धि कर दी जाए और विक्रय मूल्य में ₹54 की कमी कर दी जाए, तो लाभ 37.5% होगा। वस्तु का मूल क्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q111. An article is sold at a profit of 38%. If the cost price is increased by ₹68 and the selling price is decreased by ₹54, the profit becomes 37.5%. Find the original cost price of the article.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 29,500", "(b) 29,400", "(c) 29,700", "(d) 29,300"],
+    o_en: ["(a) 29,500", "(b) 29,400", "(c) 29,700", "(d) 29,300"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q3
+  {
+    q_hi: "Q112. 100 केले ₹1,200 प्रति सैकड़ाा की दर से खरीदे गए और ₹1,100 के लाभ पर बेचे गए। प्रति दर्जन केले का विक्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q112. 100 bananas were bought at the rate of ₹1,200 per hundred and sold at a profit of ₹1,100. Find the selling price per dozen bananas.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 286", "(b) 281", "(c) 271", "(d) 276"],
+    o_en: ["(a) 286", "(b) 281", "(c) 271", "(d) 276"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q113. एक दुकानदार किसी वस्तु का अंकित मूल्य उसके क्रय मूल्य से 40% अधिक निर्धारित करता है। 26% लाभ अर्जित करने के लिए उसे कितने प्रतिशत की छूट देनी होगी?",
+    q_en: "Q113. A shopkeeper marks an article 40% above its cost price. What percentage discount should he give to earn a profit of 26%?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 9%", "(b) 10%", "(c) 12%", "(d) 0.11%"],
+    o_en: ["(a) 9%", "(b) 10%", "(c) 12%", "(d) 0.11%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q57
+  {
+    q_hi: "Q114. एक व्यापारी ने किसी वस्तु का मूल्य, क्रय मूल्य से 40% अधिक अंकित किया। वह ग्राहक को 20% और 25% की दो क्रमिक छूट प्रदान करता है। यदि उसे ₹224 की हानि होती है, तो वह वस्तु को उस ग्राहक को किस मूल्य पर बेचता है?",
+    q_en: "Q114. A trader marks an article 40% above its cost price. He gives successive discounts of 20% and 25% to a customer. If he incurs a loss of ₹224, at what price does he sell the article to the customer?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹1,166", "(b) ₹1,176", "(c) ₹1,276", "(d) ₹1,167"],
+    o_en: ["(a) ₹1,166", "(b) ₹1,176", "(c) ₹1,276", "(d) ₹1,167"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q22
+  {
+    q_hi: "Q115. एक दुकानदार किसी वस्तु का अंकित मूल्य उसके क्रय मूल्य से 56% अधिक निर्धारित करता है। 17% का लाभ प्राप्त करने के लिए उसे कितने प्रतिशत की छूट प्रदान करनी चाहिए?",
+    q_en: "Q115. A shopkeeper marks an article 56% above its cost price. What percentage discount should he give to earn a profit of 17%?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 24%", "(b) 22%", "(c) 25%", "(d) 26%"],
+    o_en: ["(a) 24%", "(b) 22%", "(c) 25%", "(d) 26%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q116. एक व्यक्ति ने ₹1,500 में एक घड़ीी खरीदी। उसने उसे अपने मित्र को अपने क्रय मूल्य पर 12% लाभ पर बेच दिया। फिर उसके मित्र ने उसे किसी अन्य व्यक्ति को अपने क्रय मूल्य पर 8% लाभ पर बेच दिया। प्रारंभिक क्रय मूल्य और अंतिम विक्रय मूल्य में अंतर ज्ञाात कीजिए।",
+    q_en: "Q116. A person bought a watch for ₹1,500. He sold it to his friend at a profit of 12% on his cost price. The friend then sold it to another person at a profit of 8% on his cost price. Find the difference between the initial cost price and the final selling price.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹316.40", "(b) ₹312.40", "(c) ₹314.40", "(d) ₹318.40"],
+    o_en: ["(a) ₹316.40", "(b) ₹312.40", "(c) ₹314.40", "(d) ₹318.40"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q62
+  {
+    q_hi: "Q117. एक वस्तु 40% लाभ पर बेची जाती है। यदि क्रय मूल्य में ₹28 की वृद्धि कर दी जाए और विक्रय मूल्य में ₹84 की कमी कर दी जाए, तो लाभ 37.5% होगा। वस्तु का मूल क्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q117. An article is sold at a profit of 40%. If the cost price is increased by ₹28 and the selling price is decreased by ₹84, the profit becomes 37.5%. Find the original cost price of the article.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 5,000", "(b) 4,900", "(c) 4,700", "(d) 4,800"],
+    o_en: ["(a) 5,000", "(b) 4,900", "(c) 4,700", "(d) 4,800"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q67
+  {
+    q_hi: "Q118. एक दुकानदार किसी वस्तु का मूल्य उसके क्रय मूल्य से 30% अधिक अंकित करता है। वह अंकित मूल्य पर 20% की छूट देता है, और ₹32 का लाभ अर्जित करता है। वस्तु का क्रय मूल्य ज्ञाात कीजिए।",
+    q_en: "Q118. A shopkeeper marks an article 30% above its cost price. He gives a discount of 20% on the marked price and earns a profit of ₹32. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 800", "(b) 700", "(c) 680", "(d) 720"],
+    o_en: ["(a) 800", "(b) 700", "(c) 680", "(d) 720"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q23
+  {
+    q_hi: "Q119. यदि एक जैसी 12 पुस्तकों का क्रय मूल्य ₹960 है और एक जैसे 8 पेनों का क्रय मूल्य ₹320 है, तो एक ही प्रकार की 15 पुस्तकों और 10 पेनों का कुल क्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q119. यदि एक जैसी 12 पुस्तकों का क्रय मूल्य ₹960 है और एक जैसे 8 पेनों का क्रय मूल्य ₹320 है, तो एक ही प्रकार की 15 पुस्तकों और 10 पेनों का कुल क्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 1800", "(b) 1600", "(c) 1500", "(d) 1200"],
+    o_en: ["(a) 1800", "(b) 1600", "(c) 1500", "(d) 1200"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q52
+  {
+    q_hi: "Q120. एक दुकानदार किसी वस्तु के अंकित मूल्य पर 70% और 75% की दो क्रमिक छूटें प्रदान करके उसे ₹430.5 में बेचता है। यदि वह कोई छूट प्रदान नहीं करता, तो उसे 40% का लाभ प्राप्त होता। वस्तु का क्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q120. A shopkeeper sells an article for ₹430.5 after giving two successive discounts of 70% and 75% on its marked price. If he gives no discount, he earns a profit of 40%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 4,121", "(b) 4,100", "(c) 4,081", "(d) 4,145"],
+    o_en: ["(a) 4,121", "(b) 4,100", "(c) 4,081", "(d) 4,145"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q54
+  {
+    q_hi: "Q121. एक बिक्री के दौरान 50% माल 40% लाभ पर बेचा जाता है, शेष माल का 30% माल 46% लाभ पर बेचा जाता है और शेष माल 24% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q121. During a sale, 50% of the goods are sold at a profit of 40%. Of the remaining goods, 30% are sold at a profit of 46%, and the rest are sold at a loss of 24%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 20", "(b) 18.5", "(c) 17.5", "(d) 19"],
+    o_en: ["(a) 20", "(b) 18.5", "(c) 17.5", "(d) 19"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q72
+  {
+    q_hi: "Q122. किसी वस्तु पर 20% और 10% की दो क्रमिक छूट देने के बाद उसका मूल्य ₹7,200 हो जाता है। किसी भी प्रकार की छूट देने से पहले वस्तु का मूल मूल्य (original price) क्याा था?",
+    q_en: "Q122. After two successive discounts of 20% and 10% on an article, its price becomes ₹7,200. What was the original price before any discount?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹9,000", "(b) ₹11,000", "(c) ₹10,000", "(d) ₹12,000"],
+    o_en: ["(a) ₹9,000", "(b) ₹11,000", "(c) ₹10,000", "(d) ₹12,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q74
+  {
+    q_hi: "Q123. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹63 खर्च किए। फिर उसने उस वस्तु को भरत को 25% के लाभ पर बेच दिया। बाद में, भरत ने उस वस्तु को ₹8415 में बेचा, जिससे उसे 15% की हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q123. Anand bought an article and spent ₹63 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹8415 at a loss of 15%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 7918", "(b) 7919", "(c) 7917", "(d) 7920"],
+    o_en: ["(a) 7918", "(b) 7919", "(c) 7917", "(d) 7920"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q8
+  {
+    q_hi: "Q124. एक दुकान किसी वस्तु का मूल्य 50% बढ़ााकर अंकित करती है और फिर अंकित मूल्य पर 20% की छूट प्रदान करती है। यदि अंतिम विक्रय मूल्य ₹2,400 है, तो क्रय मूल्य (₹ में) कितना था?",
+    q_en: "Q124. A shop marks an article 50% above its cost price and then gives a discount of 20% on the marked price. If the final selling price is ₹2,400, what was the cost price?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 2,050", "(b) 2,000", "(c) 2,100", "(d) 1,800"],
+    o_en: ["(a) 2,050", "(b) 2,000", "(c) 2,100", "(d) 1,800"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q43
+  {
+    q_hi: "Q125. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹84 खर्च किए। फिर उसने उसे भरत को 25% लाभ पर बेच दिया। बाद में, भरत ने उस वस्तु को ₹4368 में बेच दिया, जिस पर उसे 9% की हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q125. Anand bought an article and spent ₹84 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹4368 at a loss of 9%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 3840", "(b) 3842", "(c) 3838", "(d) 3839"],
+    o_en: ["(a) 3840", "(b) 3842", "(c) 3838", "(d) 3839"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q56
+  {
+    q_hi: "Q126. एक दुकानदार किसी वस्तु को उसके अंकित मूल्य पर 90% और 50% की दो क्रमिक छूट देकर ₹225.6 में बेचता है। यदि वह कोई छूट नहीं देता है, तो उसे 41% का लाभ अर्जित होगा। वस्तु का लागत मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q126. A shopkeeper sells an article for ₹225.6 after giving two successive discounts of 90% and 50% on its marked price. If he gives no discount, he would earn a profit of 41%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 3,200", "(b) 3,194", "(c) 3,204", "(d) 3,182"],
+    o_en: ["(a) 3,200", "(b) 3,194", "(c) 3,204", "(d) 3,182"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q60
+  {
+    q_hi: "Q127. अरविंद ने एक वस्तु ₹x में खरीदी। उसने इसे बीरू को 30% हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹198 खर्च किए और इसे मीनू को 50% लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,053 में खरीदा, तो x का मान कितना है?",
+    q_en: "Q127. Arvind bought an article for ₹x. He sold it to Biru at a loss of 30%. Biru spent ₹198 on transportation and sold it to Meenu at a profit of 50%. If Meenu bought it for ₹1,053, find x.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 696", "(b) 715", "(c) 720", "(d) 671"],
+    o_en: ["(a) 696", "(b) 715", "(c) 720", "(d) 671"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q20
+  {
+    q_hi: "Q128. एक दुकानदार ने ₹10 प्रति आम के हिसाब से 50 आम खरीदे। उसने 30 आम 20% लाभ पर और शेष 20 आम 10% हानि पर बेचे। उसका कुल लाभ या हानि प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q128. A shopkeeper bought 50 mangoes at ₹10 per mango. He sold 30 mangoes at a profit of 20% and the remaining 20 at a loss of 10%. Find his overall profit or loss percentage.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 4% लाभ", "(b) 8% लाभ", "(c) 6% हानि", "(d) 2% हानि"],
+    o_en: ["(a) 4% profit", "(b) 8% profit", "(c) 6% loss", "(d) 2% loss"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q129. विनीत ने ₹5,400 में एक जूसर खरीदा। वह अपने ग्रााहक को अंकित मूल्य पर 10% की छूट देकर 20% का लाभ अर्जित करना चाहता है। इसके लिए अंकित मूल्य (₹ में) कितना होना चाहिए?",
+    q_en: "Q129. Vineet bought a juicer for ₹5,400. He wants to earn a profit of 20% after giving his customer a discount of 10% on the marked price. What should the marked price be?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 7,100", "(b) 7,200", "(c) 7,050", "(d) 7,150"],
+    o_en: ["(a) 7,100", "(b) 7,200", "(c) 7,050", "(d) 7,150"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q130. एक दुकानदार मोबाइल फोन पर उसके क्रय मूल्य से 40% अधिक मूल्य अंकित करता है। फिर वह अंकित मूल्य पर 10% और 5% की दो क्रमिक छूटें प्रदान करता है। क्रय मूल्य पर उसे प्राप्त लाभ प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q130. A shopkeeper marks a mobile phone 40% above its cost price. He then gives two successive discounts of 10% and 5% on the marked price. Find his profit percentage on the cost price.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 21%", "(b) 23%", "(c) 22.3%", "(d) 19.7%"],
+    o_en: ["(a) 21%", "(b) 23%", "(c) 22.3%", "(d) 19.7%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q61
+  {
+    q_hi: "Q131. एक सेल के दौरान, 55% माल 41% लाभ पर बेचा जाता है, शेष माल का 20% माल 19% लाभ पर और शेष माल को 21% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान कितना है?",
+    q_en: "Q131. During a sale, 55% of the goods are sold at a profit of 41%. Of the remaining goods, 20% are sold at a profit of 19%, and the rest are sold at a loss of 21%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 16.7%", "(b) 15%", "(c) 10.5%", "(d) 12%"],
+    o_en: ["(a) 16.7%", "(b) 15%", "(c) 10.5%", "(d) 12%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q25
+  {
+    q_hi: "Q132. शुभ एक वस्तु को उसके क्रय मूल्य से 40% अधिक मूल्य पर अंकित करता है। वह अंकित मूल्य पर d% की एकल छूट देता है और फिर भी क्रय मूल्य पर 10% का लाभ अर्जित करता है। छूट d% ज्ञाात कीजिए।",
+    q_en: "Q132. Shubh marks an article 40% above its cost price. He gives a single discount of d% on the marked price and still earns a profit of 10% on the cost price. Find d.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) विकल्प A", "(b) विकल्प B", "(c) 23%", "(d) 22%"],
+    o_en: ["(a) 21 2/7%", "(b) 21 3/7%", "(c) 23%", "(d) 22%"],
+    a: 1,
+    image: Q132_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q35
+  {
+    q_hi: "Q133. एक सेल के दौरान, 50% माल 49% लाभ पर बेचा जाता है, शेष माल का 32% माल 45% लाभ पर बेचा जाता है और अभी भी बचे हुए माल को 15% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q133. During a sale, 50% of the goods are sold at a profit of 49%. Of the remaining goods, 32% are sold at a profit of 45%, and the rest are sold at a loss of 15%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 28.1%", "(b) 27%", "(c) 25%", "(d) 26.6%"],
+    o_en: ["(a) 28.1%", "(b) 27%", "(c) 25%", "(d) 26.6%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q51
+  {
+    q_hi: "Q134. एक दुकानदार किसी वस्तु का अंकित मूल्य उसके क्रय मूल्य से 20% अधिक निर्धारित करता है। 2% लाभ अर्जित करने के लिए उसे कितने प्रतिशत की छूट देनी होगी?",
+    q_en: "Q134. A shopkeeper marks an article 20% above its cost price. What percentage discount should he give to earn a profit of 2%?",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 17%", "(b) 12%", "(c) 18%", "(d) 15%"],
+    o_en: ["(a) 17%", "(b) 12%", "(c) 18%", "(d) 15%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q61
+  {
+    q_hi: "Q135. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹82 खर्च हुए। बाद में उसने वह वस्तु भरत को 25% लाभ पर बेच दी। अंततः भरत ने वह वस्तु ₹2915 में बेच दी, जिससे उसे 47% हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q135. Anand bought an article and spent ₹82 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹2915 at a loss of 47%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 4398", "(b) 4397", "(c) 4400", "(d) 4402"],
+    o_en: ["(a) 4398", "(b) 4397", "(c) 4400", "(d) 4402"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q4
+  {
+    q_hi: "Q136. एक सेल के दौरान, 40% माल 44% लाभ पर बेचा जाता है, शेष माल का 25% माल 29% लाभ पर बेचा जाता है और शेष माल को 39% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q136. During a sale, 40% of the goods are sold at a profit of 44%. Of the remaining goods, 25% are sold at a profit of 29%, and the rest are sold at a loss of 39%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 15%", "(b) 4.4%", "(c) 7.5%", "(d) 10.5% 17/02/2026 9:00 AM - 10:00 AM RRB ALP CBT 1"],
+    o_en: ["(a) 15%", "(b) 4.4%", "(c) 7.5%", "(d) 10.5%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q7
+  {
+    q_hi: "Q137. एक दुकानदार किसी वस्तु के अंकित मूल्य पर 60% और 31% की दो क्रमिक छूटें प्रदान करके उसे ₹324.3 में बेचता है। यदि वह कोई छूट प्रदान नहीं करता है, तो उसे 25% का लाभ प्राप्त होता है। वस्तु का क्रय मूल्य (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q137. A shopkeeper sells an article for ₹324.3 after giving two successive discounts of 60% and 31% on its marked price. If he gives no discount, he earns a profit of 25%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 947", "(b) 917", "(c) 940", "(d) 968"],
+    o_en: ["(a) 947", "(b) 917", "(c) 940", "(d) 968"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q17
+  {
+    q_hi: "Q138. किसी वस्तु का अंकित मूल्य, क्रय मूल्य से 10% अधिक है और अंकित मूल्य पर 10% की छूट प्रदान की जाती है। इस बिक्री में व्यवसाय के मालिक को हुआ प्रतिशत लाभ या हानि ज्ञाात कीजिए।",
+    q_en: "Q138. The marked price of an article is 10% above its cost price and a discount of 10% is given on the marked price. Find the percentage profit or loss in the sale.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 1% हानि", "(b) 2% हानि", "(c) 2% लाभ", "(d) 1% लाभ"],
+    o_en: ["(a) 1% loss", "(b) 2% loss", "(c) 2% profit", "(d) 1% profit"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q65
+  {
+    q_hi: "Q139. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹175 खर्च किए। फिर उसने उसे भरत को 25% लाभ पर बेच दिया। बाद में, भरत ने उस वस्तु को ₹3,402 में बेच दिया, जिस पर उसे 58% की हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q139. Anand bought an article and spent ₹175 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹3,402 at a loss of 58%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 6480", "(b) 6478", "(c) 6483", "(d) 6481"],
+    o_en: ["(a) 6480", "(b) 6478", "(c) 6483", "(d) 6481"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q11
+  {
+    q_hi: "Q140. निखिल ने अपनी साइकिल रवि को 24% हानि पर बेची। रवि ने उसकी मरम्मत पर ₹486 खर्च किए और साइकिल को विकास को ₹2,875 में बेचकर 15% लाभ कमाया। निखिल के लिए साइकिल का लागत मूल्य ज्ञाात कीजिए।",
+    q_en: "Q140. Nikhil sold his bicycle to Ravi at a loss of 24%. Ravi spent ₹486 on repairs and sold the bicycle to Vikas for ₹2,875, earning a profit of 15%. Find the cost price of the bicycle for Nikhil.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹2,540", "(b) ₹2,650", "(c) ₹2,460", "(d) ₹2,710"],
+    o_en: ["(a) ₹2,540", "(b) ₹2,650", "(c) ₹2,460", "(d) ₹2,710"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q26
+  {
+    q_hi: "Q141. एक सेल के दौरान, 48% माल 31% लाभ पर बेचा जाता है, शेष का 25% माल 16% लाभ पर बेचा जाता है, और शेष माल को 32% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q141. During a sale, 48% of the goods are sold at a profit of 31%. Of the remaining goods, 25% are sold at a profit of 16%, and the rest are sold at a loss of 32%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 7", "(b) 4.48", "(c) 8", "(d) 7.5"],
+    o_en: ["(a) 7", "(b) 4.48", "(c) 8", "(d) 7.5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q142. एक दुकानदार ₹10,000 अंकित मूल्य की एक वस्तु पर 20% और 30% की दो क्रमिक छूटें प्रदान करता है, जिससे उसे वस्तु के क्रय मूल्य पर 12% का लाभ प्राप्त होता है। वस्तु का क्रय मूल्य और विक्रय मूल्य ज्ञाात कीजिए।",
+    q_en: "Q142. A shopkeeper gives two successive discounts of 20% and 30% on an article marked at ₹10,000, and thereby earns a profit of 12% on the cost price. Find the cost price and selling price of the article.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) क्रय मूल्य = ₹5,000, विक्रय मूल्य = ₹5,500", "(b) क्रय मूल्य = ₹4,000, विक्रय मूल्य = ₹5,000", "(c) क्रय मूल्य = ₹5,000, विक्रय मूल्य = ₹6,000", "(d) क्रय मूल्य = ₹5,000, विक्रय मूल्य = ₹5,600"],
+    o_en: ["(a) Cost price = ₹5,000, Selling price = ₹5,500", "(b) Cost price = ₹4,000, Selling price = ₹5,000", "(c) Cost price = ₹5,000, Selling price = ₹6,000", "(d) Cost price = ₹5,000, Selling price = ₹5,600"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q65
+  {
+    q_hi: "Q143. एक इलेक्ट्रॉॉनिक्स स्टोोर ₹51,000 मूल्य के लैपटॉप पर दो क्रमिक छूट प्रदान करता है। पहली छूट 10% है और दूसरी छूट 5% है। दोनों छूट के बाद अंतिम मूल्य कितना होगा?",
+    q_en: "Q143. An electronics store offers two successive discounts on a laptop priced at ₹51,000. The first discount is 10% and the second is 5%. What is the final price after both discounts?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹46,305", "(b) ₹44,305", "(c) ₹43,605", "(d) ₹43,506"],
+    o_en: ["(a) ₹46,305", "(b) ₹44,305", "(c) ₹43,605", "(d) ₹43,506"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q15
+  {
+    q_hi: "Q144. एक दुकानदार किसी वस्तु के अंकित मूल्य पर 75% और 34% की दो क्रमिक छूटें प्रदान करके उसे ₹689.7 में बेचता है। यदि वह कोई छूट प्रदान नहीं करता, तो उसे 76% का लाभ अर्जित होता। वस्तु का क्रय मूल्य (₹ में) कितना है?",
+    q_en: "Q144. A shopkeeper sells an article for ₹689.7 after giving two successive discounts of 75% and 34% on its marked price. If he gives no discount, he earns a profit of 76%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 2,397", "(b) 2,359", "(c) 2,375", "(d) 2,333"],
+    o_en: ["(a) 2,397", "(b) 2,359", "(c) 2,375", "(d) 2,333"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q145. एक दुकानदार ने छह एकसमान मोबाइल फोन ₹72000 में खरीदे, और उनमें से दो मोबाइल फोन ₹72000 में बेच दिए। उसका लाभ प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q145. A shopkeeper bought six identical mobile phones for ₹72,000 and sold two of them for ₹72,000. Find his profit percentage.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 200%", "(b) 203%", "(c) 1.97%", "(d) 201%"],
+    o_en: ["(a) 200%", "(b) 203%", "(c) 1.97%", "(d) 201%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q56
+  {
+    q_hi: "Q146. एक व्यापारी किसी उत्पााद पर ₹2,000 अंकित करता है। वह एक ग्राहक को 20% और 10% की दो क्रमिक छूटें देता है। एकल समतुल्य छूट प्रतिशत और उत्पााद का विक्रय मूल्य ज्ञाात कीजिए।",
+    q_en: "Q146. A trader marks a product at ₹2,000 and gives a customer two successive discounts of 20% and 10%. Find the single equivalent discount percentage and the selling price of the product.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 20%, ₹1,640", "(b) 28%, ₹1,440", "(c) 25%, ₹1,540", "(d) 30%, ₹1,740"],
+    o_en: ["(a) 20%, ₹1,640", "(b) 28%, ₹1,440", "(c) 25%, ₹1,540", "(d) 30%, ₹1,740"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q62
+  {
+    q_hi: "Q147. एक व्यापारी चावल की दो किस्मोंों, A और B को वजन के अनुसार 3 : 5 के अनुपात में मिश्रित करता है। वह मिश्रण को उस मूल्य पर बेचता है कि उसे चावल A पर 20% का लाभ होता है तथा चावल B पर 10% की हानि होती है। यदि मिश्रण पर समग्र लाभ 8% है, तो प्रति kg चावल A के क्रय मूल्य और प्रति kg चावल B के क्रय मूल्य का अनुपात ज्ञाात कीजिए।",
+    q_en: "Q147. A trader mixes two varieties of rice, A and B, in the ratio 3:5 by weight. He sells the mixture at such a price that he earns a 20% profit on rice A and incurs a 10% loss on rice B. If the overall profit on the mixture is 8%, find the ratio of the cost price per kg of rice A to that of rice B.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 5 : 2", "(b) 2 : 5", "(c) 3 : 4", "(d) 4 : 3"],
+    o_en: ["(a) 5:2", "(b) 2:5", "(c) 3:4", "(d) 4:3"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q14
+  {
+    q_hi: "Q148. 28 आमों का क्रय मूल्य 25 आमों के विक्रय मूल्य के बराबर है। लाभ प्रतिशत ज्ञाात कीजिए।",
+    q_en: "Q148. The cost price of 28 mangoes is equal to the selling price of 25 mangoes. Find the profit percentage.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 10.9%", "(b) 11.6%", "(c) 10%", "(d) 12%"],
+    o_en: ["(a) 10.9%", "(b) 11.6%", "(c) 10%", "(d) 12%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q149. एक लग्जरी घड़ीी का अंकित मूल्य ₹75,000 है। एक त्योहार के दौरान इस पर 18% की छूट प्रदान की जाती है और उसके बाद ₹5,000 की और छूट मिलती है। घड़ीी का अंतिम मूल्य क्याा होगा?",
+    q_en: "Q149. The marked price of a luxury watch is ₹75,000. During a festival, a discount of 18% is given, followed by a further discount of ₹5,000. What is the final price of the watch?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹55,700", "(b) ₹55,600", "(c) ₹57,500", "(d) ₹56,500"],
+    o_en: ["(a) ₹55,700", "(b) ₹55,600", "(c) ₹57,500", "(d) ₹56,500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q46
+  {
+    q_hi: "Q150. एक सेल के दौरान, 44% माल 28% लाभ पर बेचा जाता है, शेष माल का 25% माल 48% लाभ पर और शेष माल को 18% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञाात कीजिए।",
+    q_en: "Q150. During a sale, 44% of the goods are sold at a profit of 28%. Of the remaining goods, 25% are sold at a profit of 48%, and the rest are sold at a loss of 18%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 17%", "(b) 11.48%", "(c) 17.55%", "(d) 9%"],
+    o_en: ["(a) 17%", "(b) 11.48%", "(c) 17.55%", "(d) 9%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];

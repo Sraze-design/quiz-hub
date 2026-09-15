@@ -1,0 +1,555 @@
+const Q7_IMAGE = "data:image/png;base64,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bN6/fz8CJTJiUFCQj4/PY489tmzZsuorDCIiIqo1mBFrmKqaVTXt268SGricaVT/ZPfO+UlJslEyWxRJkRXZYq4wJo8anjygu2J0mhHV0lLTu+8amjQxtGpleOQR45tvIile7Z+ba3jwQeXsWduBmzRpcvfdd0dGRmpPNE+bNq1BgwaTJ0+2n3JxcfGUKVM2bdqUb7147evre//9948YMSIvLy80NBTJslu3btVZGkRERFRLMCPWLKyFUZYOdX/mfNMmpx+5J+WrlZKiSBZZUa3Pslgk2SKXlhZe6PFUasim35iU0aikpam//tKhM8OHD//zn/+8YsWKgoICvC0rK5s0aZKrq6u/v7/9wOjp5+d38eJF8YvZM2fOrFOnzpgxY9AdHh5+1113YcTrXHMiIiKqzZgRa5hqURRzynte+YP7XOjYLCN4rXztesmqIpmknB1bM6bPlCySpMrOplRFO3fubN68+cCBA6Ojow0Gw6FDh55//vkhQ4bExcVds1yqio+8vb2PHz+u3XQYEBDQpEmToUOHIjVu2LDBxcWlb9++N7g8REREVBsxI9asq8+sSErCihXFvjOyvMZePnJIlxFVRTUpSsGVnNQ9+yXV7PTx5ipD4PPx8enUqdMHH3zw9ddfe3l5IfOtX7/eaDRqwyiKkp6e7unpGRYWZvsvVWJiYsaOHdu/f/85c+ago2PHjoGBgTe2OERERFQrMSPWOEW1FKammJNOGBNOmkqLdOuFN9LVzKZcvfyMd85+JvH3KC4u/vzzzwcMGICkOHr06J07d5bZ/JsWMJvNERERiJIY0ra/LMtHjx5FduzSpYuHhwcCYkVFxY0vDxEREdU6zIhEREREpMeMSERERER6zIhEREREpMeMSERERER6zIhEREREpMeMSERERER6zIhEREREpMeMSERERER6p06dYkYkIiIiomscO3aMGZGIiIiIrsGMSERERER6zIhEREREpMeMeHv5+cr5/ef2JGbF239UbC7JNxXgVWAuNCmm35xUSEhI//79//rXv9atW/cf//jHhAkTYmJixEco27S0tPHjxzdq1KhBgwZDhgw5d+6cLMvauOXl5evWrfP09CwuLq6uVSMiIqJahBnxNnIhL3lt7Oo5e6Z9ftjvdGaC7tN3E97vGfWff0d59IgagNc7Cd4Xyy85m9TmzZvbtm376quvbt26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";
+
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q1. ₹12,000 की राशि पर 6% वार्षिक साधारण ब्यााज दर से ₹2,160 अर्जित करने के लिए आवश्यक समय (वर्षों में) क्याा है?",
+    q_en: "Q1. A sum of ₹12,000 is invested at 6% per annum simple interest. How many years are required to earn ₹2,160 as interest?",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) 2.5 वर्ष", "(b) 2 वर्ष", "(c) 3 वर्ष", "(d) 3.5 वर्ष"],
+    o_en: ["(a) 2.5 years", "(b) 2 years", "(c) 3 years", "(d) 3.5 years"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q28
+  {
+    q_hi: "Q2. एक व्यक्ति ने 7% वार्षिक साधारण ब्यााज दर पर 5 वर्षों के लिए ₹15 लाख उधार लिए। यदि वह कुल राशि को समान मासिक किश्तों में चुकाना चाहता है, तो मासिक किश्त ज्ञाात कीजिए।",
+    q_en: "Q2. A person borrowed ₹15 lakh for 5 years at 7% per annum simple interest. If he wants to repay the total amount in equal monthly instalments, find the monthly instalment.",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹32,600", "(b) ₹44,000", "(c) ₹33,750", "(d) ₹41,640"],
+    o_en: ["(a) ₹32,600", "(b) ₹44,000", "(c) ₹33,750", "(d) ₹41,640"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q41
+  {
+    q_hi: "Q3. यदि किसी धनराशि पर 5% वार्षिक दर से 3 वर्षों में अर्जित साधारण ब्यााज ₹1,500 है, तो धनराशि कितनी थी?",
+    q_en: "Q3. If the simple interest earned on a sum at 5% per annum for 3 years is ₹1,500, what was the principal?",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹7,000", "(b) ₹8,000", "(c) ₹9,000", "(d) ₹10,000"],
+    o_en: ["(a) ₹7,000", "(b) ₹8,000", "(c) ₹9,000", "(d) ₹10,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q38
+  {
+    q_hi: "Q4. श्रीीमान X ने 40 महीनों के लिए ₹50,000 की राशि उधार ली। यदि उन्होंोंने मासिक किस्त के रूप में ₹1,625 चुकाए, तो साधारण ब्यााज दर ज्ञात कीजिए।",
+    q_en: "Q4. Mr. X borrowed ₹50,000 for 40 months. If he repaid ₹1,625 as the monthly instalment, find the rate of simple interest.",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) 9%", "(b) 7.5%", "(c) 8%", "(d) 6.8%"],
+    o_en: ["(a) 9%", "(b) 7.5%", "(c) 8%", "(d) 6.8%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q5. यदि ₹2,500 पर 5% वार्षिक दर से साधारण ब्यााज के रूप में ₹500 प्राप्त होते हैं, तो धनराशि कितने समय के लिए निवेश की गई थी?",
+    q_en: "Q5. If ₹500 is received as simple interest on ₹2,500 at 5% per annum, for how many years was the money invested?",
+    tag: "RRB Group D, 04/08/2026 (Shift-03)",
+    o_hi: ["(a) 6 वर्ष", "(b) 5 वर्ष", "(c) 4 वर्ष", "(d) 3 वर्ष"],
+    o_en: ["(a) 6 years", "(b) 5 years", "(c) 4 years", "(d) 3 years"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q33
+  {
+    q_hi: "Q6. ₹10,000 की धनराशि पर 5% वार्षिक दर से 2 वर्ष का साधारण ब्यााज ज्ञाात कीजिए।",
+    q_en: "Q6. Find the simple interest on ₹10,000 at 5% per annum for 2 years.",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹1,000", "(b) ₹1,200", "(c) ₹1,500", "(d) ₹800"],
+    o_en: ["(a) ₹1,000", "(b) ₹1,200", "(c) ₹1,500", "(d) ₹800"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-02) | Original Q28
+  {
+    q_hi: "Q7. यदि ₹4,000 पर 3 वर्षों के लिए साधारण ब्यााज ₹960 है, तो वार्षिक ब्यााज दर कितनी होगी?",
+    q_en: "Q7. यदि ₹4,000 पर 3 वर्षों के लिए साधारण ब्यााज ₹960 है, तो वार्षिक ब्यााज दर कितनी होगी?",
+    tag: "RRB Group D, 05/08/2026 (Shift-02)",
+    o_hi: ["(a) विकल्प A", "(b) विकल्प B", "(c) विकल्प C", "(d) विकल्प D"],
+    o_en: ["(a) Option A", "(b) Option B", "(c) Option C", "(d) Option D"],
+    a: 3,
+    image: Q7_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-02) | Original Q39
+  {
+    q_hi: "Q8. 8% वार्षिक ब्यााज दर पर 4 वर्षों में ₹960 का साधारण ब्यााज अर्जित करने के लिए कितनी मूल राशि (₹ में) की आवश्यकता होगी?",
+    q_en: "Q8. What principal amount is required to earn ₹960 as simple interest in 4 years at 8% per annum?",
+    tag: "RRB Group D, 06/08/2026 (Shift-02)",
+    o_hi: ["(a) 4800", "(b) 1500", "(c) 6000", "(d) 3000"],
+    o_en: ["(a) 4800", "(b) 1500", "(c) 6000", "(d) 3000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q29
+  {
+    q_hi: "Q9. एक बैंक में ₹20,000 की जमा धनराशि पर 5% वार्षिक साधारण ब्यााज दर से अर्जित वार्षिक ब्यााज (₹ में) कितना होगा?",
+    q_en: "Q9. What is the annual interest earned on a bank deposit of ₹20,000 at 5% per annum simple interest?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) 1000", "(b) 1200", "(c) 1500", "(d) 1800"],
+    o_en: ["(a) 1000", "(b) 1200", "(c) 1500", "(d) 1800"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q43
+  {
+    q_hi: "Q10. कोई धनराशि 20% वार्षिक साधारण ब्यााज की दर से 5 वर्षों में ₹56,000 हो जाती है। वह धनराशि (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q10. A sum amounts to ₹56,000 in 5 years at 20% per annum simple interest. Find the principal.",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) 25,000", "(b) 35,000", "(c) 28,000", "(d) 31,000"],
+    o_en: ["(a) 25,000", "(b) 35,000", "(c) 28,000", "(d) 31,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q11. उधार ली गई ₹500 की धनराशि पर 16% वार्षिक ब्यााज की दर से 3.5 वर्षों के लिए साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q11. Find the simple interest on a borrowed sum of ₹500 for 3.5 years at 16% per annum.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 330", "(b) 380", "(c) 280", "(d) 260"],
+    o_en: ["(a) 330", "(b) 380", "(c) 280", "(d) 260"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q12. उधार ली गई ₹500 की धनराशि पर 8% वार्षिक ब्यााज दर से 3.5 वर्षों के लिए साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q12. Find the simple interest on a borrowed sum of ₹500 for 3.5 years at 8% per annum.",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) 240", "(b) 120", "(c) 190", "(d) 140"],
+    o_en: ["(a) 240", "(b) 120", "(c) 190", "(d) 140"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q28
+  {
+    q_hi: "Q13. कितनी धनराशि (₹ में) पर 12% वार्षिक ब्यााज दर से 4 वर्षों में साधारण ब्यााज के रूप में ₹960 प्राप्त होंगे?",
+    q_en: "Q13. On what sum will the simple interest for 4 years at 12% per annum be ₹960?",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) 1000", "(b) 4000", "(c) 6000", "(d) 2000"],
+    o_en: ["(a) 1000", "(b) 4000", "(c) 6000", "(d) 2000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-02) | Original Q39
+  {
+    q_hi: "Q14. ₹500 की राशि 12% वार्षिक ब्यााज दर पर 4.5 वर्ष के लिए उधार ली गई। साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q14. A sum of ₹500 was borrowed for 4.5 years at 12% per annum. Find the simple interest.",
+    tag: "RRB Group D, 10/08/2026 (Shift-02)",
+    o_hi: ["(a) 370", "(b) 320", "(c) 250", "(d) 270"],
+    o_en: ["(a) 370", "(b) 320", "(c) 250", "(d) 270"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q15. उधार ली गई ₹550 की धनराशि पर 4% वार्षिक ब्यााज दर से 2.5 वर्षों के लिए साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q15. Find the simple interest on a borrowed sum of ₹550 for 2.5 years at 4% per annum.",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) 105", "(b) 55", "(c) 155", "(d) 35"],
+    o_en: ["(a) 105", "(b) 55", "(c) 155", "(d) 35"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q35
+  {
+    q_hi: "Q16. 3.5 वर्षांसाठी, 29% वार्षिक व्याजदराने कर्जाऊ घेतलेल्या ₹500 या रकमेवर मिळणारे सरळव्याज (₹ मध्ये) काढा.",
+    q_en: "Q16. 3.5 वर्षांसाठी, 29% वार्षिक व्याजदराने कर्जाऊ घेतलेल्या ₹500 या रकमेवर मिळणारे सरळव्याज (₹ मध्ये) काढा.",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 350", "(b) 330", "(c) 450", "(d) 400"],
+    o_en: ["(a) 350", "(b) 330", "(c) 450", "(d) 400"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q39
+  {
+    q_hi: "Q17. पद्मिनी ने 10% वार्षिक साधारण ब्यााज दर पर 5 वर्षों के लिए एक निश्चित राशि उधार ली। यदि 5 वर्षों के बाद चुकाई जाने वाली कुल राशि ₹24,000 है, तो मूलधन ज्ञाात कीजिए।",
+    q_en: "Q17. Padmini borrowed a certain sum for 5 years at 10% per annum simple interest. If the total amount repayable after 5 years is ₹24,000, find the principal.",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹16,000", "(b) ₹15,800", "(c) ₹17,400", "(d) ₹18,000"],
+    o_en: ["(a) ₹16,000", "(b) ₹15,800", "(c) ₹17,400", "(d) ₹18,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q18. उधार ली गई ₹550 की धनराशि पर 12% वार्षिक साधारण ब्यााज दर से 2.5 वर्षों के लिए साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q18. Find the simple interest on a borrowed sum of ₹550 for 2.5 years at 12% per annum.",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 145", "(b) 165", "(c) 150", "(d) 155"],
+    o_en: ["(a) 145", "(b) 165", "(c) 150", "(d) 155"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q19. यदि ₹550 की राशि 20% वार्षिक ब्यााज दर पर 2.5 वर्षों के लिए उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q19. If ₹550 is borrowed for 2.5 years at 20% per annum, find the simple interest.",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) 255", "(b) 325", "(c) 275", "(d) 375"],
+    o_en: ["(a) 255", "(b) 325", "(c) 275", "(d) 375"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-02) | Original Q49
+  {
+    q_hi: "Q20. यदि ₹550 की राशि 3.5 वर्षों के लिए 4% वार्षिक ब्यााज दर पर उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q20. If ₹550 is borrowed for 3.5 years at 4% per annum, find the simple interest.",
+    tag: "RRB Group D, 12/08/2026 (Shift-02)",
+    o_hi: ["(a) 57", "(b) 77", "(c) 127", "(d) 177"],
+    o_en: ["(a) 57", "(b) 77", "(c) 127", "(d) 177"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q29
+  {
+    q_hi: "Q21. यदि ₹550 की राशि 16% वार्षिक ब्यााज दर पर 3.5 वर्षों के लिए उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q21. If ₹550 is borrowed for 3.5 years at 16% per annum, find the simple interest.",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) 358", "(b) 408", "(c) 288", "(d) 308"],
+    o_en: ["(a) 358", "(b) 408", "(c) 288", "(d) 308"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q45
+  {
+    q_hi: "Q22. यदि ₹550 की राशि 3.5 वर्षों के लिए 12% वार्षिक ब्यााज दर पर उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q22. If ₹550 is borrowed for 3.5 years at 12% per annum, find the simple interest.",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) 281", "(b) 211", "(c) 331", "(d) 231"],
+    o_en: ["(a) 281", "(b) 211", "(c) 331", "(d) 231"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q38
+  {
+    q_hi: "Q23. यदि ₹550 की राशि 3.5 वर्षों के लिए 20% वार्षिक ब्यााज दर पर उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q23. If ₹550 is borrowed for 3.5 years at 20% per annum, find the simple interest.",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 365", "(b) 485", "(c) 435", "(d) 385"],
+    o_en: ["(a) 365", "(b) 485", "(c) 435", "(d) 385"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q24. यदि ₹550 की राशि 3.5 वर्षों के लिए 8% वार्षिक ब्यााज दर पर उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञात कीजिए।",
+    q_en: "Q24. If ₹550 is borrowed for 3.5 years at 8% per annum, find the simple interest.",
+    tag: "RRB Group D, 13/08/2026 (Shift-03)",
+    o_hi: ["(a) 154", "(b) 134", "(c) 204", "(d) 254"],
+    o_en: ["(a) 154", "(b) 134", "(c) 204", "(d) 254"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-01) | Original Q36
+  {
+    q_hi: "Q25. ₹600 की राशि पर 4% वार्षिक ब्यााज दर से 2.5 वर्षों के लिए साधारण ब्यााज (₹ में) ज्ञात कीजिए।",
+    q_en: "Q25. Find the simple interest on ₹600 for 2.5 years at 4% per annum.",
+    tag: "RRB Group D, 14/08/2026 (Shift-01)",
+    o_hi: ["(a) 50", "(b) 60", "(c) 40", "(d) 70"],
+    o_en: ["(a) 50", "(b) 60", "(c) 40", "(d) 70"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-02) | Original Q32
+  {
+    q_hi: "Q26. ₹1,200 पर 6% मासिक ब्यााज दर से 10 महीनों का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q26. Find the simple interest on ₹1,200 for 10 months at 6% per month.",
+    tag: "RRB Group D, 14/08/2026 (Shift-02)",
+    o_hi: ["(a) 60", "(b) 720", "(c) 120", "(d) 80"],
+    o_en: ["(a) 60", "(b) 720", "(c) 120", "(d) 80"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q27. यदि ₹600 की राशि 12% वार्षिक ब्यााज दर पर 2.5 वर्षों के लिए उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q27. If ₹600 is borrowed for 2.5 years at 12% per annum, find the simple interest.",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 160", "(b) 230", "(c) 180", "(d) 280"],
+    o_en: ["(a) 160", "(b) 230", "(c) 180", "(d) 280"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q28. यदि ₹600 की राशि 2.5 वर्षों के लिए 8% वार्षिक ब्यााज दर पर उधार ली जाती है, तो साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q28. If ₹600 is borrowed for 2.5 years at 8% per annum, find the simple interest.",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) 170", "(b) 220", "(c) 120", "(d) 100"],
+    o_en: ["(a) 170", "(b) 220", "(c) 120", "(d) 100"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q32
+  {
+    q_hi: "Q29. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक ब्यााज दर पर ऋण प्रदान किए। तुषार ने प्रत्येक बैंक से ₹4,60,000 की धनराशि का ऋण लिया। 4 वर्ष के पश्चाात तुषार द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच का धनात्मक अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q29. Two banks, A and B, offered loans at 3.5% and 8.5% per annum respectively. Tushar borrowed ₹4,60,000 from each bank. Find the positive difference between the simple interest amounts paid to the two banks after 4 years.",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) 92,000", "(b) 91,500", "(c) 93,500", "(d) 93,000"],
+    o_en: ["(a) 92,000", "(b) 91,500", "(c) 93,500", "(d) 93,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q30. ₹1,200 पर 6% मासिक ब्यााज दर से 12 महीनों का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q30. Find the simple interest on ₹1,200 for 12 months at 6% per month.",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 864", "(b) 92", "(c) 72", "(d) 144"],
+    o_en: ["(a) 864", "(b) 92", "(c) 72", "(d) 144"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q31. ₹1,200 की धनराशि पर 6% मासिक ब्याज दर से 11 महीने का साधारण ब्याज (₹ में) ज्ञात कीजिए।",
+    q_en: "Q31. Find the simple interest on ₹1,200 for 11 months at 6% per month.",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) 86", "(b) 792", "(c) 132", "(d) 66"],
+    o_en: ["(a) 86", "(b) 792", "(c) 132", "(d) 66"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q30
+  {
+    q_hi: "Q32. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक ब्यााज दर पर ऋण प्रदान किए। डेविड ने प्रत्येक बैंक से ₹4,80,000 की धनराशि का ऋण लिया। 3 वर्ष के पश्चाात डेविड द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच का धनात्मक अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q32. Two banks, A and B, offered loans at 3.5% and 8.5% per annum respectively. David borrowed ₹4,80,000 from each bank. Find the positive difference between the simple interest amounts paid to the two banks after 3 years.",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) 73,500", "(b) 72,000", "(c) 73,000", "(d) 71,500"],
+    o_en: ["(a) 73,500", "(b) 72,000", "(c) 73,000", "(d) 71,500"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-03) | Original Q41
+  {
+    q_hi: "Q33. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक ब्यााज दर पर ऋण प्रदान किए। अतुल ने प्रत्येक बैंक से ₹4,80,000 की धनराशि का ऋण लिया। 2 वर्ष के पश्चाात अतुल द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच का धनात्मक अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q33. Two banks, A and B, offered loans at 3.5% and 8.5% per annum respectively. Atul borrowed ₹4,80,000 from each bank. Find the positive difference between the simple interest amounts paid to the two banks after 2 years.",
+    tag: "RRB Group D, 18/08/2026 (Shift-03)",
+    o_hi: ["(a) 48,000", "(b) 49,000", "(c) 49,500", "(d) 47,500"],
+    o_en: ["(a) 48,000", "(b) 49,000", "(c) 49,500", "(d) 47,500"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q50
+  {
+    q_hi: "Q34. ₹1,500 की धनराशि पर 3% मासिक ब्यााज दर से 1 महीने का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q34. Find the simple interest on ₹1,500 for 1 month at 3% per month.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) 7.50", "(b) 45", "(c) 3.75", "(d) 23.75"],
+    o_en: ["(a) 7.50", "(b) 45", "(c) 3.75", "(d) 23.75"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q29
+  {
+    q_hi: "Q35. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक दर पर ऋण प्रदान किए। शिवम ने प्रत्येक बैंक से ₹2,40,000 की धनराशि का ऋण लिया। 4 वर्ष के पश्चाात शिवम द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच धनात्मक अंतर (₹ में) ज्ञात कीजिए।",
+    q_en: "Q35. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक दर पर ऋण प्रदान किए। शिवम ने प्रत्येक बैंक से ₹2,40,000 की धनराशि का ऋण लिया। 4 वर्ष के पश्चाात शिवम द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच धनात्मक अंतर (₹ में) ज्ञात कीजिए।",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) 49,000", "(b) 47,500", "(c) 49,500", "(d) 48,000"],
+    o_en: ["(a) 49,000", "(b) 47,500", "(c) 49,500", "(d) 48,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q35
+  {
+    q_hi: "Q36. ₹1,500 पर 3% मासिक ब्यााज दर से 2 महीनों का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q36. Find the simple interest on ₹1,500 for 2 months at 3% per month.",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 90", "(b) 27.50", "(c) 15", "(d) 7.50"],
+    o_en: ["(a) 90", "(b) 27.50", "(c) 15", "(d) 7.50"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-01) | Original Q33
+  {
+    q_hi: "Q37. ₹1,500 पर 3% मासिक ब्यााज दर से 4 महीनों का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q37. Find the simple interest on ₹1,500 for 4 months at 3% per month.",
+    tag: "RRB Group D, 20/08/2026 (Shift-01)",
+    o_hi: ["(a) 180", "(b) 15", "(c) 30", "(d) 35"],
+    o_en: ["(a) 180", "(b) 15", "(c) 30", "(d) 35"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q38. ₹1,500 की धनराशि पर 3% मासिक ब्यााज दर से 3 महीने का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q38. Find the simple interest on ₹1,500 for 3 months at 3% per month.",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 31.25", "(b) 22.50", "(c) 135", "(d) 11.25"],
+    o_en: ["(a) 31.25", "(b) 22.50", "(c) 135", "(d) 11.25"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q39. ₹1,500 की धनराशि पर 3% मासिक ब्यााज दर से 5 महीनों का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q39. Find the simple interest on ₹1,500 for 5 months at 3% per month.",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 38.75", "(b) 225", "(c) 37.5", "(d) 18.75"],
+    o_en: ["(a) 38.75", "(b) 225", "(c) 37.5", "(d) 18.75"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q45
+  {
+    q_hi: "Q40. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक दर पर ऋण प्रदान किए। अक्षय ने प्रत्येक बैंक से ₹4,60,000 की धनराशि का ऋण लिया। 3 वर्ष के पश्चाात अक्षय द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच का धनात्मक अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q40. दो बैंकों, A और B ने क्रमशः 3.5% और 8.5% वार्षिक दर पर ऋण प्रदान किए। अक्षय ने प्रत्येक बैंक से ₹4,60,000 की धनराशि का ऋण लिया। 3 वर्ष के पश्चाात अक्षय द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच का धनात्मक अंतर (₹ में) ज्ञाात कीजिए।",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 70,500", "(b) 69,000", "(c) 70,000", "(d) 68,500"],
+    o_en: ["(a) 70,500", "(b) 69,000", "(c) 70,000", "(d) 68,500"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q41. ₹1,500 की धनराशि पर 3% मासिक ब्यााज दर से 7 महीनों का साधारण ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q41. Find the simple interest on ₹1,500 for 7 months at 3% per month.",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 315", "(b) 26.25", "(c) 52.5", "(d) 46.25"],
+    o_en: ["(a) 315", "(b) 26.25", "(c) 52.5", "(d) 46.25"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q42. ₹1,500 पर 3% मासिक ब्यााज दर से 6 महीने का साधारण ब्यााज (₹ में) ज्ञात कीजिए।",
+    q_en: "Q42. Find the simple interest on ₹1,500 for 6 months at 3% per month.",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 22.5", "(b) 42.5", "(c) 270", "(d) 45"],
+    o_en: ["(a) 22.5", "(b) 42.5", "(c) 270", "(d) 45"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q33
+  {
+    q_hi: "Q43. दो बको,ं A और B ने क्रमशः  3.5% और 8.5% वािषक दर पर ऋण प्रदान िकए। आशीष ने प्रत्येक बक से ₹4,60,000 की धनरािश का ऋण िलया। 2 वष के पʮात आशीष Ȫारा दोनो ंबको ंको चुकाए गए साधारण ɯाज की धनरािशयो ंके बीच का धनात्मक अंतर (₹ म) ज्ञात कीिजए।",
+    q_en: "Q43. दो बको,ं A और B ने क्रमशः  3.5% और 8.5% वािषक दर पर ऋण प्रदान िकए। आशीष ने प्रत्येक बक से ₹4,60,000 की धनरािश का ऋण िलया। 2 वष के पʮात आशीष Ȫारा दोनो ंबको ंको चुकाए गए साधारण ɯाज की धनरािशयो ंके बीच का धनात्मक अंतर (₹ म) ज्ञात कीिजए।",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 46,000", "(b) 47,500", "(c) 45,500", "(d) 47,000"],
+    o_en: ["(a) 46,000", "(b) 47,500", "(c) 45,500", "(d) 47,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q39
+  {
+    q_hi: "Q44. दो बैंकों, A और B ने क्रमशः 3.5% और 8% वार्षिक ब्यााज दर पर ऋण की पेशकश की। सचिन ने प्रत्येक बैंक से ₹3,00,000 का ऋण लिया। 3 वर्ष बाद सचिन द्वाारा दोनों बैंकों को चुकाए गए साधारण ब्यााज की धनराशियों के बीच का धनात्मक अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q44. Two banks, A and B, offered loans at 3.5% and 8% per annum respectively. Sachin borrowed ₹3,00,000 from each bank. Find the positive difference between the simple interest amounts paid to the two banks after 3 years.",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 40,000", "(b) 41,500", "(c) 40,500", "(d) 42,000"],
+    o_en: ["(a) 40,000", "(b) 41,500", "(c) 40,500", "(d) 42,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q12
+  {
+    q_hi: "Q45. एक व्यक्ति 3 वर्ष के लिए 5% वार्षिक साधारण ब्यााज दर पर ₹10,000 उधार लेता है। वह तुरंत इसे किसी अन्य व्यक्ति को वार्षिक साधारण ब्यााज पर 3 वर्ष के लिए उधार दे देता है। इस लेन-देन में उसे कितना वार्षिक लाभ (₹ में) होगा?",
+    q_en: "Q45. A person borrows ₹10,000 for 3 years at 5% per annum simple interest. He immediately lends it to another person for 3 years at 8 1/4% per annum simple interest. What will be his annual profit in this transaction?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 375", "(b) 450", "(c) 325", "(d) 400"],
+    o_en: ["(a) 375", "(b) 450", "(c) 325", "(d) 400"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q7
+  {
+    q_hi: "Q46. अनीशा ने अपनी सहेली से 9% वार्षिक साधारण ब्यााज पर ₹28,260 उधार लिए। उसने 9 माह बाद मिश्रधन लौटा दिया। उसने ब्यााज के रूप में कितना भुगतान किया?",
+    q_en: "Q46. Anisha borrowed ₹28,260 from her friend at 9% per annum simple interest. She repaid the amount after 9 months. How much did she pay as interest?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹ 1948.20", "(b) ₹ 1970.75", "(c) ₹ 1933.25", "(d) ₹ 1907.55"],
+    o_en: ["(a) ₹ 1948.20", "(b) ₹ 1970.75", "(c) ₹ 1933.25", "(d) ₹ 1907.55"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q22
+  {
+    q_hi: "Q47. वह कितनी धनराशि (₹ में) है जिस पर 2 वर्षों में 5% वार्षिक की दर से ₹720 का साधारण ब्यााज प्राप्त होगा?",
+    q_en: "Q47. What sum will earn ₹720 as simple interest in 2 years at 5% per annum?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) 7600", "(b) 7400", "(c) 6700", "(d) 7200"],
+    o_en: ["(a) 7600", "(b) 7400", "(c) 6700", "(d) 7200"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q6
+  {
+    q_hi: "Q48. स्मिता ने ₹14,750 अपनी सहेली से 8% वार्षिक साधारण ब्यााज की दर पर उधार लिए। उसने 6 मास बाद मिश्रधन चुका दिया। उसने मिश्रधन के रूप में कितनी राशि चुकाई?",
+    q_en: "Q48. Smita borrowed ₹14,750 from her friend at 8% per annum simple interest. She repaid the amount after 6 months. What total amount did she repay?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) ₹ 15355", "(b) ₹ 15390", "(c) ₹ 15340", "(d) ₹ 15375"],
+    o_en: ["(a) ₹ 15355", "(b) ₹ 15390", "(c) ₹ 15340", "(d) ₹ 15375"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q7
+  {
+    q_hi: "Q49. वह कितनी धनराशि (₹ में) है जिस पर 2 वर्षों में 10% वार्षिक की दर से ₹700 का साधारण ब्यााज प्राप्त होगा?",
+    q_en: "Q49. What sum will earn ₹700 as simple interest in 2 years at 10% per annum?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 3000", "(b) 3500", "(c) 3900", "(d) 3700"],
+    o_en: ["(a) 3000", "(b) 3500", "(c) 3900", "(d) 3700"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q8
+  {
+    q_hi: "Q50. वह कितनी धनराशि (₹ में) है जिस पर 2 वर्षों में 10% वार्षिक की दर से साधारण ब्यााज के रूप में ₹720 प्राप्त होगा?",
+    q_en: "Q50. What sum will earn ₹720 as simple interest in 2 years at 10% per annum?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 3800", "(b) 3600", "(c) 4000", "(d) 3100"],
+    o_en: ["(a) 3800", "(b) 3600", "(c) 4000", "(d) 3100"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];

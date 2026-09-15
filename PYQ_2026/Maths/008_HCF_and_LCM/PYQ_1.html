@@ -1,0 +1,379 @@
+const Q19_IMAGE = "data:image/png;base64,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";
+
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-01) | Original Q41
+  {
+    q_hi: "Q1. एक नीली बत्ती प्रत्येक 6 सेकंड में और एक लाल बत्ती प्रत्येक 9 सेकंड में टिमटिमाती है। कितने सेकंड बाद दोनों बत्तियाँ पुनः एक साथ टिमटिमाएंगी?",
+    q_en: "Q1. A blue light flashes every 6 seconds and a red light flashes every 9 seconds. After how many seconds will both lights flash together again?",
+    tag: "RRB Group D, 03/08/2026 (Shift-01)",
+    o_hi: ["(a) 18 सेकंड", "(b) 9 सेकंड", "(c) 12 सेकंड", "(d) 3 सेकंड"],
+    o_en: ["(a) 18 seconds", "(b) 9 seconds", "(c) 12 seconds", "(d) 3 seconds"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q2. दो संख्याओं के महत्तम समापवर्तक (HCF) और लघुत्तम समापवर्त्य (LCM) का गुणनफल 1944 है। यदि पहली संख्या 54 है, तो दूसरी संख्या ज्ञाात कीजिए।",
+    q_en: "Q2. The product of the HCF and LCM of two numbers is 1944. If the first number is 54, find the second number.",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) 42", "(b) 24", "(c) 36", "(d) 48"],
+    o_en: ["(a) 42", "(b) 24", "(c) 36", "(d) 48"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q3. दो संख्याओं का म.स.प. (HCF) और ल.स.प. (LCM) क्रमशः 4 और 288 हैं। यदि उनमें से एक संख्या 32 है, तो दूसरी संख्या कितनी है?",
+    q_en: "Q3. The HCF and LCM of two numbers are 4 and 288 respectively. If one of the numbers is 32, find the other number.",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) 24", "(b) 36", "(c) 18", "(d) 48"],
+    o_en: ["(a) 24", "(b) 36", "(c) 18", "(d) 48"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q4. दो संख्याएँ 12 और 18 हैं। इनके महत्तम समापवर्तक (HCF) और लघुत्तम समापवर्त्य (LCM) का गुणनफल ज्ञाात कीजिए।",
+    q_en: "Q4. The two numbers are 12 and 18. Find the product of their HCF and LCM.",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) 216", "(b) 324", "(c) 432", "(d) 108"],
+    o_en: ["(a) 216", "(b) 324", "(c) 432", "(d) 108"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q43
+  {
+    q_hi: "Q5. संख्या 252, 396 और 524 का महत्तम समापवर्तक ज्ञाात कीजिए।",
+    q_en: "Q5. Find the HCF of 252, 396 and 524.",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) 9", "(b) 36", "(c) 4", "(d) 12"],
+    o_en: ["(a) 9", "(b) 36", "(c) 4", "(d) 12"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q6. राहुल हर 6 दिन में, प्रिया हर 8 दिन में, और अमित हर 12 दिन में पुस्तकालय जाता है। यदि तीनों आज पुस्तकालय में मिलते हैं, तो कितने दिनों बाद वे सभी वहां मिलेंगे?",
+    q_en: "Q6. राहुल हर 6 दिन में, प्रिया हर 8 दिन में, और अमित हर 12 दिन में पुस्तकालय जाता है। यदि तीनों आज पुस्तकालय में मिलते हैं, तो कितने दिनों बाद वे सभी वहां मिलेंगे?",
+    tag: "RRB Group D, 05/08/2026 (Shift-02)",
+    o_hi: ["(a) 28 दिन", "(b) 16 दिन", "(c) 20 दिन", "(d) 24 दिन"],
+    o_en: ["(a) 28 दिन", "(b) 16 दिन", "(c) 20 दिन", "(d) 24 दिन"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q7. दो संख्याओं का महत्तम समापवर्तक और लघुत्तम समापवर्त्य क्रमशः 16 और 96 है। यदि इनमें से एक संख्या 48 है, तो दूसरी संख्या ज्ञाात कीजिए।",
+    q_en: "Q7. The HCF and LCM of two numbers are 16 and 96 respectively. If one of the numbers is 48, find the other number.",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) 32", "(b) 30", "(c) 28", "(d) 34"],
+    o_en: ["(a) 32", "(b) 30", "(c) 28", "(d) 34"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q42
+  {
+    q_hi: "Q8. 6, 33, 42, 114, 210 का म.स.प. (HCF) ज्ञाात कीजिए।",
+    q_en: "Q8. Find the HCF of 6, 33, 42, 114 and 210.",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 7", "(c) 1", "(d) 2"],
+    o_en: ["(a) 3", "(b) 7", "(c) 1", "(d) 2"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q38
+  {
+    q_hi: "Q9. दो प्राकृत संख्याओं का गुणनफल 1421 है। उनका HCF, 7 है। संख्याओं के LCM और HCF का अनुपात ज्ञाात कीजिए।",
+    q_en: "Q9. The product of two natural numbers is 1421 and their HCF is 7. Find the ratio of their LCM to their HCF.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 29:1", "(b) 23:7", "(c) 29:7", "(d) 27:1"],
+    o_en: ["(a) 29:1", "(b) 23:7", "(c) 29:7", "(d) 27:1"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q39
+  {
+    q_hi: "Q10. 4 अंकों की वह सबसे बड़ीी संख्या ज्ञाात कीजिए जो 12, 24, 45 और 60 से विभाज्य है।",
+    q_en: "Q10. 4 अंकों की वह सबसे बड़ीी संख्या ज्ञाात कीजिए जो 12, 24, 45 और 60 से विभाज्य है।",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 9,720", "(b) 9,256", "(c) 9,450", "(d) 9,600"],
+    o_en: ["(a) 9,720", "(b) 9,256", "(c) 9,450", "(d) 9,600"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-02) | Original Q45
+  {
+    q_hi: "Q11. दो संख्याओं का अनुपात 21 : 5 है और उनका महत्तम समापवर्तक (HCF) 50 है। उनका लघुत्तम समापवर्त्य (LCM) क्याा होगा?",
+    q_en: "Q11. The ratio of two numbers is 21 : 5 and their HCF is 50. What is their LCM?",
+    tag: "RRB Group D, 12/08/2026 (Shift-02)",
+    o_hi: ["(a) 5260", "(b) 5250", "(c) 5240", "(d) 5220"],
+    o_en: ["(a) 5260", "(b) 5250", "(c) 5240", "(d) 5220"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q12. यिद एक समपंचभुज की भुजा (cm म) 18 और 27 के HCF के बराबर है, तो पंचभुज का पįरमाप (cm म) िकतना है?",
+    q_en: "Q12. If the side of a regular pentagon (in cm) is equal to the HCF of 18 and 27, what is the perimeter of the pentagon (in cm)?",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) 54", "(b) 27", "(c) 36", "(d) 45"],
+    o_en: ["(a) 54", "(b) 27", "(c) 36", "(d) 45"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q33
+  {
+    q_hi: "Q13. दो संख्याओं का महत्तम समापवर्तक 18 है और उनका लघुत्तम समापवर्त्य 540 है। यदि एक संख्या 90 है, तो दूसरी संख्या ज्ञाात कीजिए।",
+    q_en: "Q13. The HCF of two numbers is 18 and their LCM is 540. If one number is 90, find the other number.",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 54", "(b) 120", "(c) 108", "(d) 96"],
+    o_en: ["(a) 54", "(b) 120", "(c) 108", "(d) 96"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q14. तीन संख्याएँ 4 : 5 : 6 के अनुपात में हैं और उनका महत्तम समापवर्तक (HCF) 13 है। उनका लघुत्तम समापवर्त्य (LCM) ज्ञाात कीजिए।",
+    q_en: "Q14. Three numbers are in the ratio 4 : 5 : 6 and their HCF is 13. Find their LCM.",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 1080", "(b) 780", "(c) 960", "(d) 686"],
+    o_en: ["(a) 1080", "(b) 780", "(c) 960", "(d) 686"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q30
+  {
+    q_hi: "Q15. एक स्कूूल विद्यार्थियों को 60 पेंसिल और 75 इरेजर इस प्रकार वितरित करना चाहता है कि सभी विद्यार्थियों को समान संख्या में पेंसिल और समान संख्या में इरेजर मिले, जिनमें कोई वस्तु शेष नहीं रहे। इस उपहार को प्राप्त करने वाले विद्यार्थियों की अधिकतम संख्या कितनी है?",
+    q_en: "Q15. A school wants to distribute 60 pencils and 75 erasers among students so that every student gets the same number of pencils and the same number of erasers, with nothing left over. What is the maximum number of students who can receive the gift?",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 5", "(b) 10", "(c) 15", "(d) 25"],
+    o_en: ["(a) 5", "(b) 10", "(c) 15", "(d) 25"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q44
+  {
+    q_hi: "Q16. 12 m, 18 m, और 24 m लंबाई वाली तीन रस्सियों को बराबर लंबाई वाले टुकड़ोंों में इस प्रकार काटा जाना है कि किसी भी रस्सीी से कोई भाग शेष न बचे। प्रत्येक टुकड़े की अधिकतम संभावित लंबाई (मीटर में) कितनी होगी?",
+    q_en: "Q16. Three ropes of lengths 12 m, 18 m and 24 m are to be cut into pieces of equal length so that no part of any rope is left over. What is the maximum possible length of each piece, in metres?",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 12", "(c) 6", "(d) 9"],
+    o_en: ["(a) 3", "(b) 12", "(c) 6", "(d) 9"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q41
+  {
+    q_hi: "Q17. यदि दो संख्याओं का अनुपात 4 : 9 है और उनका महत्तम समापवर्तक 34 है, तो उनका लघुत्तम समापवर्त्य ज्ञाात कीजिए।",
+    q_en: "Q17. If the ratio of two numbers is 4 : 9 and their HCF is 34, find their LCM.",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) 1227", "(b) 1250", "(c) 1214", "(d) 1224"],
+    o_en: ["(a) 1227", "(b) 1250", "(c) 1214", "(d) 1224"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q41
+  {
+    q_hi: "Q18. दो घंटियाँ क्रमशः 9 मिनट और 10 मिनट के अंतराल पर बजती हैं। यदि वे सुबह 8:00 बजे एक साथ बजती हैं, तो अगली बार वे कितने मिनट बाद पुनः एक साथ बजेंगी?",
+    q_en: "Q18. Two bells ring at intervals of 9 minutes and 10 minutes respectively. If they ring together at 8:00 AM, after how many minutes will they ring together again?",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 60 मिनट", "(b) 45 मिनट", "(c) 90 मिनट", "(d) 100 मिनट"],
+    o_en: ["(a) 60 minutes", "(b) 45 minutes", "(c) 90 minutes", "(d) 100 minutes"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q19. 432 और 120 तथा 150 के LCM का HCF कितना है?",
+    q_en: "Q19. What is the HCF of 432 and the LCM of 120 and 150?",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) 24", "(b) 8", "(c) 12", "(d) 16"],
+    o_en: ["(a) 24", "(b) 8", "(c) 12", "(d) 16"],
+    a: 0,
+    image: Q19_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q47
+  {
+    q_hi: "Q20. दो सिक्योरिटी लाइटें, जिनमें से एक, प्रत्येक 36 मिनट और दूसरी, प्रत्येक 54 मिनट के नियमित अंतराल पर फ्लैश करती है। यदि दोनों लाइटें 8:00 AM पर एक साथ फ्लैश करती हैं, तो वे दोबारा एक साथ कब फ्लैश करेंगी?",
+    q_en: "Q20. Two security lights flash at regular intervals of 36 minutes and 54 minutes respectively. If both flash together at 8:00 AM, when will they flash together again?",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) 9:28 AM", "(b) 9:08 AM", "(c) 9:38 AM", "(d) 9:48 AM"],
+    o_en: ["(a) 9:28 AM", "(b) 9:08 AM", "(c) 9:38 AM", "(d) 9:48 AM"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q31
+  {
+    q_hi: "Q21. 4m x 3.2 m माप वाले कमरे की पूरी तरह से फर्श लगाने के लिए आवश्यक एकसमान वर्गाकार टाइलों की न्यूनतम संख्या ज्ञाात कीजिए।",
+    q_en: "Q21. Find the minimum number of identical square tiles required to completely cover the floor of a room measuring 4 m × 3.2 m.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) 20", "(b) 9", "(c) 40", "(d) 18"],
+    o_en: ["(a) 20", "(b) 9", "(c) 40", "(d) 18"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q22. 19 और 57 के महत्तम समापवर्तक (HCF) और लघुत्तम समापवर्त्य (LCM) का योगफल क्याा है?",
+    q_en: "Q22. What is the sum of the HCF and LCM of 19 and 57?",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 95", "(b) 57", "(c) 66", "(d) 76"],
+    o_en: ["(a) 95", "(b) 57", "(c) 66", "(d) 76"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q47
+  {
+    q_hi: "Q23. 48 और 68 का लघुत्तम समापवर्त्य (LCM) ज्ञाात कीजिए।",
+    q_en: "Q23. Find the LCM of 48 and 68.",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 816", "(b) 684", "(c) 864", "(d) 786"],
+    o_en: ["(a) 816", "(b) 684", "(c) 864", "(d) 786"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q24. तीन संख्याओं का अनुपात 3 : 14 : 13 है, और उनका लघुत्तम समापवर्त्य (LCM) 5460 है। उन संख्याओं का महत्तम समापवर्तक (HCF) ज्ञात कीजिए।",
+    q_en: "Q24. Three numbers are in the ratio 3 : 14 : 13 and their LCM is 5460. Find their HCF.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 59", "(b) 10", "(c) 5", "(d) 36"],
+    o_en: ["(a) 59", "(b) 10", "(c) 5", "(d) 36"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q9
+  {
+    q_hi: "Q25. संख्याओं 1950, 1560 और 2340 के उभयनिष्ठ अभाज्य गुणनखंडों का गुणनफल ज्ञाात कीजिए।",
+    q_en: "Q25. संख्याओं 1950, 1560 और 2340 के उभयनिष्ठ अभाज्य गुणनखंडों का गुणनफल ज्ञाात कीजिए।",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 390", "(b) 360", "(c) 480", "(d) 520"],
+    o_en: ["(a) 390", "(b) 360", "(c) 480", "(d) 520"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q20
+  {
+    q_hi: "Q26. दो संख्याएं 4 : 5 के अनुपात में हैं और उनका HCF 16 है। उन दोनों संख्याओं का LCM ज्ञाात कीजिए।",
+    q_en: "Q26. Two numbers are in the ratio 4 : 5 and their HCF is 16. Find their LCM.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) 360", "(b) 320", "(c) 340", "(d) 380"],
+    o_en: ["(a) 360", "(b) 320", "(c) 340", "(d) 380"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q9
+  {
+    q_hi: "Q27. दो संख्याओं 64 और 148 का महत्तम समापवर्तक (HCF) ज्ञाात कीजिए।",
+    q_en: "Q27. Find the HCF of 64 and 148.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 3", "(b) 4", "(c) 2", "(d) 6"],
+    o_en: ["(a) 3", "(b) 4", "(c) 2", "(d) 6"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q18
+  {
+    q_hi: "Q28. दो संख्याओं का महत्तम समापवर्तक (HCF) 7 और लघुत्तम समापवर्त्य (LCM) 84 है। यदि एक संख्या 21 है, तो दूसरी संख्या ज्ञाात कीजिए।",
+    q_en: "Q28. The HCF of two numbers is 7 and their LCM is 84. If one number is 21, find the other number.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 24", "(b) 35", "(c) 42", "(d) 28"],
+    o_en: ["(a) 24", "(b) 35", "(c) 42", "(d) 28"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q25
+  {
+    q_hi: "Q29. यदि दो संख्याओं का गुणनफल 98,304 है और उनका महत्तम समापवर्तक (HCF) 128 है, तो उन संख्याओं का लघुत्तम समापवर्त्य (LCM) ज्ञाात कीजिए।",
+    q_en: "Q29. If the product of two numbers is 98,304 and their HCF is 128, find their LCM.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 786", "(b) 789", "(c) 766", "(d) 768"],
+    o_en: ["(a) 786", "(b) 789", "(c) 766", "(d) 768"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q11
+  {
+    q_hi: "Q30. 0.9, 3.7 और 0.54 संख्यााओं का लघुत्तम समापवर्त्य (LCM) ज्ञाात कीजिए।",
+    q_en: "Q30. Find the LCM of 0.9, 3.7 and 0.54.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 100", "(b) 99.9", "(c) 106", "(d) 105"],
+    o_en: ["(a) 100", "(b) 99.9", "(c) 106", "(d) 105"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q31. 24, 36 और 102 का महत्तम समापवर्तक (HCF) ज्ञाात कीजिए।",
+    q_en: "Q31. Find the HCF of 24, 36 and 102.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 12", "(b) 8", "(c) 6", "(d) 4"],
+    o_en: ["(a) 12", "(b) 8", "(c) 6", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q7
+  {
+    q_hi: "Q32. 1.3, 7.6 और 0.13 संख्यााओं का लघुत्तम समापवर्त्य (LCM) ज्ञाात कीजिए।",
+    q_en: "Q32. Find the LCM of 1.3, 7.6 and 0.13.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 107", "(b) 100", "(c) 98.8", "(d) 102"],
+    o_en: ["(a) 107", "(b) 100", "(c) 98.8", "(d) 102"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q24
+  {
+    q_hi: "Q33. दो धनात्मक पूर्णांकों का महत्तम समापवर्तक (HCF) = 12 और लघुत्तम समापवर्त्य (LCM) = 924 है। यदि इनमें से एक संख्या 84 है, तो दूसरी संख्या क्याा है?",
+    q_en: "Q33. The HCF of two positive integers is 12 and their LCM is 924. If one of the numbers is 84, find the other number.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 180", "(b) 132", "(c) 72", "(d) 96"],
+    o_en: ["(a) 180", "(b) 132", "(c) 72", "(d) 96"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 11/03/2026 (Shift-01) | Original Q74
+  {
+    q_hi: "Q34. यदि दो संख्याायें 6 : 7 के अनुपात में है और उनका महत्तम समापवर्तक (HCF) 9 है, तो उनका लघुत्तम समापवर्त्य (LCM) ज्ञाात कीजिए।",
+    q_en: "Q34. If two numbers are in the ratio 6 : 7 and their HCF is 9, find their LCM.",
+    tag: "RRB ALP CBT-I, 11/03/2026 (Shift-01)",
+    o_hi: ["(a) 417", "(b) 364", "(c) 408", "(d) 378 Question Type : MCQ Question ID : 441009525665 Option 1 ID : 4410092058080 Option 2 ID : 4410092058082 Option 3 ID : 4410092058081 Option 4 ID : 4410092058079 Status : Answered Chosen Option : D"],
+    o_en: ["(a) 417", "(b) 364", "(c) 408", "(d) 378"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];

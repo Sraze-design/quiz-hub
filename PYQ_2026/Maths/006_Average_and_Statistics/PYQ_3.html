@@ -1,0 +1,555 @@
+const Q136_IMAGE = "data:image/png;base64,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";
+
+const data = [
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q101. नीचे 25 विद्यार्थियों का वजन दिया गया है। आँकड़ोंों का समांतर माध्य ज्ञाात कीजिए। भार 65 66 67 68 69 विद्याार्थियों की संख्याा 8 6 4 4 3",
+    q_en: "Q101. The weights of 25 students are given below. Find the arithmetic mean. Weight: 65, 66, 67, 68, 69; Number of students: 8, 6, 4, 4, 3.",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 66.52", "(b) 56.84", "(c) 67.43", "(d) 64.32"],
+    o_en: ["(a) 66.52", "(b) 56.84", "(c) 67.43", "(d) 64.32"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q36
+  {
+    q_hi: "Q102. किन्हींीं आंकड़ो का माध्य 33 है और माध्यिका 37 है। आंकड़ो का बहुलक (आनुभविक संबंध का उपयोग करके) ज्ञाात कीजिए।",
+    q_en: "Q102. The mean of a data set is 33 and its median is 37. Using the empirical relation, find the mode.",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 108", "(b) 58", "(c) 16", "(d) 45"],
+    o_en: ["(a) 108", "(b) 58", "(c) 16", "(d) 45"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q46
+  {
+    q_hi: "Q103. 24 से शुरू होने वाले प्रथम 8 क्रमागत सम संख्याओं का औसत कितना है?",
+    q_en: "Q103. Find the average of the first 8 consecutive even numbers beginning with 24.",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 32", "(b) 33", "(c) 30", "(d) 31"],
+    o_en: ["(a) 32", "(b) 33", "(c) 30", "(d) 31"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q50
+  {
+    q_hi: "Q104. निम्नलिखित बारंबारता बंटन की माध्यिका ज्ञाात कीजिए। x 1 2 3 4 5 6 7 f 8 10 11 16 20 25 15",
+    q_en: "Q104. Find the median of the following frequency distribution. x: 1, 2, 3, 4, 5, 6, 7; f: 8, 10, 11, 16, 20, 25, 15.",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 6", "(c) 4", "(d) 5"],
+    o_en: ["(a) 3", "(b) 6", "(c) 4", "(d) 5"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q105. एक क्रिकेटर का चार मैचों में औसत स्कोर 45 है और अन्य छह मैचों में औसत स्कोर 65 है। सभी दस मैचों में औसत स्कोर ज्ञाात कीजिए।",
+    q_en: "Q105. A cricketer has an average score of 45 in four matches and 65 in another six matches. Find the average score over all ten matches.",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 58", "(b) 56", "(c) 57", "(d) 55"],
+    o_en: ["(a) 58", "(b) 56", "(c) 57", "(d) 55"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q40
+  {
+    q_hi: "Q106. यदि निम्नलिखित आंकड़ोंों का माध्य 46 है, तो x का मान ज्ञाात कीजिए। वर्ग 10-20 20-30 30-40 40-50 50-60 बारंबारता 24 16 25 49 x",
+    q_en: "Q106. If the mean of the following distribution is 46, find x. Class 10-20 20-30 30-40 40-50 50-60 Frequency 24 16 25 49 x",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 147", "(b) 137", "(c) 156", "(d) 181"],
+    o_en: ["(a) 147", "(b) 137", "(c) 156", "(d) 181"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q42
+  {
+    q_hi: "Q107. यदि आंकड़ों का माध्य 30 है, तो निम्नलिखित में से कौन-सा विकल्प दिए गए आंकड़ों के लिए x और y के बीच संबंध दर्शाता है? वर्ग अंतराल बारंबारता 0-10 2 10-20 4 20-30 x 30-40 y 40-50 3",
+    q_en: "Q107. If the mean of the data is 30, which option shows the relation between x and y for the following distribution? Class intervals: 0–10, 10–20, 20–30, 30–40, 40–50; Frequencies: 2, 4, x, y, 3.",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) y = x + 10", "(b) y = x + 13", "(c) x = y + 10", "(d) x = y + 13"],
+    o_en: ["(a) y = x + 10", "(b) y = x + 13", "(c) x = y + 10", "(d) x = y + 13"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q29
+  {
+    q_hi: "Q108. यदि निम्नलिखित बंटन का माध्य 50 है, तो (6x + 9y) का मान ज्ञात कीजिए। वर्ग 0-20 20-40 40-60 60-80 80-100 कु ल बारं बारता 9 16 x 2 y 70",
+    q_en: "Q108. If the mean of the following distribution is 50, find (6x + 9y). Class 0-20 20-40 40-60 60-80 80-100 Total frequency 9 16 x 2 y 70",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 297", "(b) 306", "(c) 312", "(d) 301"],
+    o_en: ["(a) 297", "(b) 306", "(c) 312", "(d) 301"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q109. 21 विद्यार्थियों के औसत अंक 32 हैं। यदि प्रथम 10 विद्यार्थियों के औसत अंक 30 हैं और अंतिम 10 विद्यार्थियों के औसत अंक 31 हैं, तो 11वें विद्यार्थी के अंक ज्ञात कीजिए।",
+    q_en: "Q109. The average marks of 21 students are 32. If the average marks of the first 10 students are 30 and those of the last 10 students are 31, find the marks of the 11th student.",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 60", "(b) 64", "(c) 65", "(d) 62"],
+    o_en: ["(a) 60", "(b) 64", "(c) 65", "(d) 62"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q110. n प्रेक्षणों 1, 4, 9, 16, ..., n2 का माध्य 130 है। n का मान कितना है?",
+    q_en: "Q110. The mean of n observations 1, 4, 9, 16, …, n² is 130. Find n.",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 20", "(b) 19", "(c) 15", "(d) 13"],
+    o_en: ["(a) 20", "(b) 19", "(c) 15", "(d) 13"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q30
+  {
+    q_hi: "Q111. 2024 की पहली छमाही में सुलेखा ने प्रत्येक महीने (जनवरी से जून), औसतन 2.2 kg चीनी का सेवन किया। 2024 के दौरान उसने प्रत्येक महीने औसतन 2.5 kg चीनी का सेवन किया। 2024 के जुलाई और दिसंबर के बीच उसने औसतन _________ चीनी का सेवन किया।",
+    q_en: "Q111. During the first half of 2024 (January to June), Sulekha consumed an average of 2.2 kg of sugar per month. During all of 2024, she consumed an average of 2.5 kg per month. Find her average monthly sugar consumption from July to December.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 2.2 kg", "(b) 2.5 kg", "(c) 2.8 kg", "(d) 2.7 kg"],
+    o_en: ["(a) 2.2 kg", "(b) 2.5 kg", "(c) 2.8 kg", "(d) 2.7 kg"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q49
+  {
+    q_hi: "Q112. किन्हींीं आंकड़ो का माध्य 74 है और माध्यिका 88 है। आंकड़ो का बहुलक (आनुभविक संबंध का उपयोग करते हुए) ज्ञात कीजिए।",
+    q_en: "Q112. The mean of a data set is 74 and its median is 88. Using the empirical relation, find the mode.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) 116", "(b) 91", "(c) 34", "(d) 150"],
+    o_en: ["(a) 116", "(b) 91", "(c) 34", "(d) 150"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q28
+  {
+    q_hi: "Q113. तीन महिलाओं का औसत वजन तब 4 kg बढ़ जाता है, जब उनमें से 102 kg वजन वाली एक महिला को दूसरी महिला से बदल दिया जाता है। नई महिला का वजन कितना है?",
+    q_en: "Q113. The average weight of three women increases by 4 kg when one woman weighing 102 kg is replaced by another woman. Find the weight of the new woman.",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 116 kg", "(b) 112 kg", "(c) 118 kg", "(d) 114 kg"],
+    o_en: ["(a) 116 kg", "(b) 112 kg", "(c) 118 kg", "(d) 114 kg"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q38
+  {
+    q_hi: "Q114. 280 लोगों के समूह द्वाारा पहनी जाने वाली शर्ट के साइज़ निम्न प्रकार हैं। शर्ट साइज 37 38 39 40 41 42 43 44 व्यक्तियों की संख्याा 31 35 49 51 50 37 15 12 समूह द्वाारा पहने जाने वाले शर्ट साइज का बहुलक ज्ञाात कीजिए।",
+    q_en: "Q114. The shirt sizes worn by a group of 280 people are as follows. Shirt size: 37, 38, 39, 40, 41, 42, 43, 44; Number of persons: 31, 35, 49, 51, 50, 37, 15, 12. Find the mode of the shirt sizes.",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 41", "(b) 39", "(c) 42", "(d) 40"],
+    o_en: ["(a) 41", "(b) 39", "(c) 42", "(d) 40"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q115. किसी कार्यालय में, 25 कर्मचारी हैं जो प्रतिदिन काम पर जाने के लिए यात्रा करते हैं। कार्यालय तक जाने में लगने वाला समय नीचे दिया गया है: लगने वाला समय (मिनट में) कर्मचारियों की संख्या 10 से कम 2 20 से कम 6 30 से कम 15 40 से कम 19 50 से कम 23 60 से कम 25 कार्यालय तक जाने में लगने वाले माध्य समय (मिनट में) की गणना कीजिए।",
+    q_en: "Q115. An office has 25 employees who commute to work each day. Time taken (minutes), cumulative number of employees: below 10: 2, below 20: 6, below 30: 15, below 40: 19, below 50: 23, below 60: 25. Calculate the mean travel time to the office.",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 29", "(b) 32", "(c) 15", "(d) 21"],
+    o_en: ["(a) 29", "(b) 32", "(c) 15", "(d) 21"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q3
+  {
+    q_hi: "Q116. किन्‍हीं दिए गए आंकड़ों के लिए, माध्य 48.5 है और माध्यिका 44 है। आंकड़ों का बहुलक ज्ञात कीजिए।",
+    q_en: "Q116. किन्‍हीं दिए गए आंकड़ों के लिए, माध्य 48.5 है और माध्यिका 44 है। आंकड़ों का बहुलक ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 35", "(b) 42", "(c) 32", "(d) 25"],
+    o_en: ["(a) 35", "(b) 42", "(c) 32", "(d) 25"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q15
+  {
+    q_hi: "Q117. तीन संख्याओं का औसत 20 है। यदि दो संख्याएं क्रमशः 11 और 22 हैं, तो तीसरी संख्या ज्ञाात कीजिए।",
+    q_en: "Q117. The average of three numbers is 20. If two of the numbers are 11 and 22, find the third number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 28", "(b) 27", "(c) 29", "(d) 26"],
+    o_en: ["(a) 28", "(b) 27", "(c) 29", "(d) 26"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q21
+  {
+    q_hi: "Q118. निम्नलिखित आंकड़ोंों का बहुलक क्याा है? 51, 48, 50, 55, 44, 52, 45, 52, 44, 49, 55, 54, 44, 54, 43, 45, 55, 47",
+    q_en: "Q118. What is the mode of the following data? 51, 48, 50, 55, 44, 52, 45, 52, 44, 49, 55, 54, 44, 54, 43, 45, 55, 47",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) 55", "(b) 54", "(c) 44", "(d) 45"],
+    o_en: ["(a) 55", "(b) 54", "(c) 44", "(d) 45"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q4
+  {
+    q_hi: "Q119. तीन संख्याओं का औसत 20 है। यदि दो संख्याएं क्रमशः 11 और 21 हैं, तो तीसरी संख्या ज्ञात कीजिए।",
+    q_en: "Q119. तीन संख्याओं का औसत 20 है। यदि दो संख्याएं क्रमशः 11 और 21 हैं, तो तीसरी संख्या ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 28", "(b) 27", "(c) 29", "(d) 30"],
+    o_en: ["(a) 28", "(b) 27", "(c) 29", "(d) 30"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q19
+  {
+    q_hi: "Q120. यदि किसी बंटन का माध्य 78 है और माध्यिका 61 है, तो बहुलक का मान ज्ञाात कीजिए।",
+    q_en: "Q120. The mean of a data set is 78 and its median is 61. Using the empirical relation, find the mode.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 50", "(b) 31.5", "(c) 45", "(d) 27"],
+    o_en: ["(a) 50", "(b) 31.5", "(c) 45", "(d) 27"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q7
+  {
+    q_hi: "Q121. निम्नलिखित आंकड़ोंों का बहुलक क्याा है? 52, 44, 47, 50, 45, 40, 43, 53, 53, 45, 52, 50, 52, 52, 44, 47, 54, 50",
+    q_en: "Q121. What is the mode of the following data? 52, 44, 47, 50, 45, 40, 43, 53, 53, 45, 52, 50, 52, 52, 44, 47, 54, 50",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 44", "(b) 52", "(c) 50", "(d) 47"],
+    o_en: ["(a) 44", "(b) 52", "(c) 50", "(d) 47"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q21
+  {
+    q_hi: "Q122. किसी आकड़ों का माध्य 19 है और उनकी माध्यिका 51 है। आकड़ों का बहुलक (आनुभविक संबंध का उपयोग करते हुए) ज्ञाात कीजिए।",
+    q_en: "Q122. The mean of a data set is 19 and its median is 51. Using the empirical relation, find the mode.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 115", "(b) 130", "(c) 173", "(d) 30"],
+    o_en: ["(a) 115", "(b) 130", "(c) 173", "(d) 30"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q6
+  {
+    q_hi: "Q123. 6 संख्याओं का योगफल 240 है। उनका औसत ज्ञाात कीजिए।",
+    q_en: "Q123. The sum of 6 numbers is 240. Find their average.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 38", "(b) 41", "(c) 39", "(d) 40"],
+    o_en: ["(a) 38", "(b) 41", "(c) 39", "(d) 40"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q7
+  {
+    q_hi: "Q124. यदि माध्यिका और बहुलक क्रमशः 65 और 60 दिए गए हैं, तो माध्य ज्ञाात कीजिए।",
+    q_en: "Q124. If the median and mode are 65 and 60 respectively, find the mean.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 62.5", "(b) 68", "(c) 67.5", "(d) 70"],
+    o_en: ["(a) 62.5", "(b) 68", "(c) 67.5", "(d) 70"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q20
+  {
+    q_hi: "Q125. निम्नलिखित आंकड़ोंों का बहुलक क्याा है? 40, 53, 47, 55, 42, 46, 50, 42, 54, 49, 40, 54, 43, 40, 44, 55, 49, 53",
+    q_en: "Q125. What is the mode of the following data? 40, 53, 47, 55, 42, 46, 50, 42, 54, 49, 40, 54, 43, 40, 44, 55, 49, 53",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 55", "(b) 40", "(c) 49", "(d) 53"],
+    o_en: ["(a) 55", "(b) 40", "(c) 49", "(d) 53"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q23
+  {
+    q_hi: "Q126. किन्‍हीं आकड़ों का माध्य 41 है और उनकी माध्यिका 98 है। आकड़ों का बहुलक (आनुभविक संबंध का उपयोग करते हुए) ज्ञाात कीजिए।",
+    q_en: "Q126. The mean of a data set is 41 and its median is 98. Using the empirical relation, find the mode.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 240", "(b) 212", "(c) 128", "(d) 209"],
+    o_en: ["(a) 240", "(b) 212", "(c) 128", "(d) 209"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q1
+  {
+    q_hi: "Q127. निम्नलिखित आंकड़ों का बहुलक क्या है? 47, 43, 50, 46, 46, 40, 54, 54, 40, 54, 42, 48, 44, 55, 52, 45, 41, 41",
+    q_en: "Q127. निम्नलिखित आंकड़ों का बहुलक क्या है? 47, 43, 50, 46, 46, 40, 54, 54, 40, 54, 42, 48, 44, 55, 52, 45, 41, 41",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) 54", "(b) 41", "(c) 40", "(d) 46"],
+    o_en: ["(a) 54", "(b) 41", "(c) 40", "(d) 46"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q8
+  {
+    q_hi: "Q128. किसी डेटा का माध्य 20 है और माध्यिका 30 है। आनुभविक संबंध का उपयोग करके डेटा का बहुलक ज्ञाात कीजिए।",
+    q_en: "Q128. The mean of a data set is 20 and its median is 30. Using the empirical relation, find the mode.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) 44", "(b) 110", "(c) 50", "(d) 131"],
+    o_en: ["(a) 44", "(b) 110", "(c) 50", "(d) 131"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q10
+  {
+    q_hi: "Q129. निम्नलिखित आंकड़ोंों का बहुलक क्याा है? 43, 44, 43, 53, 42, 44, 46, 47, 55, 50, 52, 55, 40, 45, 44, 53, 48, 48",
+    q_en: "Q129. What is the mode of the following data? 43, 44, 43, 53, 42, 44, 46, 47, 55, 50, 52, 55, 40, 45, 44, 53, 48, 48",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 53", "(b) 43", "(c) 44", "(d) 55"],
+    o_en: ["(a) 53", "(b) 43", "(c) 44", "(d) 55"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q18
+  {
+    q_hi: "Q130. किन्‍हीं आकड़ों का माध्य 47 है और उनकी माध्यिका 61 है। आकड़ों का बहुलक (आनुभविक संबंध का उपयोग करते हुए) ज्ञाात कीजिए।",
+    q_en: "Q130. The mean of a data set is 47 and its median is 61. Using the empirical relation, find the mode.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 111", "(b) 148", "(c) 89", "(d) 23"],
+    o_en: ["(a) 111", "(b) 148", "(c) 89", "(d) 23"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q3
+  {
+    q_hi: "Q131. यदि एक 12 वर्षीय लड़की के स्थान पर एक नई लड़की को शामिल किया जाता है, तो छह लड़कियों की औसत आयु में चार महीने की वृद्धि हो जाती है। नई लड़की की आयु कितनी है?",
+    q_en: "Q131. यदि एक 12 वर्षीय लड़की के स्थान पर एक नई लड़की को शामिल किया जाता है, तो छह लड़कियों की औसत आयु में चार महीने की वृद्धि हो जाती है। नई लड़की की आयु कितनी है?",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 13 वर्ष", "(b) 15 वर्ष", "(c) 14 वर्ष", "(d) 16 वर्ष"],
+    o_en: ["(a) 13 वर्ष", "(b) 15 वर्ष", "(c) 14 वर्ष", "(d) 16 वर्ष"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q21
+  {
+    q_hi: "Q132. निम्नलिखित आंकड़ों का बहुलक क्याा है? 50, 43, 40, 51, 44, 46, 40, 43, 41, 45, 46, 40, 45, 47, 45, 49, 47, 40",
+    q_en: "Q132. What is the mode of the following data? 50, 43, 40, 51, 44, 46, 40, 43, 41, 45, 46, 40, 45, 47, 45, 49, 47, 40.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 40", "(b) 43", "(c) 46", "(d) 45"],
+    o_en: ["(a) 40", "(b) 43", "(c) 46", "(d) 45"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q9
+  {
+    q_hi: "Q133. एक विद्याार्थी के अंक गलती से 69 के स्‍थान पर 21 दर्ज कर दिए गए। इसके कारण कक्षा के औसत अंक में की कमी हो गई। कक्षा में विद्याार्थियों की संख्याा कितनी है?",
+    q_en: "Q133. A student’s marks were mistakenly recorded as 21 instead of 69. As a result, the class average decreased by 6/5. How many students are in the class?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 37", "(b) 40", "(c) 50", "(d) 42"],
+    o_en: ["(a) 37", "(b) 40", "(c) 50", "(d) 42"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q23
+  {
+    q_hi: "Q134. यदि 20 संख्यााओं के आँकड़ोंों की माध्यिका और बहुलक क्रमशः 250 और 295 हैं, तो 20 संख्यााओं का योगफल ज्ञाात कीजिए।",
+    q_en: "Q134. If the median and mode of 20 numbers are 250 and 295 respectively, find the sum of the 20 numbers.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 4500", "(b) 4550", "(c) 4005", "(d) 4050"],
+    o_en: ["(a) 4500", "(b) 4550", "(c) 4005", "(d) 4050"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q72
+  {
+    q_hi: "Q135. निम्नलिखित आंकड़ोंों का बहुलक कितना है? 70, 70, 73, 71, 74, 69, 80, 68, 66, 66, 89, 83, 81, 86, 82, 74, 86, 87, 67, 72, 62, 76, 86, 65, 62",
+    q_en: "Q135. What is the mode of the following data? 70, 70, 73, 71, 74, 69, 80, 68, 66, 66, 89, 83, 81, 86, 82, 74, 86, 87, 67, 72, 62, 76, 86, 65, 62",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 66", "(b) 74", "(c) 70", "(d) 86 \""],
+    o_en: ["(a) 66", "(b) 74", "(c) 70", "(d) 86"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q7
+  {
+    q_hi: "Q136. और की माध्यिका ज्ञाात कीजिए।",
+    q_en: "Q136. और की माध्यिका ज्ञाात कीजिए।",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) विकल्प A", "(b) विकल्प B", "(c) विकल्प C", "(d) विकल्प D"],
+    o_en: ["(a) Option A", "(b) Option B", "(c) Option C", "(d) Option D"],
+    a: 1,
+    image: Q136_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q31
+  {
+    q_hi: "Q137. एक विद्याार्थी के अंक गलती से 99 के स्‍थान पर 35 दर्ज कर दिए गए। इसके कारण कक्षा के औसत अंक में की कमी हो गई। कक्षा में विद्याार्थियों की संख्याा कितनी है?",
+    q_en: "Q137. A student’s marks were mistakenly recorded as 35 instead of 99. As a result, the class average decreased by 8/3. How many students are in the class?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 34", "(b) 33", "(c) 24", "(d) 28"],
+    o_en: ["(a) 34", "(b) 33", "(c) 24", "(d) 28"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q61
+  {
+    q_hi: "Q138. निम्नलिखित आंकड़ोंों का बहुलक क्याा है? 78, 60, 85, 76, 84, 86, 73, 89, 78, 77, 60, 63, 62, 72, 61, 78, 67, 77, 61, 78, 75, 61, 88, 66, 69",
+    q_en: "Q138. What is the mode of the following data? 78, 60, 85, 76, 84, 86, 73, 89, 78, 77, 60, 63, 62, 72, 61, 78, 67, 77, 61, 78, 75, 61, 88, 66, 69",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 77", "(b) 60", "(c) 78", "(d) 61"],
+    o_en: ["(a) 77", "(b) 60", "(c) 78", "(d) 61"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q1
+  {
+    q_hi: "Q139. एक विद्यार्थी के अंक गलती से 92 के बजाय 44 दर्ज कर दिए गए। इसके कारण कक्षा के औसत अंक कम हो गए। कक्षा में विद्यार्थियों की संख्या कितनी है?",
+    q_en: "Q139. A student’s marks were mistakenly recorded as 44 instead of 92. As a result, the class average decreased by 4/3. How many students are in the class?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 32", "(b) 41", "(c) 36", "(d) 43"],
+    o_en: ["(a) 32", "(b) 41", "(c) 36", "(d) 43"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q51
+  {
+    q_hi: "Q140. किन्हीी आंकड़ों का माध्य उनके बहुलक का चार गुना है। यदि आंकड़ों की माध्यिका 63 है, तो इसका माध्य ज्ञाात कीजिए।",
+    q_en: "Q140. The mean of a data set is four times its mode. If its median is 63, find the mean.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 93", "(b) 72", "(c) 63", "(d) 84"],
+    o_en: ["(a) 93", "(b) 72", "(c) 63", "(d) 84"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q57
+  {
+    q_hi: "Q141. निम्नलिखित आंकड़ोंों का बहुलक ज्ञाात कीजिए। 77, 85, 87, 75, 78, 62, 68, 61, 90, 63, 61, 71, 69, 77, 75, 82, 75, 69, 74, 75, 70, 81, 65, 66, 61",
+    q_en: "Q141. Find the mode of the following data. 77, 85, 87, 75, 78, 62, 68, 61, 90, 63, 61, 71, 69, 77, 75, 82, 75, 69, 74, 75, 70, 81, 65, 66, 61",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 75", "(b) 69", "(c) 77", "(d) 61"],
+    o_en: ["(a) 75", "(b) 69", "(c) 77", "(d) 61"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q9
+  {
+    q_hi: "Q142. निम्नलिखित आंकड़ोंों का बहुलक क्याा है? 89, 76, 76, 88, 81, 81, 65, 90, 83, 89, 64, 63, 78, 64, 82, 87, 79, 89, 87, 65, 86, 77, 80, 70, 67",
+    q_en: "Q142. What is the mode of the following data? 89, 76, 76, 88, 81, 81, 65, 90, 83, 89, 64, 63, 78, 64, 82, 87, 79, 89, 87, 65, 86, 77, 80, 70, 67",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 64", "(b) 89", "(c) 76", "(d) 81"],
+    o_en: ["(a) 64", "(b) 89", "(c) 76", "(d) 81"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q14
+  {
+    q_hi: "Q143. किसी कक्षा के 9 विद्याार्थियों ने गणित में 76, 85, 47, 67, 85, 76, 47, 76 और 67 अंक प्राप्त किए। इन प्राप्तांकों का बहुलक कितना है?",
+    q_en: "Q143. Nine students in a class scored 76, 85, 47, 67, 85, 76, 47, 76 and 67 in mathematics. Find the mode of these scores.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 76", "(b) 85", "(c) 67", "(d) 47"],
+    o_en: ["(a) 76", "(b) 85", "(c) 67", "(d) 47"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q144. एक विद्याार्थी के अंक गलती से 94 के बजाय 84 दर्ज कर दिए गए। इसके कारण कक्षा के औसत अंक कम हो गए। कक्षा में विद्याार्थियों की संख्याा कितनी है?",
+    q_en: "Q144. A student’s marks were mistakenly recorded as 84 instead of 94. As a result, the class average decreased by 5/4. How many students are in the class?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 15", "(b) 8", "(c) 17", "(d) 4"],
+    o_en: ["(a) 15", "(b) 8", "(c) 17", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q1
+  {
+    q_hi: "Q145. निम्नलिखित आंकड़ोंों का बहुलक कितना है? 86, 84, 71, 82, 82, 63, 84, 71, 70, 86, 88, 65, 71, 81, 87, 60, 60, 74, 78, 62, 75, 66, 68, 85, 72",
+    q_en: "Q145. What is the mode of the following data? 86, 84, 71, 82, 82, 63, 84, 71, 70, 86, 88, 65, 71, 81, 87, 60, 60, 74, 78, 62, 75, 66, 68, 85, 72",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 84", "(b) 86", "(c) 71", "(d) 82"],
+    o_en: ["(a) 84", "(b) 86", "(c) 71", "(d) 82"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q16
+  {
+    q_hi: "Q146. किसी विद्याार्थी के अंक गलती से 70 के स्थाान पर 34 दर्ज कर दिए गए। इसके कारण, कक्षा के औसत अंकों में की कमी हो गई। कक्षा में विद्याार्थियों की संख्या कितनी है?",
+    q_en: "Q146. A student’s marks were mistakenly recorded as 34 instead of 70. As a result, the class average decreased by 4/3. How many students are in the class?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 23", "(b) 28", "(c) 27", "(d) 32"],
+    o_en: ["(a) 23", "(b) 28", "(c) 27", "(d) 32"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q40
+  {
+    q_hi: "Q147. यदि 15 संख्याओं का माध्य 25 है और उनमें से एक संख्या 36.2 को हटा दिया जाए, तो शेष संख्याओं का माध्य कितना होगा?",
+    q_en: "Q147. The mean of 15 numbers is 25. If one number, 36.2, is removed, what is the mean of the remaining numbers?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 20.8", "(b) 24.2", "(c) 21.9", "(d) 20.1"],
+    o_en: ["(a) 20.8", "(b) 24.2", "(c) 21.9", "(d) 20.1"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q57
+  {
+    q_hi: "Q148. किसी विद्याार्थी के अंक गलती से 37 के स्थाान पर 25 दर्ज कर दिए गए। इसके कारण कक्षा के औसत अंकों में की कमी हो गई। कक्षा में विद्याार्थियों की संख्याा कितनी है?",
+    q_en: "Q148. A student’s marks were mistakenly recorded as 25 instead of 37. As a result, the class average decreased by 4/3. How many students are in the class?",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 1", "(b) 9", "(c) 3", "(d) 19"],
+    o_en: ["(a) 1", "(b) 9", "(c) 3", "(d) 19"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q68
+  {
+    q_hi: "Q149. निम्नलिखित आंकड़ोंों का बहुलक कितना है? 44, 45, 51, 50, 53, 54, 46, 40, 51, 46, 40, 42, 55, 42, 44, 55, 49, 44",
+    q_en: "Q149. What is the mode of the following data? 44, 45, 51, 50, 53, 54, 46, 40, 51, 46, 40, 42, 55, 42, 44, 55, 49, 44",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 51", "(b) 55", "(c) 40", "(d) 44"],
+    o_en: ["(a) 51", "(b) 55", "(c) 40", "(d) 44"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q70
+  {
+    q_hi: "Q150. निम्नलिखित आंकड़े एक वर्ष के दौरान एक अस्पताल में भर्ती रोगियों की आयु को निरूपित करते हैं। रोगियों की बहुलकी आयु (दशमलव के 2 स्थाानों तक) कितनी है? आयु (वर्षों में) 5 - 10 10 - 15 15 - 20 20 - 25 25 - 30 30 - 35 35 - 40 रोगियों की संख्याा 4 10 8 2 12 6 3",
+    q_en: "Q150. The following data represent the ages of patients admitted to a hospital during a year. Find the modal age, rounded to two decimal places. Age (years): 5–10, 10–15, 15–20, 20–25, 25–30, 30–35, 35–40; Number of patients: 4, 10, 8, 2, 12, 6, 3.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 32.23 वर्ष", "(b) 29.12 वर्ष", "(c) 33.51 वर्ष", "(d) 28.13 वर्ष"],
+    o_en: ["(a) 32.23 years", "(b) 29.12 years", "(c) 33.51 years", "(d) 28.13 years"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];

@@ -1,0 +1,557 @@
+const Q13_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2EAAACTCAIAAACI3IbnAAAACXBIWXMAAA7EAAAOxAGVKw4bAAArDElEQVR4nO3dB3RUZd4/8PccxdXV/b/v0d1ldVdX19CDFCEgSFt6E5AiRUNNAIHQpDcBpaMICNKkFymhiAiJdEhISEgjIaQXEkifSbn93vn/Zh4YhpvMkABDQvh+zj05z9x5bnmemZz5znPL/I/JofPnz40e5bl27WrH1U6cOLlhwyZVVR1XAwAAAAAn8fO7Qnns9u3bDurcunWLot3ECV6OV6Vp2v84roGMCAAAAPBMQEYEAAAAAD1kRAAAAADQq7gZkVbnuBoAAAAAOElU1A1kRAAAAAB4QFRUNDIiAAAAADwAGbFiEUWxoKCgTIucOnXKw8NjxowZQUFBpamvqqrBYChr9xYVFf3+++8+Pj6O3ysP9QgNLC9//PHHyZMnb9686bgax3GFhYVPZ5ceU35+PnsRMzIyyntfAACgokNGrCiysrIGDBjgYtG5c+eQkJBSLhgQELBo0SIvL6/atWuHhoY6qEnpcNasWbVq1aJNuLm5HTx4sPS7l5yczPbN1dXV8VbseeQGUgiTZfkRtviYGjRowPb20KFDJVa4ePFiu3btWJ3WrVtv2rSpgofFqKgotrf16tWLiYkp790BAIAKrbJlxIKCAkowYWFhRUVFjqsVH80SBCE7O/sRNvpEUM6jD+/vvvvuyJEjXbp0qVOnTkpKSmkWHDVqVLdu3SZMmEDL9u3b10HN06dP0ya+/PLL3377bfTo0VQ+fvx4KXePXg7qUsp5tGCnTp0URSnlglaP3MBmzZrRPpd1c4+P2ms0GpcvX06Jqvgbg94tNJ+i4b59+7y9vSl8161bt02bNnFxcU9/V0uJviRQozIyMgYPHty7d+/y3h0AAKjQKk9GpM/s2bNn16xZk42U1KpVa8mSJcWjDDW1f//+rA59TKamprL5a9asodRCM9u2bRsbG1umTT8RK1eupK2zg4CUSCh/UHNKsyAFvp07d86fP799+/Y9e/akIGiv5qVLl2gTx44dM1leLWo+LVLW/aTY5ObmRsGorAs+cgPXrl3L9rlcUEdR8p4zZ45uPhtY3bNnj3UONW3o0KENGjSo+EN01P/169end0557wgAAFRclScjTpw4kT6zu3btumvXru3bt1PUo4eLFi3SVWPjZxstqODh4UEzf/31VyqPHTuWPvIpKbq7u5dp0yQ6OjrgYXx8fKzlI0eO6J49efIkJbZZs2axcr9+/Vq3bk1lX19feys8d+7c+fPnrQ+9vb1btWrVoUOHs2fP/vHHH8Xr+/v7f/bZZ4MGDfLz86NNzJs3j1pN64+Pj2etKCgoeGgraMEJEybQghcvXixxK1YnTpygVFpiA2nPrQ3MysoqTR/a2xY1avXq1fRqFn/KtuuKH9qm7w/WTdtKT0/XrYfeUY0aNaLmREZGWjuK+tDV1ZXeddQWazNpZ8aNG0dNo86hh3l5eRQlKcFTHev6ExISdC2iZ23fG9aN7tixo8QmFx8Cp686e/fu/eWXX1gEF0WR1Tx69Kh1Kdp/25XMnTu3U6dOtMO2jaJ943m+rG9+AAColCpJRkxKSqLU0rx5c47j2JycnJz69evXqlXLYDDY1ly4cOH8+fNZmTIKhSoqDBkypHr16uyjl8LEQy9TKG7o0KEuD/PBBx9Yy2zM0p4aNWpYy9aR0SercePG1vLUqVNZK6jtZVqQOvzRts7OiWSsZ/s57kNKaWXdSsOGDa1l9kJbbd68mRKei2XYOCIiwvapDRs22FshJezSdxTZv39/3bp1KbVTmbbIlp0xYwZ79pFf2eIXJ9EryJ6qV68evXvpP7b4Uh9++GGJa6NGUS5kud/F8t6j/xHcwR4AACpJRqScQR9v9NlmO3P8+PEuluGuEheJioqqVq0aO9GNsk6TJk1mzpxJiWHKlCm6WFkaGRkZyRZjx46lz/4bN25QOSEhITY2NjIyknZj+vTpNJNli7lz54aFhbH60dHR8fHxVEhMTGTpgerQvrHPbHqKrYrQeigKU4FmduvWrU2bNrEWtM/du3dndUaMGEHxi2bSalnN69evX716lVa1YMGCJAvr2rZt20bzvb29rSfbiaLIni3lgrQVNhx7/Phxeoq6sXfv3lRo0aJFjx49qCb1QLKNQYMGUW6jQkxMjLWB1lExax/u2rWLntq7dy+VAwIC2D6wFhEKWy6WZMkeUv+cP3/+zJkzFMHHjBlDc1gnz549mxaxdji9ia0vFlvn6NGjaUOU4WhvJUmyPms0GpMftGPHDqq/du1a6/8J6yh6CaiZ1NvsFSRxcXH0l8IuBVAqHDlyhBakruvYsSO1nS3LXmX20rNOoCbQK67bKHV+YGAgvT9Z7KM5ffv2pR6mgiAIurcf7Rh1Y3BwMK1t6dKlLCN+8803FH9///13Kq9fv55eUFqWdibGgr2I1DRadvHixayBtEvLly+n8s6dO8v6LwAAAJVMJcmI7ANvw4YNtjMpWNDMEk+6okBGH7cUp9ipY/QxTDVHjRq1bt06mvk4V0gcPXqUVkUphLZLq6W8SKulOfQxbLJc2+tiuW6DVabgWL16dYqnP//8s3WYhx0ApYhDZXY+ZU5OTp8+fehhz549aVk2CNehQwe2ks6dO1uvP6BYXLt2bVY+ePAgG7mkbEF/aQ1NmzatX78+ZQhWgYIdzb98+bKuCWVakKVzNrLVqlWrgQMHUuG///2vdciNAvfp06ePWlCWbdy4MZtv20AdykAs4pgsbz4qr159/z1Db1Y2h+IOrZDKH3/8Me0M9QNFMWsnL1u2rHiHMytWrKCZ7KzTOXPmUNnPz8/Ba8pilu2phwy9BNZmhoaGdu3alaq1b9+e5lMH0sy8vDy2b7Sf1posI+o6gRp17Nix4u/5H3/8kSqww8Hu7u660VBbubm5tIdUmV4+1mm0rOnekOf+/fupTOv56KOPbAcRqWk0f/fu3ez9abIkdZo/ceJEBx0CAADPg0qSEdmAjfUgMhsWGjNmTIkZKCEhoVmzZpSlrJd3UAaimmz4kAIi5TZRFEu/dcbX15cCExsDo402aNCgV69eZ86c+eqrr0rMiGfPnqWyp6cnpQoqUIz49NNPS8yIS5YsoTKlGRbdaBH6pHecESlWUpTs1q0b5blx48axQDDcggrnz5832cmIZV3QcUZMT0/XHeJ0nBEp2FGEKigoqFatmoeHB+UbHx8fa0a8ceMGFW7evElzVq1aNXr0aOoHqkAbZSufOXOmqRQZkR7SzKioKNO9q60pJNlWOHz4cG8b7NxWBxmR53l6C1HT9u3bt3nzZvpuwDIie4r+PjQjsm6kd2ZERETje1ijqAPZUGuJGZFeL3YrIvr+wN5F9M/Mzq8tnhG3b99OZfpCcuaezMxM27UVFRVRt1OdkydPmgAA4PlWSTJiWloapQr6WM3Pz7948SJFwG3btlFaqlOnju4E/zt37tCzrq6uttmI3bePhTN2+M/xrXNKxFZSs2ZNSkj0yU3lLVu2mCyf4iVmxPXr11M5JiaGDT2GhYVRrCkxIw4ePJhFK4oXlD9UVaXgYs2ItN127dqxMiU5lhFZMqDASmXKAVT+/PPPqUvZiZs//fSTyU5GLOuCx44do/KlS5eo3KRJE3a5jzUjHjx4kJ6l14L6k2L3sGHDHGdENqpnex4hwzIi/WU9TC8r9RvlIS8v85uS5UiKtuy7QWJiouOMeP36dXq3DBo0aOfOnSzCbtq0ybbC1q1baSbVmWHxxRdfOM6ItEIXy/FcNp/eQtaMaDQaqaW0Feoctjb2lUDXCSkpKayjqJfYlwr2ZiC0claZvkIUz4j03qAV0gsUHBxMi9ue41g8I1LP0Pefjh07urm50XvGusMMbbpfv35sN0wAAPDcqyQZkXz99df08UaffGvXrmUDP2T58uUmy+HOgQMH0nwqs2ESqjbVgpaimewgHT114MABCmH0SVmmTTOhoaGUKlq0aEGhkB5SjGNRlT7FS8yI3t7eVKZ8QxGBIhQlP3sZkV2RQK2gT3EWXm0zIltq/vz5kydPpgLLiJSMKab06dMnOjqaDZuxmMWGzdg5miVmxLIuSNWoTDmVDXayU0KtGZElyAsXLrCVUw87zojUdRQQKcH7+fnFW1DBug+0bx999BF1MuUherh06dK6detS0GHjryyl/fHHH+wAtIOMaLIcPqZqXbp0YV8JdPmP53l6D1Cws1Z2nBHz8vIoe1FAl2U5NzeX3gPWjEgvGbuyh95XbFSSDRAW7wRqBfWbIAj0NYZmUk4NDw+nwtChQ8+dO8cuQi+eEX19fV0sx5fZQ1o/5T92YmLxjEjBmvbzk08+WbduHRsktr2p0MmTJxEQAQDAqvJkRPqgXbNmjfXIJn1SUtSgD+ZDhw6xoDB+/Hg2pGeLRRbKZ3PnzqWPT5rTrVu3xMTEMm3aiuUk2g2T5TArRaKmTZuOHDmyxIxIiadRo0aUVKx3G7GXEYOCglwsF2FYN2SbEWk9I0aMoAoNGjSgOGI9H/Hw4cO2lw9TzNq5cycVxowZwyrYOx+xrAuuXLmSXYhN4YMdu7RmRIo71Kuenp6s5kMzoune0KP1/ou68xEpAtJDd3d3juOo3yjiUyCjROvv72/9WRQWwhxkROoxil/sSh12iUZgYKBuN+gtwbK+qXTnI9KLTnXo5WbnA1gzIrl69SplWcfHmk2Wu1dS/O3bt++kSZOsTaaNsqFB+ksNLPF8ROqNOnXq0FegvXv30qs/aNAge+cjsotv2EH2iIgIlwdP9KQvAPQ/8pi/tQgAAJVG5cmIDH20Uzij9lAhKSlp1KhRAQEBpVzWaDSWeMO80qMPe3YSJG2XUktycjJ97sbExJSYEU3mDjlPn/0UE9nxRHsZ0XTvFDr6CGc3wLPNiAxlJuox22tWTJZD8JRvaE9YGqDERpuwnmppLyM+woL0lO0vkdhes7Jw4UKXe8dhS5MRybhx4yiksjHL4tesbNmyheZ07Njx2LFj9FpTkqOER2ujnErfEGgptoiDjMgy9+DBgymPNmzYkPbW8c/GlCYjmiwnmFJmpaw2cOBA24xostxw29pd9jKiyZKP69evz1pn/Ull6lhKmfTX3jUrFHmtZ47SgvR+s5cRWUPYzYYGDBhA27L9VRh2Zmcpf/UbAAAqvcqWEcsdZdONGzdax7RcLNd52MuIhPJN69atR4wYYXKYEU2WISVKHuzMueIZkdFlRMZ6IbBuvoOM+JgL2mZESZI8LOgFLWVGLCoq6tWrF/tdweIZkZw5c6ZTp06248Fubm7UM+xnnR96zYrp3jXv1lBlryFMKTOiFX1P0GVEWw4yosny/rH3RcXxdc2FhYXWWGkvI1KUb9++fb169SjOhoWFUcK2XQMbLfb19bW3CQAAeK4gIzoFfRjTZzClqLS0tNJUth7WdIyq2d7J71lBuaf4Lf0cMxqND+2T5ORkdmfEqKioR3i35Ofn60LS84CaTF8wKAsOGTLkmf4XAwAAZ0NGBHi+UGQ/cuQIu4QLAADAHmREAAAAANBDRgQAAAAAPWREAAAAANBDRgQAAAAAvYqbEVVVdVwNAAAAAJyk4mZEjCMCAAAAlBdkRAAAAADQQ0YEAAAAAD1kRAAAAADQq5wZsaioKCsrq7Cw8JHXUF7is2P/uHkqIj3MXgVRlXLE3Ce1uQK5gFM43UyaUygX6WYWKUXFawIAAEBlVTkz4qhRo9gv0j7yGspFXFbMtqsb556auvr8iutp4SXW2ZK8o/XlLtcMdkOk1dTIOe39erDpi2AP3bMGyegVMaV/0NDegZ8viflO0RSamScZJkZM73P1C5rGhn+VKWTRTEERZkbNZzNn31goquJjNxQAAAAqukqYETMzM2vUqOFikZKS8mgrefris2O3Bm6ce/qrmWfGT/vda6Xv4vBUfRBUNbXvVXeKdPOiFz10hZ8E9A8zRuSIuTQZJIPu2eWxPyyKWUGdTJlvyLXRJzJ8aObimJWLYlbSVmj+sthVX0cvppl7bh0YHzGNQqSsyuPCp9DDJ9RiAAAAqLgqYUbcsGEDpcPx48fT3xUrVrCZBQUFs2fP9vHx2b59u4eHx8KFC3Nycmi+oig7d+4cM2aMp6fnypUrDQZ9lno6knIStwT8NNt38gK/qd/4Tx97dPjw7V9cunlRVy0wL/izoMEZQmZ7v08cH3HOFLI6+veiYGevG0MMYen83Vd91o0F21J2m8xxcH9cYQKbeSH78tCQ0VRYFb9uZdwaNpMK38WtfYyGAgAAwLOhEmbEtm3bfvjhhxQKGzRo0LRpU1mWaWZWVhZFRprTq1evAQMGUHnkyJGme4Fy5syZ06ZNq1atmru7+6NttJR4mTMIefTXOkfV1HRj2ia/ddNPjp9/eeq3ATO8jo/4fEu/ZccWy4qsW/zr6MWbkrZRYdL1mTtT9znY0OWcKz0C+o8IHUtp0jPUK6YgrsRqNH9z8nbKnXeEDN1TM6Pmr4gzv1IJRYkDgobtSNlLW/wsaAg9LHu7AQAA4BlT2TJiQEAAZb45c+ZQefbs2VQ+efKk6V5G7Ny5s2LRqFGj5s2b0/zJkydXr16dkmJUVFR4eDhVe4SNlpKkiJFZ4acTf7+eGSbIPM1RVCWzIOOny2smHR8932/qNwEzxv06YuCm3ktLCohGKb+9X49U7haVfTPP9rs6mJ1EWKLTWeemRM6+xaVJqkSxss/VL3iFL15t762Dc24sHHxtZGR+tO38nxK3UBzMlfKoHF0QMyzkywU3l8yPXjI0ZLR1oBEAAAAqscqWESnzURZ0d3engDh48GDrlSssI3p53W1Du3btmjZtSoWwsLAPP/yQnbzYrFmzPXv2PMJGS0PV1Pi8mB8Cl047M3Z1wPKQtCBZkSggrruwasyRoQv9p317deaYo8M+Xdv1u9+Wy6o+IBLv9GPt/D6ZdH0mTWPDv2p9uYtfTkApN93Jv1e48bq9Cr/cOsQOKxPKnUtivvvimqd1ZHF4yJjD6cdZ+XD6rx6h48rWcgAAAHgGVaqMaDQa69SpU6NGjQb31KxZk125wjLipEmTWM0OHTqwjEio8b6+vgsWLGjcuDHVSU9PL+t2SyM6O3K5/8L5l75acnXWFJ8vF/rOPh55dOPlH0d7uy+4Mv2bwOmjDw/uuqrtet8fi0T9fWeYEaFjNyZtDTGEs+nr6MXTIufa21xgXnCoIYKVqSc7+/fWjRQeTD9qPR/xmiGse0A/k+XGOlMiZ4+PmJYv51trdr3SJ+resrGF8RQ3H6MbAAAA4NlQqTLirl27KOStXn1//Zs2bWJXrtjLiIMHD65evbqPj098fHz//v0pX+bmPrG7D9oqFPK/Pj1lss/IbwNmLgqYNeO01+Tfvvzq9zFzLk1eEDh9pLd7l+//u+Xs5uz87BIXp3DW1q+7QTJa50QXxLS53JVynqRKwXkh3IOHkvfdOjg0ZDSbeTj9eP+goVRNVEWqyQ46z4yavzz2B5Nl4HDBzSXsEubv49d6hnplidm0IZpYUpwR9fWy2FVstT8mbqIQ6Yz+AQAAgAqlUmXE7t27UxBMTk62zsnOzq5ZsybFQWphiRkxKSmpZ8+e7Fhzw4YNvb29y7rRUlI19UZm+Nenp447MXzupa++CZg+59Kk2RcnzvOb4unt3um7NtvPb71juGOv1avi11Gq080cFvLlxqStOWJu68tdEoqSbJ+SVfnbmOU9Avq7X/McGDSMAiXNvM1nUM1kLpXKFATHhk8eGDy871X3aZFzKREKivDfy92ognXqc/ULk+US6XHhUz4NHETrGRM+OUPIdEoHAQAAQEVSqTLiI8vNzU1PT1cUu5eAPBGqpgSlBs45Md3T+4vpZ8fND5g289JEz0NfdFzResvZtXcM6U+8yZzC3REybFdLWdP2pjl5kqH4T6qUyCjl245iAgAAQOWGjPhUKaril3B51rGpg/f0G/fbiBGHPu+2qv2Pp1Zk52c8hfZSZHR8xxwAAAAABhnxaaOYeDnm/Fd7x3Rf2+HTtd2/9V5QJDx7vysNAAAAlRsyYjlQNdXv5oVx27+cf2Be8fsgAgAAAJQ7ZMTyQTFRlEUERAAAAKiYkBEBAAAAQA8ZEQAAAAD0kBEBAAAAQA8ZEQAAAAD0kBEBAAAAQA8ZEQAAAAD0Km5GVFXVcTUAAAAAcJKKmxExjggAAABQXpARAQAAAEAPGREAAAAA9JARnYvaIKtKUV4ub8jl8nJEgVc1VbO4X0fTZEkSCvKFzAxj2i1VUcpxhwEAAABMyIjORq0wpqWmHz+St2d32tYNGSdPcJl3JFlWZUWTNUUzB0bBkHvH90z8np3Rq1fF/LxFyi8o770GAACA5x0yopNpWrL/5ez9O4TNq7n54/OG9ciYNtqYniyJsiDJkiJnXryUumRxyOdDbh09nBMfq8j6QURNELTMzLuTwVCGLRcV0VTyUxynZWeX/FRmZuk3AQAAAJUVMqKTaSYhN9+Qkpi65nvOs09hp9oZrv+X1aFV7tXAwtzchMVLgpo0vNK5hzE2Vi4qkhSimR5st/L771zVqtxbb3Fvvmku1K+vnDnz8M3yPN+ypbRmjX6+polTp3J16vBNmghdu2oZGbbPSuvWCX36sLK8bx/3zju2k7R27WN1BQAAADw7kBGdTrVQOD7vrG9y/44J772R8MbL/rVcArr3CPrbGwF9+xVmpqqyLNpprzkj1q/PypogSCtWcDVrarLseKPirFnc228Xz4jyoUN88+ZsfFGcMEEcO/bumouKxGnTuH/8w5oRzWON98Yv5YMHuQ8+0AVKAAAAqMSQEZ2OXaGiaiqvSKIhJ27B/OD//XNolReCq7wUNqB/XmqKoGqapMmmh2dEosbEcFWrakajgy0qZ8/ynTqJHh7FM6J686YaFMTK8saNQq9erCxOnSoMHy59/701I97ff6ORc3VVfH3L1GoAAAB4piEjOh3LiIpJ4xWZMmLqulXnXn014IUXL71UJaRzR2PMDYXyoyLZa685I9aqpVy4oJw/r5w8KXz2mTh5sqPN5eTwTZqocXHil18Wz4iMeuuWvHUr36CBNflp+fn0V969u3hGlObNEz7/vMzNBgAAgGcZMuLTYBlH1IqysxPnzQt44/XAl6uEeXjEDRsa8de/RI4eyhkMiipqiv2M+M9/8h06mKeWLbl335VWrHDQOcKQIZT/qOAgI9I6xbFjeTc3CoW284tnRC0vj3vvPTUkpKxNBgAAgGcaMqLTmU9GVBQxNydu6tSA114Nf+XliN4DhHwjn3U7c9qEO3X/YTx1SFIVk1Ly71PrjzUnJHC1aslHjpRYWd63j2/RgiKdGhoqDBggTp9O9e3uWGgo99ZbthcyF8+I8vbtlE3L1mAAAAB49iEjOhc1QpYVheeT16zxe+mVay9XCWrslmPIkhRVUiXu9q3UiUOSGrsYUxNVTSxxDbqMSITu3aXFi0usLK1cybdsySbOxYWrU0ecNu2BtZ06pVy8eHffZJl78001Ksr6bPGMKPTvL/3wwyM0HAAAAJ5pyIjOZb7XjKJk+Z/1f/31kD+/GFrz/dtnT3OSLGuapMqSquUkxCb3ahc/3sPer6uYM2LdulpOjnnKypK9vbl//Uvx8zNZrl+xTXg6tsea1eho9cYNKsgbNvBt2mgcZy5bTknUJMm6iC4j0s5T0FTOnn38fgAAAIBnCzKic1ErBFXx79/3xt/fuP63V2LmzeLz82VVsfzCiqppVFAzL1+IaeqaEXilxDXcvT8im956i2/eXN67lz0lTpkiDB9ub9O2GVH08hI9Pc37oyjihAnm+yO2aMF//LEaFma7iD4jZmebr6G+c+cxOwEAAACeOciITqaZFE1M8hyZ2e6jGNeqqbs2Kw82TDapkiDe2fxjxsw5iklWNKf8WDOlPXHq1PsPCwvxeyoAAADgADKic1EjFEkJXbLMsHBC6vDeaT6/Kbp2qRoFw4y0lOitO0VNEjXVGc2W9+5V4+KcsGIAAAConJARnUzTFFXLuBElBpzhLp3jDdm6dtEDyaQoqkrVLHfIKfnqZgAAAICnCRkRAAAAAPSQEQEAAABADxkRAAAAAPSQEQEAAABADxkRAAAAAPSQEQEAAABADxkRAAAAAPSQEQEAAABAr+JmRFXF3aQBAAAAykfFzYgYRwQAAAAoL8iIAAAAAKCHjOhc1AZZVfjCAqEwXyjIlyRRNf8os2bbOirL9ATPSUZDUW4ODrIDAABAuUNGdC5qRVFWZsrRwzl796Tu2JLlf1kw5MmKosqKppjTIk1SYUFOSFii94HoFcsiViwTDYby3msAAAB43iEjOpmmJflfzDu8V/h5Hfft5KwRfTOXz8vPuq0IiiQqoqrkhoWnb94Y8vmQpN07MiLCVEkx2Wm3lpWlBgeriYml3XJGhiaKdp/Nz9dKCqM0UxOEB+aIopaTU8qNAgAAQOWAjOhkmqkw9XZWcEDG2hX8l59x3erdqffXLC9PY3R0YX5+2r59YZ9+EtSp+51Tp4ScXFkhWvGMqGVnC0OHcu+/z7dpw9WsyXfooCYnO9imGhrKf/QR36IFV6OG/NNP+rVJkjhqFFenDlerljhhgibL95/KyuIbN1YCAqxzpGXLuNq1+ebN+dat1YSEx+0NAAAAeEYgIzqdqqiyLBclJeXt3pLSrl7KO6+m/P214O6dwqdOD/nPe37Nm2dcPq/IsqTpTlO8S1MUoUsX0cNDy883WUb1xPHjKf/Z6x/KfHyjRvLBg+ZNx8dz77yjG3qUN2wQevY0jw5yHK1Z3rWLzVcuXaIFuapVrRlRvXaNUiYFRypLCxcKAwY8wW4BAACAigwZ0elY9FNVlSsqLIyJDO/UKeq1KmGvVAn7y2uBrVunBwQWKbImavaOCiu+vpyLi1ZYeH+F+fnizJladnbJ9S9e5Fu1sj5UY2K0oiLbCkK3bixBEvmXX4QePUyWA9NcvXo0n6tf35oRlV9/5Zs3v1vzyBH+448fpf0AAADwDEJGfEpUkyaooipw+SmxZ/7616svVrnw4stxUydJ+QZNMWmqoplKvpxZWrCgTAN48oYNooeHtHAh7+ZG+U+5elVXgatdWw0OZmWKg5yrq8lyAFrjefOzNhmRwqV5CHPiRPnnn/lmzeQDB8raagAAAHhGISM63d1xRJPG8XzuxfPX6tTwe/GFqy7VrlX/j/8b/5e8baMoiqoiaHbueCNOniyOGlX6zZnPIPz3v6VFi9SEBHnLFu7997UHX13u3XfVqChWVsPCOBeXB561zYg5ORRPhU8/FSdN4ps2lQ8fLv1uAAAAwDMNGdHp2IFmRRAyT5wIbewW9Kc/hdSomXbqZPavR5NbucV8XLcw5rqsyppScnulpUuF3r3167R/obG0ahXfuLH1ofnI8u7dthW4WrXUa9dY2TyO+MEHDzxrkxHF2bOFESNYWb1xg3vnHXZuIgAAAFR6yIjORY1QzHdDVAsiIkKafBRY5YWrr/0lae9eSZYlsdB47NCdNq5pXkMFRdZUqcQ1mGPcu+/ann2o5eZyb7+tXLlSYn3ziYNubtaHQv/+8qZNthX4zp3lo0fvVt6/X+jZ0/ZZ24wouLtLa9fef6paNTUkpAyNBwAAgGcWMqJzUStEWeaNOVfad7jy0ouhf3n55txZuTwnq5qkyjxXlLR74+2WNdN/9VbtnI9IhH79hN69tbQ0k+X2NOaHXbqYD2CLonLhgu6SFM1goDCnnD9PZfXmTe6999TYWJMla2rp6VSg2Cf06mW+rlkQzKOMDyZI24worV/Pt23LrqdWfHy4mjV12wIAAIDKChnRyTRN0rSUPZvDX3k58v/9KaTlRzlRUYogSyZVVhVVMUm8EDN4UEyXlqpgNyNqBQXi2LHc229ztWtzb70lDBvGjvlqmZlc1apqdLSuvnL2LPfBB+abKdauLW/bxmaab4izfbt5KZ4XR4zg6tXj6tYVR460vT+iSXc+oiyLEydyLi58q1b8hx8qly8/wY4BAACAigwZ0bmoFYIin2vZIva9t6+/9WrS5vWyqsomRdUs17KYZMWkFBTkxbVulOy9/yGrEgQ1JUXjuFJtV1F0lZVjx6yHmE3s91RK9+sptBI2AAkAAADPD2REJ9NMqiolTZiY06dDXJP/3Nq7TXmwXYqmyqKc8dvhW9NmySZZ1hQn7Yi0YkUp8yUAAAAAMqJzma9ZkdXwdeuMy6enTxxxx++cLiNqqiaqam52RvKpP2RNsnt5MwAAAMBThIzodKpmyktOkqKuCeEhYoFB1y56IJtU881xqB49snebRAAAAICnCBkRAAAAAPSQEQEAAABADxkRAAAAAPSQEQEAAABADxkRAAAAAPSQEQEAAABADxkRAAAAAPQqbkZUVdwpEAAAAKB8REREVtCMiHFEAAAAgPLi53cFGREAAAAAHoCMCAAAAAB6yIjOZf45ZlUpysvlDblcXo4o8Kqmahb362iaLElCQb6QmWFMu6UqSjnuMAAAAIAJGdHZqBXGtNT040fy9uxO27oh4+QJLvOOJMuqrGiypmjmwCgYcu/4nonfszN69aqYn7dI+QXlvdcAAADwvENGdDJNS/a/nL1/h7B5NTd/fN6wHhnTRhvTkyVRFiRZUuTMi5dSlywO+XzIraOHc+JjFVk/iKiJopaZeXfKzS1lt2iKomVkaPavDdeKirTsbP3MwkItP7/k+llZpdkuAAAAVA7IiE6mmYTcfENKYuqa7znPPoWdame4/l9Wh1a5VwMLc3MTFi8JatLwSucexthYuahIUohmerDdyoULXNWq3FtvcW++aS5Ury4tXeq4c+Q9e7g6dfhWrfhGjZQrV/R7pKrizJmcqyvv5sa3baulp5ssEVD49FOuXj2ufn2he3c28/4KDx7k3nnnyXQIAAAAPAuQEZ1OtVA4Pu+sb3L/jgnvvZHwxsv+tVwCuvcI+tsbAX37FWamqrIs2mmvOSNWq8bKmiQpFy9S/pN++MHu5lJTuX//W42JobJ84ADfsKGugrxrlzkaFpiPaIvjx4tjx5oLXl7iuHEUH6nbxYkTRQ+P+ytMSaEtIiMCAAA8V5ARnY5doaJqKq9IoiEnbsH84P/9c2iVF4KrvBQ2oH9eaopAwUzSZNPDMyJjHtWrVk2T5ZI3l5Wl+Piwsnr9OvfPf2oPXgQjfPKJcvz43cp5eWpSEhWkNWvUyMi7W/ztN75Vq7sVVFXo0UNavx4ZEQAA4LmCjOh0LCMqJo1XZMqIqetWnXv11YAXXrz0UpWQzh2NMTcUyo+KZK+9xTMipUCualU1OtrRRouK5CNH+HbtpKVLdU9xLi6ytzclP75pU+nrrzVB0FUQ3N3FyZNZWfrhB3HiRDUxERkRAADguYKM+DRYxhG1ouzsxHnzAt54PfDlKmEeHnHDhkb89S+Ro4dyBoOiippS6owoy+aMGBzsYItqXJzo5cW3aCHOmGF75QrtCS3Lt2qlXLmiRkTwHTpI8+bZLijNn883asSuUFFDQ/lmzbTCQmREAACA5w0yotOZT0ZUFDE3J27q1IDXXg1/5eWI3gOEfCOfdTtz2oQ7df9hPHVIUhWTUvI1yCVkxNu3Kedpd+48dNMU7zhXV+uRZYb717/kX365u/Lz57n69e9WlmVzrGzeXE1NNVmup6aAKG/cSElROXGClqKCVlT0CD0AAAAAzxxkROeiRsiyovB88po1fi+9cu3lKkGN3XIMWZKiSqrE3b6VOnFIUmMXY2qiqoklrqGE8xF37ODq1bO3RTUyUt671/pQ6NFD3rzZtgKlQPnAgbuVg4O56tXN+ykIQv/+Qq9eWl7e3T3PyeFbtrw7NW1qHn1s2dLxAW4AAACoNJARnct8mbCiZPmf9X/99ZA/vxha8/3bZ09zkixrmqTKkqrlJMQm92oXP97D3q+rmDPi++9TYtOys9XUVHn3boqM8r59JstQHz2rG9tTw8O5995T4+PN5bAwc/nGDfN6AgLYHW2kpUuF3r3Nt12kffPyEkePppnitGl8hw7a7dvmDdF0LyneXSeONQMAADxnkBGdi1ohqIp//743/v7G9b+9EjNvFp+fL6uK5RdWVM18q2s18/KFmKauGYH6Gxkyd++PyKb//IeSnOztfXflmZklXrwi//wzV7s236YNV6eOfPAgm8k3aiRv325eiudFT0/ugw94Nzeha1fzrbk5znz/RetWaLp3AJpBRgQAAHjeICM6mWZSNDHJc2Rmu49iXKum7tqsPNgw2aRKgnhn848ZM+coJlnRnsyPNWuSpKWl2V6tohw7Jh89er9Cbq7uRtkAAAAAVsiIzkWNUCQldMkyw8IJqcN7p/n8pujapWoUDDPSUqK37hQ1SdRUJzVbWrFC4zjnrBsAAAAqG2REJ9M0RdUybkSJAWe4S+d4Q7auXfRAMimKqioqu0OO3V9YBgAAAHhqkBEBAAAAQA8ZEQAAAAD0kBEBAAAAQA8ZEQAAAAD0kBEBAAAAQA8ZEQAAAAD0kBEBAAAAQA8ZEQAAAAD0Km5GVFXcTRoAAACgfCAjAgAAAIAeMiIAAAAA6CEjAgAAAIBexc2IBQAAAABQTi5evFRBM2JSUlIiAAAAAJSHY8eOV9CMiAkTJkyYMGHChKl8p4qVEc+du3DwoDcmTJgwYcKECROm8p0qVkbEOCImTJgwYcKECVNFmCpiRvTzuxIHAAAAAOVh587dFTQj4t43AAAAAOWl4t77BhkRAAAAoLwgIwIAAACAHjIiAAAAAOg92Yz4/wHFiLf99srHqQAAAABJRU5ErkJggg==";
+const Q48_IMAGE = "data:image/png;base64,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";
+
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q1. A का वह न्‍यूनतम अंकीय मान ज्ञाात कीजिए जिससे 58A4, 4 से विभाज्य हो जाए।",
+    q_en: "Q1. Find the minimum digit value of A such that 58A4 is divisible by 4.",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) 2", "(b) 0", "(c) 6", "(d) 4"],
+    o_en: ["(a) 2", "(b) 0", "(c) 6", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q2. यदि 7 अंकों की संख्या 91056A4, 3 से पूर्णतः विभाज्य है, तो A का न्यूनतम मान क्याा है?",
+    q_en: "Q2. If the 7-digit number 91056A4 is completely divisible by 3, what is the minimum value of A?",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) 5", "(b) 2", "(c) 10", "(d) 1"],
+    o_en: ["(a) 5", "(b) 2", "(c) 10", "(d) 1"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q46
+  {
+    q_hi: "Q3. यदि एक 7-अंकों संख्या 87321A6, 6 से पूर्णतः विभाज्य है, तो A का न्यूनतम मान क्याा है?",
+    q_en: "Q3. If the 7-digit number 87321A6 is completely divisible by 6, what is the minimum value of A?",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) 3", "(b) 2", "(c) 0", "(d) 1"],
+    o_en: ["(a) 3", "(b) 2", "(c) 0", "(d) 1"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q4. यदि 7-अंकीय संख्या 65873A8, 22 से पूर्णतः विभाज्य है, तो A का मान क्या है?",
+    q_en: "Q4. If the 7-digit number 65873A8 is completely divisible by 22, what is the value of A?",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 1", "(c) 2", "(d) 7"],
+    o_en: ["(a) 3", "(b) 1", "(c) 2", "(d) 7"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q5. 8-अंकीय संख्या 456A3264 को 12 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q5. What should be the minimum value of A to make the 8-digit number 456A3264 divisible by 12?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) 4", "(b) 3", "(c) 0", "(d) 6"],
+    o_en: ["(a) 4", "(b) 3", "(c) 0", "(d) 6"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q38
+  {
+    q_hi: "Q6. 7 अंकों की संख्या 84A614B, 3 से विभाज्य है। (A + B) का न्यूनतम मान क्याा होगा?",
+    q_en: "Q6. The 7-digit number 84A614B is divisible by 3. What is the minimum value of (A + B)?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) 1", "(b) 5", "(c) 4", "(d) 2"],
+    o_en: ["(a) 1", "(b) 5", "(c) 4", "(d) 2"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q7. वह सबसे छोटी संख्या ज्ञाात कीजिए जिसे 97306 में जोड़ने पर वह 6 से विभाज्य हो जाए।",
+    q_en: "Q7. Find the smallest number that must be added to 97306 so that it becomes divisible by 6.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 2", "(b) 1", "(c) 3", "(d) 0"],
+    o_en: ["(a) 2", "(b) 1", "(c) 3", "(d) 0"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q42
+  {
+    q_hi: "Q8. 8-अंकीय संख्या 378A6070 में A का वह मान ज्ञाात कीजिए जिससे यह 18 से विभाज्य हो जाए।",
+    q_en: "Q8. Find the value of A in the 8-digit number 378A6070 so that it is divisible by 18.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 5", "(b) 3", "(c) 6", "(d) 8"],
+    o_en: ["(a) 5", "(b) 3", "(c) 6", "(d) 8"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q9. निम्नलिखित में से कौन-सा कथन, सदैव सत्य होता है?",
+    q_en: "Q9. निम्नलिखित में से कौन-सा कथन, सदैव सत्य होता है?",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) एक ही संख्याा के गुणज, सदैव सहअभाज्य होते हैं।", "(b) दो सम संख्यााएँ सदैव सहअभाज्य होती हैं।", "(c) दो अभाज्य संख्यााएँ कभी भी सहअभाज्य नहीं होतीं हैं।", "(d) दो क्रमागत पूर्णांक सदैव सहअभाज्य होते हैं।"],
+    o_en: ["(a) एक ही संख्याा के गुणज, सदैव सहअभाज्य होते हैं।", "(b) दो सम संख्यााएँ सदैव सहअभाज्य होती हैं।", "(c) दो अभाज्य संख्यााएँ कभी भी सहअभाज्य नहीं होतीं हैं।", "(d) दो क्रमागत पूर्णांक सदैव सहअभाज्य होते हैं।"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q10. 7-अंकों की संख्या 22A675B, 3 से विभाज्य है। (A + B) का न्यूनतम मान ज्ञाात कीजिए।",
+    q_en: "Q10. The 7-digit number 22A675B is divisible by 3. Find the minimum value of (A + B).",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) 2", "(b) 7", "(c) 4", "(d) 6"],
+    o_en: ["(a) 2", "(b) 7", "(c) 4", "(d) 6"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q11. 8-अंकों की संख्याा 753A3228 को 18 से विभाज्य बनाने के लिए A का मान कितना होना चाहिए?",
+    q_en: "Q11. What should be the value of A to make the 8-digit number 753A3228 divisible by 18?",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) 9", "(b) 2", "(c) 6", "(d) 5"],
+    o_en: ["(a) 9", "(b) 2", "(c) 6", "(d) 5"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q12. तीन अभाज्य संख्याओं का योगफल 112 है। यदि एक संख्या, दूसरी संख्या से 36 अधिक है, तो इन संख्याओं का गुणनफल ज्ञाात कीजिए।",
+    q_en: "Q12. The sum of three prime numbers is 112. If one number is 36 more than another number, find the product of these numbers.",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) 5402", "(b) 4826", "(c) 5678", "(d) 4516"],
+    o_en: ["(a) 5402", "(b) 4826", "(c) 5678", "(d) 4516"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q13. खालीलपैकी कोणती संख्या 9 ने विभाज्य आहे?",
+    q_en: "Q13. खालीलपैकी कोणती संख्या 9 ने विभाज्य आहे?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 5,328", "(b) 4,317", "(c) 6,018", "(d) 3,624"],
+    o_en: ["(a) 5,328", "(b) 4,317", "(c) 6,018", "(d) 3,624"],
+    a: 0,
+    image: Q13_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q14. जर 45A216B या 7-अंकी संख्येला 3 ने (नि:शेष) भाग जात असेल, तर (A + B) चे किमान मूल्य किती असेल?",
+    q_en: "Q14. जर 45A216B या 7-अंकी संख्येला 3 ने (नि:शेष) भाग जात असेल, तर (A + B) चे किमान मूल्य किती असेल?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 2", "(b) 0", "(c) 5", "(d) 3"],
+    o_en: ["(a) 2", "(b) 0", "(c) 5", "(d) 3"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q38
+  {
+    q_hi: "Q15. 717A0280 या संख्येला 3 ने (नि:शेष) भाग जाण्याासाठी A चे सर्वात लहान मूल्य किती असावे?",
+    q_en: "Q15. 717A0280 या संख्येला 3 ने (नि:शेष) भाग जाण्याासाठी A चे सर्वात लहान मूल्य किती असावे?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 8", "(b) 1", "(c) 5", "(d) 2"],
+    o_en: ["(a) 8", "(b) 1", "(c) 5", "(d) 2"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q16. 7 अंकों की संख्या 39A122B, 3 से विभाज्य है। (A + B) का न्यूनतम मान क्याा है?",
+    q_en: "Q16. The 7-digit number 39A122B is divisible by 3. What is the minimum value of (A + B)?",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) 6", "(b) 3", "(c) 2", "(d) 1"],
+    o_en: ["(a) 6", "(b) 3", "(c) 2", "(d) 1"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q17. यदि एक 7 अंकों की संख्या 29009A6, 7 से पूर्णतः विभाज्य है, तो A का न्यूनतम मान क्याा है?",
+    q_en: "Q17. If the 7-digit number 29009A6 is completely divisible by 7, what is the minimum value of A?",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) 9", "(b) 2", "(c) 1", "(d) 5"],
+    o_en: ["(a) 9", "(b) 2", "(c) 1", "(d) 5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q43
+  {
+    q_hi: "Q18. संख्या 456A2384 को 16 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q18. What should be the minimum value of A to make the number 456A2384 divisible by 16?",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 4", "(b) 5", "(c) 2", "(d) 0"],
+    o_en: ["(a) 4", "(b) 5", "(c) 2", "(d) 0"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q19. संख्याओं का निम्नलिखित में से कौन-सा युग्म परस्‍पर सह-अभाज्य है?",
+    q_en: "Q19. Which of the following pairs of numbers is co-prime?",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) 96 और 111", "(b) 101 और 77", "(c) 63 और 91", "(d) 24 और 51"],
+    o_en: ["(a) 96 and 111", "(b) 101 and 77", "(c) 63 and 91", "(d) 24 and 51"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q44
+  {
+    q_hi: "Q20. 8-अंकों की संख्या 541A4888 को 9 से विभाज्य बनाने के लिए A का मान कितना होना चाहिए?",
+    q_en: "Q20. What should be the value of A to make the 8-digit number 541A4888 divisible by 9?",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 1", "(b) 9", "(c) 7", "(d) 2"],
+    o_en: ["(a) 1", "(b) 9", "(c) 7", "(d) 2"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q21. 8-अंकीय संख्या 910A3076 को 6 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q21. What should be the minimum value of A to make the 8-digit number 910A3076 divisible by 6?",
+    tag: "RRB Group D, 13/08/2026 (Shift-03)",
+    o_hi: ["(a) 5", "(b) 1", "(c) 6", "(d) 4"],
+    o_en: ["(a) 5", "(b) 1", "(c) 6", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q22. एक कक्षा में विद्याार्थियों की संख्या 50 से अधिक लेकिन 58 से कम एक अभाज्य संख्या है। कक्षा में कुल कितने विद्याार्थी हैं?",
+    q_en: "Q22. The number of students in a class is a prime number greater than 50 but less than 58. How many students are there in the class?",
+    tag: "RRB Group D, 14/08/2026 (Shift-01)",
+    o_hi: ["(a) 57", "(b) 53", "(c) 52", "(d) 55"],
+    o_en: ["(a) 57", "(b) 53", "(c) 52", "(d) 55"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q23. 8 अंकीय संख्या 796A6351 के 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q23. What should be the minimum value of A to make the 8-digit number 796A6351 divisible by 3?",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 2", "(b) 5", "(c) 1", "(d) 3"],
+    o_en: ["(a) 2", "(b) 5", "(c) 1", "(d) 3"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q24. 7-अंको ंकी संख्या 86A238B, 3 से िवभाज्य है। (A + B) का न्यूनतम मान िकतना होगा?",
+    q_en: "Q24. The 7-digit number 86A238B is divisible by 3. What is the minimum value of (A + B)?",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 5", "(c) 0", "(d) 4"],
+    o_en: ["(a) 3", "(b) 5", "(c) 0", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q25. 8 अंकों की संख्या 109A7760 को 16 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q25. What should be the minimum value of A to make the 8-digit number 109A7760 divisible by 16?",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 5", "(b) 2", "(c) 0", "(d) 4"],
+    o_en: ["(a) 5", "(b) 2", "(c) 0", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q26. संख्याओं के निम्नलिखित युग्‍मों में से कौन-सा, सह-अभाज्य है?",
+    q_en: "Q26. Which of the following pairs of numbers is co-prime?",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) 119, 239", "(b) 30, 201", "(c) 49, 217", "(d) 48, 111"],
+    o_en: ["(a) 119, 239", "(b) 30, 201", "(c) 49, 217", "(d) 48, 111"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q27. वह सबसे बड़ीी संख्या ज्ञाात कीजिए, जिससे 85, 153 और 221 को विभाजित करने पर, प्रत्येक स्थिति में समान शेषफल प्राप्त होता है।",
+    q_en: "Q27. Find the greatest number that divides 85, 153 and 221 leaving the same remainder in each case.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) 38", "(b) 60", "(c) 34", "(d) 68"],
+    o_en: ["(a) 38", "(b) 60", "(c) 34", "(d) 68"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q45
+  {
+    q_hi: "Q28. संख्या 1408, निम्नलिखित में से किस संख्या से विभाज्य है?",
+    q_en: "Q28. 1408 is divisible by which of the following numbers?",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) 24", "(b) 13", "(c) 22", "(d) 21"],
+    o_en: ["(a) 24", "(b) 13", "(c) 22", "(d) 21"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q37
+  {
+    q_hi: "Q29. (3K2-2) का वह न्यूनतम मान ज्ञाात कीजिए जिसके लिए छह अंकों की संख्याा 7K8508, 6 से विभाज्य है।",
+    q_en: "Q29. Find the minimum value of (3K² − 2) for which the six-digit number 7K8508 is divisible by 6.",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 8", "(b) 10", "(c) 17", "(d) 14"],
+    o_en: ["(a) 8", "(b) 10", "(c) 17", "(d) 14"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q30. 7-अंकों की संख्याा 36A836B, 3 से विभाज्य है। (A + B) का न्यूनतम मान ज्ञाात कीजिए।",
+    q_en: "Q30. The 7-digit number 36A836B is divisible by 3. Find the minimum value of (A + B).",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 1", "(b) 6", "(c) 4", "(d) 5"],
+    o_en: ["(a) 1", "(b) 6", "(c) 4", "(d) 5"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-01) | Original Q47
+  {
+    q_hi: "Q31. A का वह न्यूनतम मान ज्ञाात कीजिए जो संख्‍या 604A4744 को 3 से विभाज्य बनाएगा।",
+    q_en: "Q31. Find the minimum value of A that will make the number 604A4744 divisible by 3.",
+    tag: "RRB Group D, 20/08/2026 (Shift-01)",
+    o_hi: ["(a) 7", "(b) 8", "(c) 1", "(d) 4"],
+    o_en: ["(a) 7", "(b) 8", "(c) 1", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q29
+  {
+    q_hi: "Q32. निम्नलिखित में से कौन-सा संख्या युग्म, सह-अभाज्य नहीं है?",
+    q_en: "Q32. Which of the following pairs of numbers is not co-prime?",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) (143, 286)", "(b) (101, 107)", "(c) (137, 221)", "(d) (211, 337)"],
+    o_en: ["(a) (143, 286)", "(b) (101, 107)", "(c) (137, 221)", "(d) (211, 337)"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q33. A का वह क्याा मान होना चाहिए जिससे कि संख्या 391A6922, 11 से विभाज्य हो जाए?",
+    q_en: "Q33. What should be the value of A so that the number 391A6922 is divisible by 11?",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 6", "(b) 3", "(c) 7", "(d) 5"],
+    o_en: ["(a) 6", "(b) 3", "(c) 7", "(d) 5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q34
+  {
+    q_hi: "Q34. संख्या 469A1423 को 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q34. What should be the minimum value of A to make the number 469A1423 divisible by 3?",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 6", "(b) 1", "(c) 5", "(d) 4"],
+    o_en: ["(a) 6", "(b) 1", "(c) 5", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q35. किसी आण्विक यौगिक में परमाणु A और B हैं, जहाँ उनके प्रति अणु गुणन क्रमशः आरंभ से 5वीं और 7वीं अभाज्य संख्याएं हैं। इस यौगिक में 10 समरूप अणु हैं। एक अभिक्रिया के बाद, प्रति अणु B परमाणुओं की संख्या दोगुनी हो जाती है, और C परमाणु (जो आरंभ से तीसरी अभाज्य संख्या के बराबर है) जुड़ जाते हैं। अभिक्रिया के बाद सभी 10 अणुओं में A, B और C परमाणुओं की कुल संख्या कितनी होगी?",
+    q_en: "Q35. किसी आण्विक यौगिक में परमाणु A और B हैं, जहाँ उनके प्रति अणु गुणन क्रमशः आरंभ से 5वीं और 7वीं अभाज्य संख्याएं हैं। इस यौगिक में 10 समरूप अणु हैं। एक अभिक्रिया के बाद, प्रति अणु B परमाणुओं की संख्या दोगुनी हो जाती है, और C परमाणु (जो आरंभ से तीसरी अभाज्य संख्या के बराबर है) जुड़ जाते हैं। अभिक्रिया के बाद सभी 10 अणुओं में A, B और C परमाणुओं की कुल संख्या कितनी होगी?",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 330", "(b) 500", "(c) 550", "(d) 690"],
+    o_en: ["(a) 330", "(b) 500", "(c) 550", "(d) 690"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q41
+  {
+    q_hi: "Q36. यदि दशमलव संख्या को के रूप में व्यक्त किया जा सकता है जहाँ a और b सह- अभाज्य संख्याएँ हैं, तो का मान ज्ञाात कीजिए।",
+    q_en: "Q36. If the decimal number 0.15 with 201 recurring is expressed as a/b, where a and b are co-prime numbers, find √(b − a + 281).",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 98", "(b) 145", "(c) 105", "(d) 120"],
+    o_en: ["(a) 98", "(b) 145", "(c) 105", "(d) 120"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q26
+  {
+    q_hi: "Q37. संख्या 506A2404 को 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q37. What should be the minimum value of A to make the number 506A2404 divisible by 3?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 4", "(b) 6", "(c) 0", "(d) 3"],
+    o_en: ["(a) 4", "(b) 6", "(c) 0", "(d) 3"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q28
+  {
+    q_hi: "Q38. 0 और 32 के बीच की सभी अभाज्य संख्याओं का योगफल कितना है?",
+    q_en: "Q38. What is the sum of all prime numbers between 0 and 32?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 132", "(b) 160", "(c) 131", "(d) 161"],
+    o_en: ["(a) 132", "(b) 160", "(c) 131", "(d) 161"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q40
+  {
+    q_hi: "Q39. संख्या 659A9422 को 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्याा होना चाहिए?",
+    q_en: "Q39. What should be the minimum value of A to make the number 659A9422 divisible by 3?",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 1", "(b) 7", "(c) 2", "(d) 4"],
+    o_en: ["(a) 1", "(b) 7", "(c) 2", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q40. 7-अंकीय संख्या 69A840B, 12 से विभाज्य है। (A + B) का अधिकतम मान ज्ञाात कीजिए।",
+    q_en: "Q40. The 7-digit number 69A840B is divisible by 12. Find the maximum value of (A + B).",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 11", "(b) 10", "(c) 16", "(d) 15"],
+    o_en: ["(a) 11", "(b) 10", "(c) 16", "(d) 15"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q45
+  {
+    q_hi: "Q41. संख्या 13167 निम्नलिखित में से किस संख्या से विभाज्य है?",
+    q_en: "Q41. 13167 is divisible by which of the following numbers?",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 69", "(b) 67", "(c) 63", "(d) 61"],
+    o_en: ["(a) 69", "(b) 67", "(c) 63", "(d) 61"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q16
+  {
+    q_hi: "Q42. किसी संख्या के एक-तिहाई में 87 जोड़ने पर 107 प्राप्त होता है। मूल संख्या के अंकों का योगफल ज्ञाात कीजिए।",
+    q_en: "Q42. When 87 is added to one-third of a number, the result is 107. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 6", "(b) 3", "(c) 5", "(d) 8"],
+    o_en: ["(a) 6", "(b) 3", "(c) 5", "(d) 8"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q13
+  {
+    q_hi: "Q43. किसी संख्या के एक-तिहाई में 37 जोड़ने पर 51 प्राप्त होता है। मूल संख्या के अंकों का योग ज्ञाात कीजिए।",
+    q_en: "Q43. When 37 is added to one-third of a number, the result is 51. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) 6", "(b) 9", "(c) 3", "(d) 8"],
+    o_en: ["(a) 6", "(b) 9", "(c) 3", "(d) 8"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q24
+  {
+    q_hi: "Q44. निम्नलिखित में से किस संख्या के ठीक चार अलग-अलग धनात्मक भाजक नहीं होंगे?",
+    q_en: "Q44. Which of the following numbers will not have exactly four distinct positive divisors?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) अभाज्य p के लिए p³", "(b) अभाज्य p के लिए p2", "(c) अलग-अलग अभाज्य संख्याओं p और q के लिए p.q", "(d) अभाज्य q के लिए q³"],
+    o_en: ["(a) p³ for prime p", "(b) p² for prime p", "(c) p·q for distinct primes p and q", "(d) q³ for prime q"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q2
+  {
+    q_hi: "Q45. किसी संख्या के एक-तिहाई में 55 जोड़ने पर 77 प्राप्त होता है। मूल संख्या के अंकों का योगफल ज्ञात कीजिए।",
+    q_en: "Q45. When 55 is added to one-third of a number, the result is 77. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 12", "(b) 10", "(c) 13", "(d) 15"],
+    o_en: ["(a) 12", "(b) 10", "(c) 13", "(d) 15"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q23
+  {
+    q_hi: "Q46. 11 और 19 के बीच (दोनों सहित) सहअभाज्य संख्याओं के युग्मों की संख्या ज्ञाात कीजिए।",
+    q_en: "Q46. Find the number of pairs of co-prime numbers between 11 and 19, both inclusive.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 26", "(b) 30", "(c) 29", "(d) 28"],
+    o_en: ["(a) 26", "(b) 30", "(c) 29", "(d) 28"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q19
+  {
+    q_hi: "Q47. यदि संख्या 62A4, 4 से विभाज्य है, तो A का न्यूनतम संभावित मान क्याा हो सकता है?",
+    q_en: "Q47. If the number 62A4 is divisible by 4, what can be the minimum possible value of A?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 6", "(b) 4", "(c) 2", "(d) 0"],
+    o_en: ["(a) 6", "(b) 4", "(c) 2", "(d) 0"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q8
+  {
+    q_hi: "Q48. 84 के अभाज्य गुणनखंडों का योगफल कितना होगा?",
+    q_en: "Q48. What is the sum of the prime factors of 84?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 12", "(b) 18", "(c) 15", "(d) 14"],
+    o_en: ["(a) 12", "(b) 18", "(c) 15", "(d) 14"],
+    a: 0,
+    image: Q48_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q10
+  {
+    q_hi: "Q49. किसी संख्या के एक-तिहाई में 55 जोड़ने पर 83 प्राप्त होता है। मूल संख्या के अंकों का योग ज्ञाात कीजिए।",
+    q_en: "Q49. When 55 is added to one-third of a number, the result is 83. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 12", "(b) 14", "(c) 13", "(d) 9"],
+    o_en: ["(a) 12", "(b) 14", "(c) 13", "(d) 9"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q4
+  {
+    q_hi: "Q50. निम्नलिखित में से कौन-सी संख्या, 11 से विभाज्य है?",
+    q_en: "Q50. Which of the following numbers is divisible by 11?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 502589", "(b) 512579", "(c) 513589", "(d) 502579"],
+    o_en: ["(a) 502589", "(b) 512579", "(c) 513589", "(d) 502579"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];

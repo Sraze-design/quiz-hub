@@ -1,0 +1,555 @@
+const Q75_IMAGE = "data:image/png;base64,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";
+
+const data = [
+// SRC: RRB Group D, 14/08/2026 (Shift-02) | Original Q38
+  {
+    q_hi: "Q51. एक बैंक 6.8% वार्षिक चक्रवृद्धि ब्यााज देता है, जो अर्ध-वार्षिक रूप से संयोजित होता है। कोई ग्रााहक एक वर्ष की 1 जनवरी को ₹3,485 और 1 जुलाई को ₹3,485 जमा करता है। वर्ष के अंत में, उसे ब्यााज के रूप में कितनी राशि प्राप्त होगी? (दो दशमलव स्थाानों तक पूर्णांकित करें)",
+    q_en: "Q51. A bank gives 6.8% per annum compound interest, compounded half-yearly. A customer deposits ₹3,485 on 1 January and another ₹3,485 on 1 July of the same year. How much interest will he receive by the end of the year? Round to two decimal places.",
+    tag: "RRB Group D, 14/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹376.50", "(b) ₹348.50", "(c) ₹352.50", "(d) ₹359.50"],
+    o_en: ["(a) ₹376.50", "(b) ₹348.50", "(c) ₹352.50", "(d) ₹359.50"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q52. ₹5,000 की धनराशि को 8% वार्षिक ब्यााज दर पर 2 वर्षों के लिए निवेश किया जाता है। चक्रवृद्धि ब्यााज (वार्षिक रूप से संयोजित) और साधारण ब्यााज के बीच का अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q52. A sum of ₹5,000 is invested for 2 years at 8% per annum. Find the difference between compound interest, compounded annually, and simple interest.",
+    tag: "RRB Group D, 14/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹32", "(b) ₹20", "(c) ₹50", "(d) ₹80"],
+    o_en: ["(a) ₹32", "(b) ₹20", "(c) ₹50", "(d) ₹80"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q53. यदि ब्यााज की गणना वार्षिक चक्रवृद्धि आधार पर होती है, तो कोई धनराशि कितने प्रतिशत वार्षिक ब्यााज दर पर 2 वर्ष में स्वंय की 46 गुनी हो जाएगी? (अपना उत्तर एक दशमलव स्थाान तक पूर्णांकित कीजिए)",
+    q_en: "Q53. At what annual rate of compound interest, compounded annually, will a sum become 46 times itself in 2 years? Round the answer to one decimal place.",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 570.4", "(b) 588.5", "(c) 578.2", "(d) 582.2"],
+    o_en: ["(a) 570.4", "(b) 588.5", "(c) 578.2", "(d) 582.2"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q54. ₹1,000 की धनराशि को 10% वार्षिक चक्रवृद्धि ब्यााज दर (वार्षिक रूप से संयोजित) पर 2 वर्षों के लिए निवेश किया जाता है। 2 वर्षों के अंत में अर्जित चक्रवृद्धि ब्यााज (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q54. A sum of ₹1,000 is invested for 2 years at 10% per annum compound interest, compounded annually. Find the compound interest earned at the end of 2 years.",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 220", "(b) 200", "(c) 210", "(d) 230"],
+    o_en: ["(a) 220", "(b) 200", "(c) 210", "(d) 230"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q50
+  {
+    q_hi: "Q55. महेश एक निश्चित राशि 20% वार्षिक ब्यााज दर पर जमा करता है, जबकि ब्यााज वार्षिक रूप से संयोजित होता है। 2 वर्ष के अंत में, महेश को कुल ₹18,000 की राशि प्राप्त होती है। महेश द्वाारा जमा की गई राशि कितनी थी?",
+    q_en: "Q55. Mahesh deposits a certain sum at 20% per annum, compounded annually. At the end of 2 years he receives a total amount of ₹18,000. Find the amount deposited by Mahesh.",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹12,996", "(b) ₹12,500", "(c) ₹12,800", "(d) ₹12,129"],
+    o_en: ["(a) ₹12,996", "(b) ₹12,500", "(c) ₹12,800", "(d) ₹12,129"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q29
+  {
+    q_hi: "Q56. ब्याज की गणना तिमाही चक्रवृद्धि आधार पर करते हुए, ₹2,50,000 की राशि पर 40% वार्षिक दर से 1 वर्ष में प्राप्त चक्रवृद्धि ब्याज कितना होगा?",
+    q_en: "Q56. Using quarterly compounding, what will be the compound interest on ₹2,50,000 for 1 year at 40% per annum?",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹1,15,931", "(b) ₹1,16,025", "(c) ₹1,16,033", "(d) ₹1,16,416"],
+    o_en: ["(a) ₹1,15,931", "(b) ₹1,16,025", "(c) ₹1,16,033", "(d) ₹1,16,416"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q57. ₹30,000 की एक धनराशि 20% वार्षिक ब्यााज दर पर निवेश की जाती है। यदि ब्यााज वार्षिक और अर्धवार्षिक रूप से संयोजित होता है, तो 2 वर्ष बाद प्राप्त होने वाले मिश्रधनों का अंतर ज्ञाात कीजिए।",
+    q_en: "Q57. A sum of ₹30,000 is invested at 20% per annum. Find the difference between the amounts after 2 years when interest is compounded annually and when it is compounded half-yearly.",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹733", "(b) ₹713", "(c) ₹723", "(d) ₹720"],
+    o_en: ["(a) ₹733", "(b) ₹713", "(c) ₹723", "(d) ₹720"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q40
+  {
+    q_hi: "Q58. यिद ₹1800 को 20% वािषक चक्रवृİद्ध ɯाज दर पर िनवेश िकया जाता है जबिक ɯाज अध-वािषक रूप से संयोिजत होता है, तो 1 वष बाद िमश्रधन िकतना होगा?",
+    q_en: "Q58. यिद ₹1800 को 20% वािषक चक्रवृİद्ध ɯाज दर पर िनवेश िकया जाता है जबिक ɯाज अध-वािषक रूप से संयोिजत होता है, तो 1 वष बाद िमश्रधन िकतना होगा?",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹2178", "(b) ₹2659", "(c) ₹3012", "(d) ₹1974"],
+    o_en: ["(a) ₹2178", "(b) ₹2659", "(c) ₹3012", "(d) ₹1974"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q43
+  {
+    q_hi: "Q59. ₹2,000 की धनराशि 5% वार्षिक ब्यााज दर पर 3 वर्षों के लिए निवेश की जाती है। चक्रवृद्धि ब्यााज (वार्षिक रूप से संयोजित) और साधारण ब्यााज के बीच का अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q59. A sum of ₹2,000 is invested for 3 years at 5% per annum. Find the difference between compound interest, compounded annually, and simple interest.",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 20.25", "(b) 15.25", "(c) 5.25", "(d) 10.25"],
+    o_en: ["(a) 20.25", "(b) 15.25", "(c) 5.25", "(d) 10.25"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q42
+  {
+    q_hi: "Q60. एक बैंक 6.9% वार्षिक चक्रवृद्धि ब्यााज देता है, जो अर्ध-वार्षिक रूप से संयोजित होता है। कोई ग्राहक एक वर्ष की 1 जनवरी को ₹9,688 और 1 जुलाई को ₹9,688 जमा करता है। वर्ष के अंत में, उसे ब्यााज के रूप में कितनी राशि प्राप्त होगी? (अपने उत्तर को निकटतम पैसे तक पूर्णांकित करें।)",
+    q_en: "Q60. A bank gives 6.9% per annum compound interest, compounded half-yearly. A customer deposits ₹9,688 on 1 January and another ₹9,688 on 1 July of the same year. How much interest will he receive by the end of the year? Round to the nearest paise.",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹1,025.70", "(b) ₹1,014.24", "(c) ₹1,022.06", "(d) ₹1,021.44"],
+    o_en: ["(a) ₹1,025.70", "(b) ₹1,014.24", "(c) ₹1,022.06", "(d) ₹1,021.44"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q45
+  {
+    q_hi: "Q61. राधिका ने ₹5,800 की धनराशि चक्रवृद्धि ब्यााज दर (वार्षिक रूप से संयोजित) पर 2 वर्षों के लिए निवेश की। यदि 2 वर्षों के अंत में अर्जित चक्रवृद्धि ब्यााज ₹594.50 है, तो वार्षिक ब्यााज दर ज्ञात कीजिए।",
+    q_en: "Q61. Radhika invested ₹5,800 for 2 years at compound interest, compounded annually. If the compound interest earned at the end of 2 years is ₹594.50, find the annual rate of interest.",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) 6.3%", "(b) 5.6%", "(c) 4%", "(d) 5%"],
+    o_en: ["(a) 6.3%", "(b) 5.6%", "(c) 4%", "(d) 5%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q62. यदि ₹6,20,000 की धनराशि को अर्ध-वार्षिक रूप से संयोजित होने वाले 2% वार्षिक ब्यााज की दर से एक वर्ष के लिए निवेश किया जाता है, तो चक्रवृद्धि ब्यााज ज्ञाात कीजिए।",
+    q_en: "Q62. If ₹6,20,000 is invested for 1 year at 2% per annum, compounded half-yearly, find the compound interest.",
+    tag: "RRB Group D, 18/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹13,795", "(b) ₹12,462", "(c) ₹11,667", "(d) ₹10,682"],
+    o_en: ["(a) ₹13,795", "(b) ₹12,462", "(c) ₹11,667", "(d) ₹10,682"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q63. ₹10,124 की राशि पर 25% वार्षिक दर से 2 वर्ष का चक्रवृद्धि ब्यााज कितना होगा, यदि ब्यााज वार्षिक रूप से संयोजित होता है?",
+    q_en: "Q63. What is the compound interest on ₹10,124 for 2 years at 25% per annum if interest is compounded annually?",
+    tag: "RRB Group D, 18/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹5,994.75", "(b) ₹5,894.75", "(c) ₹5,694.75", "(d) ₹5,794.75"],
+    o_en: ["(a) ₹5,994.75", "(b) ₹5,894.75", "(c) ₹5,694.75", "(d) ₹5,794.75"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q64. यदि ब्यााज की गणना वार्षिक चक्रवृद्धि आधार पर होती है, तो कोई धनराशि कितने प्रतिशत वार्षिक ब्यााज दर पर 2 वर्ष में स्वंय की 20 गुनी हो जाएगी? (अपना उत्तर एक दशमलव स्थाान तक पूर्णांकित कीजिए)",
+    q_en: "Q64. At what annual rate of compound interest, compounded annually, will a sum become 20 times itself in 2 years? Round the answer to one decimal place.",
+    tag: "RRB Group D, 18/08/2026 (Shift-03)",
+    o_hi: ["(a) 340.3", "(b) 353.1", "(c) 345.6", "(d) 347.2"],
+    o_en: ["(a) 340.3", "(b) 353.1", "(c) 345.6", "(d) 347.2"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q65. ₹60,000 की धनराशि 4% वार्षिक चक्रवृद्धि ब्यााज दर पर 1 वर्ष के लिए निवेश की जाती है, जबकि ब्यााज अर्धवार्षिक रूप से संयोजित होता है। वर्ष के अंत में अर्जित चक्रवृद्धि ब्यााज कितना होगा?",
+    q_en: "Q65. A sum of ₹60,000 is invested for 1 year at 4% per annum compound interest, with interest compounded half-yearly. Find the compound interest earned by the end of the year.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹2,424", "(b) ₹3,244", "(c) ₹3,102", "(d) ₹2,999"],
+    o_en: ["(a) ₹2,424", "(b) ₹3,244", "(c) ₹3,102", "(d) ₹2,999"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q66. किसी निश्चित धनराशि पर 8% वार्षिक ब्यााज दर से 1½ वर्ष के लिए चक्रवृद्धि ब्यााज (अर्धवार्षिक रूप से संयोजित) और साधारण ब्यााज का अंतर ₹36 है। मूलधन कितना है? (निकटतम पूर्णांक तक पूर्णांकित)",
+    q_en: "Q66. For a certain sum, the difference between compound interest, compounded half-yearly, and simple interest for 1½ years at 8% per annum is ₹36. Find the principal, rounded to the nearest whole rupee.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹7,411", "(b) ₹7,201", "(c) ₹7,404", "(d) ₹7,401"],
+    o_en: ["(a) ₹7,411", "(b) ₹7,201", "(c) ₹7,404", "(d) ₹7,401"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q28
+  {
+    q_hi: "Q67. यदि ₹2,70,000 की राशि को अर्ध-वार्षिक रूप से संयोजित होने वाले 10% वार्षिक ब्यााज की दर पर एक वर्ष के लिए निवेश किया जाता है, तो चक्रवृद्धि ब्यााज ज्ञात कीजिए।",
+    q_en: "Q67. If ₹2,70,000 is invested for 1 year at 10% per annum, compounded half-yearly, find the compound interest.",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹27,850", "(b) ₹25,825", "(c) ₹27,625", "(d) ₹27,675"],
+    o_en: ["(a) ₹27,850", "(b) ₹25,825", "(c) ₹27,625", "(d) ₹27,675"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q68. एक निश्चित राशि 40% वार्षिक दर से दो वर्षों में ₹1,08,864 हो जाती है, जबकि ब्यााज अर्ध-वार्षिक रूप से संयोजित होता है। यदि ब्यााज वार्षिक रूप से संयोजित होता है, तो समान राशि पर, समान दर से और समान समय के लिए देय मिश्रधन (₹ में) कितना होगा?",
+    q_en: "Q68. A certain sum amounts to ₹1,08,864 in 2 years at 40% per annum when interest is compounded half-yearly. If interest were compounded annually, what amount would be due on the same principal at the same rate for the same period?",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) 1,07,300", "(b) 1,08,200", "(c) 1,07,600", "(d) 1,02,900"],
+    o_en: ["(a) 1,07,300", "(b) 1,08,200", "(c) 1,07,600", "(d) 1,02,900"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q32
+  {
+    q_hi: "Q69. ₹2,20,000 की राशि को अर्धवार्षिक रूप से संयोजित होने वाले 4% वार्षिक चक्रवृद्धि ब्यााज दर से 1 वर्ष के निवेश किया जाता है। वर्ष के अंत में अर्जित चक्रवृद्धि ब्यााज ज्ञाात कीजिए।",
+    q_en: "Q69. A sum of ₹2,20,000 is invested for 1 year at 4% per annum compound interest, compounded half-yearly. Find the compound interest earned by the end of the year.",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹9,364", "(b) ₹9,551", "(c) ₹8,648", "(d) ₹8,888"],
+    o_en: ["(a) ₹9,364", "(b) ₹9,551", "(c) ₹8,648", "(d) ₹8,888"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q70. कोई निश्चित धनराशि चक्रवृद्धि ब्यााज दर (वार्षिक रूप से संयोजित) पर निवेश करने पर 4 वर्षों में अपने मूल मान की तीन गुनी हो जाती है। वही धनराशि समान ब्यााज दर पर कितने वर्षों में अपने मूल मान की नौ गुनी हो जाएगी?",
+    q_en: "Q70. A certain sum becomes three times its original value in 4 years at compound interest, compounded annually. In how many years will the same sum become nine times its original value at the same rate?",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 6 वर्ष", "(b) 9 वर्ष", "(c) 8 वर्ष", "(d) 5 वर्ष"],
+    o_en: ["(a) 6 years", "(b) 9 years", "(c) 8 years", "(d) 5 years"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-01) | Original Q31
+  {
+    q_hi: "Q71. ₹1,000 की धनराशि को 10% वार्षिक ब्यााज दर पर 2 वर्षों के लिए निवेश किया जाता है। यदि ब्यााज वार्षिक रूप से संयोजित होता है, तो चक्रवृद्धि ब्यााज और साधारण ब्यााज के बीच का अंतर (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q71. A sum of ₹1,000 is invested for 2 years at 10% per annum. If interest is compounded annually, find the difference between compound interest and simple interest.",
+    tag: "RRB Group D, 20/08/2026 (Shift-01)",
+    o_hi: ["(a) 20", "(b) 10", "(c) 40", "(d) 30"],
+    o_en: ["(a) 20", "(b) 10", "(c) 40", "(d) 30"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q72. यदि ब्यााज वार्षिक रूप से संयोजित किया जाता है, तो किस वार्षिक चक्रवृद्धि ब्यााज दर पर कोई धनराशि 2 वर्षों में स्वयं की 40 गुनी हो जाएगी? (अपना उत्तर दशमलव के एक स्थाान तक पूर्णांकित कीजिए।)",
+    q_en: "Q72. At what annual compound interest rate, compounded annually, will a sum become 40 times itself in 2 years? Round the answer to one decimal place.",
+    tag: "RRB Group D, 20/08/2026 (Shift-01)",
+    o_hi: ["(a) 529.3%", "(b) 537.9%", "(c) 532.5%", "(d) 538.3%"],
+    o_en: ["(a) 529.3%", "(b) 537.9%", "(c) 532.5%", "(d) 538.3%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q44
+  {
+    q_hi: "Q73. यदि ब्यााज वार्षिक रूप से संयोजित किया जाता है, तो किस वार्षिक चक्रवृद्धि ब्यााज दर पर कोई धनराशि 2 वर्ष में स्वयं की 57 गुनी हो जाएगी? (अपने उत्तर को निकटतम पूर्णांक तक पूर्णांकित कीजिए।)",
+    q_en: "Q73. At what annual compound interest rate, compounded annually, will a sum become 57 times itself in 2 years? Round the answer to the nearest whole number.",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 660%", "(b) 662%", "(c) 655%", "(d) 653%"],
+    o_en: ["(a) 660%", "(b) 662%", "(c) 655%", "(d) 653%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q29
+  {
+    q_hi: "Q74. एक निश्चित धनराशि, नियत वार्षिक चक्रवृद्धि ब्यााज दर पर, 20 वर्षों के अंत में ₹752 और 21 वर्षों के अंत में ₹7,896 हो जाती है। चक्रवृद्धि ब्यााज की वार्षिक दर ज्ञाात कीजिए।",
+    q_en: "Q74. A certain sum amounts to ₹752 at the end of 20 years and ₹7,896 at the end of 21 years at a fixed annual compound interest rate. Find the annual rate of compound interest.",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 8.5%", "(b) 9.5%", "(c) 950%", "(d) 850%"],
+    o_en: ["(a) 8.5%", "(b) 9.5%", "(c) 950%", "(d) 850%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q75. ₹64,000 की राशि 10% वार्षिक ब्‍याज दर पर (जहां ब्‍याज अर्ध-वार्षिक रूप से संयोजित होता है), कितने वर्षों में ₹74,088 हो जाएगी?",
+    q_en: "Q75. ₹64,000 की राशि 10% वार्षिक ब्‍याज दर पर (जहां ब्‍याज अर्ध-वार्षिक रूप से संयोजित होता है), कितने वर्षों में ₹74,088 हो जाएगी?",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) विकल्प A", "(b) विकल्प B", "(c) विकल्प C", "(d) विकल्प D"],
+    o_en: ["(a) Option A", "(b) Option B", "(c) Option C", "(d) Option D"],
+    a: 0,
+    image: Q75_IMAGE,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q76. किसी धनराशि पर 5% वार्षिक दर से 3 वर्षों का साधारण ब्यााज ₹1,200 है। यदि ब्यााज वार्षिक रूप से संयोजित हो, तो समान धनराशि पर समान दर से समान अवधि के लिए चक्रवृद्धि ब्यााज ज्ञाात कीजिए।",
+    q_en: "Q76. The simple interest on a sum for 3 years at 5% per annum is ₹1,200. If interest is compounded annually, find the compound interest on the same sum at the same rate for the same period.",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹1,612", "(b) ₹1,216", "(c) ₹1,261", "(d) ₹1,621"],
+    o_en: ["(a) ₹1,612", "(b) ₹1,216", "(c) ₹1,261", "(d) ₹1,621"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q77. ₹25,000 की राशि 1 वर्ष में ₹29,160 हो जाती है, जब ब्यााज को अर्ध-वार्षिक रूप से संयोजित किया जाता है। यदि ब्यााज दर समान रहती है, तो वार्षिक रूप से संयोजित होने पर 1 वर्ष में ₹18,000 पर कितना ब्यााज अर्जित किया जाएगा?",
+    q_en: "Q77. A sum of ₹25,000 amounts to ₹29,160 in 1 year when interest is compounded half-yearly. If the rate remains the same, how much interest will be earned on ₹18,000 in 1 year when compounded annually?",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹3,080", "(b) ₹1,440", "(c) ₹1,760", "(d) ₹2,880"],
+    o_en: ["(a) ₹3,080", "(b) ₹1,440", "(c) ₹1,760", "(d) ₹2,880"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q37
+  {
+    q_hi: "Q78. चक्रवृद्धि ब्यााज पर, कोई धनराशि किस वार्षिक ब्यााज दर से 2 वर्ष में स्वयं की 4 गुना हो जाएगी, जहां ब्यााज वार्षिक रूप से संयोजित होता है?",
+    q_en: "Q78. At what annual rate of compound interest will a sum become 4 times itself in 2 years, when interest is compounded annually?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 200", "(b) 100", "(c) 50", "(d) 75"],
+    o_en: ["(a) 200", "(b) 100", "(c) 50", "(d) 75"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q79. ₹12,500 पर 10% वार्षिक ब्यााज दर से 2 वर्षों में अर्जित चक्रवृद्धि ब्यााज और ₹47,500 पर 13% वार्षिक ब्यााज दर से 2 वर्षों में अर्जित साधारण ब्यााज के योगफल का 24% कितना है?",
+    q_en: "Q79. What is 24% of the sum of the compound interest earned on ₹12,500 for 2 years at 10% per annum and the simple interest earned on ₹47,500 for 2 years at 13% per annum?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹3,596", "(b) ₹2,594", "(c) ₹3,594", "(d) ₹2,596"],
+    o_en: ["(a) ₹3,596", "(b) ₹2,594", "(c) ₹3,594", "(d) ₹2,596"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q80. यदि ब्यााज वार्षिक रूप से चक्रवृद्धि होता है, तो एक निश्चित धनराशि कितने प्रतिशत की वार्षिक दर दो वर्षों में स्वयं की 9 गुनी हो जाएगी?",
+    q_en: "Q80. If interest is compounded annually, at what annual percentage rate will a certain sum become 9 times itself in 2 years?",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 75", "(b) 100", "(c) 150", "(d) 200"],
+    o_en: ["(a) 75", "(b) 100", "(c) 150", "(d) 200"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q81. ₹30,000 की धनराशि दो अलग-अलग योजनाओं में 2 वर्षों के लिए निवेश की जाती है। पहली योजना में 8% वार्षिक ब्यााज दर (वार्षिक रूप से संयोजित) से चक्रवृद्धि ब्यााज प्राप्त होता है, जबकि दूसरी योजना में 6% वार्षिक ब्यााज दर (वार्षिक रूप से संयोजित) से चक्रवृद्धि ब्यााज प्राप्त होता है। दोनों योजनाओं से अर्जित चक्रवृद्धि ब्यााज के बीच का अंतर ज्ञात कीजिए।",
+    q_en: "Q81. A sum of ₹30,000 is invested in two different schemes for 2 years. The first scheme gives compound interest at 8% per annum, compounded annually, while the second gives compound interest at 6% per annum, compounded annually. Find the difference between the compound interest earned from the two schemes.",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹1284", "(b) ₹1210", "(c) ₹1087", "(d) ₹1344"],
+    o_en: ["(a) ₹1284", "(b) ₹1210", "(c) ₹1087", "(d) ₹1344"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-01) | Original Q36
+  {
+    q_hi: "Q82. यदि ₹21,400 की राशि 5% वार्षिक ब्यााज दर पर 2 वर्षों के लिए जमा की जाती है, तो चक्रवृद्धि ब्यााज (वार्षिक रूप से संयोजित) और साधारण ब्यााज का अंतर ज्ञात कीजिए।",
+    q_en: "Q82. If ₹21,400 is deposited for 2 years at 5% per annum, find the difference between compound interest, compounded annually, and simple interest.",
+    tag: "RRB Group D, 25/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹46.60", "(b) ₹56.50", "(c) ₹56.40", "(d) ₹53.50"],
+    o_en: ["(a) ₹46.60", "(b) ₹56.50", "(c) ₹56.40", "(d) ₹53.50"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q33
+  {
+    q_hi: "Q83. साक्षी ने ₹8900 की धनराशि 10% वार्षिक चक्रवृद्धि ब्यााज की दर से निवेश की, जबकि ब्यााज वार्षिक रूप से संयोजित होता है। यदि उसे n वर्षों के बाद ₹10,769 मिश्रधन प्राप्त होता है, तो n का मान ज्ञाात कीजिए।",
+    q_en: "Q83. Sakshi invested ₹8,900 at 10% per annum compound interest, compounded annually. If she receives ₹10,769 after n years, find n.",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 1.5", "(b) 3", "(c) 2.4", "(d) 2"],
+    o_en: ["(a) 1.5", "(b) 3", "(c) 2.4", "(d) 2"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q48
+  {
+    q_hi: "Q84. एक विद्याार्थी ₹16,000 की धनराशि को 3% वार्षिक ब्यााज दर पर निवेश करना चाहता है, जबकि ब्यााज अर्धवार्षिक रूप से संयोजित होता है। 2 वर्ष पश्चाात प्राप्त चक्रवृद्धि ब्यााज ज्ञाात कीजिए। [दिया गया है, कि (1.015)4 = 1.0614]",
+    q_en: "Q84. A student wants to invest ₹16,000 at 3% per annum, with interest compounded half-yearly. Find the compound interest after 2 years.<br>[Given that (1.015)⁴ = 1.0614]",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹782.40", "(b) ₹900.10", "(c) ₹982.40", "(d) ₹880.20"],
+    o_en: ["(a) ₹782.40", "(b) ₹900.10", "(c) ₹982.40", "(d) ₹880.20"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q23
+  {
+    q_hi: "Q85. यदि ₹8000 की राशि चक्रवृद्धि ब्यााज पर 8 वर्षों के बाद स्वंय का तिगुना हो जाती है, तो 24 वर्षों के बाद वह राशि कितनी हो जाएगी?",
+    q_en: "Q85. If a sum of ₹8,000 becomes three times itself after 8 years at compound interest, what will the amount be after 24 years?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹206000", "(b) ₹216000", "(c) ₹253000", "(d) ₹236000"],
+    o_en: ["(a) ₹206000", "(b) ₹216000", "(c) ₹253000", "(d) ₹236000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q13
+  {
+    q_hi: "Q86. रमेश अपने खाते में ₹24,000 जमा करता है, जिस पर 12% वार्षिक दर (त्रैमासिक रूप से संयोजित) से ब्यााज प्राप्त होता है। छह महीने बाद उसके खाते में कुल राशि की गणना कीजिए।",
+    q_en: "Q86. Ramesh deposits ₹24,000 in his account at 12% per annum, compounded quarterly. Calculate the total amount in his account after six months.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹25,678.60", "(b) ₹25,461.60", "(c) ₹25,937", "(d) ₹25,431"],
+    o_en: ["(a) ₹25,678.60", "(b) ₹25,461.60", "(c) ₹25,937", "(d) ₹25,431"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q25
+  {
+    q_hi: "Q87. ब्यााज के त्रैमासिक रूप से संयोजित होने पर कोई धनराशि 8% वार्षिक दर से 6 ​मास में ₹52,020 हो जाती है। वह धनराशि ज्ञाात कीजिए।",
+    q_en: "Q87. A sum amounts to ₹52,020 in 6 months at 8% per annum when interest is compounded quarterly. Find the principal.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) ₹51,000", "(b) ₹50,000", "(c) ₹49,000", "(d) ₹48,000"],
+    o_en: ["(a) ₹51,000", "(b) ₹50,000", "(c) ₹49,000", "(d) ₹48,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q14
+  {
+    q_hi: "Q88. ₹20,000 की धनराशि पर 12% वार्षिक ब्यााज (त्रैमासिक रूप से संयोजित) पर छह महीने में प्राप्त होने वाला मिश्रधन ज्ञाात कीजिए।",
+    q_en: "Q88. Find the amount on ₹20,000 after six months at 12% per annum, compounded quarterly.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹21218", "(b) ₹21934", "(c) ₹21823", "(d) ₹21335"],
+    o_en: ["(a) ₹21218", "(b) ₹21934", "(c) ₹21823", "(d) ₹21335"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q2
+  {
+    q_hi: "Q89. ललित अपने खाते में ₹42,000 जमा करता है जहां 20% वार्षिक दर से ब्याज प्राप्त होता है, जबकि ब्याज अर्धवार्षिक रूप से संयोजित होता है। एक वर्ष के बाद उसके खाते में कु ल राशि की गणना कीजिए।",
+    q_en: "Q89. Lalit deposits ₹42,000 in his account at 20% per annum, with interest compounded half-yearly. Calculate the total amount in his account after one year.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹50,820", "(b) ₹50,680", "(c) ₹50,650", "(d) ₹50,880"],
+    o_en: ["(a) ₹50,820", "(b) ₹50,680", "(c) ₹50,650", "(d) ₹50,880"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q43
+  {
+    q_hi: "Q90. किसी निश्चित राशि पर, यदि समान ब्यााज दर से, 2 वर्षों का साधारण ब्यााज ₹64 और चक्रवृद्धि ब्यााज ₹72 है, तो वह राशि (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q90. For a certain sum, if the simple interest for 2 years is ₹64 and the compound interest for 2 years at the same rate is ₹72, find the principal.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 121", "(b) 128", "(c) 123", "(d) 132"],
+    o_en: ["(a) 121", "(b) 128", "(c) 123", "(d) 132"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q43
+  {
+    q_hi: "Q91. शिवम ने अपने दो पोतों, 14 वर्षीय रूपेश और 15 वर्षीय मंदार के बीच ₹23400 इस प्रकार वितरित किए कि 23 वर्ष की आयु होने पर दोनों को बराबर राशि प्राप्त हो। तब तक यह राशि बैंक में 8% वार्षिक चक्रवृद्धि ब्यााज दर, जिसपर ब्यााज वार्षिक रूप से संयोजित होता है, पर जमा है। शिवम ने मंदार के नाम पर कितनी राशि (₹ में) जमा की है?",
+    q_en: "Q91. Shivam distributed ₹23,400 between his two grandsons, 14-year-old Rupesh and 15-year-old Mandar, so that both would receive equal amounts on reaching the age of 23. Until then the money remains deposited in a bank at 8% per annum compound interest, compounded annually. How much did Shivam deposit in Mandar's name?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 11250", "(b) 12150", "(c) 12500", "(d) 11000"],
+    o_en: ["(a) 11250", "(b) 12150", "(c) 12500", "(d) 11000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q59
+  {
+    q_hi: "Q92. अतुल ने अपने दो पोतों, 12 वर्षीय बबन और 13 वर्षीय राकेश के बीच ₹24700 इस प्रकार वितरित किए कि 23 वर्ष की आयु होने पर दोनों को बराबर राशि प्राप्‍त होगी। तब तक यह राशि बैंक में 8% वार्षिक चक्रवृद्धि ब्यााज दर पर जमा रहेगी जहां ब्‍याज वार्षिक रूप से संयोजित होता है। अतुल ने राकेश के नाम पर कितनी राशि (₹ में) जमा की?",
+    q_en: "Q92. Atul distributed ₹24,700 between his two grandsons, 12-year-old Baban and 13-year-old Rakesh, so that both would receive equal amounts on reaching the age of 23. Until then the money remains deposited in a bank at 8% per annum compound interest, compounded annually. How much did Atul deposit in Rakesh's name?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 13175", "(b) 12825", "(c) 11625", "(d) 11875"],
+    o_en: ["(a) 13175", "(b) 12825", "(c) 11625", "(d) 11875"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q23
+  {
+    q_hi: "Q93. किसी निश्चित राशि पर, यदि समान ब्यााज दर पर 2 वर्षों के लिए साधारण ब्यााज ₹66 और चक्रवृद्धि ब्यााज ₹67 है, तो राशि (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q93. For a certain sum, if the simple interest for 2 years is ₹66 and the compound interest for 2 years at the same rate is ₹67, find the principal.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 1082", "(b) 1084", "(c) 1093", "(d) 1089"],
+    o_en: ["(a) 1082", "(b) 1084", "(c) 1093", "(d) 1089"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q44
+  {
+    q_hi: "Q94. किसी निश्चित राशि पर, समान ब्यााज दर पर, 2 वर्षों के लिए साधारण ब्यााज ₹66 और चक्रवृद्धि ब्यााज ₹69 है। राशि (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q94. For a certain sum, at the same rate, the simple interest for 2 years is ₹66 and the compound interest is ₹69. Find the principal.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 367", "(b) 363", "(c) 356", "(d) 358"],
+    o_en: ["(a) 367", "(b) 363", "(c) 356", "(d) 358"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q95. यदि किसी निश्चित धनराशि पर दूसरे वर्ष के दौरान प्राप्त ब्यााज ₹3072 है और ब्यााज दर 20% वार्षिक है, जहां ब्यााज वार्षिक रूप से संयोजित होता है, तो धनराशि ज्ञाात कीजिए।",
+    q_en: "Q95. If the interest earned during the second year on a certain sum is ₹3,072 at 20% per annum, compounded annually, find the principal.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹12055", "(b) ₹12965", "(c) ₹12800", "(d) ₹13545"],
+    o_en: ["(a) ₹12055", "(b) ₹12965", "(c) ₹12800", "(d) ₹13545"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q3
+  {
+    q_hi: "Q96. यदि किसी निश्चित राशि पर दूसरे वर्ष के दौरान अर्जित ब्यााज ₹8063 है, और ब्यााज दर 10% वार्षिक (वार्षिक रूप से संयोजित) है, तो वह राशि ज्ञाात कीजिए।",
+    q_en: "Q96. If the interest earned during the second year on a certain sum is ₹8,063 and the rate is 10% per annum, compounded annually, find the principal.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹73705", "(b) ₹74250", "(c) ₹72750", "(d) ₹73300"],
+    o_en: ["(a) ₹73705", "(b) ₹74250", "(c) ₹72750", "(d) ₹73300"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q69
+  {
+    q_hi: "Q97. गोपाल ने अपने दो पोतों, 13 वर्षीय अक्षय और 14 वर्षीय अतुल के बीच ₹25200 इस प्रकार वितरित किए कि 23 वर्ष की आयु होने पर दोनों को बराबर राशि प्राप्‍त होगी। तब तक यह राशि बैंक में 10% वार्षिक चक्रवृद्धि ब्यााज दर पर जमा रहेगी जहां ब्‍याज वार्षिक रूप से संयोजित होता है। गोपाल ने अतुल के नाम पर कितनी राशि (₹ में) जमा की?",
+    q_en: "Q97. Gopal distributed ₹25,200 between his two grandsons, 13-year-old Akshay and 14-year-old Atul, so that both would receive equal amounts on reaching the age of 23. Until then the money remains deposited in a bank at 10% per annum compound interest, compounded annually. How much did Gopal deposit in Atul's name?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 11750", "(b) 13550", "(c) 13200", "(d) 12000 \""],
+    o_en: ["(a) 11750", "(b) 13550", "(c) 13200", "(d) 12000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q8
+  {
+    q_hi: "Q98. किसी निश्चित राशि पर, यदि समान ब्यााज दर से, 2 वर्षों का साधारण ब्यााज ₹64 और चक्रवृद्धि ब्यााज ₹80 है, तो वह राशि (₹ में) ज्ञाात कीजिए।",
+    q_en: "Q98. For a certain sum, if the simple interest for 2 years is ₹64 and the compound interest for 2 years at the same rate is ₹80, find the principal.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 57", "(b) 64", "(c) 59", "(d) 68"],
+    o_en: ["(a) 57", "(b) 64", "(c) 59", "(d) 68"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q34
+  {
+    q_hi: "Q99. एक धनराशि एक निश्चित चक्रवृद्धि ब्यााज दर पर 3 वर्षों में स्वयं की तिगुनी हो जाती है। कितने वर्षों में यह धनराशि स्वयं की 9 गुनी हो जाएगी?",
+    q_en: "Q99. A sum becomes three times itself in 3 years at a certain compound interest rate. In how many years will it become 9 times itself?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 6 वर्ष", "(b) 12 वर्ष", "(c) 3 वर्ष", "(d) 10 वर्ष"],
+    o_en: ["(a) 6 years", "(b) 12 years", "(c) 3 years", "(d) 10 years"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 11/03/2026 (Shift-01) | Original Q14
+  {
+    q_hi: "Q100. यदि किसी निश्चित धनराशि पर दूसरे वर्ष के दौरान प्राप्त ब्यााज ₹6330 है और ब्यााज दर 20% वार्षिक है, जो वार्षिक रूप से संयोजित होती है। धनराशि ज्ञाात कीजिए।",
+    q_en: "Q100. If the interest received during the second year on a certain sum is ₹6,330 and the rate is 20% per annum, compounded annually, find the principal.",
+    tag: "RRB ALP CBT-I, 11/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹26160", "(b) ₹25850", "(c) ₹26375", "(d) ₹25465 Question Type : MCQ Question ID : 441009897844 Option 1 ID : 4410093545448 Option 2 ID : 4410093545449 Option 3 ID : 4410093545446 Option 4 ID : 4410093545447 Status : Answered Chosen Option : B"],
+    o_en: ["(a) ₹26160", "(b) ₹25850", "(c) ₹26375", "(d) ₹25465"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  }
+];
