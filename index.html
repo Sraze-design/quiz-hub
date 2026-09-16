@@ -2302,6 +2302,26 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
 @media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:15px}.result-analysis-btn{font-size:13px;padding:9px 12px}}
+/* Keep the Analysis header fixed in its original position. Only the content
+   below it gets responsive breathing room, so tabs and card never overlap. */
+.analysis-tabs{
+  flex:0 0 auto;
+  padding-top:clamp(20px,2.5vh,30px);
+}
+.analysis-review-meta{flex:0 0 auto}
+.analysis-list{
+  min-height:0;
+  padding-top:clamp(20px,2.4vh,28px);
+  -webkit-overflow-scrolling:touch;
+}
+@media (orientation:landscape) and (max-height:700px){
+  .analysis-tabs{padding-top:16px}
+  .analysis-list{padding-top:18px}
+}
+@media (max-width:600px){
+  .analysis-tabs{padding-top:18px}
+  .analysis-list{padding-top:18px}
+}
 </style>
 <script>
 (function removePencilDiagnostic(){
@@ -3925,6 +3945,27 @@ window.addEventListener('popstate', (e) => {
   }
 });
 
+// iPadOS can keep a previously used search/jump input focused even after the
+// user taps a test card or question palette. Blur it before navigation so the
+// first tap opens the requested screen instead of reopening the keyboard.
+function dismissQuizKeyboard(){
+  const active=document.activeElement;
+  if(active && (
+    active.tagName==='INPUT' ||
+    active.tagName==='TEXTAREA' ||
+    active.tagName==='SELECT' ||
+    active.isContentEditable
+  )) active.blur();
+  document.getElementById('explorerSearch')?.blur();
+  document.getElementById('jumpNo')?.blur();
+}
+
+document.addEventListener('pointerdown',function(event){
+  if(event.target.closest('.premium-card,.quiz-menu-btn,.qp-grid button,.analysis-palette-q,.jump-btn-premium')){
+    dismissQuizKeyboard();
+  }
+},{capture:true,passive:true});
+
 function cleanHumanReadableTitle(rawString) {
   if (!rawString) return '';
 
@@ -4169,9 +4210,9 @@ function renderQuizList(subjectName, categoryName, chapterName) {
           <span class="card-subtitle-stats"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:2px;"><path d="M12 3 2 8l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/><path d="M2 16l10 5 10-5"/></svg> Category: Practice</span>
         </div>
       </div>
-      <button class="premium-btn-action"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Start</button>
+      <button type="button" class="premium-btn-action"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Start</button>
     `;
-    card.onclick = () => loadQuizData(quiz.path);
+    card.onclick = () => { dismissQuizKeyboard(); loadQuizData(quiz.path); };
     listEl.appendChild(card);
   });
 }
@@ -4233,9 +4274,9 @@ function handleSearch(query) {
           <span class="card-subtitle-stats">📚 ${cleanHumanReadableTitle(quiz.subject)}${catSubtitle} • 📘 ${cleanHumanReadableTitle(quiz.chapter)}</span>
         </div>
       </div>
-      <button class="premium-btn-action"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Launch</button>
+      <button type="button" class="premium-btn-action"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Launch</button>
     `;
-    card.onclick = () => loadQuizData(quiz.path);
+    card.onclick = () => { dismissQuizKeyboard(); loadQuizData(quiz.path); };
     listEl.appendChild(card);
   });
 }
@@ -5184,6 +5225,7 @@ function showEmptyState() {
 })();
 
 async function loadQuizData(quizPath, requestedQuestionIndex) {
+  dismissQuizKeyboard();
   showLoader(true);
   // A newly launched test must never inherit the previous test's Analysis UI
   // or response snapshot, even if navigation happened through browser Back.
@@ -6217,6 +6259,7 @@ function unlockBodyScroll(){
 let qpHistoryPushed = false;
 
 function openQuestionPalette(){
+  dismissQuizKeyboard();
   if(typeof data === 'undefined' || !data || data.length === 0) return;
   renderQuestionPalette();
   qpSwitchTab('symbols');
@@ -6266,6 +6309,7 @@ document.getElementById("jumpNo").addEventListener("keydown", function(e){
 });
 
 function goToQuestion(qNo){
+ dismissQuizKeyboard();
  timerRunning=true;
   if(isPaused) return;
   qNo = parseInt(qNo,10);
