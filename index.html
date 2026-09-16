@@ -2302,26 +2302,6 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
 @media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:15px}.result-analysis-btn{font-size:13px;padding:9px 12px}}
-/* Keep the Analysis header fixed in its original position. Only the content
-   below it gets responsive breathing room, so tabs and card never overlap. */
-.analysis-tabs{
-  flex:0 0 auto;
-  padding-top:clamp(20px,2.5vh,30px);
-}
-.analysis-review-meta{flex:0 0 auto}
-.analysis-list{
-  min-height:0;
-  padding-top:clamp(20px,2.4vh,28px);
-  -webkit-overflow-scrolling:touch;
-}
-@media (orientation:landscape) and (max-height:700px){
-  .analysis-tabs{padding-top:16px}
-  .analysis-list{padding-top:18px}
-}
-@media (max-width:600px){
-  .analysis-tabs{padding-top:18px}
-  .analysis-list{padding-top:18px}
-}
 </style>
 <script>
 (function removePencilDiagnostic(){
