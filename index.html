@@ -151,9 +151,18 @@ body {
 #appSideDrawerOverlay{position:fixed;inset:0;background:rgba(15,23,42,.42);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:100000}#appSideDrawerOverlay.active{opacity:1;pointer-events:auto}
 #appSideDrawer{position:fixed;left:0;top:0;bottom:0;width:min(84vw,360px);background:#fff;transform:translateX(-105%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:100001;box-shadow:18px 0 45px rgba(15,23,42,.18);display:flex;flex-direction:column;padding:22px 16px calc(22px + env(safe-area-inset-bottom))}#appSideDrawer.active{transform:translateX(0)}
 .side-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 18px;border-bottom:1px solid #e2e8f0}.side-drawer-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--dark)}.side-drawer-brand-icon{width:40px;height:40px;border-radius:13px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:20px}.side-drawer-close{width:38px;height:38px;border:0;border-radius:12px;background:#f1f5f9;color:#475569;font-size:22px;cursor:pointer}.side-drawer-section{margin-top:20px}.side-drawer-label{font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;padding:0 10px 8px}.side-drawer-item{width:100%;border:0;background:#fff;border-radius:16px;padding:14px 12px;display:flex;align-items:center;gap:12px;text-align:left;color:var(--dark);font-size:15px;font-weight:700;cursor:pointer}.side-drawer-item:active{background:var(--primary-light)}.side-drawer-item-icon{width:42px;height:42px;border-radius:13px;background:#fff7ed;color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:21px;flex:0 0 auto}.side-drawer-item-text{display:flex;flex-direction:column;gap:2px}.side-drawer-item-text small{font-size:11px;color:#64748b;font-weight:600}
-.quiz-subheader-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.bookmark-toggle-btn{width:40px;height:40px;min-width:40px;border:0;border-radius:12px;background:#f8fafc;color:#64748b;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition)}.bookmark-toggle-btn svg{width:21px;height:21px}.bookmark-toggle-btn.active{background:#fff7ed;color:#f59e0b}.bookmark-toggle-btn:active{transform:scale(.92)}.bookmark-question-card{align-items:flex-start;position:relative;padding-right:44px}.bookmark-question-preview{font-size:13px;line-height:1.5;color:#334155;font-weight:600;margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.bookmark-test-name{font-size:11px;color:#64748b;font-weight:600;margin-top:5px}.bookmark-star{color:#f59e0b;font-size:20px;flex:0 0 auto}; .ai-quiz-card-msg .bookmark-toggle-btn{margin-left:auto;flex:0 0 auto}
+.quiz-subheader-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.quiz-question-actions{display:flex;align-items:center;gap:7px;flex:0 0 auto}.bookmark-toggle-btn{width:40px;height:40px;min-width:40px;border:0;border-radius:12px;background:#f8fafc;color:#64748b;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition)}.bookmark-toggle-btn svg{width:21px;height:21px}.bookmark-toggle-btn.active{background:#fff7ed;color:#f59e0b}.bookmark-toggle-btn:active{transform:scale(.92)}.report-question-btn{height:40px;border:0;border-radius:12px;padding:0 11px;background:#fff1f2;color:#e11d48;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:800;cursor:pointer;transition:var(--transition)}.report-question-btn svg{width:18px;height:18px;flex:0 0 auto}.report-question-btn:active{transform:scale(.95)}.bookmark-question-card{align-items:flex-start;position:relative;padding-right:44px}.bookmark-question-preview{font-size:13px;line-height:1.5;color:#334155;font-weight:600;margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.bookmark-test-name{font-size:11px;color:#64748b;font-weight:600;margin-top:5px}.bookmark-star{color:#f59e0b;font-size:20px;flex:0 0 auto}; .ai-quiz-card-msg .bookmark-toggle-btn{margin-left:auto;flex:0 0 auto}
 .bookmark-question-card .bookmark-toggle-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;min-width:30px;border-radius:9px;box-shadow:0 1px 4px rgba(15,23,42,.08)}
 .bookmark-question-card .bookmark-toggle-btn svg{width:15px;height:15px}
+/* ===== Question report sheet ===== */
+#questionReportOverlay{position:fixed;inset:0;z-index:100060;background:rgba(15,23,42,.55);opacity:0;pointer-events:none;transition:opacity .22s ease;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+#questionReportOverlay.open{opacity:1;pointer-events:auto}
+#questionReportModal{position:fixed;left:50%;bottom:0;z-index:100061;width:min(100%,520px);max-height:min(88vh,720px);background:#fff;border-radius:24px 24px 0 0;box-shadow:0 -18px 50px rgba(15,23,42,.22);transform:translate(-50%,105%);transition:transform .28s cubic-bezier(.22,.8,.25,1);overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
+#questionReportModal.open{transform:translate(-50%,0)}
+.report-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:22px 22px 15px;border-bottom:1px solid #e2e8f0}.report-sheet-title{font-size:21px;font-weight:900;color:#0f172a}.report-sheet-subtitle{font-size:12px;line-height:1.45;color:#64748b;font-weight:600;margin-top:4px}.report-sheet-close{width:38px;height:38px;min-width:38px;border:0;border-radius:12px;background:#f1f5f9;color:#475569;font-size:24px;line-height:1;cursor:pointer}.report-sheet-body{padding:18px 20px 22px;overflow:auto;max-height:calc(min(88vh,720px) - 86px)}.report-step[hidden]{display:none!important}.report-reason-list{display:grid;gap:10px}.report-reason-btn{width:100%;min-height:58px;border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:12px 14px;display:flex;align-items:center;gap:12px;text-align:left;color:#172033;font-size:15px;font-weight:800;cursor:pointer}.report-reason-btn:active{background:#fff1f2;border-color:#fda4af}.report-reason-icon{width:36px;height:36px;border-radius:11px;background:#fff1f2;color:#e11d48;display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}.report-reason-arrow{margin-left:auto;color:#94a3b8;font-size:22px}.report-selected-reason{display:inline-flex;align-items:center;gap:7px;background:#fff1f2;color:#be123c;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;margin-bottom:13px}.report-label{display:block;color:#0f172a;font-size:15px;font-weight:850;margin-bottom:8px}.report-textarea{width:100%;min-height:145px;resize:vertical;border:1.5px solid #cbd5e1;border-radius:16px;padding:14px;font:600 15px/1.5 inherit;color:#172033;background:#fff;outline:none;box-sizing:border-box}.report-textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}.report-form-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:7px;color:#64748b;font-size:11px;font-weight:650}.report-back-link{border:0;background:transparent;color:#2563eb;font-size:12px;font-weight:800;padding:7px 0;cursor:pointer}.report-submit-btn{width:100%;height:52px;border:0;border-radius:15px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-size:16px;font-weight:850;margin-top:15px;cursor:pointer;box-shadow:0 8px 20px rgba(37,99,235,.22)}.report-submit-btn:disabled{opacity:.58;cursor:not-allowed;box-shadow:none}.report-status{min-height:20px;margin-top:10px;text-align:center;font-size:13px;font-weight:750}.report-status.error{color:#dc2626}.report-status.success{color:#059669}.report-success-view{text-align:center;padding:16px 4px 12px}.report-success-icon{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;background:#d1fae5;color:#059669;font-size:34px;font-weight:900}.report-success-title{font-size:20px;font-weight:900;color:#0f172a}.report-success-text{font-size:13px;color:#64748b;font-weight:650;margin-top:5px}
+.report-textarea{font-family:inherit;font-size:15px;font-weight:600;line-height:1.5}
+@media(min-width:700px){#questionReportModal{bottom:50%;border-radius:24px;transform:translate(-50%,calc(50% + 40px)) scale(.97);opacity:0}#questionReportModal.open{transform:translate(-50%,50%) scale(1);opacity:1}}
+@media(max-width:355px){.report-question-btn span{display:none}.report-question-btn{width:40px;padding:0}}
 .premium-logo-circle {
   width: 36px;
   height: 36px;
@@ -2528,7 +2537,10 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
             <div class="qinfo-divider"></div>
             <div class="qinfo-segment qinfo-timer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="qTimer">00:00</span></div>
           </div>
-          <button id="bookmarkToggleBtn" class="bookmark-toggle-btn" type="button" onclick="toggleCurrentBookmark()" aria-label="Bookmark question" title="Bookmark question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>
+          <div class="quiz-question-actions">
+            <button id="reportQuestionBtn" class="report-question-btn" type="button" onclick="openQuestionReport()" aria-label="Report question" title="Report question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span>Report</span></button>
+            <button id="bookmarkToggleBtn" class="bookmark-toggle-btn" type="button" onclick="toggleCurrentBookmark()" aria-label="Bookmark question" title="Bookmark question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>
+          </div>
         </div>
       </div>
 
@@ -3016,6 +3028,36 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
   </div>
 </div>
 
+<!-- Question Report: kept outside the quiz wrapper for reliable iOS blur/focus behavior -->
+<div id="questionReportOverlay" onclick="closeQuestionReport()" aria-hidden="true"></div>
+<section id="questionReportModal" role="dialog" aria-modal="true" aria-labelledby="questionReportTitle" aria-hidden="true">
+  <div class="report-sheet-head">
+    <div><div id="questionReportTitle" class="report-sheet-title">Report Question</div><div id="questionReportContext" class="report-sheet-subtitle">Choose the issue you found</div></div>
+    <button class="report-sheet-close" type="button" onclick="closeQuestionReport()" aria-label="Close report">×</button>
+  </div>
+  <div class="report-sheet-body">
+    <div id="reportReasonStep" class="report-step">
+      <div class="report-reason-list">
+        <button class="report-reason-btn" type="button" onclick="selectQuestionReportReason('Wrong Question')"><span class="report-reason-icon">?</span><span>Wrong Question</span><span class="report-reason-arrow">›</span></button>
+        <button class="report-reason-btn" type="button" onclick="selectQuestionReportReason('Wrong Option')"><span class="report-reason-icon">✕</span><span>Wrong Option</span><span class="report-reason-arrow">›</span></button>
+        <button class="report-reason-btn" type="button" onclick="selectQuestionReportReason('Wrong Wording')"><span class="report-reason-icon">Aa</span><span>Wrong Wording</span><span class="report-reason-arrow">›</span></button>
+        <button class="report-reason-btn" type="button" onclick="selectQuestionReportReason('Others')"><span class="report-reason-icon">…</span><span>Others</span><span class="report-reason-arrow">›</span></button>
+      </div>
+    </div>
+    <div id="reportDetailsStep" class="report-step" hidden>
+      <div id="reportSelectedReason" class="report-selected-reason"></div>
+      <label class="report-label" for="questionReportDescription">Tell us more</label>
+      <textarea id="questionReportDescription" class="report-textarea" maxlength="800" placeholder="Please describe what is wrong with this question..." oninput="updateQuestionReportCount()"></textarea>
+      <div class="report-form-meta"><button class="report-back-link" type="button" onclick="backToQuestionReportReasons()">← Change issue</button><span id="questionReportCount">0/800</span></div>
+      <button id="questionReportSubmit" class="report-submit-btn" type="button" onclick="submitQuestionReport()">Submit Report</button>
+      <div id="questionReportStatus" class="report-status" role="status" aria-live="polite"></div>
+    </div>
+    <div id="reportSuccessStep" class="report-step report-success-view" hidden>
+      <div class="report-success-icon">✓</div><div class="report-success-title">Report Sent</div><div class="report-success-text">Thank you. We will review this question.</div>
+    </div>
+  </div>
+</section>
+
 <!-- RE-ENGINEERED DYNAMIC PREMIUM VIEW RENDERING CORE INTERFACE LAYER -->
 <script>
 
@@ -3046,6 +3088,7 @@ let currentChapter = null;
 let currentQuizTitle = "";
 /* Leaderboard API integration (added) */
 const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
+const QUESTION_REPORT_API_URL = "https://wrong-question-report.trevoraxgaming9720.workers.dev/";
 let currentQuizPath = "";
 let currentBookmarkQuestionIndex = null;
 let currentBookmarkIdOverride = null;
@@ -3054,6 +3097,150 @@ let currentBookmarkIdOverride = null;
    question's index. retestIndexMap[i] stores the ORIGINAL index for position
    i in the filtered subset, so bookmarks keep pointing at the right question. */
 let retestIndexMap = null;
+
+/* ===== Wrong Question Report ===== */
+let questionReportReason = '';
+let questionReportSubmitting = false;
+
+function questionReportNumber(){
+  if(typeof getBookmarkTargetIndex === 'function') return getBookmarkTargetIndex()+1;
+  return currentQ+1;
+}
+
+function setQuestionReportStep(step){
+  const reason=document.getElementById('reportReasonStep');
+  const details=document.getElementById('reportDetailsStep');
+  const success=document.getElementById('reportSuccessStep');
+  if(reason) reason.hidden=step!=='reason';
+  if(details) details.hidden=step!=='details';
+  if(success) success.hidden=step!=='success';
+}
+
+function resetQuestionReportForm(){
+  questionReportReason='';
+  questionReportSubmitting=false;
+  const description=document.getElementById('questionReportDescription');
+  const submit=document.getElementById('questionReportSubmit');
+  const status=document.getElementById('questionReportStatus');
+  if(description) description.value='';
+  if(submit){submit.disabled=false;submit.textContent='Submit Report';}
+  if(status){status.textContent='';status.className='report-status';}
+  updateQuestionReportCount();
+  setQuestionReportStep('reason');
+}
+
+function openQuestionReport(){
+  if(!Array.isArray(data)||!data[currentQ]) return;
+  resetQuestionReportForm();
+  const number=questionReportNumber();
+  const context=document.getElementById('questionReportContext');
+  if(context) context.textContent=(currentQuizTitle||'Quiz')+' · Question '+number;
+  const overlay=document.getElementById('questionReportOverlay');
+  const modal=document.getElementById('questionReportModal');
+  overlay?.classList.add('open');
+  modal?.classList.add('open');
+  overlay?.setAttribute('aria-hidden','false');
+  modal?.setAttribute('aria-hidden','false');
+  document.body.classList.add('question-report-open');
+  if(!reportHistoryPushed){
+    history.pushState({reportQuestionOpen:true,screen:'quiz'},'');
+    reportHistoryPushed=true;
+  }
+  if(typeof updateAIButtonVisibility==='function') updateAIButtonVisibility();
+}
+
+function hideQuestionReportUI(){
+  document.getElementById('questionReportOverlay')?.classList.remove('open');
+  document.getElementById('questionReportModal')?.classList.remove('open');
+  document.getElementById('questionReportOverlay')?.setAttribute('aria-hidden','true');
+  document.getElementById('questionReportModal')?.setAttribute('aria-hidden','true');
+  document.body.classList.remove('question-report-open');
+  if(document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  if(typeof updateAIButtonVisibility==='function') updateAIButtonVisibility();
+}
+
+function closeQuestionReport(){
+  if(reportHistoryPushed) history.back();
+  else hideQuestionReportUI();
+}
+
+function selectQuestionReportReason(reason){
+  const valid=['Wrong Question','Wrong Option','Wrong Wording','Others'];
+  if(!valid.includes(reason)) return;
+  questionReportReason=reason;
+  const badge=document.getElementById('reportSelectedReason');
+  if(badge) badge.textContent=reason;
+  setQuestionReportStep('details');
+  setTimeout(()=>document.getElementById('questionReportDescription')?.focus(),180);
+}
+
+function backToQuestionReportReasons(){
+  if(questionReportSubmitting) return;
+  setQuestionReportStep('reason');
+}
+
+function updateQuestionReportCount(){
+  const description=document.getElementById('questionReportDescription');
+  const count=document.getElementById('questionReportCount');
+  if(count) count.textContent=String(description?.value.length||0)+'/800';
+}
+
+async function submitQuestionReport(){
+  if(questionReportSubmitting) return;
+  const descriptionEl=document.getElementById('questionReportDescription');
+  const submit=document.getElementById('questionReportSubmit');
+  const status=document.getElementById('questionReportStatus');
+  const description=(descriptionEl?.value||'').trim();
+  if(!questionReportReason){setQuestionReportStep('reason');return;}
+  if(description.length<3){
+    if(status){status.textContent='Please describe the issue first.';status.className='report-status error';}
+    descriptionEl?.focus();
+    return;
+  }
+  const item=data[currentQ];
+  if(!item) return;
+  const options=Array.isArray(T(item,'o'))?T(item,'o'):[];
+  const selectedIndex=selectedAnswers[currentQ];
+  const selectedText=Number.isInteger(selectedIndex)&&options[selectedIndex]!==undefined?options[selectedIndex]:'Not Answered';
+  const correctIndex=Number(item.a);
+  const correctText=Number.isInteger(correctIndex)&&options[correctIndex]!==undefined?options[correctIndex]:'Not available';
+  const payload={
+    subject:currentSubject||'Unknown',
+    category:currentCategory||'',
+    chapter:currentChapter||'',
+    testName:currentQuizTitle||document.title||'Quiz',
+    quizPath:currentQuizPath||'',
+    questionNumber:questionReportNumber(),
+    reason:questionReportReason,
+    description:description,
+    question:T(item,'q')||'',
+    options:options,
+    userResponse:selectedText,
+    correctAnswer:correctText,
+    language:appLang||'hi',
+    reportedAt:new Date().toISOString()
+  };
+  questionReportSubmitting=true;
+  if(submit){submit.disabled=true;submit.textContent='Sending…';}
+  if(status){status.textContent='Sending report securely…';status.className='report-status';}
+  try{
+    const response=await fetch(QUESTION_REPORT_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok||!result.ok) throw new Error(result.error||'Report failed');
+    setQuestionReportStep('success');
+    setTimeout(()=>{
+      if(document.getElementById('questionReportModal')?.classList.contains('open')) closeQuestionReport();
+    },1200);
+  }catch(error){
+    questionReportSubmitting=false;
+    if(submit){submit.disabled=false;submit.textContent='Try Again';}
+    if(status){status.textContent='Report could not be sent. Check internet and try again.';status.className='report-status error';}
+  }
+}
 
 /* ===== Persistent Question Bookmarks ===== */
 const BOOKMARK_STORAGE_KEY='devssc:bookmarks:v1';
@@ -3510,6 +3697,7 @@ let skipExitConfirmOnce = false;
 let isBookmarkOnlyQuiz = false;
 let analysisHistoryPushed = false;
 let analysisPaletteHistoryPushed = false;
+let reportHistoryPushed = false;
 // Wrong/Skipped/Mixed retests are practice attempts and must not overwrite
 // the All Time Best of the original full test.
 let isRetestAttempt = false;
@@ -3606,6 +3794,14 @@ window.addEventListener('popstate', (e) => {
     return;
   }
 
+  // Report Question owns one temporary history entry. Back closes only the
+  // report sheet and leaves the active quiz exactly where it was.
+  if (reportHistoryPushed) {
+    reportHistoryPushed = false;
+    hideQuestionReportUI();
+    return;
+  }
+
   // If the question palette is open, this back-navigation exists only to
   // close it — consume it here and stop, so the quiz/explorer logic below
   // (which would otherwise exit the whole quiz) never runs.
@@ -3681,6 +3877,8 @@ window.addEventListener('popstate', (e) => {
   // If currently inside the quiz engine, exit back to the explorer first
   const quizEngine = document.getElementById('quizEngineBox');
   if (quizEngine && quizEngine.style.display !== 'none') {
+    hideQuestionReportUI();
+    reportHistoryPushed = false;
     if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
     analysisHistoryPushed = false;
     quizEngine.style.display = 'none';
@@ -4992,6 +5190,8 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
   analysisHistoryPushed = false;
   analysisPaletteHistoryPushed = false;
+  if (typeof hideQuestionReportUI === 'function') hideQuestionReportUI();
+  reportHistoryPushed = false;
   if (typeof resultAnalysisSnapshot !== 'undefined') resultAnalysisSnapshot = null;
   if (typeof resultAnalysisPosition !== 'undefined') resultAnalysisPosition = 0;
   if (typeof resultAnalysisFilter !== 'undefined') resultAnalysisFilter = 'all';
@@ -6477,8 +6677,9 @@ function updateAIButtonVisibility() {
   const retestModalOpen = document.getElementById('retestModal')?.style.display === 'flex';
   const analysisOpen = document.getElementById('resultAnalysisModal')?.classList.contains('open');
   const analysisPaletteOpen = document.getElementById('analysisPalettePanel')?.classList.contains('open');
+  const questionReportOpen = document.getElementById('questionReportModal')?.classList.contains('open');
 
-  if(analysisOpen && !analysisPaletteOpen && !isPaused && !submitConfirmOpen && !exitConfirmOpen && !retestModalOpen){
+  if(analysisOpen && !analysisPaletteOpen && !questionReportOpen && !isPaused && !submitConfirmOpen && !exitConfirmOpen && !retestModalOpen){
     aiBtn.style.display='flex';
     return;
   }
@@ -6490,7 +6691,8 @@ function updateAIButtonVisibility() {
     !isPaused &&
     !submitConfirmOpen &&
     !exitConfirmOpen &&
-    !retestModalOpen
+    !retestModalOpen &&
+    !questionReportOpen
   ) {
     aiBtn.style.display = 'flex';
   } else {
