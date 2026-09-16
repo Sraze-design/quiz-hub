@@ -97,6 +97,16 @@ body {
   padding: 0;
 }
 
+/* iPadOS 27 standalone Web App: the system's Liquid Glass status bar is
+   transparent. Keep a dark app surface behind it, instead of allowing the
+   white explorer card to create a large frosted band at the very top. */
+@media (display-mode: standalone) {
+  html, body { background: #1e2530; }
+  .premium-app-header {
+    padding-top: calc(32px + env(safe-area-inset-top));
+  }
+}
+
 .container {
   width: 100%;
   max-width: 500px;
@@ -2246,9 +2256,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 </style>
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#1e2530">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Dream To Destiny">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
