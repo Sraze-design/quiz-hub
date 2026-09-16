@@ -97,16 +97,6 @@ body {
   padding: 0;
 }
 
-/* iPadOS 27 standalone Web App: the system's Liquid Glass status bar is
-   transparent. Keep a dark app surface behind it, instead of allowing the
-   white explorer card to create a large frosted band at the very top. */
-@media (display-mode: standalone) {
-  html, body { background: #1e2530; }
-  .premium-app-header {
-    padding-top: calc(32px + env(safe-area-inset-top));
-  }
-}
-
 .container {
   width: 100%;
   max-width: 500px;
@@ -2256,9 +2246,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 </style>
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#1e2530">
+<meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Dream To Destiny">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
@@ -3219,9 +3209,16 @@ async function openBookmarkedQuestion(bookmark){
     currentQuizTitle = bookmark.testTitle || 'Quiz';
     let item = bookmark.questionData ? JSON.parse(JSON.stringify(bookmark.questionData)) : null;
     if(!item){
-      const response = await fetchQuizFile(bookmark.path);
+      const response = await fetch(`./${bookmark.path}`);
+      if(!response.ok) throw new Error('File Download Failed');
       const source = await response.text();
-      const quizQuestions = parseQuizDataSource(source);
+      let quizQuestions;
+      try{ quizQuestions = new Function(source + "\nreturn data;")(); }
+      catch(e){
+        const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+        if(!match) throw e;
+        quizQuestions = new Function('return ' + match[1])();
+      }
       if(!Array.isArray(quizQuestions) || !quizQuestions[bookmark.questionIndex]) throw new Error('Saved question not found');
       item = JSON.parse(JSON.stringify(quizQuestions[bookmark.questionIndex]));
     }
@@ -3302,9 +3299,16 @@ async function startBookmarkedTestQuiz(bookmarks){
       if(!item && b.path){
         try{
           if(!(b.path in fileCache)){
-            const response = await fetchQuizFile(b.path);
+            const response = await fetch(`./${b.path}`);
+            if(!response.ok) throw new Error('File Download Failed');
             const source = await response.text();
-            const quizQuestions = parseQuizDataSource(source);
+            let quizQuestions;
+            try{ quizQuestions = new Function(source + "\nreturn data;")(); }
+            catch(e){
+              const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+              if(!match) throw e;
+              quizQuestions = new Function('return ' + match[1])();
+            }
             fileCache[b.path]=Array.isArray(quizQuestions)?quizQuestions:[];
           }
           const quizQuestions=fileCache[b.path];
@@ -3387,56 +3391,6 @@ async function buildGlobalQuizIndex() {
     showError("Network Error Occurred", "Kindly check your internet connection or verify index.json deployment.");
   } finally {
     showLoader(false);
-  }
-}
-
-// index.json में पुराने और नए दोनों तरह के paths मिल सकते हैं, जैसे
-// "Test.html", "./Test.html", "/Test.html" या Windows वाला "folder\\Test.html".
-// सभी को एक ही सुरक्षित relative URL में बदलकर try करते हैं, ताकि card दबाने
-// पर valid quiz file path के कारण fail न हो.
-function quizFileCandidates(quizPath) {
-  const raw = String(quizPath || '').trim().replace(/\\\\/g, '/');
-  if (!raw) return [];
-  const relative = raw.replace(/^(?:\.\/)+/, '').replace(/^\/+/, '');
-  const encoded = encodeURI(relative);
-  return [...new Set([relative, `./${relative}`, encoded, `./${encoded}`])];
-}
-
-async function fetchQuizFile(quizPath) {
-  const candidates = quizFileCandidates(quizPath);
-  if (!candidates.length) throw new Error('Quiz file path is missing');
-
-  for (const path of candidates) {
-    try {
-      const response = await fetch(path, { cache: 'no-store' });
-      if (response.ok) return response;
-    } catch (_) {
-      // Try the next equivalent path form.
-    }
-  }
-  throw new Error(`File Download Failed: ${quizPath}`);
-}
-
-// Quiz HTMLs may declare embedded diagrams above `const data`, for example:
-// const Q35_IMAGE = "data:image/png;base64,...";
-// The old reader evaluated only the data array, so those image variables were
-// missing and the entire test failed to open. Evaluate that small script prefix
-// together with the array, without running the quiz page's own UI script.
-function parseQuizDataSource(source) {
-  try {
-    return new Function(source + "\nreturn data;")();
-  } catch (fullSourceError) {
-    const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
-    if (!match) throw fullSourceError;
-
-    const dataStart = source.indexOf(match[0]);
-    const scriptStart = source.lastIndexOf('<script', dataStart);
-    let declarations = '';
-    if (scriptStart !== -1) {
-      const scriptBodyStart = source.indexOf('>', scriptStart) + 1;
-      if (scriptBodyStart > scriptStart) declarations = source.slice(scriptBodyStart, dataStart);
-    }
-    return new Function(`${declarations}\nreturn (${match[1]});`)();
   }
 }
 
@@ -4920,9 +4874,17 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     } else {
       currentQuizTitle = "";
     }
-    const response = await fetchQuizFile(quizPath);
+    const response = await fetch(`./${quizPath}`);
+    if (!response.ok) throw new Error("File Download Failed");
     const source = await response.text();
-    const quizQuestions = parseQuizDataSource(source);
+    let quizQuestions;
+    try{
+      quizQuestions = new Function(source + "\nreturn data;")();
+    }catch(e){
+      const match = source.match(/const\s+data\s*=\s*(\[[\s\S]*?\]);/);
+      if(!match) throw e;
+      quizQuestions = new Function("return " + match[1])();
+    }
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
     data=quizQuestions;
@@ -8246,3 +8208,5 @@ if ('caches' in window) {
 </body>
 
 </html>
+
+
