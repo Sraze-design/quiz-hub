@@ -1,0 +1,2104 @@
+const Q41_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q1. बोहर के परमाणु मॉडल के अनुसार, इलेक्ट्रॉनों के विविक्त कक्षकों के संबंध में निम्नलिखित में से कौन-सा कथन गलत है?",
+    q_en: "Q1. According to Bohr's atomic model, which of the following statements about the discrete orbits of electrons is incorrect?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) विविक्त कक्षाओं में परिक्रमण करते समय, इलेक्ट्रॉन ऊर्जा का विकिरण चरघातांकी रूप से करते हैं",
+      "(b) विविक्त कक्षाओं को ऊर्जा स्तर भी कहा जाता है",
+      "(c) विविक्त कक्षाओं में परिक्रमण करते समय, इलेक्ट्रॉन ऊर्जा का विकिरण नहीं करते हैं",
+      "(d) इलेक्ट्रॉनों की विविक्त कक्षाएं परमाणु के भीतर अनुमत कुछ निश्चित विशेष कक्षाएं होती हैं"
+    ],
+    o_en: [
+      "(a) While revolving in discrete orbits, electrons radiate energy exponentially",
+      "(b) Discrete orbits are also called energy levels",
+      "(c) While revolving in discrete orbits, electrons do not radiate energy",
+      "(d) The discrete orbits of electrons are certain fixed special orbits permitted within the atom"
+    ],
+    a: 0,
+    e_hi: "बोहर मॉडल के अनुसार इलेक्ट्रॉन अनुमत स्थिर कक्षाओं में रहते हुए ऊर्जा का विकिरण नहीं करते हैं।<br>इसलिए ऊर्जा विकिरण करने वाला कथन गलत है।",
+    e_en: "According to Bohr's model, electrons in permitted stationary orbits do not radiate energy.<br>Therefore, the statement that they radiate energy is incorrect."
+  },
+  {
+    q_hi: "Q2. हीरे का निरपेक्ष अपवर्तनांक 2.42 है। यदि निर्वात में प्रकाश की चाल 3 × 10⁸ m/s है, तो कौन-सा मान हीरे में प्रकाश की चाल का सर्वोत्तम रूप से आकलन करता है?",
+    q_en: "Q2. The absolute refractive index of diamond is 2.42. If the speed of light in vacuum is 3 x 10⁸ m/s, which value best estimates the speed of light in diamond?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 1 × 10⁸ m/s",
+      "(b) 1.24 × 10⁸ m/s",
+      "(c) 2 × 10⁸ m/s",
+      "(d) 1.5 × 10⁸ m/s"
+    ],
+    o_en: [
+      "(a) 1 x 10⁸ m/s",
+      "(b) 1.24 x 10⁸ m/s",
+      "(c) 2 x 10⁸ m/s",
+      "(d) 1.5 x 10⁸ m/s"
+    ],
+    a: 1,
+    e_hi: "सूत्र: n = c/v.<br>v = 3 x 10⁸ / 2.42 ≈ 1.24 x 10⁸ m/s।",
+    e_en: "Formula: n = c/v.<br>v = 3 x 10⁸ / 2.42 ≈ 1.24 x 10⁸ m/s."
+  },
+  {
+    q_hi: "Q3. एक रोलर कोस्टर कार अपने ट्रैक के उच्चतम बिंदु पर है और नीचे उतरने ही वाली है। यदि ऊँचाई और गुरुत्व को नियत रखते हुए कार और उसके यात्रियों का द्रव्यमान दोगुना कर दिया जाए, तो मूल परिदृश्य की तुलना में शीर्ष पर गुरुत्वीय स्थितिज ऊर्जा क्या होगी?",
+    q_en: "Q3. A roller-coaster car is at the highest point of its track and is about to descend. If the mass of the car and its passengers is doubled while height and gravity remain constant, what happens to the gravitational potential energy at the top compared with the original case?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) गुरुत्वीय स्थितिज ऊर्जा अपरिवर्तित रहेगी",
+      "(b) गुरुत्वीय स्थितिज ऊर्जा दोगुनी हो जाएगी",
+      "(c) गुरुत्वीय स्थितिज ऊर्जा चार गुनी हो जाएगी",
+      "(d) गुरुत्वीय स्थितिज ऊर्जा आधी हो जाएगी"
+    ],
+    o_en: [
+      "(a) Gravitational potential energy remains unchanged",
+      "(b) Gravitational potential energy becomes double",
+      "(c) Gravitational potential energy becomes four times",
+      "(d) Gravitational potential energy becomes half"
+    ],
+    a: 1,
+    e_hi: "स्थितिज ऊर्जा U = mgh होती है।<br>h और g नियत हैं, इसलिए m दोगुना करने पर U भी दोगुनी हो जाती है।",
+    e_en: "Potential energy is U = mgh.<br>With h and g fixed, doubling m doubles U."
+  },
+  {
+    q_hi: "Q4. कठोर जल में साबुन कम प्रभावी क्यों होता है?",
+    q_en: "Q4. Why is soap less effective in hard water?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) साबुन अपनी ध्रुवीयता का त्याग कर देता है",
+      "(b) साबुन शीघ्रता से वाष्पित हो जाता है",
+      "(c) साबुन अघुलनशील पृष्ठमल का निर्माण करता है",
+      "(d) साबुन अम्लीय हो जाता है"
+    ],
+    o_en: [
+      "(a) Soap loses its polarity",
+      "(b) Soap evaporates quickly",
+      "(c) Soap forms insoluble scum",
+      "(d) Soap becomes acidic"
+    ],
+    a: 2,
+    e_hi: "कठोर जल में Ca²⁺/Mg²⁺ आयन साबुन के साथ अघुलनशील लवण बनाते हैं।<br>यह पृष्ठमल बनाता है और साबुन की सफाई क्षमता घटती है।",
+    e_en: "In hard water, Ca²⁺/Mg²⁺ ions form insoluble salts with soap.<br>This produces scum and reduces the cleaning action of soap."
+  },
+  {
+    q_hi: "Q5. धातुओं के लिए निम्नलिखित में से कौन-सा भौतिक गुणधर्म सत्य है?",
+    q_en: "Q5. Which of the following physical properties is true for metals?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) धातुएं चमकदार होती हैं और विद्युत की सुचालक होती हैं।",
+      "(b) धातुएं, कक्ष तापमान पर ठोस होती हैं।",
+      "(c) धातुएं, ऊष्मा की अल्प चालक होती हैं।",
+      "(d) धातुएं भंगुर होती हैं और आसानी से टूट जाती हैं।"
+    ],
+    o_en: [
+      "(a) Metals are lustrous and good conductors of electricity.",
+      "(b) Metals are solid at room temperature.",
+      "(c) Metals are poor conductors of heat.",
+      "(d) Metals are brittle and break easily."
+    ],
+    a: 0,
+    e_hi: "धातुओं का सामान्य गुण चमक और विद्युत की अच्छी चालकता है।<br>इसलिए विकल्प (a) सही है।",
+    e_en: "A common property of metals is lustre and good electrical conductivity.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q6. एक चिकित्सा प्रयोगशाला एक रोगी के प्रतिदर्श (sample) में जीवाणु का पता लगाती है। वर्गीकरण प्रणाली के ऐतिहासिक विकास के अनुसार, तीन जगत प्रणाली प्रस्तावित होने के ठीक बाद जीवाणु को किस जगत में रखा गया होगा?",
+    q_en: "Q6. A medical laboratory detects bacteria in a patient's sample. According to the historical development of classification systems, in which kingdom would bacteria have been placed immediately after the three-kingdom system was proposed?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) मोनेरा",
+      "(b) प्रोटिस्टा",
+      "(c) प्लांटी",
+      "(d) ऐनिमेलिया"
+    ],
+    o_en: [
+      "(a) Monera",
+      "(b) Protista",
+      "(c) Plantae",
+      "(d) Animalia"
+    ],
+    a: 1,
+    e_hi: "दिए गए प्रश्न की उत्तर-कुंजी के अनुसार जीवाणु को प्रोटिस्टा में रखा गया है।<br>अतः सही उत्तर प्रोटिस्टा है।",
+    e_en: "According to the paper's answer key, bacteria are placed in Protista here.<br>Therefore, the correct answer is Protista."
+  },
+  {
+    q_hi: "Q7. तंत्रिका ऊतक से संबंधित गलत कथन की पहचान कीजिए।",
+    q_en: "Q7. Identify the incorrect statement related to nervous tissue.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) तंत्रिका ऊतक की कोशिकाओं को वृक्काणु कहा जाता है।",
+      "(b) तंत्रिकाक्ष तंत्रिका ऊतक का एकल, लंबा खंड है।",
+      "(c) तंत्रिकावेग ऐसे संकेत हैं जो तंत्रिका तंतुओं के साथ संचरित होते हैं।",
+      "(d) तंत्रिका ऊतक में मेरुरज्जु शामिल होता है।"
+    ],
+    o_en: [
+      "(a) The cells of nervous tissue are called nephrons.",
+      "(b) An axon is a single, long process of nervous tissue.",
+      "(c) Nerve impulses are signals transmitted along nerve fibres.",
+      "(d) The spinal cord includes nervous tissue."
+    ],
+    a: 0,
+    e_hi: "तंत्रिका ऊतक की प्रमुख कोशिकाएँ न्यूरॉन कहलाती हैं, वृक्काणु नहीं।<br>इसलिए विकल्प (a) गलत कथन है।",
+    e_en: "The main cells of nervous tissue are neurons, not nephrons.<br>Therefore, option (a) is the incorrect statement."
+  },
+  {
+    q_hi: "Q8. यदि किसी पिंड का द्रव्यमान दोगुना कर दिया जाए और त्वरण नियत रहे, तो बल क्या होगा?",
+    q_en: "Q8. If the mass of a body is doubled while acceleration remains constant, what happens to the force?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) समान रहेगा",
+      "(b) चार गुना हो जाएगा",
+      "(c) आधा हो जाएगा",
+      "(d) दोगुना हो जाएगा"
+    ],
+    o_en: [
+      "(a) Remains the same",
+      "(b) Becomes four times",
+      "(c) Becomes half",
+      "(d) Becomes double"
+    ],
+    a: 3,
+    e_hi: "न्यूटन के द्वितीय नियम से F = ma।<br>a नियत है, इसलिए m दोगुना होने पर F दोगुना होगा।",
+    e_en: "By Newton's second law, F = ma.<br>With a constant, doubling m doubles F."
+  },
+  {
+    q_hi: "Q9. हमारे द्वारा की गई कौन-सी कार्रवाई प्रत्यक्ष रूप से जैविक आवर्धन (biological magnification) को कम कर सकती है?",
+    q_en: "Q9. Which action by us can directly reduce biological magnification?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) कटाई के बाद फसल के अवशेषों को जलाना",
+      "(b) फसलों पर रासायनिक पीड़कनाशकों का उपयोग कम करना",
+      "(c) उपयोग करने से पहले अनाज को अच्छी तरह धो लेना",
+      "(d) अनाज के स्थान पर मांस खाना"
+    ],
+    o_en: [
+      "(a) Burning crop residues after harvesting",
+      "(b) Reducing the use of chemical pesticides on crops",
+      "(c) Washing grains thoroughly before use",
+      "(d) Eating meat instead of grains"
+    ],
+    a: 1,
+    e_hi: "जैविक आवर्धन का प्रमुख कारण खाद्य-श्रृंखला में स्थायी रसायनों का संचय है।<br>रासायनिक पीड़कनाशकों का उपयोग कम करने से उनका प्रवेश और संचय घटता है।",
+    e_en: "Biological magnification results from the accumulation of persistent chemicals in food chains.<br>Reducing chemical pesticide use lowers their entry and accumulation."
+  },
+  {
+    q_hi: "Q10. जे.जे. थॉमसन के प्रायोगिक मॉडल ने ____________ का प्रस्ताव दिया।",
+    q_en: "Q10. J. J. Thomson's experimental model proposed ____________.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) इलेक्ट्रॉन की खोज",
+      "(b) न्यूट्रॉन की खोज",
+      "(c) प्रोटॉन की खोज",
+      "(d) नाभिक की खोज"
+    ],
+    o_en: [
+      "(a) Discovery of the electron",
+      "(b) Discovery of the neutron",
+      "(c) Discovery of the proton",
+      "(d) Discovery of the nucleus"
+    ],
+    a: 0,
+    e_hi: "दिए गए प्रश्न की उत्तर-कुंजी में जे. जे. थॉमसन से इलेक्ट्रॉन की खोज संबद्ध है।<br>अतः विकल्प (a) सही है।",
+    e_en: "The paper's answer key associates J. J. Thomson with the discovery of the electron.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q11. पादपों में सुक्रोज किस प्राथमिक प्रक्रिया द्वारा फ्लोएम ऊतक में प्रवेश करता है?",
+    q_en: "Q11. By which primary process does sucrose enter phloem tissue in plants?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) अर्द्ध-पारगम्य झिल्ली के माध्यम से परासरण",
+      "(b) वाहक प्रोटीन के माध्यम से सुगम विसरण",
+      "(c) प्रवणता के अनुदिश सरल विसरण",
+      "(d) ATP से ऊर्जा के साथ सक्रिय परिवहन"
+    ],
+    o_en: [
+      "(a) Osmosis through a semipermeable membrane",
+      "(b) Facilitated diffusion through carrier proteins",
+      "(c) Simple diffusion down the gradient",
+      "(d) Active transport using energy from ATP"
+    ],
+    a: 3,
+    e_hi: "फ्लोएम लोडिंग में सुक्रोज को सांद्रता-प्रवणता के विरुद्ध पहुँचाने के लिए ऊर्जा की आवश्यकता होती है।<br>यह ATP-निर्भर सक्रिय परिवहन से होता है।",
+    e_en: "Phloem loading requires energy to move sucrose against a concentration gradient.<br>It occurs through ATP-dependent active transport."
+  },
+  {
+    q_hi: "Q12. वायु के माध्यम से गमन करने वाली ध्वनि तरंग में संपीडन और विरलन का निर्माण कैसे होता है?",
+    q_en: "Q12. How are compressions and rarefactions produced in a sound wave travelling through air?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) जैसे-जैसे तरंग गुजरती है, वायु में मौजूद कण सर्पिल पैटर्न में गति करते हैं",
+      "(b) वायु में मौजूद कण एक साथ गुच्छित होते हैं और बारी-बारी से प्रसारित होते हैं",
+      "(c) वायु में मौजूद कण स्थायी रूप से टकराते हैं और एक साथ चिपक जाते हैं",
+      "(d) वायु में मौजूद कण सभी समय समान दूरी बनाए रखते हैं"
+    ],
+    o_en: [
+      "(a) Air particles move in a spiral pattern as the wave passes",
+      "(b) Air particles alternately bunch together and spread apart",
+      "(c) Air particles collide permanently and stick together",
+      "(d) Air particles maintain equal separation at all times"
+    ],
+    a: 1,
+    e_hi: "अनुदैर्ध्य ध्वनि तरंग में वायु कण आगे-पीछे दोलन करते हैं।<br>इससे बारी-बारी से संपीडन और विरलन बनते हैं।",
+    e_en: "In a longitudinal sound wave, air particles oscillate back and forth.<br>This creates alternating compressions and rarefactions."
+  },
+  {
+    q_hi: "Q13. मानव हृदय में अलग-अलग कक्ष (chambers) होने का मुख्य उद्देश्य क्या है?",
+    q_en: "Q13. What is the main purpose of having separate chambers in the human heart?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) गैसीय विनिमय के लिए रक्त को विशेष रूप से फेफड़ों की ओर पंप करना",
+      "(b) विश्राम की अवधि के दौरान अतिरिक्त रक्त के लिए भंडारण प्रदान करना",
+      "(c) ऑक्सीजन युक्त और कार्बन डाइऑक्साइड युक्त रक्त के मिश्रण को रोकना",
+      "(d) दैहिक शिराओं में स्थिर रक्तदाब बनाए रखना"
+    ],
+    o_en: [
+      "(a) To pump blood specifically toward the lungs for gaseous exchange",
+      "(b) To provide storage for extra blood during rest",
+      "(c) To prevent mixing of oxygenated and carbon-dioxide-rich blood",
+      "(d) To maintain constant blood pressure in systemic veins"
+    ],
+    a: 2,
+    e_hi: "हृदय के पृथक कक्ष ऑक्सीजनयुक्त और ऑक्सीजन-विहीन/CO₂-युक्त रक्त को अलग रखते हैं।<br>इससे दोनों प्रकार के रक्त का मिश्रण रोका जाता है।",
+    e_en: "Separate chambers keep oxygenated and deoxygenated/CO₂-rich blood apart.<br>This prevents mixing of the two types of blood."
+  },
+  {
+    q_hi: "Q14. हाइड्रोक्लोरिक अम्ल और सोडियम हाइड्रॉक्साइड विलयनों की कौन-सी सामान्य विशेषता, जल के pH को बदलने और विद्युत का चालन करने, उनकी दोनों क्षमताओं की व्याख्या करती है?",
+    q_en: "Q14. What common property of hydrochloric acid and sodium hydroxide solutions explains both their ability to change the pH of water and conduct electricity?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) दोनों जलीय विलयन में आयन उत्पन्न करते हैं",
+      "(b) दोनों का स्वाद खट्टा होता है",
+      "(c) दोनों का pH मान 7 से कम होता है",
+      "(d) दोनों नीले लिटमस को लाल कर देते हैं"
+    ],
+    o_en: [
+      "(a) Both produce ions in aqueous solution",
+      "(b) Both taste sour",
+      "(c) Both have pH below 7",
+      "(d) Both turn blue litmus red"
+    ],
+    a: 0,
+    e_hi: "HCl और NaOH जल में आयनों में विघटित होते हैं।<br>ये आयन pH को प्रभावित करते हैं और विद्युत धारा का चालन करते हैं।",
+    e_en: "HCl and NaOH dissociate into ions in water.<br>These ions affect pH and conduct electric current."
+  },
+  {
+    q_hi: "Q15. एक विद्यार्थी एक ऐसा डिवाइस डिजाइन करना चाहता है जो दी गई बैटरी और समय के लिए अधिकतम ऊष्मा उत्पन्न करे। विद्यार्थी को किस विन्यास का चयन करना चाहिए?",
+    q_en: "Q15. A student wants to design a device that produces maximum heat for a given battery and time. Which configuration should the student choose?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) प्रतिरोध बदले बिना अधिक बैटरियां जोड़ना",
+      "(b) शून्य प्रतिरोध वाली बैटरी को लघु-पथ करना",
+      "(c) अत्यंत निम्न प्रतिरोध मान वाले प्रतिरोधक का उपयोग करना",
+      "(d) उच्चतम संभव प्रतिरोध मान वाले प्रतिरोधक का उपयोग करना"
+    ],
+    o_en: [
+      "(a) Add more batteries without changing resistance",
+      "(b) Short-circuit the battery with zero resistance",
+      "(c) Use a resistor with an extremely low resistance value",
+      "(d) Use a resistor with the highest possible resistance value"
+    ],
+    a: 2,
+    e_hi: "दिए गए स्रोत की उत्तर-कुंजी के अनुसार अत्यंत निम्न प्रतिरोध वाला प्रतिरोधक चुना जाता है।<br>अतः विकल्प (c) सही है।",
+    e_en: "According to the source answer key, the configuration uses a resistor with an extremely low resistance.<br>Therefore, option (c) is correct."
+  },
+  {
+    q_hi: "Q16. किसी वस्तु की स्थितिज ऊर्जा का संख्यात्मक मान किस SI मात्रक में मापा जाता है?",
+    q_en: "Q16. In which SI unit is the numerical value of an object's potential energy measured?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) पास्कल (Pa)",
+      "(b) वाट (W)",
+      "(c) न्यूटन (N)",
+      "(d) जूल (J)"
+    ],
+    o_en: [
+      "(a) Pascal (Pa)",
+      "(b) Watt (W)",
+      "(c) Newton (N)",
+      "(d) Joule (J)"
+    ],
+    a: 3,
+    e_hi: "ऊर्जा का SI मात्रक जूल (J) है।<br>स्थितिज ऊर्जा भी ऊर्जा है, इसलिए इसका मात्रक जूल है।",
+    e_en: "The SI unit of energy is the joule (J).<br>Potential energy is a form of energy, so its unit is joule."
+  },
+  {
+    q_hi: "Q17. खाद्य श्रृंखला: घास → टिड्डा → मेंढक → सर्प → गरुड़ में, DDT का संचय सर्वाधिक __________ में होगा।",
+    q_en: "Q17. In the food chain grass → grasshopper → frog → snake → eagle, the accumulation of DDT will be maximum in __________.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) गरुड़",
+      "(b) टिड्डा",
+      "(c) मेंढक",
+      "(d) घास"
+    ],
+    o_en: [
+      "(a) Eagle",
+      "(b) Grasshopper",
+      "(c) Frog",
+      "(d) Grass"
+    ],
+    a: 0,
+    e_hi: "DDT का जैविक आवर्धन प्रत्येक उच्च पोषण स्तर पर बढ़ता है।<br>शीर्ष उपभोक्ता गरुड़ में इसकी सांद्रता सर्वाधिक होगी।",
+    e_en: "DDT biomagnifies at each higher trophic level.<br>Its concentration will therefore be highest in the top consumer, the eagle."
+  },
+  {
+    q_hi: "Q18. तत्वों के अणुओं के संदर्भ में, कौन-सा कथन परमाणुकता शब्द की सही व्याख्या करता है?",
+    q_en: "Q18. With reference to molecules of elements, which statement correctly explains the term atomicity?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) यह एक अणु में उपस्थित परमाणुओं की संख्या है",
+      "(b) यह किसी परमाणु में उपस्थित कोशों की संख्या है",
+      "(c) यह किसी तत्व में इलेक्ट्रॉनों की संख्या है",
+      "(d) यह एक अणु में उपस्थित परमाणुओं का कुल द्रव्यमान है"
+    ],
+    o_en: [
+      "(a) It is the number of atoms present in one molecule",
+      "(b) It is the number of shells present in an atom",
+      "(c) It is the number of electrons in an element",
+      "(d) It is the total mass of atoms present in one molecule"
+    ],
+    a: 0,
+    e_hi: "परमाणुकता किसी अणु में उपस्थित परमाणुओं की संख्या बताती है।<br>इसलिए विकल्प (a) सही है।",
+    e_en: "Atomicity is the number of atoms present in one molecule.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q19. निम्नलिखित में से कौन-सा मूलभूत परिवर्तन, अपघटन अभिक्रिया को अन्य प्रकार की रासायनिक अभिक्रियाओं से पृथक करता है?",
+    q_en: "Q19. Which fundamental change distinguishes a decomposition reaction from other types of chemical reactions?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) दो पदार्थों के संयोजन से एक पदार्थ का निर्माण",
+      "(b) एक यौगिक का सरल पदार्थों में टूटना",
+      "(c) विलयन में आयनों का विनिमय",
+      "(d) एक तत्व द्वारा दूसरे तत्व का प्रतिस्थापन"
+    ],
+    o_en: [
+      "(a) Formation of one substance by combining two substances",
+      "(b) Breakdown of one compound into simpler substances",
+      "(c) Exchange of ions in solution",
+      "(d) Replacement of one element by another element"
+    ],
+    a: 1,
+    e_hi: "अपघटन अभिक्रिया में एक यौगिक टूटकर दो या अधिक सरल पदार्थ बनाता है।<br>यही इसकी पहचान है।",
+    e_en: "In a decomposition reaction, one compound breaks down into two or more simpler substances.<br>This is its defining feature."
+  },
+  {
+    q_hi: "Q20. विज्ञान के एक विद्यार्थी से यह स्पष्ट करने के लिए कहा जाता है कि भारतीय भू-दृश्य में उच्च जैव-विविधता क्यों पाई जाती है। कौन-सा स्पष्टीकरण पर्यावास विविधता और स्थानिकता की अवधारणाओं को सर्वोत्तम रूप से एकीकृत करता है?",
+    q_en: "Q20. A science student is asked to explain why the Indian landscape has high biodiversity. Which explanation best integrates the concepts of habitat diversity and endemism?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) अनन्य कृषि से प्रजातियों की विविधता में वृद्धि होती है",
+      "(b) एकल जलवायु प्रजातियों की एकरूपता को बढ़ावा देती है",
+      "(c) विविध पर्यावास कई स्थानिक प्रजातियों के लिए परिस्थितियाँ सृजित करते हैं",
+      "(d) केवल मरुस्थलों पर फोकस करने से विविधता में वृद्धि होती है"
+    ],
+    o_en: [
+      "(a) Exclusive agriculture increases species diversity",
+      "(b) A single climate promotes species uniformity",
+      "(c) Diverse habitats create conditions for many endemic species",
+      "(d) Focusing only on deserts increases diversity"
+    ],
+    a: 2,
+    e_hi: "विभिन्न पर्यावास अलग-अलग पर्यावरणीय दशाएँ उपलब्ध कराते हैं।<br>इससे अनेक स्थानिक प्रजातियों के विकसित और बने रहने की परिस्थितियाँ बनती हैं।",
+    e_en: "Different habitats provide different environmental conditions.<br>This creates conditions in which many endemic species can evolve and persist."
+  },
+  {
+    q_hi: "Q21. एक रोगी को बाह्य शरीर आवरण में गंभीर क्षति के बाद बार-बार त्वचा संक्रमण हो रहा है। किस ऊतक के प्रभावित होने की सर्वाधिक संभावना है?",
+    q_en: "Q21. A patient suffers repeated skin infections after severe damage to the external body covering. Which tissue is most likely affected?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) संयोजी ऊतक",
+      "(b) पेशी ऊतक",
+      "(c) तंत्रिका ऊतक",
+      "(d) उपकला ऊतक"
+    ],
+    o_en: [
+      "(a) Connective tissue",
+      "(b) Muscular tissue",
+      "(c) Nervous tissue",
+      "(d) Epithelial tissue"
+    ],
+    a: 3,
+    e_hi: "त्वचा की बाहरी सुरक्षात्मक परत उपकला ऊतक से बनती है।<br>इसकी क्षति से संक्रमण का खतरा बढ़ता है।",
+    e_en: "The outer protective covering of the skin is epithelial tissue.<br>Damage to it increases the risk of infection."
+  },
+  {
+    q_hi: "Q22. एक उत्तल लेंस अपने प्रकाशिक केंद्र से 30 cm की दूरी पर एक वास्तविक प्रतिबिंब बनाता है। वस्तु लेंस से 20 cm की दूरी पर रखी है। चिह्न परिपाटी का उपयोग करते हुए, लेंस की फोकस दूरी के लिए सही चिह्न और मान क्या है?",
+    q_en: "Q22. A convex lens forms a real image 30 cm from its optical centre. The object is placed 20 cm from the lens. Using the sign convention, what are the correct sign and value of the focal length?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) +60 cm",
+      "(b) +12 cm",
+      "(c) -60 cm",
+      "(d) -12 cm"
+    ],
+    o_en: [
+      "(a) +60 cm",
+      "(b) +12 cm",
+      "(c) -60 cm",
+      "(d) -12 cm"
+    ],
+    a: 1,
+    e_hi: "लेंस सूत्र: 1/f = 1/v − 1/u।<br>u = -20 cm और v = +30 cm देने पर 1/f = 1/30 + 1/20 = 1/12, अतः f = +12 cm।",
+    e_en: "Lens formula: 1/f = 1/v − 1/u.<br>With u = -20 cm and v = +30 cm, 1/f = 1/30 + 1/20 = 1/12, so f = +12 cm."
+  },
+  {
+    q_hi: "Q23. द्वि-विमीय गति में विस्थापन सदिश क्या निरूपित करता है?",
+    q_en: "Q23. In two-dimensional motion, what does the displacement vector represent?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) वस्तु द्वारा अनुसरण किया गया पथ",
+      "(b) वस्तु की औसत चाल",
+      "(c) प्रारंभिक बिंदु से अंतिम बिंदु तक स्थिति में परिवर्तन",
+      "(d) पथ के अनुदिश तय की गई दूरी"
+    ],
+    o_en: [
+      "(a) The path followed by the object",
+      "(b) The average speed of the object",
+      "(c) The change in position from the initial point to the final point",
+      "(d) The distance travelled along the path"
+    ],
+    a: 2,
+    e_hi: "विस्थापन प्रारंभिक स्थिति से अंतिम स्थिति तक का सदिश परिवर्तन है।<br>यह वास्तविक पथ की कुल लंबाई नहीं बताता।",
+    e_en: "Displacement is the vector change from the initial position to the final position.<br>It does not represent the total length of the actual path."
+  },
+  {
+    q_hi: "Q24. यदि 4 Ω और 6 Ω के दो प्रतिरोधों को समांतर क्रम में जोड़ा जाए, तो तुल्य प्रतिरोध __________ होगा।",
+    q_en: "Q24. If two resistors of 4 Ω and 6 Ω are connected in parallel, the equivalent resistance will be __________.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 4 Ω और 6 Ω के बीच",
+      "(b) 6 Ω से अधिक",
+      "(c) 10 Ω के बराबर",
+      "(d) 4 Ω से कम"
+    ],
+    o_en: [
+      "(a) Between 4 Ω and 6 Ω",
+      "(b) More than 6 Ω",
+      "(c) Equal to 10 Ω",
+      "(d) Less than 4 Ω"
+    ],
+    a: 3,
+    e_hi: "समांतर संयोजन में तुल्य प्रतिरोध सबसे छोटे प्रतिरोध से भी कम होता है।<br>यहाँ सबसे छोटा प्रतिरोध 4 Ω है, इसलिए तुल्य प्रतिरोध 4 Ω से कम होगा।",
+    e_en: "In a parallel combination, equivalent resistance is less than the smallest individual resistance.<br>Here the smallest resistance is 4 Ω, so the equivalent resistance is less than 4 Ω."
+  },
+  {
+    q_hi: "Q25. यौगिक CH3-CH2-CHO का सही IUPAC नाम क्या है?",
+    q_en: "Q25. What is the correct IUPAC name of the compound CH3-CH2-CHO?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) प्रोपेनोन (Propanone)",
+      "(b) प्रोपेनल (Propanal)",
+      "(c) प्रोपेनोइक अम्ल (Propanoic acid)",
+      "(d) प्रोपेनॉल (Propanol)"
+    ],
+    o_en: [
+      "(a) Propanone",
+      "(b) Propanal",
+      "(c) Propanoic acid",
+      "(d) Propanol"
+    ],
+    a: 1,
+    e_hi: "CH3-CH2-CHO में 3 कार्बन और एल्डिहाइड (-CHO) समूह है।<br>3-कार्बन एल्डिहाइड का IUPAC नाम प्रोपेनल है।",
+    e_en: "CH3-CH2-CHO has three carbons and an aldehyde (-CHO) group.<br>The IUPAC name of a three-carbon aldehyde is propanal."
+  },
+  {
+    q_hi: "Q26. एक कार एकसमान चाल से चलते हुए एक निश्चित दूरी को 5 घंटे में तय करती है। यदि चाल 10 km/hr अधिक होती, तो उसे 1 घंटा कम लगता। कार की वास्तविक चाल ज्ञात कीजिए।",
+    q_en: "Q26. A car travelling at uniform speed covers a certain distance in 5 hours. If its speed were 10 km/hr more, it would take 1 hour less. Find the actual speed of the car.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 37 km/hr",
+      "(b) 42 km/hr",
+      "(c) 40 km/hr",
+      "(d) 45 km/hr"
+    ],
+    o_en: [
+      "(a) 37 km/hr",
+      "(b) 42 km/hr",
+      "(c) 40 km/hr",
+      "(d) 45 km/hr"
+    ],
+    a: 2,
+    e_hi: "मान लें वास्तविक चाल v km/hr है। दूरी = 5v और बढ़ी चाल पर दूरी = 4(v + 10)।<br>5v = 4(v + 10) ⇒ v = 40 km/hr।",
+    e_en: "Let the actual speed be v km/hr. Distance = 5v, and at the increased speed it is 4(v + 10).<br>5v = 4(v + 10) ⇒ v = 40 km/hr."
+  },
+  {
+    q_hi: "Q27. AA' और BB' दो समांतर सीधी रेखाएँ हैं। CC' एक तिर्यक रेखा है जो AA' और BB' को क्रमशः D और E बिन्दुओं पर काटती है। यदि ∠B'EC' = 127° है और ∠CDA' = (7x − 3)° है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q27. AA' and BB' are two parallel straight lines. CC' is a transversal intersecting AA' and BB' at D and E respectively. If ∠B'EC' = 127° and ∠CDA' = (7x − 3)°, find x.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 8",
+      "(b) 6",
+      "(c) 7",
+      "(d) 5"
+    ],
+    o_en: [
+      "(a) 8",
+      "(b) 6",
+      "(c) 7",
+      "(d) 5"
+    ],
+    a: 0,
+    e_hi: "समांतर रेखाओं में संबंधित/समतुल्य कोण के आधार पर (7x − 3)° = 53°।<br>7x = 56 ⇒ x = 8।",
+    e_en: "Using the angle relations for parallel lines, (7x − 3)° = 53°.<br>7x = 56 ⇒ x = 8."
+  },
+  {
+    q_hi: "Q28. यदि ब्याज अर्धवार्षिक रूप से संयोजित किया जाता है, तो ₹81,250 की धनराशि पर 8% वार्षिक ब्याज दर से 1.5 वर्ष में प्राप्त चक्रवृद्धि ब्याज ज्ञात कीजिए।",
+    q_en: "Q28. If interest is compounded half-yearly, find the compound interest on ₹81,250 at 8% per annum for 1.5 years.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) ₹10,045.10",
+      "(b) ₹10,245.30",
+      "(c) ₹10,345.40",
+      "(d) ₹10,145.20"
+    ],
+    o_en: [
+      "(a) ₹10,045.10",
+      "(b) ₹10,245.30",
+      "(c) ₹10,345.40",
+      "(d) ₹10,145.20"
+    ],
+    a: 3,
+    e_hi: "अर्धवार्षिक दर = 4% और अवधियाँ = 3।<br>राशि = 81,250(1.04)³ = ₹91,395.20; CI = ₹91,395.20 − ₹81,250 = ₹10,145.20।",
+    e_en: "Half-yearly rate = 4% and number of periods = 3.<br>Amount = 81,250(1.04)³ = ₹91,395.20; CI = ₹91,395.20 − ₹81,250 = ₹10,145.20."
+  },
+  {
+    q_hi: "Q29. दिया गया है कि, 39⁰·⁶⁶ = x, 39⁰·²³ = y और xᶻ = y², तो z का मान निम्नलिखित में से किसके निकटतम होगा?",
+    q_en: "Q29. It is given that 39⁰·⁶⁶ = x, 39⁰·²³ = y and xᶻ = y². Which of the following is closest to z?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 0.12",
+      "(b) 0.69",
+      "(c) 0.64",
+      "(d) 1.62"
+    ],
+    o_en: [
+      "(a) 0.12",
+      "(b) 0.69",
+      "(c) 0.64",
+      "(d) 1.62"
+    ],
+    a: 1,
+    e_hi: "xᶻ = y² ⇒ (39⁰·⁶⁶)ᶻ = (39⁰·²³)²।<br>0.66z = 0.46 ⇒ z ≈ 0.697, जो 0.69 के निकट है।",
+    e_en: "xᶻ = y² ⇒ (39⁰·⁶⁶)ᶻ = (39⁰·²³)².<br>0.66z = 0.46 ⇒ z ≈ 0.697, which is closest to 0.69."
+  },
+  {
+    q_hi: "Q30. एक घनाभ की लंबाई और चौड़ाई बराबर है तथा उसकी ऊँचाई 32 cm है। यदि घनाभ का आयतन 2048 cm³ है, तो घनाभ का पृष्ठीय क्षेत्रफल (cm²) ज्ञात कीजिए।",
+    q_en: "Q30. The length and breadth of a cuboid are equal and its height is 32 cm. If its volume is 2048 cm³, find its surface area (in cm²).",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 1024",
+      "(b) 1225",
+      "(c) 1296",
+      "(d) 1152"
+    ],
+    o_en: [
+      "(a) 1024",
+      "(b) 1225",
+      "(c) 1296",
+      "(d) 1152"
+    ],
+    a: 3,
+    e_hi: "मान लें लंबाई = चौड़ाई = a। तब a² × 32 = 2048 ⇒ a² = 64 ⇒ a = 8।<br>पृष्ठीय क्षेत्रफल = 2(a² + 32a + 32a) = 1152 cm²।",
+    e_en: "Let length = breadth = a. Then a² × 32 = 2048 ⇒ a² = 64 ⇒ a = 8.<br>Surface area = 2(a² + 32a + 32a) = 1152 cm²."
+  },
+  {
+    q_hi: "Q31. अरविंद, किसी वस्तु को ₹x में खरीदता है। वह इसे बीरू को 5% की हानि पर बेचता है। बीरू इसके परिवहन पर ₹152 खर्च करता है और इसे मीनू को 56% के लाभ पर बेचता है। यदि मीनू इसे ₹1,482 में खरीदती है, तो x का मान कितना होगा?",
+    q_en: "Q31. Arvind buys an article for ₹x. He sells it to Biru at a 5% loss. Biru spends ₹152 on transport and sells it to Meenu at a 56% profit. If Meenu buys it for ₹1,482, what is x?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 880",
+      "(b) 820",
+      "(c) 860",
+      "(d) 840"
+    ],
+    o_en: [
+      "(a) 880",
+      "(b) 820",
+      "(c) 860",
+      "(d) 840"
+    ],
+    a: 3,
+    e_hi: "बीरू की कुल लागत = 0.95x + 152।<br>1.56(0.95x + 152) = 1482 ⇒ 0.95x + 152 = 950 ⇒ x = 840।",
+    e_en: "Biru's total cost = 0.95x + 152.<br>1.56(0.95x + 152) = 1482 ⇒ 0.95x + 152 = 950 ⇒ x = 840."
+  },
+  {
+    q_hi: "Q32. एक इमारत समतल जमीन पर खड़ी है और इमारत के शीर्ष पर एक ऊर्ध्वाधर फ्लैगस्टाफ लगा हुआ है। इमारत के पाद से 30 m दूर स्थित एक बिंदु से इमारत के शीर्ष का उन्नयन कोण 30° है, जबकि फ्लैगस्टाफ के शीर्ष का उन्नयन कोण 60° है। फ्लैगस्टाफ की ऊंचाई (m में) ज्ञात कीजिए।",
+    q_en: "Q32. A building stands on level ground with a vertical flagstaff on its top. From a point 30 m from the foot of the building, the angle of elevation of the top of the building is 30°, while that of the top of the flagstaff is 60°. Find the height of the flagstaff (in m).",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 40/√3",
+      "(b) 20√3",
+      "(c) 40√3",
+      "(d) 60√3"
+    ],
+    o_en: [
+      "(a) 40/√3",
+      "(b) 20√3",
+      "(c) 40√3",
+      "(d) 60√3"
+    ],
+    a: 1,
+    e_hi: "इमारत की ऊँचाई = 30 tan30° = 10√3 m।<br>कुल ऊँचाई = 30 tan60° = 30√3 m; फ्लैगस्टाफ = 20√3 m।",
+    e_en: "Building height = 30 tan30° = 10√3 m.<br>Total height = 30 tan60° = 30√3 m; flagstaff height = 20√3 m."
+  },
+  {
+    q_hi: "Q33. यदि 15, 45, 24 किसी समानुपात के प्रथम तीन पद हैं, तो चौथा पद ज्ञात कीजिए।",
+    q_en: "Q33. If 15, 45 and 24 are the first three terms of a proportion, find the fourth term.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 74",
+      "(b) 72",
+      "(c) 68",
+      "(d) 75"
+    ],
+    o_en: [
+      "(a) 74",
+      "(b) 72",
+      "(c) 68",
+      "(d) 75"
+    ],
+    a: 1,
+    e_hi: "समानुपात में 15 : 45 = 24 : x।<br>15x = 45 × 24 ⇒ x = 72।",
+    e_en: "In a proportion, 15 : 45 = 24 : x.<br>15x = 45 × 24 ⇒ x = 72."
+  },
+  {
+    q_hi: "Q34. दो संख्याओं का महत्तम समापवर्तक और लघुत्तम समापवर्त्य क्रमशः 16 और 96 है। यदि इनमें से एक संख्या 48 है, तो दूसरी संख्या ज्ञात कीजिए।",
+    q_en: "Q34. The HCF and LCM of two numbers are 16 and 96 respectively. If one number is 48, find the other number.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 32",
+      "(b) 30",
+      "(c) 28",
+      "(d) 34"
+    ],
+    o_en: [
+      "(a) 32",
+      "(b) 30",
+      "(c) 28",
+      "(d) 34"
+    ],
+    a: 0,
+    e_hi: "दो संख्याओं का गुणनफल = HCF × LCM।<br>दूसरी संख्या = (16 × 96)/48 = 32।",
+    e_en: "Product of two numbers = HCF × LCM.<br>Other number = (16 × 96)/48 = 32."
+  },
+  {
+    q_hi: "Q35. यदि 1.2, 1.8, 2.7 और x समानुपात में हैं, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q35. If 1.2, 1.8, 2.7 and x are in proportion, find x.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 4.05",
+      "(b) 3.05",
+      "(c) 4.55",
+      "(d) 3.55"
+    ],
+    o_en: [
+      "(a) 4.05",
+      "(b) 3.05",
+      "(c) 4.55",
+      "(d) 3.55"
+    ],
+    a: 0,
+    e_hi: "1.2 : 1.8 = 2.7 : x।<br>x = (1.8 × 2.7)/1.2 = 4.05।",
+    e_en: "1.2 : 1.8 = 2.7 : x.<br>x = (1.8 × 2.7)/1.2 = 4.05."
+  },
+  {
+    q_hi: "Q36. यदि cot A = P/Q और A एक न्यूनकोण है, तो 1/2 (P sec A + Q cosec A)² का मान ज्ञात कीजिए।",
+    q_en: "Q36. If cot A = P/Q and A is an acute angle, find the value of 1/2 (P sec A + Q cosec A)².",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 2(P² + Q²)",
+      "(b) (P² + Q²)/2",
+      "(c) √(P² + Q²)",
+      "(d) (P² + Q²)"
+    ],
+    o_en: [
+      "(a) 2(P² + Q²)",
+      "(b) (P² + Q²)/2",
+      "(c) √(P² + Q²)",
+      "(d) (P² + Q²)"
+    ],
+    a: 0,
+    e_hi: "cot A = P/Q ⇒ cos A = P/√(P²+Q²), sin A = Q/√(P²+Q²)।<br>P sec A + Q cosec A = 2√(P²+Q²); अतः 1/2 × [2√(P²+Q²)]² = 2(P²+Q²)।",
+    e_en: "cot A = P/Q ⇒ cos A = P/√(P²+Q²), sin A = Q/√(P²+Q²).<br>P sec A + Q cosec A = 2√(P²+Q²); hence 1/2 × [2√(P²+Q²)]² = 2(P²+Q²)."
+  },
+  {
+    q_hi: "Q37. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 13% और 60% की दो क्रमिक छूट, दुकान II द्वारा 56% और 12% की क्रमिक छूट, दुकान III द्वारा 60% और 28% की क्रमिक छूट तथा दुकान IV द्वारा 33%, 16% और 89% की क्रमिक छूट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q37. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 13% and 60%; shop II, 56% and 12%; shop III, 60% and 28%; and shop IV, 33%, 16% and 89%. Which shop sells the cooker at the lowest price?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) IV",
+      "(b) I",
+      "(c) II",
+      "(d) III"
+    ],
+    o_en: [
+      "(a) IV",
+      "(b) I",
+      "(c) II",
+      "(d) III"
+    ],
+    a: 0,
+    e_hi: "शेष मूल्य गुणक: I = 0.87×0.40, II = 0.44×0.88, III = 0.40×0.72, IV = 0.67×0.84×0.11।<br>सबसे छोटा गुणक IV का है, इसलिए दुकान IV का मूल्य सबसे कम है।",
+    e_en: "Remaining-price factors are: I = 0.87×0.40, II = 0.44×0.88, III = 0.40×0.72, IV = 0.67×0.84×0.11.<br>The smallest factor is for shop IV, so shop IV has the lowest price."
+  },
+  {
+    q_hi: "Q38. एक पात्र में 26 लीटर दूध है। इस पात्र से 13 लीटर दूध निकाल कर, उसके स्थान पर पानी मिलाया गया। इस प्रक्रिया को एक बार और दोहराया गया। पात्र में अब कितना दूध है?",
+    q_en: "Q38. A vessel contains 26 litres of milk. From it, 13 litres of milk are removed and replaced with water. This process is repeated once more. How much milk is now left in the vessel?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 4.5 लीटर",
+      "(b) 5.5 लीटर",
+      "(c) 3.5 लीटर",
+      "(d) 6.5 लीटर"
+    ],
+    o_en: [
+      "(a) 4.5 litres",
+      "(b) 5.5 litres",
+      "(c) 3.5 litres",
+      "(d) 6.5 litres"
+    ],
+    a: 3,
+    e_hi: "हर बार 13/26 = 1/2 मिश्रण निकाला जाता है, इसलिए दूध का 1/2 भाग बचता है।<br>दो बार बाद दूध = 26 × (1/2)² = 6.5 लीटर।",
+    e_en: "Each time, 13/26 = 1/2 of the mixture is removed, so half the milk remains.<br>After two replacements, milk = 26 × (1/2)² = 6.5 litres."
+  },
+  {
+    q_hi: "Q39. एक स्टोर एक जैकेट की कीमत ₹1,200 से बढ़ाकर ₹1,440 कर देता है, फिर एक ऐसा छूट देता है जिससे कीमत घटकर ₹1,296 हो जाती है। मूल कीमत से अंतिम कीमत में समग्र प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q39. A store increases the price of a jacket from ₹1,200 to ₹1,440, then gives a discount that reduces it to ₹1,296. Find the overall percentage change from the original price to the final price.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 8% की कमी",
+      "(b) 8% की वृद्धि",
+      "(c) 10% की कमी",
+      "(d) 10% की वृद्धि"
+    ],
+    o_en: [
+      "(a) 8% decrease",
+      "(b) 8% increase",
+      "(c) 10% decrease",
+      "(d) 10% increase"
+    ],
+    a: 1,
+    e_hi: "मूल और अंतिम मूल्य का अंतर = 1296 − 1200 = ₹96।<br>प्रतिशत वृद्धि = 96/1200 × 100 = 8%।",
+    e_en: "Difference between final and original price = 1296 − 1200 = ₹96.<br>Percentage increase = 96/1200 × 100 = 8%."
+  },
+  {
+    q_hi: "Q40. अब से आठ वर्ष बाद, राजीव की आयु सुमित की आयु की दोगुनी होगी। चार वर्ष पहले, उसकी आयु सुमित की आयु की छह गुना थी। अब से 10 वर्ष बाद सुमित की आयु ज्ञात कीजिए।",
+    q_en: "Q40. Eight years from now, Rajiv's age will be twice Sumit's age. Four years ago, Rajiv's age was six times Sumit's age. Find Sumit's age 10 years from now.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 19 वर्ष",
+      "(b) 21 वर्ष",
+      "(c) 17 वर्ष",
+      "(d) 16 वर्ष"
+    ],
+    o_en: [
+      "(a) 19 years",
+      "(b) 21 years",
+      "(c) 17 years",
+      "(d) 16 years"
+    ],
+    a: 2,
+    e_hi: "मान लें वर्तमान आयु R और S है। R+8 = 2(S+8) और R−4 = 6(S−4)।<br>हल करने पर S = 7; अतः 10 वर्ष बाद आयु = 17 वर्ष।",
+    e_en: "Let present ages be R and S. R+8 = 2(S+8) and R−4 = 6(S−4).<br>Solving gives S = 7; therefore, after 10 years the age is 17 years."
+  },
+  {
+    q_hi: "Q41. दिए गए बार ग्राफ में विभिन्न महीनों में एक दुकान द्वारा बेची गई पुस्तकों की संख्या दर्शाई गई है। जनवरी से मई तक बेची गई पुस्तकों की संख्या में कितनी वृद्धि हुई?<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + Q41_IMAGE + "\" alt=\"Q41 graph\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:620px;margin:0 auto;object-fit:contain;\"></div>",
+    q_en: "Q41. The bar graph shows the number of books sold by a shop in different months. By how much did the number of books sold increase from January to May?<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + Q41_IMAGE + "\" alt=\"Q41 graph\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:620px;margin:0 auto;object-fit:contain;\"></div>",
+    tag: "RRB Level 01 Stage I 2025",
+    image: Q41_IMAGE,
+    o_hi: [
+      "(a) 120",
+      "(b) 130",
+      "(c) 125",
+      "(d) 140"
+    ],
+    o_en: [
+      "(a) 120",
+      "(b) 130",
+      "(c) 125",
+      "(d) 140"
+    ],
+    a: 0,
+    e_hi: "ग्राफ से जनवरी में 120 और मई में 240 पुस्तकें बिकीं।<br>वृद्धि = 240 − 120 = 120।",
+    e_en: "From the graph, 120 books were sold in January and 240 in May.<br>Increase = 240 − 120 = 120."
+  },
+  {
+    q_hi: "Q42. 6, 33, 42, 114, 210 का म.स.प. (HCF) ज्ञात कीजिए।",
+    q_en: "Q42. Find the HCF of 6, 33, 42, 114 and 210.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 3",
+      "(b) 7",
+      "(c) 1",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 7",
+      "(c) 1",
+      "(d) 2"
+    ],
+    a: 0,
+    e_hi: "सभी संख्याएँ 3 से विभाज्य हैं और इससे बड़ा कोई सामान्य गुणनखंड सभी में नहीं है।<br>अतः HCF = 3।",
+    e_en: "All the numbers are divisible by 3, and no larger common factor divides all of them.<br>Therefore, HCF = 3."
+  },
+  {
+    q_hi: "Q43. कोई धनराशि 20% वार्षिक साधारण ब्याज की दर से 5 वर्षों में ₹56,000 हो जाती है। वह धनराशि (₹ में) ज्ञात कीजिए।",
+    q_en: "Q43. A sum amounts to ₹56,000 in 5 years at 20% per annum simple interest. Find the principal (in ₹).",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 25,000",
+      "(b) 35,000",
+      "(c) 28,000",
+      "(d) 31,000"
+    ],
+    o_en: [
+      "(a) 25,000",
+      "(b) 35,000",
+      "(c) 28,000",
+      "(d) 31,000"
+    ],
+    a: 2,
+    e_hi: "साधारण ब्याज में A = P(1 + rt) = P(1 + 0.20×5) = 2P।<br>56,000 = 2P ⇒ P = ₹28,000।",
+    e_en: "For simple interest, A = P(1 + rt) = P(1 + 0.20×5) = 2P.<br>56,000 = 2P ⇒ P = ₹28,000."
+  },
+  {
+    q_hi: "Q44. तीन धात्विक घन, जिनकी कोरें क्रमशः 3 cm, 4 cm और 5 cm हैं, को पिघलाकर एक बड़ा घन बनाया जाता है। फिर इस नए घन को इसके फलकों में किसी एक फलक के समानांतर एक समतल द्वारा दो एकसमान घनाभों में काटा जाता है। तीनों मूल घनों के संपूर्ण पृष्ठीय क्षेत्रफल और दो नए घनाभों के संपूर्ण पृष्ठीय क्षेत्रफल का अनुपात ज्ञात कीजिए।",
+    q_en: "Q44. Three metallic cubes with edges 3 cm, 4 cm and 5 cm are melted to form one large cube. This cube is then cut by a plane parallel to one of its faces into two identical cuboids. Find the ratio of the total surface area of the three original cubes to the total surface area of the two new cuboids.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 25 : 24",
+      "(b) 24 : 25",
+      "(c) 5 : 4",
+      "(d) 50 : 49"
+    ],
+    o_en: [
+      "(a) 25 : 24",
+      "(b) 24 : 25",
+      "(c) 5 : 4",
+      "(d) 50 : 49"
+    ],
+    a: 0,
+    e_hi: "कुल आयतन = 3³+4³+5³ = 216 = 6³, इसलिए नया घन 6 cm भुजा का है।<br>मूल TSA = 6(9+16+25)=300; दो 6×6×3 घनाभों का कुल TSA = 288; अनुपात = 25:24।",
+    e_en: "Total volume = 3³+4³+5³ = 216 = 6³, so the new cube has side 6 cm.<br>Original TSA = 6(9+16+25)=300; total TSA of two 6×6×3 cuboids = 288; ratio = 25:24."
+  },
+  {
+    q_hi: "Q45. 62 km/hr की चाल से गतिमान 320 m लंबी एक ट्रेन, समांतर पटरियों पर विपरीत दिशा में 46 km/hr की चाल से गतिमान दूसरी ट्रेन को पार करने में 16 सेकंड का समय लेती है। दूसरी ट्रेन की लंबाई (m में) ज्ञात कीजिए।",
+    q_en: "Q45. A 320 m long train moving at 62 km/hr crosses another train moving in the opposite direction at 46 km/hr on parallel tracks in 16 seconds. Find the length of the second train (in m).",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 200",
+      "(b) 220",
+      "(c) 160",
+      "(d) 180"
+    ],
+    o_en: [
+      "(a) 200",
+      "(b) 220",
+      "(c) 160",
+      "(d) 180"
+    ],
+    a: 2,
+    e_hi: "सापेक्ष चाल = 62+46 = 108 km/hr = 30 m/s।<br>16 s में कुल लंबाई = 30×16 = 480 m; दूसरी ट्रेन = 480−320 = 160 m।",
+    e_en: "Relative speed = 62+46 = 108 km/hr = 30 m/s.<br>Total length crossed in 16 s = 30×16 = 480 m; second train = 480−320 = 160 m."
+  },
+  {
+    q_hi: "Q46. यदि किसी शहर की जनसंख्या एक वर्ष में 70,000 से बढ़कर 71,435 हो जाती है, तो जनसंख्या में प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q46. If the population of a city increases from 70,000 to 71,435 in one year, find the percentage increase in population.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 2.15%",
+      "(b) 2.25%",
+      "(c) 2.05%",
+      "(d) 2.0%"
+    ],
+    o_en: [
+      "(a) 2.15%",
+      "(b) 2.25%",
+      "(c) 2.05%",
+      "(d) 2.0%"
+    ],
+    a: 2,
+    e_hi: "वृद्धि = 71,435 − 70,000 = 1,435।<br>प्रतिशत वृद्धि = 1435/70000 × 100 = 2.05%।",
+    e_en: "Increase = 71,435 − 70,000 = 1,435.<br>Percentage increase = 1435/70000 × 100 = 2.05%."
+  },
+  {
+    q_hi: "Q47. एक विद्यालय में दसवीं कक्षा के 30 विद्यार्थियों द्वारा 100 अंकों के गणित के पेपर में प्राप्त अंक निम्नलिखित तालिका में दिए गए हैं। आँकड़ों का समांतर माध्य ज्ञात कीजिए।<br>वर्ग अंतराल — विद्यार्थियों की संख्या<br>10 – 25 — 2<br>25 – 40 — 3<br>40 – 55 — 7<br>55 – 70 — 6<br>70 – 85 — 6<br>85 – 100 — 6",
+    q_en: "Q47. The marks obtained by 30 students of Class 10 in a 100-mark Mathematics paper are given below. Find the arithmetic mean of the data.<br>Class interval — Number of students<br>10 – 25 — 2<br>25 – 40 — 3<br>40 – 55 — 7<br>55 – 70 — 6<br>70 – 85 — 6<br>85 – 100 — 6",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 65",
+      "(b) 62",
+      "(c) 76",
+      "(d) 72"
+    ],
+    o_en: [
+      "(a) 65",
+      "(b) 62",
+      "(c) 76",
+      "(d) 72"
+    ],
+    a: 1,
+    e_hi: "प्रत्येक वर्ग का मध्यक लेकर Σfx/Σf निकाला जाता है।<br>दिए गए वितरण के लिए Σf = 30 और गणना से माध्य = 62 आता है।",
+    e_en: "Take the class marks and compute Σfx/Σf.<br>For the given distribution, Σf = 30 and the calculation gives mean = 62."
+  },
+  {
+    q_hi: "Q48. यदि निम्नलिखित बंटन का माध्य 66 है, तो (5x + 3y) का मान ज्ञात कीजिए।<br>वर्ग — 0-20 | 20-40 | 40-60 | 60-80 | 80-100 | कुल<br>बारंबारता — 7 | 20 | x | 8 | y | 85",
+    q_en: "Q48. If the mean of the following distribution is 66, find (5x + 3y).<br>Class — 0-20 | 20-40 | 40-60 | 60-80 | 80-100 | Total<br>Frequency — 7 | 20 | x | 8 | y | 85",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 159",
+      "(b) 166",
+      "(c) 141",
+      "(d) 156"
+    ],
+    o_en: [
+      "(a) 159",
+      "(b) 166",
+      "(c) 141",
+      "(d) 156"
+    ],
+    a: 3,
+    e_hi: "कुल बारंबारता से x+y = 50।<br>माध्य 66 के लिए Σfx = 66×85 रखने पर दूसरी समीकरण मिलती है; दोनों हल करने पर 5x+3y = 156।",
+    e_en: "From the total frequency, x+y = 50.<br>Using Σfx = 66×85 for the mean gives a second equation; solving both yields 5x+3y = 156."
+  },
+  {
+    q_hi: "Q49. पाइप A एक टंकी को 3 घंटे में भर सकता है, पाइप B उसी टंकी को 18 घंटे में भर सकता है और पाइप C उसी टंकी को 9 घंटे में भर सकता है। यदि तीनों पाइप एक साथ खोल दिए जाएं, तो उसी टंकी का आधा हिस्सा भरने में उन्हें कितना समय (घंटों में) लगेगा?",
+    q_en: "Q49. Pipe A can fill a tank in 3 hours, pipe B in 18 hours and pipe C in 9 hours. If all three are opened together, how much time (in hours) will they take to fill half the tank?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 3",
+      "(b) 2",
+      "(c) 1",
+      "(d) 4"
+    ],
+    o_en: [
+      "(a) 3",
+      "(b) 2",
+      "(c) 1",
+      "(d) 4"
+    ],
+    a: 2,
+    e_hi: "संयुक्त दर = 1/3 + 1/18 + 1/9 = 1/2 टंकी प्रति घंटा।<br>आधी टंकी भरने में समय = (1/2)/(1/2) = 1 घंटा।",
+    e_en: "Combined rate = 1/3 + 1/18 + 1/9 = 1/2 tank per hour.<br>Time to fill half the tank = (1/2)/(1/2) = 1 hour."
+  },
+  {
+    q_hi: "Q50. प्रवीण के पास ₹1,701 हैं, जिन्हें वह अपने दो पुत्रों, ऋषि और शान के बीच बाँट देता है। वह उनसे अपने संबंधित हिस्सों को वार्षिक रूप से संयोजित होने वाले 10% वार्षिक चक्रवृद्धि ब्याज दर पर निवेश करने के लिए कहता है। यह देखा गया कि 17 वर्षों के बाद ऋषि का निवेश, 18 वर्षों के बाद शान के निवेश के बराबर है। प्रवीण द्वारा ऋषि को दी गई धनराशि (₹ में) ज्ञात कीजिए।",
+    q_en: "Q50. Praveen has ₹1,701, which he divides between his two sons Rishi and Shan. He asks them to invest their shares at 10% compound interest compounded annually. Rishi's investment after 17 years equals Shan's investment after 18 years. Find the amount (in ₹) given to Rishi.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 810",
+      "(b) 741",
+      "(c) 891",
+      "(d) 910"
+    ],
+    o_en: [
+      "(a) 810",
+      "(b) 741",
+      "(c) 891",
+      "(d) 910"
+    ],
+    a: 2,
+    e_hi: "मान लें ऋषि का हिस्सा R और शान का S है। R(1.1)¹⁷ = S(1.1)¹⁸ ⇒ R = 1.1S।<br>R+S = 1701 ⇒ 2.1S = 1701 ⇒ S=810 और R=891।",
+    e_en: "Let Rishi's share be R and Shan's be S. R(1.1)¹⁷ = S(1.1)¹⁸ ⇒ R = 1.1S.<br>R+S = 1701 ⇒ 2.1S = 1701 ⇒ S=810 and R=891."
+  },
+  {
+    q_hi: "Q51. एक निश्चित कूट भाषा में,<br>A + B का अर्थ है कि ‘A, B की माता है’,<br>A – B का अर्थ है कि ‘A, B का भाई है’,<br>A × B का अर्थ है कि ‘A, B की पत्नी है’,<br>A % B का अर्थ है कि ‘A, B का पिता है’ और<br>A # B का अर्थ है कि ‘A, B की पुत्री है’।<br>यदि ‘Eq – Vc + Tg # Yk % Np’ हो, तो Yk का Eq से क्या संबंध है?",
+    q_en: "Q51. In a certain code language,<br>A + B means 'A is the mother of B',<br>A – B means 'A is the brother of B',<br>A × B means 'A is the wife of B',<br>A % B means 'A is the father of B', and<br>A # B means 'A is the daughter of B'.<br>If 'Eq – Vc + Tg # Yk % Np', how is Yk related to Eq?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) बहन की पुत्री",
+      "(b) पत्नी का भाई",
+      "(c) बहन का पति",
+      "(d) माता का भाई"
+    ],
+    o_en: [
+      "(a) Sister's daughter",
+      "(b) Wife's brother",
+      "(c) Sister's husband",
+      "(d) Mother's brother"
+    ],
+    a: 2,
+    e_hi: "Eq, Vc का भाई है और Vc, Tg की माता है। Tg, Yk की पुत्री है तथा Yk पिता है।<br>अतः Yk, Eq की बहन Vc का पति यानी बहन का पति है।",
+    e_en: "Eq is the brother of Vc, and Vc is the mother of Tg. Tg is the daughter of Yk, and Yk is a father.<br>Therefore, Yk is the husband of Eq's sister Vc, i.e. sister's husband."
+  },
+  {
+    q_hi: "Q52. निम्नलिखित अक्षर, संख्या, प्रतीक श्रृंखला का संदर्भ लीजिए और दिए गए प्रश्न का उत्तर दीजिए। सभी संख्याएं केवल एकल अंक वाली संख्याएं हैं। गिनती केवल बाएं से दाएं की जानी है।<br>(बाएं) P C? J 8 * \\ & / W? 3 6 R M G V R 4 T M Z J S (दाएं)<br>ऐसे कितने अक्षर हैं, जिनमें से प्रत्येक के ठीक पहले एक प्रतीक और ठीक बाद एक संख्या है?",
+    q_en: "Q52. Refer to the following letter-number-symbol series and answer the question. All numbers are single-digit numbers. Counting is to be done only from left to right.<br>(Left) P C ? J 8 * \\ & / W ? 3 6 R M G V R 4 T M Z J S (Right)<br>How many letters are there, each of which is immediately preceded by a symbol and immediately followed by a number?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) एक",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक भी नहीं"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Three",
+      "(c) Two",
+      "(d) None"
+    ],
+    a: 0,
+    e_hi: "श्रृंखला में शर्त को एक-एक स्थान पर जाँचने पर केवल एक अक्षर ऐसा मिलता है जिसके ठीक पहले प्रतीक और ठीक बाद संख्या है।<br>अतः उत्तर एक है।",
+    e_en: "Checking the series position by position, only one letter is immediately preceded by a symbol and immediately followed by a number.<br>Therefore, the answer is one."
+  },
+  {
+    q_hi: "Q53. यदि × का अर्थ − है, ÷ का अर्थ × है, + का अर्थ ÷ है और − का अर्थ + है, तो निम्नलिखित समीकरण में प्रश्न-चिह्न (?) के स्थान पर क्या आएगा?<br>2 ÷ 6 × 15 + 3 − 5 = ?",
+    q_en: "Q53. If × means −, ÷ means ×, + means ÷ and − means +, what should replace the question mark (?) in the following equation?<br>2 ÷ 6 × 15 + 3 − 5 = ?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 14",
+      "(b) 13",
+      "(c) 15",
+      "(d) 12"
+    ],
+    o_en: [
+      "(a) 14",
+      "(b) 13",
+      "(c) 15",
+      "(d) 12"
+    ],
+    a: 3,
+    e_hi: "चिह्न बदलने पर व्यंजक: 2 × 6 − 15 ÷ 3 + 5।<br>= 12 − 5 + 5 = 12।",
+    e_en: "After replacing the operators, the expression becomes: 2 × 6 − 15 ÷ 3 + 5.<br>= 12 − 5 + 5 = 12."
+  },
+  {
+    q_hi: "Q54. प्रियांशु बिंदु A से चलना शुरू करता है और वह दक्षिण दिशा में 17 km चलता है। फिर वह दाएँ मुड़ता है, 12 km चलता है, और वह फिर दाएँ मुड़कर 24 km चलता है। इसके बाद वह फिर दाएँ मुड़कर 19 km चलता है। अंत में वह दाएँ मुड़कर 7 km चलता है और बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुँचने के लिए उसे कितनी दूरी (न्यूनतम दूरी) और किस दिशा में चलना चाहिए? (जब तक निर्दिष्ट न हो, सभी मोड़ केवल 90-डिग्री के हैं।)",
+    q_en: "Q54. Priyanshu starts from point A and walks 17 km south. He then turns right and walks 12 km, turns right again and walks 24 km, then turns right and walks 19 km. Finally, he turns right and walks 7 km and stops at point P. What minimum distance and in which direction should he travel to return to point A? (Unless specified, all turns are 90 degrees.)",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 7 km, पूर्व दिशा में",
+      "(b) 7 km, पश्चिम दिशा में",
+      "(c) 9 km, पूर्व दिशा में",
+      "(d) 9 km, पश्चिम दिशा में"
+    ],
+    o_en: [
+      "(a) 7 km, east",
+      "(b) 7 km, west",
+      "(c) 9 km, east",
+      "(d) 9 km, west"
+    ],
+    a: 1,
+    e_hi: "दिशाओं को निर्देशांक पर रखने पर अंतिम बिंदु A से 7 km पूर्व में आता है।<br>A पर लौटने के लिए 7 km पश्चिम दिशा में चलना होगा।",
+    e_en: "Plotting the movements on coordinates, the final point lies 7 km east of A.<br>To return to A, he must travel 7 km west."
+  },
+  {
+    q_hi: "Q55. एक निश्चित कूट भाषा में, ‘DPKA’ को ‘44’ के रूप में कूटबद्ध किया जाता है और ‘QZGK’ को ‘73’ के रूप में कूटबद्ध किया जाता है। दी गई भाषा में ‘RZOI’ के लिए कूट क्या होगा?",
+    q_en: "Q55. In a certain code language, 'DPKA' is coded as '44' and 'QZGK' as '73'. What is the code for 'RZOI' in that language?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 88",
+      "(b) 71",
+      "(c) 69",
+      "(d) 80"
+    ],
+    o_en: [
+      "(a) 88",
+      "(b) 71",
+      "(c) 69",
+      "(d) 80"
+    ],
+    a: 3,
+    e_hi: "अक्षरों के स्थान-मूल्यों का योग लेकर 12 जोड़ने का नियम है: DPKA = 32+12=44 और QZGK = 61+12=73।<br>RZOI = 18+26+15+9 = 68; 68+12 = 80।",
+    e_en: "The rule is to add 12 to the sum of alphabet positions: DPKA = 32+12=44 and QZGK = 61+12=73.<br>RZOI = 18+26+15+9 = 68; 68+12 = 80."
+  },
+  {
+    q_hi: "Q56. एक निश्चित तरीके से TQ 13 का संबंध YV 6 से है। उसी तरह, LI 18 का संबंध QN 11 से है। समान तर्क का अनुसरण करते हुए, NK 22 का संबंध दिए गए विकल्पों में से किससे है?",
+    q_en: "Q56. In a certain way, TQ 13 is related to YV 6. Similarly, LI 18 is related to QN 11. Following the same logic, NK 22 is related to which of the following?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) TQ 13",
+      "(b) SP 15",
+      "(c) QN 18",
+      "(d) SQ 15"
+    ],
+    o_en: [
+      "(a) TQ 13",
+      "(b) SP 15",
+      "(c) QN 18",
+      "(d) SQ 15"
+    ],
+    a: 1,
+    e_hi: "अक्षरों में प्रत्येक को +5 किया गया है और संख्या में 7 घटाया गया है।<br>N→S, K→P और 22−7=15, इसलिए SP 15।",
+    e_en: "Each letter is shifted by +5 and 7 is subtracted from the number.<br>N→S, K→P and 22−7=15, so the result is SP 15."
+  },
+  {
+    q_hi: "Q57. एक निश्चित तर्क का अनुसरण करने पर, 21 का संबंध 86 से है। उसी तर्क का अनुसरण करने पर, 29 का संबंध 118 से है। समान तर्क का अनुसरण करने पर, 33 का संबंध निम्नलिखित में से किससे है?<br>(नोट: संख्याओं को उनके घटक अंकों में तोड़े बिना, पूर्ण संख्याओं पर संक्रियाएं की जानी चाहिए। उदाहरण के लिए 13 को लीजिए, 13 पर संक्रियाएं जैसे कि 13 में जोड़ना/घटाना/गुणा करना आदि की जा सकती हैं। 13 को 1 और 3 में तोड़ना तथा फिर 1 और 3 पर गणितीय संक्रियाएं करने की अनुमति नहीं है।)",
+    q_en: "Q57. Following a certain logic, 21 is related to 86 and 29 is related to 118. Following the same logic, 33 is related to which of the following?<br>(Note: Operations are to be performed on the whole numbers without splitting them into digits.)",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 130",
+      "(b) 132",
+      "(c) 134",
+      "(d) 136"
+    ],
+    o_en: [
+      "(a) 130",
+      "(b) 132",
+      "(c) 134",
+      "(d) 136"
+    ],
+    a: 2,
+    e_hi: "नियम है: संख्या × 4 + 2।<br>21×4+2=86, 29×4+2=118; इसलिए 33×4+2=134।",
+    e_en: "The rule is: number × 4 + 2.<br>21×4+2=86, 29×4+2=118; therefore 33×4+2=134."
+  },
+  {
+    q_hi: "Q58. दी गई श्रृंखला में प्रश्न-चिह्न (?) के स्थान पर क्या आना चाहिए?<br>141 118 96 75 55 ?",
+    q_en: "Q58. What should replace the question mark (?) in the given series?<br>141 118 96 75 55 ?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 32",
+      "(b) 36",
+      "(c) 46",
+      "(d) 43"
+    ],
+    o_en: [
+      "(a) 32",
+      "(b) 36",
+      "(c) 46",
+      "(d) 43"
+    ],
+    a: 1,
+    e_hi: "अंतर क्रमशः −23, −22, −21, −20 हैं।<br>अगला अंतर −19 होगा, इसलिए 55−19 = 36।",
+    e_en: "The differences are −23, −22, −21 and −20.<br>The next difference is −19, so 55−19 = 36."
+  },
+  {
+    q_hi: "Q59. अंग्रेजी वर्णमाला क्रम पर आधारित, निम्नलिखित चार अक्षर-समूह युग्मों में से तीन किसी निश्चित तरीके से एकसमान हैं और इस प्रकार वे एक ग्रुप बनाते हैं। कौन-सा अक्षर-समूह युग्म, उस ग्रुप से संबंधित नहीं है? (नोट: असंगत अक्षर-समूह युग्म, व्यंजनों/स्वरों की संख्या या उनकी स्थिति पर आधारित नहीं है।)",
+    q_en: "Q59. Based on English alphabetical order, three of the following four letter-cluster pairs are alike in a certain way and form a group. Which pair does not belong to the group? (The odd pair is not based on the number or position of vowels/consonants.)",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) EF − IM",
+      "(b) RS − WX",
+      "(c) AB − FG",
+      "(d) VW − AB"
+    ],
+    o_en: [
+      "(a) EF − IM",
+      "(b) RS − WX",
+      "(c) AB − FG",
+      "(d) VW − AB"
+    ],
+    a: 0,
+    e_hi: "RS→WX, AB→FG और VW→AB में दोनों अक्षर 5 स्थान आगे बढ़ते हैं।<br>EF→IM इस नियम का पालन नहीं करता, इसलिए यही असंगत युग्म है।",
+    e_en: "In RS→WX, AB→FG and VW→AB, both letters move 5 positions forward.<br>EF→IM does not follow this rule, so it is the odd pair."
+  },
+  {
+    q_hi: "Q60. दिए गए कथनों और निष्कर्षों को ध्यानपूर्वक पढ़ें। आपको दिए गए कथनों को सत्य मानना है, भले ही वे सामान्य रूप से ज्ञात तथ्यों से भिन्न प्रतीत हों। दिए गए निष्कर्षों में से कौन-से निष्कर्ष, कथनों का तार्किक रूप से अनुसरण करते हैं।<br>कथन: कुछ मछलियाँ, व्हेल हैं। कोई भी व्हेल, ऑक्टोपस नहीं है।<br>निष्कर्ष (I): कुछ मछलियाँ, ऑक्टोपस हैं।<br>निष्कर्ष (II): कुछ व्हेल, मछलियाँ हैं।",
+    q_en: "Q60. Read the statements and conclusions carefully. Assume the statements to be true even if they differ from commonly known facts. Which conclusions logically follow?<br>Statements: Some fish are whales. No whale is an octopus.<br>Conclusion (I): Some fish are octopuses.<br>Conclusion (II): Some whales are fish.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "(b) न तो निष्कर्ष I और न ही II अनुसरण करता है",
+      "(c) केवल निष्कर्ष I अनुसरण करता है",
+      "(d) केवल निष्कर्ष II अनुसरण करता है"
+    ],
+    o_en: [
+      "(a) Both conclusions I and II follow",
+      "(b) Neither conclusion I nor II follows",
+      "(c) Only conclusion I follows",
+      "(d) Only conclusion II follows"
+    ],
+    a: 3,
+    e_hi: "'कुछ मछलियाँ व्हेल हैं' से निष्कर्ष II सीधे अनुसरण करता है।<br>व्हेल और ऑक्टोपस में कोई संबंध नहीं होने से निष्कर्ष I निश्चित नहीं है; अतः केवल II अनुसरण करता है।",
+    e_en: "'Some fish are whales' directly implies conclusion II.<br>Since no whale is an octopus, conclusion I is not established; therefore only II follows."
+  },
+  {
+    q_hi: "Q61. निम्नलिखित में से किस अक्षर-समूह द्वारा # और % को प्रतिस्थापित किया जाना चाहिए ताकि :: के बाईं ओर के अक्षर-समूह युग्म के बीच अनुसरण किया गया पैटर्न और संबंध, :: के दाईं ओर के अक्षर-समूह युग्म के बीच अनुसरण किए गए पैटर्न और संबंध के समान हो?<br># : RSU :: HIK : %",
+    q_en: "Q61. Which letter-clusters should replace # and % so that the pattern and relation between the pair on the left of :: is the same as that between the pair on the right?<br># : RSU :: HIK : %",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) # = NOQ, % = LKO",
+      "(b) # = NOQ, % = LSD",
+      "(c) # = NOQ, % = LUO",
+      "(d) # = NOQ, % = LMO"
+    ],
+    o_en: [
+      "(a) # = NOQ, % = LKO",
+      "(b) # = NOQ, % = LSD",
+      "(c) # = NOQ, % = LUO",
+      "(d) # = NOQ, % = LMO"
+    ],
+    a: 3,
+    e_hi: "NOQ से प्रत्येक अक्षर 4 स्थान आगे करने पर RSU मिलता है।<br>इसी प्रकार HIK के प्रत्येक अक्षर में 4 जोड़ने पर LMO मिलता है।",
+    e_en: "Moving each letter of NOQ four positions forward gives RSU.<br>Similarly, moving each letter of HIK four positions forward gives LMO."
+  },
+  {
+    q_hi: "Q62. S, T, U, V, Y और Z एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत के सबसे निचले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है, और इसी तरह सबसे ऊपरी तल का क्रमांक 6 है।<br>S के ऊपर केवल T रहता है।<br>S के ठीक नीचे Y रहता है।<br>Z के नीचे केवल U रहता है।<br>तीसरे तल पर कौन रहता है?",
+    q_en: "Q62. S, T, U, V, Y and Z live on six different floors of the same building. The lowest floor is numbered 1 and the highest 6.<br>Only T lives above S.<br>Y lives immediately below S.<br>Only U lives below Z.<br>Who lives on the third floor?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) Z",
+      "(b) V",
+      "(c) S",
+      "(d) U"
+    ],
+    o_en: [
+      "(a) Z",
+      "(b) V",
+      "(c) S",
+      "(d) U"
+    ],
+    a: 1,
+    e_hi: "S के ऊपर केवल T होने से T=6, S=5 और Y=4।<br>Z के नीचे केवल U होने से Z=2, U=1; बचा हुआ तीसरा तल V का है।",
+    e_en: "Since only T is above S, T=6, S=5 and Y=4.<br>Since only U is below Z, Z=2 and U=1; the remaining third floor is occupied by V."
+  },
+  {
+    q_hi: "Q63. निम्नलिखित संख्या-युग्मों में, पहली संख्या पर कुछ गणितीय संक्रियाएँ करके दूसरी संख्या प्राप्त की गई है। उस समुच्चय का चयन कीजिए जिसमें संख्याएँ उसी प्रकार संबंधित हैं जिस प्रकार निम्नलिखित समुच्चय की संख्याएँ संबंधित हैं।<br>(नोट: संख्याओं को उनके घटक अंकों में तोड़े बिना, पूर्ण संख्याओं पर संक्रियाएँ की जानी चाहिए। उदाहरण के लिए 13 को लीजिए - 13 पर संक्रियाएँ जैसे कि 13 में जोड़ना/घटाना/गुणा करना आदि की जा सकती हैं। 13 को 1 व 3 में तोड़ना और फिर 1 व 3 पर गणितीय संक्रियाएँ करने की अनुमति नहीं है।)<br>101 - 90<br>43 - 32",
+    q_en: "Q63. In the following number pairs, the second number is obtained by applying certain mathematical operations to the first. Select the set in which the numbers are related in the same way as in the given sets.<br>101 - 90<br>43 - 32",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 47 - 37",
+      "(b) 82 - 71",
+      "(c) 65 - 55",
+      "(d) 99 - 89"
+    ],
+    o_en: [
+      "(a) 47 - 37",
+      "(b) 82 - 71",
+      "(c) 65 - 55",
+      "(d) 99 - 89"
+    ],
+    a: 1,
+    e_hi: "दिए गए दोनों युग्मों में दूसरी संख्या = पहली संख्या − 11।<br>82−11 = 71, इसलिए 82 - 71 सही युग्म है।",
+    e_en: "In both given pairs, the second number = first number − 11.<br>82−11 = 71, so 82 - 71 is the matching pair."
+  },
+  {
+    q_hi: "Q64. यह प्रश्न निम्नलिखित शब्दों पर आधारित है।<br>FON MEN OPS PVT<br>प्रत्येक शब्द में, प्रत्येक स्वर को अंग्रेजी वर्णमाला क्रम में उसके ठीक बाद वाले अक्षर से बदल दिया जाता है और प्रत्येक व्यंजन को अंग्रेजी वर्णमाला क्रम में उसके ठीक पहले आने वाले अक्षर से बदल दिया जाता है। इस प्रकार बने कितने अक्षर-समूहों में कोई स्वर नहीं होगा?",
+    q_en: "Q64. This question is based on the following words.<br>FON MEN OPS PVT<br>In each word, every vowel is replaced by the next letter in English alphabetical order and every consonant by the immediately preceding letter. How many resulting letter-clusters will contain no vowel?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) तीन",
+      "(b) एक",
+      "(c) चार",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) One",
+      "(c) Four",
+      "(d) Two"
+    ],
+    a: 1,
+    e_hi: "परिवर्तन के बाद: FON→EPM, MEN→LFM, OPS→POR, PVT→OUS।<br>केवल LFM में कोई स्वर नहीं है, इसलिए उत्तर एक है।",
+    e_en: "After transformation: FON→EPM, MEN→LFM, OPS→POR, PVT→OUS.<br>Only LFM contains no vowel, so the answer is one."
+  },
+  {
+    q_hi: "Q65. यदि + का अर्थ − है, − का अर्थ × है, × का अर्थ ÷ है और ÷ का अर्थ + है, तो निम्नलिखित समीकरण में प्रश्न-चिह्न (?) के स्थान पर क्या आएगा?<br>1125 − 5 ÷ 314 + 224 × 4 = ?",
+    q_en: "Q65. If + means −, − means ×, × means ÷ and ÷ means +, what should replace the question mark (?)?<br>1125 − 5 ÷ 314 + 224 × 4 = ?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 5381",
+      "(b) 5533",
+      "(c) 5883",
+      "(d) 5183"
+    ],
+    o_en: [
+      "(a) 5381",
+      "(b) 5533",
+      "(c) 5883",
+      "(d) 5183"
+    ],
+    a: 2,
+    e_hi: "चिह्न बदलने पर: 1125 × 5 + 314 − 224 ÷ 4।<br>= 5625 + 314 − 56 = 5883।",
+    e_en: "After replacing the operators: 1125 × 5 + 314 − 224 ÷ 4.<br>= 5625 + 314 − 56 = 5883."
+  },
+  {
+    q_hi: "Q66. शब्द CONCEPT के प्रत्येक अक्षर को अंग्रेजी वर्णमाला क्रम में व्यवस्थित किया जाता है। इस प्रकार बने नए अक्षर-समूह में बाएं से चौथे अक्षर और दाएं से दूसरे अक्षर के बीच अंग्रेजी वर्णमाला क्रम में कितने अक्षर हैं?",
+    q_en: "Q66. The letters of the word CONCEPT are arranged in English alphabetical order. In the new cluster, how many letters lie between the fourth letter from the left and the second letter from the right in alphabetical order?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 0",
+      "(b) 3",
+      "(c) 1",
+      "(d) 2"
+    ],
+    o_en: [
+      "(a) 0",
+      "(b) 3",
+      "(c) 1",
+      "(d) 2"
+    ],
+    a: 2,
+    e_hi: "CONCEPT को क्रम में रखने पर C C E N O P T मिलता है।<br>बाएं से चौथा N और दाएं से दूसरा P है; N और P के बीच केवल O है, अतः 1।",
+    e_en: "Arranging CONCEPT gives C C E N O P T.<br>The fourth from the left is N and the second from the right is P; only O lies between them, so the answer is 1."
+  },
+  {
+    q_hi: "Q67. एक निश्चित कूट भाषा में,<br>A + B का अर्थ है कि ‘A, B की बहन है’,<br>A − B का अर्थ है कि ‘A, B का भाई है’,<br>A × B का अर्थ है कि ‘A, B की पत्नी है’,<br>A ÷ B का अर्थ है कि ‘A, B का पिता है’।<br>यदि ‘S + E − W × T ÷ N’ है, तो S का N से क्या संबंध है?",
+    q_en: "Q67. In a certain code language,<br>A + B means 'A is the sister of B',<br>A − B means 'A is the brother of B',<br>A × B means 'A is the wife of B',<br>A ÷ B means 'A is the father of B'.<br>If 'S + E − W × T ÷ N', how is S related to N?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) बहन",
+      "(b) माता की बहन",
+      "(c) माता की माता",
+      "(d) माता"
+    ],
+    o_en: [
+      "(a) Sister",
+      "(b) Maternal aunt",
+      "(c) Maternal grandmother",
+      "(d) Mother"
+    ],
+    a: 1,
+    e_hi: "S, E की बहन है; E, W का भाई है; W, T की पत्नी है और T, N का पिता है।<br>इसलिए W, N की माता और S, N की माता की बहन यानी मौसी है।",
+    e_en: "S is E's sister; E is W's brother; W is T's wife and T is N's father.<br>Thus W is N's mother, and S is N's mother's sister, i.e. maternal aunt."
+  },
+  {
+    q_hi: "Q68. शब्द COLLEGE के प्रत्येक स्वर को अंग्रेजी वर्णमाला क्रम में उसके ठीक बाद वाले अक्षर से बदल दिया जाता है और प्रत्येक व्यंजन को अंग्रेजी वर्णमाला क्रम में उसके ठीक पहले वाले अक्षर से बदल दिया जाता है। इस प्रकार बने अक्षरों के नए समूह में निम्नलिखित में से कौन-सा अक्षर, बाएं से तीसरे स्थान पर होगा?",
+    q_en: "Q68. In the word COLLEGE, every vowel is replaced by the next letter in English alphabetical order and every consonant by the immediately preceding letter. Which letter will be third from the left in the new group?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) F",
+      "(b) P",
+      "(c) B",
+      "(d) K"
+    ],
+    o_en: [
+      "(a) F",
+      "(b) P",
+      "(c) B",
+      "(d) K"
+    ],
+    a: 3,
+    e_hi: "COLLEGE → B P K K F F F।<br>बाएं से तीसरा अक्षर K है।",
+    e_en: "COLLEGE transforms to B P K K F F F.<br>The third letter from the left is K."
+  },
+  {
+    q_hi: "Q69. सात बॉक्स I, J, K, Q, R, S और T एक के ऊपर एक रखे गए हैं, लेकिन आवश्यक नहीं कि इसी क्रम में हों। J और I के बीच केवल दो बॉक्स रखे गए हैं। केवल K को R के ऊपर रखा गया है। R और I के बीच केवल चार बॉक्स रखे गए हैं। Q को S के नीचे किसी स्थान पर लेकिन T के ऊपर किसी स्थान पर रखा गया है। कौन-सा डिब्बा T के ऊपर दूसरे स्थान पर रखा गया है?",
+    q_en: "Q69. Seven boxes I, J, K, Q, R, S and T are stacked one above another, not necessarily in that order. There are only two boxes between J and I. Only K is placed above R. There are only four boxes between R and I. Q is somewhere below S but above T. Which box is placed second above T?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) I",
+      "(b) J",
+      "(c) S",
+      "(d) Q"
+    ],
+    o_en: [
+      "(a) I",
+      "(b) J",
+      "(c) S",
+      "(d) Q"
+    ],
+    a: 1,
+    e_hi: "ऊपर से क्रम बनता है: K, R, S, J, Q, T, I।<br>T से दूसरा ऊपर J है।",
+    e_en: "The arrangement from top to bottom is: K, R, S, J, Q, T, I.<br>The box second above T is J."
+  },
+  {
+    q_hi: "Q70. निम्नलिखित अक्षर शृंखला का संदर्भ लीजिए और नीचे दिए गए प्रश्न का उत्तर दीजिए। गिनती केवल बाएं से दाएं की जानी है।<br>(बाएं) H R I F K R L L J W K L G O Q G Q X M P U (दाएं)<br>ऐसे कितने व्यंजन हैं, जिनमें से प्रत्येक के ठीक पहले एक स्वर है और ठीक बाद में एक व्यंजन है?",
+    q_en: "Q70. Refer to the following letter series and answer the question. Counting is to be done only from left to right.<br>(Left) H R I F K R L L J W K L G O Q G Q X M P U (Right)<br>How many consonants are there, each immediately preceded by a vowel and immediately followed by a consonant?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) एक भी नहीं",
+      "(b) एक",
+      "(c) तीन",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) None",
+      "(b) One",
+      "(c) Three",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "I के बाद F और O के बाद Q आते हैं; F के बाद K तथा Q के बाद G व्यंजन हैं।<br>ऐसी दो स्थितियाँ हैं, इसलिए उत्तर दो है।",
+    e_en: "F follows I and Q follows O; F is followed by K and Q by G, both consonants.<br>There are two such positions, so the answer is two."
+  },
+  {
+    q_hi: "Q71. सात व्यक्ति D, H, J, L, S, T और Y, उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। S और J के बीच केवल दो व्यक्ति बैठे हैं। H के दाईं ओर केवल L बैठा है। J और H के बीच केवल एक व्यक्ति बैठा है। D, T के दाईं ओर किसी स्थान पर लेकिन Y के बाईं ओर किसी स्थान पर बैठा है। H के बाईं ओर कितने व्यक्ति बैठे हैं?",
+    q_en: "Q71. Seven persons D, H, J, L, S, T and Y sit in a row facing north. There are only two persons between S and J. Only L sits to the right of H. There is only one person between J and H. D sits somewhere to the right of T but to the left of Y. How many persons sit to the left of H?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) दो",
+      "(b) चार",
+      "(c) तीन",
+      "(d) पाँच"
+    ],
+    o_en: [
+      "(a) Two",
+      "(b) Four",
+      "(c) Three",
+      "(d) Five"
+    ],
+    a: 3,
+    e_hi: "'H के दाईं ओर केवल L' से H छठे और L सातवें स्थान पर होगा।<br>अतः H के बाईं ओर 5 व्यक्ति बैठते हैं।",
+    e_en: "'Only L sits to the right of H' places H in the sixth position and L in the seventh.<br>Therefore, 5 persons sit to the left of H."
+  },
+  {
+    q_hi: "Q72. अंग्रेजी वर्णमाला क्रम के आधार पर, निम्नलिखित चार अक्षर-समूहों में से तीन किसी निश्चित तरीके से एकसमान हैं और इस प्रकार वे एक ग्रुप बनाते हैं। कौन-सा अक्षर-समूह, उस ग्रुप से संबंधित नहीं है? (नोट: असंगत अक्षर-समूह, व्यंजनों/स्वरों की संख्या या उनकी स्थिति पर आधारित नहीं है।)",
+    q_en: "Q72. Based on English alphabetical order, three of the following four letter-clusters are alike in a certain way and form a group. Which cluster does not belong to the group? (The odd cluster is not based on the number or position of vowels/consonants.)",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) HEZ",
+      "(b) EAW",
+      "(c) LHD",
+      "(d) TPL"
+    ],
+    o_en: [
+      "(a) HEZ",
+      "(b) EAW",
+      "(c) LHD",
+      "(d) TPL"
+    ],
+    a: 0,
+    e_hi: "EAW, LHD और TPL में प्रत्येक अगला अक्षर 4 स्थान पीछे है (चक्रीय क्रम सहित)।<br>HEZ इस पैटर्न का पालन नहीं करता, इसलिए यह असंगत है।",
+    e_en: "In EAW, LHD and TPL, each next letter is 4 positions backward (with cyclic order where needed).<br>HEZ does not follow this pattern, so it is the odd cluster."
+  },
+  {
+    q_hi: "Q73. यह प्रश्न निम्नलिखित शब्दों पर आधारित है।<br>BAS HIS JEM BOL<br>प्रत्येक शब्द में, प्रत्येक स्वर को अंग्रेजी वर्णमाला क्रम में उसके ठीक बाद वाले अक्षर से बदल दिया जाता है और प्रत्येक व्यंजन को अंग्रेजी वर्णमाला क्रम में उसके ठीक पहले वाले अक्षर से बदल दिया जाता है। इस प्रकार निर्मित कितने अक्षर-समूहों में, कोई स्वर नहीं आएगा?",
+    q_en: "Q73. This question is based on the following words.<br>BAS HIS JEM BOL<br>In each word, every vowel is replaced by the next letter in English alphabetical order and every consonant by the immediately preceding letter. In how many resulting letter-clusters will no vowel occur?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) एक",
+      "(b) तीन",
+      "(c) चार",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) One",
+      "(b) Three",
+      "(c) Four",
+      "(d) Two"
+    ],
+    a: 0,
+    e_hi: "परिवर्तन के बाद: BAS→ABR, HIS→GJR, JEM→IFL, BOL→APK।<br>केवल GJR में कोई स्वर नहीं है, इसलिए उत्तर एक है।",
+    e_en: "After transformation: BAS→ABR, HIS→GJR, JEM→IFL, BOL→APK.<br>Only GJR contains no vowel, so the answer is one."
+  },
+  {
+    q_hi: "Q74. A, G, H, P, S और Y एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे निचले तल का क्रमांक 1 है, इसके ऊपर के तल का क्रमांक 2 है और इसी तरह, सबसे ऊपरी तल का क्रमांक 6 है। P और S के बीच केवल दो व्यक्ति रहते हैं। H से ऊपर केवल G रहता है। Y किसी सम-क्रमांक वाले तल पर रहता है। P सबसे निचले तल पर रहता है। A और G के बीच कितने व्यक्ति रहते हैं?",
+    q_en: "Q74. A, G, H, P, S and Y live on six different floors of the same building. The lowest floor is 1 and the highest is 6. There are only two persons between P and S. Only G lives above H. Y lives on an even-numbered floor. P lives on the lowest floor. How many persons live between A and G?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) चार",
+      "(b) तीन",
+      "(c) दो",
+      "(d) एक"
+    ],
+    o_en: [
+      "(a) Four",
+      "(b) Three",
+      "(c) Two",
+      "(d) One"
+    ],
+    a: 2,
+    e_hi: "P=1 होने से S=4। H के ऊपर केवल G होने से H=5, G=6 और सम तल पर Y=2; इसलिए A=3।<br>A(3) और G(6) के बीच S(4) और H(5), यानी 2 व्यक्ति हैं।",
+    e_en: "With P=1, S=4. Since only G is above H, H=5 and G=6; the remaining even floor gives Y=2, so A=3.<br>Between A(3) and G(6) are S(4) and H(5), i.e. 2 persons."
+  },
+  {
+    q_hi: "Q75. सात विद्यार्थी, I, J, K, P, Q, R और Z, एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। K और Q के बीच केवल तीन व्यक्ति बैठे हैं। K के दाईं ओर से गिनती करने पर, K और R के बीच केवल दो व्यक्ति बैठे हैं। R और J के बीच केवल दो व्यक्ति बैठे है। Z, I के ठीक बाईं ओर पड़ोस में बैठा है। P के बाईं ओर चौथे स्थान पर कौन बैठा है?",
+    q_en: "Q75. Seven students I, J, K, P, Q, R and Z sit around a circular table facing the centre. There are only three persons between K and Q. Counting from K's right, there are only two persons between K and R. There are only two persons between R and J. Z sits immediately to the left of I. Who sits fourth to the left of P?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) Z",
+      "(b) R",
+      "(c) K",
+      "(d) I"
+    ],
+    o_en: [
+      "(a) Z",
+      "(b) R",
+      "(c) K",
+      "(d) I"
+    ],
+    a: 0,
+    e_hi: "सभी शर्तों के अनुसार वृत्ताकार व्यवस्था बनाने पर P के बाईं ओर चौथे स्थान पर Z आता है।<br>अतः सही उत्तर Z है।",
+    e_en: "Arranging the students around the circle according to all the conditions places Z fourth to the left of P.<br>Therefore, the correct answer is Z."
+  },
+  {
+    q_hi: "Q76. इस प्रश्न में, एक प्रश्न के बाद दो कथन दिए गए हैं, जिन्हें (I) और (II) क्रमांकित किया गया है। आपको यह तय करना है कि क्या कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है। दोनों कथनों को पढ़िए तथा उचित उत्तर का चयन कीजिए।<br>5 छड़ियों, U, R, N, S और T में से प्रत्येक की ऊँचाई अलग-अलग है, कौन-सी छड़ी सबसे छोटी है?<br>(I) T केवल दो छड़ियों से लंबी है। S, T से लंबी है लेकिन N से छोटी है।<br>(II) U, R से लंबी है।",
+    q_en: "Q76. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the information in the statements is sufficient to answer the question.<br>Among five rods U, R, N, S and T, each of a different height, which rod is the shortest?<br>(I) T is taller than only two rods. S is taller than T but shorter than N.<br>(II) U is taller than R.",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+      "(b) केवल कथन II का डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I का डेटा नहीं है",
+      "(c) कथन I और II दोनों एक साथ (और केवल कथन I या कथन II अकेले नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं।",
+      "(d) कथन I का डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II का डेटा नहीं है"
+    ],
+    o_en: [
+      "(a) Statements I and II together are not sufficient to answer the question.",
+      "(b) Statement II alone is sufficient, while statement I alone is not.",
+      "(c) Statements I and II together are sufficient, but neither statement I nor statement II alone is sufficient.",
+      "(d) Statement I alone is sufficient, while statement II alone is not."
+    ],
+    a: 2,
+    e_hi: "कथन I से T तीसरे स्थान पर, S उससे लंबी और N, S से लंबी है; सबसे छोटी R/U में से कोई एक हो सकती है।<br>कथन II से U>R, इसलिए R सबसे छोटी सिद्ध होती है। दोनों कथन साथ आवश्यक हैं।",
+    e_en: "Statement I places T third from the bottom, with S taller than T and N taller than S; the shortest could still be R or U.<br>Statement II gives U>R, making R the shortest. Both statements are needed together."
+  },
+  {
+    q_hi: "Q77. अंग्रेजी वर्णमाला क्रम के आधार पर दी गई श्रृंखला में ? के स्थान पर क्या आना चाहिए?<br>MTX LSW KRV JQU ?",
+    q_en: "Q77. Based on English alphabetical order, what should replace ? in the series?<br>MTX LSW KRV JQU ?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) HPT",
+      "(b) HOS",
+      "(c) IOV",
+      "(d) IPT"
+    ],
+    o_en: [
+      "(a) HPT",
+      "(b) HOS",
+      "(c) IOV",
+      "(d) IPT"
+    ],
+    a: 3,
+    e_hi: "प्रत्येक अगले समूह में हर अक्षर एक स्थान पीछे जाता है: MTX→LSW→KRV→JQU।<br>अगला समूह IPT होगा।",
+    e_en: "In each successive cluster, every letter moves one position backward: MTX→LSW→KRV→JQU.<br>The next cluster is IPT."
+  },
+  {
+    q_hi: "Q78. नीचे दी गई संख्या और प्रतीक श्रृंखला का संदर्भ लीजिए और दिए गए प्रश्न का उत्तर दीजिए। गिनती केवल बाएं से दाएं की जानी है। सभी संख्याएं केवल एकल-अंकीय संख्याएं हैं।<br>(बाएं) 5 @ % & 2 7 & 4 Ω 3 & 8 1 % 6 * 9 # £ (दाएं)<br>ऐसे कितने प्रतीक हैं, जिनमें से प्रत्येक के ठीक पहले एक सम संख्या है और ठीक बाद में एक विषम संख्या है?",
+    q_en: "Q78. Refer to the following number and symbol series and answer the question. Counting is only from left to right. All numbers are single-digit numbers.<br>(Left) 5 @ % & 2 7 & 4 Ω 3 & 8 1 % 6 * 9 # £ (Right)<br>How many symbols are there, each immediately preceded by an even number and immediately followed by an odd number?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) तीन",
+      "(b) एक भी नहीं",
+      "(c) एक",
+      "(d) दो"
+    ],
+    o_en: [
+      "(a) Three",
+      "(b) None",
+      "(c) One",
+      "(d) Two"
+    ],
+    a: 3,
+    e_hi: "4 Ω 3 में Ω और 6 * 9 में * शर्त पूरी करते हैं।<br>ऐसे कुल 2 प्रतीक हैं।",
+    e_en: "In 4 Ω 3, Ω satisfies the condition, and in 6 * 9, * does as well.<br>Thus there are 2 such symbols."
+  },
+  {
+    q_hi: "Q79. निम्नलिखित में से किस अक्षर-समूह द्वारा # और % को प्रतिस्थापित किया जाना चाहिए ताकि :: के बाईं ओर के अक्षर-समूह युग्म के बीच अनुसरण किया गया पैटर्न और संबंध :: के दाईं ओर के अक्षर-समूह युग्म के बीच अनुसरण किए गए पैटर्न और संबंध के समान हो?<br># : TNQ :: SMP : %",
+    q_en: "Q79. Which letter-clusters should replace # and % so that the pattern and relation on the left of :: is the same as that on the right?<br># : TNQ :: SMP : %",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) # = ION, % = VDF",
+      "(b) # = QUI, % = BVS",
+      "(c) # = QQN, % = VPP",
+      "(d) # = QKN, % = VPS"
+    ],
+    o_en: [
+      "(a) # = ION, % = VDF",
+      "(b) # = QUI, % = BVS",
+      "(c) # = QQN, % = VPP",
+      "(d) # = QKN, % = VPS"
+    ],
+    a: 3,
+    e_hi: "QKN के प्रत्येक अक्षर को 3 स्थान आगे करने पर TNQ मिलता है।<br>इसी नियम से SMP के प्रत्येक अक्षर में 3 जोड़ने पर VPS मिलता है।",
+    e_en: "Moving each letter of QKN three positions forward gives TNQ.<br>Applying the same rule to SMP gives VPS."
+  },
+  {
+    q_hi: "Q80. यदि + का अर्थ - है, - का अर्थ × है, × का अर्थ ÷ है और ÷ का अर्थ + है, तो निम्नलिखित समीकरण में प्रश्न चिह्न (?) के स्थान पर क्या आएगा?<br>26 - 6 ÷ 34 + 40 × 8 = ?",
+    q_en: "Q80. If + means -, - means ×, × means ÷ and ÷ means +, what should replace the question mark (?)?<br>26 - 6 ÷ 34 + 40 × 8 = ?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 195",
+      "(b) 135",
+      "(c) 155",
+      "(d) 185"
+    ],
+    o_en: [
+      "(a) 195",
+      "(b) 135",
+      "(c) 155",
+      "(d) 185"
+    ],
+    a: 3,
+    e_hi: "चिह्न बदलने पर: 26 × 6 + 34 − 40 ÷ 8।<br>= 156 + 34 − 5 = 185।",
+    e_en: "After replacing the operators: 26 × 6 + 34 − 40 ÷ 8.<br>= 156 + 34 − 5 = 185."
+  },
+  {
+    q_hi: "Q81. फरवरी 2026 में, इंडिया AI इम्पैक्ट समिट ने प्रत्येक नागरिक को \"AI-रेडी (AI-ready)\" बनाने पर बल दिया। इस पहल का मुख्य उद्देश्य क्या था?",
+    q_en: "Q81. In February 2026, the India AI Impact Summit emphasized making every citizen \"AI-ready\". What was the main objective of this initiative?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) डिजिटल कौशल और तकनीक पहुंच को बढ़ावा देना",
+      "(b) संचार नेटवर्क को सैटेलाइट से बदलना",
+      "(c) ग्रामीण क्षेत्रों में इंटरनेट सेवाओं पर प्रतिबंध लगाना",
+      "(d) आयातित सॉफ्टवेयर पर निर्भरता बढ़ाना"
+    ],
+    o_en: [
+      "(a) Promote digital skills and access to technology",
+      "(b) Replace communication networks with satellites",
+      "(c) Restrict internet services in rural areas",
+      "(d) Increase dependence on imported software"
+    ],
+    a: 0,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार इस पहल का उद्देश्य डिजिटल कौशल और तकनीक तक पहुंच को बढ़ावा देना था।<br>अतः विकल्प (a) सही है।",
+    e_en: "According to the source answer key, the initiative aimed to promote digital skills and access to technology.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q82. केंद्रीय बजट 2026-27 में घोषित किस स्कीम का उद्देश्य विशेष रूप से वैश्विक स्तर पर प्रतिस्पर्धी औद्योगिक इकोसिस्टम बनाना था?",
+    q_en: "Q82. Which scheme announced in the Union Budget 2026-27 specifically aimed to create a globally competitive industrial ecosystem?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) कंटेनर विनिर्माण स्कीम (Container Manufacturing Scheme)",
+      "(b) भारत निर्यात कनेक्टिविटी पहल (Bharat Export Connectivity Initiative)",
+      "(c) राष्ट्रीय लॉजिस्टिक्स प्रतिस्पर्धात्मकता कार्यक्रम (National Logistics Competitiveness Programme)",
+      "(d) एकीकृत माल ढुलाई अवसंरचना मिशन (Integrated Freight Infrastructure Mission)"
+    ],
+    o_en: [
+      "(a) Container Manufacturing Scheme",
+      "(b) Bharat Export Connectivity Initiative",
+      "(c) National Logistics Competitiveness Programme",
+      "(d) Integrated Freight Infrastructure Mission"
+    ],
+    a: 0,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार सही योजना कंटेनर विनिर्माण स्कीम है।<br>अतः विकल्प (a) सही है।",
+    e_en: "According to the source answer key, the correct scheme is the Container Manufacturing Scheme.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q83. केंद्रीय बजट 2026-27 के अनुसार, नव प्रस्तावित \"खेलो इंडिया मिशन\" का उद्देश्य भारत के खेल इकोसिस्टम को किस अवधि तक रूपांतरित करना है?",
+    q_en: "Q83. According to the Union Budget 2026-27, the newly proposed \"Khelo India Mission\" aims to transform India's sports ecosystem over what period?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) अगले पांच वर्ष",
+      "(b) अगले सात वर्ष",
+      "(c) अगले दस वर्ष",
+      "(d) अगले पंद्रह वर्ष"
+    ],
+    o_en: [
+      "(a) Next five years",
+      "(b) Next seven years",
+      "(c) Next ten years",
+      "(d) Next fifteen years"
+    ],
+    a: 2,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार खेलो इंडिया मिशन की अवधि अगले दस वर्ष है।<br>अतः विकल्प (c) सही है।",
+    e_en: "According to the source answer key, the Khelo India Mission is intended for the next ten years.<br>Therefore, option (c) is correct."
+  },
+  {
+    q_hi: "Q84. भारत सरकार के शिक्षा मंत्रालय ने विश्व भर से भारतीय मूल के शोधकर्ताओं, वैज्ञानिकों और नवप्रवर्तकों को आकर्षित करने के लिए जून 2026 में PMRC योजना लॉन्च की। PMRC का पूर्ण रूप क्या है?",
+    q_en: "Q84. In June 2026, the Ministry of Education launched the PMRC scheme to attract researchers, scientists and innovators of Indian origin from around the world. What is the full form of PMRC?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) Prime Minister Research Conference (प्राइम मिनिस्टर रिसर्च कॉन्फ्रेंस)",
+      "(b) Prime Minister Research Chair (प्राइम मिनिस्टर रिसर्च चेयर)",
+      "(c) Prime Minister Research Channel (प्राइम मिनिस्टर रिसर्च चैनल)",
+      "(d) Prime Minister Research Center (प्राइम मिनिस्टर रिसर्च सेंटर)"
+    ],
+    o_en: [
+      "(a) Prime Minister Research Conference",
+      "(b) Prime Minister Research Chair",
+      "(c) Prime Minister Research Channel",
+      "(d) Prime Minister Research Center"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार PMRC का पूर्ण रूप Prime Minister Research Chair है।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, PMRC stands for Prime Minister Research Chair.<br>Therefore, option (b) is correct."
+  },
+  {
+    q_hi: "Q85. 2026 के बजट सत्र के दौरान, राज्यसभा में निम्नलिखित में से कौन-सा विधेयक पेश किया गया था?",
+    q_en: "Q85. Which of the following bills was introduced in the Rajya Sabha during the 2026 Budget Session?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) केंद्रीय सशस्त्र पुलिस बल (सामान्य प्रशासन) विधेयक, 2026",
+      "(b) कॉर्पोरेट कानून (संशोधन) विधेयक, 2026",
+      "(c) विदेशी अभिदाय (विनियमन) संशोधन विधेयक, 2026",
+      "(d) औद्योगिक संबंध संहिता (संशोधन) विधेयक, 2026"
+    ],
+    o_en: [
+      "(a) Central Armed Police Forces (General Administration) Bill, 2026",
+      "(b) Corporate Laws (Amendment) Bill, 2026",
+      "(c) Foreign Contribution (Regulation) Amendment Bill, 2026",
+      "(d) Industrial Relations Code (Amendment) Bill, 2026"
+    ],
+    a: 0,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार राज्यसभा में केंद्रीय सशस्त्र पुलिस बल (सामान्य प्रशासन) विधेयक, 2026 पेश किया गया था।<br>अतः विकल्प (a) सही है।",
+    e_en: "According to the source answer key, the Central Armed Police Forces (General Administration) Bill, 2026 was introduced in the Rajya Sabha.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q86. 2026 एशियन बीच गेम्स (अप्रैल 2026 में) चीन के किस शहर में आयोजित किए गए थे?",
+    q_en: "Q86. In which Chinese city were the 2026 Asian Beach Games held in April 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) हाइकोऊ (Haikou)",
+      "(b) सान्या (Sanya)",
+      "(c) शेन्ज़ेन (Shenzhen)",
+      "(d) क़िंगदाओ (Qingdao)"
+    ],
+    o_en: [
+      "(a) Haikou",
+      "(b) Sanya",
+      "(c) Shenzhen",
+      "(d) Qingdao"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार 2026 एशियन बीच गेम्स सान्या में आयोजित हुए थे।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, the 2026 Asian Beach Games were held in Sanya.<br>Therefore, option (b) is correct."
+  },
+  {
+    q_hi: "Q87. अक्टूबर 2025 में पर्थ, ऑस्ट्रेलिया में भारत-ऑस्ट्रेलिया संयुक्त सैन्य अभ्यास \"AUSTRAHIND\" का कौन-सा संस्करण आयोजित किया गया था?",
+    q_en: "Q87. Which edition of the India-Australia joint military exercise \"AUSTRAHIND\" was held in Perth, Australia, in October 2025?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) तीसरा संस्करण",
+      "(b) पांचवां संस्करण",
+      "(c) दूसरा संस्करण",
+      "(d) चौथा संस्करण"
+    ],
+    o_en: [
+      "(a) Third edition",
+      "(b) Fifth edition",
+      "(c) Second edition",
+      "(d) Fourth edition"
+    ],
+    a: 3,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार यह AUSTRAHIND का चौथा संस्करण था।<br>अतः विकल्प (d) सही है।",
+    e_en: "According to the source answer key, this was the fourth edition of AUSTRAHIND.<br>Therefore, option (d) is correct."
+  },
+  {
+    q_hi: "Q88. उस राष्ट्रव्यापी कार्यक्रम का नाम क्या था जिसके अंतर्गत महिला एवं बाल विकास मंत्रालय ने 27 नवंबर, 2025 से 8 मार्च, 2026 तक 100 दिवसीय अभियान चलाया?",
+    q_en: "Q88. What was the name of the nationwide programme under which the Ministry of Women and Child Development ran a 100-day campaign from 27 November 2025 to 8 March 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) मिशन शक्ति (Mission Shakti)",
+      "(b) बाल विवाह मुक्त भारत (Bal Vivah Mukt Bharat)",
+      "(c) बेटी बचाओ बेटी पढ़ाओ (Beti Bachao Beti Padhao)",
+      "(d) पोषण अभियान (POSHAN Abhiyaan)"
+    ],
+    o_en: [
+      "(a) Mission Shakti",
+      "(b) Bal Vivah Mukt Bharat",
+      "(c) Beti Bachao Beti Padhao",
+      "(d) POSHAN Abhiyaan"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार 100 दिवसीय अभियान बाल विवाह मुक्त भारत कार्यक्रम के अंतर्गत चला।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, the 100-day campaign was run under Bal Vivah Mukt Bharat.<br>Therefore, option (b) is correct."
+  },
+  {
+    q_hi: "Q89. एक्सटेरा रोबोटिक्स (xTerra Robotics) द्वारा विकसित लेग्ड मोबाइल मैनिपुलेटर SCORP को, 2026 में किस शैक्षणिक संस्थान में इनक्यूबेट किया गया था?",
+    q_en: "Q89. At which academic institution was SCORP, the legged mobile manipulator developed by xTerra Robotics, incubated in 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) IIT रुड़की",
+      "(b) IIT कानपुर",
+      "(c) IIT मद्रास",
+      "(d) IIT दिल्ली"
+    ],
+    o_en: [
+      "(a) IIT Roorkee",
+      "(b) IIT Kanpur",
+      "(c) IIT Madras",
+      "(d) IIT Delhi"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार SCORP को IIT कानपुर में इनक्यूबेट किया गया था।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, SCORP was incubated at IIT Kanpur.<br>Therefore, option (b) is correct."
+  },
+  {
+    q_hi: "Q90. मिलान और कॉर्टिना डी'अम्पेज़ो (Milan and Cortina d'Ampezzo), इटली (6-22 फरवरी) में आयोजित, 2026 विंटर ओलंपिक में कौन-सा देश पदक तालिका में शीर्ष पर रहा?",
+    q_en: "Q90. Which country topped the medal table at the 2026 Winter Olympics held in Milan and Cortina d'Ampezzo, Italy (6-22 February)?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) नॉर्वे (Norway)",
+      "(b) जर्मनी (Germany)",
+      "(c) संयुक्त राज्य अमेरिका (United States)",
+      "(d) इटली (Italy)"
+    ],
+    o_en: [
+      "(a) Norway",
+      "(b) Germany",
+      "(c) United States",
+      "(d) Italy"
+    ],
+    a: 0,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार पदक तालिका में नॉर्वे शीर्ष पर रहा।<br>अतः विकल्प (a) सही है।",
+    e_en: "According to the source answer key, Norway topped the medal table.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q91. 16वें वित्त आयोग के वह अध्यक्ष कौन थे, जिनकी रिपोर्ट फरवरी 2026 में संसद के पटल (tabled) पर रखी गई थी?",
+    q_en: "Q91. Who was the Chairman of the 16th Finance Commission whose report was tabled in Parliament in February 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) मोंटेक सिंह अहलूवालिया",
+      "(b) संजय मल्होत्रा",
+      "(c) अशोक लाहिड़ी",
+      "(d) अरविंद पनगढ़िया"
+    ],
+    o_en: [
+      "(a) Montek Singh Ahluwalia",
+      "(b) Sanjay Malhotra",
+      "(c) Ashok Lahiri",
+      "(d) Arvind Panagariya"
+    ],
+    a: 3,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार 16वें वित्त आयोग के अध्यक्ष अरविंद पनगढ़िया थे।<br>अतः विकल्प (d) सही है।",
+    e_en: "According to the source answer key, the Chairman of the 16th Finance Commission was Arvind Panagariya.<br>Therefore, option (d) is correct."
+  },
+  {
+    q_hi: "Q92. 8 मार्च से 13 मार्च, 2026 तक किस देश ने वर्ल्ड पैरा एथलेटिक्स ग्रैंड प्रिक्स 2026 (World Para Athletics Grand Prix 2026) की मेजबानी की?",
+    q_en: "Q92. Which country hosted the World Para Athletics Grand Prix 2026 from 8 March to 13 March 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) ब्राज़ील",
+      "(b) भारत",
+      "(c) जापान",
+      "(d) कनाडा"
+    ],
+    o_en: [
+      "(a) Brazil",
+      "(b) India",
+      "(c) Japan",
+      "(d) Canada"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार मेजबान देश भारत था।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, the host country was India.<br>Therefore, option (b) is correct."
+  },
+  {
+    q_hi: "Q93. भारत के सात्विकसाईराज रंकीरेड्डी और चिराग शेट्टी ने किस देश की बैडमिंटन जोड़ी को हराकर सिंगापुर ओपन 2026 का पुरुष युगल खिताब जीता?",
+    q_en: "Q93. Satwiksairaj Rankireddy and Chirag Shetty of India defeated a badminton pair from which country to win the men's doubles title at the Singapore Open 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) मलेशिया",
+      "(b) चीन",
+      "(c) जापान",
+      "(d) इंडोनेशिया"
+    ],
+    o_en: [
+      "(a) Malaysia",
+      "(b) China",
+      "(c) Japan",
+      "(d) Indonesia"
+    ],
+    a: 3,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार उन्होंने इंडोनेशिया की जोड़ी को हराया।<br>अतः विकल्प (d) सही है।",
+    e_en: "According to the source answer key, they defeated an Indonesian pair.<br>Therefore, option (d) is correct."
+  },
+  {
+    q_hi: "Q94. मई 2026 में पद्म विभूषण से गौरवान्वित सुश्री एन. राजम को निम्नलिखित में से किस श्रेणी में सम्मानित किया गया?",
+    q_en: "Q94. In which category was Ms. N. Rajam honoured with the Padma Vibhushan in May 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) कला",
+      "(b) खेल",
+      "(c) साहित्य",
+      "(d) चिकित्सा"
+    ],
+    o_en: [
+      "(a) Art",
+      "(b) Sports",
+      "(c) Literature",
+      "(d) Medicine"
+    ],
+    a: 0,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार सुश्री एन. राजम को कला श्रेणी में सम्मानित किया गया।<br>अतः विकल्प (a) सही है।",
+    e_en: "According to the source answer key, Ms. N. Rajam was honoured in the Art category.<br>Therefore, option (a) is correct."
+  },
+  {
+    q_hi: "Q95. मई 2026 में डेफ-टेक भारत 2026 (DEF-TECH Bharat 2026) का आयोजन निम्नलिखित में से किस शहर में किया गया था?",
+    q_en: "Q95. In which city was DEF-TECH Bharat 2026 held in May 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) चेन्नई",
+      "(b) बेंगलुरु",
+      "(c) पुणे",
+      "(d) हैदराबाद"
+    ],
+    o_en: [
+      "(a) Chennai",
+      "(b) Bengaluru",
+      "(c) Pune",
+      "(d) Hyderabad"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार DEF-TECH Bharat 2026 का आयोजन बेंगलुरु में हुआ।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, DEF-TECH Bharat 2026 was held in Bengaluru.<br>Therefore, option (b) is correct."
+  },
+  {
+    q_hi: "Q96. अप्रैल 2026 में रामसर स्थलों की सूची में निम्नलिखित में से कौन-सा पक्षी अभयारण्य शामिल किया गया था?",
+    q_en: "Q96. Which of the following bird sanctuaries was added to the list of Ramsar Sites in April 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) नंदूर मध्मेश्वर पक्षी अभयारण्य (Nandur Madhmeshwar Bird Sanctuary)",
+      "(b) भितरकनिका पक्षी अभयारण्य (Bhitarkanika Bird Sanctuary)",
+      "(c) वेदांथांगल पक्षी अभयारण्य (Vedanthangal Bird Sanctuary)",
+      "(d) शेखा झील पक्षी अभयारण्य (Shekha Jheel Bird Sanctuary)"
+    ],
+    o_en: [
+      "(a) Nandur Madhmeshwar Bird Sanctuary",
+      "(b) Bhitarkanika Bird Sanctuary",
+      "(c) Vedanthangal Bird Sanctuary",
+      "(d) Shekha Jheel Bird Sanctuary"
+    ],
+    a: 3,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार शेखा झील पक्षी अभयारण्य को रामसर स्थलों की सूची में शामिल किया गया।<br>अतः विकल्प (d) सही है।",
+    e_en: "According to the source answer key, Shekha Jheel Bird Sanctuary was added to the list of Ramsar Sites.<br>Therefore, option (d) is correct."
+  },
+  {
+    q_hi: "Q97. वर्ल्ड हैप्पीनेस रिपोर्ट 2026 (मार्च 2026 में जारी) में कौन-सा देश शीर्ष पर रहा?",
+    q_en: "Q97. Which country ranked first in the World Happiness Report 2026 released in March 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) स्विट्जरलैंड",
+      "(b) डेनमार्क",
+      "(c) नीदरलैंड",
+      "(d) फिनलैंड"
+    ],
+    o_en: [
+      "(a) Switzerland",
+      "(b) Denmark",
+      "(c) Netherlands",
+      "(d) Finland"
+    ],
+    a: 3,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार वर्ल्ड हैप्पीनेस रिपोर्ट 2026 में फिनलैंड शीर्ष पर रहा।<br>अतः विकल्प (d) सही है।",
+    e_en: "According to the source answer key, Finland ranked first in the World Happiness Report 2026.<br>Therefore, option (d) is correct."
+  },
+  {
+    q_hi: "Q98. अल्पसंख्यक कार्य मंत्रालय ने बिहार के अल्पसंख्यक युवाओं को आर्टिफिशियल इंटेलिजेंस और बिजनेस एनालिटिक्स का प्रशिक्षण देने के लिए, अप्रैल 2026 में IIT पटना के साथ किस स्कीम के तहत समझौता ज्ञापन पर हस्ताक्षर किए?",
+    q_en: "Q98. Under which scheme did the Ministry of Minority Affairs sign an MoU with IIT Patna in April 2026 to train minority youth in Bihar in Artificial Intelligence and Business Analytics?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) नई मंजिल स्कीम",
+      "(b) सीखो और कमाओ स्कीम",
+      "(c) PM VIKAS स्कीम",
+      "(d) PMJVK स्कीम"
+    ],
+    o_en: [
+      "(a) Nai Manzil Scheme",
+      "(b) Seekho Aur Kamao Scheme",
+      "(c) PM VIKAS Scheme",
+      "(d) PMJVK Scheme"
+    ],
+    a: 2,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार यह समझौता PM VIKAS स्कीम के तहत हुआ।<br>अतः विकल्प (c) सही है।",
+    e_en: "According to the source answer key, the MoU was signed under the PM VIKAS Scheme.<br>Therefore, option (c) is correct."
+  },
+  {
+    q_hi: "Q99. वर्ष 2026 में कला के क्षेत्र में किस अभिनेता को पद्म भूषण पुरस्कार से सम्मानित किया गया?",
+    q_en: "Q99. Which actor was awarded the Padma Bhushan in the field of Art in 2026?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) जोसेफ विजय (Joseph Vijay)",
+      "(b) गोविंदा (Govinda)",
+      "(c) मामूट्टी (Mammootty)",
+      "(d) पवन कल्याण (Pawan Kalyan)"
+    ],
+    o_en: [
+      "(a) Joseph Vijay",
+      "(b) Govinda",
+      "(c) Mammootty",
+      "(d) Pawan Kalyan"
+    ],
+    a: 2,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार कला के क्षेत्र में पद्म भूषण से मामूट्टी को सम्मानित किया गया।<br>अतः विकल्प (c) सही है।",
+    e_en: "According to the source answer key, Mammootty was awarded the Padma Bhushan in the field of Art.<br>Therefore, option (c) is correct."
+  },
+  {
+    q_hi: "Q100. नीति आयोग के \"विकसित भारत और नेट ज़ीरो की ओर परिदृश्य\" शीर्षक वाले अध्ययन के अनुसार, भारत का लक्ष्य किस लक्ष्य वर्ष तक नेट ज़ीरो (Net Zero) ग्रीनहाउस गैस उत्सर्जन प्राप्त करना है?",
+    q_en: "Q100. According to NITI Aayog's study titled \"Scenarios Towards Viksit Bharat and Net Zero\", by which target year does India aim to achieve net-zero greenhouse-gas emissions?",
+    tag: "RRB Level 01 Stage I 2025",
+    image: null,
+    o_hi: [
+      "(a) 2050",
+      "(b) 2070",
+      "(c) 2060",
+      "(d) 2047"
+    ],
+    o_en: [
+      "(a) 2050",
+      "(b) 2070",
+      "(c) 2060",
+      "(d) 2047"
+    ],
+    a: 1,
+    e_hi: "स्रोत की उत्तर-कुंजी के अनुसार भारत का नेट ज़ीरो लक्ष्य वर्ष 2070 है।<br>अतः विकल्प (b) सही है।",
+    e_en: "According to the source answer key, India's target year for net-zero emissions is 2070.<br>Therefore, option (b) is correct."
+  }
+];
