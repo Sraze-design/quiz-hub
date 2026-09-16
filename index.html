@@ -3508,6 +3508,7 @@ function parseQuizDataSource(source) {
 let isHistoryNav = false;
 let skipExitConfirmOnce = false;
 let isBookmarkOnlyQuiz = false;
+let analysisHistoryPushed = false;
 // Wrong/Skipped/Mixed retests are practice attempts and must not overwrite
 // the All Time Best of the original full test.
 let isRetestAttempt = false;
@@ -3596,6 +3597,13 @@ function pushExplorerHistory(state) {
 
 window.addEventListener('popstate', (e) => {
   const d=document.getElementById('appSideDrawer');if(d&&d.classList.contains('active')){closeAppSideDrawer();return}
+  // Analysis behaves like the other full-screen overlays: the first Back
+  // closes Analysis and returns to the result page, without exiting the test.
+  if (analysisHistoryPushed) {
+    analysisHistoryPushed = false;
+    if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
+    return;
+  }
   // If the AI assistant panel is open, this back-navigation exists only to
   // close it — consume it here and stop.
   if (aiHistoryPushed) {
@@ -3663,6 +3671,8 @@ window.addEventListener('popstate', (e) => {
   // If currently inside the quiz engine, exit back to the explorer first
   const quizEngine = document.getElementById('quizEngineBox');
   if (quizEngine && quizEngine.style.display !== 'none') {
+    if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
+    analysisHistoryPushed = false;
     quizEngine.style.display = 'none';
     if (state.screen !== 'quiz' || !e.state?.bookmarkOnly) isBookmarkOnlyQuiz = false;
     if (typeof unlockBodyScroll === 'function') unlockBodyScroll();
@@ -4967,6 +4977,13 @@ function showEmptyState() {
 
 async function loadQuizData(quizPath, requestedQuestionIndex) {
   showLoader(true);
+  // A newly launched test must never inherit the previous test's Analysis UI
+  // or response snapshot, even if navigation happened through browser Back.
+  if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
+  analysisHistoryPushed = false;
+  if (typeof resultAnalysisSnapshot !== 'undefined') resultAnalysisSnapshot = null;
+  if (typeof resultAnalysisPosition !== 'undefined') resultAnalysisPosition = 0;
+  if (typeof resultAnalysisFilter !== 'undefined') resultAnalysisFilter = 'all';
   isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
   currentBookmarkIdOverride = null;
@@ -5348,17 +5365,29 @@ function openResultAnalysis(filter){
   modal.classList.add('open');
   document.body.classList.add('analysis-open');
   document.body.style.overflow='hidden';
+  if(!analysisHistoryPushed){
+    history.pushState({analysisOpen:true,screen:'quiz'},'');
+    analysisHistoryPushed=true;
+  }
   const subtitle=document.getElementById('analysisSubtitle');
   if(subtitle) subtitle.textContent=resultAnalysisSnapshot.test||'Review every response';
   setAnalysisFilter(filter||'all');
 }
 
-function closeResultAnalysis(){
+function hideResultAnalysisUI(){
   closeAnalysisPalette();
   document.getElementById('resultAnalysisModal')?.classList.remove('open');
   document.body.classList.remove('analysis-open');
   document.body.style.overflow='';
   if(typeof updateAIButtonVisibility==='function') updateAIButtonVisibility();
+}
+
+function closeResultAnalysis(){
+  if(analysisHistoryPushed){
+    history.back();
+  }else{
+    hideResultAnalysisUI();
+  }
 }
 
 function setAnalysisFilter(filter){
