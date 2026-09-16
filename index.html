@@ -3509,6 +3509,7 @@ let isHistoryNav = false;
 let skipExitConfirmOnce = false;
 let isBookmarkOnlyQuiz = false;
 let analysisHistoryPushed = false;
+let analysisPaletteHistoryPushed = false;
 // Wrong/Skipped/Mixed retests are practice attempts and must not overwrite
 // the All Time Best of the original full test.
 let isRetestAttempt = false;
@@ -3597,13 +3598,6 @@ function pushExplorerHistory(state) {
 
 window.addEventListener('popstate', (e) => {
   const d=document.getElementById('appSideDrawer');if(d&&d.classList.contains('active')){closeAppSideDrawer();return}
-  // Analysis behaves like the other full-screen overlays: the first Back
-  // closes Analysis and returns to the result page, without exiting the test.
-  if (analysisHistoryPushed) {
-    analysisHistoryPushed = false;
-    if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
-    return;
-  }
   // If the AI assistant panel is open, this back-navigation exists only to
   // close it — consume it here and stop.
   if (aiHistoryPushed) {
@@ -3618,6 +3612,22 @@ window.addEventListener('popstate', (e) => {
   if (qpHistoryPushed) {
     qpHistoryPushed = false;
     hideQuestionPaletteUI();
+    return;
+  }
+
+  // The Analysis question palette is a child of Analysis. Back closes only
+  // this palette and keeps the user on the same reviewed question.
+  if (analysisPaletteHistoryPushed) {
+    analysisPaletteHistoryPushed = false;
+    if (typeof hideAnalysisPaletteUI === 'function') hideAnalysisPaletteUI();
+    return;
+  }
+
+  // Analysis sits below AI and palettes in the overlay stack. Check it only
+  // after those child overlays, so closing AI returns to Analysis—not Result.
+  if (analysisHistoryPushed) {
+    analysisHistoryPushed = false;
+    if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
     return;
   }
 
@@ -4981,6 +4991,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   // or response snapshot, even if navigation happened through browser Back.
   if (typeof hideResultAnalysisUI === 'function') hideResultAnalysisUI();
   analysisHistoryPushed = false;
+  analysisPaletteHistoryPushed = false;
   if (typeof resultAnalysisSnapshot !== 'undefined') resultAnalysisSnapshot = null;
   if (typeof resultAnalysisPosition !== 'undefined') resultAnalysisPosition = 0;
   if (typeof resultAnalysisFilter !== 'undefined') resultAnalysisFilter = 'all';
@@ -5375,7 +5386,8 @@ function openResultAnalysis(filter){
 }
 
 function hideResultAnalysisUI(){
-  closeAnalysisPalette();
+  if(typeof hideAnalysisPaletteUI==='function') hideAnalysisPaletteUI();
+  analysisPaletteHistoryPushed=false;
   document.getElementById('resultAnalysisModal')?.classList.remove('open');
   document.body.classList.remove('analysis-open');
   document.body.style.overflow='';
@@ -5446,18 +5458,29 @@ function renderAnalysisPalette(){
 }
 
 function openAnalysisPalette(){
+  if(analysisPaletteHistoryPushed) return;
   renderAnalysisPalette();
   document.getElementById('analysisPaletteOverlay')?.classList.add('open');
   document.getElementById('analysisPalettePanel')?.classList.add('open');
   if(typeof closeAIPanel==='function') closeAIPanel();
   const aiBtn=document.getElementById('ai-floating-btn');
   if(aiBtn) aiBtn.style.display='none';
+  history.pushState({analysisPaletteOpen:true,screen:'quiz'},'');
+  analysisPaletteHistoryPushed=true;
 }
 
-function closeAnalysisPalette(){
+function hideAnalysisPaletteUI(){
   document.getElementById('analysisPaletteOverlay')?.classList.remove('open');
   document.getElementById('analysisPalettePanel')?.classList.remove('open');
   if(document.getElementById('resultAnalysisModal')?.classList.contains('open')&&typeof updateAIButtonVisibility==='function') updateAIButtonVisibility();
+}
+
+function closeAnalysisPalette(){
+  if(analysisPaletteHistoryPushed){
+    history.back();
+  }else{
+    hideAnalysisPaletteUI();
+  }
 }
 
 function formatAnalysisQuestionTime(seconds){
