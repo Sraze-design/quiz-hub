@@ -1,0 +1,552 @@
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q1. कोई व्यापारी, किसी वस्तु के अंकित मूल्य पर 50% और 14% की दो क्रमिक छू ट देने के बाद उसे बेचता है और 72% का लाभ प्राप्त करता है। यदि वस्तु के क्रय मूल्य में 36% की वृद्धि हो, तो उसे अब उसी अंकित मूल्य पर कितनी एकल छू ट देनी चाहिए ताकि उसे पहले जितना ही लाभ प्रतिशत प्राप्त हो?",
+    q_en: "Q1. A trader sells an article after giving two successive discounts of 50% and 14% on its marked price and earns a profit of 72%. If the cost price of the article increases by 36%, what single discount should he now give on the same marked price to earn the same profit percentage as before?",
+    tag: "RRB Group D, 03/08/2026 (Shift-01)",
+    o_hi: ["(a) 40.56%", "(b) 47.46%", "(c) 41.52%", "(d) 46.78%"],
+    o_en: ["(a) 40.56%", "(b) 47.46%", "(c) 41.52%", "(d) 46.78%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q2. एक वस्तु को 20% के लाभ पर बेचा जाता है। यदि विक्रय मूल्य में ₹100 की वृद्धि कर दी जाए, तो लाभ प्रतिशत दोगुना हो जाएगा। वस्तु का क्रय मूल्य कितना था?",
+    q_en: "Q2. An article is sold at a profit of 20%. If the selling price is increased by ₹100, the profit percentage becomes double. What was the cost price of the article?",
+    tag: "RRB Group D, 03/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹250", "(b) ₹500", "(c) ₹200", "(d) ₹400"],
+    o_en: ["(a) ₹250", "(b) ₹500", "(c) ₹200", "(d) ₹400"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q3. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य बराबर है। दुकान I कुकर के अंकित मूल्य पर 46% और 13% की दो क्रमिक छूट प्रदान करती है, दुकान II कुकर के अंकित मूल्य पर 55% और 69% की दो क्रमिक छूट प्रदान करती है, दुकान III कुकर के अंकित मूल्य पर 47% और 68% की दो क्रमिक छूट प्रदान करती है, और दुकान IV कुकर के अंकित मूल्य पर 91%, 98%, और 18% की क्रमिक छूट प्रदान करती है। कौन-सी दुकान कुकर को न्यूनतम मूल्य पर बेच रही है?",
+    q_en: "Q3. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 46% and 13%; Shop II offers 55% and 69%; Shop III offers 47% and 68%; and Shop IV offers successive discounts of 91%, 98% and 18%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) III", "(b) II", "(c) IV", "(d) I"],
+    o_en: ["(a) III", "(b) II", "(c) IV", "(d) I"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q4. एक बेईमान दुकानदार अपने माल को क्रय मूल्य पर बेचने का वादा करता है, लेकिन वह ऐसे बाट का उपयोग करता है जिसका वजन लिखे हुए वास्तविक वजन से 20% कम है। उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q4. A dishonest shopkeeper claims to sell goods at cost price, but uses a weight that is 20% less than the stated weight. Find his profit percentage.",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) 23.62%", "(b) 25%", "(c) 26.02%", "(d) 24.6%"],
+    o_en: ["(a) 23.62%", "(b) 25%", "(c) 26.02%", "(d) 24.6%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q5. एक दुकानदार किसी वस्तु का मूल्य उसके क्रय मूल्य से 44% अधिक अंकित करता है और फिर उसपर प्रत्येक 39% की दो क्रमिक छूटें देता है। उसका हानि प्रतिशत कितना होगा? (निकटतम पूर्णांक तक पूर्णांकित करें)",
+    q_en: "Q5. A shopkeeper marks an article 44% above its cost price and then gives two successive discounts of 39% each. What is his loss percentage? (Round to the nearest integer.)",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) 48%", "(b) 45%", "(c) 47%", "(d) 46%"],
+    o_en: ["(a) 48%", "(b) 45%", "(c) 47%", "(d) 46%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q6. एक दुकानदार ने ₹1,200 प्रत्येक की दर से दो घड़ियाँ खरीदीं। उसने पहली घड़ी 15% के लाभ पर और दूसरी घड़ी 10% की हानि पर बेची। फिर उसने पहली घड़ी खरीदने वाले ग्राहक को ₹100 कैशबैक दिया। दुकानदार का समग्र लाभ या हानि ज्ञात कीजिए।",
+    q_en: "Q6. A shopkeeper bought two watches for ₹1,200 each. He sold the first at a 15% profit and the second at a 10% loss, then gave ₹100 cashback to the customer who bought the first watch. Find the shopkeeper’s overall profit or loss.",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹15 का लाभ", "(b) ₹60 का लाभ", "(c) ₹40 की हािन", "(d) ₹30 की हािन"],
+    o_en: ["(a) ₹15 profit", "(b) ₹60 profit", "(c) ₹40 loss", "(d) ₹30 loss"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q49
+  {
+    q_hi: "Q7. एक कुकर का अंकित मूल्य चार दुकानों I, II, III और IV पर समान है। कुकर के अंकित मूल्य पर दुकान I, 78% और 25% की दो क्रमिक छूट देती है, दुकान II, 83% और 29% की क्रमिक छूट देती है, दुकान III, 33% और 81% की क्रमिक छूट देती है, और दुकान IV, 84%, 83%, और 82% की क्रमिक छूट देती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q7. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 78% and 25%; Shop II offers 83% and 29%; Shop III offers 33% and 81%; and Shop IV offers successive discounts of 84%, 83% and 82%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) I", "(b) IV", "(c) II", "(d) III"],
+    o_en: ["(a) I", "(b) IV", "(c) II", "(d) III"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q48
+  {
+    q_hi: "Q8. एक व्यापारी किसी वस्तु को उसके सूची मूल्य पर 25% की छूट पर खरीदता है और उसे सूची मूल्य से 35% अधिक पर अंकित करता है। यदि वह नए अंकित मूल्य पर 20% की छूट देता है, तो उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q8. A trader buys an article at a 25% discount on its list price and marks it 35% above the list price. If he gives a 20% discount on the new marked price, find his profit percentage.",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) 36%", "(b) 44%", "(c) 42%", "(d) 34%"],
+    o_en: ["(a) 36%", "(b) 44%", "(c) 42%", "(d) 34%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q9. एक व्यापारी किसी वस्तु को उसके अंकित मूल्य पर 25% और 80% की दो क्रमिक छूट देकर बेचता है और उसे 50% का लाभ प्राप्त होता है। यदि वस्तु का क्रय मूल्य 74% बढ़ा दिया जाए, तो उसे पहले जितना लाभ प्रतिशत प्राप्त करने के लिए उसी समान अंकित मूल्य पर कितनी छूट देनी चाहिए?",
+    q_en: "Q9. A trader sells an article after giving two successive discounts of 25% and 80% on its marked price and earns a profit of 50%. If the cost price of the article is increased by 74%, what discount should he give on the same marked price to earn the same profit percentage as before?",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) 72.62%", "(b) 66.56%", "(c) 69.5%", "(d) 73.9%"],
+    o_en: ["(a) 72.62%", "(b) 66.56%", "(c) 69.5%", "(d) 73.9%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-03) | Original Q26
+  {
+    q_hi: "Q10. एक विक्रे ता एक वस्तु को 25% लाभ पर बेचता है। फिर क्रे ता उसे 10% हानि पर बेचता है। यदि मूल क्रय मूल्य ₹1,200 था, तो वस्तु के अंतिम विक्रय मूल्य का 40% कितना है?",
+    q_en: "Q10. A seller sells an article at a profit of 25%. The buyer then sells it at a loss of 10%. If the original cost price was ₹1,200, what is 40% of the final selling price of the article?",
+    tag: "RRB Group D, 04/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹480", "(b) ₹600", "(c) ₹630", "(d) ₹540"],
+    o_en: ["(a) ₹480", "(b) ₹600", "(c) ₹630", "(d) ₹540"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q11. एक कुकर का अंकित मूल्य चार दुकानों- I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 46% और 62% की दो क्रमिक छूट देती है, दुकान II, 16% और 77% की क्रमिक छूट देती है, दुकान III, 74% और 54% की क्रमिक छूट देती है, और दुकान IV, 12%, 98% और 86% की क्रमिक छूट देती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q11. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 46% and 62%; Shop II offers 16% and 77%; Shop III offers 74% and 54%; and Shop IV offers successive discounts of 12%, 98% and 86%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 04/08/2026 (Shift-03)",
+    o_hi: ["(a) II", "(b) III", "(c) IV", "(d) I"],
+    o_en: ["(a) II", "(b) III", "(c) IV", "(d) I"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q37
+  {
+    q_hi: "Q12. एक कुकर का अंकित मूल्य चार दुकानों- I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 80% और 44% की दो क्रमिक छूट देती है, दुकान II, 58% और 62% की क्रमिक छूट देती है, दुकान III, 67% और 85% की क्रमिक छूट देती है, और दुकान IV, 41%, 91%, और 74% की क्रमिक छूट देती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q12. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 80% and 44%; Shop II offers 58% and 62%; Shop III offers 67% and 85%; and Shop IV offers successive discounts of 41%, 91% and 74%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) I", "(b) IV", "(c) III", "(d) II"],
+    o_en: ["(a) I", "(b) IV", "(c) III", "(d) II"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q13. यदि किसी वस्तु का क्रय मूल्य ₹500 है और उसे ₹400 में बेचा जाता है, तो हानि प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q13. If the cost price of an article is ₹500 and it is sold for ₹400, find the loss percentage.",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) 20%", "(b) 80%", "(c) 25%", "(d) 100%"],
+    o_en: ["(a) 20%", "(b) 80%", "(c) 25%", "(d) 100%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q14. एक दुकानदार किसी वस्तु के मूल्य में उसके क्रय मूल्य से 20% अधिक की वृद्धि करता है। और फिर नए मूल्य पर 25% की छूट देता है। बाद में, वह छूट के बाद प्राप्त मूल्य में पुनः 10% की वृद्धि करता है। यदि वस्तु का क्रय मूल्य ₹500 था, तो वस्तु का अंतिम मूल्य ज्ञात कीजिए।",
+    q_en: "Q14. A shopkeeper marks an article 20% above its cost price and then gives a discount of 25% on the new price. Later, he increases the discounted price by 10%. If the cost price was ₹500, find the final price of the article.",
+    tag: "RRB Group D, 05/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹495", "(b) ₹490", "(c) ₹485", "(d) ₹510"],
+    o_en: ["(a) ₹495", "(b) ₹490", "(c) ₹485", "(d) ₹510"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-02) | Original Q33
+  {
+    q_hi: "Q15. एक व्यापारी ₹350 में एक वस्तु खरीदता है और उसे ₹420 में बेचता है। उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q15. A trader buys an article for ₹350 and sells it for ₹420. Find his profit percentage.",
+    tag: "RRB Group D, 05/08/2026 (Shift-02)",
+    o_hi: ["(a) 15%", "(b) 25%", "(c) 30%", "(d) 20%"],
+    o_en: ["(a) 15%", "(b) 25%", "(c) 30%", "(d) 20%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-02) | Original Q40
+  {
+    q_hi: "Q16. एक कुकर का अंकित मूल्य चार दुकानों- I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 78% और 43% की दो क्रमिक छूट देती है, दुकान II, 74% और 83% की क्रमिक छूट देती है, दुकान III, 15% और 93% की क्रमिक छूट देती है, और दुकान IV, 93%, 84%, और 42% की क्रमिक छूट देती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q16. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 78% and 43%; Shop II offers 74% and 83%; Shop III offers 15% and 93%; and Shop IV offers successive discounts of 93%, 84% and 42%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 05/08/2026 (Shift-02)",
+    o_hi: ["(a) IV", "(b) III", "(c) II", "(d) I"],
+    o_en: ["(a) IV", "(b) III", "(c) II", "(d) I"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q17. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 87% और 14% की दो क्रमिक छूट, दुकान II द्वारा 16% और 92% की क्रमिक छूट, दुकान III द्वारा 60% और 35% की क्रमिक छूट तथा दुकान IV द्वारा 58%, 29% और 87% की क्रमिक छूट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q17. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 87% and 14%; Shop II offers 16% and 92%; Shop III offers 60% and 35%; and Shop IV offers successive discounts of 58%, 29% and 87%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 06/08/2026 (Shift-02)",
+    o_hi: ["(a) II", "(b) I", "(c) III", "(d) IV"],
+    o_en: ["(a) II", "(b) I", "(c) III", "(d) IV"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q18. अरविंद ने एक वस्तु ₹x में खरीदी। उसने इसे बीरू को 25% की हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹157 व्यय किए और इसे मीनू को 40% के लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,715 में खरीदा है, तो x का मान (₹ में) ज्ञात कीजिए।",
+    q_en: "Q18. Arvind bought an article for ₹x. He sold it to Biru at a loss of 25%. Biru spent ₹157 on transportation and sold it to Meenu at a profit of 40%. If Meenu bought it for ₹1,715, find x.",
+    tag: "RRB Group D, 06/08/2026 (Shift-02)",
+    o_hi: ["(a) 1,424", "(b) 1,408", "(c) 1,446", "(d) 1,414"],
+    o_en: ["(a) 1,424", "(b) 1,408", "(c) 1,446", "(d) 1,414"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q26
+  {
+    q_hi: "Q19. एक आवासीय प्लॉट ₹6,28,200 में खरीदा गया और ₹7,09,866 में बेचा गया। लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q19. A residential plot was bought for ₹6,28,200 and sold for ₹7,09,866. Find the profit percentage.",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) 19%", "(b) 11%", "(c) 13%", "(d) 17%"],
+    o_en: ["(a) 19%", "(b) 11%", "(c) 13%", "(d) 17%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q32
+  {
+    q_hi: "Q20. एक कुकर का अंकित मूल्य चार दुकानों I, II, III और IV पर समान है। कुकर के अंकित मूल्य पर दुकान I, 12% और 79% की दो क्रमिक छूट प्रदान करती है, दुकान II, 33% और 19% की क्रमिक छूट प्रदान करती है, दुकान III, 38% और 39% की क्रमिक छूट प्रदान करती है और दुकान IV, 55%, 79%, और 34% की क्रमिक छूट प्रदान करती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q20. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 12% and 79%; Shop II offers 33% and 19%; Shop III offers 38% and 39%; and Shop IV offers successive discounts of 55%, 79% and 34%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) IV", "(b) II", "(c) III", "(d) I"],
+    o_en: ["(a) IV", "(b) II", "(c) III", "(d) I"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q31
+  {
+    q_hi: "Q21. अरविंद, किसी वस्तु को ₹x में खरीदता है। वह इसे बीरू को 5% की हानि पर बेचता है। बीरू इसके परिवहन पर ₹152 खर्च करता है और इसे मीनू को 56% के लाभ पर बेचता है। यदि मीनू इसे ₹1,482 में खरीदती है, तो x का मान कितना होगा?",
+    q_en: "Q21. Arvind bought an article for ₹x. He sold it to Biru at a loss of 5%. Biru spent ₹152 on transportation and sold it to Meenu at a profit of 56%. If Meenu bought it for ₹1,482, find x.",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) 880", "(b) 820", "(c) 860", "(d) 840"],
+    o_en: ["(a) 880", "(b) 820", "(c) 860", "(d) 840"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q37
+  {
+    q_hi: "Q22. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 13% और 60% की दो क्रमिक छूट, दुकान II द्वारा 56% और 12% की क्रमिक छूट, दुकान III द्वारा 60% और 28% की क्रमिक छूट तथा दुकान IV द्वारा 33%, 16% और 89% की क्रमिक छूट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q22. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 13% and 60%; Shop II offers 56% and 12%; Shop III offers 60% and 28%; and Shop IV offers successive discounts of 33%, 16% and 89%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) IV", "(b) I", "(c) II", "(d) III"],
+    o_en: ["(a) IV", "(b) I", "(c) II", "(d) III"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q23. एक स्टोर एक जैकेट की कीमत ₹1,200 से बढ़ाकर ₹1,440 कर देता है, फिर एक ऐसा छूट देता है जिससे कीमत घटकर ₹1,296 हो जाती है। मूल कीमत से अंतिम कीमत में समग्र प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q23. A store increases the price of a jacket from ₹1,200 to ₹1,440 and then gives a discount that reduces the price to ₹1,296. Find the overall percentage change from the original price to the final price.",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) 8% की कमी", "(b) 8% की वृद्धि", "(c) 10% की कमी", "(d) 10% की वृद्धि"],
+    o_en: ["(a) 8% decrease", "(b) 8% increase", "(c) 10% decrease", "(d) 10% increase"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q33
+  {
+    q_hi: "Q24. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 23% और 92% की दो क्रमिक छूट, दुकान II द्वारा 88% और 47% की क्रमिक छूट, दुकान III द्वारा 11% और 28% की क्रमिक छूट तथा दुकान IV द्वारा 63%, 76% और 86% की क्रमिक छूट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q24. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 23% and 92%; Shop II offers 88% and 47%; Shop III offers 11% and 28%; and Shop IV offers successive discounts of 63%, 76% and 86%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) III", "(b) I", "(c) IV", "(d) II"],
+    o_en: ["(a) III", "(b) I", "(c) IV", "(d) II"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q25. अरविंद ने एक वस्तु ₹x में खरीदी। उसने इसे बिरू को 30% की हानि पर बेच दिया। बिरू ने इसके परिवहन पर ₹130 खर्च किए और इसे मीनू को 50% के लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,287 में खरीदा, तो x का मान कितना है?",
+    q_en: "Q25. Arvind bought an article for ₹x. He sold it to Biru at a loss of 30%. Biru spent ₹130 on transportation and sold it to Meenu at a profit of 50%. If Meenu bought it for ₹1,287, find x.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 1,072", "(b) 1,044", "(c) 1,022", "(d) 1,040"],
+    o_en: ["(a) 1,072", "(b) 1,044", "(c) 1,022", "(d) 1,040"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q26
+  {
+    q_hi: "Q26. चार दुकानों I, II, III और IV पर एक कु कर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 19% और 59% की दो क्रमिक छू ट, दुकान II द्वारा 11% और 94% की क्रमिक छू ट, दुकान III द्वारा 25% और 70% की क्रमिक छू ट तथा दुकान IV द्वारा 96%, 44% और 25% की क्रमिक छू ट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कु कर बेच रही है?",
+    q_en: "Q26. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 19% and 59%; Shop II offers 11% and 94%; Shop III offers 25% and 70%; and Shop IV offers successive discounts of 96%, 44% and 25%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) II", "(b) IV", "(c) III", "(d) I"],
+    o_en: ["(a) II", "(b) IV", "(c) III", "(d) I"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q40
+  {
+    q_hi: "Q27. रमेश दो एकसमान वाशिंग मशीन खरीदता है। वह एक को 20% लाभ पर और दूसरी को 10% हानि पर बेचता है। यदि दोनों मशीनों का कुल विक्रय मूल्य ₹33,600 था, तो प्रत्येक वाशिंग मशीन का क्रय मूल्य ज्ञात कीजिए।",
+    q_en: "Q27. Ramesh buys two identical washing machines. He sells one at a profit of 20% and the other at a loss of 10%. If the total selling price of both machines is ₹33,600, find the cost price of each washing machine.",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹16,800", "(b) ₹15,800", "(c) ₹16,000", "(d) ₹18,000"],
+    o_en: ["(a) ₹16,800", "(b) ₹15,800", "(c) ₹16,000", "(d) ₹18,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q28. एक दुकानदार कुछ पेंसिलें ₹35 में 6 पेंसिल की दर से खरीदता है और उन्हें ₹65 में 10 पेंसिल की दर से बेचता है। उसका लाभ प्रतिशत _______% है। (दशमलव के दो स्थानों तक पूर्णांकित)",
+    q_en: "Q28. A shopkeeper buys pencils at the rate of 6 pencils for ₹35 and sells them at the rate of 10 pencils for ₹65. Find his profit percentage, rounded to two decimal places.",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) 11.34", "(b) 13.14", "(c) 13.41", "(d) 11.43"],
+    o_en: ["(a) 11.34", "(b) 13.14", "(c) 13.41", "(d) 11.43"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q50
+  {
+    q_hi: "Q29. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 58% और 36% की दो क्रमिक छूट, दुकान II द्वारा 73% और 91% की क्रमिक छूट, दुकान III द्वारा 76% और 88% की क्रमिक छूट तथा दुकान IV द्वारा 79%, 68% और 96% की क्रमिक छूट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q29. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 58% and 36%; Shop II offers 73% and 91%; Shop III offers 76% and 88%; and Shop IV offers successive discounts of 79%, 68% and 96%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) I", "(b) II", "(c) III", "(d) IV"],
+    o_en: ["(a) I", "(b) II", "(c) III", "(d) IV"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-02) | Original Q29
+  {
+    q_hi: "Q30. एक कुकर का अंकित मूल्य चार दुकानों I, II, III और IV पर समान है। कुकर के अंकित मूल्य पर, दुकान I में 66% और 88% की दो क्रमिक छूट दी जाती है, दुकान II में 78% और 70% की क्रमिक छूट दी जाती है, दुकान III में 89% और 35% की क्रमिक छूट दी जाती है और दुकान IV में 27%, 65% और 59% की क्रमिक छूट दी जाती है। किस दुकान में सबसे कम मूल्य पर कुकर बेचा जा रहा है?",
+    q_en: "Q30. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 66% and 88%; Shop II offers 78% and 70%; Shop III offers 89% and 35%; and Shop IV offers successive discounts of 27%, 65% and 59%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 10/08/2026 (Shift-02)",
+    o_hi: ["(a) IV", "(b) II", "(c) I", "(d) III"],
+    o_en: ["(a) IV", "(b) II", "(c) I", "(d) III"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-02) | Original Q38
+  {
+    q_hi: "Q31. व्यापारी मुकेश ₹5 प्रति पेन की दर से कुछ पेन खरीदता है। वह दो-तिहाई पेन 25% लाभ पर और शेष पेन 10% हानि पर बेचता है। यदि मुकेश का कुल लाभ ₹360 है, तो बताएं कि उसने कितने पेन खरीदे थे?",
+    q_en: "Q31. Trader Mukesh buys some pens at ₹5 per pen. He sells two-thirds of the pens at a profit of 25% and the remaining pens at a loss of 10%. If Mukesh's total profit is ₹360, how many pens did he buy?",
+    tag: "RRB Group D, 10/08/2026 (Shift-02)",
+    o_hi: ["(a) 530", "(b) 580", "(c) 550", "(d) 540"],
+    o_en: ["(a) 530", "(b) 580", "(c) 550", "(d) 540"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q35
+  {
+    q_hi: "Q32. अरविंद ने कोई वस्तु ₹x में खरीदी। उसने इसे बीरू को 11% की हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹180 खर्च किए और इसे मीनू को 60% के लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,000 में खरीदा, तो x का मान कितना है?",
+    q_en: "Q32. Arvind bought an article for ₹x. He sold it to Biru at a loss of 11%. Biru spent ₹180 on transportation and sold it to Meenu at a profit of 60%. If Meenu bought it for ₹1,000, find x.",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) 494", "(b) 452", "(c) 503", "(d) 500"],
+    o_en: ["(a) 494", "(b) 452", "(c) 503", "(d) 500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q33. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य समान है। दुकान I द्वारा उस पर 85% और 27% की दो क्रमिक छूट, दुकान II द्वारा 78% और 19% की क्रमिक छूट, दुकान III द्वारा 24% और 27% की क्रमिक छूट तथा दुकान IV द्वारा 24%, 94% और 74% की क्रमिक छूट दी जाती है। कौन-सी दुकान सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q33. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 85% and 27%; Shop II offers 78% and 19%; Shop III offers 24% and 27%; and Shop IV offers successive discounts of 24%, 94% and 74%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) III", "(b) I", "(c) IV", "(d) II"],
+    o_en: ["(a) III", "(b) I", "(c) IV", "(d) II"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q34. I, II, III आणि IV या चार दुकानांमध्ये कुकरची चिन्हांकित किंमत समान आहे. दुकान I मध्ये 54% आणि 61% च्या दोन सलग सवलती दिल्या आहेत, दुकान II मध्ये 17% आणि 49% च्या सलग सवलती दिल्या आहेत, दुकान III मध्ये 25% आणि 36% च्या सलग सवलती दिल्या आहेत आणि दुकान IV मध्ये कुकरच्या चिन्हांकित किंमतीवर 95%, 20% आणि 68% च्या सलग सवलती दिल्या आहेत. कोणते दुकान कुकर सर्वात कमी किंमतीत विकत आहे?",
+    q_en: "Q34. I, II, III आणि IV या चार दुकानांमध्ये कुकरची चिन्हांकित किंमत समान आहे. दुकान I मध्ये 54% आणि 61% च्या दोन सलग सवलती दिल्या आहेत, दुकान II मध्ये 17% आणि 49% च्या सलग सवलती दिल्या आहेत, दुकान III मध्ये 25% आणि 36% च्या सलग सवलती दिल्या आहेत आणि दुकान IV मध्ये कुकरच्या चिन्हांकित किंमतीवर 95%, 20% आणि 68% च्या सलग सवलती दिल्या आहेत. कोणते दुकान कुकर सर्वात कमी किंमतीत विकत आहे?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) I", "(b) III", "(c) II", "(d) IV"],
+    o_en: ["(a) I", "(b) III", "(c) II", "(d) IV"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q31
+  {
+    q_hi: "Q35. एका लॅपटॉपची 10% तोट्याने आणि डेस्कटॉपची 15% नफ्याने विक्री केल्यावर, रीटाला एकूण ₹8,000 मिळतात. जर तिने लॅपटॉपची 10% नफ्याने आणि डेस्कटॉपची 20% नफ्याने विक्री केल्यास, तिला एकूण ₹20,000 चा नफा होतो. लॅपटॉपची खरेदी किंमत (₹ मध्ये) काढा.",
+    q_en: "Q35. एका लॅपटॉपची 10% तोट्याने आणि डेस्कटॉपची 15% नफ्याने विक्री केल्यावर, रीटाला एकूण ₹8,000 मिळतात. जर तिने लॅपटॉपची 10% नफ्याने आणि डेस्कटॉपची 20% नफ्याने विक्री केल्यास, तिला एकूण ₹20,000 चा नफा होतो. लॅपटॉपची खरेदी किंमत (₹ मध्ये) काढा.",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 36,000", "(b) 40,000", "(c) 60,000", "(d) 80,000"],
+    o_en: ["(a) 36,000", "(b) 40,000", "(c) 60,000", "(d) 80,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q32
+  {
+    q_hi: "Q36. चार दुकानों I, II, III और IV पर एक कुकर का अंकित मूल्य बराबर है। दुकान I कुकर के अंकित मूल्य पर 90% और 61% की दो क्रमिक छूट प्रदान करती है, दुकान II कुकर के अंकित मूल्य पर 15% और 98% की दो क्रमिक छूट प्रदान करती है, दुकान III कुकर के अंकित मूल्य पर 28% और 99% की दो क्रमिक छूट प्रदान करती है, और दुकान IV कुकर के अंकित मूल्य पर 91%, 37%, और 95% की क्रमिक छूट प्रदान करती है। कौन-सी दुकान कुकर को न्यूनतम मूल्य पर बेच रही है?",
+    q_en: "Q36. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 90% and 61%; Shop II offers 15% and 98%; Shop III offers 28% and 99%; and Shop IV offers successive discounts of 91%, 37% and 95%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) IV", "(b) I", "(c) III", "(d) II"],
+    o_en: ["(a) IV", "(b) I", "(c) III", "(d) II"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q42
+  {
+    q_hi: "Q37. एक व्यापारी ने ₹6,000 की कुल लागत पर 10 एकसमान वस्तुएँ खरीदीं। उसने उनमें से 6 वस्तुओं को 15% लाभ पर और शेष 4 वस्तुओं को 10% हानि पर बेचा। समग्र लाभ या हानि प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q37. A trader bought 10 identical articles for a total cost of ₹6,000. He sold 6 of them at a profit of 15% and the remaining 4 at a loss of 10%. Find the overall profit or loss percentage.",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) 10% लाभ", "(b) 10% हानि", "(c) 5% लाभ", "(d) 5% हानि"],
+    o_en: ["(a) 10% profit", "(b) 10% loss", "(c) 5% profit", "(d) 5% loss"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q33
+  {
+    q_hi: "Q38. एक कुकर का अंकित मूल्य चार दुकानों- I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर, दुकान I पर 57% और 29% की दो क्रमिक छूट मिलती है, दुकान II पर 76% और 35% की क्रमिक छूट मिलती है, दुकान III पर 53% और 86% की क्रमिक छूट मिलती है तथा दुकान IV पर 58%, 13% और 12% की क्रमिक छूट मिलती है। कौन-सी दुकान कुकर को सबसे कम कीमत पर बेच रही है?",
+    q_en: "Q38. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 57% and 29%; Shop II offers 76% and 35%; Shop III offers 53% and 86%; and Shop IV offers successive discounts of 58%, 13% and 12%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) I", "(b) III", "(c) II", "(d) IV"],
+    o_en: ["(a) I", "(b) III", "(c) II", "(d) IV"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q48
+  {
+    q_hi: "Q39. अरविंद ने कोई वस्तु ₹x में खरीदी। उसने इसे बीरू को 15% की हानि पर बेचा। बीरू ने इसके परिवहन पर ₹101 खर्च किए और इसे मीनू को 50% के लाभ पर बेचा। यदि मीनू ने इसे ₹1,554 में खरीदा, तो x का मान कितना होगा?",
+    q_en: "Q39. Arvind bought an article for ₹x and sold it to Biru at a 15% loss. Biru spent ₹101 on transportation and sold it to Meenu at a 50% profit. If Meenu bought it for ₹1,554, find x.",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 1,126", "(b) 1,087", "(c) 1,100", "(d) 1,068"],
+    o_en: ["(a) 1,126", "(b) 1,087", "(c) 1,100", "(d) 1,068"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q40. अरविंद ने एक वस्तु ₹x में खरीदी। उसने इसे बीरू को 16% की हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹147 खर्च किए और इसे मीनू को 40% के लाभ पर बेच दिया। यदि मीनू ने इसे ₹617 में खरीदा, तो x का मान कितना होगा?",
+    q_en: "Q40. Arvind bought an article for ₹x. He sold it to Biru at a loss of 16%. Biru spent ₹147 on transportation and sold it to Meenu at a profit of 40%. If Meenu bought it for ₹617, find x.",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) 1,186", "(b) 1,227", "(c) 1,204", "(d) 1,200"],
+    o_en: ["(a) 1,186", "(b) 1,227", "(c) 1,204", "(d) 1,200"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q35
+  {
+    q_hi: "Q41. एक कुकर का अंकित मूल्य चार दुकानों I, II, III और IV पर समान है। कुकर के अंकित मूल्य पर, दुकान I द्वारा 14% और 87% की दो क्रमिक छूट दी जाती है, दुकान II द्वारा 96% और 76% की क्रमिक छूट दी जाती है, दुकान III द्वारा 22% और 92% की क्रमिक छूट दी जाती है और दुकान IV द्वारा 16%, 89% और 57% की क्रमिक छूट दी जाती है। कौन-सी दुकान, सबसे कम मूल्य पर कुकर बेच रही है?",
+    q_en: "Q41. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 14% and 87%; Shop II offers 96% and 76%; Shop III offers 22% and 92%; and Shop IV offers successive discounts of 16%, 89% and 57%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) IV", "(b) II", "(c) I", "(d) III"],
+    o_en: ["(a) IV", "(b) II", "(c) I", "(d) III"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-02) | Original Q30
+  {
+    q_hi: "Q42. एक कुकर का अंकित मूल्य चार दुकानों - I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 18% और 51% की दो क्रमिक छूटें प्रदान करती है, दुकान II, 59% और 89% की क्रमिक छूटें प्रदान करती है, दुकान III, 57% और 40% की क्रमिक छूटें प्रदान करती है और दुकान IV, 68%, 69% और 27% की क्रमिक छूटें प्रदान करती है। कौन-सी दुकान कुकर को सबसे कम कीमत पर बेच रही है?",
+    q_en: "Q42. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 18% and 51%; Shop II offers 59% and 89%; Shop III offers 57% and 40%; and Shop IV offers successive discounts of 68%, 69% and 27%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 12/08/2026 (Shift-02)",
+    o_hi: ["(a) IV", "(b) I", "(c) III", "(d) II"],
+    o_en: ["(a) IV", "(b) I", "(c) III", "(d) II"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-02) | Original Q39
+  {
+    q_hi: "Q43. एक निर्माता अपने विक्रय मूल्य को उत्पादन लागत से 70% अधिक तय करता है। यदि उत्पादन लागत में 10% की वृद्धि होती है और निर्माता अपने विक्रय मूल्य में 10% की वृद्धि करता है, तो नया लाभ प्रतिशत कितना होगा?",
+    q_en: "Q43. A manufacturer sets the selling price 70% above the production cost. If the production cost increases by 10% and the manufacturer also increases the selling price by 10%, what is the new profit percentage?",
+    tag: "RRB Group D, 12/08/2026 (Shift-02)",
+    o_hi: ["(a) 70%", "(b) 72%", "(c) 73%", "(d) 71%"],
+    o_en: ["(a) 70%", "(b) 72%", "(c) 73%", "(d) 71%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q44. अरविंद ने कोई वस्तु ₹x में खरीदी। उसने इसे बीरू को 20% की हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹140 खर्च किए और इसे मीनू को 46% के लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,752 में खरीदा, तो x का मान कितना होगा?",
+    q_en: "Q44. अरविंद ने कोई वस्तु ₹x में खरीदी। उसने इसे बीरू को 20% की हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹140 खर्च किए और इसे मीनू को 46% के लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,752 में खरीदा, तो x का मान कितना होगा?",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) 1,356", "(b) 1,357", "(c) 1,344", "(d) 1,325"],
+    o_en: ["(a) 1,356", "(b) 1,357", "(c) 1,344", "(d) 1,325"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q39
+  {
+    q_hi: "Q45. एक कुकर का अंकित मूल्य चार दुकानों - I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 28% और 93% की दो क्रमिक छूटें प्रदान करती है, दुकान II, 41% और 13% की क्रमिक छूटें प्रदान करती है, दुकान III, 19% और 67% की क्रमिक छूटें प्रदान करती है और दुकान IV, 31%, 59% और 25% की क्रमिक छूटें प्रदान करती है। कौन-सी दुकान कुकर को सबसे कम कीमत पर बेच रही है?",
+    q_en: "Q45. एक कुकर का अंकित मूल्य चार दुकानों - I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 28% और 93% की दो क्रमिक छूटें प्रदान करती है, दुकान II, 41% और 13% की क्रमिक छूटें प्रदान करती है, दुकान III, 19% और 67% की क्रमिक छूटें प्रदान करती है और दुकान IV, 31%, 59% और 25% की क्रमिक छूटें प्रदान करती है। कौन-सी दुकान कुकर को सबसे कम कीमत पर बेच रही है?",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) I", "(b) IV", "(c) III", "(d) II"],
+    o_en: ["(a) I", "(b) IV", "(c) III", "(d) II"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q46. एक विनिर्माता अपने विक्रय मूल्य को उत्पादन लागत से 25% अधिक निर्धारित करता है। यदि उत्पादन लागत 50% बढ़ जाती है, और विनिर्माता अपने विक्रय मूल्य में 68% की वृद्धि करता है, तो लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q46. एक विनिर्माता अपने विक्रय मूल्य को उत्पादन लागत से 25% अधिक निर्धारित करता है। यदि उत्पादन लागत 50% बढ़ जाती है, और विनिर्माता अपने विक्रय मूल्य में 68% की वृद्धि करता है, तो लाभ प्रतिशत ज्ञात कीजिए।",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) 41%", "(b) 39%", "(c) 45%", "(d) 40%"],
+    o_en: ["(a) 41%", "(b) 39%", "(c) 45%", "(d) 40%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q38
+  {
+    q_hi: "Q47. एक कुकर का अंकित मूल्य चार दुकानों - I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 87% और 66% की दो क्रमिक छूट प्रदान करती है, दुकान II, 56% और 30% की क्रमिक छूट प्रदान करती है, दुकान III, 23% और 69% की क्रमिक छूट प्रदान करती है और दुकान IV, 97%, 45% और 27% की क्रमिक छूट प्रदान करती है। कौन-सी दुकान कुकर को सबसे कम मूल्य पर बेच रही है?",
+    q_en: "Q47. एक कुकर का अंकित मूल्य चार दुकानों - I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 87% और 66% की दो क्रमिक छूट प्रदान करती है, दुकान II, 56% और 30% की क्रमिक छूट प्रदान करती है, दुकान III, 23% और 69% की क्रमिक छूट प्रदान करती है और दुकान IV, 97%, 45% और 27% की क्रमिक छूट प्रदान करती है। कौन-सी दुकान कुकर को सबसे कम मूल्य पर बेच रही है?",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) III", "(b) IV", "(c) I", "(d) II"],
+    o_en: ["(a) III", "(b) IV", "(c) I", "(d) II"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q26
+  {
+    q_hi: "Q48. एक विनिर्माता अपने विक्रय मूल्य को उत्पादन लागत से 72% अधिक निर्धारित करता है। यदि उत्पादन लागत में 50% की वृद्धि होती है तथा निर्माता अपने विक्रय मूल्य में 50% की वृद्धि करता है, तो नया लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q48. A manufacturer sets the selling price 72% above the production cost. If the production cost increases by 50% and the manufacturer increases the selling price by 50%, find the new profit percentage.",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 69%", "(b) 72%", "(c) 75%", "(d) 71%"],
+    o_en: ["(a) 69%", "(b) 72%", "(c) 75%", "(d) 71%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q49
+  {
+    q_hi: "Q49. एक कुकर का अंकित मूल्य चार दुकानों - I, II, III और IV पर एकसमान है। कुकर के अंकित मूल्य पर दुकान I, 68% और 24% की दो क्रमिक छूट प्रदान करती है, दुकान II, 37% और 55% की क्रमिक छूट प्रदान करती है, दुकान III, 89% और 10% की क्रमिक छूट प्रदान करती है और दुकान IV, 41%, 90% और 48% की क्रमिक छूट प्रदान करती है। कौन-सी दुकान कुकर को सबसे कम मूल्य पर बेच रही है?",
+    q_en: "Q49. The marked price of a cooker is the same at four shops I, II, III and IV. Shop I offers successive discounts of 68% and 24%; Shop II offers 37% and 55%; Shop III offers 89% and 10%; and Shop IV offers successive discounts of 41%, 90% and 48%. Which shop is selling the cooker at the lowest price?",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) I", "(b) III", "(c) II", "(d) IV"],
+    o_en: ["(a) I", "(b) III", "(c) II", "(d) IV"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-03) | Original Q28
+  {
+    q_hi: "Q50. अरविंद ने कोई वस्तु ₹x में खरीदी। उसने इसे बीरू को 25% की हानि पर बेचा। बीरू ने इसके परिवहन पर ₹183 खर्च किए और इसे मीनू को 45% के लाभ पर बेचा। यदि मीनू ने इसे ₹1,479 में खरीदा, तो x का मान कितना होगा?",
+    q_en: "Q50. Arvind bought an article for ₹x. He sold it to Biru at a loss of 25%. Biru spent ₹183 on transportation and sold it to Meenu at a profit of 45%. If Meenu bought it for ₹1,479, find x.",
+    tag: "RRB Group D, 13/08/2026 (Shift-03)",
+    o_hi: ["(a) 1,092", "(b) 1,116", "(c) 1,079", "(d) 1,067"],
+    o_en: ["(a) 1,092", "(b) 1,116", "(c) 1,079", "(d) 1,067"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+];

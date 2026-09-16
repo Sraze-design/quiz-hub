@@ -1,0 +1,552 @@
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q1. एक परिवार प्रति माह ₹50,000 अर्जित करता है और ₹35,000 व्यय करता है। आय के कितने प्रतिशत की बचत की जाती है?",
+    q_en: "Q1. A family earns ₹50,000 per month and spends ₹35,000. What percentage of the income is saved?",
+    tag: "RRB Group D, 03/08/2026 (Shift-01)",
+    o_hi: ["(a) 30%", "(b) 20%", "(c) 25%", "(d) 15%"],
+    o_en: ["(a) 30%", "(b) 20%", "(c) 25%", "(d) 15%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q2. किसी कंपनी के राजस्व में एक तिमाही में 40% की वृद्धि होती है और फिर अगली तिमाही में 20% की कमी होती है। यदि प्रारंभिक राजस्व ₹1,00,000 था, तो अंतिम राजस्व ज्ञात कीजिए।",
+    q_en: "Q2. A company's revenue increases by 40% in one quarter and then decreases by 20% in the next quarter. If the initial revenue was ₹1,00,000, find the final revenue.",
+    tag: "RRB Group D, 03/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹1,20,000", "(b) ₹1,08,000", "(c) ₹1,14,000", "(d) ₹1,12,000"],
+    o_en: ["(a) ₹1,20,000", "(b) ₹1,08,000", "(c) ₹1,14,000", "(d) ₹1,12,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q30
+  {
+    q_hi: "Q3. रमन की आय ₹70,000 है। वह अपनी आय का 26% बचाता है। यदि उसकी आय में 32% की वृद्धि हो जाती है और व्यय में 45% की वृद्धि हो जाती है, तो उसकी बचत पर क्या प्रभाव पड़ेगा?",
+    q_en: "Q3. Raman's income is ₹70,000. He saves 26% of his income. If his income increases by 32% and his expenditure increases by 45%, what will be the effect on his savings?",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹913 की वृद्धि होगी", "(b) ₹910 की कमी होगी", "(c) ₹908 की कमी होगी", "(d) ₹909 की वृद्धि होगी"],
+    o_en: ["(a) ₹913 increase", "(b) ₹910 decrease", "(c) ₹908 decrease", "(d) ₹909 increase"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q4. एक कारखाने का उत्पादन 1,200 यूनिट से बढ़कर 1,500 यूनिट हो गया। उत्पादन में प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q4. A factory's production increased from 1,200 units to 1,500 units. Find the percentage increase in production.",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) 25%", "(b) 30%", "(c) 22%", "(d) 20%"],
+    o_en: ["(a) 25%", "(b) 30%", "(c) 22%", "(d) 20%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q35
+  {
+    q_hi: "Q5. एक पौधे में प्रति वर्ष 12.5% की वृद्धि होती है। यदि उसकी वर्तमान ऊँचाई 64 cm है, तो 2 वर्षों के बाद उसकी ऊँचाई कितनी होगी, मान लीजिए कि वृद्धि, वार्षिक रूप से संयोजित होती है?",
+    q_en: "Q5. A plant grows by 12.5% per year. If its present height is 64 cm, what will its height be after 2 years, assuming the growth is compounded annually?",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) 81 cm", "(b) 88 cm", "(c) 80 cm", "(d) 85 cm"],
+    o_en: ["(a) 81 cm", "(b) 88 cm", "(c) 80 cm", "(d) 85 cm"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q39
+  {
+    q_hi: "Q6. रमन की आय ₹34,000 है। वह अपनी आय का 5.5% बचाता है। यदि उसकी आय में 17% की वृद्धि हो जाती है और व्यय में 10% की वृद्धि हो जाती है, तो उसकी बचत पर क्या प्रभाव पड़ेगा?",
+    q_en: "Q6. Raman's income is ₹34,000. He saves 5.5% of his income. If his income increases by 17% and his expenditure increases by 10%, what will be the effect on his savings?",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹2,657 की कमी होगी", "(b) ₹10,284 की वृद्धि होगी", "(c) ₹2,567 की वृद्धि होगी", "(d) ₹10,285 की कमी होगी"],
+    o_en: ["(a) ₹2,657 decrease", "(b) ₹10,284 increase", "(c) ₹2,567 increase", "(d) ₹10,285 decrease"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q43
+  {
+    q_hi: "Q7. किसी लैपटॉप की कीमत पहले वर्ष में 20% और दूसरे वर्ष में 10% बढ़ जाती है। यदि मूल कीमत ₹50,000 थी, तो दो वर्षों के बाद अंतिम कीमत ज्ञात कीजिए।",
+    q_en: "Q7. The price of a laptop increases by 20% in the first year and by 10% in the second year. If the original price was ₹50,000, find the final price after two years.",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹65,000", "(b) ₹67,000", "(c) ₹66,000", "(d) ₹68,000"],
+    o_en: ["(a) ₹65,000", "(b) ₹67,000", "(c) ₹66,000", "(d) ₹68,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q48
+  {
+    q_hi: "Q8. किसी बेलन की त्रिज्या में 20% की वृद्धि की जाती है और उसकी ऊँचाई में 10% की कमी की जाती है। उसके आयतन में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q8. The radius of a cylinder is increased by 20% and its height is decreased by 10%. Find the percentage change in its volume.",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) 29.6% वृद्धि", "(b) 26.9% कमी", "(c) 29.6% कमी", "(d) 26.9% वृद्धि"],
+    o_en: ["(a) 29.6% increase", "(b) 26.9% decrease", "(c) 29.6% decrease", "(d) 26.9% increase"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q9. पेट्रोल की कीमत में 10% की वृद्धि होती है। किसी व्यक्ति को खपत में कितने प्रतिशत की कमी करनी चाहिए, जिससे कि पेट्रोल पर कुल व्यय में केवल 5% की वृद्धि हो? (उत्तर को दशमलव के दो स्थानों तक पूर्णांकित कीजिए।)",
+    q_en: "Q9. The price of petrol increases by 10%. By what percentage should a person reduce consumption so that the total expenditure on petrol increases by only 5%? (Round the answer to two decimal places.)",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) 4.45%", "(b) 4.35%", "(c) 4.55%", "(d) 4.15%"],
+    o_en: ["(a) 4.45%", "(b) 4.35%", "(c) 4.55%", "(d) 4.15%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q50
+  {
+    q_hi: "Q10. एक अधिकारी का वर्तमान वेतन ₹15,000 है। पहले वर्ष में इसमें 10% की वृद्धि हुई और दूसरे वर्ष में 20% की कमी हुई। दूसरे वर्ष के अंत में उसका वेतन कितना था?",
+    q_en: "Q10. An officer's present salary is ₹15,000. It increases by 10% in the first year and decreases by 20% in the second year. What is his salary at the end of the second year?",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹13,400", "(b) ₹13,600", "(c) ₹13,800", "(d) ₹13,200"],
+    o_en: ["(a) ₹13,400", "(b) ₹13,600", "(c) ₹13,800", "(d) ₹13,200"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q30
+  {
+    q_hi: "Q11. एक व्यापारी ₹500 प्रति बैरल की दर से तेल खरीदता है। वह पहले कीमत में 20% की वृद्धि करता है और बाद में बढ़ी हुई कीमत में 10% की कमी कर देता है। प्रति बैरल अंतिम कीमत कितनी होगी?",
+    q_en: "Q11. A trader buys oil at ₹500 per barrel. He first increases the price by 20% and then decreases the increased price by 10%. What is the final price per barrel?",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹560", "(b) ₹550", "(c) ₹540", "(d) ₹500"],
+    o_en: ["(a) ₹560", "(b) ₹550", "(c) ₹540", "(d) ₹500"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q12. एक चुनाव में, कुल 8,000 मत डाले गए। उम्मीदवार X को कुल मतों में से 55% मत प्राप्त हुए। उम्मीदवार X को प्राप्त मतों की संख्या ज्ञात कीजिए।",
+    q_en: "Q12. In an election, a total of 8,000 votes were cast. Candidate X received 55% of the total votes. Find the number of votes received by candidate X.",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) 4,400", "(b) 4,200", "(c) 4,000", "(d) 4,600"],
+    o_en: ["(a) 4,400", "(b) 4,200", "(c) 4,000", "(d) 4,600"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q13. रवि अपनी मासिक आय का 80% खर्च करता है। यदि उसकी मासिक आय ₹25,000 है, तो उसकी मासिक बचत ज्ञात कीजिए।",
+    q_en: "Q13. Ravi spends 80% of his monthly income. If his monthly income is ₹25,000, find his monthly savings.",
+    tag: "RRB Group D, 04/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹6,000", "(b) ₹4,000", "(c) ₹7,000", "(d) ₹5,000"],
+    o_en: ["(a) ₹6,000", "(b) ₹4,000", "(c) ₹7,000", "(d) ₹5,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q14. रमन की आय ₹61,500 है। वह अपनी आय का 17% बचाता है। यदि उसकी आय में 38% की वृद्धि हो जाती है और व्यय में 20% की वृद्धि हो जाती है, तो उसकी बचत पर क्या प्रभाव पड़ेगा?",
+    q_en: "Q14. Raman's income is ₹61,500. He saves 17% of his income. If his income increases by 38% and his expenditure increases by 20%, what will be the effect on his savings?",
+    tag: "RRB Group D, 04/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹13,156 की वृद्धि होगी", "(b) ₹13,161 की वृद्धि होगी", "(c) ₹13,165 की कमी होगी", "(d) ₹13,159 की कमी आएगी"],
+    o_en: ["(a) ₹13,156 increase", "(b) ₹13,161 increase", "(c) ₹13,165 decrease", "(d) ₹13,159 decrease आएगी"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q15. किसी शहर की जनसंख्या 80,000 से घटकर 72,000 हो गई। जनसंख्या में प्रतिशत कमी ज्ञात कीजिए।",
+    q_en: "Q15. The population of a city decreased from 80,000 to 72,000. Find the percentage decrease in population.",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) 12%", "(b) 15%", "(c) 8%", "(d) 10%"],
+    o_en: ["(a) 12%", "(b) 15%", "(c) 8%", "(d) 10%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q49
+  {
+    q_hi: "Q16. किसी वस्तु की कीमत में 36% की वृद्धि होती है। इस वृद्धि के बाद, उसमें 30% की कमी होती है। यदि वस्तु की अंतिम कीमत, उसकी मूल कीमत से ₹132 कम है, तो वस्तु की मूल कीमत ज्ञात कीजिए।",
+    q_en: "Q16. The price of an article is increased by 36% and then decreased by 30%. If the final price is ₹132 less than the original price, find the original price of the article.",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹2,460", "(b) ₹2,940", "(c) ₹2,750", "(d) ₹2,280"],
+    o_en: ["(a) ₹2,460", "(b) ₹2,940", "(c) ₹2,750", "(d) ₹2,280"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q17. एक व्यक्ति अपनी आय का 70% खर्च करता है और ₹6,000 की बचत करता है। उसकी कुल आय ज्ञात कीजिए।",
+    q_en: "Q17. A person spends 70% of his income and saves ₹6,000. Find his total income.",
+    tag: "RRB Group D, 05/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹24,000", "(b) ₹22,000", "(c) ₹20,000", "(d) ₹18,000"],
+    o_en: ["(a) ₹24,000", "(b) ₹22,000", "(c) ₹20,000", "(d) ₹18,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-02) | Original Q26
+  {
+    q_hi: "Q18. एक शहर के वृक्षारोपण अभियान से वृक्षों की संख्या में 40% की वृद्धि हुई। एक तूफान ने 30% नए वृक्षों को नष्ट कर दिया। तूफान में नष्ट हुए वृक्षों की संख्या, मूल वृक्षों की संख्या का कितना प्रतिशत है?",
+    q_en: "Q18. A city's tree-plantation drive increased the number of trees by 40%. A storm destroyed 30% of the newly increased number of trees. The number of trees destroyed in the storm is what percentage of the original number of trees?",
+    tag: "RRB Group D, 06/08/2026 (Shift-02)",
+    o_hi: ["(a) 12%", "(b) 9%", "(c) 18%", "(d) 15%"],
+    o_en: ["(a) 12%", "(b) 9%", "(c) 18%", "(d) 15%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-02) | Original Q41
+  {
+    q_hi: "Q19. स्कूल के एक चुनाव में, 10% विद्यार्थियों ने वोट नहीं दिया। यदि विद्यार्थियों की कुल संख्या 2,000 थी, तो कितने विद्यार्थियों ने वोट दिया?",
+    q_en: "Q19. In a school election, 10% of the students did not vote. If the total number of students was 2,000, how many students voted?",
+    tag: "RRB Group D, 06/08/2026 (Shift-02)",
+    o_hi: ["(a) 1,900", "(b) 1,600", "(c) 1,700", "(d) 1,800"],
+    o_en: ["(a) 1,900", "(b) 1,600", "(c) 1,700", "(d) 1,800"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q43
+  {
+    q_hi: "Q20. एक अधिकारी अपने वेतन का 10% घर के किराए पर खर्च करता है। शेष राशि में से, वह 50% परिवहन पर खर्च करता है। उसके पास ₹20,556 शेष हैं। उसका कुल वेतन कितना था?",
+    q_en: "Q20. An officer spends 10% of his salary on house rent. From the remaining amount, he spends 50% on transport. He is left with ₹20,556. What is his total salary?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹45,680", "(b) ₹46,680", "(c) ₹47,680", "(d) ₹48,680"],
+    o_en: ["(a) ₹45,680", "(b) ₹46,680", "(c) ₹47,680", "(d) ₹48,680"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q21. रमन की आय ₹43,800 है। वह अपनी आय का 20% बचाता है। यदि उसकी आय में 36% की वृद्धि हो जाती है और व्यय में 40% की वृद्धि हो जाती है, तो उसकी बचत में ___________________।",
+    q_en: "Q21. Raman's income is ₹43,800. He saves 20% of his income. If his income increases by 36% and his expenditure increases by 40%, what will be the change in his savings?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹1,757 की वृद्धि होगी", "(b) ₹1,752 की वृद्धि होगी", "(c) ₹1,753 की कमी होगी", "(d) ₹1,748 की कमी होगी"],
+    o_en: ["(a) ₹1,757 increase", "(b) ₹1,752 increase", "(c) ₹1,753 decrease", "(d) ₹1,748 decrease"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-01) | Original Q46
+  {
+    q_hi: "Q22. यदि किसी शहर की जनसंख्या एक वर्ष में 70,000 से बढ़कर 71,435 हो जाती है, तो जनसंख्या में प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q22. If the population of a city increases from 70,000 to 71,435 in one year, find the percentage increase in population.",
+    tag: "RRB Group D, 09/08/2026 (Shift-01)",
+    o_hi: ["(a) 2.15%", "(b) 2.25%", "(c) 2.05%", "(d) 2.0%"],
+    o_en: ["(a) 2.15%", "(b) 2.25%", "(c) 2.05%", "(d) 2.0%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q23. एक चुनाव में, उम्मीदवार A को कुल मतों में से 60% मत प्राप्त हुए जबकि उम्मीदवार B को शेष मत प्राप्त हुए। यदि कुल मत 5,000 थे, तो उम्मीदवार B को कितने मत प्राप्त हुए?",
+    q_en: "Q23. In an election, candidate A received 60% of the total votes while candidate B received the remaining votes. If the total number of votes was 5,000, how many votes did candidate B receive?",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 1,500", "(b) 3,000", "(c) 2,000", "(d) 2,400"],
+    o_en: ["(a) 1,500", "(b) 3,000", "(c) 2,000", "(d) 2,400"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q24. रमन की आय ₹12,000 है। वह अपनी आय का 27% बचत करता है। यदि उसकी आय में 20% की वृद्धि होती है तथा व्यय में 15% की वृद्धि होती है, तो उसकी बचत में ______ होगी।",
+    q_en: "Q24. Raman's income is ₹12,000. He saves 27% of his income. If his income increases by 20% and his expenditure increases by 15%, what will be the change in his savings?",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹1,085 की कमी", "(b) ₹1,089 की कमी", "(c) ₹1,088 की वृद्धि", "(d) ₹1,086 की वृद्धि"],
+    o_en: ["(a) ₹1,085 decrease", "(b) ₹1,089 decrease", "(c) ₹1,088 increase", "(d) ₹1,086 increase"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q35
+  {
+    q_hi: "Q25. रमन की आय ₹83,000 है। वह अपनी आय का 16% बचत करता है। यदि उसकी आय में 22% की वृद्धि होती है और व्यय में 25% की वृद्धि होती है, तो उसकी बचत में ________ होगी।",
+    q_en: "Q25. Raman's income is ₹83,000. He saves 16% of his income. If his income increases by 22% and his expenditure increases by 25%, what will be the change in his savings?",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹828 की कमी", "(b) ₹833 की कमी", "(c) ₹830 की वृद्धि", "(d) ₹827 की वृद्धि"],
+    o_en: ["(a) ₹828 decrease", "(b) ₹833 decrease", "(c) ₹830 increase", "(d) ₹827 increase"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q37
+  {
+    q_hi: "Q26. ईंधन की कीमत क्रमागत तीन महीनों में क्रमिक रूप से 10%, 20% और 15% घटती है। चौथे महीने में कीमत 40% बढ़ जाती है। चौथे महीने के अंत में ईंधन की कीमत में मूल कीमत की तुलना में कुल प्रतिशत कमी ज्ञात कीजिए।",
+    q_en: "Q26. The price of fuel decreases successively by 10%, 20% and 15% in three consecutive months. In the fourth month, the price increases by 40%. Find the overall percentage decrease in the fuel price at the end of the fourth month compared with the original price.",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) 15.33%", "(b) 14.32%", "(c) 12.65%", "(d) 13.42%"],
+    o_en: ["(a) 15.33%", "(b) 14.32%", "(c) 12.65%", "(d) 13.42%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q27. एक परिवार का मासिक बजट ₹48,000 है। बजट का वितरण इस प्रकार है: भोजन 30%, किराया 25%, शिक्षा 20%, बचत 15% और अन्य 10%। यदि वे अगले महीने कुल बजट में कोई परिवर्तन किए बिना अपनी बचत को 20% बढ़ाना चाहते हैं, तो वर्तमान महीने की तुलना में अगले महीने उन्हें कितनी अतिरिक्त बचत की आवश्यकता होगी?",
+    q_en: "Q27. A family has a monthly budget of ₹48,000. The distribution is: food 30%, rent 25%, education 20%, savings 15%, and other expenses 10%. If they want to increase their savings to 20% next month without changing the total budget, how much additional saving will be required compared with the current month?",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹2,800", "(b) ₹2,000", "(c) ₹3,000", "(d) ₹2,400"],
+    o_en: ["(a) ₹2,800", "(b) ₹2,000", "(c) ₹3,000", "(d) ₹2,400"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q31
+  {
+    q_hi: "Q28. एक व्यक्ति की मासिक आय ₹9,770 है। यदि उसकी आय में 27% की वृद्धि की जाती है, तो उसकी नई मासिक आय ज्ञात कीजिए।",
+    q_en: "Q28. A person's monthly income is ₹9,770. If the income is increased by 27%, find the new monthly income.",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹12,507.50", "(b) ₹12,307.50", "(c) ₹12,207.90", "(d) ₹12,407.90"],
+    o_en: ["(a) ₹12,507.50", "(b) ₹12,307.50", "(c) ₹12,207.90", "(d) ₹12,407.90"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q46
+  {
+    q_hi: "Q29. किसी वस्तु की कीमत में पहले 30% की वृद्धि की जाती है और फिर 30% की कमी की जाती है। वस्तु की कीमत में समग्र प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q29. The price of an article is first increased by 30% and then decreased by 30%. Find the overall percentage change in the price.",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) 9% की वृद्धि", "(b) 18% की कमी", "(c) 9% की कमी", "(d) न तो वृद्धि और न ही कमी"],
+    o_en: ["(a) 9% increase", "(b) 18% decrease", "(c) 9% decrease", "(d) न तो increase और न ही lessी"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-02) | Original Q32
+  {
+    q_hi: "Q30. एक वाशिंग मशीन की कीमत, एक TV की कीमत से 50% कम है। यदि वाशिंग मशीन की कीमत में 76% की वृद्धि होती है और TV की कीमत में 37% की कमी होती है, तो 4 वाशिंग मशीनों और 3 TV की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q30. The price of a washing machine is 50% less than the price of a TV. If the washing-machine price increases by 76% and the TV price decreases by 37%, what is the percentage change in the total price of 4 washing machines and 3 TVs?",
+    tag: "RRB Group D, 10/08/2026 (Shift-02)",
+    o_hi: ["(a) 13% की वृद्धि", "(b) 16% की कमी", "(c) 8.2% की वृद्धि", "(d) 5% की कमी"],
+    o_en: ["(a) 13% increase", "(b) 16% decrease", "(c) 8.2% increase", "(d) 5% decrease"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-02) | Original Q49
+  {
+    q_hi: "Q31. एक चुनाव में केवल दो उम्मीदवार चुनाव लड़ रहे हैं। जिस व्यक्ति को 25% वोट प्राप्त हुए, वह 500 वोटों से हार गया। यह मानते हुए कि कोई भी वोट अवैध नहीं था, डाले गए वोटों की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q31. Only two candidates contest an election. The candidate who received 25% of the votes lost by 500 votes. Assuming no vote was invalid, find the total number of votes cast.",
+    tag: "RRB Group D, 10/08/2026 (Shift-02)",
+    o_hi: ["(a) 1000", "(b) 2000", "(c) 3000", "(d) 4000"],
+    o_en: ["(a) 1000", "(b) 2000", "(c) 3000", "(d) 4000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q41
+  {
+    q_hi: "Q32. रमन की आय ₹49,000 है। वह अपनी आय के 27.5% की बचत करता है। यदि उसकी आय में 34% की वृद्धि होती है और व्यय में 20% की वृद्धि होती है, तो उसकी बचत में _______ होगी।",
+    q_en: "Q32. Raman's income is ₹49,000. He saves 27.5% of his income. If his income increases by 34% and his expenditure increases by 20%, what will be the change in his savings?",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹9,556 की कमी", "(b) ₹9,555 की वृद्धि", "(c) ₹9,559 की वृद्धि", "(d) ₹9,550 की कमी"],
+    o_en: ["(a) ₹9,556 decrease", "(b) ₹9,555 increase", "(c) ₹9,559 increase", "(d) ₹9,550 decrease"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q46
+  {
+    q_hi: "Q33. एक संख्या में पहले 20% की वद्धि की जाती है और फिर 12% की कमी की जाती है। कुल प्रतिशत वृद्धि या कमी ज्ञात कीजिए।",
+    q_en: "Q33. A number is first increased by 20% and then decreased by 12%. Find the overall percentage increase or decrease.",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) 4.8% की कमी", "(b) 5.2% की वृद्धि", "(c) 5.6% की वृद्धि", "(d) 4.3% की कमी"],
+    o_en: ["(a) 4.8% decrease", "(b) 5.2% increase", "(c) 5.6% increase", "(d) 4.3% decrease"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q37
+  {
+    q_hi: "Q34. एका शहराची लोकसंख्या दरवर्षी 25% नी वाढते. जर सध्याची लोकसंख्या 16,000 असेल, तर 3 वर्षांनंतर लोकसंख्या किती असेल?",
+    q_en: "Q34. एका शहराची लोकसंख्या दरवर्षी 25% नी वाढते. जर सध्याची लोकसंख्या 16,000 असेल, तर 3 वर्षांनंतर लोकसंख्या किती असेल?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 32,000", "(b) 31,250", "(c) 30,250", "(d) 28,800"],
+    o_en: ["(a) 32,000", "(b) 31,250", "(c) 30,250", "(d) 28,800"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q35. एक व्यक्ति प्रति माह ₹3654 खर्च करता है और अपनी आय का 12 1/2% बचाता है। उसका मासिक आय कितना होगा?",
+    q_en: "Q35. A person spends ₹3654 per month and saves 12 1/2% of his income. What is his monthly income?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹4166", "(b) ₹4176", "(c) ₹4196", "(d) ₹4186"],
+    o_en: ["(a) ₹4166", "(b) ₹4176", "(c) ₹4196", "(d) ₹4186"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q41
+  {
+    q_hi: "Q36. रमणचे उत्पन्न ₹70,900 आहे. तो त्याच्या उत्पन्नातील 12% बचत करतो. जर त्याचे उत्पन्न 39% ने वाढले आणि खर्च 50% ने वाढला, तर त्याच्या बचतीत काय बदल होईल?",
+    q_en: "Q36. रमणचे उत्पन्न ₹70,900 आहे. तो त्याच्या उत्पन्नातील 12% बचत करतो. जर त्याचे उत्पन्न 39% ने वाढले आणि खर्च 50% ने वाढला, तर त्याच्या बचतीत काय बदल होईल?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹3,550 ने कमी होईल", "(b) ₹3,546 ने वाढले", "(c) ₹3,545 ने कमी होईल", "(d) ₹3,548 ने वाढले"],
+    o_en: ["(a) ₹3,550 ने कमी होईल", "(b) ₹3,546 ने वाढले", "(c) ₹3,545 ने कमी होईल", "(d) ₹3,548 ने वाढले"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q26
+  {
+    q_hi: "Q37. किसी कर्मचारी का वेतन ₹50,000 से घटकर ₹45,000 हो गया। वेतन में प्रतिशत कमी ज्ञात कीजिए।",
+    q_en: "Q37. An employee's salary decreased from ₹50,000 to ₹45,000. Find the percentage decrease in salary.",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) 10%", "(b) 12%", "(c) 15%", "(d) 8%"],
+    o_en: ["(a) 10%", "(b) 12%", "(c) 15%", "(d) 8%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q40
+  {
+    q_hi: "Q38. रमन की आय ₹10,200 है। वह अपनी आय का 30% बचाता है। यदि उसकी आय में 14% वृद्धि होती है और व्यय में 40% वृद्धि होती है, तो उसकी बचत पर क्या प्रभाव पड़ेगा?",
+    q_en: "Q38. Raman's income is ₹10,200. He saves 30% of his income. If his income increases by 14% and his expenditure increases by 40%, what will be the effect on his savings?",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹1,428 की कमी हो जाएगी", "(b) ₹1,427 की कमी हो जाएगी", "(c) ₹1,429 की वृद्धि हो जाएगी", "(d) ₹1,430 की वृद्धि हो जाएगी"],
+    o_en: ["(a) ₹1,428 decrease हो जाएगी", "(b) ₹1,427 decrease हो जाएगी", "(c) ₹1,429 increase हो जाएगी", "(d) ₹1,430 increase हो जाएगी"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q41
+  {
+    q_hi: "Q39. एक वॉशिंग मशीन की कीमत, एक TV की कीमत से 50% कम है। यदि वॉशिंग मशीन की कीमत में 83% की वृद्धि होती है तथा TV की कीमत में 38% की कमी होती है, तो 8 वॉशिंग मशीनों और 4 TV की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q39. The price of a washing machine is 50% less than the price of a TV. If the price of the washing machine increases by 83% and the price of the TV decreases by 38%, what is the percentage change in the total price of 8 washing machines and 4 TVs?",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 22.5% की वृद्धि", "(b) 26% की वृद्धि", "(c) 19% की कमी", "(d) 27% की कमी"],
+    o_en: ["(a) 22.5% increase", "(b) 26% increase", "(c) 19% decrease", "(d) 27% decrease"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q49
+  {
+    q_hi: "Q40. किसी वस्तु की कीमत में 12% की दो क्रमिक वृद्धि होती है। वस्तु की कीमत में एकल तुल्य प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q40. The price of an article is increased successively by 12% twice. Find the single equivalent percentage increase in the price.",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 24.44%", "(b) 24%", "(c) 22%", "(d) 25.44%"],
+    o_en: ["(a) 24.44%", "(b) 24%", "(c) 22%", "(d) 25.44%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q36
+  {
+    q_hi: "Q41. रमन की आय ₹91,700 है। वह अपनी आय के 20% की बचत करता है। यदि उसकी आय में 19% की वृद्धि होती है और व्यय में 35% की वृद्धि होती है, तो उसकी बचत में _____ होगी।",
+    q_en: "Q41. Raman's income is ₹91,700. He saves 20% of his income. If his income increases by 19% and his expenditure increases by 35%, what will be the change in his savings?",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹8,253 की कमी", "(b) ₹8,252 की कमी", "(c) ₹8,255 की वृद्धि", "(d) ₹8,249 की वृद्धि"],
+    o_en: ["(a) ₹8,253 decrease", "(b) ₹8,252 decrease", "(c) ₹8,255 increase", "(d) ₹8,249 increase"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q41
+  {
+    q_hi: "Q42. विक्रम अपनी कमाई से r% की बचत करता है। यदि उसकी कमाई में 22% की वृद्धि होती है और उसके व्यय में 16% की वृद्धि होती है, तो उसकी बचत में 40% की वृद्धि होती है। r का मान ज्ञात कीजिए।",
+    q_en: "Q42. Vikram saves r% of his earnings. If his earnings increase by 22% and his expenditure increases by 16%, his savings increase by 40%. Find r.",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) 16", "(b) 22", "(c) 25", "(d) 27"],
+    o_en: ["(a) 16", "(b) 22", "(c) 25", "(d) 27"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-02) | Original Q33
+  {
+    q_hi: "Q43. रमन की आय ₹43,500 है। वह अपनी आय के 17% की बचत करता है। यदि उसकी आय में 18% की वृद्धि होती है और व्यय में 20% की वृद्धि होती है, तो उसकी बचत में ________ होगी।",
+    q_en: "Q43. Raman's income is ₹43,500. He saves 17% of his income. If his income increases by 18% and his expenditure increases by 20%, what will be the change in his savings?",
+    tag: "RRB Group D, 12/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹606 की वृद्धि", "(b) ₹609 की वृद्धि", "(c) ₹608 की कमी", "(d) ₹604 की कमी"],
+    o_en: ["(a) ₹606 increase", "(b) ₹609 increase", "(c) ₹608 decrease", "(d) ₹604 decrease"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-02) | Original Q37
+  {
+    q_hi: "Q44. दो उम्मीदवारों के बीच हुए एक चुनाव में, एक उम्मीदवार को कुल वोटों का 28% प्राप्त हुआ और वह 649 वोटों से हार गया। यदि सभी वोट वैध थे, तो डाले गए वोटों की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q44. In an election between two candidates, one candidate received 28% of the total votes and lost by 649 votes. If all votes were valid, find the total number of votes cast.",
+    tag: "RRB Group D, 12/08/2026 (Shift-02)",
+    o_hi: ["(a) 1485", "(b) 1475", "(c) 1465", "(d) 1495"],
+    o_en: ["(a) 1485", "(b) 1475", "(c) 1465", "(d) 1495"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q28
+  {
+    q_hi: "Q45. रमन की आय ₹68,500 है। वह अपनी आय के 22.5% की बचत करता है। यदि उसकी आय में 14% की वृद्धि होती है और व्यय में 40% की वृद्धि होती है, तो उसकी बचत में _______ होगी।",
+    q_en: "Q45. रमन की आय ₹68,500 है। वह अपनी आय के 22.5% की बचत करता है। यदि उसकी आय में 14% की वृद्धि होती है और व्यय में 40% की वृद्धि होती है, तो उसकी बचत में _______ होगी।",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹11,645 की कमी", "(b) ₹11,647 की कमी", "(c) ₹11,647 की वृद्धि", "(d) ₹11,642 की वृद्धि"],
+    o_en: ["(a) ₹11,645 की कमी", "(b) ₹11,647 की कमी", "(c) ₹11,647 की वृद्धि", "(d) ₹11,642 की वृद्धि"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q47
+  {
+    q_hi: "Q46. दो उम्मीदवारों के बीच हुए चुनाव में, वैध वोटों का 59% प्राप्त करने वाले उम्मीदवार ने 450 वोटों के बहुमत से जीत हासिल की। कुल वैध वोटों की संख्या ज्ञात कीजिए।",
+    q_en: "Q46. दो उम्मीदवारों के बीच हुए चुनाव में, वैध वोटों का 59% प्राप्त करने वाले उम्मीदवार ने 450 वोटों के बहुमत से जीत हासिल की। कुल वैध वोटों की संख्या ज्ञात कीजिए।",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) 2540", "(b) 2456", "(c) 2350", "(d) 2500"],
+    o_en: ["(a) 2540", "(b) 2456", "(c) 2350", "(d) 2500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q47. एक वॉशिंग मशीन की कीमत, एक TV की कीमत से 50% कम है। यदि वॉशिंग मशीन की कीमत में 60% की वृद्धि होती है और TV की कीमत में 11% की कमी होती है, तो 6 वॉशिंग मशीनों और 2 TV की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q47. एक वॉशिंग मशीन की कीमत, एक TV की कीमत से 50% कम है। यदि वॉशिंग मशीन की कीमत में 60% की वृद्धि होती है और TV की कीमत में 11% की कमी होती है, तो 6 वॉशिंग मशीनों और 2 TV की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) 26% की वृद्धि", "(b) 33% की कमी", "(c) 29% की कमी", "(d) 31.6% की वृद्धि"],
+    o_en: ["(a) 26% की वृद्धि", "(b) 33% की कमी", "(c) 29% की कमी", "(d) 31.6% की वृद्धि"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q48. एक शहर की जनसंख्या में पहले वर्ष में 15% की वृद्धि और दूसरे वर्ष में 20% की वृद्धि होती है। यदि मूल जनसंख्या 50,000 थी, तो 2 वर्ष बाद जनसंख्या ज्ञात कीजिए।",
+    q_en: "Q48. एक शहर की जनसंख्या में पहले वर्ष में 15% की वृद्धि और दूसरे वर्ष में 20% की वृद्धि होती है। यदि मूल जनसंख्या 50,000 थी, तो 2 वर्ष बाद जनसंख्या ज्ञात कीजिए।",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) 68,000", "(b) 69,900", "(c) 69,000", "(d) 68,800"],
+    o_en: ["(a) 68,000", "(b) 69,900", "(c) 69,000", "(d) 68,800"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q44
+  {
+    q_hi: "Q49. एक संख्या में पहले 45% की वृद्धि की जाती है, फिर 20% की कमी की जाती है, फिर 10% की वृद्धि की जाती है, और फिर 25% की कमी की जाती है। संख्या में समग्र वृद्धि/कमी प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q49. एक संख्या में पहले 45% की वृद्धि की जाती है, फिर 20% की कमी की जाती है, फिर 10% की वृद्धि की जाती है, और फिर 25% की कमी की जाती है। संख्या में समग्र वृद्धि/कमी प्रतिशत ज्ञात कीजिए।",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) 4.3% की वृद्धि", "(b) 5.2% की वृद्धि", "(c) 4.1% की कमी", "(d) 4.3% की कमी"],
+    o_en: ["(a) 4.3% की वृद्धि", "(b) 5.2% की वृद्धि", "(c) 4.1% की कमी", "(d) 4.3% की कमी"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-01) | Original Q47
+  {
+    q_hi: "Q50. एक डिजिटल डिजाइन कंपनी में केवल ग्राफ़िक डिजाइनर और कंटेंट राइटर हैं। ग्राफ़िक डिजाइनरों का औसत मासिक वेतन ₹520 है, जबकि कंटेंट राइटरों का औसत मासिक वेतन ₹420 है। यदि सभी कर्मचारियों का औसत मासिक वेतन ₹500 है, तो कंपनी के कितने प्रतिशत कर्मचारी क्रमशः ग्राफ़िक डिज़ाइनर और कंटेंट राइटर हैं?",
+    q_en: "Q50. एक डिजिटल डिजाइन कंपनी में केवल ग्राफ़िक डिजाइनर और कंटेंट राइटर हैं। ग्राफ़िक डिजाइनरों का औसत मासिक वेतन ₹520 है, जबकि कंटेंट राइटरों का औसत मासिक वेतन ₹420 है। यदि सभी कर्मचारियों का औसत मासिक वेतन ₹500 है, तो कंपनी के कितने प्रतिशत कर्मचारी क्रमशः ग्राफ़िक डिज़ाइनर और कंटेंट राइटर हैं?",
+    tag: "RRB Group D, 13/08/2026 (Shift-01)",
+    o_hi: ["(a) 80% और 20%", "(b) 30% और 70%", "(c) 20% और 80%", "(d) 70% और 30%"],
+    o_en: ["(a) 80% और 20%", "(b) 30% और 70%", "(c) 20% और 80%", "(d) 70% और 30%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+];

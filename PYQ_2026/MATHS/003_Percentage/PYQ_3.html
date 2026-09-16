@@ -1,0 +1,453 @@
+const data = [
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q12
+  {
+    q_hi: "Q101. किसी विद्यार्थी ने परीक्षा में पूर्णांक के 84% प्राप्त किए और 62 अंकों से उत्तीर्ण हुआ। लेकिन जब उसने उसी परीक्षा में पूर्णांक के 45% प्राप्त किए, तो वह 35.5 अंकों से अनुत्तीर्ण हो गया। परीक्षा के पूर्णांक ज्ञात कीजिए।",
+    q_en: "Q101. A student scored 84% of the maximum marks in an examination and passed by 62 marks. When the student scored 45% of the maximum marks in the same examination, the student failed by 35.5 marks. Find the maximum marks of the examination.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) 265", "(b) 225", "(c) 250", "(d) 240"],
+    o_en: ["(a) 265", "(b) 225", "(c) 250", "(d) 240"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q17
+  {
+    q_hi: "Q102. यदि किसी पुस्तक की लागत ₹300 है और उसकी कीमत में 5% की वृद्धि की जाती है, तो वृद्धि के बाद पुस्तक की नई कीमत मूल कीमत से कितनी अधिक होगी?",
+    q_en: "Q102. If a book costs ₹300 and its price is increased by 5%, by how much is the new price greater than the original price?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹15", "(b) ₹20", "(c) ₹25", "(d) ₹10"],
+    o_en: ["(a) ₹15", "(b) ₹20", "(c) ₹25", "(d) ₹10"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q11
+  {
+    q_hi: "Q103. एक किले में आने वाले पर्यटकों की संख्या गर्मियों में 30% बढ़ गई और मानसून में 35% घट गई। समग्र प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    q_en: "Q103. The number of tourists visiting a fort increased by 30% in summer and decreased by 35% in the monsoon. Find the overall percentage change.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 12.5% कमी", "(b) 12.5% वृद्धि", "(c) 15.5% वृद्धि", "(d) 15.5% कमी"],
+    o_en: ["(a) 12.5% lessी", "(b) 12.5% increase", "(c) 15.5% increase", "(d) 15.5% lessी"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q18
+  {
+    q_hi: "Q104. चार उम्मीदवारों वाले एक चुनाव में, पंजीकृत मतदाताओं में से 60% ने मतदान किया। उम्मीदवार X को डाले गए वोटों का 40% मिला। शेष वोट अन्य तीन उम्मीदवारों के बीच बराबर-बराबर बँट गए। यदि उम्मीदवार X को अन्य प्रत्येक उम्मीदवार से 480 अधिक वोट मिले, तो कुल पंजीकृत मतदाता कितने थे?",
+    q_en: "Q104. In an election with four candidates, 60% of the registered voters voted. Candidate X received 40% of the votes cast. The remaining votes were divided equally among the other three candidates. If X received 480 more votes than each of the other candidates, find the total number of registered voters.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 5600", "(b) 4800", "(c) 6200", "(d) 4000"],
+    o_en: ["(a) 5600", "(b) 4800", "(c) 6200", "(d) 4000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q15
+  {
+    q_hi: "Q105. 120 पूर्णांक वाली किसी परीक्षा में, B को 50 अंक प्राप्त हुए जबकि A को 80 अंक प्राप्त हुए। A के अंकों का कितना प्रतिशत B के अंक थे?",
+    q_en: "Q105. In an examination with maximum marks 120, B scored 50 marks while A scored 80 marks. B's marks were what percentage of A's marks?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 66.67%", "(b) 160%", "(c) 120%", "(d) 62.5%"],
+    o_en: ["(a) 66.67%", "(b) 160%", "(c) 120%", "(d) 62.5%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q17
+  {
+    q_hi: "Q106. किसी विद्यार्थी ने परीक्षा में पूर्णांक के 91% प्राप्त किए और 187 अंकों से उत्तीर्ण हुआ। लेकिन जब उसने उसी परीक्षा में पूर्णांक के 36% प्राप्त किए, तो वह 60.5 अंकों से अनुत्तीर्ण हो गया। परीक्षा के पूर्णांक ज्ञात कीजिए।",
+    q_en: "Q106. A student scored 91% of the maximum marks in an examination and passed by 187 marks. When the student scored 36% of the maximum marks in the same examination, the student failed by 60.5 marks. Find the maximum marks.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 465", "(b) 400", "(c) 450", "(d) 425"],
+    o_en: ["(a) 465", "(b) 400", "(c) 450", "(d) 425"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q1
+  {
+    q_hi: "Q107. किसी परिवार की मासिक आय में 15% की वृद्धि हुई। उन्होंने भोजन पर मासिक व्यय में 10% और किराए पर 20% की वृद्धि की। यदि भोजन पर उनका प्रारं भिक मासिक व्यय ₹12,000 और किराए पर ₹8,000 था, और उनकी प्रारं भिक मासिक बचत ₹15,000 थी, तो उनकी नई मासिक बचत कितनी होगी? (मान लें कि कोई अन्य खर्च नहीं है।)",
+    q_en: "Q107. A family's monthly income increased by 15%. They increased their monthly expenditure on food by 10% and on rent by 20%. If their initial monthly food expenditure was ₹12,000, rent was ₹8,000, and initial monthly savings were ₹15,000, what are their new monthly savings? (Assume there are no other expenses.)",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹25,000", "(b) ₹15,000", "(c) ₹17,450", "(d) ₹18,650"],
+    o_en: ["(a) ₹25,000", "(b) ₹15,000", "(c) ₹17,450", "(d) ₹18,650"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q4
+  {
+    q_hi: "Q108. नवीना की मासिक आय ₹84,000 है। वह अपनी आय का 25% मकान के किराए पर, 20% किराने के सामान पर, 15% अन्य घरे लू खर्चों पर व्यय करती है और शेष राशि की बचत करती है। उसके द्वारा प्रत्येक माह कितनी राशि (₹ में) की बचत की जाती है?",
+    q_en: "Q108. Navina's monthly income is ₹84,000. She spends 25% on house rent, 20% on groceries, 15% on other household expenses, and saves the remaining amount. How much does she save each month?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 33,000", "(b) 33,600", "(c) 32,000", "(d) 32,600"],
+    o_en: ["(a) 33,000", "(b) 33,600", "(c) 32,000", "(d) 32,600"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q9
+  {
+    q_hi: "Q109. 110 पूर्णांक वाली किसी परीक्षा में, B को 50 अंक प्राप्त हुए जबकि A को 80 अंक प्राप्त हुए। A के अंकों का कितना प्रतिशत B के अंक थे?",
+    q_en: "Q109. In an examination with maximum marks 110, B scored 50 marks while A scored 80 marks. B's marks were what percentage of A's marks?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 160%", "(b) 72.73%", "(c) 62.5%", "(d) 110%"],
+    o_en: ["(a) 160%", "(b) 72.73%", "(c) 62.5%", "(d) 110%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q21
+  {
+    q_hi: "Q110. एक व्यक्ति ने अपनी आय का 40% अपनी पत्नी को घरेलू खर्च के लिए दिया। उसने शेष राशि का 20% अपने दो पुत्रों और एक पुत्री में से प्रत्येक को दिया। अब बची हुई राशि का एक-तिहाई हिस्सा फुटकर वस्तुओं पर खर्च किया गया तथा शेष राशि ₹14,400 को बैंक में जमा कर दिया। उसकी आय ज्ञात कीजिए।",
+    q_en: "Q110. A person gave 40% of his income to his wife for household expenses. He gave 20% of the remaining amount to each of his two sons and one daughter. One-third of the amount then remaining was spent on miscellaneous items, and the remaining ₹14,400 was deposited in a bank. Find his income.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) ₹96,000", "(b) ₹1,10,000", "(c) ₹90,000", "(d) ₹1,00,000"],
+    o_en: ["(a) ₹96,000", "(b) ₹1,10,000", "(c) ₹90,000", "(d) ₹1,00,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q7
+  {
+    q_hi: "Q111. एक महाविद्यालय में कक्षा A में 25 विद्यार्थी और कक्षा B में 30 विद्यार्थी हैं। यदि कक्षा A में विद्यार्थियों की संख्या पहले वर्ष में 20% और दूसरे वर्ष में 10% बढ़ जाती है और कक्षा B में विद्यार्थियों की संख्या दो वर्षों में कुल 20% बढ़ जाती है, तो दो वर्षों में महाविद्यालय में विद्यार्थियों की कुल संख्या में प्रतिशत वृद्धि ज्ञात कीजिए। (अपना उत्तर को दशमलव के दो स्थानों तक पूर्णांकित कीजिए।)",
+    q_en: "Q111. A college has 25 students in Class A and 30 students in Class B. The number of students in Class A increases by 20% in the first year and 10% in the second year, while Class B increases by a total of 20% over two years. Find the percentage increase in the total number of students in the college over the two years. Round to two decimal places.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) 20.45%", "(b) 25.45%", "(c) 25.85%", "(d) 20.85%"],
+    o_en: ["(a) 20.45%", "(b) 25.45%", "(c) 25.85%", "(d) 20.85%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q20
+  {
+    q_hi: "Q112. एक राशि में पहले 12% की कमी की जाती है फिर 8% की कमी की जाती है। समग्र प्रतिशत कमी ज्ञात कीजिए।",
+    q_en: "Q112. An amount is first decreased by 12% and then by 8%. Find the overall percentage decrease.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) 18.96%", "(b) 19.04%", "(c) 20.96%", "(d) 21.04%"],
+    o_en: ["(a) 18.96%", "(b) 19.04%", "(c) 20.96%", "(d) 21.04%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q8
+  {
+    q_hi: "Q113. मिस्टर जॉन अपनी मासिक आय का 20% भोजन पर तथा 20% बच्चों की शिक्षा पर खर्च करते हैं। शेष आय का 40% वे खरीदारी और परिवहन पर मिलाकर खर्च करते हैं और बाकी का 20% चिकित्सा व्ययों पर खर्च करते हैं। यदि इन सभी व्ययों के बाद उनके पास ₹23,040 बचते हैं, तो उनकी मासिक आय ज्ञात कीजिए।",
+    q_en: "Q113. Mr John spends 20% of his monthly income on food and 20% on his children's education. He spends 40% of the remaining income on shopping and transport together and 20% of the balance on medical expenses. If ₹23,040 remains after all these expenses, find his monthly income.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹80,000", "(b) ₹96,000", "(c) ₹86,000", "(d) ₹92,000"],
+    o_en: ["(a) ₹80,000", "(b) ₹96,000", "(c) ₹86,000", "(d) ₹92,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q11
+  {
+    q_hi: "Q114. किसी संख्या को 110% बढ़ाने पर 3570 प्राप्त होता है। वह संख्या कितनी है?",
+    q_en: "Q114. When a number is increased by 110%, the result is 3570. Find the number.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 850", "(b) 1700", "(c) 3400", "(d) 5100"],
+    o_en: ["(a) 850", "(b) 1700", "(c) 3400", "(d) 5100"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q24
+  {
+    q_hi: "Q115. किसी लैपटॉप की कीमत में, पहले मास में 20% की वृद्धि हुई, दूसरे मास में 10% की कमी हुई और तीसरे मास में फिर से 15% की वृद्धि हो गई। यदि लैपटॉप की मूल कीमत ₹1,20,000 थी, तो इन तीन परिवर्तनों के बाद अंतिम कीमत ज्ञात कीजिए।",
+    q_en: "Q115. The price of a laptop increases by 20% in the first month, decreases by 10% in the second month, and increases again by 15% in the third month. If the original price was ₹1,20,000, find the final price after these three changes.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) ₹1,49,040", "(b) ₹1,38,000", "(c) ₹1,41,000", "(d) ₹1,42,800"],
+    o_en: ["(a) ₹1,49,040", "(b) ₹1,38,000", "(c) ₹1,41,000", "(d) ₹1,42,800"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q25
+  {
+    q_hi: "Q116. एक कक्षा में 36 लड़के और 24 लड़कियां हैं। लड़कियों की संख्या में कितने प्रतिशत की वृद्धि की जाए ताकि यह लड़कों की संख्या के बराबर हो जाए?",
+    q_en: "Q116. A class has 36 boys and 24 girls. By what percentage should the number of girls be increased so that it becomes equal to the number of boys?",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 60%", "(b) 50%", "(c) 40%", "(d) 30%"],
+    o_en: ["(a) 60%", "(b) 50%", "(c) 40%", "(d) 30%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q6
+  {
+    q_hi: "Q117. तीन उपहार वस्तुओं की कीमतों का अनुपात 2: 5: 8 है। यदि दूसरी और तीसरी वस्तु की कीमतों में अंतर ₹5,055 है, तो तीनों वस्तुओं की कीमतों का योग ज्ञात कीजिए।",
+    q_en: "Q117. The prices of three gift items are in the ratio 2:5:8. If the difference between the prices of the second and third items is ₹5,055, find the sum of the prices of all three items.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹25,275", "(b) ₹31,500", "(c) ₹26,200", "(d) ₹29,090"],
+    o_en: ["(a) ₹25,275", "(b) ₹31,500", "(c) ₹26,200", "(d) ₹29,090"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q21
+  {
+    q_hi: "Q118. एक संख्या में 18% की कमी की जाती है और फिर 22% की वृद्धि की जाती है। नेट वृद्धि या कमी प्रतिशत (दशमलव के दो स्थानों तक सही) ज्ञात कीजिए।",
+    q_en: "Q118. A number is decreased by 18% and then increased by 22%. Find the net percentage increase or decrease, correct to two decimal places.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 1.2% की कमी", "(b) 0.04% की कमी", "(c) 1.2% की वृद्धि", "(d) 0.04% की वृद्धि"],
+    o_en: ["(a) 1.2% decrease", "(b) 0.04% decrease", "(c) 1.2% increase", "(d) 0.04% increase"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q51
+  {
+    q_hi: "Q119. एक चुनाव में चार उम्मीदवार थे, जिन्हें क्रमशः 4500, 1260, 240 और 2000 मत मिले। यदि सभी पात्र मतदाताओं ने मतदान किया, और सभी डाले गए मत वैध थे तथा चारों उम्मीदवारों में से किसी एक के पक्ष में थे, तो विजयी उम्मीदवार और उपविजयी उम्मीदवार के मत प्रतिशत के बीच अंतर कितना होगा?",
+    q_en: "Q119. In an election there were four candidates who received 4500, 1260, 240 and 2000 votes respectively. If all eligible voters voted and every vote was valid and cast for one of the four candidates, what is the difference between the vote percentages of the winner and the runner-up?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 31.25%", "(b) 25%", "(c) 27.5%", "(d) 30.75%"],
+    o_en: ["(a) 31.25%", "(b) 25%", "(c) 27.5%", "(d) 30.75%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q23
+  {
+    q_hi: "Q120. एक कस्बे की जनसंख्या में पहले वर्ष में 25% की वृद्धि हुई, फिर दूसरे वर्ष में 20% की कमी हुई तथा फिर तीसरे वर्ष में 10% की वृद्धि हुई। यदि प्रारंभिक जनसंख्या 50,000 थी तो 3 वर्ष बाद जनसंख्या कितनी होगी?",
+    q_en: "Q120. The population of a town increases by 25% in the first year, decreases by 20% in the second year, and then increases by 10% in the third year. If the initial population was 50,000, what will it be after 3 years?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 56,500", "(b) 58,500", "(c) 55,000", "(d) 57,000"],
+    o_en: ["(a) 56,500", "(b) 58,500", "(c) 55,000", "(d) 57,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q121. किसी संख्या का 5% उसी संख्या के 5% का कितना प्रतिशत है?",
+    q_en: "Q121. 5% of a number is what percentage of 5% of the same number?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 50%", "(b) 100%", "(c) 25%", "(d) 110%"],
+    o_en: ["(a) 50%", "(b) 100%", "(c) 25%", "(d) 110%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q21
+  {
+    q_hi: "Q122. किसी संख्या का 4% उसी संख्या के 20% का कितना प्रतिशत है?",
+    q_en: "Q122. 4% of a number is what percentage of 20% of the same number?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 16.67%", "(b) 8.33%", "(c) 20%", "(d) 500%"],
+    o_en: ["(a) 16.67%", "(b) 8.33%", "(c) 20%", "(d) 500%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q123. एक वस्तु की कीमत ₹1600 थी। पहले वर्ष में इसमें 10% की वृद्धि और दूसरे वर्ष में 20% की वृद्धि हुई। दो वर्ष बाद वस्तु की कीमत (₹ में) कितनी होगी?",
+    q_en: "Q123. An article was priced at ₹1,600. Its price increased by 10% in the first year and by 20% in the second year. What will be its price after two years?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 1840", "(b) 2000", "(c) 2112", "(d) 2144"],
+    o_en: ["(a) 1840", "(b) 2000", "(c) 2112", "(d) 2144"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q124. एक शर्ट की कीमत में पहले 10% की वृद्धि और फिर x% की वृद्धि की जाती है। यदि समग्र प्रतिशत वृद्धि 19% है, तो x का मान (निकटतम पूर्णांक तक पूर्णांकित) कितना है?",
+    q_en: "Q124. The price of a shirt is first increased by 10% and then by x%. If the overall percentage increase is 19%, find x, rounded to the nearest integer.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 10", "(b) 11", "(c) 8", "(d) 9"],
+    o_en: ["(a) 10", "(b) 11", "(c) 8", "(d) 9"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q66
+  {
+    q_hi: "Q125. अमन प्रति माह ₹36,000 अर्जित करता है। वह 30% किराए पर, 25% भोजन पर और 20% शिक्षा पर खर्च करता है। वह शेष राशि की बचत करता है। एक वर्ष में उसकी कुल बचत ज्ञात कीजिए।",
+    q_en: "Q125. Aman earns ₹36,000 per month. He spends 30% on rent, 25% on food and 20% on education. He saves the remaining amount. Find his total savings in one year.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹1,08,000", "(b) ₹1,15,800", "(c) ₹1,04,400", "(d) ₹1,11,000"],
+    o_en: ["(a) ₹1,08,000", "(b) ₹1,15,800", "(c) ₹1,04,400", "(d) ₹1,11,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q9
+  {
+    q_hi: "Q126. एक वस्तु का मूल्य ₹1600 था। इसके मूल्य में पहले वर्ष में 10% और दूसरे वर्ष में 30% की वृद्धि हुई। दो वर्ष बाद वस्तु का मूल्य (₹ में) कितना होगा?",
+    q_en: "Q126. An article was priced at ₹1,600. Its price increased by 10% in the first year and by 30% in the second year. What will be its price after two years?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 2288", "(b) 2080", "(c) 1760", "(d) 2248"],
+    o_en: ["(a) 2288", "(b) 2080", "(c) 1760", "(d) 2248"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q63
+  {
+    q_hi: "Q127. किसी उत्पाद की कीमत पहले वर्ष में 38% बढ़ जाती है और दूसरे वर्ष में 20% घट जाती है। यदि उत्पाद की प्रारंभिक कीमत ₹5,100 है, तो दूसरे वर्ष के अंत में अंतिम कीमत की गणना कीजिए।",
+    q_en: "Q127. The price of a product increases by 38% in the first year and decreases by 20% in the second year. If its initial price is ₹5,100, calculate the final price at the end of the second year.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹5,630.40", "(b) ₹5,720.80", "(c) ₹5,570.20", "(d) ₹5,490.60"],
+    o_en: ["(a) ₹5,630.40", "(b) ₹5,720.80", "(c) ₹5,570.20", "(d) ₹5,490.60"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q67
+  {
+    q_hi: "Q128. किसी संख्या का 5% उसी संख्या के 4% का कितना प्रतिशत है?",
+    q_en: "Q128. 5% of a number is what percentage of 4% of the same number?",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 125%", "(b) 27.78%", "(c) 80%", "(d) 55.55%"],
+    o_en: ["(a) 125%", "(b) 27.78%", "(c) 80%", "(d) 55.55%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q12
+  {
+    q_hi: "Q129. एक स्थानीय समूह में 2,100 सदस्य हैं। 2019 में सदस्यों की संख्या में 15% की वृद्धि हुई। हालांकि, 2020 में यह संख्या 20% कम हो गई। इन दो परिवर्तनों के बाद सदस्यों की कुल संख्या कितनी है?",
+    q_en: "Q129. A local group has 2,100 members. The number of members increased by 15% in 2019, but decreased by 20% in 2020. What is the total number of members after these two changes?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 1932", "(b) 1905", "(c) 1836", "(d) 1754"],
+    o_en: ["(a) 1932", "(b) 1905", "(c) 1836", "(d) 1754"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q35
+  {
+    q_hi: "Q130. यदि एक समवृत्ताकार बेलन के आधार की त्रिज्या 19% घटा दी जाए और उसकी ऊँचाई 129% बढ़ा दी जाए, तो उसके आयतन में प्रतिशत वृद्धि कितनी होगी? [अपना उत्तर निकटतम पूर्णांक तक सही दें।]",
+    q_en: "Q130. If the base radius of a right circular cylinder is decreased by 19% and its height is increased by 129%, what is the percentage increase in its volume? Give the answer to the nearest integer.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 50%", "(b) 28%", "(c) 36%", "(d) 66%"],
+    o_en: ["(a) 50%", "(b) 28%", "(c) 36%", "(d) 66%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q58
+  {
+    q_hi: "Q131. यदि किसी संख्या में क्रमिक रूप से 10%, 20%, और 15% की वृद्धि की जाए, तो उसमें समग्र प्रतिशत वृद्धि कितनी होगी?",
+    q_en: "Q131. If a number is increased successively by 10%, 20% and 15%, what is the overall percentage increase?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 45.8%", "(b) 55.8%", "(c) 41.8%", "(d) 51.8%"],
+    o_en: ["(a) 45.8%", "(b) 55.8%", "(c) 41.8%", "(d) 51.8%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q51
+  {
+    q_hi: "Q132. एक वस्तु की कीमत ₹1600 थी। पहले वर्ष में इसमें 15% की वृद्धि और दूसरे वर्ष में 20% की वृद्धि हुई। दो वर्ष बाद वस्तु की कीमत (₹ में) कितनी होगी?",
+    q_en: "Q132. An article was priced at ₹1,600. Its price increased by 15% in the first year and by 20% in the second year. What will be its price after two years?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 2208", "(b) 2106", "(c) 1840", "(d) 1920"],
+    o_en: ["(a) 2208", "(b) 2106", "(c) 1840", "(d) 1920"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q63
+  {
+    q_hi: "Q133. एक कर्मचारी के वेतन में पहले 20% की वृद्धि होती है और फिर 10% की वृद्धि होती है। वेतन में कुल प्रतिशत वृद्धि ज्ञात कीजिए।",
+    q_en: "Q133. An employee's salary is first increased by 20% and then by 10%. Find the total percentage increase in salary.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 30%", "(b) 31%", "(c) 32%", "(d) 33%"],
+    o_en: ["(a) 30%", "(b) 31%", "(c) 32%", "(d) 33%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q75
+  {
+    q_hi: "Q134. राज के पास 8 cm त्रिज्या का एक गोल आकार का केक था। उसने उसे चॉकलेट में डुबोकर फ्रीजर में रख दिया। कुछ समय बाद उसने देखा कि केक पर चॉकलेट की 2 cm मोटी परत जम जाती है। चॉकलेट में डुबोने के बाद केक के पृष्ठीय क्षेत्रफल में कितने प्रतिशत की वृद्धि हुई?",
+    q_en: "Q134. Raj had a spherical cake of radius 8 cm. He dipped it in chocolate and a 2 cm thick chocolate layer formed on it. By what percentage did the surface area increase after dipping?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 52.25 %", "(b) 56.25 %", "(c) 62.25 %", "(d) 58.25 %"],
+    o_en: ["(a) 52.25 %", "(b) 56.25 %", "(c) 62.25 %", "(d) 58.25 %"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q6
+  {
+    q_hi: "Q135. किसी संख्या का 4% उसी संख्या के 18% का लगभग कितना प्रतिशत है?",
+    q_en: "Q135. 4% of a number is approximately what percentage of 18% of the same number?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 450%", "(b) 9.09%", "(c) 18.18%", "(d) 22.22%"],
+    o_en: ["(a) 450%", "(b) 9.09%", "(c) 18.18%", "(d) 22.22%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q20
+  {
+    q_hi: "Q136. एक वस्तु की कीमत ₹1700 थी। पहले वर्ष में इसमें 5% और दूसरे वर्ष में 20% की वृद्धि की गयी। दो वर्ष बाद वस्तु की कीमत (₹ में) कितनी होगी?",
+    q_en: "Q136. An article was priced at ₹1,700. Its price increased by 5% in the first year and by 20% in the second year. What will be its price after two years?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 1885", "(b) 2142", "(c) 2040", "(d) 2125"],
+    o_en: ["(a) 1885", "(b) 2142", "(c) 2040", "(d) 2125"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q28
+  {
+    q_hi: "Q137. किसी संख्या का 4% उसी संख्या के 16% का कितना प्रतिशत है?",
+    q_en: "Q137. 4% of a number is what percentage of 16% of the same number?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 20%", "(b) 400%", "(c) 25%", "(d) 10%"],
+    o_en: ["(a) 20%", "(b) 400%", "(c) 25%", "(d) 10%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 11/03/2026 (Shift-01) | Original Q5
+  {
+    q_hi: "Q138. किसी संख्या का 5% उसी संख्या के 2% का कितना प्रतिशत है?",
+    q_en: "Q138. 5% of a number is what percentage of 2% of the same number?",
+    tag: "RRB ALP CBT-I, 11/03/2026 (Shift-01)",
+    o_hi: ["(a) 250%", "(b) 71.43%", "(c) 40%", "(d) 35.71%"],
+    o_en: ["(a) 250%", "(b) 71.43%", "(c) 40%", "(d) 35.71%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 11/03/2026 (Shift-01) | Original Q8
+  {
+    q_hi: "Q139. एक लैपटॉप के मूल्य में पहले 20% की वृद्धि की गई और फिर 30% की कमी की गई। यदि अंतिम मूल्य ₹16,800 है, तो मूल मूल्य (₹ में) क्या था?",
+    q_en: "Q139. The price of a laptop is first increased by 20% and then decreased by 30%. If the final price is ₹16,800, what was the original price?",
+    tag: "RRB ALP CBT-I, 11/03/2026 (Shift-01)",
+    o_hi: ["(a) 22,000", "(b) 20,000", "(c) 18,000", "(d) 25,000"],
+    o_en: ["(a) 22,000", "(b) 20,000", "(c) 18,000", "(d) 25,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 11/03/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q140. यदि किसी आयत की लंबाई में 40% की वृद्धि की जाए, तो उसकी चौड़ाई में कितने प्रतिशत की कमी की जानी चाहिए जिससे उसका क्षेत्रफल अपरिवर्तित रहे? (उत्तर को दशमलव के बाद दो स्थानों तक पूर्णांकित करें।)",
+    q_en: "Q140. If the length of a rectangle is increased by 40%, by what percentage should its breadth be decreased so that its area remains unchanged? (Round the answer to two decimal places.)",
+    tag: "RRB ALP CBT-I, 11/03/2026 (Shift-01)",
+    o_hi: ["(a) 20.50%", "(b) 28.57%", "(c) 22.22%", "(d) 30.51%"],
+    o_en: ["(a) 20.50%", "(b) 28.57%", "(c) 22.22%", "(d) 30.51%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q30
+  {
+    q_hi: "Q141. एक वॉशिंग मशीन की कीमत, एक TV की कीमत से 50% कम है। यदि वॉशिंग मशीन की कीमत में 83% की वृद्धि होती है तथा TV की कीमत में 38% की कमी होती है, तो 8 वॉशिंग मशीनों और 4 TV की कुल कीमत में प्रतिशत परिवर्तन कितना होगा?",
+    q_en: "Q141. The price of a washing machine is 50% less than the price of a TV. If the price of the washing machine increases by 83% and the price of the TV decreases by 38%, what is the percentage change in the total price of 8 washing machines and 4 TVs?",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) 22.5% की वृद्धि", "(b) 26% की वृद्धि", "(c) 19% की कमी", "(d) 27% की कमी"],
+    o_en: ["(a) 22.5% increase", "(b) 26% increase", "(c) 19% decrease", "(d) 27% decrease"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+];

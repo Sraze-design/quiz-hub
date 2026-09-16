@@ -1,0 +1,431 @@
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q28
+  {
+    q_hi: "Q1. राजेश ने ₹50,000 के साथ एक व्यवसाय शुरू किया। पहले वर्ष में, उसने 20% का लाभ अर्जित किया। उसने दूसरे वर्ष में पूरी राशि (मूलधन + लाभ) पुनः निवेश कर दी। दूसरे वर्ष में, उसे 15% की हानि हुई। दूसरे वर्ष के अंत में, उसने अपनी शेष व्यावसायिक परिसंपत्ति को बेच दिया और गुडविल के रूप में ₹8,000 अतिरिक्त प्राप्त किए। उसके मूल निवेश पर उसका कुल लाभ या हानि प्रतिशत कितना है?",
+    q_en: "Q1. Rajesh started a business with ₹50,000. In the first year, he earned a profit of 20%. He reinvested the entire amount (principal + profit) in the second year. In the second year, he incurred a loss of 15%. At the end of the second year, he sold his remaining business assets and received an additional ₹8,000 as goodwill. What was his overall profit or loss percentage on the original investment?",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) 15% की हानि", "(b) 12% की हानि", "(c) 18% का लाभ", "(d) 20% का लाभ"],
+    o_en: ["(a) 15% loss", "(b) 12% loss", "(c) 18% profit", "(d) 20% profit"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 03/08/2026 (Shift-02) | Original Q46
+  {
+    q_hi: "Q2. अमित और भरत ने क्रमशः ₹40,000 और ₹55,000 का निवेश करके एक व्यवसाय शुरू किया। 6 महीने बाद, चेतन ₹60,000 का निवेश करके व्यवसाय में सम्मिलित हो गया। यदि वार्षिक लाभ ₹47,400 है, तो भरत का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q2. Amit and Bharat started a business by investing ₹40,000 and ₹55,000 respectively. After 6 months, Chetan joined the business by investing ₹60,000. If the annual profit is ₹47,400, find Bharat's share.",
+    tag: "RRB Group D, 03/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹20,716", "(b) ₹20,856", "(c) ₹20,756", "(d) ₹20,886"],
+    o_en: ["(a) ₹20,716", "(b) ₹20,856", "(c) ₹20,756", "(d) ₹20,886"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q3. तीन साझेदार P, Q और R, 5: 4: 3 के अनुपात में पूंजी निवेश करके एक व्यवसाय शुरू करते हैं। एक वर्ष के अंत में, व्यवसाय को कुल ₹48,000 का लाभ प्राप्त होता है। यदि Q, 6 महीने बाद अपना निवेश निकाल लेता है, जबकि P और R पूरे वर्ष के लिए अपना निवेश व्यवसाय में बनाए रखते हैं, तो Q को कितना लाभ प्राप्त होना चाहिए?",
+    q_en: "Q3. Three partners P, Q and R start a business by investing capital in the ratio 5:4:3. At the end of one year, the business earns a total profit of ₹48,000. If Q withdraws his investment after 6 months while P and R keep their investments in the business for the whole year, how much profit should Q receive?",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹6,000", "(b) ₹9,600", "(c) ₹12,000", "(d) ₹8,000"],
+    o_en: ["(a) ₹6,000", "(b) ₹9,600", "(c) ₹12,000", "(d) ₹8,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q37
+  {
+    q_hi: "Q4. रोहित, पल्लवी और सिमरन एक वस्त्र व्यवसाय में ₹56,800, ₹36,200 और ₹48,600 का निवेश करते हैं। यदि वर्ष के अंत में कुल लाभ ₹5,60,028 है, तो लाभ में रोहित का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q4. रोहित, पल्लवी और सिमरन एक वस्त्र व्यवसाय में ₹56,800, ₹36,200 और ₹48,600 का निवेश करते हैं। यदि वर्ष के अंत में कुल लाभ ₹5,60,028 है, तो लाभ में रोहित का हिस्सा ज्ञात कीजिए।",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹2,24,800", "(b) ₹2,24,500", "(c) ₹2,18,644", "(d) ₹2,24,644"],
+    o_en: ["(a) ₹2,24,800", "(b) ₹2,24,500", "(c) ₹2,18,644", "(d) ₹2,24,644"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q36
+  {
+    q_hi: "Q5. A आणि B संयुक्तपणे एक व्यवसाय सुरू करतात. A ची गुंतवणूक B च्या गुंतवणुकीच्या तिप्पट आहे. तर ₹5,524 च्या वार्षिक नफ्यात A चा वाटा काढा.",
+    q_en: "Q5. A आणि B संयुक्तपणे एक व्यवसाय सुरू करतात. A ची गुंतवणूक B च्या गुंतवणुकीच्या तिप्पट आहे. तर ₹5,524 च्या वार्षिक नफ्यात A चा वाटा काढा.",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹4,113", "(b) ₹4,143", "(c) ₹4,123", "(d) ₹4,133"],
+    o_en: ["(a) ₹4,113", "(b) ₹4,143", "(c) ₹4,123", "(d) ₹4,133"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q6. A, B और C ने एक व्यवसाय शुरू किया और प्रत्येक ने ₹10,000 का निवेश किया। 4 महीने बाद A ने ₹3,000 निकाल लिए, B ने ₹4,000 निकाल लिए और C ने ₹3,000 अतिरिक्त निवेश किए। वर्ष के अंत में कुल लाभ ₹65,600 था। वर्ष के अंत में C का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q6. A, B and C started a business and each invested ₹10,000. After 4 months, A withdrew ₹3,000, B withdrew ₹4,000 and C invested an additional ₹3,000. The total profit at the end of the year was ₹65,600. Find C’s share of the profit.",
+    tag: "RRB Group D, 12/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹28,800", "(b) ₹24,600", "(c) ₹29,800", "(d) ₹22,700"],
+    o_en: ["(a) ₹28,800", "(b) ₹24,600", "(c) ₹29,800", "(d) ₹22,700"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q46
+  {
+    q_hi: "Q7. X और Y क्रमशः Rs. 70,000 और Rs 50,000 के निवेश के साथ साझेदारी शुरू करते हैं। 6 महीने बाद, Y अतिरिक्त Rs 20,000 का निवेश करता है। यदि एक वर्ष के बाद कुल लाभ Rs 58,500 है, तो Y का हिस्सा कितना होगा?",
+    q_en: "Q7. X and Y start a partnership with investments of ₹70,000 and ₹50,000 respectively. After 6 months, Y invests an additional ₹20,000. If the total profit after one year is ₹58,500, what is Y's share?",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) Rs 25,000", "(b) Rs 27,000", "(c) Rs 24,000", "(d) Rs 29,000"],
+    o_en: ["(a) Rs 25,000", "(b) Rs 27,000", "(c) Rs 24,000", "(d) Rs 29,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-03) | Original Q34
+  {
+    q_hi: "Q8. तीन भागीदार, A, B, और C, क्रमशः ₹25,000, ₹35,000, और ₹60,000 का निवेश करते हैं। यदि कुल लाभ ₹66,000 है, तो C का हिस्सा कितना है?",
+    q_en: "Q8. तीन भागीदार, A, B, और C, क्रमशः ₹25,000, ₹35,000, और ₹60,000 का निवेश करते हैं। यदि कुल लाभ ₹66,000 है, तो C का हिस्सा कितना है?",
+    tag: "RRB Group D, 13/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹39,000", "(b) ₹35,000", "(c) ₹33,000", "(d) ₹37,000"],
+    o_en: ["(a) ₹39,000", "(b) ₹35,000", "(c) ₹33,000", "(d) ₹37,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q35
+  {
+    q_hi: "Q9. जतिन और किरण क्रमशः ₹1,20,000 और ₹80,000 का निवेश करके एक व्यवसाय शुरू करते हैं। 8 महीने बाद, जतिन ₹20,000 निकाल लेता है। यदि वर्ष के अंत में कुल लाभ ₹29,000 है, तो लाभ में किरण का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q9. जतिन और किरण क्रमशः ₹1,20,000 और ₹80,000 का निवेश करके एक व्यवसाय शुरू करते हैं। 8 महीने बाद, जतिन ₹20,000 निकाल लेता है। यदि वर्ष के अंत में कुल लाभ ₹29,000 है, तो लाभ में किरण का हिस्सा ज्ञात कीजिए।",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹12,000", "(b) ₹14,000", "(c) ₹18,000", "(d) ₹17,000"],
+    o_en: ["(a) ₹12,000", "(b) ₹14,000", "(c) ₹18,000", "(d) ₹17,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q37
+  {
+    q_hi: "Q10. P, Q और R मिलकर एक व्यवसाय शुरू करते हैं, जिसमें वे 4:5:6 के अनुपात में धनराशि का निवेश करते हैं। यदि कुल लाभ को उनके बीच समान अनुपात में विभाजित किया जाता है और Q को ₹15,000 प्राप्त होता है, तो कुल लाभ कितना है?",
+    q_en: "Q10. P, Q और R मिलकर एक व्यवसाय शुरू करते हैं, जिसमें वे 4:5:6 के अनुपात में धनराशि का निवेश करते हैं। यदि कुल लाभ को उनके बीच समान अनुपात में विभाजित किया जाता है और Q को ₹15,000 प्राप्त होता है, तो कुल लाभ कितना है?",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹51,000", "(b) ₹45,000", "(c) ₹54,000", "(d) ₹60,000"],
+    o_en: ["(a) ₹51,000", "(b) ₹45,000", "(c) ₹54,000", "(d) ₹60,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q11. दीपक और ईशा एक साझेदारी में क्रमशः ₹40,000 और ₹60,000 का निवेश करते हैं। दीपक 6 महीने बाद अपनी पूरी धनराशि निकाल लेता है, जबकि ईशा पूरे वर्ष अपनी धनराशि निवेशित रखती है। यदि वर्ष के अंत में कुल लाभ ₹22,000 है, तो लाभ में दीपक का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q11. Deepak and Isha invest ₹40,000 and ₹60,000 respectively in a partnership. Deepak withdraws his entire amount after 6 months, while Isha keeps her amount invested for the whole year. If the total profit at the end of the year is ₹22,000, find Deepak's share of the profit.",
+    tag: "RRB Group D, 17/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹5,500", "(b) ₹8,000", "(c) ₹7,200", "(d) ₹6,500"],
+    o_en: ["(a) ₹5,500", "(b) ₹8,000", "(c) ₹7,200", "(d) ₹6,500"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q12. वर्ष की शुरुआत में, किसी व्यवसाय में A ने ₹12,000 का निवेश तथा B ने ₹18,000 का निवेश किया। वर्ष के अंत में, लाभ ₹15,000 है। लाभ में B का हिस्सा (₹ में) ज्ञात कीजिए।",
+    q_en: "Q12. At the beginning of the year, A invested ₹12,000 and B invested ₹18,000 in a business. At the end of the year, the profit is ₹15,000. Find B's share of the profit, in rupees.",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 8,000", "(b) 9,000", "(c) 6,000", "(d) 7,000"],
+    o_en: ["(a) 8,000", "(b) 9,000", "(c) 6,000", "(d) 7,000"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q30
+  {
+    q_hi: "Q13. तीन मित्रों, अमित, सुमित और रोहित ने क्रमशः ₹4,000, ₹6,000 और ₹8,000 का निवेश करके एक व्यवसाय शुरू किया। वर्ष के अंत में, उन्हें ₹9,000 का लाभ हुआ। लाभ में सुमित का हिस्सा कितना है?",
+    q_en: "Q13. तीन मित्रों, अमित, सुमित और रोहित ने क्रमशः ₹4,000, ₹6,000 और ₹8,000 का निवेश करके एक व्यवसाय शुरू किया। वर्ष के अंत में, उन्हें ₹9,000 का लाभ हुआ। लाभ में सुमित का हिस्सा कितना है?",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) ₹3,000", "(b) ₹4,000", "(c) ₹4,500", "(d) ₹2,000"],
+    o_en: ["(a) ₹3,000", "(b) ₹4,000", "(c) ₹4,500", "(d) ₹2,000"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q14. A, B और C एक व्यवसाय में क्रमशः ₹5,000, ₹7,000 और ₹8,000 का निवेश करते हैं। यदि लाभ ₹4,000 है, तो A का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q14. A, B और C एक व्यवसाय में क्रमशः ₹5,000, ₹7,000 और ₹8,000 का निवेश करते हैं। यदि लाभ ₹4,000 है, तो A का हिस्सा ज्ञात कीजिए।",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹1,400", "(b) ₹1,200", "(c) ₹1,100", "(d) ₹1,000"],
+    o_en: ["(a) ₹1,400", "(b) ₹1,200", "(c) ₹1,100", "(d) ₹1,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q38
+  {
+    q_hi: "Q15. दो साझेदारों, A और B, ने किसी व्यवसाय में क्रमशः ₹1,50,000 और ₹1,80,000 का निवेश किया। वे लाभ का 50% बराबर बांटने और शेष 50% को अपनी पूंजी निवेश के अनुपात में बांटने पर सहमत हुए। यदि B को कुल लाभ में से ₹46,000 प्राप्त होते हैं, तो कुल लाभ ज्ञात कीजिए।",
+    q_en: "Q15. दो साझेदारों, A और B, ने किसी व्यवसाय में क्रमशः ₹1,50,000 और ₹1,80,000 का निवेश किया। वे लाभ का 50% बराबर बांटने और शेष 50% को अपनी पूंजी निवेश के अनुपात में बांटने पर सहमत हुए। यदि B को कुल लाभ में से ₹46,000 प्राप्त होते हैं, तो कुल लाभ ज्ञात कीजिए।",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹98,000", "(b) ₹96,000", "(c) ₹86,000", "(d) ₹88,000"],
+    o_en: ["(a) ₹98,000", "(b) ₹96,000", "(c) ₹86,000", "(d) ₹88,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q32
+  {
+    q_hi: "Q16. ऋषभ और नेहा ने मिलकर एक व्यवसाय शुरू किया। ऋषभ ने ₹21,000 और नेहा ने ₹35,000 का निवेश किया। दो साल के अंत में, उन्हें ₹10,000 का लाभ हुआ। कुल लाभ में नेहा का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q16. ऋषभ और नेहा ने मिलकर एक व्यवसाय शुरू किया। ऋषभ ने ₹21,000 और नेहा ने ₹35,000 का निवेश किया। दो साल के अंत में, उन्हें ₹10,000 का लाभ हुआ। कुल लाभ में नेहा का हिस्सा ज्ञात कीजिए।",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹6,250", "(b) ₹6,520", "(c) ₹6,205", "(d) ₹6,025"],
+    o_en: ["(a) ₹6,250", "(b) ₹6,520", "(c) ₹6,205", "(d) ₹6,025"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q17. तीन व्यावसायिक साझेदार, A, B और C, एक निश्चित वर्ष के लिए अपने कुल लाभ को 3: 4: 5 के अनुपात में बांटने के लिए सहमत होते हैं। यदि B का हिस्सा ₹24,000 था, तो उस वर्ष के लिए व्यावसायिक साझेदारों का कुल लाभ कितना था?",
+    q_en: "Q17. तीन व्यावसायिक साझेदार, A, B और C, एक निश्चित वर्ष के लिए अपने कुल लाभ को 3: 4: 5 के अनुपात में बांटने के लिए सहमत होते हैं। यदि B का हिस्सा ₹24,000 था, तो उस वर्ष के लिए व्यावसायिक साझेदारों का कुल लाभ कितना था?",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) ₹76,000", "(b) ₹64,000", "(c) ₹72,000", "(d) ₹56,000"],
+    o_en: ["(a) ₹76,000", "(b) ₹64,000", "(c) ₹72,000", "(d) ₹56,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q46
+  {
+    q_hi: "Q18. A और B ने क्रमशः ₹20,000 और ₹15,000 का निवेश करके साझेदारी में एक व्यवसाय प्रारंभ किया। छह महीने बाद, C, ₹20,000 का निवेश करके उनके साथ व्यवसाय में शामिल हो गया। व्यवसाय प्रारंभ होने के 2 वर्ष बाद अर्जित कुल लाभ ₹20,000 में B का हिस्सा कितना होगा?",
+    q_en: "Q18. A and B started a partnership business by investing ₹20,000 and ₹15,000 respectively. After six months, C joined them by investing ₹20,000. What is B's share out of the total profit of ₹20,000 earned 2 years after the business started?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) ₹6,800", "(b) ₹6,000", "(c) ₹7,200", "(d) ₹5,400"],
+    o_en: ["(a) ₹6,800", "(b) ₹6,000", "(c) ₹7,200", "(d) ₹5,400"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q9
+  {
+    q_hi: "Q19. एक व्यक्ति X, 12 महीने के लिए ₹12,000 निवेश करता है और व्यक्ति Y, ₹18,000 निवेश करता है लेकिन वह 6 महीने बाद अपना निवेश निकाल लेता है। यदि उनके निवेश पर अर्जित कुल लाभ ₹25,200 है, तो लाभ में X का हिस्सा कितना है?",
+    q_en: "Q19. A person X invests ₹12,000 for 12 months and a person Y invests ₹18,000 but withdraws his investment after 6 months. If the total profit earned on their investments is ₹25,200, what is X's share of the profit?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹13,900", "(b) ₹15,700", "(c) ₹16,800", "(d) ₹14,400"],
+    o_en: ["(a) ₹13,900", "(b) ₹15,700", "(c) ₹16,800", "(d) ₹14,400"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q16
+  {
+    q_hi: "Q20. अनुषा ₹55,000 की पूंजी से एक व्यवसाय शुरू करती है और 7 महीने बाद मीनल उसकी साझेदार के रूप में व्यवसाय के साथ जुड़ जाती है। एक वर्ष बाद, लाभ को 8: 3 के अनुपात में विभाजित किया जाता है। पूंजी में मीनल का योगदान कितना है?",
+    q_en: "Q20. Anusha starts a business with a capital of ₹55,000 and Meenal joins her as a partner after 7 months. After one year, the profit is divided in the ratio 8:3. What is Meenal's contribution to the capital?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹50,755", "(b) ₹48,745", "(c) ₹49,410", "(d) ₹49,500"],
+    o_en: ["(a) ₹50,755", "(b) ₹48,745", "(c) ₹49,410", "(d) ₹49,500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q20
+  {
+    q_hi: "Q21. कीर्ति ₹35,000 की पूंजी से एक व्यवसाय शुरू करती है और 3 महीने बाद वैष्णवी उसकी साझेदार के रूप में व्यवसाय के साथ जुड़ जाती है। एक वर्ष बाद, लाभ को 7: 6 के अनुपात में विभाजित किया जाता है। पूंजी में वैष्णवी का योगदान कितना है?",
+    q_en: "Q21. Kirti starts a business with a capital of ₹35,000 and Vaishnavi joins her as a partner after 3 months. After one year, the profit is divided in the ratio 7:6. What is Vaishnavi's contribution to the capital?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹40,000", "(b) ₹41,020", "(c) ₹39,255", "(d) ₹38,240"],
+    o_en: ["(a) ₹40,000", "(b) ₹41,020", "(c) ₹39,255", "(d) ₹38,240"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q11
+  {
+    q_hi: "Q22. कीर्ति ₹27,000 की पूंजी से एक व्यवसाय शुरू करती है और 7 महीने बाद वैष्णवी उसकी साझेदार बनकर व्यवसाय से जुड़ जाती है। एक वर्ष बाद, लाभ को 8: 9 के अनुपात में विभाजित किया गया। पूंजी में वैष्णवी का योगदान कितना है?",
+    q_en: "Q22. Kirti starts a business with a capital of ₹27,000 and Vaishnavi joins her as a partner after 7 months. After one year, the profit is divided in the ratio 8:9. What is Vaishnavi's contribution to the capital?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) ₹72,750", "(b) ₹72,875", "(c) ₹73,360", "(d) ₹72,900"],
+    o_en: ["(a) ₹72,750", "(b) ₹72,875", "(c) ₹73,360", "(d) ₹72,900"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q22
+  {
+    q_hi: "Q23. करण और अर्जुन एक व्यवसाय शुरू करते हैं। करण, अर्जुन से ₹15,000 अधिक निवेश करता है। करण 3 महीने के लिए निवेश करता है और अर्जुन 4 महीने के लिए निवेश करता है। व्यवसाय के अंत में, कुल लाभ ₹6,060 है, और करण का हिस्सा, अर्जुन के हिस्से से ₹2,020 अधिक है। करण द्वारा निवेश की गई पूंजी ज्ञात कीजिए।",
+    q_en: "Q23. Karan and Arjun start a business. Karan invests ₹15,000 more than Arjun. Karan invests for 3 months and Arjun for 4 months. At the end of the business, the total profit is ₹6,060 and Karan's share is ₹2,020 more than Arjun's share. Find the capital invested by Karan.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) ₹23,885", "(b) ₹24,087", "(c) ₹24,000", "(d) ₹24,093"],
+    o_en: ["(a) ₹23,885", "(b) ₹24,087", "(c) ₹24,000", "(d) ₹24,093"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q2
+  {
+    q_hi: "Q24. आरजू ₹55,000 की पूंजी से एक व्यवसाय शुरू करती है और 3 महीने बाद बिमला उसकी साझेदार के रूप में व्यवसाय से जुड़ जाती है। एक वर्ष बाद, लाभ को 8: 9 के अनुपात में विभाजित किया जाता है। पूंजी में बिमला का योगदान कितना है?",
+    q_en: "Q24. Arzu starts a business with a capital of ₹55,000 and Bimla joins her as a partner after 3 months. After one year, the profit is divided in the ratio 8:9. What is Bimla's contribution to the capital?",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹82,500", "(b) ₹82,355", "(c) ₹84,080", "(d) ₹84,240"],
+    o_en: ["(a) ₹82,500", "(b) ₹82,355", "(c) ₹84,080", "(d) ₹84,240"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q4
+  {
+    q_hi: "Q25. A, B और C ने क्रमशः 6: 4: 3 की समयावधि अनुपात में धनराशि को 2: 3: 4 के अनुपात में निवेश किया। यदि कु ल लाभ ₹1,32,000 है, तो C का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q25. A, B और C ने क्रमशः 6: 4: 3 की समयावधि अनुपात में धनराशि को 2: 3: 4 के अनुपात में निवेश किया। यदि कु ल लाभ ₹1,32,000 है, तो C का हिस्सा ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) ₹42,000", "(b) ₹43,000", "(c) ₹44,000", "(d) ₹45,000"],
+    o_en: ["(a) ₹42,000", "(b) ₹43,000", "(c) ₹44,000", "(d) ₹45,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q26. A और B क्रमशः ₹93,000 और ₹54,000 का निवेश करके एक व्यवसाय शुरू करते हैं। B तीन महीने बाद व्यवसाय छोड़ देता है, और फिर C वर्ष की शेष अवधि के लिए ₹28,000 के निवेश के साथ व्यवसाय से जुड़ जाता है। यदि कुल लाभ का 11% ₹61,336 है, तो लाभ में B का हिस्सा कितना है?",
+    q_en: "Q26. A and B start a business by investing ₹93,000 and ₹54,000 respectively. B leaves the business after three months, and then C joins with an investment of ₹28,000 for the remaining period of the year. If 11% of the total profit is ₹61,336, what is B's share of the profit?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹58,951", "(b) ₹59,070", "(c) ₹59,040", "(d) ₹59,059"],
+    o_en: ["(a) ₹58,951", "(b) ₹59,070", "(c) ₹59,040", "(d) ₹59,059"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q2
+  {
+    q_hi: "Q27. तरुण और वरुण क्रमशः ₹12,000 और ₹72,000 का निवेश करके एक व्यवसाय शुरू करते हैं। तरुण अपनी धनराशि 4 महीने के लिए निवेश करता है और वरुण अपनी धनराशि 10 महीने के लिए निवेश करता है। वर्ष के अंत में, कुल लाभ का 20%, ₹16,800 है। वरुण का लाभ में हिस्सा (₹ में) कितना है?",
+    q_en: "Q27. Tarun and Varun start a business by investing ₹12,000 and ₹72,000 respectively. Tarun invests his money for 4 months and Varun for 10 months. At the end of the year, 20% of the total profit is ₹16,800. What is Varun's share of the profit, in rupees?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 78,750", "(b) 76,550", "(c) 78,250", "(d) 76,350"],
+    o_en: ["(a) 78,750", "(b) 76,550", "(c) 78,250", "(d) 76,350"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q70
+  {
+    q_hi: "Q28. तीन व्यक्ति अमर, अकबर और सुनील क्रमशः ₹15,600, ₹10,400 और ₹11,700 के निवेश के साथ एक व्यवसाय शुरू करते हैं। उन्हें लाभ के रूप में कुल निवेश का 20% प्राप्त हुआ और उन्होंने लाभ का 5% पुनर्निवेश करने की योजना बनाई। यदि शेष लाभ उनके निवेश के अनुपात में वितरित किया जाता है, तो लाभ में सुनील का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q28. Three persons Amar, Akbar and Sunil start a business with investments of ₹15,600, ₹10,400 and ₹11,700 respectively. They receive a profit equal to 20% of the total investment and plan to reinvest 5% of the profit. If the remaining profit is distributed in the ratio of their investments, find Sunil's share of the profit.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹2,845", "(b) ₹2,223", "(c) ₹3,247", "(d) ₹4,225 \""],
+    o_en: ["(a) ₹2,845", "(b) ₹2,223", "(c) ₹3,247", "(d) ₹4,225"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q13
+  {
+    q_hi: "Q29. भारत, ज्योति और विशाल ने क्रमशः ₹70,000, ₹32,000 और ₹46,000 का निवेश करके एक व्यवसाय शुरू किया। वर्ष के अंत में, कुल लाभ ₹52,540 था। कुल लाभ का 60% दान में दे दिया गया और शेष राशि को उनके बीच लाभ के अनुपात में वितरित किया गया। विशाल का हिस्सा (₹ में) कितना होगा?",
+    q_en: "Q29. भारत, ज्योति और विशाल ने क्रमशः ₹70,000, ₹32,000 और ₹46,000 का निवेश करके एक व्यवसाय शुरू किया। वर्ष के अंत में, कुल लाभ ₹52,540 था। कुल लाभ का 60% दान में दे दिया गया और शेष राशि को उनके बीच लाभ के अनुपात में वितरित किया गया। विशाल का हिस्सा (₹ में) कितना होगा?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 6,532", "(b) 6,380", "(c) 6,453", "(d) 6,520"],
+    o_en: ["(a) 6,532", "(b) 6,380", "(c) 6,453", "(d) 6,520"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q27
+  {
+    q_hi: "Q30. प्रवीण और शीनू एक व्यवसाय में साझेदार हैं। प्रवीण 9 माह के लिए ₹35,000 और शीनू 10 माह के लिए ₹42,000 का निवेश करते हैं। ₹31,570 के लाभ में से शीनू का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q30. Praveen and Sheenu are partners in a business. Praveen invests ₹35,000 for 9 months and Sheenu invests ₹42,000 for 10 months. Find Sheenu's share out of a profit of ₹31,570.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹18,640", "(b) ₹18,040", "(c) ₹18,240", "(d) ₹18,020"],
+    o_en: ["(a) ₹18,640", "(b) ₹18,040", "(c) ₹18,240", "(d) ₹18,020"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q51
+  {
+    q_hi: "Q31. राजेश और नरेश क्रमशः ₹66,000 और ₹29,000 का निवेश करके एक व्यवसाय शुरू करते हैं। राजेश अपनी धनराशि 2 महीने के लिए निवेश करता है और नरेश अपनी धनराशि 12 महीने के लिए निवेश करता है। वर्ष के अंत में, कुल लाभ का 5%, ₹7,036 है। नरेश का लाभ में हिस्सा (₹ में) कितना है?",
+    q_en: "Q31. Rajesh and Naresh start a business by investing ₹66,000 and ₹29,000 respectively. Rajesh invests his money for 2 months and Naresh for 12 months. At the end of the year, 5% of the total profit is ₹7,036. What is Naresh's share of the profit, in rupees?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 1,03,148", "(b) 1,03,156", "(c) 1,02,022", "(d) 1,02,145"],
+    o_en: ["(a) 1,03,148", "(b) 1,03,156", "(c) 1,02,022", "(d) 1,02,145"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q23
+  {
+    q_hi: "Q32. A और B क्रमशः ₹40,000 और ₹60,000 का निवेश करके एक व्यवसाय शुरू करते हैं। वर्ष के अंत में, उन्हें ₹20,000 का लाभ अर्जित होता है। A को कितना लाभ प्राप्त होगा?",
+    q_en: "Q32. A और B क्रमशः ₹40,000 और ₹60,000 का निवेश करके एक व्यवसाय शुरू करते हैं। वर्ष के अंत में, उन्हें ₹20,000 का लाभ अर्जित होता है। A को कितना लाभ प्राप्त होगा?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹8,000", "(b) ₹7,500", "(c) ₹9,000", "(d) ₹8,500"],
+    o_en: ["(a) ₹8,000", "(b) ₹7,500", "(c) ₹9,000", "(d) ₹8,500"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q49
+  {
+    q_hi: "Q33. A और B ने क्रमशः ₹29,000 और ₹95,000 का निवेश करके एक व्यवसाय किया। B छह महीने बाद अपना निवेश निकाल लेता है, और फिर C वर्ष की शेष अवधि के लिए ₹67,000 का निवेश करके व्यवसाय में शामिल हो जाता है। यदि कुल लाभ का 15%, ₹6,600 है, तो B का लाभ में हिस्सा ज्ञात कीजिए।",
+    q_en: "Q33. A and B invest ₹29,000 and ₹95,000 respectively in a business. B withdraws his investment after six months, and then C joins the business by investing ₹67,000 for the remaining period of the year. If 15% of the total profit is ₹6,600, find B's share of the profit.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹20,500", "(b) ₹19,500", "(c) ₹19,000", "(d) ₹20,000"],
+    o_en: ["(a) ₹20,500", "(b) ₹19,500", "(c) ₹19,000", "(d) ₹20,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q74
+  {
+    q_hi: "Q34. A और B ने एक व्यवसाय में 4: 5 के अनुपात में निवेश किया। उन्होंने ₹54,000 का लाभ अर्जित किया। उन्होंने लाभ का आधा हिस्सा समान रूप से बांटा और शेष आधा हिस्सा अपने निवेश के अनुपात में बांटा। B का लाभ का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q34. A and B invested in a business in the ratio 4:5. They earned a profit of ₹54,000. They divided half of the profit equally and the remaining half in the ratio of their investments. Find B's share of the profit.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹27,550", "(b) ₹28,500", "(c) ₹26,650", "(d) ₹25,750"],
+    o_en: ["(a) ₹27,550", "(b) ₹28,500", "(c) ₹26,650", "(d) ₹25,750"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q35
+  {
+    q_hi: "Q35. पंकज, मीरा और अशोक ने क्रमशः ₹62,000, ₹70,000 और ₹83,000 का निवेश करके एक व्यवसाय शुरू किया। वर्ष के अंत में, कुल लाभ ₹75,500 था। कुल लाभ का 14% दान में दे दिया गया और शेष राशि को उनके बीच लाभ के अनुपात में वितरित किया गया। अशोक का हिस्सा (₹ में) कितना होगा?",
+    q_en: "Q35. पंकज, मीरा और अशोक ने क्रमशः ₹62,000, ₹70,000 और ₹83,000 का निवेश करके एक व्यवसाय शुरू किया। वर्ष के अंत में, कुल लाभ ₹75,500 था। कुल लाभ का 14% दान में दे दिया गया और शेष राशि को उनके बीच लाभ के अनुपात में वितरित किया गया। अशोक का हिस्सा (₹ में) कितना होगा?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 24,954", "(b) 25,183", "(c) 25,206", "(d) 25,066"],
+    o_en: ["(a) 24,954", "(b) 25,183", "(c) 25,206", "(d) 25,066"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q14
+  {
+    q_hi: "Q36. करण और अर्जुन क्रमशः ₹45,000 और ₹50,000 का निवेश करके एक व्यवसाय शुरू करते हैं। करण अपनी धनराशि 4 महीने के लिए निवेश करता है और अर्जुन अपनी धनराशि 10 महीने के लिए निवेश करता है। वर्ष के अंत में, कुल लाभ का 20%, ₹30,600 है। लाभ में अर्जुन का हिस्सा (₹ में) कितना है?",
+    q_en: "Q36. Karan and Arjun start a business by investing ₹45,000 and ₹50,000 respectively. Karan invests his money for 4 months and Arjun for 10 months. At the end of the year, 20% of the total profit is ₹30,600. What is Arjun's share of the profit, in rupees?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 1,14,600", "(b) 1,12,500", "(c) 1,14,250", "(d) 1,12,350"],
+    o_en: ["(a) 1,14,600", "(b) 1,12,500", "(c) 1,14,250", "(d) 1,12,350"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q57
+  {
+    q_hi: "Q37. तीन साझेदार, एलेक्स, बेन और क्रिस, एक स्टार्टअप में निवेश करते हैं। एलेक्स ₹30,000, बेन ₹45,000 और क्रिस ₹60,000 का निवेश करते हैं। एक वर्ष बाद, ₹27,000 का लाभ प्राप्त होता है। लाभ में एलेक्स का हिस्सा ज्ञात कीजिए।",
+    q_en: "Q37. Three partners, Alex, Ben and Chris, invest in a startup. Alex invests ₹30,000, Ben ₹45,000 and Chris ₹60,000. After one year, a profit of ₹27,000 is earned. Find Alex's share of the profit.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹5,000", "(b) ₹5,200", "(c) ₹5,800", "(d) ₹6,000"],
+    o_en: ["(a) ₹5,000", "(b) ₹5,200", "(c) ₹5,800", "(d) ₹6,000"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q51
+  {
+    q_hi: "Q38. तीन व्यक्ति P, Q और R एक व्यवसाय शुरू करते है, जिसमें उनके शेयरों का अनुपात 6: 3: 15 है। 5 माह बाद Q ने अपना 80% शेयर वापस ले लिया और R ने वर्ष की समाप्ति से 4 माह पूर्व अपना 52% शेयर वापस ले लिया। यदि वर्ष का कुल लाभ ₹29900 है, तो लाभ में R का हिस्सा (₹ में) ज्ञात कीजिए।",
+    q_en: "Q38. Three persons P, Q and R start a business in which their shares are in the ratio 6:3:15. After 5 months, Q withdraws 80% of his share, and R withdraws 52% of his share 4 months before the end of the year. If the total profit for the year is ₹29,900, find R's share of the profit, in rupees.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 18498", "(b) 18580", "(c) 18538", "(d) 18558"],
+    o_en: ["(a) 18498", "(b) 18580", "(c) 18538", "(d) 18558"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q74
+  {
+    q_hi: "Q39. A और B ने क्रमशः ₹45,000 और ₹60,000 का निवेश करके एक व्यवसाय शुरू किया। 4 महीने बाद, C भी ₹75,000 का निवेश करके व्यवसाय में शामिल हुआ। यदि वर्ष के अंत में कुल लाभ ₹62,000 है, तो लाभ में से B और C के हिस्सों का अंतर (₹ में) ज्ञात कीजिए।",
+    q_en: "Q39. A and B start a business by investing ₹45,000 and ₹60,000 respectively. After 4 months, C also joins by investing ₹75,000. If the total profit at the end of the year is ₹62,000, find the difference between B's and C's shares of the profit, in rupees.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 7,000", "(b) 6,000", "(c) 4,000", "(d) 8,000"],
+    o_en: ["(a) 7,000", "(b) 6,000", "(c) 4,000", "(d) 8,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+];

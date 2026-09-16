@@ -1,0 +1,552 @@
+const data = [
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q13
+  {
+    q_hi: "Q101. एक दुकानदार पंखे का मूल्य उसके लागत मूल्य से 36% अधिक अंकित करता है और अंकित मूल्य पर 25% की छूट देता है। यदि उसे ₹134 का लाभ प्राप्त होता है, तो पंखे का अंकित मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q101. A shopkeeper marks the price of a fan 36% above its cost price and gives a discount of 25% on the marked price. If he earns a profit of ₹134, find the marked price of the fan.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 9,112", "(b) 8,851", "(c) 9,135", "(d) 8,987"],
+    o_en: ["(a) 9,112", "(b) 8,851", "(c) 9,135", "(d) 8,987"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q18
+  {
+    q_hi: "Q102. एक सेल के दौरान, कुल वस्तुओं में से 60% वस्तुओं को 21% लाभ पर बेचा जाता है। शेष वस्तुओं में से 40% वस्तुओं को 46% लाभ पर बेचा जाता है, और शेष वस्तुएं 29% हानि पर बेची जाती है। यदि समग्र लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q102. During a sale, 60% of the goods are sold at a profit of 21%. Of the remaining goods, 40% are sold at a profit of 46%, and the rest are sold at a loss of 29%. If the overall profit is x%, find x.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 13", "(b) 3.5", "(c) 9.5", "(d) 3"],
+    o_en: ["(a) 13", "(b) 3.5", "(c) 9.5", "(d) 3"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q5
+  {
+    q_hi: "Q103. एक दुकानदार ने एक पुस्तक 7% की हानि पर बेची। यदि विक्रय मूल्य में ₹120 की वृद्धि कर दी जाती, तो उसे 17% का लाभ होता। पुस्तक का क्रय मूल्य (₹ में) कितना था?",
+    q_en: "Q103. A shopkeeper sold a book at a loss of 7%. If the selling price were increased by ₹120, he would make a profit of 17%. What was the cost price of the book?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 505", "(b) 510", "(c) 495", "(d) 500"],
+    o_en: ["(a) 505", "(b) 510", "(c) 495", "(d) 500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q7
+  {
+    q_hi: "Q104. एक व्यापारी दो वस्तुएँ X और Y, ₹1,200 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 80% और 44% की दो क्रमिक छूट देकर बेचता है और फिर भी ₹172 का लाभ अर्जित करता है। यदि वह Y को 88% की एकल छूट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q104. A dealer buys two articles X and Y at ₹1,200 each and marks both at the same price. He sells X after successive discounts of 80% and 44% and still earns a profit of ₹172. If he sells Y at a single discount of 88%, find the profit percentage on Y.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 21.5%", "(b) 22%", "(c) 22.5%", "(d) 21%"],
+    o_en: ["(a) 21.5%", "(b) 22%", "(c) 22.5%", "(d) 21%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q3
+  {
+    q_hi: "Q105. एक डीलर दो वस्तुएँ X और Y, ₹700 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 60% और 20% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹630 का लाभ अर्जित करता है। यदि वह Y को 76% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q105. एक डीलर दो वस्तुएँ X और Y, ₹700 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 60% और 20% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹630 का लाभ अर्जित करता है। यदि वह Y को 76% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) 41.5%", "(b) 42%", "(c) 41%", "(d) 42.5%"],
+    o_en: ["(a) 41.5%", "(b) 42%", "(c) 41%", "(d) 42.5%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-01) | Original Q23
+  {
+    q_hi: "Q106. एक व्यक्ति ₹42000 प्रति वस्तु की दर से दो वस्तुएँ बेचता है। उसे एक वस्तु पर 45% का लाभ होता है और दूसरी वस्तु पर 45% की हानि होती है। इस लेन-देन में उसका समग्र लाभ या हानि (निकटतम पूर्णांक तक) ज्ञात कीजिए।",
+    q_en: "Q106. A person sells two articles at ₹42,000 each. He earns a profit of 45% on one article and incurs a loss of 45% on the other. Find the overall profit or loss in this transaction, rounded to the nearest integer.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-01)",
+    o_hi: ["(a) ₹21429 का लाभ", "(b) ₹21429 की हानि", "(c) ₹21329 का लाभ", "(d) ₹21329 की हानि"],
+    o_en: ["(a) ₹21429 profit", "(b) ₹21429 loss", "(c) ₹21329 profit", "(d) ₹21329 loss"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q1
+  {
+    q_hi: "Q107. एक डीलर दो वस्तुएँ X और Y, ₹800 प्रति वस्तु की दर से खरीदता है। वह दोनों पर समान मूल्य अंकित करता है। वह X को 73% और 37% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹901 का लाभ अर्जित करता है। यदि वह Y को 89% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q107. एक डीलर दो वस्तुएँ X और Y, ₹800 प्रति वस्तु की दर से खरीदता है। वह दोनों पर समान मूल्य अंकित करता है। वह X को 73% और 37% की दो क्रमिक छू ट देकर बेचता है और फिर भी ₹901 का लाभ अर्जित करता है। यदि वह Y को 89% की एकल छू ट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 36%", "(b) 37.5%", "(c) 37%", "(d) 36.5%"],
+    o_en: ["(a) 36%", "(b) 37.5%", "(c) 37%", "(d) 36.5%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-02) | Original Q12
+  {
+    q_hi: "Q108. एक व्यापारी मसाले को 15% के लाभ पर बेचने का दावा करता है, लेकिन बेईमानी से बांट पर लिखे वजन से 14% कम वजन का उपयोग करता है। व्यापारी द्वारा अर्जित कुल लाभ प्रतिशत ज्ञात कीजिए। (उत्तर को निकटतम पूर्णांक तक पूर्णांकित कीजिए)",
+    q_en: "Q108. A trader claims to sell spices at a profit of 15%, but dishonestly uses a weight that is 14% less than the stated weight. Find the total profit percentage earned by the trader. (Round to the nearest integer.)",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-02)",
+    o_hi: ["(a) 34%", "(b) 36%", "(c) 31%", "(d) 39%"],
+    o_en: ["(a) 34%", "(b) 36%", "(c) 31%", "(d) 39%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q16
+  {
+    q_hi: "Q109. एक डीलर दो वस्तुएं X और Y ₹3,400 प्रति वस्तु की दर से खरीदता है। वह दोनों वस्तुओं पर समान मूल्य अंकित करता है। वह X को 10% और 50% की दो क्रमागत छूट देकर बेचता है और फिर भी ₹323 का लाभ अर्जित करता है। यदि वह Y को 28% की एकल छूट पर बेचता है, तो Y पर लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q109. A dealer buys two articles X and Y at ₹3,400 each and marks both at the same price. He sells X after successive discounts of 10% and 50% and still earns a profit of ₹323. If he sells Y at a single discount of 28%, find the profit percentage on Y.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 74%", "(b) 74.2%", "(c) 75.2%", "(d) 75%"],
+    o_en: ["(a) 74%", "(b) 74.2%", "(c) 75.2%", "(d) 75%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 10/03/2026 (Shift-03) | Original Q22
+  {
+    q_hi: "Q110. एक बिक्री के दौरान, 44% माल 47% लाभ पर बेचा जाता है। शेष माल का 25% माल 22% लाभ पर बेचा जाता है, और शेष माल 38% हानि पर बेचा जाता है। यदि समग्र लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q110. During a sale, 44% of the goods are sold at a profit of 47%. Of the remaining goods, 25% are sold at a profit of 22%, and the rest are sold at a loss of 38%. If the overall profit is x%, find x.",
+    tag: "RRB Tech G-III, 10/03/2026 (Shift-03)",
+    o_hi: ["(a) 12.4", "(b) 7.8", "(c) 18", "(d) 18.5"],
+    o_en: ["(a) 12.4", "(b) 7.8", "(c) 18", "(d) 18.5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q2
+  {
+    q_hi: "Q111. एक वस्तु 38% लाभ पर बेची जाती है। यदि क्रय मूल्य में ₹68 की वृद्धि कर दी जाए और विक्रय मूल्य में ₹54 की कमी कर दी जाए, तो लाभ 37.5% होगा। वस्तु का मूल क्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q111. An article is sold at a profit of 38%. If the cost price is increased by ₹68 and the selling price is decreased by ₹54, the profit becomes 37.5%. Find the original cost price of the article.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 29,500", "(b) 29,400", "(c) 29,700", "(d) 29,300"],
+    o_en: ["(a) 29,500", "(b) 29,400", "(c) 29,700", "(d) 29,300"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q3
+  {
+    q_hi: "Q112. 100 केले ₹1,200 प्रति सैकड़ा की दर से खरीदे गए और ₹1,100 के लाभ पर बेचे गए। प्रति दर्जन केले का विक्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q112. 100 bananas were bought at the rate of ₹1,200 per hundred and sold at a profit of ₹1,100. Find the selling price per dozen bananas.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 286", "(b) 281", "(c) 271", "(d) 276"],
+    o_en: ["(a) 286", "(b) 281", "(c) 271", "(d) 276"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q113. एक दुकानदार किसी वस्तु का अंकित मूल्य उसके क्रय मूल्य से 40% अधिक निर्धारित करता है। 26% लाभ अर्जित करने के लिए उसे कितने प्रतिशत की छूट देनी होगी?",
+    q_en: "Q113. A shopkeeper marks an article 40% above its cost price. What percentage discount should he give to earn a profit of 26%?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) 9%", "(b) 10%", "(c) 12%", "(d) 0.11%"],
+    o_en: ["(a) 9%", "(b) 10%", "(c) 12%", "(d) 0.11%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-03) | Original Q57
+  {
+    q_hi: "Q114. एक व्यापारी ने किसी वस्तु का मूल्य, क्रय मूल्य से 40% अधिक अंकित किया। वह ग्राहक को 20% और 25% की दो क्रमिक छूट प्रदान करता है। यदि उसे ₹224 की हानि होती है, तो वह वस्तु को उस ग्राहक को किस मूल्य पर बेचता है?",
+    q_en: "Q114. A trader marks an article 40% above its cost price. He gives successive discounts of 20% and 25% to a customer. If he incurs a loss of ₹224, at what price does he sell the article to the customer?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹1,166", "(b) ₹1,176", "(c) ₹1,276", "(d) ₹1,167"],
+    o_en: ["(a) ₹1,166", "(b) ₹1,176", "(c) ₹1,276", "(d) ₹1,167"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q22
+  {
+    q_hi: "Q115. एक दुकानदार किसी वस्तु का अंकित मूल्य उसके क्रय मूल्य से 56% अधिक निर्धारित करता है। 17% का लाभ प्राप्त करने के लिए उसे कितने प्रतिशत की छूट प्रदान करनी चाहिए?",
+    q_en: "Q115. A shopkeeper marks an article 56% above its cost price. What percentage discount should he give to earn a profit of 17%?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 24%", "(b) 22%", "(c) 25%", "(d) 26%"],
+    o_en: ["(a) 24%", "(b) 22%", "(c) 25%", "(d) 26%"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q116. एक व्यक्ति ने ₹1,500 में एक घड़ी खरीदी। उसने उसे अपने मित्र को अपने क्रय मूल्य पर 12% लाभ पर बेच दिया। फिर उसके मित्र ने उसे किसी अन्य व्यक्ति को अपने क्रय मूल्य पर 8% लाभ पर बेच दिया। प्रारंभिक क्रय मूल्य और अंतिम विक्रय मूल्य में अंतर ज्ञात कीजिए।",
+    q_en: "Q116. A person bought a watch for ₹1,500. He sold it to his friend at a profit of 12% on his cost price. The friend then sold it to another person at a profit of 8% on his cost price. Find the difference between the initial cost price and the final selling price.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) ₹316.40", "(b) ₹312.40", "(c) ₹314.40", "(d) ₹318.40"],
+    o_en: ["(a) ₹316.40", "(b) ₹312.40", "(c) ₹314.40", "(d) ₹318.40"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q62
+  {
+    q_hi: "Q117. एक वस्तु 40% लाभ पर बेची जाती है। यदि क्रय मूल्य में ₹28 की वृद्धि कर दी जाए और विक्रय मूल्य में ₹84 की कमी कर दी जाए, तो लाभ 37.5% होगा। वस्तु का मूल क्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q117. An article is sold at a profit of 40%. If the cost price is increased by ₹28 and the selling price is decreased by ₹84, the profit becomes 37.5%. Find the original cost price of the article.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 5,000", "(b) 4,900", "(c) 4,700", "(d) 4,800"],
+    o_en: ["(a) 5,000", "(b) 4,900", "(c) 4,700", "(d) 4,800"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-01) | Original Q67
+  {
+    q_hi: "Q118. एक दुकानदार किसी वस्तु का मूल्य उसके क्रय मूल्य से 30% अधिक अंकित करता है। वह अंकित मूल्य पर 20% की छूट देता है, और ₹32 का लाभ अर्जित करता है। वस्तु का क्रय मूल्य ज्ञात कीजिए।",
+    q_en: "Q118. A shopkeeper marks an article 30% above its cost price. He gives a discount of 20% on the marked price and earns a profit of ₹32. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-01)",
+    o_hi: ["(a) 800", "(b) 700", "(c) 680", "(d) 720"],
+    o_en: ["(a) 800", "(b) 700", "(c) 680", "(d) 720"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q23
+  {
+    q_hi: "Q119. यदि एक जैसी 12 पुस्तकों का क्रय मूल्य ₹960 है और एक जैसे 8 पेनों का क्रय मूल्य ₹320 है, तो एक ही प्रकार की 15 पुस्तकों और 10 पेनों का कुल क्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q119. यदि एक जैसी 12 पुस्तकों का क्रय मूल्य ₹960 है और एक जैसे 8 पेनों का क्रय मूल्य ₹320 है, तो एक ही प्रकार की 15 पुस्तकों और 10 पेनों का कुल क्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 1800", "(b) 1600", "(c) 1500", "(d) 1200"],
+    o_en: ["(a) 1800", "(b) 1600", "(c) 1500", "(d) 1200"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q52
+  {
+    q_hi: "Q120. एक दुकानदार किसी वस्तु के अंकित मूल्य पर 70% और 75% की दो क्रमिक छूटें प्रदान करके उसे ₹430.5 में बेचता है। यदि वह कोई छूट प्रदान नहीं करता, तो उसे 40% का लाभ प्राप्त होता। वस्तु का क्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q120. A shopkeeper sells an article for ₹430.5 after giving two successive discounts of 70% and 75% on its marked price. If he gives no discount, he earns a profit of 40%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 4,121", "(b) 4,100", "(c) 4,081", "(d) 4,145"],
+    o_en: ["(a) 4,121", "(b) 4,100", "(c) 4,081", "(d) 4,145"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q54
+  {
+    q_hi: "Q121. एक बिक्री के दौरान 50% माल 40% लाभ पर बेचा जाता है, शेष माल का 30% माल 46% लाभ पर बेचा जाता है और शेष माल 24% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q121. During a sale, 50% of the goods are sold at a profit of 40%. Of the remaining goods, 30% are sold at a profit of 46%, and the rest are sold at a loss of 24%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 20", "(b) 18.5", "(c) 17.5", "(d) 19"],
+    o_en: ["(a) 20", "(b) 18.5", "(c) 17.5", "(d) 19"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q72
+  {
+    q_hi: "Q122. किसी वस्तु पर 20% और 10% की दो क्रमिक छूट देने के बाद उसका मूल्य ₹7,200 हो जाता है। किसी भी प्रकार की छूट देने से पहले वस्तु का मूल मूल्य (original price) क्या था?",
+    q_en: "Q122. After two successive discounts of 20% and 10% on an article, its price becomes ₹7,200. What was the original price before any discount?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) ₹9,000", "(b) ₹11,000", "(c) ₹10,000", "(d) ₹12,000"],
+    o_en: ["(a) ₹9,000", "(b) ₹11,000", "(c) ₹10,000", "(d) ₹12,000"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-02) | Original Q74
+  {
+    q_hi: "Q123. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹63 खर्च किए। फिर उसने उस वस्तु को भरत को 25% के लाभ पर बेच दिया। बाद में, भरत ने उस वस्तु को ₹8415 में बेचा, जिससे उसे 15% की हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q123. Anand bought an article and spent ₹63 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹8415 at a loss of 15%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-02)",
+    o_hi: ["(a) 7918", "(b) 7919", "(c) 7917", "(d) 7920"],
+    o_en: ["(a) 7918", "(b) 7919", "(c) 7917", "(d) 7920"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q8
+  {
+    q_hi: "Q124. एक दुकान किसी वस्तु का मूल्य 50% बढ़ाकर अंकित करती है और फिर अंकित मूल्य पर 20% की छूट प्रदान करती है। यदि अंतिम विक्रय मूल्य ₹2,400 है, तो क्रय मूल्य (₹ में) कितना था?",
+    q_en: "Q124. A shop marks an article 50% above its cost price and then gives a discount of 20% on the marked price. If the final selling price is ₹2,400, what was the cost price?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 2,050", "(b) 2,000", "(c) 2,100", "(d) 1,800"],
+    o_en: ["(a) 2,050", "(b) 2,000", "(c) 2,100", "(d) 1,800"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q43
+  {
+    q_hi: "Q125. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹84 खर्च किए। फिर उसने उसे भरत को 25% लाभ पर बेच दिया। बाद में, भरत ने उस वस्तु को ₹4368 में बेच दिया, जिस पर उसे 9% की हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q125. Anand bought an article and spent ₹84 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹4368 at a loss of 9%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 3840", "(b) 3842", "(c) 3838", "(d) 3839"],
+    o_en: ["(a) 3840", "(b) 3842", "(c) 3838", "(d) 3839"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q56
+  {
+    q_hi: "Q126. एक दुकानदार किसी वस्तु को उसके अंकित मूल्य पर 90% और 50% की दो क्रमिक छूट देकर ₹225.6 में बेचता है। यदि वह कोई छूट नहीं देता है, तो उसे 41% का लाभ अर्जित होगा। वस्तु का लागत मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q126. A shopkeeper sells an article for ₹225.6 after giving two successive discounts of 90% and 50% on its marked price. If he gives no discount, he would earn a profit of 41%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 3,200", "(b) 3,194", "(c) 3,204", "(d) 3,182"],
+    o_en: ["(a) 3,200", "(b) 3,194", "(c) 3,204", "(d) 3,182"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-01) | Original Q60
+  {
+    q_hi: "Q127. अरविंद ने एक वस्तु ₹x में खरीदी। उसने इसे बीरू को 30% हानि पर बेच दिया। बीरू ने इसके परिवहन पर ₹198 खर्च किए और इसे मीनू को 50% लाभ पर बेच दिया। यदि मीनू ने इसे ₹1,053 में खरीदा, तो x का मान कितना है?",
+    q_en: "Q127. Arvind bought an article for ₹x. He sold it to Biru at a loss of 30%. Biru spent ₹198 on transportation and sold it to Meenu at a profit of 50%. If Meenu bought it for ₹1,053, find x.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-01)",
+    o_hi: ["(a) 696", "(b) 715", "(c) 720", "(d) 671"],
+    o_en: ["(a) 696", "(b) 715", "(c) 720", "(d) 671"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q20
+  {
+    q_hi: "Q128. एक दुकानदार ने ₹10 प्रति आम के हिसाब से 50 आम खरीदे। उसने 30 आम 20% लाभ पर और शेष 20 आम 10% हानि पर बेचे। उसका कुल लाभ या हानि प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q128. A shopkeeper bought 50 mangoes at ₹10 per mango. He sold 30 mangoes at a profit of 20% and the remaining 20 at a loss of 10%. Find his overall profit or loss percentage.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 4% लाभ", "(b) 8% लाभ", "(c) 6% हानि", "(d) 2% हानि"],
+    o_en: ["(a) 4% profit", "(b) 8% profit", "(c) 6% loss", "(d) 2% loss"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q34
+  {
+    q_hi: "Q129. विनीत ने ₹5,400 में एक जूसर खरीदा। वह अपने ग्राहक को अंकित मूल्य पर 10% की छूट देकर 20% का लाभ अर्जित करना चाहता है। इसके लिए अंकित मूल्य (₹ में) कितना होना चाहिए?",
+    q_en: "Q129. Vineet bought a juicer for ₹5,400. He wants to earn a profit of 20% after giving his customer a discount of 10% on the marked price. What should the marked price be?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 7,100", "(b) 7,200", "(c) 7,050", "(d) 7,150"],
+    o_en: ["(a) 7,100", "(b) 7,200", "(c) 7,050", "(d) 7,150"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q43
+  {
+    q_hi: "Q130. एक दुकानदार मोबाइल फोन पर उसके क्रय मूल्य से 40% अधिक मूल्य अंकित करता है। फिर वह अंकित मूल्य पर 10% और 5% की दो क्रमिक छूटें प्रदान करता है। क्रय मूल्य पर उसे प्राप्त लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q130. A shopkeeper marks a mobile phone 40% above its cost price. He then gives two successive discounts of 10% and 5% on the marked price. Find his profit percentage on the cost price.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 21%", "(b) 23%", "(c) 22.3%", "(d) 19.7%"],
+    o_en: ["(a) 21%", "(b) 23%", "(c) 22.3%", "(d) 19.7%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-02) | Original Q61
+  {
+    q_hi: "Q131. एक सेल के दौरान, 55% माल 41% लाभ पर बेचा जाता है, शेष माल का 20% माल 19% लाभ पर और शेष माल को 21% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान कितना है?",
+    q_en: "Q131. During a sale, 55% of the goods are sold at a profit of 41%. Of the remaining goods, 20% are sold at a profit of 19%, and the rest are sold at a loss of 21%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-02)",
+    o_hi: ["(a) 16.7%", "(b) 15%", "(c) 10.5%", "(d) 12%"],
+    o_en: ["(a) 16.7%", "(b) 15%", "(c) 10.5%", "(d) 12%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q25
+  {
+    q_hi: "Q132. शुभ एक वस्तु को उसके क्रय मूल्य से 40% अधिक पर अंकित करता है। वह अंकित मूल्य पर d% की एकल छूट देता है और फिर भी क्रय मूल्य पर 10% लाभ कमाता है। d ज्ञात कीजिए।",
+    q_en: "Q132. Shubh marks an article 40% above its cost price. He gives a single discount of d% on the marked price and still earns a 10% profit. Find d.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 21 2/7%", "(b) 21 3/7%", "(c) 23%", "(d) 22%"],
+    o_en: ["(a) 21 2/7%", "(b) 21 3/7%", "(c) 23%", "(d) 22%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q35
+  {
+    q_hi: "Q133. एक सेल के दौरान, 50% माल 49% लाभ पर बेचा जाता है, शेष माल का 32% माल 45% लाभ पर बेचा जाता है और अभी भी बचे हुए माल को 15% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q133. During a sale, 50% of the goods are sold at a profit of 49%. Of the remaining goods, 32% are sold at a profit of 45%, and the rest are sold at a loss of 15%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 28.1%", "(b) 27%", "(c) 25%", "(d) 26.6%"],
+    o_en: ["(a) 28.1%", "(b) 27%", "(c) 25%", "(d) 26.6%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q51
+  {
+    q_hi: "Q134. एक दुकानदार किसी वस्तु का अंकित मूल्य उसके क्रय मूल्य से 20% अधिक निर्धारित करता है। 2% लाभ अर्जित करने के लिए उसे कितने प्रतिशत की छूट देनी होगी?",
+    q_en: "Q134. A shopkeeper marks an article 20% above its cost price. What percentage discount should he give to earn a profit of 2%?",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 17%", "(b) 12%", "(c) 18%", "(d) 15%"],
+    o_en: ["(a) 17%", "(b) 12%", "(c) 18%", "(d) 15%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 13/02/2026 (Shift-01) | Original Q61
+  {
+    q_hi: "Q135. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹82 खर्च हुए। बाद में उसने वह वस्तु भरत को 25% लाभ पर बेच दी। अंततः भरत ने वह वस्तु ₹2915 में बेच दी, जिससे उसे 47% हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q135. Anand bought an article and spent ₹82 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹2915 at a loss of 47%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 13/02/2026 (Shift-01)",
+    o_hi: ["(a) 4398", "(b) 4397", "(c) 4400", "(d) 4402"],
+    o_en: ["(a) 4398", "(b) 4397", "(c) 4400", "(d) 4402"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q4
+  {
+    q_hi: "Q136. एक सेल के दौरान, 40% माल 44% लाभ पर बेचा जाता है, शेष माल का 25% माल 29% लाभ पर बेचा जाता है और शेष माल को 39% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q136. During a sale, 40% of the goods are sold at a profit of 44%. Of the remaining goods, 25% are sold at a profit of 29%, and the rest are sold at a loss of 39%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 15%", "(b) 4.4%", "(c) 7.5%", "(d) 10.5% 17/02/2026 9:00 AM - 10:00 AM RRB ALP CBT 1"],
+    o_en: ["(a) 15%", "(b) 4.4%", "(c) 7.5%", "(d) 10.5%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q7
+  {
+    q_hi: "Q137. एक दुकानदार किसी वस्तु के अंकित मूल्य पर 60% और 31% की दो क्रमिक छूटें प्रदान करके उसे ₹324.3 में बेचता है। यदि वह कोई छूट प्रदान नहीं करता है, तो उसे 25% का लाभ प्राप्त होता है। वस्तु का क्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    q_en: "Q137. A shopkeeper sells an article for ₹324.3 after giving two successive discounts of 60% and 31% on its marked price. If he gives no discount, he earns a profit of 25%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 947", "(b) 917", "(c) 940", "(d) 968"],
+    o_en: ["(a) 947", "(b) 917", "(c) 940", "(d) 968"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q17
+  {
+    q_hi: "Q138. किसी वस्तु का अंकित मूल्य, क्रय मूल्य से 10% अधिक है और अंकित मूल्य पर 10% की छूट प्रदान की जाती है। इस बिक्री में व्यवसाय के मालिक को हुआ प्रतिशत लाभ या हानि ज्ञात कीजिए।",
+    q_en: "Q138. The marked price of an article is 10% above its cost price and a discount of 10% is given on the marked price. Find the percentage profit or loss in the sale.",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 1% हानि", "(b) 2% हानि", "(c) 2% लाभ", "(d) 1% लाभ"],
+    o_en: ["(a) 1% loss", "(b) 2% loss", "(c) 2% profit", "(d) 1% profit"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 17/02/2026 (Shift-01) | Original Q65
+  {
+    q_hi: "Q139. आनंद ने एक वस्तु खरीदी और उसकी मरम्मत पर ₹175 खर्च किए। फिर उसने उसे भरत को 25% लाभ पर बेच दिया। बाद में, भरत ने उस वस्तु को ₹3,402 में बेच दिया, जिस पर उसे 58% की हानि हुई। भरत को वस्तु बेचने से ठीक पहले आनंद के लिए उस वस्तु की लागत (₹ में) कितनी थी?",
+    q_en: "Q139. Anand bought an article and spent ₹175 on repairs. He then sold it to Bharat at a profit of 25%. Later, Bharat sold the article for ₹3,402 at a loss of 58%. What was Anand's cost of the article just before selling it to Bharat?",
+    tag: "RRB ALP CBT-I, 17/02/2026 (Shift-01)",
+    o_hi: ["(a) 6480", "(b) 6478", "(c) 6483", "(d) 6481"],
+    o_en: ["(a) 6480", "(b) 6478", "(c) 6483", "(d) 6481"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q11
+  {
+    q_hi: "Q140. निखिल ने अपनी साइकिल रवि को 24% हानि पर बेची। रवि ने उसकी मरम्मत पर ₹486 खर्च किए और साइकिल को विकास को ₹2,875 में बेचकर 15% लाभ कमाया। निखिल के लिए साइकिल का लागत मूल्य ज्ञात कीजिए।",
+    q_en: "Q140. Nikhil sold his bicycle to Ravi at a loss of 24%. Ravi spent ₹486 on repairs and sold the bicycle to Vikas for ₹2,875, earning a profit of 15%. Find the cost price of the bicycle for Nikhil.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹2,540", "(b) ₹2,650", "(c) ₹2,460", "(d) ₹2,710"],
+    o_en: ["(a) ₹2,540", "(b) ₹2,650", "(c) ₹2,460", "(d) ₹2,710"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q26
+  {
+    q_hi: "Q141. एक सेल के दौरान, 48% माल 31% लाभ पर बेचा जाता है, शेष का 25% माल 16% लाभ पर बेचा जाता है, और शेष माल को 32% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q141. During a sale, 48% of the goods are sold at a profit of 31%. Of the remaining goods, 25% are sold at a profit of 16%, and the rest are sold at a loss of 32%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) 7", "(b) 4.48", "(c) 8", "(d) 7.5"],
+    o_en: ["(a) 7", "(b) 4.48", "(c) 8", "(d) 7.5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q142. एक दुकानदार ₹10,000 अंकित मूल्य की एक वस्तु पर 20% और 30% की दो क्रमिक छूटें प्रदान करता है, जिससे उसे वस्तु के क्रय मूल्य पर 12% का लाभ प्राप्त होता है। वस्तु का क्रय मूल्य और विक्रय मूल्य ज्ञात कीजिए।",
+    q_en: "Q142. A shopkeeper gives two successive discounts of 20% and 30% on an article marked at ₹10,000, and thereby earns a profit of 12% on the cost price. Find the cost price and selling price of the article.",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) क्रय मूल्य = ₹5,000, विक्रय मूल्य = ₹5,500", "(b) क्रय मूल्य = ₹4,000, विक्रय मूल्य = ₹5,000", "(c) क्रय मूल्य = ₹5,000, विक्रय मूल्य = ₹6,000", "(d) क्रय मूल्य = ₹5,000, विक्रय मूल्य = ₹5,600"],
+    o_en: ["(a) Cost price = ₹5,000, Selling price = ₹5,500", "(b) Cost price = ₹4,000, Selling price = ₹5,000", "(c) Cost price = ₹5,000, Selling price = ₹6,000", "(d) Cost price = ₹5,000, Selling price = ₹5,600"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 16/02/2026 (Shift-03) | Original Q65
+  {
+    q_hi: "Q143. एक इलेक्ट्रॉनिक्स स्टोर ₹51,000 मूल्य के लैपटॉप पर दो क्रमिक छूट प्रदान करता है। पहली छूट 10% है और दूसरी छूट 5% है। दोनों छूट के बाद अंतिम मूल्य कितना होगा?",
+    q_en: "Q143. An electronics store offers two successive discounts on a laptop priced at ₹51,000. The first discount is 10% and the second is 5%. What is the final price after both discounts?",
+    tag: "RRB ALP CBT-I, 16/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹46,305", "(b) ₹44,305", "(c) ₹43,605", "(d) ₹43,506"],
+    o_en: ["(a) ₹46,305", "(b) ₹44,305", "(c) ₹43,605", "(d) ₹43,506"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q15
+  {
+    q_hi: "Q144. एक दुकानदार किसी वस्तु के अंकित मूल्य पर 75% और 34% की दो क्रमिक छूटें प्रदान करके उसे ₹689.7 में बेचता है। यदि वह कोई छूट प्रदान नहीं करता, तो उसे 76% का लाभ अर्जित होता। वस्तु का क्रय मूल्य (₹ में) कितना है?",
+    q_en: "Q144. A shopkeeper sells an article for ₹689.7 after giving two successive discounts of 75% and 34% on its marked price. If he gives no discount, he earns a profit of 76%. Find the cost price of the article.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 2,397", "(b) 2,359", "(c) 2,375", "(d) 2,333"],
+    o_en: ["(a) 2,397", "(b) 2,359", "(c) 2,375", "(d) 2,333"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q31
+  {
+    q_hi: "Q145. एक दुकानदार ने छह एकसमान मोबाइल फोन ₹72000 में खरीदे, और उनमें से दो मोबाइल फोन ₹72000 में बेच दिए। उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q145. A shopkeeper bought six identical mobile phones for ₹72,000 and sold two of them for ₹72,000. Find his profit percentage.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 200%", "(b) 203%", "(c) 1.97%", "(d) 201%"],
+    o_en: ["(a) 200%", "(b) 203%", "(c) 1.97%", "(d) 201%"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q56
+  {
+    q_hi: "Q146. एक व्यापारी किसी उत्पाद पर ₹2,000 अंकित करता है। वह एक ग्राहक को 20% और 10% की दो क्रमिक छूटें देता है। एकल समतुल्य छूट प्रतिशत और उत्पाद का विक्रय मूल्य ज्ञात कीजिए।",
+    q_en: "Q146. A trader marks a product at ₹2,000 and gives a customer two successive discounts of 20% and 10%. Find the single equivalent discount percentage and the selling price of the product.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 20%, ₹1,640", "(b) 28%, ₹1,440", "(c) 25%, ₹1,540", "(d) 30%, ₹1,740"],
+    o_en: ["(a) 20%, ₹1,640", "(b) 28%, ₹1,440", "(c) 25%, ₹1,540", "(d) 30%, ₹1,740"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-02) | Original Q62
+  {
+    q_hi: "Q147. एक व्यापारी चावल की दो किस्मों, A और B को वजन के अनुसार 3: 5 के अनुपात में मिश्रित करता है। वह मिश्रण को उस मूल्य पर बेचता है कि उसे चावल A पर 20% का लाभ होता है तथा चावल B पर 10% की हानि होती है। यदि मिश्रण पर समग्र लाभ 8% है, तो प्रति kg चावल A के क्रय मूल्य और प्रति kg चावल B के क्रय मूल्य का अनुपात ज्ञात कीजिए।",
+    q_en: "Q147. A trader mixes two varieties of rice, A and B, in the ratio 3:5 by weight. He sells the mixture at such a price that he earns a 20% profit on rice A and incurs a 10% loss on rice B. If the overall profit on the mixture is 8%, find the ratio of the cost price per kg of rice A to that of rice B.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-02)",
+    o_hi: ["(a) 5: 2", "(b) 2: 5", "(c) 3: 4", "(d) 4: 3"],
+    o_en: ["(a) 5:2", "(b) 2:5", "(c) 3:4", "(d) 4:3"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q14
+  {
+    q_hi: "Q148. 28 आमों का क्रय मूल्य 25 आमों के विक्रय मूल्य के बराबर है। लाभ प्रतिशत ज्ञात कीजिए।",
+    q_en: "Q148. The cost price of 28 mangoes is equal to the selling price of 25 mangoes. Find the profit percentage.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 10.9%", "(b) 11.6%", "(c) 10%", "(d) 12%"],
+    o_en: ["(a) 10.9%", "(b) 11.6%", "(c) 10%", "(d) 12%"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q149. एक लग्जरी घड़ी का अंकित मूल्य ₹75,000 है। एक त्योहार के दौरान इस पर 18% की छूट प्रदान की जाती है और उसके बाद ₹5,000 की और छूट मिलती है। घड़ी का अंतिम मूल्य क्या होगा?",
+    q_en: "Q149. The marked price of a luxury watch is ₹75,000. During a festival, a discount of 18% is given, followed by a further discount of ₹5,000. What is the final price of the watch?",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) ₹55,700", "(b) ₹55,600", "(c) ₹57,500", "(d) ₹56,500"],
+    o_en: ["(a) ₹55,700", "(b) ₹55,600", "(c) ₹57,500", "(d) ₹56,500"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB ALP CBT-I, 18/02/2026 (Shift-03) | Original Q46
+  {
+    q_hi: "Q150. एक सेल के दौरान, 44% माल 28% लाभ पर बेचा जाता है, शेष माल का 25% माल 48% लाभ पर और शेष माल को 18% हानि पर बेचा जाता है। यदि कुल लाभ x% है, तो x का मान ज्ञात कीजिए।",
+    q_en: "Q150. During a sale, 44% of the goods are sold at a profit of 28%. Of the remaining goods, 25% are sold at a profit of 48%, and the rest are sold at a loss of 18%. If the overall profit is x%, find x.",
+    tag: "RRB ALP CBT-I, 18/02/2026 (Shift-03)",
+    o_hi: ["(a) 17%", "(b) 11.48%", "(c) 17.55%", "(d) 9%"],
+    o_en: ["(a) 17%", "(b) 11.48%", "(c) 17.55%", "(d) 9%"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+];

@@ -1,0 +1,552 @@
+const data = [
+// SRC: RRB Group D, 03/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q1. A का वह न्यूनतम अंकीय मान ज्ञात कीजिए जिससे 58A4, 4 से विभाज्य हो जाए।",
+    q_en: "Q1. Find the minimum digit value of A such that 58A4 is divisible by 4.",
+    tag: "RRB Group D, 03/08/2026 (Shift-03)",
+    o_hi: ["(a) 2", "(b) 0", "(c) 6", "(d) 4"],
+    o_en: ["(a) 2", "(b) 0", "(c) 6", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-01) | Original Q29
+  {
+    q_hi: "Q2. यदि 7 अंकों की संख्या 91056A4, 3 से पूर्णतः विभाज्य है, तो A का न्यूनतम मान क्या है?",
+    q_en: "Q2. If the 7-digit number 91056A4 is completely divisible by 3, what is the minimum value of A?",
+    tag: "RRB Group D, 04/08/2026 (Shift-01)",
+    o_hi: ["(a) 5", "(b) 2", "(c) 10", "(d) 1"],
+    o_en: ["(a) 5", "(b) 2", "(c) 10", "(d) 1"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 04/08/2026 (Shift-02) | Original Q46
+  {
+    q_hi: "Q3. यदि एक 7-अंकों संख्या 87321A6, 6 से पूर्णतः विभाज्य है, तो A का न्यूनतम मान क्या है?",
+    q_en: "Q3. If the 7-digit number 87321A6 is completely divisible by 6, what is the minimum value of A?",
+    tag: "RRB Group D, 04/08/2026 (Shift-02)",
+    o_hi: ["(a) 3", "(b) 2", "(c) 0", "(d) 1"],
+    o_en: ["(a) 3", "(b) 2", "(c) 0", "(d) 1"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 05/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q4. यदि 7-अंकीय संख्या 65873A8, 22 से पूर्णतः विभाज्य है, तो A का मान क्या है?",
+    q_en: "Q4. If the 7-digit number 65873A8 is completely divisible by 22, what is the value of A?",
+    tag: "RRB Group D, 05/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 1", "(c) 2", "(d) 7"],
+    o_en: ["(a) 3", "(b) 1", "(c) 2", "(d) 7"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q36
+  {
+    q_hi: "Q5. 8-अंकीय संख्या 456A3264 को 12 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q5. What should be the minimum value of A to make the 8-digit number 456A3264 divisible by 12?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) 4", "(b) 3", "(c) 0", "(d) 6"],
+    o_en: ["(a) 4", "(b) 3", "(c) 0", "(d) 6"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 06/08/2026 (Shift-03) | Original Q38
+  {
+    q_hi: "Q6. 7 अंकों की संख्या 84A614B, 3 से विभाज्य है। (A + B) का न्यूनतम मान क्या होगा?",
+    q_en: "Q6. The 7-digit number 84A614B is divisible by 3. What is the minimum value of (A + B)?",
+    tag: "RRB Group D, 06/08/2026 (Shift-03)",
+    o_hi: ["(a) 1", "(b) 5", "(c) 4", "(d) 2"],
+    o_en: ["(a) 1", "(b) 5", "(c) 4", "(d) 2"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q36
+  {
+    q_hi: "Q7. वह सबसे छोटी संख्या ज्ञात कीजिए जिसे 97306 में जोड़ने पर वह 6 से विभाज्य हो जाए।",
+    q_en: "Q7. Find the smallest number that must be added to 97306 so that it becomes divisible by 6.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 2", "(b) 1", "(c) 3", "(d) 0"],
+    o_en: ["(a) 2", "(b) 1", "(c) 3", "(d) 0"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-02) | Original Q42
+  {
+    q_hi: "Q8. 8-अंकीय संख्या 378A6070 में A का वह मान ज्ञात कीजिए जिससे यह 18 से विभाज्य हो जाए।",
+    q_en: "Q8. Find the value of A in the 8-digit number 378A6070 so that it is divisible by 18.",
+    tag: "RRB Group D, 09/08/2026 (Shift-02)",
+    o_hi: ["(a) 5", "(b) 3", "(c) 6", "(d) 8"],
+    o_en: ["(a) 5", "(b) 3", "(c) 6", "(d) 8"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q42
+  {
+    q_hi: "Q9. निम्नलिखित में से कौन-सा कथन, सदैव सत्य होता है?",
+    q_en: "Q9. निम्नलिखित में से कौन-सा कथन, सदैव सत्य होता है?",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) एक ही संख्या के गुणज, सदैव सहअभाज्य होते हैं।", "(b) दो सम संख्याएँ सदैव सहअभाज्य होती हैं।", "(c) दो अभाज्य संख्याएँ कभी भी सहअभाज्य नहीं होतीं हैं।", "(d) दो क्रमागत पूर्णांक सदैव सहअभाज्य होते हैं।"],
+    o_en: ["(a) एक ही संख्या के गुणज, सदैव सहअभाज्य होते हैं।", "(b) दो सम संख्याएँ सदैव सहअभाज्य होती हैं।", "(c) दो अभाज्य संख्याएँ कभी भी सहअभाज्य नहीं होतीं हैं।", "(d) दो क्रमागत पूर्णांक सदैव सहअभाज्य होते हैं।"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 09/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q10. 7-अंकों की संख्या 22A675B, 3 से विभाज्य है। (A + B) का न्यूनतम मान ज्ञात कीजिए।",
+    q_en: "Q10. The 7-digit number 22A675B is divisible by 3. Find the minimum value of (A + B).",
+    tag: "RRB Group D, 09/08/2026 (Shift-03)",
+    o_hi: ["(a) 2", "(b) 7", "(c) 4", "(d) 6"],
+    o_en: ["(a) 2", "(b) 7", "(c) 4", "(d) 6"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-01) | Original Q34
+  {
+    q_hi: "Q11. 8-अंकों की संख्या 753A3228 को 18 से विभाज्य बनाने के लिए A का मान कितना होना चाहिए?",
+    q_en: "Q11. What should be the value of A to make the 8-digit number 753A3228 divisible by 18?",
+    tag: "RRB Group D, 10/08/2026 (Shift-01)",
+    o_hi: ["(a) 9", "(b) 2", "(c) 6", "(d) 5"],
+    o_en: ["(a) 9", "(b) 2", "(c) 6", "(d) 5"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 10/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q12. तीन अभाज्य संख्याओं का योगफल 112 है। यदि एक संख्या, दूसरी संख्या से 36 अधिक है, तो इन संख्याओं का गुणनफल ज्ञात कीजिए।",
+    q_en: "Q12. The sum of three prime numbers is 112. If one number is 36 more than another number, find the product of these numbers.",
+    tag: "RRB Group D, 10/08/2026 (Shift-03)",
+    o_hi: ["(a) 5402", "(b) 4826", "(c) 5678", "(d) 4516"],
+    o_en: ["(a) 5402", "(b) 4826", "(c) 5678", "(d) 4516"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q26
+  {
+    q_hi: "Q13. खालीलपैकी कोणती संख्या 9 ने विभाज्य आहे?",
+    q_en: "Q13. खालीलपैकी कोणती संख्या 9 ने विभाज्य आहे?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 5,328", "(b) 4,317", "(c) 6,018", "(d) 3,624"],
+    o_en: ["(a) 5,328", "(b) 4,317", "(c) 6,018", "(d) 3,624"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q32
+  {
+    q_hi: "Q14. जर 45A216B या 7-अंकी संख्येला 3 ने (नि:शेष) भाग जात असेल, तर (A + B) चे किमान मूल्य किती असेल?",
+    q_en: "Q14. जर 45A216B या 7-अंकी संख्येला 3 ने (नि:शेष) भाग जात असेल, तर (A + B) चे किमान मूल्य किती असेल?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 2", "(b) 0", "(c) 5", "(d) 3"],
+    o_en: ["(a) 2", "(b) 0", "(c) 5", "(d) 3"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-01) | Original Q38
+  {
+    q_hi: "Q15. 717A0280 या संख्येला 3 ने (नि:शेष) भाग जाण्यासाठी A चे सर्वात लहान मूल्य किती असावे?",
+    q_en: "Q15. 717A0280 या संख्येला 3 ने (नि:शेष) भाग जाण्यासाठी A चे सर्वात लहान मूल्य किती असावे?",
+    tag: "RRB Group D, 11/08/2026 (Shift-01)",
+    o_hi: ["(a) 8", "(b) 1", "(c) 5", "(d) 2"],
+    o_en: ["(a) 8", "(b) 1", "(c) 5", "(d) 2"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q16. 7 अंकों की संख्या 39A122B, 3 से विभाज्य है। (A + B) का न्यूनतम मान क्या है?",
+    q_en: "Q16. The 7-digit number 39A122B is divisible by 3. What is the minimum value of (A + B)?",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) 6", "(b) 3", "(c) 2", "(d) 1"],
+    o_en: ["(a) 6", "(b) 3", "(c) 2", "(d) 1"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-02) | Original Q50
+  {
+    q_hi: "Q17. यदि एक 7 अंकों की संख्या 29009A6, 7 से पूर्णतः विभाज्य है, तो A का न्यूनतम मान क्या है?",
+    q_en: "Q17. If the 7-digit number 29009A6 is completely divisible by 7, what is the minimum value of A?",
+    tag: "RRB Group D, 11/08/2026 (Shift-02)",
+    o_hi: ["(a) 9", "(b) 2", "(c) 1", "(d) 5"],
+    o_en: ["(a) 9", "(b) 2", "(c) 1", "(d) 5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 11/08/2026 (Shift-03) | Original Q43
+  {
+    q_hi: "Q18. संख्या 456A2384 को 16 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q18. What should be the minimum value of A to make the number 456A2384 divisible by 16?",
+    tag: "RRB Group D, 11/08/2026 (Shift-03)",
+    o_hi: ["(a) 4", "(b) 5", "(c) 2", "(d) 0"],
+    o_en: ["(a) 4", "(b) 5", "(c) 2", "(d) 0"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 12/08/2026 (Shift-03) | Original Q27
+  {
+    q_hi: "Q19. संख्याओं का निम्नलिखित में से कौन-सा युग्म परस्पर सह-अभाज्य है?",
+    q_en: "Q19. Which of the following pairs of numbers is co-prime?",
+    tag: "RRB Group D, 12/08/2026 (Shift-03)",
+    o_hi: ["(a) 96 और 111", "(b) 101 और 77", "(c) 63 और 91", "(d) 24 और 51"],
+    o_en: ["(a) 96 and 111", "(b) 101 and 77", "(c) 63 and 91", "(d) 24 and 51"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-02) | Original Q44
+  {
+    q_hi: "Q20. 8-अंकों की संख्या 541A4888 को 9 से विभाज्य बनाने के लिए A का मान कितना होना चाहिए?",
+    q_en: "Q20. What should be the value of A to make the 8-digit number 541A4888 divisible by 9?",
+    tag: "RRB Group D, 13/08/2026 (Shift-02)",
+    o_hi: ["(a) 1", "(b) 9", "(c) 7", "(d) 2"],
+    o_en: ["(a) 1", "(b) 9", "(c) 7", "(d) 2"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 13/08/2026 (Shift-03) | Original Q31
+  {
+    q_hi: "Q21. 8-अंकीय संख्या 910A3076 को 6 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q21. What should be the minimum value of A to make the 8-digit number 910A3076 divisible by 6?",
+    tag: "RRB Group D, 13/08/2026 (Shift-03)",
+    o_hi: ["(a) 5", "(b) 1", "(c) 6", "(d) 4"],
+    o_en: ["(a) 5", "(b) 1", "(c) 6", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-01) | Original Q39
+  {
+    q_hi: "Q22. एक कक्षा में विद्यार्थियों की संख्या 50 से अधिक लेकिन 58 से कम एक अभाज्य संख्या है। कक्षा में कुल कितने विद्यार्थी हैं?",
+    q_en: "Q22. The number of students in a class is a prime number greater than 50 but less than 58. How many students are there in the class?",
+    tag: "RRB Group D, 14/08/2026 (Shift-01)",
+    o_hi: ["(a) 57", "(b) 53", "(c) 52", "(d) 55"],
+    o_en: ["(a) 57", "(b) 53", "(c) 52", "(d) 55"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 14/08/2026 (Shift-03) | Original Q50
+  {
+    q_hi: "Q23. 8 अंकीय संख्या 796A6351 के 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q23. What should be the minimum value of A to make the 8-digit number 796A6351 divisible by 3?",
+    tag: "RRB Group D, 14/08/2026 (Shift-03)",
+    o_hi: ["(a) 2", "(b) 5", "(c) 1", "(d) 3"],
+    o_en: ["(a) 2", "(b) 5", "(c) 1", "(d) 3"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-01) | Original Q40
+  {
+    q_hi: "Q24. 7-अंको ंकी संख्या 86A238B, 3 से िवभाज्य है। (A + B) का न्यूनतम मान िकतना होगा?",
+    q_en: "Q24. The 7-digit number 86A238B is divisible by 3. What is the minimum value of (A + B)?",
+    tag: "RRB Group D, 17/08/2026 (Shift-01)",
+    o_hi: ["(a) 3", "(b) 5", "(c) 0", "(d) 4"],
+    o_en: ["(a) 3", "(b) 5", "(c) 0", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 17/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q25. 8 अंकों की संख्या 109A7760 को 16 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q25. What should be the minimum value of A to make the 8-digit number 109A7760 divisible by 16?",
+    tag: "RRB Group D, 17/08/2026 (Shift-03)",
+    o_hi: ["(a) 5", "(b) 2", "(c) 0", "(d) 4"],
+    o_en: ["(a) 5", "(b) 2", "(c) 0", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 18/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q26. संख्याओं के निम्नलिखित युग्मों में से कौन-सा, सह-अभाज्य है?",
+    q_en: "Q26. Which of the following pairs of numbers is co-prime?",
+    tag: "RRB Group D, 18/08/2026 (Shift-01)",
+    o_hi: ["(a) 119, 239", "(b) 30, 201", "(c) 49, 217", "(d) 48, 111"],
+    o_en: ["(a) 119, 239", "(b) 30, 201", "(c) 49, 217", "(d) 48, 111"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-01) | Original Q48
+  {
+    q_hi: "Q27. वह सबसे बड़ी संख्या ज्ञात कीजिए, जिससे 85, 153 और 221 को विभाजित करने पर, प्रत्येक स्थिति में समान शेषफल प्राप्त होता है।",
+    q_en: "Q27. Find the greatest number that divides 85, 153 and 221 leaving the same remainder in each case.",
+    tag: "RRB Group D, 19/08/2026 (Shift-01)",
+    o_hi: ["(a) 38", "(b) 60", "(c) 34", "(d) 68"],
+    o_en: ["(a) 38", "(b) 60", "(c) 34", "(d) 68"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-02) | Original Q45
+  {
+    q_hi: "Q28. संख्या 1408, निम्नलिखित में से किस संख्या से विभाज्य है?",
+    q_en: "Q28. 1408 is divisible by which of the following numbers?",
+    tag: "RRB Group D, 19/08/2026 (Shift-02)",
+    o_hi: ["(a) 24", "(b) 13", "(c) 22", "(d) 21"],
+    o_en: ["(a) 24", "(b) 13", "(c) 22", "(d) 21"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q37
+  {
+    q_hi: "Q29. (3K2-2) का वह न्यूनतम मान ज्ञात कीजिए जिसके लिए छह अंकों की संख्या 7K8508, 6 से विभाज्य है।",
+    q_en: "Q29. Find the minimum value of (3K² − 2) for which the six-digit number 7K8508 is divisible by 6.",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 8", "(b) 10", "(c) 17", "(d) 14"],
+    o_en: ["(a) 8", "(b) 10", "(c) 17", "(d) 14"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 19/08/2026 (Shift-03) | Original Q45
+  {
+    q_hi: "Q30. 7-अंकों की संख्या 36A836B, 3 से विभाज्य है। (A + B) का न्यूनतम मान ज्ञात कीजिए।",
+    q_en: "Q30. The 7-digit number 36A836B is divisible by 3. Find the minimum value of (A + B).",
+    tag: "RRB Group D, 19/08/2026 (Shift-03)",
+    o_hi: ["(a) 1", "(b) 6", "(c) 4", "(d) 5"],
+    o_en: ["(a) 1", "(b) 6", "(c) 4", "(d) 5"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-01) | Original Q47
+  {
+    q_hi: "Q31. A का वह न्यूनतम मान ज्ञात कीजिए जो संख्या 604A4744 को 3 से विभाज्य बनाएगा।",
+    q_en: "Q31. Find the minimum value of A that will make the number 604A4744 divisible by 3.",
+    tag: "RRB Group D, 20/08/2026 (Shift-01)",
+    o_hi: ["(a) 7", "(b) 8", "(c) 1", "(d) 4"],
+    o_en: ["(a) 7", "(b) 8", "(c) 1", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q29
+  {
+    q_hi: "Q32. निम्नलिखित में से कौन-सा संख्या युग्म, सह-अभाज्य नहीं है?",
+    q_en: "Q32. Which of the following pairs of numbers is not co-prime?",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) (143, 286)", "(b) (101, 107)", "(c) (137, 221)", "(d) (211, 337)"],
+    o_en: ["(a) (143, 286)", "(b) (101, 107)", "(c) (137, 221)", "(d) (211, 337)"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-02) | Original Q35
+  {
+    q_hi: "Q33. A का वह क्या मान होना चाहिए जिससे कि संख्या 391A6922, 11 से विभाज्य हो जाए?",
+    q_en: "Q33. What should be the value of A so that the number 391A6922 is divisible by 11?",
+    tag: "RRB Group D, 20/08/2026 (Shift-02)",
+    o_hi: ["(a) 6", "(b) 3", "(c) 7", "(d) 5"],
+    o_en: ["(a) 6", "(b) 3", "(c) 7", "(d) 5"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q34
+  {
+    q_hi: "Q34. संख्या 469A1423 को 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q34. What should be the minimum value of A to make the number 469A1423 divisible by 3?",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 6", "(b) 1", "(c) 5", "(d) 4"],
+    o_en: ["(a) 6", "(b) 1", "(c) 5", "(d) 4"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 20/08/2026 (Shift-03) | Original Q44
+  {
+    q_hi: "Q35. किसी आण्विक यौगिक में परमाणु A और B हैं, जहाँ उनके प्रति अणु गुणन क्रमशः आरंभ से 5वीं और 7वीं अभाज्य संख्याएं हैं। इस यौगिक में 10 समरूप अणु हैं। एक अभिक्रिया के बाद, प्रति अणु B परमाणुओं की संख्या दोगुनी हो जाती है, और C परमाणु (जो आरंभ से तीसरी अभाज्य संख्या के बराबर है) जुड़ जाते हैं। अभिक्रिया के बाद सभी 10 अणुओं में A, B और C परमाणुओं की कुल संख्या कितनी होगी?",
+    q_en: "Q35. किसी आण्विक यौगिक में परमाणु A और B हैं, जहाँ उनके प्रति अणु गुणन क्रमशः आरंभ से 5वीं और 7वीं अभाज्य संख्याएं हैं। इस यौगिक में 10 समरूप अणु हैं। एक अभिक्रिया के बाद, प्रति अणु B परमाणुओं की संख्या दोगुनी हो जाती है, और C परमाणु (जो आरंभ से तीसरी अभाज्य संख्या के बराबर है) जुड़ जाते हैं। अभिक्रिया के बाद सभी 10 अणुओं में A, B और C परमाणुओं की कुल संख्या कितनी होगी?",
+    tag: "RRB Group D, 20/08/2026 (Shift-03)",
+    o_hi: ["(a) 330", "(b) 500", "(c) 550", "(d) 690"],
+    o_en: ["(a) 330", "(b) 500", "(c) 550", "(d) 690"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-01) | Original Q41
+  {
+    q_hi: "Q36. यदि दशमलव संख्या 0.15 में 201 आवर्ती है और इसे a/b के रूप में व्यक्त किया जा सकता है, जहाँ a और b सह-अभाज्य संख्याएँ हैं, तो √(b − a + 281) का मान ज्ञात कीजिए।",
+    q_en: "Q36. If the decimal number 0.15 with 201 recurring is expressed as a/b, where a and b are co-prime numbers, find √(b − a + 281).",
+    tag: "RRB Group D, 21/08/2026 (Shift-01)",
+    o_hi: ["(a) 98", "(b) 145", "(c) 105", "(d) 120"],
+    o_en: ["(a) 98", "(b) 145", "(c) 105", "(d) 120"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q26
+  {
+    q_hi: "Q37. संख्या 506A2404 को 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q37. What should be the minimum value of A to make the number 506A2404 divisible by 3?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 4", "(b) 6", "(c) 0", "(d) 3"],
+    o_en: ["(a) 4", "(b) 6", "(c) 0", "(d) 3"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-02) | Original Q28
+  {
+    q_hi: "Q38. 0 और 32 के बीच की सभी अभाज्य संख्याओं का योगफल कितना है?",
+    q_en: "Q38. What is the sum of all prime numbers between 0 and 32?",
+    tag: "RRB Group D, 21/08/2026 (Shift-02)",
+    o_hi: ["(a) 132", "(b) 160", "(c) 131", "(d) 161"],
+    o_en: ["(a) 132", "(b) 160", "(c) 131", "(d) 161"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 21/08/2026 (Shift-03) | Original Q40
+  {
+    q_hi: "Q39. संख्या 659A9422 को 3 से विभाज्य बनाने के लिए A का न्यूनतम मान क्या होना चाहिए?",
+    q_en: "Q39. What should be the minimum value of A to make the number 659A9422 divisible by 3?",
+    tag: "RRB Group D, 21/08/2026 (Shift-03)",
+    o_hi: ["(a) 1", "(b) 7", "(c) 2", "(d) 4"],
+    o_en: ["(a) 1", "(b) 7", "(c) 2", "(d) 4"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q27
+  {
+    q_hi: "Q40. 7-अंकीय संख्या 69A840B, 12 से विभाज्य है। (A + B) का अधिकतम मान ज्ञात कीजिए।",
+    q_en: "Q40. The 7-digit number 69A840B is divisible by 12. Find the maximum value of (A + B).",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 11", "(b) 10", "(c) 16", "(d) 15"],
+    o_en: ["(a) 11", "(b) 10", "(c) 16", "(d) 15"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Group D, 25/08/2026 (Shift-02) | Original Q45
+  {
+    q_hi: "Q41. संख्या 13167 निम्नलिखित में से किस संख्या से विभाज्य है?",
+    q_en: "Q41. 13167 is divisible by which of the following numbers?",
+    tag: "RRB Group D, 25/08/2026 (Shift-02)",
+    o_hi: ["(a) 69", "(b) 67", "(c) 63", "(d) 61"],
+    o_en: ["(a) 69", "(b) 67", "(c) 63", "(d) 61"],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-01) | Original Q16
+  {
+    q_hi: "Q42. किसी संख्या के एक-तिहाई में 87 जोड़ने पर 107 प्राप्त होता है। मूल संख्या के अंकों का योगफल ज्ञात कीजिए।",
+    q_en: "Q42. When 87 is added to one-third of a number, the result is 107. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-01)",
+    o_hi: ["(a) 6", "(b) 3", "(c) 5", "(d) 8"],
+    o_en: ["(a) 6", "(b) 3", "(c) 5", "(d) 8"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q13
+  {
+    q_hi: "Q43. किसी संख्या के एक-तिहाई में 37 जोड़ने पर 51 प्राप्त होता है। मूल संख्या के अंकों का योग ज्ञात कीजिए।",
+    q_en: "Q43. When 37 is added to one-third of a number, the result is 51. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) 6", "(b) 9", "(c) 3", "(d) 8"],
+    o_en: ["(a) 6", "(b) 9", "(c) 3", "(d) 8"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-02) | Original Q24
+  {
+    q_hi: "Q44. निम्नलिखित में से किस संख्या के ठीक चार अलग-अलग धनात्मक भाजक नहीं होंगे?",
+    q_en: "Q44. Which of the following numbers will not have exactly four distinct positive divisors?",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-02)",
+    o_hi: ["(a) अभाज्य p के लिए p³", "(b) अभाज्य p के लिए p2", "(c) अलग-अलग अभाज्य संख्याओं p और q के लिए p.q", "(d) अभाज्य q के लिए q³"],
+    o_en: ["(a) p³ for prime p", "(b) p² for prime p", "(c) p·q for distinct primes p and q", "(d) q³ for prime q"],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q2
+  {
+    q_hi: "Q45. किसी संख्या के एक-तिहाई में 55 जोड़ने पर 77 प्राप्त होता है। मूल संख्या के अंकों का योगफल ज्ञात कीजिए।",
+    q_en: "Q45. When 55 is added to one-third of a number, the result is 77. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 12", "(b) 10", "(c) 13", "(d) 15"],
+    o_en: ["(a) 12", "(b) 10", "(c) 13", "(d) 15"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 06/03/2026 (Shift-03) | Original Q23
+  {
+    q_hi: "Q46. 11 और 19 के बीच (दोनों सहित) सहअभाज्य संख्याओं के युग्मों की संख्या ज्ञात कीजिए।",
+    q_en: "Q46. Find the number of pairs of co-prime numbers between 11 and 19, both inclusive.",
+    tag: "RRB Tech G-III, 06/03/2026 (Shift-03)",
+    o_hi: ["(a) 26", "(b) 30", "(c) 29", "(d) 28"],
+    o_en: ["(a) 26", "(b) 30", "(c) 29", "(d) 28"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-01) | Original Q19
+  {
+    q_hi: "Q47. यदि संख्या 62A4, 4 से विभाज्य है, तो A का न्यूनतम संभावित मान क्या हो सकता है?",
+    q_en: "Q47. If the number 62A4 is divisible by 4, what can be the minimum possible value of A?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-01)",
+    o_hi: ["(a) 6", "(b) 4", "(c) 2", "(d) 0"],
+    o_en: ["(a) 6", "(b) 4", "(c) 2", "(d) 0"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q8
+  {
+    q_hi: "Q48. 84 के अभाज्य गुणनखंडों का योगफल कितना होगा?",
+    q_en: "Q48. What is the sum of the prime factors of 84?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 12", "(b) 18", "(c) 15", "(d) 14"],
+    o_en: ["(a) 12", "(b) 18", "(c) 15", "(d) 14"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-02) | Original Q10
+  {
+    q_hi: "Q49. किसी संख्या के एक-तिहाई में 55 जोड़ने पर 83 प्राप्त होता है। मूल संख्या के अंकों का योग ज्ञात कीजिए।",
+    q_en: "Q49. When 55 is added to one-third of a number, the result is 83. Find the sum of the digits of the original number.",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-02)",
+    o_hi: ["(a) 12", "(b) 14", "(c) 13", "(d) 9"],
+    o_en: ["(a) 12", "(b) 14", "(c) 13", "(d) 9"],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+// SRC: RRB Tech G-III, 09/03/2026 (Shift-03) | Original Q4
+  {
+    q_hi: "Q50. निम्नलिखित में से कौन-सी संख्या, 11 से विभाज्य है?",
+    q_en: "Q50. Which of the following numbers is divisible by 11?",
+    tag: "RRB Tech G-III, 09/03/2026 (Shift-03)",
+    o_hi: ["(a) 502589", "(b) 512579", "(c) 513589", "(d) 502579"],
+    o_en: ["(a) 502589", "(b) 512579", "(c) 513589", "(d) 502579"],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+];
