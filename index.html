@@ -5447,15 +5447,7 @@ function formatContent(txt){
  txt=txt.replace(/\\implies/g,"⇒");
  txt=txt.replace(/\\therefore/g,"∴");
  txt=txt.replace(/\\because/g,"∵");
- // Distinguish genuine $...$ maths from dollar symbols used in reasoning
- // series. Maths normally contains a variable, operator or LaTeX command;
- // a spaced numeric pair such as "4 $ 3 $ 9" is a symbol sequence.
- txt=txt.replace(/\$([^$\r\n]+)\$/g,function(full,inner){
-   const value=inner.trim();
-   const hasStrongMathSyntax=/\\[A-Za-z]+|[=+\-*\/^_{}()[\]<>≤≥√πθ]/.test(value);
-   const compactMathToken=inner===value && /^[A-Za-z0-9.+\-]+$/.test(value);
-   return (hasStrongMathSyntax || compactMathToken) ? inner : "&#36;"+inner+"&#36;";
- });
+ // Always preserve dollar signs exactly as visible question symbols.
  txt=txt.replace(/\$/g,"&#36;");
  txt=txt.replace(/\\\{/g,"{").replace(/\\\}/g,"}");
  txt=txt.replace(/([A-Za-z])_([0-9]+)/g,"$1<sub>$2</sub>");
