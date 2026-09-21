@@ -1,0 +1,862 @@
+const data = [
+  {
+    "q_hi": "Q1. निम्नलिखित में से कौन-सी एक अधातु है?",
+    "q_en": "Q1. Which of the following is a non-metal?",
+    "tag": "RRB Group D 9/1/26 Shift-II",
+    "o_hi": [
+      "(a) तांबा",
+      "(b) क्लोरीन",
+      "(c) जस्ता",
+      "(d) पारा"
+    ],
+    "o_en": [
+      "(a) Copper",
+      "(b) Chlorine",
+      "(c) Zinc",
+      "(d) Mercury"
+    ],
+    "a": 1,
+    "e_hi": "क्लोरीन एक अधातु है, जबकि तांबा, जस्ता और पारा धातुएँ हैं।",
+    "e_en": "Chlorine is a non-metal, whereas copper, zinc and mercury are metals."
+  },
+  {
+    "q_hi": "Q2. निम्नलिखित में से कौन-सी अधातु रासायनिक रूप से अधातु होने के बावजूद धात्विक चमक प्रदर्शित करती है?",
+    "q_en": "Q2. Which of the following non-metals exhibits a metallic lustre despite being chemically non-metallic?",
+    "tag": "RRB Group D 12/12/25 Shift-I",
+    "o_hi": [
+      "(a) फॉस्फोरस",
+      "(b) नाइट्रोजन",
+      "(c) आयोडीन",
+      "(d) सल्फर"
+    ],
+    "o_en": [
+      "(a) Phosphorus",
+      "(b) Nitrogen",
+      "(c) Iodine",
+      "(d) Sulphur"
+    ],
+    "a": 2,
+    "e_hi": "आयोडीन अधातु है, लेकिन इसके क्रिस्टल चमकीले होते हैं और धात्विक चमक दिखाते हैं।",
+    "e_en": "Iodine is a non-metal, but its crystals are lustrous and show a metallic shine."
+  },
+  {
+    "q_hi": "Q3. कौन-से दो भौतिक गुण क्रमशः धातुओं को पतले तारों में खींचने और पतली चादरों में पीटने की अनुमति देते हैं?",
+    "q_en": "Q3. Which two physical properties allow metals to be drawn into thin wires and beaten into thin sheets, respectively?",
+    "tag": "RRB Group D 21/12/25 Shift-III",
+    "o_hi": [
+      "(a) तन्यता और आघातवर्धनीयता",
+      "(b) उच्च गलनांक और ठोस अवस्था",
+      "(c) ध्वानिकता और सुचालकता",
+      "(d) चमक और कठोरता"
+    ],
+    "o_en": [
+      "(a) Ductility and malleability",
+      "(b) High melting point and solid state",
+      "(c) Sonorousness and conductivity",
+      "(d) Lustre and hardness"
+    ],
+    "a": 0,
+    "e_hi": "तार बनाने की क्षमता को तन्यता (ductility) और चादर बनाने की क्षमता को आघातवर्धनीयता (malleability) कहते हैं।",
+    "e_en": "The ability to be drawn into wires is ductility, while the ability to be beaten into sheets is malleability."
+  },
+  {
+    "q_hi": "Q4. धातुएँ सामान्यतः ऊष्मा की अच्छी सुचालक होती हैं। निम्नलिखित में से कौन-सा इसका एक अपवाद है?",
+    "q_en": "Q4. Metals are generally good conductors of heat. Which of the following is an exception to this?",
+    "tag": "RRB Group D 6/2/26 Shift-II",
+    "o_hi": [
+      "(a) लोहा",
+      "(b) तांबा",
+      "(c) एल्युमिनियम",
+      "(d) पारा"
+    ],
+    "o_en": [
+      "(a) Iron",
+      "(b) Copper",
+      "(c) Aluminium",
+      "(d) Mercury"
+    ],
+    "a": 3,
+    "e_hi": "पारा धातु होते हुए भी ऊष्मा का अपेक्षाकृत खराब चालक है; तांबा और एल्युमिनियम अच्छे ऊष्मा चालक हैं।",
+    "e_en": "Mercury is a metal but is a comparatively poor conductor of heat; copper and aluminium are good heat conductors."
+  },
+  {
+    "q_hi": "Q5. निम्नलिखित में से कौन-सा अधातुओं का एक विशिष्ट भौतिक गुण है?",
+    "q_en": "Q5. Which of the following is a typical physical property of non-metals?",
+    "tag": "RRB Group D 15/12/25 Shift-II",
+    "o_hi": [
+      "(a) वे धातुओं की तरह तन्य और चमकदार होती हैं।",
+      "(b) वे आघातवर्धनीय और ध्वानिक होती हैं।",
+      "(c) वे ऊष्मा और विद्युत की अच्छी सुचालक होती हैं।",
+      "(d) वे भंगुर और विद्युत की कुचालक होती हैं।"
+    ],
+    "o_en": [
+      "(a) They are ductile and shiny like metals.",
+      "(b) They are malleable and sonorous.",
+      "(c) They conduct heat and electricity well.",
+      "(d) They are brittle and poor conductors of electricity."
+    ],
+    "a": 3,
+    "e_hi": "ठोस अधातुएँ सामान्यतः भंगुर होती हैं और अधिकतर विद्युत की खराब चालक होती हैं। ग्रेफाइट इसका उल्लेखनीय अपवाद है।",
+    "e_en": "Solid non-metals are generally brittle and most are poor conductors of electricity. Graphite is a notable exception."
+  },
+  {
+    "q_hi": "Q6. अधातुओं के भौतिक गुणों के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+    "q_en": "Q6. Which of the following statements about the physical properties of non-metals is correct?",
+    "tag": "RRB Group D 15/12/25 Shift-III",
+    "o_hi": [
+      "(a) अधातुएँ आघातवर्धनीय और तन्य होती हैं।",
+      "(b) अधातुओं का घनत्व और गलनांक हमेशा उच्च होता है।",
+      "(c) अधातुएँ विद्युत की अच्छी सुचालक होती हैं।",
+      "(d) अधातुएँ आमतौर पर ठोस अवस्था में भंगुर होती हैं।"
+    ],
+    "o_en": [
+      "(a) Non-metals are malleable and ductile.",
+      "(b) Non-metals always have high density and high melting points.",
+      "(c) Non-metals are good conductors of electricity.",
+      "(d) Non-metals are generally brittle in solid state."
+    ],
+    "a": 3,
+    "e_hi": "ठोस अवस्था में अधातु सामान्यतः भंगुर होते हैं; वे न तो तन्य होते हैं और न ही आघातवर्धनीय।",
+    "e_en": "In the solid state, non-metals are generally brittle; they are neither ductile nor malleable."
+  },
+  {
+    "q_hi": "Q7. निम्नलिखित में से कौन-सी अधातु कमरे के तापमान पर द्रव अवस्था में पाई जाती है?",
+    "q_en": "Q7. Which of the following non-metals is found in the liquid state at room temperature?",
+    "tag": "RRB Group D 8/12/25 Shift-II",
+    "o_hi": [
+      "(a) नाइट्रोजन",
+      "(b) फॉस्फोरस",
+      "(c) आयोडीन",
+      "(d) ब्रोमीन"
+    ],
+    "o_en": [
+      "(a) Nitrogen",
+      "(b) Phosphorus",
+      "(c) Iodine",
+      "(d) Bromine"
+    ],
+    "a": 3,
+    "e_hi": "ब्रोमीन सामान्य तापमान पर द्रव अवस्था में पाई जाने वाली अधातु है।",
+    "e_en": "Bromine is a non-metal that exists as a liquid at room temperature."
+  },
+  {
+    "q_hi": "Q8. निम्नलिखित में से किस धातु की विशेषता कम घनत्व और कोमलता है?",
+    "q_en": "Q8. Which of the following metals is characterised by low density and softness?",
+    "tag": "RRB Group D 17/12/25 Shift-II",
+    "o_hi": [
+      "(a) तांबा",
+      "(b) पोटैशियम",
+      "(c) एल्युमिनियम",
+      "(d) मैग्नीशियम"
+    ],
+    "o_en": [
+      "(a) Copper",
+      "(b) Potassium",
+      "(c) Aluminium",
+      "(d) Magnesium"
+    ],
+    "a": 1,
+    "e_hi": "पोटैशियम एक क्षार धातु है। यह बहुत कोमल और कम घनत्व वाली होती है तथा चाकू से काटी जा सकती है।",
+    "e_en": "Potassium is an alkali metal. It is very soft, has low density, and can be cut with a knife."
+  },
+  {
+    "q_hi": "Q9. धातुओं के वायु के साथ अभिक्रिया करने पर सामान्यतः कौन-सा उत्पाद बनता है?",
+    "q_en": "Q9. What is the product generally formed when metals react with air?",
+    "tag": "RRB Technicians Grade III 24-12-2024 (Shift-3)",
+    "o_hi": [
+      "(a) धातु ऑक्साइड",
+      "(b) धातु नाइट्रेट",
+      "(c) धातु हाइड्राइड",
+      "(d) धातु क्लोराइड"
+    ],
+    "o_en": [
+      "(a) Metal oxide",
+      "(b) Metal nitrate",
+      "(c) Metal hydride",
+      "(d) Metal chloride"
+    ],
+    "a": 0,
+    "e_hi": "धातु वायु में उपस्थित ऑक्सीजन से अभिक्रिया करके सामान्यतः धातु ऑक्साइड बनाती है।",
+    "e_en": "Metals generally react with oxygen present in air to form metal oxides."
+  },
+  {
+    "q_hi": "Q10. निम्नलिखित में से कौन-सी धातु खुले में रखने पर आग पकड़ सकती है?",
+    "q_en": "Q10. Which of the following metals catches fire when kept in open air?",
+    "tag": "RRB Technicians Grade III 26-12-2024 (Shift-2)",
+    "o_hi": [
+      "(a) मैग्नीशियम",
+      "(b) जिंक",
+      "(c) कॉपर",
+      "(d) सोडियम"
+    ],
+    "o_en": [
+      "(a) Magnesium",
+      "(b) Zinc",
+      "(c) Copper",
+      "(d) Sodium"
+    ],
+    "a": 3,
+    "e_hi": "सोडियम अत्यधिक अभिक्रियाशील है और वायु/नमी के संपर्क में तेजी से अभिक्रिया कर सकता है, इसलिए इसे केरोसिन में रखा जाता है।",
+    "e_en": "Sodium is highly reactive and can react rapidly with air/moisture, so it is stored under kerosene."
+  },
+  {
+    "q_hi": "Q11. हवा के संपर्क में आने पर निम्नलिखित में से कौन-सी धातु अपनी सतह पर एक सुरक्षात्मक ऑक्साइड परत बनाती है, जो आगे क्षरण से बचाती है?",
+    "q_en": "Q11. Which of the following metals forms a protective oxide layer on its surface when exposed to air, preventing further corrosion?",
+    "tag": "RRB Group D 12/12/25 Shift-III",
+    "o_hi": [
+      "(a) कैल्शियम",
+      "(b) सोडियम",
+      "(c) एल्युमिनियम",
+      "(d) मैग्नीशियम"
+    ],
+    "o_en": [
+      "(a) Calcium",
+      "(b) Sodium",
+      "(c) Aluminium",
+      "(d) Magnesium"
+    ],
+    "a": 2,
+    "e_hi": "एल्युमिनियम की सतह पर Al₂O₃ की पतली, सघन और चिपकी हुई परत बनती है जो अंदर की धातु को आगे ऑक्सीकरण से बचाती है।",
+    "e_en": "Aluminium forms a thin, compact and adherent Al₂O₃ layer that protects the underlying metal from further oxidation."
+  },
+  {
+    "q_hi": "Q12. निम्नलिखित में से कौन उच्च तापमान पर ऑक्सीजन के साथ आसानी से अभिक्रिया नहीं करता?",
+    "q_en": "Q12. Which of the following does not readily react with oxygen at high temperatures?",
+    "tag": "RRB Group-D 13-09-2022 Level 1 (Shift-3)",
+    "o_hi": [
+      "(a) एल्युमिनियम",
+      "(b) तांबा",
+      "(c) लोहा",
+      "(d) नाइक्रोम"
+    ],
+    "o_en": [
+      "(a) Aluminium",
+      "(b) Copper",
+      "(c) Iron",
+      "(d) Nichrome"
+    ],
+    "a": 3,
+    "e_hi": "नाइक्रोम उच्च तापमान पर ऑक्सीकरण का अच्छा प्रतिरोध करता है; इसी कारण इसका उपयोग हीटिंग एलिमेंट में किया जाता है।",
+    "e_en": "Nichrome resists oxidation well at high temperatures, which is why it is used for heating elements."
+  },
+  {
+    "q_hi": "Q13. नीचे दिए गए कथनों पर विचार कीजिए और सही उत्तर चुनिए।<br>कथन I: गर्म करने पर कॉपर पाउडर की सतह पर कॉपर(II) ऑक्साइड की काली परत बनती है।<br>कथन II: इस गर्म CuO के ऊपर से हाइड्रोजन गैस प्रवाहित करने पर काली परत भूरी हो जाती है।",
+    "q_en": "Q13. Consider the statements given below and select the correct answer.<br>Statement I: When heated, a black layer of copper(II) oxide forms on the surface of copper powder.<br>Statement II: If hydrogen gas is passed over this heated CuO, the black layer turns brown.",
+    "tag": "RRB Group D 22 Aug 2022 Shift 2",
+    "o_hi": [
+      "(a) कथन I असत्य है और कथन II सत्य है।",
+      "(b) दोनों कथन सत्य हैं।",
+      "(c) कथन I सत्य है और कथन II असत्य है।",
+      "(d) दोनों कथन असत्य हैं।"
+    ],
+    "o_en": [
+      "(a) Statement I is false and Statement II is true.",
+      "(b) Both statements are true.",
+      "(c) Statement I is true and Statement II is false.",
+      "(d) Both statements are false."
+    ],
+    "a": 1,
+    "e_hi": "गर्म करने पर 2Cu + O₂ → 2CuO से काला CuO बनता है। हाइड्रोजन CuO को अपचयित करके भूरा Cu बनाता है: CuO + H₂ → Cu + H₂O। इसलिए दोनों कथन सत्य हैं।",
+    "e_en": "On heating, 2Cu + O₂ → 2CuO forms black CuO. Hydrogen reduces CuO back to brown copper: CuO + H₂ → Cu + H₂O. Hence both statements are true."
+  },
+  {
+    "q_hi": "Q14. निम्नलिखित में से कौन-सा ऑक्साइड उभयधर्मी प्रकृति का होता है?",
+    "q_en": "Q14. Which of the following oxides is amphoteric in nature?",
+    "tag": "RRB Technicians Grade III 30-12-2024 (Shift-1)",
+    "o_hi": [
+      "(a) एल्युमिनियम ऑक्साइड",
+      "(b) सोडियम परॉक्साइड",
+      "(c) कैल्शियम ऑक्साइड",
+      "(d) कॉपर ऑक्साइड"
+    ],
+    "o_en": [
+      "(a) Aluminium oxide",
+      "(b) Sodium peroxide",
+      "(c) Calcium oxide",
+      "(d) Copper oxide"
+    ],
+    "a": 0,
+    "e_hi": "Al₂O₃ अम्ल और क्षार दोनों के साथ अभिक्रिया कर सकता है, इसलिए यह उभयधर्मी ऑक्साइड है।",
+    "e_en": "Al₂O₃ reacts with both acids and bases, so it is an amphoteric oxide."
+  },
+  {
+    "q_hi": "Q15. एल्युमिनियम धातु का एनोडाइजिंग करने का उद्देश्य क्या है?",
+    "q_en": "Q15. What is the purpose of anodising aluminium metal?",
+    "tag": "RRB Group D 19/12/25 Shift-I",
+    "o_hi": [
+      "(a) एक सुरक्षात्मक ऑक्साइड परत बनाना",
+      "(b) इसके गलनांक को कम करना",
+      "(c) इसकी विद्युत चालकता बढ़ाना",
+      "(d) इसे हवा के साथ अधिक अभिक्रियाशील बनाना"
+    ],
+    "o_en": [
+      "(a) To form a protective oxide layer",
+      "(b) To reduce its melting point",
+      "(c) To increase its electrical conductivity",
+      "(d) To make it more reactive with air"
+    ],
+    "a": 0,
+    "e_hi": "एनोडाइजिंग से एल्युमिनियम की प्राकृतिक ऑक्साइड परत को मोटा किया जाता है, जिससे संक्षारण प्रतिरोध बढ़ता है।",
+    "e_en": "Anodising thickens the natural oxide layer on aluminium, increasing its resistance to corrosion."
+  },
+  {
+    "q_hi": "Q16. कौन-सी धातु ठंडे पानी के साथ तीव्र अभिक्रिया करती है?",
+    "q_en": "Q16. Which metal reacts violently with cold water?",
+    "tag": "RRB Group D 19/12/25 Shift-III",
+    "o_hi": [
+      "(a) एल्युमिनियम",
+      "(b) सोडियम",
+      "(c) मैग्नीशियम",
+      "(d) तांबा"
+    ],
+    "o_en": [
+      "(a) Aluminium",
+      "(b) Sodium",
+      "(c) Magnesium",
+      "(d) Copper"
+    ],
+    "a": 1,
+    "e_hi": "सोडियम ठंडे पानी के साथ बहुत तीव्रता से अभिक्रिया करके NaOH और H₂ बनाता है; उत्पन्न ऊष्मा हाइड्रोजन को जला सकती है।",
+    "e_en": "Sodium reacts very vigorously with cold water to form NaOH and H₂; the heat evolved can ignite the hydrogen."
+  },
+  {
+    "q_hi": "Q17. जब पोटैशियम पानी के साथ अभिक्रिया करता है, तो हम क्या देखते हैं?",
+    "q_en": "Q17. When potassium reacts with water, we observe:",
+    "tag": "Technician Grade III 6/3/26 Shift-I",
+    "o_hi": [
+      "(a) कोई दृश्य परिवर्तन नहीं",
+      "(b) हरे रंग के यौगिक का निर्माण",
+      "(c) हल्के बुलबुले और धीमी अभिक्रिया",
+      "(d) तेज ज्वाला और तीव्र अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) No visible change",
+      "(b) Formation of a greenish compound",
+      "(c) Gentle bubbling and slow reaction",
+      "(d) Bright flame and rapid reaction"
+    ],
+    "a": 3,
+    "e_hi": "पोटैशियम ठंडे पानी के साथ अत्यंत तीव्र अभिक्रिया करता है। अभिक्रिया इतनी ऊष्माक्षेपी होती है कि उत्पन्न हाइड्रोजन जल सकती है और ज्वाला दिखाई देती है।",
+    "e_en": "Potassium reacts extremely rapidly with cold water. The reaction is so exothermic that the evolved hydrogen may ignite, producing a flame."
+  },
+  {
+    "q_hi": "Q18. निम्नलिखित में से कौन-सी धातु केवल भाप के साथ अभिक्रिया करती है, ठंडे या गर्म पानी के साथ नहीं?",
+    "q_en": "Q18. Which of the following metals reacts only with steam and not with cold or hot water?",
+    "tag": "RRB Technicians Grade III 20-12-2024 (Shift-3)",
+    "o_hi": [
+      "(a) सोडियम",
+      "(b) एल्युमिनियम",
+      "(c) पोटैशियम",
+      "(d) मैग्नीशियम"
+    ],
+    "o_en": [
+      "(a) Sodium",
+      "(b) Aluminium",
+      "(c) Potassium",
+      "(d) Magnesium"
+    ],
+    "a": 1,
+    "e_hi": "एल्युमिनियम सामान्यतः ठंडे/गर्म पानी से अभिक्रिया नहीं करता क्योंकि उस पर सुरक्षात्मक ऑक्साइड परत होती है; भाप के साथ उपयुक्त परिस्थितियों में ऑक्साइड और हाइड्रोजन बनते हैं।",
+    "e_en": "Aluminium generally does not react with cold or hot water because of its protective oxide layer; with steam under suitable conditions it forms oxide and hydrogen."
+  },
+  {
+    "q_hi": "Q19. हाइड्रोक्लोरिक अम्ल के साथ एल्युमिनियम की अभिक्रिया को कौन-सा समीकरण सही ढंग से दर्शाता है?",
+    "q_en": "Q19. Which equation correctly represents the reaction of aluminium with hydrochloric acid?",
+    "tag": "RRB Group D 2/12/25 Shift-I",
+    "o_hi": [
+      "(a) Al + HCl → AlCl + H₂",
+      "(b) 2Al + 6HCl → 2AlCl₃ + 3H₂",
+      "(c) Al + HCl → AlCl₃ + H₂",
+      "(d) 2Al + 3HCl → 2AlCl₃ + 3H₂"
+    ],
+    "o_en": [
+      "(a) Al + HCl → AlCl + H₂",
+      "(b) 2Al + 6HCl → 2AlCl₃ + 3H₂",
+      "(c) Al + HCl → AlCl₃ + H₂",
+      "(d) 2Al + 3HCl → 2AlCl₃ + 3H₂"
+    ],
+    "a": 1,
+    "e_hi": "संतुलित समीकरण है: 2Al + 6HCl → 2AlCl₃ + 3H₂।",
+    "e_en": "The balanced equation is: 2Al + 6HCl → 2AlCl₃ + 3H₂."
+  },
+  {
+    "q_hi": "Q20. जब मैग्नीशियम तनु हाइड्रोक्लोरिक अम्ल के साथ अभिक्रिया करता है, तो उत्पाद क्या होते हैं?",
+    "q_en": "Q20. When magnesium reacts with dilute hydrochloric acid, the products are:",
+    "tag": "RRB Group D 19/12/25 Shift-II",
+    "o_hi": [
+      "(a) मैग्नीशियम क्लोराइड और ऑक्सीजन",
+      "(b) मैग्नीशियम हाइड्रॉक्साइड और हाइड्रोजन",
+      "(c) मैग्नीशियम ऑक्साइड और पानी",
+      "(d) मैग्नीशियम क्लोराइड और हाइड्रोजन"
+    ],
+    "o_en": [
+      "(a) Magnesium chloride and oxygen",
+      "(b) Magnesium hydroxide and hydrogen",
+      "(c) Magnesium oxide and water",
+      "(d) Magnesium chloride and hydrogen"
+    ],
+    "a": 3,
+    "e_hi": "Mg + 2HCl → MgCl₂ + H₂। इसलिए मैग्नीशियम क्लोराइड और हाइड्रोजन बनते हैं।",
+    "e_en": "Mg + 2HCl → MgCl₂ + H₂. Thus magnesium chloride and hydrogen are formed."
+  },
+  {
+    "q_hi": "Q21. जिंक और कॉपर के बराबर टुकड़ों को अलग-अलग तनु सल्फ्यूरिक अम्ल में मिलाया जाता है। कौन-सा अवलोकन सही है?",
+    "q_en": "Q21. Equal pieces of zinc and copper are added separately to dilute sulphuric acid. Which observation is correct?",
+    "tag": "RRB JE 19/2/26 Shift-II",
+    "o_hi": [
+      "(a) दोनों धातुएँ हाइड्रोजन गैस निकालती हैं",
+      "(b) कोई भी धातु हाइड्रोजन गैस नहीं निकालती",
+      "(c) केवल जिंक हाइड्रोजन गैस निकालता है",
+      "(d) केवल कॉपर हाइड्रोजन गैस निकालता है"
+    ],
+    "o_en": [
+      "(a) Both metals evolve hydrogen gas",
+      "(b) Neither metal evolves hydrogen gas",
+      "(c) Only zinc evolves hydrogen gas",
+      "(d) Only copper evolves hydrogen gas"
+    ],
+    "a": 2,
+    "e_hi": "जिंक अभिक्रियाशीलता श्रेणी में हाइड्रोजन से ऊपर है, इसलिए तनु H₂SO₄ से H₂ निकालता है। कॉपर हाइड्रोजन से नीचे है और ऐसी अभिक्रिया नहीं करता।",
+    "e_en": "Zinc is above hydrogen in the reactivity series, so it evolves H₂ with dilute H₂SO₄. Copper lies below hydrogen and does not do so."
+  },
+  {
+    "q_hi": "Q22. कौन-सी धातुएँ अत्यधिक तनु नाइट्रिक अम्ल के साथ अभिक्रिया करने पर हाइड्रोजन गैस उत्पन्न करती हैं?",
+    "q_en": "Q22. Which metals produce hydrogen gas when reacting with highly dilute nitric acid?",
+    "tag": "RRB Technicians Grade III 23-12-2024 (Shift-3)",
+    "o_hi": [
+      "(a) मैंगनीज (Mn) और कोबाल्ट (Co)",
+      "(b) मैग्नीशियम (Mg) और कॉपर (Cu)",
+      "(c) कॉपर (Cu) और कोबाल्ट (Co)",
+      "(d) मैग्नीशियम (Mg) और मैंगनीज (Mn)"
+    ],
+    "o_en": [
+      "(a) Manganese (Mn) and Cobalt (Co)",
+      "(b) Magnesium (Mg) and Copper (Cu)",
+      "(c) Copper (Cu) and Cobalt (Co)",
+      "(d) Magnesium (Mg) and Manganese (Mn)"
+    ],
+    "a": 3,
+    "e_hi": "नाइट्रिक अम्ल प्रबल ऑक्सीकारक होने के कारण सामान्यतः H₂ नहीं देता, लेकिन बहुत तनु HNO₃ के साथ Mg और Mn हाइड्रोजन गैस दे सकते हैं।",
+    "e_en": "Nitric acid is a strong oxidising agent and usually does not evolve H₂, but Mg and Mn can give hydrogen with very dilute HNO₃."
+  },
+  {
+    "q_hi": "Q23. जब एक धातु किसी अधातु के साथ अभिक्रिया करती है, तो आमतौर पर किस प्रकार का रासायनिक बंध बनता है?",
+    "q_en": "Q23. What type of chemical bond is typically formed when a metal reacts with a non-metal?",
+    "tag": "RRB Group D 21/12/25 Shift-III",
+    "o_hi": [
+      "(a) धात्विक बंध",
+      "(b) सहसंयोजक बंध",
+      "(c) आयनिक बंध",
+      "(d) हाइड्रोजन बंध"
+    ],
+    "o_en": [
+      "(a) Metallic bond",
+      "(b) Covalent bond",
+      "(c) Ionic bond",
+      "(d) Hydrogen bond"
+    ],
+    "a": 2,
+    "e_hi": "धातु सामान्यतः इलेक्ट्रॉन खोकर धनायन और अधातु इलेक्ट्रॉन ग्रहण करके ऋणायन बनाती है। इनके विद्युतस्थैतिक आकर्षण से आयनिक बंध बनता है।",
+    "e_en": "A metal generally loses electrons to form a cation while a non-metal gains electrons to form an anion. Their electrostatic attraction forms an ionic bond."
+  },
+  {
+    "q_hi": "Q24. निम्नलिखित में से किस अधातु द्वारा निर्मित ऋणायन Ca²⁺ आयन के साथ अभिक्रिया करके एक स्थिर आयनिक यौगिक बनाता है?",
+    "q_en": "Q24. The anion formed by which of the following non-metals reacts with Ca²⁺ ion to form a stable ionic compound?",
+    "tag": "RRB Group D 5/12/25 Shift-II",
+    "o_hi": [
+      "(a) बोरोन",
+      "(b) कार्बन",
+      "(c) ऑक्सीजन",
+      "(d) नाइट्रोजन"
+    ],
+    "o_en": [
+      "(a) Boron",
+      "(b) Carbon",
+      "(c) Oxygen",
+      "(d) Nitrogen"
+    ],
+    "a": 2,
+    "e_hi": "ऑक्सीजन O²⁻ आयन बनाती है। Ca²⁺ और O²⁻ 1:1 अनुपात में मिलकर स्थिर आयनिक यौगिक CaO बनाते हैं।",
+    "e_en": "Oxygen forms the O²⁻ ion. Ca²⁺ and O²⁻ combine in a 1:1 ratio to form the stable ionic compound CaO."
+  },
+  {
+    "q_hi": "Q25. निम्नलिखित में से कौन-से आयनिक यौगिकों के गुण हैं?<br>A. उच्च गलनांक<br>B. गैर-ध्रुवीय विलायकों में घुलनशील<br>C. ठोस अवस्था में विद्युत चालन करते हैं<br>D. प्रकृति में भंगुर",
+    "q_en": "Q25. Which of the following are properties of ionic compounds?<br>A. High melting point<br>B. Soluble in non-polar solvents<br>C. Conduct electricity in solid state<br>D. Brittle in nature",
+    "tag": "Technician Grade III 10/3/26 Shift-II",
+    "o_hi": [
+      "(a) केवल (C) और (B)",
+      "(b) केवल (A) और (B)",
+      "(c) केवल (C) और (D)",
+      "(d) केवल (A) और (D)"
+    ],
+    "o_en": [
+      "(a) Only (C) and (B)",
+      "(b) Only (A) and (B)",
+      "(c) Only (C) and (D)",
+      "(d) Only (A) and (D)"
+    ],
+    "a": 3,
+    "e_hi": "आयनिक यौगिकों में मजबूत विद्युतस्थैतिक आकर्षण के कारण गलनांक उच्च होता है और वे भंगुर होते हैं। वे ठोस अवस्था में विद्युत नहीं चलाते तथा सामान्यतः गैर-ध्रुवीय विलायकों में नहीं घुलते।",
+    "e_en": "Ionic compounds have high melting points because of strong electrostatic forces and are brittle. They do not conduct electricity in the solid state and are generally insoluble in non-polar solvents."
+  },
+  {
+    "q_hi": "Q26. इनमें से किस आयनिक यौगिक का क्वथनांक सर्वाधिक है?",
+    "q_en": "Q26. Which of these ionic compounds has the highest boiling point?",
+    "tag": "RRB Group-D 29-09-2022 Level 1 (Shift-1)",
+    "o_hi": [
+      "(a) CaCl₂",
+      "(b) LiCl",
+      "(c) MgCl₂",
+      "(d) NaCl"
+    ],
+    "o_en": [
+      "(a) CaCl₂",
+      "(b) LiCl",
+      "(c) MgCl₂",
+      "(d) NaCl"
+    ],
+    "a": 0,
+    "e_hi": "दिए गए यौगिकों में CaCl₂ का क्वथनांक सर्वाधिक है। आयनिक यौगिकों के उच्च क्वथनांक उनके आयनों के बीच मजबूत आकर्षण के कारण होते हैं।",
+    "e_en": "Among the listed compounds, CaCl₂ has the highest boiling point. Ionic compounds have high boiling points because of strong attractions between their ions."
+  },
+  {
+    "q_hi": "Q27. निम्नलिखित में से पाइराइट किस प्रकार का अयस्क है?",
+    "q_en": "Q27. Which of the following types of ore is pyrite?",
+    "tag": "RRB Group D 9/2/26 Shift-II",
+    "o_hi": [
+      "(a) हैलाइड",
+      "(b) ऑक्साइड",
+      "(c) नाइट्रेट",
+      "(d) सल्फाइड"
+    ],
+    "o_en": [
+      "(a) Halide",
+      "(b) Oxide",
+      "(c) Nitrate",
+      "(d) Sulphide"
+    ],
+    "a": 3,
+    "e_hi": "पाइराइट सामान्यतः लौह पाइराइट FeS₂ को कहा जाता है, जो सल्फाइड अयस्क है।",
+    "e_en": "Pyrite commonly refers to iron pyrite, FeS₂, which is a sulphide ore."
+  },
+  {
+    "q_hi": "Q28. अयस्क से गैंग को हटाने के लिए उपयोग की जाने वाली प्रक्रिया, जो उनके रासायनिक या भौतिक गुणों के अंतर पर आधारित होती है, अयस्कों का ________ कहलाती है।",
+    "q_en": "Q28. The process used for removing gangue from an ore, based on differences in chemical or physical properties, is called ________ of ores.",
+    "tag": "RRB Group D 3/12/25 Shift-I",
+    "o_hi": [
+      "(a) तौलना",
+      "(b) संवर्धन/सांद्रण",
+      "(c) रंग देना",
+      "(d) पॉलिश करना"
+    ],
+    "o_en": [
+      "(a) Weighing",
+      "(b) Enrichment/concentration",
+      "(c) Colouring",
+      "(d) Polishing"
+    ],
+    "a": 1,
+    "e_hi": "अयस्क से गैंग हटाकर धातु-युक्त अंश बढ़ाने की प्रक्रिया को अयस्क का संवर्धन या सांद्रण कहते हैं।",
+    "e_en": "Removing gangue to increase the metal-bearing fraction is called enrichment or concentration of the ore."
+  },
+  {
+    "q_hi": "Q29. सक्रियता श्रेणी के सबसे नीचे पाई जाने वाली धातुएँ (जैसे सोना, चाँदी, प्लेटिनम) आमतौर पर प्रकृति में किस अवस्था में पाई जाती हैं?",
+    "q_en": "Q29. Metals found at the bottom of the activity series (e.g., gold, silver, platinum) are typically found in nature in which state?",
+    "tag": "RRB Group D 28/11/25 Shift-I",
+    "o_hi": [
+      "(a) अत्यधिक अभिक्रियाशील ऑक्साइड के रूप में",
+      "(b) ऐसे कार्बोनेट के रूप में जिन्हें भर्जन की आवश्यकता होती है",
+      "(c) अपनी स्वतंत्र अवस्था में",
+      "(d) ऐसे सल्फाइड के रूप में जिन्हें निस्तापन की आवश्यकता होती है"
+    ],
+    "o_en": [
+      "(a) As highly reactive oxides",
+      "(b) As carbonates that require roasting",
+      "(c) In their free state",
+      "(d) As sulphides that require calcination"
+    ],
+    "a": 2,
+    "e_hi": "कम अभिक्रियाशील धातुएँ जैसे Au, Ag और Pt प्रकृति में अक्सर मुक्त/स्वतंत्र अवस्था में मिल सकती हैं।",
+    "e_en": "Low-reactivity metals such as Au, Ag and Pt can often occur in nature in the free/native state."
+  },
+  {
+    "q_hi": "Q30. निम्नलिखित में से किस धातु के ऑक्साइड को केवल गर्म करके धातु में अपचयित किया जा सकता है?",
+    "q_en": "Q30. Which of the following metallic oxides can be reduced to the metal by heating alone?",
+    "tag": "RRB Group D 28/11/25 Shift-III",
+    "o_hi": [
+      "(a) मैंगनीज ऑक्साइड",
+      "(b) मरक्यूरिक ऑक्साइड",
+      "(c) आयरन(III) ऑक्साइड",
+      "(d) जिंक ऑक्साइड"
+    ],
+    "o_en": [
+      "(a) Manganese oxide",
+      "(b) Mercuric oxide",
+      "(c) Iron(III) oxide",
+      "(d) Zinc oxide"
+    ],
+    "a": 1,
+    "e_hi": "मरक्यूरिक ऑक्साइड कम स्थायी होता है और गर्म करने पर विघटित होकर पारा तथा ऑक्सीजन देता है: 2HgO → 2Hg + O₂।",
+    "e_en": "Mercuric oxide is relatively unstable and decomposes on heating to mercury and oxygen: 2HgO → 2Hg + O₂."
+  },
+  {
+    "q_hi": "Q31. सक्रियता श्रेणी के मध्य में स्थित धातुओं के सल्फाइड अयस्कों को पहले ऑक्साइड में परिवर्तित किया जाता है। इस परिवर्तन के लिए आवश्यक शर्त है:",
+    "q_en": "Q31. The sulphide ores of metals in the middle of the activity series are first converted to oxides. The necessary condition for this conversion is:",
+    "tag": "RRB Group D 4/2/26 Shift-III",
+    "o_hi": [
+      "(a) उच्च तापमान की उपस्थिति",
+      "(b) उच्च दबाव की उपस्थिति",
+      "(c) अतिरिक्त वायु की उपस्थिति",
+      "(d) ऑक्सीजन की अनुपस्थिति"
+    ],
+    "o_en": [
+      "(a) Presence of high temperature",
+      "(b) Presence of high pressure",
+      "(c) Presence of excess air",
+      "(d) Absence of oxygen"
+    ],
+    "a": 2,
+    "e_hi": "सल्फाइड अयस्कों को अधिक वायु/ऑक्सीजन की उपस्थिति में गर्म करने की प्रक्रिया भर्जन (roasting) कहलाती है, जिससे वे ऑक्साइड में बदलते हैं।",
+    "e_en": "Heating sulphide ores strongly in excess air/oxygen is called roasting, and it converts them into oxides."
+  },
+  {
+    "q_hi": "Q32. धातुओं के निष्कर्षण के बारे में निम्नलिखित में से कौन-से कथन सही हैं?<br>a. उच्च अभिक्रियाशीलता वाली धातुओं को उनके पिघले यौगिकों के विद्युत अपघटन द्वारा निकाला जाता है।<br>b. मध्यम अभिक्रियाशीलता वाली धातुएँ प्रकृति में सल्फाइड और कार्बोनेट के रूप में पाई जाती हैं।<br>c. किसी धातु को उसके ऑक्साइड की तुलना में उसके सल्फाइड से निकालना आसान होता है।",
+    "q_en": "Q32. Which of the following statements about the extraction of metals are correct?<br>a. Highly reactive metals are extracted by electrolysis of their molten compounds.<br>b. Metals of medium reactivity occur in nature as sulphides and carbonates.<br>c. It is easier to extract a metal from its sulphide than from its oxide.",
+    "tag": "RRB Group D 27/12/25 Shift-I",
+    "o_hi": [
+      "(a) केवल a और c",
+      "(b) a, b और c सभी",
+      "(c) केवल b और c",
+      "(d) केवल a और b"
+    ],
+    "o_en": [
+      "(a) Only a and c",
+      "(b) All of a, b and c",
+      "(c) Only b and c",
+      "(d) Only a and b"
+    ],
+    "a": 3,
+    "e_hi": "a और b सही हैं। मध्यम अभिक्रियाशील धातुओं के सल्फाइड/कार्बोनेट अयस्कों को पहले ऑक्साइड में बदला जाता है क्योंकि ऑक्साइड से धातु निकालना सामान्यतः आसान होता है; इसलिए c गलत है।",
+    "e_en": "Statements a and b are correct. Sulphide/carbonate ores of moderately reactive metals are first converted to oxides because metals are generally easier to extract from oxides; hence c is false."
+  },
+  {
+    "q_hi": "Q33. अपचयन से पहले जिंक कार्बोनेट अयस्क को जिंक ऑक्साइड में बदलने के लिए किस प्रक्रिया का उपयोग किया जाता है?",
+    "q_en": "Q33. Which process is used to convert zinc carbonate ore into zinc oxide before reduction?",
+    "tag": "RRB JE 19/2/26 Shift-III",
+    "o_hi": [
+      "(a) सीमित या अनुपस्थित वायु में प्रबल रूप से गर्म करना",
+      "(b) एल्युमिनियम पाउडर के साथ गर्म करना",
+      "(c) कार्बन पाउडर के साथ गर्म करना",
+      "(d) अधिक वायु में प्रबल रूप से गर्म करना"
+    ],
+    "o_en": [
+      "(a) Heating strongly in limited or absent air",
+      "(b) Heating with aluminium powder",
+      "(c) Heating with carbon powder",
+      "(d) Heating strongly in excess air"
+    ],
+    "a": 0,
+    "e_hi": "कार्बोनेट अयस्क को सीमित या बिना वायु के प्रबल रूप से गर्म करके ऑक्साइड में बदलना निस्तापन (calcination) कहलाता है: ZnCO₃ → ZnO + CO₂।",
+    "e_en": "Strong heating of a carbonate ore in limited or no air to form the oxide is calcination: ZnCO₃ → ZnO + CO₂."
+  },
+  {
+    "q_hi": "Q34. भर्जन की प्रक्रिया द्वारा ______ अयस्कों को उनके संबंधित ऑक्साइड में परिवर्तित किया जाता है।",
+    "q_en": "Q34. The ______ ores are converted to their respective oxides by the process of roasting.",
+    "tag": "RRB Group D 2/12/25 Shift-III",
+    "o_hi": [
+      "(a) सल्फाइट",
+      "(b) सल्फाइड",
+      "(c) क्लोराइड",
+      "(d) कार्बोनेट"
+    ],
+    "o_en": [
+      "(a) Sulphite",
+      "(b) Sulphide",
+      "(c) Chloride",
+      "(d) Carbonate"
+    ],
+    "a": 1,
+    "e_hi": "भर्जन में सल्फाइड अयस्कों को अधिक वायु में गर्म किया जाता है, जिससे वे ऑक्साइड में बदलते हैं और SO₂ निकलता है।",
+    "e_en": "In roasting, sulphide ores are heated in excess air, converting them into oxides and releasing SO₂."
+  },
+  {
+    "q_hi": "Q35. थर्मिट अभिक्रिया में एल्युमिनियम के साथ सामान्यतः किस ऑक्साइड का उपयोग किया जाता है?",
+    "q_en": "Q35. What is the typical oxide used along with aluminium in a thermite reaction?",
+    "tag": "RRB Group-D, 09/02/2026 (Shift-2)",
+    "o_hi": [
+      "(a) मैग्नीशियम ऑक्साइड",
+      "(b) आयरन(III) ऑक्साइड",
+      "(c) कॉपर ऑक्साइड",
+      "(d) जिंक ऑक्साइड"
+    ],
+    "o_en": [
+      "(a) Magnesium oxide",
+      "(b) Iron(III) oxide",
+      "(c) Copper oxide",
+      "(d) Zinc oxide"
+    ],
+    "a": 1,
+    "e_hi": "थर्मिट अभिक्रिया में Fe₂O₃ को एल्युमिनियम द्वारा अपचयित किया जाता है: Fe₂O₃ + 2Al → Al₂O₃ + 2Fe + बहुत अधिक ऊष्मा।",
+    "e_en": "In the thermite reaction, Fe₂O₃ is reduced by aluminium: Fe₂O₃ + 2Al → Al₂O₃ + 2Fe + a large amount of heat."
+  },
+  {
+    "q_hi": "Q36. सोडियम और एल्युमिनियम जैसी अत्यधिक अभिक्रियाशील धातुओं को निकालने के लिए किस विधि का उपयोग किया जाता है?",
+    "q_en": "Q36. Which method is used to extract highly reactive metals such as sodium and aluminium?",
+    "tag": "RRB Group D 9/1/26 Shift-I",
+    "o_hi": [
+      "(a) कार्बन के साथ अपचयन",
+      "(b) सल्फाइड अयस्कों का भर्जन",
+      "(c) पिघले क्लोराइड या ऑक्साइड का विद्युत-अपघटनी अपचयन",
+      "(d) कार्बोनेट अयस्कों का निस्तापन"
+    ],
+    "o_en": [
+      "(a) Reduction with carbon",
+      "(b) Roasting of sulphide ores",
+      "(c) Electrolytic reduction of molten chlorides or oxides",
+      "(d) Calcination of carbonate ores"
+    ],
+    "a": 2,
+    "e_hi": "सक्रियता श्रेणी के शीर्ष की धातुएँ कार्बन से आसानी से अपचयित नहीं होतीं। उन्हें उनके पिघले आयनिक यौगिकों के विद्युत अपघटन से निकाला जाता है।",
+    "e_en": "Metals high in the reactivity series cannot be readily reduced by carbon. They are extracted by electrolysis of their molten ionic compounds."
+  },
+  {
+    "q_hi": "Q37. कॉपर के विद्युत-अपघटनी परिष्करण में निम्नलिखित में से कौन-सा एनोड के रूप में कार्य करता है?",
+    "q_en": "Q37. In the electrolytic refining of copper, which of the following acts as the anode?",
+    "tag": "Technician Grade III 10/3/26 Shift-III",
+    "o_hi": [
+      "(a) शुद्ध तांबे की प्लेट",
+      "(b) कॉपर सल्फेट विलयन",
+      "(c) कार्बन इलेक्ट्रोड",
+      "(d) अशुद्ध तांबे का ब्लॉक"
+    ],
+    "o_en": [
+      "(a) Pure copper plate",
+      "(b) Copper sulphate solution",
+      "(c) Carbon electrode",
+      "(d) Impure copper block"
+    ],
+    "a": 3,
+    "e_hi": "कॉपर के विद्युत परिष्करण में अशुद्ध कॉपर एनोड, शुद्ध कॉपर की पतली पट्टी कैथोड और अम्लीकृत CuSO₄ विलयन इलेक्ट्रोलाइट होता है।",
+    "e_en": "In electrolytic refining of copper, impure copper is the anode, a thin sheet of pure copper is the cathode, and acidified CuSO₄ solution is the electrolyte."
+  },
+  {
+    "q_hi": "Q38. विद्युत-अपघटनी परिष्करण के दौरान अघुलनशील अशुद्धियों का क्या होता है?",
+    "q_en": "Q38. What happens to insoluble impurities during electrolytic refining?",
+    "tag": "RRB JE 20/2/26 Shift-III",
+    "o_hi": [
+      "(a) वे कैथोड पर जमा हो जाती हैं",
+      "(b) वे पूरी तरह घुल जाती हैं",
+      "(c) वे एनोड मड के रूप में नीचे बैठ जाती हैं",
+      "(d) वे वाष्पित हो जाती हैं"
+    ],
+    "o_en": [
+      "(a) They deposit on the cathode",
+      "(b) They dissolve completely",
+      "(c) They settle as anode mud",
+      "(d) They evaporate"
+    ],
+    "a": 2,
+    "e_hi": "अघुलनशील अशुद्धियाँ एनोड से अलग होकर सेल के तल में बैठ जाती हैं; इन्हें एनोड मड कहते हैं।",
+    "e_en": "Insoluble impurities detach from the anode and settle at the bottom of the cell as anode mud."
+  },
+  {
+    "q_hi": "Q39. निम्नलिखित में से किस धातु को विद्युत-अपघटनी परिष्करण द्वारा परिष्कृत नहीं किया जाता है?",
+    "q_en": "Q39. Which of the following metals is NOT refined by electrolytic refining?",
+    "tag": "RRB JE 19/2/26 Shift-I",
+    "o_hi": [
+      "(a) जिंक",
+      "(b) कॉपर",
+      "(c) सोडियम",
+      "(d) टिन"
+    ],
+    "o_en": [
+      "(a) Zinc",
+      "(b) Copper",
+      "(c) Sodium",
+      "(d) Tin"
+    ],
+    "a": 2,
+    "e_hi": "सोडियम अत्यधिक अभिक्रियाशील है और इसका उत्पादन पिघले लवण के विद्युत अपघटन से किया जाता है; सामान्य इलेक्ट्रोलाइटिक refining वाली सूची में यह शामिल नहीं होता।",
+    "e_en": "Sodium is highly reactive and is produced by electrolysis of molten salts; it is not normally refined by the standard electrolytic-refining method used for metals such as Cu, Zn and Sn."
+  },
+  {
+    "q_hi": "Q40. संक्षारण होने पर चाँदी पर विकसित होने वाली काली परत क्या है?",
+    "q_en": "Q40. What is the dark layer that develops on silver upon corrosion?",
+    "tag": "RRB Group D 26/12/25 Shift-II",
+    "o_hi": [
+      "(a) जिंक ऑक्साइड",
+      "(b) कॉपर ऑक्साइड",
+      "(c) आयरन ऑक्साइड",
+      "(d) सिल्वर सल्फाइड"
+    ],
+    "o_en": [
+      "(a) Zinc oxide",
+      "(b) Copper oxide",
+      "(c) Iron oxide",
+      "(d) Silver sulphide"
+    ],
+    "a": 3,
+    "e_hi": "चाँदी वायु में सल्फर यौगिकों, विशेषकर H₂S, से अभिक्रिया करके काला Ag₂S बनाती है।",
+    "e_en": "Silver reacts with sulfur compounds in air, especially H₂S, to form black Ag₂S."
+  },
+  {
+    "q_hi": "Q41. लोहे के संक्षारण को रोकने के लिए आमतौर पर निम्नलिखित में से किस विधि का उपयोग किया जाता है?",
+    "q_en": "Q41. Which of the following methods is commonly used to prevent the corrosion of iron?",
+    "tag": "RRB Group D 28/11/25 Shift-III",
+    "o_hi": [
+      "(a) धातु पर पेंट या तेल की परत चढ़ाना",
+      "(b) धातु को बार-बार गर्म करना",
+      "(c) धातु को नियमित रूप से पानी से ठंडा करना",
+      "(d) धातु को अम्ल में घोलना"
+    ],
+    "o_en": [
+      "(a) Coating the metal with paint or oil",
+      "(b) Heating the metal repeatedly",
+      "(c) Cooling the metal with water regularly",
+      "(d) Dissolving the metal in acid"
+    ],
+    "a": 0,
+    "e_hi": "पेंट या तेल की परत लोहे को वायु और नमी के संपर्क से अलग रखती है, इसलिए जंग लगना कम होता है।",
+    "e_en": "A coating of paint or oil isolates iron from air and moisture, thereby reducing rusting."
+  },
+  {
+    "q_hi": "Q42. लोहे को जंग से सुरक्षित करने के लिए निम्नलिखित में से किस विधि का उपयोग नहीं किया जाता है?",
+    "q_en": "Q42. Which of the following methods is not used to protect iron from rusting?",
+    "tag": "RRB Technicians Grade III 30-12-2024 (Shift-2)",
+    "o_hi": [
+      "(a) यशदलेपन",
+      "(b) गर्म करना",
+      "(c) पेंट करना",
+      "(d) क्रोमियम लेपन"
+    ],
+    "o_en": [
+      "(a) Galvanising",
+      "(b) Heating",
+      "(c) Painting",
+      "(d) Chrome plating"
+    ],
+    "a": 1,
+    "e_hi": "गैल्वनाइजिंग, पेंटिंग और क्रोमियम प्लेटिंग लोहे को वातावरण से अलग करके संक्षारण से बचाते हैं। केवल गर्म करना जंग-रोधक विधि नहीं है।",
+    "e_en": "Galvanising, painting and chrome plating protect iron by isolating it from the environment. Heating alone is not a rust-prevention method."
+  },
+  {
+    "q_hi": "Q43. तांबे और टिन (Cu और Sn) के मिश्रण से बनने वाली मिश्रधातु का नाम क्या है?",
+    "q_en": "Q43. What is the name of the alloy formed by mixing copper and tin (Cu and Sn)?",
+    "tag": "RRB Technicians Grade III 30-12-2024 (Shift-3)",
+    "o_hi": [
+      "(a) सोल्डर",
+      "(b) कांसा",
+      "(c) पीतल",
+      "(d) सोना"
+    ],
+    "o_en": [
+      "(a) Solder",
+      "(b) Bronze",
+      "(c) Brass",
+      "(d) Gold"
+    ],
+    "a": 1,
+    "e_hi": "तांबा और टिन की मिश्रधातु कांसा (bronze) कहलाती है। पीतल तांबा और जस्ता की मिश्रधातु है।",
+    "e_en": "The alloy of copper and tin is bronze. Brass is an alloy of copper and zinc."
+  }
+];

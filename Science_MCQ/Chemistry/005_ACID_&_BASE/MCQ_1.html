@@ -1,0 +1,962 @@
+const data = [
+  {
+    "q_hi": "Q1. निम्नलिखित में से कौन-सा अम्ल या क्षार के लिए प्राकृतिक संकेतक नहीं है?",
+    "q_en": "Q1. Which of the following is NOT a natural indicator for acids or bases?",
+    "tag": "RRB Group-D 09-09-2022 Level 1 (Shift-2)",
+    "o_hi": [
+      "(a) हल्दी",
+      "(b) मिथाइल ऑरेंज",
+      "(c) हाइड्रेंजिया की रंगीन पंखुड़ियाँ",
+      "(d) पेटूनिया की रंगीन पंखुड़ियाँ"
+    ],
+    "o_en": [
+      "(a) Turmeric",
+      "(b) Methyl orange",
+      "(c) Colorful petals of hydrangea",
+      "(d) Colorful petals of petunia"
+    ],
+    "a": 1,
+    "e_hi": "मिथाइल ऑरेंज एक कृत्रिम (synthetic) अम्ल-क्षार संकेतक है। हल्दी तथा कुछ रंगीन पुष्प-पंखुड़ियों से प्राप्त रंगद्रव्य प्राकृतिक संकेतक की तरह व्यवहार कर सकते हैं।",
+    "e_en": "Methyl orange is a synthetic acid-base indicator. Turmeric and pigments from certain coloured flower petals can act as natural indicators."
+  },
+  {
+    "q_hi": "Q2. लाल पत्तागोभी एक प्राकृतिक संकेतक है। इसे किसी क्षारीय विलयन के साथ मिलाने पर कौन-सा रंग प्राप्त होता है?",
+    "q_en": "Q2. Red cabbage is a natural indicator that produces different colours when mixed with an acid or a base. Identify the colour produced when it is mixed with a basic (alkaline) solution:",
+    "tag": "RRB Group-D 17-09-2022 Level 1 (Shift-3)",
+    "o_hi": [
+      "(a) नीला-हरा",
+      "(b) फीका गुलाबी",
+      "(c) लाल-भूरा",
+      "(d) नारंगी"
+    ],
+    "o_en": [
+      "(a) Bluish green",
+      "(b) Pale pink",
+      "(c) Reddish brown",
+      "(d) Orange"
+    ],
+    "a": 0,
+    "e_hi": "लाल पत्तागोभी के रस में एन्थोसाइनिन वर्णक होते हैं। क्षारीय माध्यम में इसका रंग नीला-हरा/हरा हो जाता है।",
+    "e_en": "Red-cabbage juice contains anthocyanin pigments. In a basic medium its colour shifts toward blue-green/green."
+  },
+  {
+    "q_hi": "Q3. निम्नलिखित कृत्रिम संकेतकों और रंग परिवर्तन का मिलान कीजिए:<br>A. लाल लिटमस — 1. क्षार में नीला हो जाता है<br>B. नीला लिटमस — 2. अम्ल में लाल हो जाता है<br>C. फिनॉल्फ्थेलीन — 3. अम्ल में रंगहीन, क्षार में गुलाबी<br>D. मिथाइल ऑरेंज — 4. अम्ल में लाल, क्षार में पीला",
+    "q_en": "Q3. Match the following synthetic indicators and colour changes:<br>A. Red litmus — 1. Turns blue in base<br>B. Blue litmus — 2. Turns red in acid<br>C. Phenolphthalein — 3. Colourless in acid, pink in base<br>D. Methyl orange — 4. Red in acid, yellow in base",
+    "tag": "RRB Group-D, 30/12/2025, Shift-III",
+    "o_hi": [
+      "(a) A-3; B-4; C-1; D-2",
+      "(b) A-2; B-1; C-3; D-4",
+      "(c) A-1; B-2; C-3; D-4",
+      "(d) A-4; B-3; C-2; D-1"
+    ],
+    "o_en": [
+      "(a) A-3; B-4; C-1; D-2",
+      "(b) A-2; B-1; C-3; D-4",
+      "(c) A-1; B-2; C-3; D-4",
+      "(d) A-4; B-3; C-2; D-1"
+    ],
+    "a": 2,
+    "e_hi": "लाल लिटमस क्षार में नीला और नीला लिटमस अम्ल में लाल होता है। फिनॉल्फ्थेलीन अम्ल में रंगहीन तथा क्षार में गुलाबी, जबकि मिथाइल ऑरेंज अम्ल में लाल और क्षार में पीला होता है।",
+    "e_en": "Red litmus turns blue in base and blue litmus turns red in acid. Phenolphthalein is colourless in acid and pink in base, while methyl orange is red in acid and yellow in base."
+  },
+  {
+    "q_hi": "Q4. लिटमस पेपर के अलावा विलयन की प्रकृति का परीक्षण करने के लिए निम्नलिखित में से किस संकेतक का उपयोग किया जाता है?",
+    "q_en": "Q4. Which of the following 'indicators' is used to test the nature of solutions besides litmus paper?",
+    "tag": "RRB Group-D, 27/12/2025, Shift-II",
+    "o_hi": [
+      "(a) हल्दी और लाल पत्तागोभी का रस",
+      "(b) चीनी और पानी",
+      "(c) रेत और एल्कोहल",
+      "(d) साधारण नमक और सिरका"
+    ],
+    "o_en": [
+      "(a) Turmeric and red cabbage juice",
+      "(b) Sugar and water",
+      "(c) Sand and alcohol",
+      "(d) Table salt and vinegar"
+    ],
+    "a": 0,
+    "e_hi": "हल्दी और लाल पत्तागोभी का रस अम्ल-क्षार के साथ रंग परिवर्तन दिखाते हैं, इसलिए संकेतक के रूप में उपयोग किए जा सकते हैं।",
+    "e_en": "Turmeric and red-cabbage juice show characteristic colour changes with acids/bases and can therefore be used as indicators."
+  },
+  {
+    "q_hi": "Q5. निम्नलिखित कथनों में से कौन-सा/से सही है/हैं?<br>a. गंधीय संकेतक का उपयोग किसी यौगिक की अम्लीय या क्षारीय प्रकृति जाँचने के लिए किया जाता है।<br>b. लौंग का तेल एक गंधीय संकेतक है।<br>c. लौंग के तेल का उपयोग किसी यौगिक की शुद्धता जाँचने के लिए किया जाता है।",
+    "q_en": "Q5. Which of the following statements is/are correct?<br>a. Olfactory indicators are used to check the acidic or basic nature of a compound.<br>b. Clove oil is an olfactory indicator.<br>c. Clove oil is used to check the purity of any compound.",
+    "tag": "RRB Group-D, 28/11/2025, Shift-II",
+    "o_hi": [
+      "(a) a, b और c",
+      "(b) केवल a और b",
+      "(c) केवल a",
+      "(d) केवल a और c"
+    ],
+    "o_en": [
+      "(a) a, b and c",
+      "(b) a and b only",
+      "(c) a only",
+      "(d) a and c only"
+    ],
+    "a": 1,
+    "e_hi": "गंधीय संकेतक अम्ल/क्षार की उपस्थिति में गंध के परिवर्तन से प्रकृति पहचानने में मदद करते हैं; लौंग का तेल ऐसा संकेतक है। इसका उद्देश्य सामान्य रूप से यौगिक की शुद्धता जाँचना नहीं है।",
+    "e_en": "Olfactory indicators help identify acidic/basic nature through changes in smell; clove oil is one such indicator. It is not generally used to test the purity of a compound."
+  },
+  {
+    "q_hi": "Q6. जब जिंक के कण तनु सल्फ्यूरिक अम्ल के साथ अभिक्रिया करते हैं, तो बनने वाला उत्पाद ________ होगा।",
+    "q_en": "Q6. When zinc granules react with dilute sulphuric acid, the product formed will be ________.",
+    "tag": "RRB Group-D 12-09-2022 Level 1 (Shift-3)",
+    "o_hi": [
+      "(a) ZnSO₄ (जिंक सल्फेट)",
+      "(b) ZnCl₂ (जिंक क्लोराइड)",
+      "(c) N₂ गैस",
+      "(d) O₂ गैस"
+    ],
+    "o_en": [
+      "(a) ZnSO₄ (zinc sulphate)",
+      "(b) ZnCl₂ (zinc chloride)",
+      "(c) N₂ gas",
+      "(d) O₂ gas"
+    ],
+    "a": 0,
+    "e_hi": "अभिक्रिया: Zn + H₂SO₄ → ZnSO₄ + H₂↑। इसलिए लवण जिंक सल्फेट बनता है और हाइड्रोजन गैस निकलती है।",
+    "e_en": "Reaction: Zn + H₂SO₄ → ZnSO₄ + H₂↑. Thus zinc sulphate is formed and hydrogen gas is evolved."
+  },
+  {
+    "q_hi": "Q7. कथन A: अम्ल सभी धातुओं के साथ अभिक्रिया करके हाइड्रोजन गैस बनाते हैं।<br>कथन B: सोना और प्लेटिनम भी अम्लों के साथ अभिक्रिया करके हाइड्रोजन छोड़ते हैं।",
+    "q_en": "Q7. Statement A: Acids react with all metals to form hydrogen gas.<br>Statement B: Gold and platinum also react with acids to release hydrogen.",
+    "tag": "RRB Group-D, 26/12/2025, Shift-I",
+    "o_hi": [
+      "(a) कथन A सही है लेकिन B गलत है।",
+      "(b) कथन A गलत है लेकिन B सही है।",
+      "(c) दोनों कथन A और B सही हैं।",
+      "(d) दोनों कथन A और B गलत हैं।"
+    ],
+    "o_en": [
+      "(a) Statement A is correct but B is incorrect.",
+      "(b) Statement A is incorrect but B is correct.",
+      "(c) Both statements A and B are correct.",
+      "(d) Both statements A and B are incorrect."
+    ],
+    "a": 3,
+    "e_hi": "सभी धातुएँ तनु अम्लों से हाइड्रोजन नहीं निकालतीं। अभिक्रियाशीलता श्रेणी में हाइड्रोजन से नीचे स्थित Cu, Ag, Au, Pt जैसी धातुएँ सामान्य तनु अम्लों से H₂ नहीं देतीं; इसलिए दोनों कथन गलत हैं।",
+    "e_en": "Not all metals liberate hydrogen from dilute acids. Metals below hydrogen in the reactivity series, such as Cu, Ag, Au and Pt, do not normally evolve H₂ with dilute acids; hence both statements are incorrect."
+  },
+  {
+    "q_hi": "Q8. जिंक के कण तनु सल्फ्यूरिक अम्ल से अभिक्रिया करने पर एक रंगहीन गैस देते हैं जो ________ के साथ जलती है।",
+    "q_en": "Q8. When zinc granules react with dilute sulphuric acid, a colourless gas is produced which burns with a ________.",
+    "tag": "RRB Group-D 16-09-2022 Level 1 (Shift-1)",
+    "o_hi": [
+      "(a) पॉप ध्वनि",
+      "(b) लाल रंग की लौ",
+      "(c) हरी लौ",
+      "(d) पीली लौ"
+    ],
+    "o_en": [
+      "(a) Pop sound",
+      "(b) Red flame",
+      "(c) Green flame",
+      "(d) Yellow flame"
+    ],
+    "a": 0,
+    "e_hi": "उत्पन्न गैस हाइड्रोजन है। जलती तीली के पास हाइड्रोजन विशिष्ट 'पॉप' ध्वनि के साथ जलती है।",
+    "e_en": "The gas evolved is hydrogen. Hydrogen burns with a characteristic 'pop' sound when tested with a burning splint."
+  },
+  {
+    "q_hi": "Q9. निम्नलिखित में से कौन-सी धातु सामान्य परिस्थितियों में तनु हाइड्रोक्लोरिक अम्ल के साथ अभिक्रिया नहीं करती है?",
+    "q_en": "Q9. Which of the following metals does NOT react with dilute hydrochloric acid under normal conditions?",
+    "tag": "RRB Group-D, 09/01/2026, Shift-II",
+    "o_hi": [
+      "(a) लोहा",
+      "(b) एल्युमिनियम",
+      "(c) तांबा",
+      "(d) जस्ता"
+    ],
+    "o_en": [
+      "(a) Iron",
+      "(b) Aluminium",
+      "(c) Copper",
+      "(d) Zinc"
+    ],
+    "a": 2,
+    "e_hi": "तांबा अभिक्रियाशीलता श्रेणी में हाइड्रोजन से नीचे है, इसलिए वह तनु HCl से हाइड्रोजन को विस्थापित नहीं करता।",
+    "e_en": "Copper lies below hydrogen in the reactivity series, so it does not displace hydrogen from dilute HCl under normal conditions."
+  },
+  {
+    "q_hi": "Q10. जिंक धातु सोडियम हाइड्रॉक्साइड के साथ अभिक्रिया करके ____ बनाती है।",
+    "q_en": "Q10. Zinc metal reacts with sodium hydroxide to form ____.",
+    "tag": "RRB Technicians Grade III 30-12-2024 (Shift-1)",
+    "o_hi": [
+      "(a) जिंक हाइड्रॉक्साइड",
+      "(b) जिंक ऑक्साइड",
+      "(c) सोडियम जिंकेट",
+      "(d) सोडियम हाइड्राइड"
+    ],
+    "o_en": [
+      "(a) Zinc hydroxide",
+      "(b) Zinc oxide",
+      "(c) Sodium zincate",
+      "(d) Sodium hydride"
+    ],
+    "a": 2,
+    "e_hi": "जिंक एक उभयधर्मी धातु है और प्रबल क्षार NaOH से अभिक्रिया करके सोडियम जिंकेट तथा हाइड्रोजन बनाता है।",
+    "e_en": "Zinc is amphoteric and reacts with strong NaOH to form sodium zincate along with hydrogen gas."
+  },
+  {
+    "q_hi": "Q11. जब कोई अम्ल किसी धातु कार्बोनेट के साथ अभिक्रिया करता है, तो सामान्यतः कौन-सी गैस बनती है?",
+    "q_en": "Q11. When an acid reacts with a metal carbonate, which gas is typically produced?",
+    "tag": "RRB Group-D, 03/12/2025, Shift-I",
+    "o_hi": [
+      "(a) हाइड्रोजन गैस",
+      "(b) कार्बन डाइऑक्साइड गैस",
+      "(c) नाइट्रोजन गैस",
+      "(d) ऑक्सीजन गैस"
+    ],
+    "o_en": [
+      "(a) Hydrogen gas",
+      "(b) Carbon dioxide gas",
+      "(c) Nitrogen gas",
+      "(d) Oxygen gas"
+    ],
+    "a": 1,
+    "e_hi": "अम्ल + धातु कार्बोनेट → लवण + जल + CO₂। इसलिए कार्बन डाइऑक्साइड निकलती है।",
+    "e_en": "Acid + metal carbonate → salt + water + CO₂. Hence carbon dioxide is evolved."
+  },
+  {
+    "q_hi": "Q12. यौगिक 'A' तनु हाइड्रोक्लोरिक अम्ल के साथ अभिक्रिया करता है और बुलबुले बनते हैं। निकलने वाली गैस चूने के पानी को दूधिया करती है। यौगिक A की पहचान कीजिए।",
+    "q_en": "Q12. When compound 'A' reacts with dilute hydrochloric acid, bubbles are formed. The gas released turns lime water milky. Identify compound A.",
+    "tag": "RRB Group-D 20-09-2022 Level 1 (Shift-3)",
+    "o_hi": [
+      "(a) NaCl",
+      "(b) Na₂CO₃",
+      "(c) NaOH",
+      "(d) Zn धातु"
+    ],
+    "o_en": [
+      "(a) NaCl",
+      "(b) Na₂CO₃",
+      "(c) NaOH",
+      "(d) Zn metal"
+    ],
+    "a": 1,
+    "e_hi": "Na₂CO₃ + 2HCl → 2NaCl + H₂O + CO₂। CO₂ चूने के पानी में CaCO₃ का सफेद अवक्षेप बनाकर उसे दूधिया करती है।",
+    "e_en": "Na₂CO₃ + 2HCl → 2NaCl + H₂O + CO₂. The CO₂ turns lime water milky by forming a white CaCO₃ precipitate."
+  },
+  {
+    "q_hi": "Q13. कथन A: जब कोई अम्ल किसी क्षार के साथ अभिक्रिया करता है तो उदासीनीकरण अभिक्रिया होती है।<br>कथन B: उदासीनीकरण के दौरान जल और लवण बनते हैं।",
+    "q_en": "Q13. Statement A: A neutralisation reaction occurs when an acid reacts with a base.<br>Statement B: Water and salt are formed during neutralisation.",
+    "tag": "RRB Group-D, 23/12/2025, Shift-I",
+    "o_hi": [
+      "(a) दोनों कथन A और B गलत हैं।",
+      "(b) दोनों कथन A और B सही हैं।",
+      "(c) कथन A सही है लेकिन B गलत है।",
+      "(d) कथन A गलत है लेकिन B सही है।"
+    ],
+    "o_en": [
+      "(a) Both statements A and B are incorrect.",
+      "(b) Both statements A and B are correct.",
+      "(c) Statement A is correct but B is incorrect.",
+      "(d) Statement A is incorrect but B is correct."
+    ],
+    "a": 1,
+    "e_hi": "उदासीनीकरण में अम्ल और क्षार अभिक्रिया करके लवण तथा जल बनाते हैं, इसलिए दोनों कथन सही हैं।",
+    "e_en": "In neutralisation, an acid reacts with a base to form salt and water, so both statements are correct."
+  },
+  {
+    "q_hi": "Q14. निम्नलिखित में से कौन-सी उदासीनीकरण अभिक्रिया है?",
+    "q_en": "Q14. Which of the following is a neutralisation reaction?",
+    "tag": "RRB Group-D, 05/02/2026, Shift-I",
+    "o_hi": [
+      "(a) Fe + CuSO₄ → FeSO₄ + Cu",
+      "(b) NaOH + HCl → NaCl + H₂O",
+      "(c) CaCO₃ → CaO + CO₂",
+      "(d) Zn + HCl → ZnCl₂ + H₂"
+    ],
+    "o_en": [
+      "(a) Fe + CuSO₄ → FeSO₄ + Cu",
+      "(b) NaOH + HCl → NaCl + H₂O",
+      "(c) CaCO₃ → CaO + CO₂",
+      "(d) Zn + HCl → ZnCl₂ + H₂"
+    ],
+    "a": 1,
+    "e_hi": "HCl अम्ल और NaOH क्षार अभिक्रिया करके NaCl तथा H₂O बनाते हैं; यही उदासीनीकरण है।",
+    "e_en": "HCl (acid) reacts with NaOH (base) to form NaCl and H₂O; this is a neutralisation reaction."
+  },
+  {
+    "q_hi": "Q15. धात्विक ऑक्साइड सामान्यतः प्रकृति में ________ होते हैं।",
+    "q_en": "Q15. Metal oxides are generally ________ in nature.",
+    "tag": "RRB Group D 22 Aug 2022 Shift 1",
+    "o_hi": [
+      "(a) उदासीन",
+      "(b) मीठे",
+      "(c) अम्लीय",
+      "(d) क्षारीय"
+    ],
+    "o_en": [
+      "(a) Neutral",
+      "(b) Sweet",
+      "(c) Acidic",
+      "(d) Basic"
+    ],
+    "a": 3,
+    "e_hi": "अधिकांश धात्विक ऑक्साइड क्षारीय प्रकृति के होते हैं और अम्लों से अभिक्रिया करके लवण तथा जल बनाते हैं।",
+    "e_en": "Most metal oxides are basic in nature and react with acids to form salt and water."
+  },
+  {
+    "q_hi": "Q16. कॉपर ऑक्साइड को तनु हाइड्रोक्लोरिक अम्ल में मिलाने पर _________ बनने के कारण विलयन का रंग नीला-हरा हो जाता है।",
+    "q_en": "Q16. When copper oxide is mixed with dilute hydrochloric acid, the colour of the acid turns blue-green due to the formation of _________.",
+    "tag": "RRB Group-D 27-09-2022 Level 1 (Shift-3)",
+    "o_hi": [
+      "(a) जल",
+      "(b) हाइड्रोजन गैस",
+      "(c) कॉपर(I) क्लोराइड",
+      "(d) कॉपर(II) क्लोराइड"
+    ],
+    "o_en": [
+      "(a) Water",
+      "(b) Hydrogen gas",
+      "(c) Copper(I) chloride",
+      "(d) Copper(II) chloride"
+    ],
+    "a": 3,
+    "e_hi": "CuO + 2HCl → CuCl₂ + H₂O। बने हुए कॉपर(II) क्लोराइड के कारण विलयन नीला-हरा दिखाई देता है।",
+    "e_en": "CuO + 2HCl → CuCl₂ + H₂O. The copper(II) chloride formed gives the solution its blue-green colour."
+  },
+  {
+    "q_hi": "Q17. निम्नलिखित में से कौन जलीय विलयन में H⁺ आयन देता है?",
+    "q_en": "Q17. Which of the following gives H⁺ ions in an aqueous solution?",
+    "tag": "RRB Group-D, 19/12/2025, Shift-II",
+    "o_hi": [
+      "(a) सोडियम हाइड्रॉक्साइड",
+      "(b) हाइड्रोक्लोरिक अम्ल",
+      "(c) अमोनियम हाइड्रॉक्साइड",
+      "(d) कैल्शियम हाइड्रॉक्साइड"
+    ],
+    "o_en": [
+      "(a) Sodium hydroxide",
+      "(b) Hydrochloric acid",
+      "(c) Ammonium hydroxide",
+      "(d) Calcium hydroxide"
+    ],
+    "a": 1,
+    "e_hi": "HCl जल में आयनीकृत होकर H₃O⁺ (जिसे सरल रूप में H⁺ लिखा जाता है) और Cl⁻ देता है। बाकी विकल्प क्षार हैं।",
+    "e_en": "HCl ionises in water to give H₃O⁺ (often written simply as H⁺) and Cl⁻. The other options are bases."
+  },
+  {
+    "q_hi": "Q18. जल में किसी क्षार के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+    "q_en": "Q18. Which of the following statements is true about a base in an aqueous solution?",
+    "tag": "RRB Group-D, 10/02/2026, Shift-I",
+    "o_hi": [
+      "(a) वे पानी में OH⁻ आयन उत्पन्न करते हैं।",
+      "(b) उनका स्वाद खट्टा होता है।",
+      "(c) वे धातुओं से अभिक्रिया कर हमेशा हाइड्रोजन गैस बनाते हैं।",
+      "(d) वे नीले लिटमस को लाल कर देते हैं।"
+    ],
+    "o_en": [
+      "(a) They produce OH⁻ ions in water.",
+      "(b) They have a sour taste.",
+      "(c) They react with metals to produce hydrogen gas.",
+      "(d) They turn blue litmus red."
+    ],
+    "a": 0,
+    "e_hi": "जलीय माध्यम में क्षार OH⁻ आयनों की सांद्रता बढ़ाते हैं। खट्टा स्वाद और नीले लिटमस को लाल करना अम्लों के गुण हैं।",
+    "e_en": "Bases increase the concentration of OH⁻ ions in aqueous solution. Sour taste and turning blue litmus red are properties of acids."
+  },
+  {
+    "q_hi": "Q19. निम्नलिखित पदार्थों और उनके द्वारा उत्पन्न आयनों का मिलान कीजिए:<br>A. HCl — 1. H₃O⁺ और Cl⁻<br>B. NaOH — 2. Na⁺ और OH⁻<br>C. KOH — 3. K⁺ और OH⁻<br>D. Mg(OH)₂ — 4. Mg²⁺ और 2OH⁻",
+    "q_en": "Q19. Match the following substances and their ions:<br>A. HCl — 1. H₃O⁺ and Cl⁻<br>B. NaOH — 2. Na⁺ and OH⁻<br>C. KOH — 3. K⁺ and OH⁻<br>D. Mg(OH)₂ — 4. Mg²⁺ and 2OH⁻",
+    "tag": "RRB Group-D, 08/01/2026, Shift-I",
+    "o_hi": [
+      "(a) A-3; B-4; C-1; D-2",
+      "(b) A-4; B-3; C-2; D-1",
+      "(c) A-1; B-2; C-3; D-4",
+      "(d) A-2; B-1; C-4; D-3"
+    ],
+    "o_en": [
+      "(a) A-3; B-4; C-1; D-2",
+      "(b) A-4; B-3; C-2; D-1",
+      "(c) A-1; B-2; C-3; D-4",
+      "(d) A-2; B-1; C-4; D-3"
+    ],
+    "a": 2,
+    "e_hi": "HCl से H₃O⁺/Cl⁻, NaOH से Na⁺/OH⁻, KOH से K⁺/OH⁻ और Mg(OH)₂ से Mg²⁺/2OH⁻ प्राप्त होते हैं। अतः A-1, B-2, C-3, D-4 सही है।",
+    "e_en": "HCl gives H₃O⁺/Cl⁻, NaOH gives Na⁺/OH⁻, KOH gives K⁺/OH⁻, and Mg(OH)₂ gives Mg²⁺/2OH⁻. Hence A-1, B-2, C-3, D-4 is correct."
+  },
+  {
+    "q_hi": "Q20. ग्लूकोज और एल्कोहल विद्युत का चालन क्यों नहीं करते हैं?",
+    "q_en": "Q20. Select the correct reason as to why glucose and alcohol do NOT conduct electricity?",
+    "tag": "RRB Group-D, 26/12/2025, Shift-II",
+    "o_hi": [
+      "(a) वे धातु से बने हैं।",
+      "(b) वे प्रकृति में अम्लीय हैं।",
+      "(c) वे विलयन में आयन नहीं बनाते हैं।",
+      "(d) वे जल्दी वाष्पित हो जाते हैं।"
+    ],
+    "o_en": [
+      "(a) They are made of metal.",
+      "(b) They are acidic in nature.",
+      "(c) They do not form ions in solution.",
+      "(d) They evaporate quickly."
+    ],
+    "a": 2,
+    "e_hi": "ग्लूकोज और एल्कोहल जल में घुल सकते हैं, लेकिन वे आयन उत्पन्न नहीं करते। विद्युत चालन के लिए गतिशील आयनों की आवश्यकता होती है।",
+    "e_en": "Glucose and alcohol may dissolve in water, but they do not produce ions. Electrical conduction in solution requires mobile ions."
+  },
+  {
+    "q_hi": "Q21. निम्न में से कौन-सा alkali नहीं है?",
+    "q_en": "Q21. Which of the following is not an alkali?",
+    "tag": "RRB Group-D 02-09-2022 Level-1 (Shift-III)",
+    "o_hi": [
+      "(a) Cu(OH)₂",
+      "(b) Ba(OH)₂",
+      "(c) NH₄OH",
+      "(d) LiOH"
+    ],
+    "o_en": [
+      "(a) Cu(OH)₂",
+      "(b) Ba(OH)₂",
+      "(c) NH₄OH",
+      "(d) LiOH"
+    ],
+    "a": 0,
+    "e_hi": "Alkali वह क्षार है जो जल में घुलता है। Cu(OH)₂ जल में व्यावहारिक रूप से अघुलनशील है, इसलिए इसे alkali नहीं माना जाता।",
+    "e_en": "An alkali is a base that dissolves in water. Cu(OH)₂ is practically insoluble in water, so it is not classified as an alkali."
+  },
+  {
+    "q_hi": "Q22. सूखी HCl गैस लिटमस पेपर का रंग क्यों नहीं बदलती है?",
+    "q_en": "Q22. Which of the following statements accurately describes why dry HCl gas does not change the colour of litmus paper?",
+    "tag": "RRB Group-D, 27/12/2025, Shift-I",
+    "o_hi": [
+      "(a) सूखी HCl गैस अम्लीय नहीं है।",
+      "(b) पानी लिटमस के साथ अभिक्रिया करता है, HCl नहीं।",
+      "(c) HCl केवल पानी में घुलने पर H⁺ आयन छोड़ता है।",
+      "(d) लिटमस पेपर केवल प्रकाश की उपस्थिति में काम करता है।"
+    ],
+    "o_en": [
+      "(a) Dry HCl gas is not acidic.",
+      "(b) Water reacts with litmus, not HCl.",
+      "(c) HCl releases H⁺ ions only when dissolved in water.",
+      "(d) Litmus paper works only in the presence of light."
+    ],
+    "a": 2,
+    "e_hi": "अम्लीय व्यवहार के लिए HCl का जल में आयनीकरण आवश्यक है। सूखी अवस्था में आवश्यक H₃O⁺ आयन नहीं बनते, इसलिए सूखा लिटमस रंग नहीं बदलता।",
+    "e_en": "HCl must ionise in water to show acidic behaviour. In dry conditions the required H₃O⁺ ions are not formed, so dry litmus does not change colour."
+  },
+  {
+    "q_hi": "Q23. निम्नलिखित में से कौन-सी अभिक्रिया ऊष्माक्षेपी अभिक्रिया नहीं है?",
+    "q_en": "Q23. Which of the following reaction is not an exothermic reaction?",
+    "tag": "RRB Technicians Grade III 27-12-2024 (Shift-3)",
+    "o_hi": [
+      "(a) श्वसन",
+      "(b) प्राकृतिक गैस का जलना",
+      "(c) प्रकाशसंश्लेषण",
+      "(d) किसी प्रबल अम्ल का तनुकरण"
+    ],
+    "o_en": [
+      "(a) Respiration",
+      "(b) Burning of natural gas",
+      "(c) Photosynthesis",
+      "(d) Dilution of a strong acid"
+    ],
+    "a": 2,
+    "e_hi": "प्रकाशसंश्लेषण में सौर ऊर्जा अवशोषित होती है, इसलिए यह ऊष्माशोषी/ऊर्जा-अवशोषी प्रक्रिया है। शेष प्रक्रियाएँ ऊर्जा/ऊष्मा मुक्त करती हैं।",
+    "e_en": "Photosynthesis absorbs solar energy, so it is an energy-absorbing (endothermic in this context) process. The other listed processes release energy/heat."
+  },
+  {
+    "q_hi": "Q24. जब अम्ल को जल में मिलाया जाता है तो क्या होता है?",
+    "q_en": "Q24. What happens when an acid is added to water?",
+    "tag": "RRB ALP CBT 1 28th Nov 2024 Shift 1",
+    "o_hi": [
+      "(a) प्रति इकाई आयतन में हाइड्रोनियम आयनों (H₃O⁺) की सांद्रता बढ़ जाती है।",
+      "(b) प्रति इकाई आयतन में हाइड्रॉक्सिल आयनों (OH⁻) की सांद्रता बढ़ जाती है।",
+      "(c) आयनों की सांद्रता पर कोई प्रभाव नहीं पड़ता।",
+      "(d) प्रति इकाई आयतन में हाइड्रोनियम आयनों (H₃O⁺) की सांद्रता घट जाती है।"
+    ],
+    "o_en": [
+      "(a) It will increase the concentration of hydronium ions per unit volume.",
+      "(b) It will increase the concentration of hydroxyl ions per unit volume.",
+      "(c) There will be no effect on the concentration of ions.",
+      "(d) It will decrease the concentration of hydronium ions per unit volume."
+    ],
+    "a": 0,
+    "e_hi": "अम्ल जल में H₃O⁺ आयन बनाता है, इसलिए शुद्ध जल की तुलना में हाइड्रोनियम आयनों की सांद्रता बढ़ती है।",
+    "e_en": "An acid forms H₃O⁺ ions in water, so the hydronium-ion concentration increases relative to pure water."
+  },
+  {
+    "q_hi": "Q25. अम्ल या क्षार को जल में मिलाने पर क्या होगा?<br>i) प्रति इकाई आयतन में आयनों की सांद्रता बढ़ेगी।<br>ii) प्रति इकाई आयतन में आयनों की सांद्रता घटेगी।<br>iii) विलयन तनु हो जाएगा।<br>iv) विलयन अधिक सांद्र हो जाएगा।",
+    "q_en": "Q25. What happens when an acid or base is mixed with water?<br>i) Increase in concentration of ions per unit volume.<br>ii) Decrease in concentration of ions per unit volume.<br>iii) The solution becomes dilute.<br>iv) The solution becomes more concentrated.",
+    "tag": "RRB Group-D 07-10-2022 Level 1 (Shift-3)",
+    "o_hi": [
+      "(a) केवल (i) और (iv)",
+      "(b) केवल (ii)",
+      "(c) केवल (i)",
+      "(d) केवल (ii) और (iii)"
+    ],
+    "o_en": [
+      "(a) Only (i) and (iv)",
+      "(b) Only (ii)",
+      "(c) Only (i)",
+      "(d) Only (ii) and (iii)"
+    ],
+    "a": 3,
+    "e_hi": "जल मिलाने पर विलयन का आयतन बढ़ता है, इसलिए प्रति इकाई आयतन आयनों की सांद्रता घटती है और विलयन तनु होता है। अतः (ii) और (iii) सही हैं।",
+    "e_en": "Adding water increases the solution volume, so the ion concentration per unit volume decreases and the solution becomes dilute. Thus (ii) and (iii) are correct."
+  },
+  {
+    "q_hi": "Q26. तीन विलयन A, B और C के pH मान क्रमशः 3, 7 और 12 हैं। निम्नलिखित में से कौन-सा कथन सही है?",
+    "q_en": "Q26. Three solutions A, B and C have pH values of 3, 7 and 12 respectively. Which of the following statements is correct?",
+    "tag": "RRB Group-D, 14/12/2025, Shift-I",
+    "o_hi": [
+      "(a) विलयन A और C दोनों उदासीन हैं।",
+      "(b) विलयन C उदासीन है जबकि विलयन A क्षारीय है।",
+      "(c) विलयन B क्षारीय है और विलयन C अम्लीय है।",
+      "(d) विलयन A प्रबल अम्लीय है और विलयन C प्रबल क्षारीय है।"
+    ],
+    "o_en": [
+      "(a) Both solutions A and C are neutral.",
+      "(b) Solution C is neutral while solution A is basic.",
+      "(c) Solution B is basic and solution C is acidic.",
+      "(d) Solution A is strongly acidic and solution C is strongly basic."
+    ],
+    "a": 3,
+    "e_hi": "pH 3 अम्लीय, pH 7 उदासीन और pH 12 प्रबल क्षारीय होता है। इसलिए A अम्लीय और C प्रबल क्षारीय है।",
+    "e_en": "pH 3 is acidic, pH 7 is neutral, and pH 12 is strongly basic. Therefore A is strongly acidic and C strongly basic."
+  },
+  {
+    "q_hi": "Q27. सार्वत्रिक संकेतक से परीक्षण पर पाँच विलयनों A, B, C, D और E के pH मान क्रमशः 4, 1, 11, 7 और 9 हैं। H⁺ आयन सांद्रता के बढ़ते क्रम में इन विलयनों का क्रम क्या होगा?",
+    "q_en": "Q27. Five solutions A, B, C, D and E, tested with universal indicator, had pH values of 4, 1, 11, 7 and 9 respectively. What would be the order of these solutions in increasing H⁺ ion concentration?",
+    "tag": "RRB Group D 22 Aug 2022 Shift 2",
+    "o_hi": [
+      "(a) C < D < E < A < B",
+      "(b) C < E < D < A < B",
+      "(c) C < D < E < B < A",
+      "(d) D < C < E < A < B"
+    ],
+    "o_en": [
+      "(a) C < D < E < A < B",
+      "(b) C < E < D < A < B",
+      "(c) C < D < E < B < A",
+      "(d) D < C < E < A < B"
+    ],
+    "a": 1,
+    "e_hi": "[H⁺] = 10⁻ᵖᴴ, इसलिए pH जितना अधिक होगा H⁺ सांद्रता उतनी कम होगी। pH: C=11, E=9, D=7, A=4, B=1; अतः बढ़ती [H⁺] का क्रम C < E < D < A < B है।",
+    "e_en": "Because [H⁺] = 10⁻ᵖᴴ, a higher pH means a lower H⁺ concentration. With C=11, E=9, D=7, A=4, B=1, increasing [H⁺] is C < E < D < A < B."
+  },
+  {
+    "q_hi": "Q28. निम्नलिखित का मिलान कीजिए:<br>i. नींबू का रस — a. 14<br>ii. गैस्ट्रिक जूस — b. 1.2<br>iii. मिल्क ऑफ मैग्नीशिया — c. 2.2<br>iv. सोडियम हाइड्रॉक्साइड विलयन — d. 10",
+    "q_en": "Q28. Match the following:<br>i. Lemon juice — a. 14<br>ii. Gastric juice — b. 1.2<br>iii. Milk of magnesia — c. 2.2<br>iv. Sodium hydroxide solution — d. 10",
+    "tag": "RRB Group-D 18-08-2022 (Shift-III)",
+    "o_hi": [
+      "(a) i-a, ii-b, iii-c, iv-d",
+      "(b) i-c, ii-b, iii-d, iv-a",
+      "(c) i-c, ii-b, iii-a, iv-d",
+      "(d) i-d, ii-b, iii-c, iv-a"
+    ],
+    "o_en": [
+      "(a) i-a, ii-b, iii-c, iv-d",
+      "(b) i-c, ii-b, iii-d, iv-a",
+      "(c) i-c, ii-b, iii-a, iv-d",
+      "(d) i-d, ii-b, iii-c, iv-a"
+    ],
+    "a": 1,
+    "e_hi": "नींबू का रस लगभग pH 2.2, गैस्ट्रिक जूस लगभग 1.2, मिल्क ऑफ मैग्नीशिया लगभग 10 और NaOH विलयन प्रबल क्षारीय होकर लगभग 14 हो सकता है।",
+    "e_en": "Lemon juice is about pH 2.2, gastric juice about 1.2, milk of magnesia about 10, and a strong NaOH solution can be around pH 14."
+  },
+  {
+    "q_hi": "Q29. जो अम्ल अधिक H⁺ आयन उत्पन्न करते हैं उन्हें _____________ कहा जाता है, जबकि कम H⁺ आयन उत्पन्न करने वाले अम्ल _______ कहलाते हैं।",
+    "q_en": "Q29. Acids that produce more H⁺ ions are called ______________, while acids that produce fewer H⁺ ions are called _______.",
+    "tag": "RRB Group-D 08-09-2022 Level 1 (Shift-III)",
+    "o_hi": [
+      "(a) दुर्बल अम्ल, प्रबल अम्ल",
+      "(b) प्रबल अम्ल, दुर्बल क्षारक",
+      "(c) प्रबल अम्ल, दुर्बल अम्ल",
+      "(d) प्रबल अम्ल, प्रबल क्षारक"
+    ],
+    "o_en": [
+      "(a) Weak acid, strong acid",
+      "(b) Strong acid, weak base",
+      "(c) Strong acid, weak acid",
+      "(d) Strong acid, strong base"
+    ],
+    "a": 2,
+    "e_hi": "प्रबल अम्ल जल में अधिक मात्रा में आयनीकृत होकर अधिक H⁺/H₃O⁺ देते हैं, जबकि दुर्बल अम्ल आंशिक आयनीकरण के कारण कम आयन देते हैं।",
+    "e_en": "Strong acids ionise to a much greater extent in water and produce more H⁺/H₃O⁺ ions, whereas weak acids ionise only partially and produce fewer ions."
+  },
+  {
+    "q_hi": "Q30. निम्नलिखित का मिलान कीजिए:<br>i. सिरका — a. ऑक्सैलिक अम्ल<br>ii. टमाटर — b. साइट्रिक अम्ल<br>iii. संतरा — c. एसिटिक अम्ल",
+    "q_en": "Q30. Match the following:<br>i. Vinegar — a. Oxalic acid<br>ii. Tomato — b. Citric acid<br>iii. Orange — c. Acetic acid",
+    "tag": "RRB Group-D 26-08-2022 (Shift-I)",
+    "o_hi": [
+      "(a) i-c, ii-a, iii-b",
+      "(b) i-a, ii-c, iii-b",
+      "(c) i-a, ii-b, iii-c",
+      "(d) i-c, ii-b, iii-a"
+    ],
+    "o_en": [
+      "(a) i-c, ii-a, iii-b",
+      "(b) i-a, ii-c, iii-b",
+      "(c) i-a, ii-b, iii-c",
+      "(d) i-c, ii-b, iii-a"
+    ],
+    "a": 0,
+    "e_hi": "सिरके में एसिटिक अम्ल, टमाटर में ऑक्सैलिक अम्ल और संतरे में साइट्रिक अम्ल प्रमुख रूप से पाया जाता है। इसलिए i-c, ii-a, iii-b सही है।",
+    "e_en": "Vinegar contains acetic acid, tomato is associated with oxalic acid, and orange contains citric acid. Hence i-c, ii-a, iii-b is correct."
+  },
+  {
+    "q_hi": "Q31. मधुमक्खी का डंक दर्द और जलन क्यों पैदा करता है?",
+    "q_en": "Q31. Why does a bee sting cause pain and irritation?",
+    "tag": "RRB JE CBT-2, 22/04/2025, Shift-I",
+    "o_hi": [
+      "(a) डंक से कार्बन डाइऑक्साइड गैस निकलती है।",
+      "(b) डंक से हल्का चीनी का विलयन इंजेक्ट होता है।",
+      "(c) डंक से मेथेनोइक अम्ल (फॉर्मिक अम्ल) इंजेक्ट होता है।",
+      "(d) डंक में एक प्रबल क्षार होता है।"
+    ],
+    "o_en": [
+      "(a) The sting releases carbon dioxide gas.",
+      "(b) The sting injects a mild sugar solution.",
+      "(c) The sting injects methanoic acid (formic acid).",
+      "(d) The sting contains a strong base."
+    ],
+    "a": 2,
+    "e_hi": "स्कूली NCERT संदर्भ में मधुमक्खी/चींटी के डंक से होने वाली अम्लीय जलन को मेथेनोइक (फॉर्मिक) अम्ल से जोड़ा जाता है; हल्के क्षार जैसे बेकिंग सोडा से राहत मिल सकती है।",
+    "e_en": "In the school-level NCERT context, the acidic irritation from such stings is associated with methanoic (formic) acid; a mild base such as baking soda can help neutralise it."
+  },
+  {
+    "q_hi": "Q32. निम्नलिखित का मिलान कीजिए:<br>i. नींबू — a. मेथेनोइक अम्ल<br>ii. बिच्छू-बूटी के चुभने वाले रोएँ (Nettle sting) — b. साइट्रिक अम्ल<br>iii. टमाटर — c. ऑक्सैलिक अम्ल",
+    "q_en": "Q32. Match the following:<br>i. Lemon — a. Methanoic acid<br>ii. Nettle sting — b. Citric acid<br>iii. Tomato — c. Oxalic acid",
+    "tag": "RRB Group-D 06-09-2022 Level-1 (Shift-I)",
+    "o_hi": [
+      "(a) i-c, ii-a, iii-b",
+      "(b) i-a, ii-b, iii-c",
+      "(c) i-b, ii-a, iii-c",
+      "(d) i-c, ii-b, iii-a"
+    ],
+    "o_en": [
+      "(a) i-c, ii-a, iii-b",
+      "(b) i-a, ii-b, iii-c",
+      "(c) i-b, ii-a, iii-c",
+      "(d) i-c, ii-b, iii-a"
+    ],
+    "a": 2,
+    "e_hi": "नींबू में साइट्रिक अम्ल, बिच्छू-बूटी के डंक/रोएँ से मेथेनोइक अम्ल और टमाटर में ऑक्सैलिक अम्ल का मिलान किया जाता है। अतः i-b, ii-a, iii-c सही है।",
+    "e_en": "Lemon is matched with citric acid, nettle sting with methanoic acid, and tomato with oxalic acid. Hence i-b, ii-a, iii-c is correct."
+  },
+  {
+    "q_hi": "Q33. pH मान के संबंध में निम्नलिखित में से कौन-सा/से युग्म सही है/हैं?<br>(a) मनुष्यों में दाँतों की सड़न: मुँह का pH > 5.5<br>(b) मानव शरीर का pH परास: 7.0 से 7.8<br>(c) अम्लीय वर्षा: वर्षा जल का pH > 8",
+    "q_en": "Q33. Which of the following pair(s) is/are correct with respect to pH value?<br>(a) Tooth decay in humans: pH of mouth > 5.5<br>(b) pH range of human body: 7.0 to 7.8<br>(c) Acid rain: pH of rainwater > 8",
+    "tag": "RRB Technicians Grade III 30-12-2024 (Shift-2)",
+    "o_hi": [
+      "(a) (a), (b) और (c) सही हैं।",
+      "(b) केवल (a) सही है।",
+      "(c) केवल (c) सही है।",
+      "(d) केवल (b) सही है।"
+    ],
+    "o_en": [
+      "(a) (a), (b) and (c) are correct.",
+      "(b) Only (a) is correct.",
+      "(c) Only (c) is correct.",
+      "(d) Only (b) is correct."
+    ],
+    "a": 3,
+    "e_hi": "NCERT के अनुसार दाँतों का क्षय तब शुरू होता है जब मुँह का pH लगभग 5.5 से कम हो जाता है, और अम्लीय वर्षा का pH सामान्यतः 5.6 से कम माना जाता है। मानव शरीर लगभग pH 7.0–7.8 के संकीर्ण परास में कार्य करता है। इसलिए केवल (b) सही है।",
+    "e_en": "According to NCERT, tooth decay starts when mouth pH falls below about 5.5, and acid rain is typically below pH 5.6. The human body functions within the narrow pH range of about 7.0–7.8. Therefore only (b) is correct."
+  },
+  {
+    "q_hi": "Q34. कथन A: पौधों को उचित वृद्धि के लिए विशिष्ट मृदा pH की आवश्यकता होती है।<br>कथन B: किसान किस प्रकार का उर्वरक मिलाना है, यह तय करने के लिए pH मान का उपयोग करते हैं।",
+    "q_en": "Q34. Statement A: Plants require specific soil pH for proper growth.<br>Statement B: Farmers use pH values to decide the type of fertiliser to add.",
+    "tag": "RRB Group-D, 29/12/2025, Shift-III",
+    "o_hi": [
+      "(a) कथन A गलत है लेकिन B सही है।",
+      "(b) दोनों कथन A और B गलत हैं।",
+      "(c) कथन A सही है लेकिन B गलत है।",
+      "(d) दोनों कथन A और B सही हैं।"
+    ],
+    "o_en": [
+      "(a) Statement A is incorrect but B is correct.",
+      "(b) Both statements A and B are incorrect.",
+      "(c) Statement A is correct but B is incorrect.",
+      "(d) Both statements A and B are correct."
+    ],
+    "a": 3,
+    "e_hi": "फसलों की वृद्धि के लिए मृदा का उपयुक्त pH महत्त्वपूर्ण है। मृदा की अम्लीय/क्षारीय प्रकृति जानकर किसान उपयुक्त उपचार या उर्वरक/मृदा-संशोधन चुन सकते हैं; इसलिए दोनों कथन सही हैं।",
+    "e_en": "Suitable soil pH is important for plant growth. Knowing whether soil is acidic or basic helps farmers choose appropriate treatment/fertiliser or soil amendment; hence both statements are correct."
+  },
+  {
+    "q_hi": "Q35. शुक्र ग्रह के घने सफेद और पीले बादल मुख्यतः किस अम्ल से बने हैं?",
+    "q_en": "Q35. The thick white and yellowish clouds of Venus are made of which acid?",
+    "tag": "RRB Group-D 28-09-2022 Level 1 (Shift-1)",
+    "o_hi": [
+      "(a) हाइड्रोक्लोरिक अम्ल",
+      "(b) एसिटिक अम्ल",
+      "(c) सल्फ्यूरिक अम्ल",
+      "(d) नाइट्रिक अम्ल"
+    ],
+    "o_en": [
+      "(a) Hydrochloric acid",
+      "(b) Acetic acid",
+      "(c) Sulfuric acid",
+      "(d) Nitric acid"
+    ],
+    "a": 2,
+    "e_hi": "शुक्र के बादलों में सल्फ्यूरिक अम्ल (H₂SO₄) की बूंदें प्रमुख घटक हैं।",
+    "e_en": "Venus's clouds are composed largely of droplets of sulfuric acid (H₂SO₄)."
+  },
+  {
+    "q_hi": "Q36. निम्नलिखित में से किस लवण का पानी में घोलने पर pH 7 के करीब होगा?",
+    "q_en": "Q36. Which of the following salts will have a pH close to 7 when dissolved in water?",
+    "tag": "RRB Group-D, 09/02/2026, Shift-I",
+    "o_hi": [
+      "(a) Na₂CO₃",
+      "(b) NaCl",
+      "(c) CH₃COONa",
+      "(d) NH₄Cl"
+    ],
+    "o_en": [
+      "(a) Na₂CO₃",
+      "(b) NaCl",
+      "(c) CH₃COONa",
+      "(d) NH₄Cl"
+    ],
+    "a": 1,
+    "e_hi": "NaCl प्रबल अम्ल HCl और प्रबल क्षार NaOH का लवण है, इसलिए इसका जलीय विलयन लगभग उदासीन (pH ≈ 7) होता है।",
+    "e_en": "NaCl is a salt of the strong acid HCl and strong base NaOH, so its aqueous solution is approximately neutral (pH ≈ 7)."
+  },
+  {
+    "q_hi": "Q37. निम्नलिखित में से कौन-सा लवण पानी में घुलने पर उदासीन विलयन उत्पन्न करेगा?",
+    "q_en": "Q37. Which of the following salts, when dissolved in water, will produce a neutral solution?",
+    "tag": "RRB Technician, 06/03/2026, Shift-II",
+    "o_hi": [
+      "(a) सोडियम क्लोराइड (NaCl)",
+      "(b) सोडियम एसीटेट (CH₃COONa)",
+      "(c) अमोनियम क्लोराइड (NH₄Cl)",
+      "(d) पोटैशियम हाइड्रॉक्साइड (KOH)"
+    ],
+    "o_en": [
+      "(a) Sodium chloride (NaCl)",
+      "(b) Sodium acetate (CH₃COONa)",
+      "(c) Ammonium chloride (NH₄Cl)",
+      "(d) Potassium hydroxide (KOH)"
+    ],
+    "a": 0,
+    "e_hi": "NaCl प्रबल अम्ल और प्रबल क्षार से बना लवण है और सामान्यतः पानी में उदासीन विलयन देता है। CH₃COONa क्षारीय तथा NH₄Cl अम्लीय विलयन देता है; KOH स्वयं क्षार है।",
+    "e_en": "NaCl is formed from a strong acid and a strong base and generally gives a neutral solution in water. CH₃COONa gives a basic solution, NH₄Cl an acidic one, and KOH is itself a base."
+  },
+  {
+    "q_hi": "Q38. सोडियम हाइड्रॉक्साइड का निर्माण किसके द्वारा होता है?",
+    "q_en": "Q38. Sodium hydroxide is formed by:",
+    "tag": "RRB Group-D, 09/01/2026, Shift-II",
+    "o_hi": [
+      "(a) ब्राइन (नमक के विलयन) से विद्युत प्रवाहित करने पर",
+      "(b) पानी से क्लोरीन गुजारने पर",
+      "(c) एथानॉल में सोडियम घोलने पर",
+      "(d) सोडियम की कार्बन डाइऑक्साइड से अभिक्रिया कराने पर"
+    ],
+    "o_en": [
+      "(a) Passing electricity through brine",
+      "(b) Passing chlorine through water",
+      "(c) Dissolving sodium in ethanol",
+      "(d) Reacting sodium with carbon dioxide"
+    ],
+    "a": 0,
+    "e_hi": "ब्राइन (NaCl का जलीय विलयन) के विद्युत-अपघटन से NaOH बनता है; साथ में क्लोरीन और हाइड्रोजन गैसें प्राप्त होती हैं। इसे chlor-alkali process कहते हैं।",
+    "e_en": "Electrolysis of brine (aqueous NaCl) produces NaOH along with chlorine and hydrogen gases. This is the chlor-alkali process."
+  },
+  {
+    "q_hi": "Q39. Chlor-Alkali प्रक्रिया के दौरान ब्राइन के विद्युत-अपघटन से निम्नलिखित में से कौन-सा उत्पाद सीधे प्राप्त नहीं होता?",
+    "q_en": "Q39. During the Chlor-Alkali process, which of the following products is NOT obtained directly from the electrolysis of brine?",
+    "tag": "RRB Group-D, 08/12/2025, Shift-I",
+    "o_hi": [
+      "(a) एनोड पर क्लोरीन गैस",
+      "(b) सोडियम हाइड्रॉक्साइड विलयन",
+      "(c) कैथोड पर जमा सोडियम धातु",
+      "(d) कैथोड पर हाइड्रोजन गैस"
+    ],
+    "o_en": [
+      "(a) Chlorine gas at the anode",
+      "(b) Sodium hydroxide solution",
+      "(c) Sodium metal deposited at the cathode",
+      "(d) Hydrogen gas at the cathode"
+    ],
+    "a": 2,
+    "e_hi": "ब्राइन के विद्युत-अपघटन में Cl₂ एनोड पर, H₂ कैथोड पर और विलयन में NaOH बनता है। जलीय माध्यम में सोडियम धातु जमा नहीं होती।",
+    "e_en": "In electrolysis of brine, Cl₂ forms at the anode, H₂ at the cathode, and NaOH remains in solution. Sodium metal is not deposited from aqueous brine."
+  },
+  {
+    "q_hi": "Q40. सूखे बुझे हुए चूने Ca(OH)₂ पर क्लोरीन की क्रिया से कौन-सा यौगिक बनता है?",
+    "q_en": "Q40. Which of the following is the compound produced by the action of chlorine on dry slaked lime (Ca(OH)₂)?",
+    "tag": "RRB Group-D, 08/12/2025, Shift-II",
+    "o_hi": [
+      "(a) साधारण नमक",
+      "(b) ब्लिचिंग सोडा",
+      "(c) वाशिंग सोडा",
+      "(d) ब्लिचिंग पाउडर"
+    ],
+    "o_en": [
+      "(a) Common salt",
+      "(b) Bleaching soda",
+      "(c) Washing soda",
+      "(d) Bleaching powder"
+    ],
+    "a": 3,
+    "e_hi": "क्लोरीन को सूखे बुझे चूने Ca(OH)₂ पर प्रवाहित करने से bleaching powder बनता है, जिसे स्कूल-स्तर पर CaOCl₂ लिखा जाता है।",
+    "e_en": "Passing chlorine over dry slaked lime, Ca(OH)₂, produces bleaching powder, commonly represented at school level as CaOCl₂."
+  },
+  {
+    "q_hi": "Q41. निम्नलिखित में से कौन-सा ब्लिचिंग पाउडर का उपयोग नहीं है?",
+    "q_en": "Q41. Which of the following is NOT the use of bleaching powder?",
+    "tag": "RRB Group-D, 12/12/2025, Shift-III",
+    "o_hi": [
+      "(a) पीने के पानी को कीटाणुरहित करने के लिए",
+      "(b) पानी की स्थायी कठोरता दूर करने के लिए",
+      "(c) वस्त्र उद्योग में सूती और लिनन को ब्लीच करने के लिए",
+      "(d) कई रासायनिक उद्योगों में ऑक्सीकारक के रूप में"
+    ],
+    "o_en": [
+      "(a) To make drinking water free from germs",
+      "(b) For removing permanent hardness of water",
+      "(c) For bleaching cotton and linen in the textile industry",
+      "(d) As an oxidising agent in many chemical industries"
+    ],
+    "a": 1,
+    "e_hi": "ब्लिचिंग पाउडर का उपयोग जल कीटाणुशोधन, कपड़ों/कागज की ब्लीचिंग और ऑक्सीकारक के रूप में होता है। स्थायी कठोरता हटाना इसका सामान्य उपयोग नहीं है।",
+    "e_en": "Bleaching powder is used for disinfecting water, bleaching textiles/paper and as an oxidising agent. Removing permanent hardness of water is not its standard use."
+  },
+  {
+    "q_hi": "Q42. बेकिंग सोडा का रासायनिक नाम क्या है?",
+    "q_en": "Q42. What is the chemical name of baking soda?",
+    "tag": "RRB Group-D, 27/12/2025, Shift-III",
+    "o_hi": [
+      "(a) सोडियम कार्बोनेट",
+      "(b) सोडियम हाइड्रोजन कार्बोनेट",
+      "(c) सोडियम सल्फेट",
+      "(d) सोडियम हाइड्रॉक्साइड"
+    ],
+    "o_en": [
+      "(a) Sodium carbonate",
+      "(b) Sodium hydrogen carbonate",
+      "(c) Sodium sulphate",
+      "(d) Sodium hydroxide"
+    ],
+    "a": 1,
+    "e_hi": "बेकिंग सोडा NaHCO₃ है, जिसका रासायनिक नाम sodium hydrogen carbonate (sodium bicarbonate) है।",
+    "e_en": "Baking soda is NaHCO₃, chemically called sodium hydrogen carbonate (sodium bicarbonate)."
+  },
+  {
+    "q_hi": "Q43. बेकिंग सोडा को गर्म करने पर कौन-सी गैस निकलती है?",
+    "q_en": "Q43. Baking soda releases which gas on heating?",
+    "tag": "RRB Group-D, 09/02/2026, Shift-II",
+    "o_hi": [
+      "(a) O₂",
+      "(b) CO₂",
+      "(c) H₂",
+      "(d) N₂"
+    ],
+    "o_en": [
+      "(a) O₂",
+      "(b) CO₂",
+      "(c) H₂",
+      "(d) N₂"
+    ],
+    "a": 1,
+    "e_hi": "गर्म करने पर: 2NaHCO₃ → Na₂CO₃ + H₂O + CO₂। इसलिए CO₂ गैस निकलती है।",
+    "e_en": "On heating: 2NaHCO₃ → Na₂CO₃ + H₂O + CO₂. Therefore CO₂ gas is released."
+  },
+  {
+    "q_hi": "Q44. निम्नलिखित में से कौन-सा बेकिंग सोडा का सामान्य उपयोग है?",
+    "q_en": "Q44. Which of the following is a common use of baking soda?",
+    "tag": "RRB Group-D, 08/12/2025, Shift-I",
+    "o_hi": [
+      "(a) पेट के अतिरिक्त अम्ल को उदासीन करना",
+      "(b) मिट्टी की क्यारियों में अम्लता बढ़ाना",
+      "(c) जीवाणु अपघटन रोकना",
+      "(d) साबुन बनाने के लिए एल्कोहल के साथ अभिक्रिया करना"
+    ],
+    "o_en": [
+      "(a) Neutralising excess stomach acid",
+      "(b) Increasing acidity in soil beds",
+      "(c) Preventing bacterial decomposition",
+      "(d) Reacting with alcohol to make soap"
+    ],
+    "a": 0,
+    "e_hi": "NaHCO₃ एक हल्का क्षार है और antacid के रूप में पेट के अतिरिक्त अम्ल को उदासीन कर सकता है।",
+    "e_en": "NaHCO₃ is a mild base and can act as an antacid by neutralising excess stomach acid."
+  },
+  {
+    "q_hi": "Q45. निम्नलिखित में से कौन-सा सोडियम हाइड्रोजन कार्बोनेट (NaHCO₃) का सही उपयोग या गुण नहीं है?",
+    "q_en": "Q45. Which of the following is NOT a correct use or property of sodium hydrogen carbonate, NaHCO₃?",
+    "tag": "RRB Technician, 06/03/2026, Shift-III",
+    "o_hi": [
+      "(a) इसका उपयोग अग्निशामक यंत्रों में किया जाता है।",
+      "(b) इसका उपयोग बेकिंग में फुलाने वाले एजेंट के रूप में किया जाता है।",
+      "(c) इसका उपयोग एक प्रबल अम्ल के रूप में किया जाता है।",
+      "(d) इसका उपयोग एंटासिड में किया जाता है।"
+    ],
+    "o_en": [
+      "(a) It is used in fire extinguishers.",
+      "(b) It is used in baking as a leavening agent.",
+      "(c) It is used as a strong acid.",
+      "(d) It is used in antacids."
+    ],
+    "a": 2,
+    "e_hi": "NaHCO₃ हल्का क्षारीय लवण है, प्रबल अम्ल नहीं। इसका उपयोग बेकिंग, एंटासिड और कुछ अग्निशामक यंत्रों में होता है।",
+    "e_en": "NaHCO₃ is a mildly basic salt, not a strong acid. It is used in baking, antacids and some fire extinguishers."
+  },
+  {
+    "q_hi": "Q46. सोडियम बाइकार्बोनेट और एक दुर्बल खाद्य अम्ल का मिश्रण ____ कहलाता है।",
+    "q_en": "Q46. A mixture of sodium bicarbonate and a weak edible acid is called ______.",
+    "tag": "RRB Group-D 28-09-2022 Level 1 (Shift-2)",
+    "o_hi": [
+      "(a) बेकिंग सोडा",
+      "(b) वाशिंग सोडा",
+      "(c) बेकिंग पाउडर",
+      "(d) ब्लिचिंग पाउडर"
+    ],
+    "o_en": [
+      "(a) Baking soda",
+      "(b) Washing soda",
+      "(c) Baking powder",
+      "(d) Bleaching powder"
+    ],
+    "a": 2,
+    "e_hi": "बेकिंग पाउडर में सोडियम हाइड्रोजन कार्बोनेट तथा टार्टरिक अम्ल जैसे हल्के खाद्य अम्ल का मिश्रण होता है।",
+    "e_en": "Baking powder is a mixture of sodium hydrogen carbonate and a mild edible acid such as tartaric acid."
+  },
+  {
+    "q_hi": "Q47. निम्नलिखित में से कौन-सा वाशिंग सोडा का उपयोग है?",
+    "q_en": "Q47. Which of the following is a use of washing soda?",
+    "tag": "RRB Group-D, 24/12/2025, Shift-III",
+    "o_hi": [
+      "(a) गरम पानी के उपचार में",
+      "(b) पानी की कठोरता दूर करने में",
+      "(c) पानी में बैक्टीरिया मारने में",
+      "(d) खाना पकाने में"
+    ],
+    "o_en": [
+      "(a) Used in treatment of hot water",
+      "(b) Removes the hardness of water",
+      "(c) Used to kill bacteria in water",
+      "(d) Used in cooking"
+    ],
+    "a": 1,
+    "e_hi": "वाशिंग सोडा Na₂CO₃·10H₂O का उपयोग जल की स्थायी कठोरता दूर करने के लिए किया जाता है।",
+    "e_en": "Washing soda, Na₂CO₃·10H₂O, is used to remove permanent hardness of water."
+  },
+  {
+    "q_hi": "Q48. Plaster of Paris (POP) के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+    "q_en": "Q48. Which of the following statements about Plaster of Paris (POP) is CORRECT?",
+    "tag": "RRB JE, 19/02/2026, Shift-II",
+    "o_hi": [
+      "(a) POP CaSO₄·2H₂O है और पानी मिलाने पर जल्दी जमता है।",
+      "(b) POP CaSO₄·½H₂O है और पानी के साथ अभिक्रिया करके कठोर हो जाता है।",
+      "(c) POP CaSO₄·2H₂O है और मुख्य रूप से उर्वरक के रूप में उपयोग होता है।",
+      "(d) POP CaSO₄·½H₂O है और बिना पानी के धीरे-धीरे जमता है।"
+    ],
+    "o_en": [
+      "(a) POP is CaSO₄·2H₂O and sets quickly on mixing with water.",
+      "(b) POP is CaSO₄·½H₂O and hardens by reacting with water.",
+      "(c) POP is CaSO₄·2H₂O and is mainly used as a fertilizer.",
+      "(d) POP is CaSO₄·½H₂O and sets slowly without water."
+    ],
+    "a": 1,
+    "e_hi": "Plaster of Paris कैल्शियम सल्फेट हेमीहाइड्रेट, CaSO₄·½H₂O है। पानी मिलाने पर यह जिप्सम CaSO₄·2H₂O बनाकर कठोर हो जाता है।",
+    "e_en": "Plaster of Paris is calcium sulphate hemihydrate, CaSO₄·½H₂O. On adding water it converts to gypsum, CaSO₄·2H₂O, and hardens."
+  }
+];

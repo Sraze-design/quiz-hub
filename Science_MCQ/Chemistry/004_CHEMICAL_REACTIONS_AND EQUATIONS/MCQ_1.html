@@ -1,0 +1,902 @@
+const data = [
+  {
+    "q_hi": "Q1. निम्नलिखित में से कौन-सा रासायनिक अभिक्रिया का उदाहरण है?",
+    "q_en": "Q1. Which of the following is an example of a chemical reaction?",
+    "tag": "",
+    "o_hi": [
+      "(a) बर्फ का पिघलना",
+      "(b) पानी में चीनी का घुलना",
+      "(c) मैग्नीशियम रिबन का जलना",
+      "(d) पानी का जमना"
+    ],
+    "o_en": [
+      "(a) Melting of ice",
+      "(b) Dissolving sugar in water",
+      "(c) Burning of magnesium ribbon",
+      "(d) Freezing of water"
+    ],
+    "a": 2,
+    "e_hi": "मैग्नीशियम के जलने पर नया पदार्थ मैग्नीशियम ऑक्साइड बनता है, इसलिए यह रासायनिक परिवर्तन है। बाकी विकल्प भौतिक परिवर्तन हैं।",
+    "e_en": "Burning magnesium forms a new substance, magnesium oxide, so it is a chemical change. The other options are physical changes."
+  },
+  {
+    "q_hi": "Q2. निम्नलिखित में से कौन-से प्रेक्षणीय परिवर्तन यह संकेत दे सकते हैं कि रासायनिक अभिक्रिया हुई है?<br>(a) गैस का बनना<br>(b) अवक्षेप का बनना<br>(c) भौतिक अवस्था में परिवर्तन<br>(d) रंग में परिवर्तन",
+    "q_en": "Q2. Which of the following observable changes indicate that a chemical reaction has occurred?<br>(a) Formation of gas<br>(b) Formation of precipitates<br>(c) Change in physical state<br>(d) Colour change",
+    "tag": "Technician Grade III 26/12/24 Shift-II",
+    "o_hi": [
+      "(a) सभी (a), (b), (c) और (d)",
+      "(b) केवल (a) और (b)",
+      "(c) केवल (a), (b) और (c)",
+      "(d) केवल (c) और (d)"
+    ],
+    "o_en": [
+      "(a) All (a), (b), (c) and (d)",
+      "(b) Only (a) and (b)",
+      "(c) Only (a), (b) and (c)",
+      "(d) Only (c) and (d)"
+    ],
+    "a": 0,
+    "e_hi": "रासायनिक अभिक्रिया के सामान्य संकेतों में गैस निकलना, अवक्षेप बनना, अवस्था में परिवर्तन और रंग बदलना शामिल हो सकते हैं। इसलिए सभी कथन सही हैं।",
+    "e_en": "Common observable signs of a chemical reaction can include gas evolution, precipitate formation, change of state and colour change. Hence all are included."
+  },
+  {
+    "q_hi": "Q3. अभिक्रिया H₂ + Cl₂ → 2HCl में HCl क्या है?",
+    "q_en": "Q3. In the reaction H₂ + Cl₂ → 2HCl, what is HCl?",
+    "tag": "",
+    "o_hi": [
+      "(a) अभिकारक",
+      "(b) उत्पाद",
+      "(c) उत्प्रेरक",
+      "(d) निष्क्रिय गैस"
+    ],
+    "o_en": [
+      "(a) Reactant",
+      "(b) Product",
+      "(c) Catalyst",
+      "(d) Inert gas"
+    ],
+    "a": 1,
+    "e_hi": "तीर के बाईं ओर H₂ और Cl₂ अभिकारक हैं तथा दाईं ओर बनने वाला HCl उत्पाद है।",
+    "e_en": "H₂ and Cl₂ are reactants on the left side of the arrow, while HCl formed on the right side is the product."
+  },
+  {
+    "q_hi": "Q4. रासायनिक समीकरण में तीर का सिरा किस ओर इंगित करता है?",
+    "q_en": "Q4. In a chemical equation, the arrowhead points towards:",
+    "tag": "RRB Group-D-01/09/2022 (Shift-I)",
+    "o_hi": [
+      "(a) अभिक्रिया की स्थितियाँ",
+      "(b) विलायक",
+      "(c) उत्पाद",
+      "(d) अभिकारक"
+    ],
+    "o_en": [
+      "(a) Reaction conditions",
+      "(b) Solvent",
+      "(c) Products",
+      "(d) Reactants"
+    ],
+    "a": 2,
+    "e_hi": "रासायनिक समीकरण में अभिकारक बाईं ओर और उत्पाद दाईं ओर लिखे जाते हैं; तीर उत्पादों की ओर होता है।",
+    "e_en": "In a chemical equation, reactants are written on the left and products on the right; the arrow points toward the products."
+  },
+  {
+    "q_hi": "Q5. CuO + NH₃ → Cu + N₂ + H₂O के लिए सही संतुलित अभिक्रिया का चयन कीजिए।",
+    "q_en": "Q5. Select the correct balanced reaction for CuO + NH₃ → Cu + N₂ + H₂O.",
+    "tag": "RRB ALP 25/11/24 Shift-I",
+    "o_hi": [
+      "(a) 2CuO + 3NH₃ → 3Cu + N₂ + 3H₂O",
+      "(b) 3CuO + 2NH₃ → 3Cu + 2N₂ + 3H₂O",
+      "(c) 3CuO + 2NH₃ → 3Cu + N₂ + 3H₂O",
+      "(d) 3CuO + 2NH₃ → 3Cu + N₂ + 4H₂O"
+    ],
+    "o_en": [
+      "(a) 2CuO + 3NH₃ → 3Cu + N₂ + 3H₂O",
+      "(b) 3CuO + 2NH₃ → 3Cu + 2N₂ + 3H₂O",
+      "(c) 3CuO + 2NH₃ → 3Cu + N₂ + 3H₂O",
+      "(d) 3CuO + 2NH₃ → 3Cu + N₂ + 4H₂O"
+    ],
+    "a": 2,
+    "e_hi": "3CuO + 2NH₃ → 3Cu + N₂ + 3H₂O में दोनों ओर Cu=3, N=2, H=6 और O=3 हैं, इसलिए यही संतुलित समीकरण है।",
+    "e_en": "In 3CuO + 2NH₃ → 3Cu + N₂ + 3H₂O, both sides contain Cu=3, N=2, H=6 and O=3, so it is balanced."
+  },
+  {
+    "q_hi": "Q6. समीकरण Fe + H₂O → Fe₃O₄ + H₂ को संतुलित कीजिए। Fe का गुणांक क्या है?",
+    "q_en": "Q6. Balance the equation Fe + H₂O → Fe₃O₄ + H₂. What is the coefficient of Fe?",
+    "tag": "",
+    "o_hi": [
+      "(a) 2",
+      "(b) 4",
+      "(c) 3",
+      "(d) 1"
+    ],
+    "o_en": [
+      "(a) 2",
+      "(b) 4",
+      "(c) 3",
+      "(d) 1"
+    ],
+    "a": 2,
+    "e_hi": "संतुलित समीकरण 3Fe + 4H₂O → Fe₃O₄ + 4H₂ है। इसलिए Fe का गुणांक 3 है।",
+    "e_en": "The balanced equation is 3Fe + 4H₂O → Fe₃O₄ + 4H₂. Therefore, the coefficient of Fe is 3."
+  },
+  {
+    "q_hi": "Q7. कौन-सा कथन संयोजन अभिक्रिया को सबसे अच्छी तरह परिभाषित करता है?",
+    "q_en": "Q7. Which statement best defines a combination reaction?",
+    "tag": "RRB Group-D, 09/02/2026, Shift-II",
+    "o_hi": [
+      "(a) दो अभिकारक सरल उत्पादों में टूट जाते हैं।",
+      "(b) दो या दो से अधिक अभिकारक मिलकर एक एकल उत्पाद बनाते हैं।",
+      "(c) एक तत्व दूसरे तत्व को उसके यौगिक से विस्थापित करता है।",
+      "(d) दो यौगिक नए यौगिक बनाने के लिए आयनों का आदान-प्रदान करते हैं।"
+    ],
+    "o_en": [
+      "(a) Two reactants break down into simpler products.",
+      "(b) Two or more reactants combine to form a single product.",
+      "(c) One element displaces another element from its compound.",
+      "(d) Two compounds exchange ions to form new compounds."
+    ],
+    "a": 1,
+    "e_hi": "संयोजन अभिक्रिया में दो या अधिक पदार्थ मिलकर एक ही उत्पाद बनाते हैं, जैसे CaO + H₂O → Ca(OH)₂।",
+    "e_en": "In a combination reaction, two or more substances combine to form a single product, e.g. CaO + H₂O → Ca(OH)₂."
+  },
+  {
+    "q_hi": "Q8. निम्नलिखित में से कौन-सी संयोजन अभिक्रिया नहीं है?",
+    "q_en": "Q8. Which of the following is NOT a combination reaction?",
+    "tag": "RRB Group-D, 24/12/2025, Shift-II",
+    "o_hi": [
+      "(a) HCl + NaOH → NaCl + H₂O",
+      "(b) C + O₂ → CO₂",
+      "(c) 2Mg + O₂ → 2MgO",
+      "(d) N₂ + 3H₂ → 2NH₃"
+    ],
+    "o_en": [
+      "(a) HCl + NaOH → NaCl + H₂O",
+      "(b) C + O₂ → CO₂",
+      "(c) 2Mg + O₂ → 2MgO",
+      "(d) N₂ + 3H₂ → 2NH₃"
+    ],
+    "a": 0,
+    "e_hi": "HCl + NaOH → NaCl + H₂O में दो उत्पाद बनते हैं और यह उदासीनीकरण/द्विविस्थापन अभिक्रिया है। बाकी में अनेक अभिकारकों से एक प्रकार का उत्पाद बनता है।",
+    "e_en": "HCl + NaOH → NaCl + H₂O gives two products and is a neutralisation/double-displacement reaction. The others form a single type of product from multiple reactants."
+  },
+  {
+    "q_hi": "Q9. निम्नलिखित में से कौन-सी संयोजन अभिक्रिया का उदाहरण है?",
+    "q_en": "Q9. Which of the following is an example of a combination reaction?",
+    "tag": "RRB Group-D, 16/12/2025, Shift-III",
+    "o_hi": [
+      "(a) CuSO₄ + BaCl₂ → BaSO₄ + CuCl₂",
+      "(b) CaO + H₂O → Ca(OH)₂",
+      "(c) 2KClO₃ → 2KCl + 3O₂",
+      "(d) Zn + H₂SO₄ → ZnSO₄ + H₂"
+    ],
+    "o_en": [
+      "(a) CuSO₄ + BaCl₂ → BaSO₄ + CuCl₂",
+      "(b) CaO + H₂O → Ca(OH)₂",
+      "(c) 2KClO₃ → 2KCl + 3O₂",
+      "(d) Zn + H₂SO₄ → ZnSO₄ + H₂"
+    ],
+    "a": 1,
+    "e_hi": "CaO और H₂O मिलकर केवल Ca(OH)₂ बनाते हैं, इसलिए यह संयोजन अभिक्रिया है।",
+    "e_en": "CaO and H₂O combine to form only Ca(OH)₂, so this is a combination reaction."
+  },
+  {
+    "q_hi": "Q10. CaO और H₂O की अत्यधिक ऊष्माक्षेपी अभिक्रिया से Ca(OH)₂ बनता है। यह किस प्रकार की अभिक्रिया है?",
+    "q_en": "Q10. The reaction between CaO and H₂O is highly exothermic and produces Ca(OH)₂. This is an example of:",
+    "tag": "RRB Group-D, 16/12/2025, Shift-III",
+    "o_hi": [
+      "(a) पुनर्विन्यास अभिक्रिया",
+      "(b) द्विविस्थापन अभिक्रिया",
+      "(c) संयोजन अभिक्रिया",
+      "(d) विस्थापन अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) Rearrangement reaction",
+      "(b) Double displacement reaction",
+      "(c) Combination reaction",
+      "(d) Displacement reaction"
+    ],
+    "a": 2,
+    "e_hi": "दो अभिकारक CaO और H₂O मिलकर एक ही उत्पाद Ca(OH)₂ बनाते हैं, इसलिए यह संयोजन अभिक्रिया है।",
+    "e_en": "Two reactants, CaO and H₂O, combine to form the single product Ca(OH)₂, so it is a combination reaction."
+  },
+  {
+    "q_hi": "Q11. वायु की उपस्थिति में मैग्नीशियम को जलाने पर मैग्नीशियम ऑक्साइड बनता है। इसमें शामिल अभिक्रिया के प्रकार का चयन कीजिए।",
+    "q_en": "Q11. Magnesium oxide is formed when magnesium is burnt in the presence of air. Select the type of reaction involved.",
+    "tag": "RRB Group-D - 22/09/2022 (Shift-II)",
+    "o_hi": [
+      "(a) ऑक्सीकरण अभिक्रिया",
+      "(b) विस्थापन अभिक्रिया",
+      "(c) अपचयन अभिक्रिया",
+      "(d) द्विविस्थापन अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) Oxidation reaction",
+      "(b) Displacement reaction",
+      "(c) Reduction reaction",
+      "(d) Double displacement reaction"
+    ],
+    "a": 0,
+    "e_hi": "मैग्नीशियम ऑक्सीजन ग्रहण करके MgO बनाता है: 2Mg + O₂ → 2MgO। ऑक्सीजन का योग ऑक्सीकरण है।",
+    "e_en": "Magnesium gains oxygen to form MgO: 2Mg + O₂ → 2MgO. Addition of oxygen is oxidation."
+  },
+  {
+    "q_hi": "Q12. निम्न में से कौन-सा संयोजन अभिक्रिया का उदाहरण नहीं है?",
+    "q_en": "Q12. Which of the following is not an example of a combination reaction?",
+    "tag": "RRB Group-D - 22/09/2022 (Shift-III)",
+    "o_hi": [
+      "(a) बुझे हुए चूने का निर्माण",
+      "(b) कैल्शियम कार्बोनेट को गर्म करना",
+      "(c) कोयले का जलना",
+      "(d) हाइड्रोजन गैस और ऑक्सीजन गैस से जल का निर्माण"
+    ],
+    "o_en": [
+      "(a) Formation of quenched lime",
+      "(b) Heating calcium carbonate",
+      "(c) Burning of coal",
+      "(d) Formation of water from hydrogen gas and oxygen gas"
+    ],
+    "a": 1,
+    "e_hi": "CaCO₃ को गर्म करने पर CaO और CO₂ बनते हैं; एक पदार्थ दो उत्पादों में टूटता है, इसलिए यह अपघटन अभिक्रिया है, संयोजन नहीं।",
+    "e_en": "On heating, CaCO₃ decomposes into CaO and CO₂. One substance breaks into two products, so it is a decomposition reaction, not a combination reaction."
+  },
+  {
+    "q_hi": "Q13. मैग्नीशियम रिबन वायु (ऑक्सीजन) में चमकदार लौ के साथ जलता है और सफेद पदार्थ 'X' बनता है। X क्या है?",
+    "q_en": "Q13. A magnesium ribbon burns in air (oxygen) with a dazzling flame and forms a white substance 'X'. What is X?",
+    "tag": "RRB Group-D - 18/08/2022 (Shift-III)",
+    "o_hi": [
+      "(a) Mg(OH)₂",
+      "(b) MgO",
+      "(c) Mg",
+      "(d) MgCO₃"
+    ],
+    "o_en": [
+      "(a) Mg(OH)₂",
+      "(b) MgO",
+      "(c) Mg",
+      "(d) MgCO₃"
+    ],
+    "a": 1,
+    "e_hi": "मैग्नीशियम ऑक्सीजन में जलकर सफेद मैग्नीशियम ऑक्साइड बनाता है: 2Mg + O₂ → 2MgO।",
+    "e_en": "Magnesium burns in oxygen to form white magnesium oxide: 2Mg + O₂ → 2MgO."
+  },
+  {
+    "q_hi": "Q14. अपघटन अभिक्रिया क्या होती है?",
+    "q_en": "Q14. What is a decomposition reaction?",
+    "tag": "RRB Group-D, 19/12/2025, Shift-III",
+    "o_hi": [
+      "(a) दो या अधिक पदार्थ मिलकर एक उत्पाद बनाते हैं।",
+      "(b) दो यौगिक आयनों का आदान-प्रदान करते हैं।",
+      "(c) एक यौगिक दो या दो से अधिक सरल पदार्थों में टूट जाता है।",
+      "(d) दो या अधिक अभिकारकों से एक ही पदार्थ बनता है।"
+    ],
+    "o_en": [
+      "(a) Two or more substances combine to form one product.",
+      "(b) Two compounds exchange ions.",
+      "(c) A compound breaks down into two or more simpler substances.",
+      "(d) A single substance is formed from two or more reactants."
+    ],
+    "a": 2,
+    "e_hi": "अपघटन अभिक्रिया में एक अभिकारक टूटकर दो या अधिक सरल उत्पाद बनाता है।",
+    "e_en": "In a decomposition reaction, one reactant breaks down into two or more simpler products."
+  },
+  {
+    "q_hi": "Q15. कैल्शियम कार्बोनेट को गर्म करने पर कैल्शियम ऑक्साइड और कार्बन डाइऑक्साइड बनते हैं। यह किस प्रकार की रासायनिक अभिक्रिया है?",
+    "q_en": "Q15. Heating calcium carbonate produces calcium oxide and carbon dioxide. This is an example of which type of chemical reaction?",
+    "tag": "RRB Group-D, 26/12/2025, Shift-III",
+    "o_hi": [
+      "(a) अपघटन",
+      "(b) द्विविस्थापन",
+      "(c) विस्थापन",
+      "(d) संयोजन"
+    ],
+    "o_en": [
+      "(a) Decomposition",
+      "(b) Double displacement",
+      "(c) Displacement",
+      "(d) Combination"
+    ],
+    "a": 0,
+    "e_hi": "CaCO₃ → CaO + CO₂ में एक यौगिक दो पदार्थों में टूटता है, इसलिए यह ऊष्मीय अपघटन अभिक्रिया है।",
+    "e_en": "In CaCO₃ → CaO + CO₂, one compound breaks into two substances, so it is a thermal decomposition reaction."
+  },
+  {
+    "q_hi": "Q16. निम्नलिखित में से कौन गर्म करने पर अपघटित होकर बिना बुझा चूना (quick lime) देता है?",
+    "q_en": "Q16. Which of the following decomposes on heating to give quick lime?",
+    "tag": "RRB Group-D, 11/12/2025, Shift-II",
+    "o_hi": [
+      "(a) CaCO₃",
+      "(b) CaCl",
+      "(c) NaOH",
+      "(d) KClO₃"
+    ],
+    "o_en": [
+      "(a) CaCO₃",
+      "(b) CaCl",
+      "(c) NaOH",
+      "(d) KClO₃"
+    ],
+    "a": 0,
+    "e_hi": "कैल्शियम कार्बोनेट को गर्म करने पर CaO (quick lime) और CO₂ बनते हैं: CaCO₃ → CaO + CO₂।",
+    "e_en": "Heating calcium carbonate gives CaO (quick lime) and CO₂: CaCO₃ → CaO + CO₂."
+  },
+  {
+    "q_hi": "Q17. फेरस सल्फेट को गर्म करना किस प्रकार की अभिक्रिया का उदाहरण है?",
+    "q_en": "Q17. Heating ferrous sulphate is an example of which type of reaction?",
+    "tag": "",
+    "o_hi": [
+      "(a) ऊष्मीय अपघटन",
+      "(b) ऊष्मीय विश्लेषण",
+      "(c) द्वि-अपघटन",
+      "(d) उत्प्रेरक अपघटन"
+    ],
+    "o_en": [
+      "(a) Thermal decomposition",
+      "(b) Thermal analysis",
+      "(c) Double decomposition",
+      "(d) Catalytic decomposition"
+    ],
+    "a": 0,
+    "e_hi": "गर्म करने पर फेरस सल्फेट टूटकर Fe₂O₃, SO₂ और SO₃ बनाता है, इसलिए यह ऊष्मीय अपघटन है।",
+    "e_en": "On heating, ferrous sulphate decomposes to Fe₂O₃, SO₂ and SO₃, so the reaction is thermal decomposition."
+  },
+  {
+    "q_hi": "Q18. दी गई अभिक्रिया में फेरस सल्फेट का रंग कैसा होता है?<br>2FeSO₄(s) → Fe₂O₃(s) + SO₂(g) + SO₃(g)",
+    "q_en": "Q18. What is the colour of ferrous sulphate in the given chemical reaction?<br>2FeSO₄(s) → Fe₂O₃(s) + SO₂(g) + SO₃(g)",
+    "tag": "RRB Group-D - 27/09/2022 (Shift-II)",
+    "o_hi": [
+      "(a) हरा",
+      "(b) नीला",
+      "(c) लाल",
+      "(d) पीला"
+    ],
+    "o_en": [
+      "(a) Green",
+      "(b) Blue",
+      "(c) Red",
+      "(d) Yellow"
+    ],
+    "a": 0,
+    "e_hi": "फेरस सल्फेट क्रिस्टल हल्के हरे रंग के होते हैं। गर्म करने पर वे विघटित होकर Fe₂O₃ बनाते हैं।",
+    "e_en": "Ferrous sulphate crystals are pale green. On heating they decompose, eventually forming Fe₂O₃."
+  },
+  {
+    "q_hi": "Q19. ठोस लेड(II) नाइट्रेट को गर्म करने पर पीला PbO अवशेष बचता है और दो गैसें निकलती हैं—एक लाल-भूरी और दूसरी दहन में सहायता करती है। कौन-सी गैसें निकलती हैं?",
+    "q_en": "Q19. When solid lead(II) nitrate is heated, a yellow residue (PbO) is left behind and two gases are evolved—one is reddish-brown and the other supports combustion. Which gases are evolved?",
+    "tag": "RRB Group D 28/11/25 Shift-III",
+    "o_hi": [
+      "(a) नाइट्रोजन डाइऑक्साइड और ऑक्सीजन",
+      "(b) नाइट्रिक ऑक्साइड और ऑक्सीजन",
+      "(c) नाइट्रोजन गैस और कार्बन डाइऑक्साइड",
+      "(d) नाइट्रोजन डाइऑक्साइड और हाइड्रोजन"
+    ],
+    "o_en": [
+      "(a) Nitrogen dioxide and oxygen",
+      "(b) Nitric oxide and oxygen",
+      "(c) Nitrogen gas and carbon dioxide",
+      "(d) Nitrogen dioxide and hydrogen"
+    ],
+    "a": 0,
+    "e_hi": "अभिक्रिया 2Pb(NO₃)₂ → 2PbO + 4NO₂ + O₂ है। NO₂ लाल-भूरी गैस है और O₂ दहन में सहायता करती है।",
+    "e_en": "The reaction is 2Pb(NO₃)₂ → 2PbO + 4NO₂ + O₂. NO₂ is reddish-brown and O₂ supports combustion."
+  },
+  {
+    "q_hi": "Q20. सिल्वर क्लोराइड को कुछ समय सूर्य के प्रकाश में रखने पर उसका रंग बदल जाता है। इसका कारण क्या है?",
+    "q_en": "Q20. The colour of silver chloride changes when placed in sunlight for some time due to:",
+    "tag": "RRB Group-D, 17/12/2025, Shift-III",
+    "o_hi": [
+      "(a) ऑक्सीजन के साथ सिल्वर क्लोराइड की संयोजन अभिक्रिया",
+      "(b) सूर्य के प्रकाश द्वारा सिल्वर क्लोराइड का प्रकाश-रासायनिक अपघटन",
+      "(c) सिल्वर क्लोराइड का ऊष्मीय अपघटन",
+      "(d) ऑक्सीजन और पानी द्वारा विस्थापन अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) Combination reaction of silver chloride with oxygen",
+      "(b) Photochemical decomposition of silver chloride by sunlight",
+      "(c) Thermal decomposition of silver chloride",
+      "(d) Displacement reaction by oxygen and water"
+    ],
+    "a": 1,
+    "e_hi": "सूर्य के प्रकाश में 2AgCl → 2Ag + Cl₂ होता है। धात्विक सिल्वर बनने से सफेद AgCl धूसर होने लगता है; यह प्रकाश-अपघटन है।",
+    "e_en": "In sunlight, 2AgCl → 2Ag + Cl₂. Formation of metallic silver makes white AgCl turn grey; this is photochemical decomposition."
+  },
+  {
+    "q_hi": "Q21. निम्नलिखित में से कौन-सी 'वैद्युत अपघटन अभिक्रिया' का उदाहरण है?",
+    "q_en": "Q21. Which of the following is an example of an electrolytic decomposition reaction?",
+    "tag": "RRB Group-D 25-08-2022 (Shift-I)",
+    "o_hi": [
+      "(a) 2KClO₃ → 2KCl + 3O₂",
+      "(b) 2H₂O → 2H₂ + O₂",
+      "(c) ZnCO₃ → ZnO + CO₂",
+      "(d) 2AgBr → 2Ag + Br₂"
+    ],
+    "o_en": [
+      "(a) 2KClO₃ → 2KCl + 3O₂",
+      "(b) 2H₂O → 2H₂ + O₂",
+      "(c) ZnCO₃ → ZnO + CO₂",
+      "(d) 2AgBr → 2Ag + Br₂"
+    ],
+    "a": 1,
+    "e_hi": "जल का विद्युत अपघटन विद्युत धारा से H₂ और O₂ देता है: 2H₂O → 2H₂ + O₂।",
+    "e_en": "Electrolysis of water uses electric current to decompose water into H₂ and O₂: 2H₂O → 2H₂ + O₂."
+  },
+  {
+    "q_hi": "Q22. रासायनिक अभिक्रिया Fe(s) + CuSO₄(aq) → FeSO₄(aq) + Cu(s) किस प्रकार की अभिक्रिया है?",
+    "q_en": "Q22. The chemical reaction Fe(s) + CuSO₄(aq) → FeSO₄(aq) + Cu(s) represents which type of reaction?",
+    "tag": "Technician Grade III 23/12/24 Shift-I",
+    "o_hi": [
+      "(a) संयोजन अभिक्रिया",
+      "(b) दहन अभिक्रिया",
+      "(c) विस्थापन अभिक्रिया",
+      "(d) द्विविस्थापन अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) Combination reaction",
+      "(b) Combustion reaction",
+      "(c) Displacement reaction",
+      "(d) Double displacement reaction"
+    ],
+    "a": 2,
+    "e_hi": "Fe, CuSO₄ से Cu को विस्थापित करके FeSO₄ बनाता है। इसलिए यह एकल विस्थापन अभिक्रिया है।",
+    "e_en": "Iron displaces copper from CuSO₄ to form FeSO₄, so this is a single-displacement reaction."
+  },
+  {
+    "q_hi": "Q23. निम्नलिखित में से कौन-सी विस्थापन अभिक्रिया है?",
+    "q_en": "Q23. Which of the following is a displacement reaction?",
+    "tag": "RRB Group-D, 30/12/2025, Shift-III",
+    "o_hi": [
+      "(a) Zn + CuSO₄ → ZnSO₄ + Cu",
+      "(b) CaCO₃ → CaO + CO₂",
+      "(c) AgNO₃ + NaCl → AgCl + NaNO₃",
+      "(d) NaOH + HCl → NaCl + H₂O"
+    ],
+    "o_en": [
+      "(a) Zn + CuSO₄ → ZnSO₄ + Cu",
+      "(b) CaCO₃ → CaO + CO₂",
+      "(c) AgNO₃ + NaCl → AgCl + NaNO₃",
+      "(d) NaOH + HCl → NaCl + H₂O"
+    ],
+    "a": 0,
+    "e_hi": "Zn अधिक क्रियाशील होने के कारण CuSO₄ से Cu को विस्थापित करता है, इसलिए यह विस्थापन अभिक्रिया है।",
+    "e_en": "Zinc is more reactive and displaces copper from CuSO₄, making this a displacement reaction."
+  },
+  {
+    "q_hi": "Q24. कौन-सी अभिक्रिया विस्थापन अभिक्रिया नहीं है?",
+    "q_en": "Q24. Which reaction is NOT a displacement reaction?",
+    "tag": "RRB ALP, 13/02/2026, Shift-I",
+    "o_hi": [
+      "(a) Na + H₂O → NaOH + H₂",
+      "(b) HCl + NaOH → NaCl + H₂O",
+      "(c) Fe + CuSO₄ → FeSO₄ + Cu",
+      "(d) Zn + H₂SO₄ → ZnSO₄ + H₂"
+    ],
+    "o_en": [
+      "(a) Na + H₂O → NaOH + H₂",
+      "(b) HCl + NaOH → NaCl + H₂O",
+      "(c) Fe + CuSO₄ → FeSO₄ + Cu",
+      "(d) Zn + H₂SO₄ → ZnSO₄ + H₂"
+    ],
+    "a": 1,
+    "e_hi": "HCl + NaOH → NaCl + H₂O उदासीनीकरण तथा द्विविस्थापन अभिक्रिया है; इसमें कोई एक तत्व दूसरे को यौगिक से विस्थापित नहीं करता।",
+    "e_en": "HCl + NaOH → NaCl + H₂O is a neutralisation/double-displacement reaction; no single element displaces another from a compound."
+  },
+  {
+    "q_hi": "Q25. क्लोरीन गैस पोटैशियम आयोडाइड विलयन से अभिक्रिया करके पोटैशियम क्लोराइड और आयोडीन बनाती है। यह किस प्रकार की अभिक्रिया है?",
+    "q_en": "Q25. Chlorine gas reacts with potassium iodide solution to form potassium chloride and iodine. This reaction is an example of a:",
+    "tag": "RRB Group D 25/8/22 Shift-II",
+    "o_hi": [
+      "(a) अपघटन अभिक्रिया",
+      "(b) संयोजन अभिक्रिया",
+      "(c) विस्थापन अभिक्रिया",
+      "(d) द्विविस्थापन अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) Decomposition reaction",
+      "(b) Combination reaction",
+      "(c) Displacement reaction",
+      "(d) Double displacement reaction"
+    ],
+    "a": 2,
+    "e_hi": "Cl₂ अधिक क्रियाशील है और KI से I₂ को विस्थापित करता है: Cl₂ + 2KI → 2KCl + I₂। इसलिए यह विस्थापन अभिक्रिया है।",
+    "e_en": "Chlorine is more reactive and displaces iodine from KI: Cl₂ + 2KI → 2KCl + I₂. Therefore it is a displacement reaction."
+  },
+  {
+    "q_hi": "Q26. वह अभिक्रिया जिसमें दो आयनिक यौगिकों के धनात्मक और ऋणात्मक आयन स्थानों का आदान-प्रदान करके दो नए यौगिक बनाते हैं, किसका उदाहरण है?",
+    "q_en": "Q26. A reaction in which the positive and negative ions of two ionic compounds exchange places to form two new compounds is an example of:",
+    "tag": "RRB Group-D, 06/02/2026, Shift-II",
+    "o_hi": [
+      "(a) विस्थापन अभिक्रिया",
+      "(b) द्विविस्थापन अभिक्रिया",
+      "(c) संयोजन अभिक्रिया",
+      "(d) अपघटन अभिक्रिया"
+    ],
+    "o_en": [
+      "(a) Displacement reaction",
+      "(b) Double displacement reaction",
+      "(c) Combination reaction",
+      "(d) Decomposition reaction"
+    ],
+    "a": 1,
+    "e_hi": "दो यौगिकों के आयनों के परस्पर आदान-प्रदान से दो नए यौगिक बनें तो इसे द्विविस्थापन अभिक्रिया कहते हैं।",
+    "e_en": "When ions of two compounds exchange partners to form two new compounds, the reaction is called double displacement."
+  },
+  {
+    "q_hi": "Q27. बेरियम क्लोराइड, एल्युमिनियम सल्फेट से अभिक्रिया करके एल्युमिनियम क्लोराइड के साथ क्या देता है?",
+    "q_en": "Q27. When barium chloride reacts with aluminium sulphate, it gives aluminium chloride along with:",
+    "tag": "RRB Group-D, 12/12/2025, Shift-II",
+    "o_hi": [
+      "(a) बेरियम सल्फेट का सफेद अवक्षेप",
+      "(b) बेरियम क्लोराइड का सफेद अवक्षेप",
+      "(c) बेरियम सल्फेट का पीला अवक्षेप",
+      "(d) बेरियम ऑक्साइड का सफेद अवक्षेप"
+    ],
+    "o_en": [
+      "(a) A white precipitate of barium sulphate",
+      "(b) A white precipitate of barium chloride",
+      "(c) A yellow precipitate of barium sulphate",
+      "(d) A white precipitate of barium oxide"
+    ],
+    "a": 0,
+    "e_hi": "Ba²⁺ और SO₄²⁻ मिलकर अघुलनशील BaSO₄ बनाते हैं, जो सफेद अवक्षेप है।",
+    "e_en": "Ba²⁺ and SO₄²⁻ form insoluble BaSO₄, which appears as a white precipitate."
+  },
+  {
+    "q_hi": "Q28. Na₂SO₄(aq) + BaCl₂(aq) → 2NaCl(aq) + BaSO₄(s) किस प्रकार की अभिक्रिया है?",
+    "q_en": "Q28. Na₂SO₄(aq) + BaCl₂(aq) → 2NaCl(aq) + BaSO₄(s) is what type of reaction?",
+    "tag": "",
+    "o_hi": [
+      "(a) संयोजन",
+      "(b) अपघटन",
+      "(c) विस्थापन",
+      "(d) द्विविस्थापन"
+    ],
+    "o_en": [
+      "(a) Combination",
+      "(b) Decomposition",
+      "(c) Displacement",
+      "(d) Double displacement"
+    ],
+    "a": 3,
+    "e_hi": "Na₂SO₄ और BaCl₂ अपने आयनों का आदान-प्रदान करके NaCl और BaSO₄ बनाते हैं, इसलिए यह द्विविस्थापन अभिक्रिया है।",
+    "e_en": "Na₂SO₄ and BaCl₂ exchange ions to form NaCl and BaSO₄, so this is a double-displacement reaction."
+  },
+  {
+    "q_hi": "Q29. सिल्वर नाइट्रेट की सोडियम क्लोराइड से अभिक्रिया पर बनने वाले अवक्षेप का रंग क्या होता है?",
+    "q_en": "Q29. What is the colour of the precipitate formed when silver nitrate reacts with sodium chloride?",
+    "tag": "RRB Group-D, 05/02/2026, Shift-II",
+    "o_hi": [
+      "(a) हरा",
+      "(b) नीला",
+      "(c) पीला",
+      "(d) सफेद"
+    ],
+    "o_en": [
+      "(a) Green",
+      "(b) Blue",
+      "(c) Yellow",
+      "(d) White"
+    ],
+    "a": 3,
+    "e_hi": "AgNO₃ + NaCl → AgCl↓ + NaNO₃ में AgCl अघुलनशील सफेद अवक्षेप के रूप में बनता है।",
+    "e_en": "In AgNO₃ + NaCl → AgCl↓ + NaNO₃, AgCl forms as an insoluble white precipitate."
+  },
+  {
+    "q_hi": "Q30. एक छात्र अज्ञात विलयन में लेड(II) नाइट्रेट [Pb(NO₃)₂] मिलाता है और पीला अवक्षेप बनता है। अज्ञात विलयन क्या हो सकता है?",
+    "q_en": "Q30. A student adds lead(II) nitrate [Pb(NO₃)₂] to an unknown solution and a yellow precipitate forms. What could the unknown solution be?",
+    "tag": "RRB JE, 20/02/2026, Shift-III",
+    "o_hi": [
+      "(a) पोटैशियम आयोडाइड (KI)",
+      "(b) कॉपर सल्फेट (CuSO₄)",
+      "(c) सोडियम क्लोराइड (NaCl)",
+      "(d) बेरियम सल्फेट (BaSO₄)"
+    ],
+    "o_en": [
+      "(a) Potassium iodide (KI)",
+      "(b) Copper sulphate (CuSO₄)",
+      "(c) Sodium chloride (NaCl)",
+      "(d) Barium sulphate (BaSO₄)"
+    ],
+    "a": 0,
+    "e_hi": "Pb(NO₃)₂ + 2KI → PbI₂↓ + 2KNO₃ में PbI₂ चमकीला पीला अवक्षेप बनाता है।",
+    "e_en": "Pb(NO₃)₂ + 2KI → PbI₂↓ + 2KNO₃ produces PbI₂ as a bright yellow precipitate."
+  },
+  {
+    "q_hi": "Q31. निम्नलिखित में से कौन-सी अभिक्रिया अवक्षेपण अभिक्रिया का उदाहरण है?",
+    "q_en": "Q31. Which of the following reactions is an example of a precipitation reaction?",
+    "tag": "RRB Group-D, 26/12/2025, Shift-III",
+    "o_hi": [
+      "(a) Zn + H₂SO₄ → ZnSO₄ + H₂↑",
+      "(b) AgNO₃ + NaCl → AgCl↓ + NaNO₃",
+      "(c) NaOH + HCl → NaCl + H₂O",
+      "(d) CaCO₃ → CaO + CO₂↑"
+    ],
+    "o_en": [
+      "(a) Zn + H₂SO₄ → ZnSO₄ + H₂↑",
+      "(b) AgNO₃ + NaCl → AgCl↓ + NaNO₃",
+      "(c) NaOH + HCl → NaCl + H₂O",
+      "(d) CaCO₃ → CaO + CO₂↑"
+    ],
+    "a": 1,
+    "e_hi": "AgNO₃ और NaCl के जलीय विलयनों से अघुलनशील AgCl बनता है, इसलिए यह अवक्षेपण अभिक्रिया है।",
+    "e_en": "Aqueous AgNO₃ and NaCl form insoluble AgCl, so this is a precipitation reaction."
+  },
+  {
+    "q_hi": "Q32. कथन 1: अवक्षेपण अभिक्रिया तब होती है जब दो जलीय विलयन अभिक्रिया करके अघुलनशील ठोस बनाते हैं।<br>कथन 2: बने ठोस को अवक्षेप कहते हैं।<br>कथन 3: सभी अवक्षेपण अभिक्रियाओं में केवल अम्ल और क्षार शामिल होते हैं।<br>उपरोक्त में से कौन-से कथन सही हैं?",
+    "q_en": "Q32. Statement 1: A precipitation reaction occurs when two aqueous solutions react to form an insoluble solid.<br>Statement 2: The solid formed is called a precipitate.<br>Statement 3: All precipitation reactions involve acids and bases only.<br>Which of the above statements are correct?",
+    "tag": "RRB Technician, 06/03/2026, Shift-II",
+    "o_hi": [
+      "(a) 1, 2 और 3",
+      "(b) केवल 2 और 3",
+      "(c) केवल 1 और 3",
+      "(d) केवल 1 और 2"
+    ],
+    "o_en": [
+      "(a) 1, 2 and 3",
+      "(b) 2 and 3 only",
+      "(c) 1 and 3 only",
+      "(d) 1 and 2 only"
+    ],
+    "a": 3,
+    "e_hi": "कथन 1 और 2 सही हैं। अवक्षेपण के लिए केवल अम्ल-क्षार होना आवश्यक नहीं; कई लवण-विलयन भी अघुलनशील ठोस बनाते हैं।",
+    "e_en": "Statements 1 and 2 are correct. Precipitation is not restricted to acid-base reactions; many salt solutions also form insoluble solids."
+  },
+  {
+    "q_hi": "Q33. निम्न रासायनिक अभिक्रियाओं पर विचार कीजिए:<br>I. BaCl₂(aq) + Na₂SO₄(aq) → BaSO₄(s) + 2NaCl(aq)<br>II. Pb(NO₃)₂(aq) + 2KI(aq) → PbI₂(s) + 2KNO₃(aq)<br>इनका सही वर्गीकरण क्या है?",
+    "q_en": "Q33. Consider the following chemical reactions:<br>I. BaCl₂(aq) + Na₂SO₄(aq) → BaSO₄(s) + 2NaCl(aq)<br>II. Pb(NO₃)₂(aq) + 2KI(aq) → PbI₂(s) + 2KNO₃(aq)<br>Which correctly classifies these reactions?",
+    "tag": "RRB ALP 17/2/26 Shift-III",
+    "o_hi": [
+      "(a) I: द्विविस्थापन; II: विस्थापन",
+      "(b) I: द्विविस्थापन; II: उदासीनीकरण",
+      "(c) I: विस्थापन; II: द्विविस्थापन",
+      "(d) दोनों द्विविस्थापन अभिक्रियाएँ हैं"
+    ],
+    "o_en": [
+      "(a) I: Double displacement; II: Displacement",
+      "(b) I: Double displacement; II: Neutralisation",
+      "(c) I: Displacement; II: Double displacement",
+      "(d) Both are double displacement reactions"
+    ],
+    "a": 3,
+    "e_hi": "दोनों अभिक्रियाओं में दो यौगिक आयनों का आदान-प्रदान करते हैं और नया अवक्षेप बनता है, इसलिए दोनों द्विविस्थापन अभिक्रियाएँ हैं।",
+    "e_en": "In both reactions, ions from two compounds exchange partners and a precipitate forms; therefore both are double-displacement reactions."
+  },
+  {
+    "q_hi": "Q34. ऑक्सीकरण के दौरान क्या होता है?",
+    "q_en": "Q34. What happens during oxidation?",
+    "tag": "",
+    "o_hi": [
+      "(a) इलेक्ट्रॉनों की प्राप्ति",
+      "(b) इलेक्ट्रॉनों का त्याग",
+      "(c) प्रोटॉनों की प्राप्ति",
+      "(d) प्रोटॉनों का त्याग"
+    ],
+    "o_en": [
+      "(a) Gain of electrons",
+      "(b) Loss of electrons",
+      "(c) Gain of protons",
+      "(d) Loss of protons"
+    ],
+    "a": 1,
+    "e_hi": "इलेक्ट्रॉन-स्थानांतरण की परिभाषा में ऑक्सीकरण इलेक्ट्रॉनों का त्याग है; इसे OIL (Oxidation Is Loss) से याद रख सकते हैं।",
+    "e_en": "In electron-transfer terms, oxidation is loss of electrons; it can be remembered as OIL: Oxidation Is Loss."
+  },
+  {
+    "q_hi": "Q35. CuO(s) + H₂(g) → Cu(s) + H₂O(l) में ऑक्सीकृत पदार्थ की पहचान कीजिए।",
+    "q_en": "Q35. In CuO(s) + H₂(g) → Cu(s) + H₂O(l), identify the substance oxidized.",
+    "tag": "",
+    "o_hi": [
+      "(a) Cu",
+      "(b) H₂O",
+      "(c) H₂",
+      "(d) CuO"
+    ],
+    "o_en": [
+      "(a) Cu",
+      "(b) H₂O",
+      "(c) H₂",
+      "(d) CuO"
+    ],
+    "a": 2,
+    "e_hi": "H₂ ऑक्सीजन ग्रहण करके H₂O बनाता है, इसलिए H₂ का ऑक्सीकरण होता है। उसी समय CuO से ऑक्सीजन हटती है, इसलिए CuO का अपचयन होता है।",
+    "e_en": "H₂ gains oxygen to form H₂O, so H₂ is oxidized. At the same time CuO loses oxygen and is reduced."
+  },
+  {
+    "q_hi": "Q36. अभिक्रिया PbO + H₂ → Pb + H₂O में निम्नलिखित में से कौन-सा अभिकारक ऑक्सीकरण से गुजरा है?",
+    "q_en": "Q36. In the reaction PbO + H₂ → Pb + H₂O, which reactant has undergone oxidation?",
+    "tag": "RRB Group-D, 03/02/2026, Shift-II",
+    "o_hi": [
+      "(a) H₂O",
+      "(b) Pb",
+      "(c) PbO",
+      "(d) H₂"
+    ],
+    "o_en": [
+      "(a) H₂O",
+      "(b) Pb",
+      "(c) PbO",
+      "(d) H₂"
+    ],
+    "a": 3,
+    "e_hi": "H₂ ऑक्सीजन ग्रहण करके H₂O बनता है, इसलिए H₂ ऑक्सीकृत होता है। PbO का अपचयन होकर Pb बनता है।",
+    "e_en": "H₂ gains oxygen to form H₂O, so H₂ is oxidized. PbO is reduced to Pb."
+  },
+  {
+    "q_hi": "Q37. H₂S + I₂ → 2HI + S के लिए कथनों पर विचार कीजिए:<br>I. हाइड्रोजन सल्फाइड, सल्फर बनाने के लिए ऑक्सीकृत होता है।<br>II. आयोडीन का अपचयन होकर हाइड्रोजन आयोडाइड बनता है।<br>कौन-सा/से कथन सही है/हैं?",
+    "q_en": "Q37. For H₂S + I₂ → 2HI + S, consider the statements:<br>I. Hydrogen sulphide undergoes oxidation to form sulphur.<br>II. Iodine is reduced, producing hydrogen iodide.<br>Which statement(s) correctly describe the redox reaction?",
+    "tag": "RRB Group-D, 28/11/2025, Shift-I",
+    "o_hi": [
+      "(a) केवल कथन I सही है",
+      "(b) कथन I और II दोनों सही हैं",
+      "(c) केवल कथन II सही है",
+      "(d) कथन I और II दोनों गलत हैं"
+    ],
+    "o_en": [
+      "(a) Only Statement I is correct",
+      "(b) Both Statement I and II are correct",
+      "(c) Only Statement II is correct",
+      "(d) Both Statement I and II are incorrect"
+    ],
+    "a": 1,
+    "e_hi": "H₂S में S का ऑक्सीकरण अवस्था −2 से 0 होती है, इसलिए वह ऑक्सीकृत होता है। I₂ में I का 0 से −1 होना अपचयन है। दोनों कथन सही हैं।",
+    "e_en": "Sulfur in H₂S changes from −2 to 0, so it is oxidized. Iodine changes from 0 in I₂ to −1 in HI, so it is reduced. Both statements are correct."
+  },
+  {
+    "q_hi": "Q38. रेडॉक्स अभिक्रिया में 'अपचायक' (reducing agent) की क्या भूमिका होती है?",
+    "q_en": "Q38. In a redox reaction, what is the role of a reducing agent?",
+    "tag": "RRB JE, 20/02/2026, Shift-II",
+    "o_hi": [
+      "(a) यह अभिक्रिया की गति बढ़ाने वाला उत्प्रेरक है।",
+      "(b) यह अन्य पदार्थों को ऑक्सीकृत होने में मदद करता है।",
+      "(c) यह अपचयन कराता है और स्वयं ऑक्सीकृत हो जाता है।",
+      "(d) यह केवल अपघटन अभिक्रियाओं में भाग लेता है।"
+    ],
+    "o_en": [
+      "(a) It is a catalyst that speeds up the reaction.",
+      "(b) It is an agent that helps other substances to be oxidized.",
+      "(c) It causes reduction and itself gets oxidized.",
+      "(d) It only participates in decomposition reactions."
+    ],
+    "a": 2,
+    "e_hi": "अपचायक दूसरे पदार्थ को इलेक्ट्रॉन देता है, जिससे उसका अपचयन होता है; इलेक्ट्रॉन देने के कारण अपचायक स्वयं ऑक्सीकृत हो जाता है।",
+    "e_en": "A reducing agent donates electrons to another species, causing its reduction; by losing electrons, the reducing agent itself is oxidized."
+  },
+  {
+    "q_hi": "Q39. अभिक्रिया Zn + CuSO₄ → ZnSO₄ + Cu में अपचायक की पहचान कीजिए।",
+    "q_en": "Q39. Identify the reducing agent in the reaction Zn + CuSO₄ → ZnSO₄ + Cu.",
+    "tag": "",
+    "o_hi": [
+      "(a) Zn",
+      "(b) CuSO₄",
+      "(c) ZnSO₄",
+      "(d) Cu"
+    ],
+    "o_en": [
+      "(a) Zn",
+      "(b) CuSO₄",
+      "(c) ZnSO₄",
+      "(d) Cu"
+    ],
+    "a": 0,
+    "e_hi": "Zn, Zn²⁺ बनते समय इलेक्ट्रॉन खोता है और Cu²⁺ को Cu में अपचयित करता है। इसलिए Zn अपचायक है।",
+    "e_en": "Zn loses electrons to form Zn²⁺ and reduces Cu²⁺ to Cu. Therefore Zn is the reducing agent."
+  },
+  {
+    "q_hi": "Q40. अभिक्रिया Zn + CuSO₄ → ZnSO₄ + Cu में जिंक का क्या होता है?",
+    "q_en": "Q40. In the reaction Zn + CuSO₄ → ZnSO₄ + Cu, what happens to zinc?",
+    "tag": "RRB JE 17/12/24 Shift-I",
+    "o_hi": [
+      "(a) जिंक का अपचयन होता है।",
+      "(b) जिंक इलेक्ट्रॉन खोता है।",
+      "(c) जिंक का ऑक्सीकरण होता है।",
+      "(d) जिंक में कोई परिवर्तन नहीं होता।"
+    ],
+    "o_en": [
+      "(a) Zinc is reduced.",
+      "(b) Zinc loses electrons.",
+      "(c) Zinc is oxidised.",
+      "(d) Zinc does not change."
+    ],
+    "a": 2,
+    "e_hi": "Zn → Zn²⁺ + 2e⁻ होता है, इसलिए जिंक ऑक्सीकृत होता है। ध्यान दें: विकल्प (b) 'जिंक इलेक्ट्रॉन खोता है' भी इसी प्रक्रिया का वर्णन करता है; स्रोत प्रश्न एकल-विकल्प रूप में विकल्प (c) को अभिक्रिया-वर्गीकरण के रूप में अपेक्षित करता है।",
+    "e_en": "Zn → Zn²⁺ + 2e⁻, so zinc is oxidised. Note that option (b), 'zinc loses electrons', describes the same process; the source item is single-choice and intends option (c) as the reaction classification."
+  },
+  {
+    "q_hi": "Q41. रेडॉक्स विस्थापन अभिक्रिया में यदि तत्व X इलेक्ट्रॉन खोता है और तत्व Y इलेक्ट्रॉन प्राप्त करता है, तो क्या होगा?",
+    "q_en": "Q41. In a redox displacement reaction, if element X loses electrons and element Y gains electrons, then:",
+    "tag": "RRB Group-D, 30/12/2025, Shift-II",
+    "o_hi": [
+      "(a) दोनों ऑक्सीकृत होते हैं",
+      "(b) X अपचयित और Y ऑक्सीकृत होता है",
+      "(c) दोनों अपचयित होते हैं",
+      "(d) X ऑक्सीकृत और Y अपचयित होता है"
+    ],
+    "o_en": [
+      "(a) Both are oxidised",
+      "(b) X is reduced and Y is oxidised",
+      "(c) Both are reduced",
+      "(d) X is oxidised and Y is reduced"
+    ],
+    "a": 3,
+    "e_hi": "इलेक्ट्रॉन खोना ऑक्सीकरण और इलेक्ट्रॉन प्राप्त करना अपचयन है। इसलिए X ऑक्सीकृत तथा Y अपचयित होता है।",
+    "e_en": "Loss of electrons is oxidation and gain of electrons is reduction. Therefore X is oxidized and Y is reduced."
+  },
+  {
+    "q_hi": "Q42. निम्नलिखित में से कौन-सी रेडॉक्स अभिक्रिया का उदाहरण नहीं है?<br>(i) ZnO + C → Zn + CO<br>(ii) MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂<br>(iii) 4Na + O₂ → 2Na₂O<br>(iv) AgNO₃ + NaCl → AgCl + NaNO₃",
+    "q_en": "Q42. Which of the following is NOT an example of a redox reaction?<br>(i) ZnO + C → Zn + CO<br>(ii) MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂<br>(iii) 4Na + O₂ → 2Na₂O<br>(iv) AgNO₃ + NaCl → AgCl + NaNO₃",
+    "tag": "RRB Group-D- 17/08/2022 (Shift-II)",
+    "o_hi": [
+      "(a) (i)",
+      "(b) (iv)",
+      "(c) (iii)",
+      "(d) (ii)"
+    ],
+    "o_en": [
+      "(a) (i)",
+      "(b) (iv)",
+      "(c) (iii)",
+      "(d) (ii)"
+    ],
+    "a": 1,
+    "e_hi": "AgNO₃ + NaCl → AgCl + NaNO₃ में किसी तत्व की ऑक्सीकरण अवस्था नहीं बदलती; यह द्विविस्थापन/अवक्षेपण अभिक्रिया है, रेडॉक्स नहीं। स्रोत में (iii) का तीर छूटा हुआ दिखता है; उसे 4Na + O₂ → 2Na₂O के रूप में पढ़ा गया है।",
+    "e_en": "In AgNO₃ + NaCl → AgCl + NaNO₃, no oxidation state changes; it is a double-displacement/precipitation reaction, not redox. In the source, the arrow in (iii) appears omitted; it is interpreted as 4Na + O₂ → 2Na₂O."
+  },
+  {
+    "q_hi": "Q43. विकृतगंधिता (rancidity) क्या है?",
+    "q_en": "Q43. What is rancidity?",
+    "tag": "RRB Group D 2/2/26 Shift-II",
+    "o_hi": [
+      "(a) वह प्रक्रिया जिसमें भोजन की वसा और तेल ऑक्सीकृत होकर गंध और स्वाद बदल देते हैं",
+      "(b) बैक्टीरिया की वृद्धि से भोजन के सड़ने की प्रक्रिया",
+      "(c) नमक या चीनी मिलाकर भोजन संरक्षित करने की प्रक्रिया",
+      "(d) सूखने के कारण भोजन के बासी होने की प्रक्रिया"
+    ],
+    "o_en": [
+      "(a) The process where fats and oils in food are oxidised, leading to changes in smell and taste",
+      "(b) The process of food decaying due to bacterial growth",
+      "(c) The process of preserving food by adding salt or sugar",
+      "(d) The process of food becoming stale due to drying"
+    ],
+    "a": 0,
+    "e_hi": "वसा और तेल के ऑक्सीकरण से उनका स्वाद और गंध खराब हो जाती है; इसी को विकृतगंधिता कहते हैं।",
+    "e_en": "Rancidity is the oxidation of fats and oils that produces unpleasant changes in smell and taste."
+  },
+  {
+    "q_hi": "Q44. कौन-सी विधि विकृतगंधिता को रोकने में मदद करती है?",
+    "q_en": "Q44. Which method helps prevent rancidity?",
+    "tag": "RRB JE, 19/02/2026, Shift-II",
+    "o_hi": [
+      "(a) भोजन को सूर्य के प्रकाश में रखना",
+      "(b) भोजन को लगातार गर्म करना",
+      "(c) अधिक पानी मिलाना",
+      "(d) भोजन को वायुरोधी पात्रों में रखना"
+    ],
+    "o_en": [
+      "(a) Exposing food to sunlight",
+      "(b) Heating food continuously",
+      "(c) Adding excess water",
+      "(d) Storing food in airtight containers"
+    ],
+    "a": 3,
+    "e_hi": "वायुरोधी पात्र में ऑक्सीजन की उपलब्धता कम होती है, जिससे वसा और तेल का ऑक्सीकरण धीमा पड़ता है और विकृतगंधिता कम होती है।",
+    "e_en": "Airtight containers limit oxygen exposure, slowing oxidation of fats and oils and thereby reducing rancidity."
+  },
+  {
+    "q_hi": "Q45. निम्न कथनों को पढ़कर सही विकल्प चुनिए।<br>अभिकथन (A): तैलीय भोजन को वायुरोधी पात्रों में रखने से विकृतगंधिता रुकती है।<br>कारण (R): वायुरोधी पात्र वसा और तेलों के ऑक्सीकरण को धीमा कर देते हैं।",
+    "q_en": "Q45. Read the following statements carefully and select the correct option.<br>Assertion (A): Keeping oily food in airtight containers prevents rancidity.<br>Reason (R): Airtight containers slow down the oxidation of fats and oils.",
+    "tag": "RRB Group-D, 09/02/2026, Shift-III",
+    "o_hi": [
+      "(a) A और R दोनों सत्य हैं, पर R, A की सही व्याख्या नहीं है।",
+      "(b) A सत्य है, पर R असत्य है।",
+      "(c) A और R दोनों सत्य हैं और R, A की सही व्याख्या है।",
+      "(d) A असत्य है, पर R सत्य है।"
+    ],
+    "o_en": [
+      "(a) Both A and R are true, and R is not the correct explanation of A.",
+      "(b) A is true, but R is false.",
+      "(c) Both A and R are true, and R is the correct explanation of A.",
+      "(d) A is false, but R is true."
+    ],
+    "a": 2,
+    "e_hi": "दोनों कथन सही हैं। वायुरोधी पात्र ऑक्सीजन की पहुँच घटाते हैं, इसलिए वसा/तेल का ऑक्सीकरण धीमा होता है और विकृतगंधिता रुकती है; R, A की सही व्याख्या है।",
+    "e_en": "Both statements are true. Airtight containers reduce oxygen exposure, slowing oxidation of fats/oils and preventing rancidity; therefore R correctly explains A."
+  }
+];
