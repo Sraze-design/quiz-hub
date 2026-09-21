@@ -1,0 +1,622 @@
+const data = [
+  {
+    "q_hi": "Q1. रॉबर्ट हुक द्वारा कोशिकाओं की खोज सबसे पहले किस वर्ष की गई थी?",
+    "q_en": "Q1. In which year were cells first discovered by Robert Hooke?",
+    "tag": "RRB Technician, 26/12/2024, Shift-III",
+    "o_hi": [
+      "(a) 1665",
+      "(b) 1670",
+      "(c) 1667",
+      "(d) 1664"
+    ],
+    "o_en": [
+      "(a) 1665",
+      "(b) 1670",
+      "(c) 1667",
+      "(d) 1664"
+    ],
+    "a": 0,
+    "e_hi": "रॉबर्ट हुक ने 1665 में कॉर्क की पतली काट में छोटे-छोटे कक्ष देखे और उन्हें cell कहा।",
+    "e_en": "Robert Hooke observed tiny compartments in a thin slice of cork in 1665 and called them cells."
+  },
+  {
+    "q_hi": "Q2. तालाब के पानी में पहली बार मुक्त जीवित कोशिकाओं की खोज किसने की थी?",
+    "q_en": "Q2. Who discovered free-living cells in pond water for the first time?",
+    "tag": "RRB Technician, 27/12/2024, Shift-I",
+    "o_hi": [
+      "(a) 1855 में विरचो",
+      "(b) 1674 में ल्यूवेनहॉक",
+      "(c) 1665 में रॉबर्ट हुक",
+      "(d) 1831 में रॉबर्ट ब्राउन"
+    ],
+    "o_en": [
+      "(a) Virchow in 1855",
+      "(b) Leeuwenhoek in 1674",
+      "(c) Robert Hooke in 1665",
+      "(d) Robert Brown in 1831"
+    ],
+    "a": 1,
+    "e_hi": "एंटोनी वॉन ल्यूवेनहॉक ने 1674 में तालाब के पानी में पहली बार जीवित कोशिकाएँ देखीं।",
+    "e_en": "Antonie van Leeuwenhoek first observed living cells in pond water in 1674."
+  },
+  {
+    "q_hi": "Q3. पौधों को ऊर्जा की कम आवश्यकता क्यों होती है?",
+    "q_en": "Q3. Why do plants have low energy needs?",
+    "tag": "RRB Group-D 24-08-2022 (Shift-I)",
+    "o_hi": [
+      "(a) क्योंकि वे ऑक्सीजन उत्पन्न करते हैं",
+      "(b) क्योंकि वे केवल ऊँचाई में बढ़ते हैं",
+      "(c) क्योंकि वे भोजन के मामले में आत्मनिर्भर होते हैं",
+      "(d) क्योंकि उनमें बहुत सारी मृत कोशिकाएँ होती हैं"
+    ],
+    "o_en": [
+      "(a) Because they produce oxygen",
+      "(b) Because they only increase in height",
+      "(c) Because they are self-sufficient in terms of food",
+      "(d) Because they have a lot of dead cells"
+    ],
+    "a": 3,
+    "e_hi": "पौधों में सहारा देने वाले कई ऊतक मृत कोशिकाओं से बने होते हैं; इन कोशिकाओं को रख-रखाव के लिए ऊर्जा नहीं चाहिए, इसलिए कुल ऊर्जा आवश्यकता कम रहती है।",
+    "e_en": "Many supporting tissues in plants contain dead cells, which require no energy for maintenance, so overall energy needs are lower."
+  },
+  {
+    "q_hi": "Q4. कोशिका के वैज्ञानिक अध्ययन को क्या कहा जाता है?",
+    "q_en": "Q4. The scientific study of a cell is called:",
+    "tag": "",
+    "o_hi": [
+      "(a) Cytology",
+      "(b) Histology",
+      "(c) Physiology",
+      "(d) Taxonomy"
+    ],
+    "o_en": [
+      "(a) Cytology",
+      "(b) Histology",
+      "(c) Physiology",
+      "(d) Taxonomy"
+    ],
+    "a": 0,
+    "e_hi": "कोशिकाओं की संरचना और कार्य के अध्ययन को Cytology (कोशिका विज्ञान) कहते हैं।",
+    "e_en": "The study of cell structure and function is called cytology."
+  },
+  {
+    "q_hi": "Q5. कोशिका सिद्धांत के बारे में निम्नलिखित में से कौन-सा कथन सत्य है?",
+    "q_en": "Q5. Which of the following statements is true about cell theory?",
+    "tag": "RRB Group-D 22-08-2022",
+    "o_hi": [
+      "(a) कोशिका सिद्धांत कवक पर लागू नहीं होता है",
+      "(b) कोशिका सिद्धांत वायरस पर लागू नहीं होता है",
+      "(c) कोशिका सिद्धांत शैवाल पर लागू नहीं होता है",
+      "(d) कोशिका सिद्धांत रोगाणुओं पर लागू नहीं होता है"
+    ],
+    "o_en": [
+      "(a) The cell theory does not apply to fungi",
+      "(b) The cell theory does not apply to viruses",
+      "(c) The cell theory does not apply to algae",
+      "(d) The cell theory does not apply to microbes"
+    ],
+    "a": 1,
+    "e_hi": "वायरस कोशिकीय संरचना वाले जीव नहीं हैं; इसलिए सामान्य कोशिका सिद्धांत उन पर लागू नहीं होता।",
+    "e_en": "Viruses are acellular, so the conventional cell theory does not apply to them."
+  },
+  {
+    "q_hi": "Q6. निम्नलिखित में से किस वैज्ञानिक ने कहा था, “सभी कोशिकाएँ पहले से मौजूद कोशिकाओं से उत्पन्न होती हैं”?",
+    "q_en": "Q6. Which scientist stated, “All cells arise from pre-existing cells”?",
+    "tag": "RRB Technician, 27/12/2024, Shift-II",
+    "o_hi": [
+      "(a) रुडोल्फ विरचो",
+      "(b) रॉबर्ट ब्राउन",
+      "(c) पुरकिंजे",
+      "(d) रॉबर्ट हुक"
+    ],
+    "o_en": [
+      "(a) Rudolf Virchow",
+      "(b) Robert Brown",
+      "(c) Purkinje",
+      "(d) Robert Hooke"
+    ],
+    "a": 0,
+    "e_hi": "रुडोल्फ विरचो ने कोशिका सिद्धांत का विस्तार करते हुए कहा कि नई कोशिकाएँ पूर्व-विद्यमान कोशिकाओं से बनती हैं।",
+    "e_en": "Rudolf Virchow extended cell theory by stating that new cells arise from pre-existing cells."
+  },
+  {
+    "q_hi": "Q7. एककोशिकीय जीव की पहचान कीजिए।",
+    "q_en": "Q7. Identify the single-celled organism.",
+    "tag": "ALP 28 Nov 2024 4th Shift",
+    "o_hi": [
+      "(a) अमीबा",
+      "(b) समुद्री शैवाल",
+      "(c) जोंक",
+      "(d) लिवर फ्लूक"
+    ],
+    "o_en": [
+      "(a) Amoeba",
+      "(b) Seaweed",
+      "(c) Leech",
+      "(d) Liver fluke"
+    ],
+    "a": 0,
+    "e_hi": "अमीबा एक एककोशिकीय जीव है और एक ही कोशिका में सभी जीवन क्रियाएँ करता है।",
+    "e_en": "Amoeba is unicellular and performs all vital functions within a single cell."
+  },
+  {
+    "q_hi": "Q8. निम्नलिखित सभी में एक अकेली कोशिका संपूर्ण जीव बना सकती है, सिवाय किसके?",
+    "q_en": "Q8. A single cell may constitute a whole organism in all of the following, EXCEPT:",
+    "tag": "Railway Technician 26/12/2024 --> 1st shift",
+    "o_hi": [
+      "(a) क्लैमाइडोमोनास",
+      "(b) अमीबा",
+      "(c) राइजोपस",
+      "(d) बैक्टीरिया"
+    ],
+    "o_en": [
+      "(a) Chlamydomonas",
+      "(b) Amoeba",
+      "(c) Rhizopus",
+      "(d) Bacteria"
+    ],
+    "a": 2,
+    "e_hi": "राइजोपस एक बहुकोशिकीय/तंतुयुक्त कवक है, जबकि क्लैमाइडोमोनास, अमीबा और बैक्टीरिया एककोशिकीय हो सकते हैं।",
+    "e_en": "Rhizopus is a multicellular filamentous fungus, whereas Chlamydomonas, Amoeba and bacteria can be unicellular organisms."
+  },
+  {
+    "q_hi": "Q9. मानव शरीर की सबसे बड़ी कोशिका कौन-सी है?",
+    "q_en": "Q9. Which of the following is the largest cell in the human body?",
+    "tag": "",
+    "o_hi": [
+      "(a) न्यूरॉन",
+      "(b) लाल रक्त कोशिका",
+      "(c) मांसपेशी कोशिका",
+      "(d) अंडाणु (Egg cell)"
+    ],
+    "o_en": [
+      "(a) Neuron",
+      "(b) Red blood cell",
+      "(c) Muscle cell",
+      "(d) Ovum (egg cell)"
+    ],
+    "a": 3,
+    "e_hi": "मानव शरीर की सबसे बड़ी कोशिका अंडाणु है।",
+    "e_en": "The human ovum is the largest cell in the human body."
+  },
+  {
+    "q_hi": "Q10. बहुकोशिकीय जीव में कोशिकाएँ अनेक आकार और आकृतियाँ क्यों दिखाती हैं?",
+    "q_en": "Q10. Why do cells in a multicellular organism exhibit a wide range of shapes and sizes?",
+    "tag": "RRB Technician, 06/03/2026, Shift-III",
+    "o_hi": [
+      "(a) उनकी संरचना विशिष्ट कार्य करने के लिए अनुकूलित होती है",
+      "(b) आकार और आकृति में भिन्नता का कोई कार्यात्मक महत्व नहीं होता",
+      "(c) कोशिका का आकार यादृच्छिक और कार्य से असंबंधित होता है",
+      "(d) एक ही जीव में हर कोशिका प्रकार का जीनोम अलग होता है"
+    ],
+    "o_en": [
+      "(a) Their structure is adapted to perform specific functions",
+      "(b) Variation in cell shape and size has no functional significance",
+      "(c) Cell shape is random and unrelated to function",
+      "(d) Each cell type contains a different genome in the same organism"
+    ],
+    "a": 0,
+    "e_hi": "कोशिका की आकृति और आकार उसके विशिष्ट कार्य के अनुरूप होते हैं, जैसे तंत्रिका कोशिका लंबी और RBC चपटी होती है।",
+    "e_en": "Cell shape and size are adapted to specific functions, such as long nerve cells and flattened red blood cells."
+  },
+  {
+    "q_hi": "Q11. कोशिका के आकार के बारे में कौन-सा कथन सही है?",
+    "q_en": "Q11. Which statement about cell size is correct?",
+    "tag": "RRB Group-D, 28/11/2025, Shift-III",
+    "o_hi": [
+      "(a) बहुकोशिकीय जीवों में कोशिकाएँ हमेशा बड़ी होती हैं",
+      "(b) कोशिका का आकार केंद्रकों की संख्या पर निर्भर करता है",
+      "(c) सभी जीवों में सभी कोशिकाएँ समान आकार की होती हैं",
+      "(d) कोशिका का आकार उसके कार्य से संबंधित होता है, जीव के आकार से नहीं"
+    ],
+    "o_en": [
+      "(a) Cell size is always large in multicellular organisms",
+      "(b) Cell size depends on the number of nuclei",
+      "(c) All cells are of the same size in all organisms",
+      "(d) Cell size is related to its function, not the size of the organism"
+    ],
+    "a": 3,
+    "e_hi": "कोशिकाओं का आकार मुख्यतः उनके कार्य से संबंधित होता है; बड़े जीवों में जरूरी नहीं कि कोशिकाएँ बड़ी हों।",
+    "e_en": "Cell size is mainly related to function; a larger organism does not necessarily have larger cells."
+  },
+  {
+    "q_hi": "Q12. “Protoplasm” शब्द किसने दिया?",
+    "q_en": "Q12. Who coined the term “protoplasm”?",
+    "tag": "RRB NTPC 03.03.2021 (Shift-I)",
+    "o_hi": [
+      "(a) जी. जे. मेंडल",
+      "(b) जोहान इवेंजेलिस्ट पुरकिंजे",
+      "(c) चार्ल्स डार्विन",
+      "(d) रॉबर्ट हुक"
+    ],
+    "o_en": [
+      "(a) G.J. Mendel",
+      "(b) Johann Evangelist Purkinje",
+      "(c) Charles Darwin",
+      "(d) Robert Hooke"
+    ],
+    "a": 1,
+    "e_hi": "जोहान इवेंजेलिस्ट पुरकिंजे ने कोशिका के जीवित पदार्थ के लिए “protoplasm” शब्द का प्रयोग किया।",
+    "e_en": "Johann Evangelist Purkinje used the term “protoplasm” for the living substance of the cell."
+  },
+  {
+    "q_hi": "Q13. सादृश्य पूरा कीजिए: Prokaryotic cell : Small and simple :: Eukaryotic cell : ________.",
+    "q_en": "Q13. Complete the analogy: Prokaryotic cell : Small and simple :: Eukaryotic cell : ________.",
+    "tag": "RRB Technician, 10/03/2026, Shift-III",
+    "o_hi": [
+      "(a) समान आकार और जटिलता",
+      "(b) अनियमित और सरल",
+      "(c) छोटी और सरल",
+      "(d) बड़ी और जटिल"
+    ],
+    "o_en": [
+      "(a) Same size and complexity",
+      "(b) Irregular and simple",
+      "(c) Smaller and simple",
+      "(d) Larger and complex"
+    ],
+    "a": 3,
+    "e_hi": "यूकेरियोटिक कोशिकाएँ सामान्यतः प्रोकैरियोटिक कोशिकाओं से बड़ी और अधिक जटिल होती हैं तथा इनमें झिल्ली-बद्ध कोशिकांग होते हैं।",
+    "e_en": "Eukaryotic cells are generally larger and more complex and contain membrane-bound organelles."
+  },
+  {
+    "q_hi": "Q14. प्रोकैरियोटिक कोशिका में पाया जाने वाला एकमात्र कोशिकांग कौन-सा है?",
+    "q_en": "Q14. The only cell organelle seen in a prokaryotic cell is:",
+    "tag": "",
+    "o_hi": [
+      "(a) माइटोकॉन्ड्रिया",
+      "(b) राइबोसोम",
+      "(c) प्लास्टिड",
+      "(d) लाइसोसोम"
+    ],
+    "o_en": [
+      "(a) Mitochondria",
+      "(b) Ribosomes",
+      "(c) Plastids",
+      "(d) Lysosomes"
+    ],
+    "a": 1,
+    "e_hi": "प्रोकैरियोटिक कोशिकाओं में झिल्ली-बद्ध कोशिकांग नहीं होते, लेकिन 70S राइबोसोम उपस्थित रहते हैं।",
+    "e_en": "Prokaryotic cells lack membrane-bound organelles but contain 70S ribosomes."
+  },
+  {
+    "q_hi": "Q15. प्रोकैरियोटिक राइबोसोम की उप-इकाई संरचना क्या होती है?",
+    "q_en": "Q15. What is the subunit structure of a prokaryotic ribosome?",
+    "tag": "RRB Group-D - 01/09/2022 (Shift-II)",
+    "o_hi": [
+      "(a) 50S और 40S",
+      "(b) 60S और 40S",
+      "(c) 50S और 30S",
+      "(d) 0S और 30S"
+    ],
+    "o_en": [
+      "(a) 50S and 40S",
+      "(b) 60S and 40S",
+      "(c) 50S and 30S",
+      "(d) 0S and 30S"
+    ],
+    "a": 2,
+    "e_hi": "प्रोकैरियोटिक राइबोसोम 70S होता है, जो 50S बड़ी और 30S छोटी उप-इकाई से बना होता है।",
+    "e_en": "A prokaryotic ribosome is 70S, made of a 50S large subunit and a 30S small subunit."
+  },
+  {
+    "q_hi": "Q16. निम्नलिखित में से किसे कोशिका की “protein factory” कहा जाता है?",
+    "q_en": "Q16. Which cellular component is known as the protein factory of a cell?",
+    "tag": "RRB Group-D-05/09/2022 (Shift-III)",
+    "o_hi": [
+      "(a) राइबोसोम",
+      "(b) क्लोरोप्लास्ट",
+      "(c) माइटोकॉन्ड्रिया",
+      "(d) गॉल्जी बॉडी"
+    ],
+    "o_en": [
+      "(a) Ribosomes",
+      "(b) Chloroplasts",
+      "(c) Mitochondria",
+      "(d) Golgi bodies"
+    ],
+    "a": 0,
+    "e_hi": "राइबोसोम प्रोटीन संश्लेषण का स्थल है, इसलिए इसे कोशिका की protein factory कहा जाता है।",
+    "e_en": "Ribosomes are the sites of protein synthesis, so they are called the protein factories of the cell."
+  },
+  {
+    "q_hi": "Q17. निम्नलिखित में से कौन-सा भाग प्रोकैरियोटिक कोशिका में नहीं पाया जाता?",
+    "q_en": "Q17. Which of the following parts is not present in a prokaryotic cell?",
+    "tag": "RRB Group-D-02/09/2022 (Shift-II)",
+    "o_hi": [
+      "(a) कोशिकाद्रव्य",
+      "(b) केंद्रक झिल्ली",
+      "(c) कोशिका भित्ति",
+      "(d) राइबोसोम"
+    ],
+    "o_en": [
+      "(a) Cytoplasm",
+      "(b) Nuclear membrane",
+      "(c) Cell wall",
+      "(d) Ribosome"
+    ],
+    "a": 1,
+    "e_hi": "प्रोकैरियोटिक कोशिका में वास्तविक झिल्ली-बद्ध केंद्रक नहीं होता, इसलिए nuclear membrane अनुपस्थित होती है।",
+    "e_en": "Prokaryotic cells lack a true membrane-bound nucleus, so a nuclear membrane is absent."
+  },
+  {
+    "q_hi": "Q18. प्रोकैरियोटिक कोशिका की विशेषताओं में से गलत विकल्प चुनिए।",
+    "q_en": "Q18. Select the incorrect characteristic of a prokaryotic cell.",
+    "tag": "RRB Group-D - 05/09/2022 (Shift-1)",
+    "o_hi": [
+      "(a) झिल्ली-बद्ध कोशिकांगों की उपस्थिति",
+      "(b) अत्यंत छोटा आकार",
+      "(c) एकल गुणसूत्र",
+      "(d) केंद्रकीय क्षेत्र को nucleoid कहा जाता है"
+    ],
+    "o_en": [
+      "(a) Presence of membrane-bound organelles",
+      "(b) Extremely small size",
+      "(c) Single chromosome",
+      "(d) Its nuclear region is called nucleoid"
+    ],
+    "a": 0,
+    "e_hi": "प्रोकैरियोटिक कोशिकाओं में झिल्ली-बद्ध कोशिकांग अनुपस्थित होते हैं; बाकी विशेषताएँ सामान्यतः सही हैं।",
+    "e_en": "Prokaryotic cells lack membrane-bound organelles; the other listed features are generally characteristic of them."
+  },
+  {
+    "q_hi": "Q19. पादप कोशिकाओं में कोशिका भित्ति का प्राथमिक कार्य क्या है?",
+    "q_en": "Q19. What is the primary function of the cell wall in plant cells?",
+    "tag": "RRB Technician, 06/03/2026, Shift-I",
+    "o_hi": [
+      "(a) कोशिकीय श्वसन नियंत्रित करना",
+      "(b) पोषक तत्वों का परिवहन",
+      "(c) कोशिका विभाजन नियंत्रित करना",
+      "(d) कठोरता और सुरक्षा प्रदान करना"
+    ],
+    "o_en": [
+      "(a) Control cellular respiration",
+      "(b) Transport nutrients",
+      "(c) Control cell division",
+      "(d) Provide rigidity and protection"
+    ],
+    "a": 3,
+    "e_hi": "कोशिका भित्ति पादप कोशिका को आकार, कठोरता और यांत्रिक सुरक्षा देती है तथा अधिक जल प्रवेश पर फटने से बचाती है।",
+    "e_en": "The cell wall gives plant cells shape, rigidity and mechanical protection and helps prevent bursting when excess water enters."
+  },
+  {
+    "q_hi": "Q20. पौधों में कोशिका भित्ति बनाने वाले जटिल कार्बोहाइड्रेट को क्या कहते हैं?",
+    "q_en": "Q20. What are the complex carbohydrates that form cell walls in plants called?",
+    "tag": "RRB JE 02.06.2019 (Shift-III)",
+    "o_hi": [
+      "(a) माल्टोज",
+      "(b) सेलुलोज",
+      "(c) सुक्रोज",
+      "(d) लैक्टोज"
+    ],
+    "o_en": [
+      "(a) Maltose",
+      "(b) Cellulose",
+      "(c) Sucrose",
+      "(d) Lactose"
+    ],
+    "a": 1,
+    "e_hi": "पादप कोशिका भित्ति का प्रमुख संरचनात्मक कार्बोहाइड्रेट cellulose है।",
+    "e_en": "Cellulose is the principal structural carbohydrate of plant cell walls."
+  },
+  {
+    "q_hi": "Q21. पादप कोशिकाओं में कोशिका भित्ति क्यों होती है?",
+    "q_en": "Q21. Why do plant cells have cell walls?",
+    "tag": "RRB Group-D-20/09/2022 (Shift-II)",
+    "o_hi": [
+      "(a) वे प्रकाश संश्लेषण के लिए आवश्यक हैं",
+      "(b) वे पादप कोशिकाओं को विभिन्न पर्यावरणीय कारकों से बचाती हैं",
+      "(c) वे जीवित प्राणी हैं",
+      "(d) उनमें कोशिका झिल्ली नहीं होती"
+    ],
+    "o_en": [
+      "(a) They are required for photosynthesis",
+      "(b) They protect plant cells from various environmental factors",
+      "(c) They are living beings",
+      "(d) They do not have a cell membrane"
+    ],
+    "a": 1,
+    "e_hi": "कोशिका भित्ति पादप कोशिका को बाहरी कारकों से सुरक्षा और संरचनात्मक सहारा देती है।",
+    "e_en": "The cell wall protects plant cells from external factors and provides structural support."
+  },
+  {
+    "q_hi": "Q22. सूक्ष्मदर्शी के नीचे प्रत्येक कोशिका में कौन-सी विशेषता देखी जाती है?",
+    "q_en": "Q22. Which feature is seen in every cell under a microscope?",
+    "tag": "RRB Group-D, 08/12/2025, Shift-II",
+    "o_hi": [
+      "(a) गुणसूत्र",
+      "(b) लाइसोसोम",
+      "(c) कोशिका झिल्ली",
+      "(d) माइटोकॉन्ड्रिया"
+    ],
+    "o_en": [
+      "(a) Chromosome",
+      "(b) Lysosome",
+      "(c) Cell membrane",
+      "(d) Mitochondria"
+    ],
+    "a": 2,
+    "e_hi": "सभी कोशिकाएँ plasma/cell membrane से घिरी होती हैं; लाइसोसोम और माइटोकॉन्ड्रिया सभी कोशिकाओं में नहीं होते।",
+    "e_en": "All cells are bounded by a plasma/cell membrane; lysosomes and mitochondria are not present in every cell."
+  },
+  {
+    "q_hi": "Q23. प्लाज्मा झिल्ली का प्रमुख कार्य क्या है?",
+    "q_en": "Q23. The principal function of the plasma membrane is to:",
+    "tag": "RRB Technician, 06/03/2026, Shift-II",
+    "o_hi": [
+      "(a) कोशिका के आर-पार पदार्थों की गति नियंत्रित करना",
+      "(b) कोशिका की आनुवंशिक सामग्री संग्रहित करना",
+      "(c) ATP संश्लेषण का स्थल बनना",
+      "(d) कठोर सहारा देना और कोशिका को फूलने से रोकना"
+    ],
+    "o_en": [
+      "(a) Regulate movement of substances across the cell",
+      "(b) Store the cell’s genetic material",
+      "(c) Serve as the site of ATP synthesis",
+      "(d) Provide rigid support and prevent cell swelling"
+    ],
+    "a": 0,
+    "e_hi": "प्लाज्मा झिल्ली चयनात्मक रूप से पारगम्य होती है और पदार्थों के प्रवेश तथा निकास को नियंत्रित करती है।",
+    "e_en": "The plasma membrane is selectively permeable and regulates the entry and exit of substances."
+  },
+  {
+    "q_hi": "Q24. कोशिका का वह सबसे बाहरी आवरण कौन-सा है जो उसकी सामग्री को बाहरी वातावरण से अलग करता है?",
+    "q_en": "Q24. Which is the outermost covering of the cell that separates its contents from the external environment?",
+    "tag": "RRB NTPC 03.02.2021 (Shift-I) Stage Ist",
+    "o_hi": [
+      "(a) कोशिकांग",
+      "(b) चिकनी मांसपेशी कोशिका",
+      "(c) तंत्रिका कोशिका",
+      "(d) प्लाज्मा झिल्ली"
+    ],
+    "o_en": [
+      "(a) Organelles",
+      "(b) Smooth muscle cell",
+      "(c) Nerve cell",
+      "(d) Plasma membrane"
+    ],
+    "a": 3,
+    "e_hi": "प्लाज्मा झिल्ली कोशिका की सीमा बनाती है और कोशिकीय सामग्री को बाहरी वातावरण से अलग करती है।",
+    "e_en": "The plasma membrane forms the cell boundary and separates cellular contents from the external environment."
+  },
+  {
+    "q_hi": "Q25. कार्य के आधार पर प्लाज्मा झिल्ली किस प्रकृति की होती है?",
+    "q_en": "Q25. On the basis of function, the plasma membrane is ___________ in nature.",
+    "tag": "RRB ALP, 17/02/2026, Shift-II",
+    "o_hi": [
+      "(a) अर्ध-पारगम्य",
+      "(b) चयनात्मक रूप से पारगम्य",
+      "(c) पूर्ण पारगम्य",
+      "(d) पूर्ण अपारगम्य"
+    ],
+    "o_en": [
+      "(a) Semi-permeable",
+      "(b) Selectively permeable",
+      "(c) Fully permeable",
+      "(d) Fully non-permeable"
+    ],
+    "a": 1,
+    "e_hi": "प्लाज्मा झिल्ली कुछ पदार्थों को गुजरने देती है और कुछ को रोकती है, इसलिए यह selectively permeable कहलाती है।",
+    "e_en": "The plasma membrane allows some substances to pass while restricting others, so it is selectively permeable."
+  },
+  {
+    "q_hi": "Q26. प्लाज्मा झिल्ली मुख्यतः किससे बनी होती है?",
+    "q_en": "Q26. The plasma membrane is composed of _____________.",
+    "tag": "RRB Group-D, 09/12/2025, Shift-III",
+    "o_hi": [
+      "(a) शर्करा और लिपिड",
+      "(b) प्रोटीन और शर्करा",
+      "(c) लिपिड और प्रोटीन",
+      "(d) DNA और लिपिड"
+    ],
+    "o_en": [
+      "(a) Sugars and lipids",
+      "(b) Proteins and sugars",
+      "(c) Lipids and proteins",
+      "(d) DNA and lipids"
+    ],
+    "a": 2,
+    "e_hi": "प्लाज्मा झिल्ली मुख्यतः लिपिड और प्रोटीन से बनी होती है।",
+    "e_en": "The plasma membrane is mainly composed of lipids and proteins."
+  },
+  {
+    "q_hi": "Q27. CO₂ या O₂ जैसी गैसों का कोशिका झिल्ली के पार संचरण किस प्रक्रिया से और किस सांद्रता दिशा में होता है?",
+    "q_en": "Q27. Movement of gases such as CO₂ or O₂ across the cell membrane occurs by ___, from ____ concentration to _____ concentration.",
+    "tag": "RRB Group-D, 27/12/2025, Shift-III",
+    "o_hi": [
+      "(a) विसरण; उच्च; निम्न",
+      "(b) एंडोसाइटोसिस; समान; समान",
+      "(c) परासरण; निम्न; उच्च",
+      "(d) सक्रिय परिवहन; निम्न; उच्च"
+    ],
+    "o_en": [
+      "(a) Diffusion; high; low",
+      "(b) Endocytosis; equal; equal",
+      "(c) Osmosis; low; high",
+      "(d) Active transport; low; high"
+    ],
+    "a": 0,
+    "e_hi": "छोटे गैसीय अणु diffusion द्वारा उच्च सांद्रता से निम्न सांद्रता की ओर जाते हैं।",
+    "e_en": "Small gas molecules move by diffusion from a region of higher concentration to lower concentration."
+  },
+  {
+    "q_hi": "Q28. चयनात्मक रूप से पारगम्य झिल्ली के माध्यम से जल के विसरण को क्या कहते हैं?",
+    "q_en": "Q28. The diffusion of water through a selectively permeable membrane is called:",
+    "tag": "RRB Group-D, 11/12/2025, Shift-III",
+    "o_hi": [
+      "(a) वाष्पोत्सर्जन",
+      "(b) सक्रिय परिवहन",
+      "(c) परासरण",
+      "(d) विसरण"
+    ],
+    "o_en": [
+      "(a) Transpiration",
+      "(b) Active transport",
+      "(c) Osmosis",
+      "(d) Diffusion"
+    ],
+    "a": 2,
+    "e_hi": "चयनात्मक पारगम्य झिल्ली से जल का संचरण osmosis (परासरण) कहलाता है।",
+    "e_en": "Movement of water through a selectively permeable membrane is called osmosis."
+  },
+  {
+    "q_hi": "Q29. जब पादप कोशिकाएँ परासरण द्वारा जल खोती हैं और कोशिकीय सामग्री भित्ति से सिकुड़कर दूर हो जाती है, इस प्रक्रिया को क्या कहते हैं?",
+    "q_en": "Q29. When plant cells lose water by osmosis and the contents shrink away from the cell wall, the process is known as:",
+    "tag": "Railway Technician 20/12/2024 --> 2nd shift",
+    "o_hi": [
+      "(a) निष्क्रिय परिवहन",
+      "(b) सक्रिय परिवहन",
+      "(c) प्लाज्मोलाइसिस",
+      "(d) विसरण"
+    ],
+    "o_en": [
+      "(a) Passive transport",
+      "(b) Active transport",
+      "(c) Plasmolysis",
+      "(d) Diffusion"
+    ],
+    "a": 2,
+    "e_hi": "अतिपरासारी माध्यम में जल निकलने से प्रोटोप्लाज्म कोशिका भित्ति से अलग होकर सिकुड़ता है; इसे plasmolysis कहते हैं।",
+    "e_en": "In a hypertonic medium, water leaves the cell and the protoplast shrinks away from the cell wall; this is plasmolysis."
+  },
+  {
+    "q_hi": "Q30. किस प्रकार का विलयन कोशिका से जल बाहर निकालकर उसे सिकोड़ देता है?",
+    "q_en": "Q30. What type of solution causes water to move out of a cell through the plasma membrane, making the cell shrink?",
+    "tag": "RRB Group-D, 10/12/2025, Shift-III",
+    "o_hi": [
+      "(a) तनु विलयन",
+      "(b) अतिपरासारी (Hypertonic) विलयन",
+      "(c) अल्पपरासारी (Hypotonic) विलयन",
+      "(d) समपरासारी (Isotonic) विलयन"
+    ],
+    "o_en": [
+      "(a) Dilute solution",
+      "(b) Hypertonic solution",
+      "(c) Hypotonic solution",
+      "(d) Isotonic solution"
+    ],
+    "a": 1,
+    "e_hi": "Hypertonic विलयन में बाहर विलेय की सांद्रता अधिक होने से जल कोशिका से बाहर निकलता है और कोशिका सिकुड़ती है।",
+    "e_en": "In a hypertonic solution, the outside has a higher solute concentration, so water leaves the cell and it shrinks."
+  },
+  {
+    "q_hi": "Q31. पादप और जंतु कोशिकाओं को शुद्ध जल में रखने पर केवल जंतु कोशिका क्यों फट सकती है?",
+    "q_en": "Q31. What causes only the animal cell to burst when both plant and animal cells are placed in pure water?",
+    "tag": "RRB Technician, 10/03/2026, Shift-I",
+    "o_hi": [
+      "(a) पादप कोशिकाएँ सक्रिय रूप से जल बाहर पंप करती हैं",
+      "(b) परासरण केवल जंतु कोशिकाओं में होता है",
+      "(c) जंतु कोशिकाओं की झिल्ली अधिक मोटी होती है",
+      "(d) पादप कोशिकाओं में कठोर कोशिका भित्ति होती है"
+    ],
+    "o_en": [
+      "(a) Plant cells can actively pump out water",
+      "(b) Osmosis occurs only in animal cells",
+      "(c) Animal cells have a thicker membrane",
+      "(d) Plant cells have a rigid cell wall"
+    ],
+    "a": 3,
+    "e_hi": "शुद्ध जल में दोनों में जल प्रवेश करता है, पर पादप कोशिका की कठोर कोशिका भित्ति उसे फटने से बचाती है; जंतु कोशिका में ऐसी भित्ति नहीं होती।",
+    "e_en": "Water enters both cells in pure water, but the rigid plant cell wall resists bursting; animal cells lack such a wall."
+  }
+];

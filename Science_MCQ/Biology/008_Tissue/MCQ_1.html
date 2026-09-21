@@ -1,0 +1,845 @@
+const Q15_IMAGE = "data:image/png;base64,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";
+
+const data = [
+  {
+    q_hi: "Q1. ऊतक __ कोशिकाओं का एक समूह है जो __ कार्य करता है।",
+    q_en: "Q1. A tissue is a group of __ cells performing a __ function.",
+    tag: "RRB Group-D 05-12-2018 (Shift-I)",
+    o_hi: [
+      "(a) भिन्न, भिन्न",
+      "(b) समान, समान",
+      "(c) भिन्न, विशिष्ट",
+      "(d) समान, भिन्न"
+    ],
+    o_en: [
+      "(a) Different, different",
+      "(b) Similar, similar",
+      "(c) Different, specific",
+      "(d) Similar, different"
+    ],
+    a: 1,
+    e_hi: "ऊतक सामान्यतः समान संरचना और उत्पत्ति वाली कोशिकाओं का समूह होता है जो एक समान/विशिष्ट कार्य मिलकर करता है। इसलिए “Similar, similar” सही है।",
+    e_en: "A tissue is generally a group of similar cells that work together to perform a similar/specific function. Hence “Similar, similar” is correct."
+  },
+  {
+    q_hi: "Q2. निम्नलिखित में से कौन-सा किसी जीव के ऊतक का उदाहरण नहीं है?",
+    q_en: "Q2. Which of the following is NOT an example of a tissue of an organism?",
+    tag: "RRB Group-D, 02/12/2025, Shift-I",
+    o_hi: [
+      "(a) अस्थि",
+      "(b) न्यूरॉन",
+      "(c) रक्त",
+      "(d) मांसपेशी"
+    ],
+    o_en: [
+      "(a) Bone",
+      "(b) Neuron",
+      "(c) Blood",
+      "(d) Muscle"
+    ],
+    a: 1,
+    e_hi: "न्यूरॉन एक विशिष्ट तंत्रिका कोशिका है, जबकि अस्थि, रक्त और मांसपेशी ऊतक के उदाहरण हैं।",
+    e_en: "A neuron is a specialised nerve cell, whereas bone, blood and muscle are tissues."
+  },
+  {
+    q_hi: "Q3. जंतु ऊतक, पादप ऊतकों से भिन्न होते हैं क्योंकि जंतु ऊतक:",
+    q_en: "Q3. Animal tissues differ from plant tissues because animal tissues:",
+    tag: "RRB JE, 19/02/2026, Shift-II",
+    o_hi: [
+      "(a) विशिष्ट कार्यों का अभाव होता है।",
+      "(b) असीमित वृद्धि करते हैं।",
+      "(c) अधिकांशतः जीवित तथा लचीले होते हैं।",
+      "(d) कठोर कोशिका भित्ति रखते हैं।"
+    ],
+    o_en: [
+      "(a) Lack specialized functions",
+      "(b) Show unlimited growth",
+      "(c) Are mostly living and flexible",
+      "(d) Possess rigid cell walls"
+    ],
+    a: 2,
+    e_hi: "जंतु ऊतकों की अधिकांश कोशिकाएँ जीवित होती हैं और उनमें कठोर कोशिका भित्ति नहीं होती, इसलिए वे अपेक्षाकृत लचीली होती हैं।",
+    e_en: "Most animal-tissue cells are living and lack rigid cell walls, so animal tissues are generally more flexible."
+  },
+  {
+    q_hi: "Q4. पौधों की वृद्धि केवल कुछ विशेष क्षेत्रों में ही होती है क्योंकि:",
+    q_en: "Q4. The growth of plants occurs only in certain specific regions because:",
+    tag: "RRB Technician, 26/12/2024, Shift-II",
+    o_hi: [
+      "(a) सरल स्थायी ऊतक केवल इन्हीं क्षेत्रों में स्थित होते हैं।",
+      "(b) विभज्योतक ऊतक, जिसे मेरिस्टेमेटिक ऊतक भी कहा जाता है, केवल कुछ क्षेत्रों में स्थित होता है।",
+      "(c) संयोजी ऊतक केवल इन्हीं क्षेत्रों में स्थित होते हैं।",
+      "(d) जटिल स्थायी ऊतक केवल इन्हीं क्षेत्रों में स्थित होते हैं।"
+    ],
+    o_en: [
+      "(a) The simple permanent tissue is located only at these regions.",
+      "(b) The dividing tissue, also known as meristematic tissue, is located only at these regions.",
+      "(c) The connective tissue is located only at these regions.",
+      "(d) The complex permanent tissue is located only at these regions."
+    ],
+    a: 1,
+    e_hi: "पौधों में सक्रिय कोशिका विभाजन मेरिस्टेमेटिक ऊतक में होता है और यह जड़/तने के शीर्ष, गांठों या पार्श्व क्षेत्रों जैसे विशिष्ट स्थानों पर पाया जाता है।",
+    e_en: "Active cell division in plants occurs in meristematic tissue, which is restricted to specific regions such as tips, nodes and lateral zones."
+  },
+  {
+    q_hi: "Q5. निम्न में से कौन मेरिस्टेमेटिक ऊतक की कोशिकाओं में अनुपस्थित है?",
+    q_en: "Q5. Which of the following is absent in cells of meristematic tissue?",
+    tag: "Railway Technician 23/12/2024 --> 3rd shift",
+    o_hi: [
+      "(a) साइटोप्लाज्म",
+      "(b) कोशिका भित्तियाँ",
+      "(c) रसधानियाँ",
+      "(d) केंद्रक"
+    ],
+    o_en: [
+      "(a) Cytoplasm",
+      "(b) Cell walls",
+      "(c) Vacuoles",
+      "(d) Nuclei"
+    ],
+    a: 2,
+    e_hi: "मेरिस्टेमेटिक कोशिकाएँ सक्रिय रूप से विभाजित होती हैं; इनमें घना कोशिकाद्रव्य, बड़ा केंद्रक और पतली कोशिका भित्ति होती है, पर बड़ी रसधानियाँ सामान्यतः अनुपस्थित होती हैं।",
+    e_en: "Meristematic cells actively divide; they have dense cytoplasm, a prominent nucleus and thin walls, while large vacuoles are generally absent."
+  },
+  {
+    q_hi: "Q6. विभज्योतक ऊतकों के बारे में निम्नलिखित में से कौन-सा कथन गलत है?",
+    q_en: "Q6. Which of the following statements about meristematic tissues is INCORRECT?",
+    tag: "RRB Group-D, 10/12/2025, Shift-II",
+    o_hi: [
+      "(a) मेरिस्टेमेटिक कोशिकाएँ परिपक्व होने पर मृत हो जाती हैं।",
+      "(b) पौधों में जीवनभर वृद्धि को संभव बनाते हैं।",
+      "(c) कोशिकाएँ छोटी, पतली भित्ति वाली, सघन कोशिकाद्रव्य युक्त तथा बड़े केंद्रक वाली होती हैं।",
+      "(d) मेरिस्टेमेटिक ऊतक सक्रिय रूप से विभाजित होने वाली कोशिकाओं से बने होते हैं।"
+    ],
+    o_en: [
+      "(a) Meristematic cells are dead at maturity.",
+      "(b) Enable lifelong growth in plants.",
+      "(c) Cells are small, thin-walled, and densely cytoplasmic with large nuclei.",
+      "(d) Meristematic tissues consist of actively dividing cells."
+    ],
+    a: 0,
+    e_hi: "मेरिस्टेमेटिक कोशिकाएँ जीवित और सक्रिय रूप से विभाजित होने वाली कोशिकाएँ होती हैं; “परिपक्व होने पर मृत” होना उनका गुण नहीं है।",
+    e_en: "Meristematic cells are living and actively dividing; being dead at maturity is not a characteristic of meristematic tissue."
+  },
+  {
+    q_hi: "Q7. विभज्योतक ऊतक की कोशिकाओं में रसधानियाँ नहीं होती हैं क्योंकि:",
+    q_en: "Q7. Cells of the meristematic tissue lack vacuoles because:",
+    tag: "RRB Group-D, 03/12/2025, Shift-II",
+    o_hi: [
+      "(a) मेरिस्टेमेटिक कोशिकाएँ सक्रिय रूप से विभाजित होती हैं तथा उन्हें सघन कोशिकाद्रव्य की आवश्यकता होती है।",
+      "(b) रसधानियाँ कोशिका की मृत्यु का कारण बनती हैं।",
+      "(c) मेरिस्टेमेटिक कोशिकाएँ मृत होती हैं और उन्हें रसधानियों की आवश्यकता नहीं होती।",
+      "(d) रसधानियाँ श्वसन एंजाइमों को अवरुद्ध कर देती हैं।"
+    ],
+    o_en: [
+      "(a) Meristematic cells are actively dividing and need a dense cytoplasm.",
+      "(b) Vacuoles cause cell death.",
+      "(c) Meristematic cells are dead and do not need vacuoles.",
+      "(d) Vacuoles block respiratory enzymes."
+    ],
+    a: 0,
+    e_hi: "लगातार विभाजन करने वाली मेरिस्टेमेटिक कोशिकाओं में सघन कोशिकाद्रव्य रहता है और भंडारण के लिए बड़ी रसधानियों की आवश्यकता नहीं होती।",
+    e_en: "Actively dividing meristematic cells require dense cytoplasm and do not need large storage vacuoles."
+  },
+  {
+    q_hi: "Q8. __________ ऊतक की कोशिकाएँ विभेदन करके विभिन्न प्रकार के स्थायी ऊतक बनाती हैं।",
+    q_en: "Q8. Cells of __________ tissue differentiate to form different types of permanent tissue.",
+    tag: "RRB Group-D 10-12-2018 (Shift-I)",
+    o_hi: [
+      "(a) मैक्रोस्कोपिक ऊतक",
+      "(b) मेरिस्टेम",
+      "(c) पैरेंकाइमा",
+      "(d) कठोर ऊतक"
+    ],
+    o_en: [
+      "(a) Macroscopic tissue",
+      "(b) Meristem",
+      "(c) Parenchyma",
+      "(d) Hard tissue"
+    ],
+    a: 1,
+    e_hi: "मेरिस्टेम की कोशिकाएँ विभाजन के बाद विभेदन (differentiation) करके स्थायी ऊतकों की विभिन्न कोशिकाएँ बनाती हैं।",
+    e_en: "Meristematic cells undergo differentiation after division to form different permanent tissues."
+  },
+  {
+    q_hi: "Q9. पौधों में, मेरिस्टेमेटिक ऊतक की कोशिकाएँ ऐसी प्रक्रिया से गुजरती हैं जिसमें वे विभाजित होने की अपनी क्षमता खो देती हैं, स्थायी आकार और माप लेती हैं तथा एक विशिष्ट कार्य के लिए विशेषीकृत हो जाती हैं। इस प्रक्रिया को क्या कहते हैं?",
+    q_en: "Q9. In plants, the cells of meristematic tissue undergo a process wherein they lose their ability to divide, take up a permanent shape and size and specialize to perform a specific function. What is this process known as?",
+    tag: "RRB Group-D 25-08-2022 (Shift-I)",
+    o_hi: [
+      "(a) विकास",
+      "(b) प्रसार",
+      "(c) विभेदन",
+      "(d) पुनर्जनन"
+    ],
+    o_en: [
+      "(a) Development",
+      "(b) Proliferation",
+      "(c) Differentiation",
+      "(d) Regeneration"
+    ],
+    a: 2,
+    e_hi: "मेरिस्टेमेटिक कोशिकाओं का स्थायी आकार, संरचना और विशिष्ट कार्य प्राप्त करना विभेदन (differentiation) कहलाता है।",
+    e_en: "The process by which meristematic cells acquire a permanent shape, structure and specialised function is called differentiation."
+  },
+  {
+    q_hi: "Q10. विभज्योतक ऊतक केवल विशेष क्षेत्रों में पाए जाते हैं। स्थिति के आधार पर निम्नलिखित में से कौन-सा विभज्योतक का प्रकार नहीं है?",
+    q_en: "Q10. Meristematic tissues are found only in a specific region. On the basis of position, which is NOT a meristematic tissue type?",
+    tag: "RRB Group-D, 02/02/2026, Shift-I",
+    o_hi: [
+      "(a) शीर्षस्थ विभज्योतक",
+      "(b) अंतर्वेशी विभज्योतक",
+      "(c) आधारीय",
+      "(d) पार्श्व विभज्योतक"
+    ],
+    o_en: [
+      "(a) Apical",
+      "(b) Intercalary",
+      "(c) Basal",
+      "(d) Lateral"
+    ],
+    a: 2,
+    e_hi: "स्थिति के आधार पर मुख्य मेरिस्टेम apical, intercalary और lateral होते हैं; “basal” इस मानक वर्गीकरण में अलग मेरिस्टेम प्रकार नहीं है।",
+    e_en: "By position, the standard meristem types are apical, intercalary and lateral; “basal” is not a separate type in this classification."
+  },
+  {
+    q_hi: "Q11. कुछ पौधों में गांठों (नोड) के निकट कौन-सा विभज्योतक पाया जाता है?",
+    q_en: "Q11. Which meristem is located near the nodes in some plants?",
+    tag: "RRB Group-D, 05/02/2026, Shift-II",
+    o_hi: [
+      "(a) शीर्षस्थ विभज्योतक",
+      "(b) मूल विभज्योतक",
+      "(c) पार्श्व विभज्योतक",
+      "(d) अंतर्वेशी विभज्योतक"
+    ],
+    o_en: [
+      "(a) Apical meristem",
+      "(b) Root meristem",
+      "(c) Lateral meristem",
+      "(d) Intercalary meristem"
+    ],
+    a: 3,
+    e_hi: "अंतर्वेशी मेरिस्टेम पत्तियों के आधार या गांठों/इंटरनोड के पास पाया जाता है और लंबाई में वृद्धि में सहायता करता है।",
+    e_en: "Intercalary meristem occurs near nodes or at the bases of leaves and contributes to elongation."
+  },
+  {
+    q_hi: "Q12. पौधे के शरीर में शीर्षस्थ (Apical) मेरिस्टेमेटिक ऊतक की स्थिति क्या है?",
+    q_en: "Q12. What is the position of the apical meristematic tissue in a plant body?",
+    tag: "ALP 28 Nov 2024 3rd Shift",
+    o_hi: [
+      "(a) तनों और जड़ों की बढ़ती नोक पर",
+      "(b) केवल जड़ क्षेत्र के पास",
+      "(c) तने और जड़ों के पार्श्व भाग पर",
+      "(d) गांठ के पास"
+    ],
+    o_en: [
+      "(a) At the growing tips of the stems and roots",
+      "(b) Near to the root region only",
+      "(c) On the lateral side of the stem and roots",
+      "(d) Near the node"
+    ],
+    a: 0,
+    e_hi: "शीर्षस्थ मेरिस्टेम जड़ और तने की बढ़ती हुई नोकों पर होता है और प्राथमिक वृद्धि अर्थात लंबाई बढ़ाता है।",
+    e_en: "Apical meristem is located at the growing tips of roots and shoots and causes primary growth in length."
+  },
+  {
+    q_hi: "Q13. शीर्षस्थ विभज्योतक : लंबाई :: पार्श्व विभज्योतक : ____",
+    q_en: "Q13. Apical Meristem : Length :: Lateral Meristem :",
+    tag: "RRB Technician, 10/03/2026, Shift-III",
+    o_hi: [
+      "(a) तनों के सिरे",
+      "(b) नोड",
+      "(c) मोटाई",
+      "(d) केवल कोशिका विभेदन"
+    ],
+    o_en: [
+      "(a) Tips of stems",
+      "(b) Nodes",
+      "(c) Girth",
+      "(d) Cell differentiation only"
+    ],
+    a: 2,
+    e_hi: "शीर्षस्थ मेरिस्टेम लंबाई बढ़ाता है, जबकि पार्श्व मेरिस्टेम द्वितीयक वृद्धि द्वारा तने/जड़ की मोटाई या girth बढ़ाता है।",
+    e_en: "Apical meristem increases length, whereas lateral meristem causes secondary growth and increases girth."
+  },
+  {
+    q_hi: "Q14. एक वनस्पतिशास्त्री किसी पौधे के प्ररोह शीर्ष पर तीव्र वृद्धि देखता है। इस वृद्धि के लिए निम्नलिखित में से कौन-सा पादप ऊतक सबसे अधिक उत्तरदायी है?",
+    q_en: "Q14. A botanist observes a plant exhibiting rapid growth at its shoot tip. Which type of plant tissue is most likely responsible for this growth?",
+    tag: "RRB Group-D, 05/02/2026, Shift-I",
+    o_hi: [
+      "(a) अंतर्वेशी विभज्योतक",
+      "(b) स्थायी ऊतक",
+      "(c) पार्श्व विभज्योतक",
+      "(d) शीर्षस्थ विभज्योतक"
+    ],
+    o_en: [
+      "(a) Intercalary meristem",
+      "(b) Permanent tissue",
+      "(c) Lateral meristem",
+      "(d) Apical meristem"
+    ],
+    a: 3,
+    e_hi: "प्ररोह की नोक पर शीर्षस्थ मेरिस्टेम स्थित होता है; इसकी सक्रिय कोशिका विभाजन से तने की लंबाई बढ़ती है।",
+    e_en: "The shoot tip contains apical meristem, whose active cell division increases the length of the shoot."
+  },
+  {
+    q_hi: "Q15. पानी से भरे जार और उगती हुई जड़ों वाले प्याज को सीधा रखकर बनाए गए प्रयोगात्मक सेटअप को देखें। जड़ों के सिरों के हिस्से A में किस प्रकार का ऊतक मौजूद है?<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + Q15_IMAGE + "\" alt=\"Q15 onion root-tip experimental setup\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    q_en: "Q15. Study the experimental set up containing a water filled jar and an onion with growing roots set vertically up. Which type of tissue is present in the portion A of roots tips?<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + Q15_IMAGE + "\" alt=\"Q15 onion root-tip experimental setup\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    tag: "RRB Group-D, 12/12/2025, Shift-III",
+    image: Q15_IMAGE,
+    o_hi: [
+      "(a) स्क्लेरेंकाइमा",
+      "(b) मेरिस्टेमेटिक ऊतक",
+      "(c) पैरेंकाइमा",
+      "(d) कोलेंकाइमा"
+    ],
+    o_en: [
+      "(a) Sclerenchyma",
+      "(b) Meristematic tissue",
+      "(c) Parenchyma",
+      "(d) Collenchyma"
+    ],
+    a: 1,
+    e_hi: "जड़ की बढ़ती नोक पर apical meristem पाया जाता है, इसलिए भाग A में मेरिस्टेमेटिक ऊतक उपस्थित है।",
+    e_en: "The growing root tip contains apical meristem; therefore portion A has meristematic tissue."
+  },
+  {
+    q_hi: "Q16. प्याज की जड़ का सिरा काट देने पर उसकी वृद्धि क्यों रुक जाती है?",
+    q_en: "Q16. Why does the growth of an onion root stop after its tip is cut?",
+    tag: "RRB ALP CBT - 1 13/02/2026 Shift 1",
+    o_hi: [
+      "(a) मेरिस्टेमेटिक कोशिकाएँ अपनी रसधानियाँ खो देती हैं।",
+      "(b) नई कोशिकाएँ बनाने वाला शीर्षस्थ विभज्योतक हट जाता है।",
+      "(c) पार्श्व विभज्योतक क्षतिग्रस्त हो जाता है।",
+      "(d) अंतर्वेशी विभज्योतक कार्य करना प्रारंभ कर देता है।"
+    ],
+    o_en: [
+      "(a) The meristematic cells lose their vacuoles.",
+      "(b) The apical meristem that produces new cells is removed.",
+      "(c) The lateral meristem gets damaged.",
+      "(d) The intercalary meristem starts working."
+    ],
+    a: 1,
+    e_hi: "जड़ की नोक पर apical meristem होता है जो नई कोशिकाएँ बनाता है; नोक काटने पर यह हट जाता है और लंबाई में वृद्धि रुक जाती है।",
+    e_en: "The root tip contains apical meristem that produces new cells; cutting the tip removes it and stops elongation."
+  },
+  {
+    q_hi: "Q17. कुछ पौधों में पत्तियों के आधार या गांठों के निकट परिपक्व ऊतकों के बीच विभज्योतक ऊतक पाया जाता है। यह कौन-सा ऊतक है?",
+    q_en: "Q17. In some plants, a meristematic tissue is found at the base of leaves or near the nodes, separating regions of a mature tissue. Which tissue is this?",
+    tag: "RRB Technician, 09/03/2026, Shift-I",
+    o_hi: [
+      "(a) अंतर्वेशी विभज्योतक",
+      "(b) विभेदित ऊतक",
+      "(c) शीर्षस्थ विभज्योतक",
+      "(d) पार्श्व विभज्योतक"
+    ],
+    o_en: [
+      "(a) Intercalary meristem",
+      "(b) Differentiated tissue",
+      "(c) Apical meristem",
+      "(d) Lateral meristem"
+    ],
+    a: 0,
+    e_hi: "अंतर्वेशी मेरिस्टेम परिपक्व ऊतकों के बीच, विशेषकर पत्ती के आधार और गांठों के पास स्थित होता है।",
+    e_en: "Intercalary meristem occurs between mature tissues, commonly near nodes and at the bases of leaves."
+  },
+  {
+    q_hi: "Q18. निम्न में से कौन-सा सरल स्थायी ऊतक नहीं है?",
+    q_en: "Q18. Which of the following is not a simple permanent tissue?",
+    tag: "RRB Group-D 18-09-2018 (Shift-I)",
+    o_hi: [
+      "(a) पैरेंकाइमा",
+      "(b) जाइलम",
+      "(c) कोलेंकाइमा",
+      "(d) स्क्लेरेंकाइमा"
+    ],
+    o_en: [
+      "(a) Parenchyma",
+      "(b) Xylem",
+      "(c) Collenchyma",
+      "(d) Sclerenchyma"
+    ],
+    a: 1,
+    e_hi: "पैरेंकाइमा, कोलेंकाइमा और स्क्लेरेंकाइमा सरल स्थायी ऊतक हैं। जाइलम कई प्रकार की कोशिकाओं से बना जटिल स्थायी ऊतक है।",
+    e_en: "Parenchyma, collenchyma and sclerenchyma are simple permanent tissues. Xylem is a complex permanent tissue made of different cell types."
+  },
+  {
+    q_hi: "Q19. पौधों में निम्नलिखित में से कौन-सा सबसे सामान्य सरल स्थायी ऊतक है?",
+    q_en: "Q19. Which of the following is the most common simple permanent tissue in plants?",
+    tag: "RRB Group-D, 02/12/2025, Shift-III",
+    o_hi: [
+      "(a) एरेन्काइमा",
+      "(b) पैरेंकाइमा",
+      "(c) क्लोरेन्काइमा",
+      "(d) स्क्लेरेंकाइमा"
+    ],
+    o_en: [
+      "(a) Aerenchyma",
+      "(b) Parenchyma",
+      "(c) Chlorenchyma",
+      "(d) Sclerenchyma"
+    ],
+    a: 1,
+    e_hi: "पैरेंकाइमा पौधों में व्यापक रूप से पाया जाने वाला सबसे सामान्य सरल स्थायी ऊतक है; इसकी कोशिकाएँ जीवित और पतली भित्ति वाली होती हैं।",
+    e_en: "Parenchyma is the most widely distributed simple permanent tissue in plants; its cells are living and thin-walled."
+  },
+  {
+    q_hi: "Q20. निम्नलिखित में से किस ऊतक में सबसे बड़ा अंतरकोशिकीय स्थान होता है?",
+    q_en: "Q20. Which of the following tissues has the largest intercellular space?",
+    tag: "RRB Group-D 22-09-2018 (Shift-II)",
+    o_hi: [
+      "(a) पैरेंकाइमा",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) कोलेंकाइमा",
+      "(d) जाइलम"
+    ],
+    o_en: [
+      "(a) Parenchyma",
+      "(b) Sclerenchyma",
+      "(c) Collenchyma",
+      "(d) Xylem"
+    ],
+    a: 0,
+    e_hi: "पैरेंकाइमा कोशिकाएँ सामान्यतः ढीली व्यवस्थित होती हैं और उनके बीच बड़े अंतरकोशिकीय स्थान होते हैं।",
+    e_en: "Parenchyma cells are usually loosely packed and possess comparatively large intercellular spaces."
+  },
+  {
+    q_hi: "Q21. पौधों में पैरेंकाइमा कोशिकाएँ कैसी होती हैं?",
+    q_en: "Q21. The parenchyma cells in plants are:",
+    tag: "RRB Group-D, 21/12/2025, Shift-II",
+    o_hi: [
+      "(a) मृत तथा लिग्निनयुक्त लंबी कोशिका भित्ति वाली होती हैं।",
+      "(b) जीवित होती हैं तथा इनके कोनों पर मोटी कोशिका भित्ति होती है और अंतरकोशिकीय स्थान नहीं होते।",
+      "(c) जीवित होती हैं तथा अंतरकोशिकीय स्थानों के साथ ढीली व्यवस्था में स्थित होती हैं।",
+      "(d) मृत होती हैं तथा बिना अंतरकोशिकीय स्थान के सघन रूप से व्यवस्थित होती हैं।"
+    ],
+    o_en: [
+      "(a) Dead and elongated with lignified walls",
+      "(b) Living and thickened at corners without spaces",
+      "(c) Living and loosely arranged with intercellular spaces",
+      "(d) Dead and compactly arranged without spaces"
+    ],
+    a: 2,
+    e_hi: "पैरेंकाइमा की कोशिकाएँ जीवित, पतली भित्ति वाली और अक्सर ढीली व्यवस्थित होती हैं, जिससे इनके बीच अंतरकोशिकीय स्थान बनते हैं।",
+    e_en: "Parenchyma cells are living, thin-walled and often loosely arranged, leaving intercellular spaces."
+  },
+  {
+    q_hi: "Q22. निम्नलिखित में से कौन-सा पादप ऊतक प्रकाश संश्लेषण करता है?",
+    q_en: "Q22. Which of the following plant tissue performs photosynthesis?",
+    tag: "RRB Group-D, 27/11/2025, Shift-I",
+    o_hi: [
+      "(a) क्लोरेन्काइमा",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) जाइलम",
+      "(d) फ्लोएम"
+    ],
+    o_en: [
+      "(a) Chlorenchyma",
+      "(b) Sclerenchyma",
+      "(c) Xylem",
+      "(d) Phloem"
+    ],
+    a: 0,
+    e_hi: "क्लोरेन्काइमा वह पैरेंकाइमा है जिसमें क्लोरोप्लास्ट होते हैं; इसलिए यह प्रकाश संश्लेषण करता है।",
+    e_en: "Chlorenchyma is parenchyma containing chloroplasts, so it performs photosynthesis."
+  },
+  {
+    q_hi: "Q23. निम्नलिखित में से कौन-सा पैरेंकाइमा का प्रकार है, जो जलीय पौधों में पाया जाता है तथा जिसमें तैरने में सहायता के लिए बड़ी वायु गुहाएँ होती हैं?",
+    q_en: "Q23. Which of the following is parenchyma type and present in aquatic plants, with large air cavities to help them float?",
+    tag: "RRB Group-D, 16/12/2025, Shift-I",
+    o_hi: [
+      "(a) ट्रैकिड",
+      "(b) क्लोरेन्काइमा",
+      "(c) सहचर कोशिका",
+      "(d) एरेन्काइमा"
+    ],
+    o_en: [
+      "(a) Tracheid",
+      "(b) Chlorenchyma",
+      "(c) Companion cell",
+      "(d) Aerenchyma"
+    ],
+    a: 3,
+    e_hi: "एरेन्काइमा में बड़े वायु स्थान होते हैं जो जलीय पौधों को उछाल और गैसों के आदान-प्रदान में सहायता करते हैं।",
+    e_en: "Aerenchyma has large air spaces that help aquatic plants with buoyancy and gaseous exchange."
+  },
+  {
+    q_hi: "Q24. पैरेंकाइमा कोशिकाओं में बड़े अंतरकोशिकीय स्थान किसके लिए होते हैं?",
+    q_en: "Q24. Parenchyma cells contain large intercellular spaces for:",
+    tag: "RRB Group-D, 23/12/2025, Shift-I",
+    o_hi: [
+      "(a) संरक्षण एवं वाष्पोत्सर्जन",
+      "(b) गैसों के आदान-प्रदान एवं भंडारण",
+      "(c) संवहन एवं स्राव",
+      "(d) प्रकाश संश्लेषण एवं सहारा"
+    ],
+    o_en: [
+      "(a) Protection and transpiration",
+      "(b) Gas exchange and storage",
+      "(c) Conduction and secretion",
+      "(d) Photosynthesis and support"
+    ],
+    a: 1,
+    e_hi: "पैरेंकाइमा के अंतरकोशिकीय स्थान गैसों के प्रसार/आदान-प्रदान में सहायक होते हैं और यह ऊतक भोजन/जल का भंडारण भी करता है।",
+    e_en: "Intercellular spaces in parenchyma aid diffusion and gaseous exchange, while parenchyma also commonly performs storage."
+  },
+  {
+    q_hi: "Q25. पौधों में लचीलापन .......... ऊतक के कारण होता है?",
+    q_en: "Q25. Flexibility in plants is due to………… tissue?",
+    tag: "RRB Group-D 17-09-2018 (Shift-1)",
+    o_hi: [
+      "(a) जाइलम",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) कोलेंकाइमा",
+      "(d) फ्लोएम"
+    ],
+    o_en: [
+      "(a) Xylem",
+      "(b) Sclerenchyma",
+      "(c) Collenchyma",
+      "(d) Phloem"
+    ],
+    a: 2,
+    e_hi: "कोलेंकाइमा की कोशिका भित्तियाँ कोनों पर असमान रूप से मोटी होती हैं; यह पौधे को यांत्रिक सहारा के साथ लचीलापन भी देती हैं।",
+    e_en: "Collenchyma cells have unevenly thickened walls at the corners, providing mechanical support along with flexibility."
+  },
+  {
+    q_hi: "Q26. पौधों में लचीलापन किस स्थायी ऊतक के कारण होता है जो पौधे के विभिन्न भागों, जैसे टेंड्रिल और चढ़ने वाले पौधों के तनों को, बिना टूटे झुकने देता है?",
+    q_en: "Q26. The flexibility in plants is due to which permanent tissue that allows bending of various parts of a plant like tendrils and stems of climbers without breaking?",
+    tag: "Railway Technician 20/12/2024 --> 2nd shift",
+    o_hi: [
+      "(a) क्लोरेन्काइमा",
+      "(b) कोलेंकाइमा",
+      "(c) एरेन्काइमा",
+      "(d) पैरेंकाइमा"
+    ],
+    o_en: [
+      "(a) Chlorenchyma",
+      "(b) Collenchyma",
+      "(c) Aerenchyma",
+      "(d) Parenchyma"
+    ],
+    a: 1,
+    e_hi: "कोलेंकाइमा पौधे के बढ़ते भागों को सहारा और लचीलापन देता है, इसलिए वे झुक सकते हैं पर आसानी से टूटते नहीं।",
+    e_en: "Collenchyma provides support and flexibility to growing plant parts, allowing them to bend without breaking easily."
+  },
+  {
+    q_hi: "Q27. अनियमित रूप से _____________ की कोशिकाएँ कोनों पर मोटी होती हैं।",
+    q_en: "Q27. The cells of irregularly _____________ are thick at the corners.",
+    tag: "RRB Group-D 07-12-2018 (Shift-III); RRB Group-D 31-10-2018 (Shift-II)",
+    o_hi: [
+      "(a) पैरेंकाइमा",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) कोलेंकाइमा",
+      "(d) एरेन्काइमा"
+    ],
+    o_en: [
+      "(a) Parenchyma",
+      "(b) Sclerenchyma",
+      "(c) Collenchyma",
+      "(d) Aerenchyma"
+    ],
+    a: 2,
+    e_hi: "कोलेंकाइमा कोशिकाओं की भित्तियाँ कोनों पर असमान रूप से मोटी होती हैं; यही उनकी पहचान है।",
+    e_en: "Collenchyma cells are characterised by uneven thickening of the cell wall at the corners."
+  },
+  {
+    q_hi: "Q28. नारियल के छिलके में मुख्यतः कौन-सा पादप ऊतक पाया जाता है तथा उसका प्रमुख कार्य क्या है?",
+    q_en: "Q28. Which plant tissue is mostly found in the husk of a coconut, and what is its main function?",
+    tag: "RRB Group-D, 09/12/2025, Shift-III",
+    o_hi: [
+      "(a) कोलेंकाइमा - लचीलापन प्रदान करना",
+      "(b) जाइलम - जल एवं खनिजों का संवहन करना",
+      "(c) स्क्लेरेंकाइमा - दृढ़ता एवं कठोरता प्रदान करना",
+      "(d) पैरेंकाइमा - भोजन का भंडारण"
+    ],
+    o_en: [
+      "(a) Collenchyma - providing flexibility",
+      "(b) Xylem - conducting water and minerals",
+      "(c) Sclerenchyma - providing strength and rigidity",
+      "(d) Parenchyma - storage of food"
+    ],
+    a: 2,
+    e_hi: "नारियल की जटा/हस्क में स्क्लेरेंकाइमा तंतु होते हैं; उनकी मोटी लिग्निनयुक्त भित्तियाँ मजबूती और कठोरता देती हैं।",
+    e_en: "Coconut husk contains sclerenchyma fibres; their thick lignified walls provide strength and rigidity."
+  },
+  {
+    q_hi: "Q29. निम्नलिखित में से कौन-सा ऊतक पौधे को कठोर एवं दृढ़ बनाता है?",
+    q_en: "Q29. Which of the following tissues makes the plant hard and stiff?",
+    tag: "RRB Group-D, 12/12/2025, Shift-I",
+    o_hi: [
+      "(a) स्क्लेरेंकाइमा",
+      "(b) कोलेंकाइमा",
+      "(c) एरेन्काइमा",
+      "(d) क्लोरेन्काइमा"
+    ],
+    o_en: [
+      "(a) Sclerenchyma",
+      "(b) Collenchyma",
+      "(c) Aerenchyma",
+      "(d) Chlorenchyma"
+    ],
+    a: 0,
+    e_hi: "स्क्लेरेंकाइमा की कोशिका भित्तियाँ मोटी और लिग्निनयुक्त होती हैं, इसलिए यह पौधों को कठोरता और यांत्रिक मजबूती देता है।",
+    e_en: "Sclerenchyma has thick lignified cell walls and therefore provides hardness and mechanical strength."
+  },
+  {
+    q_hi: "Q30. निम्नलिखित में से किस सरल स्थायी ऊतक की कोशिका भित्तियाँ लिग्निनयुक्त होती हैं?",
+    q_en: "Q30. Which of the following simple permanent tissues have its cell walls lignified?",
+    tag: "RRB Group-D, 15/12/2025, Shift-III",
+    o_hi: [
+      "(a) पैरेंकाइमा",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) कोलेंकाइमा",
+      "(d) फ्लोएम"
+    ],
+    o_en: [
+      "(a) Parenchyma",
+      "(b) Sclerenchyma",
+      "(c) Collenchyma",
+      "(d) Phloem"
+    ],
+    a: 1,
+    e_hi: "स्क्लेरेंकाइमा कोशिकाओं की द्वितीयक भित्तियों में लिग्निन जमा होता है, जिससे वे मोटी, कठोर और मजबूत हो जाती हैं।",
+    e_en: "Lignin is deposited in the secondary walls of sclerenchyma cells, making them thick, hard and strong."
+  },
+  {
+    q_hi: "Q31. अनियमित रूप से _____________ की कोशिकाएँ कोनों पर मोटी होती हैं।",
+    q_en: "Q31. The cells of irregularly _____________ are thick at the corners.",
+    tag: "RRB Group-D 07-12-2018 (Shift-III); RRB Group-D 31-10-2018 (Shift-II)",
+    o_hi: [
+      "(a) पैरेंकाइमा",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) कोलेंकाइमा",
+      "(d) एरेन्काइमा"
+    ],
+    o_en: [
+      "(a) Parenchyma",
+      "(b) Sclerenchyma",
+      "(c) Collenchyma",
+      "(d) Aerenchyma"
+    ],
+    a: 2,
+    e_hi: "कोलेंकाइमा में कोशिका भित्ति विशेषकर कोनों पर असमान रूप से मोटी होती है, जिससे ऊतक को लचीलापन और सहारा मिलता है।",
+    e_en: "In collenchyma, the cell wall is unevenly thickened at the corners, giving flexibility and support."
+  },
+  {
+    q_hi: "Q32. नारियल के छिलके में कौन-सा ऊतक उसे कठोर और सख्त बनाता है?",
+    q_en: "Q32. Which tissue in the coconut husk makes it hard and stiff?",
+    tag: "RRB Group-D 23-08-2022 (Shift-II)",
+    o_hi: [
+      "(a) पैरेंकाइमा",
+      "(b) स्क्लेरेंकाइमा",
+      "(c) कोलेंकाइमा",
+      "(d) रक्षक कोशिकाएँ"
+    ],
+    o_en: [
+      "(a) Parenchyma",
+      "(b) Sclerenchyma",
+      "(c) Collenchyma",
+      "(d) Guard cells"
+    ],
+    a: 1,
+    e_hi: "नारियल के हस्क में स्क्लेरेंकाइमा तंतु पाए जाते हैं, जो लिग्निनयुक्त भित्तियों के कारण कठोर और मजबूत होते हैं।",
+    e_en: "Coconut husk contains sclerenchyma fibres, which are hard and strong because of lignified walls."
+  },
+  {
+    q_hi: "Q33. ___________________ में मृत ऊतक होते हैं।",
+    q_en: "Q33. There are dead tissues in the ___________.",
+    tag: "Railway Technician 23/12/2024 --> 1st shift",
+    o_hi: [
+      "(a) केले का छिलका",
+      "(b) संतरे का छिलका",
+      "(c) अमरूद का छिलका",
+      "(d) नारियल की भूसी"
+    ],
+    o_en: [
+      "(a) Banana peel",
+      "(b) Orange peel",
+      "(c) Guava peel",
+      "(d) Coconut husk"
+    ],
+    a: 3,
+    e_hi: "नारियल की भूसी में स्क्लेरेंकाइमा तंतु होते हैं; परिपक्व स्क्लेरेंकाइमा कोशिकाएँ मृत होती हैं।",
+    e_en: "Coconut husk contains sclerenchyma fibres, and mature sclerenchyma cells are dead."
+  },
+  {
+    q_hi: "Q34. जाइलम का कार्य क्या है?",
+    q_en: "Q34. What is the function of xylem?",
+    tag: "ALP 25 Nov 2024 1st Shift",
+    o_hi: [
+      "(a) भोजन का परिवहन",
+      "(b) प्रोटीन का परिवहन",
+      "(c) पानी और खनिजों का परिवहन",
+      "(d) लिपिड का परिवहन"
+    ],
+    o_en: [
+      "(a) Conduction of food",
+      "(b) Conduction of protein",
+      "(c) Conduction of water and minerals",
+      "(d) Conduction of lipid"
+    ],
+    a: 2,
+    e_hi: "जाइलम जड़ों से जल और घुले हुए खनिजों को तने तथा पत्तियों सहित पौधे के अन्य भागों तक पहुँचाता है।",
+    e_en: "Xylem conducts water and dissolved minerals from the roots to stems, leaves and other plant parts."
+  },
+  {
+    q_hi: "Q35. निम्नलिखित में से कौन-सा ऊतक पत्तियों में निर्मित भोजन को पौधे के सभी भागों तक पहुँचाता है?",
+    q_en: "Q35. Which of the following tissues ensures that food made in the leaves is delivered to all plant parts?",
+    tag: "RRB JE, 25/02/2026, Shift-III",
+    o_hi: [
+      "(a) फ्लोएम",
+      "(b) मेसोफिल",
+      "(c) जाइलम",
+      "(d) एपिडर्मिस"
+    ],
+    o_en: [
+      "(a) Phloem",
+      "(b) Mesophyll",
+      "(c) Xylem",
+      "(d) Epidermis"
+    ],
+    a: 0,
+    e_hi: "फ्लोएम प्रकाश संश्लेषण से बने भोजन (मुख्यतः शर्करा) का पत्तियों से पौधे के अन्य भागों तक स्थानांतरण करता है।",
+    e_en: "Phloem transports food, mainly sugars produced by photosynthesis, from leaves to other parts of the plant."
+  },
+  {
+    q_hi: "Q36. _____ मिट्टी से प्राप्त पानी और खनिजों को स्थानांतरित करता है जबकि ______ पत्तियों से, जहाँ उनका संश्लेषण होता है, प्रकाश संश्लेषण के उत्पादों को पौधे के अन्य भागों तक ले जाता है।",
+    q_en: "Q36. The ______ moves water and minerals obtained from the soil while ______ transports products of photosynthesis from the leaves where they are synthesized to other parts of the plant.",
+    tag: "ALP 28 Nov 2024 1st Shift",
+    o_hi: [
+      "(a) कोलेंकाइमा, पैरेंकाइमा",
+      "(b) फ्लोएम, जाइलम",
+      "(c) पैरेंकाइमा, कोलेंकाइमा",
+      "(d) जाइलम, फ्लोएम"
+    ],
+    o_en: [
+      "(a) Collenchyma, Parenchyma",
+      "(b) Phloem, Xylem",
+      "(c) Parenchyma, Collenchyma",
+      "(d) Xylem, Phloem"
+    ],
+    a: 3,
+    e_hi: "जाइलम जल और खनिजों का परिवहन करता है, जबकि फ्लोएम पत्तियों में बने प्रकाश संश्लेषण उत्पादों का स्थानांतरण करता है।",
+    e_en: "Xylem transports water and minerals, whereas phloem transports the products of photosynthesis from leaves to other parts."
+  },
+  {
+    q_hi: "Q37. फ्लोएम में मौजूद मृत तत्व है—",
+    q_en: "Q37. The dead element present in the phloem is-",
+    tag: "",
+    o_hi: [
+      "(a) सहचर कोशिकाएँ",
+      "(b) फ्लोएम तंतु",
+      "(c) फ्लोएम पैरेंकाइमा",
+      "(d) चालनी नलिकाएँ"
+    ],
+    o_en: [
+      "(a) Companion cells",
+      "(b) Phloem fibres",
+      "(c) Phloem parenchyma",
+      "(d) Sieve tubes"
+    ],
+    a: 1,
+    e_hi: "फ्लोएम के घटकों में फ्लोएम तंतु (phloem fibres) मृत होते हैं; sieve tubes, companion cells और phloem parenchyma जीवित होते हैं।",
+    e_en: "Among phloem elements, phloem fibres are dead; sieve tubes, companion cells and phloem parenchyma are living."
+  },
+  {
+    q_hi: "Q38. पौधों में भोजन का संवहन करने वाला जटिल ऊतक ____ कहलाता है, तथा यह चालनी नलिकाओं एवं ____ जैसी जीवित कोशिकाओं से मिलकर बना होता है।",
+    q_en: "Q38. The complex tissue that transports food in plants is called ___, and it consists of living cells like sieve tubes and _____.",
+    tag: "RRB Group-D, 09/02/2026, Shift-III",
+    o_hi: [
+      "(a) जाइलम, ट्रैकिड",
+      "(b) कोलेंकाइमा, स्क्लेरेंकाइमा",
+      "(c) फ्लोएम, सहचर कोशिकाएँ",
+      "(d) जाइलम, जाइलम तंतु"
+    ],
+    o_en: [
+      "(a) Xylem, tracheids",
+      "(b) Collenchyma, sclerenchyma",
+      "(c) Phloem, companion cells",
+      "(d) Xylem, xylem fibres"
+    ],
+    a: 2,
+    e_hi: "फ्लोएम भोजन का परिवहन करने वाला जटिल ऊतक है; sieve tubes और companion cells इसके प्रमुख जीवित घटक हैं।",
+    e_en: "Phloem is the complex tissue that transports food; sieve tubes and companion cells are important living components."
+  },
+  {
+    q_hi: "Q39. जाइलम ऊतक के कौन-से तत्व परस्पर जुड़े हुए जल-संवाहक चैनल बनाते हैं?",
+    q_en: "Q39. Which elements of xylem tissue form interconnected water-conducting channels?",
+    tag: "ALP 26 Nov 2024 | 3rd Shift",
+    o_hi: [
+      "(a) वाहिकाएँ और जाइलम तंतु",
+      "(b) ट्रैकिड्स और जाइलम तंतु",
+      "(c) केवल वाहिकाएँ",
+      "(d) वाहिकाएँ और ट्रैकिड्स"
+    ],
+    o_en: [
+      "(a) Vessels and Xylem fibres",
+      "(b) Tracheids and Xylem fibres",
+      "(c) Only Vessels",
+      "(d) Vessels and Tracheids"
+    ],
+    a: 3,
+    e_hi: "जाइलम की वाहिकाएँ (vessels) और ट्रैकिड्स आपस में जुड़े जल-संवाहक मार्ग बनाते हैं जो जड़ों से ऊपर तक जल पहुँचाते हैं।",
+    e_en: "Xylem vessels and tracheids form interconnected water-conducting channels that carry water upward from the roots."
+  },
+  {
+    q_hi: "Q40. ____________ पत्ती की एपिडर्मिस में पाए जाते हैं।",
+    q_en: "Q40. __________ are found in the epidermis of a leaf.",
+    tag: "Railway Technician 23/12/2024 --> 1st shift",
+    o_hi: [
+      "(a) संवहनी बंडल",
+      "(b) एरेन्काइमा",
+      "(c) स्टोमाटा",
+      "(d) क्लोरेन्काइमा"
+    ],
+    o_en: [
+      "(a) Vascular bundle",
+      "(b) Aerenchyma",
+      "(c) Stomata",
+      "(d) Chlorenchyma"
+    ],
+    a: 2,
+    e_hi: "पत्ती की एपिडर्मिस में स्टोमाटा (रंध्र) होते हैं, जिनके माध्यम से गैसीय आदान-प्रदान और वाष्पोत्सर्जन होता है।",
+    e_en: "Stomata are present in the leaf epidermis and allow gaseous exchange and transpiration."
+  },
+  {
+    q_hi: "Q41. रेगिस्तानी पौधों की एपिडर्मिस पर __________ की मोटी मोमी परत होती है।",
+    q_en: "Q41. Epidermis of desert plants has a thick waxy coating of __________.",
+    tag: "RRB Group-D 05-12-2018 (Shift-I)",
+    o_hi: [
+      "(a) पेक्टिन",
+      "(b) क्यूटिन",
+      "(c) सेलुलोज",
+      "(d) लिग्निन"
+    ],
+    o_en: [
+      "(a) Pectin",
+      "(b) Cutin",
+      "(c) Cellulose",
+      "(d) Lignin"
+    ],
+    a: 1,
+    e_hi: "रेगिस्तानी पौधों में एपिडर्मिस के बाहर क्यूटिन की मोटी मोमी परत (cuticle) जल हानि को कम करती है।",
+    e_en: "Desert plants have a thick waxy cutin layer (cuticle) over the epidermis, which reduces water loss."
+  },
+  {
+    q_hi: "Q42. कॉर्क अपनी कोशिकाओं के भीतर पाए जाने वाले _________ के कारण पानी और गैसों के लिए अभेद्य है।",
+    q_en: "Q42. Cork is impermeable to water and gases because of _________ found within its cells.",
+    tag: "RRB Group-D 24-08-2022 (Shift-III)",
+    o_hi: [
+      "(a) लिग्निन",
+      "(b) क्यूटिन",
+      "(c) सेलुलोज",
+      "(d) सुबेरिन"
+    ],
+    o_en: [
+      "(a) Lignin",
+      "(b) Cutin",
+      "(c) Cellulose",
+      "(d) Suberin"
+    ],
+    a: 3,
+    e_hi: "कॉर्क कोशिकाओं की भित्तियों में सुबेरिन जमा होता है, जो उन्हें पानी और गैसों के लिए लगभग अभेद्य बनाता है।",
+    e_en: "Suberin is deposited in cork cell walls and makes them largely impermeable to water and gases."
+  }
+];
