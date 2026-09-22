@@ -1916,8 +1916,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 
 /* Pencil canvas is positioned (via JS) to exactly match the visible rect
    of the message area — but lives as a sibling of it, NOT a scrolling
-   child, so it stays correctly aligned even while the chat auto-scrolls
-   during a streaming AI response. The header and bottom input area sit
+   child, so it stays correctly aligned when the chat auto-scrolls.
+   The header and bottom input area sit
    outside this rect entirely, so they're never covered and always behave
    normally whether or not AI-chat pencil mode is on. */
 #aiPencilCanvas {
@@ -3653,8 +3653,12 @@ async function buildGlobalQuizIndex() {
     const response = await fetch('./index.json?v=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) throw new Error("Unable to load index.json");
     allFlattenedQuizzes = await response.json();
-    isHistoryNav = true; // initial render should not push a duplicate history entry
-    renderSubjects();
+    // Keep history suppression active for the complete render call. Some
+    // explorer views immediately delegate to another level, so clearing the
+    // flag inside the first nested render would create a phantom Back entry.
+    isHistoryNav = true;
+    try { renderSubjects(); }
+    finally { isHistoryNav = false; }
   } catch (error) {
     showError("Network Error Occurred", "Kindly check your internet connection or verify index.json deployment.");
   } finally {
@@ -3803,7 +3807,12 @@ function showExitConfirmModal(onYes) {
 }
 
 function pushExplorerHistory(state) {
-  if (isHistoryNav) { isHistoryNav = false; return; }
+  // During a browser/device Back render, keep suppressing pushes for the
+  // entire nested render chain. Bookmark navigation can skip empty category
+  // or chapter levels by calling another renderer immediately; consuming the
+  // flag here used to let that nested renderer push the same final screen
+  // again, trapping iPad Back navigation on that screen.
+  if (isHistoryNav) return;
   history.pushState(state, '');
 }
 
@@ -3927,24 +3936,29 @@ window.addEventListener('popstate', (e) => {
   const searchInput = document.getElementById('explorerSearch');
   if (searchInput && searchInput.value) searchInput.value = '';
 
-  switch (state.screen) {
-    case 'bookmarks': renderBookmarkSubjects(); break;
-    case 'bookmarkLevel2': renderBookmarkLevel2(state.subject); break;
-    case 'bookmarkChapters': renderBookmarkChapters(state.subject,state.category); break;
-    case 'bookmarkTests': renderBookmarkTests(state.subject,state.category,state.chapter,state.directOnly); break;
-    case 'bookmarkQuestions': renderBookmarkQuestions(state.subject, state.path); break;
-    case 'categories':
-      renderCategories(state.subject);
-      break;
-    case 'chapters':
-      renderChapters(state.subject, state.category);
-      break;
-    case 'quizlist':
-    case 'quiz':
-      renderQuizList(state.subject, state.category, state.chapter);
-      break;
-    default:
-      renderSubjects();
+  try {
+    switch (state.screen) {
+      case 'bookmarks': renderBookmarkSubjects(); break;
+      case 'bookmarkLevel2': renderBookmarkLevel2(state.subject); break;
+      case 'bookmarkChapters': renderBookmarkChapters(state.subject,state.category); break;
+      case 'bookmarkTests': renderBookmarkTests(state.subject,state.category,state.chapter,state.directOnly); break;
+      case 'bookmarkQuestions': renderBookmarkQuestions(state.subject, state.path); break;
+      case 'categories':
+        renderCategories(state.subject);
+        break;
+      case 'chapters':
+        renderChapters(state.subject, state.category);
+        break;
+      case 'quizlist':
+      case 'quiz':
+        renderQuizList(state.subject, state.category, state.chapter);
+        break;
+      default:
+        renderSubjects();
+    }
+  } finally {
+    // A fresh user click after Back must be allowed to create its own entry.
+    isHistoryNav = false;
   }
 });
 
@@ -7015,44 +7029,6 @@ document.addEventListener("click", (event) => {
   if (pop && pop.classList.contains("open") && !pop.contains(event.target) && event.target !== btn) closeAISettings();
 });
 
-async function readGeminiStreamingResponse(response, onTextChunk) {
-  if (!response.body) throw new Error("Streaming response body unavailable.");
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "";
-  let fullText = "";
-
-  const consumeEvent = async (eventText) => {
-    const lines = eventText.split(/\r?\n/);
-    const dataLines = lines
-      .filter(line => line.startsWith("data:"))
-      .map(line => line.slice(5).trimStart());
-    if (!dataLines.length) return;
-    const dataText = dataLines.join("\n").trim();
-    if (!dataText || dataText === "[DONE]") return;
-    let chunk;
-    try { chunk = JSON.parse(dataText); } catch (_) { return; }
-    const parts = chunk?.candidates?.[0]?.content?.parts;
-    if (!Array.isArray(parts)) return;
-    const text = parts.map(p => typeof p?.text === "string" ? p.text : "").join("");
-    if (!text) return;
-    fullText += text;
-    if (typeof onTextChunk === "function") onTextChunk(text, fullText);
-  };
-
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    const events = buffer.split(/\r?\n\r?\n/);
-    buffer = events.pop() || "";
-    for (const eventText of events) await consumeEvent(eventText);
-  }
-  buffer += decoder.decode();
-  if (buffer.trim()) await consumeEvent(buffer);
-  return fullText;
-}
-
 async function requestGeminiResponse(isAutoScanRequest = false) {
   if (isAIGenerating) return;
   isAIGenerating = true;
@@ -7143,45 +7119,15 @@ For automatic question explanations, independently solve first, then reconcile w
     if (modelUsed) console.log('[Gemini model used]:', modelUsed);
     if (modelAttempts) console.log('[Gemini attempts]:', modelAttempts);
 
+    const resData = await res.json();
+    showAITyping(false);
     let replyText = "";
-    let streamBubble = null;
-    const contentType = (res.headers.get('content-type') || '').toLowerCase();
-    const isStreamingResponse = contentType.includes('text/event-stream');
-
-    if (isStreamingResponse) {
-      // Stream directly into a temporary bot bubble so the user sees the answer
-      // as Gemini generates it. The final full text is still kept for history,
-      // quiz-card parsing and the existing <<<QUIZDATA>>> stripping logic.
-      showAITyping(false);
-      let streamedDisplay = "";
-      const ensureStreamBubble = () => {
-        if (streamBubble) return streamBubble;
-        streamBubble = document.createElement('div');
-        streamBubble.className = 'ai-msg bot';
-        const container = document.getElementById('aiChatBody');
-        if (container) container.appendChild(streamBubble);
-        return streamBubble;
-      };
-      replyText = await readGeminiStreamingResponse(res, (_chunk, fullText) => {
-        const bubble = ensureStreamBubble();
-        let content = bubble.querySelector('.ai-stream-content');
-        if (!content) { content = document.createElement('div'); content.className = 'ai-stream-content notranslate'; content.setAttribute('translate','no'); bubble.appendChild(content); }
-        streamedDisplay = fullText.replace(/<<<QUIZDATA>>>[\s\S]*?<<<END>>>/g, '').trim();
-        try { content.innerHTML = formatAIResponseText(streamedDisplay); } catch (_) { content.textContent = streamedDisplay; }
-        const scroller = bubble.closest('.ai-messages, .ai-chat-messages, #aiMessages');
-        if (scroller) scroller.scrollTop = scroller.scrollHeight;
-      });
-      if (!replyText.trim()) throw new Error("Streaming response was empty.");
+    if (resData && resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts) {
+      replyText = resData.candidates[0].content.parts.map(p => p.text).join('');
+    } else if (resData && resData.text) {
+      replyText = resData.text;
     } else {
-      const resData = await res.json();
-      showAITyping(false);
-      if (resData && resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts) {
-        replyText = resData.candidates[0].content.parts.map(p => p.text).join('');
-      } else if (resData && resData.text) {
-        replyText = resData.text;
-      } else {
-        replyText = "Sorry, there was a problem retrieving the answer. Please try again.";
-      }
+      replyText = "Sorry, there was a problem retrieving the answer. Please try again.";
     }
 
     aiChatHistory.push({
@@ -7200,11 +7146,6 @@ For automatic question explanations, independently solve first, then reconcile w
     quizCardPendingRequest = false;
 
     if (!renderedAsQuizCard) {
-      // The stream bubble is only a live preview; replace it with the app's
-      // normal final renderer so existing message styling/metadata stays intact.
-      if (typeof streamBubble !== 'undefined' && streamBubble && streamBubble.parentNode) {
-        streamBubble.parentNode.removeChild(streamBubble);
-      }
       // Even outside quiz-card mode, replies can carry a trailing
       // <<<QUIZDATA>>>...<<<END>>> block (e.g. the next question, appended
       // after this answer's explanation). Never show that raw block to the
@@ -8023,9 +7964,8 @@ if ('caches' in window) {
 // — but scoped to just the message area (#aiChatBody) of the AI assistant
 // sheet, with its own independent toggle/state. Canvas is positioned via
 // JS to match the chat body's live viewport rect (not appended as a
-// scrolling child of it), so it stays correctly aligned even while the
-// chat auto-scrolls during a streaming response — a fixed sibling, not a
-// scrolling passenger.
+// scrolling child of it), so it stays correctly aligned when the chat
+// auto-scrolls — a fixed sibling, not a scrolling passenger.
 (function(){
   let enabled=false, drawing=false, activePointerId=null;
   let canvas=null, ctx=null, dpr=1;
