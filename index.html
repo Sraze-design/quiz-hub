@@ -565,6 +565,14 @@ body {
   text-overflow: ellipsis;
   max-width: 100%;
 }
+.quiz-type-label {
+  display: none;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.55);
+  overflow-wrap: anywhere;
+}
 .quiz-top-bar-right {
   display: flex;
   align-items: center;
@@ -2541,6 +2549,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
           <div class="quiz-timer-block">
             <div class="quiz-timer-big" id="liveTimer">00:00</div>
             <div class="quiz-timer-label" id="quizCategoryLabel">DREAM TO DESTINY</div>
+            <div class="quiz-type-label" id="quizTypeLabel"></div>
           </div>
           <div class="quiz-top-bar-right">
             <button id="pencilToggleBtn" type="button" aria-label="Apple Pencil" title="Apple Pencil">
@@ -5814,6 +5823,15 @@ function renderQuestionContent(container, item) {
 function showQ() {
 if(data.length === 0) return;
 const item = data[currentQ];
+const typeLabel=document.getElementById('quizTypeLabel');
+if(typeLabel){
+  // Keep the exam tag separate. Quiz files can provide type_tag (or type),
+  // with optional _hi/_en versions for the existing language switch.
+  const typeText=T(item,'type_tag') || T(item,'type');
+  const label=typeof typeText==='string' ? typeText.trim() : '';
+  typeLabel.textContent=label;
+  typeLabel.style.display=label ? 'block' : 'none';
+}
 updateBookmarkButton();
 const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>व्याख्या:</b> ";
 renderQuestionContent(document.getElementById('q-text'), item);
