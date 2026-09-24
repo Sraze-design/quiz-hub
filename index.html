@@ -2283,6 +2283,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 #resultAnalysisModal.open{display:flex}
 .analysis-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border,#e5e7eb);background:var(--card-bg,#fff);position:sticky;top:0;z-index:2}
 .analysis-heading{font-size:20px;font-weight:900}.analysis-subtitle{font-size:12px;color:var(--muted,#64748b);margin-top:2px}
+.analysis-header>div:first-child{min-width:0}.analysis-subtitle{overflow-wrap:anywhere}
 .analysis-header-actions{display:flex;align-items:center;gap:8px}
 .analysis-palette-btn{width:40px;height:40px;border:1px solid var(--border,#dbe2ea);border-radius:12px;background:var(--card-bg,#fff);color:inherit;font-size:22px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 .analysis-close{min-width:84px;height:40px;padding:0 13px;border:0;border-radius:12px;background:#2563eb;color:#fff;font-size:14px;font-weight:850;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 6px 16px rgba(37,99,235,.2)}
@@ -2296,6 +2297,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-card.correct{border-left:5px solid #10b981}.analysis-card.wrong{border-left:5px solid #ef4444}.analysis-card.skipped{border-left:5px solid #f59e0b}
 .analysis-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
 .analysis-qno{font-weight:900}.analysis-status{font-size:11px;font-weight:900;padding:5px 9px;border-radius:999px;text-transform:uppercase}
+.analysis-q-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}.analysis-type-label{font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#e8efff;color:#1d4ed8;overflow-wrap:anywhere}
 .analysis-status.correct{background:#dcfce7;color:#15803d}.analysis-status.wrong{background:#fee2e2;color:#b91c1c}.analysis-status.skipped{background:#fef3c7;color:#b45309}
 .analysis-question{font-size:16px;font-weight:750;line-height:1.55;margin-bottom:12px;overflow-wrap:anywhere}
 .analysis-question img{display:block;max-width:100%;height:auto;margin:12px auto;object-fit:contain}
@@ -5581,6 +5583,7 @@ function captureResultAnalysis(){
   });
   resultAnalysisSnapshot={
     test:currentQuizTitle||document.title||'Quiz',
+    chapterLabel:document.getElementById('quizCategoryLabel')?.textContent?.trim()||'',
     path:currentQuizPath||'',
     savedAt:Date.now(),
     items
@@ -5619,7 +5622,7 @@ function openResultAnalysis(filter){
     analysisHistoryPushed=true;
   }
   const subtitle=document.getElementById('analysisSubtitle');
-  if(subtitle) subtitle.textContent=resultAnalysisSnapshot.test||'Review every response';
+  if(subtitle) subtitle.textContent=resultAnalysisSnapshot.chapterLabel||resultAnalysisSnapshot.test||'Review every response';
   setAnalysisFilter(filter||'all');
 }
 
@@ -5756,7 +5759,25 @@ function renderResultAnalysis(){
 
   const top=document.createElement('div');
   top.className='analysis-card-top';
-  top.innerHTML='<span class="analysis-qno">Question '+(record.originalIndex+1)+'</span><span class="analysis-status '+record.status+'">'+statusLabel[record.status]+'</span>';
+  const title=document.createElement('div');
+  title.className='analysis-q-title';
+  const qno=document.createElement('span');
+  qno.className='analysis-qno';
+  qno.textContent='Question '+(record.originalIndex+1);
+  title.appendChild(qno);
+  const typeText=T(record.item,'type_tag') || T(record.item,'type');
+  const typeLabel=typeof typeText==='string' ? typeText.trim() : '';
+  if(typeLabel){
+    const badge=document.createElement('span');
+    badge.className='analysis-type-label';
+    badge.textContent=typeLabel;
+    title.appendChild(badge);
+  }
+  top.appendChild(title);
+  const status=document.createElement('span');
+  status.className='analysis-status '+record.status;
+  status.textContent=statusLabel[record.status];
+  top.appendChild(status);
   card.appendChild(top);
 
   const question=document.createElement('div');
