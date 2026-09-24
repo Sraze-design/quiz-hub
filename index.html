@@ -2295,11 +2295,11 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-list{flex:1;overflow:auto;padding:14px 14px 92px;background:var(--bg,#f8fafc)}
 .analysis-card{max-width:900px;margin:0 auto 14px;background:var(--card-bg,#fff);border:1px solid var(--border,#e2e8f0);border-radius:18px;padding:16px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
 .analysis-card.correct{border-left:5px solid #10b981}.analysis-card.wrong{border-left:5px solid #ef4444}.analysis-card.skipped{border-left:5px solid #f59e0b}
-.analysis-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.analysis-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
 .analysis-qno{font-weight:900}.analysis-status{font-size:11px;font-weight:900;padding:5px 9px;border-radius:999px;text-transform:uppercase}
-.analysis-q-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}.analysis-type-label{font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#e8efff;color:#1d4ed8;overflow-wrap:anywhere}
+.analysis-q-title{display:flex;align-items:center;min-width:0;white-space:nowrap}.analysis-meta-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}.analysis-type-label{min-width:0;max-width:calc(100% - 82px);font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#e8efff;color:#1d4ed8;overflow-wrap:anywhere}.analysis-meta-row .analysis-status{margin-left:auto;flex:0 0 auto}
 .analysis-status.correct{background:#dcfce7;color:#15803d}.analysis-status.wrong{background:#fee2e2;color:#b91c1c}.analysis-status.skipped{background:#fef3c7;color:#b45309}
-.analysis-actions{display:grid;grid-template-columns:minmax(0,1fr) 42px 72px;gap:8px;margin:0 0 12px}.analysis-action-btn{height:40px;border:1px solid var(--border,#dbe2ea);border-radius:12px;background:var(--card-bg,#fff);color:var(--text-secondary,#64748b);font-size:12px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;white-space:nowrap}.analysis-action-btn:active{transform:scale(.97)}.analysis-action-btn svg{width:18px;height:18px;flex:0 0 auto}.analysis-report-btn{color:#dc3454;background:#fff5f7;border-color:#ffe1e7}.analysis-bookmark-btn.active{color:#2563eb;background:#eff6ff;border-color:#bfdbfe}.analysis-lang-btn{letter-spacing:.2px}.analysis-lang-btn .active{color:#2563eb}.analysis-lang-divider{height:16px;width:1px;background:#cbd5e1}
+.analysis-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-left:auto}.analysis-action-btn{height:38px;border:1px solid var(--border,#dbe2ea);border-radius:11px;background:var(--card-bg,#fff);color:var(--text-secondary,#64748b);font-size:12px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}.analysis-action-btn:active{transform:scale(.97)}.analysis-action-btn svg{width:18px;height:18px;flex:0 0 auto}.analysis-report-btn,.analysis-bookmark-btn{width:38px;padding:0}.analysis-report-btn span{display:none}.analysis-report-btn{color:#dc3454;background:#fff5f7;border-color:#ffe1e7}.analysis-bookmark-btn.active{color:#2563eb;background:#eff6ff;border-color:#bfdbfe}.analysis-lang-btn{width:66px;padding:0 8px;letter-spacing:.2px}.analysis-lang-btn .active{color:#2563eb}.analysis-lang-divider{height:16px;width:1px;background:#cbd5e1}
 .analysis-question{font-size:16px;font-weight:750;line-height:1.55;margin-bottom:12px;overflow-wrap:anywhere}
 .analysis-question img{display:block;max-width:100%;height:auto;margin:12px auto;object-fit:contain}
 .analysis-exam-tag{display:block;width:max-content;max-width:100%;margin:-4px 0 12px auto;text-align:right;background:#f1f5f9;color:var(--text-secondary,#64748b);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;overflow-wrap:anywhere}
@@ -2316,7 +2316,8 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-palette-head{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border,#e2e8f0);font-size:18px;font-weight:900}.analysis-palette-head button{border:0;background:var(--bg-soft,#f1f5f9);border-radius:10px;width:38px;height:38px;font-size:22px;color:inherit}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
-@media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:15px}.result-analysis-btn{font-size:13px;padding:9px 12px}.analysis-actions{grid-template-columns:minmax(0,1fr) 40px 68px;gap:6px}.analysis-action-btn{height:38px;border-radius:11px}}
+@media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:17px;line-height:1.52}.result-analysis-btn{font-size:13px;padding:9px 12px}.analysis-actions{gap:5px}.analysis-action-btn{height:36px;border-radius:10px}.analysis-report-btn,.analysis-bookmark-btn{width:36px}.analysis-lang-btn{width:62px;padding:0 6px}.analysis-type-label{font-size:10.5px}}
+@media(max-width:340px){.analysis-card{padding:11px}.analysis-qno{font-size:14px}.analysis-actions{gap:4px}.analysis-action-btn{height:34px}.analysis-report-btn,.analysis-bookmark-btn{width:34px}.analysis-lang-btn{width:58px}.analysis-question{font-size:16px}}
 /* Keep the Analysis header fixed in its original position. Only the content
    below it gets responsive breathing room, so tabs and card never overlap. */
 .analysis-tabs{
@@ -5814,18 +5815,10 @@ function renderResultAnalysis(){
   title.appendChild(qno);
   const typeText=T(record.item,'type_tag') || T(record.item,'type');
   const typeLabel=typeof typeText==='string' ? typeText.trim() : '';
-  if(typeLabel){
-    const badge=document.createElement('span');
-    badge.className='analysis-type-label';
-    badge.textContent=typeLabel;
-    title.appendChild(badge);
-  }
   top.appendChild(title);
   const status=document.createElement('span');
   status.className='analysis-status '+record.status;
   status.textContent=statusLabel[record.status];
-  top.appendChild(status);
-  card.appendChild(top);
 
   const actions=document.createElement('div');
   actions.className='analysis-actions';
@@ -5855,7 +5848,19 @@ function renderResultAnalysis(){
   langBtn.setAttribute('aria-label',appLang==='hi'?'Show question in English':'प्रश्न हिंदी में दिखाएँ');
   langBtn.onclick=toggleAnalysisLanguage;
   actions.appendChild(langBtn);
-  card.appendChild(actions);
+  top.appendChild(actions);
+  card.appendChild(top);
+
+  const meta=document.createElement('div');
+  meta.className='analysis-meta-row';
+  if(typeLabel){
+    const badge=document.createElement('span');
+    badge.className='analysis-type-label';
+    badge.textContent=typeLabel;
+    meta.appendChild(badge);
+  }
+  meta.appendChild(status);
+  card.appendChild(meta);
 
   const question=document.createElement('div');
   question.className='analysis-question';
