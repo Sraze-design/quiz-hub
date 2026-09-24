@@ -2299,8 +2299,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-qno{font-weight:900}.analysis-status{font-size:11px;font-weight:900;padding:5px 9px;border-radius:999px;text-transform:uppercase}
 .analysis-q-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}.analysis-type-label{font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#e8efff;color:#1d4ed8;overflow-wrap:anywhere}
 .analysis-status.correct{background:#dcfce7;color:#15803d}.analysis-status.wrong{background:#fee2e2;color:#b91c1c}.analysis-status.skipped{background:#fef3c7;color:#b45309}
+.analysis-actions{display:grid;grid-template-columns:minmax(0,1fr) 42px 72px;gap:8px;margin:0 0 12px}.analysis-action-btn{height:40px;border:1px solid var(--border,#dbe2ea);border-radius:12px;background:var(--card-bg,#fff);color:var(--text-secondary,#64748b);font-size:12px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;white-space:nowrap}.analysis-action-btn:active{transform:scale(.97)}.analysis-action-btn svg{width:18px;height:18px;flex:0 0 auto}.analysis-report-btn{color:#dc3454;background:#fff5f7;border-color:#ffe1e7}.analysis-bookmark-btn.active{color:#2563eb;background:#eff6ff;border-color:#bfdbfe}.analysis-lang-btn{letter-spacing:.2px}.analysis-lang-btn .active{color:#2563eb}.analysis-lang-divider{height:16px;width:1px;background:#cbd5e1}
 .analysis-question{font-size:16px;font-weight:750;line-height:1.55;margin-bottom:12px;overflow-wrap:anywhere}
 .analysis-question img{display:block;max-width:100%;height:auto;margin:12px auto;object-fit:contain}
+.analysis-exam-tag{display:block;width:max-content;max-width:100%;margin:-4px 0 12px auto;text-align:right;background:#f1f5f9;color:var(--text-secondary,#64748b);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;overflow-wrap:anywhere}
 .analysis-options{display:grid;gap:8px}.analysis-option{border:1px solid var(--border,#dbe2ea);border-radius:12px;padding:10px 12px;line-height:1.45;background:var(--card-bg,#fff)}
 .analysis-option.correct-answer{border-color:#10b981;background:#ecfdf5}.analysis-option.user-wrong{border-color:#ef4444;background:#fef2f2}
 .analysis-option-flags{float:right;font-size:10px;font-weight:900;margin-left:8px}.analysis-option-flags .correct-flag{color:#15803d}.analysis-option-flags .your-flag{color:#b91c1c}
@@ -2314,7 +2316,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-palette-head{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border,#e2e8f0);font-size:18px;font-weight:900}.analysis-palette-head button{border:0;background:var(--bg-soft,#f1f5f9);border-radius:10px;width:38px;height:38px;font-size:22px;color:inherit}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
-@media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:15px}.result-analysis-btn{font-size:13px;padding:9px 12px}}
+@media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:15px}.result-analysis-btn{font-size:13px;padding:9px 12px}.analysis-actions{grid-template-columns:minmax(0,1fr) 40px 68px;gap:6px}.analysis-action-btn{height:38px;border-radius:11px}}
 /* Keep the Analysis header fixed in its original position. Only the content
    below it gets responsive breathing room, so tabs and card never overlap. */
 .analysis-tabs{
@@ -3135,8 +3137,10 @@ let retestIndexMap = null;
 /* ===== Wrong Question Report ===== */
 let questionReportReason = '';
 let questionReportSubmitting = false;
+let questionReportRecordOverride = null;
 
 function questionReportNumber(){
+  if(questionReportRecordOverride && Number.isInteger(questionReportRecordOverride.originalIndex)) return questionReportRecordOverride.originalIndex+1;
   if(typeof getBookmarkTargetIndex === 'function') return getBookmarkTargetIndex()+1;
   return currentQ+1;
 }
@@ -3163,8 +3167,10 @@ function resetQuestionReportForm(){
   setQuestionReportStep('reason');
 }
 
-function openQuestionReport(){
-  if(!Array.isArray(data)||!data[currentQ]) return;
+function openQuestionReport(recordOverride){
+  questionReportRecordOverride=(recordOverride&&recordOverride.item)?recordOverride:null;
+  const reportItem=questionReportRecordOverride?.item || (Array.isArray(data)?data[currentQ]:null);
+  if(!reportItem) return;
   resetQuestionReportForm();
   const number=questionReportNumber();
   const context=document.getElementById('questionReportContext');
@@ -3189,6 +3195,7 @@ function hideQuestionReportUI(){
   document.getElementById('questionReportOverlay')?.setAttribute('aria-hidden','true');
   document.getElementById('questionReportModal')?.setAttribute('aria-hidden','true');
   document.body.classList.remove('question-report-open');
+  questionReportRecordOverride=null;
   if(document.activeElement instanceof HTMLElement) document.activeElement.blur();
   if(typeof updateAIButtonVisibility==='function') updateAIButtonVisibility();
 }
@@ -3231,10 +3238,10 @@ async function submitQuestionReport(){
     descriptionEl?.focus();
     return;
   }
-  const item=data[currentQ];
+  const item=questionReportRecordOverride?.item || data[currentQ];
   if(!item) return;
   const options=Array.isArray(T(item,'o'))?T(item,'o'):[];
-  const selectedIndex=selectedAnswers[currentQ];
+  const selectedIndex=questionReportRecordOverride ? questionReportRecordOverride.selected : selectedAnswers[currentQ];
   const selectedText=Number.isInteger(selectedIndex)&&options[selectedIndex]!==undefined?options[selectedIndex]:'Not Answered';
   const correctIndex=Number(item.a);
   const correctText=Number.isInteger(correctIndex)&&options[correctIndex]!==undefined?options[correctIndex]:'Not available';
@@ -5678,6 +5685,46 @@ function refreshAnalysisAI(){
   else if(typeof updateAIButtonVisibility==='function') updateAIButtonVisibility();
 }
 
+function isAnalysisQuestionBookmarked(record){
+  if(!record) return false;
+  return isQuestionBookmarked(currentQuizPath,record.originalIndex);
+}
+
+function toggleAnalysisBookmark(){
+  const record=getCurrentAnalysisRecord();
+  if(!record||!record.item) return;
+  const targetIndex=record.originalIndex;
+  const id=bookmarkId(currentQuizPath,targetIndex);
+  const list=getBookmarks();
+  const at=list.findIndex(bookmark=>bookmark.id===id);
+  if(at>=0){
+    list.splice(at,1);
+  }else{
+    const item=record.item;
+    const q=item.q_hi!==undefined?item.q_hi:item.q;
+    const o=Array.isArray(item.o_hi)?item.o_hi:(Array.isArray(item.o)?item.o:[]);
+    const tag=item.tag_hi!==undefined?item.tag_hi:item.tag;
+    list.push({id,path:currentQuizPath,questionIndex:targetIndex,subject:currentSubject||'',category:currentCategory||null,chapter:currentChapter||'',testTitle:currentQuizTitle||'',q:q||'',tag:tag||'',options:o,questionData:JSON.parse(JSON.stringify(item)),savedAt:Date.now()});
+  }
+  setBookmarks(list);
+  renderResultAnalysis();
+}
+
+function toggleAnalysisLanguage(){
+  if(langSwitchBusy) return;
+  langSwitchBusy=true;
+  suppressAIRefreshDuringLanguageSwitch=true;
+  try{
+    appLang=(appLang==='hi')?'en':'hi';
+    updateLangIconState();
+    renderResultAnalysis();
+  }finally{
+    suppressAIRefreshDuringLanguageSwitch=false;
+    langSwitchBusy=false;
+    refreshAnalysisAI();
+  }
+}
+
 function renderAnalysisPalette(){
   const grid=document.getElementById('analysisPaletteGrid');
   if(!grid) return;
@@ -5780,10 +5827,49 @@ function renderResultAnalysis(){
   top.appendChild(status);
   card.appendChild(top);
 
+  const actions=document.createElement('div');
+  actions.className='analysis-actions';
+
+  const reportBtn=document.createElement('button');
+  reportBtn.type='button';
+  reportBtn.className='analysis-action-btn analysis-report-btn';
+  reportBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span>Report Question</span>';
+  reportBtn.setAttribute('aria-label','Report question '+(record.originalIndex+1));
+  reportBtn.onclick=()=>openQuestionReport(record);
+  actions.appendChild(reportBtn);
+
+  const bookmarkBtn=document.createElement('button');
+  bookmarkBtn.type='button';
+  const bookmarked=isAnalysisQuestionBookmarked(record);
+  bookmarkBtn.className='analysis-action-btn analysis-bookmark-btn'+(bookmarked?' active':'');
+  bookmarkBtn.innerHTML=bookmarked?'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg>';
+  bookmarkBtn.title=bookmarked?'Remove bookmark':'Bookmark question';
+  bookmarkBtn.setAttribute('aria-label',bookmarkBtn.title);
+  bookmarkBtn.onclick=toggleAnalysisBookmark;
+  actions.appendChild(bookmarkBtn);
+
+  const langBtn=document.createElement('button');
+  langBtn.type='button';
+  langBtn.className='analysis-action-btn analysis-lang-btn';
+  langBtn.innerHTML='<span class="'+(appLang==='en'?'active':'')+'">E</span><span class="analysis-lang-divider"></span><span class="'+(appLang==='hi'?'active':'')+'">अ</span>';
+  langBtn.setAttribute('aria-label',appLang==='hi'?'Show question in English':'प्रश्न हिंदी में दिखाएँ');
+  langBtn.onclick=toggleAnalysisLanguage;
+  actions.appendChild(langBtn);
+  card.appendChild(actions);
+
   const question=document.createElement('div');
   question.className='analysis-question';
   renderQuestionContent(question,record.item);
   card.appendChild(question);
+
+  const examTagText=T(record.item,'tag');
+  if(examTagText){
+    const examTag=document.createElement('div');
+    examTag.className='analysis-exam-tag';
+    examTag.innerHTML=formatContent(examTagText);
+    examTag.setAttribute('translate','no');
+    card.appendChild(examTag);
+  }
 
   const options=Array.isArray(T(record.item,'o'))?T(record.item,'o'):[];
   const optionBox=document.createElement('div');
