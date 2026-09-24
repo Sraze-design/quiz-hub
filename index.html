@@ -2291,11 +2291,11 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-tab{border:1px solid var(--border,#dbe2ea);background:var(--card-bg,#fff);color:inherit;border-radius:999px;padding:8px 12px;font-weight:800;font-size:13px;white-space:nowrap;cursor:pointer}
 .analysis-tab.active{background:#1d4ed8;border-color:#1d4ed8;color:#fff}
 .analysis-list{flex:1;overflow:auto;padding:14px 14px 92px;background:var(--bg,#f8fafc)}
-.analysis-card{max-width:900px;margin:0 auto 14px;background:var(--card-bg,#fff);border:1px solid var(--border,#e2e8f0);border-radius:18px;padding:16px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
+.analysis-card{position:relative;max-width:900px;margin:0 auto 14px;background:var(--card-bg,#fff);border:1px solid var(--border,#e2e8f0);border-radius:18px;padding:16px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
 .analysis-card.correct{border-left:5px solid #10b981}.analysis-card.wrong{border-left:5px solid #ef4444}.analysis-card.skipped{border-left:5px solid #f59e0b}
 .analysis-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
 .analysis-qno{font-weight:900}.analysis-status{font-size:11px;font-weight:900;padding:5px 9px;border-radius:999px;text-transform:uppercase}
-.analysis-q-title{display:flex;align-items:center;gap:9px;min-width:0;white-space:nowrap}.analysis-card-time{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:850}.analysis-card-time svg{width:13px;height:13px}.analysis-card-time.fast{color:#10b981}.analysis-card-time.medium{color:#f59e0b}.analysis-card-time.slow{color:#ef4444}.analysis-meta-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}.analysis-type-label{min-width:0;max-width:calc(100% - 82px);font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#e8efff;color:#1d4ed8;overflow-wrap:anywhere}.analysis-meta-row .analysis-status{margin-left:auto;flex:0 0 auto}
+.analysis-q-title{display:flex;align-items:center;min-width:0;white-space:nowrap}.analysis-status-corner{position:absolute;top:3px;left:16px;font-size:8px;line-height:1.1;padding:1px 5px;z-index:1}.analysis-q-line{display:flex;align-items:center;gap:9px}.analysis-card-time{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:850}.analysis-card-time svg{width:13px;height:13px}.analysis-card-time.fast{color:#10b981}.analysis-card-time.medium{color:#f59e0b}.analysis-card-time.slow{color:#ef4444}.analysis-meta-row{display:flex;align-items:flex-start;margin-bottom:12px}.analysis-type-label{min-width:0;max-width:100%;font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#e8efff;color:#1d4ed8;overflow-wrap:anywhere}
 .analysis-status.correct{background:#dcfce7;color:#15803d}.analysis-status.wrong{background:#fee2e2;color:#b91c1c}.analysis-status.skipped{background:#fef3c7;color:#b45309}
 .analysis-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-left:auto}.analysis-action-btn{height:38px;border:1px solid var(--border,#dbe2ea);border-radius:11px;background:var(--card-bg,#fff);color:var(--text-secondary,#64748b);font-size:12px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}.analysis-action-btn:active{transform:scale(.97)}.analysis-action-btn svg{width:18px;height:18px;flex:0 0 auto}.analysis-report-btn,.analysis-bookmark-btn{width:38px;padding:0}.analysis-report-btn span{display:none}.analysis-report-btn{color:#dc3454;background:#fff5f7;border-color:#ffe1e7}.analysis-bookmark-btn.active{color:#2563eb;background:#eff6ff;border-color:#bfdbfe}.analysis-lang-btn{width:66px;padding:0 8px;letter-spacing:.2px}.analysis-lang-btn .active{color:#2563eb}.analysis-lang-divider{height:16px;width:1px;background:#cbd5e1}
 .analysis-question{font-size:16px;font-weight:750;line-height:1.55;margin-bottom:12px;overflow-wrap:anywhere}
@@ -5806,20 +5806,24 @@ function renderResultAnalysis(){
   top.className='analysis-card-top';
   const title=document.createElement('div');
   title.className='analysis-q-title';
+  const status=document.createElement('span');
+  status.className='analysis-status analysis-status-corner '+record.status;
+  status.textContent=statusLabel[record.status];
+  card.appendChild(status);
+  const qLine=document.createElement('div');
+  qLine.className='analysis-q-line';
   const qno=document.createElement('span');
   qno.className='analysis-qno';
   qno.textContent='Q'+(record.originalIndex+1)+'/'+(resultAnalysisSnapshot.items?.length||items.length);
-  title.appendChild(qno);
+  qLine.appendChild(qno);
   const questionTime=document.createElement('span');
   questionTime.className='analysis-card-time '+analysisQuestionTimeTone(record.time);
   questionTime.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>'+formatAnalysisQuestionTime(record.time)+'</span>';
-  title.appendChild(questionTime);
+  qLine.appendChild(questionTime);
+  title.appendChild(qLine);
   const typeText=T(record.item,'type_tag') || T(record.item,'type');
   const typeLabel=typeof typeText==='string' ? typeText.trim() : '';
   top.appendChild(title);
-  const status=document.createElement('span');
-  status.className='analysis-status '+record.status;
-  status.textContent=statusLabel[record.status];
 
   const actions=document.createElement('div');
   actions.className='analysis-actions';
@@ -5852,16 +5856,15 @@ function renderResultAnalysis(){
   top.appendChild(actions);
   card.appendChild(top);
 
-  const meta=document.createElement('div');
-  meta.className='analysis-meta-row';
   if(typeLabel){
+    const meta=document.createElement('div');
+    meta.className='analysis-meta-row';
     const badge=document.createElement('span');
     badge.className='analysis-type-label';
     badge.textContent=typeLabel;
     meta.appendChild(badge);
+    card.appendChild(meta);
   }
-  meta.appendChild(status);
-  card.appendChild(meta);
 
   const question=document.createElement('div');
   question.className='analysis-question';
@@ -5950,7 +5953,7 @@ const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>рд╡ре
 renderQuestionContent(document.getElementById('q-text'), item);
 const tagBox=document.getElementById('exam-tag');
 const tagText = T(item, 'tag');
-if(tagText){tagBox.innerHTML=formatContent(tagText);tagBox.style.display='inline-block';}else{tagBox.innerText='';tagBox.style.display='none';}
+if(tagText){tagBox.innerHTML=formatContent(tagText);tagBox.style.display='block';}else{tagBox.innerText='';tagBox.style.display='none';}
 let oBox = document.getElementById('options');
 oBox.innerHTML = "";
 document.getElementById('feedback').style.display = "none";
