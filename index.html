@@ -2985,6 +2985,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
         <option value="gemini-3.6-flash">Gemini 3.6 Flash</option>
         <option value="gemini-3.5-flash">Gemini 3.5 Flash</option>
         <option value="gemini-3-flash-preview">Gemini 3 Flash Preview</option>
+        <option value="qwen/qwen3.8-27b">Groq Qwen 3.8 27B</option>
       </select>
     </div>
     <div class="ai-settings-group">
@@ -7250,8 +7251,8 @@ For automatic question explanations, independently solve first, then reconcile w
 
     const modelUsed = res.headers.get('X-Model-Used') || '';
     const modelAttempts = res.headers.get('X-Model-Attempts') || '';
-    if (modelUsed) console.log('[Gemini model used]:', modelUsed);
-    if (modelAttempts) console.log('[Gemini attempts]:', modelAttempts);
+    if (modelUsed) console.log('[AI model used]:', modelUsed);
+    if (modelAttempts) console.log('[AI attempts]:', modelAttempts);
 
     const resData = await res.json();
     showAITyping(false);
@@ -7435,6 +7436,7 @@ async function verifyCurrentAnswer(btn, messageContainer) {
 
     const payload = {
       mode: 'verify',
+      selectedModel: (document.getElementById('aiModelSelect')?.value || AI_DEFAULT_MODEL),
       question: verifyQuestionText,
       options: qContext.options,
       examTag: qContext.examTag || '',
