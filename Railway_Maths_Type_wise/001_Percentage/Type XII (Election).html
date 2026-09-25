@@ -1,0 +1,611 @@
+const data = [
+  {
+    q_hi: "Q181. एक चुनाव में चार उम्मीदवार थे, जिन्हें क्रमशः 4500, 1260, 240 और 2000 मत मिले। यदि सभी पात्र मतदाताओं ने मतदान किया, और सभी डाले गए मत वैध थे तथा चारों उम्मीदवारों में से किसी एक के पक्ष में थे, तो विजयी उम्मीदवार और उपविजयी उम्मीदवार के मत प्रतिशत के बीच अंतर कितना होगा?",
+    q_en: "Q181. In an election there were four candidates who received 4500, 1260, 240 and 2000 votes respectively. If all eligible voters voted and all votes cast were valid and in favour of one of the four candidates, what is the difference between the vote percentages of the winner and the runner-up?",
+    tag: "RRB ALP CBT-1, 17/02/2026 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 31.25%",
+      "(b) 25%",
+      "(c) 27.5%",
+      "(d) 30.75%"
+    ],
+    o_en: [
+      "(a) 31.25%",
+      "(b) 25%",
+      "(c) 27.5%",
+      "(d) 30.75%"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q182. एक चुनाव में चार उम्मीदवारों को क्रमशः 1242, 832, 1426 और 1100 वोट मिले। विजेता उम्मीदवार के वोट प्रतिशत और दूसरे स्थान पर रहने वाले उम्मीदवार के वोट प्रतिशत के बीच का अंतर ज्ञात कीजिए।",
+    q_en: "Q182. In an election, four candidates received 1242, 832, 1426 and 1100 votes respectively. Find the difference between the vote percentage of the winner and that of the runner-up.",
+    tag: "RRB Group D 08/12/2025 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 3%",
+      "(b) 5%",
+      "(c) 6%",
+      "(d) 4%"
+    ],
+    o_en: [
+      "(a) 3%",
+      "(b) 5%",
+      "(c) 6%",
+      "(d) 4%"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q183. तीन उम्मीदवारों ने एक चुनाव में भाग लिया और उन्होंने क्रमशः 1036, 7044 और 12,120 वोट प्राप्त किए। विजेता उम्मीदवार ने कुल वोटों का कितना प्रतिशत प्राप्त किया?",
+    q_en: "Q183. Three candidates contested an election and received 1036, 7044 and 12,120 votes respectively. What percentage of the total votes did the winning candidate receive?",
+    tag: "RRB Tech. G-III 28/12/2024 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 65%",
+      "(b) 60%",
+      "(c) 90%",
+      "(d) 57%"
+    ],
+    o_en: [
+      "(a) 65%",
+      "(b) 60%",
+      "(c) 90%",
+      "(d) 57%"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q184. दो उम्मीदवारों के बीच चुनाव में, जो उम्मीदवार चुनाव जीतने वाला था उसे 1854 वोट प्राप्त हुए, जबकि दूसरे उम्मीदवार द्वारा उसे 618 वोट प्राप्त किए। कुल प्राप्त वोटों का कितना प्रतिशत विजेता उम्मीदवार के पक्ष में गया?",
+    q_en: "Q184. In an election between two candidates, the winning candidate received 1854 votes while the other candidate received 618 votes. What percentage of the total votes went in favour of the winner?",
+    tag: "RRB Tech. G-III 29/12/2024 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 60%",
+      "(b) 75%",
+      "(c) 70%",
+      "(d) 80%"
+    ],
+    o_en: [
+      "(a) 60%",
+      "(b) 75%",
+      "(c) 70%",
+      "(d) 80%"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q185. किसी स्थानीय चुनाव में, 20,000 मतदाता थे। उम्मीदवार A को कुल मतों का 40% और उम्मीदवार B को कुल मतों का 50% प्राप्त हुआ। शेष मत दो अन्य उम्मीदवारों, C और D के बीच बराबर-बराबर बांटे गए। उम्मीदवार C को कितने मत मिले?",
+    q_en: "Q185. In a local election there were 20,000 voters. Candidate A received 40% of the total votes and candidate B received 50%. The remaining votes were divided equally between two other candidates, C and D. How many votes did candidate C receive?",
+    tag: "RRB Group-D, 19/12/2025 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 1200",
+      "(b) 600",
+      "(c) 1000",
+      "(d) 700"
+    ],
+    o_en: [
+      "(a) 1200",
+      "(b) 600",
+      "(c) 1000",
+      "(d) 700"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q186. दो उम्मीदवारों के बीच हुए एक चुनाव में, एक उम्मीदवार को कुल वोटों का 38% मिला और वह 28,800 वोटों से चुनाव हार गया। मतदाताओं की कुल संख्या कितनी है?",
+    q_en: "Q186. In an election between two candidates, one candidate received 38% of the total votes and lost the election by 28,800 votes. What was the total number of voters?",
+    tag: "RRB NTPC G CBT-1, 17/03/2026 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 1,22,800",
+      "(b) 1,22,000",
+      "(c) 1,20,000",
+      "(d) 1,24,000"
+    ],
+    o_en: [
+      "(a) 1,22,800",
+      "(b) 1,22,000",
+      "(c) 1,20,000",
+      "(d) 1,24,000"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q187. दो उम्मीदवारों के बीच हुए चुनाव में, पंजीकृत मतदाताओं में से 80% ने अपना वोट डाला और 10% वोट अमान्य पाए गए। विजयी उम्मीदवार को वैध वोटों का 89% प्राप्त हुआ और उसने 351 वोटों के अंतर से चुनाव जीत लिया। कुल मतदाता पंजीकृत थे?",
+    q_en: "Q187. In an election between two candidates, 80% of the registered voters cast their votes and 10% of the votes were invalid. The winning candidate received 89% of the valid votes and won by a margin of 351 votes. How many voters were registered in total?",
+    tag: "RRB NTPC G CBT-1, 16/03/2026 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 625",
+      "(b) 650",
+      "(c) 600",
+      "(d) 675"
+    ],
+    o_en: [
+      "(a) 625",
+      "(b) 650",
+      "(c) 600",
+      "(d) 675"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q188. दो उम्मीदवारों के बीच हुए एक चुनाव में, 84% पंजीकृत मतदाताओं ने अपने वोट डाले और डाले गए वोटों में से 20% वोट अमान्य पाए गए। जीतने वाले उम्मीदवार को वैध वोटों का 58% मिला और उसने 336 वोटों के अंतर से चुनाव जीत लिया। मतदाताओं की संख्या कितनी थी?",
+    q_en: "Q188. In an election between two candidates, 84% of the registered voters cast their votes and 20% of the votes cast were invalid. The winner received 58% of the valid votes and won by a margin of 336 votes. What was the number of voters?",
+    tag: "RRB NTPC G CBT-1, 17/03/2026 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 3125",
+      "(b) 3123",
+      "(c) 3120",
+      "(d) 3124"
+    ],
+    o_en: [
+      "(a) 3125",
+      "(b) 3123",
+      "(c) 3120",
+      "(d) 3124"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q189. मतदान की शुरुआत में, राहुल को कुल मतों का 52% मत और लीना को कुल मतों का 48% मत प्राप्त हुआ। कुल मतदान 3,72,000 हुआ। लीना को 1,00,000 से अधिक कितने मत प्राप्त हुए?",
+    q_en: "Q189. At the start of voting, Rahul received 52% of the total votes and Lina received 48%. The total votes polled were 3,72,000. How many votes more than 1,00,000 did Lina receive?",
+    tag: "RRB Group D, 01/12/2025 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 37,20,000 मत",
+      "(b) 78,560 मत",
+      "(c) 1,78,560 मत",
+      "(d) 1,00,000 मत"
+    ],
+    o_en: [
+      "(a) 37,20,000 votes",
+      "(b) 78,560 votes",
+      "(c) 1,78,560 votes",
+      "(d) 1,00,000 votes"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q190. दो उम्मीदवारों के बीच एक चुनाव में, 86% पंजीकृत मतदाताओं ने मतदान किया और डाले गए मतों में 6% मत अवैध पाए गए। जीतने वाले उम्मीदवार को वैध मतों में से 58% मत मिले और उसने 202100 मतों के अंतर से चुनाव जीता। कितने मतदाता पंजीकृत थे?",
+    q_en: "Q190. In an election between two candidates, 86% of the registered voters voted and 6% of the votes cast were invalid. The winner received 58% of the valid votes and won by a margin of 202100 votes. How many voters were registered?",
+    tag: "RRB JE CBT-1, 20/02/2026 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 1562400",
+      "(b) 1562500",
+      "(c) 1562800",
+      "(d) 1562200"
+    ],
+    o_en: [
+      "(a) 1562400",
+      "(b) 1562500",
+      "(c) 1562800",
+      "(d) 1562200"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q191. दो उम्मीदवारों के बीच हुए एक चुनाव में, कुल मतदाताओं में से 80% मतदाताओं ने अपने मत डाले। कुल डाले गए मतों में से 10% अवैध घोषित कर दिए गए। यदि उम्मीदवार A को वैध मतों में से 70% मत और उम्मीदवार B को शेष मत प्राप्त हुए, तथा पात्र मतदाताओं की कुल संख्या 50,000 थी, तो उम्मीदवार A को कितने मत प्राप्त हुए?",
+    q_en: "Q191. In an election between two candidates, 80% of the total voters cast their votes. Of the total votes cast, 10% were declared invalid. If candidate A received 70% of the valid votes and candidate B received the rest, and the total number of eligible voters was 50,000, how many votes did candidate A receive?",
+    tag: "RRB Group D, 02/12/2025 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 25,200",
+      "(b) 26,200",
+      "(c) 26,500",
+      "(d) 25,500"
+    ],
+    o_en: [
+      "(a) 25,200",
+      "(b) 26,200",
+      "(c) 26,500",
+      "(d) 25,500"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q192. एक चुनाव में उम्मीदवार A को कुल वैध मतों के 60% मत प्राप्त हुए, जबकि उम्मीदवार B को शेष मत प्राप्त हुए। यदि वैध मतों की कुल संख्या 18,600 थी, तो दोनों उम्मीदवारों को प्राप्त मतों की संख्या के बीच का अंतर ज्ञात कीजिए।",
+    q_en: "Q192. In an election, candidate A received 60% of the total valid votes and candidate B received the rest. If the total number of valid votes was 18,600, find the difference between the votes received by the two candidates.",
+    tag: "RRB Group D, 04/12/2025 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 2,520",
+      "(b) 3,720",
+      "(c) 3,550",
+      "(d) 2,750"
+    ],
+    o_en: [
+      "(a) 2,520",
+      "(b) 3,720",
+      "(c) 3,550",
+      "(d) 2,750"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q193. दो उम्मीदवारों वाले एक चुनाव में, पंजीकृत मतदाताओं में से 8% मतदाताओं ने मतदान नहीं किया और 120 मतदाताओं ने कोरा मतपत्र (blank ballot) डाला। डाले गए मतों में विजयी उम्मीदवार को सभी पंजीकृत मतदाताओं में से 48% मतदाताओं का मत प्राप्त हुआ और उसे दूसरे उम्मीदवार की तुलना में 780 मत अधिक मिले। सूची में कुल मतदाताओं की संख्या ज्ञात कीजिए।",
+    q_en: "Q193. In an election between two candidates, 8% of the registered voters did not vote and 120 voters cast blank ballots. The winning candidate received votes from 48% of all registered voters and got 780 votes more than the other candidate. Find the total number of voters on the list.",
+    tag: "RRB Group D 17/12/2025 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 14,840",
+      "(b) 16,500",
+      "(c) 15,690",
+      "(d) 17,800"
+    ],
+    o_en: [
+      "(a) 14,840",
+      "(b) 16,500",
+      "(c) 15,690",
+      "(d) 17,800"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q194. दो उम्मीदवारों के बीच हुए एक चुनाव में, कुल मतों में से 20% मत अवैध घोषित कर दिए गए। विजयी उम्मीदवार को वैध मतों में से 70% मत प्राप्त हुए और वह 12,400 मतों के अंतर से विजयी हुआ। पंजीकृत मतदाताओं की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q194. In an election between two candidates, 20% of the total votes were declared invalid. The winner received 70% of the valid votes and won by a margin of 12,400 votes. Find the total number of registered voters.",
+    tag: "RRB Group D 08/12/2025 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 38,750",
+      "(b) 27,125",
+      "(c) 38,000",
+      "(d) 11,625"
+    ],
+    o_en: [
+      "(a) 38,750",
+      "(b) 27,125",
+      "(c) 38,000",
+      "(d) 11,625"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q195. एक कॉलेज चुनाव में, उम्मीदवार X और Y के वैध मतों का अनुपात 7 : 2 था। कॉलेज में 1800 पंजीकृत मतदाता थे, जिनमें से 20% ने मत नहीं डाला और डाले गए मतों में से 20% मत अवैध घोषित कर दिए गए। उम्मीदवार X और Y द्वारा प्राप्त मतों की संख्या में कितना अंतर है?",
+    q_en: "Q195. In a college election, the valid votes of candidates X and Y were in the ratio 7 : 2. There were 1800 registered voters, of whom 20% did not vote and 20% of the votes cast were declared invalid. What is the difference between the votes received by X and Y?",
+    tag: "RRB Group D, 08/12/2025 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 886",
+      "(b) 459",
+      "(c) 640",
+      "(d) 256"
+    ],
+    o_en: [
+      "(a) 886",
+      "(b) 459",
+      "(c) 640",
+      "(d) 256"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q196. दो उम्मीदवारों के बीच एक चुनाव में, पंजीकृत मतदाताओं में से 90% ने अपना वोट डाला और डाले गए वोटों में से 20% अमान्य पाए गए। विजेता उम्मीदवार को वैध वोटों का 51% प्राप्त हुआ और उसने 3870 वोटों के अंतर से चुनाव जीता। कुल पंजीकृत मतदाताओं की संख्या कितनी थी?",
+    q_en: "Q196. In an election between two candidates, 90% of the registered voters cast their votes and 20% of the votes cast were invalid. The winner received 51% of the valid votes and won by a margin of 3870 votes. What was the total number of registered voters?",
+    tag: "RRB NTPC G CBT-1, 22/03/2026 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 268720",
+      "(b) 268600",
+      "(c) 268730",
+      "(d) 268750"
+    ],
+    o_en: [
+      "(a) 268720",
+      "(b) 268600",
+      "(c) 268730",
+      "(d) 268750"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q197. दो उम्मीदवारों के बीच हुए चुनाव में, पंजीकृत मतदाताओं में से 80% ने अपना वोट डाला और डाले गए वोटों में से 3% वोट अमान्य पाए गए। विजयी उम्मीदवार को वैध वोटों का 52% प्राप्त हुआ और उसने 291 वोटों के अंतर से चुनाव जीता। कितने मतदाता पंजीकृत थे?",
+    q_en: "Q197. In an election between two candidates, 80% of the registered voters cast their votes and 3% of the votes cast were invalid. The winner received 52% of the valid votes and won by a margin of 291 votes. How many voters were registered?",
+    tag: "RRB NTPC G CBT-1, 24/03/2026 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 9373",
+      "(b) 9370",
+      "(c) 9378",
+      "(d) 9375"
+    ],
+    o_en: [
+      "(a) 9373",
+      "(b) 9370",
+      "(c) 9378",
+      "(d) 9375"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q198. दो उम्मीदवारों के बीच हुए चुनाव में 90% पंजीकृत मतदाताओं ने अपना वोट डाला और डाले गए वोटों में से 15% अवैध पाए गए। विजयी उम्मीदवार को वैध वोटों में से 51% वोट मिले और उसने 2142 वोटों के अंतर से चुनाव जीता। पंजीकृत मतदाताओं की संख्या ज्ञात कीजिए।",
+    q_en: "Q198. In an election between two candidates, 90% of the registered voters cast their votes and 15% of the votes cast were invalid. The winner received 51% of the valid votes and won by a margin of 2142 votes. Find the number of registered voters.",
+    tag: "RPF Constable 07/03/2025 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 140000",
+      "(b) 140002",
+      "(c) 139999",
+      "(d) 140001"
+    ],
+    o_en: [
+      "(a) 140000",
+      "(b) 140002",
+      "(c) 139999",
+      "(d) 140001"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q199. दो उम्मीदवारों के बीच हुए एक चुनाव में 85% पंजीकृत मतदाताओं ने मतदान किया और 4% मत अवैध पाए गए। विजयी उम्मीदवार को वैध मतों का 65% प्राप्त हुआ और उसने 2142 मतों के अंतर से चुनाव जीत लिया। कितने मतदाता पंजीकृत थे?",
+    q_en: "Q199. In an election between two candidates, 85% of the registered voters voted and 4% of the votes were invalid. The winner received 65% of the valid votes and won by a margin of 2142 votes. How many voters were registered?",
+    tag: "RRB NTPC UG CBT-1 07/08/2025 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 8747",
+      "(b) 8750",
+      "(c) 8751",
+      "(d) 8752"
+    ],
+    o_en: [
+      "(a) 8747",
+      "(b) 8750",
+      "(c) 8751",
+      "(d) 8752"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q200. 9000 वैध मतों वाले एक मतदान केंद्र में, चार उम्मीदवार P, Q, R और S चुनाव लड़ रहे थे और मतदान के दौरान NOTA का विकल्प भी उपलब्ध था। कुल मतों का ठीक 1% मत NOTA को गया। उम्मीदवार Q को P द्वारा प्राप्त मतों का 25% मत प्राप्त हुआ। R और S के संयुक्त मतों की कुल संख्या 5,830 थी, जो प्रत्येक वोट 3 : 2 के अनुपात में विभाजित हुई। विजयी उम्मीदवार को कितने मत प्राप्त हुए?",
+    q_en: "Q200. At a polling centre with 9000 valid votes, four candidates P, Q, R and S contested and the NOTA option was also available. Exactly 1% of the total votes went to NOTA. Candidate Q received 25% of the votes received by P. The combined votes of R and S were 5,830, divided in the ratio 3 : 2. How many votes did the winning candidate receive?",
+    tag: "RRB Group D, 10/12/2025 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 4398",
+      "(b) 3984",
+      "(c) 3894",
+      "(d) 3498"
+    ],
+    o_en: [
+      "(a) 4398",
+      "(b) 3984",
+      "(c) 3894",
+      "(d) 3498"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q201. तीन उम्मीदवारों, राम, मोहन और सोहन के एक चुनाव में, कुल डाले गए मतों में से 10% अवैध थे। सोहन को वैध मतों का 40% प्राप्त हुआ। यदि राम को मोहन से 2,000 अधिक वैध मत मिले और कुल डाले गए मतों की संख्या 10,000 थी, तो राम के मतों को मोहन के मतों से विभाजित करने पर शेषफल कितना होगा?",
+    q_en: "Q201. In an election among three candidates, Ram, Mohan and Sohan, 10% of the total votes cast were invalid. Sohan received 40% of the valid votes. If Ram received 2,000 more valid votes than Mohan and the total number of votes cast was 10,000, what is the remainder when Ram's votes are divided by Mohan's votes?",
+    tag: "RRB Group D, 14/12/2025 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 320",
+      "(b) 490",
+      "(c) 300",
+      "(d) 400"
+    ],
+    o_en: [
+      "(a) 320",
+      "(b) 490",
+      "(c) 300",
+      "(d) 400"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q202. एक छात्रसंघ चुनाव में, पात्र मतदाताओं में से 5% की आयु 18-21 वर्ष है, 12% की आयु 21-25 वर्ष है, और शेष 25 वर्ष से अधिक आयु के हैं। इन समूहों में से, 18-21 वर्ष आयु वर्ग के 80%, 21-25 वर्ष आयु वर्ग के 60% ने वास्तव में मतदान किया। यदि मतदान करने वाले 21-25 वर्ष आयु वर्ग के मतदाताओं की संख्या, 18-21 वर्ष आयु वर्ग के मतदाताओं से 320 अधिक है, तो 18-21 वर्ष आयु वर्ग के पात्र मतदाताओं और 21-25 वर्ष आयु वर्ग के मतदाताओं की संख्या में क्या अंतर है?",
+    q_en: "Q202. In a students' union election, 5% of the eligible voters are aged 18-21 years, 12% are aged 21-25 years, and the rest are above 25 years. Of these groups, 80% of the 18-21 age group and 60% of the 21-25 age group actually voted. If the number of voters aged 21-25 who voted is 320 more than those aged 18-21 who voted, what is the difference between the numbers of eligible voters in the 18-21 and 21-25 age groups?",
+    tag: "RRB Group D 17/12/2025 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 800",
+      "(b) 700",
+      "(c) 600",
+      "(d) 500"
+    ],
+    o_en: [
+      "(a) 800",
+      "(b) 700",
+      "(c) 600",
+      "(d) 500"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q203. चार उम्मीदवारों वाले एक चुनाव में, पंजीकृत मतदाताओं में से 60% ने मतदान किया। उम्मीदवार X को डाले गए वोटों का 40% मिला। शेष वोट अन्य तीन उम्मीदवारों के बीच बराबर-बराबर बांट दिए गए। यदि उम्मीदवार X को अन्य प्रत्येक उम्मीदवार से 480 अधिक वोट मिले, तो कुल पंजीकृत मतदाता कितने थे?",
+    q_en: "Q203. In an election with four candidates, 60% of the registered voters voted. Candidate X received 40% of the votes cast. The remaining votes were divided equally among the other three candidates. If X received 480 more votes than each of the other candidates, how many voters were registered in total?",
+    tag: "RRB TECH G-III, 06/03/2026 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 6200",
+      "(b) 4000",
+      "(c) 5600",
+      "(d) 4800"
+    ],
+    o_en: [
+      "(a) 6200",
+      "(b) 4000",
+      "(c) 5600",
+      "(d) 4800"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q204. दो उम्मीदवारों के बीच चुनाव में, एक उम्मीदवार ने 38% वोट प्राप्त किए और फिर भी 7200 वोटों से हार गया। यदि सभी डाले गए वोट वैध थे, तो चुनाव में कुल कितने वोट डाले गए थे?",
+    q_en: "Q204. In an election between two candidates, one candidate received 38% of the votes and still lost by 7200 votes. If all votes cast were valid, how many votes were cast in total?",
+    tag: "RRB Tech. G-III 23/12/2024 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 13,800",
+      "(b) 13,000",
+      "(c) 16,200",
+      "(d) 30,000"
+    ],
+    o_en: [
+      "(a) 13,800",
+      "(b) 13,000",
+      "(c) 16,200",
+      "(d) 30,000"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q205. दो उम्मीदवारों के बीच चुनाव में, एक ने कुल वैध मतों का 55% प्राप्त किया, और 20% मत अवैध थे। यदि कुल मतों की संख्या 7500 थी, तो दूसरे उम्मीदवार ने कितने वैध मत प्राप्त किए?",
+    q_en: "Q205. In an election between two candidates, one received 55% of the total valid votes, and 20% of the votes were invalid. If the total number of votes was 7500, how many valid votes did the other candidate receive?",
+    tag: "RRB Tech. G-III 27/12/2024 (Shift-03)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 3000",
+      "(b) 2600",
+      "(c) 2700",
+      "(d) 3300"
+    ],
+    o_en: [
+      "(a) 3000",
+      "(b) 2600",
+      "(c) 2700",
+      "(d) 3300"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q206. एक चुनाव में, केवल दो उम्मीदवारों ने भाग लिया। एक उम्मीदवार ने वैध वोटों का 70% प्राप्त किया और 172 वोटों के अंतर से जीता। कुल वैध वोटों की संख्या क्या थी?",
+    q_en: "Q206. In an election, only two candidates contested. One candidate received 70% of the valid votes and won by a margin of 172 votes. What was the total number of valid votes?",
+    tag: "RRB ALP Tier-I 28/11/2024 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 570",
+      "(b) 560",
+      "(c) 430",
+      "(d) 480"
+    ],
+    o_en: [
+      "(a) 570",
+      "(b) 560",
+      "(c) 430",
+      "(d) 480"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q207. दो उम्मीदवारों के बीच चुनाव में, एक ने कुल वैध वोटों का 55% प्राप्त किया और 20% वोट अवैध थे। यदि कुल वोटों की संख्या 7500 थी, तो विजेता ने चुनाव में कितने वोटों से जीत हासिल की?",
+    q_en: "Q207. In an election between two candidates, one received 55% of the total valid votes and 20% of the votes were invalid. If the total number of votes was 7500, by how many votes did the winner win?",
+    tag: "RRB ALP Tier-I 28/11/2024 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 750",
+      "(b) 800",
+      "(c) 600",
+      "(d) 700"
+    ],
+    o_en: [
+      "(a) 750",
+      "(b) 800",
+      "(c) 600",
+      "(d) 700"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q208. दो प्रत्याशियों के बीच हुए चुनाव में, 75% पात्र मतदाताओं ने अपने मत दिए और दिए गए 6% मत अवैध घोषित कर दिए गए। एक प्रत्याशी को 15228 मत मिले, जो कुल वैध मतों का 90% थे। पात्र मतदाताओं की कुल संख्या ज्ञात कीजिए।",
+    q_en: "Q208. In an election between two candidates, 75% of the eligible voters cast their votes and 6% of the votes cast were declared invalid. One candidate received 15228 votes, which were 90% of the total valid votes. Find the total number of eligible voters.",
+    tag: "RPF SI 12/12/2024 (Shift-02)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 24850",
+      "(b) 27000",
+      "(c) 25600",
+      "(d) 24000"
+    ],
+    o_en: [
+      "(a) 24850",
+      "(b) 27000",
+      "(c) 25600",
+      "(d) 24000"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q209. दो उम्मीदवारों के बीच एक चुनाव में, 80% मतदाता अपना मत डालते हैं, जिनमें से 53 अवैध घोषित कर दिए जाते हैं। विजेता को सूची के सभी मतदाताओं में से 48% मत प्राप्त होते हैं और वह 1013 मतों से जीत जाता है। सूची में मतदाताओं की संख्या कितनी थी?",
+    q_en: "Q209. In an election between two candidates, 80% of the voters cast their votes, of which 53 are declared invalid. The winner receives votes from 48% of all voters on the list and wins by 1013 votes. How many voters were on the list?",
+    tag: "RPF SI 03/12/2024 (Shift-01)",
+    type_tag: "Type XII (Election)",
+    o_hi: [
+      "(a) 6000",
+      "(b) 5600",
+      "(c) 5000",
+      "(d) 6500"
+    ],
+    o_en: [
+      "(a) 6000",
+      "(b) 5600",
+      "(c) 5000",
+      "(d) 6500"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  }
+];

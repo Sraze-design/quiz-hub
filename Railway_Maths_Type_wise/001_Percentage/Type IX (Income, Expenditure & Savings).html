@@ -1,0 +1,422 @@
+const data = [
+  {
+    q_hi: "Q142. एक व्यक्ति अपनी आय का 90% बचाता है। यदि उसका खर्च ₹600 है, तो उसकी आय (₹ में) है:",
+    q_en: "Q142. A person saves 90% of his income. If his expenditure is ₹600, then his income (in ₹) is:",
+    tag: "RRB S.C. 11/02/2026 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 5400",
+      "(b) 6040",
+      "(c) 6000",
+      "(d) 6080"
+    ],
+    o_en: [
+      "(a) 5400",
+      "(b) 6040",
+      "(c) 6000",
+      "(d) 6080"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q143. एक व्यक्ति अपनी आय का 50% बचाता है। यदि उसका व्यय ₹320 है, तो उसकी आय (₹ में) ज्ञात कीजिए।",
+    q_en: "Q143. A person saves 50% of his income. If his expenditure is ₹320, find his income (in ₹).",
+    tag: "RRB NTPC G CBT-1 10/06/2025 (Shift-01)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 160",
+      "(b) 640",
+      "(c) 680",
+      "(d) 600"
+    ],
+    o_en: [
+      "(a) 160",
+      "(b) 640",
+      "(c) 680",
+      "(d) 600"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q144. एक व्यक्ति अपनी आय के 60% की बचत करता है। यदि उसका व्यय ₹400 है, तो उसकी आय (₹ में) ज्ञात कीजिए।",
+    q_en: "Q144. A person saves 60% of his income. If his expenditure is ₹400, find his income (in ₹).",
+    tag: "RRB Group D, 27/11/2025 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 160",
+      "(b) 240",
+      "(c) 1,000",
+      "(d) 1,040"
+    ],
+    o_en: [
+      "(a) 160",
+      "(b) 240",
+      "(c) 1,000",
+      "(d) 1,040"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q145. एक व्यक्ति अपनी आय के 60% की बचत करता है। यदि उसका व्यय ₹440 है, तो उसकी आय (₹ में) ज्ञात कीजिए।",
+    q_en: "Q145. A person saves 60% of his income. If his expenditure is ₹440, find his income (in ₹).",
+    tag: "RRB Group D, 27/11/2025 (Shift-03)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 176",
+      "(b) 264",
+      "(c) 1,140",
+      "(d) 1,100"
+    ],
+    o_en: [
+      "(a) 176",
+      "(b) 264",
+      "(c) 1,140",
+      "(d) 1,100"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q146. आकृति ₹54,500 मासिक कमाती है और अपने वेतन के 17% की बचत करती है। उसका मासिक खर्च ज्ञात कीजिए।",
+    q_en: "Q146. Aakriti earns ₹54,500 per month and saves 17% of her salary. Find her monthly expenditure.",
+    tag: "RRB Group D, 01/12/2025 (Shift-03)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹45,523",
+      "(b) ₹45,325",
+      "(c) ₹45,352",
+      "(d) ₹45,235"
+    ],
+    o_en: [
+      "(a) ₹45,523",
+      "(b) ₹45,325",
+      "(c) ₹45,352",
+      "(d) ₹45,235"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q147. एक व्यक्ति ने किराने के सामान पर ₹14,000 खर्च किए, मकान के किराए पर ₹8,000 खर्च किए, बच्चों की स्कूल फीस पर ₹10,000 खर्च किए और कुल आय का शेष 20% नकद अपने पास रख लिया। उसकी आय ज्ञात कीजिए।",
+    q_en: "Q147. A person spent ₹14,000 on groceries, ₹8,000 on house rent and ₹10,000 on the children's school fees, and kept the remaining 20% of his total income as cash. Find his income.",
+    tag: "RRB Group D 15/12/2025 (Shift-03)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹50,000",
+      "(b) ₹46,000",
+      "(c) ₹40,000",
+      "(d) ₹52,000"
+    ],
+    o_en: [
+      "(a) ₹50,000",
+      "(b) ₹46,000",
+      "(c) ₹40,000",
+      "(d) ₹52,000"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q148. अमन प्रति माह ₹36,000 अर्जित करता है। वह 30% किराए पर, 25% भोजन पर और 20% शिक्षा पर खर्च करता है। वह शेष राशि की बचत करता है। एक वर्ष में उसकी कुल बचत ज्ञात कीजिए।",
+    q_en: "Q148. Aman earns ₹36,000 per month. He spends 30% on rent, 25% on food and 20% on education. He saves the remaining amount. Find his total savings in one year.",
+    tag: "RRB ALP CBT-1, 16/02/2026 (Shift-01)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹1,04,400",
+      "(b) ₹1,11,000",
+      "(c) ₹1,08,000",
+      "(d) ₹1,15,800"
+    ],
+    o_en: [
+      "(a) ₹1,04,400",
+      "(b) ₹1,11,000",
+      "(c) ₹1,08,000",
+      "(d) ₹1,15,800"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q149. नवीना की मासिक आय ₹84,000 है। वह अपनी आय का 25% मकान के किराए पर, 20% किराने के सामान पर, 15% अन्य घरेलू खर्चों पर व्यय करती है और शेष राशि की बचत करती है। उसके द्वारा प्रत्येक माह कितनी राशि (₹ में) की बचत की जाती है?",
+    q_en: "Q149. Navina's monthly income is ₹84,000. She spends 25% on house rent, 20% on groceries and 15% on other household expenses, and saves the rest. How much (in ₹) does she save each month?",
+    tag: "RRB TECH G-III, 09/03/2026 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 32000",
+      "(b) 32600",
+      "(c) 33600",
+      "(d) 33000"
+    ],
+    o_en: [
+      "(a) 32000",
+      "(b) 32600",
+      "(c) 33600",
+      "(d) 33000"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q150. श्रीधर अपनी मासिक आय का 10% किराए पर खर्च करता है, शेष का 20% घरेलू जरूरतों पर खर्च करता है और शेष का 25% खाने पर खर्च करता है और बाकी की बचत करता है। अंततः, वह ₹78,300 बचाता है। उसकी मासिक आय ज्ञात कीजिए।",
+    q_en: "Q150. Sridhar spends 10% of his monthly income on rent, 20% of the remainder on household needs, and 25% of the next remainder on food, saving the rest. He finally saves ₹78,300. Find his monthly income.",
+    tag: "RRB Group D 03/12/2025 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹1,78,300",
+      "(b) ₹1,00,000",
+      "(c) ₹1,50,000",
+      "(d) ₹1,45,000"
+    ],
+    o_en: [
+      "(a) ₹1,78,300",
+      "(b) ₹1,00,000",
+      "(c) ₹1,50,000",
+      "(d) ₹1,45,000"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q151. एक व्यक्ति ने अपनी आय का 40% अपनी पत्नी को घरेलू खर्च के लिए दिया। उसने शेष राशि का 20% अपने दो पुत्रों और एक पुत्री में से प्रत्येक को दिया। अब बची हुई राशि का एक-तिहाई हिस्सा फुटकर वस्तुओं पर खर्च किया गया तथा शेष राशि ₹14,400 को बैंक जमा कर दिया। उसकी आय ज्ञात कीजिए।",
+    q_en: "Q151. A man gave 40% of his income to his wife for household expenses. She gave 20% of the remaining amount to each of their two sons and one daughter. One-third of the amount then left was spent on miscellaneous items and the remaining ₹14,400 was deposited in a bank. Find his income.",
+    tag: "",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹90,000",
+      "(b) ₹96,000",
+      "(c) ₹1,10,000",
+      "(d) ₹1,00,000"
+    ],
+    o_en: [
+      "(a) ₹90,000",
+      "(b) ₹96,000",
+      "(c) ₹1,10,000",
+      "(d) ₹1,00,000"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. रमन की आय ₹12,000 है। वह अपनी आय का 27% बचाता है। यदि उसकी आय में 20% और व्यय में 15% की वृद्धि होती है, तो उसकी बचत में ____ होगी।",
+    q_en: "Q152. Raman's income is ₹12,000. He saves 27% of his income. If his income increases by 20% and expenditure increases by 15%, then his savings will ____.",
+    tag: "RRB Group D, 01/12/2025 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹1,085 की कमी",
+      "(b) ₹1,088 की वृद्धि",
+      "(c) ₹1,089 की कमी",
+      "(d) ₹1,086 की वृद्धि"
+    ],
+    o_en: [
+      "(a) decrease by ₹1,085",
+      "(b) increase by ₹1,088",
+      "(c) decrease by ₹1,089",
+      "(d) increase by ₹1,086"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. मोहित की मासिक आय ₹12800 है और उसका मासिक व्यय ₹4000 है। यदि उसकी आय में 25% की कमी होती है और व्यय में ₹1000 की कमी होती है, तो उसकी मासिक बचत में कमी ज्ञात कीजिए।",
+    q_en: "Q153. Mohit's monthly income is ₹12,800 and his monthly expenditure is ₹4,000. If his income decreases by 25% and his expenditure decreases by ₹1,000, find the decrease in his monthly savings.",
+    tag: "RRB NTPC G CBT-1, 20/02/2026 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹2600",
+      "(b) ₹2800",
+      "(c) ₹2400",
+      "(d) ₹2200"
+    ],
+    o_en: [
+      "(a) ₹2600",
+      "(b) ₹2800",
+      "(c) ₹2400",
+      "(d) ₹2200"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. रमन की आय ₹49,000 है। वह अपनी आय का 27.5% बचाता है। यदि उसकी आय में 34% की वृद्धि होती है और व्यय में 20% की वृद्धि होती है, तो उसकी बचत में ____ होगी।",
+    q_en: "Q154. Raman's income is ₹49,000. He saves 27.5% of his income. If his income increases by 34% and expenditure increases by 20%, then his savings will ____.",
+    tag: "RRB Group D, 10/12/2025 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹9,558 की कमी",
+      "(b) ₹9,559 की वृद्धि",
+      "(c) ₹9,555 की वृद्धि",
+      "(d) ₹9,557 की कमी"
+    ],
+    o_en: [
+      "(a) decrease by ₹9,558",
+      "(b) increase by ₹9,559",
+      "(c) increase by ₹9,555",
+      "(d) decrease by ₹9,557"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. रमन की आय ₹50,400 है। वह अपनी आय के 7.5% की बचत करता है। यदि उसकी आय में 26% की और व्यय में 45% की वृद्धि होती है, तो उसकी बचत में होगी:",
+    q_en: "Q155. Raman's income is ₹50,400. He saves 7.5% of his income. If his income increases by 26% and his expenditure increases by 45%, then the change in his savings will be:",
+    tag: "RRB Group D 05/12/2025 (Shift-01)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹7,878 की वृद्धि",
+      "(b) ₹7,875 की कमी",
+      "(c) ₹7,872 की वृद्धि",
+      "(d) ₹7,880 की कमी"
+    ],
+    o_en: [
+      "(a) increase of ₹7,878",
+      "(b) decrease of ₹7,875",
+      "(c) increase of ₹7,872",
+      "(d) decrease of ₹7,880"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. किसी परिवार की मासिक आय में 15% की वृद्धि हुई। उन्होंने भोजन पर मासिक व्यय में 10% और किराए पर 20% की वृद्धि की। यदि भोजन पर उनका प्रारंभिक मासिक व्यय ₹12,000 और किराए पर ₹8,000 था, और उनकी प्रारंभिक मासिक बचत ₹15,000 थी, तो उनकी नई मासिक बचत कितनी होगी? (मान लें कि कोई अन्य खर्च नहीं है।)",
+    q_en: "Q156. A family's monthly income increased by 15%. Their monthly expenditure on food increased by 10% and on rent by 20%. If their initial monthly expenditure on food was ₹12,000 and on rent was ₹8,000, and their initial monthly savings were ₹15,000, what will be their new monthly savings? (Assume there are no other expenses.)",
+    tag: "RRB TECH G-III, 09/03/2026 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹18,650",
+      "(b) ₹17,450",
+      "(c) ₹25,000",
+      "(d) ₹15,000"
+    ],
+    o_en: [
+      "(a) ₹18,650",
+      "(b) ₹17,450",
+      "(c) ₹25,000",
+      "(d) ₹15,000"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. रमन की आय ₹44,000 है। वह अपनी आय के 18.5% की बचत करता है। यदि उसकी आय में 17% की वृद्धि होती है और खर्च में 40% की वृद्धि होती है, तो उसकी बचत में ____ होगी।",
+    q_en: "Q157. Raman's income is ₹44,000. He saves 18.5% of his income. If his income increases by 17% and expenditure increases by 40%, then his savings will ____.",
+    tag: "RRB NTPC UG CBT-1 18/08/2025 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹6,862 की वृद्धि",
+      "(b) ₹6,864 की कमी",
+      "(c) ₹6,860 की कमी",
+      "(d) ₹6,859 की वृद्धि"
+    ],
+    o_en: [
+      "(a) increase by ₹6,862",
+      "(b) decrease by ₹6,864",
+      "(c) decrease by ₹6,860",
+      "(d) increase by ₹6,859"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. एक आदमी अपने मासिक वेतन का 76% (₹ में) अपने घर के किराए पर खर्च करता है। यदि हर महीने वह अपने वाहन पर ₹813 और किराने पर ₹2508 खर्च करता है और शेष ₹687 बचाता है, तो उसका मासिक वेतन (₹ में) है:",
+    q_en: "Q158. A man spends 76% of his monthly salary (in ₹) on house rent. If every month he spends ₹813 on his vehicle and ₹2508 on groceries and saves the remaining ₹687, then his monthly salary (in ₹) is:",
+    tag: "RRB JE 17/12/2024 (Shift-01)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 16700",
+      "(b) 16611",
+      "(c) 16621",
+      "(d) 16617"
+    ],
+    o_en: [
+      "(a) 16700",
+      "(b) 16611",
+      "(c) 16621",
+      "(d) 16617"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. सुरेश अपनी आय का 30% पेट्रोल पर खर्च करता है, शेष आय का 1/4 हिस्सा घर के किराए पर और बचा हुआ हिस्सा भोजन पर खर्च करता है। यदि वह पेट्रोल पर ₹300 खर्च करता है, तो उसका घर के किराए पर कितना खर्च है?",
+    q_en: "Q159. Suresh spends 30% of his income on petrol, one-fourth of the remaining income on house rent and the rest on food. If he spends ₹300 on petrol, how much does he spend on house rent?",
+    tag: "RRB Tech. G-III 27/12/2024 (Shift-02)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹675",
+      "(b) ₹175",
+      "(c) ₹525",
+      "(d) ₹1,000"
+    ],
+    o_en: [
+      "(a) ₹675",
+      "(b) ₹175",
+      "(c) ₹525",
+      "(d) ₹1,000"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. एक आदमी अपने मासिक वेतन का 74% घर के किराए पर खर्च करता है। यदि हर महीने वह ₹385 परिवहन पर और ₹2,725 किराने पर खर्च करता है और शेष ₹621 बचाता है, तो उसका मासिक वेतन कितना है?",
+    q_en: "Q160. A man spends 74% of his monthly salary on house rent. If every month he spends ₹385 on transport and ₹2,725 on groceries and saves the remaining ₹621, what is his monthly salary?",
+    tag: "RRB NTPC G CBT-1 17/06/2025 (Shift-01)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) ₹14,287",
+      "(b) ₹14,350",
+      "(c) ₹14,389",
+      "(d) ₹14,373"
+    ],
+    o_en: [
+      "(a) ₹14,287",
+      "(b) ₹14,350",
+      "(c) ₹14,389",
+      "(d) ₹14,373"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. X अपने व्यय की योजना बनाता है जिसमें वेतन का 30% घर के किराए के लिए, 25% भोजन के लिए, 15% चिकित्सा व्यय के लिए और 16% अन्य के लिए निर्धारित करता है। यदि वह हर महीने ₹42,000 की बचत कर सकता है, तो उसका मासिक वेतन (₹ में) ज्ञात कीजिए।",
+    q_en: "Q161. X plans his expenditure by allocating 30% of salary to house rent, 25% to food, 15% to medical expenses and 16% to other expenses. If he can save ₹42,000 every month, find his monthly salary (in ₹).",
+    tag: "RRB NTPC G CBT-1 06/06/2025 (Shift-03)",
+    type_tag: "Type IX (Income, Expenditure & Savings)",
+    o_hi: [
+      "(a) 3,30,000",
+      "(b) 3,00,000",
+      "(c) 3,50,000",
+      "(d) 4,20,000"
+    ],
+    o_en: [
+      "(a) 3,30,000",
+      "(b) 3,00,000",
+      "(c) 3,50,000",
+      "(d) 4,20,000"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  }
+];
