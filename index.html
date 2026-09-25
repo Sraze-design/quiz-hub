@@ -124,6 +124,11 @@ body {
   display: flex;
 }
 
+/* Explorer navigation should never inherit the previous page/list scroll offset. */
+.explorer-screen, #explorerList {
+  overflow-anchor: none;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -3555,6 +3560,7 @@ function openMyReportsFromMenu(){closeAppSideDrawer();renderMyReports()}
 function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError();const __playBtn=document.getElementById('playBookmarkedTestBtn');if(__playBtn){__playBtn.style.display='none';__playBtn.dataset.subject='';__playBtn.dataset.path='';}}
 function restoreNormalExplorerSearch(){const e=document.querySelector('.search-container');if(e)e.style.display='block'}
 function renderMyReports(){
+  resetExplorerScrollPosition();
   pushExplorerHistory({screen:'myReports'});
   prepareBookmarkExplorer('My Reports');
   const list=document.getElementById('explorerList');
@@ -3632,6 +3638,7 @@ function groupBookmarks(items, keyFn){
   return g;
 }
 function renderBookmarkSubjects(){
+  resetExplorerScrollPosition();
   pushExplorerHistory({screen:'bookmarks'});
   prepareBookmarkExplorer('Bookmarks');
   const l=document.getElementById('explorerList'); l.innerHTML='';
@@ -3644,6 +3651,7 @@ function renderBookmarkSubjects(){
   });
 }
 function renderBookmarkLevel2(subject){
+  resetExplorerScrollPosition();
   const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject);
   const hasCategory=bs.some(b=>b.category);
   pushExplorerHistory({screen:'bookmarkLevel2',subject:subject});
@@ -3660,6 +3668,7 @@ function renderBookmarkLevel2(subject){
   }
 }
 function renderBookmarkChapters(subject,category){
+  resetExplorerScrollPosition();
   const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject&&(!category||b.category===category));
   const hasChapter=bs.some(b=>b.chapter);
   if(!hasChapter){ renderBookmarkTests(subject,category,null); return; }
@@ -3694,6 +3703,7 @@ function removeBookmarkFromList(bookmarkId,subject,path){
   renderBookmarkQuestions(subject,path);
 }
 function renderBookmarkQuestions(subject,path){
+  resetExplorerScrollPosition();
   pushExplorerHistory({screen:'bookmarkQuestions',subject:subject,path:path});
   const l=document.getElementById('explorerList');
   const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&bookmarkTestKeyOf(b)===path).sort((a,b)=>a.questionIndex-b.questionIndex);
@@ -4053,6 +4063,43 @@ function showExitConfirmModal(onYes) {
   noBtn.addEventListener('click', onNoClick);
 }
 
+
+/* ===== Explorer scroll reset =====
+   iOS Safari/Android browsers may restore an old document scroll offset after
+   the explorer DOM is re-rendered (especially after leaving Analysis/Quiz).
+   Force every explorer screen to open from its true top instead. */
+try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (_) {}
+
+function resetExplorerScrollPosition(){
+  const resetNow = () => {
+    const explorer = document.getElementById('explorerScreen');
+    const list = document.getElementById('explorerList');
+    const container = document.querySelector('.container');
+    const targets = [explorer, list, container, document.scrollingElement, document.documentElement, document.body];
+    targets.forEach(el => {
+      if (!el) return;
+      try { el.scrollTop = 0; el.scrollLeft = 0; } catch (_) {}
+    });
+    try { window.scrollTo(0, 0); } catch (_) {}
+  };
+
+  resetNow();
+  requestAnimationFrame(() => {
+    resetNow();
+    requestAnimationFrame(resetNow);
+  });
+  setTimeout(resetNow, 60);
+  setTimeout(resetNow, 180);
+}
+
+window.addEventListener('pageshow', () => {
+  const explorer = document.getElementById('explorerScreen');
+  const quizEngine = document.getElementById('quizEngineBox');
+  if (explorer && (!quizEngine || quizEngine.style.display === 'none')) {
+    resetExplorerScrollPosition();
+  }
+});
+
 function pushExplorerHistory(state) {
   // During a browser/device Back render, keep suppressing pushes for the
   // entire nested render chain. Bookmark navigation can skip empty category
@@ -4164,6 +4211,7 @@ window.addEventListener('popstate', (e) => {
     if (state.screen !== 'quiz' || !e.state?.bookmarkOnly) isBookmarkOnlyQuiz = false;
     if (typeof unlockBodyScroll === 'function') unlockBodyScroll();
     document.getElementById('explorerScreen').style.display = 'flex';
+    resetExplorerScrollPosition();
     document.getElementById('score-card').style.display = 'none';
     timerRunning = false;
     isPaused = true;
@@ -4207,6 +4255,7 @@ window.addEventListener('popstate', (e) => {
   } finally {
     // A fresh user click after Back must be allowed to create its own entry.
     isHistoryNav = false;
+    resetExplorerScrollPosition();
   }
 });
 
@@ -4222,6 +4271,7 @@ function cleanHumanReadableTitle(rawString) {
 }
 
 function renderSubjects() {
+  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = null;
   currentCategory = null;
@@ -4286,6 +4336,7 @@ function renderSubjects() {
 }
 
 function renderCategories(subjectName) {
+  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = null;
@@ -4346,6 +4397,7 @@ function renderCategories(subjectName) {
 }
 
 function renderChapters(subjectName, categoryName) {
+  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = categoryName || null;
@@ -4411,6 +4463,7 @@ function renderChapters(subjectName, categoryName) {
 }
 
 function renderQuizList(subjectName, categoryName, chapterName) {
+  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = categoryName || null;
