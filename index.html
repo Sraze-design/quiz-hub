@@ -2050,7 +2050,41 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .ai-msg.ai-quiz-card-msg {
   max-width: 100%;
   width: 100%;
-  padding: 14px;
+  padding: 40px 14px 14px;
+  background: #fffdf8;
+  border: 1px solid #e9e5dc;
+  border-radius: 22px;
+  box-shadow: 0 4px 14px rgba(15,23,42,0.045);
+}
+.ai-quiz-card-timer {
+  position: absolute;
+  top: 11px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 1px 4px rgba(15,23,42,.04);
+}
+.ai-quiz-card-timer.stopped {
+  background: #f8fafc;
+  color: #475569;
+}
+.ai-quiz-question-number {
+  display: inline;
+  margin-right: 6px;
+  color: #2563eb;
+  font-weight: 900;
+  white-space: nowrap;
 }
 
 .ai-msg-actions {
@@ -7053,6 +7087,20 @@ function updateAIButtonVisibility() {
 
 let aiHistoryPushed = false;
 
+/* AI quiz-card UI state: local question numbering + per-card stopwatch. */
+let aiQuizCardSequence = 0;
+const aiQuizTimerHandles = new Set();
+function clearAIQuizCardTimers(){
+  aiQuizTimerHandles.forEach(handle=>clearInterval(handle));
+  aiQuizTimerHandles.clear();
+}
+function formatAIQuizElapsed(ms){
+  const totalSeconds=Math.max(0,Math.floor(ms/1000));
+  const minutes=Math.floor(totalSeconds/60);
+  const seconds=totalSeconds%60;
+  return String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');
+}
+
 function toggleAIPanel() {
   const sheet = document.getElementById('ai-bottom-sheet');
   const overlay = document.getElementById('ai-overlay');
@@ -7109,6 +7157,8 @@ function closeAIPanel() {
 }
 
 function resetAIChat() {
+  clearAIQuizCardTimers();
+  aiQuizCardSequence = 0;
   aiChatEpoch++;
   aiChatHistory = [];
   quizCardPendingRequest = false;
@@ -7979,13 +8029,45 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
   const msgDiv = document.createElement('div');
   msgDiv.className = 'ai-msg bot ai-quiz-card-msg';
 
+  const quizNumber = ++aiQuizCardSequence;
+  const timerEl = document.createElement('div');
+  timerEl.className = 'ai-quiz-card-timer notranslate';
+  timerEl.setAttribute('translate','no');
+  timerEl.textContent = '⏱ 00:00';
+  msgDiv.appendChild(timerEl);
+
+  const timerStartedAt = Date.now();
+  let timerStopped = false;
+  const refreshCardTimer = () => {
+    if (timerStopped) return;
+    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(Date.now() - timerStartedAt);
+  };
+  const timerHandle = setInterval(refreshCardTimer, 250);
+  aiQuizTimerHandles.add(timerHandle);
+  const stopCardTimer = () => {
+    if (timerStopped) return;
+    timerStopped = true;
+    clearInterval(timerHandle);
+    aiQuizTimerHandles.delete(timerHandle);
+    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(Date.now() - timerStartedAt);
+    timerEl.classList.add('stopped');
+  };
+
   const questionCard = document.createElement('div');
   questionCard.className = 'premium-question-card';
 
   const qText = document.createElement('div');
   qText.className = 'question-text-style notranslate';
-  qText.innerHTML = formatAIResponseText(quizCardData.question);
-  qText.setAttribute('data-original-ai-html', qText.innerHTML);
+  const qNo = document.createElement('span');
+  qNo.className = 'ai-quiz-question-number notranslate';
+  qNo.setAttribute('translate','no');
+  qNo.textContent = 'Q' + quizNumber + '.';
+  const qBody = document.createElement('span');
+  qBody.innerHTML = formatAIResponseText(quizCardData.question);
+  qBody.setAttribute('data-original-ai-html', qBody.innerHTML);
+  qBody.classList.add('notranslate');
+  qBody.setAttribute('translate','no');
+  qText.append(qNo, qBody);
   qText.setAttribute('translate','no');
   questionCard.appendChild(qText);
 
@@ -8022,6 +8104,7 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
     btn.appendChild(optSpan);
     btn.onclick = () => {
       if (isAIGenerating) return;
+      stopCardTimer();
       const btns = optionsBox.getElementsByTagName('button');
       for (const b of btns) b.disabled = true;
 
