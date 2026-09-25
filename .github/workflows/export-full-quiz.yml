@@ -1,0 +1,30 @@
+name: Export Full Quiz Hub ZIP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/export-full-quiz.yml"
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Stage full repository
+        run: |
+          mkdir -p package/quiz-hub
+          rsync -a --exclude='.git' --exclude='package' ./ package/quiz-hub/
+
+      - name: Upload full repository ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: quiz-hub-complete
+          path: package/quiz-hub
+          if-no-files-found: error
+          retention-days: 1
