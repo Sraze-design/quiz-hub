@@ -3,7 +3,7 @@ const CACHE_NAME = "wake-study-stopwatch-v37";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./manifest.webmanifest",
+  "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
 ];
