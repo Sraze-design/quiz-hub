@@ -2051,10 +2051,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   max-width: 100%;
   width: 100%;
   padding: 40px 14px 14px;
-  background: #fffdf8;
-  border: 1px solid #e9e5dc;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 22px;
-  box-shadow: 0 4px 14px rgba(15,23,42,0.045);
+  box-shadow: 0 4px 14px rgba(15,23,42,0.05);
 }
 .ai-quiz-card-timer {
   position: absolute;
@@ -2066,23 +2066,32 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   height: 24px;
   padding: 0 8px;
   border-radius: 8px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  color: #64748b;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #16a34a;
   font-size: 11px;
   font-weight: 800;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   box-shadow: 0 1px 4px rgba(15,23,42,.04);
 }
+.ai-quiz-card-timer.warning {
+  background: #fff7ed;
+  color: #ea580c;
+  border-color: #fdba74;
+}
+.ai-quiz-card-timer.danger {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
 .ai-quiz-card-timer.stopped {
-  background: #f8fafc;
-  color: #475569;
+  box-shadow: 0 1px 4px rgba(15,23,42,.06);
 }
 .ai-quiz-question-number {
   display: inline;
   margin-right: 6px;
-  color: #2563eb;
+  color: #0f172a;
   font-weight: 900;
   white-space: nowrap;
 }
@@ -7100,6 +7109,16 @@ function formatAIQuizElapsed(ms){
   const seconds=totalSeconds%60;
   return String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');
 }
+function applyAIQuizTimerColor(timerEl, elapsedMs){
+  if(!timerEl) return;
+  const totalSeconds=Math.max(0,Math.floor(elapsedMs/1000));
+  timerEl.classList.remove('warning','danger');
+  if(totalSeconds >= 60){
+    timerEl.classList.add('danger');
+  } else if(totalSeconds >= 30){
+    timerEl.classList.add('warning');
+  }
+}
 
 function toggleAIPanel() {
   const sheet = document.getElementById('ai-bottom-sheet');
@@ -8040,8 +8059,11 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
   let timerStopped = false;
   const refreshCardTimer = () => {
     if (timerStopped) return;
-    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(Date.now() - timerStartedAt);
+    const elapsedMs = Date.now() - timerStartedAt;
+    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(elapsedMs);
+    applyAIQuizTimerColor(timerEl, elapsedMs);
   };
+  refreshCardTimer();
   const timerHandle = setInterval(refreshCardTimer, 250);
   aiQuizTimerHandles.add(timerHandle);
   const stopCardTimer = () => {
@@ -8049,7 +8071,9 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
     timerStopped = true;
     clearInterval(timerHandle);
     aiQuizTimerHandles.delete(timerHandle);
-    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(Date.now() - timerStartedAt);
+    const elapsedMs = Date.now() - timerStartedAt;
+    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(elapsedMs);
+    applyAIQuizTimerColor(timerEl, elapsedMs);
     timerEl.classList.add('stopped');
   };
 
