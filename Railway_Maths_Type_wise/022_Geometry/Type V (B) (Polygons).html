@@ -1,0 +1,548 @@
+const data = [
+  {
+    q_hi: "Q148. 6 भुजाओं वाले एक सम बहुभुज के सभी आंतरिक कोणों का योग ज्ञात कीजिए।",
+    q_en: "Q148. Find the sum of all interior angles of a regular polygon with 6 sides.",
+    tag: "RRB NTPC Gra. L-1, 25/03/2026 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 760°",
+      "(b) 720°",
+      "(c) 600°",
+      "(d) 680°"
+    ],
+    o_en: [
+      "(a) 760°",
+      "(b) 720°",
+      "(c) 600°",
+      "(d) 680°"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q149. किसी सम बहुभुज के सभी आंतरिक कोणों का योगफल 2520° है। इसके प्रत्येक बाह्य कोण का माप ज्ञात कीजिए।",
+    q_en: "Q149. The sum of all interior angles of a regular polygon is 2520°. Find each exterior angle.",
+    tag: "RRB NTPC Gra. L-1, 27/03/2026 (Shift-02)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 26°",
+      "(b) 22.5°",
+      "(c) 25.75°",
+      "(d) 22°"
+    ],
+    o_en: [
+      "(a) 26°",
+      "(b) 22.5°",
+      "(c) 25.75°",
+      "(d) 22°"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q150. किसी 24-भुजाओं वाले समबहुभुज के 8 बाह्य कोणों का योग ज्ञात कीजिए।",
+    q_en: "Q150. Find the sum of 8 exterior angles of a regular 24-sided polygon.",
+    tag: "RRB Tech. G-III, 09/03/2026 (Shift-02)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 115°",
+      "(b) 130°",
+      "(c) 140°",
+      "(d) 120°"
+    ],
+    o_en: [
+      "(a) 115°",
+      "(b) 130°",
+      "(c) 140°",
+      "(d) 120°"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q151. यदि किसी समबहुभुज का एक बाह्य कोण 40° है, तो बहुभुज के विकर्णों की संख्या ज्ञात कीजिए।",
+    q_en: "Q151. If one exterior angle of a regular polygon is 40°, find the number of diagonals of the polygon.",
+    tag: "RRB Tech. G-III, 10/03/2026 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 27",
+      "(b) 40",
+      "(c) 35",
+      "(d) 45"
+    ],
+    o_en: [
+      "(a) 27",
+      "(b) 40",
+      "(c) 35",
+      "(d) 45"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q152. यदि किसी समबहुभुज का एक आंतरिक कोण 156° है, तो उसके 7 बाह्य कोणों का योग ज्ञात कीजिए।",
+    q_en: "Q152. If one interior angle of a regular polygon is 156°, find the sum of 7 of its exterior angles.",
+    tag: "RRB Tech. G-III, 06/03/2026 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 156°",
+      "(b) 165°",
+      "(c) 168°",
+      "(d) 172°"
+    ],
+    o_en: [
+      "(a) 156°",
+      "(b) 165°",
+      "(c) 168°",
+      "(d) 172°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q153. एक सम अष्टभुज के प्रत्येक बाह्य कोण का माप क्या होगा?",
+    q_en: "Q153. What is the measure of each exterior angle of a regular octagon?",
+    tag: "RRB Tech. G-III 30/12/2024 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 30°",
+      "(b) 60°",
+      "(c) 45°",
+      "(d) 80°"
+    ],
+    o_en: [
+      "(a) 30°",
+      "(b) 60°",
+      "(c) 45°",
+      "(d) 80°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q154. एक नियमित दशभुज के प्रत्येक बाह्य कोण का माप क्या होगा?",
+    q_en: "Q154. What is the measure of each exterior angle of a regular decagon?",
+    tag: "RRB Tech. G-III 29/12/2024 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 60°",
+      "(b) 30°",
+      "(c) 36°",
+      "(d) 45°"
+    ],
+    o_en: [
+      "(a) 60°",
+      "(b) 30°",
+      "(c) 36°",
+      "(d) 45°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q155. एक नियमित बहुभुज में भुजाओं की संख्या ज्ञात कीजिए यदि इसका प्रत्येक आंतरिक कोण 165° है।",
+    q_en: "Q155. Find the number of sides of a regular polygon if each interior angle is 165°.",
+    tag: "RRB Tech. G-III 20/12/2024 (Shift-02); NTPC CBT-I 15/03/2021 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 24",
+      "(b) 18",
+      "(c) 25",
+      "(d) 20"
+    ],
+    o_en: [
+      "(a) 24",
+      "(b) 18",
+      "(c) 25",
+      "(d) 20"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q156. एक नियमित बहुभुज का एक बाह्य कोण और एक आंतरिक कोण 1 : 8 के अनुपात में हैं। बहुभुज की भुजाओं की संख्या क्या है?",
+    q_en: "Q156. An exterior angle and an interior angle of a regular polygon are in the ratio 1 : 8. What is the number of sides of the polygon?",
+    tag: "RRB NTPC UG CBT-I 7/08/2025 (Shift-02)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 12",
+      "(b) 24",
+      "(c) 18",
+      "(d) 6"
+    ],
+    o_en: [
+      "(a) 12",
+      "(b) 24",
+      "(c) 18",
+      "(d) 6"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q157. एक सम बहुभुज के शीर्ष पर आंतरिक और बाह्य कोणों का अंतर 150° है। बहुभुज की भुजाओं की संख्या क्या है?",
+    q_en: "Q157. At a vertex of a regular polygon, the difference between the interior and exterior angles is 150°. What is the number of sides?",
+    tag: "RRB ALP CBT-1, 18/02/2026 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 26",
+      "(b) 20",
+      "(c) 24",
+      "(d) 22"
+    ],
+    o_en: [
+      "(a) 26",
+      "(b) 20",
+      "(c) 24",
+      "(d) 22"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q158. एक सम बहुभुज के अंतः कोण और बाह्य कोण के बीच का अंतर 140° है। बहुभुज की भुजाओं की संख्या ज्ञात कीजिए।",
+    q_en: "Q158. The difference between the interior and exterior angles of a regular polygon is 140°. Find the number of sides.",
+    tag: "RRB NTPC Gra. CBT-I 24/06/2025 (Shift-3)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 15",
+      "(b) 16",
+      "(c) 18",
+      "(d) 20"
+    ],
+    o_en: [
+      "(a) 15",
+      "(b) 16",
+      "(c) 18",
+      "(d) 20"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q159. यदि एक समबहुभुज में 20 विकर्ण हैं, तो उसके आंतरिक कोणों का योग होगा:",
+    q_en: "Q159. If a regular polygon has 20 diagonals, then the sum of its interior angles is:",
+    tag: "RRB Tech. G-III 27/12/2024 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 1080°",
+      "(b) 960°",
+      "(c) 1440°",
+      "(d) 1200°"
+    ],
+    o_en: [
+      "(a) 1080°",
+      "(b) 960°",
+      "(c) 1440°",
+      "(d) 1200°"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q160. यदि एक नियमित बहुभुज के 35 विकर्ण हैं, तो उसके आंतरिक कोणों का योग क्या होगा?",
+    q_en: "Q160. If a regular polygon has 35 diagonals, what is the sum of its interior angles?",
+    tag: "RRB ALP Tier-I 26/11/2024 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 1620°",
+      "(b) 1440°",
+      "(c) 1980°",
+      "(d) 1800°"
+    ],
+    o_en: [
+      "(a) 1620°",
+      "(b) 1440°",
+      "(c) 1980°",
+      "(d) 1800°"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q161. निम्नलिखित में से कौन-सा, एक सम बहुभुज का गुण नहीं है?",
+    q_en: "Q161. Which of the following is not a property of a regular polygon?",
+    tag: "RRB JE 18/12/2024 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) सभी भुजाएँ समान लंबाई की होती हैं।",
+      "(b) सभी भुजाओं द्वारा केंद्र पर बने कोण बराबर होते हैं।",
+      "(c) यदि यह चार भुजाओं वाला एक सम बहुभुज है, तो केंद्र पर प्रत्येक भुजा द्वारा निर्मित कोण 90° होता है।",
+      "(d) यदि यह आठ भुजाओं वाला एक सम बहुभुज है, तो केंद्र पर प्रत्येक भुजा द्वारा निर्मित कोण 60° होता है।"
+    ],
+    o_en: [
+      "(a) All sides are equal in length.",
+      "(b) The angles subtended by all sides at the center are equal.",
+      "(c) If it is a regular four-sided polygon, each side subtends 90° at the center.",
+      "(d) If it is a regular eight-sided polygon, each side subtends 60° at the center."
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q162. यदि किसी सम बहुभुज के सभी बाह्य कोणों का योग, उसके सभी आंतरिक कोणों के योग का दो-तिहाई है, तो बहुभुज में भुजाओं की संख्या ज्ञात कीजिए।",
+    q_en: "Q162. If the sum of all exterior angles of a regular polygon is two-thirds of the sum of all its interior angles, find the number of sides.",
+    tag: "RRB NTPC Gra. L-1, 27/03/2026 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 6",
+      "(b) 7",
+      "(c) 4",
+      "(d) 5"
+    ],
+    o_en: [
+      "(a) 6",
+      "(b) 7",
+      "(c) 4",
+      "(d) 5"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q163. एक बहुभुज में, आंतरिक कोणों का योग बाह्य कोणों के योग का तिगुना होता है। भुजाओं की संख्या कितनी है?",
+    q_en: "Q163. In a polygon, the sum of interior angles is three times the sum of exterior angles. How many sides does it have?",
+    tag: "RRB NTPC 04/02/2021 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 8",
+      "(b) 7",
+      "(c) 6",
+      "(d) 9"
+    ],
+    o_en: [
+      "(a) 8",
+      "(b) 7",
+      "(c) 6",
+      "(d) 9"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q164. यदि एक नियमित बहुभुज के आंतरिक कोणों का योग उसके बाह्य कोणों के योग के चार गुना के बराबर है, तो बहुभुज में विकर्णों की संख्या क्या है?",
+    q_en: "Q164. If the sum of interior angles of a regular polygon is four times the sum of its exterior angles, how many diagonals does the polygon have?",
+    tag: "RRB NTPC UG CBT-I 29/08/2025 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 30",
+      "(b) 35",
+      "(c) 25",
+      "(d) 40"
+    ],
+    o_en: [
+      "(a) 30",
+      "(b) 35",
+      "(c) 25",
+      "(d) 40"
+    ],
+    a: 1,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q165. एक सम बहुभुज के लिए, अंतः कोणों का योगफल उसके बाह्य कोणों के योगफल से 250% अधिक है। बहुभुज के प्रत्येक अंतः कोण की माप x° है। x का मान ज्ञात कीजिए।",
+    q_en: "Q165. For a regular polygon, the sum of interior angles is 250% more than the sum of exterior angles. Each interior angle is x°. Find x.",
+    tag: "RRB NTPC Gra. CBT-I 09/06/2025 (Shift-1)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 140",
+      "(b) 150",
+      "(c) 145",
+      "(d) 120"
+    ],
+    o_en: [
+      "(a) 140",
+      "(b) 150",
+      "(c) 145",
+      "(d) 120"
+    ],
+    a: 0,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q166. एक 8 भुजाओं वाले बहुभुज के आंतरिक कोण 1 : 3 : 4 : 6 : 7 : 11 : 13 : 15 के अनुपात में हैं। इस बहुभुज में सबसे बड़े आंतरिक कोण का माप ज्ञात कीजिए।",
+    q_en: "Q166. The interior angles of an 8-sided polygon are in the ratio 1 : 3 : 4 : 6 : 7 : 11 : 13 : 15. Find the largest interior angle.",
+    tag: "NTPC CBT-II 11/10/2022 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 288°",
+      "(b) 300°",
+      "(c) 270°",
+      "(d) 4°"
+    ],
+    o_en: [
+      "(a) 288°",
+      "(b) 300°",
+      "(c) 270°",
+      "(d) 4°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q167. एक पंचभुज के 4 कोण 70°, 110°, 135° और 95° हैं। पंचभुज के पांचवें कोण की माप ज्ञात कीजिए।",
+    q_en: "Q167. Four angles of a pentagon are 70°, 110°, 135° and 95°. Find the fifth angle.",
+    tag: "NTPC CBT-I 09/02/2021 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 134°",
+      "(b) 128°",
+      "(c) 130°",
+      "(d) 132°"
+    ],
+    o_en: [
+      "(a) 134°",
+      "(b) 128°",
+      "(c) 130°",
+      "(d) 132°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q168. एक सम पंचभुज का परिमाप क्या है जिसकी प्रत्येक भुजा 2a सेमी लंबी है?",
+    q_en: "Q168. What is the perimeter of a regular pentagon whose each side is 2a cm long?",
+    tag: "Group-D 07/10/2022 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 10a² सेमी",
+      "(b) 5a सेमी",
+      "(c) 5a² सेमी",
+      "(d) 10a सेमी"
+    ],
+    o_en: [
+      "(a) 10a² cm",
+      "(b) 5a cm",
+      "(c) 5a² cm",
+      "(d) 10a cm"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q169. ABCDEF एक सम षट्भुज है और BE = 14 सेमी है। षट्भुज का परिमाप ज्ञात कीजिए।",
+    q_en: "Q169. ABCDEF is a regular hexagon and BE = 14 cm. Find the perimeter of the hexagon.",
+    tag: "NTPC CBT-II 13/06/2022 (Shift-02)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 48 सेमी",
+      "(b) 36 सेमी",
+      "(c) 42 सेमी",
+      "(d) 30 सेमी"
+    ],
+    o_en: [
+      "(a) 48 cm",
+      "(b) 36 cm",
+      "(c) 42 cm",
+      "(d) 30 cm"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q170. यदि एक नियमित बहुभुज में 65 विकर्ण हैं, तो इसके आंतरिक कोणों का योग है:",
+    q_en: "Q170. If a regular polygon has 65 diagonals, then the sum of its interior angles is:",
+    tag: "Group-D 29/08/2022 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 1800°",
+      "(b) 1620°",
+      "(c) 1980°",
+      "(d) 1440°"
+    ],
+    o_en: [
+      "(a) 1800°",
+      "(b) 1620°",
+      "(c) 1980°",
+      "(d) 1440°"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q171. दो बहुभुजों में भुजाओं की संख्या समान है। यदि भुजाओं की लंबाई का अनुपात 3 : 5 है, तो उनके संबंधित क्षेत्रफलों का अनुपात क्या है?",
+    q_en: "Q171. Two polygons have the same number of sides. If the ratio of their side lengths is 3 : 5, what is the ratio of their corresponding areas?",
+    tag: "RRB NTPC 02/03/2021 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 3 : 23",
+      "(b) 6 : 11",
+      "(c) 9 : 25",
+      "(d) 4 : 7"
+    ],
+    o_en: [
+      "(a) 3 : 23",
+      "(b) 6 : 11",
+      "(c) 9 : 25",
+      "(d) 4 : 7"
+    ],
+    a: 2,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q172. दो बहुभुजों में भुजाओं की संख्या समान है। उनकी लंबाई का अनुपात 7 : 5 है और बड़े बहुभुज का क्षेत्रफल 1127 सेमी² है। छोटे बहुभुज का क्षेत्रफल ज्ञात कीजिए।",
+    q_en: "Q172. Two polygons have the same number of sides. Their corresponding side lengths are in the ratio 7 : 5 and the area of the larger polygon is 1127 cm². Find the area of the smaller polygon.",
+    tag: "RRB NTPC 14/03/2021 (Shift-01)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 565 सेमी²",
+      "(b) 550 सेमी²",
+      "(c) 585 सेमी²",
+      "(d) 575 सेमी²"
+    ],
+    o_en: [
+      "(a) 565 cm²",
+      "(b) 550 cm²",
+      "(c) 585 cm²",
+      "(d) 575 cm²"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  },
+  {
+    q_hi: "Q173. दो बहुभुजों की भुजाओं की संख्या का अनुपात 1 : 2 है। यदि पहले बहुभुज का प्रत्येक अंतः कोण 140° है, तो दूसरे बहुभुज के प्रत्येक अंतः कोण का माप कितना है?",
+    q_en: "Q173. The numbers of sides of two polygons are in the ratio 1 : 2. If each interior angle of the first polygon is 140°, what is each interior angle of the second polygon?",
+    tag: "NTPC CBT-I 25/01/2021 (Shift-03)",
+    type_tag: "Type V (B) (Polygons)",
+    o_hi: [
+      "(a) 150°",
+      "(b) 140°",
+      "(c) 170°",
+      "(d) 160°"
+    ],
+    o_en: [
+      "(a) 150°",
+      "(b) 140°",
+      "(c) 170°",
+      "(d) 160°"
+    ],
+    a: 3,
+    e_hi: "",
+    e_en: ""
+  }
+];
