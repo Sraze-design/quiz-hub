@@ -2075,10 +2075,16 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   font-variant-numeric: tabular-nums;
   box-shadow: 0 1px 4px rgba(15,23,42,.04);
 }
+.ai-quiz-card-timer svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  stroke: currentColor;
+}
 .ai-quiz-card-timer.warning {
-  background: #fff7ed;
-  color: #ea580c;
-  border-color: #fdba74;
+  background: #fffbeb;
+  color: #d97706;
+  border-color: #fbbf24;
 }
 .ai-quiz-card-timer.danger {
   background: #fef2f2;
@@ -8052,7 +8058,8 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
   const timerEl = document.createElement('div');
   timerEl.className = 'ai-quiz-card-timer notranslate';
   timerEl.setAttribute('translate','no');
-  timerEl.textContent = '⏱ 00:00';
+  timerEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 1.5"></path><path d="M9 2h6"></path><path d="M12 2v3"></path></svg><span class="ai-quiz-timer-text">00:00</span>';
+  const timerTextEl = timerEl.querySelector('.ai-quiz-timer-text');
   msgDiv.appendChild(timerEl);
 
   const timerStartedAt = Date.now();
@@ -8060,7 +8067,7 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
   const refreshCardTimer = () => {
     if (timerStopped) return;
     const elapsedMs = Date.now() - timerStartedAt;
-    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(elapsedMs);
+    if(timerTextEl) timerTextEl.textContent = formatAIQuizElapsed(elapsedMs);
     applyAIQuizTimerColor(timerEl, elapsedMs);
   };
   refreshCardTimer();
@@ -8072,7 +8079,7 @@ function renderQuizCardMessage(quizCardData, modelUsed = null, modelAttempts = n
     clearInterval(timerHandle);
     aiQuizTimerHandles.delete(timerHandle);
     const elapsedMs = Date.now() - timerStartedAt;
-    timerEl.textContent = '⏱ ' + formatAIQuizElapsed(elapsedMs);
+    if(timerTextEl) timerTextEl.textContent = formatAIQuizElapsed(elapsedMs);
     applyAIQuizTimerColor(timerEl, elapsedMs);
     timerEl.classList.add('stopped');
   };
