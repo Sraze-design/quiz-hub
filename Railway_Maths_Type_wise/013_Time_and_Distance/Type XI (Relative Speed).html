@@ -1,0 +1,527 @@
+const data = [
+  {
+    "q_hi": "Q136. दो कारें एक ही बिंदु से चलना शुरू करती हैं और एक ही दिशा में यात्रा करती हैं। यदि एक कार 55 किमी/घंटा और दूसरी 72 किमी/घंटा की चाल से चलती है, तो 3 घंटे बाद वे एक-दूसरे से कितनी दूरी पर होंगी?",
+    "q_en": "Q136. Two cars start from the same point and travel in the same direction at 55 km/h and 72 km/h. How far apart will they be after 3 hours?",
+    "tag": "RRB Group D 15/12/2025 (Shift-03)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 51 किमी",
+      "(b) 57 किमी",
+      "(c) 61 किमी",
+      "(d) 45 किमी"
+    ],
+    "o_en": [
+      "(a) 51 km",
+      "(b) 57 km",
+      "(c) 61 km",
+      "(d) 45 km"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q137. एक मालगाड़ी और एक सुपरफास्ट ट्रेन क्रमशः स्टेशन A और स्टेशन B से एक ही समय पर समानांतर ट्रैक पर एक-दूसरे की ओर चलना शुरू करती हैं। यदि स्टेशन A और स्टेशन B के बीच की दूरी 154 किमी है और ट्रेनों की गति क्रमशः 61 किमी/घंटा और 93 किमी/घंटा है, तो स्टेशन B से कितनी दूरी पर ट्रेनें मिलेंगी?",
+    "q_en": "Q137. A goods train and a superfast train start simultaneously from stations A and B on parallel tracks towards each other. The stations are 154 km apart and their speeds are 61 km/h and 93 km/h. How far from station B will they meet?",
+    "tag": "RRB ALP CBT-I 17/02/2026 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 88",
+      "(b) 93",
+      "(c) 112",
+      "(d) 86"
+    ],
+    "o_en": [
+      "(a) 88",
+      "(b) 93",
+      "(c) 112",
+      "(d) 86"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q138. यदि दो कारें एक ही बिंदु से एक सीधी सड़क पर चलना प्रारंभ करती हैं, जहाँ कार X, 40 किमी/घंटा की नियत चाल से और कार Y, 60 किमी/घंटा की नियत चाल से चलती है, तो 2 घंटे के बाद उनकी गतियों की तुलना के संबंध में कौन-सा कथन सही है?",
+    "q_en": "Q138. Two cars start from the same point on a straight road. Car X moves at 40 km/h and car Y at 60 km/h. Which statement is correct after 2 hours?",
+    "tag": "RRB JE CBT-I 19/02/2026 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 2 घंटे बाद कार Y, कार X से 20 किमी आगे होगी।",
+      "(b) 2 घंटे बाद कार Y, कार X से 40 किमी आगे होगी।",
+      "(c) 2 घंटे बाद कार X, कार Y से 40 किमी आगे होगी।",
+      "(d) 2 घंटे बाद दोनों कारें बराबर दूरी तय कर चुकी होंगी।"
+    ],
+    "o_en": [
+      "(a) After 2 hours, Y will be 20 km ahead of X.",
+      "(b) After 2 hours, Y will be 40 km ahead of X.",
+      "(c) After 2 hours, X will be 40 km ahead of Y.",
+      "(d) After 2 hours, both cars will have covered equal distances."
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q139. दो रेलगाड़ियों के इंजन, जो एक-दूसरे से 60 किमी की दूरी पर हैं, क्रमशः 16 किमी/घंटा और 29 किमी/घंटा की चाल से एक-दूसरे की ओर चलना शुरू करते हैं। कितने समय बाद वे एक-दूसरे से मिलेंगे? (मान लीजिए कि इंजन की लंबाई नगण्य है।)",
+    "q_en": "Q139. Two train engines 60 km apart move toward each other at 16 km/h and 29 km/h. After how long will they meet? Assume engine lengths are negligible.",
+    "tag": "RRB Group D 10/12/2025 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 90 मिनट",
+      "(b) 86 मिनट",
+      "(c) 80 मिनट",
+      "(d) 72 मिनट"
+    ],
+    "o_en": [
+      "(a) 90 minutes",
+      "(b) 86 minutes",
+      "(c) 80 minutes",
+      "(d) 72 minutes"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q140. दो व्यक्ति दो स्थानों से, जो 56 किमी दूर हैं, एक-दूसरे की ओर गाड़ी चलाते हैं। पहले व्यक्ति की चाल 12 किमी/घंटा और दूसरे की चाल 13 किमी/घंटा है। यदि वे एक साथ गाड़ी चलाना शुरू करते हैं, तो कितने समय बाद वे 6 किमी दूर होंगे?",
+    "q_en": "Q140. Two persons start driving toward each other from points 56 km apart at 12 km/h and 13 km/h. After how long will they be 6 km apart?",
+    "tag": "RRB Tech. G-III 23/12/2024 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 1 घंटा 30 मिनट",
+      "(b) 2 घंटे",
+      "(c) 1 घंटा",
+      "(d) 2 घंटे 10 मिनट"
+    ],
+    "o_en": [
+      "(a) 1 hour 30 minutes",
+      "(b) 2 hours",
+      "(c) 1 hour",
+      "(d) 2 hours 10 minutes"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q141. दो लोग दो स्थानों से एक-दूसरे की ओर ड्राइव करते हैं, जो 56 किमी दूर हैं। पहले व्यक्ति की गति 13 किमी/घंटा और दूसरे व्यक्ति की गति 14 किमी/घंटा है। यदि वे दोनों एक साथ ड्राइविंग शुरू करते हैं, तो वे 2 किमी दूर होने में कितने समय तक चलेंगे?",
+    "q_en": "Q141. Two people drive toward each other from points 56 km apart at 13 km/h and 14 km/h. How long until they are 2 km apart?",
+    "tag": "RRB Tech. G-III 24/12/2024 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 2 घंटे",
+      "(b) 2 घंटे 10 मिनट",
+      "(c) 1 घंटा 30 मिनट",
+      "(d) 1 घंटा"
+    ],
+    "o_en": [
+      "(a) 2 hours",
+      "(b) 2 hours 10 minutes",
+      "(c) 1 hour 30 minutes",
+      "(d) 1 hour"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q142. दो लोग दो स्थानों से एक-दूसरे की ओर 56 किमी की दूरी से चलते हैं। पहले व्यक्ति की गति 12 किमी/घंटा और दूसरे की गति 14 किमी/घंटा है। यदि वे एक ही समय में चलना शुरू करते हैं, तो वे एक-दूसरे से 4 किमी दूर होने में कितना समय लेंगे?",
+    "q_en": "Q142. Two people start toward each other from points 56 km apart at 12 km/h and 14 km/h. How long until they are 4 km apart?",
+    "tag": "RRB ALP Tier-I 27/11/2024 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 1 घंटा 30 मिनट",
+      "(b) 1 घंटा",
+      "(c) 2 घंटे 10 मिनट",
+      "(d) 2 घंटे"
+    ],
+    "o_en": [
+      "(a) 1 hour 30 minutes",
+      "(b) 1 hour",
+      "(c) 2 hours 10 minutes",
+      "(d) 2 hours"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q143. एक ही समय में A और B, 240 किमी दूर दो अलग-अलग स्थानों से एक-दूसरे की ओर बढ़ना शुरू करते हैं। A और B की चाल का अनुपात 5 : 7 है और B की चाल 84 किमी/घंटा है। कितने मिनट बाद A और B एक-दूसरे से मिलेंगे?",
+    "q_en": "Q143. A and B start simultaneously from two places 240 km apart toward each other. Their speed ratio is 5:7 and B speed is 84 km/h. After how many minutes will they meet?",
+    "tag": "NTPC CBT-II 14/06/2022 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 80 मिनट",
+      "(b) 100 मिनट",
+      "(c) 120 मिनट",
+      "(d) 90 मिनट"
+    ],
+    "o_en": [
+      "(a) 80 minutes",
+      "(b) 100 minutes",
+      "(c) 120 minutes",
+      "(d) 90 minutes"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q144. दो पुरुष एक स्थान से एक ही दिशा में क्रमशः 5 किमी/घंटा और 5.5 किमी/घंटा की चाल से यात्रा शुरू करते हैं। वे कितने समय बाद एक-दूसरे से 8.5 किमी की दूरी पर होंगे?",
+    "q_en": "Q144. Two men start from the same point in the same direction at 5 km/h and 5.5 km/h. After how long will they be 8.5 km apart?",
+    "tag": "NTPC CBT-I 07/01/2021 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 17 घंटे",
+      "(b) 4 घंटे 15 मिनट",
+      "(c) 16 घंटे 15 मिनट",
+      "(d) 8 घंटे 30 मिनट"
+    ],
+    "o_en": [
+      "(a) 17 hours",
+      "(b) 4 hours 15 minutes",
+      "(c) 16 hours 15 minutes",
+      "(d) 8 hours 30 minutes"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q145. दो स्टेशनों A और B के बीच की दूरी 420 किमी है। एक ट्रेन स्टेशन A से दोपहर 3 बजे शुरू होती है और 60 किमी/घंटा की चाल से B की ओर चलती है। दूसरी ट्रेन स्टेशन B से शाम 4 बजे चलती है और स्टेशन A की ओर 30 किमी/घंटा की चाल से चलती है। वे किस समय मिलती हैं?",
+    "q_en": "Q145. Stations A and B are 420 km apart. A train leaves A at 3 pm at 60 km/h toward B. Another leaves B at 4 pm at 30 km/h toward A. At what time do they meet?",
+    "tag": "NTPC CBT-I 22/02/2021 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 10 pm",
+      "(b) 10:30 pm",
+      "(c) 9 pm",
+      "(d) 8 pm"
+    ],
+    "o_en": [
+      "(a) 10 pm",
+      "(b) 10:30 pm",
+      "(c) 9 pm",
+      "(d) 8 pm"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q146. एक रेलगाड़ी 80 किमी/घंटा की चाल से बैंगलोर रेलवे स्टेशन से मुंबई के लिए निकलती है। 1 घंटे बाद एक अन्य रेलगाड़ी 100 किमी/घंटा की चाल से उसी स्टेशन से मुंबई के लिए चलती है। दूसरी रेलगाड़ी, पहली रेलगाड़ी से कितने घंटे बाद मिलेगी?",
+    "q_en": "Q146. A train leaves Bengaluru station for Mumbai at 80 km/h. One hour later another train leaves the same station at 100 km/h. How many hours after the second train starts will it catch the first?",
+    "tag": "NTPC CBT-I 29/12/2020 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 6 घंटे",
+      "(b) 3 घंटे",
+      "(c) 5 घंटे",
+      "(d) 4 घंटे"
+    ],
+    "o_en": [
+      "(a) 6 hours",
+      "(b) 3 hours",
+      "(c) 5 hours",
+      "(d) 4 hours"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q147. दो रेलगाड़ियाँ दिल्ली से देहरादून के लिए 10:00 am और 10:30 am बजे निकलती हैं और इन दोनों रेलगाड़ियों की चाल क्रमशः 60 किमी/घंटा और 75 किमी/घंटा है। दिल्ली से कितनी किमी की दूरी पर ये दोनों रेलगाड़ियाँ मिलेंगी?",
+    "q_en": "Q147. Two trains leave Delhi for Dehradun at 10:00 am and 10:30 am at 60 km/h and 75 km/h respectively. How far from Delhi will they meet?",
+    "tag": "NTPC CBT-I 03/04/2021 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 100 किमी",
+      "(b) 140 किमी",
+      "(c) 130 किमी",
+      "(d) 150 किमी"
+    ],
+    "o_en": [
+      "(a) 100 km",
+      "(b) 140 km",
+      "(c) 130 km",
+      "(d) 150 km"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q148. दो कारें शहर A से शहर B के लिए क्रमशः सुबह 8:30 am और 8:45 am पर निकलती हैं। कारें क्रमशः 45 किमी/घंटा और 54 किमी/घंटा की चाल से चलती हैं। शहर A से कितने किलोमीटर की दूरी पर दोनों कारें मिलेंगी?",
+    "q_en": "Q148. Two cars leave city A for city B at 8:30 am and 8:45 am at 45 km/h and 54 km/h respectively. How far from city A will they meet?",
+    "tag": "NTPC CBT-I 08/04/2021 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 67.5",
+      "(b) 45",
+      "(c) 40.5",
+      "(d) 55.2"
+    ],
+    "o_en": [
+      "(a) 67.5",
+      "(b) 45",
+      "(c) 40.5",
+      "(d) 55.2"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q149. 80 किमी/घंटा की चाल से चलने वाली ट्रेन 1, 6:00 a.m. पर स्टेशन A से निकलती है और 105 किमी/घंटा की चाल से चलने वाली ट्रेन 2, 8:30 a.m. पर स्टेशन A से समानांतर ट्रैक पर समान दिशा में चलना प्रारंभ करती है। ट्रेन 2, स्टेशन A से कितनी दूरी पर ट्रेन 1 से मिलेगी?",
+    "q_en": "Q149. Train 1 leaves station A at 6:00 am at 80 km/h. Train 2 leaves the same station at 8:30 am at 105 km/h on a parallel track in the same direction. How far from A will train 2 catch train 1?",
+    "tag": "RPF Constable 12/03/2025 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 920",
+      "(b) 840",
+      "(c) 780",
+      "(d) 860"
+    ],
+    "o_en": [
+      "(a) 920",
+      "(b) 840",
+      "(c) 780",
+      "(d) 860"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q150. X और Y से दो ट्रेनें क्रमशः 32 किमी/घंटा और 26 किमी/घंटा की चाल से एक ही दिशा में चल रही हैं। यदि Y से X की दूरी 42 किमी है और यदि वे Y से पर किसी बिंदु Z पर मिलती हैं, तो Y से Z तक की दूरी कितनी होगी?",
+    "q_en": "Q150. Two trains from X and Y move in the same direction at 32 km/h and 26 km/h. X is 42 km behind Y. If they meet at point Z ahead of Y, what is the distance from Y to Z?",
+    "tag": "NTPC CBT-I 27/01/2021 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 165 किमी",
+      "(b) 182 किमी",
+      "(c) 148 किमी",
+      "(d) 236 किमी"
+    ],
+    "o_en": [
+      "(a) 165 km",
+      "(b) 182 km",
+      "(c) 148 km",
+      "(d) 236 km"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q151. परशोतम और अंजेलिका ने एक स्थान से विपरीत दिशाओं में क्रमशः 30 किमी/घंटा और 3.5 किमी/घंटा की चाल से चलना शुरू किया। 2.5 घंटे में वे दोनों एक-दूसरे से कितने दूर होंगे?",
+    "q_en": "Q151. Parshotam and Angelica start from the same place in opposite directions at 30 km/h and 3.5 km/h respectively. How far apart will they be after 2.5 hours?",
+    "tag": "NTPC CBT-I 30/12/2020 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 75 किमी",
+      "(b) 8.75 किमी",
+      "(c) 83.75 किमी",
+      "(d) 66.25 किमी"
+    ],
+    "o_en": [
+      "(a) 75 km",
+      "(b) 8.75 km",
+      "(c) 83.75 km",
+      "(d) 66.25 km"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q152. एक बस और एक कार क्रमशः बिंदु x और y से एक-दूसरे की ओर 60 किमी/घंटा और 50 किमी/घंटा की गति से चलना शुरू करते हैं। जब वे मिलते हैं, तब बस कार से 50 किमी अधिक दूरी तय कर चुकी होती है। x और y के बीच की दूरी क्या है?",
+    "q_en": "Q152. A bus and a car start from points x and y toward each other at 60 km/h and 50 km/h. When they meet, the bus has travelled 50 km more than the car. What is the distance between x and y?",
+    "tag": "NTPC CBT-I 11/03/2021 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 450 किमी",
+      "(b) 500 किमी",
+      "(c) 600 किमी",
+      "(d) 550 किमी"
+    ],
+    "o_en": [
+      "(a) 450 km",
+      "(b) 500 km",
+      "(c) 600 km",
+      "(d) 550 km"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q153. दो ट्रेनें एक ही समय में दो स्टेशनों से शुरू होती हैं और क्रमशः 30 किमी/घंटा और 35 किमी/घंटा की चाल से एक-दूसरे की ओर बढ़ती हैं। जब वे मिलती हैं तो पता चलता है कि एक ट्रेन दूसरी ट्रेन से 30 किमी अधिक चल चुकी है। दोनों स्टेशनों के बीच की दूरी ज्ञात कीजिए।",
+    "q_en": "Q153. Two trains start simultaneously from two stations toward each other at 30 km/h and 35 km/h. When they meet, one train has travelled 30 km more than the other. Find the distance between the stations.",
+    "tag": "NTPC CBT-II 16/06/2022 (Shift-03)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 390 किमी",
+      "(b) 400 किमी",
+      "(c) 410 किमी",
+      "(d) 380 किमी"
+    ],
+    "o_en": [
+      "(a) 390 km",
+      "(b) 400 km",
+      "(c) 410 km",
+      "(d) 380 km"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q154. दो ट्रेनें एक ही समय में दो स्टेशनों से शुरू होती हैं और क्रमशः 20 किमी/घंटा और 25 किमी/घंटा की चाल से एक-दूसरे की ओर बढ़ती हैं। जब वे मिलती हैं, तो पता चलता है कि एक ट्रेन ने दूसरी से 80 किमी अधिक यात्रा की है। दोनों स्टेशनों के बीच की दूरी ज्ञात कीजिए।",
+    "q_en": "Q154. Two trains start simultaneously from two stations toward each other at 20 km/h and 25 km/h. When they meet, one has travelled 80 km more than the other. Find the distance between the stations.",
+    "tag": "NTPC CBT-I 28/12/2020 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 730 किमी",
+      "(b) 700 किमी",
+      "(c) 710 किमी",
+      "(d) 720 किमी"
+    ],
+    "o_en": [
+      "(a) 730 km",
+      "(b) 700 km",
+      "(c) 710 km",
+      "(d) 720 km"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q155. एक ट्रेन स्टेशन A से स्टेशन B की ओर 50 किमी/घंटा की चाल से निकलती है। आधे घंटे के बाद, एक अन्य ट्रेन स्टेशन B से स्टेशन A की ओर 150 किमी/घंटा की चाल से निकलती है। दोनों स्टेशनों के बीच की दूरी 725 किमी है। जिस स्थान पर दोनों ट्रेनें मिलती हैं, उस स्थान की स्टेशन A से दूरी कितनी होगी?",
+    "q_en": "Q155. A train leaves station A for B at 50 km/h. Half an hour later another train leaves B for A at 150 km/h. The stations are 725 km apart. How far from station A is their meeting point?",
+    "tag": "NTPC CBT-I 28/12/2020 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 250 किमी",
+      "(b) 200 किमी",
+      "(c) 150 किमी",
+      "(d) 168 किमी"
+    ],
+    "o_en": [
+      "(a) 250 km",
+      "(b) 200 km",
+      "(c) 150 km",
+      "(d) 168 km"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q156. एक-दूसरे की ओर चलने वाली दो रेलगाड़ियाँ एक ही समय पर 250 किमी की दूरी पर स्थित दो स्टेशनों से चलना शुरू करती हैं। रेलगाड़ियाँ किसी एक स्टेशन से 130 किमी दूर किसी स्थान पर एक-दूसरे से मिलती हैं। उनकी चालों का अनुपात ज्ञात कीजिए।",
+    "q_en": "Q156. Two trains start simultaneously from stations 250 km apart and move toward each other. They meet at a point 130 km from one station. Find the ratio of their speeds.",
+    "tag": "NTPC CBT-I 08/01/2021 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 12 : 11",
+      "(b) 9 : 8",
+      "(c) 15 : 14",
+      "(d) 13 : 12"
+    ],
+    "o_en": [
+      "(a) 12 : 11",
+      "(b) 9 : 8",
+      "(c) 15 : 14",
+      "(d) 13 : 12"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q157. ट्रेन A, स्टेशन M से सुबह 7:50 बजे निकलती है और उसी दिन दोपहर 2:50 बजे स्टेशन N पहुँचती है। ट्रेन B, स्टेशन N से सुबह 9:50 बजे निकलती है और उसी दिन दोपहर 2:50 बजे स्टेशन M पहुँचती है। ट्रेन A और B के मिलने का समय ज्ञात कीजिए।",
+    "q_en": "Q157. Train A leaves station M at 7:50 am and reaches N at 2:50 pm the same day. Train B leaves N at 9:50 am and reaches M at 2:50 pm. Find their meeting time.",
+    "tag": "RRB NTPC UG CBT-I 07/08/2025 (Shift-03)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 10:47 pm",
+      "(b) 11:55 am",
+      "(c) 9:47 pm",
+      "(d) 5:00 am"
+    ],
+    "o_en": [
+      "(a) 10:47 pm",
+      "(b) 11:55 am",
+      "(c) 9:47 pm",
+      "(d) 5:00 am"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q158. रेलगाड़ी A, स्टेशन M से 6:20 AM पर निकलती है और उसी दिन स्टेशन N पर 3:20 PM पर पहुँचती है। रेलगाड़ी B, स्टेशन N से 8:20 AM पर निकलती है और उसी दिन स्टेशन M पर 2:20 PM पर पहुँचती है। रेलगाड़ी A और B के मिलने का समय ज्ञात कीजिए।",
+    "q_en": "Q158. Train A leaves M at 6:20 am and reaches N at 3:20 pm. Train B leaves N at 8:20 am and reaches M at 2:20 pm. Find the meeting time.",
+    "tag": "RPF Constable 07/03/2025 (Shift-01)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 7:38 pm",
+      "(b) 9:51 am",
+      "(c) 11:08 am",
+      "(d) 3:30 pm"
+    ],
+    "o_en": [
+      "(a) 7:38 pm",
+      "(b) 9:51 am",
+      "(c) 11:08 am",
+      "(d) 3:30 pm"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q159. ट्रेन A, स्टेशन M से सुबह 7:20 बजे निकलती है और उसी दिन स्टेशन N पर दोपहर 3:20 बजे पहुँचती है। ट्रेन B, स्टेशन N से सुबह 9:20 बजे निकलती है और उसी दिन शाम 4:20 बजे स्टेशन M पहुँचती है। वह समय पता करें जब ट्रेन A और B एक-दूसरे से मिलती हैं।",
+    "q_en": "Q159. Train A leaves M at 7:20 am and reaches N at 3:20 pm. Train B leaves N at 9:20 am and reaches M at 4:20 pm. Find their meeting time.",
+    "tag": "RRB NTPC UGL CBT-II 20/12/2025",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 4:10 pm",
+      "(b) 1:38 am",
+      "(c) 10:57 am",
+      "(d) 12:08 pm"
+    ],
+    "o_en": [
+      "(a) 4:10 pm",
+      "(b) 1:38 am",
+      "(c) 10:57 am",
+      "(d) 12:08 pm"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q160. रेलगाड़ी A, स्टेशन M से 7:40 AM पर निकलती है और उसी दिन स्टेशन N पर 2:40 PM पर पहुँचती है। रेलगाड़ी B, स्टेशन N से 9:40 AM पर निकलती है और उसी दिन स्टेशन M पर 2:40 PM पर पहुँचती है। रेलगाड़ी A और B के मिलने का समय ज्ञात कीजिए।",
+    "q_en": "Q160. Train A leaves M at 7:40 am and reaches N at 2:40 pm. Train B leaves N at 9:40 am and reaches M at 2:40 pm. Find the meeting time.",
+    "tag": "RPF Constable 06/03/2025 (Shift-02)",
+    "type_tag": "Type XI (Relative Speed)",
+    "o_hi": [
+      "(a) 10:29 pm",
+      "(b) 5:12 pm",
+      "(c) 11:23 pm",
+      "(d) 11:45 am"
+    ],
+    "o_en": [
+      "(a) 10:29 pm",
+      "(b) 5:12 pm",
+      "(c) 11:23 pm",
+      "(d) 11:45 am"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }
+];
