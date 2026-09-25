@@ -155,8 +155,11 @@ body {
 .bookmark-question-card .bookmark-toggle-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;min-width:30px;border-radius:9px;box-shadow:0 1px 4px rgba(15,23,42,.08)}
 .bookmark-question-card .bookmark-toggle-btn svg{width:15px;height:15px}
 .side-drawer-item-icon.reports-icon{background:#fff1f2;color:#e11d48}
-.premium-card.report-history-card{display:block;width:100%;min-width:0;box-sizing:border-box;cursor:default;user-select:text;-webkit-user-select:text;touch-action:auto}
-.report-history-card:active{transform:none;box-shadow:var(--shadow-sm);border-color:#edf2f7}
+.premium-card.report-history-card{display:block;width:100%;min-width:0;box-sizing:border-box;cursor:default;user-select:text;-webkit-user-select:text;touch-action:auto;background:#fff7ed;border-color:#fed7aa;padding-right:58px}
+.report-history-card:active{transform:none;box-shadow:var(--shadow-sm);border-color:#fdba74}
+.report-history-remove-btn{position:absolute;top:12px;right:12px;width:30px;height:30px;min-width:30px;border:0;border-radius:9px;background:#fff1f2;color:#e11d48;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 1px 4px rgba(15,23,42,.08);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.report-history-remove-btn svg{width:16px;height:16px;pointer-events:none}
+.report-history-remove-btn:active{transform:scale(.9);background:#ffe4e6}
 .report-history-meta{font-size:12px;color:#64748b;font-weight:650;margin:6px 0 9px}
 .report-history-path{font-size:13px;line-height:1.5;color:#475569;overflow-wrap:anywhere;margin-top:7px}
 .report-history-detail{font-size:14px;line-height:1.5;color:#334155;overflow-wrap:anywhere;margin-top:6px}
@@ -3196,6 +3199,22 @@ function updateLocalReportDrawerCount(){
   count.textContent=n?`${n} Sent Report${n===1?'':'s'}`:'No reports sent';
 }
 
+function removeLocalReport(reportId, reportedAt){
+  try {
+    const reports=getLocalReports();
+    const index=reports.findIndex(report=>{
+      if(!report || typeof report!=='object') return false;
+      if(reportId && report.id) return String(report.id)===String(reportId);
+      return !reportId && reportedAt && report.reportedAt===reportedAt;
+    });
+    if(index<0) return false;
+    reports.splice(index,1);
+    localStorage.setItem(LOCAL_REPORT_STORAGE_KEY,JSON.stringify(reports));
+    updateLocalReportDrawerCount();
+    return true;
+  } catch (_) { return false; }
+}
+
 function saveLocalReport(payload, selectedIndex, correctIndex){
   const report={
     id:(typeof crypto!=='undefined' && crypto.randomUUID)?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2),
@@ -3491,17 +3510,34 @@ function renderMyReports(){
   prepareBookmarkExplorer('My Reports');
   const list=document.getElementById('explorerList');
   list.innerHTML='';
-  const reports=getLocalReports().filter(report=>report&&typeof report==='object').reverse();
-  if(!reports.length){
+  const showEmptyState=()=>{
     const empty=document.createElement('div');
     empty.className='premium-state-view';
     empty.innerHTML='<div class="state-illustration">▣</div><div class="state-title">No reports yet</div><div class="state-desc">Questions you report successfully will appear here on this device.</div>';
     list.appendChild(empty);
+  };
+  const reports=getLocalReports().filter(report=>report&&typeof report==='object').reverse();
+  if(!reports.length){
+    showEmptyState();
     return;
   }
   reports.forEach(report=>{
     const card=document.createElement('article');
     card.className='premium-card report-history-card';
+    const removeBtn=document.createElement('button');
+    removeBtn.type='button';
+    removeBtn.className='report-history-remove-btn';
+    removeBtn.setAttribute('aria-label','Remove report');
+    removeBtn.title='Remove report';
+    removeBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v5"/><path d="M14 11v5"/></svg>';
+    removeBtn.addEventListener('click',event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      if(!removeLocalReport(report.id,report.reportedAt)) return;
+      card.remove();
+      if(!list.querySelector('.report-history-card')) showEmptyState();
+    });
+    card.appendChild(removeBtn);
     const title=document.createElement('div');
     title.className='card-main-title';
     title.textContent=`Question ${report.questionNumber||'?'}`;
