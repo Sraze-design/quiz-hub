@@ -425,6 +425,28 @@ body {
   background: #16a34a;
 }
 
+/* Keep long quiz names inside the card while the action stays visible. */
+.quiz-test-card .card-meta-box,
+.quiz-test-card .card-details {
+  min-width: 0;
+}
+.quiz-test-card .card-icon-wrapper {
+  flex: 0 0 52px;
+}
+.quiz-test-card .card-main-title {
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+.quiz-test-card .card-subtitle-stats {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.quiz-test-card .premium-btn-action {
+  flex: 0 0 auto;
+  margin-left: 12px;
+}
+
 /* Premium Animations (Skeletons/Spinners) */
 .premium-loader-screen {
   padding: 20px;
@@ -4262,7 +4284,9 @@ window.addEventListener('popstate', (e) => {
 function cleanHumanReadableTitle(rawString) {
   if (!rawString) return '';
 
-  let title = rawString.replace(/\.html$/i, '');
+  let title = String(rawString);
+  try { title = decodeURIComponent(title); } catch (e) { /* Keep literal percent signs. */ }
+  title = title.replace(/\.html$/i, '');
   title = title.replace(/^\d+\s*[-_.]?\s*/, '');
   title = title.replace(/[-_]/g, ' ');
   title = title.replace(/\bpyq\b/gi, 'PYQ Test');
@@ -4497,7 +4521,7 @@ function renderQuizList(subjectName, categoryName, chapterName) {
 
   quizzes.forEach((quiz, idx) => {
     const card = document.createElement('div');
-    card.className = 'premium-card';
+    card.className = 'premium-card quiz-test-card';
     
     card.innerHTML = `
       <div class="card-meta-box">
@@ -4561,7 +4585,7 @@ function handleSearch(query) {
 
   filtered.forEach(quiz => {
     const card = document.createElement('div');
-    card.className = 'premium-card';
+    card.className = 'premium-card quiz-test-card';
     const catSubtitle = quiz.category ? ` • 🗂️ ${cleanHumanReadableTitle(quiz.category)}` : '';
     card.innerHTML = `
       <div class="card-meta-box">
