@@ -3844,6 +3844,7 @@ async function startBookmarkedTestQuiz(bookmarks){
     selectedAnswers=new Array(items.length).fill(null);
     answerCorrect=new Array(items.length).fill(null);
     questionTimes=new Array(items.length).fill(0);
+    resetQuizPauseUIForFreshStart();
 
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -5467,6 +5468,38 @@ function showEmptyState() {
   else init();
 })();
 
+function resetQuizPauseUIForFreshStart(){
+  timerRunning=true;
+  isPaused=false;
+
+  const pauseBtn=document.getElementById('pauseBtn');
+  if(pauseBtn){
+    pauseBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg> <span>Pause</span>';
+  }
+
+  document.getElementById('pauseFade')?.classList.remove('show');
+  document.getElementById('pauseModal')?.classList.remove('show');
+
+  ['backBtn','nextBtn'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      el.disabled=false;
+      el.style.opacity='1';
+      el.style.pointerEvents='auto';
+    }
+  });
+
+  const jumpBox=document.getElementById('jumpBox');
+  if(jumpBox){
+    jumpBox.style.opacity='1';
+    jumpBox.style.pointerEvents='auto';
+  }
+  const jumpNo=document.getElementById('jumpNo');
+  if(jumpNo) jumpNo.disabled=false;
+  const goBtn=document.querySelector('#jumpBox button');
+  if(goBtn) goBtn.disabled=false;
+}
+
 async function loadQuizData(quizPath, requestedQuestionIndex) {
   showLoader(true);
   // A newly launched test must never inherit the previous test's Analysis UI
@@ -5514,11 +5547,11 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     const __requestedQ = Number.isInteger(requestedQuestionIndex) ? requestedQuestionIndex : parseInt(requestedQuestionIndex,10);
     currentQ = Number.isFinite(__requestedQ) && __requestedQ >= 0 && __requestedQ < data.length ? __requestedQ : 0;
     score=0; currentStreak=0; maxStreak=0; elapsed=0;
-    timerRunning=true; isPaused=false;
     answered=new Array(data.length).fill(false);
     selectedAnswers=new Array(data.length).fill(null);
     answerCorrect=new Array(data.length).fill(null);
     questionTimes=new Array(data.length).fill(0);
+    resetQuizPauseUIForFreshStart();
     
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -6171,6 +6204,15 @@ function renderQuestionContent(container, item) {
 
 function showQ() {
 if(data.length === 0) return;
+
+/* Always open every newly rendered question from the top.
+   The main quiz content is its own scroll container, so iOS/Android can
+   otherwise preserve the previous question's scrollTop on Next/Back/Jump. */
+const quizMainScroller = document.querySelector('.quiz-main-content-area');
+if(quizMainScroller){
+  quizMainScroller.scrollTop = 0;
+}
+
 const item = data[currentQ];
 const typeLabel=document.getElementById('quizTypeLabel');
 if(typeLabel){
@@ -6267,6 +6309,14 @@ if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageS
 // iOS/WebKit repaint safeguard after dynamically rebuilding the question DOM.
 // This changes only rendering; quiz state/logic remains untouched.
 if(typeof window.__pencilOnQuestionChange==='function') window.__pencilOnQuestionChange();
+
+/* WebKit can restore the old scroll offset after DOM repaint.
+   Reset once more on the next frame so Next/Back/Jump always starts at top. */
+if(quizMainScroller){
+  requestAnimationFrame(()=>{
+    quizMainScroller.scrollTop = 0;
+  });
+}
 
 const __iosQuizPaint = document.getElementById('quiz-box');
 if (__iosQuizPaint) {
