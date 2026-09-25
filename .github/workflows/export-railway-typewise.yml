@@ -1,0 +1,30 @@
+name: Export Railway Type Wise ZIP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/export-railway-typewise.yml"
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Stage Railway Maths Type Wise
+        run: |
+          mkdir -p export
+          cp -a Railway_Maths_Type_wise export/
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Railway_Maths_Type_wise_All_29_Chapters
+          path: export/Railway_Maths_Type_wise
+          if-no-files-found: error
+          retention-days: 1
