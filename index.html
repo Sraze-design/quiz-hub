@@ -154,6 +154,11 @@ body {
 .quiz-subheader-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.quiz-question-actions{display:flex;align-items:center;gap:7px;flex:0 0 auto}.bookmark-toggle-btn{width:40px;height:40px;min-width:40px;border:0;border-radius:12px;background:#f8fafc;color:#64748b;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition)}.bookmark-toggle-btn svg{width:21px;height:21px}.bookmark-toggle-btn.active{background:#fff7ed;color:#f59e0b}.bookmark-toggle-btn:active{transform:scale(.92)}.report-question-btn{height:40px;border:0;border-radius:12px;padding:0 11px;background:#fff1f2;color:#e11d48;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:800;cursor:pointer;transition:var(--transition)}.report-question-btn svg{width:18px;height:18px;flex:0 0 auto}.report-question-btn:active{transform:scale(.95)}.bookmark-question-card{align-items:flex-start;position:relative;padding-right:44px}.bookmark-question-preview{font-size:13px;line-height:1.5;color:#334155;font-weight:600;margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.bookmark-test-name{font-size:11px;color:#64748b;font-weight:600;margin-top:5px}.bookmark-star{color:#f59e0b;font-size:20px;flex:0 0 auto}; .ai-quiz-card-msg .bookmark-toggle-btn{margin-left:auto;flex:0 0 auto}
 .bookmark-question-card .bookmark-toggle-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;min-width:30px;border-radius:9px;box-shadow:0 1px 4px rgba(15,23,42,.08)}
 .bookmark-question-card .bookmark-toggle-btn svg{width:15px;height:15px}
+.side-drawer-item-icon.reports-icon{background:#f1f5f9;color:#64748b}
+.report-history-card{display:block;cursor:default;user-select:text;-webkit-user-select:text;touch-action:auto}
+.report-history-card:active{transform:none;box-shadow:var(--shadow-sm);border-color:#edf2f7}
+.report-history-meta{font-size:12px;color:#64748b;font-weight:650;margin:6px 0 9px}
+.report-history-detail{font-size:14px;line-height:1.5;color:#334155;overflow-wrap:anywhere;margin-top:6px}
 /* ===== Question report sheet ===== */
 #questionReportOverlay{position:fixed;inset:0;z-index:100060;background:rgba(15,23,42,.55);opacity:0;pointer-events:none;transition:opacity .22s ease;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 #questionReportOverlay.open{opacity:1;pointer-events:auto}
@@ -2555,7 +2560,14 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
 
   <!-- Bookmark navigation drawer -->
   <div id="appSideDrawerOverlay" onclick="closeAppSideDrawer()"></div>
-  <aside id="appSideDrawer" aria-label="App menu"><div class="side-drawer-head"><div class="side-drawer-brand"><span class="side-drawer-brand-icon">📚</span><span>Dream To Destiny</span></div><button class="side-drawer-close" type="button" onclick="closeAppSideDrawer()" aria-label="Close menu">×</button></div><div class="side-drawer-section"><div class="side-drawer-label">Library</div><button class="side-drawer-item" type="button" onclick="openBookmarksFromMenu()"><span class="side-drawer-item-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></span><span class="side-drawer-item-text"><span>Bookmarks</span><small id="drawerBookmarkCount">Saved Questions</small></span></button></div></aside>
+  <aside id="appSideDrawer" aria-label="App menu">
+    <div class="side-drawer-head"><div class="side-drawer-brand"><span class="side-drawer-brand-icon">📚</span><span>Dream To Destiny</span></div><button class="side-drawer-close" type="button" onclick="closeAppSideDrawer()" aria-label="Close menu">×</button></div>
+    <div class="side-drawer-section">
+      <div class="side-drawer-label">Library</div>
+      <button class="side-drawer-item" type="button" onclick="openBookmarksFromMenu()"><span class="side-drawer-item-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></span><span class="side-drawer-item-text"><span>Bookmarks</span><small id="drawerBookmarkCount">Saved Questions</small></span></button>
+      <button class="side-drawer-item" type="button" onclick="openMyReportsFromMenu()"><span class="side-drawer-item-icon reports-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span><span class="side-drawer-item-text"><span>My Reports</span><small id="drawerReportCount">No reports sent</small></span></button>
+    </div>
+  </aside>
 
   <!-- EXISTING ASSESSMENT INTERACTIVE APPLICATION ENGINE BOX -->
 
@@ -3163,6 +3175,46 @@ let retestIndexMap = null;
 let questionReportReason = '';
 let questionReportSubmitting = false;
 let questionReportRecordOverride = null;
+const LOCAL_REPORT_STORAGE_KEY = 'devssc:sent-question-reports:v1';
+
+function getLocalReports(){
+  try {
+    const reports=JSON.parse(localStorage.getItem(LOCAL_REPORT_STORAGE_KEY)||'[]');
+    return Array.isArray(reports)?reports:[];
+  } catch (_) { return []; }
+}
+
+function plainReportText(value){
+  return String(value||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;/gi,' ').replace(/\s+/g,' ').trim();
+}
+
+function updateLocalReportDrawerCount(){
+  const count=document.getElementById('drawerReportCount');
+  if(!count) return;
+  const n=getLocalReports().length;
+  count.textContent=n?`${n} Sent Report${n===1?'':'s'}`:'No reports sent';
+}
+
+function saveLocalReport(payload){
+  const report={
+    id:(typeof crypto!=='undefined' && crypto.randomUUID)?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2),
+    subject:payload.subject, chapter:payload.chapter, testName:payload.testName,
+    quizPath:payload.quizPath, questionNumber:payload.questionNumber,
+    reason:payload.reason, description:payload.description,
+    question:plainReportText(payload.question).slice(0,2500),
+    options:payload.options.map(option=>plainReportText(option).slice(0,800)),
+    userResponse:plainReportText(payload.userResponse).slice(0,800),
+    correctAnswer:plainReportText(payload.correctAnswer).slice(0,800),
+    reportedAt:payload.reportedAt
+  };
+  try {
+    const reports=getLocalReports();
+    reports.push(report);
+    localStorage.setItem(LOCAL_REPORT_STORAGE_KEY,JSON.stringify(reports));
+    updateLocalReportDrawerCount();
+    return true;
+  } catch (_) { return false; }
+}
 
 function questionReportNumber(){
   if(questionReportRecordOverride && Number.isInteger(questionReportRecordOverride.originalIndex)) return questionReportRecordOverride.originalIndex+1;
@@ -3297,7 +3349,12 @@ async function submitQuestionReport(){
     });
     const result=await response.json().catch(()=>({}));
     if(!response.ok||!result.ok) throw new Error(result.error||'Report failed');
+    const savedOnDevice=saveLocalReport(payload);
     setQuestionReportStep('success');
+    const successText=document.querySelector('#reportSuccessStep .report-success-text');
+    if(successText) successText.textContent=savedOnDevice
+      ? 'Thank you. Your report is saved in My Reports on this device.'
+      : 'Report sent, but this device could not save a local copy.';
     setTimeout(()=>{
       if(document.getElementById('questionReportModal')?.classList.contains('open')) closeQuestionReport();
     },1200);
@@ -3420,11 +3477,54 @@ function toggleAICardBookmark(quizCardData,btn){
   updateAICardBookmarkButton(btn,quizCardData);
 }
 function updateBookmarkDrawerCount(){const e=document.getElementById('drawerBookmarkCount');if(e){const n=getBookmarks().length;e.textContent=n?`${n} Saved Question${n===1?'':'s'}`:'No saved questions'}}
-function openAppSideDrawer(){updateBookmarkDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
+function openAppSideDrawer(){updateBookmarkDrawerCount();updateLocalReportDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
 function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.classList.remove('active');document.getElementById('appSideDrawer')?.classList.remove('active')}
 function openBookmarksFromMenu(){closeAppSideDrawer();renderBookmarkSubjects()}
+function openMyReportsFromMenu(){closeAppSideDrawer();renderMyReports()}
 function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError();const __playBtn=document.getElementById('playBookmarkedTestBtn');if(__playBtn){__playBtn.style.display='none';__playBtn.dataset.subject='';__playBtn.dataset.path='';}}
 function restoreNormalExplorerSearch(){const e=document.querySelector('.search-container');if(e)e.style.display='block'}
+function renderMyReports(){
+  pushExplorerHistory({screen:'myReports'});
+  prepareBookmarkExplorer('My Reports');
+  const list=document.getElementById('explorerList');
+  list.innerHTML='';
+  const reports=getLocalReports().filter(report=>report&&typeof report==='object').reverse();
+  if(!reports.length){
+    const empty=document.createElement('div');
+    empty.className='premium-state-view';
+    empty.innerHTML='<div class="state-illustration">▣</div><div class="state-title">No reports yet</div><div class="state-desc">Questions you report successfully will appear here on this device.</div>';
+    list.appendChild(empty);
+    return;
+  }
+  reports.forEach(report=>{
+    const card=document.createElement('article');
+    card.className='premium-card report-history-card';
+    const title=document.createElement('div');
+    title.className='card-main-title';
+    title.textContent=`Question ${report.questionNumber||'?'} · ${report.testName||'Quiz'}`;
+    card.appendChild(title);
+    const meta=document.createElement('div');
+    meta.className='report-history-meta';
+    const timestamp=new Date(report.reportedAt);
+    const date=Number.isNaN(timestamp.getTime())?'':timestamp.toLocaleString();
+    meta.textContent=['Sent',date,report.subject,report.chapter].filter(Boolean).join(' · ');
+    card.appendChild(meta);
+    const addLine=(label,value)=>{
+      if(!value) return;
+      const line=document.createElement('div');
+      line.className='report-history-detail';
+      const name=document.createElement('strong');
+      name.textContent=label+': ';
+      line.append(name,document.createTextNode(String(value)));
+      card.appendChild(line);
+    };
+    addLine('Issue',report.reason);
+    addLine('Question',report.question);
+    if(Array.isArray(report.options)) report.options.forEach((option,index)=>addLine('Option '+String.fromCharCode(65+index),option));
+    addLine('Your note',report.description);
+    list.appendChild(card);
+  });
+}
 function groupBookmarks(items, keyFn){
   const g=new Map();
   items.forEach(b=>{const k=keyFn(b);if(!g.has(k))g.set(k,[]);g.get(k).push(b)});
@@ -3983,6 +4083,7 @@ window.addEventListener('popstate', (e) => {
 
   try {
     switch (state.screen) {
+      case 'myReports': renderMyReports(); break;
       case 'bookmarks': renderBookmarkSubjects(); break;
       case 'bookmarkLevel2': renderBookmarkLevel2(state.subject); break;
       case 'bookmarkChapters': renderBookmarkChapters(state.subject,state.category); break;
