@@ -1,4 +1,4 @@
-name: Export Railway Type Wise ZIP
+name: Export Full Quiz Hub ZIP
 
 on:
   push:
@@ -16,15 +16,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Stage Railway Maths Type Wise
+      - name: Stage full repository
         run: |
-          mkdir -p export
-          cp -a Railway_Maths_Type_wise export/
+          mkdir -p export/quiz-hub
+          rsync -a --exclude='.git' ./ export/quiz-hub/
 
-      - name: Upload ZIP artifact
+      - name: Upload full repository ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: Railway_Maths_Type_wise_All_29_Chapters
-          path: export/Railway_Maths_Type_wise
+          name: quiz-hub-complete
+          path: export/quiz-hub
           if-no-files-found: error
           retention-days: 1
