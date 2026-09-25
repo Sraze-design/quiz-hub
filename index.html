@@ -446,36 +446,6 @@ body {
   flex: 0 0 auto;
   margin-left: 12px;
 }
-/* A type title gets the entire card width, with the button in its own row. */
-.quiz-test-card.type-name-card {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 12px;
-  row-gap: 8px;
-}
-.quiz-test-card.type-name-card .card-meta-box,
-.quiz-test-card.type-name-card .card-details {
-  display: contents;
-}
-.quiz-test-card.type-name-card .card-icon-wrapper {
-  grid-column: 1;
-  grid-row: 1;
-}
-.quiz-test-card.type-name-card .card-main-title {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  min-width: 0;
-  line-height: 1.25;
-}
-.quiz-test-card.type-name-card .card-subtitle-stats {
-  grid-column: 1 / -1;
-  grid-row: 3;
-}
-.quiz-test-card.type-name-card .premium-btn-action {
-  grid-column: 2;
-  grid-row: 1;
-  margin-left: 0;
-}
 
 /* Premium Animations (Skeletons/Spinners) */
 .premium-loader-screen {
@@ -4324,20 +4294,6 @@ function cleanHumanReadableTitle(rawString) {
   return title.replace(/\b\w/g, c => c.toUpperCase());
 }
 
-function fitTypeQuizTitle(card) {
-  if (!card.classList.contains('type-name-card')) return;
-  const title = card.querySelector('.card-main-title');
-  if (!title) return;
-  for (let size = 15; size >= 8; size--) {
-    title.style.fontSize = size + 'px';
-    const lineHeight = parseFloat(getComputedStyle(title).lineHeight);
-    if (title.getBoundingClientRect().height <= lineHeight * 2 + 1) break;
-  }
-}
-window.addEventListener('resize', () => {
-  document.querySelectorAll('.type-name-card').forEach(fitTypeQuizTitle);
-});
-
 function renderSubjects() {
   resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
@@ -4565,14 +4521,13 @@ function renderQuizList(subjectName, categoryName, chapterName) {
 
   quizzes.forEach((quiz, idx) => {
     const card = document.createElement('div');
-    const displayTitle = cleanHumanReadableTitle(quiz.title || quiz.name);
-    card.className = 'premium-card quiz-test-card' + (/^Type\b/i.test(displayTitle) ? ' type-name-card' : '');
+    card.className = 'premium-card quiz-test-card';
     
     card.innerHTML = `
       <div class="card-meta-box">
         <div class="card-icon-wrapper" style="background-color: var(--warning-light); color: var(--warning);"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6z"/><path d="M14 2v6h5"/><path d="M9 11h5"/><path d="M9 15h4"/></svg></div>
         <div class="card-details">
-          <span class="card-main-title">${displayTitle}</span>
+          <span class="card-main-title">${cleanHumanReadableTitle(quiz.title || quiz.name)}</span>
           <span class="card-subtitle-stats"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:2px;"><path d="M12 3 2 8l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/><path d="M2 16l10 5 10-5"/></svg> Category: Practice</span>
         </div>
       </div>
@@ -4580,7 +4535,6 @@ function renderQuizList(subjectName, categoryName, chapterName) {
     `;
     card.onclick = () => loadQuizData(quiz.path);
     listEl.appendChild(card);
-    fitTypeQuizTitle(card);
   });
 }
 
@@ -4631,14 +4585,13 @@ function handleSearch(query) {
 
   filtered.forEach(quiz => {
     const card = document.createElement('div');
-    const displayTitle = cleanHumanReadableTitle(quiz.title || quiz.name);
-    card.className = 'premium-card quiz-test-card' + (/^Type\b/i.test(displayTitle) ? ' type-name-card' : '');
+    card.className = 'premium-card quiz-test-card';
     const catSubtitle = quiz.category ? ` • 🗂️ ${cleanHumanReadableTitle(quiz.category)}` : '';
     card.innerHTML = `
       <div class="card-meta-box">
         <div class="card-icon-wrapper" style="background-color: var(--primary-light); color: var(--primary);">📝</div>
         <div class="card-details">
-          <span class="card-main-title">${displayTitle}</span>
+          <span class="card-main-title">${cleanHumanReadableTitle(quiz.title || quiz.name)}</span>
           <span class="card-subtitle-stats">📚 ${cleanHumanReadableTitle(quiz.subject)}${catSubtitle} • 📘 ${cleanHumanReadableTitle(quiz.chapter)}</span>
         </div>
       </div>
@@ -4646,7 +4599,6 @@ function handleSearch(query) {
     `;
     card.onclick = () => loadQuizData(quiz.path);
     listEl.appendChild(card);
-    fitTypeQuizTitle(card);
   });
 }
 
