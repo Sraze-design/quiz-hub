@@ -914,6 +914,12 @@ body.pencil-mode{
   align-items:center;
   justify-content:center;
 }
+/* Keep rapid navigation taps from triggering Safari's double-tap zoom. */
+#nextBtn, #analysisNextBtn {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
 .footer-nav-btn.btn-back-quiz{
 background:#0D8BF2;
 color:#fff;
@@ -2000,6 +2006,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   align-self: flex-start;
   background: #f8fafc;
   color: var(--dark);
+  font-size: 18px;
   border: 1px solid #e2e8f0;
   border-bottom-left-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -2056,6 +2063,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   background: #e2e8f0;
   color: var(--dark);
 }
+.ai-rescan-btn { margin-top: 10px; font-size: 14px; padding: 8px 12px; touch-action: manipulation; }
 
 /* Additive: independent answer-check UI. It never replaces the normal
    explanation; it is appended inside the same AI response card. */
@@ -2065,7 +2073,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   background: #f8fafc;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1.5;
 }
 .ai-verify-result.verify-agree { background: #f0fdf4; border-color: #bbf7d0; }
@@ -2143,7 +2151,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   padding: 12px 16px;
   border: 1.5px solid #e2e8f0;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   transition: var(--transition);
 }
@@ -3514,6 +3522,7 @@ async function openBookmarkedQuestion(bookmark){
       if(!Array.isArray(quizQuestions) || !quizQuestions[bookmark.questionIndex]) throw new Error('Saved question not found');
       item = JSON.parse(JSON.stringify(quizQuestions[bookmark.questionIndex]));
     }
+    if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
     data=[item];
     ORIGINAL_DATA=data.slice();
     appLang='hi';
@@ -3604,6 +3613,7 @@ async function startBookmarkedTestQuiz(bookmarks){
     }
     if(!items.length) throw new Error('Saved questions not found');
 
+    if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
     data=items;
     ORIGINAL_DATA=items.slice();
     appLang='hi';
@@ -5269,6 +5279,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     const quizQuestions = parseQuizDataSource(source);
     if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
     
+    if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
     data=quizQuestions;
     ORIGINAL_DATA=quizQuestions.slice();
 
@@ -6811,6 +6822,7 @@ let selectedAIImage = null;
 let selectedAIImageBase64 = "";
 let selectedAIImageMime = "";
 let aiChatHistory = [];
+let aiChatEpoch = 0;
 let isAIGenerating = false;
 let currentAbortController = null;
 let currentAutoScannedQ = -1;
@@ -6926,7 +6938,9 @@ function closeAIPanel() {
 }
 
 function resetAIChat() {
+  aiChatEpoch++;
   aiChatHistory = [];
+  quizCardPendingRequest = false;
   const chatBody = document.getElementById('aiChatBody');
   if (chatBody) chatBody.innerHTML = '';
   if (currentAbortController) {
@@ -6940,6 +6954,33 @@ function resetAIChat() {
   isAIVerifying = false;
   isAIGenerating = false;
   showAITyping(false);
+}
+
+function resetAIForNewTest() {
+  resetAIChat();
+  currentAutoScannedQ = -1;
+  if (typeof window.__aiPencilClearForNewQuestion === 'function') window.__aiPencilClearForNewQuestion();
+}
+
+function addAIRescanButton(container) {
+  if (!container) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'ai-action-btn ai-rescan-btn';
+  btn.textContent = appLang === 'en' ? '🔄 Rescan question' : '🔄 प्रश्न फिर से स्कैन करें';
+  btn.onclick = () => {
+    if (isAIGenerating) return;
+    resetAIChat();
+    currentAutoScannedQ = -1;
+    autoScanAndExplain();
+  };
+  container.appendChild(btn);
+}
+
+function appendAIErrorWithRescan(message) {
+  const chatBody = document.getElementById('aiChatBody');
+  appendAIMessage('bot', message);
+  addAIRescanButton(chatBody?.lastElementChild);
 }
 
 function getCurrentQuestionContext() {
@@ -6984,7 +7025,7 @@ function getCurrentQuestionContext() {
 
 function getAIQuestionIdentity(){
   const analysisRecord=typeof getCurrentAnalysisRecord==='function'?getCurrentAnalysisRecord():null;
-  return analysisRecord?'analysis:'+resultAnalysisFilter+':'+analysisRecord.originalIndex:currentQ;
+  return analysisRecord?'analysis:'+currentQuizPath+':'+resultAnalysisFilter+':'+analysisRecord.originalIndex:'quiz:'+currentQuizPath+':'+currentQ;
 }
 
 // Convert the question's ACTUAL figure/diagram into native image bytes for Gemini.
@@ -7022,9 +7063,11 @@ async function hydrateQuestionImageData(qContext) {
 
 async function autoScanAndExplain() {
   currentAutoScannedQ = getAIQuestionIdentity();
+  const scanEpoch = aiChatEpoch;
   let qContext = getCurrentQuestionContext();
   if (!qContext) return;
   qContext = await hydrateQuestionImageData(qContext);
+  if (scanEpoch !== aiChatEpoch) return;
 
   const langRule = (appLang === 'en')
     ? "1. Output in clear, simple ENGLISH — do not switch to Hindi. Technical terms (Ratio, Percentage, Unitary Method) stay in English as usual."
@@ -7071,7 +7114,7 @@ Task: पहले स्वतंत्र रूप से हल करो, �
   // as a native Gemini image input, when one exists. The text prompt stays
   // separate so Gemini can use both the question text and the actual figure.
   if (qContext.imageSource && !qContext.imageData) {
-    appendAIMessage('bot', appLang === 'en'
+    appendAIErrorWithRescan(appLang === 'en'
       ? '⚠️ The question contains a diagram/image, but it could not be loaded for AI inspection. Please retry.'
       : '⚠️ प्रश्न में चित्र/डायग्राम है, लेकिन AI जाँच के लिए वह लोड नहीं हो पाया। कृपया Retry करें।');
     return;
@@ -7169,12 +7212,14 @@ document.addEventListener("click", (event) => {
 
 async function requestGeminiResponse(isAutoScanRequest = false) {
   if (isAIGenerating) return;
+  const requestEpoch = aiChatEpoch;
   isAIGenerating = true;
   showAITyping(true);
 
   currentAbortController = new AbortController();
   let didTimeout = false;
   const timeoutId = setTimeout(() => {
+    if (requestEpoch !== aiChatEpoch) return;
     didTimeout = true;
     if (currentAbortController) currentAbortController.abort();
   }, 75000); // matches worker's OVERALL_TIMEOUT (75s)
@@ -7185,10 +7230,14 @@ async function requestGeminiResponse(isAutoScanRequest = false) {
     // here because it was trading away accuracy for speed. The worker's
     // adaptThinkingConfigForModel() is a no-op when no generationConfig.thinkingConfig
     // is sent, so leaving that worker code in place is harmless.
+    const selectedModel = document.getElementById("aiModelSelect")?.value || AI_DEFAULT_MODEL;
+    const flashMindRule = selectedModel.startsWith("gemini-") && selectedModel.includes("flash") ? `
+MATHS/REASONING PRIORITY: For a maths or reasoning question, show the shortest correct MIND METHOD first: a small-number ratio/unitary/percentage shortcut, cancellation, complementary values or easy mental arithmetic. Write the actual 1–3 mental steps and then the answer; naming a trick alone is not enough. If the user asks for a trick or mind method, answer with that method directly. Do not default to long variable equations or option elimination. If no valid mental shortcut exists, say so briefly and give the shortest correct calculation; never invent a shortcut or skip necessary reasoning. This rule does not apply to other subjects.
+` : '';
     const payload = {
       subject: currentSubject || "",
       // Normal AI only: the Worker will use these user-selected settings.
-      selectedModel: (document.getElementById("aiModelSelect")?.value || AI_DEFAULT_MODEL),
+      selectedModel,
       selectedThinking: (document.getElementById("aiThinkingSelect")?.value || AI_DEFAULT_THINKING),
       systemInstruction: {
         parts: [{
@@ -7208,6 +7257,7 @@ TEACHING RULES:
 2. Solve independently. Do not treat a stored answer key, reference explanation or user choice as proof.
 3. For IMAGE/DIAGRAM questions, inspect the actual image before answering. Observe visible labels, positions, orientation, sizes, arrows/rays, angles, distances and markings; extract the visual facts; interpret only what the image supports; calculate/apply the relevant concept; compare all options; then cross-check the final answer against the image and wording. Never replace an unclear visual with a remembered textbook pattern. Do not assume missing values. In optics/ray diagrams, identify the device only after matching position, orientation, size/magnification and ray/geometry evidence together.
 4. Maths/Reasoning: use mental-friendly unitary/ratio/percentage shortcuts or approximation first, then option elimination; avoid algebra unless necessary. Give only one solution. End with a short trick/formula when useful.
+${flashMindRule}
 5. GK/Current Affairs/English/Science/History/Polity: direct, factual and exam-focused. Explain the correct answer briefly; for GK, briefly state why the other options are not correct/what they refer to, and end with exactly one closely related exam-useful fact labeled **👉 रोचक तथ्य:**. Do not add a maths-style trick/formula.
 6. Do not repeat the full question and all options at the top unless the user explicitly asks for them. Start directly with the answer/solution.
 
@@ -7258,15 +7308,15 @@ For automatic question explanations, independently solve first, then reconcile w
     if (modelAttempts) console.log('[AI attempts]:', modelAttempts);
 
     const resData = await res.json();
+    if (requestEpoch !== aiChatEpoch) return;
     showAITyping(false);
     let replyText = "";
     if (resData && resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts) {
       replyText = resData.candidates[0].content.parts.map(p => p.text).join('');
     } else if (resData && resData.text) {
       replyText = resData.text;
-    } else {
-      replyText = "Sorry, there was a problem retrieving the answer. Please try again.";
     }
+    if (!replyText.trim()) throw new Error('The AI returned an empty answer. Please try again.');
 
     aiChatHistory.push({
       role: "model",
@@ -7296,21 +7346,24 @@ For automatic question explanations, independently solve first, then reconcile w
     }
 
   } catch (err) {
+    if (requestEpoch !== aiChatEpoch) return;
     showAITyping(false);
     if (err.name === 'AbortError') {
       if (didTimeout) {
-        appendAIMessage("bot", "⏱️ **Timeout:** Server ne samay par jawaab nahi diya. Kripya dobara try karein.");
+        appendAIErrorWithRescan("⏱️ **Timeout:** Server ne samay par jawaab nahi diya. Kripya dobara try karein.");
       }
       return;
     }
     console.error(err);
     const errorDetail = (err && err.message) ? err.message : "Unknown error occurred.";
-    appendAIMessage("bot", "⚠️ **Error:** " + errorDetail);
+    appendAIErrorWithRescan("⚠️ **Error:** " + errorDetail);
   } finally {
     clearTimeout(timeoutId);
-    isAIGenerating = false;
-    currentAbortController = null;
-    quizCardPendingRequest = false;
+    if (requestEpoch === aiChatEpoch) {
+      isAIGenerating = false;
+      currentAbortController = null;
+      quizCardPendingRequest = false;
+    }
   }
 }
 
@@ -7492,6 +7545,7 @@ async function verifyCurrentAnswer(btn, messageContainer) {
       errorBox.className = 'ai-verify-result verify-uncertain';
       errorBox.setAttribute('data-ai-verification', 'true');
       errorBox.textContent = '⚠️ Independent check failed: ' + (err.message || 'Please try again.');
+      addAIRescanButton(errorBox);
       messageContainer.appendChild(errorBox);
     }
     setVerifyButtonState(btn, '🔍 Verify Answer', false);
