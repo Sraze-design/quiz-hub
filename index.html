@@ -911,6 +911,32 @@ body.pencil-mode{
   outline:none;
   box-shadow:none;
 }
+.multi-part-option-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin:4px 0 18px;
+}
+.multi-part-option-label{
+  font-size:15px;
+  font-weight:800;
+  color:var(--dark);
+  margin:2px 2px 0;
+}
+.analysis-multi-part-group{
+  margin:4px 0 16px;
+}
+.analysis-multi-part-label{
+  font-size:14px;
+  font-weight:800;
+  color:var(--dark);
+  margin:0 0 8px;
+}
+.analysis-multi-part-summary{
+  margin-top:8px;
+  font-size:13px;
+  line-height:1.45;
+}
 
 .explanation-box-premium {
   background: var(--primary-light);
@@ -3415,11 +3441,34 @@ async function submitQuestionReport(){
   }
   const item=questionReportRecordOverride?.item || data[currentQ];
   if(!item) return;
-  const options=Array.isArray(T(item,'o'))?T(item,'o'):[];
+  const multi=isMultiPartQuestion(item);
   const selectedIndex=questionReportRecordOverride ? questionReportRecordOverride.selected : selectedAnswers[currentQ];
-  const selectedText=Number.isInteger(selectedIndex)&&options[selectedIndex]!==undefined?options[selectedIndex]:'Not Answered';
-  const correctIndex=Number(item.a);
-  const correctText=Number.isInteger(correctIndex)&&options[correctIndex]!==undefined?options[correctIndex]:'Not available';
+  let options=Array.isArray(T(item,'o'))?T(item,'o'):[];
+  let selectedText='Not Answered';
+  let correctIndex=Number(item.a);
+  let correctText='Not available';
+  if(multi){
+    const selectedParts=Array.isArray(selectedIndex)?selectedIndex:[];
+    const flatOptions=[];
+    const selectedPartsText=[];
+    const correctPartsText=[];
+    item.subparts.forEach((part,partIndex)=>{
+      const label=part.label||('('+(partIndex+1)+')');
+      const partOptions=Array.isArray(T(part,'o'))?T(part,'o'):[];
+      partOptions.forEach(option=>flatOptions.push(label+' '+option));
+      const s=selectedParts[partIndex];
+      const a=Number(part.a);
+      selectedPartsText.push(label+' '+(Number.isInteger(s)&&partOptions[s]!==undefined?partOptions[s]:'Not Answered'));
+      correctPartsText.push(label+' '+(Number.isInteger(a)&&partOptions[a]!==undefined?partOptions[a]:'Not available'));
+    });
+    options=flatOptions;
+    selectedText=selectedPartsText.join(' | ');
+    correctText=correctPartsText.join(' | ');
+    correctIndex=null;
+  }else{
+    selectedText=Number.isInteger(selectedIndex)&&options[selectedIndex]!==undefined?options[selectedIndex]:'Not Answered';
+    correctText=Number.isInteger(correctIndex)&&options[correctIndex]!==undefined?options[correctIndex]:'Not available';
+  }
   const payload={
     subject:currentSubject||'Unknown',
     category:currentCategory||'',
@@ -5922,11 +5971,13 @@ function resultAnalysisStorageKey(){
 function captureResultAnalysis(){
   const items=data.map((item,index)=>{
     const selected=selectedAnswers[index];
-    const attempted=answered[index]===true && selected!==null && selected!==undefined;
+    const multi=isMultiPartQuestion(item);
+    const attempted=answered[index]===true && (multi?multiPartSelectionComplete(item,selected):(selected!==null&&selected!==undefined));
     const status=!attempted?'skipped':(answerCorrect[index]===true?'correct':'wrong');
     const originalIndex=Array.isArray(retestIndexMap)&&Number.isInteger(retestIndexMap[index])?retestIndexMap[index]:index;
     const time=Math.max(0,Number(questionTimes[index])||0);
-    return {item,selected,correct:Number(item.a),status,originalIndex,time};
+    const correct=multi?item.subparts.map(part=>Number(part.a)):Number(item.a);
+    return {item,selected,correct,status,originalIndex,time};
   });
   resultAnalysisSnapshot={
     test:currentQuizTitle||document.title||'Quiz',
@@ -6223,28 +6274,66 @@ function renderResultAnalysis(){
     card.appendChild(examTag);
   }
 
-  const options=Array.isArray(T(record.item,'o'))?T(record.item,'o'):[];
-  const optionBox=document.createElement('div');
-  optionBox.className='analysis-options';
-  options.forEach((option,index)=>{
-    const row=document.createElement('div');
-    const isCorrect=index===record.correct;
-    const isSelected=index===record.selected;
-    row.className='analysis-option'+(isCorrect?' correct-answer':'')+(isSelected&&!isCorrect?' user-wrong':'');
-    let flags='';
-    if(isCorrect) flags+='<span class="correct-flag">CORRECT</span>';
-    if(isSelected) flags+=(flags?' · ':'')+'<span class="your-flag">YOUR RESPONSE</span>';
-    row.innerHTML=(flags?'<span class="analysis-option-flags">'+flags+'</span>':'')+formatContent(option);
-    optionBox.appendChild(row);
-  });
-  card.appendChild(optionBox);
+  if(isMultiPartQuestion(record.item)){
+    const selectedParts=Array.isArray(record.selected)?record.selected:[];
+    record.item.subparts.forEach((part,partIndex)=>{
+      const group=document.createElement('div');
+      group.className='analysis-multi-part-group';
+      const label=document.createElement('div');
+      label.className='analysis-multi-part-label';
+      label.textContent=part.label||('('+(partIndex+1)+')');
+      group.appendChild(label);
 
-  const chosen=(record.selected!==null&&record.selected!==undefined&&options[record.selected]!==undefined)?formatContent(options[record.selected]):'Not Answered';
-  const right=options[record.correct]!==undefined?formatContent(options[record.correct]):'—';
-  const summary=document.createElement('div');
-  summary.className='analysis-answer-summary';
-  summary.innerHTML='<div><b>Your Response:</b> '+chosen+'</div><div><b>Correct Answer:</b> '+right+'</div>';
-  card.appendChild(summary);
+      const partOptions=Array.isArray(T(part,'o'))?T(part,'o'):[];
+      const selectedPart=selectedParts[partIndex];
+      const correctPart=Number(part.a);
+      const partBox=document.createElement('div');
+      partBox.className='analysis-options';
+      partOptions.forEach((option,index)=>{
+        const row=document.createElement('div');
+        const isCorrect=index===correctPart;
+        const isSelected=index===selectedPart;
+        row.className='analysis-option'+(isCorrect?' correct-answer':'')+(isSelected&&!isCorrect?' user-wrong':'');
+        let flags='';
+        if(isCorrect) flags+='<span class="correct-flag">CORRECT</span>';
+        if(isSelected) flags+=(flags?' · ':'')+'<span class="your-flag">YOUR RESPONSE</span>';
+        row.innerHTML=(flags?'<span class="analysis-option-flags">'+flags+'</span>':'')+formatContent(option);
+        partBox.appendChild(row);
+      });
+      group.appendChild(partBox);
+
+      const chosenPart=(Number.isInteger(selectedPart)&&partOptions[selectedPart]!==undefined)?formatContent(partOptions[selectedPart]):'Not Answered';
+      const rightPart=partOptions[correctPart]!==undefined?formatContent(partOptions[correctPart]):'—';
+      const partSummary=document.createElement('div');
+      partSummary.className='analysis-answer-summary analysis-multi-part-summary';
+      partSummary.innerHTML='<div><b>Your Response:</b> '+chosenPart+'</div><div><b>Correct Answer:</b> '+rightPart+'</div>';
+      group.appendChild(partSummary);
+      card.appendChild(group);
+    });
+  }else{
+    const options=Array.isArray(T(record.item,'o'))?T(record.item,'o'):[];
+    const optionBox=document.createElement('div');
+    optionBox.className='analysis-options';
+    options.forEach((option,index)=>{
+      const row=document.createElement('div');
+      const isCorrect=index===record.correct;
+      const isSelected=index===record.selected;
+      row.className='analysis-option'+(isCorrect?' correct-answer':'')+(isSelected&&!isCorrect?' user-wrong':'');
+      let flags='';
+      if(isCorrect) flags+='<span class="correct-flag">CORRECT</span>';
+      if(isSelected) flags+=(flags?' · ':'')+'<span class="your-flag">YOUR RESPONSE</span>';
+      row.innerHTML=(flags?'<span class="analysis-option-flags">'+flags+'</span>':'')+formatContent(option);
+      optionBox.appendChild(row);
+    });
+    card.appendChild(optionBox);
+
+    const chosen=(record.selected!==null&&record.selected!==undefined&&options[record.selected]!==undefined)?formatContent(options[record.selected]):'Not Answered';
+    const right=options[record.correct]!==undefined?formatContent(options[record.correct]):'—';
+    const summary=document.createElement('div');
+    summary.className='analysis-answer-summary';
+    summary.innerHTML='<div><b>Your Response:</b> '+chosen+'</div><div><b>Correct Answer:</b> '+right+'</div>';
+    card.appendChild(summary);
+  }
 
   const explanation=T(record.item,'e');
   if(explanation){
@@ -6279,6 +6368,46 @@ function renderQuestionContent(container, item) {
   container.appendChild(figure);
 }
 
+function isMultiPartQuestion(item){
+  return !!(item&&item.multi===true&&Array.isArray(item.subparts)&&item.subparts.length);
+}
+function multiPartSelectionComplete(item,selection){
+  return isMultiPartQuestion(item)&&Array.isArray(selection)&&selection.length===item.subparts.length&&selection.every(Number.isInteger);
+}
+function multiPartSelectionCorrect(item,selection){
+  return multiPartSelectionComplete(item,selection)&&item.subparts.every((part,index)=>selection[index]===Number(part.a));
+}
+function applyCompletedAnswerStreak(isCorrect){
+  if(isCorrect){
+    currentStreak++;
+    if(currentStreak>maxStreak) maxStreak=currentStreak;
+    let msg="";
+    if(currentStreak===3) msg="🔥 3 Correct Streak!";
+    else if(currentStreak===5) msg="🚀 5 Correct Streak!";
+    else if(currentStreak===10) msg="💎 10 Correct Streak!";
+    else if(currentStreak===15) msg="👑 15 Correct Streak!";
+    else if(currentStreak===20) msg="🏆 20 Correct Streak!";
+    else if(currentStreak===30) msg="⚡ 30 Correct Streak!";
+    else if(currentStreak===50) msg="🌟 50 Correct Streak!";
+    else if(currentStreak===100) msg="💯 100 Correct Streak!";
+    if(msg){
+      celebrate(
+        msg,
+        currentStreak===3?'Keep Going!':
+        currentStreak===5?'Awesome!':
+        currentStreak===10?'Excellent!':
+        currentStreak===15?'Outstanding!':
+        currentStreak===20?'Champion!':
+        currentStreak===30?'Master!':
+        currentStreak===50?'Super Legend!':
+        'GOAT!'
+      );
+    }
+  }else{
+    currentStreak=0;
+  }
+}
+
 function showQ() {
 if(data.length === 0) return;
 
@@ -6310,73 +6439,135 @@ let oBox = document.getElementById('options');
 oBox.innerHTML = "";
 document.getElementById('feedback').style.display = "none";
 const prevSel=selectedAnswers[currentQ];
-T(item, 'o').forEach((opt, idx) => {
-let btn = document.createElement("button");
-btn.innerHTML = formatContent(opt);
-btn.onclick = () => {
-if(isPaused) return;
-let btns = oBox.getElementsByTagName("button");
-for(let b of btns) b.disabled = true;
-if(idx === item.a) {
-btn.style.borderColor = "var(--success)";
-btn.style.background = "var(--success-light)";
-if(!answered[currentQ]) score += 1;
-} else {
-btn.style.borderColor = "var(--danger)";
-btn.style.background = "var(--danger-light)";
-btns[item.a].style.borderColor = "var(--success)";
-btns[item.a].style.background = "var(--success-light)";
-if(!answered[currentQ]) score -= (1/3);
-}
-if(idx === item.a){
-currentStreak++;
-if(currentStreak>maxStreak) maxStreak=currentStreak;
-let msg="";
-if(currentStreak===3) msg="🔥 3 Correct Streak!";
-else if(currentStreak===5) msg="🚀 5 Correct Streak!";
-else if(currentStreak===10) msg="💎 10 Correct Streak!";
-else if(currentStreak===15) msg="👑 15 Correct Streak!";
-else if(currentStreak===20) msg="🏆 20 Correct Streak!";
-else if(currentStreak===30) msg="⚡ 30 Correct Streak!";
-else if(currentStreak===50) msg="🌟 50 Correct Streak!";
-else if(currentStreak===100) msg="💯 100 Correct Streak!";
-if(msg){
-celebrate(
-msg,
-currentStreak===3?'Keep Going!':
-currentStreak===5?'Awesome!':
-currentStreak===10?'Excellent!':
-currentStreak===15?'Outstanding!':
-currentStreak===20?'Champion!':
-currentStreak===30?'Master!':
-currentStreak===50?'Super Legend!':
-'GOAT!'
-);
-}
+
+if(isMultiPartQuestion(item)){
+  const selections=Array.isArray(prevSel)?prevSel.slice():new Array(item.subparts.length).fill(null);
+  while(selections.length<item.subparts.length) selections.push(null);
+
+  item.subparts.forEach((part,partIndex)=>{
+    const group=document.createElement('div');
+    group.className='multi-part-option-group';
+    const label=document.createElement('div');
+    label.className='multi-part-option-label';
+    label.textContent=part.label||('('+(partIndex+1)+')');
+    group.appendChild(label);
+
+    const partOptions=Array.isArray(T(part,'o'))?T(part,'o'):[];
+    const buttons=[];
+    partOptions.forEach((opt,idx)=>{
+      const btn=document.createElement('button');
+      btn.innerHTML=formatContent(opt);
+      buttons.push(btn);
+      btn.onclick=()=>{
+        if(isPaused||Number.isInteger(selections[partIndex])) return;
+
+        buttons.forEach(b=>b.disabled=true);
+        const correctIndex=Number(part.a);
+        if(idx===correctIndex){
+          btn.style.borderColor="var(--success)";
+          btn.style.background="var(--success-light)";
+        }else{
+          btn.style.borderColor="var(--danger)";
+          btn.style.background="var(--danger-light)";
+          if(buttons[correctIndex]){
+            buttons[correctIndex].style.borderColor="var(--success)";
+            buttons[correctIndex].style.background="var(--success-light)";
+          }
+        }
+
+        selections[partIndex]=idx;
+        selectedAnswers[currentQ]=selections.slice();
+
+        if(multiPartSelectionComplete(item,selections)){
+          const allCorrect=multiPartSelectionCorrect(item,selections);
+          if(!answered[currentQ]) score+=allCorrect?1:-(1/3);
+          answerCorrect[currentQ]=allCorrect;
+          answered[currentQ]=true;
+          applyCompletedAnswerStreak(allCorrect);
+          if(typeof updateQBadge==='function') updateQBadge();
+          timerRunning=false;
+          const feedback=document.getElementById("feedback");
+          const explanation=T(item,'e');
+          if(explanation){
+            feedback.innerHTML=explanationLabel+formatContent(explanation);
+            feedback.style.display="block";
+          }
+        }
+      };
+      group.appendChild(btn);
+    });
+
+    const saved=selections[partIndex];
+    if(Number.isInteger(saved)){
+      buttons.forEach(b=>b.disabled=true);
+      const correctIndex=Number(part.a);
+      if(buttons[correctIndex]){
+        buttons[correctIndex].style.borderColor="var(--success)";
+        buttons[correctIndex].style.background="var(--success-light)";
+      }
+      if(saved!==correctIndex&&buttons[saved]){
+        buttons[saved].style.borderColor="var(--danger)";
+        buttons[saved].style.background="var(--danger-light)";
+      }
+    }
+    oBox.appendChild(group);
+  });
+
+  if(multiPartSelectionComplete(item,selections)){
+    const feedback=document.getElementById("feedback");
+    const explanation=T(item,'e');
+    if(explanation){
+      feedback.innerHTML=explanationLabel+formatContent(explanation);
+      feedback.style.display="block";
+    }
+  }
 }else{
-currentStreak=0;
-}
-selectedAnswers[currentQ]=idx;
-answerCorrect[currentQ]=(idx===item.a);
-answered[currentQ] = true;
-if(typeof updateQBadge==='function') updateQBadge();
-timerRunning=false;
-document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
-document.getElementById('feedback').style.display = "block";
-};
-oBox.appendChild(btn);
-});
-if(prevSel!==null && prevSel!==undefined){
- const btns=oBox.getElementsByTagName("button");
- for(let b of btns) b.disabled=true;
- btns[item.a].style.borderColor="var(--success)";
- btns[item.a].style.background="var(--success-light)";
- if(prevSel!==item.a){
-   btns[prevSel].style.borderColor="var(--danger)";
-   btns[prevSel].style.background="var(--danger-light)";
- }
- document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
- document.getElementById('feedback').style.display="block";
+  const options=Array.isArray(T(item,'o'))?T(item,'o'):[];
+  options.forEach((opt, idx) => {
+    let btn = document.createElement("button");
+    btn.innerHTML = formatContent(opt);
+    btn.onclick = () => {
+      if(isPaused) return;
+      let btns = oBox.getElementsByTagName("button");
+      for(let b of btns) b.disabled = true;
+      if(idx === item.a) {
+        btn.style.borderColor = "var(--success)";
+        btn.style.background = "var(--success-light)";
+        if(!answered[currentQ]) score += 1;
+      } else {
+        btn.style.borderColor = "var(--danger)";
+        btn.style.background = "var(--danger-light)";
+        if(btns[item.a]){
+          btns[item.a].style.borderColor = "var(--success)";
+          btns[item.a].style.background = "var(--success-light)";
+        }
+        if(!answered[currentQ]) score -= (1/3);
+      }
+      applyCompletedAnswerStreak(idx===item.a);
+      selectedAnswers[currentQ]=idx;
+      answerCorrect[currentQ]=(idx===item.a);
+      answered[currentQ] = true;
+      if(typeof updateQBadge==='function') updateQBadge();
+      timerRunning=false;
+      document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
+      document.getElementById('feedback').style.display = "block";
+    };
+    oBox.appendChild(btn);
+  });
+  if(prevSel!==null && prevSel!==undefined){
+    const btns=oBox.getElementsByTagName("button");
+    for(let b of btns) b.disabled=true;
+    if(btns[item.a]){
+      btns[item.a].style.borderColor="var(--success)";
+      btns[item.a].style.background="var(--success-light)";
+    }
+    if(prevSel!==item.a&&btns[prevSel]){
+      btns[prevSel].style.borderColor="var(--danger)";
+      btns[prevSel].style.background="var(--danger-light)";
+    }
+    document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
+    document.getElementById('feedback').style.display="block";
+  }
 }
 
 if(typeof onQuestionChangeAI === 'function' && !suppressAIRefreshDuringLanguageSwitch){
@@ -7360,17 +7551,37 @@ function getCurrentQuestionContext() {
   const analysisRecord=typeof getCurrentAnalysisRecord==='function'?getCurrentAnalysisRecord():null;
   if (!analysisRecord && (!data || !data[currentQ])) return null;
   const item = analysisRecord?analysisRecord.item:data[currentQ];
-  const opts = T(item, 'o') || [];
+  const multi=isMultiPartQuestion(item);
+  let opts = T(item, 'o') || [];
 
   let selectedOptText = "Not Selected Yet";
   const selectedIndex=analysisRecord?analysisRecord.selected:selectedAnswers[currentQ];
-  if (selectedIndex !== null && selectedIndex !== undefined) {
-    selectedOptText = opts[selectedIndex] || "Selected Option Index: " + selectedIndex;
-  }
 
   let correctOptText = "Unknown";
-  if (item.a !== undefined && opts && opts[item.a]) {
-    correctOptText = opts[item.a];
+  if(multi){
+    const selectedParts=Array.isArray(selectedIndex)?selectedIndex:[];
+    const flattened=[];
+    const selectedLines=[];
+    const correctLines=[];
+    item.subparts.forEach((part,partIndex)=>{
+      const label=part.label||('('+(partIndex+1)+')');
+      const partOptions=Array.isArray(T(part,'o'))?T(part,'o'):[];
+      flattened.push(label+' '+partOptions.join(' | '));
+      const s=selectedParts[partIndex];
+      const a=Number(part.a);
+      selectedLines.push(label+' '+(Number.isInteger(s)&&partOptions[s]!==undefined?partOptions[s]:'Not Selected Yet'));
+      correctLines.push(label+' '+(Number.isInteger(a)&&partOptions[a]!==undefined?partOptions[a]:'Unknown'));
+    });
+    opts=flattened;
+    selectedOptText=selectedLines.join(' ; ');
+    correctOptText=correctLines.join(' ; ');
+  }else{
+    if (selectedIndex !== null && selectedIndex !== undefined) {
+      selectedOptText = opts[selectedIndex] || "Selected Option Index: " + selectedIndex;
+    }
+    if (item.a !== undefined && opts && opts[item.a]) {
+      correctOptText = opts[item.a];
+    }
   }
 
   const qHtml = T(item, 'q') || '';
