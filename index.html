@@ -839,6 +839,18 @@ body.pencil-mode{
   line-height: 1.6;
   color: var(--dark);
 }
+.question-direction-style {
+  display: none;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  background: #f8fafc;
+  border-left: 3px solid #94a3b8;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 0 0 8px;
+}
 .exam-tag-badge {
   display: block;
   width: max-content;
@@ -2806,6 +2818,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
 
           <!-- Question Number • Exam Tag • Badge / Question -->
           <div class="premium-question-card">
+            <div id="question-direction" class="question-direction-style" translate="yes"></div>
             <div id="q-text" class="question-text-style" translate="yes"></div>
             <div id="exam-tag" class="exam-tag-badge" translate="no"></div>
           </div>
@@ -6260,6 +6273,16 @@ function renderResultAnalysis(){
     card.appendChild(meta);
   }
 
+  const analysisDirectionText=T(record.item,'direction');
+  const analysisDirection=typeof analysisDirectionText==='string' ? analysisDirectionText.trim() : '';
+  if(analysisDirection){
+    const direction=document.createElement('div');
+    direction.className='question-direction-style';
+    direction.style.display='block';
+    direction.innerHTML='<b>Direction :-</b> '+formatContent(analysisDirection);
+    card.appendChild(direction);
+  }
+
   const question=document.createElement('div');
   question.className='analysis-question';
   renderQuestionContent(question,record.item);
@@ -6431,6 +6454,18 @@ if(typeLabel){
 }
 updateBookmarkButton();
 const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>व्याख्या:</b> ";
+const directionBox=document.getElementById('question-direction');
+const directionText=T(item,'direction');
+if(directionBox){
+  const direction=typeof directionText==='string' ? directionText.trim() : '';
+  if(direction){
+    directionBox.innerHTML='<b>Direction :-</b> '+formatContent(direction);
+    directionBox.style.display='block';
+  }else{
+    directionBox.innerHTML='';
+    directionBox.style.display='none';
+  }
+}
 renderQuestionContent(document.getElementById('q-text'), item);
 const tagBox=document.getElementById('exam-tag');
 const tagText = T(item, 'tag');
