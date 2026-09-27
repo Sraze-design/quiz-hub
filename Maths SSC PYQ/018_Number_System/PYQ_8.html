@@ -1,0 +1,884 @@
+const data = [
+  {
+    "q_hi": "Q351. दो अंकों की एक संख्या के अंकों का योग 9 है। इसके अंकों को आपस में बदलने पर प्राप्त संख्या दी गई संख्या से 45 अधिक है, तो मूल संख्या ज्ञात कीजिए।",
+    "q_en": "Q351. The digits of a two-digit number sum to 9. Reversing them gives a number 45 greater than the original. Find the original number.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 18",
+      "(b) 27",
+      "(c) 36",
+      "(d) 54"
+    ],
+    "o_en": [
+      "(a) 18",
+      "(b) 27",
+      "(c) 36",
+      "(d) 54"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q352. दो-अंकों की एक संख्या और उसके अंकों को आपस में बदलने पर प्राप्त संख्या का योग 77 है। यदि अंकों का अंतर 1 है, तो संख्या ज्ञात कीजिए।",
+    "q_en": "Q352. The sum of a two-digit number and the number obtained by reversing its digits is 77. If the digits differ by 1, find the number.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 67",
+      "(b) 45",
+      "(c) 43",
+      "(d) 12"
+    ],
+    "o_en": [
+      "(a) 67",
+      "(b) 45",
+      "(c) 43",
+      "(d) 12"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q353. यदि दो अंकों वाली एक संख्या के अंकों को व्युत्क्रमित कर दिया जाए, तो संख्या 36 कम हो जाती है। संख्या के संदर्भ में निम्नलिखित में से कौन-सा कथन सही है?<br>I. अंकों का अंतर 4 है।<br>II. संख्या 84 हो सकती है।<br>III. संख्या सदैव एक भाज्य संख्या है।",
+    "q_en": "Q353. Reversing the digits of a two-digit number decreases it by 36. Which statements are correct?<br>I. The digits differ by 4.<br>II. The number can be 84.<br>III. The number is always composite.",
+    "tag": "SSC CGL TIER-II (08/08/2022)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) I और II",
+      "(b) I और III",
+      "(c) II और III",
+      "(d) I, II और III"
+    ],
+    "o_en": [
+      "(a) I and II",
+      "(b) I and III",
+      "(c) II and III",
+      "(d) I, II and III"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q354. कोई संख्या जिसके पांचवें भाग में 5 की वृद्धि की जाती है, तो वह उसके तीसरे भाग में 7 की कमी के बराबर हो जाती है। संख्या का आधा भाग ज्ञात कीजिए।",
+    "q_en": "Q354. Adding 5 to one-fifth of a number gives the same result as subtracting 7 from one-third of it. Find half the number.",
+    "tag": "SSC CGL 26/09/2024 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 45",
+      "(b) 150",
+      "(c) 80",
+      "(d) 60"
+    ],
+    "o_en": [
+      "(a) 45",
+      "(b) 150",
+      "(c) 80",
+      "(d) 60"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q355. दो व्यक्तियों, A और B ने एक खेत किराए पर लिया है। A, 21 घोड़ों को 6 महीने के लिए और 15 गायों को 2 महीने के लिए मैदान में रखता है। B, 6 महीने के लिए 15 गायों और 7.5 महीने के लिए 40 भेड़ें जोड़ता है। यदि 3 घोड़े, 5 गायों के बराबर भोजन खाते हैं, और 6 गायें, 10 भेड़ों के बराबर भोजन खाती हैं, तो किराए का कितना भाग A को देना चाहिए?",
+    "q_en": "Q355. A and B rent a field. A keeps 21 horses for six months and 15 cows for two months. B keeps 15 cows for six months and 40 sheep for 7.5 months. If three horses eat as much as five cows and six cows eat as much as ten sheep, what share of the rent should A pay?",
+    "tag": "SSC CGL 12/09/2025 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 8/17",
+      "(b) 19/17",
+      "(c) 16/17",
+      "(d) 20/17"
+    ],
+    "o_en": [
+      "(a) 8/17",
+      "(b) 19/17",
+      "(c) 16/17",
+      "(d) 20/17"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q356. दो व्यक्ति, A और B एक चारागाह किराए पर लेते हैं। A, 3 महीने की अवधि के लिए 16 गायों और 4 महीने के लिए 20 भेड़ों का उपयोग करता है और B, 6 महीने के लिए 30 भेड़ों का उपयोग करता है। यदि 4 गायें 8 भेड़ों के बराबर हैं, तो किराए का, A का हिस्सा निर्धारित करें।",
+    "q_en": "Q356. A and B rent a pasture. A uses it for 16 cows for three months and 20 sheep for four months; B uses it for 30 sheep for six months. If four cows are equivalent to eight sheep, find A's share of the rent.",
+    "tag": "SSC CGL 12/09/2025 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 44/89",
+      "(b) 54/89",
+      "(c) 64/89",
+      "(d) 74/89"
+    ],
+    "o_en": [
+      "(a) 44/89",
+      "(b) 54/89",
+      "(c) 64/89",
+      "(d) 74/89"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q357. पाँच क्रमागत सम संख्याओं का योग 2720 है। तीसरी और पाँचवीं संख्याओं का योग ज्ञात कीजिए।",
+    "q_en": "Q357. The sum of five consecutive even numbers is 2720. Find the sum of the third and fifth numbers.",
+    "tag": "SSC CHSL 02/07/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1192",
+      "(b) 1292",
+      "(c) 1092",
+      "(d) 1392"
+    ],
+    "o_en": [
+      "(a) 1192",
+      "(b) 1292",
+      "(c) 1092",
+      "(d) 1392"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q358. यदि तीन क्रमबद्ध भाज्य संख्याओं का योग 36 है, तो तीनों संख्याओं का गुणनफल क्या है?",
+    "q_en": "Q358. If the sum of three consecutive composite numbers is 36, what is their product?",
+    "tag": "SSC CHSL 14/03/2023 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1460",
+      "(b) 1750",
+      "(c) 1680",
+      "(d) 1820"
+    ],
+    "o_en": [
+      "(a) 1460",
+      "(b) 1750",
+      "(c) 1680",
+      "(d) 1820"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q359. यदि दो संख्याओं का योग 25 है और उनका गुणनफल 144 है, तो दोनों संख्याओं में कितना अंतर है?",
+    "q_en": "Q359. The sum of two numbers is 25 and their product is 144. What is their difference?",
+    "tag": "SSC CHSL 25/05/2022 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 8",
+      "(b) 7",
+      "(c) 16",
+      "(d) 9"
+    ],
+    "o_en": [
+      "(a) 8",
+      "(b) 7",
+      "(c) 16",
+      "(d) 9"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q360. दो अंकों की सभी सम संख्याओं का योग कितना होता है?",
+    "q_en": "Q360. What is the sum of all two-digit even numbers?",
+    "tag": "SSC CHSL 15/03/2023 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 2520",
+      "(b) 2470",
+      "(c) 2430",
+      "(d) 2410"
+    ],
+    "o_en": [
+      "(a) 2520",
+      "(b) 2470",
+      "(c) 2430",
+      "(d) 2410"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q361. सभी दो अंकीय विषम संख्याओं का योग क्या है?",
+    "q_en": "Q361. What is the sum of all two-digit odd numbers?",
+    "tag": "SSC CHSL 17/03/2023 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 2375",
+      "(b) 2475",
+      "(c) 2325",
+      "(d) 2425"
+    ],
+    "o_en": [
+      "(a) 2375",
+      "(b) 2475",
+      "(c) 2325",
+      "(d) 2425"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q362. 428 पृष्ठों वाली एक पुस्तक को क्रमांकित करने के लिए आवश्यक अंकों की संख्या कितनी है?",
+    "q_en": "Q362. How many digits are required to number the pages of a 428-page book?",
+    "tag": "SSC CHSL 02/07/2024 (Shift-04)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1176",
+      "(b) 1500",
+      "(c) 2000",
+      "(d) 988"
+    ],
+    "o_en": [
+      "(a) 1176",
+      "(b) 1500",
+      "(c) 2000",
+      "(d) 988"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q363. 25 को दो भागों में इस प्रकार विभाजित कीजिए कि छोटे भाग के 4 गुने में बड़े भाग का 6 गुना जोड़ा जाए, तो यह 130 के बराबर होता है। बड़ा भाग ज्ञात कीजिए।",
+    "q_en": "Q363. Divide 25 into two parts such that four times the smaller part plus six times the larger part equals 130. Find the larger part.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 13",
+      "(b) 15",
+      "(c) 14",
+      "(d) 20"
+    ],
+    "o_en": [
+      "(a) 13",
+      "(b) 15",
+      "(c) 14",
+      "(d) 20"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q364. दो संख्याओं का योग 76 है। बड़ी संख्या का तीन गुना, छोटी संख्या के चार गुने से 46 अधिक है। दोनों संख्याएँ ज्ञात कीजिए।",
+    "q_en": "Q364. The sum of two numbers is 76. Three times the larger is 46 more than four times the smaller. Find the numbers.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 50 और 26",
+      "(b) 35 और 41",
+      "(c) 44 और 32",
+      "(d) 40 और 36"
+    ],
+    "o_en": [
+      "(a) 50 and 26",
+      "(b) 35 and 41",
+      "(c) 44 and 32",
+      "(d) 40 and 36"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q365. यदि दो संख्याओं x और y का योग 12 है और उनका गुणनफल 27 है, तो उनके घनों का योग ज्ञात करें।",
+    "q_en": "Q365. If two numbers x and y have sum 12 and product 27, find the sum of their cubes.",
+    "tag": "SSC CPO 27/06/2024 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 657",
+      "(b) 576",
+      "(c) 765",
+      "(d) 756"
+    ],
+    "o_en": [
+      "(a) 657",
+      "(b) 576",
+      "(c) 765",
+      "(d) 756"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q366. दो संख्याओं का योग 28 है और उनके वर्गों का योग 528 है। दोनों संख्याओं के गुणनफल का वर्गमूल ज्ञात करें।",
+    "q_en": "Q366. The sum of two numbers is 28 and the sum of their squares is 528. Find the square root of their product.",
+    "tag": "SSC CPO 28/06/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 8√2",
+      "(b) 2√2",
+      "(c) 4√2",
+      "(d) 6√2"
+    ],
+    "o_en": [
+      "(a) 8√2",
+      "(b) 2√2",
+      "(c) 4√2",
+      "(d) 6√2"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q367. 15 सेमी व्यास वाला एक गियर 21 सेमी व्यास वाले गियर को घुमा रहा है। जब छोटे गियर ने 105 चक्कर लगाए हैं, तो बड़े गियर ने कितने चक्कर लगाए हैं?",
+    "q_en": "Q367. A gear of diameter 15 cm drives a gear of diameter 21 cm. How many revolutions does the larger gear make when the smaller gear makes 105 revolutions?",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 75",
+      "(b) 100",
+      "(c) 85",
+      "(d) 90"
+    ],
+    "o_en": [
+      "(a) 75",
+      "(b) 100",
+      "(c) 85",
+      "(d) 90"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q368. एक कक्षा के 18 विद्यार्थियों ने एक प्रश्नोत्तरी में भाग लिया। यदि लड़कियों की संख्या, लड़कों की संख्या से 8 अधिक है, तो लड़कों और लड़कियों की संख्या का गुणनफल ज्ञात करें।",
+    "q_en": "Q368. Eighteen students took part in a quiz. If the number of girls exceeds the number of boys by 8, find the product of the numbers of boys and girls.",
+    "tag": "SSC CPO 29/06/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 56",
+      "(b) 36",
+      "(c) 63",
+      "(d) 65"
+    ],
+    "o_en": [
+      "(a) 56",
+      "(b) 36",
+      "(c) 63",
+      "(d) 65"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q369. 10,000 और 20,000 (सहित) के बीच कितने पूर्ण वर्ग आते हैं?",
+    "q_en": "Q369. How many perfect squares lie between 10,000 and 20,000 inclusive?",
+    "tag": "SSC CHSL 17/11/2025 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 32",
+      "(b) 42",
+      "(c) 52",
+      "(d) 62"
+    ],
+    "o_en": [
+      "(a) 32",
+      "(b) 42",
+      "(c) 52",
+      "(d) 62"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q370. 72 का वर्ग, 216 और एक संख्या के गुणनफल के बराबर है। संख्या ज्ञात करें।",
+    "q_en": "Q370. The square of 72 equals the product of 216 and a number. Find the number.",
+    "tag": "SSC CGL 20/07/2023 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 36",
+      "(b) 18",
+      "(c) 24",
+      "(d) 48"
+    ],
+    "o_en": [
+      "(a) 36",
+      "(b) 18",
+      "(c) 24",
+      "(d) 48"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q371. यदि किसी संख्या और उसके व्युत्क्रम का योग 4 है, तो उनके वर्गों का योग ज्ञात कीजिए।",
+    "q_en": "Q371. If the sum of a number and its reciprocal is 4, find the sum of their squares.",
+    "tag": "SSC CHSL 17/03/2023 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 12",
+      "(b) 16",
+      "(c) 14",
+      "(d) 18"
+    ],
+    "o_en": [
+      "(a) 12",
+      "(b) 16",
+      "(c) 14",
+      "(d) 18"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q372. यदि दो वास्तविक संख्याओं के वर्गों का योग 12 है और संख्याओं का गुणनफल 4 है, तो संख्याओं के बीच का अंतर ज्ञात कीजिए।",
+    "q_en": "Q372. If the sum of the squares of two real numbers is 12 and their product is 4, find the difference between the numbers.",
+    "tag": "SSC CHSL 20/03/2023 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 4",
+      "(b) 8",
+      "(c) 1",
+      "(d) 2"
+    ],
+    "o_en": [
+      "(a) 4",
+      "(b) 8",
+      "(c) 1",
+      "(d) 2"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q373. एक निश्चित संख्या में 7 जोड़ा जाता है और योग को 5 से गुणा किया जाता है। फिर गुणनफल को 3 से विभाजित किया जाता है और 4 को भागफल में से घटाया जाता है। यदि परिणाम 16 आता है, तो मूल संख्या क्या है?",
+    "q_en": "Q373. Add 7 to a number and multiply the sum by 5. Divide the product by 3 and subtract 4 from the quotient. If the result is 16, find the original number.",
+    "tag": "SSC CGL 08/12/2022 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 3",
+      "(b) 1",
+      "(c) 5",
+      "(d) 4"
+    ],
+    "o_en": [
+      "(a) 3",
+      "(b) 1",
+      "(c) 5",
+      "(d) 4"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q374. यदि A, B से 7 अधिक है, B, C से 16 अधिक है, और A + B + C का मान 255 है, तो 3A + C − 4B का मान ज्ञात करें।",
+    "q_en": "Q374. If A is 7 more than B, B is 16 more than C, and A + B + C = 255, find 3A + C − 4B.",
+    "tag": "SSC CPO 09/11/2022 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 5",
+      "(b) 10",
+      "(c) 8",
+      "(d) 4"
+    ],
+    "o_en": [
+      "(a) 5",
+      "(b) 10",
+      "(c) 8",
+      "(d) 4"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q375. दो संख्याओं के बीच का अंतर 1365 है। बड़ी संख्या को छोटी संख्या से भाग देने पर भागफल 6 प्राप्त होता है और शेषफल 15 प्राप्त होता है। छोटी संख्या ज्ञात कीजिए।",
+    "q_en": "Q375. Two numbers differ by 1365. Dividing the larger by the smaller gives quotient 6 and remainder 15. Find the smaller number.",
+    "tag": "SSC PHASE XIII 28/07/2025 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 240",
+      "(b) 270",
+      "(c) 285",
+      "(d) 295"
+    ],
+    "o_en": [
+      "(a) 240",
+      "(b) 270",
+      "(c) 285",
+      "(d) 295"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q376. 8 सेब और 10 संतरे का वजन 5 किलोग्राम है। 12 सेब और 20 संतरे का वजन 9 किलोग्राम है। 15 सेब और 24 संतरे का वजन (किलोग्राम में, निकटतम पूर्णांक तक) क्या है?",
+    "q_en": "Q376. Eight apples and ten oranges weigh 5 kg. Twelve apples and twenty oranges weigh 9 kg. What is the weight of fifteen apples and twenty-four oranges, to the nearest whole kilogram?",
+    "tag": "SSC CHSL 08/07/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 13",
+      "(b) 10",
+      "(c) 16",
+      "(d) 11"
+    ],
+    "o_en": [
+      "(a) 13",
+      "(b) 10",
+      "(c) 16",
+      "(d) 11"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q377. 21 पेंसिल और 9 पेन का मूल्य ₹276, और 6 पेंसिल और 3 पेन का मूल्य ₹84 है। 1 पेंसिल और 1 पेन का मूल्य क्या है?",
+    "q_en": "Q377. Twenty-one pencils and nine pens cost ₹276, and six pencils and three pens cost ₹84. What is the cost of one pencil and one pen?",
+    "tag": "SSC CHSL 10/07/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) ₹30",
+      "(b) ₹40",
+      "(c) ₹20",
+      "(d) ₹10"
+    ],
+    "o_en": [
+      "(a) ₹30",
+      "(b) ₹40",
+      "(c) ₹20",
+      "(d) ₹10"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q378. दो संख्याओं x और y (जहाँ x, y से बड़ी है) का योग उनके अंतर के चार गुने के बराबर है। 5xy/[3(x² − y²)] का मान ज्ञात करें।",
+    "q_en": "Q378. Two numbers x and y, where x is greater than y, have a sum equal to four times their difference. Find 5xy/[3(x² − y²)].",
+    "tag": "SSC CPO 27/06/2024 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 25/16",
+      "(b) 16",
+      "(c) 2 3/16",
+      "(d) 25"
+    ],
+    "o_en": [
+      "(a) 25/16",
+      "(b) 16",
+      "(c) 2 3/16",
+      "(d) 25"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q379. यदि 847 × 385 × 675 × 3025 = 3ᵃ × 5ᵇ × 7ᶜ × 11ᵈ तो ab − cd का मान क्या होगा?",
+    "q_en": "Q379. If 847 × 385 × 675 × 3025 = 3ᵃ × 5ᵇ × 7ᶜ × 11ᵈ, find ab − cd.",
+    "tag": "SSC CGL TIER-II 29/01/2022",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 4",
+      "(b) 5",
+      "(c) 1",
+      "(d) 7"
+    ],
+    "o_en": [
+      "(a) 4",
+      "(b) 5",
+      "(c) 1",
+      "(d) 7"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q380. a, b और c ऐसे भिन्न हैं कि a < b < c हैं। यदि c, a से विभाज्य है तो परिणाम 5/2 निकलता है जो b से 7/4 अधिक है। यदि a + b + c = 1 11/12 है तो (c − a) निम्नलिखित में से किसके बराबर है?",
+    "q_en": "Q380. Fractions a, b and c satisfy a < b < c. Dividing c by a gives 5/2, which is 7/4 more than b. If a + b + c = 1 11/12, what is c − a?",
+    "tag": "SSC CGL TIER-II 11/09/2019",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1/3",
+      "(b) 1/2",
+      "(c) 2/3",
+      "(d) 1/6"
+    ],
+    "o_en": [
+      "(a) 1/3",
+      "(b) 1/2",
+      "(c) 2/3",
+      "(d) 1/6"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q381. 245 और 7 1/5 के माध्यानुपाती को एक सम अभाज्य संख्या से विभाजित किए जाने पर प्राप्त भागफल ज्ञात करें।",
+    "q_en": "Q381. Find the quotient when the mean proportional between 245 and 7 1/5 is divided by an even prime number.",
+    "tag": "SSC CGL 11/09/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 49",
+      "(b) 42",
+      "(c) 21",
+      "(d) 36"
+    ],
+    "o_en": [
+      "(a) 49",
+      "(b) 42",
+      "(c) 21",
+      "(d) 36"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q382. घड़ी में घंटे की सुई और मिनट की सुई आधे दिन में कितनी बार एक साथ होती हैं?",
+    "q_en": "Q382. How many times do the hour and minute hands of a clock coincide in half a day?",
+    "tag": "SSC Phase-XII 20/06/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 44",
+      "(b) 11",
+      "(c) 22",
+      "(d) 55"
+    ],
+    "o_en": [
+      "(a) 44",
+      "(b) 11",
+      "(c) 22",
+      "(d) 55"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q383. तीन भिन्न x, y और z, इस प्रकार हैं कि x > y > z। जब उनमें से सबसे छोटे को सबसे बड़े से विभाजित किया जाता है, तो परिणाम 9/16 निकलता है जो कि y से 0.0625 अधिक है। यदि x + y + z = 1 13/24, तो x + z का मान है:",
+    "q_en": "Q383. Fractions x, y and z satisfy x > y > z. Dividing the smallest by the largest gives 9/16, which is 0.0625 greater than y. If x + y + z = 1 13/24, find x + z.",
+    "tag": "SSC CGL Tier-II 12/09/2019",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 7/8",
+      "(b) 1",
+      "(c) 25/24",
+      "(d) 7/6"
+    ],
+    "o_en": [
+      "(a) 7/8",
+      "(b) 1",
+      "(c) 25/24",
+      "(d) 7/6"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q384. 6 + 8 + 10 + 12 + 14 ...... + 40 का योग ज्ञात कीजिए।",
+    "q_en": "Q384. Find the sum 6 + 8 + 10 + 12 + 14 + ... + 40.",
+    "tag": "SSC CGL TIER-II 18/11/2020",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 424",
+      "(b) 1600",
+      "(c) 400",
+      "(d) 414"
+    ],
+    "o_en": [
+      "(a) 424",
+      "(b) 1600",
+      "(c) 400",
+      "(d) 414"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q385. जब दो अंकों की संख्या को उसके अंकों के योग से गुणा किया जाता है, तो उसका गुणनफल 424 आता है। इसके अंकों को एक-दूसरे के स्थान पर रखकर प्राप्त संख्या को अंकों के योग से गुणा किया जाता है, तो गुणनफल 280 निकलता है। संख्या के अंकों का योग है:",
+    "q_en": "Q385. Multiplying a two-digit number by the sum of its digits gives 424. Reversing its digits and multiplying the new number by the digit sum gives 280. Find the digit sum.",
+    "tag": "SSC CGL Tier II 12/09/2019",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 6",
+      "(b) 9",
+      "(c) 8",
+      "(d) 7"
+    ],
+    "o_en": [
+      "(a) 6",
+      "(b) 9",
+      "(c) 8",
+      "(d) 7"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q386. 400 से 700 तक ऐसी कितनी संख्याएँ हैं, जिनमें अंक 6 ठीक दो बार आता है?",
+    "q_en": "Q386. How many numbers from 400 to 700 contain the digit 6 exactly twice?",
+    "tag": "SSC CGL TIER-II (08/08/2022)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 19",
+      "(b) 21",
+      "(c) 18",
+      "(d) 20"
+    ],
+    "o_en": [
+      "(a) 19",
+      "(b) 21",
+      "(c) 18",
+      "(d) 20"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q387. राम, श्याम को छः अंकों वाली संख्या 468312 की विभाज्यता की जाँच करने के लिए देता है। श्याम, राम से कहता है कि संख्या 57 से विभाज्य है। श्याम, राम से पूछता है, ‘यदि हम इस संख्या के अंकों को अवरोही क्रम में पुनर्व्यवस्थित करें, तो यह किस संख्या से विभाज्य होगी?’",
+    "q_en": "Q387. Ram asks Shyam to check whether the six-digit number 468312 is divisible by 57. Shyam says that it is. If the digits are rearranged in descending order, by which number will it be divisible?",
+    "tag": "SSC Phase XII 21/06/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 2",
+      "(b) 17",
+      "(c) 3",
+      "(d) 19"
+    ],
+    "o_en": [
+      "(a) 2",
+      "(b) 17",
+      "(c) 3",
+      "(d) 19"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q388. एक बगीचे में, पहले वर्ष गुलबहार के 6 पौधे हैं। प्रत्येक वर्ष, माली गुलबहार के 3 नए पौधे उगाता है। बगीचे में पहले वर्ष चमेली के भी 26 पौधे हैं, जिसमें से प्रत्येक वर्ष 2 पौधे खत्म हो जाते हैं। पहले वर्ष के बाद कितने समय में गुलबहार के पौधों की संख्या चमेली के पौधों की संख्या के बराबर हो जाएगी?",
+    "q_en": "Q388. In the first year a garden has six daisy plants and 26 jasmine plants. The gardener grows three new daisies each year, while two jasmine plants die each year. How long after the first year will their numbers be equal?",
+    "tag": "SSC CGL 12/09/2024 (Shift-02)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 5 वर्ष",
+      "(b) 4 वर्ष",
+      "(c) 2 वर्ष",
+      "(d) 6 वर्ष"
+    ],
+    "o_en": [
+      "(a) 5 years",
+      "(b) 4 years",
+      "(c) 2 years",
+      "(d) 6 years"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q389. 2 बिस्कुट और 1 चॉकलेट की कीमत ₹69 है। 2 चॉकलेट और 3 कप कॉफी की कीमत ₹127 है। 3 बिस्कुट, 4 चॉकलेट और 2 कप कॉफी की कीमत ₹229 है। 5 बिस्कुट, 5 चॉकलेट और 5 कप कॉफी की कुल कीमत (₹ में) ज्ञात कीजिए।",
+    "q_en": "Q389. Two biscuits and one chocolate cost ₹69. Two chocolates and three cups of coffee cost ₹127. Three biscuits, four chocolates and two cups of coffee cost ₹229. Find the total cost of five biscuits, five chocolates and five cups of coffee in rupees.",
+    "tag": "SSC CGL 13/09/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 304",
+      "(b) 375",
+      "(c) 345",
+      "(d) 355"
+    ],
+    "o_en": [
+      "(a) 304",
+      "(b) 375",
+      "(c) 345",
+      "(d) 355"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q390. एना और बेन दोनों के पास कंचों का संग्रह है। यदि एना, बेन को एक कंचा देती है, तो उन दोनों के पास बराबर संख्या में कंचे होंगे। इसके विपरीत, यदि बेन, एना को एक कंचा देता है, तो उसके पास बेन के पास मौजूद कंचों की संख्या से तीन गुना अधिक कंचे होंगे। उन दोनों के पास कुल कंचों की संख्या कितनी है?",
+    "q_en": "Q390. Anna and Ben have collections of marbles. If Anna gives Ben one marble, they will have equal numbers. If Ben gives Anna one marble, Anna will have three times as many marbles as Ben. How many marbles do they have in total?",
+    "tag": "SSC CGL 18/09/2024 (Shift-03)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 10",
+      "(b) 8",
+      "(c) 11",
+      "(d) 9"
+    ],
+    "o_en": [
+      "(a) 10",
+      "(b) 8",
+      "(c) 11",
+      "(d) 9"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q391. रवि और कविता दोनों के पास कुछ कंचे थे। कविता के पास रवि से 12 कंचे अधिक थे। यदि दोनों के पास एक-एक कंचा और होता, तो उस स्थिति में कविता के कंचों की संख्या का तीन गुना, रवि के कंचों की संख्या के चार गुने के बराबर होता। वास्तव में कविता के पास कितने कंचे थे?",
+    "q_en": "Q391. Kavita had 12 more marbles than Ravi. If each had one more marble, three times Kavita's number would equal four times Ravi's number. How many marbles did Kavita actually have?",
+    "tag": "SSC CGL 19/09/2024 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 43",
+      "(b) 47",
+      "(c) 51",
+      "(d) 48"
+    ],
+    "o_en": [
+      "(a) 43",
+      "(b) 47",
+      "(c) 51",
+      "(d) 48"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q392. राज के पास 11,000 रुपये हैं और वह नया लैपटॉप खरीदने के लिए प्रति सप्ताह 5,000 रुपये की बचत करना शुरू करता है। उसी समय, रमेश के पास 60,000 रुपये हैं और वह अपनी कला कक्षा के लिए सामग्री पर प्रति सप्ताह 2,000 रुपये खर्च करना शुरू करता है। क्या कोई ऐसा सप्ताह होगा जब उनके पास समान धनराशि होगी?",
+    "q_en": "Q392. Raj has ₹11,000 and starts saving ₹5,000 per week for a new laptop. At the same time, Ramesh has ₹60,000 and starts spending ₹2,000 per week on materials for his art class. Will they have the same amount of money in any week?",
+    "tag": "SSC CHSL 05/07/2024 (Shift-01)",
+    "type_tag": "Type VI (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) हाँ, 7 सप्ताह के बाद",
+      "(b) हाँ, 6 सप्ताह के बाद",
+      "(c) नहीं, उनके पास कभी भी समान धनराशि नहीं होगी",
+      "(d) हाँ, 5 सप्ताह के बाद"
+    ],
+    "o_en": [
+      "(a) Yes, after 7 weeks",
+      "(b) Yes, after 6 weeks",
+      "(c) No, they will never have the same amount",
+      "(d) Yes, after 5 weeks"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }
+];

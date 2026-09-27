@@ -1,0 +1,842 @@
+const data = [
+  {
+    "q_hi": "Q51. a और b का मध्यानुपाती c है। तो बताइए a² c और b² c का मध्यानुपाती क्या होगा?",
+    "q_en": "Q51. The mean proportional of a and b is c. What will be the mean proportional of a²c and b²c?",
+    "tag": "SSC CGL 06/12/2022 (Shift-01)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) c",
+      "(b) 3c",
+      "(c) c³",
+      "(d) c²"
+    ],
+    "o_en": [
+      "(a) c",
+      "(b) 3c",
+      "(c) c³",
+      "(d) c²"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q52. x³y और xy³ का मध्यानुपाती ज्ञात कीजिए।",
+    "q_en": "Q52. Find the mean proportional of x³y and xy³.",
+    "tag": "SSC CPO 04/10/2023 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) xy",
+      "(b) x²y²",
+      "(c) x³y³",
+      "(d) x⁴y⁴"
+    ],
+    "o_en": [
+      "(a) xy",
+      "(b) x²y²",
+      "(c) x³y³",
+      "(d) x⁴y⁴"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q53. 45x⁴ और 5y² का मध्यानुपाती क्या है?",
+    "q_en": "Q53. What is the mean proportional of 45x⁴ and 5y²?",
+    "tag": "SSC Phase-XII 21/06/2024 (Shift-02)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 5x²y",
+      "(b) 15x²y",
+      "(c) 25x⁴y",
+      "(d) 45x²y²"
+    ],
+    "o_en": [
+      "(a) 5x²y",
+      "(b) 15x²y",
+      "(c) 25x⁴y",
+      "(d) 45x²y²"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q54. a और a/b² का माध्यानुपाती ............ है।",
+    "q_en": "Q54. The mean proportional of a and a/b² is ............",
+    "tag": "SSC MTS 05/09/2023 (Shift-02)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) ab",
+      "(b) b/a",
+      "(c) a/(2b)",
+      "(d) a/b"
+    ],
+    "o_en": [
+      "(a) ab",
+      "(b) b/a",
+      "(c) a/(2b)",
+      "(d) a/b"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q55. यदि a एक धनात्मक संख्या है और b = 4/a है, तो a और b का मध्यानुपाती क्या होगा?",
+    "q_en": "Q55. If a is a positive number and b = 4/a, what will be the mean proportional of a and b?",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 4",
+      "(b) 3",
+      "(c) 2",
+      "(d) a"
+    ],
+    "o_en": [
+      "(a) 4",
+      "(b) 3",
+      "(c) 2",
+      "(d) a"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q56. 8a² और 18/a⁴ का मध्यानुपाती क्या है, जहाँ a एक धनात्मक संख्या है।",
+    "q_en": "Q56. What is the mean proportional of 8a² and 18/a⁴, where a is a positive number?",
+    "tag": "SSC CGL 09/09/2024 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 12/a²",
+      "(b) 12a",
+      "(c) 12a²",
+      "(d) 12/a"
+    ],
+    "o_en": [
+      "(a) 12/a²",
+      "(b) 12a",
+      "(c) 12a²",
+      "(d) 12/a"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q57. 4a² और x का मध्यानुपाती 1/(5a) है, जहाँ a धनात्मक संख्या है, तो x का मान .......... है।",
+    "q_en": "Q57. The mean proportional of 4a² and x is 1/(5a), where a is positive. Then x is ..........",
+    "tag": "SSC CGL 18/09/2024 (Shift-02)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 1/(100a⁴)",
+      "(b) 1/(100a²)",
+      "(c) 1/(25a²)",
+      "(d) 1/(25a⁴)"
+    ],
+    "o_en": [
+      "(a) 1/(100a⁴)",
+      "(b) 1/(100a²)",
+      "(c) 1/(25a²)",
+      "(d) 1/(25a⁴)"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q58. (a + b)(a − b)³, (a + b)³(a − b) का मध्यानुपाती है।",
+    "q_en": "Q58. The mean proportional of (a + b)(a − b)³ and (a + b)³(a − b) is:",
+    "tag": "SSC CGL 25/07/2023 (Shift-04)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) (a + b)²(a − b)",
+      "(b) (a + b)²(a − b)²",
+      "(c) (a + b)(a − b)²",
+      "(d) a² − b²"
+    ],
+    "o_en": [
+      "(a) (a + b)²(a − b)",
+      "(b) (a + b)²(a − b)²",
+      "(c) (a + b)(a − b)²",
+      "(d) a² − b²"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q59. (p − q)/(p + q) और (pq)²/(p² − q²) का मध्यानुपाती ज्ञात कीजिए।",
+    "q_en": "Q59. Find the mean proportional of (p − q)/(p + q) and (pq)²/(p² − q²).",
+    "tag": "SSC Phase-XI 30/06/2023 (Shift-04)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) pq/(p − q)",
+      "(b) (p − q)/pq",
+      "(c) pq/(p + q)",
+      "(d) (p + q)/pq"
+    ],
+    "o_en": [
+      "(a) pq/(p − q)",
+      "(b) (p − q)/pq",
+      "(c) pq/(p + q)",
+      "(d) (p + q)/pq"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q60. (a³ + b³)/(a − b) और (a² − b²)/(a² − ab + b²) का मध्यानुपाती ज्ञात कीजिए।",
+    "q_en": "Q60. Find the mean proportional of (a³ + b³)/(a − b) and (a² − b²)/(a² − ab + b²).",
+    "tag": "SSC CGL 06/12/2022 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 1",
+      "(b) a + b",
+      "(c) (a + b)/(a − b)",
+      "(d) √(a + b)"
+    ],
+    "o_en": [
+      "(a) 1",
+      "(b) a + b",
+      "(c) (a + b)/(a − b)",
+      "(d) √(a + b)"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q61. 36 और 48 का तृतीयानुपाती ज्ञात कीजिए।",
+    "q_en": "Q61. Find the third proportional of 36 and 48.",
+    "tag": "SSC CHSL 04/07/2024 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 54",
+      "(b) 36",
+      "(c) 48",
+      "(d) 64"
+    ],
+    "o_en": [
+      "(a) 54",
+      "(b) 36",
+      "(c) 48",
+      "(d) 64"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q62. यदि 3, 9 का तृतीयानुपाती P है, तो 6, P, 4 का चतुर्थ अनुपाती ज्ञात करो।",
+    "q_en": "Q62. If P is the third proportional of 3 and 9, find the fourth proportional of 6, P and 4.",
+    "tag": "SSC CGL Tier-I 24/08/2021",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 3/2",
+      "(b) 2√3",
+      "(c) 10",
+      "(d) 18"
+    ],
+    "o_en": [
+      "(a) 3/2",
+      "(b) 2√3",
+      "(c) 10",
+      "(d) 18"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q63. यदि 3 और x का तृतीय अनुपाती 27 है और 2 और y का तृतीय अनुपाती 8 है, तो x : y ज्ञात करें।",
+    "q_en": "Q63. If the third proportional of 3 and x is 27 and the third proportional of 2 and y is 8, find x : y.",
+    "tag": "SSC MTS 03/05/2023 (Shift-02)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 7 : 9",
+      "(b) 4 : 5",
+      "(c) 3 : 7",
+      "(d) 9 : 4"
+    ],
+    "o_en": [
+      "(a) 7 : 9",
+      "(b) 4 : 5",
+      "(c) 3 : 7",
+      "(d) 9 : 4"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q64. यदि 8, 20 का तृतीयानुपाती p है और 3, 5, 24 का चतुर्थानुपाती q है, तो (2p + q) का मान ज्ञात कीजिए।",
+    "q_en": "Q64. If p is the third proportional of 8 and 20 and q is the fourth proportional of 3, 5 and 24, find (2p + q).",
+    "tag": "SSC CGL 11/04/2022 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 140",
+      "(b) 126",
+      "(c) 90",
+      "(d) 104"
+    ],
+    "o_en": [
+      "(a) 140",
+      "(b) 126",
+      "(c) 90",
+      "(d) 104"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q65. (5² − 3²) और (5 − 3) का तृतीयानुपाती ज्ञात कीजिए।",
+    "q_en": "Q65. Find the third proportional of (5² − 3²) and (5 − 3).",
+    "tag": "SSC Phase-XII 25/06/2024 (Shift-03)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) 1/3",
+      "(b) 1/4",
+      "(c) 1/2",
+      "(d) 1/8"
+    ],
+    "o_en": [
+      "(a) 1/3",
+      "(b) 1/4",
+      "(c) 1/2",
+      "(d) 1/8"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q66. (x² − y²) और (x − y) का तृतीयानुपाती ज्ञात करें",
+    "q_en": "Q66. Find the third proportional of (x² − y²) and (x − y).",
+    "tag": "SSC CGL 18/07/2023 (Shift-01)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) (x − y)",
+      "(b) (x − y)/(x + y)",
+      "(c) (x + y)/(x − y)",
+      "(d) (x + y)"
+    ],
+    "o_en": [
+      "(a) (x − y)",
+      "(b) (x − y)/(x + y)",
+      "(c) (x + y)/(x − y)",
+      "(d) (x + y)"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q67. यदि a : b = c : d है, तो निम्नलिखित में से कौन-सा अनुपात a : c के बराबर है?",
+    "q_en": "Q67. If a : b = c : d, which of the following ratios is equal to a : c?",
+    "tag": "SSC CGL 03/12/2022 (Shift-01)",
+    "type_tag": "Type II (When Two Numbers Are Given)",
+    "o_hi": [
+      "(a) a : d",
+      "(b) b : c",
+      "(c) a + d : b + c",
+      "(d) a + b : c + d"
+    ],
+    "o_en": [
+      "(a) a : d",
+      "(b) b : c",
+      "(c) a + d : b + c",
+      "(d) a + b : c + d"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q68. 10, 12, 13, 16 में से क्या घटाया जाए कि शेष संख्याएँ समानुपातिक हो जाएँ?",
+    "q_en": "Q68. What should be subtracted from 10, 12, 13 and 16 so that the remaining numbers are proportional?",
+    "tag": "SSC CGL 14/09/2025 (Shift-02)",
+    "type_tag": "Type III (Proportion After Addition/Subtraction)",
+    "o_hi": [
+      "(a) 3",
+      "(b) 9",
+      "(c) 4",
+      "(d) 12"
+    ],
+    "o_en": [
+      "(a) 3",
+      "(b) 9",
+      "(c) 4",
+      "(d) 12"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q69. जब संख्या 7, 11, 18 और 23 में प्रत्येक में x जोड़ा जाता है, तो इस प्रकार प्राप्त संख्याएँ समानुपात में होती हैं। (x − 1) और (2x − 10) का मध्यानुपाती क्या है?",
+    "q_en": "Q69. When x is added to each of 7, 11, 18 and 23, the resulting numbers are in proportion. What is the mean proportional of (x − 1) and (2x − 10)?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-04)",
+    "type_tag": "Type III (Proportion After Addition/Subtraction)",
+    "o_hi": [
+      "(a) 68",
+      "(b) 78",
+      "(c) 98",
+      "(d) 48"
+    ],
+    "o_en": [
+      "(a) 68",
+      "(b) 78",
+      "(c) 98",
+      "(d) 48"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q70. जब x को 2, 3, 30 और 35 में जोड़ा जाता है तो इस क्रम में प्राप्त होने वाली संख्याएं समानुपात में हैं। (x + 7) तथा (x − 2) के बीच मध्य समानुपाती ज्ञात करें।",
+    "q_en": "Q70. When x is added to 2, 3, 30 and 35, the numbers obtained in this order are in proportion. Find the mean proportional between (x + 7) and (x − 2).",
+    "tag": "SSC CGL TIER-II 11/09/2019",
+    "type_tag": "Type III (Proportion After Addition/Subtraction)",
+    "o_hi": [
+      "(a) 7",
+      "(b) 4",
+      "(c) 6",
+      "(d) 5"
+    ],
+    "o_en": [
+      "(a) 7",
+      "(b) 4",
+      "(c) 6",
+      "(d) 5"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q71. 24, 40, 33 और 57 में से प्रत्येक से x घटाने पर प्राप्त संख्याएं समानुपात में हैं। (5x + 12) और (4x + 15) का अनुपात ज्ञात करें।",
+    "q_en": "Q71. The numbers obtained by subtracting x from each of 24, 40, 33 and 57 are in proportion. Find the ratio of (5x + 12) and (4x + 15).",
+    "tag": "SSC CGL 23/08/2021 (Shift-02)",
+    "type_tag": "Type III (Proportion After Addition/Subtraction)",
+    "o_hi": [
+      "(a) 4 : 3",
+      "(b) 14 : 13",
+      "(c) 7 : 4",
+      "(d) 7 : 5"
+    ],
+    "o_en": [
+      "(a) 4 : 3",
+      "(b) 14 : 13",
+      "(c) 7 : 4",
+      "(d) 7 : 5"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q72. जब 24, 33, 20 और 26 में से प्रत्येक से x घटाया जाता है, तो इस क्रम में प्राप्त संख्या समानुपाती होती है। (2x + 1) और (5x − 11) के बीच माध्य आनुपातिक क्या है?",
+    "q_en": "Q72. When x is subtracted from each of 24, 33, 20 and 26, the numbers obtained in this order are proportional. What is the mean proportional between (2x + 1) and (5x − 11)?",
+    "tag": "SSC MTS 27/10/2021 (Shift-02)",
+    "type_tag": "Type III (Proportion After Addition/Subtraction)",
+    "o_hi": [
+      "(a) 30",
+      "(b) 35",
+      "(c) 20",
+      "(d) 428"
+    ],
+    "o_en": [
+      "(a) 30",
+      "(b) 35",
+      "(c) 20",
+      "(d) 428"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q73. यदि चार अलग-अलग धनात्मक संख्याएँ a, b, c और d दिए गए क्रम में समानुपात में हैं, तो निम्नलिखित में से कौन-सा विकल्प सही नहीं है?",
+    "q_en": "Q73. If four distinct positive numbers a, b, c and d are in proportion in the given order, which of the following options is not correct?",
+    "tag": "SSC CPO 28/06/2024 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) b, a, d और c दिए गए क्रम में समानुपात में हैं।",
+      "(b) c, d, b और a दिए गए क्रम में समानुपात में हैं।",
+      "(c) d, c, b और a दिए गए क्रम में समानुपात में हैं।",
+      "(d) a, c, b और d दिए गए क्रम में समानुपात में हैं।"
+    ],
+    "o_en": [
+      "(a) b, a, d and c are in proportion in the given order.",
+      "(b) c, d, b and a are in proportion in the given order.",
+      "(c) d, c, b and a are in proportion in the given order.",
+      "(d) a, c, b and d are in proportion in the given order."
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q74. चार अलग-अलग धनात्मक संख्याएँ, 'a', 'b', 'c' और 'd' दिए गए क्रम में समानुपात में हैं। 'b', 'a' से 35 अधिक है और 'd', 'c' से 60 अधिक है। 'a' और 'c' का गुणनफल 5376 है। 'a', 'b', 'c' और 'd' का योग ज्ञात करें।",
+    "q_en": "Q74. Four distinct positive numbers 'a', 'b', 'c' and 'd' are in proportion in the given order. 'b' is 35 more than 'a' and 'd' is 60 more than 'c'. The product of 'a' and 'c' is 5376. Find the sum of 'a', 'b', 'c' and 'd'.",
+    "tag": "SSC Phase-XII 26/06/2024 (Shift-03)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 400",
+      "(b) 398",
+      "(c) 397",
+      "(d) 399"
+    ],
+    "o_en": [
+      "(a) 400",
+      "(b) 398",
+      "(c) 397",
+      "(d) 399"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q75. यदि x, y के व्युत्क्रमानुपाती हैं और y = 6 होने पर x = 2 है, तो x = 3 होने पर y का मान क्या होगा?",
+    "q_en": "Q75. If x is inversely proportional to y and x = 2 when y = 6, what will be y when x = 3?",
+    "tag": "SSC CGL 09/09/2024 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 6"
+    ],
+    "o_en": [
+      "(a) 2",
+      "(b) 3",
+      "(c) 4",
+      "(d) 6"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q76. यदि a ∝ b, b ∝ 1/c और c ∝ d है, तो a और d के बीच क्या संबंध है?",
+    "q_en": "Q76. If a ∝ b, b ∝ 1/c and c ∝ d, what is the relation between a and d?",
+    "tag": "SSC CPO 03/10/2023 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) a ∝ √d",
+      "(b) a ∝ d",
+      "(c) a ∝ 1/d",
+      "(d) a ∝ d²"
+    ],
+    "o_en": [
+      "(a) a ∝ √d",
+      "(b) a ∝ d",
+      "(c) a ∝ 1/d",
+      "(d) a ∝ d²"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q77. M, N के व्युत्क्रमानुपाती हैं। यदि M, 20 है, तो N, 70 है। यदि N = 50 है, M का मान कितना है?",
+    "q_en": "Q77. M is inversely proportional to N. If M is 20, N is 70. If N = 50, what is M?",
+    "tag": "SSC MTS 07/07/2022 (Shift-01)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 20",
+      "(b) 700",
+      "(c) 28",
+      "(d) 600"
+    ],
+    "o_en": [
+      "(a) 20",
+      "(b) 700",
+      "(c) 28",
+      "(d) 600"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q78. A, (B + 18) के अनुक्रमानुपाती है और B = 36 होने पर, A = 108 होता है। A का मान ज्ञात कीजिए जब B = 68 हो।",
+    "q_en": "Q78. A is directly proportional to (B + 18), and when B = 36, A = 108. Find A when B = 68.",
+    "tag": "SSC CGL 19/07/2023 (Shift-01)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 75",
+      "(b) 86",
+      "(c) 127",
+      "(d) 172"
+    ],
+    "o_en": [
+      "(a) 75",
+      "(b) 86",
+      "(c) 127",
+      "(d) 172"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q79. A, B के समानुपाती है। जब A = 52, B = 91 है। तो B = 126 होने पर A का मान ज्ञात कीजिए।",
+    "q_en": "Q79. A is proportional to B. When A = 52, B = 91. Find A when B = 126.",
+    "tag": "SSC Phase-XI 27/06/2023 (Shift-03)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 76",
+      "(b) 84",
+      "(c) 72",
+      "(d) 70"
+    ],
+    "o_en": [
+      "(a) 76",
+      "(b) 84",
+      "(c) 72",
+      "(d) 70"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q80. M, (N² + 3) का व्युत्क्रमानुपाती है। यदि N = 3 होने पर M = 3 होता है, तो N² = 69 होने पर M का मान क्या होगा?",
+    "q_en": "Q80. M is inversely proportional to (N² + 3). If M = 3 when N = 3, what will be M when N² = 69?",
+    "tag": "SSC CHSL 01/07/2024 (Shift-04)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1/2",
+      "(b) 1",
+      "(c) √69",
+      "(d) 1/4"
+    ],
+    "o_en": [
+      "(a) 1/2",
+      "(b) 1",
+      "(c) √69",
+      "(d) 1/4"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q81. A, B के धनात्मक वर्गमूल के अनुक्रमानुपाती है, और C के घन के व्युत्क्रमानुपाती है। यदि B = 27 और C = 2 होने पर A = 15 है, तो A = 9 और C = 2 होने पर, B ज्ञात कीजिए",
+    "q_en": "Q81. A is directly proportional to the positive square root of B and inversely proportional to the cube of C. If A = 15 when B = 27 and C = 2, find B when A = 9 and C = 2.",
+    "tag": "SSC CGL 05/12/2022 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 281/42",
+      "(b) 243/25",
+      "(c) 264/37",
+      "(d) 275/51"
+    ],
+    "o_en": [
+      "(a) 281/42",
+      "(b) 243/25",
+      "(c) 264/37",
+      "(d) 275/51"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q82. गणित में A के अंक उसके अभ्यास समय के अनुक्रमानुपाती (सीधे आनुपातिक) हैं। 6 घंटे के अभ्यास में A को 70 अंक मिलते हैं। 90 अंक प्राप्त करने के लिए उसका अभ्यास समय (लगभग) क्या होना चाहिए?",
+    "q_en": "Q82. A's marks in Mathematics are directly proportional to his practice time. A gets 70 marks with 6 hours of practice. Approximately how much practice time is needed to score 90 marks?",
+    "tag": "SSC CHSL 08/07/2024 (Shift-01)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 8 घंटे",
+      "(b) 8.3 घंटे",
+      "(c) 7 घंटे",
+      "(d) 7.7 घंटे"
+    ],
+    "o_en": [
+      "(a) 8 hours",
+      "(b) 8.3 hours",
+      "(c) 7 hours",
+      "(d) 7.7 hours"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q83. दो चर का एक फलन x के अनुक्रमानुपाती है और y के व्युत्क्रमानुपाती है, x = 5 और y = 3 होने पर फलन ज्ञात कीजिए। दिया है कि, x = 0 और y = 1 के लिए f = 15 है तथा x = 1 और y = 15 के लिए f = 2 है।",
+    "q_en": "Q83. A function of two variables varies directly as x and inversely as y. Find the function value when x = 5 and y = 3. Given that f = 15 for x = 0, y = 1 and f = 2 for x = 1, y = 15.",
+    "tag": "SSC CGL 17/09/2024 (Shift-03)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 10",
+      "(b) 2",
+      "(c) 5",
+      "(d) 15"
+    ],
+    "o_en": [
+      "(a) 10",
+      "(b) 2",
+      "(c) 5",
+      "(d) 15"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q84. 'x', 'y' के घन के अनुक्रमानुपाती और 'z' के वर्ग के व्युत्क्रमानुपाती है। यदि y = 2 और z = 3 होने पर x = 1/36 है, तो y = 3 और z = 5 होने पर 800x का मान क्या होगा?",
+    "q_en": "Q84. 'x' is directly proportional to the cube of 'y' and inversely proportional to the square of 'z'. If x = 1/36 when y = 2 and z = 3, what is 800x when y = 3 and z = 5?",
+    "tag": "SSC CGL 25/09/2024 (Shift-03)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 9/800",
+      "(b) 27",
+      "(c) 800/9",
+      "(d) 9"
+    ],
+    "o_en": [
+      "(a) 9/800",
+      "(b) 27",
+      "(c) 800/9",
+      "(d) 9"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q85. y, x + 3 के समानुपातिक है और x = 1 होने पर y = 8 है, x, z के व्युत्क्रमानुपाती है और z = 6 होने पर x = 2 है। y और z के बीच संबंध ज्ञात कीजिए",
+    "q_en": "Q85. y is proportional to x + 3 and y = 8 when x = 1; x is inversely proportional to z and x = 2 when z = 6. Find the relation between y and z.",
+    "tag": "MTS 12/09/2023 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) (y − 6)/(z − 24)",
+      "(b) z(y − 6) = 24",
+      "(c) (y − 6)/(z − 12)",
+      "(d) z(y − 6) = 12"
+    ],
+    "o_en": [
+      "(a) (y − 6)/(z − 24)",
+      "(b) z(y − 6) = 24",
+      "(c) (y − 6)/(z − 12)",
+      "(d) z(y − 6) = 12"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q86. एक वृक्ष की आयु उसके तने में मौजूद छल्लों की संख्या पर निर्भर करती है। ऐसे वृक्ष का मूल्य उसकी आयु के समानुपाती होता है। यदि 40 छल्लों और 50 वर्ष की आयु वाले वृक्ष का मूल्य ₹50,000 है, तो 30 छल्लों वाले वृक्ष की आयु .......... वर्ष और इसका मूल्य ₹......... है।",
+    "q_en": "Q86. The age of a tree depends on the number of rings in its trunk. The value of such a tree is proportional to its age. If a tree with 40 rings and age 50 years is worth ₹50,000, then the age of a tree with 30 rings is .......... years and its value is ₹.........",
+    "tag": "SSC CHSL 09/07/2024 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 37.5,57500",
+      "(b) 37.5,37500",
+      "(c) 57.5,57500",
+      "(d) 57.5,37500"
+    ],
+    "o_en": [
+      "(a) 37.5,57500",
+      "(b) 37.5,37500",
+      "(c) 57.5,57500",
+      "(d) 57.5,37500"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q87. एक वस्तु के पतन की ऊँचाई समय वर्ग के अनुक्रमानुपाती है। वस्तु 4 सेकंड में 80 सेमी नीचे गिरती है, तो 8 सेकंड में वस्तु कितनी ऊँचाई (सेमी में) से गिरेगी?",
+    "q_en": "Q87. The distance fallen by an object is directly proportional to the square of time. The object falls 80 cm in 4 seconds. How far (in cm) will it fall in 8 seconds?",
+    "tag": "SSC MTS 12/09/2023 (Shift-01)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 420",
+      "(b) 320",
+      "(c) 480",
+      "(d) 360"
+    ],
+    "o_en": [
+      "(a) 420",
+      "(b) 320",
+      "(c) 480",
+      "(d) 360"
+    ],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q88. वह छोटी से छोटी धनात्मक संख्या कौन-सी है, जिसे 2 और 3 में से घटाया जाने पर उनका तृतीय अनुपात 4 होगा?",
+    "q_en": "Q88. What is the smallest positive number which, when subtracted from 2 and 3, makes their third proportional equal to 4?",
+    "tag": "SSC CGL 26/07/2023 (Shift-04)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1",
+      "(b) 2",
+      "(c) 4",
+      "(d) 3"
+    ],
+    "o_en": [
+      "(a) 1",
+      "(b) 2",
+      "(c) 4",
+      "(d) 3"
+    ],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q89. एक वृत्ताकार डिस्क का भार, उसकी त्रिज्या के वर्ग और उसकी मोटाई के गुणनफल के अनुक्रमानुपाती है। दो समरूप/ समान, डिस्क की मोटाइयों का अनुपात 16 : 9 है। यदि पहली डिस्क का भार दूसरी डिस्क के भार से चार गुना है तो उनकी त्रिज्याओं का अनुपात क्या है?",
+    "q_en": "Q89. The weight of a circular disc is directly proportional to the product of the square of its radius and its thickness. The thicknesses of two similar/equal discs are in the ratio 16 : 9. If the first disc weighs four times the second, what is the ratio of their radii?",
+    "tag": "SSC MTS 12/09/2023 (Shift-03)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 1 : 2",
+      "(b) 2 : 3",
+      "(c) 3 : 2",
+      "(d) 2 : 1"
+    ],
+    "o_en": [
+      "(a) 1 : 2",
+      "(b) 2 : 3",
+      "(c) 3 : 2",
+      "(d) 2 : 1"
+    ],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  },
+  {
+    "q_hi": "Q90. किसी घन का भार उसके आयतन और उसके घनत्व के गुणनफल के अनुक्रमानुपाती है। पहले घन और दूसरे घन के पदार्थों के घनत्वों का अनुपात 27 : 16 है। यदि पहले घन का भार दूसरे घन के भार का 4 गुना है, तो पहले घन और दूसरे घन के किनारों का अनुपात क्या है?",
+    "q_en": "Q90. The weight of a cube is directly proportional to the product of its volume and density. The densities of the materials of the first and second cubes are in the ratio 27 : 16. If the first cube weighs 4 times the second, what is the ratio of the edges of the first and second cubes?",
+    "tag": "SSC MTS 14/09/2023 (Shift-02)",
+    "type_tag": "Type IV (Miscellaneous Questions)",
+    "o_hi": [
+      "(a) 3 : 2",
+      "(b) 2 : 3",
+      "(c) 3 : 4",
+      "(d) 4 : 3"
+    ],
+    "o_en": [
+      "(a) 3 : 2",
+      "(b) 2 : 3",
+      "(c) 3 : 4",
+      "(d) 4 : 3"
+    ],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }
+];
