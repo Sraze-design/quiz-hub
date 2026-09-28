@@ -2434,6 +2434,13 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 /* Use the same compact report icon in the quiz and analysis views. */
 .report-question-btn{width:40px;min-width:40px;padding:0;gap:0;background:#f1f5f9;color:#64748b}
 .report-question-btn span{display:none}
+#practiceReviewBtn{width:40px;height:40px;min-width:40px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #a78bfa;border-radius:12px;background:#f5f0ff;color:#7c3aed;cursor:pointer}
+#practiceReviewBtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#practiceReviewBtn[aria-pressed="true"]{background:#7c3aed;border-color:#7c3aed;color:#fff}
+#practiceReviewBtn[aria-pressed="true"] .practice-flag-cloth{fill:currentColor}
+body.exam-live #practiceReviewBtn{display:none!important}
+#qpGrid button.practice-reviewed{background:#8b5cf6;color:#fff;position:relative}
+#qpGrid button.practice-reviewed.qp-current{outline:2px solid #1e293b;outline-offset:2px}
 .analysis-report-btn{background:#f1f5f9;color:#64748b;border-color:#e2e8f0}
 .analysis-question{font-size:16px;font-weight:750;line-height:1.55;margin-bottom:12px;overflow-wrap:anywhere}
 .analysis-question img{display:block;max-width:100%;height:auto;margin:12px auto;object-fit:contain}
@@ -2450,6 +2457,10 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-palette-panel{position:fixed;top:0;right:0;bottom:0;width:min(84%,380px);z-index:13101;background:var(--card-bg,#fff);transform:translateX(100%);transition:.28s;box-shadow:-12px 0 35px rgba(15,23,42,.22);display:flex;flex-direction:column}.analysis-palette-panel.open{transform:translateX(0)}
 .analysis-palette-head{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border,#e2e8f0);font-size:18px;font-weight:900}.analysis-palette-head button{border:0;background:var(--bg-soft,#f1f5f9);border-radius:10px;width:38px;height:38px;font-size:22px;color:inherit}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
+.analysis-palette-q.reviewed{position:relative;background:#8b5cf6}
+.analysis-palette-q.reviewed.correct::after,.analysis-palette-q.reviewed.wrong::after{content:'✓';position:absolute;right:-5px;top:-6px;width:17px;height:17px;border:2px solid #fff;border-radius:50%;color:#fff;font:800 11px/13px Arial;text-align:center;box-sizing:border-box}
+.analysis-palette-q.reviewed.correct::after{background:#10b981}
+.analysis-palette-q.reviewed.wrong::after{background:#ef4444}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
 @media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:17px;line-height:1.52}.result-analysis-btn{font-size:13px;padding:9px 12px}.analysis-actions{gap:5px}.analysis-action-btn{height:36px;border-radius:10px}.analysis-report-btn,.analysis-bookmark-btn{width:36px}.analysis-lang-btn{width:62px;padding:0 6px}.analysis-type-label{font-size:10.5px}}
 @media(max-width:340px){.analysis-card{padding:11px}.analysis-qno{font-size:14px}.analysis-actions{gap:4px}.analysis-action-btn{height:34px}.analysis-report-btn,.analysis-bookmark-btn{width:34px}.analysis-lang-btn{width:58px}.analysis-question{font-size:16px}}
@@ -2519,6 +2530,9 @@ body.exam-live #ai-floating-btn,body.exam-live #feedback,body.exam-live #control
 body.exam-live #controls #submitKeep,body.exam-live #qp-panel .qp-stats-box,
 body.exam-live #qp-panel .qp-instructions-text,body.exam-live #pauseStats{display:none!important}
 body.exam-live #options button.exam-selected{background:#e7efff!important;border-color:#4a83e8!important;color:#172033}
+body.exam-live #qTimer.exam-time-green{color:#10b981!important}
+body.exam-live #qTimer.exam-time-orange{color:#f59e0b!important}
+body.exam-live #qTimer.exam-time-red{color:#ef4444!important}
 body.exam-live #controls{gap:8px;padding:12px 12px calc(12px + env(safe-area-inset-bottom));}
 body.exam-live #controls .footer-nav-btn{font-size:clamp(12px,3.3vw,16px);padding:0 6px;height:52px;border-radius:11px;white-space:nowrap}
 #examMarkBtn{background:#f5f0ff;color:#6d28d9;border:1px solid #a78bfa;flex:1.1}
@@ -2544,6 +2558,7 @@ body.exam-live #nextBtn{flex:1.2}
 #qpGrid .exam-current{outline:3px solid #1e293b;outline-offset:2px}
 .exam-reviewed-answer{position:relative}
 .exam-reviewed-answer::after{content:'✓';position:absolute;right:-5px;top:-6px;background:#10b981;color:white;border:2px solid white;width:17px;height:17px;border-radius:50%;font:800 11px/13px Arial;text-align:center;box-sizing:border-box}
+#qpGrid button.practice-reviewed.exam-reviewed-wrong::after{background:#ef4444}
 .exam-instructions{flex-direction:column;gap:12px;font-size:14px;line-height:1.6;color:#475569}
 #examSubmitSummary{flex-direction:column;gap:8px;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px;font-size:13px;color:#6d28d9}
 body.exam-paused #question-direction,body.exam-paused #q-text,body.exam-paused #options,body.exam-paused #exam-tag{visibility:hidden!important}
@@ -2798,6 +2813,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
             <div class="qinfo-segment qinfo-timer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="qTimer">00:00</span></div>
           </div>
           <div class="quiz-question-actions">
+            <button id="practiceReviewBtn" type="button" onclick="togglePracticeReview()" aria-label="Mark for review" title="Mark for review" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18"/><path class="practice-flag-cloth" d="M5 5c3-2 5-2 8 0s5 2 8 0v10c-3 2-5 2-8 0s-5-2-8 0V5Z"/></svg></button>
             <button id="reportQuestionBtn" class="report-question-btn" type="button" onclick="openQuestionReport()" aria-label="Report question" title="Report question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span>Report</span></button>
             <button id="bookmarkToggleBtn" class="bookmark-toggle-btn" type="button" onclick="toggleCurrentBookmark()" aria-label="Bookmark question" title="Bookmark question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></button>
           </div>
@@ -6031,7 +6047,7 @@ setInterval(()=>{if(quizMode !== 'test' && timerRunning && data.length > 0){
 }
 }},1000);
 
-function resetQuestionTimer(){if(data.length === 0) return; qElapsed=questionTimes[currentQ] || 0;const qt=document.getElementById('qTimer');if(qt){const m=String(Math.floor(qElapsed/60)).padStart(2,'0');const s=String(qElapsed%60).padStart(2,'0');qt.textContent=m+':'+s;}}
+function resetQuestionTimer(){if(data.length === 0) return; qElapsed=questionTimes[currentQ] || 0;const qt=document.getElementById('qTimer');if(qt){const m=String(Math.floor(qElapsed/60)).padStart(2,'0');const s=String(qElapsed%60).padStart(2,'0');qt.textContent=m+':'+s;if(quizMode==='test') updateExamQuestionTimerColor(qElapsed);}}
 
 function updatePauseStats(){
  let attempted=answered.filter(v=>v).length;
@@ -6108,7 +6124,7 @@ function captureResultAnalysis(){
     const originalIndex=Array.isArray(retestIndexMap)&&Number.isInteger(retestIndexMap[index])?retestIndexMap[index]:index;
     const time=Math.max(0,Number(questionTimes[index])||0);
     const correct=multi?item.subparts.map(part=>Number(part.a)):Number(item.a);
-    return {item,selected,correct,status,originalIndex,time};
+    return {item,selected,correct,status,originalIndex,time,reviewed:!!examReview[index]};
   });
   resultAnalysisSnapshot={
     test:currentQuizTitle||document.title||'Quiz',
@@ -6124,7 +6140,7 @@ function captureResultAnalysis(){
       test:resultAnalysisSnapshot.test,
       path:resultAnalysisSnapshot.path,
       savedAt:resultAnalysisSnapshot.savedAt,
-      responses:items.map(x=>({selected:x.selected,correct:x.correct,status:x.status,originalIndex:x.originalIndex,time:x.time}))
+      responses:items.map(x=>({selected:x.selected,correct:x.correct,status:x.status,originalIndex:x.originalIndex,time:x.time,reviewed:x.reviewed}))
     }));
   }catch(_){ }
 }
@@ -6254,9 +6270,9 @@ function renderAnalysisPalette(){
   getFilteredAnalysisItems().forEach((record,index)=>{
     const button=document.createElement('button');
     button.type='button';
-    button.className='analysis-palette-q '+record.status+(index===resultAnalysisPosition?' current':'');
+    button.className='analysis-palette-q '+record.status+(record.reviewed?' reviewed':'')+(index===resultAnalysisPosition?' current':'');
     button.textContent=record.originalIndex+1;
-    button.setAttribute('aria-label','Question '+(record.originalIndex+1)+' '+record.status);
+    button.setAttribute('aria-label','Question '+(record.originalIndex+1)+' '+record.status+(record.reviewed?' marked for review':''));
     button.onclick=()=>{
       resultAnalysisPosition=index;
       closeAnalysisPalette();
@@ -7068,6 +7084,14 @@ function renderQuestionPalette(){
     } else {
       btn.className = 'qp-unattempted';
     }
+    if(examReview[i]){
+      btn.classList.add('practice-reviewed');
+      if(isAnswered){
+        btn.classList.add('exam-reviewed-answer');
+        if(answerCorrect[i]===false) btn.classList.add('exam-reviewed-wrong');
+      }
+      btn.setAttribute('aria-label','Question '+(i+1)+': '+(isAnswered?(answerCorrect[i]===false?'Wrong':'Correct')+' and marked for review':'Marked for review'));
+    }
     btn.onclick = () => {
       goToQuestion(i + 1);
       closeQuestionPalette();
@@ -7359,6 +7383,7 @@ const __oldShowQ=showQ;
 showQ=function(){
   __oldShowQ();
   upd();
+  if(typeof updatePracticeReviewButton==='function') updatePracticeReviewButton();
 };
 })();
 </script>
@@ -9884,6 +9909,29 @@ function beginAttemptMode(mode){
   document.getElementById('qBadge').parentElement.classList.remove('exam-reviewed-answer');
   if(examActive && typeof window.__pencilForceDisable==='function') window.__pencilForceDisable();
   updateExamControls();
+  updatePracticeReviewButton();
+}
+function updatePracticeReviewButton(){
+  const button=document.getElementById('practiceReviewBtn');
+  if(!button) return;
+  const marked=quizMode==='practice' && !!examReview[currentQ];
+  button.setAttribute('aria-pressed',String(marked));
+  button.setAttribute('aria-label',marked?'Remove from review':'Mark for review');
+  button.title=marked?'Remove from review':'Mark for review';
+}
+function togglePracticeReview(){
+  if(quizMode!=='practice' || isPaused || !data.length) return;
+  examReview[currentQ]=!examReview[currentQ];
+  updatePracticeReviewButton();
+}
+function updateExamQuestionTimerColor(seconds){
+  const qt=document.getElementById('qTimer');
+  if(!qt) return;
+  const tone=seconds>40?'red':seconds>20?'orange':'green';
+  if(qt.dataset.examTone===tone) return;
+  qt.classList.remove('exam-time-green','exam-time-orange','exam-time-red');
+  qt.classList.add('exam-time-'+tone);
+  qt.dataset.examTone=tone;
 }
 function tickExamClock(autoSubmit=true){
   if(!examActive) return;
@@ -9906,6 +9954,7 @@ function tickExamClock(autoSubmit=true){
   const qt=document.getElementById('qTimer');
   const nextQuestion=formatMMSS(questionTimes[currentQ]||0);
   if(qt.textContent!==nextQuestion) qt.textContent=nextQuestion;
+  updateExamQuestionTimerColor(questionTimes[currentQ]||0);
   document.getElementById('popupTime').textContent=formatMMSS(elapsed);
   document.getElementById('scmTotalTime').textContent=formatHHMMSS(elapsed);
   if(autoSubmit && !remaining) showScore();
