@@ -4378,7 +4378,13 @@ window.addEventListener('popstate', (e) => {
   skipExitConfirmOnce = false;
 
   isHistoryNav = true;
-  const state = e.state || { screen: 'subjects' };
+  // The previous history entry of a live test previews the quiz on iOS.
+  // Once the user actually leaves, turn it back into the ordinary Test List.
+  const wasQuizExitGuard = e.state?.screen === 'quizExitGuard';
+  const state = wasQuizExitGuard
+    ? { screen: 'quizlist', subject: e.state.subject, category: e.state.category, chapter: e.state.chapter }
+    : (e.state || { screen: 'subjects' });
+  if (wasQuizExitGuard) history.replaceState(state, '');
 
   // If currently inside the quiz engine, exit back to the explorer first
   const quizEngine = document.getElementById('quizEngineBox');
@@ -5836,16 +5842,18 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
         ? (testPart ? `${chapterPart} (${testPart})` : chapterPart)
         : (testPart || 'Quiz');
     }
-    // Always keep the immediate history parent as the current Test List.
-    // This prevents the device/browser Back action from skipping the list and
-    // jumping directly to the Chapter page.
+    // Keep the Test List as the immediate history parent. For test mode,
+    // temporarily make that parent a quiz preview: iOS shows it during the
+    // native Back gesture before popstate can display exit confirmation.
     const __hist = history.state || {};
-    if (__hist.screen === 'quizlist' && __hist.subject === currentSubject && __hist.chapter === currentChapter) {
-      history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath }, '');
-    } else {
-      history.pushState({ screen: 'quizlist', subject: currentSubject, category: currentCategory, chapter: currentChapter }, '');
-      history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath }, '');
+    const __listState = { screen: 'quizlist', subject: currentSubject, category: currentCategory, chapter: currentChapter };
+    if (__hist.screen !== 'quizlist' || __hist.subject !== currentSubject || __hist.chapter !== currentChapter) {
+      history.pushState(__listState, '');
     }
+    if (selectedMode === 'test') {
+      history.replaceState({ ...__listState, screen: 'quizExitGuard' }, '');
+    }
+    history.pushState({ screen: 'quiz', subject: currentSubject, category: currentCategory, chapter: currentChapter, path: quizPath }, '');
 
     showQ();
     setQuizOriginalLanguageMode(true);
