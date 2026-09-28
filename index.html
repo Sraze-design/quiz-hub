@@ -2435,7 +2435,7 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 /* Use the same compact report icon in the quiz and analysis views. */
 .report-question-btn{width:40px;min-width:40px;padding:0;gap:0;background:#f1f5f9;color:#64748b}
 .report-question-btn span{display:none}
-#practiceReviewBtn{width:40px;height:40px;min-width:40px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #a78bfa;border-radius:12px;background:#f5f0ff;color:#7c3aed;cursor:pointer}
+#practiceReviewBtn{width:40px;height:40px;min-width:40px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#64748b;cursor:pointer}
 #practiceReviewBtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 #practiceReviewBtn[aria-pressed="true"]{background:#7c3aed;border-color:#7c3aed;color:#fff}
 #practiceReviewBtn[aria-pressed="true"] .practice-flag-cloth{fill:currentColor}
@@ -2543,7 +2543,7 @@ body.exam-live #nextBtn{flex:1.2}
 #examNav{align-items:center;gap:10px;padding:4px 16px 0;color:#64748b;font-size:10px;font-weight:750}
 #examNav button{border:0;background:#f1f5f9;border-radius:7px;padding:6px 9px;color:#334155;font-weight:750;cursor:pointer}
 #examNav #examPrevBtn{height:28px}
-#examNav #examReviewToggleBtn{margin-left:auto;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #a78bfa;border-radius:8px;background:#f5f0ff;color:#7c3aed}
+#examNav #examReviewToggleBtn{margin-left:auto;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;color:#64748b}
 #examNav #examReviewToggleBtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 #examNav #examReviewToggleBtn[aria-pressed="true"]{background:#7c3aed;color:#fff;border-color:#7c3aed}
 #examNav #examReviewToggleBtn[aria-pressed="true"] .exam-flag-cloth{fill:currentColor}
@@ -2556,11 +2556,11 @@ body.exam-live #nextBtn{flex:1.2}
 #qpGrid .exam-unvisited{background:#94a3b8;color:#fff}
 #qpGrid .exam-unanswered{background:#ef4444;color:#fff}
 #qpGrid .exam-answered{background:#10b981;color:#fff}
-#qpGrid .exam-review{background:#8b5cf6;color:#fff}
+/* Test mode keeps the base status color; review is shown only as a purple flag. */
 #qpGrid .exam-current{outline:3px solid #1e293b;outline-offset:2px}
+#qpGrid button.exam-review-flag::after{content:'';position:absolute;right:3px;top:-7px;width:11px;height:9px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
+.exam-dot.exam-review-flag::after{content:'';position:absolute;right:-4px;top:-5px;width:8px;height:7px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
 .exam-reviewed-answer{position:relative}
-.exam-reviewed-answer::after{content:'✓';position:absolute;right:-5px;top:-6px;background:#10b981;color:white;border:2px solid white;width:17px;height:17px;border-radius:50%;font:800 11px/13px Arial;text-align:center;box-sizing:border-box}
-#qpGrid button.practice-reviewed.exam-reviewed-wrong::after{background:#ef4444}
 .exam-instructions{flex-direction:column;gap:12px;font-size:14px;line-height:1.6;color:#475569}
 #examSubmitSummary{flex-direction:column;gap:8px;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px;font-size:13px;color:#6d28d9}
 body.exam-paused #question-direction,body.exam-paused #q-text,body.exam-paused #options,body.exam-paused #exam-tag{visibility:hidden!important}
@@ -3189,7 +3189,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
     <div class="exam-only exam-instructions">
       <p>1. Total time = number of questions × 40 seconds.</p>
       <p>2. Selected options are blue. You can change or clear an answer until submission.</p>
-      <p>3. Mark &amp; Next marks a question for review. A green check on purple means an answer is selected.</p>
+      <p>3. Mark &amp; Next marks a question for review. The question keeps its normal status color and shows a purple flag.</p>
       <p>4. All selected answers, including reviewed answers, count towards your score. Correct: +1; wrong: −⅓; unanswered: 0.</p>
       <p>5. Tap a question number to return to it. Remove review clears only its review flag.</p>
       <p>6. Pause stops both timers and hides the question. When time ends, the test submits automatically.</p>
@@ -10025,20 +10025,23 @@ function renderExamPalette(){
   const names={unvisited:'Not visited',unanswered:'Not answered',answered:'Answered',review:'Marked for review',reviewAnswered:'Answered & marked for review'};
   data.forEach((_,index)=>{
     const button=document.createElement('button');
-    const status=examReview[index]?(answered[index]?'reviewAnswered':'review'):answered[index]?'answered':examVisited[index]?'unanswered':'unvisited';
+    const isAnswered=!!answered[index];
+    const baseStatus=isAnswered?'answered':examVisited[index]?'unanswered':'unvisited';
+    const status=examReview[index]?(isAnswered?'reviewAnswered':'review'):baseStatus;
     button.type='button';button.textContent=index+1;
-    button.className='exam-'+(status==='reviewAnswered'?'review':status);
-    if(status==='reviewAnswered') button.classList.add('exam-reviewed-answer');
+    button.className='exam-'+baseStatus;
+    if(examReview[index]) button.classList.add('exam-review-flag');
     if(index===currentQ){button.classList.add('exam-current');button.setAttribute('aria-current','true');}
     button.setAttribute('aria-label','Question '+(index+1)+': '+names[status]);
     button.onclick=()=>{goToQuestion(index+1);closeQuestionPalette();};
     grid.appendChild(button);
   });
-  const counts=examStatusCounts(),colors={unvisited:'#94a3b8',unanswered:'#ef4444',answered:'#10b981',review:'#8b5cf6',reviewAnswered:'#8b5cf6'};
+  const counts=examStatusCounts(),colors={unvisited:'#94a3b8',unanswered:'#ef4444',answered:'#10b981',review:'#ef4444',reviewAnswered:'#10b981'};
   const legend=document.getElementById('examLegend');legend.innerHTML='';
   Object.keys(names).forEach(key=>{
     const row=document.createElement('div');row.className='exam-legend-row';
-    const dot=document.createElement('span');dot.className='exam-dot'+(key==='reviewAnswered'?' exam-reviewed-answer':'');dot.style.background=colors[key];
+    const reviewed=key==='review'||key==='reviewAnswered';
+    const dot=document.createElement('span');dot.className='exam-dot'+(reviewed?' exam-review-flag':'');dot.style.background=colors[key];
     const label=document.createElement('span');label.textContent=names[key];
     const count=document.createElement('strong');count.textContent=counts[key];
     row.append(dot,label,count);legend.appendChild(row);
