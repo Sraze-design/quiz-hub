@@ -2486,6 +2486,13 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
 }
 </style>
 <script>
+let quizMode = 'practice';
+let examActive = false, examDuration = 0, examElapsedMs = 0, examLastTick = 0;
+let examQuestionMs = [], examVisited = [], examReview = [];
+let modePickerResolve = null, modePickerChoice = null, modePickerClosing = false;
+let quizLaunchBusy = false;
+</script>
+<script>
 (function removePencilDiagnostic(){
   function clean(){
     document.querySelectorAll('#pencilInputCheck').forEach(node => node.remove());
@@ -2499,6 +2506,55 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
   new MutationObserver(clean).observe(document.documentElement, {childList:true, subtree:true});
 })();
 </script>
+<style id="test-mode-styles">
+.exam-only{display:none!important}
+body.exam-live .exam-only{display:flex!important}
+body.exam-live #pencilToggleBtn,body.exam-live #pencilCanvas,body.exam-live #pencilTools,
+body.exam-live #pencilStarCanvas,body.exam-live #pencilLaserCanvas,body.exam-live #pencilEraserCursor,
+body.exam-live #ai-floating-btn,body.exam-live #feedback,body.exam-live #controls #backBtn,
+body.exam-live #controls #submitKeep,body.exam-live #qp-panel .qp-stats-box,
+body.exam-live #qp-panel .qp-instructions-text,body.exam-live #pauseStats{display:none!important}
+body.exam-live #options button.exam-selected{background:#e7efff!important;border-color:#4a83e8!important;color:#172033}
+body.exam-live #controls{gap:8px;padding:12px 12px calc(12px + env(safe-area-inset-bottom));}
+body.exam-live #controls .footer-nav-btn{font-size:clamp(12px,3.3vw,16px);padding:0 6px;height:52px;border-radius:11px;white-space:nowrap}
+#examMarkBtn{background:#f5f0ff;color:#6d28d9;border:1px solid #a78bfa;flex:1.1}
+#examClearBtn{background:white;color:#334155;border:1px solid #94a3b8;flex:.7}
+body.exam-live #nextBtn{flex:1.2}
+#examNav{align-items:center;gap:10px;padding:4px 16px 0;color:#64748b;font-size:10px;font-weight:750}
+#examNav button{border:0;background:#f1f5f9;border-radius:7px;padding:6px 9px;color:#334155;font-weight:750;cursor:pointer}
+#examNav #examUnmarkBtn{margin-left:auto;background:#f5f0ff;color:#7c3aed}
+#examNav button[hidden]{display:none}
+#examLegend{flex-direction:column;gap:9px;border:1px solid #e2e8f0;border-radius:14px;padding:14px;margin:8px 0 20px}
+.exam-legend-row{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:650;color:#334155}
+.exam-legend-row strong{margin-left:auto}
+.exam-dot{width:17px;height:17px;border-radius:5px;position:relative;flex-shrink:0}
+#qpGrid button{position:relative}
+#qpGrid .exam-unvisited{background:#94a3b8;color:#fff}
+#qpGrid .exam-unanswered{background:#ef4444;color:#fff}
+#qpGrid .exam-answered{background:#10b981;color:#fff}
+#qpGrid .exam-review{background:#8b5cf6;color:#fff}
+#qpGrid .exam-current{outline:3px solid #1e293b;outline-offset:2px}
+.exam-reviewed-answer{position:relative}
+.exam-reviewed-answer::after{content:'✓';position:absolute;right:-5px;top:-6px;background:#10b981;color:white;border:2px solid white;width:17px;height:17px;border-radius:50%;font:800 11px/13px Arial;text-align:center;box-sizing:border-box}
+.exam-instructions{flex-direction:column;gap:12px;font-size:14px;line-height:1.6;color:#475569}
+#examSubmitSummary{flex-direction:column;gap:8px;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px;font-size:13px;color:#6d28d9}
+body.exam-paused #question-direction,body.exam-paused #q-text,body.exam-paused #options,body.exam-paused #exam-tag{visibility:hidden!important}
+body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls{pointer-events:none}
+#attemptModeOverlay{position:fixed;inset:0;z-index:210000;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+#attemptModeOverlay[hidden]{display:none}
+#attemptModeCard{width:100%;max-width:410px;background:#fff;color:#0f172a;padding:25px;border-radius:22px;box-shadow:0 24px 70px #0003;max-height:90dvh;overflow:auto}
+#attemptModeCard h2{font-size:23px;margin:0 0 7px}
+#attemptModeCard p{font-size:14px;color:#64748b;line-height:1.5;margin:0 0 19px}
+.attempt-mode-choice{width:100%;text-align:left;border:1.5px solid #dbe2ea;border-radius:14px;background:#fff;padding:15px;margin:0 0 11px;cursor:pointer;color:#0f172a}
+.attempt-mode-choice strong{display:block;font-size:17px;margin-bottom:4px}
+.attempt-mode-choice span{font-size:12px;line-height:1.5;color:#64748b}
+.attempt-mode-choice[aria-pressed="true"]{border-color:#2563eb;background:#eff6ff}
+#attemptModeDetails{padding:10px 12px;background:#f8fafc;border-radius:10px;font-size:13px;line-height:1.5;margin:3px 0 16px}
+.attempt-mode-actions{display:flex;gap:10px}
+.attempt-mode-actions button{border:0;border-radius:11px;min-height:46px;padding:10px 15px;font-weight:800;cursor:pointer}
+#attemptModeStart{background:#2563eb;color:white;flex:1}
+#attemptModeCancel{background:#f1f5f9;color:#475569}
+</style>
 </head>
 <body>
 <div id="pullToRefreshIndicator" aria-hidden="true"><span class="ptr-arrow">↓</span></div>
@@ -2720,6 +2776,11 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
           </div>
         </div>
 
+        <div id="examNav" class="exam-only">
+          <button id="examPrevBtn" type="button" onclick="prevQ()">← Back</button>
+          <span>TEST MODE · +1 / −⅓</span>
+          <button id="examUnmarkBtn" type="button" onclick="unmarkExamQuestion()" hidden>Remove review</button>
+        </div>
         <!-- Question badge + per-question timer pill -->
         <div class="quiz-subheader-row">
           <div class="quiz-qinfo-box">
@@ -2763,6 +2824,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
                 <span class="scm-label">Unattempted</span>
                 <span class="scm-value" style="color:#f97316;" id="scmUnattempted">0</span>
               </div>
+              <div id="examSubmitSummary" class="exam-only"></div>
               <div class="scm-question">Are you sure you want to submit the test?</div>
               <div class="scm-btns">
                 <button id="scmYesBtn" style="background:#2563eb;">Yes</button>
@@ -3019,6 +3081,8 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
 
       <!-- Assessment Interaction Control Bar Footer Panel Menu Layout Area -->
       <div id="controls" class="quiz-controls-footer">
+        <button id="examMarkBtn" class="footer-nav-btn exam-only" onclick="markExamNext()">Mark &amp; Next</button>
+        <button id="examClearBtn" class="footer-nav-btn exam-only" onclick="clearExamAnswer()">Clear</button>
         <button id="backBtn" class="footer-nav-btn btn-back-quiz" onclick="prevQ()">Back</button>
         <button id="submitKeep" class="footer-nav-btn btn-submit-quiz" onclick="confirmSubmit()">Submit Test</button>
         <button id="nextBtn" class="footer-nav-btn btn-next-quiz" onclick="next()">Next</button>
@@ -3064,6 +3128,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
   <div id="qpBodySymbols" class="qp-body">
     <div class="qp-section-title" id="qpSectionTitle">Test</div>
 
+    <div id="examLegend" class="exam-only"></div>
     <div class="qp-stats-box">
       <div class="qp-stats-row">
         <span class="qp-dot" style="background:#000000;"></span>
@@ -3094,6 +3159,14 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
   </div>
 
   <div id="qpBodyInstructions" class="qp-body" style="display:none;">
+    <div class="exam-only exam-instructions">
+      <p>1. Total time = number of questions × 40 seconds.</p>
+      <p>2. Selected options are blue. You can change or clear an answer until submission.</p>
+      <p>3. Mark &amp; Next marks a question for review. A green check on purple means an answer is selected.</p>
+      <p>4. All selected answers, including reviewed answers, count towards your score. Correct: +1; wrong: −⅓; unanswered: 0.</p>
+      <p>5. Tap a question number to return to it. Remove review clears only its review flag.</p>
+      <p>6. Pause stops both timers and hides the question. When time ends, the test submits automatically.</p>
+    </div>
     <div class="qp-instructions-text">
       <p>1. Select only one correct option for each question.</p>
       <p>2. After answering, the correct answer will show in green and the wrong answer will show in red.</p>
@@ -3846,6 +3919,7 @@ async function openBookmarkedQuestion(bookmark){
     score=0; currentStreak=0; maxStreak=0; elapsed=0;
     timerRunning=true; isPaused=false;
     answered=[false]; selectedAnswers=[null]; answerCorrect=[null]; questionTimes=[0];
+    beginAttemptMode('practice');
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
     if (typeof lockBodyScroll === 'function') lockBodyScroll();
@@ -3887,6 +3961,8 @@ function playCurrentBookmarkedTest(){
    across multiple questions, so it should behave like any other in-progress test. */
 async function startBookmarkedTestQuiz(bookmarks){
   if(!Array.isArray(bookmarks) || !bookmarks.length) return;
+  const selectedMode=await chooseQuizMode(bookmarks.length);
+  if(!selectedMode) return;
   showLoader(true);
   isBookmarkOnlyQuiz = false;
   currentBookmarkQuestionIndex = null;
@@ -3939,6 +4015,7 @@ async function startBookmarkedTestQuiz(bookmarks){
     answerCorrect=new Array(items.length).fill(null);
     questionTimes=new Array(items.length).fill(0);
     resetQuizPauseUIForFreshStart();
+    beginAttemptMode(selectedMode);
 
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -4195,6 +4272,7 @@ function pushExplorerHistory(state) {
 }
 
 window.addEventListener('popstate', (e) => {
+  if(modePickerResolve){ finishModePicker(); return; }
   const d=document.getElementById('appSideDrawer');if(d&&d.classList.contains('active')){closeAppSideDrawer();return}
   // If the AI assistant panel is open, this back-navigation exists only to
   // close it — consume it here and stop.
@@ -4297,6 +4375,7 @@ window.addEventListener('popstate', (e) => {
     document.getElementById('explorerScreen').style.display = 'flex';
     resetExplorerScrollPosition();
     document.getElementById('score-card').style.display = 'none';
+    if(examActive) stopExamOnExit();
     timerRunning = false;
     isPaused = true;
     updateAIButtonVisibility();
@@ -5640,6 +5719,17 @@ function resetQuizPauseUIForFreshStart(){
 }
 
 async function loadQuizData(quizPath, requestedQuestionIndex) {
+  if(quizLaunchBusy) return;
+  quizLaunchBusy=true;
+  let quizQuestions, selectedMode;
+  try {
+    const response=await fetchQuizFile(quizPath);
+    quizQuestions=parseQuizDataSource(await response.text());
+    if(!Array.isArray(quizQuestions)||!quizQuestions.length) throw new Error('No questions found');
+    selectedMode=await chooseQuizMode(quizQuestions.length);
+  } catch(err) { alert('Test could not be opened: '+err.message); }
+  finally { quizLaunchBusy=false; }
+  if(!selectedMode) return;
   showLoader(true);
   // A newly launched test must never inherit the previous test's Analysis UI
   // or response snapshot, even if navigation happened through browser Back.
@@ -5666,10 +5756,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     } else {
       currentQuizTitle = "";
     }
-    const response = await fetchQuizFile(quizPath);
-    const source = await response.text();
-    const quizQuestions = parseQuizDataSource(source);
-    if(!Array.isArray(quizQuestions) || !quizQuestions.length) throw new Error("Invalid quiz data structure arrays parameters context context");
+    isRetestAttempt=false;
     
     if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
     data=quizQuestions;
@@ -5691,6 +5778,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     answerCorrect=new Array(data.length).fill(null);
     questionTimes=new Array(data.length).fill(0);
     resetQuizPauseUIForFreshStart();
+    beginAttemptMode(selectedMode);
     
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
@@ -5895,11 +5983,11 @@ let data = [];
 let ORIGINAL_DATA = [];
 let ORIGINAL_TOTAL = 0;
 let elapsed=0,timerRunning=true,isPaused=false;
-const timer=setInterval(()=>{if(timerRunning && data.length > 0){elapsed++;const m=String(Math.floor(elapsed/60)).padStart(2,'0');const s=String(elapsed%60).padStart(2,'0');const t=document.getElementById('liveTimer');if(t)t.textContent=m+':'+s;const pt=document.getElementById('popupTime');if(pt)pt.textContent=m+':'+s;const scmT=document.getElementById('scmTotalTime');if(scmT && typeof formatHHMMSS==='function')scmT.textContent=formatHHMMSS(elapsed);}},1000);
+const timer=setInterval(()=>{if(quizMode !== 'test' && timerRunning && data.length > 0){elapsed++;const m=String(Math.floor(elapsed/60)).padStart(2,'0');const s=String(elapsed%60).padStart(2,'0');const t=document.getElementById('liveTimer');if(t)t.textContent=m+':'+s;const pt=document.getElementById('popupTime');if(pt)pt.textContent=m+':'+s;const scmT=document.getElementById('scmTotalTime');if(scmT && typeof formatHHMMSS==='function')scmT.textContent=formatHHMMSS(elapsed);}},1000);
 
 let qElapsed=0;
 let questionTimes = [];
-setInterval(()=>{if(timerRunning && data.length > 0){
+setInterval(()=>{if(quizMode !== 'test' && timerRunning && data.length > 0){
  if(!questionTimes[currentQ]) questionTimes[currentQ] = 0;
  questionTimes[currentQ]++;
  qElapsed=questionTimes[currentQ];
@@ -5941,8 +6029,14 @@ window.addEventListener('load',()=>{
   b.onclick=function(e){
    e.preventDefault();
    if(data.length === 0) return;
+   if(quizMode==='test') { tickExamClock(); if(!examActive) return; }
    timerRunning=!timerRunning;
    isPaused=!timerRunning;
+   if(quizMode==='test'){
+     examLastTick=Date.now();
+     document.body.classList.toggle('exam-paused',isPaused);
+     updateExamControls();
+   }
    this.innerHTML=timerRunning?'<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg> <span>Pause</span>':'<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M8 5v14l11-7z"/></svg> <span>Resume</span>';
    const fade=document.getElementById('pauseFade');
    if(fade){ fade.classList.toggle('show', !timerRunning); }
@@ -6474,8 +6568,26 @@ let oBox = document.getElementById('options');
 oBox.innerHTML = "";
 document.getElementById('feedback').style.display = "none";
 const prevSel=selectedAnswers[currentQ];
+if(examActive) examVisited[currentQ]=true;
 
-if(isMultiPartQuestion(item)){
+if(isMultiPartQuestion(item)&&quizMode==='test'){
+  item.subparts.forEach((part,partIndex)=>{
+    const group=document.createElement('div'); group.className='multi-part-option-group';
+    const label=document.createElement('div'); label.className='multi-part-option-label';
+    label.textContent=part.label||('('+(partIndex+1)+')');group.appendChild(label);
+    (Array.isArray(T(part,'o'))?T(part,'o'):[]).forEach((opt,idx)=>{
+      const btn=document.createElement('button');btn.innerHTML=formatContent(opt);
+      btn.onclick=()=>{
+        if(isPaused) return;tickExamClock();if(!examActive) return;
+        const values=Array.isArray(selectedAnswers[currentQ])?selectedAnswers[currentQ].slice():new Array(item.subparts.length).fill(null);
+        values[partIndex]=idx;selectedAnswers[currentQ]=values;
+        answered[currentQ]=multiPartSelectionComplete(item,values);answerCorrect[currentQ]=null;
+        paintExamOptions();updateExamControls();updateQBadge();
+      };group.appendChild(btn);
+    });oBox.appendChild(group);
+  });
+  paintExamOptions();updateExamControls();
+}else if(isMultiPartQuestion(item)){
   const selections=Array.isArray(prevSel)?prevSel.slice():new Array(item.subparts.length).fill(null);
   while(selections.length<item.subparts.length) selections.push(null);
 
@@ -6563,6 +6675,11 @@ if(isMultiPartQuestion(item)){
     btn.innerHTML = formatContent(opt);
     btn.onclick = () => {
       if(isPaused) return;
+      if(quizMode==='test') {
+        tickExamClock();if(!examActive)return;
+        selectedAnswers[currentQ]=idx;answered[currentQ]=true;answerCorrect[currentQ]=null;
+        paintExamOptions();updateExamControls();updateQBadge();return;
+      }
       let btns = oBox.getElementsByTagName("button");
       for(let b of btns) b.disabled = true;
       if(idx === item.a) {
@@ -6589,7 +6706,9 @@ if(isMultiPartQuestion(item)){
     };
     oBox.appendChild(btn);
   });
-  if(prevSel!==null && prevSel!==undefined){
+  if(quizMode==='test') {
+    paintExamOptions();updateExamControls();
+  } else if(prevSel!==null && prevSel!==undefined){
     const btns=oBox.getElementsByTagName("button");
     for(let b of btns) b.disabled=true;
     if(btns[item.a]){
@@ -6646,9 +6765,13 @@ function celebrate(msg,sub){
 }
 
 function showScore(){
+if(quizMode==='test') {
+  if(!examActive) return;
+  finishExamAttempt();
+}
 const __fade=document.getElementById('pauseFade');
 if(__fade){__fade.classList.remove('show');}
-timerRunning=true;
+timerRunning=quizMode!=='test';
 captureResultAnalysis();
 
 document.getElementById('quiz-box').style.display='none';
@@ -6827,6 +6950,7 @@ function showNewBestAnimation(){
 
 function next() {
  if(isPaused) return;
+ if(quizMode==='test') { tickExamClock(); if(!examActive) return; }
  if(currentQ < data.length - 1){
    currentQ++;
    timerRunning=true;
@@ -6837,7 +6961,9 @@ function next() {
 }
 
 function prevQ() {
- if(isPaused) return; if(currentQ > 0) { currentQ--;
+ if(isPaused) return;
+ if(quizMode==='test') { tickExamClock(); if(!examActive) return; }
+ if(currentQ > 0) { currentQ--;
  timerRunning=true; showQ(); resetQuestionTimer(); } }
 function formatHHMMSS(sec){
   sec=Math.max(0,Math.round(Number(sec)||0));
@@ -6848,6 +6974,7 @@ function formatHHMMSS(sec){
 }
 
 function confirmSubmit(){
+  if(quizMode==='test') { tickExamClock(); if(!examActive) return; updateExamSubmitSummary(); }
   const attempted = answered.filter(Boolean).length;
   const unattempted = data.length - attempted;
   const totalTimeEl = document.getElementById('scmTotalTime');
@@ -6894,6 +7021,7 @@ function qpSwitchTab(which){
 }
 
 function renderQuestionPalette(){
+  if(examActive) { renderExamPalette(); return; }
   const grid = document.getElementById('qpGrid');
   if(!grid || typeof data === 'undefined' || !data) return;
   grid.innerHTML = '';
@@ -7015,8 +7143,9 @@ document.getElementById("jumpNo").addEventListener("keydown", function(e){
 });
 
 function goToQuestion(qNo){
- timerRunning=true;
   if(isPaused) return;
+  if(quizMode==='test') { tickExamClock(); if(!examActive) return; }
+  timerRunning=true;
   qNo = parseInt(qNo,10);
   if(!Number.isFinite(qNo)) return;
   if(qNo<1 || qNo>data.length){
@@ -7053,7 +7182,13 @@ if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 return;
 }
 
-function startRetest(mode){
+async function startRetest(mode){
+if(modePickerResolve) return;
+const retestCount=mode===1 ? ORIGINAL_DATA.length : data.filter((_,i)=>
+  mode===2 ? answerCorrect[i]===false : mode===3 ? !answered[i] : !answered[i]||answerCorrect[i]===false).length;
+if(!retestCount) return;
+const selectedMode=await chooseQuizMode(retestCount);
+if(!selectedMode) return;
 document.getElementById('retestModal').style.display='none';
 // Mode 1 = full original test; modes 2-4 = reduced-question retests.
 isRetestAttempt = (mode !== 1);
@@ -7107,6 +7242,7 @@ if(goBtn) goBtn.disabled=false;
    selectedAnswers=new Array(data.length).fill(null);
    answerCorrect=new Array(data.length).fill(null);
    questionTimes=new Array(data.length).fill(0);
+   beginAttemptMode(selectedMode);
    document.getElementById('score-card').style.display='none';
    document.getElementById('quiz-box').style.display='flex';
    document.getElementById('controls').style.display='flex';
@@ -7151,6 +7287,7 @@ if(pt) pt.textContent='00:00';
  selectedAnswers=new Array(data.length).fill(null);
  answerCorrect=new Array(data.length).fill(null);
  questionTimes=new Array(data.length).fill(0);
+ beginAttemptMode(selectedMode);
  document.getElementById('score-card').style.display='none';
  document.getElementById('quiz-box').style.display='flex';
  document.getElementById('controls').style.display='flex';
@@ -7180,6 +7317,12 @@ function upd(){
  var isAns=(typeof answered!=='undefined'&&answered)?!!answered[idx]:false;
  var isCorrect=(typeof answerCorrect!=='undefined'&&answerCorrect)?answerCorrect[idx]:null;
  var target=pill||b;
+ if(examActive){
+   target.style.background=examReview[idx]?'#8b5cf6':isAns?'#10b981':'#ef4444';
+   target.classList.toggle('exam-reviewed-answer',!!examReview[idx]&&isAns);
+   return;
+ }
+ target.classList.remove('exam-reviewed-answer');
  if(isAns && isCorrect===true){ target.style.background='#10b981'; }
  else if(isAns && isCorrect===false){ target.style.background='#ef4444'; }
  else { target.style.background='#94a3b8'; }
@@ -7436,6 +7579,11 @@ function updateAIButtonVisibility() {
     return;
   }
 
+  if(examActive || modePickerResolve) {
+    aiBtn.style.display='none';
+    closeAIPanel();
+    return;
+  }
   if (
     quizEngine && quizEngine.style.display !== 'none' &&
     quizBox && quizBox.style.display !== 'none' &&
@@ -7480,6 +7628,7 @@ function applyAIQuizTimerColor(timerEl, elapsedMs){
 }
 
 function toggleAIPanel() {
+  if(examActive || modePickerResolve) return;
   const sheet = document.getElementById('ai-bottom-sheet');
   const overlay = document.getElementById('ai-overlay');
   const isActive = sheet.classList.contains('active');
@@ -9612,6 +9761,238 @@ if ("serviceWorker" in navigator) {
 </script>
 
 
+
+<!-- Mode choice is shared by normal tests and all four retest options. -->
+<div id="attemptModeOverlay" hidden>
+  <section id="attemptModeCard" role="dialog" aria-modal="true" aria-labelledby="attemptModeTitle">
+    <h2 id="attemptModeTitle">Choose your mode</h2>
+    <p id="attemptModeCount"></p>
+    <button type="button" class="attempt-mode-choice" id="attemptPractice" aria-pressed="true" onclick="selectAttemptMode('practice')"><strong>Practice</strong><span>See the correct answer and explanation after choosing an option.</span></button>
+    <button type="button" class="attempt-mode-choice" id="attemptTest" aria-pressed="false" onclick="selectAttemptMode('test')"><strong>Test</strong><span>Timed attempt. Change answers and mark questions for review. Review answers after submission.</span></button>
+    <div id="attemptModeDetails"></div>
+    <div class="attempt-mode-actions"><button type="button" id="attemptModeCancel" onclick="requestModePickerClose(null)">Cancel</button><button type="button" id="attemptModeStart" onclick="requestModePickerClose(attemptModeSelection)">Start Practice</button></div>
+  </section>
+</div>
+<script id="test-mode-engine">
+let attemptModeSelection='practice', attemptModeCount=0, attemptModePreviousFocus=null;
+function chooseQuizMode(count){
+  if(modePickerResolve) return Promise.resolve(null);
+  attemptModeCount=count;
+  attemptModePreviousFocus=document.activeElement;
+  modePickerChoice=null;
+  modePickerClosing=false;
+  return new Promise(resolve=>{
+    modePickerResolve=resolve;
+    document.getElementById('attemptModeCount').textContent=count+' questions · Choose how you want to attempt them.';
+    selectAttemptMode('practice');
+    document.getElementById('attemptModeOverlay').hidden=false;
+    lockBodyScroll();
+    history.pushState({attemptModePicker:true},'');
+    updateAIButtonVisibility();
+    document.getElementById('attemptPractice').focus();
+  });
+}
+function selectAttemptMode(mode){
+  attemptModeSelection=mode;
+  document.getElementById('attemptPractice').setAttribute('aria-pressed',String(mode==='practice'));
+  document.getElementById('attemptTest').setAttribute('aria-pressed',String(mode==='test'));
+  document.getElementById('attemptModeStart').textContent=mode==='test'?'Start Test':'Start Practice';
+  document.getElementById('attemptModeDetails').textContent=mode==='test'
+    ? 'Time: '+formatHHMMSS(attemptModeCount*40)+' · +1 correct / −⅓ wrong · Timer starts when you press Start Test.'
+    : 'Practice at your own pace with instant feedback.';
+}
+function requestModePickerClose(choice){
+  if(!modePickerResolve || modePickerClosing) return;
+  modePickerClosing=true;
+  modePickerChoice=choice;
+  history.back();
+}
+function finishModePicker(){
+  const resolve=modePickerResolve, choice=modePickerChoice;
+  modePickerResolve=null; modePickerChoice=null; modePickerClosing=false;
+  document.getElementById('attemptModeOverlay').hidden=true;
+  unlockBodyScroll();
+  if(attemptModePreviousFocus?.isConnected) attemptModePreviousFocus.focus();
+  updateAIButtonVisibility();
+  if(resolve) resolve(choice);
+}
+document.getElementById('attemptModeOverlay').addEventListener('click',event=>{
+  if(event.target.id==='attemptModeOverlay') requestModePickerClose(null);
+});
+document.addEventListener('keydown',event=>{
+  if(!modePickerResolve) return;
+  if(event.key==='Escape'){ event.preventDefault(); requestModePickerClose(null); }
+  if(event.key==='Tab'){
+    const buttons=Array.from(document.querySelectorAll('#attemptModeCard button'));
+    const first=buttons[0],last=buttons[buttons.length-1];
+    if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+    else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+  }
+});
+function beginAttemptMode(mode){
+  quizMode=mode;
+  examActive=mode==='test';
+  examDuration=data.length*40;
+  examElapsedMs=0;
+  examLastTick=Date.now();
+  examQuestionMs=new Array(data.length).fill(0);
+  examVisited=new Array(data.length).fill(false);
+  examReview=new Array(data.length).fill(false);
+  timerRunning=true; isPaused=false;
+  document.body.classList.toggle('exam-live',examActive);
+  document.body.classList.remove('exam-paused');
+  document.getElementById('score-card').style.display='none';
+  document.getElementById('nextBtn').textContent=examActive?'Save & Next':'Next';
+  document.getElementById('liveTimer').style.color='';
+  document.getElementById('liveTimer').textContent=examActive?formatMMSS(examDuration):'00:00';
+  document.getElementById('qBadge').parentElement.classList.remove('exam-reviewed-answer');
+  if(examActive && typeof window.__pencilForceDisable==='function') window.__pencilForceDisable();
+  updateExamControls();
+}
+function tickExamClock(autoSubmit=true){
+  if(!examActive) return;
+  const now=Date.now();
+  if(!isPaused && timerRunning){
+    const delta=Math.min(Math.max(0,now-examLastTick),Math.max(0,examDuration*1000-examElapsedMs));
+    examElapsedMs+=delta;
+    examQuestionMs[currentQ]=(examQuestionMs[currentQ]||0)+delta;
+    elapsed=Math.floor(examElapsedMs/1000);
+    questionTimes[currentQ]=Math.floor(examQuestionMs[currentQ]/1000);
+    qElapsed=questionTimes[currentQ];
+  }
+  examLastTick=now;
+  const remaining=Math.max(0,Math.ceil((examDuration*1000-examElapsedMs)/1000));
+  const total=document.getElementById('liveTimer');
+  const nextTotal=formatMMSS(remaining);
+  if(total.textContent!==nextTotal) total.textContent=nextTotal;
+  const timerColor=remaining<=60?'#ef4444':remaining<=300?'#d97706':'';
+  if(total.style.color!==timerColor) total.style.color=timerColor;
+  const qt=document.getElementById('qTimer');
+  const nextQuestion=formatMMSS(questionTimes[currentQ]||0);
+  if(qt.textContent!==nextQuestion) qt.textContent=nextQuestion;
+  document.getElementById('popupTime').textContent=formatMMSS(elapsed);
+  document.getElementById('scmTotalTime').textContent=formatHHMMSS(elapsed);
+  if(autoSubmit && !remaining) showScore();
+}
+setInterval(()=>tickExamClock(),250);
+window.addEventListener('visibilitychange',()=>tickExamClock());
+window.addEventListener('pageshow',()=>tickExamClock());
+function paintExamOptions(){
+  const item=data[currentQ],choice=selectedAnswers[currentQ];
+  if(isMultiPartQuestion(item)){
+    document.querySelectorAll('#options .multi-part-option-group').forEach((group,partIndex)=>{
+      group.querySelectorAll('button').forEach((button,index)=>{
+        const selected=Array.isArray(choice)&&choice[partIndex]===index;
+        button.classList.toggle('exam-selected',selected);
+        button.setAttribute('aria-pressed',String(selected));
+        button.disabled=isPaused||!examActive;
+      });
+    });
+  }else{
+    document.querySelectorAll('#options button').forEach((button,index)=>{
+      button.classList.toggle('exam-selected',choice===index);
+      button.setAttribute('aria-pressed',String(choice===index));
+      button.disabled=isPaused||!examActive;
+    });
+  }
+  const feedback=document.getElementById('feedback');
+  feedback.innerHTML='';feedback.style.display='none';
+}
+function updateExamControls(){
+  if(!examActive) return;
+  const blocked=isPaused;
+  ['examMarkBtn','examClearBtn','examUnmarkBtn'].forEach(id=>document.getElementById(id).disabled=blocked);
+  document.getElementById('examPrevBtn').disabled=blocked||currentQ===0;
+  document.getElementById('examUnmarkBtn').hidden=!examReview[currentQ];
+}
+function clearExamAnswer(){
+  if(!examActive || isPaused) return;
+  tickExamClock(); if(!examActive) return;
+  selectedAnswers[currentQ]=null; answered[currentQ]=false; answerCorrect[currentQ]=null;
+  paintExamOptions(); updateQBadge(); updateExamControls();
+}
+function markExamNext(){
+  if(!examActive || isPaused) return;
+  tickExamClock(); if(!examActive) return;
+  examReview[currentQ]=true;
+  updateQBadge(); updateExamControls();
+  next();
+}
+function unmarkExamQuestion(){
+  if(!examActive || isPaused) return;
+  tickExamClock(); if(!examActive) return;
+  examReview[currentQ]=false;
+  updateQBadge(); updateExamControls();
+}
+function examStatusCounts(){
+  const counts={unvisited:0,unanswered:0,answered:0,review:0,reviewAnswered:0};
+  data.forEach((_,i)=>{
+    if(examReview[i]) counts[answered[i]?'reviewAnswered':'review']++;
+    else if(answered[i]) counts.answered++;
+    else counts[examVisited[i]?'unanswered':'unvisited']++;
+  });
+  return counts;
+}
+function renderExamPalette(){
+  const grid=document.getElementById('qpGrid');
+  grid.innerHTML='';
+  const names={unvisited:'Not visited',unanswered:'Not answered',answered:'Answered',review:'Marked for review',reviewAnswered:'Answered & marked for review'};
+  data.forEach((_,index)=>{
+    const button=document.createElement('button');
+    const status=examReview[index]?(answered[index]?'reviewAnswered':'review'):answered[index]?'answered':examVisited[index]?'unanswered':'unvisited';
+    button.type='button';button.textContent=index+1;
+    button.className='exam-'+(status==='reviewAnswered'?'review':status);
+    if(status==='reviewAnswered') button.classList.add('exam-reviewed-answer');
+    if(index===currentQ){button.classList.add('exam-current');button.setAttribute('aria-current','true');}
+    button.setAttribute('aria-label','Question '+(index+1)+': '+names[status]);
+    button.onclick=()=>{goToQuestion(index+1);closeQuestionPalette();};
+    grid.appendChild(button);
+  });
+  const counts=examStatusCounts(),colors={unvisited:'#94a3b8',unanswered:'#ef4444',answered:'#10b981',review:'#8b5cf6',reviewAnswered:'#8b5cf6'};
+  const legend=document.getElementById('examLegend');legend.innerHTML='';
+  Object.keys(names).forEach(key=>{
+    const row=document.createElement('div');row.className='exam-legend-row';
+    const dot=document.createElement('span');dot.className='exam-dot'+(key==='reviewAnswered'?' exam-reviewed-answer':'');dot.style.background=colors[key];
+    const label=document.createElement('span');label.textContent=names[key];
+    const count=document.createElement('strong');count.textContent=counts[key];
+    row.append(dot,label,count);legend.appendChild(row);
+  });
+  document.getElementById('qpSectionTitle').textContent=document.getElementById('quizCategoryLabel').textContent||'Test';
+}
+function updateExamSubmitSummary(){
+  const counts=examStatusCounts();
+  const box=document.getElementById('examSubmitSummary');
+  box.innerHTML='';
+  [['Review with answer',counts.reviewAnswered],['Review without answer',counts.review]].forEach(([label,count])=>{
+    const line=document.createElement('div');line.textContent=label+': '+count;box.appendChild(line);
+  });
+  const note=document.createElement('div');note.textContent='All selected answers, including reviewed ones, will be evaluated.';box.appendChild(note);
+}
+function finishExamAttempt(){
+  tickExamClock(false);
+  // Close overlays through their existing history paths, retaining navigation behavior.
+  if(reportHistoryPushed && typeof closeQuestionReport==='function') closeQuestionReport();
+  else if(qpHistoryPushed) closeQuestionPalette();
+  if(document.getElementById('exitConfirmModal').classList.contains('show')) document.getElementById('exitNoBtn').click();
+  ['submitConfirmModal','submitConfirmFade','pauseModal','pauseFade'].forEach(id=>document.getElementById(id)?.classList.remove('show'));
+  score=0;currentStreak=0;maxStreak=0;
+  data.forEach((item,index)=>{
+    const choice=selectedAnswers[index];
+    const multi=isMultiPartQuestion(item);
+    answered[index]=multi?multiPartSelectionComplete(item,choice):Number.isInteger(choice);
+    answerCorrect[index]=answered[index]?(multi?multiPartSelectionCorrect(item,choice):choice===Number(item.a)):null;
+    if(answerCorrect[index]===true){score++;currentStreak++;maxStreak=Math.max(maxStreak,currentStreak);}
+    else {if(answered[index])score-=1/3;currentStreak=0;}
+  });
+  examActive=false; timerRunning=false; isPaused=false;
+  document.body.classList.remove('exam-live','exam-paused');
+}
+function stopExamOnExit(){
+  tickExamClock(false);
+  examActive=false;
+  document.body.classList.remove('exam-live','exam-paused');
+}
+</script>
 
 </body>
 
