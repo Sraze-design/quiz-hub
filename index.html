@@ -6614,7 +6614,8 @@ if(isMultiPartQuestion(item)&&quizMode==='test'){
       btn.onclick=()=>{
         if(isPaused) return;tickExamClock();if(!examActive) return;
         const values=Array.isArray(selectedAnswers[currentQ])?selectedAnswers[currentQ].slice():new Array(item.subparts.length).fill(null);
-        values[partIndex]=idx;selectedAnswers[currentQ]=values;
+        values[partIndex]=(values[partIndex]===idx)?null:idx;
+        selectedAnswers[currentQ]=values;
         answered[currentQ]=multiPartSelectionComplete(item,values);answerCorrect[currentQ]=null;
         paintExamOptions();updateExamControls();updateQBadge();
       };group.appendChild(btn);
@@ -6711,7 +6712,12 @@ if(isMultiPartQuestion(item)&&quizMode==='test'){
       if(isPaused) return;
       if(quizMode==='test') {
         tickExamClock();if(!examActive)return;
-        selectedAnswers[currentQ]=idx;answered[currentQ]=true;answerCorrect[currentQ]=null;
+        if(selectedAnswers[currentQ]===idx){
+          selectedAnswers[currentQ]=null;answered[currentQ]=false;
+        }else{
+          selectedAnswers[currentQ]=idx;answered[currentQ]=true;
+        }
+        answerCorrect[currentQ]=null;
         paintExamOptions();updateExamControls();updateQBadge();return;
       }
       let btns = oBox.getElementsByTagName("button");
