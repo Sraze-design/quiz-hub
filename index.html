@@ -2522,7 +2522,10 @@ body.exam-live #controls .footer-nav-btn{font-size:clamp(12px,3.3vw,16px);paddin
 body.exam-live #nextBtn{flex:1.2}
 #examNav{align-items:center;gap:10px;padding:4px 16px 0;color:#64748b;font-size:10px;font-weight:750}
 #examNav button{border:0;background:#f1f5f9;border-radius:7px;padding:6px 9px;color:#334155;font-weight:750;cursor:pointer}
-#examNav #examUnmarkBtn{margin-left:auto;background:#f5f0ff;color:#7c3aed}
+#examNav #examReviewToggleBtn{margin-left:auto;width:40px;height:40px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #a78bfa;border-radius:11px;background:#f5f0ff;color:#7c3aed}
+#examNav #examReviewToggleBtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#examNav #examReviewToggleBtn[aria-pressed="true"]{background:#7c3aed;color:#fff;border-color:#7c3aed}
+#examNav #examReviewToggleBtn[aria-pressed="true"] .exam-flag-cloth{fill:currentColor}
 #examNav button[hidden]{display:none}
 #examLegend{flex-direction:column;gap:9px;border:1px solid #e2e8f0;border-radius:14px;padding:14px;margin:8px 0 20px}
 .exam-legend-row{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:650;color:#334155}
@@ -2780,7 +2783,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
         <div id="examNav" class="exam-only">
           <button id="examPrevBtn" type="button" onclick="prevQ()">← Back</button>
           <span>TEST MODE · +1 / −⅓</span>
-          <button id="examUnmarkBtn" type="button" onclick="unmarkExamQuestion()" hidden>Remove review</button>
+          <button id="examReviewToggleBtn" type="button" onclick="toggleExamReview()" aria-label="Mark for review" title="Mark for review" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18"/><path class="exam-flag-cloth" d="M5 5c3-2 5-2 8 0s5 2 8 0v10c-3 2-5 2-8 0s-5-2-8 0V5Z"/></svg></button>
         </div>
         <!-- Question badge + per-question timer pill -->
         <div class="quiz-subheader-row">
@@ -9929,9 +9932,13 @@ function paintExamOptions(){
 function updateExamControls(){
   if(!examActive) return;
   const blocked=isPaused;
-  ['examMarkBtn','examClearBtn','examUnmarkBtn'].forEach(id=>document.getElementById(id).disabled=blocked);
+  ['examMarkBtn','examClearBtn','examReviewToggleBtn'].forEach(id=>document.getElementById(id).disabled=blocked);
   document.getElementById('examPrevBtn').disabled=blocked||currentQ===0;
-  document.getElementById('examUnmarkBtn').hidden=!examReview[currentQ];
+  const reviewButton=document.getElementById('examReviewToggleBtn');
+  const marked=!!examReview[currentQ];
+  reviewButton.setAttribute('aria-pressed',String(marked));
+  reviewButton.setAttribute('aria-label',marked?'Remove from review':'Mark for review');
+  reviewButton.title=marked?'Remove from review':'Mark for review';
 }
 function clearExamAnswer(){
   if(!examActive || isPaused) return;
@@ -9946,10 +9953,10 @@ function markExamNext(){
   updateQBadge(); updateExamControls();
   next();
 }
-function unmarkExamQuestion(){
+function toggleExamReview(){
   if(!examActive || isPaused) return;
   tickExamClock(); if(!examActive) return;
-  examReview[currentQ]=false;
+  examReview[currentQ]=!examReview[currentQ];
   updateQBadge(); updateExamControls();
 }
 function examStatusCounts(){
