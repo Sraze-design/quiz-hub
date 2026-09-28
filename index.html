@@ -2506,7 +2506,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
 let quizMode = 'practice';
 let examActive = false, examDuration = 0, examElapsedMs = 0, examLastTick = 0;
 let examQuestionMs = [], examVisited = [], examReview = [];
-let modePickerResolve = null, modePickerChoice = null, modePickerClosing = false;
+let modePickerResolve = null, modePickerChoice = null, modePickerClosing = false, modePickerUsesHistory = true;
 let quizLaunchBusy = false;
 </script>
 <script>
@@ -4290,7 +4290,13 @@ function pushExplorerHistory(state) {
 }
 
 window.addEventListener('popstate', (e) => {
-  if(modePickerResolve){ finishModePicker(); return; }
+  if(modePickerResolve){
+    const pickerHadHistoryEntry = modePickerUsesHistory;
+    finishModePicker();
+    // The normal test picker does not own a history entry. A device Back
+    // gesture closes it and continues to the explorer's previous screen.
+    if (pickerHadHistoryEntry) return;
+  }
   const d=document.getElementById('appSideDrawer');if(d&&d.classList.contains('active')){closeAppSideDrawer();return}
   // If the AI assistant panel is open, this back-navigation exists only to
   // close it — consume it here and stop.
@@ -5746,7 +5752,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   if(quizLaunchBusy) return;
   quizLaunchBusy=true;
   // Show the mode panel now; load the quiz while the user chooses.
-  const modePromise=chooseQuizMode(0);
+  const modePromise=chooseQuizMode(0, false);
   const thisPicker=modePickerResolve;
   const quizPromise=(async()=>{
     // Let the phone paint the panel before reading/parsing a large question file.
@@ -5766,6 +5772,9 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   });
   const selectedMode=await modePromise;
   if(!selectedMode){quizLaunchBusy=false;return;}
+  // Let WebKit paint the uncovered Test List before recording the quiz's
+  // history entry, so the native swipe preview cannot cache the mode dialog.
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
   const quizQuestions=await quizPromise;
   quizLaunchBusy=false;
   if(!quizQuestions) return;
@@ -9848,8 +9857,9 @@ if ("serviceWorker" in navigator) {
 </div>
 <script id="test-mode-engine">
 let attemptModeSelection='practice', attemptModeCount=0, attemptModePreviousFocus=null;
-function chooseQuizMode(count){
+function chooseQuizMode(count, useHistoryEntry=true){
   if(modePickerResolve) return Promise.resolve(null);
+  modePickerUsesHistory=useHistoryEntry;
   attemptModeCount=count;
   attemptModePreviousFocus=document.activeElement;
   modePickerChoice=null;
@@ -9860,7 +9870,7 @@ function chooseQuizMode(count){
     selectAttemptMode('practice');
     // Create the history entry while the explorer is still visible. On iOS,
     // Back gestures can preview the previous entry before popstate runs.
-    history.pushState({attemptModePicker:true},'');
+    if(modePickerUsesHistory) history.pushState({attemptModePicker:true},'');
     document.getElementById('attemptModeOverlay').hidden=false;
     lockBodyScroll();
     updateAIButtonVisibility();
@@ -9892,7 +9902,8 @@ function requestModePickerClose(choice){
   if(!modePickerResolve || modePickerClosing || (choice && !attemptModeCount)) return;
   modePickerClosing=true;
   modePickerChoice=choice;
-  history.back();
+  if(modePickerUsesHistory) history.back();
+  else finishModePicker();
 }
 function finishModePicker(){
   const resolve=modePickerResolve, choice=modePickerChoice;
