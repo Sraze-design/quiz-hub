@@ -2558,7 +2558,9 @@ body.exam-live #nextBtn{flex:1.2}
 #qpGrid .exam-answered{background:#10b981;color:#fff}
 /* Test mode keeps the base status color; review is shown only as a purple flag. */
 #qpGrid .exam-current{outline:3px solid #1e293b;outline-offset:2px}
+#qpGrid button.exam-review-flag::before{content:'';position:absolute;right:14px;top:-7px;width:2px;height:18px;background:#7c3aed;border-radius:2px;z-index:2}
 #qpGrid button.exam-review-flag::after{content:'';position:absolute;right:3px;top:-7px;width:11px;height:9px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
+.exam-dot.exam-review-flag::before{content:'';position:absolute;right:6px;top:-5px;width:2px;height:12px;background:#7c3aed;border-radius:2px;z-index:2}
 .exam-dot.exam-review-flag::after{content:'';position:absolute;right:-4px;top:-5px;width:8px;height:7px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
 .exam-reviewed-answer{position:relative}
 .exam-instructions{flex-direction:column;gap:12px;font-size:14px;line-height:1.6;color:#475569}
@@ -10030,7 +10032,7 @@ function renderExamPalette(){
     const status=examReview[index]?(isAnswered?'reviewAnswered':'review'):baseStatus;
     button.type='button';button.textContent=index+1;
     button.className='exam-'+baseStatus;
-    if(examReview[index]) button.classList.add('exam-review-flag');
+    if(examReview[index]) button.classList.add('practice-reviewed');
     if(index===currentQ){button.classList.add('exam-current');button.setAttribute('aria-current','true');}
     button.setAttribute('aria-label','Question '+(index+1)+': '+names[status]);
     button.onclick=()=>{goToQuestion(index+1);closeQuestionPalette();};
