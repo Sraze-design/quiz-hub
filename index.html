@@ -9850,9 +9850,11 @@ function chooseQuizMode(count){
     modePickerResolve=resolve;
     document.getElementById('attemptModeCount').textContent=count>0 ? count+' questions · Choose how you want to attempt them.' : 'Loading questions…';
     selectAttemptMode('practice');
+    // Create the history entry while the explorer is still visible. On iOS,
+    // Back gestures can preview the previous entry before popstate runs.
+    history.pushState({attemptModePicker:true},'');
     document.getElementById('attemptModeOverlay').hidden=false;
     lockBodyScroll();
-    history.pushState({attemptModePicker:true},'');
     updateAIButtonVisibility();
     document.getElementById('attemptPractice').focus();
   });
