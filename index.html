@@ -2540,7 +2540,7 @@ body.exam-live #nextBtn{flex:1.2}
 #examSubmitSummary{flex-direction:column;gap:8px;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px;font-size:13px;color:#6d28d9}
 body.exam-paused #question-direction,body.exam-paused #q-text,body.exam-paused #options,body.exam-paused #exam-tag{visibility:hidden!important}
 body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls{pointer-events:none}
-#attemptModeOverlay{position:fixed;inset:0;z-index:210000;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+#attemptModeOverlay{position:fixed;inset:0;z-index:1100000;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px}
 #attemptModeOverlay[hidden]{display:none}
 #attemptModeCard{width:100%;max-width:410px;background:#fff;color:#0f172a;padding:25px;border-radius:22px;box-shadow:0 24px 70px #0003;max-height:90dvh;overflow:auto}
 #attemptModeCard h2{font-size:23px;margin:0 0 7px}
@@ -2554,6 +2554,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
 .attempt-mode-actions button{border:0;border-radius:11px;min-height:46px;padding:10px 15px;font-weight:800;cursor:pointer}
 #attemptModeStart{background:#2563eb;color:white;flex:1}
 #attemptModeCancel{background:#f1f5f9;color:#475569}
+#attemptModeStart:disabled{opacity:.55;cursor:wait}
 </style>
 </head>
 <body>
@@ -5721,15 +5722,30 @@ function resetQuizPauseUIForFreshStart(){
 async function loadQuizData(quizPath, requestedQuestionIndex) {
   if(quizLaunchBusy) return;
   quizLaunchBusy=true;
-  let quizQuestions, selectedMode;
-  try {
+  // Show the mode panel now; load the quiz while the user chooses.
+  const modePromise=chooseQuizMode(0);
+  const thisPicker=modePickerResolve;
+  const quizPromise=(async()=>{
+    // Let the phone paint the panel before reading/parsing a large question file.
+    await new Promise(resolve=>requestAnimationFrame(()=>setTimeout(resolve,0)));
+    if(modePickerResolve!==thisPicker) return null;
     const response=await fetchQuizFile(quizPath);
-    quizQuestions=parseQuizDataSource(await response.text());
-    if(!Array.isArray(quizQuestions)||!quizQuestions.length) throw new Error('No questions found');
-    selectedMode=await chooseQuizMode(quizQuestions.length);
-  } catch(err) { alert('Test could not be opened: '+err.message); }
-  finally { quizLaunchBusy=false; }
-  if(!selectedMode) return;
+    if(modePickerResolve!==thisPicker) return null;
+    const source=await response.text();
+    if(modePickerResolve!==thisPicker) return null;
+    const questions=parseQuizDataSource(source);
+    if(!Array.isArray(questions)||!questions.length) throw new Error('No questions found');
+    if(modePickerResolve===thisPicker) updateAttemptModeCount(questions.length);
+    return questions;
+  })().catch(err=>{
+    if(modePickerResolve===thisPicker) showAttemptModeLoadError(err);
+    return null;
+  });
+  const selectedMode=await modePromise;
+  if(!selectedMode){quizLaunchBusy=false;return;}
+  const quizQuestions=await quizPromise;
+  quizLaunchBusy=false;
+  if(!quizQuestions) return;
   showLoader(true);
   // A newly launched test must never inherit the previous test's Analysis UI
   // or response snapshot, even if navigation happened through browser Back.
@@ -7318,8 +7334,8 @@ function upd(){
  var isCorrect=(typeof answerCorrect!=='undefined'&&answerCorrect)?answerCorrect[idx]:null;
  var target=pill||b;
  if(examActive){
-   target.style.background=examReview[idx]?'#8b5cf6':isAns?'#10b981':'#ef4444';
-   target.classList.toggle('exam-reviewed-answer',!!examReview[idx]&&isAns);
+   target.style.background=isAns?'#10b981':'#94a3b8';
+   target.classList.remove('exam-reviewed-answer');
    return;
  }
  target.classList.remove('exam-reviewed-answer');
@@ -9783,7 +9799,7 @@ function chooseQuizMode(count){
   modePickerClosing=false;
   return new Promise(resolve=>{
     modePickerResolve=resolve;
-    document.getElementById('attemptModeCount').textContent=count+' questions · Choose how you want to attempt them.';
+    document.getElementById('attemptModeCount').textContent=count>0 ? count+' questions · Choose how you want to attempt them.' : 'Loading questions…';
     selectAttemptMode('practice');
     document.getElementById('attemptModeOverlay').hidden=false;
     lockBodyScroll();
@@ -9792,17 +9808,29 @@ function chooseQuizMode(count){
     document.getElementById('attemptPractice').focus();
   });
 }
+function updateAttemptModeCount(count){
+  if(!modePickerResolve) return;
+  attemptModeCount=count;
+  document.getElementById('attemptModeCount').textContent=count+' questions · Choose how you want to attempt them.';
+  selectAttemptMode(attemptModeSelection);
+}
+function showAttemptModeLoadError(error){
+  document.getElementById('attemptModeCount').textContent='Questions could not be loaded. Please close and try again.';
+  document.getElementById('attemptModeDetails').textContent=error.message||'Loading failed.';
+  document.getElementById('attemptModeStart').disabled=true;
+}
 function selectAttemptMode(mode){
   attemptModeSelection=mode;
   document.getElementById('attemptPractice').setAttribute('aria-pressed',String(mode==='practice'));
   document.getElementById('attemptTest').setAttribute('aria-pressed',String(mode==='test'));
   document.getElementById('attemptModeStart').textContent=mode==='test'?'Start Test':'Start Practice';
-  document.getElementById('attemptModeDetails').textContent=mode==='test'
+  document.getElementById('attemptModeStart').disabled=attemptModeCount===0;
+  document.getElementById('attemptModeDetails').textContent=attemptModeCount===0 ? 'Preparing questions…' : mode==='test'
     ? 'Time: '+formatHHMMSS(attemptModeCount*40)+' · +1 correct / −⅓ wrong · Timer starts when you press Start Test.'
     : 'Practice at your own pace with instant feedback.';
 }
 function requestModePickerClose(choice){
-  if(!modePickerResolve || modePickerClosing) return;
+  if(!modePickerResolve || modePickerClosing || (choice && !attemptModeCount)) return;
   modePickerClosing=true;
   modePickerChoice=choice;
   history.back();
@@ -9843,7 +9871,7 @@ function beginAttemptMode(mode){
   document.body.classList.remove('exam-paused');
   document.getElementById('score-card').style.display='none';
   document.getElementById('nextBtn').textContent=examActive?'Save & Next':'Next';
-  document.getElementById('liveTimer').style.color='';
+  document.getElementById('liveTimer').style.color=examActive?'#ffffff':'';
   document.getElementById('liveTimer').textContent=examActive?formatMMSS(examDuration):'00:00';
   document.getElementById('qBadge').parentElement.classList.remove('exam-reviewed-answer');
   if(examActive && typeof window.__pencilForceDisable==='function') window.__pencilForceDisable();
@@ -9865,7 +9893,7 @@ function tickExamClock(autoSubmit=true){
   const total=document.getElementById('liveTimer');
   const nextTotal=formatMMSS(remaining);
   if(total.textContent!==nextTotal) total.textContent=nextTotal;
-  const timerColor=remaining<=60?'#ef4444':remaining<=300?'#d97706':'';
+  const timerColor='#ffffff';
   if(total.style.color!==timerColor) total.style.color=timerColor;
   const qt=document.getElementById('qTimer');
   const nextQuestion=formatMMSS(questionTimes[currentQ]||0);
