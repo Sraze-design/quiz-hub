@@ -2441,9 +2441,11 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 #practiceReviewBtn[aria-pressed="true"] .practice-flag-cloth{fill:currentColor}
 body.exam-live #practiceReviewBtn{display:none!important}
 #qpGrid button.practice-reviewed{position:relative}
-#qpGrid button.practice-reviewed::before{content:'';position:absolute;right:14px;top:-7px;width:2px;height:18px;background:#7c3aed;border-radius:2px;z-index:2}
-#qpGrid button.practice-reviewed::after{content:'';position:absolute;right:3px;top:-7px;width:11px;height:9px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
 #qpGrid button.practice-reviewed.qp-current{outline:2px solid #1e293b;outline-offset:2px}
+.review-flag-marker{position:absolute;right:-2px;top:-9px;width:19px;height:21px;display:block;overflow:visible;pointer-events:none;z-index:5}
+.review-flag-marker .review-flag-pole{stroke:#7c3aed;stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.review-flag-marker .review-flag-cloth{fill:#8b5cf6}
+.review-flag-marker.legend{right:-8px;top:-7px;width:16px;height:18px;z-index:3}
 .analysis-report-btn{background:#f1f5f9;color:#64748b;border-color:#e2e8f0}
 .analysis-question{font-size:16px;font-weight:750;line-height:1.55;margin-bottom:12px;overflow-wrap:anywhere}
 .analysis-question img{display:block;max-width:100%;height:auto;margin:12px auto;object-fit:contain}
@@ -2461,8 +2463,6 @@ body.exam-live #practiceReviewBtn{display:none!important}
 .analysis-palette-head{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border,#e2e8f0);font-size:18px;font-weight:900}.analysis-palette-head button{border:0;background:var(--bg-soft,#f1f5f9);border-radius:10px;width:38px;height:38px;font-size:22px;color:inherit}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
 .analysis-palette-q.reviewed{position:relative}
-.analysis-palette-q.reviewed::before{content:'';position:absolute;right:14px;top:-7px;width:2px;height:18px;background:#7c3aed;border-radius:2px;z-index:2}
-.analysis-palette-q.reviewed::after{content:'';position:absolute;right:3px;top:-7px;width:11px;height:9px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
 @media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:17px;line-height:1.52}.result-analysis-btn{font-size:13px;padding:9px 12px}.analysis-actions{gap:5px}.analysis-action-btn{height:36px;border-radius:10px}.analysis-report-btn,.analysis-bookmark-btn{width:36px}.analysis-lang-btn{width:62px;padding:0 6px}.analysis-type-label{font-size:10.5px}}
 @media(max-width:340px){.analysis-card{padding:11px}.analysis-qno{font-size:14px}.analysis-actions{gap:4px}.analysis-action-btn{height:34px}.analysis-report-btn,.analysis-bookmark-btn{width:34px}.analysis-lang-btn{width:58px}.analysis-question{font-size:16px}}
@@ -2558,10 +2558,6 @@ body.exam-live #nextBtn{flex:1.2}
 #qpGrid .exam-answered{background:#10b981;color:#fff}
 /* Test mode keeps the base status color; review is shown only as a purple flag. */
 #qpGrid .exam-current{outline:3px solid #1e293b;outline-offset:2px}
-#qpGrid button.exam-review-flag::before{content:'';position:absolute;right:14px;top:-7px;width:2px;height:18px;background:#7c3aed;border-radius:2px;z-index:2}
-#qpGrid button.exam-review-flag::after{content:'';position:absolute;right:3px;top:-7px;width:11px;height:9px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
-.exam-dot.exam-review-flag::before{content:'';position:absolute;right:6px;top:-5px;width:2px;height:12px;background:#7c3aed;border-radius:2px;z-index:2}
-.exam-dot.exam-review-flag::after{content:'';position:absolute;right:-4px;top:-5px;width:8px;height:7px;background:#8b5cf6;clip-path:polygon(0 0,100% 0,72% 50%,100% 100%,0 100%);z-index:2;filter:drop-shadow(0 1px 1px rgba(15,23,42,.18))}
 .exam-reviewed-answer{position:relative}
 .exam-instructions{flex-direction:column;gap:12px;font-size:14px;line-height:1.6;color:#475569}
 #examSubmitSummary{flex-direction:column;gap:8px;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px;font-size:13px;color:#6d28d9}
@@ -6276,6 +6272,7 @@ function renderAnalysisPalette(){
     button.type='button';
     button.className='analysis-palette-q '+record.status+(record.reviewed?' reviewed':'')+(index===resultAnalysisPosition?' current':'');
     button.textContent=record.originalIndex+1;
+    if(record.reviewed) appendReviewFlagMarker(button);
     button.setAttribute('aria-label','Question '+(record.originalIndex+1)+' '+record.status+(record.reviewed?' marked for review':''));
     button.onclick=()=>{
       resultAnalysisPosition=index;
@@ -7064,6 +7061,26 @@ function qpSwitchTab(which){
   }
 }
 
+function appendReviewFlagMarker(target,variant){
+  if(!target || target.querySelector('.review-flag-marker')) return;
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','0 0 18 20');
+  svg.setAttribute('aria-hidden','true');
+  svg.setAttribute('focusable','false');
+  svg.classList.add('review-flag-marker');
+  if(variant==='legend') svg.classList.add('legend');
+  const pole=document.createElementNS(ns,'path');
+  pole.setAttribute('d','M4 1.5 V18.5');
+  pole.setAttribute('class','review-flag-pole');
+  const cloth=document.createElementNS(ns,'path');
+  cloth.setAttribute('d','M5 2.5 H16 L12.8 6.7 L16 11 H5 Z');
+  cloth.setAttribute('class','review-flag-cloth');
+  svg.appendChild(pole);
+  svg.appendChild(cloth);
+  target.appendChild(svg);
+}
+
 function renderQuestionPalette(){
   if(examActive) { renderExamPalette(); return; }
   const grid = document.getElementById('qpGrid');
@@ -7089,6 +7106,7 @@ function renderQuestionPalette(){
     if(i === currentQ) btn.classList.add('qp-current');
     if(examReview[i]){
       btn.classList.add('practice-reviewed');
+      appendReviewFlagMarker(btn);
       btn.setAttribute('aria-label','Question '+(i+1)+': '+(isAnswered?(answerCorrect[i]===false?'Wrong':'Correct')+' and marked for review':'Marked for review'));
     }
     btn.onclick = () => {
@@ -10032,7 +10050,7 @@ function renderExamPalette(){
     const status=examReview[index]?(isAnswered?'reviewAnswered':'review'):baseStatus;
     button.type='button';button.textContent=index+1;
     button.className='exam-'+baseStatus;
-    if(examReview[index]) button.classList.add('practice-reviewed');
+    if(examReview[index]){button.classList.add('practice-reviewed');appendReviewFlagMarker(button);}
     if(index===currentQ){button.classList.add('exam-current');button.setAttribute('aria-current','true');}
     button.setAttribute('aria-label','Question '+(index+1)+': '+names[status]);
     button.onclick=()=>{goToQuestion(index+1);closeQuestionPalette();};
@@ -10044,6 +10062,7 @@ function renderExamPalette(){
     const row=document.createElement('div');row.className='exam-legend-row';
     const reviewed=key==='review'||key==='reviewAnswered';
     const dot=document.createElement('span');dot.className='exam-dot'+(reviewed?' exam-review-flag':'');dot.style.background=colors[key];
+    if(reviewed) appendReviewFlagMarker(dot,'legend');
     const label=document.createElement('span');label.textContent=names[key];
     const count=document.createElement('strong');count.textContent=counts[key];
     row.append(dot,label,count);legend.appendChild(row);
