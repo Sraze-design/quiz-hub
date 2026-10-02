@@ -124,7 +124,7 @@ body {
   display: flex;
 }
 
-/* Explorer navigation should never inherit the previous page/list scroll offset. */
+/* Restore explorer scroll explicitly after its list has been rendered. */
 .explorer-screen, #explorerList {
   overflow-anchor: none;
 }
@@ -3735,7 +3735,6 @@ function openMyReportsFromMenu(){closeAppSideDrawer();renderMyReports()}
 function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError();const __playBtn=document.getElementById('playBookmarkedTestBtn');if(__playBtn){__playBtn.style.display='none';__playBtn.dataset.subject='';__playBtn.dataset.path='';}}
 function restoreNormalExplorerSearch(){const e=document.querySelector('.search-container');if(e)e.style.display='block'}
 function renderMyReports(){
-  resetExplorerScrollPosition();
   pushExplorerHistory({screen:'myReports'});
   prepareBookmarkExplorer('My Reports');
   const list=document.getElementById('explorerList');
@@ -3813,7 +3812,6 @@ function groupBookmarks(items, keyFn){
   return g;
 }
 function renderBookmarkSubjects(){
-  resetExplorerScrollPosition();
   pushExplorerHistory({screen:'bookmarks'});
   prepareBookmarkExplorer('Bookmarks');
   const l=document.getElementById('explorerList'); l.innerHTML='';
@@ -3826,7 +3824,6 @@ function renderBookmarkSubjects(){
   });
 }
 function renderBookmarkLevel2(subject){
-  resetExplorerScrollPosition();
   const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject);
   const hasCategory=bs.some(b=>b.category);
   pushExplorerHistory({screen:'bookmarkLevel2',subject:subject});
@@ -3843,7 +3840,6 @@ function renderBookmarkLevel2(subject){
   }
 }
 function renderBookmarkChapters(subject,category){
-  resetExplorerScrollPosition();
   const bs=getBookmarks().filter(b=>(b.subject||'Other')===subject&&(!category||b.category===category));
   const hasChapter=bs.some(b=>b.chapter);
   if(!hasChapter){ renderBookmarkTests(subject,category,null); return; }
@@ -3878,7 +3874,6 @@ function removeBookmarkFromList(bookmarkId,subject,path){
   renderBookmarkQuestions(subject,path);
 }
 function renderBookmarkQuestions(subject,path){
-  resetExplorerScrollPosition();
   pushExplorerHistory({screen:'bookmarkQuestions',subject:subject,path:path});
   const l=document.getElementById('explorerList');
   const items=getBookmarks().filter(b=>(b.subject||'Other')===subject&&bookmarkTestKeyOf(b)===path).sort((a,b)=>a.questionIndex-b.questionIndex);
@@ -3938,6 +3933,7 @@ async function openBookmarkedQuestion(bookmark){
     timerRunning=true; isPaused=false;
     answered=[false]; selectedAnswers=[null]; answerCorrect=[null]; questionTimes=[0];
     beginAttemptMode('practice');
+    saveExplorerScrollPosition();
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
     if (typeof lockBodyScroll === 'function') lockBodyScroll();
@@ -4035,6 +4031,7 @@ async function startBookmarkedTestQuiz(bookmarks){
     resetQuizPauseUIForFreshStart();
     beginAttemptMode(selectedMode);
 
+    saveExplorerScrollPosition();
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
     if (typeof lockBodyScroll === 'function') lockBodyScroll();
@@ -4243,50 +4240,73 @@ function showExitConfirmModal(onYes) {
 }
 
 
-/* ===== Explorer scroll reset =====
-   iOS Safari/Android browsers may restore an old document scroll offset after
-   the explorer DOM is re-rendered (especially after leaving Analysis/Quiz).
-   Force every explorer screen to open from its true top instead. */
+/* ===== Explorer scroll history =====
+   New lists start at the top; Back/Forward restores that history entry's
+   position after rendering. Keep delayed iOS updates tied to one navigation. */
 try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (_) {}
+let explorerScrollGeneration = 0;
+let explorerScrollRestoring = false;
 
-function resetExplorerScrollPosition(){
-  const resetNow = () => {
-    const explorer = document.getElementById('explorerScreen');
-    const list = document.getElementById('explorerList');
-    const container = document.querySelector('.container');
-    const targets = [explorer, list, container, document.scrollingElement, document.documentElement, document.body];
-    targets.forEach(el => {
-      if (!el) return;
-      try { el.scrollTop = 0; el.scrollLeft = 0; } catch (_) {}
-    });
-    try { window.scrollTo(0, 0); } catch (_) {}
-  };
-
-  resetNow();
-  requestAnimationFrame(() => {
-    resetNow();
-    requestAnimationFrame(resetNow);
-  });
-  setTimeout(resetNow, 60);
-  setTimeout(resetNow, 180);
+function explorerScrollTargets(){
+  return [document.scrollingElement, document.documentElement, document.body,
+    document.querySelector('.container'), document.getElementById('explorerScreen'),
+    document.getElementById('explorerList')];
 }
-
-window.addEventListener('pageshow', () => {
+function saveExplorerScrollPosition(){
   const explorer = document.getElementById('explorerScreen');
-  const quizEngine = document.getElementById('quizEngineBox');
-  if (explorer && (!quizEngine || quizEngine.style.display === 'none')) {
-    resetExplorerScrollPosition();
-  }
+  const quiz = document.getElementById('quizEngineBox');
+  const loader = document.getElementById('explorerLoader');
+  if (isHistoryNav || explorerScrollRestoring || !explorer || explorer.style.display === 'none' ||
+      (quiz && quiz.style.display !== 'none') || loader?.style.display === 'block' ||
+      document.body.style.position === 'fixed') return;
+  const explorerScroll = {
+    x: window.scrollX || 0, y: window.scrollY || 0,
+    targets: explorerScrollTargets().map(el => el ? [el.scrollLeft, el.scrollTop] : [0, 0])
+  };
+  history.replaceState({ ...(history.state || {screen:'subjects'}), explorerScroll }, '');
+}
+function restoreExplorerScrollPosition(position){
+  const generation = ++explorerScrollGeneration;
+  explorerScrollRestoring = true;
+  const apply = () => {
+    if (generation !== explorerScrollGeneration) return;
+    const quiz = document.getElementById('quizEngineBox');
+    if (quiz && quiz.style.display !== 'none') return;
+    explorerScrollTargets().forEach((el, index) => {
+      if (!el) return;
+      const offset = position?.targets?.[index] || [0, 0];
+      el.scrollLeft = offset[0]; el.scrollTop = offset[1];
+    });
+    window.scrollTo(position?.x || 0, position?.y || 0);
+  };
+  apply();
+  requestAnimationFrame(() => { apply(); requestAnimationFrame(apply); });
+  setTimeout(apply, 60);
+  setTimeout(() => {
+    apply();
+    if (generation === explorerScrollGeneration) explorerScrollRestoring = false;
+  }, 180);
+}
+function resetExplorerScrollPosition(){ restoreExplorerScrollPosition(null); }
+function stopExplorerScrollRestore(){
+  ++explorerScrollGeneration;
+  explorerScrollRestoring = false;
+}
+// A new gesture takes precedence over any pending restoration retry.
+['touchstart', 'pointerdown', 'wheel'].forEach(type =>
+  document.addEventListener(type, stopExplorerScrollRestore, {passive:true, capture:true}));
+document.addEventListener('scroll', saveExplorerScrollPosition, {passive:true, capture:true});
+window.addEventListener('pagehide', saveExplorerScrollPosition);
+window.addEventListener('pageshow', event => {
+  if (event.persisted) restoreExplorerScrollPosition(history.state?.explorerScroll);
 });
 
 function pushExplorerHistory(state) {
-  // During a browser/device Back render, keep suppressing pushes for the
-  // entire nested render chain. Bookmark navigation can skip empty category
-  // or chapter levels by calling another renderer immediately; consuming the
-  // flag here used to let that nested renderer push the same final screen
-  // again, trapping iPad Back navigation on that screen.
+  // Suppress pushes for the entire nested Back render chain.
   if (isHistoryNav) return;
+  saveExplorerScrollPosition();
   history.pushState(state, '');
+  if (state.screen !== 'quiz') resetExplorerScrollPosition();
 }
 
 window.addEventListener('popstate', (e) => {
@@ -4388,7 +4408,7 @@ window.addEventListener('popstate', (e) => {
   // Once the user actually leaves, turn it back into the ordinary Test List.
   const wasQuizExitGuard = e.state?.screen === 'quizExitGuard';
   const state = wasQuizExitGuard
-    ? { screen: 'quizlist', subject: e.state.subject, category: e.state.category, chapter: e.state.chapter }
+    ? { ...e.state, screen: 'quizlist' }
     : (e.state || { screen: 'subjects' });
   if (wasQuizExitGuard) history.replaceState(state, '');
 
@@ -4403,7 +4423,6 @@ window.addEventListener('popstate', (e) => {
     if (state.screen !== 'quiz' || !e.state?.bookmarkOnly) isBookmarkOnlyQuiz = false;
     if (typeof unlockBodyScroll === 'function') unlockBodyScroll();
     document.getElementById('explorerScreen').style.display = 'flex';
-    resetExplorerScrollPosition();
     document.getElementById('score-card').style.display = 'none';
     if(examActive) stopExamOnExit();
     timerRunning = false;
@@ -4448,7 +4467,7 @@ window.addEventListener('popstate', (e) => {
   } finally {
     // A fresh user click after Back must be allowed to create its own entry.
     isHistoryNav = false;
-    resetExplorerScrollPosition();
+    restoreExplorerScrollPosition(state.explorerScroll);
   }
 });
 
@@ -4466,7 +4485,6 @@ function cleanHumanReadableTitle(rawString) {
 }
 
 function renderSubjects() {
-  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = null;
   currentCategory = null;
@@ -4531,7 +4549,6 @@ function renderSubjects() {
 }
 
 function renderCategories(subjectName) {
-  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = null;
@@ -4592,7 +4609,6 @@ function renderCategories(subjectName) {
 }
 
 function renderChapters(subjectName, categoryName) {
-  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = categoryName || null;
@@ -4658,7 +4674,6 @@ function renderChapters(subjectName, categoryName) {
 }
 
 function renderQuizList(subjectName, categoryName, chapterName) {
-  resetExplorerScrollPosition();
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = categoryName || null;
@@ -4776,6 +4791,7 @@ function handleSearch(query) {
 function handleExplorerBack() {
   // Route through browser history so the on-screen arrow and the phone's
   // hardware back button stay perfectly in sync (popstate does the actual render).
+  saveExplorerScrollPosition();
   history.back();
 }
 
@@ -5828,6 +5844,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     resetQuizPauseUIForFreshStart();
     beginAttemptMode(selectedMode);
     
+    saveExplorerScrollPosition();
     document.getElementById('explorerScreen').style.display='none';
     document.getElementById('quizEngineBox').style.display='flex';
     if (typeof lockBodyScroll === 'function') lockBodyScroll();
@@ -5855,7 +5872,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     // temporarily make that parent a quiz preview: iOS shows it during the
     // native Back gesture before popstate can display exit confirmation.
     const __hist = history.state || {};
-    const __listState = { screen: 'quizlist', subject: currentSubject, category: currentCategory, chapter: currentChapter };
+    const __listState = { screen: 'quizlist', subject: currentSubject, category: currentCategory, chapter: currentChapter, explorerScroll: __hist.explorerScroll };
     if (__hist.screen !== 'quizlist' || __hist.subject !== currentSubject || __hist.chapter !== currentChapter) {
       history.pushState(__listState, '');
     }
@@ -5880,6 +5897,8 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
 }
 
 function showLoader(isVisible) {
+  // Capture the list before removing its cards (which can clamp document scroll).
+  if (isVisible) saveExplorerScrollPosition();
   document.getElementById('explorerLoader').style.display = isVisible ? "block" : "none";
   if (isVisible) {
     document.getElementById('explorerList').innerHTML = "";
@@ -9860,6 +9879,7 @@ let attemptModeSelection='practice', attemptModeCount=0, attemptModePreviousFocu
 function chooseQuizMode(count, useHistoryEntry=true){
   if(modePickerResolve) return Promise.resolve(null);
   modePickerUsesHistory=useHistoryEntry;
+  saveExplorerScrollPosition();
   attemptModeCount=count;
   attemptModePreviousFocus=document.activeElement;
   modePickerChoice=null;
@@ -9910,7 +9930,7 @@ function finishModePicker(){
   modePickerResolve=null; modePickerChoice=null; modePickerClosing=false;
   document.getElementById('attemptModeOverlay').hidden=true;
   unlockBodyScroll();
-  if(attemptModePreviousFocus?.isConnected) attemptModePreviousFocus.focus();
+  if(attemptModePreviousFocus?.isConnected) attemptModePreviousFocus.focus({preventScroll:true});
   updateAIButtonVisibility();
   if(resolve) resolve(choice);
 }
