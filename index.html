@@ -2410,7 +2410,14 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 #pencilInputCheck { display: none !important; visibility: hidden !important; }
 </style>
 <style>
-.result-analysis-row{display:flex;justify-content:flex-end;margin:0 0 12px}
+.result-analysis-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px}
+.result-download{position:relative}
+.result-download>summary{list-style:none}
+.result-download>summary::-webkit-details-marker{display:none}
+.result-download-menu{position:absolute;top:calc(100% + 7px);left:0;z-index:20;min-width:185px;padding:6px;background:var(--card-bg,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;box-shadow:0 8px 24px #0002}
+.result-download-menu button{display:block;width:100%;border:0;border-radius:8px;padding:12px;text-align:left;background:transparent;color:var(--text,#111827);font-size:14px;font-weight:700;cursor:pointer}
+.result-download-menu button:hover,.result-download-menu button:focus-visible{background:var(--bg-soft,#eff6ff)}
+.result-download[aria-busy="true"]{opacity:.65;pointer-events:none}
 .result-analysis-btn{border:0;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;font-size:14px;padding:10px 15px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 8px 20px rgba(37,99,235,.22);cursor:pointer}
 .result-analysis-btn:active{transform:scale(.97)}
 #resultAnalysisModal{position:fixed;inset:0;z-index:13000;background:var(--card-bg,#fff);display:none;flex-direction:column;color:var(--text,#111827)}
@@ -2914,6 +2921,16 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
         <!-- REDESIGNED PREMIUM RESULT SCREEN PAGE -->
         <div id="score-card" style="display:none;" class="premium-result-screen">
           <div class="result-analysis-row">
+            <details class="result-download" id="resultDownload">
+              <summary class="result-analysis-btn" aria-label="Download this quiz attempt data">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>
+                <span>Download Data</span>
+              </summary>
+              <div class="result-download-menu">
+                <button type="button" onclick="downloadResultData('html')">HTML Report</button>
+                <button type="button" onclick="downloadResultData('json')">JSON for AI</button>
+              </div>
+            </details>
             <button type="button" class="result-analysis-btn" onclick="openResultAnalysis('all')" aria-label="Open result analysis">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19V3"/></svg>
               <span>Analysis</span>
@@ -6160,6 +6177,14 @@ function captureResultAnalysis(){
     chapterLabel:document.getElementById('quizCategoryLabel')?.textContent?.trim()||'',
     path:currentQuizPath||'',
     savedAt:Date.now(),
+    mode:quizMode,
+    isRetest:!!isRetestAttempt,
+    subject:currentSubject||'',
+    category:currentCategory||'',
+    chapter:currentChapter||'',
+    elapsedSeconds:Math.max(0,Number(elapsed)||0),
+    score:Number(score)||0,
+    highestStreak:maxStreak,
     items
   };
   // Save only the compact response map. Question text/images remain in the
@@ -6173,6 +6198,206 @@ function captureResultAnalysis(){
     }));
   }catch(_){ }
 }
+
+// Export the completed attempt, independent of the active Analysis filter/language.
+function buildResultExport(snapshot){
+  const round=n=>Math.round(n*100)/100;
+  const field=(item,key,lang)=>item[key+'_'+lang]??item[key+'_hi']??item[key+'_en']??item[key]??'';
+  const plain=value=>{
+    const box=document.createElement('div');
+    box.innerHTML=formatContent(value);
+    box.querySelectorAll('script,style,iframe,object').forEach(el=>el.remove());
+    box.querySelectorAll('br').forEach(el=>el.replaceWith('\n'));
+    return (box.textContent||'').trim();
+  };
+  const option=(index,options)=>Number.isInteger(index)&&Array.isArray(options)&&index>=0&&index<options.length
+    ? {index,label:String.fromCharCode(65+index),text:plain(options[index]),html:options[index]} : null;
+  const questions=snapshot.items.map((record,i)=>{
+    const item=record.item;
+    const hi=field(item,'o','hi'),en=field(item,'o','en');
+    const row={
+      attemptQuestionNumber:i+1,originalQuestionNumber:record.originalIndex+1,
+      status:record.status,timeSeconds:record.time,markedForReview:!!record.reviewed,
+      type:plain(field(item,'type_tag','hi')||field(item,'type','hi'))||'Unspecified',
+      examTag:plain(field(item,'tag','hi')),
+      questionText:{hi:plain(field(item,'q','hi')),en:plain(field(item,'q','en'))},
+      optionsText:{hi:Array.isArray(hi)?hi.map(plain):[],en:Array.isArray(en)?en.map(plain):[]},
+      selectedOptionIndex:record.selected??null,correctOptionIndex:record.correct,
+      selectedAnswer:{hi:option(record.selected,hi),en:option(record.selected,en)},
+      correctAnswer:{hi:option(record.correct,hi),en:option(record.correct,en)},
+      questionData:JSON.parse(JSON.stringify(item))
+    };
+    if(isMultiPartQuestion(item)) row.subparts=item.subparts.map((part,p)=>({
+      label:part.label||String(p+1),
+      selectedAnswer:{hi:option(record.selected?.[p],field(part,'o','hi')),en:option(record.selected?.[p],field(part,'o','en'))},
+      correctAnswer:{hi:option(Number(part.a),field(part,'o','hi')),en:option(Number(part.a),field(part,'o','en'))}
+    }));
+    return row;
+  });
+  const stats=rows=>{
+    const total=rows.length,correct=rows.filter(q=>q.status==='correct').length,
+      wrong=rows.filter(q=>q.status==='wrong').length,skipped=total-correct-wrong,attempted=correct+wrong;
+    const time=rows.reduce((sum,q)=>sum+q.timeSeconds,0);
+    const average=status=>{
+      const group=rows.filter(q=>q.status===status);
+      return group.length?round(group.reduce((sum,q)=>sum+q.timeSeconds,0)/group.length):null;
+    };
+    return {total,attempted,correct,wrong,skipped,accuracyPercent:attempted?round(correct/attempted*100):null,
+      recordedQuestionTimeSeconds:time,averageTimeSeconds:total?round(time/total):null,
+      averageCorrectTimeSeconds:average('correct'),averageWrongTimeSeconds:average('wrong'),averageSkippedTimeSeconds:average('skipped'),
+      markedForReview:rows.filter(q=>q.markedForReview).length,
+      skippedAfterSpendingTime:rows.filter(q=>q.status==='skipped'&&q.timeSeconds>0).length};
+  };
+  const groups=new Map();
+  questions.forEach(q=>{if(!groups.has(q.type))groups.set(q.type,[]);groups.get(q.type).push(q);});
+  return {schemaVersion:1,scope:'current_completed_attempt',
+    test:snapshot.test,chapterLabel:snapshot.chapterLabel,path:snapshot.path,
+    subject:snapshot.subject||'',category:snapshot.category||'',chapter:snapshot.chapter||'',
+    mode:snapshot.mode||'practice',isRetest:!!snapshot.isRetest,
+    completedAt:new Date(snapshot.savedAt).toISOString(),exportedAt:new Date().toISOString(),
+    summary:{...stats(questions),score:snapshot.score,maximumScore:questions.length,
+      scoring:{correct:1,wrong:-1/3,skipped:0},elapsedSeconds:snapshot.elapsedSeconds,highestStreak:snapshot.highestStreak},
+    byType:Array.from(groups,([type,rows])=>({type,...stats(rows)})),
+    notes:['Option indices are zero-based; A=0, B=1. Correct answers come from the stored quiz answer key.',
+      'Includes all questions in this completed attempt, including skipped questions and partial multi-part responses.',
+      'Time is recorded quiz time, not proof of reading or thinking. Null averages mean no questions in that group.',
+      'Reasons for mistakes and unrecorded answer changes cannot be inferred from these records.'],
+    aiAnalysisRequest:'Analyze chapter/type accuracy, time on correct/wrong/skipped questions, and repeated errors. Prioritize revision and practice with question-number references. Distinguish evidence from guesses; do not invent reasons for mistakes or missing history.',
+    questions};
+}
+
+function resultExportEscape(value){
+  return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function resultExportContent(value){
+  const template=document.createElement('template');
+  template.innerHTML=formatContent(value);
+  const allowed=new Set(['BR','B','STRONG','I','EM','U','S','SUP','SUB','SPAN','DIV','P','UL','OL','LI','TABLE','THEAD','TBODY','TR','TH','TD','IMG','SVG','G','PATH','LINE','POLYLINE','POLYGON','CIRCLE','ELLIPSE','RECT','TEXT','TSPAN']);
+  template.content.querySelectorAll('*').forEach(el=>{
+    if(['SCRIPT','STYLE','IFRAME','OBJECT','EMBED','LINK','META','FORM','INPUT','BUTTON'].includes(el.tagName.toUpperCase())){el.remove();return;}
+    if(!allowed.has(el.tagName.toUpperCase())){el.replaceWith(...el.childNodes);return;}
+    for(const attr of Array.from(el.attributes)){
+      const name=attr.name.toLowerCase();
+      if(name.startsWith('on')||['href','xlink:href','srcset','id'].includes(name)||(name==='style'&&/url\s*\(|expression\s*\(|position\s*:|behavior\s*:/i.test(attr.value)))el.removeAttribute(attr.name);
+    }
+    if(el.tagName==='IMG'){
+      try{
+        const source=new URL(el.getAttribute('src')||'',document.baseURI);
+        if(!['https:','http:','data:','blob:'].includes(source.protocol)||(source.protocol==='data:'&&!/^data:image\//i.test(source.href)))el.remove();
+        else el.setAttribute('src',source.href);
+      }catch(_){el.remove();}
+    }
+  });
+  return template.innerHTML;
+}
+
+function renderResultExportHTML(report){
+  const esc=resultExportEscape,content=resultExportContent,s=report.summary;
+  const num=n=>n===null||n===undefined?'—':esc(n);
+  const get=(item,key,lang)=>item[key+'_'+lang]??item[key+'_hi']??item[key+'_en']??item[key]??'';
+  const answer=a=>a?esc(a.label)+'. '+content(a.html):'Not Answered';
+  const timing=[['Correct',s.averageCorrectTimeSeconds],['Wrong',s.averageWrongTimeSeconds],['Skipped',s.averageSkippedTimeSeconds]]
+    .map(([label,time])=>'<tr><td>'+label+'</td><td>'+num(time)+'</td></tr>').join('');
+  const types=report.byType.map(t=>'<tr><td>'+esc(t.type)+'</td><td>'+t.total+'</td><td>'+t.correct+'</td><td>'+t.wrong+'</td><td>'+t.skipped+'</td><td>'+num(t.accuracyPercent)+'</td><td>'+num(t.averageTimeSeconds)+'</td></tr>').join('');
+  const cards=report.questions.map(row=>{
+    const item=row.questionData;
+    const langs=['hi','en'].map(lang=>{
+      if(lang==='en'&&!['q_en','o_en','direction_en','e_en'].some(k=>item[k]!=null)&&!item.subparts?.some(p=>p.o_en!=null))return '';
+      const direction=get(item,'direction',lang);
+      const image=item.image?content('<img src="'+esc(item.image)+'" alt="Question diagram">'):'';
+      const question=get(item,'q',lang);
+      const questionHTML=content(question);
+      const figure=String(question).includes(item.image||'\u0000')?'':image;
+      const options=(part,selected,correct)=>{
+        const choices=get(part,'o',lang);
+        return '<ol class="options" type="A">'+(Array.isArray(choices)?choices:[]).map((o,i)=>
+          '<li class="'+(i===correct?'right':i===selected?'wrong':'')+'">'+content(o)+(i===correct?' <b>[Correct]</b>':'')+(i===selected?' <b>[Your answer]</b>':'')+'</li>').join('')+'</ol>';
+      };
+      let responses='';
+      if(row.subparts)responses=item.subparts.map((part,p)=>'<h4>'+esc(part.label||p+1)+'</h4>'+options(part,row.selectedOptionIndex?.[p],Number(part.a))+
+        '<p><b>Your response:</b> '+answer(row.subparts[p].selectedAnswer[lang])+'<br><b>Correct answer:</b> '+answer(row.subparts[p].correctAnswer[lang])+'</p>').join('');
+      else responses=options(item,row.selectedOptionIndex,row.correctOptionIndex)+'<p><b>Your response:</b> '+answer(row.selectedAnswer[lang])+'<br><b>Correct answer:</b> '+answer(row.correctAnswer[lang])+'</p>';
+      const explanation=get(item,'e',lang);
+      return '<section lang="'+lang+'"><h3>'+(lang==='hi'?'हिंदी':'English')+'</h3>'+(direction?'<div class="direction">'+content(direction)+'</div>':'')+questionHTML+figure+responses+(explanation?'<div><b>Explanation:</b> '+content(explanation)+'</div>':'')+'</section>';
+    }).join('');
+    return '<article class="question '+row.status+'"><h2>Q'+row.originalQuestionNumber+' · '+esc(row.status.toUpperCase())+'</h2><p class="meta">Time: '+row.timeSeconds+' s · '+esc(row.type)+(row.examTag?' · '+esc(row.examTag):'')+(row.markedForReview?' · Marked for Review':'')+'</p>'+langs+'</article>';
+  }).join('');
+  // Escape '<' so question text cannot close the non-executable JSON script.
+  const json=JSON.stringify(report).replace(/</g,'\\u003c');
+  return '<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; img-src data: blob: https: http:; style-src \'unsafe-inline\'; font-src \'none\'; base-uri \'none\'; form-action \'none\'">'+
+    '<title>'+esc(report.test)+' — Result Report</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#172033;background:#f3f6fa;margin:0;padding:18px}main{max-width:960px;margin:auto}h1{font-size:25px}h2{font-size:19px}h3{font-size:16px}header,.panel,.question{background:#fff;border:1px solid #dce3ed;border-radius:14px;padding:18px;margin-bottom:16px}.question.correct{border-left:5px solid #16a34a}.question.wrong{border-left:5px solid #dc2626}.question.skipped{border-left:5px solid #d97706}.meta{color:#536174;font-size:13px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}.metric{background:#f1f5f9;padding:10px;border-radius:8px}.metric b{display:block;font-size:21px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #dce3ed;padding:8px;text-align:left}.table-wrap{overflow-x:auto}img,svg{max-width:100%;height:auto}img{display:block;margin:12px auto}.options{padding-left:30px}.options li{padding:7px;margin:6px 0;border:1px solid #dce3ed;border-radius:7px}.options .right{background:#ecfdf5;border-color:#16a34a}.options .wrong{background:#fef2f2;border-color:#dc2626}.direction{background:#f1f5f9;padding:10px;margin-bottom:12px}section+section{border-top:1px solid #dce3ed;margin-top:18px;padding-top:8px}@media print{body{padding:0;background:#fff}.question{break-inside:avoid}}</style></head><body><main>'+
+    '<header><h1>'+esc(report.test)+'</h1><p>'+esc(report.chapterLabel||report.chapter)+'</p><p class="meta">Completed: '+esc(report.completedAt)+' · '+esc(report.mode)+(report.isRetest?' · Retest':'')+'</p><div class="grid">'+
+    [['Total',s.total],['Correct',s.correct],['Wrong',s.wrong],['Skipped',s.skipped],['Score',num(s.score)+' / '+s.maximumScore],['Accuracy',num(s.accuracyPercent)+'%'],['Total time',num(s.elapsedSeconds)+' s'],['Review',s.markedForReview]].map(([label,value])=>'<div class="metric">'+label+'<b>'+value+'</b></div>').join('')+'</div></header>'+
+    '<div class="panel"><h2>Time analysis</h2><table><tr><th>Status</th><th>Average seconds per question</th></tr>'+timing+'</table><p>Skipped after spending time: '+s.skippedAfterSpendingTime+'</p></div>'+
+    '<div class="panel"><h2>Type-wise analysis</h2><div class="table-wrap"><table><tr><th>Type</th><th>Total</th><th>Correct</th><th>Wrong</th><th>Skipped</th><th>Accuracy %</th><th>Avg seconds</th></tr>'+types+'</table></div></div>'+
+    '<div class="panel"><h2>AI analysis request</h2><p>'+esc(report.aiAnalysisRequest)+'</p><p class="meta">'+report.notes.map(esc).join('<br>')+'</p></div>'+cards+
+    '</main><script type="application/json" id="quiz-result-data">'+json+'</scr'+'ipt></body></html>';
+}
+
+async function downloadResultData(format){
+  const menu=document.getElementById('resultDownload');
+  if(menu?.getAttribute('aria-busy')==='true')return;
+  if(menu){menu.open=false;menu.setAttribute('aria-busy','true');}
+  try{
+    if(!resultAnalysisSnapshot)captureResultAnalysis();
+    if(!resultAnalysisSnapshot.items.length){alert('No completed quiz data to download.');return;}
+    const report=buildResultExport(resultAnalysisSnapshot);
+    // Preserve linked diagrams as embedded assets when readable by this browser.
+    // Already embedded data images are copied exactly, without any modification.
+    const sources=new Set();
+    const findImages=value=>{
+      if(typeof value==='string'){
+        const box=document.createElement('template');box.innerHTML=value;
+        box.content.querySelectorAll('img[src]').forEach(img=>sources.add(img.getAttribute('src')));
+      }else if(Array.isArray(value))value.forEach(findImages);
+      else if(value&&typeof value==='object')Object.entries(value).forEach(([key,v])=>{if(key==='image'&&typeof v==='string')sources.add(v);else findImages(v);});
+    };
+    report.questions.forEach(q=>findImages(q.questionData));
+    const replacements=new Map();
+    await Promise.all(Array.from(sources).filter(src=>src&&!/^data:/i.test(src)).map(async src=>{
+      try{
+        const url=new URL(src,document.baseURI);
+        if(!['https:','http:','blob:'].includes(url.protocol))return;
+        const response=await fetch(url.href,{signal:AbortSignal.timeout(8000)});
+        if(!response.ok)throw new Error('Image unavailable');
+        const blob=await response.blob();
+        if(!blob.type.startsWith('image/'))throw new Error('Not an image');
+        const embedded=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob);});
+        replacements.set(src,embedded);
+      }catch(_){
+        try{replacements.set(src,new URL(src,document.baseURI).href);}catch(_){ }
+        (report.linkedImagesNotEmbedded||(report.linkedImagesNotEmbedded=[])).push(src);
+      }
+    }));
+    const replaceImages=value=>{
+      if(typeof value==='string'){
+        if(replacements.has(value))return replacements.get(value);
+        if(!/<img\b/i.test(value))return value;
+        const box=document.createElement('template');box.innerHTML=value;
+        box.content.querySelectorAll('img[src]').forEach(img=>{const src=img.getAttribute('src');if(replacements.has(src))img.setAttribute('src',replacements.get(src));});
+        return box.innerHTML;
+      }
+      if(Array.isArray(value))return value.map(replaceImages);
+      if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([key,v])=>[key,replaceImages(v)]));
+      return value;
+    };
+    const portable=replaceImages(report);
+    if(report.linkedImagesNotEmbedded?.length)portable.notes.push('Some linked images could not be embedded; their original absolute links are retained and require internet access.');
+    const isJSON=format==='json';
+    const contents=isJSON?JSON.stringify(portable,null,2):renderResultExportHTML(portable);
+    const blob=new Blob([contents],{type:isJSON?'application/json;charset=utf-8':'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob),link=document.createElement('a');
+    const name=String(report.test||'Quiz').replace(/[<>:"/\\|?*\u0000-\u001f]/g,'_').slice(0,90);
+    link.href=url;link.download=name+'_Result_'+report.completedAt.replace(/[:.]/g,'-')+(isJSON?'.json':'.html');
+    document.body.appendChild(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),60000);
+  }catch(error){console.error('Result export failed:',error);alert('Download could not be prepared. Please try again.');}
+  finally{menu?.removeAttribute('aria-busy');}
+}
+
+document.addEventListener('click',event=>{const menu=document.getElementById('resultDownload');if(menu&&!menu.contains(event.target))menu.open=false;});
 
 function analysisCounts(){
   const items=resultAnalysisSnapshot?.items||[];
