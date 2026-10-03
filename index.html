@@ -2527,7 +2527,7 @@ let quizLaunchBusy = false;
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clean, {once:true});
   else clean();
-  new MutationObserver(clean).observe(document.documentElement, {childList:true, subtree:true});
+  // The removed diagnostic has no runtime creator; one startup cleanup is enough.
 })();
 </script>
 <style id="test-mode-styles">
@@ -2639,13 +2639,32 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
     const resultVisible = scoreCard && getComputedStyle(scoreCard).display !== 'none';
     const paletteOpen = (qpPanel && qpPanel.classList.contains('active')) || (qpOverlay && qpOverlay.classList.contains('active'));
     const shouldShow = quizVisible && questionsVisible && !resultVisible && !paletteOpen && !aiPanelOpen;
-    btn.style.display = shouldShow ? 'flex' : 'none';
-    btn.style.pointerEvents = (shouldShow && !langSwitchBusy) ? 'auto' : 'none';
+    const display = shouldShow ? 'flex' : 'none';
+    const pointerEvents = (shouldShow && !langSwitchBusy) ? 'auto' : 'none';
+    if (btn.style.display !== display) btn.style.display = display;
+    if (btn.style.pointerEvents !== pointerEvents) btn.style.pointerEvents = pointerEvents;
   }
   // Old name kept as an alias so existing call sites elsewhere in the file
   // keep working untouched.
   function killGoogleUI() { updateLangButtonVisibility(); }
-  new MutationObserver(updateLangButtonVisibility).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style','class'] });
+  // Folder rendering and touch gestures must not re-run quiz visibility checks.
+  // Observe only the screens/panels that determine this button's visibility;
+  // exclude the button itself so style writes cannot feed back into the observer.
+  function watchQuizLanguageVisibility() {
+    let queued = false;
+    const observer = new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; updateLangButtonVisibility(); });
+    });
+    ['quizEngineBox', 'quiz-box', 'score-card', 'qp-panel', 'qp-overlay', 'ai-bottom-sheet'].forEach(id => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element, { attributes: true, attributeFilter: ['style', 'class'] });
+    });
+    updateLangButtonVisibility();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchQuizLanguageVisibility, { once: true });
+  else watchQuizLanguageVisibility();
 
   // Legacy no-ops: these used to drive Google's DOM translator. Bilingual
   // data is now rendered straight from `data` via T(), so no DOM-scanning is
@@ -4263,6 +4282,9 @@ function showExitConfirmModal(onYes) {
 try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (_) {}
 let explorerScrollGeneration = 0;
 let explorerScrollRestoring = false;
+let explorerScrollSaveTimer = null;
+let explorerScrollLastSave = -Infinity;
+const EXPLORER_SCROLL_SAVE_INTERVAL = 1000;
 
 function explorerScrollTargets(){
   return [document.scrollingElement, document.documentElement, document.body,
@@ -4270,6 +4292,11 @@ function explorerScrollTargets(){
     document.getElementById('explorerList')];
 }
 function saveExplorerScrollPosition(){
+  // Navigation/pagehide calls save immediately and cancel any scroll-only retry.
+  if (explorerScrollSaveTimer !== null) {
+    clearTimeout(explorerScrollSaveTimer);
+    explorerScrollSaveTimer = null;
+  }
   const explorer = document.getElementById('explorerScreen');
   const quiz = document.getElementById('quizEngineBox');
   const loader = document.getElementById('explorerLoader');
@@ -4280,7 +4307,23 @@ function saveExplorerScrollPosition(){
     x: window.scrollX || 0, y: window.scrollY || 0,
     targets: explorerScrollTargets().map(el => el ? [el.scrollLeft, el.scrollTop] : [0, 0])
   };
-  history.replaceState({ ...(history.state || {screen:'subjects'}), explorerScroll }, '');
+  if (JSON.stringify(history.state?.explorerScroll) === JSON.stringify(explorerScroll)) return;
+  explorerScrollLastSave = performance.now();
+  try {
+    history.replaceState({ ...(history.state || {screen:'subjects'}), explorerScroll }, '');
+  } catch (error) {
+    // Safari can reject overly frequent history writes. Saving a position is
+    // optional; it must never abort the folder's click/navigation handler.
+    if (error.name !== 'SecurityError') throw error;
+  }
+}
+function scheduleExplorerScrollSave(){
+  if (explorerScrollSaveTimer !== null || isHistoryNav || explorerScrollRestoring) return;
+  const delay = Math.max(150, EXPLORER_SCROLL_SAVE_INTERVAL - (performance.now() - explorerScrollLastSave));
+  explorerScrollSaveTimer = setTimeout(() => {
+    explorerScrollSaveTimer = null;
+    saveExplorerScrollPosition();
+  }, delay);
 }
 function restoreExplorerScrollPosition(position){
   const generation = ++explorerScrollGeneration;
@@ -4312,7 +4355,7 @@ function stopExplorerScrollRestore(){
 // A new gesture takes precedence over any pending restoration retry.
 ['touchstart', 'pointerdown', 'wheel'].forEach(type =>
   document.addEventListener(type, stopExplorerScrollRestore, {passive:true, capture:true}));
-document.addEventListener('scroll', saveExplorerScrollPosition, {passive:true, capture:true});
+document.addEventListener('scroll', scheduleExplorerScrollSave, {passive:true, capture:true});
 window.addEventListener('pagehide', saveExplorerScrollPosition);
 window.addEventListener('pageshow', event => {
   if (event.persisted) restoreExplorerScrollPosition(history.state?.explorerScroll);
