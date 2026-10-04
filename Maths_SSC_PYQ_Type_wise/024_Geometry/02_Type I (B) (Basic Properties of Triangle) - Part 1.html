@@ -1,0 +1,504 @@
+const IMAGE_1 = "data:image/jpeg;base64,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";
+
+const data = [{
+    "q_hi": "Q8. त्रिभुजों के लिए, निम्नलिखित में से कौन-सा/कौन-से कथन सत्य है/हैं?<br>1. सभी आंतरिक कोणों का योग 180° होता है।<br>2. सभी आंतरिक कोण बराबर नहीं हो सकते।<br>3. अधिकतम एक अधिक कोण हो सकता है।<br>4. दो भुजाओं का योग तीसरी भुजा के बराबर हो भी सकता है और नहीं भी।",
+    "q_en": "Q8. For triangles, which of the following statements is/are true?<br>1. The sum of all interior angles is 180°.<br>2. All interior angles cannot be equal.<br>3. At most one angle can be obtuse.<br>4. The sum of two sides may or may not be equal to the third side.",
+    "tag": "SSC CGL 26/09/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) (i) और (ii)", "(b) (ii), (iii) और (iv)", "(c) (i), (ii) और (iv)", "(d) (i) और (iii)"],
+    "o_en": ["(a) (i) और (ii)", "(b) (ii), (iii) और (iv)", "(c) (i), (ii) और (iv)", "(d) (i) और (iii)"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q9. निम्नलिखित समुच्चयों में से कौन सा समुच्चय एक त्रिभुज के कोणों को दर्शाता है?",
+    "q_en": "Q9. Which of the following sets represents the angles of a triangle?",
+    "tag": "SSC CGL 13/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) {30°, 60°, 90°}", "(b) {80°, 50°, 90°}", "(c) {30°, 50°, 110°}", "(d) {30°, 50°, 90°}"],
+    "o_en": ["(a) {30°, 60°, 90°}", "(b) {80°, 50°, 90°}", "(c) {30°, 50°, 110°}", "(d) {30°, 50°, 90°}"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q10. त्रिभुज PQR में, ∠P + ∠Q = 84° है। ∠R का मान ज्ञात कीजिए।",
+    "q_en": "Q10. In triangle PQR, ∠P + ∠Q = 84°. Find ∠R.",
+    "tag": "SSC CGL 26/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 74°", "(b) 96°", "(c) 60°", "(d) 120°"],
+    "o_en": ["(a) 74°", "(b) 96°", "(c) 60°", "(d) 120°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q11. त्रिभुज के कोण इस प्रकार हैं कि एक कोण अन्य दो कोणों का औसत है, तो कोण निम्नलिखित में से कौन-से होंगे?<br>1) π/6, π/3, π/2 &nbsp;&nbsp; 2) π/3, π/3, π/2<br>3) π/6, π/3, π/4 &nbsp;&nbsp; 4) π/2, π/2, π/3",
+    "q_en": "Q11. The angles of a triangle are such that one angle is the average of the other two. Which of the following sets can be the angles?<br>1) π/6, π/3, π/2 &nbsp;&nbsp; 2) π/3, π/3, π/2<br>3) π/6, π/3, π/4 &nbsp;&nbsp; 4) π/2, π/2, π/3",
+    "tag": "SSC CGL 09/09/2024 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 4", "(b) 3", "(c) 2", "(d) 1"],
+    "o_en": ["(a) 4", "(b) 3", "(c) 2", "(d) 1"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q12. एक त्रिभुज के आंतरिक कोणों का अनुपात 2 : 3 : 4 है। त्रिभुज के सबसे बड़े बाह्य कोण का माप क्या है?",
+    "q_en": "Q12. The interior angles of a triangle are in the ratio 2 : 3 : 4. What is the measure of the largest exterior angle?",
+    "tag": "SSC CPO 13/12/2025 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 100°", "(b) 120°", "(c) 140°", "(d) 180°"],
+    "o_en": ["(a) 100°", "(b) 120°", "(c) 140°", "(d) 180°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q13. यदि एक त्रिभुज के कोण 7 : 8 : 3 के अनुपात में हैं, तो सबसे बड़े कोण का मान ज्ञात कीजिए।",
+    "q_en": "Q13. If the angles of a triangle are in the ratio 7 : 8 : 3, find the largest angle.",
+    "tag": "SSC CGL 26/09/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 120°", "(b) 80°", "(c) 100°", "(d) 60°"],
+    "o_en": ["(a) 120°", "(b) 80°", "(c) 100°", "(d) 60°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q14. एक त्रिभुज के कोणों का अनुपात 1 : 2 : 3 है। सबसे बड़े और सबसे छोटे कोण का अंतर (अंश में) _____ है।",
+    "q_en": "Q14. The angles of a triangle are in the ratio 1 : 2 : 3. The difference between the largest and smallest angles (in degrees) is _____.",
+    "tag": "SSC CGL 24/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 60°", "(b) 15°", "(c) 45°", "(d) 30°"],
+    "o_en": ["(a) 60°", "(b) 15°", "(c) 45°", "(d) 30°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q15. एक त्रिभुज के तीनों कोणों की मापों का अनुपात 17 : 13 : 15 है। इन तीनों कोणों में सबसे बड़े और सबसे छोटे कोण के बीच का धनात्मक अंतर ज्ञात कीजिए।",
+    "q_en": "Q15. The measures of the three angles of a triangle are in the ratio 17 : 13 : 15. Find the positive difference between the largest and smallest angles.",
+    "tag": "SSC CGL 12/09/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 16°", "(b) 24°", "(c) 20°", "(d) 12°"],
+    "o_en": ["(a) 16°", "(b) 24°", "(c) 20°", "(d) 12°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q16. यदि एक त्रिभुज के कोण 9 : 11 : 16 के अनुपात में हैं, तो सबसे बड़े कोण और सबसे छोटे कोण के बीच का अंतर ज्ञात कीजिए।",
+    "q_en": "Q16. If the angles of a triangle are in the ratio 9 : 11 : 16, find the difference between the largest and smallest angles.",
+    "tag": "SSC Phase-XII 21/06/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 40°", "(b) 35°", "(c) 25°", "(d) 30°"],
+    "o_en": ["(a) 40°", "(b) 35°", "(c) 25°", "(d) 30°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q17. समद्विबाहु त्रिभुज ABC में, जहाँ भुजाएँ AB और AC बराबर हैं, शीर्ष B पर बना बाह्य कोण 130° है। कोण A का माप क्या है?",
+    "q_en": "Q17. In isosceles triangle ABC, where AB = AC, the exterior angle at vertex B is 130°. What is the measure of angle A?",
+    "tag": "SSC CPO 11/12/2025 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 50°", "(b) 65°", "(c) 80°", "(d) 130°"],
+    "o_en": ["(a) 50°", "(b) 65°", "(c) 80°", "(d) 130°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q18. ΔABC में ∠A − ∠B = 33°, ∠B − ∠C = 18° है, तो त्रिभुज के सबसे छोटे और सबसे बड़े कोण का योग क्या है?",
+    "q_en": "Q18. In ΔABC, ∠A − ∠B = 33° and ∠B − ∠C = 18°. What is the sum of the smallest and largest angles of the triangle?",
+    "tag": "SSC CGL TIER-II (15/11/2020)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 143°", "(b) 108°", "(c) 92°", "(d) 125°"],
+    "o_en": ["(a) 143°", "(b) 108°", "(c) 92°", "(d) 125°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q19. P, Q और R एक त्रिभुज के तीन कोण हैं। यदि P − Q = 20° है और Q − R = 26° है, तो ∠P निम्नलिखित में से किसके बराबर है?",
+    "q_en": "Q19. P, Q and R are the three angles of a triangle. If P − Q = 20° and Q − R = 26°, then ∠P is equal to which of the following?",
+    "tag": "SSC CGL 19/09/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 52°", "(b) 46°", "(c) 92°", "(d) 82°"],
+    "o_en": ["(a) 52°", "(b) 46°", "(c) 92°", "(d) 82°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q20. ΔABC में, यदि 1/2∠A + ∠B + ∠C = 120° है, तो 1/4∠A का मान ज्ञात कीजिए।",
+    "q_en": "Q20. In ΔABC, if 1/2∠A + ∠B + ∠C = 120°, find 1/4∠A.",
+    "tag": "SSC CGL 11/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 20°", "(b) 40°", "(c) 60°", "(d) 30°"],
+    "o_en": ["(a) 20°", "(b) 40°", "(c) 60°", "(d) 30°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q21. एक त्रिभुज के बाह्य कोण 2x, 3x और 4x दिए गए हैं। त्रिभुज के सबसे छोटे आंतरिक कोण का माप क्या है?",
+    "q_en": "Q21. The exterior angles of a triangle are 2x, 3x and 4x. What is the measure of the smallest interior angle?",
+    "tag": "SSC CPO 12/12/2025 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 100°", "(b) 80°", "(c) 40°", "(d) 20°"],
+    "o_en": ["(a) 100°", "(b) 80°", "(c) 40°", "(d) 20°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q22. ΔPQR में, यदि 4∠P = 5∠Q = 20∠R है, तो ∠Q का मान क्या है?",
+    "q_en": "Q22. In ΔPQR, if 4∠P = 5∠Q = 20∠R, find ∠Q.",
+    "tag": "SSC CGL 23/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 72°", "(b) 36°", "(c) 90°", "(d) 45°"],
+    "o_en": ["(a) 72°", "(b) 36°", "(c) 90°", "(d) 45°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q23. किसी त्रिभुज के कोण AP (समानांतर श्रेणी) में हैं। यदि सबसे छोटे कोण का माप सबसे बड़े कोण से 50° कम है, तो सबसे बड़ा कोण (डिग्री में) ज्ञात करें।",
+    "q_en": "Q23. The angles of a triangle are in A.P. (arithmetic progression). If the smallest angle is 50° less than the largest angle, find the largest angle.",
+    "tag": "SSC CGL 20/08/2021 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 80°", "(b) 85°", "(c) 90°", "(d) 75°"],
+    "o_en": ["(a) 80°", "(b) 85°", "(c) 90°", "(d) 75°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q24. किसी त्रिभुज के तीन कोणों में से एक कोण सबसे छोटे कोण का दो गुना है और दूसरा कोण सबसे छोटे कोण का तीन गुना है। सबसे छोटे कोण का मान ज्ञात करें।",
+    "q_en": "Q24. Of the three angles of a triangle, one angle is twice the smallest angle and another angle is three times the smallest angle. Find the smallest angle.",
+    "tag": "SSC CPO 28/06/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 65°", "(b) 30°", "(c) 60°", "(d) 45°"],
+    "o_en": ["(a) 65°", "(b) 30°", "(c) 60°", "(d) 45°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q25. एक त्रिभुज के दो कोणों की माप 3 : 7 के अनुपात में है। यदि इन दोनों मापों का योग तीसरे कोण की माप के बराबर है, तो सबसे छोटा कोण ज्ञात कीजिए।",
+    "q_en": "Q25. Two angles of a triangle are in the ratio 3 : 7. If their sum equals the third angle, find the smallest angle.",
+    "tag": "SSC CHSL TIER-II 10/01/2024",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 9°", "(b) 3°", "(c) 36°", "(d) 27°"],
+    "o_en": ["(a) 9°", "(b) 3°", "(c) 36°", "(d) 27°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q26. एक त्रिभुज के तीनों कोणों के माप इस प्रकार हैं कि सबसे छोटे कोण का माप, सबसे बड़े कोण के माप से 42° कम है, जबकि शेष कोण का माप, सबसे छोटे कोण के माप से 24° अधिक है। त्रिभुज के सबसे छोटे कोण का माप ज्ञात कीजिए।",
+    "q_en": "Q26. The angles of a triangle are such that the smallest angle is 42° less than the largest angle, while the remaining angle is 24° more than the smallest angle. Find the smallest angle.",
+    "tag": "SSC CHSL 04/07/2024 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 42°", "(b) 40°", "(c) 38°", "(d) 36°"],
+    "o_en": ["(a) 42°", "(b) 40°", "(c) 38°", "(d) 36°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q27. ΔABC में, DE ∥ BC इस प्रकार है कि A-D-B और A-E-C है। यदि ∠ACB = 40° है तो ∠DAE + ∠ADE क्या होगा?",
+    "q_en": "Q27. In ΔABC, DE ∥ BC, with A-D-B and A-E-C. If ∠ACB = 40°, then what is ∠DAE + ∠ADE?",
+    "tag": "SSC CPO 09/11/2022 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 240°", "(b) 120°", "(c) 140°", "(d) 230°"],
+    "o_en": ["(a) 240°", "(b) 120°", "(c) 140°", "(d) 230°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q28. ΔPQR में ∠P = 90°, ∠R = 47° और PS ⟂ QR है, तो ∠QPS का मान ज्ञात कीजिए।",
+    "q_en": "Q28. In ΔPQR, ∠P = 90°, ∠R = 47° and PS ⟂ QR. Find ∠QPS.",
+    "tag": "SSC CPO 04/10/2023 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 45°", "(b) 40°", "(c) 43°", "(d) 47°"],
+    "o_en": ["(a) 45°", "(b) 40°", "(c) 43°", "(d) 47°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q29. एक ΔABC में AB = AC और ∠A = 80° है, तो ∠B ज्ञात कीजिए।",
+    "q_en": "Q29. In ΔABC, AB = AC and ∠A = 80°. Find ∠B.",
+    "tag": "SSC CGL 11/09/2024 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 50°", "(b) 80°", "(c) 40°", "(d) 45°"],
+    "o_en": ["(a) 50°", "(b) 80°", "(c) 40°", "(d) 45°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q30. ΔLMN में, ∠L = 118° और LM = LN है। ∠N ज्ञात कीजिए।",
+    "q_en": "Q30. In ΔLMN, ∠L = 118° and LM = LN. Find ∠N.",
+    "tag": "SSC CGL 11/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 42°", "(b) 31°", "(c) 65°", "(d) 62°"],
+    "o_en": ["(a) 42°", "(b) 31°", "(c) 65°", "(d) 62°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q31. त्रिभुज ABC, AB = AC और ∠A = 70° है। ∠C का मान ज्ञात कीजिए।",
+    "q_en": "Q31. In triangle ABC, AB = AC and ∠A = 70°. Find ∠C.",
+    "tag": "SSC CPO 29/06/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 45°", "(b) 75°", "(c) 65°", "(d) 55°"],
+    "o_en": ["(a) 45°", "(b) 75°", "(c) 65°", "(d) 55°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q32. त्रिभुज XYZ में, YZ पर एक बिंदु A इस प्रकार है कि XA = YA है। यदि ∠XYA = 50° और ∠AXZ = 19° है, तो ∠XZA का डिग्री माप ज्ञात कीजिए।",
+    "q_en": "Q32. In triangle XYZ, point A lies on YZ such that XA = YA. If ∠XYA = 50° and ∠AXZ = 19°, find the degree measure of ∠XZA.",
+    "tag": "SSC CGL 26/09/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 61°", "(b) 53°", "(c) 49°", "(d) 41°"],
+    "o_en": ["(a) 61°", "(b) 53°", "(c) 49°", "(d) 41°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q33. ΔPQR में, PQ = PR और S रेखा QR पर इस प्रकार स्थित एक बिंदु है कि ∠PSQ = 96° + ∠QPS और ∠QPR = 132° है। ∠PSR का माप बताइए।",
+    "q_en": "Q33. In ΔPQR, PQ = PR and S is a point on line QR such that ∠PSQ = 96° + ∠QPS and ∠QPR = 132°. Find ∠PSR.",
+    "tag": "SSC CGL TIER-II 03/02/2022",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 45°", "(b) 56°", "(c) 54°", "(d) 52°"],
+    "o_en": ["(a) 45°", "(b) 56°", "(c) 54°", "(d) 52°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q34. एक त्रिभुज ABC में, भुजा BC को एक बिंदु D तक बढ़ाया गया है। C पर बना बाह्य कोण 105° है। A और B पर बने आंतरिक कोण 2 : 5 के अनुपात में हैं। त्रिभुज के सबसे बड़े आंतरिक कोण का माप क्या है?",
+    "q_en": "Q34. In triangle ABC, side BC is extended to point D. The exterior angle at C is 105°. The interior angles at A and B are in the ratio 2 : 5. What is the largest interior angle of the triangle?",
+    "tag": "SSC CGL 22/09/2025 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 30°", "(b) 75°", "(c) 105°", "(d) 15°"],
+    "o_en": ["(a) 30°", "(b) 75°", "(c) 105°", "(d) 15°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q35. ΔPQR में ∠P : ∠Q : ∠R = 3 : 4 : 8 है। त्रिभुज की सबसे छोटी भुजा और सबसे बड़ी भुजा क्रमशः .......... हैं।",
+    "q_en": "Q35. In ΔPQR, ∠P : ∠Q : ∠R = 3 : 4 : 8. The smallest side and the largest side of the triangle respectively are ..........",
+    "tag": "SSC CPO 04/10/2023 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) QR और PR", "(b) PQ और PR", "(c) PQ और QR", "(d) QR और PQ"],
+    "o_en": ["(a) QR और PR", "(b) PQ और PR", "(c) PQ और QR", "(d) QR और PQ"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q36. यदि किसी त्रिभुज के कोण 45° और 65° हैं, तो तीसरे कोण (शेष कोण) का बाह्य कोण ज्ञात कीजिए।",
+    "q_en": "Q36. If two angles of a triangle are 45° and 65°, find the exterior angle of the third angle.",
+    "tag": "SSC CGL 10/09/2024 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 110°", "(b) 120°", "(c) 70°", "(d) 100°"],
+    "o_en": ["(a) 110°", "(b) 120°", "(c) 70°", "(d) 100°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q37. ΔABC में, भुजा BC को D तक इस प्रकार बढ़ाया गया है कि ∠ACD = 127° है। यदि ∠ABC = 35° है, तो ∠BAC ज्ञात कीजिए।",
+    "q_en": "Q37. In ΔABC, side BC is extended to D such that ∠ACD = 127°. If ∠ABC = 35°, find ∠BAC.",
+    "tag": "SSC CHSL 02/08/2023 (Shift-04)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 82°", "(b) 92°", "(c) 95°", "(d) 75°"],
+    "o_en": ["(a) 82°", "(b) 92°", "(c) 95°", "(d) 75°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q38. निम्न आकृति से x + y + z ज्ञात करें।<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + IMAGE_1 + "\" alt=\"Q38 figure\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    "q_en": "Q38. Find x + y + z from the following figure.<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + IMAGE_1 + "\" alt=\"Q38 figure\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    "tag": "SSC CGL 01/12/2022 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 100°", "(b) 130°", "(c) 120°", "(d) 110°"],
+    "o_en": ["(a) 100°", "(b) 130°", "(c) 120°", "(d) 110°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": "",
+    "image": IMAGE_1
+  }, {
+    "q_hi": "Q39. ΔPQR में, QR को S तक बढ़ाया जाता है। यदि ∠PRS = (9x − 15)°, ∠RPQ = (2x)° और ∠PQR = (4x + 15)° है, तो x का मान क्या है?",
+    "q_en": "Q39. In ΔPQR, QR is extended to S. If ∠PRS = (9x − 15)°, ∠RPQ = (2x)° and ∠PQR = (4x + 15)°, find x.",
+    "tag": "SSC CHSL 03/08/2023 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 55", "(b) 20", "(c) 10", "(d) 75"],
+    "o_en": ["(a) 55", "(b) 20", "(c) 10", "(d) 75"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q40. ΔABC की भुजा BC को D तक इस प्रकार बढ़ाया जाता है कि CD = AC होती है। यदि ∠BAD = 118° है और ∠ACB = 80° है, तो ∠ABC का मान _____ होगा।",
+    "q_en": "Q40. Side BC of ΔABC is extended to D such that CD = AC. If ∠BAD = 118° and ∠ACB = 80°, then ∠ABC is _____.",
+    "tag": "SSC CHSL 08/07/2024 (Shift-05)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 36°", "(b) 32°", "(c) 22°", "(d) 27°"],
+    "o_en": ["(a) 36°", "(b) 32°", "(c) 22°", "(d) 27°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q41. ΔABC की भुजा BC को बिंदु D तक बढ़ाया जाता है। यदि AC = BC और ∠BAC = 70° है, तो ∠ACD − ∠ABC का मान ज्ञात कीजिए।",
+    "q_en": "Q41. Side BC of ΔABC is extended to point D. If AC = BC and ∠BAC = 70°, find ∠ACD − ∠ABC.",
+    "tag": "SSC CGL 25/09/2024 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 70°", "(b) 60°", "(c) 75°", "(d) 45°"],
+    "o_en": ["(a) 70°", "(b) 60°", "(c) 75°", "(d) 45°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q42. त्रिभुज ABC में AB = AC, BC को D तक इस प्रकार बढ़ाया जाता है कि CD = AB और ∠ADC = 30° है। त्रिभुज ABC के कोण कितनी डिग्री के हैं?",
+    "q_en": "Q42. In triangle ABC, AB = AC and BC is extended to D such that CD = AB and ∠ADC = 30°. What are the angles of triangle ABC?",
+    "tag": "SSC CHSL 04/07/2024 (Shift-04)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 30°, 60°, 90°", "(b) 50°, 60°, 70°", "(c) 60°, 60°, 60°", "(d) 45°, 60°, 75°"],
+    "o_en": ["(a) 30°, 60°, 90°", "(b) 50°, 60°, 70°", "(c) 60°, 60°, 60°", "(d) 45°, 60°, 75°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q43. एक ΔPQR की भुजा PR को S तक इस प्रकार बढ़ाया जाता है ताकि QR = RS हो। यदि ∠PRQ = 86° है, तो ∠PSQ का मान ज्ञात कीजिए।",
+    "q_en": "Q43. Side PR of ΔPQR is extended to S such that QR = RS. If ∠PRQ = 86°, find ∠PSQ.",
+    "tag": "SSC CPO 29/06/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 94°", "(b) 54°", "(c) 43°", "(d) 86°"],
+    "o_en": ["(a) 94°", "(b) 54°", "(c) 43°", "(d) 86°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q44. त्रिभुज ABC में, BD ⟂ AC है। E, BC पर एक बिंदु इस प्रकार है कि ∠BEA = x° है। यदि ∠EAC = 38° और ∠EBD = 40° है, तो x का मान ज्ञात कीजिए।",
+    "q_en": "Q44. In triangle ABC, BD ⟂ AC. E is a point on BC such that ∠BEA = x°. If ∠EAC = 38° and ∠EBD = 40°, find x.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 82", "(b) 88", "(c) 96", "(d) 48"],
+    "o_en": ["(a) 82", "(b) 88", "(c) 96", "(d) 48"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q45. ΔPQR में QT, PR पर लंब है और QR पर बिंदु S इस प्रकार है कि ∠PSQ = p° है। यदि ∠TQR = 46° और ∠SPR = 32° है, तो p का मान ज्ञात करें।",
+    "q_en": "Q45. In ΔPQR, QT is perpendicular to PR and S is a point on QR such that ∠PSQ = p°. If ∠TQR = 46° and ∠SPR = 32°, find p.",
+    "tag": "SSC CGL 10/06/2019 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 78°", "(b) 82°", "(c) 76°", "(d) 72°"],
+    "o_en": ["(a) 78°", "(b) 82°", "(c) 76°", "(d) 72°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q46. ΔABC में, D पर BD ⟂ AC है। BC पर एक बिंदु E इस प्रकार है कि ∠BEA = x° है। यदि ∠EAC = 46° और ∠EBD = 60° है, तो x का मान ज्ञात करें।",
+    "q_en": "Q46. In ΔABC, BD ⟂ AC at D. E is a point on BC such that ∠BEA = x°. If ∠EAC = 46° and ∠EBD = 60°, find x.",
+    "tag": "SSC CPO 23/11/2020 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 76°", "(b) 68°", "(c) 78°", "(d) 72°"],
+    "o_en": ["(a) 76°", "(b) 68°", "(c) 78°", "(d) 72°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q47. ΔABC में, BC पर बिंदु D इस प्रकार है कि ∠BAD = 1/2 ∠ADC और ∠BAC = 77° और ∠C = 45° है, तो ∠ADB की माप ज्ञात करें।",
+    "q_en": "Q47. In ΔABC, point D lies on BC such that ∠BAD = 1/2∠ADC, ∠BAC = 77° and ∠C = 45°. Find ∠ADB.",
+    "tag": "SSC CGL 23/08/2021 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 64°", "(b) 77°", "(c) 45°", "(d) 58°"],
+    "o_en": ["(a) 64°", "(b) 77°", "(c) 45°", "(d) 58°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q48. ΔPQR में, S एक बिंदु है, जो भुजा QR पर इस प्रकार स्थित है कि ∠QPS = 1/2 ∠PSR, ∠QPR = 78° और ∠PRS = 44° है। ∠PSQ की माप क्या है?",
+    "q_en": "Q48. In ΔPQR, S is a point on QR such that ∠QPS = 1/2∠PSR, ∠QPR = 78° and ∠PRS = 44°. Find ∠PSQ.",
+    "tag": "SSC CGL TIER-II 29/01/2022",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 68°", "(b) 64°", "(c) 58°", "(d) 56°"],
+    "o_en": ["(a) 68°", "(b) 64°", "(c) 58°", "(d) 56°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q49. ΔABC में, BC पर D एक ऐसा बिंदु है कि ∠ADB = 2∠DAC, ∠BAC = 70° और ∠B = 56° है। ∠ADC का माप क्या है?",
+    "q_en": "Q49. In ΔABC, D is a point on BC such that ∠ADB = 2∠DAC, ∠BAC = 70° and ∠B = 56°. Find ∠ADC.",
+    "tag": "SSC CGL TIER-II 03/02/2022",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 72°", "(b) 54°", "(c) 74°", "(d) 81°"],
+    "o_en": ["(a) 72°", "(b) 54°", "(c) 74°", "(d) 81°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q50. ΔABC की भुजा BC को बिंदु D तक बढ़ाया जाता है। यदि ∠ACD = 117° और ∠ABC = 5/8 ∠BAC है, तो ∠ABC की माप ज्ञात करें।",
+    "q_en": "Q50. Side BC of ΔABC is extended to point D. If ∠ACD = 117° and ∠ABC = 5/8∠BAC, find ∠ABC.",
+    "tag": "SSC CHSL 13/04/2021 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 72°", "(b) 45°", "(c) 54°", "(d) 36°"],
+    "o_en": ["(a) 72°", "(b) 45°", "(c) 54°", "(d) 36°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q51. ΔABC की भुजा BC को बिंदु D तक बढ़ाया गया है। यदि AC = BC और ∠BAC = 70° है, तो 2.5∠ACD − 1.5∠ABC का मान ज्ञात कीजिए।",
+    "q_en": "Q51. Side BC of ΔABC is extended to point D. If AC = BC and ∠BAC = 70°, find 2.5∠ACD − 1.5∠ABC.",
+    "tag": "SSC CGL 26/09/2024 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 245°", "(b) 235°", "(c) 225°", "(d) 230°"],
+    "o_en": ["(a) 245°", "(b) 235°", "(c) 225°", "(d) 230°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q52. PQR एक त्रिभुज है। आंतरिक कोण ∠Q और बाह्य कोण ∠R के समद्विभाजक S पर प्रतिच्छेद करते हैं। यदि ∠QSR = 40° है, तो ∠P है:",
+    "q_en": "Q52. PQR is a triangle. The bisectors of interior angle ∠Q and exterior angle ∠R intersect at S. If ∠QSR = 40°, then ∠P is:",
+    "tag": "SSC CPO 04/10/2023 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 80°", "(b) 60°", "(c) 40°", "(d) 30°"],
+    "o_en": ["(a) 80°", "(b) 60°", "(c) 40°", "(d) 30°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q53. त्रिभुज PQR में, PS, ∠QPR का समद्विभाजक है और PT ⟂ QR है, जहाँ ∠Q > ∠R है। ∠TPS का मान क्या है?",
+    "q_en": "Q53. In triangle PQR, PS bisects ∠QPR and PT ⟂ QR, where ∠Q > ∠R. What is ∠TPS?",
+    "tag": "SSC CHSL 28/11/2025 (Shift-01)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) (∠Q + ∠R)/2", "(b) (∠Q − ∠R)/2", "(c) (∠Q × ∠R)/2", "(d) (∠Q/2 − ∠R)/2"],
+    "o_en": ["(a) (∠Q + ∠R)/2", "(b) (∠Q − ∠R)/2", "(c) (∠Q × ∠R)/2", "(d) (∠Q/2 − ∠R)/2"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q54. ΔABC में AD, BC पर लंब है और AE, ∠BAC का समद्विभाजक है। यदि ∠ABC = 58° और ∠ACB = 34° है, तो ∠DAE का माप ज्ञात कीजिए।",
+    "q_en": "Q54. In ΔABC, AD is perpendicular to BC and AE bisects ∠BAC. If ∠ABC = 58° and ∠ACB = 34°, find ∠DAE.",
+    "tag": "SSC CGL 12/04/2022 (Shift-03)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 12°", "(b) 11°", "(c) 22°", "(d) 15°"],
+    "o_en": ["(a) 12°", "(b) 11°", "(c) 22°", "(d) 15°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q55. ΔABC में D पर AD ⟂ BC है और AE, ∠A का समद्विभाजक है। यदि ∠B = 62° और ∠C = 36° है, तो ∠DAE का माप ज्ञात करें।",
+    "q_en": "Q55. In ΔABC, AD ⟂ BC at D and AE bisects ∠A. If ∠B = 62° and ∠C = 36°, find ∠DAE.",
+    "tag": "SSC CGL 17/08/2021 (Shift-02)",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 13°", "(b) 54°", "(c) 23°", "(d) 27°"],
+    "o_en": ["(a) 13°", "(b) 54°", "(c) 23°", "(d) 27°"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q56. ΔPQR में, ∠Q = 84°, ∠R = 48°, S पर PS ⟂ QR है और ∠P का द्विभाजक QR पर T से मिलता है। ∠SPT का माप ज्ञात कीजिए।",
+    "q_en": "Q56. In ΔPQR, ∠Q = 84°, ∠R = 48°, PS ⟂ QR at S, and the bisector of ∠P meets QR at T. Find ∠SPT.",
+    "tag": "SSC CGL TIER-II 15/11/2020",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 21°", "(b) 12°", "(c) 24°", "(d) 18°"],
+    "o_en": ["(a) 21°", "(b) 12°", "(c) 24°", "(d) 18°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q57. ΔABC में, ∠B = 78° है, ∠A का समद्विभाजक AD है जो BC में बिंदु D पर मिलता है और बिंदु E पर AE ⟂ BC है। यदि ∠DAE = 24° है, तो ∠ACB की माप क्या है?",
+    "q_en": "Q57. In ΔABC, ∠B = 78°. AD bisects ∠A and meets BC at D, and AE ⟂ BC at E. If ∠DAE = 24°, what is ∠ACB?",
+    "tag": "SSC CGL TIER-II 29/01/2022",
+    "type_tag": "Type I (B) (Basic Properties of Triangle)",
+    "o_hi": ["(a) 38°", "(b) 30°", "(c) 32°", "(d) 42°"],
+    "o_en": ["(a) 38°", "(b) 30°", "(c) 32°", "(d) 42°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }];

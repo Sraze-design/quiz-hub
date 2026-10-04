@@ -1,0 +1,503 @@
+
+
+const data = [{
+    "q_hi": "Q392. 3 सेमी त्रिज्या और 4 सेमी ऊंचाई वाले शंकु का वक्र पृष्ठीय क्षेत्रफल (सेमी² में) ज्ञात करें।",
+    "q_en": "Q392. Find the curved surface area (in cm²) of a cone of radius 3 cm and height 4 cm.",
+    "tag": "SSC CPO 29/06/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 12π", "(b) 7π", "(c) 15π", "(d) 14π"],
+    "o_en": ["(a) 12π", "(b) 7π", "(c) 15π", "(d) 14π"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q393. आधार त्रिज्या 7 सेमी और तिर्यक ऊंचाई 10 सेमी वाले शंकु का वक्र पृष्ठीय क्षेत्रफल ज्ञात कीजिए।",
+    "q_en": "Q393. Find the curved surface area of a cone with base radius 7 cm and slant height 10 cm.",
+    "tag": "SSC CPO 03/10/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 280 सेमी²", "(b) 300 सेमी²", "(c) 220 सेमी²", "(d) 250 सेमी²"],
+    "o_en": ["(a) 280 cm²", "(b) 300 cm²", "(c) 220 cm²", "(d) 250 cm²"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q394. 8 मीटर ऊंचाई वाले एक शंक्वाकार तम्बू के आधार की परिधि 32π मीटर है। इसका वक्र पृष्ठीय क्षेत्रफल ज्ञात कीजिए",
+    "q_en": "Q394. The circumference of the base of a conical tent of height 8 metres is 32π metres. Find its curved surface area.",
+    "tag": "SSC CGL 12/09/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 164√5π मी²", "(b) 162√3π मी²", "(c) 132√3π मी²", "(d) 128√5π मी²"],
+    "o_en": ["(a) 164√5π m²", "(b) 162√3π m²", "(c) 132√3π m²", "(d) 128√5π m²"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q395. एक लंब वृत्तीय शंकु की त्रिज्या 7 सेमी और ऊंचाई 24 सेमी है। तिरछी ऊंचाई क्या है?",
+    "q_en": "Q395. The radius and height of a right circular cone are 7 cm and 24 cm respectively. What is its slant height?",
+    "tag": "SSC CGL 12/09/2025 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 25 सेमी", "(b) 30 सेमी", "(c) 35 सेमी", "(d) 40 सेमी"],
+    "o_en": ["(a) 25 cm", "(b) 30 cm", "(c) 35 cm", "(d) 40 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q396. एक शंकु का वक्र पृष्ठीय क्षेत्रफल 2200 सेमी² है और इसकी त्रिज्या 28 सेमी है। इस शंकु की तिर्यक ऊंचाई (सेमी में) क्या है? (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q396. The curved surface area of a cone is 2200 cm² and its radius is 28 cm. What is the slant height (in cm) of this cone? (Use π = 22/7)",
+    "tag": "SSC CHSL 01/07/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 22", "(b) 24", "(c) 23", "(d) 25"],
+    "o_en": ["(a) 22", "(b) 24", "(c) 23", "(d) 25"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q397. एक शंकु का वक्र-पृष्ठीय क्षेत्रफल 308 सेमी² है और इसकी तिर्यक ऊंचाई 28 सेमी है। इसके आधार की त्रिज्या ज्ञात कीजिए। (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q397. The curved surface area of a cone is 308 cm² and its slant height is 28 cm. Find the radius of its base. (Use π = 22/7)",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 2.8 सेमी", "(b) 3.5 सेमी", "(c) 2.5 सेमी", "(d) 3.0 सेमी"],
+    "o_en": ["(a) 2.8 cm", "(b) 3.5 cm", "(c) 2.5 cm", "(d) 3.0 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q398. 20 फिट ऊंचाई वाले और 30π फिट की परिधि के वृत्तीय आधार वाले एक लंब वृत्तीय शंक्वाकार तम्बू को खड़ा करने के लिए आवश्यक कैनवास कपड़े का क्षेत्रफल ज्ञात करें।",
+    "q_en": "Q398. Find the area of canvas cloth required to erect a right circular conical tent 20 ft high with a circular base of circumference 30π ft.",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 455π फिट²", "(b) 375π फिट²", "(c) 589π फिट²", "(d) 470π फिट²"],
+    "o_en": ["(a) 455π ft²", "(b) 375π ft²", "(c) 589π ft²", "(d) 470π ft²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q399. तिर्यक ऊंचाई 4.2 इकाई के एक शंकु का पार्श्व पृष्ठीय क्षेत्रफल 13.2 इकाई² है। आधार की त्रिज्या ज्ञात कीजिए।",
+    "q_en": "Q399. The lateral surface area of a cone with slant height 4.2 units is 13.2 units². Find the radius of the base.",
+    "tag": "SSC CPO 29/06/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 1 इकाई", "(b) 1.5 इकाई", "(c) 2.5 इकाई", "(d) 2 इकाई"],
+    "o_en": ["(a) 1 unit", "(b) 1.5 units", "(c) 2.5 units", "(d) 2 units"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q400. एक शंकु की तिर्यक ऊंचाई और ऊंचाई का अनुपात 4 : 3 है। यदि शंकु का वक्र पृष्ठीय क्षेत्रफल 4√7π वर्ग इकाई है, तो शंकु की त्रिज्या ____ इकाई है।",
+    "q_en": "Q400. The slant height and height of a cone are in the ratio 4 : 3. If the curved surface area of the cone is 4√7π square units, then the radius of the cone is ____ units.",
+    "tag": "SSC CPO 29/06/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 7√7", "(b) 7", "(c) √7", "(d) √7/7"],
+    "o_en": ["(a) 7√7", "(b) 7", "(c) √7", "(d) √7/7"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q401. एक शंकु की त्रिज्या 10.5 सेमी है और वक्र पृष्ठ का क्षेत्रफल 396 सेमी² है। इसकी तिर्यक ऊंचाई ज्ञात कीजिए। (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q401. The radius of a cone is 10.5 cm and its curved surface area is 396 cm². Find its slant height. (Use π = 22/7)",
+    "tag": "SSC MTS 08/09/2023 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 8.5 सेमी", "(b) 11.5 सेमी", "(c) 9 सेमी", "(d) 12 सेमी"],
+    "o_en": ["(a) 8.5 cm", "(b) 11.5 cm", "(c) 9 cm", "(d) 12 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q402. 42 सेमी व्यास वाले एक लंब वृत्तीय शंकु का वक्र पृष्ठीय क्षेत्रफल 990 सेमी² है। शंकु की तिर्यक ऊंचाई (सेमी में) कितनी होगी? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q402. The curved surface area of a right circular cone of diameter 42 cm is 990 cm². What will be the slant height of the cone (in cm)? (Use π = 22/7)",
+    "tag": "SSC CHSL 14/08/2023 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 10", "(b) 15", "(c) 24", "(d) 12"],
+    "o_en": ["(a) 10", "(b) 15", "(c) 24", "(d) 12"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q403. एक कंपनी द्वारा एक पार्क में 10 मीटर ऊंचाई और 48 मीटर व्यास का एक शंक्वाकार तम्बू लगाया गया था। तम्बू का वक्र पृष्ठीय क्षेत्रफल (मीटर² में) ज्ञात कीजिए।",
+    "q_en": "Q403. A company set up a conical tent in a park with height 10 m and diameter 48 m. Find the curved surface area of the tent (in m²).",
+    "tag": "SSC CGL 18/07/2023 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 576π", "(b) 1248π", "(c) 1152π", "(d) 624π"],
+    "o_en": ["(a) 576π", "(b) 1248π", "(c) 1152π", "(d) 624π"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q404. एक कैनवास से 6 इकाई त्रिज्या और 8 इकाई ऊंचाई वाला एक शंक्वाकार तम्बू बनाया जाना है। तम्बू बनाने के लिए कितने कैनवास की आवश्यकता होगी? (दो दशमलव स्थान तक पूर्णांकित)",
+    "q_en": "Q404. A conical tent of radius 6 units and height 8 units is to be made from canvas. How much canvas will be required to make the tent? (Rounded to two decimal places)",
+    "tag": "SSC CGL 18/07/2023 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 188.57 इकाई", "(b) 155.87 इकाई", "(c) 166.57 इकाई", "(d) 177.55 इकाई"],
+    "o_en": ["(a) 188.57 units", "(b) 155.87 units", "(c) 166.57 units", "(d) 177.55 units"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q405. गेहूँ का एक ढेर एक शंकु के आकार का है जिसका आधार व्यास 8.4 मीटर और ऊंचाई 1.75 मीटर है। ढेर को कैनवास से ढकना है। कैनवास का क्षेत्रफल (मी² में) ज्ञात करें। (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q405. A heap of wheat is in the shape of a cone with base diameter 8.4 m and height 1.75 m. The heap is to be covered with canvas. Find the area of the canvas (in m²). (Use π = 22/7)",
+    "tag": "SSC CGL 16/08/2021 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 60.06", "(b) 115.05", "(c) 60.6", "(d) 115.5"],
+    "o_en": ["(a) 60.06", "(b) 115.05", "(c) 60.6", "(d) 115.5"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q406. एक शंकु के आधार की त्रिज्या 6 सेमी और तिर्यक ऊंचाई 10 सेमी है। यदि इसमें से एक शंक्वाकार छिन्नक काटा जाए, तो शीर्ष त्रिज्या 3 सेमी है और ऊंचाई समानुपातिक रूप से मापी गई है। छिन्नक की ऊंचाई ज्ञात कीजिए?",
+    "q_en": "Q406. The base radius of a cone is 6 cm and its slant height is 10 cm. If a conical frustum is cut from it such that the top radius is 3 cm and the height is measured proportionally, find the height of the frustum.",
+    "tag": "SSC CPO 10/12/2025 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 4 सेमी", "(b) 6 सेमी", "(c) 8 सेमी", "(d) 10 सेमी"],
+    "o_en": ["(a) 4 cm", "(b) 6 cm", "(c) 8 cm", "(d) 10 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q407. एक ठोस शंकु, जिसका वक्र पृष्ठीय क्षेत्रफल उसके आधार क्षेत्रफल से दोगुना है, तिर्यक ऊंचाई 6√3 सेमी है। इसकी ऊंचाई ज्ञात करें।",
+    "q_en": "Q407. A solid cone has a curved surface area twice its base area and a slant height of 6√3 cm. Find its height.",
+    "tag": "SSC CGL 20/07/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 6√2 सेमी", "(b) 9 सेमी", "(c) 6 सेमी", "(d) 3√6 सेमी"],
+    "o_en": ["(a) 6√2 cm", "(b) 9 cm", "(c) 6 cm", "(d) 3√6 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q408. एक शंक्वाकार तंबू के आधार की त्रिज्या 8 मीटर है और इसकी ऊंचाई 15 मीटर है, यदि इसकी लागत 54π रुपये प्रति मीटर² है तो इसे बनाने के लिए आवश्यक सामग्री की लागत क्या है?",
+    "q_en": "Q408. The base radius of a conical tent is 8 m and its height is 15 m. If its cost is ₹54π per m², what is the cost of the material required to make it?",
+    "tag": "SSC MTS 08/05/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) ₹6454", "(b) ₹7344", "(c) ₹8678", "(d) ₹7454"],
+    "o_en": ["(a) ₹6454", "(b) ₹7344", "(c) ₹8678", "(d) ₹7454"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q409. एक लम्बवृतीय शंकु के आधार की परिधि 88 सेमी है। यदि शंकु की ऊंचाई 28 सेमी है, तो शंकु का वक्र पृष्ठीय क्षेत्रफल क्या है?",
+    "q_en": "Q409. The circumference of the base of a right circular cone is 88 cm. If the height of the cone is 28 cm, what is its curved surface area?",
+    "tag": "SSC CHSL 09/03/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 670√3 मीटर²", "(b) 616√5 मीटर²", "(c) 627√3 मीटर²", "(d) 561√5 मीटर²"],
+    "o_en": ["(a) 670√3 m²", "(b) 616√5 m²", "(c) 627√3 m²", "(d) 561√5 m²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q410. एक लंब वृत्तीय शंकु, जिसके आधार की त्रिज्या 21 सेमी है, का वक्र पृष्ठीय क्षेत्रफल 594 वर्ग सेमी है। शंकु की तिर्यक ऊंचाई कितनी है?",
+    "q_en": "Q410. A right circular cone has base radius 21 cm and curved surface area 594 cm². What is the slant height of the cone?",
+    "tag": "SSC CGL 09/12/2022 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 15 सेमी", "(b) 11 सेमी", "(c) 9 सेमी", "(d) 6 सेमी"],
+    "o_en": ["(a) 15 cm", "(b) 11 cm", "(c) 9 cm", "(d) 6 cm"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q411. एक लम्बवृतीय शंकु की तिर्यक ऊंचाई 11 सेमी और त्रिज्या 6 सेमी है। शंकु का वक्र पृष्ठीय क्षेत्रफल कितना है?",
+    "q_en": "Q411. The slant height of a right circular cone is 11 cm and its radius is 6 cm. What is the curved surface area of the cone?",
+    "tag": "SSC MTS 12/07/2022 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 74π सेमी²", "(b) 60π सेमी²", "(c) 44π सेमी²", "(d) 66π सेमी²"],
+    "o_en": ["(a) 74π cm²", "(b) 60π cm²", "(c) 44π cm²", "(d) 66π cm²"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q412. एक शंकु की तिर्यक ऊंचाई 20 सेमी है। यदि इसके आधार का क्षेत्रफल 616 सेमी² हो, तो शंकु का वक्र पृष्ठीय क्षेत्रफल कितना है?",
+    "q_en": "Q412. The slant height of a cone is 20 cm. If the area of its base is 616 cm², what is the curved surface area of the cone?",
+    "tag": "SSC CGL TIER-II (08/08/2022)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 880 सेमी²", "(b) 960 सेमी²", "(c) 440 सेमी²", "(d) 1760 सेमी²"],
+    "o_en": ["(a) 880 cm²", "(b) 960 cm²", "(c) 440 cm²", "(d) 1760 cm²"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q413. एक शंक्वाकार बर्तन की त्रिज्या 21 सेमी और तिर्यक ऊंचाई 25 सेमी है। यदि बर्तन के वक्रीय भाग को सफेद रंग से पेंट किया जाता है, तो ₹1.5 प्रति सेमी² की दर से पेंटिंग की लागत (₹ में) ज्ञात कीजिए।",
+    "q_en": "Q413. A conical vessel has radius 21 cm and slant height 25 cm. If its curved part is painted white, find the cost of painting (in ₹) at ₹1.5 per cm².",
+    "tag": "SSC CPO 03/10/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 2475", "(b) 825", "(c) 1680", "(d) 1250"],
+    "o_en": ["(a) 2475", "(b) 825", "(c) 1680", "(d) 1250"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q414. उस शंकु का कुल पृष्ठीय क्षेत्रफल क्या होगा, जिसका वक्र पृष्ठीय क्षेत्रफल 550 सेमी² और त्रिज्या 7 सेमी है? (π = 22/7 लें)",
+    "q_en": "Q414. What will be the total surface area of a cone whose curved surface area is 550 cm² and radius is 7 cm? (Take π = 22/7)",
+    "tag": "SSC CGL 26/09/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 764.71 सेमी²", "(b) 704.00 सेमी²", "(c) 682.60 सेमी²", "(d) 714.05 सेमी²"],
+    "o_en": ["(a) 764.71 cm²", "(b) 704.00 cm²", "(c) 682.60 cm²", "(d) 714.05 cm²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q415. एक शंकु का कुल पृष्ठीय क्षेत्रफल कितना है, जिसकी त्रिज्या r/4 है और तिर्यक ऊंचाई 4l है?",
+    "q_en": "Q415. What is the total surface area of a cone whose radius is r/4 and slant height is 4l?",
+    "tag": "SSC CPO 27/06/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 8πr(l + r)", "(b) πr(l + r/16)", "(c) πr(l + r/4)", "(d) 4πr(l + r)"],
+    "o_en": ["(a) 8πr(l + r)", "(b) πr(l + r/16)", "(c) πr(l + r/4)", "(d) 4πr(l + r)"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q416. आधार त्रिज्या 3.5 सेमी और ऊंचाई 18 सेमी वाले शंकु का आयतन ज्ञात कीजिए।",
+    "q_en": "Q416. Find the volume of a cone with base radius 3.5 cm and height 18 cm.",
+    "tag": "SSC CGL 26/09/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 241 सेमी³", "(b) 221 सेमी³", "(c) 201 सेमी³", "(d) 231 सेमी³"],
+    "o_en": ["(a) 241 cm³", "(b) 221 cm³", "(c) 201 cm³", "(d) 231 cm³"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q417. यदि एक शंकु की ऊंचाई 7 सेमी है और इसके वृत्ताकार आधार का व्यास 12 सेमी है, तो इसका आयतन क्या होगा? (निकटतम पूर्णांक तक)",
+    "q_en": "Q417. If the height of a cone is 7 cm and the diameter of its circular base is 12 cm, what will be its volume? (To the nearest integer)",
+    "tag": "SSC CPO 03/10/2023 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 264 सेमी³", "(b) 284 सेमी³", "(c) 274 सेमी³", "(d) 254 सेमी³"],
+    "o_en": ["(a) 264 cm³", "(b) 284 cm³", "(c) 274 cm³", "(d) 254 cm³"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q418. ऐसे शंकु का आयतन (घन इकाई में) क्या होगा जिसकी त्रिज्या 3 इकाई और तिर्यक ऊंचाई 3√2 इकाई है?",
+    "q_en": "Q418. What will be the volume (in cubic units) of a cone whose radius is 3 units and slant height is 3√2 units?",
+    "tag": "SSC CGL 18/09/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 18π", "(b) 10π/3", "(c) 9π/2", "(d) 9π"],
+    "o_en": ["(a) 18π", "(b) 10π/3", "(c) 9π/2", "(d) 9π"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q419. 70 मी त्रिज्या और 46200 मी³ आयतन वाली शंक्वाकार पानी की टंकी की ऊंचाई (मी में) कितनी है? (π = 22/7 लीजिए)",
+    "q_en": "Q419. What is the height (in m) of a conical water tank with radius 70 m and volume 46200 m³? (Take π = 22/7)",
+    "tag": "SSC CGL 13/09/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 27", "(b) 9", "(c) 18", "(d) 54"],
+    "o_en": ["(a) 27", "(b) 9", "(c) 18", "(d) 54"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q420. यदि एक लंब वृत्तीय शंकु की ऊंचाई 24 सेमी है और उसके आधार की त्रिज्या 10.5 सेमी है, तो लंब वृत्तीय शंकु का आयतन (सेमी³ में) है। (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q420. If the height of a right circular cone is 24 cm and the radius of its base is 10.5 cm, then the volume of the right circular cone (in cm³) is: (Use π = 22/7)",
+    "tag": "SSC CHSL 03/07/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 2237", "(b) 2277", "(c) 2772", "(d) 2727"],
+    "o_en": ["(a) 2237", "(b) 2277", "(c) 2772", "(d) 2727"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q421. यदि एक शंकु के आधार की त्रिज्या और तिर्यक ऊंचाई क्रमशः 6 सेमी और 10 सेमी है, तो शंकु का आयतन ज्ञात करें।",
+    "q_en": "Q421. If the radius of the base and the slant height of a cone are 6 cm and 10 cm respectively, find the volume of the cone.",
+    "tag": "SSC CHSL 09/07/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 108π सेमी³", "(b) 96π सेमी³", "(c) 98π सेमी³", "(d) 106π सेमी³"],
+    "o_en": ["(a) 108π cm³", "(b) 96π cm³", "(c) 98π cm³", "(d) 106π cm³"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q422. एक लम्बवृतीय शंकु का आयतन 150π सेमी³ है और इसकी ऊंचाई 18 सेमी है। इसकी तिर्यक ऊंचाई (सेमी में) ज्ञात करें (दशमलव के बाद 2 स्थानों तक गणना करें)।",
+    "q_en": "Q422. The volume of a right circular cone is 150π cm³ and its height is 18 cm. Find its slant height (in cm), calculated to 2 decimal places.",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 18.68", "(b) 25.35", "(c) 28.68", "(d) 15.25"],
+    "o_en": ["(a) 18.68", "(b) 25.35", "(c) 28.68", "(d) 15.25"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q423. एक शंक्वाकार भंडारण टंकी की ऊंचाई और त्रिज्या क्रमशः 9 फीट और 7 फीट है। टंकी में आ सकने वाले जल का आयतन ज्ञात कीजिए।",
+    "q_en": "Q423. The height and radius of a conical storage tank are 9 ft and 7 ft respectively. Find the volume of water that the tank can hold.",
+    "tag": "SSC CPO 29/06/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 462 फीट³", "(b) 527 फीट³", "(c) 1386 फीट³", "(d) 1423 फीट³"],
+    "o_en": ["(a) 462 ft³", "(b) 527 ft³", "(c) 1386 ft³", "(d) 1423 ft³"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q424. एक लंब वृत्तीय शंकु का वक्र पृष्ठीय क्षेत्रफल 20π सेमी² है। यदि इसकी त्रिज्या 4 सेमी है, तो शंकु का आयतन ज्ञात कीजिए।",
+    "q_en": "Q424. The curved surface area of a right circular cone is 20π cm². If its radius is 4 cm, find the volume of the cone.",
+    "tag": "SSC CHSL 10/07/2024 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 18π सेमी³", "(b) 21π सेमी³", "(c) 20π सेमी³", "(d) 16π सेमी³"],
+    "o_en": ["(a) 18π cm³", "(b) 21π cm³", "(c) 20π cm³", "(d) 16π cm³"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q425. एक शंकु जिसके आधार की त्रिज्या तथा ऊंचाई क्रमशः r तथा h है, का आयतन 400 सेमी³ है। एक शंकु, जिसके आधार की त्रिज्या तथा ऊंचाई क्रमशः 2r सेमी तथा h सेमी है, का आयतन क्या होगा?",
+    "q_en": "Q425. A cone with base radius r and height h has volume 400 cm³. What will be the volume of a cone whose base radius and height are 2r cm and h cm respectively?",
+    "tag": "SSC CGL TIER-II 08/08/2022",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 100 सेमी³", "(b) 1200 सेमी³", "(c) 1600 सेमी³", "(d) 800 सेमी³"],
+    "o_en": ["(a) 100 cm³", "(b) 1200 cm³", "(c) 1600 cm³", "(d) 800 cm³"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q426. एक लंब वृत्तीय शंकु का आयतन 196π सेमी³ और इसके आधार का व्यास 14 सेमी है। इसकी लंबवत ऊंचाई ज्ञात कीजिए।",
+    "q_en": "Q426. The volume of a right circular cone is 196π cm³ and the diameter of its base is 14 cm. Find its perpendicular height.",
+    "tag": "SSC CPO 03/10/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 8 सेमी", "(b) 14 सेमी", "(c) 10 सेमी", "(d) 12 सेमी"],
+    "o_en": ["(a) 8 cm", "(b) 14 cm", "(c) 10 cm", "(d) 12 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q427. एक लम्ब वृत्तीय शंकु के आधार की त्रिज्या 5 सेमी है। इसकी तिर्यक ऊंचाई 13 सेमी है। इसका आयतन क्या है? (सेमी³ में, दशमलव के 1 स्थान तक पूर्णांकित)? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q427. The radius of the base of a right circular cone is 5 cm and its slant height is 13 cm. What is its volume (in cm³, rounded to 1 decimal place)? (Use π = 22/7)",
+    "tag": "SSC CPO 04/10/2023 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 314.3", "(b) 323.4", "(c) 328.6", "(d) 340.5"],
+    "o_en": ["(a) 314.3", "(b) 323.4", "(c) 328.6", "(d) 340.5"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q428. एक लम्बवृतीय शंकु की ऊंचाई उसके आधार के समानांतर दो तलों द्वारा समत्रिभाजित की गई है। तीनों आयतनों (ऊपर से नीचे) का अनुपात क्या है?",
+    "q_en": "Q428. The height of a right circular cone is trisected by two planes parallel to its base. What is the ratio of the three volumes (from top to bottom)?",
+    "tag": "SSC CPO 11/12/2025 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 1 : 7 : 19", "(b) 1 : 8 : 28", "(c) 1 : 3 : 10", "(d) इनमें से कोई नहीं"],
+    "o_en": ["(a) 1 : 7 : 19", "(b) 1 : 8 : 28", "(c) 1 : 3 : 10", "(d) None of these"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q429. 15 व्यक्तियों के रहने के लिए एक शंक्वाकार तम्बू बनाया जाता है। प्रत्येक व्यक्ति के पास जमीन पर 5 वर्ग मीटर जगह है और सांस लेने के लिए 30 घन मीटर हवा होगी। शंक्वाकार तम्बू की ऊंचाई कितनी है?",
+    "q_en": "Q429. A conical tent is made to accommodate 15 persons. Each person has 5 square metres of ground space and 30 cubic metres of air for breathing. What is the height of the conical tent?",
+    "tag": "SSC MTS 12/09/2023 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 18 मीटर", "(b) 22 मीटर", "(c) 13 मीटर", "(d) 15 मीटर"],
+    "o_en": ["(a) 18 m", "(b) 22 m", "(c) 13 m", "(d) 15 m"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q430. यदि एक शंकु के आधार का व्यास 70 सेमी है और इसका वक्र पृष्ठीय क्षेत्रफल 4070 सेमी² है, तो इसका आयतन (सेमी³ में) क्या होगा? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q430. If the diameter of the base of a cone is 70 cm and its curved surface area is 4070 cm², what will be its volume (in cm³)? (Use π = 22/7)",
+    "tag": "SSC MTS 13/09/2023 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 1180", "(b) 16,300", "(c) 15,400", "(d) 17,600"],
+    "o_en": ["(a) 1180", "(b) 16,300", "(c) 15,400", "(d) 17,600"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q431. एक शंक्वाकार फ्लास्क ठीक-ठाक एक बेलनाकार पात्र में फिट होता है। दोनों की आधार त्रिज्या 5 सेमी और ऊंचाई 12 सेमी है। शंकु और बेलन के आयतन का अनुपात क्या है?",
+    "q_en": "Q431. A conical flask fits exactly in a cylindrical vessel. Both have base radius 5 cm and height 12 cm. What is the ratio of the volumes of the cone and the cylinder?",
+    "tag": "SSC CHSL 24/11/2025 (Shift-1)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 1 : 2", "(b) 1 : 3", "(c) 2 : 3", "(d) 3 : 4"],
+    "o_en": ["(a) 1 : 2", "(b) 1 : 3", "(c) 2 : 3", "(d) 3 : 4"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q432. एक शंकु की ऊंचाई h और त्रिज्या r है। शंकु को पिघलाकर एक छोटा शंकु में ढाला गया है जिसकी ऊंचाई h/2 है, और त्रिज्या r/3 है। मूल आयतन का कितना भाग अप्रयुक्त है?",
+    "q_en": "Q432. A cone has height h and radius r. A smaller cone of height h/2 and radius r/3 is formed from it. What fraction of the original volume remains unused?",
+    "tag": "SSC CGL 19/09/2025 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 17/18", "(b) 15/16", "(c) 12/17", "(d) 16/19"],
+    "o_en": ["(a) 17/18", "(b) 15/16", "(c) 12/17", "(d) 16/19"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q433. एक शंकु को उसकी आधार के समानांतर तल से दो हिस्सों में काटा जाता है, जिसमें ऊपरी हिस्सा कुल आयतन का 1/8 दर्शाता है। छोटे शंकु की ऊंचाई और मूल शंकु की ऊंचाई का अनुपात क्या है?",
+    "q_en": "Q433. A cone is cut into two parts by a plane parallel to its base, with the upper part representing 1/8 of the total volume. What is the ratio of the height of the smaller cone to the height of the original cone?",
+    "tag": "SSC CGL 18/09/2025 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 1 : 2", "(b) 1 : 7", "(c) 5 : 1", "(d) 6 : 1"],
+    "o_en": ["(a) 1 : 2", "(b) 1 : 7", "(c) 5 : 1", "(d) 6 : 1"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q434. एक शंक्वाकार बर्तन की त्रिज्या 4 सेमी है और इसका वक्र पृष्ठीय क्षेत्रफल 20π सेमी² है। शंक्वाकार बर्तन का आयतन ज्ञात कीजिए।",
+    "q_en": "Q434. The radius of a conical vessel is 4 cm and its curved surface area is 20π cm². Find the volume of the conical vessel.",
+    "tag": "SSC Phase-X 02/08/2022 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 18π सेमी³", "(b) 16π सेमी³", "(c) 26π सेमी³", "(d) 12π सेमी³"],
+    "o_en": ["(a) 18π cm³", "(b) 16π cm³", "(c) 26π cm³", "(d) 12π cm³"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q435. एक शंकु को उसके आधार के समानांतर एक समतल द्वारा शीर्ष से 1/3 भाग पर काटा जाता है। शीर्ष पर स्थित छोटे शंकु के आयतन का पूरे शंकु के आयतन से अनुपात क्या है?",
+    "q_en": "Q435. A cone is cut by a plane parallel to its base at one-third of its height from the vertex. What is the ratio of the volume of the small cone at the top to the volume of the whole cone?",
+    "tag": "SSC CPO 11/12/2025 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 1 : 27", "(b) 2 : 17", "(c) 3 : 17", "(d) 5 : 27"],
+    "o_en": ["(a) 1 : 27", "(b) 2 : 17", "(c) 3 : 17", "(d) 5 : 27"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q436. दो शंकुओं की त्रिज्याओं का अनुपात 2 : 5 और उनके आयतन का अनुपात 3 : 5 है। उनकी ऊंचाइयों का अनुपात क्या है?",
+    "q_en": "Q436. The radii of two cones are in the ratio 2 : 5 and their volumes are in the ratio 3 : 5. What is the ratio of their heights?",
+    "tag": "SSC CGL 09/09/2024 (Shift-01)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 15 : 4", "(b) 11 : 15", "(c) 13 : 11", "(d) 4 : 11"],
+    "o_en": ["(a) 15 : 4", "(b) 11 : 15", "(c) 13 : 11", "(d) 4 : 11"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q437. यदि लंब वृत्तीय शंकु की त्रिज्या 20% बढ़ा दी जाए और इसकी ऊंचाई 25% कम कर दी जाए, तो लंब वृत्तीय शंकु का आयतन कितना बढ़ जाएगा?",
+    "q_en": "Q437. If the radius of a right circular cone is increased by 20% and its height is decreased by 25%, by what percent will the volume of the cone increase?",
+    "tag": "SSC Phase-XII 26/06/2024 (Shift-04)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 12%", "(b) 10%", "(c) 8%", "(d) 15%"],
+    "o_en": ["(a) 12%", "(b) 10%", "(c) 8%", "(d) 15%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q438. यदि दो शंकुओं के आयतनों का अनुपात 11 : 16 है और उनके आधारों की त्रिज्याओं का अनुपात 3 : 4 है, तो उनकी ऊंचाई का अनुपात होगा:",
+    "q_en": "Q438. If the volumes of two cones are in the ratio 11 : 16 and the radii of their bases are in the ratio 3 : 4, then the ratio of their heights will be:",
+    "tag": "SSC CHSL 26/05/2022 (Shift-02)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 11 : 9", "(b) 4 : 11", "(c) 3 : 16", "(d) 9 : 11"],
+    "o_en": ["(a) 11 : 9", "(b) 4 : 11", "(c) 3 : 16", "(d) 9 : 11"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q439. एक लंब वृत्तीय शंकु की तिर्यक ऊंचाई और त्रिज्या 29 : 20 के अनुपात में हैं। यदि इसका आयतन 4838.4π सेमी³ है, तो इसकी त्रिज्या कितनी होगी?",
+    "q_en": "Q439. The slant height and radius of a right circular cone are in the ratio 29 : 20. If its volume is 4838.4π cm³, what is its radius?",
+    "tag": "SSC CGL TIER-II 29/01/2022",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 20 सेमी", "(b) 24 सेमी", "(c) 25 सेमी", "(d) 28 सेमी"],
+    "o_en": ["(a) 20 cm", "(b) 24 cm", "(c) 25 cm", "(d) 28 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q440. यदि किसी शंकु का आधार-व्यास 56 cm है और इसका वक्र पृष्ठीय क्षेत्रफल 3080 cm² है, तो इसका आयतन (cm³ में) कितना होगा? (π=22/7 का उपयोग कीजिए)",
+    "q_en": "Q440. If the base diameter of a cone is 56 cm and its curved surface area is 3080 cm², what is its volume (in cm³)? (Use π = 22/7)",
+    "tag": "SSC CGL TIER-II (20/01/2025)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 17248", "(b) 15391", "(c) 14670", "(d) 12250"],
+    "o_en": ["(a) 17248", "(b) 15391", "(c) 14670", "(d) 12250"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q441. 12 सेमी व्यास और 5 सेमी ऊंचाई वाले एक लंब वृत्तीय शंकु का आयतन (सेमी³ में, 2 दशमलव स्थान तक पूर्णांकित) ज्ञात कीजिए। (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q441. Find the volume of a right circular cone of diameter 12 cm and height 5 cm (in cm³, rounded to 2 decimal places). (Use π = 22/7)",
+    "tag": "SSC CGL TIER-II (18/01/2025)",
+    "type_tag": "Type V (Cone)",
+    "o_hi": ["(a) 188.57", "(b) 197.25", "(c) 147.23", "(d) 156.39"],
+    "o_en": ["(a) 188.57", "(b) 197.25", "(c) 147.23", "(d) 156.39"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }];

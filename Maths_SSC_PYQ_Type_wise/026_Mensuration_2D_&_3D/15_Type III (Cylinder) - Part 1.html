@@ -1,0 +1,503 @@
+
+
+const data = [{
+    "q_hi": "Q313. उस बेलन का वक्र पृष्ठीय क्षेत्रफल क्या है जिसकी त्रिज्या 3 सेमी और ऊंचाई 14 सेमी है? (π = 22/7 लें)",
+    "q_en": "Q313. What is the curved surface area of a cylinder whose radius is 3 cm and height is 14 cm? (Take π = 22/7)",
+    "tag": "SSC CHSL 04/07/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 262 सेमी²", "(b) 263 सेमी²", "(c) 261 सेमी²", "(d) 264 सेमी²"],
+    "o_en": ["(a) 262 cm²", "(b) 263 cm²", "(c) 261 cm²", "(d) 264 cm²"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q314. एक बेलनाकार टैंक के आधार का व्यास 28 सेमी है और इसकी ऊंचाई 42 सेमी है। इसका वक्र पृष्ठीय क्षेत्रफल ज्ञात कीजिए।",
+    "q_en": "Q314. The diameter of the base of a cylindrical tank is 28 cm and its height is 42 cm. Find its curved surface area.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 3680 सेमी²", "(b) 3690 सेमी²", "(c) 3696 सेमी²", "(d) 3686 सेमी²"],
+    "o_en": ["(a) 3680 cm²", "(b) 3690 cm²", "(c) 3696 cm²", "(d) 3686 cm²"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q315. यदि एक बेलन का वक्र पृष्ठीय क्षेत्रफल 880 सेमी² है, तो उसकी ऊंचाई और त्रिज्या का गुणनफल क्या होगा?",
+    "q_en": "Q315. If the curved surface area of a cylinder is 880 cm², what will be the product of its height and radius?",
+    "tag": "SSC CGL 13/09/2024 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 90 सेमी²", "(b) 120 सेमी²", "(c) 220 सेमी²", "(d) 140 सेमी²"],
+    "o_en": ["(a) 90 cm²", "(b) 120 cm²", "(c) 220 cm²", "(d) 140 cm²"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q316. 56 सेमी ऊंचाई वाले एक लम्ब वृत्तीय बेलन का वक्र पृष्ठीय क्षेत्रफल 1408 सेमी² है। बेलन के आधार का व्यास ज्ञात कीजिए।",
+    "q_en": "Q316. The curved surface area of a right circular cylinder of height 56 cm is 1408 cm². Find the diameter of the base of the cylinder.",
+    "tag": "SSC CGL 27/07/2023 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 8 मीटर", "(b) 0.04 मीटर", "(c) 0.08 मीटर", "(d) 0.008 मीटर"],
+    "o_en": ["(a) 8 m", "(b) 0.04 m", "(c) 0.08 m", "(d) 0.008 m"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q317. एक बेलन की ऊंचाई 45 सेमी है। यदि इसके आधार की परिधि 132 सेमी हो, तो इस बेलन का वक्र पृष्ठीय क्षेत्रफल कितना है? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q317. The height of a cylinder is 45 cm. If the circumference of its base is 132 cm, what is the curved surface area of the cylinder? (Use π = 22/7)",
+    "tag": "SSC CGL TIER-II 08/08/2022",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 5720 सेमी²", "(b) 5940 सेमी²", "(c) 6270 सेमी²", "(d) 6360 सेमी²"],
+    "o_en": ["(a) 5720 cm²", "(b) 5940 cm²", "(c) 6270 cm²", "(d) 6360 cm²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q318. एक सिलिंडर का घुमावदार सतह का क्षेत्रफल उसके आधार के क्षेत्रफल का पांच गुना है। सिलिंडर की त्रिज्या और ऊंचाई का अनुपात ज्ञात करें।",
+    "q_en": "Q318. The curved surface area of a cylinder is five times the area of its base. Find the ratio of the radius to the height of the cylinder.",
+    "tag": "SSC CGL TIER-II 18/11/2020",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 2 : 5", "(b) 2 : 3", "(c) 3 : 4", "(d) 3 : 5"],
+    "o_en": ["(a) 2 : 5", "(b) 2 : 3", "(c) 3 : 4", "(d) 3 : 5"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q319. दो बेलनों के आधारों की त्रिज्याएँ 4 : 5 के अनुपात में हैं और उनकी ऊंचाइयाँ 5 : 7 के अनुपात में हैं। उनके वक्रपृष्ठीय क्षेत्रफलों का अनुपात ज्ञात कीजिए।",
+    "q_en": "Q319. The radii of the bases of two cylinders are in the ratio 4 : 5 and their heights are in the ratio 5 : 7. Find the ratio of their curved surface areas.",
+    "tag": "SSC CGL 12/09/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 5 : 4", "(b) 4 : 7", "(c) 1 : 2", "(d) 4 : 5"],
+    "o_en": ["(a) 5 : 4", "(b) 4 : 7", "(c) 1 : 2", "(d) 4 : 5"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q320. एक औषधीय कैप्सूल का आकार 0.4 सेमी त्रिज्या और 1.5 सेमी ऊंचाई वाले समकोण वृत्तीय बेलन के समान है। समतल सिरे मानते हुए कैप्सूल का कुल पृष्ठीय क्षेत्रफल ज्ञात कीजिए।",
+    "q_en": "Q320. A medicinal capsule is shaped like a right circular cylinder of radius 0.4 cm and height 1.5 cm. Assuming flat ends, find the total surface area of the capsule.",
+    "tag": "SSC CHSL 29/11/2025 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 4.32 सेमी²", "(b) 4.77 सेमी²", "(c) 4.20 सेमी²", "(d) 3.76 सेमी²"],
+    "o_en": ["(a) 4.32 cm²", "(b) 4.77 cm²", "(c) 4.20 cm²", "(d) 3.76 cm²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q321. एक मैदानी रोलर, जो बेलन के आकार का है, उसका व्यास 1 मी और लंबाई 1 1/4 मी है। यदि इस रोलर के घूमने की चाल 14 चक्कर प्रति मिनट है, तो 1 घंटे में यह अधिकतम कितने क्षेत्रफल (वर्ग मी में) सम कर सकता है? (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q321. A field roller, cylindrical in shape, has diameter 1 m and length 1 1/4 m. If it rotates at 14 revolutions per minute, what maximum area (in square metres) can it level in 1 hour? (Use π = 22/7)",
+    "tag": "SSC CGL TIER-II 12/09/2019",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 3960", "(b) 3600", "(c) 3300", "(d) 3500"],
+    "o_en": ["(a) 3960", "(b) 3600", "(c) 3300", "(d) 3500"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q322. एक रोलर का व्यास 35 सेमी और इसकी लंबाई 100 सेमी है। एक खेल के मैदान को समतल बनाने में इसे 200 पूर्ण परिक्रमण लगाने पड़ते हैं। खेल के मैदान का क्षेत्रफल मी² में ज्ञात कीजिए।",
+    "q_en": "Q322. A roller has diameter 35 cm and length 100 cm. It makes 200 complete revolutions to level a playground. Find the area of the playground in m².",
+    "tag": "SSC CHSL 05/07/2024 (Shift-04)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1,10,000", "(b) 110", "(c) 2,20,00,000", "(d) 220"],
+    "o_en": ["(a) 1,10,000", "(b) 110", "(c) 2,20,00,000", "(d) 220"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q323. एक रोलर की त्रिज्या 49 सेमी है और इसकी लंबाई 200 सेमी है। एक खेल के मैदान को समतल करने के लिए एक बार रोलर के 700 पूर्ण चक्कर लगाने पड़ते हैं। खेल के मैदान का क्षेत्रफल ज्ञात कीजिए। (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q323. A roller has radius 49 cm and length 200 cm. To level a playground, the roller makes 700 complete revolutions. Find the area of the playground. (Use π = 22/7)",
+    "tag": "SSC CHSL 01/07/2024 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 4312 × 10³ सेमी²", "(b) 4312 × 10² सेमी²", "(c) 4322 × 10⁴ सेमी²", "(d) 4312 × 10⁴ सेमी²"],
+    "o_en": ["(a) 4312 × 10³ cm²", "(b) 4312 × 10² cm²", "(c) 4322 × 10⁴ cm²", "(d) 4312 × 10⁴ cm²"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q324. एक लकड़ी के बेलन के वक्र पृष्ठ को 50 रुपये/मीटर² की दर से पॉलिश करने की कुल लागत (रुपये में) क्या होगी, यदि इसका व्यास 70 सेमी और ऊंचाई 6 मीटर है? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q324. What will be the total cost (in rupees) of polishing the curved surface of a wooden cylinder at ₹50/m² if its diameter is 70 cm and height is 6 m? (Use π = 22/7)",
+    "tag": "SSC CGL 13/04/2022 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 612", "(b) 675", "(c) 560", "(d) 624"],
+    "o_en": ["(a) 612", "(b) 675", "(c) 560", "(d) 624"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q325. एक बेलन के वक्र पृष्ठीय क्षेत्रफल का उसके कुल पृष्ठीय क्षेत्रफल से अनुपात क्रमशः 7 : 10 है। यदि बेलन का आयतन 12672 घन सेमी है, तो बेलन का वक्र पृष्ठीय क्षेत्रफल ज्ञात कीजिए।",
+    "q_en": "Q325. The ratio of the curved surface area of a cylinder to its total surface area is 7 : 10. If the volume of the cylinder is 12672 cm³, find its curved surface area.",
+    "tag": "SSC CHSL 18/11/2025 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 2080 सेमी²", "(b) 2348 सेमी²", "(c) 2112 सेमी²", "(d) 2648 सेमी²"],
+    "o_en": ["(a) 2080 cm²", "(b) 2348 cm²", "(c) 2112 cm²", "(d) 2648 cm²"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q326. उस बेलन का कुल पृष्ठीय क्षेत्रफल क्या होगा जिसके आधार की त्रिज्या 7 सेमी और ऊंचाई 5 सेमी है?",
+    "q_en": "Q326. What will be the total surface area of a cylinder whose base radius is 7 cm and height is 5 cm?",
+    "tag": "SSC CHSL 21/03/2023 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 426 सेमी²", "(b) 528 सेमी²", "(c) 428 सेमी²", "(d) 572 सेमी²"],
+    "o_en": ["(a) 426 cm²", "(b) 528 cm²", "(c) 428 cm²", "(d) 572 cm²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q327. यदि एक लम्ब वृत्तीय बेलन की त्रिज्या और ऊंचाई क्रमशः 21 सेमी और 5 सेमी है, तो बेलन का संपूर्ण पृष्ठीय क्षेत्रफल क्या है? (π = 22/7 का उपयोग कीजिए)",
+    "q_en": "Q327. If the radius and height of a right circular cylinder are 21 cm and 5 cm respectively, what is its total surface area? (Use π = 22/7)",
+    "tag": "SSC CGL 26/09/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 4312 सेमी²", "(b) 3432 सेमी²", "(c) 5212 सेमी²", "(d) 3816 सेमी²"],
+    "o_en": ["(a) 4312 cm²", "(b) 3432 cm²", "(c) 5212 cm²", "(d) 3816 cm²"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q328. यदि एक ठोस लम्बवृत्तीय बेलन की ऊंचाई 27 सेमी है और उसके आधार का व्यास 30 सेमी है, तो लम्बवृत्तीय बेलन का कुल पृष्ठीय क्षेत्रफल (सेमी² में) कितना है? (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q328. If a solid right circular cylinder has height 27 cm and base diameter 30 cm, what is its total surface area (in cm²)? (Use π = 22/7)",
+    "tag": "SSC CHSL 04/07/2024 (Shift-04)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 3964", "(b) 3960", "(c) 3978", "(d) 3976"],
+    "o_en": ["(a) 3964", "(b) 3960", "(c) 3978", "(d) 3976"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q329. यदि एक बेलन के आधार का व्यास और वक्र पृष्ठीय क्षेत्रफल क्रमशः 14 सेमी और 352 सेमी² है, तो बेलन का संपूर्ण पृष्ठीय क्षेत्रफल ज्ञात करें।",
+    "q_en": "Q329. If the diameter of the base and the curved surface area of a cylinder are 14 cm and 352 cm² respectively, find the total surface area of the cylinder.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 660 सेमी²", "(b) 760 सेमी²", "(c) 754 सेमी²", "(d) 654 सेमी²"],
+    "o_en": ["(a) 660 cm²", "(b) 760 cm²", "(c) 754 cm²", "(d) 654 cm²"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q330. 14 सेमी ऊंचाई वाले एक लम्ब वृत्तीय बेलन का वक्र पृष्ठीय क्षेत्रफल 88 सेमी² है। बेलन का कुल पृष्ठीय क्षेत्रफल ज्ञात करें।",
+    "q_en": "Q330. The curved surface area of a right circular cylinder of height 14 cm is 88 cm². Find the total surface area of the cylinder.",
+    "tag": "SSC CHSL 03/07/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 560/7 सेमी²", "(b) 360/7 सेमी²", "(c) 660/7 सेमी²", "(d) 460/7 सेमी²"],
+    "o_en": ["(a) 560/7 cm²", "(b) 360/7 cm²", "(c) 660/7 cm²", "(d) 460/7 cm²"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q331. दो लम्बवृत्तीय बेलनों की त्रिज्याओं का अनुपात 1 : 3 और ऊंचाइयों का अनुपात 4 : 1 है। उनके आयतनों का अनुपात क्या है?",
+    "q_en": "Q331. The radii of two right circular cylinders are in the ratio 1 : 3 and their heights are in the ratio 4 : 1. What is the ratio of their volumes?",
+    "tag": "SSC CPO 13/12/2025 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1 : 3", "(b) 4 : 9", "(c) 1 : 9", "(d) 2 : 3"],
+    "o_en": ["(a) 1 : 3", "(b) 4 : 9", "(c) 1 : 9", "(d) 2 : 3"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q332. एक बेलन का कुल पृष्ठीय क्षेत्रफल 64π वर्ग इकाई है। जहां बेलन की ऊंचाई इसकी त्रिज्या के बराबर है। यदि ऊंचाई दोगुनी और त्रिज्या आधी कर दी जाए, तो नए बेलन का कुल पृष्ठीय क्षेत्रफल वर्ग इकाई में ...... होगा।",
+    "q_en": "Q332. The total surface area of a cylinder is 64π square units, where its height is equal to its radius. If the height is doubled and the radius is halved, the total surface area of the new cylinder in square units will be ......",
+    "tag": "SSC MTS 08/09/2023 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 40π", "(b) 48π", "(c) 64π", "(d) 54π"],
+    "o_en": ["(a) 40π", "(b) 48π", "(c) 64π", "(d) 54π"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q333. यदि एक बेलन की ऊंचाई और व्यास क्रमशः 12 सेमी और 28 सेमी हैं, तो कुल पृष्ठीय क्षेत्रफल और वक्र पृष्ठीय क्षेत्रफल का अनुपात ज्ञात कीजिए।",
+    "q_en": "Q333. If the height and diameter of a cylinder are 12 cm and 28 cm respectively, find the ratio of total surface area to curved surface area.",
+    "tag": "SSC CGL 17/09/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 13 : 5", "(b) 10 : 3", "(c) 13 : 6", "(d) 11 : 6"],
+    "o_en": ["(a) 13 : 5", "(b) 10 : 3", "(c) 13 : 6", "(d) 11 : 6"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q334. किसी संपृक्त ठोस बेलन की आधार त्रिज्या और ऊंचाई का योगफल 12.5 सेमी है। यदि बेलन का सम्पूर्ण पृष्ठीय क्षेत्रफल 275 सेमी² है, तो इसकी त्रिज्या ज्ञात करो। (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q334. For a solid cylinder, the sum of its base radius and height is 12.5 cm. If its total surface area is 275 cm², find its radius. (Use π = 22/7)",
+    "tag": "SSC CHSL 13/04/2021 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 3.5 सेमी", "(b) 3 सेमी", "(c) 7 सेमी", "(d) 5 सेमी"],
+    "o_en": ["(a) 3.5 cm", "(b) 3 cm", "(c) 7 cm", "(d) 5 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q335. यदि एक लम्ब वृत्तीय बेलन का पार्श्व पृष्ठीय क्षेत्रफल उसके आधार के क्षेत्रफल के दोगुने के बराबर है, तो त्रिज्या के पदों में ऊंचाई ज्ञात कीजिए?",
+    "q_en": "Q335. If the lateral surface area of a right circular cylinder is equal to twice the area of its base, find the height in terms of radius.",
+    "tag": "SSC CHSL 27/11/2025 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) h = r", "(b) h = 2r", "(c) h = 3r", "(d) h = 5r"],
+    "o_en": ["(a) h = r", "(b) h = 2r", "(c) h = 3r", "(d) h = 5r"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q336. 1.5 मीटर त्रिज्या और 3 मीटर ऊंचाई वाली एक बंद बेलनाकार टंकी धातु की शीट से बनाई जाती है, इसे बनाने के लिए धातु की कितनी शीट की आवश्यकता होगी?",
+    "q_en": "Q336. A closed cylindrical tank of radius 1.5 m and height 3 m is made from a metal sheet. How much metal sheet will be required to make it?",
+    "tag": "SSC CHSL 09/07/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 42.24 मी²", "(b) 24.42 मी²", "(c) 42.42 मी²", "(d) 24.24 मी²"],
+    "o_en": ["(a) 42.24 m²", "(b) 24.42 m²", "(c) 42.42 m²", "(d) 24.24 m²"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q337. एक लकड़ी के बेलन की वक्र पृष्ठ को 50 रुपये/मीटर² की दर से पॉलिश करने की कुल लागत (रुपये में) क्या होगी, यदि इसका व्यास 70 सेमी और ऊंचाई 6 मीटर है? (π = 22/7 का प्रयोग करें)",
+    "q_en": "Q337. What will be the total cost (in rupees) of polishing the curved surface of a wooden cylinder at ₹50/m² if its diameter is 70 cm and height is 6 m? (Use π = 22/7)",
+    "tag": "SSC CGL 13/04/2022 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 612", "(b) 675", "(c) 560", "(d) 624"],
+    "o_en": ["(a) 612", "(b) 675", "(c) 560", "(d) 624"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q338. एक ठोस बेलन जिसकी आधार त्रिज्या 28 सेमी और ऊंचाई 24 सेमी है, दो समान बेलन प्राप्त करने के लिए इसकी ऊंचाई के समद्विभाजक बिंदु से काटा जाता है। कुल सतह क्षेत्र में कितने प्रतिशत की वृद्धि होगी?",
+    "q_en": "Q338. A solid cylinder with base radius 28 cm and height 24 cm is cut at the midpoint of its height to obtain two identical cylinders. By what percentage will the total surface area increase?",
+    "tag": "SSC MTS 17/05/2023 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 61.72%", "(b) 41.92%", "(c) 53.85%", "(d) 48.64%"],
+    "o_en": ["(a) 61.72%", "(b) 41.92%", "(c) 53.85%", "(d) 48.64%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q339. 60 सेमी आधार व्यास और 10 सेमी ऊंचाई वाले बेलन के पार्श्व पृष्ठीय क्षेत्रफल और संपूर्ण पृष्ठीय क्षेत्रफल का अनुपात क्या होगा?",
+    "q_en": "Q339. What is the ratio of the lateral surface area to the total surface area of a cylinder with base diameter 60 cm and height 10 cm?",
+    "tag": "SSC CHSL 04/07/2024 (Shift-04)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1 : 9", "(b) 1 : 7", "(c) 1 : 4", "(d) 1 : 3"],
+    "o_en": ["(a) 1 : 9", "(b) 1 : 7", "(c) 1 : 4", "(d) 1 : 3"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q340. एक बेलनाकार तेल की टंकी की त्रिज्या 5 मीटर और उसका कुल पृष्ठीय क्षेत्रफल 628 मीटर² है। इसका वक्र पृष्ठीय क्षेत्रफल क्या होगा? (दशमलव के 2 स्थानों तक सन्निकटित)",
+    "q_en": "Q340. A cylindrical oil tank has radius 5 m and total surface area 628 m². What will be its curved surface area? (Rounded to 2 decimal places)",
+    "tag": "SSC CHSL 05/07/2024 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 371.83 मी²", "(b) 401.43 मी²", "(c) 470.8 मी²", "(d) 481.43 मी²"],
+    "o_en": ["(a) 371.83 m²", "(b) 401.43 m²", "(c) 470.8 m²", "(d) 481.43 m²"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q341. 68 सेमी लंबाई और 28 सेमी के आधार व्यास वाले एक लम्ब वृत्तीय बेलन के वक्र पृष्ठीय क्षेत्रफल और संपूर्ण पृष्ठीय क्षेत्रफल के बीच का अंतर ज्ञात करें।",
+    "q_en": "Q341. Find the difference between the curved surface area and the total surface area of a right circular cylinder of length 68 cm and base diameter 28 cm.",
+    "tag": "SSC CHSL 02/07/2024 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1432 सेमी²", "(b) 1132 सेमी²", "(c) 1332 सेमी²", "(d) 1232 सेमी²"],
+    "o_en": ["(a) 1432 cm²", "(b) 1132 cm²", "(c) 1332 cm²", "(d) 1232 cm²"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q342. उस शिरोपरि बेलनाकार पानी की टंकी की लीटर में धारिता (क्षमता) ज्ञात कीजिए, जिसकी त्रिज्या 2.1 मीटर और ऊंचाई 6.3 मीटर है।",
+    "q_en": "Q342. Find the capacity (in litres) of an overhead cylindrical water tank whose radius is 2.1 m and height is 6.3 m.",
+    "tag": "SSC CHSL 04/07/2024 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 87318", "(b) 65622", "(c) 61802", "(d) 611726"],
+    "o_en": ["(a) 87318", "(b) 65622", "(c) 61802", "(d) 611726"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q343. बेलन का आयतन क्या होगा यदि बेलन की त्रिज्या 10 सेमी और ऊंचाई 20 सेमी हो? (π = 3.14 लें)",
+    "q_en": "Q343. What will be the volume of a cylinder if its radius is 10 cm and height is 20 cm? (Take π = 3.14)",
+    "tag": "SSC CGL TIER II 07/03/2023",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 6280 सेमी³", "(b) 5306 सेमी³", "(c) 6260 सेमी³", "(d) 5280 सेमी³"],
+    "o_en": ["(a) 6280 cm³", "(b) 5306 cm³", "(c) 6260 cm³", "(d) 5280 cm³"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q344. यदि एक बेलन की त्रिज्या 8 सेमी और ऊंचाई 14 सेमी है, तो उस बेलन का आयतन (सेमी³ में) क्या होगा? (π = 22/7 लीजिए)",
+    "q_en": "Q344. If the radius of a cylinder is 8 cm and its height is 14 cm, what is the volume of the cylinder (in cm³)? (Take π = 22/7)",
+    "tag": "SSC CGL 09/09/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 2686", "(b) 2816", "(c) 2784", "(d) 2456"],
+    "o_en": ["(a) 2686", "(b) 2816", "(c) 2784", "(d) 2456"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q345. यदि एक लम्ब वृत्तीय बेलन की त्रिज्या में 10 प्रतिशत की वृद्धि कर दी जाए, जबकि इसकी ऊंचाई स्थिर रहे, तो इसके आयतन में कितने प्रतिशत परिवर्तन होता है?",
+    "q_en": "Q345. If the radius of a right circular cylinder is increased by 10 percent while its height remains constant, by what percent does its volume change?",
+    "tag": "SSC CPO 09/12/2025 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 10", "(b) 20", "(c) 21", "(d) 100"],
+    "o_en": ["(a) 10", "(b) 20", "(c) 21", "(d) 100"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q346. एक बेलनाकार बर्तन के आधार की परिधि 44 सेमी है और इसकी ऊंचाई 25 सेमी है। इसमें कितने लीटर जल आ सकता है? (π = 22/7 लें)",
+    "q_en": "Q346. The circumference of the base of a cylindrical vessel is 44 cm and its height is 25 cm. How many litres of water can it hold? (Take π = 22/7)",
+    "tag": "SSC CGL 17/09/2024 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 38.5", "(b) 3.58", "(c) 3.85", "(d) 83.5"],
+    "o_en": ["(a) 38.5", "(b) 3.58", "(c) 3.85", "(d) 83.5"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q347. एक बेलन की त्रिज्या 8/π सेमी है और इसका आयतन 448 सेमी³ है। बेलन की ऊंचाई कितनी है (मान लीजिए π = 22/7)",
+    "q_en": "Q347. The radius of a cylinder is 8/π cm and its volume is 448 cm³. What is the height of the cylinder? (Take π = 22/7)",
+    "tag": "SSC CHSL TIER-II (16/01/2024)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 23 सेमी", "(b) 24 सेमी", "(c) 21 सेमी", "(d) 22 सेमी"],
+    "o_en": ["(a) 23 cm", "(b) 24 cm", "(c) 21 cm", "(d) 22 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q348. 30सेमी त्रिज्या वाले एक लम्ब वृत्तीय बेलनाकार बॉक्स का आयतन 600 सेमी³ है। बॉक्स की ऊंचाई ज्ञात करें।",
+    "q_en": "Q348. A right circular cylindrical box of radius 30 cm has volume 600 cm³. Find the height of the box.",
+    "tag": "SSC CGL 24/09/2024 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 0.6 सेमी", "(b) 0.31 सेमी", "(c) 0.51 सेमी", "(d) 0.21 सेमी"],
+    "o_en": ["(a) 0.6 cm", "(b) 0.31 cm", "(c) 0.51 cm", "(d) 0.21 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q349. किसी बेलनाकार बर्तन के आधार की परिधि 154 सेमी है और इसकी ऊंचाई 49 मिलीमीटर है। इसमें कितने लीटर पानी आ सकता है? (दशमलव के तीन स्थानों तक शुद्ध, π = 22/7 का उपयोग कीजिए)",
+    "q_en": "Q349. The circumference of the base of a cylindrical vessel is 154 cm and its height is 49 mm. How many litres of water can it hold? (Correct to three decimal places, use π = 22/7)",
+    "tag": "SSC CGL 25/09/2024 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 9.244", "(b) 2.439", "(c) 3.924", "(d) 4.329"],
+    "o_en": ["(a) 9.244", "(b) 2.439", "(c) 3.924", "(d) 4.329"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q350. 44 सेमी × 10 सेमी माप वाली एक आयताकार कागज की शीट को एक लम्बवृत्तीय बेलन के आकार में मोड़ा गया है, जहां 10 सेमी भुजा बेलन की ऊंचाई है। बेलन का लगभग आयतन क्या है?",
+    "q_en": "Q350. A rectangular paper sheet measuring 44 cm × 10 cm is rolled into the shape of a right circular cylinder, where the 10 cm side is the height of the cylinder. What is the approximate volume of the cylinder?",
+    "tag": "SSC CHSL 12/11/2025 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1890 सेमी³", "(b) 1978 सेमी³", "(c) 1482 सेमी³", "(d) 1540 सेमी³"],
+    "o_en": ["(a) 1890 cm³", "(b) 1978 cm³", "(c) 1482 cm³", "(d) 1540 cm³"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q351. रानू 12 सेमी व्यास और 21 सेमी ऊंचाई की बेलनाकार बोतल में स्कूल में पानी ले जाती है। उस पानी की मात्रा निर्धारित कीजिए जो वह बोतल में ले जा सकती है। (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q351. Ranu carries water to school in a cylindrical bottle of diameter 12 cm and height 21 cm. Determine the quantity of water that she can carry in the bottle. (Use π = 22/7)",
+    "tag": "SSC CGL 14/07/2023 (Shift-04)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 2372 सेमी³", "(b) 2370 सेमी³", "(c) 2376 सेमी³", "(d) 2374 सेमी³"],
+    "o_en": ["(a) 2372 cm³", "(b) 2370 cm³", "(c) 2376 cm³", "(d) 2374 cm³"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q352. व्यास के बराबर ऊंचाई और 4 इकाई त्रिज्या वाले बेलन का घन इकाई में आयतन क्या है?",
+    "q_en": "Q352. What is the volume, in cubic units, of a cylinder whose height is equal to its diameter and whose radius is 4 units?",
+    "tag": "SSC CGL 13/09/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 128π", "(b) 64π/3", "(c) 32π", "(d) 32π/3"],
+    "o_en": ["(a) 128π", "(b) 64π/3", "(c) 32π", "(d) 32π/3"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q353. एक बेलन का आयतन 1650 मी³ है, जबकि इसके आधार का पृष्ठीय क्षेत्रफल 78 4/7 मी² है। उस बेलन की ऊंचाई ज्ञात कीजिए।",
+    "q_en": "Q353. The volume of a cylinder is 1650 m³, while the surface area of its base is 78 4/7 m². Find the height of the cylinder.",
+    "tag": "SSC Phase-XI 30/06/2023 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 75 मीटर", "(b) 14 मीटर", "(c) 21 मीटर", "(d) 24 मीटर"],
+    "o_en": ["(a) 75 metres", "(b) 14 metres", "(c) 21 metres", "(d) 24 metres"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q354. एक लंब वृत्ताकार बेलन की त्रिज्या उसकी ऊंचाई की पाँच गुना है। यदि बेलन की ऊंचाई 3.5 सेमी है, तो बेलन का आयतन क्या है?",
+    "q_en": "Q354. The radius of a right circular cylinder is five times its height. If the height of the cylinder is 3.5 cm, what is its volume?",
+    "tag": "SSC CGL 02/12/2022 (Shift-03)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 3368.75 सेमी³", "(b) 3872.75 सेमी³", "(c) 3146.75 सेमी³", "(d) 3524.25 सेमी³"],
+    "o_en": ["(a) 3368.75 cm³", "(b) 3872.75 cm³", "(c) 3146.75 cm³", "(d) 3524.25 cm³"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q355. एक लंब वृत्ताकार बेलन की त्रिज्या उसकी ऊंचाई की चार गुना है। यदि बेलन की ऊंचाई 14 सेमी है, तो बेलन का आयतन क्या है?",
+    "q_en": "Q355. The radius of a right circular cylinder is four times its height. If the height of the cylinder is 14 cm, what is its volume?",
+    "tag": "SSC CGL 12/12/2022 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 15468 सेमी³", "(b) 14262 सेमी³", "(c) 137984 सेमी³", "(d) 11296 सेमी³"],
+    "o_en": ["(a) 15468 cm³", "(b) 14262 cm³", "(c) 137984 cm³", "(d) 11296 cm³"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q356. एक ठोस बेलन की ऊंचाई 35 सेमी है। इसके आधार की परिधि इसकी त्रिज्या से 37 सेमी अधिक है। इस बेलन का आयतन क्या होगा?",
+    "q_en": "Q356. The height of a solid cylinder is 35 cm. The circumference of its base is 37 cm more than its radius. What will be the volume of this cylinder?",
+    "tag": "SSC CGL TIER-II 08/08/2022",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 4420 सेमी³", "(b) 4850 सेमी³", "(c) 4740 सेमी³", "(d) 5390 सेमी³"],
+    "o_en": ["(a) 4420 cm³", "(b) 4850 cm³", "(c) 4740 cm³", "(d) 5390 cm³"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q357. एक ठोस बेलन का आयतन 2002 सेमी³ है और इसकी ऊंचाई 13 सेमी है। इसके आधार का क्षेत्रफल (सेमी² में) कितना होगा? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q357. The volume of a solid cylinder is 2002 cm³ and its height is 13 cm. What will be the area of its base (in cm²)? (Use π = 22/7)",
+    "tag": "SSC CGL TIER-II 29/01/2022",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 154", "(b) 77", "(c) 308", "(d) 231"],
+    "o_en": ["(a) 154", "(b) 77", "(c) 308", "(d) 231"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q358. एक बेलनाकार वस्तु का वक्र पृष्ठीय क्षेत्रफल और आयतन क्रमशः 88 सेमी² और 132 सेमी³ है। बेलनाकार वस्तु की ऊंचाई (सेमी में) कितनी होगी? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q358. The curved surface area and volume of a cylindrical object are 88 cm² and 132 cm³ respectively. What will be the height (in cm) of the cylindrical object? (Use π = 22/7)",
+    "tag": "SSC CGL TIER-II 29/01/2022",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 3 2/3", "(b) 4", "(c) 6", "(d) 4 2/3"],
+    "o_en": ["(a) 3 2/3", "(b) 4", "(c) 6", "(d) 4 2/3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q359. एक बेलन की ऊंचाई 10 सेमी और वक्र पृष्ठीय क्षेत्रफल 1320 सेमी² है। इस बेलन का आयतन कितना होगा? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q359. The height of a cylinder is 10 cm and its curved surface area is 1320 cm². What will be the volume of this cylinder? (Use π = 22/7)",
+    "tag": "SSC MTS 20/07/2022 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1388 मी³", "(b) 0.001368 मी³", "(c) 0.1386 मी³", "(d) 0.01386 मी³"],
+    "o_en": ["(a) 1388 m³", "(b) 0.001368 m³", "(c) 0.1386 m³", "(d) 0.01386 m³"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q360. 11 मीटर त्रिज्या वाला एक स्तंभ 21 मीटर ऊंचा है। इसे बनाने में कितनी सामग्री का उपयोग किया गया था? (π = 22/7 का प्रयोग कीजिए)",
+    "q_en": "Q360. A pillar of radius 11 metres is 21 metres high. How much material was used to make it? (Use π = 22/7)",
+    "tag": "SSC CHSL 24/05/2022 (Shift-01)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 7996 मी³", "(b) 7886 मी³", "(c) 7989 मी³", "(d) 7986 मी³"],
+    "o_en": ["(a) 7996 m³", "(b) 7886 m³", "(c) 7989 m³", "(d) 7986 m³"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q361. एक बेलन की त्रिज्या 7 सेमी है और इसका वक्र पृष्ठीय क्षेत्रफल 396 सेमी² है। बेलन का आयतन क्या होगा?",
+    "q_en": "Q361. The radius of a cylinder is 7 cm and its curved surface area is 396 cm². What will be the volume of the cylinder?",
+    "tag": "SSC CPO 28/06/2024 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1396 सेमी³", "(b) 1381 सेमी³", "(c) 1386 सेमी³", "(d) 1391 सेमी³"],
+    "o_en": ["(a) 1396 cm³", "(b) 1381 cm³", "(c) 1386 cm³", "(d) 1391 cm³"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q362. एक लम्ब वृत्तीय बेलन के आधार की परिधि 62.8 सेमी. है और इसका आयतन 8792 घन सेमी. है। बेलन का वक्र पृष्ठीय क्षेत्रफल (वर्ग सेमी. में) क्या होगा? (यदि π = 3.14)",
+    "q_en": "Q362. The circumference of the base of a right circular cylinder is 62.8 cm and its volume is 8792 cubic cm. What will be the curved surface area of the cylinder (in square cm)? (If π = 3.14)",
+    "tag": "SSC CGL 18/04/2022 (Shift-02)",
+    "type_tag": "Type III (Cylinder)",
+    "o_hi": ["(a) 1570.2", "(b) 1695.6", "(c) 1632.8", "(d) 1758.4"],
+    "o_en": ["(a) 1570.2", "(b) 1695.6", "(c) 1632.8", "(d) 1758.4"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }];

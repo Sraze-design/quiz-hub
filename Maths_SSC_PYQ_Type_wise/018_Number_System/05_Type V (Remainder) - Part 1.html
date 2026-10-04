@@ -1,0 +1,503 @@
+
+
+const data = [{
+    "q_hi": "Q256. एक संख्या को 45 से भाग देने पर शेष 27 बचता है, तथा 27 से भाग देने पर शेष 9 बचता है। ऐसी सबसे छोटी संख्या ज्ञात कीजिए।",
+    "q_en": "Q256. A number leaves remainder 27 when divided by 45 and remainder 9 when divided by 27. Find the smallest such number.",
+    "tag": "SSC CHSL 14/11/2025 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 189", "(b) 117", "(c) 369", "(d) 459"],
+    "o_en": ["(a) 189", "(b) 117", "(c) 369", "(d) 459"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q257. किसी संख्या को 55 से विभाजित करने पर शेषफल 28 प्राप्त होता है। उसी संख्या को 11 से विभाजित करने पर शेषफल क्या आएगा?",
+    "q_en": "Q257. A number leaves a remainder of 28 when divided by 55. What remainder will it leave when divided by 11?",
+    "tag": "SSC CGL 24/09/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 5", "(b) 8", "(c) 7", "(d) 6"],
+    "o_en": ["(a) 5", "(b) 8", "(c) 7", "(d) 6"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q258. एक संख्या को 363 द्वारा विभाजित किया जाता है तो शेषफल 17 प्राप्त होता है। जब उसी संख्या को 11 द्वारा विभाजित किया जाएगा तो शेषफल क्या होगा?",
+    "q_en": "Q258. A number gives remainder 17 when divided by 363. What remainder will it give when divided by 11?",
+    "tag": "SSC CGL 05/12/2022 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 7", "(b) 8", "(c) 6", "(d) 9"],
+    "o_en": ["(a) 7", "(b) 8", "(c) 6", "(d) 9"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q259. एक निश्चित संख्या को 304 से विभाजित करने पर हम शेषफल के रूप में 43 प्राप्त करते हैं। यदि उसी संख्या को 16 से विभाजित किया जाए, तो शेषफल क्या होगा?",
+    "q_en": "Q259. On dividing a certain number by 304, the remainder is 43. What is the remainder when the same number is divided by 16?",
+    "tag": "SSC CHSL 02/07/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 11", "(b) 8", "(c) 12", "(d) 15"],
+    "o_en": ["(a) 11", "(b) 8", "(c) 12", "(d) 15"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q260. एक निश्चित संख्या को 459 से विभाजित करने पर, हमें शेषफल के रूप में 19 प्राप्त होता है। उसी संख्या को 17 से विभाजित करने पर शेषफल क्या होगा?",
+    "q_en": "Q260. A certain number leaves remainder 19 when divided by 459. What remainder will it leave when divided by 17?",
+    "tag": "SSC CHSL 11/07/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 13", "(b) 11", "(c) 2", "(d) 1"],
+    "o_en": ["(a) 13", "(b) 11", "(c) 2", "(d) 1"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q261. जब एक संख्या को 512 से भाग दिया जाता है तो शेषफल 67 बचता है। यदि उसी संख्या को 32 से भाग दिया जाए, तो शेषफल क्या होगा?",
+    "q_en": "Q261. A number leaves remainder 67 when divided by 512. What remainder will it leave when divided by 32?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 0", "(b) 5", "(c) 4", "(d) 3"],
+    "o_en": ["(a) 0", "(b) 5", "(c) 4", "(d) 3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q262. जब पूर्णांक n को 5 से भाग दिया जाता है, तो शेषफल 3 प्राप्त होता है। यदि 6n को 5 से भाग दिया जाए, तो शेषफल क्या होगा?",
+    "q_en": "Q262. When integer n is divided by 5, the remainder is 3. What is the remainder when 6n is divided by 5?",
+    "tag": "SSC CHSL 08/07/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 3", "(b) 0", "(c) 1", "(d) 2"],
+    "o_en": ["(a) 3", "(b) 0", "(c) 1", "(d) 2"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q263. एक संख्या को 78 से विभाजित करने पर भागफल 280 और शेषफल 0 प्राप्त होता है। यदि उसी संख्या को 65 से विभाजित किया जाए, तो शेषफल का मान क्या होगा?",
+    "q_en": "Q263. Dividing a number by 78 gives quotient 280 and remainder 0. What is the remainder when the same number is divided by 65?",
+    "tag": "SSC CHSL 02/08/2023 (Shift-04)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 1", "(b) 3", "(c) 0", "(d) 2"],
+    "o_en": ["(a) 1", "(b) 3", "(c) 0", "(d) 2"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q264. किसी संख्या को 45 से विभाजित करने पर शेषफल 21 आता है। संख्या को 15 से विभाजित करने पर शेषफल क्या होगा?",
+    "q_en": "Q264. A number leaves remainder 21 when divided by 45. What remainder will it leave when divided by 15?",
+    "tag": "SSC CGL 26/07/2023 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 6", "(b) 5", "(c) 3", "(d) 0"],
+    "o_en": ["(a) 6", "(b) 5", "(c) 3", "(d) 0"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q265. किसी संख्या को 7 से विभाजित करने पर 4 शेषफल बचता है। यदि उसी संख्या के वर्ग को 7 से विभाजित किया जाए, तो शेषफल क्या होगा?",
+    "q_en": "Q265. A number leaves remainder 4 when divided by 7. What remainder will its square leave when divided by 7?",
+    "tag": "SSC CGL 03/12/2022 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 3", "(b) 1", "(c) 4", "(d) 2"],
+    "o_en": ["(a) 3", "(b) 1", "(c) 4", "(d) 2"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q266. एक विभाजन योग में भाजक, भागफल का 10 गुना और शेषफल का चार गुना है। यदि शेषफल 45 है तो भाज्य क्या होगा?",
+    "q_en": "Q266. In a division, the divisor is 10 times the quotient and four times the remainder. If the remainder is 45, what is the dividend?",
+    "tag": "SSC CGL 08/12/2022 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 4123", "(b) 3285", "(c) 2895", "(d) 5412"],
+    "o_en": ["(a) 4123", "(b) 3285", "(c) 2895", "(d) 5412"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q267. यदि एक धनात्मक पूर्णांक N को 7 से विभाजित किया जाता है, तो शेषफल 3 प्राप्त होता है। निम्नलिखित में से किस संख्या को 7 से विभाजित करने पर शेषफल 0 प्राप्त होगा?",
+    "q_en": "Q267. A positive integer N leaves remainder 3 when divided by 7. Which of the following will leave remainder 0 when divided by 7?",
+    "tag": "SSC CHSL 27/05/2022 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) N + 5", "(b) N + 2", "(c) N + 4", "(d) N + 3"],
+    "o_en": ["(a) N + 5", "(b) N + 2", "(c) N + 4", "(d) N + 3"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q268. किसी संख्या को 7 से भाग देने पर शेषफल 1 बचता है। इस संख्या के घन को 7 से भाग देने पर, शेषफल क्या होगा?",
+    "q_en": "Q268. A number leaves remainder 1 when divided by 7. What remainder does its cube leave when divided by 7?",
+    "tag": "SSC CHSL 04/08/2023 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 2", "(b) 4", "(c) 1", "(d) 3"],
+    "o_en": ["(a) 2", "(b) 4", "(c) 1", "(d) 3"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q269. किसी विभाजन योग में भाजक, भागफल का 10 गुना और शेषफल का 5 गुना है। यदि शेषफल 46 है तो भाज्य क्या है?",
+    "q_en": "Q269. In a division, the divisor is 10 times the quotient and five times the remainder. If the remainder is 46, what is the dividend?",
+    "tag": "SSC CHSL 03/08/2023 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 5972", "(b) 4286", "(c) 4874", "(d) 5336"],
+    "o_en": ["(a) 5972", "(b) 4286", "(c) 4874", "(d) 5336"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q270. एक भाग-प्रश्न में भाजक, भागफल का 4 गुना और शेषफल का 2 गुना है। यदि शेषफल 32 है, तो भाज्य ज्ञात कीजिए।",
+    "q_en": "Q270. In a division, the divisor is four times the quotient and twice the remainder. If the remainder is 32, find the dividend.",
+    "tag": "SSC CGL 11/09/2024 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 1056", "(b) 1650", "(c) 3240", "(d) 1065"],
+    "o_en": ["(a) 1056", "(b) 1650", "(c) 3240", "(d) 1065"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q271. एक भाग प्रश्न में भाजक, भागफल का 13 गुना और शेषफल का 6 गुना है। यदि शेषफल 39 है, तो भाज्य ज्ञात करें।",
+    "q_en": "Q271. In a division, the divisor is 13 times the quotient and six times the remainder. If the remainder is 39, find the dividend.",
+    "tag": "SSC Phase-XII 20/06/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 4,240", "(b) 4,800", "(c) 4,251", "(d) 4,576"],
+    "o_en": ["(a) 4,240", "(b) 4,800", "(c) 4,251", "(d) 4,576"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q272. भागफल के योग में भाजक, भागफल का 10 गुना तथा शेषफल का 5 गुना है। यदि शेषफल 12 है, तो भाज्य क्या है?",
+    "q_en": "Q272. In a division, the divisor is 10 times the quotient and five times the remainder. If the remainder is 12, what is the dividend?",
+    "tag": "SSC Phase-XII 25/06/2024 (Shift-04)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 352", "(b) 386", "(c) 368", "(d) 372"],
+    "o_en": ["(a) 352", "(b) 386", "(c) 368", "(d) 372"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q273. किसी विभाजन के योग में भाजक, भागफल का 11 गुना और शेषफल का 5 गुना है। यदि शेषफल 44 है, तो भाज्य है:",
+    "q_en": "Q273. In a division, the divisor is 11 times the quotient and five times the remainder. If the remainder is 44, the dividend is:",
+    "tag": "SSC CHSL 07/08/2023 (Shift-04)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 8888", "(b) 4448", "(c) 8444", "(d) 4444"],
+    "o_en": ["(a) 8888", "(b) 4448", "(c) 8444", "(d) 4444"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q274. 8675123 को एक निश्चित संख्या से भाग देने पर भागफल 33611 और शेषफल 3485 आता है। भाजक ज्ञात कीजिए।",
+    "q_en": "Q274. When 8675123 is divided by a certain number, the quotient is 33611 and the remainder is 3485. Find the divisor.",
+    "tag": "SSC CHSL 25/05/2022 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 538", "(b) 258", "(c) 248", "(d) 356"],
+    "o_en": ["(a) 538", "(b) 258", "(c) 248", "(d) 356"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q275. जब 200 को एक धनात्मक पूर्णांक x से विभाजित किया जाता है, तो शेषफल 8 प्राप्त होता है। x के कितने मान हो सकते हैं?",
+    "q_en": "Q275. When 200 is divided by a positive integer x, the remainder is 8. How many values can x have?",
+    "tag": "SSC CGL 03/03/2020 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 6", "(b) 7", "(c) 8", "(d) 5"],
+    "o_en": ["(a) 6", "(b) 7", "(c) 8", "(d) 5"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q276. जब 732 को किसी धनात्मक पूर्णांक x से विभाजित किया जाता है, तो शेषफल 12 प्राप्त होता है। x के कितने मान हो सकते हैं?",
+    "q_en": "Q276. When 732 is divided by a positive integer x, the remainder is 12. How many values can x have?",
+    "tag": "SSC CGL 04/03/2020 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 19", "(b) 20", "(c) 18", "(d) 16"],
+    "o_en": ["(a) 19", "(b) 20", "(c) 18", "(d) 16"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q277. जब पूर्णांक n को 18 से विभाजित किया जाता है तो भागफल x और शेषफल 6 प्राप्त होता है। जब पूर्णांक n को 25 से विभाजित किया जाता है, तो भागफल y और शेषफल 15 प्राप्त होता है। निम्न में से कौन सा विकल्प सत्य है?",
+    "q_en": "Q277. When integer n is divided by 18, quotient x and remainder 6 are obtained. When n is divided by 25, quotient y and remainder 15 are obtained. Which option is true?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-05)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 18y + 25x = 9", "(b) 18y − 25x = 9", "(c) 18x + 25y = 9", "(d) 18x − 25y = 9"],
+    "o_en": ["(a) 18y + 25x = 9", "(b) 18y − 25x = 9", "(c) 18x + 25y = 9", "(d) 18x − 25y = 9"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q278. दो संख्याओं का अंतर 1564 है। बड़ी संख्या को छोटी से विभाजित करने पर, हमें भागफल के रूप में 6 और शेषफल के रूप में 19 प्राप्त होता है। छोटी संख्या क्या है?",
+    "q_en": "Q278. The difference between two numbers is 1564. Dividing the larger by the smaller gives quotient 6 and remainder 19. What is the smaller number?",
+    "tag": "SSC CGL 02/12/2022 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 456", "(b) 287", "(c) 623", "(d) 309"],
+    "o_en": ["(a) 456", "(b) 287", "(c) 623", "(d) 309"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q279. मोहन 18935 को एक निश्चित संख्या से विभाजित करता है। यदि भागफल और शेषफल क्रमशः 102 और 65 प्राप्त होते हैं, तो भाजक है:",
+    "q_en": "Q279. Mohan divides 18935 by a certain number. If the quotient and remainder are 102 and 65 respectively, what is the divisor?",
+    "tag": "Higher Secondary 28/06/2023 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 186", "(b) 183", "(c) 184", "(d) 185"],
+    "o_en": ["(a) 186", "(b) 183", "(c) 184", "(d) 185"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q280. एक प्राकृतिक संख्या n, 732 को विभाजित करती है और शेषफल 12 देती है। n के कितने मान संभव हैं?",
+    "q_en": "Q280. A natural number n divides 732 and gives a remainder of 12. How many values of n are possible?",
+    "tag": "SSC CHSL 09/07/2024 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 18", "(b) 20", "(c) 16", "(d) 22"],
+    "o_en": ["(a) 18", "(b) 20", "(c) 16", "(d) 22"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q281. दो संख्याओं को एक निश्चित भाजक द्वारा विभाजित करने पर शेषफल 57 बचता है। जब दो संख्याओं के योग को एक ही भाजक से विभाजित किया जाता है, तो शेषफल 49 होता है। भाजक है:",
+    "q_en": "Q281. Each of two numbers leaves a remainder of 57 when divided by a certain divisor. The sum of the numbers leaves remainder 49 when divided by the same divisor. Find the divisor.",
+    "tag": "SSC CHSL 08/08/2023 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 56", "(b) 57", "(c) 49", "(d) 65"],
+    "o_en": ["(a) 56", "(b) 57", "(c) 49", "(d) 65"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q282. दो धनात्मक संख्याओं का अंतर 1280 है। जब बड़ी संख्या को छोटी संख्या से विभाजित किया जाता है, तो भागफल 7 और शेषफल 50 प्राप्त होता है। बड़ी संख्या ज्ञात कीजिए।",
+    "q_en": "Q282. The difference between two positive numbers is 1280. Dividing the larger by the smaller gives quotient 7 and remainder 50. Find the larger number.",
+    "tag": "SSC CGL Tier-II 15/11/2020",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 1458", "(b) 1485", "(c) 1585", "(d) 1558"],
+    "o_en": ["(a) 1458", "(b) 1485", "(c) 1585", "(d) 1558"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q283. 179 × 172 × 173 को 17 से भाग देने पर शेषफल ज्ञात कीजिए।",
+    "q_en": "Q283. Find the remainder when 179 × 172 × 173 is divided by 17.",
+    "tag": "SSC CHSL 03/07/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 16", "(b) 3", "(c) 10", "(d) 11"],
+    "o_en": ["(a) 16", "(b) 3", "(c) 10", "(d) 11"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q284. 335, 608 और 853 के गुणनफल को 13 से विभाजित करने पर प्राप्त शेषफल क्या होगा?",
+    "q_en": "Q284. What is the remainder when the product of 335, 608 and 853 is divided by 13?",
+    "tag": "SSC CGL 12/04/2022 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 11", "(b) 12", "(c) 6", "(d) 7"],
+    "o_en": ["(a) 11", "(b) 12", "(c) 6", "(d) 7"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q285. 72 × 73 × 78 × 76 को 35 से विभाजित करने पर प्राप्त शेषफल ज्ञात करें।",
+    "q_en": "Q285. Find the remainder when 72 × 73 × 78 × 76 is divided by 35.",
+    "tag": "SSC CPO 24/11/2020 (Shift-1)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 12", "(b) 8", "(c) 22", "(d) 15"],
+    "o_en": ["(a) 12", "(b) 8", "(c) 22", "(d) 15"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q286. यदि 1433 × 1433 × 1422 × 1425 को 12 से विभाजित किया जाता है, तो प्राप्त शेषफल ज्ञात करें।",
+    "q_en": "Q286. Find the remainder when 1433 × 1433 × 1422 × 1425 is divided by 12.",
+    "tag": "SSC CPO 23/11/2020 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 3", "(b) 9", "(c) 8", "(d) 6"],
+    "o_en": ["(a) 3", "(b) 9", "(c) 8", "(d) 6"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q287. जब 75 × 73 × 78 × 76 को 34 से विभाजित किया जाता है, तो शेषफल ज्ञात करें।",
+    "q_en": "Q287. Find the remainder when 75 × 73 × 78 × 76 is divided by 34.",
+    "tag": "SSC CPO 23/11/2020 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 18", "(b) 10", "(c) 22", "(d) 15"],
+    "o_en": ["(a) 18", "(b) 10", "(c) 22", "(d) 15"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q288. यदि 1433 × 1433 × 1422 × 1425 को 10 से विभाजित किया जाता है, तो प्राप्त शेषफल ज्ञात करें।",
+    "q_en": "Q288. Find the remainder when 1433 × 1433 × 1422 × 1425 is divided by 10.",
+    "tag": "SSC CPO 25/11/2020 (Shift-1)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 9", "(b) 0", "(c) 3", "(d) 8"],
+    "o_en": ["(a) 9", "(b) 0", "(c) 3", "(d) 8"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q289. यदि (77⁷⁷ + 77) को 78 से विभाजित किया जाए, तो शेषफल क्या होगा?",
+    "q_en": "Q289. What is the remainder when (77⁷⁷ + 77) is divided by 78?",
+    "tag": "SSC CGL 10/09/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 76", "(b) 77", "(c) 78", "(d) 1"],
+    "o_en": ["(a) 76", "(b) 77", "(c) 78", "(d) 1"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q290. (17¹³ − 21) ÷ 18 का शेषफल ज्ञात करें।",
+    "q_en": "Q290. Find the remainder when (17¹³ − 21) is divided by 18.",
+    "tag": "SSC CGL 13/09/2024 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 15", "(b) 17", "(c) 14", "(d) 21"],
+    "o_en": ["(a) 15", "(b) 17", "(c) 14", "(d) 21"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q291. (8⁶ + 1) को 7 से विभाजित करने पर शेषफल के रूप में ______ प्राप्त होगा।",
+    "q_en": "Q291. What remainder is obtained when (8⁶ + 1) is divided by 7?",
+    "tag": "SSC CHSL 10/07/2024 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 6", "(b) 2", "(c) 1", "(d) 4"],
+    "o_en": ["(a) 6", "(b) 2", "(c) 1", "(d) 4"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q292. जब 27²⁷ + 27 को 28 से विभाजित किया जाए, तो शेषफल कितना होगा?",
+    "q_en": "Q292. What is the remainder when 27²⁷ + 27 is divided by 28?",
+    "tag": "SSC CGL 01/12/2022 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 28", "(b) 27", "(c) 25", "(d) 26"],
+    "o_en": ["(a) 28", "(b) 27", "(c) 25", "(d) 26"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q293. 9²⁰ + 2 को 4 से विभाजित करने पर शेषफल क्या आएगा?",
+    "q_en": "Q293. What is the remainder when 9²⁰ + 2 is divided by 4?",
+    "tag": "SSC CGL 26/09/2024 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 1", "(b) 3", "(c) 0", "(d) 2"],
+    "o_en": ["(a) 1", "(b) 3", "(c) 0", "(d) 2"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q294. (265)⁴⁰⁸¹ + 9 को 266 से विभाजित करने पर प्राप्त शेषफल ज्ञात कीजिए।",
+    "q_en": "Q294. Find the remainder when (265)⁴⁰⁸¹ + 9 is divided by 266.",
+    "tag": "SSC CGL 14/07/2023 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 8", "(b) 6", "(c) 1", "(d) 9"],
+    "o_en": ["(a) 8", "(b) 6", "(c) 1", "(d) 9"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q295. यदि 19²⁰⁰ को 20 से विभाजित किया जाता है, तो शेषफल ज्ञात कीजिए।",
+    "q_en": "Q295. Find the remainder when 19²⁰⁰ is divided by 20.",
+    "tag": "SSC CGL 18/09/2024 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 2", "(b) −1", "(c) 1", "(d) 3"],
+    "o_en": ["(a) 2", "(b) −1", "(c) 1", "(d) 3"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q296. 2²⁵⁶ को 17 से भाग देने पर कितना शेषफल बचेगा?",
+    "q_en": "Q296. What is the remainder when 2²⁵⁶ is divided by 17?",
+    "tag": "SSC CHSL 10/07/2024 (Shift-04)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 2", "(b) 5", "(c) 0", "(d) 1"],
+    "o_en": ["(a) 2", "(b) 5", "(c) 0", "(d) 1"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q297. 4⁹⁹⁹ को 7 से विभाजित करने पर शेषफल क्या होगा?",
+    "q_en": "Q297. What is the remainder when 4⁹⁹⁹ is divided by 7?",
+    "tag": "Matriculation Level 28/06/2023 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 2", "(b) 4", "(c) 1", "(d) 3"],
+    "o_en": ["(a) 2", "(b) 4", "(c) 1", "(d) 3"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q298. जब 7⁴² को 48 से विभाजित किया जाए, तो शेषफल ज्ञात कीजिए।",
+    "q_en": "Q298. Find the remainder when 7⁴² is divided by 48.",
+    "tag": "SSC CGL 03/12/2022 (Shift-02)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 2", "(b) 3", "(c) 1", "(d) 0"],
+    "o_en": ["(a) 2", "(b) 3", "(c) 1", "(d) 0"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q299. जब 19¹⁹ + 20 को 18 से विभाजित किया जाए, तो शेषफल ज्ञात कीजिए।",
+    "q_en": "Q299. Find the remainder when 19¹⁹ + 20 is divided by 18.",
+    "tag": "SSC CGL 09/12/2022 (Shift-04)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 3", "(b) 2", "(c) 1", "(d) 0"],
+    "o_en": ["(a) 3", "(b) 2", "(c) 1", "(d) 0"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q300. (2²⁴ − 1) को 7 से विभाजित करने पर कितना शेषफल बचेगा?",
+    "q_en": "Q300. What is the remainder when (2²⁴ − 1) is divided by 7?",
+    "tag": "SSC CHSL 04/08/2021 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 4", "(b) 2", "(c) 0", "(d) 1"],
+    "o_en": ["(a) 4", "(b) 2", "(c) 0", "(d) 1"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q301. 5⁷⁰ + 7⁷⁰ को 74 से विभाजित करने पर शेषफल क्या प्राप्त होता है?",
+    "q_en": "Q301. What remainder is obtained when 5⁷⁰ + 7⁷⁰ is divided by 74?",
+    "tag": "SSC CGL 07/03/2020 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 5", "(b) 0", "(c) 7", "(d) 1"],
+    "o_en": ["(a) 5", "(b) 0", "(c) 7", "(d) 1"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q302. जब पद 9 + 9² + ... + 9⁽²ⁿ⁺¹⁾ को 6 से भाग दिया जाता है तो शेषफल कितना होगा?",
+    "q_en": "Q302. What is the remainder when 9 + 9² + ... + 9⁽²ⁿ⁺¹⁾ is divided by 6?",
+    "tag": "SSC CHSL 11/08/2023 (Shift-4)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 1", "(b) 4", "(c) 2", "(d) 3"],
+    "o_en": ["(a) 1", "(b) 4", "(c) 2", "(d) 3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q303. जब (x¹⁷ + 1) को (x + 1) से विभाजित किया जाता है, तो शेषफल क्या होगा?",
+    "q_en": "Q303. What is the remainder when (x¹⁷ + 1) is divided by (x + 1)?",
+    "tag": "SSC CGL 25/07/2023 (Shift-03)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) x", "(b) x − 1", "(c) 0", "(d) 1"],
+    "o_en": ["(a) x", "(b) x − 1", "(c) 0", "(d) 1"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q304. यदि दो संख्याओं 5¹⁶ और 5²⁵ में से प्रत्येक को 6 से विभाजित किया जाता है, तो शेषफल क्रमशः R₁ और R₂ हैं। (R₁ + R₂)/R₂ का मान क्या है?",
+    "q_en": "Q304. If 5¹⁶ and 5²⁵ are each divided by 6, the remainders are R₁ and R₂ respectively. What is (R₁ + R₂)/R₂?",
+    "tag": "SSC CGL 19/04/2022 (Shift-01)",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 1/6", "(b) 5/6", "(c) 1/5", "(d) 6/5"],
+    "o_en": ["(a) 1/6", "(b) 5/6", "(c) 1/5", "(d) 6/5"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q305. जब धनात्मक संख्या x, y और z को 31 से विभाजित किया जाता है, तो क्रमशः 17, 24 और 27 शेषफल प्राप्त होते हैं। जब (4x − 2y + 3z) को 31 से विभाजित किया जाता है, तो प्राप्त शेषफल ज्ञात कीजिए।",
+    "q_en": "Q305. Positive numbers x, y and z leave remainders 17, 24 and 27 respectively when divided by 31. Find the remainder when (4x − 2y + 3z) is divided by 31.",
+    "tag": "SSC CGL Tier-II 15/11/2020",
+    "type_tag": "Type V (Remainder)",
+    "o_hi": ["(a) 9", "(b) 8", "(c) 16", "(d) 19"],
+    "o_en": ["(a) 9", "(b) 8", "(c) 16", "(d) 19"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }];

@@ -1,0 +1,463 @@
+
+
+const data = [{
+    "q_hi": "Q148. यदि A, B से दोगुनी गति से काम करता है और A किसी कार्य को 10 दिनों में पूरा कर सकता है, तो B को उस कार्य को पूरा करने में कितने दिन लगेंगे?",
+    "q_en": "Q148. If A works twice as fast as B and A can complete a work in 10 days, how many days will B take to complete the work?",
+    "tag": "SSC CPO 09/12/2025 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 50 दिन", "(b) 40 दिन", "(c) 30 दिन", "(d) 20 दिन"],
+    "o_en": ["(a) 50 days", "(b) 40 days", "(c) 30 days", "(d) 20 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q149. A किसी काम को उतने ही समय में कर सकता है जितने समय में B और C मिलकर कर सकते हैं। यदि A और B मिलकर उस काम को 10 दिनों में और C अकेले 40 दिनों में कर सकते हैं, तो A अकेले उस काम को कितने दिनों में कर सकता है?",
+    "q_en": "Q149. A can do a work in the same time as B and C together. If A and B together can complete the work in 10 days and C alone in 40 days, in how many days can A alone complete the work?",
+    "tag": "SSC CHSL 15/11/2025 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 16 दिन", "(b) 19 दिन", "(c) 14 दिन", "(d) 13 दिन"],
+    "o_en": ["(a) 16 days", "(b) 19 days", "(c) 14 days", "(d) 13 days"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q150. राकेश की तुलना में सपना दोगुनी कुशल है। यदि वे दोनों एक परियोजना पर एक साथ कार्य करते हैं और इसे 48 दिनों में पूरा करते हैं, तो सपना अकेले उस परियोजना को कितने दिन में पूरा कर सकती है?",
+    "q_en": "Q150. Sapna is twice as efficient as Rakesh. If they work together on a project and complete it in 48 days, in how many days can Sapna alone complete the project?",
+    "tag": "SSC CPO 29/06/2024 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 72", "(b) 69 1/2", "(c) 68", "(d) 52"],
+    "o_en": ["(a) 72", "(b) 69 1/2", "(c) 68", "(d) 52"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q151. रीना एक काम का आधा भाग 6 दिनों में पूरा करती है। बाद में, श्याम की मदद से, वह शेष काम को 4 दिनों में पूरा करती है। श्याम अकेले संपूर्ण काम कितने दिनों में पूरा कर सकता है?",
+    "q_en": "Q151. Reena completes half of a work in 6 days. Later, with Shyam's help, she completes the remaining work in 4 days. In how many days can Shyam alone complete the entire work?",
+    "tag": "SSC CHSL 11/07/2024 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 21 दिन", "(b) 24 दिन", "(c) 18 दिन", "(d) 12 दिन"],
+    "o_en": ["(a) 21 days", "(b) 24 days", "(c) 18 days", "(d) 12 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q152. जॉय ने स्कूल प्रोजेक्ट 15 दिनों में पूरा किया। टिम को वही काम पूरा करने में कितने दिन लगेंगे, अगर वह जॉय से 25% अधिक कुशल है।",
+    "q_en": "Q152. Joy completed a school project in 15 days. How many days will Tim take to complete the same work if he is 25% more efficient than Joy?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 12 दिन", "(b) 10 दिन", "(c) 16 दिन", "(d) 8 दिन"],
+    "o_en": ["(a) 12 days", "(b) 10 days", "(c) 16 days", "(d) 8 days"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q153. निर्मल ने एक स्कूल प्रोजेक्ट को 45 दिनों में पूरा किया। यदि अमित निर्मल से 25% अधिक कुशल है तो अमित को इसी काम को पूरा करने में कितने दिन लगेंगे?",
+    "q_en": "Q153. Nirmal completed a school project in 45 days. If Amit is 25% more efficient than Nirmal, how many days will Amit take to complete the same work?",
+    "tag": "SSC CHSL 11/07/2024 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 30", "(b) 25", "(c) 38", "(d) 36"],
+    "o_en": ["(a) 30", "(b) 25", "(c) 38", "(d) 36"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q154. अरविंद, सुरेश से 4 गुना तेजी से काम करता है। यदि सुरेश स्वतंत्र रूप से किसी कार्य को 20 दिन में पूरा कर सकता है, तो अरविंद और सुरेश मिलकर उस कार्य को कितने दिन में पूरा कर सकते हैं?",
+    "q_en": "Q154. Arvind works 4 times as fast as Suresh. If Suresh alone can complete a work in 20 days, in how many days can Arvind and Suresh together complete it?",
+    "tag": "SSC CPO 27/06/2024 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 6", "(b) 3", "(c) 5", "(d) 4"],
+    "o_en": ["(a) 6", "(b) 3", "(c) 5", "(d) 4"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q155. तरुण किसी कार्य को करने में तृप्ति से दोगुना कार्यकुशल है। दोनों एक साथ मिलकर एक कार्य को 16 दिनों में पूरा कर सकते हैं। तृप्ति अकेले उस कार्य को कितने दिनों में पूरा कर सकती है?",
+    "q_en": "Q155. Tarun is twice as efficient as Tripti in doing a work. Together they can complete the work in 16 days. In how many days can Tripti alone complete it?",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 24", "(b) 48", "(c) 25", "(d) 50"],
+    "o_en": ["(a) 24", "(b) 48", "(c) 25", "(d) 50"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q156. किसी कार्य को पूरा करने में A और B द्वारा लिए गए समय का अनुपात 3 : 2 है। यदि B अकेले उस कार्य को 18 घंटे में पूरा कर सकता है, तो यदि वे दोनों एक साथ कार्य करते हैं, तो उन्हें उस कार्य को पूरा करने में कितने घंटे लगेंगे?",
+    "q_en": "Q156. The ratio of the time taken by A and B to complete a work is 3:2. If B alone can complete the work in 18 hours, how many hours will they take if they work together?",
+    "tag": "SSC CGL 14/09/2025 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 12 घंटे", "(b) 10.8 घंटे", "(c) 9.8 घंटे", "(d) 10 घंटे"],
+    "o_en": ["(a) 12 hours", "(b) 10.8 hours", "(c) 9.8 hours", "(d) 10 hours"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q157. अतहर एक काम उतने ही समय में कर सकता है, जितने समय में बबन और चेतन मिलकर उसे कर सकते हैं। यदि अतहर और बबन मिलकर उसे 10 दिनों में और चेतन अकेले 50 दिनों में कर सकते हैं, तो बबन अकेले उसे कितने दिनों में कर सकता है?",
+    "q_en": "Q157. Athar can do a work in the same time as Baban and Chetan together. If Athar and Baban together can do it in 10 days and Chetan alone in 50 days, in how many days can Baban alone do it?",
+    "tag": "SSC CGL 22/09/2025 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 20 दिन", "(b) 25 दिन", "(c) 30 दिन", "(d) 27 दिन"],
+    "o_en": ["(a) 20 days", "(b) 25 days", "(c) 30 days", "(d) 27 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q158. A किसी काम को उतने ही समय में कर सकता है जितने समय में B और C मिलकर कर सकते हैं। यदि A और B मिलकर उस काम को 10 दिनों में और B अकेले 25 दिनों में कर सकते हैं, तो C अकेले उस काम को कितने दिनों में कर सकता है?",
+    "q_en": "Q158. A can do a work in the same time as B and C together. If A and B together can complete the work in 10 days and B alone in 25 days, in how many days can C alone complete it?",
+    "tag": "SSC CHSL 30/11/2025 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 47 दिन", "(b) 38 दिन", "(c) 50 दिन", "(d) 40 दिन"],
+    "o_en": ["(a) 47 days", "(b) 38 days", "(c) 50 days", "(d) 40 days"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q159. A और B मिलकर एक कार्य को 48 दिन में पूरा कर सकते हैं। A, B का 4 गुना कार्यकुशल है। B अकेले कार्य को कितने दिन में पूरा कर सकता है?",
+    "q_en": "Q159. A and B together can complete a work in 48 days. A is 4 times as efficient as B. In how many days can B alone complete the work?",
+    "tag": "SSC CGL TIER-II 06/03/2023",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 220 दिन", "(b) 240 दिन", "(c) 120 दिन", "(d) 320 दिन"],
+    "o_en": ["(a) 220 days", "(b) 240 days", "(c) 120 days", "(d) 320 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q160. यदि R प्रतिदिन 10 घंटे काम करता है तो वह एक काम 6 दिनों में पूरा कर सकता है। यदि S प्रतिदिन 8 घंटे काम करता है तो वह इसे 5 दिनों में पूरा कर सकता है। यदि दोनों एक साथ मिलकर काम शुरू करते हैं और प्रतिदिन 6 घंटे काम करते हैं, तो काम कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q160. If R works 10 hours per day, he can complete a work in 6 days. If S works 8 hours per day, he can complete it in 5 days. If both start together and work 6 hours per day, in how many days will the work be completed?",
+    "tag": "SSC CHSL 05/07/2024 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 3", "(b) 4", "(c) 5", "(d) 6"],
+    "o_en": ["(a) 3", "(b) 4", "(c) 5", "(d) 6"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q161. यदि 6 इंजीनियर एक काम को 5 दिनों में पूरा कर सकते हैं और 5 कुशल श्रमिक उसी काम को 7 दिनों में पूरा कर सकते हैं, तो उसी काम को 7 इंजीनियरों और 4 कुशल श्रमिकों द्वारा पूरा करने में कितना समय (दिनों में) लगेगा?",
+    "q_en": "Q161. If 6 engineers can complete a work in 5 days and 5 skilled workers can complete the same work in 7 days, how much time (in days) will 7 engineers and 4 skilled workers take to complete it?",
+    "tag": "SSC CHSL 09/07/2024 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 2 64/70", "(b) 3 64/73", "(c) 2 64/73", "(d) 2 65/73"],
+    "o_en": ["(a) 2 64/70", "(b) 3 64/73", "(c) 2 64/73", "(d) 2 65/73"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q162. किसी काम को पूरा करने के लिए, Q को जितने दिन चाहिए, P उससे आधे दिन लेता है। यदि वे एक साथ मिलकर काम को 36 दिनों में पूरा कर सकते हैं, तो Q को अकेले काम पूरा करने में कितने दिन का समय लगेगा?",
+    "q_en": "Q162. To complete a work, P takes half as many days as Q. If they together can complete the work in 36 days, how many days will Q alone take to complete it?",
+    "tag": "SSC CHSL 10/07/2024 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 84", "(b) 60", "(c) 24", "(d) 108"],
+    "o_en": ["(a) 84", "(b) 60", "(c) 24", "(d) 108"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q163. एक पुरुष और एक महिला द्वारा एक काम को क्रमशः 12 दिनों और 8 दिनों में किया जा सकता है। 6 पुरुष और 8 महिलाएँ इस काम को कितने दिनों में पूरा करेंगे?",
+    "q_en": "Q163. A man and a woman can complete a work in 12 days and 8 days respectively. In how many days will 6 men and 8 women complete the work?",
+    "tag": "SSC CHSL 05/07/2024 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 1/2", "(b) 1", "(c) 3", "(d) 2"],
+    "o_en": ["(a) 1/2", "(b) 1", "(c) 3", "(d) 2"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q164. यदि 4 आदमी या 6 लड़के एक काम को 20 दिनों में पूरा कर सकते हैं, तो 6 आदमी और 11 लड़के उसी काम को कितने दिनों में पूरा कर सकते हैं?",
+    "q_en": "Q164. If 4 men or 6 boys can complete a work in 20 days, in how many days can 6 men and 11 boys complete the same work?",
+    "tag": "SSC CPO 03/10/2023 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 5 दिन", "(b) 7 दिन", "(c) 8 दिन", "(d) 6 दिन"],
+    "o_en": ["(a) 5 days", "(b) 7 days", "(c) 8 days", "(d) 6 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q165. 5 पुरुष या 8 महिलाएँ किसी काम को 12 दिन में पूरा कर सकते हैं। 10 पुरुष और 4 महिलाएँ मिलकर उसी काम को कितने दिन में पूरा करेंगे?",
+    "q_en": "Q165. 5 men or 8 women can complete a work in 12 days. In how many days will 10 men and 4 women together complete the same work?",
+    "tag": "SSC CPO 12/12/2025 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 4 दिन", "(b) 4.8 दिन", "(c) 5 दिन", "(d) 7.5 दिन"],
+    "o_en": ["(a) 4 days", "(b) 4.8 days", "(c) 5 days", "(d) 7.5 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q166. A प्रतिदिन 5 घंटे कार्य करके एक कार्य को 8 दिनों में पूरा कर सकता है और B प्रतिदिन 6 घंटे कार्य करके उसी कार्य को 10 दिनों में पूरा कर सकता है। यदि वे दोनों मिलकर प्रतिदिन 8 घंटे कार्य करें, तो उस कार्य को ____ में पूरा कर सकते हैं।",
+    "q_en": "Q166. A can complete a work in 8 days by working 5 hours per day, and B can complete the same work in 10 days by working 6 hours per day. If they work together for 8 hours per day, they can complete the work in ____.",
+    "tag": "SSC CGL 17/07/2023 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 5 दिन", "(b) 3 दिन", "(c) 4.5 दिन", "(d) 6 दिन"],
+    "o_en": ["(a) 5 days", "(b) 3 days", "(c) 4.5 days", "(d) 6 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q167. A अकेले किसी कार्य को 15 दिनों में पूरा कर सकता है और वह केवल पहले दो दिन और आखिरी दो दिन के दौरान कार्य करता है। शेष कार्य B द्वारा किया जाता है और कार्य 20 दिनों में पूरा होता है। A और B मिलकर उस कार्य को कितने दिनों में पूरा कर सकते हैं?",
+    "q_en": "Q167. A alone can complete a work in 15 days and works only during the first two days and the last two days. The remaining work is done by B and the work is completed in 20 days. In how many days can A and B together complete the work?",
+    "tag": "SSC CGL 18/07/2023 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 90/8", "(b) 80/7", "(c) 80/9", "(d) 70/8"],
+    "o_en": ["(a) 90/8", "(b) 80/7", "(c) 80/9", "(d) 70/8"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q168. 12 दिनों तक अकेले काम करने के बाद, रीना को पता चला कि केवल 10 प्रतिशत काम पूरा हुआ है। वह प्रिया को काम पर रखती है जो रीना से 40 प्रतिशत अधिक कुशल है। शेष कार्य को पूरा करने में उन्हें और कितने दिन लगेंगे?",
+    "q_en": "Q168. After working alone for 12 days, Reena finds that only 10 percent of the work has been completed. She hires Priya, who is 40 percent more efficient than Reena. How many more days will they take to complete the remaining work?",
+    "tag": "SSC MTS 15/06/2023 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 30 दिन", "(b) 50 दिन", "(c) 45 दिन", "(d) 40 दिन"],
+    "o_en": ["(a) 30 days", "(b) 50 days", "(c) 45 days", "(d) 40 days"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q169. A किसी काम को 25 दिन में पूरा कर सकता है। 5 दिन काम करने के बाद, उसने B की मदद ली और काम को 8 दिन में पूरा कर लिया। यदि A और B दोनों ने शुरू से ही साथ मिलकर काम किया होता, तो वे काम को कितने दिन में पूरा कर लेते?",
+    "q_en": "Q169. A can complete a work in 25 days. After working for 5 days, he takes B's help and completes the work in 8 days. If A and B had worked together from the beginning, in how many days would they have completed the work?",
+    "tag": "SSC Phase XII 28/06/2024 (Shift-04)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 14", "(b) 12", "(c) 10", "(d) 15"],
+    "o_en": ["(a) 14", "(b) 12", "(c) 10", "(d) 15"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q170. नमन 4/5 समय में गगन से आधा काम करता है। यदि वे एक साथ एक कार्य को पूरा करने में 16 दिन लेते हैं, तो गगन को उस कार्य को पूरा करने में कितना समय लगेगा?",
+    "q_en": "Q170. Naman does half the work done by Gagan in 4/5 of the time. If together they take 16 days to complete a work, how much time will Gagan take to complete the work?",
+    "tag": "SSC CGL 05/12/2022 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 23 दिन", "(b) 24 दिन", "(c) 25 दिन", "(d) 26 दिन"],
+    "o_en": ["(a) 23 days", "(b) 24 days", "(c) 25 days", "(d) 26 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q171. P किसी कार्य का एक चौथाई भाग 18 दिनों में कर सकती है। उसने उस काम का 37.5% पूरा किया और उसे छोड़ दिया। Q ने शेष कार्य को 40 दिनों में पूरा किया। एक साथ काम करते हुए, वे उसी कार्य का 17/48 हिस्सा कितने दिनों में पूरा करेंगे?",
+    "q_en": "Q171. P can complete one-fourth of a work in 18 days. She completes 37.5% of the work and leaves it. Q completes the remaining work in 40 days. Working together, in how many days will they complete 17/48 of the same work?",
+    "tag": "SSC PHASE-IX 2022",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 10 दिन", "(b) 8 दिन", "(c) 12 दिन", "(d) 6 दिन"],
+    "o_en": ["(a) 10 days", "(b) 8 days", "(c) 12 days", "(d) 6 days"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q172. एक निश्चित कार्य को पूरा करने के लिए, A और B की कुशलताओं का अनुपात 7 : 5 है। वे एक साथ कार्य को 17 1/2 दिन में पूरा कर सकते हैं। अकेले B, उसी कार्य के 50% भाग को कितने दिन में करेगा?",
+    "q_en": "Q172. To complete a certain work, the efficiencies of A and B are in the ratio 7:5. Together they can complete the work in 17 1/2 days. In how many days will B alone complete 50% of the same work?",
+    "tag": "SSC CGL 23/08/2021 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 50", "(b) 30", "(c) 42", "(d) 21"],
+    "o_en": ["(a) 50", "(b) 30", "(c) 42", "(d) 21"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q173. अमिता उतने ही समय में एक कमरा बना सकती है, जितने समय में बीना और सीता एकसाथ मिलकर उसे बना सकती हैं। यदि अमिता और बीना एकसाथ मिलकर इसे 25 दिन में कर सकती हैं और सीता अकेले 35 दिन में कर सकती है, तो बीना को अकेले उसी कार्य को करने में कितने दिन लगेंगे?",
+    "q_en": "Q173. Amita can build a room in the same time as Beena and Sita together. If Amita and Beena together can do it in 25 days and Sita alone can do it in 35 days, in how many days can Beena alone do the same work?",
+    "tag": "SSC CPO 29/06/2024 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 152 दिन", "(b) 175 दिन", "(c) 165 दिन", "(d) 180 दिन"],
+    "o_en": ["(a) 152 days", "(b) 175 days", "(c) 165 days", "(d) 180 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q174. रॉबर्ट को एक काम पूरा करने में टॉम से दोगुना और जॉर्ज से तीन गुना अधिक समय लगता है। यदि एक साथ काम करते हुए, वे इसे 23 घंटे में पूरा कर सकते हैं, तो टॉम को काम पूरा करने में कितना समय लगेगा?",
+    "q_en": "Q174. Robert takes twice as much time as Tom and three times as much time as George to complete a work. If working together they can complete it in 23 hours, how much time will Tom take to complete the work?",
+    "tag": "SSC CPO 05/10/2023 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 39 घंटे", "(b) 46 घंटे", "(c) 69 घंटे", "(d) 11 घंटे"],
+    "o_en": ["(a) 39 hours", "(b) 46 hours", "(c) 69 hours", "(d) 11 hours"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q175. A किसी कार्य को पूरा करने में B से दोगुना और C से तीन गुना समय लेता है। एक साथ मिलकर कार्य करते हुए, वे 8 दिनों में कार्य को पूरा कर सकते हैं। कार्य को पूरा करने के लिए क्रमशः A, B और C द्वारा लिया गया समय (दिनों में) ज्ञात कीजिए।",
+    "q_en": "Q175. A takes twice as much time as B and three times as much time as C to complete a work. Working together, they can complete the work in 8 days. Find the time (in days) taken by A, B and C respectively to complete the work.",
+    "tag": "SSC CGL 02/12/2022 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 42, 21, 14", "(b) 60, 30, 20", "(c) 54, 27, 18", "(d) 48, 24, 16"],
+    "o_en": ["(a) 42, 21, 14", "(b) 60, 30, 20", "(c) 54, 27, 18", "(d) 48, 24, 16"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q176. A और B 18 दिनों में एक कार्य को कर सकते हैं। B और C मिलकर इसे 30 दिनों में कर सकते हैं। यदि A, C से दोगुना कुशल है तो B अकेले कितने दिन में कार्य कर सकता है?",
+    "q_en": "Q176. A and B can complete a work in 18 days. B and C together can complete it in 30 days. If A is twice as efficient as C, in how many days can B alone complete the work?",
+    "tag": "SSC CGL Tier-II 18/11/2020",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 80", "(b) 100", "(c) 75", "(d) 90"],
+    "o_en": ["(a) 80", "(b) 100", "(c) 75", "(d) 90"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q177. A, B और C की कार्य क्षमता का अनुपात 2 : 5 : 3 है। एक साथ कार्य करते हुए, वे किसी कार्य को 27 दिन में पूरा कर सकते हैं। B और C एक साथ उस कार्य के 4/9 भाग को कितने दिनों में पूरा करेंगे?",
+    "q_en": "Q177. The efficiency ratio of A, B and C is 2:5:3. Working together, they can complete a work in 27 days. In how many days will B and C together complete 4/9 of the work?",
+    "tag": "SSC CGL 04/06/2019 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 27 दिन", "(b) 15 दिन", "(c) 17 1/7 दिन", "(d) 24 दिन"],
+    "o_en": ["(a) 27 days", "(b) 15 days", "(c) 17 1/7 days", "(d) 24 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q178. A, B और C की कार्य क्षमता का अनुपात 2 : 3 : 5 है। एक साथ कार्य करते हुए, वे किसी कार्य को 6 दिनों में पूरा कर सकते हैं। A 20% कार्य कितने दिनों में पूरा करेगा?",
+    "q_en": "Q178. The efficiency ratio of A, B and C is 2:3:5. Working together, they can complete a work in 6 days. In how many days will A complete 20% of the work?",
+    "tag": "SSC CGL 12/06/2019 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 8", "(b) 5", "(c) 6", "(d) 4"],
+    "o_en": ["(a) 8", "(b) 5", "(c) 6", "(d) 4"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q179. A एक निश्चित कार्य को B और C द्वारा मिलकर लिए गए दिनों की तुलना में 2.4 गुना अधिक दिनों में पूरा कर सकता है। यदि A और B मिलकर उस कार्य को 27 दिनों में पूरा कर सकते हैं और C अकेले उस कार्य को 75 दिनों में कर सकता है, तो B को अकेले इस कार्य को करने में कितने दिन लगेंगे?",
+    "q_en": "Q179. A can complete a certain work in 2.4 times the number of days taken by B and C together. If A and B together can complete the work in 27 days and C alone can complete it in 75 days, how many days will B alone take to complete the work?",
+    "tag": "SSC CPO 05/10/2023 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 42 दिन", "(b) 54 दिन", "(c) 48 दिन", "(d) 45 दिन"],
+    "o_en": ["(a) 42 days", "(b) 54 days", "(c) 48 days", "(d) 45 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q180. A और B किसी काम को 10 दिनों में कर सकते हैं। B और C उसी काम को 15 दिनों में कर सकते हैं। यदि A, C से दुगुना अच्छा काम करता है, तो ज्ञात कीजिए कि B अकेले इस काम को कितने समय में पूरा कर सकता है (दिनों में)।",
+    "q_en": "Q180. A and B can complete a work in 10 days. B and C can complete the same work in 15 days. If A works twice as efficiently as C, find the time (in days) B alone can take to complete the work.",
+    "tag": "SSC MTS 12/09/2023 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 25", "(b) 30", "(c) 10", "(d) 20"],
+    "o_en": ["(a) 25", "(b) 30", "(c) 10", "(d) 20"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q181. A एक निश्चित कार्य को B और C द्वारा मिलकर पूरा किए जाने में लगे दिनों की संख्या से 1.5 गुने दिनों में कर सकता है। यदि A और B मिलकर उसी कार्य को 30 दिन में कर सकते हैं और C अकेले इसे 120 दिन में कर सकता है, तो B इस कार्य को अकेले कितने दिनों में करेगा?",
+    "q_en": "Q181. A can complete a certain work in 1.5 times the number of days taken by B and C together. If A and B together can complete the same work in 30 days and C alone can complete it in 120 days, in how many days will B alone complete the work?",
+    "tag": "SSC CGL 24/07/2023 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 75", "(b) 45", "(c) 60", "(d) 50"],
+    "o_en": ["(a) 75", "(b) 45", "(c) 60", "(d) 50"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q182. एक निश्चित काम करने के लिए X को, उसी काम को Y और Z को एक साथ मिलकर करने में लगे समय से 3 गुना समय लगता है, और Z को, Y और X को एक साथ मिलकर करने में लगे समय से 4 गुना समय लगता है। तीनों मिलकर काम को 10 दिनों में पूरा कर सकते हैं। X और Z को एक साथ मिलकर काम पूरा करने में कितना समय लगेगा?",
+    "q_en": "Q182. To complete a certain work, X takes 3 times the time taken by Y and Z together, and Z takes 4 times the time taken by Y and X together. All three together can complete the work in 10 days. How much time will X and Z together take to complete the work?",
+    "tag": "SSC CPO 09/11/2022 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 18 2/9 दिन", "(b) 20 1/9 दिन", "(c) 20 1/9 दिन", "(d) 22 2/9 दिन"],
+    "o_en": ["(a) 18 2/9 days", "(b) 20 1/9 days", "(c) 20 1/9 days", "(d) 22 2/9 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q183. A अकेला एक कार्य का 2/5 भाग 12 दिनों में पूरा कर सकता है। A की तुलना में B, 25 प्रतिशत अधिक कार्यकुशल है। C अकेला उसी कार्य को B से 12 दिन कम में कर सकता है। C की तुलना में D, 25 प्रतिशत अधिक कार्यकुशल है। यदि वे सारे एक साथ मिलकर कार्य करें, तो कार्य कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q183. A alone can complete 2/5 of a work in 12 days. B is 25 percent more efficient than A. C alone can complete the same work in 12 days less than B. D is 25 percent more efficient than C. If all of them work together, in how many days will the work be completed?",
+    "tag": "SSC CGL TIER-II 08/08/2022",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 240/53", "(b) 180/43", "(c) 300/47", "(d) 200/57"],
+    "o_en": ["(a) 240/53", "(b) 180/43", "(c) 300/47", "(d) 200/57"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q184. एक निश्चित कार्य को करने के लिए, A, B से 40% अधिक कुशल है। एक साथ कार्य करते हुए, वे उसी कार्य को 15 दिनों में कर सकते हैं। A ने काम शुरू किया और 15 दिनों के बाद छोड़ दिया। B और C मिलकर शेष कार्य को अगले 10 दिनों में पूरा करते हैं। C अकेले मूल कार्य का एक तिहाई भाग कितने समय में कर सकता है?",
+    "q_en": "Q184. To complete a certain work, A is 40% more efficient than B. Working together, they can complete the same work in 15 days. A starts the work and leaves after 15 days. B and C together complete the remaining work in the next 10 days. In how much time can C alone complete one-third of the original work?",
+    "tag": "SSC PHASE-IX 2022",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 36 दिन", "(b) 21 दिन", "(c) 30 दिन", "(d) 24 दिन"],
+    "o_en": ["(a) 36 days", "(b) 21 days", "(c) 30 days", "(d) 24 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q185. A एक कार्य को 11 1/2 दिन में पूरा कर सकता है। B, A से 25% अधिक कुशल है और C, B की तुलना में 50% कुशल है। A, B और C साथ मिलकर उसी कार्य को कितने दिन में पूरा करेंगे?",
+    "q_en": "Q185. A can complete a work in 11 1/2 days. B is 25% more efficient than A and C is 50% as efficient as B. In how many days will A, B and C together complete the same work?",
+    "tag": "SSC CGL 24/08/2021 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 8 दिन", "(b) 4 दिन", "(c) 3 दिन", "(d) 5 दिन"],
+    "o_en": ["(a) 8 days", "(b) 4 days", "(c) 3 days", "(d) 5 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q186. A 15 दिनों में एक कार्य करता है। B, A की तुलना में 25% अधिक कुशल है और C, B की तुलना में 40% अधिक कुशल है। A और C एक साथ 3 दिनों के लिए कार्य करते हैं और फिर C चला जाता है। A और B एक साथ मिलकर शेष कार्य को पूरा करते हैं।",
+    "q_en": "Q186. A completes a work in 15 days. B is 25% more efficient than A and C is 40% more efficient than B. A and C work together for 3 days and then C leaves. A and B together complete the remaining work.",
+    "tag": "SSC CGL TIER-II 15/11/2020",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 2 1/2 दिन", "(b) 3 1/2 दिन", "(c) 4 दिन", "(d) 3 दिन"],
+    "o_en": ["(a) 2 1/2 days", "(b) 3 1/2 days", "(c) 4 days", "(d) 3 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q187. A किसी कार्य को 40 दिनों में पूरा कर सकता है। B, A की तुलना में 25% अधिक कार्य कुशल है तथा C, B की तुलना में 28% अधिक कार्य कुशल है। वे 5 दिनों तक एक साथ कार्य करते हैं। शेष कार्य पूरा करने में अकेले B को कितने दिन लगेंगे?",
+    "q_en": "Q187. A can complete a work in 40 days. B is 25% more efficient than A and C is 28% more efficient than B. They work together for 5 days. How many days will B alone take to complete the remaining work?",
+    "tag": "SSC CGL 03/03/2020 (Shift-02)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 20 3/4", "(b) 16 1/5", "(c) 16 3/5", "(d) 20 1/2"],
+    "o_en": ["(a) 20 3/4", "(b) 16 1/5", "(c) 16 3/5", "(d) 20 1/2"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q188. किसी निश्चित कार्य को पूरा करने के लिए, X, Y की तुलना में 40% अधिक कार्य कुशल है तथा Z, Y से 40% कम कार्य कुशल है। एक साथ कार्य करते हुए, वे इस कार्य को 21 दिनों में पूरा कर सकते हैं। Y तथा Z ने 35 दिनों तक एक साथ कार्य किया। शेष कार्य X अकेला कितने दिनों में पूरा करेगा?",
+    "q_en": "Q188. To complete a certain work, X is 40% more efficient than Y, while Z is 40% less efficient than Y. Working together, they can complete the work in 21 days. Y and Z work together for 35 days. In how many days will X alone complete the remaining work?",
+    "tag": "SSC CGL 05/03/2020 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 8", "(b) 6", "(c) 5", "(d) 4"],
+    "o_en": ["(a) 8", "(b) 6", "(c) 5", "(d) 4"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q189. A की कार्य क्षमता B की कार्य क्षमता से दोगुनी है। A एक दिन में केवल 8 घंटे कार्य करता है, जबकि B एक दिन में 12 घंटे कार्य करता है। यदि A किसी कार्य को 12 दिनों में पूरा कर सकता है, तो B उस कार्य को कितने दिनों में पूरा करेगा?",
+    "q_en": "Q189. A is twice as efficient as B. A works only 8 hours per day, while B works 12 hours per day. If A can complete a work in 12 days, in how many days will B complete the work?",
+    "tag": "SSC CGL 14/07/2023 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 8", "(b) 10", "(c) 16", "(d) 12"],
+    "o_en": ["(a) 8", "(b) 10", "(c) 16", "(d) 12"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q190. P और Q एक कार्य को 24 दिनों में पूरा कर सकते हैं, Q और R उसी कार्य को 30 दिनों में पूरा कर सकते हैं, जबकि P और R उस कार्य को 40 दिनों में पूरा कर सकते हैं। X, P से चार गुना कुशल है, Y, Q का आधा कुशल है, और Z, R से 2.5 गुना कुशल है। यदि X, Y और Z एक साथ कार्य करते हैं, तो समान कार्य को पूरा करने के लिए आवश्यक दिनों की संख्या ज्ञात कीजिए।",
+    "q_en": "Q190. P and Q can complete a work in 24 days, Q and R in 30 days, while P and R can complete it in 40 days. X is four times as efficient as P, Y is half as efficient as Q, and Z is 2.5 times as efficient as R. If X, Y and Z work together, find the number of days required to complete the same work.",
+    "tag": "SSC CGL 20/07/2023 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 9", "(b) 12", "(c) 8", "(d) 10"],
+    "o_en": ["(a) 9", "(b) 12", "(c) 8", "(d) 10"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q191. A, B और C समान क्रम में एकांतरित होकर काम करते हुए एक काम को 15 दिनों में पूरा कर सकते हैं। A की दक्षता B के समान है और C की दक्षता A के बराबर है। C, A और B के क्रम में एकांतरित होकर कार्य करने पर कार्य कितने दिनों में समाप्त हो जाएगा?",
+    "q_en": "Q191. A, B and C, working alternately in the same order, can complete a work in 15 days. A has the same efficiency as B and C has the same efficiency as A. If they work alternately in the order C, A and B, in how many days will the work be completed?",
+    "tag": "SSC CGL 26/07/2023 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 12", "(b) 14", "(c) 15", "(d) 16"],
+    "o_en": ["(a) 12", "(b) 14", "(c) 15", "(d) 16"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q192. आभा और अनुज एक साथ मिलकर कार्य करते हुए किसी काम को 40/9 दिन में पूरा करते हैं। यदि आभा ने अपनी वास्तविक दक्षता से दोगुनी दक्षता से कार्य किया होता और अनुज ने अपनी वास्तविक दक्षता के 1/3 से कार्य किया होता, तो काम 60/17 दिन में पूरा हो जाता। आभा द्वारा अकेले काम को पूरा करने में लिया गया समय ज्ञात करें।",
+    "q_en": "Q192. Abha and Anuj together complete a work in 40/9 days. If Abha worked at twice her actual efficiency and Anuj at one-third of his actual efficiency, the work would be completed in 60/17 days. Find the time taken by Abha alone to complete the work.",
+    "tag": "SSC CGL 09/12/2022 (Shift-03)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 10 दिन", "(b) 8 दिन", "(c) 12 दिन", "(d) 6 दिन"],
+    "o_en": ["(a) 10 days", "(b) 8 days", "(c) 12 days", "(d) 6 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q193. A, B और C एक साथ, मिलकर किसी कार्य को क्रमशः x, 30 और 45 दिन में पूरा कर सकते हैं। B और C एक साथ मिलकर 6 दिन तक कार्य करते हैं। शेष कार्य अकेले A द्वारा 12 दिनों में पूरा किया जाता है। x का मान ज्ञात करें।",
+    "q_en": "Q193. A, B and C can individually complete a work in x, 30 and 45 days respectively. B and C work together for 6 days. The remaining work is completed by A alone in 12 days. Find x.",
+    "tag": "SSC CHSL 19/04/2021 (Shift-01)",
+    "type_tag": "Type V (Based on Efficiency)",
+    "o_hi": ["(a) 18", "(b) 20", "(c) 24", "(d) 15"],
+    "o_en": ["(a) 18", "(b) 20", "(c) 24", "(d) 15"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }];

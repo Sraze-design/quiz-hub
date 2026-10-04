@@ -1,0 +1,503 @@
+
+
+const data = [{
+    "q_hi": "Q127. एक संख्या r को 8 से विभाजित करने पर 3 शेष बनता है। (r² + 6r + 7) को 8 से विभाजित करने पर शेषफल क्या होगा?",
+    "q_en": "Q127. A number r leaves a remainder of 3 when divided by 8. What remainder does (r² + 6r + 7) leave when divided by 8?",
+    "tag": "SSC CGL 18/09/2024 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 2", "(b) 3", "(c) 1", "(d) 4"],
+    "o_en": ["(a) 2", "(b) 3", "(c) 1", "(d) 4"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q128. यदि 6 अंकीय संख्या 7002*4, 8 से पूर्णतः विभाज्य है, तो * के स्थान पर आने वाला सबसे छोटा पूर्णांक क्या होगा?",
+    "q_en": "Q128. If the six-digit number 7002*4 is completely divisible by 8, what is the smallest integer that can replace *?",
+    "tag": "SSC Phase-XII 24/06/2024 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 6", "(b) 0", "(c) 4", "(d) 2"],
+    "o_en": ["(a) 6", "(b) 0", "(c) 4", "(d) 2"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q129. यदि 8 अंकों की संख्या 123456xy, 8 से विभाज्य है, तो (x, y) के कुल कितने संभावित युग्म होंगे?",
+    "q_en": "Q129. If the eight-digit number 123456xy is divisible by 8, how many possible pairs (x, y) are there?",
+    "tag": "SSC CGL 03/12/2022 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 8", "(b) 13", "(c) 10", "(d) 11"],
+    "o_en": ["(a) 8", "(b) 13", "(c) 10", "(d) 11"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q130. एक 7-अंकीय संख्या 89476*2 में, * का न्यूनतम संभव मान क्या है जिससे संख्या 8 से विभाज्य हो?",
+    "q_en": "Q130. In the seven-digit number 89476*2, what is the smallest possible value of * that makes it divisible by 8?",
+    "tag": "SSC CGL 09/12/2022 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 2", "(b) 1", "(c) 4", "(d) 3"],
+    "o_en": ["(a) 2", "(b) 1", "(c) 4", "(d) 3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q131. (c − b) का वह न्यूनतम धनात्मक मान ज्ञात कीजिए जिससे 7 अंकों की संख्या 1738b9c, 12 से विभाज्य हो।",
+    "q_en": "Q131. Find the smallest positive value of (c − b) that makes the seven-digit number 1738b9c divisible by 12.",
+    "tag": "SSC CHSL 01/07/2024 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4", "(b) 2", "(c) 1", "(d) 7"],
+    "o_en": ["(a) 4", "(b) 2", "(c) 1", "(d) 7"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q132. x का न्यूनतम मान क्या है जिसके लिए संख्या 712x816, 12 से विभाज्य है?",
+    "q_en": "Q132. What is the minimum value of x for which 712x816 is divisible by 12?",
+    "tag": "SSC CHSL 04/08/2023 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4", "(b) 1", "(c) 0", "(d) 2"],
+    "o_en": ["(a) 4", "(b) 1", "(c) 0", "(d) 2"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q133. एक 11-अंकीय संख्या 7823326867X, 18 से विभाज्य है। X का मान क्या है?",
+    "q_en": "Q133. An eleven-digit number 7823326867X is divisible by 18. What is the value of X?",
+    "tag": "SSC CGL 19/07/2023 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 6", "(b) 4", "(c) 8", "(d) 2"],
+    "o_en": ["(a) 6", "(b) 4", "(c) 8", "(d) 2"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q134. यदि 62684*#, 7 अंकों की एक ऐसी संख्या है जो 8 और 5 दोनों से विभाज्य है, तो क्रमशः * और # के स्थान पर कौन से अंक आने चाहिए?",
+    "q_en": "Q134. If 62684*# is a seven-digit number divisible by both 8 and 5, which digits should replace * and # respectively?",
+    "tag": "SSC CGL 10/09/2024 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 2 और 0", "(b) 4 और 0", "(c) 5 और 0", "(d) 0 और 5"],
+    "o_en": ["(a) 2 and 0", "(b) 4 and 0", "(c) 5 and 0", "(d) 0 and 5"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q135. यदि 72864*$ एक ऐसी संख्या है जो 8 और 5 दोनों से विभाज्य है, तो क्रमशः * और $ के स्थान पर कौन-से अंक आने चाहिए?",
+    "q_en": "Q135. If 72864*$ is divisible by both 8 and 5, which digits should replace * and $ respectively?",
+    "tag": "SSC CGL 12/09/2024 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4 और 0", "(b) 2 और 0", "(c) 2 और 5", "(d) 4 और 5"],
+    "o_en": ["(a) 4 and 0", "(b) 2 and 0", "(c) 2 and 5", "(d) 4 and 5"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q136. यदि संख्या 62684xy, 8 और 5 दोनों से विभाज्य है, तो क्रमशः x और y के स्थान पर कौन से अंक आने चाहिए?",
+    "q_en": "Q136. If 62684xy is divisible by both 8 and 5, which digits should replace x and y respectively?",
+    "tag": "SSC CGL 13/09/2024 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 5 और 0", "(b) 4 और 0", "(c) 2 और 0", "(d) 0 और 5"],
+    "o_en": ["(a) 5 and 0", "(b) 4 and 0", "(c) 2 and 0", "(d) 0 and 5"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q137. यदि 9 अंकों की संख्या 5x79856y6, 36 से विभाज्य है, तो y के सबसे बड़े संभावित मान के लिए √(2x + y) का ऋणात्मक मान क्या है, दिया गया है कि x और y प्राकृतिक संख्याएँ हैं?",
+    "q_en": "Q137. If the nine-digit number 5x79856y6 is divisible by 36, what is the negative value of √(2x + y) for the greatest possible y, given that x and y are natural numbers?",
+    "tag": "SSC CGL 18/09/2024 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) −7", "(b) −2", "(c) −4", "(d) −5"],
+    "o_en": ["(a) −7", "(b) −2", "(c) −4", "(d) −5"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q138. 45yz0 पाँच अंकों की एक ऐसी संख्या है जो 40 से विभाज्य है। (y + z) का अधिकतम संभावित मान क्या है?",
+    "q_en": "Q138. 45yz0 is a five-digit number divisible by 40. What is the greatest possible value of (y + z)?",
+    "tag": "SSC CGL 26/09/2024 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 15", "(b) 18", "(c) 16", "(d) 17"],
+    "o_en": ["(a) 15", "(b) 18", "(c) 16", "(d) 17"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q139. 489y5z6 एक सात अंकों की संख्या है जो 72 से विभाज्य है। कौन-सा विकल्प y और z का उच्चतम संभव गुणनफल देता है?",
+    "q_en": "Q139. 489y5z6 is a seven-digit number divisible by 72. Which option gives the highest possible product of y and z?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 21", "(b) 30", "(c) 42", "(d) 3"],
+    "o_en": ["(a) 21", "(b) 30", "(c) 42", "(d) 3"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q140. यदि एक 9 अंकों की संख्या 389x6378y, 72 से विभाज्य है, तो 6x + 7y का मान ज्ञात कीजिए।",
+    "q_en": "Q140. If the nine-digit number 389x6378y is divisible by 72, find the value of 6x + 7y.",
+    "tag": "SSC Phase-XII 20/06/2024 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 16", "(b) 32", "(c) 28", "(d) 64"],
+    "o_en": ["(a) 16", "(b) 32", "(c) 28", "(d) 64"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q141. यदि 9-अंकीय संख्या 1039m837n, 72 से पूर्णतः विभाज्य है, तो (n² − m)/4 का मान ज्ञात कीजिए।",
+    "q_en": "Q141. If the nine-digit number 1039m837n is exactly divisible by 72, find (n² − m)/4.",
+    "tag": "Matric Level 02/02/2022 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 7", "(b) 6", "(c) 2", "(d) 4"],
+    "o_en": ["(a) 7", "(b) 6", "(c) 2", "(d) 4"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q142. यदि संख्या 6p5157q, 88 से विभाज्य है जहाँ p और q एक अंक वाली संख्याएँ हैं तो p × q = ______ है।",
+    "q_en": "Q142. If 6p5157q is divisible by 88, where p and q are single-digit numbers, then p × q = ______.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 15", "(b) 18", "(c) 20", "(d) 12"],
+    "o_en": ["(a) 15", "(b) 18", "(c) 20", "(d) 12"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q143. एक 8 अंकीय संख्या 99 से विभाज्य है। यदि अंकों में फेरबदल कर दिया जाए, तो संख्या हमेशा ______ से विभाज्य होती है।",
+    "q_en": "Q143. An eight-digit number is divisible by 99. If its digits are rearranged, the resulting number is always divisible by ______.",
+    "tag": "SSC CHSL 03/07/2024 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 11", "(b) 5", "(c) 9", "(d) 6"],
+    "o_en": ["(a) 11", "(b) 5", "(c) 9", "(d) 6"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q144. a का वह कौन-सा मान है ताकि सात अंकों की संख्या 4645a52, 72 से विभाज्य हो?",
+    "q_en": "Q144. What value of a makes the seven-digit number 4645a52 divisible by 72?",
+    "tag": "SSC CHSL 11/07/2024 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 0", "(b) 3", "(c) 2", "(d) 1"],
+    "o_en": ["(a) 0", "(b) 3", "(c) 2", "(d) 1"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q145. 725yz एक ऐसी पाँच अंकों वाली संख्या है जो 15 से विभाज्य है। y और z के गुणनफल का अधिकतम संभावित मान क्या है?",
+    "q_en": "Q145. 725yz is a five-digit number divisible by 15. What is the greatest possible product of y and z?",
+    "tag": "SSC Phase-XII 21/06/2024 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 40", "(b) 35", "(c) 30", "(d) 45"],
+    "o_en": ["(a) 40", "(b) 35", "(c) 30", "(d) 45"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q146. यदि 15x1y2 एक ऐसी छः अंकों की संख्या है जो 44 से विभाज्य है, तो (x + y) का न्यूनतम मान है।",
+    "q_en": "Q146. If 15x1y2 is a six-digit number divisible by 44, what is the minimum value of (x + y)?",
+    "tag": "SSC Phase-XII 26/06/2024 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 8", "(b) 6", "(c) 5", "(d) 7"],
+    "o_en": ["(a) 8", "(b) 6", "(c) 5", "(d) 7"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q147. यदि छः अंकों की संख्या 11p9q4, 24 से विभाज्य है, तो pq का अधिकतम संभावित मान ज्ञात कीजिए।",
+    "q_en": "Q147. If the six-digit number 11p9q4 is divisible by 24, find the greatest possible value of pq.",
+    "tag": "SSC CGL TIER-II 26/10/2023",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 42", "(b) 32", "(c) 56", "(d) 68"],
+    "o_en": ["(a) 42", "(b) 32", "(c) 56", "(d) 68"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q148. यदि 10 अंकों की संख्या 780x533y24, 88 से विभाज्य है, तो x + y का न्यूनतम मान क्या है?",
+    "q_en": "Q148. If the ten-digit number 780x533y24 is divisible by 88, what is the minimum value of x + y?",
+    "tag": "SSC CHSL 03/08/2023 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4", "(b) 3", "(c) 1", "(d) 2"],
+    "o_en": ["(a) 4", "(b) 3", "(c) 1", "(d) 2"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q149. संख्या 3426x में x का मान ज्ञात कीजिए, यदि संख्या 6 से विभाज्य है लेकिन 5 से विभाज्य नहीं है।",
+    "q_en": "Q149. Find the value of x in 3426x if the number is divisible by 6 but not by 5.",
+    "tag": "SSC CHSL 10/08/2023 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 3", "(b) 4", "(c) 6", "(d) 8"],
+    "o_en": ["(a) 3", "(b) 4", "(c) 6", "(d) 8"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q150. यदि 10 अंकों की संख्या 620x976y52, 88 से विभाज्य है, तो (x² + y²) का न्यूनतम मान क्या होगा?",
+    "q_en": "Q150. If the ten-digit number 620x976y52 is divisible by 88, what is the minimum value of (x² + y²)?",
+    "tag": "SSC CHSL 14/08/2023 (Shift-1)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 8", "(b) 7", "(c) 11", "(d) 10"],
+    "o_en": ["(a) 8", "(b) 7", "(c) 11", "(d) 10"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q151. जब 151314 को 15 से विभाजित किया जाता है, तो कितना शेषफल प्राप्त होता है?",
+    "q_en": "Q151. What remainder is obtained when 151314 is divided by 15?",
+    "tag": "Matriculation Level 30/06/2023 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 11", "(b) 6", "(c) 9", "(d) 7"],
+    "o_en": ["(a) 11", "(b) 6", "(c) 9", "(d) 7"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q152. * का न्यूनतम मान क्या है ताकि संख्या 457643*4, 18 से विभाज्य हो?",
+    "q_en": "Q152. What is the minimum value of * so that 457643*4 is divisible by 18?",
+    "tag": "Higher Secondary 28/06/2023 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 9", "(b) 3", "(c) 4", "(d) 5"],
+    "o_en": ["(a) 9", "(b) 3", "(c) 4", "(d) 5"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q153. यदि एक संख्या 2x64y, 88 से पूर्णतः विभाज्य है, तो 6x − 5y का मान क्या है?",
+    "q_en": "Q153. If 2x64y is exactly divisible by 88, what is the value of 6x − 5y?",
+    "tag": "SSC CHSL 10/03/2023 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 38", "(b) −40", "(c) 18", "(d) −34"],
+    "o_en": ["(a) 38", "(b) −40", "(c) 18", "(d) −34"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q154. यदि 7A425B, 36 से विभाज्य है, तो A − B का मान क्या है?",
+    "q_en": "Q154. If 7A425B is divisible by 36, what is the value of A − B?",
+    "tag": "SSC CHSL 15/03/2023 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 0", "(b) 5", "(c) 1", "(d) 2"],
+    "o_en": ["(a) 0", "(b) 5", "(c) 1", "(d) 2"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q155. यदि 4 अंकों की संख्या 48ab, 2, 5 और 7 से विभाज्य है, तो (10a − b) का मान क्या है?",
+    "q_en": "Q155. If the four-digit number 48ab is divisible by 2, 5 and 7, what is the value of (10a − b)?",
+    "tag": "SSC CHSL 16/03/2023 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 0", "(b) 20", "(c) 10", "(d) 30"],
+    "o_en": ["(a) 0", "(b) 20", "(c) 10", "(d) 30"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q156. 73A215, 11 से विभाज्य है और 56B26, 9 से विभाज्य है, तो A + B का मान क्या है?",
+    "q_en": "Q156. If 73A215 is divisible by 11 and 56B26 is divisible by 9, what is A + B?",
+    "tag": "SSC CHSL 20/03/2023 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 10", "(b) 8", "(c) 11", "(d) 7"],
+    "o_en": ["(a) 10", "(b) 8", "(c) 11", "(d) 7"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q157. निम्नलिखित में से कौन-सी संख्या (49¹⁵ − 1) का भाजक है?",
+    "q_en": "Q157. Which of the following numbers is a divisor of (49¹⁵ − 1)?",
+    "tag": "SSC CGL 01/12/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 46", "(b) 14", "(c) 8", "(d) 50"],
+    "o_en": ["(a) 46", "(b) 14", "(c) 8", "(d) 50"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q158. यदि चार अंकों की संख्या 463y, 7 से विभाज्य है, तो y का मान क्या होगा?",
+    "q_en": "Q158. If the four-digit number 463y is divisible by 7, what is the value of y?",
+    "tag": "SSC CGL TIER-II 07/03/2023",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4", "(b) 6", "(c) 3", "(d) 5"],
+    "o_en": ["(a) 4", "(b) 6", "(c) 3", "(d) 5"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q159. p और q के शून्येतर मानों का निम्नलिखित में से कौन-सा युग्म 6 अंकों की संख्या 674pq0 को 3 और 11 दोनों से विभाज्य बनाता है?",
+    "q_en": "Q159. Which pair of non-zero values of p and q makes the six-digit number 674pq0 divisible by both 3 and 11?",
+    "tag": "SSC CGL 05/12/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) p = 2 और q = 2", "(b) p = 5 और q = 4", "(c) p = 4 और q = 2", "(d) p = 5 और q = 2"],
+    "o_en": ["(a) p = 2 and q = 2", "(b) p = 5 and q = 4", "(c) p = 4 and q = 2", "(d) p = 5 and q = 2"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q160. 38211, 38121, 32118 और 31128 में से कौन-सी संख्या 24 से विभाज्य है?",
+    "q_en": "Q160. Which of 38211, 38121, 32118 and 31128 is divisible by 24?",
+    "tag": "SSC CGL TIER-II (20/01/2025)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 32118", "(b) 31128", "(c) 38121", "(d) 38211"],
+    "o_en": ["(a) 32118", "(b) 31128", "(c) 38121", "(d) 38211"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q161. यदि 9 अंकों की संख्या 83P93678Q, 72 से विभाज्य है, तो √(P² + Q² + 12) का मान क्या है?",
+    "q_en": "Q161. If the nine-digit number 83P93678Q is divisible by 72, what is √(P² + Q² + 12)?",
+    "tag": "SSC CGL 05/12/2022 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 6", "(b) 7", "(c) 8", "(d) 9"],
+    "o_en": ["(a) 6", "(b) 7", "(c) 8", "(d) 9"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q162. यदि एक संख्या K = 42 × 25 × 54 × 135, 3ᵃ द्वारा विभाज्य है, तो a का अधिकतम मान ज्ञात कीजिए।",
+    "q_en": "Q162. If K = 42 × 25 × 54 × 135 is divisible by 3ᵃ, find the maximum value of a.",
+    "tag": "SSC CGL 07/12/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 6", "(b) 7", "(c) 4", "(d) 5"],
+    "o_en": ["(a) 6", "(b) 7", "(c) 4", "(d) 5"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q163. यदि 7 अंकों की संख्या 678p37q, 75 से विभाज्य है और p एक भाज्य संख्या नहीं है, तो p और q के मान ज्ञात कीजिए।",
+    "q_en": "Q163. If the seven-digit number 678p37q is divisible by 75 and p is not a composite number, find p and q.",
+    "tag": "SSC CGL 08/12/2022 (Shift-04)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) p = 5, q = 5", "(b) p = 3, q = 0", "(c) p = 3, q = 5", "(d) p = 2, q = 5"],
+    "o_en": ["(a) p = 5, q = 5", "(b) p = 3, q = 0", "(c) p = 3, q = 5", "(d) p = 2, q = 5"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q164. यदि सात अंकों की संख्या 52A6B7C, 33 से विभाज्य है, और A, B, C अभाज्य हैं, तो 2A + 3B + C का अधिकतम मान है:",
+    "q_en": "Q164. If the seven-digit number 52A6B7C is divisible by 33 and A, B, C are prime, what is the maximum value of 2A + 3B + C?",
+    "tag": "SSC CGL 12/12/2022 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 32", "(b) 23", "(c) 27", "(d) 34"],
+    "o_en": ["(a) 32", "(b) 23", "(c) 27", "(d) 34"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q165. संख्या 647592, 88 से विभाज्य है। यदि इस संख्या के अंकों को आरोही क्रम में पुनर्व्यवस्थित किया जाए, तो इस प्रकार बनने वाली नई संख्या निम्नलिखित में से किसके द्वारा विभाज्य होगी?",
+    "q_en": "Q165. The number 647592 is divisible by 88. If its digits are rearranged in ascending order, by which of the following will the new number be divisible?",
+    "tag": "SSC CPO 09/11/2022 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 22", "(b) 66", "(c) 44", "(d) 3"],
+    "o_en": ["(a) 22", "(b) 66", "(c) 44", "(d) 3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q166. यदि एक 9-अंकीय संख्या 72x8431y4, 36 से विभाज्य है, x और y प्राकृतिक संख्याएँ हैं, तो y के सबसे छोटे मान के लिए (x/y − y/x) का मान क्या होगा?",
+    "q_en": "Q166. If the nine-digit number 72x8431y4 is divisible by 36 and x and y are natural numbers, what is (x/y − y/x) for the smallest y?",
+    "tag": "SSC CPO 09/11/2022 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 1 5/7", "(b) 2 1/10", "(c) 1 2/5", "(d) 2 9/10"],
+    "o_en": ["(a) 1 5/7", "(b) 2 1/10", "(c) 1 2/5", "(d) 2 9/10"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q167. संख्या 150328, 23 से विभाज्य है। यदि इस संख्या के अंकों को अवरोही क्रम में पुनर्व्यवस्थित किया जाए और इस प्रकार निर्मित संख्या में से 13 का पाँच गुना घटा दिया जाए, तो परिणामी संख्या निम्नलिखित में से किससे विभाज्य होगी?",
+    "q_en": "Q167. The number 150328 is divisible by 23. If its digits are rearranged in descending order and five times 13 is subtracted, by which of the following is the resulting number divisible?",
+    "tag": "SSC CPO 10/11/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 3", "(b) 5", "(c) 11", "(d) 2"],
+    "o_en": ["(a) 3", "(b) 5", "(c) 11", "(d) 2"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q168. यदि दी गई संख्या 34R05030M6, 16 और 11 से पूर्णतः विभाज्य है, तो R और M के मान क्रमशः क्या हैं?",
+    "q_en": "Q168. If 34R05030M6 is exactly divisible by 16 and 11, what are R and M respectively?",
+    "tag": "SSC CPO 10/11/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4 और 6", "(b) 7 और 5", "(c) 5 और 5", "(d) 5 और 7"],
+    "o_en": ["(a) 4 and 6", "(b) 7 and 5", "(c) 5 and 5", "(d) 5 and 7"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q169. यदि संख्या 6336633P, 132 द्वारा विभाज्य है, तो P का मान क्या होगा?",
+    "q_en": "Q169. If 6336633P is divisible by 132, what is the value of P?",
+    "tag": "SSC CPO 10/11/2022 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 4", "(b) 2", "(c) 3", "(d) 6"],
+    "o_en": ["(a) 4", "(b) 2", "(c) 3", "(d) 6"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q170. यदि संख्या 476**0, 3 और 11 दोनों से विभाज्य है, तो सैकड़े और दहाई के स्थान पर गैर-शून्य अंक क्रमशः क्या होंगे?",
+    "q_en": "Q170. If 476**0 is divisible by both 3 and 11, what are the non-zero digits in the hundreds and tens places respectively?",
+    "tag": "SSC CPO 10/11/2022 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 2 और 3", "(b) 3 और 2", "(c) 5 और 8", "(d) 8 और 5"],
+    "o_en": ["(a) 2 and 3", "(b) 3 and 2", "(c) 5 and 8", "(d) 8 and 5"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q171. यदि एक 9 अंकीय संख्या 97x4562y8, 88 से विभाज्य है, x और y प्राकृतिक संख्याएँ हैं, तो y के सबसे छोटे मान के लिए (x² + y²) का मान क्या होगा?",
+    "q_en": "Q171. If the nine-digit number 97x4562y8 is divisible by 88 and x and y are natural numbers, what is x² + y² for the smallest y?",
+    "tag": "SSC CPO 11/11/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 64", "(b) 68", "(c) 76", "(d) 80"],
+    "o_en": ["(a) 64", "(b) 68", "(c) 76", "(d) 80"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q172. राम को 1 और 1000 (दोनों सहित) के बीच की संख्याओं की एक सूची का चयन करना था, जो 2 और 7 दोनों से विभाज्य हों। ऐसी कितनी संख्याएँ हैं?",
+    "q_en": "Q172. Ram had to select numbers between 1 and 1000 (both inclusive) that are divisible by both 2 and 7. How many such numbers are there?",
+    "tag": "SSC CPO 11/11/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 142", "(b) 71", "(c) 97", "(d) 642"],
+    "o_en": ["(a) 142", "(b) 71", "(c) 97", "(d) 642"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q173. यदि संख्या 55p1067q9, 99 से पूरी तरह विभाज्य है, तो pq का मान कितना होगा?",
+    "q_en": "Q173. If 55p1067q9 is completely divisible by 99, what is the value of pq?",
+    "tag": "SSC CPO 11/11/2022 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 35", "(b) 28", "(c) 36", "(d) 42"],
+    "o_en": ["(a) 35", "(b) 28", "(c) 36", "(d) 42"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q174. संख्या 2143251 निम्न में से किससे विभाज्य है?",
+    "q_en": "Q174. By which of the following is 2143251 divisible?",
+    "tag": "SSC CHSL 26/05/2022 (Shift-02)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 13", "(b) 17", "(c) 7", "(d) 3"],
+    "o_en": ["(a) 13", "(b) 17", "(c) 7", "(d) 3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q175. वह सबसे बड़ी संख्या 23a68b ज्ञात कीजिए, जो 3 से विभाज्य है लेकिन 9 से विभाज्य नहीं है।",
+    "q_en": "Q175. Find the largest number 23a68b that is divisible by 3 but not by 9.",
+    "tag": "SSC CGL 11/04/2022 (Shift-01)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 238689", "(b) 239685", "(c) 239688", "(d) 237687"],
+    "o_en": ["(a) 238689", "(b) 239685", "(c) 239688", "(d) 237687"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q176. यदि x8942y4 एक ऐसी 7 अंकों की संख्या है जो 56 से विभाज्य है, तो y के सबसे बड़े मान के लिए (x² + y) का मान क्या है, जहाँ x और y प्राकृतिक संख्याएँ हैं?",
+    "q_en": "Q176. If the seven-digit number x8942y4 is divisible by 56, what is x² + y for the greatest value of y, where x and y are natural numbers?",
+    "tag": "SSC CGL 11/04/2022 (Shift-03)",
+    "type_tag": "Type IV (Divisibility)",
+    "o_hi": ["(a) 33", "(b) 44", "(c) 55", "(d) 70"],
+    "o_en": ["(a) 33", "(b) 44", "(c) 55", "(d) 70"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }];

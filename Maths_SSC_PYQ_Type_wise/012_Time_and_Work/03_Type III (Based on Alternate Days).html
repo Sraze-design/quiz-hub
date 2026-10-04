@@ -1,0 +1,413 @@
+
+
+const data = [{
+    "q_hi": "Q86. रानी और आशा अलग-अलग काम करते हुए एक काम को क्रमशः 12 दिन और 16 दिन में पूरा कर सकती हैं। वे बारी-बारी से एक-एक दिन काम करती हैं। यदि रानी पहले काम करना शुरू करती है, तो काम कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q86. Rani and Asha can complete a work separately in 12 days and 16 days respectively. They work on alternate days, one day each. If Rani starts first, in how many days will the work be completed?",
+    "tag": "SSC CGL TIER-II (18/01/2025)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 12 1/3 दिन", "(b) 13 2/3 दिन", "(c) 13 1/3 दिन", "(d) 12 2/3 दिन"],
+    "o_en": ["(a) 12 1/3 days", "(b) 13 2/3 days", "(c) 13 1/3 days", "(d) 12 2/3 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q87. P तथा Q अकेले कार्य करते हुए एक कार्य को क्रमशः 5 दिनों तथा 15 दिनों में पूरा कर सकते हैं। वे बारी-बारी से एक-एक दिन छोड़कर कार्य करते हैं। पहले दिन P कार्य करता है। संपूर्ण कार्य कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q87. P and Q, working alone, can complete a work in 5 days and 15 days respectively. They work on alternate days, one day each, with P working on the first day. In how many days will the whole work be completed?",
+    "tag": "SSC CHSL 24/11/2025 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 6", "(b) 7", "(c) 7.5", "(d) 3"],
+    "o_en": ["(a) 6", "(b) 7", "(c) 7.5", "(d) 3"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q88. आकाश और विकास एक कार्य को क्रमशः 40 दिन और 60 दिन में पूरा कर सकते हैं। आकाश से शुरू करते हुए, यदि वे एकांतर दिनों में बारी-बारी से कार्य करते हैं, तो संपूर्ण कार्य कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q88. Aakash and Vikas can complete a work in 40 days and 60 days respectively. Starting with Aakash, if they work on alternate days, in how many days will the whole work be completed?",
+    "tag": "SSC CPO 29/06/2024 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 48", "(b) 52", "(c) 50", "(d) 42"],
+    "o_en": ["(a) 48", "(b) 52", "(c) 50", "(d) 42"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q89. A, B और C एक काम को क्रमशः 20, 30 और 50 दिनों में पूरा कर सकते हैं। यदि B और C हर दूसरे दिन A की सहायता करते हैं, तो वह काम कितने दिनों में पूरा कर सकता है?",
+    "q_en": "Q89. A, B and C can complete a work in 20, 30 and 50 days respectively. If B and C assist A on alternate days, in how many days can the work be completed?",
+    "tag": "SSC CPO 12/12/2025 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 13 9/31 दिन", "(b) 19 दिन", "(c) 15 दिन", "(d) 21 दिन"],
+    "o_en": ["(a) 13 9/31 days", "(b) 19 days", "(c) 15 days", "(d) 21 days"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q90. A एक काम को 12 दिनों में, B 15 दिनों में और C 20 दिनों में पूरा कर सकता है। वे निम्नलिखित तरीके से काम करते हैं:<br>पहले दिन A काम करता है,<br>दूसरे दिन B काम करता है,<br>तीसरे दिन C काम करता है, और चक्र इसी क्रम में दोहराया जाता है।<br>काम कितने दिनों में पूरा होगा?",
+    "q_en": "Q90. A can complete a work in 12 days, B in 15 days and C in 20 days. They work as follows:<br>Day 1: A works,<br>Day 2: B works,<br>Day 3: C works, and the cycle repeats in the same order.<br>In how many days will the work be completed?",
+    "tag": "SSC CHSL 15/11/2025 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 5 दिन", "(b) 10 दिन", "(c) 15 दिन", "(d) 20 दिन"],
+    "o_en": ["(a) 5 days", "(b) 10 days", "(c) 15 days", "(d) 20 days"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q91. X और Y एक कार्य को क्रमशः 18 दिन और 27 दिन में कर सकते हैं। X से शुरू करते हुए, वे एकांतर दिन में कार्य करते हैं। X और Y द्वारा कार्य को पूरा करने में कुल कितने दिन लगेंगे?",
+    "q_en": "Q91. X and Y can complete a work in 18 days and 27 days respectively. Starting with X, they work on alternate days. How many total days will X and Y take to complete the work?",
+    "tag": "SSC Phase-XII 25/06/2024 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 21 1/2", "(b) 24", "(c) 20", "(d) 21"],
+    "o_en": ["(a) 21 1/2", "(b) 24", "(c) 20", "(d) 21"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q92. सार्थक और मोहन एक वर्कशॉप में एकांतर दिनों पर काम कर रहे हैं। सार्थक काम को 20 दिनों में पूरा कर सकता है जबकि मोहन 25 दिनों में पूरा कर सकता है। सार्थक पहले दिन काम करता है, मोहन दूसरे दिन काम करता है और इसी तरह बारी-बारी एकांतर आधार पर उन्हें कितना समय (दिनों में) लगेगा?",
+    "q_en": "Q92. Sarthak and Mohan work on alternate days in a workshop. Sarthak can complete the work in 20 days, while Mohan can complete it in 25 days. Sarthak works on the first day, Mohan on the second, and so on alternately. How much time (in days) will they take?",
+    "tag": "SSC Phase-XII 25/06/2024 (Shift-04)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 22 1/3", "(b) 22 1/5", "(c) 23", "(d) 20 1/5"],
+    "o_en": ["(a) 22 1/3", "(b) 22 1/5", "(c) 23", "(d) 20 1/5"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q93. A और B अलग-अलग कार्य करते हुए एक कार्य को क्रमशः 15 दिनों और 18 दिनों में पूरा कर सकते हैं। यदि A कार्य शुरू करता है और वे प्रत्येक दिन बारी-बारी से एक-एक करके एकांतर दिनों में कार्य करते हैं, तो कार्य कितने दिनों में पूरा होगा?",
+    "q_en": "Q93. A and B, working separately, can complete a work in 15 days and 18 days respectively. If A starts and they work on alternate days, one at a time, in how many days will the work be completed?",
+    "tag": "SSC Phase-XII 26/06/2024 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 15 2/3", "(b) 17 1/3", "(c) 18 2/3", "(d) 16 1/3"],
+    "o_en": ["(a) 15 2/3", "(b) 17 1/3", "(c) 18 2/3", "(d) 16 1/3"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q94. A किसी कार्य को 10 दिनों में पूरा कर सकता है, जबकि B वही कार्य 12 दिनों में पूरा कर सकता है। वे बारी-बारी से कार्य करते हैं, जिसमें A पहले दिन कार्य शुरू करता है। पूरा कार्य करने में उन्हें कितने दिन लगेंगे?",
+    "q_en": "Q94. A can complete a work in 10 days, while B can complete it in 12 days. They work on alternate days, with A starting on the first day. How many days will they take to complete the work?",
+    "tag": "SSC CHSL 27/11/2025 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 10.5 दिन", "(b) 10.2 दिन", "(c) 10.83 दिन", "(d) 10.4 दिन"],
+    "o_en": ["(a) 10.5 days", "(b) 10.2 days", "(c) 10.83 days", "(d) 10.4 days"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q95. A, B और C क्रमशः 30, 45 और 90 दिनों में एक काम पूरा कर सकते हैं। A हर दिन काम करता है, जबकि B और C हर पांचवें दिन A के साथ काम में शामिल होते हैं। काम पूरा करने में कितने दिन लगेंगे?",
+    "q_en": "Q95. A, B and C can complete a work in 30, 45 and 90 days respectively. A works every day, while B and C join A every fifth day. In how many days will the work be completed?",
+    "tag": "SSC CGL 12/09/2025 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 25 दिन", "(b) 18 दिन", "(c) 16 दिन", "(d) 12 दिन"],
+    "o_en": ["(a) 25 days", "(b) 18 days", "(c) 16 days", "(d) 12 days"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q96. A, B और C किसी काम को क्रमशः 24, 36 और 72 दिनों में पूरा कर सकते हैं। A प्रतिदिन काम करता है और B और C हर चौथे दिन उसकी सहायता करते हैं। काम कितने दिनों में पूरा होगा?",
+    "q_en": "Q96. A, B and C can complete a work in 24, 36 and 72 days respectively. A works every day and B and C assist him every fourth day. In how many days will the work be completed?",
+    "tag": "SSC PHASE XIII 28/07/2025 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 18 दिन", "(b) 19.5 दिन", "(c) 25 दिन", "(d) 16.5 दिन"],
+    "o_en": ["(a) 18 days", "(b) 19.5 days", "(c) 25 days", "(d) 16.5 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q97. A एक काम को 25 दिन में पूरा कर सकता है जबकि B उसी काम को 30 दिन में पूरा कर सकता है। वे एकांतर दिन के आधार पर काम करते हैं, A से शुरू करते हैं। A और B दोनों 5 दिन के लिए इस तरीके का पालन करते हैं और फिर A काम छोड़ देता है। B शेष कार्य को कितने दिन में पूरा करेगा?",
+    "q_en": "Q97. A can complete a work in 25 days while B can complete it in 30 days. They work on alternate days starting with A. They follow this pattern for 5 days and then A leaves. In how many days will B complete the remaining work?",
+    "tag": "SSC CGL 14/07/2023 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 24 2/5", "(b) 5 2/5", "(c) 5 3/5", "(d) 24 3/5"],
+    "o_en": ["(a) 24 2/5", "(b) 5 2/5", "(c) 5 3/5", "(d) 24 3/5"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q98. A और B एक काम को 5 1/3 दिनों में पूरा कर सकते हैं। A अकेले इस काम को 8 दिनों में पूरा कर सकता है। A और B इस काम को पूरा करने के लिए बारी-बारी से एक-एक दिन छोड़कर काम करते हैं (B पहले दिन काम शुरू करता है)। काम कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q98. A and B together can complete a work in 5 1/3 days. A alone can complete it in 8 days. A and B work on alternate days to complete it, with B starting on the first day. In how many days will the work be completed?",
+    "tag": "SSC MTS 06/09/2023 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 6 दिन", "(b) 11 दिन", "(c) 6 1/3 दिन", "(d) 11 1/3 दिन"],
+    "o_en": ["(a) 6 days", "(b) 11 days", "(c) 6 1/3 days", "(d) 11 1/3 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q99. एक कारखाने में अजय और विजय हीरे काटने के लिए एक ही मशीन पर काम करते हैं, लेकिन बारी-बारी से घंटे के आधार पर। अजय पहले घंटे के लिए काम करता है और फिर विजय दूसरे घंटे के लिए काम करता है और इसी तरह आगे काम करते हैं। अजय काम को 6 घंटे में पूरा कर सकता है, जबकि विजय उसे 16 घंटे में पूरा करता है। अगर वे अलग-अलग काम करते हैं। यदि वे बारी-बारी आधार पर मशीन का उपयोग कर रहे हैं, तो वे कार्य को कितने समय में पूरा कर सकते हैं?",
+    "q_en": "Q99. In a factory, Ajay and Vijay cut diamonds using the same machine, working alternately by the hour. Ajay works the first hour, Vijay the second, and so on. Ajay can complete the work in 6 hours while Vijay can complete it in 16 hours when working alone. How long will they take when using the machine alternately?",
+    "tag": "SSC CGL 08/12/2022 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 8 घंटे 30 मिनट", "(b) 8 घंटे", "(c) 9 घंटे", "(d) 9 घंटे 30 मिनट"],
+    "o_en": ["(a) 8 hours 30 minutes", "(b) 8 hours", "(c) 9 hours", "(d) 9 hours 30 minutes"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q100. दो व्यक्ति A और B अलग-अलग काम करके किसी भवन को क्रमशः 6 और 10 घंटे में स्वच्छ कर सकते हैं। वे बारी-बारी से एक-एक घंटे के अंतराल पर काम करते हैं। यदि A कार्य प्रारंभ करता है, तो वह कार्य कितनी देर में समाप्त होगा?",
+    "q_en": "Q100. Two persons A and B, working separately, can clean a building in 6 hours and 10 hours respectively. They work alternately in one-hour intervals. If A starts, how long will the work take to finish?",
+    "tag": "SSC CGL 13/12/2022 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 9 1/3", "(b) 8 1/3", "(c) 6 1/3", "(d) 7 1/3"],
+    "o_en": ["(a) 9 1/3", "(b) 8 1/3", "(c) 6 1/3", "(d) 7 1/3"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q101. अवि और बिंदु प्रोजेक्ट को क्रमशः 4 और 12 घंटे में पूरा कर सकते हैं। यदि अवि 5 a.m. पर प्रोजेक्ट आरंभ करता है और वे वैकल्पिक रूप से, प्रत्येक एक-एक घंटे के लिए कार्य करते हैं, तो प्रोजेक्ट कब पूरा होगा?",
+    "q_en": "Q101. Avi and Bindu can complete a project in 4 hours and 12 hours respectively. If Avi starts the project at 5 a.m. and they work alternately for one hour each, when will the project be completed?",
+    "tag": "SSC CHSL 24/05/2022 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 9 am.", "(b) 11 am.", "(c) 1 pm.", "(d) 10 am."],
+    "o_en": ["(a) 9 am.", "(b) 11 am.", "(c) 1 pm.", "(d) 10 am."],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q102. एक आदमी एक प्रोजेक्ट को पूरा करने में 16 दिन लेता है। एक महिला उसी काम को 12 दिन में करती है। उन्होंने एक के बाद एक दिन में बारी-बारी से काम करना शुरू किया और आदमी ने पहले दिन काम किया था। उन्हें काम पूरा करने में कितना समय लगेगा?",
+    "q_en": "Q102. A man takes 16 days to complete a project. A woman takes 12 days to complete the same work. They work alternately on successive days, with the man working on the first day. How much time will they take to complete the work?",
+    "tag": "SSC CHSL 26/05/2022 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 58/4 दिन", "(b) 55/4 दिन", "(c) 33/4 दिन", "(d) 61/4 दिन"],
+    "o_en": ["(a) 58/4 days", "(b) 55/4 days", "(c) 33/4 days", "(d) 61/4 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q103. A, B और C किसी कार्य को क्रमशः 20, 30 और 60 दिनों में पूरा कर सकते हैं। यदि A को हर तीसरे दिन B और C से मदद मिलती है, तो उसे कार्य पूरा करने में कितने दिन लगेंगे?",
+    "q_en": "Q103. A, B and C can complete a work in 20, 30 and 60 days respectively. If A gets help from B and C every third day, how many days will it take to complete the work?",
+    "tag": "SSC CGL 16/09/2025 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 15 दिन", "(b) 12 दिन", "(c) 10 दिन", "(d) 9 दिन"],
+    "o_en": ["(a) 15 days", "(b) 12 days", "(c) 10 days", "(d) 9 days"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q104. मोहित, नीतू और सोमा एक काम को क्रमशः 5 दिन, 6 दिन और 8 दिन में पूरा कर सकते हैं। यदि वे बारी-बारी से एक दिन छोड़कर काम करते हैं और मोहित पहले दिन काम शुरू करता है, फिर नीतू दूसरे दिन, फिर सोमा तीसरे दिन, फिर मोहित चौथे दिन इसी प्रकार आगे काम करते रहते हैं, तो काम कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q104. Mohit, Neetu and Soma can complete a work in 5, 6 and 8 days respectively. If they work one day each in rotation, with Mohit on day 1, Neetu on day 2, Soma on day 3, and the pattern repeating, in how many days will the work be completed?",
+    "tag": "SSC MTS 14/09/2023 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 5 7/12", "(b) 7 1/60", "(c) 6 1/12", "(d) 4 7/15"],
+    "o_en": ["(a) 5 7/12", "(b) 7 1/60", "(c) 6 1/12", "(d) 4 7/15"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q105. A, B और C अलग-अलग एक कार्य को क्रमशः 20, 25 और 30 दिनों में पूरा कर सकते हैं। यदि A अकेले पहले दिन कार्य करता है, B अकेले दूसरे दिन और C अकेले तीसरे दिन कार्य करता है, और यह क्रम आगे भी चलता है, तो पूरा कार्य कितने दिनों में समाप्त हो जाएगा?",
+    "q_en": "Q105. A, B and C can complete a work separately in 20, 25 and 30 days respectively. If A works alone on the first day, B alone on the second, C alone on the third, and the cycle repeats, in how many days will the whole work be completed?",
+    "tag": "SSC Phase-XI 27/06/2023 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 25 4/15", "(b) 24 1/75", "(c) 25 1/75", "(d) 24 4/15"],
+    "o_en": ["(a) 25 4/15", "(b) 24 1/75", "(c) 25 1/75", "(d) 24 4/15"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q106. तुषार, मेघा, पूनम और ऋचा एक काम को क्रमशः 10 दिन, 12 दिन, 15 दिन और 18 दिन में पूरा कर सकते हैं। यदि उनमें से हर एक बारी-बारी से एक दिन छोड़कर काम करें और मेघा पहले दिन काम शुरू करती है और उसके बाद, पूनम दूसरे दिन, फिर ऋचा तीसरे दिन, फिर तुषार चौथे दिन और फिर मेघा पांचवें दिन इसी प्रकार आगे काम करते रहते हैं, तो काम कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q106. Tushar, Megha, Poonam and Richa can complete a work in 10, 12, 15 and 18 days respectively. If they work one day each in rotation, with Megha on day 1, Poonam on day 2, Richa on day 3, Tushar on day 4 and then Megha again on day 5, in how many days will the work be completed?",
+    "tag": "SSC MTS 05/09/2023 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 12", "(b) 10", "(c) 13", "(d) 14"],
+    "o_en": ["(a) 12", "(b) 10", "(c) 13", "(d) 14"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q107. A किसी काम को 24 दिन में कर सकता है और B इसे 80 दिन में कर सकता है। B दो दिन अकेले कार्य करता है और A तीसरे दिन अकेले कार्य करता है। यह प्रक्रिया काम पूरा होने तक चलती है। कार्य कितने दिन में पूरा होगा?",
+    "q_en": "Q107. A can complete a work in 24 days and B can complete it in 80 days. B works alone for two days and A works alone on the third day. This process continues until the work is completed. In how many days will the work be completed?",
+    "tag": "SSC CHSL 25/05/2022 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 42", "(b) 45", "(c) 48", "(d) 44"],
+    "o_en": ["(a) 42", "(b) 45", "(c) 48", "(d) 44"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q108. A अकेले किसी कार्य को 200 दिनों में पूरा कर सकता है, जबकि B उसी कार्य को अकेले 100 दिनों में पूरा कर सकता है। प्रत्येक तीन दिवसीय चक्र में पहले दिन A और B दोनों काम करते हैं, दूसरे दिन केवल A काम करता है और तीसरे दिन केवल B काम करता है। यह चक्र, कार्य पूरा होने तक जारी रहता है। दोनों मिलकर कार्य को पूरा करने में कितने दिन लेते हैं?",
+    "q_en": "Q108. A alone can complete a work in 200 days, while B alone can complete it in 100 days. In each three-day cycle, both A and B work on the first day, only A on the second, and only B on the third. The cycle repeats until completion. How many days do they take to complete the work?",
+    "tag": "SSC CPO 27/06/2024 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 100 1/3", "(b) 99 2/3", "(c) 100 1/2", "(d) 100"],
+    "o_en": ["(a) 100 1/3", "(b) 99 2/3", "(c) 100 1/2", "(d) 100"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q109. A, B और C एक कार्य को क्रमशः 20 दिन, 30 दिन और 60 दिन में पूरा कर सकते हैं। यदि A प्रतिदिन कार्य करता है, और प्रत्येक तीसरे दिन B और C भी A के साथ कार्य करते हैं, तो कार्य कितने दिनों में पूरा हो जाएगा?",
+    "q_en": "Q109. A, B and C can complete a work in 20, 30 and 60 days respectively. If A works every day, and on every third day B and C also work with A, in how many days will the work be completed?",
+    "tag": "SSC CPO 03/10/2023 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 21 दिन", "(b) 12 दिन", "(c) 18 दिन", "(d) 15 दिन"],
+    "o_en": ["(a) 21 days", "(b) 12 days", "(c) 18 days", "(d) 15 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q110. A, B और C एक काम को क्रमशः 11 दिन, 20 दिन और 55 दिन में कर सकते हैं। यदि A पहले दिन B के साथ कार्य करता है, A दूसरे दिन C के साथ कार्य करता है और इसी तरह कार्य कितनी जल्दी पूरा किया जा सकता है?",
+    "q_en": "Q110. A, B and C can complete a work in 11, 20 and 55 days respectively. If A works with B on the first day, with C on the second day, and so on alternately, how quickly can the work be completed?",
+    "tag": "SSC CPO 05/10/2023 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 9 दिन", "(b) 9 1/2 दिन", "(c) 8 1/2 दिन", "(d) 8 दिन"],
+    "o_en": ["(a) 9 days", "(b) 9 1/2 days", "(c) 8 1/2 days", "(d) 8 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q111. X, Y और Z एक कार्य को क्रमशः 5 दिन, 15 दिन और 30 दिन में पूरा कर सकते हैं। यदि हर दूसरे दिन, Y और Z मिलकर X की सहायता करते हैं, तो कार्य कितने दिन में पूरा किया जा सकता है?",
+    "q_en": "Q111. X, Y and Z can complete a work in 5, 15 and 30 days respectively. If Y and Z together assist X every second day, in how many days can the work be completed?",
+    "tag": "SSC CGL 26/07/2023 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 5 दिन", "(b) 4 दिन", "(c) 7 दिन", "(d) 6 दिन"],
+    "o_en": ["(a) 5 days", "(b) 4 days", "(c) 7 days", "(d) 6 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q112. P, Q और R अकेले कार्य करते हुए किसी कार्य को क्रमशः 5 दिन, 10 दिन और 15 दिन में पूरा कर सकते हैं। P और Q पहले दिन कार्य करते हैं, P और R दूसरे दिन कार्य करते हैं तथा P और Q तीसरे दिन कार्य करते हैं तथा इसी क्रम में कार्य करते हैं जब तक कार्य पूरा नहीं हो जाता। कार्य कितने दिन में पूरा होगा?",
+    "q_en": "Q112. P, Q and R, working alone, can complete a work in 5, 10 and 15 days respectively. P and Q work on the first day, P and R on the second day, P and Q on the third day, and the sequence repeats until the work is finished. In how many days will the work be completed?",
+    "tag": "SSC CGL TIER-II 07/03/2023",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 13/2", "(b) 9/2", "(c) 7/2", "(d) 5/2"],
+    "o_en": ["(a) 13/2", "(b) 9/2", "(c) 7/2", "(d) 5/2"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q113. A, B और C एक कार्य को अलग-अलग क्रमशः 10, 20 और 40 दिन में पूरा कर सकते हैं। यदि A को प्रत्येक तीसरे दिन B और C दोनों द्वारा सहायता प्रदान की जाए तो कार्य कितने दिन में पूरा होगा?",
+    "q_en": "Q113. A, B and C can separately complete a work in 10, 20 and 40 days respectively. If A is assisted by both B and C every third day, in how many days will the work be completed?",
+    "tag": "SSC CGL 01/12/2022 (Shift-02)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 8 2/7", "(b) 9", "(c) 10 2/3", "(d) 6"],
+    "o_en": ["(a) 8 2/7", "(b) 9", "(c) 10 2/3", "(d) 6"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q114. रवि, खुशी और तेजू एक कार्य को क्रमशः 30, 40 और 60 दिन में पूरा कर सकते हैं। यदि खुशी और तेजू दोनों हर तीसरे दिन रवि की सहायता करते हैं, तो रवि कितने दिन में कार्य पूरा कर सकता है?",
+    "q_en": "Q114. Ravi, Khushi and Teju can complete a work in 30, 40 and 60 days respectively. If Khushi and Teju both assist Ravi every third day, in how many days can Ravi complete the work?",
+    "tag": "SSC CGL 03/12/2022 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 550/12 दिन", "(b) 85/4 दिन", "(c) 71/2 दिन", "(d) 360/17 दिन"],
+    "o_en": ["(a) 550/12 days", "(b) 85/4 days", "(c) 71/2 days", "(d) 360/17 days"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q115. A, B और C एक काम क्रमशः 11 दिन, 20 दिन और 55 दिन में पूरा कर सकते हैं। यदि B प्रतिदिन कार्य करता है और A से शुरू करते हुए एकांतर दिनों में उसकी A और C द्वारा सहायता की जाती है, तो काम कितने दिनों में समाप्त हो जाएगा?",
+    "q_en": "Q115. A, B and C can complete a work in 11, 20 and 55 days respectively. If B works every day and is assisted alternately by A and C on alternate days starting with A, in how many days will the work be completed?",
+    "tag": "SSC CGL 06/12/2022 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 10", "(b) 9 1/3", "(c) 12", "(d) 8"],
+    "o_en": ["(a) 10", "(b) 9 1/3", "(c) 12", "(d) 8"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q116. A अकेला एक काम को 11 दिनों में कर सकता है। B अकेला उसी कार्य को 22 दिनों में कर सकता है। C अकेला उसी कार्य को 33 दिनों में कर सकता है। वे निम्नलिखित तरीके से काम करते हैं:<br>दिन 1 : A और B काम करते हैं।<br>दिन 2 : B और C काम करते हैं।<br>दिन 3 : C और A काम करते हैं।<br>दिन 4 : A और B काम करते हैं।<br>और वे इसी तरह आगे भी काम करते हैं। कार्य कितने दिनों में पूरा होगा?",
+    "q_en": "Q116. A alone can complete a work in 11 days, B in 22 days and C in 33 days. They work as follows:<br>Day 1: A and B work.<br>Day 2: B and C work.<br>Day 3: C and A work.<br>Day 4: A and B work.<br>The pattern continues. In how many days will the work be completed?",
+    "tag": "SSC CGL TIER-II 08/08/2022",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 12 दिन", "(b) 3 दिन", "(c) 6 दिन", "(d) 9 दिन"],
+    "o_en": ["(a) 12 days", "(b) 3 days", "(c) 6 days", "(d) 9 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q117. A और B प्रतिदिन 10 घंटे कार्य करते हुए एक कार्य को क्रमशः 24 और 30 दिनों में पूरा करते हैं। कार्य दो पालियों में किया जाना है। सुबह की पाली 6 घंटे की, और शाम की पाली 4 घंटे की है। पहले दिन, A सुबह कार्य करता है, और B शाम को कार्य करता है, और वे प्रतिदिन अपनी पाली परस्पर बदल लेते हैं। कार्य किस दिन पूरा होगा?",
+    "q_en": "Q117. A and B, working 10 hours per day, can complete a work in 24 and 30 days respectively. The work is done in two shifts: a 6-hour morning shift and a 4-hour evening shift. On the first day A works the morning shift and B the evening shift, and they swap shifts each day. On which day will the work be completed?",
+    "tag": "SSC CPO 05/10/2023 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 24 वें दिन", "(b) 27 वें दिन", "(c) 30 वें दिन", "(d) 21 वें दिन"],
+    "o_en": ["(a) 24th day", "(b) 27th day", "(c) 30th day", "(d) 21st day"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q118. R, S और T एक कार्य को क्रमशः 20, 15 और 10 दिनों में पूरा कर सकते हैं। R शुरू से लेकर अंत तक कार्य करता है और S और T एकांतर दिनों में बारी-बारी से कार्य करते हैं, जिसमें T पहले दिन से कार्य शुरू करता है। कार्य कितने दिनों में पूरा होता है?",
+    "q_en": "Q118. R, S and T can complete a work in 20, 15 and 10 days respectively. R works from start to finish, while S and T work on alternate days, with T starting on the first day. In how many days is the work completed?",
+    "tag": "SSC CGL 24/07/2023 (Shift-04)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 61/7", "(b) 50/7", "(c) 52/7", "(d) 54/7"],
+    "o_en": ["(a) 61/7", "(b) 50/7", "(c) 52/7", "(d) 54/7"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q119. A और B समान रूप से कुशल हैं, और यदि कोई भी छुट्टी नहीं लेता है, तो प्रत्येक व्यक्तिगत रूप से 36 दिनों में एक काम पूरा कर सकता है। A और B ने इस काम पर एक साथ काम करना शुरू किया, लेकिन A ने हर पांच दिन के काम के बाद एक दिन की छुट्टी ली, जबकि B ने हर सात दिन के काम के बाद एक दिन की छुट्टी ली। यदि दोनों ने 1 जुलाई 2021 को काम शुरू किया था, तो काम किस तारीख को पूरा हुआ?",
+    "q_en": "Q119. A and B are equally efficient, and if neither takes any leave, each can individually complete the work in 36 days. They start together, but A takes one day off after every five working days, while B takes one day off after every seven working days. If they started on 1 July 2021, on what date was the work completed?",
+    "tag": "SSC CPO 05/10/2023 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 19 जुलाई, 2021", "(b) 20 जुलाई, 2021", "(c) 22 जुलाई, 2021", "(d) 21 जुलाई, 2021"],
+    "o_en": ["(a) 19 July 2021", "(b) 20 July 2021", "(c) 22 July 2021", "(d) 21 July 2021"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q120. A और B समान रूप से कार्य कुशल हैं और यदि किसी ने कोई अवकाश नहीं लिया तो प्रत्येक व्यक्तिगत रूप से 30 दिन में एक कार्य पूरा कर सकता है। A और B ने इस कार्य पर एक साथ कार्य करना शुरू किया, लेकिन A ने हर चार दिन कार्य करने के बाद एक दिन का अवकाश लिया जबकि B पांच दिन कार्य करने के बाद एक दिन का अवकाश लिया। यदि दोनों ने 01 अगस्त 2022 को कार्य करना प्रारंभ किया था तो कार्य किस तिथि को पूर्ण हुआ?",
+    "q_en": "Q120. A and B are equally efficient and, with no leave, each can individually complete a work in 30 days. They start together, but A takes one day off after every four working days, while B takes one day off after every five working days. If they started on 01 August 2022, on what date was the work completed?",
+    "tag": "SSC CGL 18/07/2023 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 19 अगस्त, 2022", "(b) 18 अगस्त, 2022", "(c) 16 अगस्त, 2022", "(d) 17 अगस्त, 2022"],
+    "o_en": ["(a) 19 August 2022", "(b) 18 August 2022", "(c) 16 August 2022", "(d) 17 August 2022"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q121. दो पुरुष A और B, प्रत्येक दिन में 12 घंटे अकेले काम करके किसी काम को 20 दिनों में पूरा कर सकते हैं। काम को पूरा करने के लिए, यह निर्णय लिया गया कि A और B क्रमशः 8 और 6 घंटे प्रति दिन, एकांतर दिनों में, काम करेंगे जिसकी शुरुआत A से होगी। यदि काम को पूरा करने में x दिन और y घंटे लगते हैं तो (x, y) का मान क्या होगा?",
+    "q_en": "Q121. Two men A and B, each working alone for 12 hours per day, can complete a work in 20 days. It is decided that A and B will work on alternate days for 8 and 6 hours per day respectively, starting with A. If the work takes x days and y hours, what is (x, y)?",
+    "tag": "SSC MTS 05/10/2021 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) (34, 4)", "(b) (33, 4)", "(c) (33, 2)", "(d) (34, 2)"],
+    "o_en": ["(a) (34, 4)", "(b) (33, 4)", "(c) (33, 2)", "(d) (34, 2)"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q122. रलेश और विनीत बारी-बारी से एक दिन छोड़कर काम करते हैं और रलेश पहले दिन काम शुरू करता है। संपूर्ण काम 54 3/4 दिनों में पूरा हो जाता है। यदि रलेश अकेले उस काम को 48 दिनों में पूरा कर सकता है तो विनीत अकेले उस काम को कितने दिनों में पूरा कर सकता है?",
+    "q_en": "Q122. Ralesh and Vineet work on alternate days, with Ralesh starting on the first day. The entire work is completed in 54 3/4 days. If Ralesh alone can complete it in 48 days, in how many days can Vineet alone complete it?",
+    "tag": "SSC CHSL TIER-II (18/11/2024)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 62", "(b) 64", "(c) 60", "(d) 66"],
+    "o_en": ["(a) 62", "(b) 64", "(c) 60", "(d) 66"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q123. एक दिन छोड़कर काम करते हुए एक पुरुष और एक महिला एक काम को 15 दिनों में पूरा कर सकते हैं और यदि पुरुष पहले दिन काम शुरू करता है। यदि वे एक दिन छोड़कर काम करते हैं और यदि महिला पहले दिन काम शुरू करती है तो यही काम 14.5 दिनों में पूरा हो जाता है। एक पुरुष अकेले इस काम को ____ दिनों में पूरा करेगा।",
+    "q_en": "Q123. Working on alternate days, a man and a woman can complete a work in 15 days when the man starts on the first day. If instead the woman starts on the first day, the same work is completed in 14.5 days. The man alone will complete the work in ____ days.",
+    "tag": "SSC MTS 08/09/2023 (Shift-01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 22", "(b) 15", "(c) 21", "(d) 25"],
+    "o_en": ["(a) 22", "(b) 15", "(c) 21", "(d) 25"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q124. एक निश्चित कार्य को करने के लिए अजय और भरत एकांतर दिनों में कार्य करते हैं, भरत पहले दिन से कार्य शुरू करता है। अजय 32 दिनों में अकेला कार्य पूरा कर सकता है। यदि कार्य ठीक 8 दिनों में पूरा हो जाता है, तो भरत अकेला उसी कार्य का 7 गुना ____ दिनों में पूरा कर सकता है।",
+    "q_en": "Q124. Ajay and Bharat work on alternate days to complete a certain work, with Bharat starting on the first day. Ajay alone can complete the work in 32 days. If the work is completed in exactly 8 days, Bharat alone can complete seven times the same work in ____ days.",
+    "tag": "SSC CGL 14/07/2023 (Shift-04)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 28/8", "(b) 4", "(c) 32/7", "(d) 32"],
+    "o_en": ["(a) 28/8", "(b) 4", "(c) 32/7", "(d) 32"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q125. एक निश्चित कार्य करने के लिए A और B वैकल्पिक दिन पर कार्य करते हैं, पहले दिन B कार्य शुरू करता है। अकेले A उस कार्य को 24 दिन में कर सकता है। यदि कार्य 11 1/3 दिन में पूरा होता है, तो अकेले B मूल कार्य का 7/9 भाग कितने दिन में पूरा कर सकता है।",
+    "q_en": "Q125. A and B work on alternate days to complete a certain work, with B starting on the first day. A alone can complete the work in 24 days. If the work is completed in 11 1/3 days, in how many days can B alone complete 7/9 of the original work?",
+    "tag": "SSC CGL 13/08/2021 (Shift 01)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 5 1/2 दिन", "(b) 4 दिन", "(c) 4 1/2 दिन", "(d) 6 दिन"],
+    "o_en": ["(a) 5 1/2 days", "(b) 4 days", "(c) 4 1/2 days", "(d) 6 days"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q126. अमन और राजन एक निर्माण स्थल पर काम कर रहे हैं। किसी इंजीनियरिंग प्रयोग में, अमन एक दीवार बना रहा है, जबकि राजन उस दीवार को गिरा रहा है। अमन 15 दिन में पूरी तरह से दीवार बना सकता है, जबकि राजन को दीवार को पूरी तरह गिराने में 20 दिन लगेंगे। यदि वे एकांतर दिन में काम करते हैं, जिसमें अमन पहले दिन काम करता है, तो कितने दिन में पूरी दीवार पहली बार बनाई जाएगी?",
+    "q_en": "Q126. Aman and Rajan are working at a construction site. In an engineering experiment, Aman is building a wall while Rajan is demolishing it. Aman can build the entire wall in 15 days, while Rajan can demolish it completely in 20 days. If they work on alternate days, with Aman working on the first day, after how many days will the complete wall be built for the first time?",
+    "tag": "SSC Phase-XII 21/06/2024 (Shift-03)",
+    "type_tag": "Type III (Based on Alternate Days)",
+    "o_hi": ["(a) 57", "(b) 117", "(c) 113", "(d) 120"],
+    "o_en": ["(a) 57", "(b) 117", "(c) 113", "(d) 120"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }];

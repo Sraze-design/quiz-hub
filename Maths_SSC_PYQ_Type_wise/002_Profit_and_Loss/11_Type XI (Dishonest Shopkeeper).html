@@ -1,0 +1,453 @@
+
+
+const data = [{
+    "q_hi": "Q117. एक बेईमान व्यापारी वस्तुओं को क्रय मूल्य पर बेचने का दावा करता है लेकिन 1 किलोग्राम के बजाय 950 ग्राम के गलत वजन का उपयोग करता है। उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q117. A dishonest trader claims to sell goods at cost price but uses a false weight of 950 grams instead of 1 kilogram. Find his profit percentage.",
+    "tag": "SSC CGL 27/11/2025 (Shift-01) / SSC CPO 28/06/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 4.76%", "(b) 5.26%", "(c) 6.25%", "(d) 7.14%"],
+    "o_en": ["(a) 4.76%", "(b) 5.26%", "(c) 6.25%", "(d) 7.14%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q118. एक फल विक्रेता लागत मूल्य पर 5% की हानि पर सेब बेचता है लेकिन वास्तविक वजन से 20% कम वजन का उपयोग करता है। उसका कुल लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q118. A fruit seller sells apples at a loss of 5% on cost price but uses 20% less than the actual weight. Find his overall profit percentage.",
+    "tag": "SSC CGL 12/09/2025 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 20.62%", "(b) 19.25%", "(c) 16.28%", "(d) 18.75%"],
+    "o_en": ["(a) 20.62%", "(b) 19.25%", "(c) 16.28%", "(d) 18.75%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q119. एक बेईमान व्यापारी अपने माल पर 50% अधिक मूल्य अंकित करता है और फिर उसके अंकित मूल्य पर 20% की छूट देता है। इसके अतिरिक्त, वह एक दोषपूर्ण तराजू का उपयोग करता है जो 900 ग्राम के लिए 1 किग्रा दिखाता है। उसका शुद्ध लाभ प्रतिशत (निकटतम पूर्णांक तक) क्या होगा?",
+    "q_en": "Q119. A dishonest trader marks his goods 50% above cost price and then gives a discount of 20% on the marked price. In addition, he uses a faulty scale that shows 1 kg for 900 grams. What will be his net profit percentage (to the nearest integer)?",
+    "tag": "SSC CGL TIER-II 06/03/2023",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 33%", "(b) 36%", "(c) 27%", "(d) 24%"],
+    "o_en": ["(a) 33%", "(b) 36%", "(c) 27%", "(d) 24%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q120. एक पंसारी लागत मूल्य पर चावल बेचने का दावा करता है, लेकिन 1 किग्रा के लिए 870 ग्राम के नकली वजन का उपयोग करता है। उसका लाभ प्रतिशत (दो दशमलव स्थानों तक सही) ज्ञात कीजिए।",
+    "q_en": "Q120. A grocer claims to sell rice at cost price, but uses a false weight of 870 grams for 1 kg. Find his profit percentage (correct to two decimal places).",
+    "tag": "SSC CGL 09/09/2024 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 15.11%", "(b) 14.94%", "(c) 18.21%", "(d) 11.11%"],
+    "o_en": ["(a) 15.11%", "(b) 14.94%", "(c) 18.21%", "(d) 11.11%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q121. एक बेईमान दुकानदार ₹25/किग्रा की दर से नमक बेचने का दावा करता है। नमक का क्रय मूल्य ₹25/किग्रा है। इससे संतुष्ट नहीं होने पर वह प्रत्येक किग्रा से 200 ग्राम निकालकर मुनाफा कमाने की कोशिश करता है। दुकानदार का लाभ प्रतिशत कितना है?",
+    "q_en": "Q121. A dishonest shopkeeper claims to sell salt at ₹25/kg. The cost price of salt is ₹25/kg. Not satisfied with this, he removes 200 grams from every kilogram to increase his profit. What is the shopkeeper's profit percentage?",
+    "tag": "SSC CGL 09/09/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 15%", "(b) 25%", "(c) 30%", "(d) 20%"],
+    "o_en": ["(a) 15%", "(b) 25%", "(c) 30%", "(d) 20%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q122. एक बेईमान व्यापारी अपने किराने के सामान को वास्तविक बाट से 12% कम बाट का उपयोग करके बेचता है और 10% अधिक मूल्य अंकित करता है। उसका कुल लाभ प्रतिशत ज्ञात करें।",
+    "q_en": "Q122. A dishonest trader sells his grocery goods using a weight 12% less than the actual weight and marks the price 10% higher. Find his overall profit percentage.",
+    "tag": "SSC CGL 11/09/2024 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 10%", "(b) 20%", "(c) 15%", "(d) 25%"],
+    "o_en": ["(a) 10%", "(b) 20%", "(c) 15%", "(d) 25%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q123. एक दुकानदार लागत मूल्य पर 10% लाभ पर सामान बेचने का दावा करता है लेकिन प्रत्येक 1 किलोग्राम के लिए 900 ग्राम का गलत वजन इस्तेमाल करता है। उसका वास्तविक लाभ प्रतिशत क्या है?",
+    "q_en": "Q123. A shopkeeper claims to sell goods at a profit of 10% on cost price but uses a false weight of 900 grams for every 1 kilogram. What is his actual profit percentage?",
+    "tag": "SSC PHASE XIII 28/07/2025 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 20.62%", "(b) 22.22%", "(c) 19.62%", "(d) 21.32%"],
+    "o_en": ["(a) 20.62%", "(b) 22.22%", "(c) 19.62%", "(d) 21.32%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q124. एक बेईमान फल-विक्रेता 20% लाभ पर फल बेचता है लेकिन वह 1 किग्रा के स्थान पर 950 ग्राम बाट का उपयोग करता है। लाभ प्रतिशत क्या है?",
+    "q_en": "Q124. A dishonest fruit seller sells fruit at a profit of 20% but uses a weight of 950 grams instead of 1 kilogram. What is the profit percentage?",
+    "tag": "SSC CGL 13/09/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 500/17%", "(b) 500/19%", "(c) 500/32%", "(d) 700/19%"],
+    "o_en": ["(a) 500/17%", "(b) 500/19%", "(c) 500/32%", "(d) 700/19%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q125. एक विक्रेता ने एक ग्राहक को धोखा देकर एक किग्रा में 20 कुकीज के बजाय 19 कुकीज ₹95 में बेच दी। यदि विक्रेता ने ₹76 में कुकीज खरीदी, तो लाभ (₹ में) क्या होगा?",
+    "q_en": "Q125. A seller cheats a customer by selling 19 cookies instead of 20 cookies for ₹95 per kilogram-equivalent. If the seller bought 20 cookies for ₹76, what is the profit (in ₹)?",
+    "tag": "SSC CGL 18/09/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 28.2", "(b) 26.2", "(c) 22.8", "(d) 25.8"],
+    "o_en": ["(a) 28.2", "(b) 26.2", "(c) 22.8", "(d) 25.8"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q126. एक विक्रेता ने 10 रुपये प्रति किग्रा के हिसाब से सब्जियां बेचना शुरू किया, लेकिन इस दर पर खरीदार नहीं मिला। इसलिए उसने कीमत घटाकर 7.2 रुपये प्रति किग्रा कर दी, लेकिन 1 किग्रा के बजाय 900 ग्राम के दोषपूर्ण वजन का उपयोग किया। वास्तविक मूल्य में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+    "q_en": "Q126. A seller initially tried to sell vegetables at ₹10 per kg, but found no buyer at that rate. He therefore reduced the price to ₹7.2 per kg but used a faulty weight of 900 grams instead of 1 kg. Find the percentage change in the effective price.",
+    "tag": "SSC CGL 19/09/2024 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 10%", "(b) 15%", "(c) 20%", "(d) 25%"],
+    "o_en": ["(a) 10%", "(b) 15%", "(c) 20%", "(d) 25%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q127. एक दुकानदार ₹44 प्रति किग्रा की दर से चावल बेचता है, जिसका क्रय मूल्य ₹40 प्रति किग्रा है। इससे संतुष्ट नहीं होने पर वह हर पैकेट से 200 ग्राम चावल निकालकर अपना लाभ बढ़ाने की कोशिश करता है। दुकानदार के कुल लाभ प्रतिशत की गणना करें।",
+    "q_en": "Q127. A shopkeeper sells rice at ₹44 per kg, while its cost price is ₹40 per kg. Not satisfied with this, he removes 200 grams of rice from every packet to increase his profit. Calculate the shopkeeper's overall profit percentage.",
+    "tag": "SSC CGL 19/09/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 35%", "(b) 37.5%", "(c) 37%", "(d) 35.5%"],
+    "o_en": ["(a) 35%", "(b) 37.5%", "(c) 37%", "(d) 35.5%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q128. एक दुकानदार के 3 किग्रा के वजन (बाट) में 100 ग्राम कम है। उसने उसी गलत वजन (बाट) का उपयोग करके चारू को 3 किग्रा आलू 46 रुपये में बेच दिए। विक्रेता के लिए आलू का क्रय मूल्य 12 रुपये प्रति किग्रा था। उसने आलू पर कितना लाभ (रुपये में) कमाया?",
+    "q_en": "Q128. A shopkeeper's 3 kg weight is 100 grams short. Using this false weight, he sells Charu 3 kg of potatoes for ₹46. The cost price of potatoes for the seller is ₹12 per kg. How much profit (in rupees) did he make?",
+    "tag": "SSC CGL 26/09/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 11.6", "(b) 10.2", "(c) 11.2", "(d) 10"],
+    "o_en": ["(a) 11.6", "(b) 10.2", "(c) 11.2", "(d) 10"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q129. एक दुकानदार चावल खरीदते समय भार में 25% की बेईमानी करता है और बेचते समय 25% की बेईमानी करता है। यदि वह चावल को 12.5% लाभ पर बेचता है, तो उसका निवल लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q129. A shopkeeper cheats by 25% in weight while buying rice and by 25% in weight while selling it. If he sells the rice at a profit of 12.5%, find his net profit percentage.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-04)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 82.5%", "(b) 62.5%", "(c) 87.5%", "(d) 92.5%"],
+    "o_en": ["(a) 82.5%", "(b) 62.5%", "(c) 87.5%", "(d) 92.5%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q130. एक विक्रेता वास्तविक भार वाले भार से 19% कम भार के बाट का उपयोग करके अपना माल बेचता है और 35% का लाभ अर्जित करता है। उसका निवल लाभ प्रतिशत (दशमलव के 2 स्थानों तक सही) क्या है?",
+    "q_en": "Q130. A seller uses a weight that is 19% less than the actual weight and sells his goods at a profit of 35%. What is his net profit percentage (correct to 2 decimal places)?",
+    "tag": "SSC CHSL 10/07/2024 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 66.67%", "(b) 66.33%", "(c) 81.33%", "(d) 81.67%"],
+    "o_en": ["(a) 66.67%", "(b) 66.33%", "(c) 81.33%", "(d) 81.67%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q131. रवि अपने माल को क्रय मूल्य पर 25% की हानि पर बेचता है लेकिन 45% कम भार का उपयोग करता है। उसका लाभ या हानि प्रतिशत क्या है?",
+    "q_en": "Q131. Ravi sells his goods at a loss of 25% on cost price but uses 45% less weight. What is his profit or loss percentage?",
+    "tag": "SSC CHSL 01/07/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) लाभ, 47\\frac{9}{10}%", "(b) हानि, 36\\frac{4}{11}%", "(c) हानि, 47\\frac{9}{10}%", "(d) लाभ, 36\\frac{4}{11}%"],
+    "o_en": ["(a) Profit, 47\\frac{9}{10}%", "(b) Loss, 36\\frac{4}{11}%", "(c) Loss, 47\\frac{9}{10}%", "(d) Profit, 36\\frac{4}{11}%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q132. एक दुकानदार क्रय मूल्य पर 40% की हानि पर माल बेचता है लेकिन 25% कम भार का उपयोग करता है। उसका लाभ या हानि प्रतिशत क्या है?",
+    "q_en": "Q132. A shopkeeper sells goods at a loss of 40% on cost price but uses 25% less weight. What is his profit or loss percentage?",
+    "tag": "SSC CHSL 11/07/2024 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 20% लाभ", "(b) 10% हानि", "(c) 20% हानि", "(d) 10% लाभ"],
+    "o_en": ["(a) 20% profit", "(b) 10% loss", "(c) 20% loss", "(d) 10% profit"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q133. एक बेईमान व्यापारी अपने माल को क्रय मूल्य पर बेचने का दावा करता है, परंतु वह 1 किग्रा के स्थान पर 850 ग्राम के छोटे बाट का उपयोग करता है। उसके लाभ का प्रतिशत ज्ञात कीजिए। (दशमलव के दो स्थानों तक सही)",
+    "q_en": "Q133. A dishonest trader claims to sell his goods at cost price, but uses a short weight of 850 grams instead of 1 kg. Find his profit percentage. (Correct to two decimal places)",
+    "tag": "SSC CHSL 09/07/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 17.65%", "(b) 17.54%", "(c) 17.56%", "(d) 17.45%"],
+    "o_en": ["(a) 17.65%", "(b) 17.54%", "(c) 17.56%", "(d) 17.45%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q134. एक बेईमान डीलर अपने सामान को क्रय मूल्य पर 20% हानि पर बेचता है लेकिन एक दोषपूर्ण वजन का उपयोग करता है जिसका वजन 25% कम होता है। उसका लाभ या हानि प्रतिशत (दो दशमलव स्थानों तक पूर्णांकित) ज्ञात कीजिए।",
+    "q_en": "Q134. A dishonest dealer sells his goods at a loss of 20% on cost price but uses a faulty weight that is 25% short. Find his profit or loss percentage (rounded to two decimal places).",
+    "tag": "SSC CPO 27/06/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 6.67%, हानि", "(b) 3.33%, लाभ", "(c) 3.33%, हानि", "(d) 6.67%, लाभ"],
+    "o_en": ["(a) 6.67% loss", "(b) 3.33% profit", "(c) 3.33% loss", "(d) 6.67% profit"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q135. रमेश ₹36 प्रति किग्रा की दर से चावल बेचता है, जिसे उसने ₹30 प्रति किग्रा की दर से खरीदा था। इसके अतिरिक्त, वह बेचते समय 1 किग्रा की जगह केवल 800 ग्राम चावल देता है। रमेश का वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q135. Ramesh sells rice at ₹36 per kg, which he bought at ₹30 per kg. In addition, while selling he gives only 800 grams instead of 1 kg. Find Ramesh's actual profit percentage.",
+    "tag": "SSC CGL 13/09/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 46%", "(b) 50%", "(c) 48%", "(d) 52%"],
+    "o_en": ["(a) 46%", "(b) 50%", "(c) 48%", "(d) 52%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q136. एक व्यापारी 32% लाभ पर दाल बेचता है और वास्तविक वजन से 20% कम वजन का उपयोग करता है। उसका लाभ प्रतिशत ज्ञात करें।",
+    "q_en": "Q136. A trader sells pulses at a profit of 32% and uses 20% less than the actual weight. Find his profit percentage.",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 65%", "(b) 58%", "(c) 72%", "(d) 62%"],
+    "o_en": ["(a) 65%", "(b) 58%", "(c) 72%", "(d) 62%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q137. एक बेईमान विक्रेता क्रय मूल्य पर 10% हानि पर एक वस्तु बेचता है लेकिन 50 ग्राम के स्थान पर 40 ग्राम का बाट उपयोग करता है। उसके लाभ प्रतिशत की गणना करें।",
+    "q_en": "Q137. A dishonest seller sells an article at a loss of 10% on cost price but uses a 40-gram weight instead of 50 grams. Calculate his profit percentage.",
+    "tag": "SSC CPO 29/06/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 12.5%", "(b) 11.5%", "(c) 10.0%", "(d) 18.4%"],
+    "o_en": ["(a) 12.5%", "(b) 11.5%", "(c) 10.0%", "(d) 18.4%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q138. एक बेईमान डीलर अपने उत्पादों को क्रय मूल्य पर 24% हानि पर बेचने का दावा करता है लेकिन 200 ग्राम वजन के बजाय 100 ग्राम वजन का उपयोग करता है। उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q138. A dishonest dealer claims to sell his products at a loss of 24% on cost price but uses a weight of 100 grams instead of 200 grams. Find his profit percentage.",
+    "tag": "SSC CPO 29/06/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 52%", "(b) 40%", "(c) 48%", "(d) 55%"],
+    "o_en": ["(a) 52%", "(b) 40%", "(c) 48%", "(d) 55%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q139. एक दुकानदार क्रय मूल्य पर 82% की हानि पर बेचता है, लेकिन 28% कम वजन का उपयोग करता है। उसका निवल लाभ या हानि क्या है?",
+    "q_en": "Q139. A shopkeeper sells at a loss of 82% on cost price but uses 28% less weight. What is his net profit or loss?",
+    "tag": "SSC Phase-XII 21/06/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 54% हानि", "(b) 54% लाभ", "(c) 75% लाभ", "(d) 75% हानि"],
+    "o_en": ["(a) 54% loss", "(b) 54% profit", "(c) 75% profit", "(d) 75% loss"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q140. एक दुकानदार ने मूंगफली को 64 रुपये किग्रा में खरीदा और 80 रुपये किग्रा पर बेचा। बेचते समय वह गलत बाटों का उपयोग करता है और 1 किग्रा के स्थान पर 800 ग्राम देता है। उसका वास्तविक लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q140. A shopkeeper buys groundnuts at ₹64 per kg and sells them at ₹80 per kg. While selling, he uses false weights and gives 800 grams instead of 1 kg. Find his actual profit percentage.",
+    "tag": "SSC Phase-XII 24/06/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 32.25%", "(b) 28.75%", "(c) 36.65%", "(d) 56.25%"],
+    "o_en": ["(a) 32.25%", "(b) 28.75%", "(c) 36.65%", "(d) 56.25%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q141. एक बेईमान व्यापारी क्रय मूल्य पर अनाज बेचने का दावा करता है, लेकिन वह 1 किग्रा की जगह 925 ग्राम तौलने वाले बाट का उपयोग करता है। उसका लाभ प्रतिशत ज्ञात करें। (दशमलव के दो स्थानों तक पूर्णांकित)",
+    "q_en": "Q141. A dishonest trader claims to sell grain at cost price, but uses a weight that measures 925 grams instead of 1 kg. Find his profit percentage. (Rounded to two decimal places)",
+    "tag": "SSC Phase-XII 26/06/2024 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 8.11%", "(b) 7.75%", "(c) 8.50%", "(d) 7.50%"],
+    "o_en": ["(a) 8.11%", "(b) 7.75%", "(c) 8.50%", "(d) 7.50%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q142. एक बेईमान दुकानदार एक ग्राहक को क्रय मूल्य के ऊपर T% के लाभ पर सामान बेचता है और साथ ही 1 किग्रा के स्थान पर वह 800 ग्राम तौलता है। उसका कुल लाभ प्रतिशत 40% है। T का मान कितना है?",
+    "q_en": "Q142. A dishonest shopkeeper sells goods to a customer at a profit of T% above cost price and at the same time weighs 800 grams instead of 1 kg. His overall profit percentage is 40%. What is T?",
+    "tag": "SSC CGL 08/02/2023 (Shift-04)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 40", "(b) 24", "(c) 10", "(d) 12"],
+    "o_en": ["(a) 40", "(b) 24", "(c) 10", "(d) 12"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q143. एक दुकानदार 450 किग्रा चावल को 40 रुपये प्रति किग्रा के क्रय मूल्य पर बेचने का दावा करता है, लेकिन एक किग्रा वजन के बजाय 900 ग्राम वजन का उपयोग करता है। यदि वह बचे हुए चावल को ब्लैक मार्केट में बेचकर 2,520 रुपये का लाभ अर्जित करता है। प्रति किग्रा चावल के ब्लैक मार्केट मूल्य का अनुपात क्या है?",
+    "q_en": "Q143. A shopkeeper claims to sell 450 kg of rice at its cost price of ₹40 per kg, but uses 900 grams instead of a 1 kg weight. If he earns a profit of ₹2,520 by selling the rice left over in the black market, what is the required ratio involving the black-market price per kg?",
+    "tag": "SSC Phase-XII 25/06/2024 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 9 : 4", "(b) 4 : 3", "(c) 10 : 7", "(d) 7 : 5"],
+    "o_en": ["(a) 9 : 4", "(b) 4 : 3", "(c) 10 : 7", "(d) 7 : 5"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q144. एक दुकानदार आमतौर पर एक निश्चित लेन-देन में 20% का लाभ कमाता है। वजन तौलने की मशीन में गड़बड़ी के कारण वह 1 किग्रा की जगह 900 ग्राम तौलता है। यदि वह सामान्य मूल्य से 15% कम शुल्क लेता है, तो उसका वास्तविक लाभ या हानि प्रतिशत कितना है?",
+    "q_en": "Q144. A shopkeeper normally earns a profit of 20% on a certain transaction. Due to a faulty weighing machine he weighs 900 grams instead of 1 kg. If he charges 15% less than the normal price, what is his actual profit or loss percentage?",
+    "tag": "SSC Phase-XII 25/06/2024 (Shift-04)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 18.33% लाभ", "(b) 13.33% लाभ", "(c) 13.33% हानि", "(d) 18.00% हानि"],
+    "o_en": ["(a) 18.33% profit", "(b) 13.33% profit", "(c) 13.33% loss", "(d) 18.00% loss"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q145. सोहन क्रय मूल्य पर चीनी बेचता है लेकिन वह खराब बाटों का प्रयोग करता है और इस प्रकार 28% का लाभ अर्जित करता है। वह 3.2 किग्रा चीनी के बदले कितनी (ग्राम) चीनी दे रहा है?",
+    "q_en": "Q145. Sohan sells sugar at cost price but uses false weights and thereby earns a profit of 28%. How many grams of sugar is he actually giving instead of 3.2 kg?",
+    "tag": "SSC CHSL TIER-II 10/01/2024",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 1900", "(b) 1500", "(c) 2500", "(d) 2200"],
+    "o_en": ["(a) 1900", "(b) 1500", "(c) 2500", "(d) 2200"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q146. एक बेईमान दुकानदार क्रय मूल्य पर चावल बेचता है लेकिन दोषपूर्ण बाटों का प्रयोग करके 25% लाभ अर्जित करता है। उसने अधिक ग्राहकों को आकर्षित करने के लिए छूट देने का निर्णय लिया। 10% लाभ अर्जित करने के लिए उसे कितने प्रतिशत की छूट देनी चाहिए?",
+    "q_en": "Q146. A dishonest shopkeeper sells rice at cost price but earns a profit of 25% by using faulty weights. He decides to offer a discount to attract more customers. What percentage discount should he give in order to earn a profit of 10%?",
+    "tag": "SSC CHSL TIER-II 02/11/2023",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 9%", "(b) 11%", "(c) 10%", "(d) 12%"],
+    "o_en": ["(a) 9%", "(b) 11%", "(c) 10%", "(d) 12%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q147. B ने एक थोक विक्रेता से 180 रुपये प्रति किग्रा की दर से 15 किग्रा सेब खरीदे, जो एक किग्रा वजन के लिए 950 ग्राम के वजन का उपयोग करता है। B इन सभी सेबों को 180 रुपये प्रति किग्रा की दर से बेचता है, लेकिन एक किग्रा वजन के लिए 750 ग्राम के वजन का उपयोग किया। इस लेन-देन में B द्वारा अर्जित लाभ प्रतिशत (दो दशमलव स्थानों तक शुद्ध) ज्ञात कीजिए।",
+    "q_en": "Q147. B bought 15 kg of apples from a wholesaler at ₹180 per kg, where the wholesaler used a 950-gram weight for 1 kg. B sold all these apples at ₹180 per kg but used a 750-gram weight for 1 kg. Find B's profit percentage in the transaction (to two decimal places).",
+    "tag": "SSC CGL TIER-II 26/10/2023",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 25.75%", "(b) 26.67%", "(c) 22.55%", "(d) 33.33%"],
+    "o_en": ["(a) 25.75%", "(b) 26.67%", "(c) 22.55%", "(d) 33.33%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q148. दालों का लागत मूल्य बिक्री मूल्य से 12% कम है। खराब तौल मशीन का उपयोग कर दुकानदार 25% लाभ कमा पाता है। दोषपूर्ण मशीन कितना प्रतिशत वास्तविक वजन की तुलना में अधिक वजन दिखाता है (निकटतम पूर्णांक तक पूर्णांकित)?",
+    "q_en": "Q148. The cost price of pulses is 12% less than the selling price. By using a faulty weighing machine, the shopkeeper earns a profit of 25%. By what percentage does the faulty machine show more weight than the actual weight (rounded to the nearest integer)?",
+    "tag": "SSC CPO 04/10/2023 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 10%", "(b) 14%", "(c) 13%", "(d) 15%"],
+    "o_en": ["(a) 10%", "(b) 14%", "(c) 13%", "(d) 15%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q149. एक दुकानदार 40 रुपये प्रति किलोग्राम पर चीनी बेचता है, जिसे उसने 36 रुपये प्रति किलोग्राम पर खरीदा। उसकी वजन मापने की मशीन खराब है और बेचते समय उसका वजन केवल 800 ग्राम था। उसका प्रतिशत लाभ (दशमलव 2 स्थानों तक सही) है:",
+    "q_en": "Q149. A shopkeeper sells sugar at ₹40 per kg, which he bought at ₹36 per kg. His weighing machine is faulty and while selling, the weight delivered is only 800 grams. His profit percentage (correct to 2 decimal places) is:",
+    "tag": "SSC CPO 05/10/2023 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 40%", "(b) 37.58%", "(c) 38.89%", "(d) 39.28%"],
+    "o_en": ["(a) 40%", "(b) 37.58%", "(c) 38.89%", "(d) 39.28%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q150. एक बेईमान दुकानदार लागत मूल्य पर अनाज बेचने का दावा करता है, लेकिन वह 1 किलो वजन के स्थान पर 920 ग्राम वजन का उपयोग करता है। उसका लाभ प्रतिशत ज्ञात करें (दशमलव के दो स्थानों तक पूर्णांकित करें)।",
+    "q_en": "Q150. A dishonest shopkeeper claims to sell grain at cost price, but uses a weight of 920 grams instead of 1 kg. Find his profit percentage (rounded to two decimal places).",
+    "tag": "SSC CHSL 02/08/2023 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 7.90%", "(b) 8.70%", "(c) 8.50%", "(d) 7.80%"],
+    "o_en": ["(a) 7.90%", "(b) 8.70%", "(c) 8.50%", "(d) 7.80%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q151. एक दर्जी एक थोक व्यापारी से अस्तर के कपड़े खरीदता है और माप टेप का उपयोग करके उसे धोखा देता है जो सामान्य टेप से 5 सेमी लंबा होता है। दर्जी विभिन्न परिधान सिलते समय ग्राहक को लागत मूल्य पर ऑफर देता है और माप टेप का उपयोग करता है जो सामान्य टेप से 5 सेमी छोटा होता है। लाभ प्रतिशत क्या है?",
+    "q_en": "Q151. A tailor buys lining cloth from a wholesaler and cheats him by using a measuring tape that is 5 cm longer than a normal tape. While stitching garments, the tailor offers the cloth to customers at cost price but uses a tape that is 5 cm shorter than a normal tape. What is the profit percentage?",
+    "tag": "SSC CHSL 03/08/2023 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 15%", "(b) 10\\frac{10}{25}%", "(c) 10%", "(d) 10\\frac{10}{19}%"],
+    "o_en": ["(a) 15%", "(b) 10\\frac{10}{25}%", "(c) 10%", "(d) 10\\frac{10}{19}%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q152. एक आदमी 8% लाभ पर चावल बेचता है और वास्तविक माप से 25% कम वजन का उपयोग करता है। उसका प्रतिशत लाभ क्या है?",
+    "q_en": "Q152. A man sells rice at a profit of 8% and uses 25% less weight than the actual measure. What is his profit percentage?",
+    "tag": "SSC CHSL 09/08/2023 (Shift-04)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 44%", "(b) 41%", "(c) 23%", "(d) 36%"],
+    "o_en": ["(a) 44%", "(b) 41%", "(c) 23%", "(d) 36%"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q153. एक दुकानदार एक वस्तु का 1 किग्रा के स्थान पर 930 ग्राम का गलत तौल करता है और उसके क्रय मूल्य पर बेच देता है। 15 किग्रा वस्तु बेचने पर उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q153. A shopkeeper gives 930 grams instead of 1 kg of an article and sells it at its cost price. Find his profit percentage on selling 15 kg of the article.",
+    "tag": "SSC CHSL 11/08/2023 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 8\\frac{79}{93}%", "(b) 5\\frac{21}{93}%", "(c) 7\\frac{49}{93}%", "(d) 6\\frac{19}{93}%"],
+    "o_en": ["(a) 8\\frac{79}{93}%", "(b) 5\\frac{21}{93}%", "(c) 7\\frac{49}{93}%", "(d) 6\\frac{19}{93}%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q154. एक दुकानदार एक किग्रा वजन के स्थान पर 940 ग्राम वजन का उपयोग करता है। इस वजन का उपयोग करके वह माल 4% लाभ पर बेचता है। वास्तविक लाभ प्रतिशत क्या होगा? (दो दशमलव स्थान तक पूर्णांकित)",
+    "q_en": "Q154. A shopkeeper uses a weight of 940 grams instead of 1 kg. Using this weight, he sells the goods at a profit of 4%. What will be the actual profit percentage? (Rounded to two decimal places)",
+    "tag": "SSC CGL 14/07/2023 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 9.25%", "(b) 10.32%", "(c) 10.64%", "(d) 10.96%"],
+    "o_en": ["(a) 9.25%", "(b) 10.32%", "(c) 10.64%", "(d) 10.96%"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q155. चावल का क्रय मूल्य और विक्रय मूल्य समान है। तौलने की मशीन में खराबी के कारण विक्रेता को 15% का लाभ होता है। यदि 1000 ग्राम चावल का क्रय मूल्य x रुपये है और मशीन को बदल दिया जाता है, जो 950 ग्राम के बजाय 1000 ग्राम दिखाती है, तो समान लाभ प्रतिशत प्राप्त करने के लिए अब विक्रय मूल्य (रुपये में) क्या होना चाहिए?",
+    "q_en": "Q155. The cost price and selling price of rice are the same. Due to a faulty weighing machine, the seller earns a profit of 15%. If the cost price of 1000 grams of rice is x rupees and the machine is replaced by one that shows 1000 grams instead of 950 grams, what should the new selling price (in rupees) be to earn the same profit percentage?",
+    "tag": "SSC CGL 20/07/2023 (Shift-04)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 1.0295x", "(b) 1.0259x", "(c) 1.0925x", "(d) 1.0950x"],
+    "o_en": ["(a) 1.0295x", "(b) 1.0259x", "(c) 1.0925x", "(d) 1.0950x"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q156. R की तौल मशीन 400 ग्राम भार दिखाती है जबकि वास्तविक भार 350 ग्राम होता है। बादाम का क्रय मूल्य 880 रुपये प्रति किग्रा है और खराब मशीन से 200 ग्राम के पैकेट बनाए जाते हैं। 25% का लाभ प्राप्त करने के लिए प्रत्येक पैकेट का विक्रय मूल्य (रुपये में) क्या होना चाहिए?",
+    "q_en": "Q156. R's weighing machine shows 400 grams when the actual weight is 350 grams. The cost price of almonds is ₹880 per kg and 200-gram packets are made using the faulty machine. What should be the selling price (in rupees) of each packet to earn a profit of 25%?",
+    "tag": "SSC CGL 26/07/2023 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 197.50", "(b) 175.50", "(c) 182.50", "(d) 192.50"],
+    "o_en": ["(a) 197.50", "(b) 175.50", "(c) 182.50", "(d) 192.50"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q157. एक बेईमान व्यापारी किसी वस्तु को क्रय मूल्य से 15% हानि पर बेचता है, लेकिन 25 ग्राम के स्थान पर 20 ग्राम वजन का उपयोग करता है। उसका लाभ या हानि प्रतिशत क्या होगा?",
+    "q_en": "Q157. A dishonest trader sells an article at a loss of 15% on the cost price but uses a 20-gram weight instead of 25 grams. What will be his profit or loss percentage?",
+    "tag": "SSC CGL 27/07/2023 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 6.25% लाभ", "(b) 6.50% लाभ", "(c) 7.55% हानि", "(d) 5.25% हानि"],
+    "o_en": ["(a) 6.25% profit", "(b) 6.50% profit", "(c) 7.55% loss", "(d) 5.25% loss"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q158. एक किराने की दुकान में समर्थ ने एक ग्राहक को 1 किग्रा के स्थान पर 950 ग्राम शक्कर 54 रुपये में बेची। 1 किग्रा शक्कर का क्रय मूल्य 36 रुपये है। उसने शक्कर को बेचने पर कितना लाभ (रुपये में) कमाया?",
+    "q_en": "Q158. At a grocery shop, Samarth sold a customer 950 grams of sugar instead of 1 kg for ₹54. The cost price of 1 kg sugar is ₹36. How much profit (in rupees) did he earn on selling the sugar?",
+    "tag": "SSC Phase-XI 30/06/2023 (Shift-04)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 16.2", "(b) 18.7", "(c) 20.2", "(d) 19.8"],
+    "o_en": ["(a) 16.2", "(b) 18.7", "(c) 20.2", "(d) 19.8"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q159. एक व्यवसायी सामग्री खरीदते और बेचते समय, हर बार 12% दोषपूर्ण बाटों का उपयोग करके धोखा देता है। केवल दोषपूर्ण बाटों का उपयोग करके उसके लाभ प्रतिशत में कितनी वृद्धि हुई है?",
+    "q_en": "Q159. A businessman cheats while buying and selling goods by using faulty weights of 12% each time. By how much does his profit percentage increase solely due to the use of faulty weights?",
+    "tag": "SSC CGL 05/12/2022 (Shift-03)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 22%", "(b) 25.44%", "(c) 24%", "(d) 26.32%"],
+    "o_en": ["(a) 22%", "(b) 25.44%", "(c) 24%", "(d) 26.32%"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q160. एक दुकानदार द्वारा अपने सामान को तौलने के लिए एक दोषपूर्ण तराजू का उपयोग किया जाता है, जो 900 ग्राम भार को 1 किग्रा दर्शाता है, साथ ही दुकानदार अपने सामान का मूल्य 10% बढ़ाकर अंकित करता है, लेकिन दुर्भाग्य से वह मापिकी विभाग द्वारा पकड़ लिया जाता है, जिसके बाद उसे तराजू को ठीक करने के बाद दंडस्वरूप एक महीने तक क्रय मूल्य पर 10% की छूट देते हुए सामान बेचने का आदेश दिया जाता है। यदि प्रत्येक ग्राहक अब 1 किग्रा के लिए 20 रुपये का भुगतान कर रहा है तो छापे से पहले समान मात्रा के लिए कितनी धनराशि का भुगतान कर रहे थे? (दशमलव के दो स्थान तक पूर्णांकित)",
+    "q_en": "Q160. A shopkeeper uses a faulty scale that shows 900 grams as 1 kg and also marks his goods 10% above cost price. He is caught by the weights and measures department and, after the scale is corrected, is ordered as a penalty to sell for one month at a 10% discount on cost price. If each customer is now paying ₹20 for 1 kg, how much were they paying for the same quantity before the raid? (Rounded to two decimal places)",
+    "tag": "SSC CPO 09/11/2022 (Shift-01)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) ₹27.16", "(b) ₹27.84", "(c) ₹28.05", "(d) ₹28.15"],
+    "o_en": ["(a) ₹27.16", "(b) ₹27.84", "(c) ₹28.05", "(d) ₹28.15"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q161. एक दुकानदार अपनी वस्तुओं को एक दोषपूर्ण तराजू का उपयोग करके बेचता है जो 25% कम तौलता है। फिर वह अपनी वस्तुओं पर क्रय मूल्य से 15% अधिक मूल्य अंकित करता है। यदि वह 10% की छूट भी देता है, तो 1 किग्रा वस्तुओं पर उसका शुद्ध लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q161. A shopkeeper sells his goods using a faulty scale that weighs 25% less. He then marks his goods 15% above the cost price. If he also gives a discount of 10%, find his net profit percentage on 1 kg of goods.",
+    "tag": "SSC CPO 10/11/2022 (Shift-02)",
+    "type_tag": "Type XI (Dishonest Shopkeeper)",
+    "o_hi": ["(a) 32%", "(b) 41%", "(c) 44%", "(d) 38%"],
+    "o_en": ["(a) 32%", "(b) 41%", "(c) 44%", "(d) 38%"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }];

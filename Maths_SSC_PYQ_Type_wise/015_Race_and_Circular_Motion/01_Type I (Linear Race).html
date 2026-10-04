@@ -1,0 +1,393 @@
+
+
+const data = [{
+    "q_hi": "Q1. 100 मीटर की दौड़ में, A, B को 20 मीटर से हराता है और B, C को 5 मीटर से हराता है। उसी दौड़ में, वह दूरी ज्ञात कीजिए जिससे A, C को हराता है।",
+    "q_en": "Q1. In a 100 m race, A beats B by 20 m and B beats C by 5 m. In the same race, find the distance by which A beats C.",
+    "tag": "SSC CHSL 04/07/2024 (Shift-05)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 22 मीटर", "(b) 24 मीटर", "(c) 26 मीटर", "(d) 25 मीटर"],
+    "o_en": ["(a) 22 m", "(b) 24 m", "(c) 26 m", "(d) 25 m"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q2. 1500 मीटर की दौड़ में, अनिल ने बकुल को 150 मीटर से हराया और उसी दौड़ में बकुल ने चार्ल्स को 75 मीटर से हराया। अनिल ने चार्ल्स को कितनी दूरी से हराया है?",
+    "q_en": "Q2. In a 1500 m race, Anil beats Bakul by 150 m and in the same race Bakul beats Charles by 75 m. By how much does Anil beat Charles?",
+    "tag": "SSC CGL 01/12/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 217.50 मी", "(b) 200.15 मी", "(c) 293.50 मी", "(d) 313.75 मी"],
+    "o_en": ["(a) 217.50 m", "(b) 200.15 m", "(c) 293.50 m", "(d) 313.75 m"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q3. 1500 मीटर की दौड़ में, अगर A, B को 100 मीटर से हराता है और B, C को 150 मीटर से हराता है, तो A, C को कितनी दूरी (मीटर में) से हराएगा?",
+    "q_en": "Q3. In a 1500 m race, if A beats B by 100 m and B beats C by 150 m, by how many metres will A beat C?",
+    "tag": "SSC CHSL 03/06/2022 (Shift-2)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 140", "(b) 150", "(c) 100", "(d) 240"],
+    "o_en": ["(a) 140", "(b) 150", "(c) 100", "(d) 240"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q4. 500 मीटर की एक रेखीय दौड़ में, A, B को 50 मीटर से हरा सकता है और 600 मीटर की दौड़ में B, C को 60 मीटर से हरा सकता है। 400 मीटर की दौड़ में A, C को कितने मीटर से हराएगा?",
+    "q_en": "Q4. In a 500 m linear race, A can beat B by 50 m, and in a 600 m race B can beat C by 60 m. In a 400 m race, by how many metres will A beat C?",
+    "tag": "SSC CGL 08/12/2022 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 70", "(b) 68", "(c) 76", "(d) 72"],
+    "o_en": ["(a) 70", "(b) 68", "(c) 76", "(d) 72"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q5. 1500 मी. की दौड़ में, X, Y को 100 मी. से और Z को 240 मी. से हराता है। उसी दौड़ में Y, Z को कितनी दूरी से हराएगा?",
+    "q_en": "Q5. In a 1500 m race, X beats Y by 100 m and Z by 240 m. In the same race, by how much will Y beat Z?",
+    "tag": "SSC CGL 18/07/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 160 मी.", "(b) 140 मी.", "(c) 150 मी.", "(d) 200 मी."],
+    "o_en": ["(a) 160 m", "(b) 140 m", "(c) 150 m", "(d) 200 m"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q6. 1000 मीटर की एक रेखीय दौड़ में, प्रकाश ने वेद को 280 मीटर से हराया, जबकि वेद ने राहुल को 100 मीटर से हराया। उसी दौड़ में प्रकाश ने राहुल को कितने मीटर से हराया?",
+    "q_en": "Q6. In a 1000 m linear race, Prakash beats Ved by 280 m, while Ved beats Rahul by 100 m. By how many metres does Prakash beat Rahul in the same race?",
+    "tag": "SSC CHSL 08/08/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 376", "(b) 350", "(c) 352", "(d) 348"],
+    "o_en": ["(a) 376", "(b) 350", "(c) 352", "(d) 348"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q7. 1400 मीटर की दौड़ में जॉन 1 मिनट 6 सेकण्ड में अंत बिंदु तक पहुँचता है, जबकि जेम्स 77 सेकण्ड में अंत बिंदु तक पहुँचता है। जॉन, जेम्स को कितनी दूरी से हराता है?",
+    "q_en": "Q7. In a 1400 m race, John reaches the finish in 1 minute 6 seconds, while James reaches it in 77 seconds. By how much does John beat James?",
+    "tag": "SSC PHASE-X 03/08/2022 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 240 मी", "(b) 220 मी", "(c) 180 मी", "(d) 200 मी"],
+    "o_en": ["(a) 240 m", "(b) 220 m", "(c) 180 m", "(d) 200 m"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q8. 1170 मीटर की दौड़ में, रमन 65 सेकंड में अंतिम बिंदु पर पहुंचता है और मोहन 90 सेकंड में अंतिम बिंदु पर पहुंचता है। रमन, मोहन को कितनी दूरी से हराता है?",
+    "q_en": "Q8. In a 1170 m race, Raman reaches the finish in 65 seconds and Mohan in 90 seconds. By how much does Raman beat Mohan?",
+    "tag": "SSC CGL 19/07/2023 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 325 मी.", "(b) 300 मी.", "(c) 375 मी.", "(d) 350 मी."],
+    "o_en": ["(a) 325 m", "(b) 300 m", "(c) 375 m", "(d) 350 m"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q9. 1200 मीटर की दौड़ में, राकेश 36 सेकंड में अंतिम बिंदु पर पहुंचता है और राजेश 40 सेकंड में पहुंचता है। राकेश ने राजेश को कितनी दूरी से हराया?",
+    "q_en": "Q9. In a 1200 m race, Rakesh reaches the finish in 36 seconds and Rajesh in 40 seconds. By how much does Rakesh beat Rajesh?",
+    "tag": "SSC CPO 05/10/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 150 मी", "(b) 140 मी", "(c) 130 मी", "(d) 120 मी"],
+    "o_en": ["(a) 150 m", "(b) 140 m", "(c) 130 m", "(d) 120 m"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q10. 1610 मीटर की दौड़ में अमरजीत 91 सेकंड में अंतिम बिंदु पर पहुंचता है और दिनेश 115 सेकंड में अंतिम बिंदु पर पहुंचता है। अमरजीत, दिनेश को कितनी दूरी से हराता है?",
+    "q_en": "Q10. In a 1610 m race, Amarjeet reaches the finish in 91 seconds and Dinesh in 115 seconds. By how much does Amarjeet beat Dinesh?",
+    "tag": "SSC Phase-XI 30/06/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 326 मी", "(b) 340 मी", "(c) 336 मी", "(d) 330 मी"],
+    "o_en": ["(a) 326 m", "(b) 340 m", "(c) 336 m", "(d) 330 m"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q11. 250 मी की दूरी तय करने में A को 25 सेकंड का समय लगता है जबकि उतनी ही दूरी तय करने में B को 30 सेकंड का समय लगता है। एक किमी की दौड़ में A, B को कितने मीटर की बढ़त दे जिससे दौड़ टाई हो जाए।",
+    "q_en": "Q11. A takes 25 seconds to cover 250 m, while B takes 30 seconds for the same distance. In a 1 km race, what head start should A give B so that the race ends in a tie?",
+    "tag": "SSC CPO 11/11/2022 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 169.53 मी", "(b) 173.82 मी", "(c) 166.67 मी", "(d) 186.34 मी"],
+    "o_en": ["(a) 169.53 m", "(b) 173.82 m", "(c) 166.67 m", "(d) 186.34 m"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q12. 2 किमी की रैखिक दौड़ में, यदि P, 200 सेकंड में और Q 220 सेकंड में दौड़ पूरी करता है, तो P, Q को कितनी दूरी से हराता है? (दो दशमलव स्थानों तक पूर्णांकित)",
+    "q_en": "Q12. In a 2 km linear race, if P completes the race in 200 seconds and Q in 220 seconds, by how much does P beat Q?",
+    "tag": "SSC CHSL 09/07/2024 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 167 6/11 मीटर", "(b) 173 7/11 मीटर", "(c) 191 7/11 मीटर", "(d) 181 9/11 मीटर"],
+    "o_en": ["(a) 167 6/11 m", "(b) 173 7/11 m", "(c) 191 7/11 m", "(d) 181 9/11 m"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q13. रीमा, रेखा से 5/4 गुना तेज दौड़ती है। इसे देखते हुए रीमा एक मैत्रीपूर्ण रेस प्रतियोगिता में रेखा को 50 मीटर की बढ़त देती है। प्रारंभिक बिंदु से उस स्थान की दूरी ज्ञात कीजिए जहाँ रीमा और रेखा दोनों मिलेंगी?",
+    "q_en": "Q13. Reema runs 5/4 times as fast as Rekha. Reema gives Rekha a 50 m head start in a friendly race. Find the distance from the starting point where Reema and Rekha meet.",
+    "tag": "SSC CPO 03/10/2023 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 200 मी", "(b) 225 मी", "(c) 240 मी", "(d) 250 मी"],
+    "o_en": ["(a) 200 m", "(b) 225 m", "(c) 240 m", "(d) 250 m"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q14. दो धावक क्रमशः 100 मीटर/मिनट तथा 120 मीटर/मिनट की चाल से दौड़ते हैं। यदि दूसरे धावक को पहले धावक की तुलना में दौड़ पूरी करने में 10 मिनट कम लगते हैं, तो दौड़ की लंबाई कितनी है?",
+    "q_en": "Q14. Two runners run at 100 m/min and 120 m/min respectively. If the second runner takes 10 minutes less than the first to complete the race, what is the race length?",
+    "tag": "SSC CGL 03/03/2020 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 6 किमी", "(b) 4 किमी", "(c) 1 किमी", "(d) 2 किमी"],
+    "o_en": ["(a) 6 km", "(b) 4 km", "(c) 1 km", "(d) 2 km"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q15. राकेश, मुकेश से 4/3 गुना तेज दौड़ता है। एक दौड़ में, यदि राकेश, मुकेश को 60 मीटर की बढ़त देता है, तो प्रारंभिक बिंदु से वह दूरी ज्ञात कीजिए जहाँ वे दोनों मिलेंगे?",
+    "q_en": "Q15. Rakesh runs 4/3 times as fast as Mukesh. If Rakesh gives Mukesh a 60 m head start, find the distance from the starting point where they meet.",
+    "tag": "SSC CHSL 25/05/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 232 मी", "(b) 240 मी", "(c) 264 मी", "(d) 255 मी"],
+    "o_en": ["(a) 232 m", "(b) 240 m", "(c) 264 m", "(d) 255 m"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q16. अशोक, भरत से 2 2/3 गुना तेज दौड़ता है। यदि अशोक, भरत को 160 मीटर की प्रारंभिक बढ़त देता है, तो लक्ष्य स्तंभ कितना दूर होना चाहिए, ताकि अशोक और भरत एक ही समय में उस तक पहुंच सकें?",
+    "q_en": "Q16. Ashok runs 2 2/3 times as fast as Bharat. If Ashok gives Bharat a 160 m head start, how far should the winning post be so that both reach it at the same time?",
+    "tag": "SSC CGL 19/07/2023 (Shift-04)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 225 मी", "(b) 256 मी", "(c) 240 मी", "(d) 200 मी"],
+    "o_en": ["(a) 225 m", "(b) 256 m", "(c) 240 m", "(d) 200 m"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q17. 800 मीटर की एक दौड़ में, दो प्रतियोगियों अंकुर और नेहा की चाल का अनुपात 5 : 6 है। यदि अंकुर को 200 मीटर की बढ़त दी जाती है, तो अंकुर कितने मीटर से जीत जाएगा?",
+    "q_en": "Q17. In an 800 m race, the speed ratio of Ankur and Neha is 5:6. If Ankur is given a 200 m head start, by how many metres will Ankur win?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 89 मीटर", "(b) 80 मीटर", "(c) 76 मीटर", "(d) 69 मीटर"],
+    "o_en": ["(a) 89 m", "(b) 80 m", "(c) 76 m", "(d) 69 m"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q18. गीता, बबीता से 5/2 गुना तेज दौड़ती है। एक दौड़ में, यदि गीता, बबीता को 40 मीटर की बढ़त देती है, तो प्रारंभिक बिंदु से उस बिंदु तक की दूरी ज्ञात कीजिए जहाँ वे दोनों मिलेंगे।",
+    "q_en": "Q18. Geeta runs 5/2 times as fast as Babita. If Geeta gives Babita a 40 m head start, find the distance from the starting point to where they meet.",
+    "tag": "SSC CPO 10/11/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 66.67 मी", "(b) 65 मी", "(c) 65.33 मी", "(d) 66 मी"],
+    "o_en": ["(a) 66.67 m", "(b) 65 m", "(c) 65.33 m", "(d) 66 m"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q19. P, Q को 400 मीटर की दौड़ में 2 सेकंड की शुरुआत (हेड स्टार्ट) देता है, लेकिन दोनों एक ही समय में दौड़ पूरी करते हैं। यदि Q की चाल 2 मीटर/सेकंड है तो P द्वारा दौड़ पूरी करने में लिया गया समय ज्ञात कीजिए।",
+    "q_en": "Q19. P gives Q a 2-second head start in a 400 m race, but both finish at the same time. If Q runs at 2 m/s, find the time taken by P to complete the race.",
+    "tag": "SSC CGL 20/07/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 198 सेकंड", "(b) 199 सेकंड", "(c) 200 सेकंड", "(d) 195 सेकंड"],
+    "o_en": ["(a) 198 s", "(b) 199 s", "(c) 200 s", "(d) 195 s"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q20. A, 1500 मीटर की दौड़ में B को 10 सेकंड की शुरुआत (हेड-स्टार्ट) देता है और दोनों एक ही समय में दौड़ पूरी करते हैं। यदि B की चाल 6 मी/सेकंड है, तो A को दौड़ पूरी करने में (मिनट में) कितना समय लगा?",
+    "q_en": "Q20. In a 1500 m race, A gives B a 10-second head start and both finish at the same time. If B runs at 6 m/s, how many minutes does A take to finish?",
+    "tag": "SSC CPO 11/11/2022 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 3", "(b) 4", "(c) 8", "(d) 5"],
+    "o_en": ["(a) 3", "(b) 4", "(c) 8", "(d) 5"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q21. 1200 मी. की दौड़ में, बाइक A ने बाइक B को 100 मी. से हराती है। 600 मी. की दौड़ में, बाइक B ने बाइक C को 100 मी. से हराती है। यदि बाइक A 720 मी. की दौड़ में बाइक C को 30 सेकण्ड से हरा देती है, तो बाइक C की गति क्या है?",
+    "q_en": "Q21. In a 1200 m race, bike A beats bike B by 100 m. In a 600 m race, bike B beats bike C by 100 m. If bike A beats bike C by 30 seconds in a 720 m race, what is the speed of bike C?",
+    "tag": "SSC CGL 03/12/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 17/3 मी./सेकंड", "(b) 26/9 मी./सेकंड", "(c) 17/4 मी./सेकंड", "(d) 26/3 मी./सेकंड"],
+    "o_en": ["(a) 17/3 m/s", "(b) 26/9 m/s", "(c) 17/4 m/s", "(d) 26/3 m/s"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q22. 400 मीटर की दौड़ में, A 16 मीटर/सेकंड की चाल से दौड़ता है। यदि A, B को 15 मीटर की शुरुआत देता है और फिर भी उसे 10 सेकंड से हरा देता है, तो B की चाल क्या है?",
+    "q_en": "Q22. In a 400 m race, A runs at 16 m/s. If A gives B a 15 m head start and still beats B by 10 seconds, what is B’s speed?",
+    "tag": "SSC CGL 02/12/2022 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 11 मी/सेकंड", "(b) 10 मी/सेकंड", "(c) 13 मी/सेकंड", "(d) 9 मी/सेकंड"],
+    "o_en": ["(a) 11 m/s", "(b) 10 m/s", "(c) 13 m/s", "(d) 9 m/s"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q23. 5 किमी की दौड़ में, S ने T को 500 मीटर की बढ़त दी। यदि उन्होंने एक ही समय में दौड़ पूरी की और T की गति 13.5 किमी/घंटा है, तो S की गति है:",
+    "q_en": "Q23. In a 5 km race, S gives T a 500 m head start. If they finish at the same time and T’s speed is 13.5 km/h, what is S’s speed?",
+    "tag": "SSC CHSL 02/08/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 15 किमी/घंटा", "(b) 20 किमी/घंटा", "(c) 17.5 किमी/घंटा", "(d) 16.5 किमी/घंटा"],
+    "o_en": ["(a) 15 km/h", "(b) 20 km/h", "(c) 17.5 km/h", "(d) 16.5 km/h"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q24. 140 मीटर की एक दौड़ में, पंकज 5/2 मी/सेकंड की चाल से दौड़ता है। वह अरुण को 20 मीटर की बढ़त देता है और फिर भी उसे 4 सेकंड से हरा देता है। अरुण की चाल क्या है?",
+    "q_en": "Q24. In a 140 m race, Pankaj runs at 5/2 m/s. He gives Arun a 20 m head start and still beats him by 4 seconds. What is Arun’s speed?",
+    "tag": "SSC CHSL 10/08/2023 (Shift-04)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 1.75 मी/सेकंड", "(b) 1.25 मी/सेकंड", "(c) 2 मी/सेकंड", "(d) 1.5 मी/सेकंड"],
+    "o_en": ["(a) 1.75 m/s", "(b) 1.25 m/s", "(c) 2 m/s", "(d) 1.5 m/s"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q25. 2400 मीटर की दौड़ में तरुण, हरि को 60 सेकंड की शुरुआती बढ़त देता है और फिर भी उसे 40 सेकंड से हरा देता है। यदि हरि की चाल 6 मी./सेकंड है, तो तरुण की चाल ज्ञात कीजिए।",
+    "q_en": "Q25. In a 2400 m race, Tarun gives Hari a 60-second head start and still beats him by 40 seconds. If Hari runs at 6 m/s, find Tarun’s speed.",
+    "tag": "SSC CHSL TIER-II (18/11/2024)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 8.5 मी./सेकंड", "(b) 8 मी./सेकंड", "(c) 7 मी./सेकंड", "(d) 7.5 मी./सेकंड"],
+    "o_en": ["(a) 8.5 m/s", "(b) 8 m/s", "(c) 7 m/s", "(d) 7.5 m/s"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q26. राहुल 100 मीटर की दौड़ में 6 किमी/घंटा की चाल से दौड़ता है। राहुल, भरत को 4 मीटर की बढ़त देता है और फिर भी उसे 4 सेकंड से हरा देता है। भरत की चाल ज्ञात कीजिए।",
+    "q_en": "Q26. Rahul runs a 100 m race at 6 km/h. Rahul gives Bharat a 4 m head start and still beats him by 4 seconds. Find Bharat’s speed.",
+    "tag": "Higher Secondary 01/08/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 4.5 किमी/घंटा", "(b) 4.9 किमी/घंटा", "(c) 5.8 किमी/घंटा", "(d) 5.4 किमी/घंटा"],
+    "o_en": ["(a) 4.5 km/h", "(b) 4.9 km/h", "(c) 5.8 km/h", "(d) 5.4 km/h"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q27. 400 मीटर की एक दौड़ में भीम ने दौड़ की शुरुआत में सरल को 20 मीटर से बढ़त दी। सरल ने दौड़ पूरी करने में 48 सेकंड का समय लिया। यदि सरल ने भीम को 2 सेकंड के अंतर से हरा दिया, तो भीम की गति (मीटर/सेकंड में) क्या थी?",
+    "q_en": "Q27. In a 400 m race, Bhim gives Saral a 20 m head start. Saral takes 48 seconds to finish. If Saral beats Bhim by 2 seconds, what is Bhim’s speed in m/s?",
+    "tag": "SSC Phase XII 26/06/2024 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 8", "(b) 8.7", "(c) 7.6", "(d) 7.4"],
+    "o_en": ["(a) 8", "(b) 8.7", "(c) 7.6", "(d) 7.4"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q28. P और Q एक 400 मीटर की दौड़ में भाग लेते हैं। P, 12 किमी/घंटा की चाल से दौड़ता है। P, Q को 20 मीटर की बढ़त देता है और फिर भी उसे 13 सेकंड से हरा देता है। Q की चाल क्या है? (दो दशमलव स्थानों तक पूर्णांकित कीजिए।)",
+    "q_en": "Q28. P and Q take part in a 400 m race. P runs at 12 km/h. P gives Q a 20 m head start and still beats Q by 13 seconds. What is Q’s speed?",
+    "tag": "SSC CGL TIER-II (20/01/2025)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 11.38 किमी/घंटा", "(b) 10.29 किमी/घंटा", "(c) 11.61 किमी/घंटा", "(d) 10.87 किमी/घंटा"],
+    "o_en": ["(a) 11.38 km/h", "(b) 10.29 km/h", "(c) 11.61 km/h", "(d) 10.87 km/h"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q29. सविता और पर्णिका ने एक ट्रैक पर 2250 मीटर लंबी दौड़ लगाने का फैसला किया। इस ट्रैक की लंबाई दौड़ की लंबाई के बराबर ही है। सविता ने पर्णिका को 396 मीटर की बढ़त दी, साथ ही सविता ने उसे अपने से 9 सेकंड पहले शुरुआत करने दी। पर्णिका 6 मीटर/सेकंड की चाल से दौड़ी और सविता के दौड़ शुरू करने के 250 सेकंड बाद सविता ने पर्णिका को पकड़ लिया। दौड़ के दौरान सविता की चाल (मीटर/सेकंड में) क्या थी?",
+    "q_en": "Q29. Savita and Parnika decide to run a 2250 m race on a track of the same length. Savita gives Parnika a 396 m head start and also lets her start 9 seconds earlier. Parnika runs at 6 m/s, and Savita catches her 250 seconds after Savita starts. What was Savita’s speed?",
+    "tag": "SSC CHSL 11/08/2023 (Shift-04)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 7.2 मीटर/सेकंड", "(b) 7.8 मीटर/सेकंड", "(c) 8 मीटर/सेकंड", "(d) 7.5 मीटर/सेकंड"],
+    "o_en": ["(a) 7.2 m/s", "(b) 7.8 m/s", "(c) 8 m/s", "(d) 7.5 m/s"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q30. 200 मी. की रैखिक दौड़ में, यदि A, B को 25 मी. का स्टार्ट (शुरुआती लाभ) देता है, तो A दौड़ को 10 सेकंड से जीत जाता है। वैकल्पिक रूप से, यदि A, B को 45 मी. का स्टार्ट देता है, तो दौड़ डेड हीट हो जाती है। 200 मी. दौड़ने में A को कितना समय लगता है?",
+    "q_en": "Q30. In a 200 m linear race, if A gives B a 25 m head start, A wins by 10 seconds. If A gives B a 45 m head start, the race is a dead heat. How long does A take to run 200 m?",
+    "tag": "SSC CGL 24/07/2023 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 78 सेकंड", "(b) 77 सेकंड", "(c) 78.5 सेकंड", "(d) 77.5 सेकंड"],
+    "o_en": ["(a) 78 s", "(b) 77 s", "(c) 78.5 s", "(d) 77.5 s"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q31. 900 मीटर की एक दौड़ में अतुल ने विशु को 20 सेकंड की बढ़त दी और उसे 135 मी से हरा दिया। फिर से वही दौड़ लगाते समय अतुल ने 189 मी की बढ़त दी और उसे 8 सेकंड से हरा दिया। विशु 900 मी की पूरी दौड़ कितने समय में पूरी कर सकता है?",
+    "q_en": "Q31. In a 900 m race, Atul gives Vishu a 20-second head start and beats him by 135 m. In another run, Atul gives a 189 m head start and beats him by 8 seconds. How long can Vishu take to complete the full 900 m race?",
+    "tag": "SSC CGL 11/09/2024 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 3 मिनट 30 सेकंड", "(b) 2 मिनट 50 सेकंड", "(c) 3 मिनट 20 सेकंड", "(d) 3 मिनट 10 सेकंड"],
+    "o_en": ["(a) 3 min 30 s", "(b) 2 min 50 s", "(c) 3 min 20 s", "(d) 3 min 10 s"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q32. 1500 मीटर की रेस में, यदि वाहन P, वाहन Q को 200 मीटर की बढ़त देता है, तो वाहन P, 8 सेकंड से दौड़ जीत जाता है। इसके विपरीत, यदि वाहन P, वाहन Q को 400 मीटर की बढ़त देता है, तो दौड़ बराबरी पर समाप्त होती है। वाहन P को 1500 मीटर चलने में कितना समय लगता है?",
+    "q_en": "Q32. In a 1500 m race, if vehicle P gives vehicle Q a 200 m head start, P wins by 8 seconds. If P gives Q a 400 m head start, the race is a dead heat. How long does P take to cover 1500 m?",
+    "tag": "SSC CGL 07/12/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 44 सेकंड", "(b) 45 सेकंड", "(c) 40 सेकंड", "(d) 60 सेकंड"],
+    "o_en": ["(a) 44 s", "(b) 45 s", "(c) 40 s", "(d) 60 s"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q33. 3000 मीटर की दौड़ में, यदि वाहन A वाहन B को 400 मीटर की बढ़त देता है, तो वाहन A 10 सेकंड से दौड़ जीत जाता है। यदि वाहन A, वाहन B को 750 मीटर की बढ़त देता है, तो दौड़ बराबरी पर समाप्त होती है। वाहन A को 3000 मीटर चलने में कितना समय लगता है?",
+    "q_en": "Q33. In a 3000 m race, if vehicle A gives B a 400 m head start, A wins by 10 seconds. If A gives B a 750 m head start, the race is a dead heat. How long does A take to cover 3000 m?",
+    "tag": "SSC Phase XII 21/06/2024 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 90.5 सेकंड", "(b) 100 सेकंड", "(c) 64.3 सेकंड", "(d) 92.5 सेकंड"],
+    "o_en": ["(a) 90.5 s", "(b) 100 s", "(c) 64.3 s", "(d) 92.5 s"],
+    "a": 2,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q34. अरुण और भास्कर ने 3 किमी की दौड़ लगाई। पहले अरुण भास्कर को 400 मीटर की बढ़त देता है और उसे 30 सेकंड से हरा देता है। वापस आते समय, अरुण भास्कर को 2.5 मिनट की बढ़त देता है और 500 मीटर से हार जाता है। मिनट में, उस समय के बीच का अंतर कितना है, जिसमें अरुण और भास्कर एक तरफ की रेस को पूरा कर सकते हैं?",
+    "q_en": "Q34. Arun and Bhaskar run a 3 km race. First Arun gives Bhaskar a 400 m head start and beats him by 30 seconds. On the return race, Arun gives Bhaskar a 2.5-minute head start and loses by 500 m. What is the difference, in minutes, between their times to complete one-way race?",
+    "tag": "SSC CHSL 04/07/2024 (Shift-02)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 3 मिनट", "(b) 1.5 मिनट", "(c) 2.5 मिनट", "(d) 2 मिनट"],
+    "o_en": ["(a) 3 min", "(b) 1.5 min", "(c) 2.5 min", "(d) 2 min"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q35. मुस्कान और अमन दिल्ली से हरियाणा जा रहे हैं। उन दोनों की चाल में अंतर और उनकी चाल का योग क्रमशः 40 किमी/घंटा और 60 किमी/घंटा है। अगर इस दौड़ को मुस्कान अमन से 8 मिनट पहले पूरी कर सकता है, तो वह दूरी ज्ञात कीजिए जो दोनों को पूरी करनी चाहिए।",
+    "q_en": "Q35. Muskan and Aman are travelling from Delhi to Haryana. The difference and sum of their speeds are 40 km/h and 60 km/h respectively. If Muskan can complete the race 8 minutes before Aman, find the distance both have to cover.",
+    "tag": "SSC CHSL 21/03/2023 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 5/3 किमी", "(b) 8/3 किमी", "(c) 3/5 किमी", "(d) 3/8 किमी"],
+    "o_en": ["(a) 5/3 km", "(b) 8/3 km", "(c) 3/5 km", "(d) 3/8 km"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q36. A 100 मीटर की दौड़ में B को 10 मीटर से हरा सकता है। B 100 मीटर की दौड़ में C को 10 मीटर से हरा सकता है। अनुपात (tA : tB : tC) क्या है, जो दौड़ को पूरा करने के लिए A, B और C द्वारा लिया गया संबंधित समय है?",
+    "q_en": "Q36. A can beat B by 10 m in a 100 m race. B can beat C by 10 m in a 100 m race. What is the ratio tA:tB:tC of their respective times to complete the race?",
+    "tag": "SSC MTS 07/07/2022 (Shift-1)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 100 : 90 : 81", "(b) 90 : 81 : 100", "(c) 100 : 81 : 90", "(d) 81 : 90 : 100"],
+    "o_en": ["(a) 100 : 90 : 81", "(b) 90 : 81 : 100", "(c) 100 : 81 : 90", "(d) 81 : 90 : 100"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q37. 1000 मीटर की दौड़ में, अर्जुन, बालाजी और चरण दौड़ रहे हैं। अर्जुन ने बालाजी को 100 मीटर से और बालाजी ने चरण को 100 मीटर से हराया। अगली 1000 मीटर की दौड़ में गति पिछले की तरह ही रखते हैं। बालाजी, चरण को 100 मीटर की शुरुआत देते हैं और अर्जुन, बालाजी को 100 मीटर की शुरुआत देते हैं। वह दूरी ज्ञात कीजिए जिससे विजेता ठीक पीछे वाले व्यक्ति से आगे है।",
+    "q_en": "Q37. In a 1000 m race, Arjun beats Balaji by 100 m and Balaji beats Charan by 100 m. In the next 1000 m race they keep the same speeds. Balaji gives Charan a 100 m head start and Arjun gives Balaji a 100 m head start. Find the distance by which the winner is ahead of the runner immediately behind.",
+    "tag": "SSC CGL 13/12/2022 (Shift-01)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) 100 मीटर", "(b) 40 मीटर", "(c) 30 मीटर", "(d) 20 मीटर"],
+    "o_en": ["(a) 100 m", "(b) 40 m", "(c) 30 m", "(d) 20 m"],
+    "a": 3,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q38. 120 मीटर की एक दौड़ में P, S को 6 मीटर से हरा देता है। यदि S, 7.5 मीटर की बढ़त के साथ दौड़ शुरू करता है और यह 100 मीटर की दौड़ है, तो दौड़ कौन और कितने मीटर से जीतता है? (दशमलव के दो स्थानों तक)",
+    "q_en": "Q38. In a 120 m race, P beats S by 6 m. If S starts a 100 m race with a 7.5 m head start, who wins and by how many metres?",
+    "tag": "SSC CHSL 14/08/2023 (Shift-1)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) S, 2.63", "(b) P, 3.63", "(c) S, 3.63", "(d) P, 2.63"],
+    "o_en": ["(a) S, 2.63", "(b) P, 3.63", "(c) S, 3.63", "(d) P, 2.63"],
+    "a": 0,
+    "e_hi": null,
+    "e_en": null
+  }, {
+    "q_hi": "Q39. 150 मीटर की दौड़ में, यदि R को 5 मीटर की शुरुआती बढ़त मिलती है, तो वह S को 35 मीटर से हरा देगा। यदि S को 100 मीटर की बढ़त दी जाती है और वह R को 25 मीटर से हरा देगा, तो कौन R को कितने मीटर से जीत जाएगा?",
+    "q_en": "Q39. In a 150 m race, if R gets a 5 m head start, he beats S by 35 m. If S gets a 100 m head start, S beats R by 25 m. Who wins and by how many metres?",
+    "tag": "SSC Phase-XII 20/06/2024 (Shift-03)",
+    "type_tag": "Type I (Linear Race)",
+    "o_hi": ["(a) R = 5.44", "(b) S = 5.44", "(c) S = 4.44", "(d) R = 4.44"],
+    "o_en": ["(a) R = 5.44", "(b) S = 5.44", "(c) S = 4.44", "(d) R = 4.44"],
+    "a": 1,
+    "e_hi": null,
+    "e_en": null
+  }];

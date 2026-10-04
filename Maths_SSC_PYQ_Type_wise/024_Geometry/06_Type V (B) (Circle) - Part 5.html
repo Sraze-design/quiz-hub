@@ -1,0 +1,504 @@
+const IMAGE_1 = "data:image/jpeg;base64,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";
+
+const data = [{
+    "q_hi": "Q476. AB वृत्त की एक जीवा है और AOC इसका व्यास इस प्रकार है कि ∠ACB = 65° है। यदि AT बिंदु A पर वृत्त की स्पर्शरेखा है, तो ∠BAT बराबर है:",
+    "q_en": "Q476. AB is a chord of a circle and AOC is its diameter such that ∠ACB = 65°. If AT is tangent at A, then ∠BAT is:",
+    "tag": "SSC CHSL 02/08/2023 (Shift-04)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 65°", "(b) 75°", "(c) 6", "(d) 8"],
+    "o_en": ["(a) 65°", "(b) 75°", "(c) 6", "(d) 8"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q477. O केंद्र वाले वृत्त में, PAX और PBY एक बाह्य बिंदु P से बिंदु A और B पर वृत्त की स्पर्श रेखाएँ हैं। वृत्त पर एक बिंदु Q इस प्रकार है कि ∠QAX = 59° और ∠QBY = 72° है। ∠AQB का माप ज्ञात करें।",
+    "q_en": "Q477. In a circle with centre O, PAX and PBY are tangents from external point P at A and B. A point Q on the circle satisfies ∠QAX = 59° and ∠QBY = 72°. Find ∠AQB.",
+    "tag": "SSC CGL 17/08/2021 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 31°", "(b) 72°", "(c) 59°", "(d) 49°"],
+    "o_en": ["(a) 31°", "(b) 72°", "(c) 59°", "(d) 49°"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q478. बाह्य बिंदु F से सीधी रेखाओं का एक युग्म वृत्त को A और B (FA < FB) पर प्रतिच्छेद करता है, और C पर वृत्त को स्पर्श करता है। O वृत्त का केंद्र है। यदि ∠ACF = 50° और ∠AFC = 30° दिया गया है, तो ∠AOB ज्ञात करें।",
+    "q_en": "Q478. From an external point F, a secant cuts the circle at A and B (FA < FB), and another line touches the circle at C. O is the centre. If ∠ACF = 50° and ∠AFC = 30°, find ∠AOB.",
+    "tag": "SSC CGL 12/09/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 80°", "(b) 90°", "(c) 100°", "(d) 40°"],
+    "o_en": ["(a) 80°", "(b) 90°", "(c) 100°", "(d) 40°"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q479. A और B केंद्र O वाले वृत्त पर स्थित बिंदु हैं। वृत्त के बाहर बिंदु P से PAM और PBN क्रमशः A और B पर वृत्त की स्पर्श रेखाएँ हैं। दीर्घ चाप AB पर बिंदु Q इस प्रकार स्थित है कि ∠QAM = 58° और ∠QBN = 50° है। ∠APB का माप (अंश में) ज्ञात करें।",
+    "q_en": "Q479. A and B lie on a circle with centre O. From external point P, PAM and PBN are tangents at A and B respectively. Q lies on the major arc AB such that ∠QAM = 58° and ∠QBN = 50°. Find ∠APB.",
+    "tag": "SSC CGL 17/08/2021 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 30", "(b) 32", "(c) 36", "(d) 40"],
+    "o_en": ["(a) 30", "(b) 32", "(c) 36", "(d) 40"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q480. O केंद्र वाले वृत्त में व्यास AB को वृत्त के बाहर स्थित बिंदु P तक निर्मित किया जाता है और PT उस बिंदु से बिंदु C पर वृत्त की स्पर्शिता है। यदि ∠BPT = 28° है, तो ∠BCP का माप कितना होगा?",
+    "q_en": "Q480. In a circle with centre O, diameter AB is produced to an external point P and PT is tangent from P at C. If ∠BPT = 28°, find ∠BCP.",
+    "tag": "SSC CGL 24/08/2021 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 28°", "(b) 31°", "(c) 62°", "(d) 45°"],
+    "o_en": ["(a) 28°", "(b) 31°", "(c) 62°", "(d) 45°"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q481. एक वृत्त की दो जीवाएँ AB और CD, एक दूसरे को वृत्त के बाहर, बिंदु P पर प्रतिच्छेद करने के लिए बढ़ायी जाती हैं। यदि AB = 7 सेमी, BP = 4.2 सेमी और PD = 2.8 सेमी है, तो CD की लंबाई ज्ञात कीजिए।",
+    "q_en": "Q481. Two chords AB and CD of a circle are produced to meet at an external point P. If AB = 7 cm, BP = 4.2 cm and PD = 2.8 cm, find CD.",
+    "tag": "SSC CHSL 10/07/2024 (Shift-04)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 11 सेमी", "(b) 18 सेमी", "(c) 16 सेमी", "(d) 14 सेमी"],
+    "o_en": ["(a) 11 cm", "(b) 18 cm", "(c) 16 cm", "(d) 14 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q482. 5 सेमी त्रिज्या वाले एक वृत्त के केंद्र O से 13 सेमी दूर स्थित बिंदु P से एक रेखा खींची जाती है। यदि रेखा वृत्त की स्पर्श रेखा है, तो बिंदु P से वृत्त के स्पर्श बिंदु तक स्पर्श रेखा की लंबाई क्या होगी?",
+    "q_en": "Q482. From a point P at a distance 13 cm from the centre O of a circle of radius 5 cm, a tangent is drawn. Find the tangent length from P to the point of contact.",
+    "tag": "SSC CGL 24/09/2025 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 8 सेमी", "(b) 9 सेमी", "(c) 12 सेमी", "(d) 10 सेमी"],
+    "o_en": ["(a) 8 cm", "(b) 9 cm", "(c) 12 cm", "(d) 10 cm"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q483. बिंदु A से एक रेखा खींची गई है जो बिंदु B पर वृत्त की स्पर्शरेखा है। बिंदु A से वृत्त पर एक छेदक रेखा भी खींची गई है जो इसे बिंदु C और D पर काटती है। यदि AB = 42 सेमी और AC = 21 सेमी है, तो AB और CD का अनुपात ज्ञात करें।",
+    "q_en": "Q483. From point A, a tangent touches the circle at B. A secant from A cuts the circle at C and D. If AB = 42 cm and AC = 21 cm, find the ratio AB : CD.",
+    "tag": "SSC CHSL 10/07/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 2 : 5", "(b) 2 : 3", "(c) 3 : 2", "(d) 3 : 4"],
+    "o_en": ["(a) 2 : 5", "(b) 2 : 3", "(c) 3 : 2", "(d) 3 : 4"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q484. एक वृत्त की त्रिज्या 7 सेमी है। बाह्य बिंदु P से एक स्पर्श रेखा खींची जाती है। यदि स्पर्श रेखा की लंबाई 24 सेमी है, तो P से वृत्त के केंद्र की दूरी क्या है?",
+    "q_en": "Q484. A circle has radius 7 cm. A tangent from external point P has length 24 cm. Find the distance from P to the centre.",
+    "tag": "SSC CGL 18/09/2025 (SHIFT-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 17 सेमी", "(b) 25 सेमी", "(c) 31 सेमी", "(d) 576 सेमी"],
+    "o_en": ["(a) 17 cm", "(b) 25 cm", "(c) 31 cm", "(d) 576 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q485. एक वृत्त के बाहर एक बिंदु P से एक स्पर्श रेखा PA और एक छेदक PBC खींची गई है। यदि PA = 6 सेमी और BC = 5 सेमी है, तो रेखाखंड PB की लंबाई क्या है?",
+    "q_en": "Q485. From an external point P, tangent PA and secant PBC are drawn to a circle. If PA = 6 cm and BC = 5 cm, find PB.",
+    "tag": "SSC CGL 19/09/2025 (SHIFT-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 4 सेमी", "(b) 5 सेमी", "(c) 9 सेमी", "(d) 12 सेमी"],
+    "o_en": ["(a) 4 cm", "(b) 5 cm", "(c) 9 cm", "(d) 12 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q486. छेदक रेखा CD वृत्त को E पर प्रतिच्छेदित करती है और CF वृत्त F पर स्पर्शरेखा है। यदि छेदक रेखा CD की लंबाई 20 सेमी है और स्पर्शरेखा CF की लंबाई 15 सेमी है, तो जीवा DE की लंबाई ज्ञात कीजिए।",
+    "q_en": "Q486. Secant CD intersects the circle at E and CF is tangent at F. If CD = 20 cm and CF = 15 cm, find DE.",
+    "tag": "SSC CPO 29/06/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 3.75 सेमी", "(b) 11.25 सेमी", "(c) 9.25 सेमी", "(d) 8.75 सेमी"],
+    "o_en": ["(a) 3.75 cm", "(b) 11.25 cm", "(c) 9.25 cm", "(d) 8.75 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q487. 6 सेमी त्रिज्या वाले एक वृत्त के बिंदु A पर स्पर्श रेखा AB, केंद्र O से होकर जाने वाली एक रेखा से बिंदु B पर मिलती है। यदि OB = 10 सेमी है, तो AB की लंबाई (सेमी में) बराबर है:",
+    "q_en": "Q487. A tangent AB at point A of a circle of radius 6 cm meets a line through centre O at B. If OB = 10 cm, find AB.",
+    "tag": "SSC CHSL 02/08/2023 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 5 सेमी", "(b) 6 सेमी", "(c) 4 सेमी", "(d) 8 सेमी"],
+    "o_en": ["(a) 5 cm", "(b) 6 cm", "(c) 4 cm", "(d) 8 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q488. एक स्पर्शरेखा बिंदु P से खींची जाती है जो वृत्त के केंद्र O से 37 सेमी की दूरी पर है और व्यास 24 सेमी है। स्पर्शरेखा की लंबाई (सेमी में) कितनी है?",
+    "q_en": "Q488. A tangent is drawn from point P, 37 cm from the centre O of a circle whose diameter is 24 cm. Find the tangent length.",
+    "tag": "SSC CHSL 09/07/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 30 सेमी", "(b) 35 सेमी", "(c) 28.16 सेमी", "(d) 37 सेमी"],
+    "o_en": ["(a) 30 cm", "(b) 35 cm", "(c) 28.16 cm", "(d) 37 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q489. 4 सेमी त्रिज्या वाले एक वृत्त के केंद्र से 10 सेमी दूर स्थित एक बिंदु से खींची गई स्पर्श रेखा की लंबाई ज्ञात कीजिए।",
+    "q_en": "Q489. Find the length of a tangent drawn from a point 10 cm from the centre of a circle of radius 4 cm.",
+    "tag": "SSC CGL 23/09/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 3√14 सेमी", "(b) 3√21 सेमी", "(c) 2√21 सेमी", "(d) 2√14 सेमी"],
+    "o_en": ["(a) 3√14 cm", "(b) 3√21 cm", "(c) 2√21 cm", "(d) 2√14 cm"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q490. एक त्रिभुज ABC एक वृत्त में अंकित है। वृत्त पर बिंदु A पर एक स्पर्शरेखा खींची जाती है, जो भुजा BC के विस्तार को D पर काटती है। यदि AD = 6 सेमी और CD = 4 सेमी है, तो भुजा BC की लंबाई क्या है?",
+    "q_en": "Q490. Triangle ABC is inscribed in a circle. The tangent at A meets side BC produced at D. If AD = 6 cm and CD = 4 cm, find BC.",
+    "tag": "SSC CGL 17/09/2025 (SHIFT-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 5 सेमी", "(b) 6 सेमी", "(c) 7 सेमी", "(d) 8 सेमी"],
+    "o_en": ["(a) 5 cm", "(b) 6 cm", "(c) 7 cm", "(d) 8 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q491. किसी बिंदु A से 7 इकाई त्रिज्या वाले वृत्त पर एक स्पर्श रेखा खींची जाती है। उसी बिंदु से वृत्त पर एक छेदक रेखा खींची जाती है जो वृत्त को B और C पर काटती है और बिंदु B, C की तुलना में A के निकट है। यदि बिंदु A से वृत्त की स्पर्श रेखा की लंबाई 21 इकाई है और AB की लंबाई 14 इकाई है, तो इकाई में BC की लंबाई कितनी है?",
+    "q_en": "Q491. From point A, a tangent is drawn to a circle of radius 7 units. A secant from A cuts the circle at B and C, with B nearer A. If the tangent length is 21 units and AB = 14 units, find BC.",
+    "tag": "SSC CGL 19/09/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 18.5", "(b) 16.5", "(c) 15.5", "(d) 17.5"],
+    "o_en": ["(a) 18.5", "(b) 16.5", "(c) 15.5", "(d) 17.5"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q492. एक वृत्त की त्रिज्या 8 सेमी है। वृत्त के बाहर एक बिंदु की वृत्त के केंद्र से दूरी 17 सेमी है। बाहरी बिंदु से वृत्त तक खींची गई स्पर्शरेखा की लंबाई होगी।",
+    "q_en": "Q492. A circle has radius 8 cm and an external point is 17 cm from its centre. Find the tangent length from the external point.",
+    "tag": "SSC CGL 13/09/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 18 सेमी", "(b) 15 सेमी", "(c) 16 सेमी", "(d) 19 सेमी"],
+    "o_en": ["(a) 18 cm", "(b) 15 cm", "(c) 16 cm", "(d) 19 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q493. केंद्र O वाले वृत्त में, ABC एक छेदक रेखा है, जो वृत्त को A और B पर प्रतिच्छेद करती है और DC, वृत्त के बिंदु D पर स्पर्शरेखा है। यदि DC = 12 सेमी और BC = 6 सेमी है, तो AB की लंबाई किसके बराबर है?",
+    "q_en": "Q493. In a circle with centre O, ABC is a secant intersecting the circle at A and B, and DC is tangent at D. If DC = 12 cm and BC = 6 cm, find AB.",
+    "tag": "SSC CHSL 03/07/2024 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 20 सेमी", "(b) 18 सेमी", "(c) 22 सेमी", "(d) 16 सेमी"],
+    "o_en": ["(a) 20 cm", "(b) 18 cm", "(c) 22 cm", "(d) 16 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q494. PQ एक वृत्त की जीवा है। इस वृत्त पर बिंदु X पर स्पर्शरेखा XR, बिंदु R पर PQ के विस्तार को प्रतिच्छेद करती है। दिया गया है कि XR = 12 सेमी, PQ = x सेमी, और QR = (x − 2) सेमी है, तो x का मान ज्ञात कीजिए।",
+    "q_en": "Q494. PQ is a chord of a circle. Tangent XR at X meets PQ produced at R. Given XR = 12 cm, PQ = x cm and QR = (x − 2) cm, find x.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-02); SSC CHSL 04/08/2023 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 11 सेमी", "(b) 9 सेमी", "(c) 8 सेमी", "(d) 10 सेमी"],
+    "o_en": ["(a) 11 cm", "(b) 9 cm", "(c) 8 cm", "(d) 10 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q495. किसी बिंदु T से एक वृत्त की स्पर्श रेखा की लंबाई 32 सेमी है और केंद्र से T की दूरी 40 सेमी है। वृत्त का व्यास (सेमी में) ज्ञात कीजिए।",
+    "q_en": "Q495. From point T, the tangent length to a circle is 32 cm and the distance from T to the centre is 40 cm. Find the diameter of the circle.",
+    "tag": "SSC CGL 12/09/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 36 सेमी", "(b) 16 सेमी", "(c) 32 सेमी", "(d) 48 सेमी"],
+    "o_en": ["(a) 36 cm", "(b) 16 cm", "(c) 32 cm", "(d) 48 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q496. दी गई आकृति में एक वृत्त का व्यास AB और जीवा CD, P पर मिलती है। PT, T पर वृत्त की स्पर्श रेखा है। यदि CD = 8 सेमी, PD = 10 सेमी और PB = 8 सेमी है, तो AB ज्ञात कीजिए।<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + IMAGE_1 + "\" alt=\"Q496 figure\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    "q_en": "Q496. In the given figure, diameter AB and chord CD of a circle meet at P. PT is tangent at T. If CD = 8 cm, PD = 10 cm and PB = 8 cm, find AB.<br><div style=\"text-align:center;margin:14px 0;\"><img src=\"" + IMAGE_1 + "\" alt=\"Q496 figure\" style=\"display:block;max-width:100%;width:auto;height:auto;max-height:500px;margin:0 auto;object-fit:contain;\"></div>",
+    "tag": "SSC CGL 21/07/2023 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 14.5 सेमी", "(b) 22.5 सेमी", "(c) 12 सेमी", "(d) 8 सेमी"],
+    "o_en": ["(a) 14.5 cm", "(b) 22.5 cm", "(c) 12 cm", "(d) 8 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": "",
+    "image": IMAGE_1
+  }, {
+    "q_hi": "Q497. मान लीजिए कि AD एक 6 सेमी त्रिज्या वाले वृत्त की स्पर्शरेखा है। AC एक छेदक रेखा है जो वृत्त से बिंदु B पर मिलती है और CD व्यास है। यदि AB का मान 7 सेमी है, तो AC का मान (सेमी में) क्या है?",
+    "q_en": "Q497. Let AD be tangent to a circle of radius 6 cm. AC is a secant meeting the circle at B and CD is a diameter. If AB = 7 cm, find AC.",
+    "tag": "SSC CHSL 09/07/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 9 सेमी", "(b) 18 सेमी", "(c) 20 सेमी", "(d) 16 सेमी"],
+    "o_en": ["(a) 9 cm", "(b) 18 cm", "(c) 20 cm", "(d) 16 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q498. माना C एक वृत्त है जिसका केंद्र O और त्रिज्या 5 सेमी है। माना कि PQ वृत्त की स्पर्शरेखा है और A स्पर्शिता बिंदु है। मान लीजिए B, PQ पर एक बिंदु है जैसे कि AB की लंबाई 12 सेमी है। यदि O और B को मिलाने वाली रेखा वृत्त को R पर काटती है, तो BR की लंबाई (सेमी में) ज्ञात कीजिए।",
+    "q_en": "Q498. Let C be a circle with centre O and radius 5 cm. PQ is tangent at A. Point B lies on PQ such that AB = 12 cm. If line OB cuts the circle at R, find BR.",
+    "tag": "SSC CPO 04/10/2023 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 13 सेमी", "(b) 6 सेमी", "(c) 8 सेमी", "(d) 2 सेमी"],
+    "o_en": ["(a) 13 cm", "(b) 6 cm", "(c) 8 cm", "(d) 2 cm"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q499. 7 सेमी त्रिज्या वाले एक वृत्त में जीवा PQ की लंबाई (सेमी में) कितनी है, जहाँ व्यास AB और गैर-व्यास जीवा PQ, बिंदु C पर लंबवत रूप से प्रतिच्छेद करती है, और AC तथा BC का अनुपात 4 : 3 है?",
+    "q_en": "Q499. In a circle of radius 7 cm, diameter AB and non-diameter chord PQ intersect perpendicularly at C. If AC : BC = 4 : 3, find chord PQ.",
+    "tag": "SSC CPO 28/06/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 4√3", "(b) 8√3", "(c) 2√3", "(d) 6√3"],
+    "o_en": ["(a) 4√3", "(b) 8√3", "(c) 2√3", "(d) 6√3"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q500. एक वृत्त की जीवाएँ AB और CD, जब बढ़ाई जाती हैं, तो वृत्त के बाहर एक बिंदु P पर मिलती हैं। यदि AB = 6 सेमी, CD = 3 सेमी और PD = 5 सेमी है, तो PB किसके बराबर है?",
+    "q_en": "Q500. Chords AB and CD of a circle, when produced, meet at an external point P. If AB = 6 cm, CD = 3 cm and PD = 5 cm, find PB.",
+    "tag": "SSC CHSL 10/07/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 9 सेमी", "(b) 8 सेमी", "(c) 4 सेमी", "(d) 6 सेमी"],
+    "o_en": ["(a) 9 cm", "(b) 8 cm", "(c) 4 cm", "(d) 6 cm"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q501. XAB और XCD, एक वृत्त की दो छेदक रेखाएँ हैं। यदि XA = 18 सेमी, AB = 22 सेमी है और XC = 24 सेमी है, तो XD का मान (सेमी में) ज्ञात कीजिए।",
+    "q_en": "Q501. XAB and XCD are two secants of a circle. If XA = 18 cm, AB = 22 cm and XC = 24 cm, find XD.",
+    "tag": "SSC CGL 23/09/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 28 सेमी", "(b) 21 सेमी", "(c) 30 सेमी", "(d) 34 सेमी"],
+    "o_en": ["(a) 28 cm", "(b) 21 cm", "(c) 30 cm", "(d) 34 cm"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q502. O केंद्र वाले एक वृत्त के बाहरी बिंदु P से एक छेदक PAB खींचा गया है, जो इसे A और B पर काटता है। यदि OP = 17 cm, PA = 12 cm और PB = 22.5 cm है, तो वृत्त की त्रिज्या ज्ञात करें।",
+    "q_en": "Q502. From an external point P of a circle with centre O, secant PAB cuts the circle at A and B. If OP = 17 cm, PA = 12 cm and PB = 22.5 cm, find the radius.",
+    "tag": "SSC CGL 26/09/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) √23 सेमी", "(b) √21 सेमी", "(c) √17 सेमी", "(d) √19 सेमी"],
+    "o_en": ["(a) √23 cm", "(b) √21 cm", "(c) √17 cm", "(d) √19 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q503. एक वृत्त की जीवाएँ AB और CD आगे बढ़ाए जाने पर बिंदु P पर मिलती हैं। यदि AB = 6.3 सेमी, BP = 4.5 सेमी और CD = 3.6 सेमी है, तो PD की लंबाई (सेमी में) कितनी है?",
+    "q_en": "Q503. Chords AB and CD of a circle, when produced, meet at P. If AB = 6.3 cm, BP = 4.5 cm and CD = 3.6 cm, find PD.",
+    "tag": "SSC CGL 13/04/2022 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 4.8 सेमी", "(b) 3.5 सेमी", "(c) 3.1 सेमी", "(d) 5.4 सेमी"],
+    "o_en": ["(a) 4.8 cm", "(b) 3.5 cm", "(c) 3.1 cm", "(d) 5.4 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q504. R एक वृत्त के बाहर एक बिंदु है और यह इसके केंद्र से 18 cm दूर है। बिंदु R से खींची गई छेदक रेखा वृत्त को बिंदुओं A और B पर इस प्रकार प्रतिच्छेद करती है कि RA = 7 cm और AB = 5 cm है। वृत्त की त्रिज्या (cm में) ज्ञात कीजिए।",
+    "q_en": "Q504. R is outside a circle and is 18 cm from its centre. A secant from R meets the circle at A and B such that RA = 7 cm and AB = 5 cm. Find the radius.",
+    "tag": "SSC CGL 19/09/2024 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 4√15", "(b) 5√15", "(c) 7√15", "(d) 3√15"],
+    "o_en": ["(a) 4√15", "(b) 5√15", "(c) 7√15", "(d) 3√15"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q505. एक वृत्त में, दो जीवाएँ AB और CD एक दूसरे को बिंदु P पर आंतरिक रूप से प्रतिच्छेद करती हैं। यदि AB = 16 सेमी, PB = 6 सेमी और PD = 12 सेमी है, तो PC का मान किसके बराबर है?",
+    "q_en": "Q505. In a circle, chords AB and CD intersect internally at P. If AB = 16 cm, PB = 6 cm and PD = 12 cm, find PC.",
+    "tag": "SSC CHSL 09/08/2023 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 3 सेमी", "(b) 8 सेमी", "(c) 6 सेमी", "(d) 5 सेमी"],
+    "o_en": ["(a) 3 cm", "(b) 8 cm", "(c) 6 cm", "(d) 5 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q506. एक वृत्त में, दो जीवाएँ AB और CD, बिंदु E पर एक-दूसरे को काटती हैं, जो वृत्त के अंदर स्थित है। दिया गया है कि AE = 3 सेमी, EB = 2 सेमी और CE = 6 सेमी है, तो ED की लंबाई ज्ञात कीजिए?",
+    "q_en": "Q506. In a circle, chords AB and CD intersect at E inside the circle. If AE = 3 cm, EB = 2 cm and CE = 6 cm, find ED.",
+    "tag": "SSC CPO 10/12/2025 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 1 सेमी", "(b) 2 सेमी", "(c) 3 सेमी", "(d) 4 सेमी"],
+    "o_en": ["(a) 1 cm", "(b) 2 cm", "(c) 3 cm", "(d) 4 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q507. दो जीवाएँ AB और CD एक वृत्त के अंदर बिंदु P पर प्रतिच्छेद करती हैं। यदि AP = 6 सेमी, PB = 8 सेमी और CP = 4 सेमी है तो PD की लंबाई क्या है?",
+    "q_en": "Q507. Two chords AB and CD intersect at P inside a circle. If AP = 6 cm, PB = 8 cm and CP = 4 cm, find PD.",
+    "tag": "SSC CGL 17/09/2025 (SHIFT-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 10 सेमी", "(b) 12 सेमी", "(c) 16 सेमी", "(d) 18 सेमी"],
+    "o_en": ["(a) 10 cm", "(b) 12 cm", "(c) 16 cm", "(d) 18 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q508. O वृत्त का केंद्र है। इसकी दो जीवाएँ AB और CD एक-दूसरे को वृत्त के अंदर बिंदु P पर (आंतरिक रूप से) प्रतिच्छेद करती हैं। यदि AB = 22 सेमी, PB = 14 सेमी, CP = 8 सेमी है, तो PD का मान ज्ञात कीजिए।",
+    "q_en": "Q508. O is the centre of a circle. Chords AB and CD intersect internally at P. If AB = 22 cm, PB = 14 cm and CP = 8 cm, find PD.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 14 सेमी", "(b) 12 सेमी", "(c) 11 सेमी", "(d) 22 सेमी"],
+    "o_en": ["(a) 14 cm", "(b) 12 cm", "(c) 11 cm", "(d) 22 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q509. एक वृत्त की दो जीवाएँ AB और CD, वृत्त के अंदर एक बिंदु P पर प्रतिच्छेद करती हैं। यदि AP = 5 सेमी, PB = 8 सेमी और CP = 4 सेमी है, जीवा CD की लंबाई क्या है?",
+    "q_en": "Q509. Chords AB and CD intersect at P inside a circle. If AP = 5 cm, PB = 8 cm and CP = 4 cm, find chord CD.",
+    "tag": "SSC CHSL 19/11/2025 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 10 सेमी", "(b) 14 सेमी", "(c) 16 सेमी", "(d) 18 सेमी"],
+    "o_en": ["(a) 10 cm", "(b) 14 cm", "(c) 16 cm", "(d) 18 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q510. एक वृत्त की जीवाएँ AB और CD वृत्त के अंदर स्थित बिंदु F पर प्रतिच्छेद करती हैं। यदि m(AF) = 2.4 सेमी, m(BF) = 1.8 सेमी और m(CD) = 5.7 सेमी है, तो दो रेखाखंडों (CF) और (DF) में से बड़े रेखाखंड की लंबाई (सेमी में) क्या है?",
+    "q_en": "Q510. Chords AB and CD intersect at F inside a circle. If AF = 2.4 cm, BF = 1.8 cm and CD = 5.7 cm, find the length of the longer of CF and DF.",
+    "tag": "SSC CHSL 09/08/2023 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 4.5", "(b) 4.8", "(c) 5.4", "(d) 3.6"],
+    "o_en": ["(a) 4.5", "(b) 4.8", "(c) 5.4", "(d) 3.6"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q511. केंद्र O वाले वृत्त का व्यास PQ जीवा RS पर लंबवत है। PQ, RS को T पर प्रतिच्छेद करता है। यदि RS = 16 सेमी और QT = 4 सेमी है, तो वृत्त के व्यास की लंबाई (सेमी में) क्या है?",
+    "q_en": "Q511. In a circle with centre O, diameter PQ is perpendicular to chord RS and intersects it at T. If RS = 16 cm and QT = 4 cm, find the diameter.",
+    "tag": "SSC CHSL 07/08/2023 (Shift-04)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 20", "(b) 48", "(c) 24", "(d) 10"],
+    "o_en": ["(a) 20", "(b) 48", "(c) 24", "(d) 10"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q512. JKLM एक चक्रीय चतुर्भुज है, जिसमें ∠K, ∠M के सम्मुख है। जब JK और ML को आगे बढ़ाया जाता है, तो वे बिंदु Z पर मिलते हैं। JK = 10 सेमी, KZ = 12 सेमी और MZ = 33 सेमी है। LZ की लंबाई कितनी है?",
+    "q_en": "Q512. JKLM is a cyclic quadrilateral, with ∠K opposite ∠M. JK and ML produced meet at Z. If JK = 10 cm, KZ = 12 cm and MZ = 33 cm, find LZ.",
+    "tag": "SSC CHSL 14/03/2023 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 9 सेमी", "(b) 8 सेमी", "(c) 10 सेमी", "(d) 12 सेमी"],
+    "o_en": ["(a) 9 cm", "(b) 8 cm", "(c) 10 cm", "(d) 12 cm"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q513. एक वृत्त में, जीवा AB और जीवा CD बिंदु E पर इस प्रकार प्रतिच्छेद करती हैं कि AE : EB = 2 : 3 और CE : ED = 5 : 2 हैं। यदि AB = x और CD = y हैं, तो निम्नलिखित में से कौन सा सत्य है?",
+    "q_en": "Q513. In a circle, chords AB and CD intersect at E such that AE : EB = 2 : 3 and CE : ED = 5 : 2. If AB = x and CD = y, which relation is true?",
+    "tag": "SSC CGL 16/09/2025 (SHIFT-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) x²/y² = 15/16", "(b) x/y = 6/15", "(c) x/y = 10/9", "(d) x²/y² = 125/147"],
+    "o_en": ["(a) x²/y² = 15/16", "(b) x/y = 6/15", "(c) x/y = 10/9", "(d) x²/y² = 125/147"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q514. त्रिज्या r वाले एक वृत्त में, एक जीवा केंद्र पर कोण θ (रेडियन में) अंतरित करती है। कौन सा व्यंजक लघु चाप की लंबाई को दर्शाता है?",
+    "q_en": "Q514. In a circle of radius r, a chord subtends an angle θ radians at the centre. Which expression gives the length of the minor arc?",
+    "tag": "SSC CGL 26/09/2025 (SHIFT-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) rθ", "(b) 1/(2r²θ)", "(c) 2r sin(θ/2)", "(d) 2πr"],
+    "o_en": ["(a) rθ", "(b) 1/(2r²θ)", "(c) 2r sin(θ/2)", "(d) 2πr"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q515. एक वृत्त में, एक चाप केंद्र पर 84° कोण अंतरित करता है। यदि चाप की लंबाई 22 सेमी है, तो वृत्त की त्रिज्या की लंबाई (सेमी में) ............ के बराबर है। (π = 22/7 का प्रयोग करें।)",
+    "q_en": "Q515. In a circle, an arc subtends 84° at the centre. If the arc length is 22 cm, find the radius. (Use π = 22/7.)",
+    "tag": "SSC CHSL 10/08/2023 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 19", "(b) 15", "(c) 17", "(d) 13"],
+    "o_en": ["(a) 19", "(b) 15", "(c) 17", "(d) 13"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q516. 7 इकाई की त्रिज्या वाले एक वृत्त से 7 इकाई लंबाई की जीवा से एक चाप काटा जाता है। छोटे हिस्से के चाप की लंबाई (इकाई में) क्या है?",
+    "q_en": "Q516. In a circle of radius 7 units, a chord of length 7 units cuts off an arc. Find the length of the minor arc.",
+    "tag": "SSC CGL 13/09/2024 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 8π/3", "(b) 7π/6", "(c) 7π/3", "(d) 7π/4"],
+    "o_en": ["(a) 8π/3", "(b) 7π/6", "(c) 7π/3", "(d) 7π/4"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q517. 6 सेमी और 2 सेमी त्रिज्याओं वाले दो वृत्त इस प्रकार हैं कि उनके केंद्रों के बीच की दूरी 8 सेमी है। कितनी उभयनिष्ठ स्पर्श रेखाएँ खींची जा सकती हैं?",
+    "q_en": "Q517. Two circles have radii 6 cm and 2 cm and the distance between their centres is 8 cm. How many common tangents can be drawn?",
+    "tag": "SSC CGL 25/09/2025 (SHIFT-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 0", "(b) 1", "(c) 2", "(d) 3"],
+    "o_en": ["(a) 0", "(b) 1", "(c) 2", "(d) 3"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q518. उभयनिष्ठ स्पर्श रेखाओं की संख्या ज्ञात कीजिए, यदि r₁ + r₂ = C₁C₂ (सामान्य नोटेशन के साथ, r₁ और r₂ और C₁ और C₂ दो वृत्तों की त्रिज्या और केन्द्र हैं)।",
+    "q_en": "Q518. Find the number of common tangents if r₁ + r₂ = C₁C₂, where r₁ and r₂ are the radii and C₁ and C₂ the centres of the two circles.",
+    "tag": "SSC CGL 05/12/2022 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 1", "(b) 0", "(c) 3", "(d) 4"],
+    "o_en": ["(a) 1", "(b) 0", "(c) 3", "(d) 4"],
+    "a": 2,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q519. दो वृत्तों की त्रिज्याएँ क्रमशः 5 सेमी और 3 सेमी हैं। उन दोनों वृत्तों के केंद्रों के बीच की न्यूनतम दूरी क्या होनी चाहिए ताकि उनके बीच ठीक तीन उभयनिष्ठ स्पर्श रेखाएँ संभव हों?",
+    "q_en": "Q519. Two circles have radii 5 cm and 3 cm. What should be the minimum distance between their centres so that exactly three common tangents are possible?",
+    "tag": "SSC CGL 23/09/2025 (Shift-01)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 8 सेमी", "(b) 2 सेमी", "(c) 5 सेमी", "(d) 10 सेमी"],
+    "o_en": ["(a) 8 cm", "(b) 2 cm", "(c) 5 cm", "(d) 10 cm"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q520. केंद्र P और Q वाले दो वृत्त जिनकी त्रिज्याएँ क्रमशः 6 सेमी और 4 सेमी हैं, एक दूसरे को आंतरिक रूप से स्पर्श करते हैं। यदि PQ का लम्ब समद्विभाजक A और B पर बड़े वृत्त से मिलता है, तो AB का मान है:",
+    "q_en": "Q520. Two circles with centres P and Q and radii 6 cm and 4 cm touch internally. If the perpendicular bisector of PQ meets the larger circle at A and B, find AB.",
+    "tag": "SSC CPO 05/10/2023 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) √35 सेमी", "(b) √5 सेमी", "(c) 2√5 सेमी", "(d) 2√35 सेमी"],
+    "o_en": ["(a) √35 cm", "(b) √5 cm", "(c) 2√5 cm", "(d) 2√35 cm"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q521. एक रेखा दो संकेंद्रित वृत्तों को काटती है। वृत्तों पर इस रेखा द्वारा बनाई गई जीवाओं की लंबाई 6 सेमी और 18 सेमी है। दो वृत्तों की त्रिज्याओं के वर्गों में अंतर ज्ञात कीजिए।",
+    "q_en": "Q521. A line cuts two concentric circles. The chords formed by this line on the circles have lengths 6 cm and 18 cm. Find the difference between the squares of the radii of the two circles.",
+    "tag": "SSC CGL 24/09/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 90", "(b) 120", "(c) 60", "(d) 72"],
+    "o_en": ["(a) 90", "(b) 120", "(c) 60", "(d) 72"],
+    "a": 3,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q522. 16 सेमी और 20 सेमी व्यास वाले दो वृत्त इस प्रकार हैं कि उनके केंद्रों के बीच की दूरी 13 सेमी है। इन वृत्तों की उस उभयनिष्ठ स्पर्शरेखा की लंबाई (सेमी में) कितनी है जो केंद्रों को मिलाने वाली रेखा को प्रतिच्छेद नहीं करती है?",
+    "q_en": "Q522. Two circles have diameters 16 cm and 20 cm, and the distance between their centres is 13 cm. Find the length of the common tangent that does not intersect the line joining their centres.",
+    "tag": "SSC CHSL 02/07/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) √165", "(b) √173", "(c) √167", "(d) √163"],
+    "o_en": ["(a) √165", "(b) √173", "(c) √167", "(d) √163"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q523. क्रमशः 3 इकाई और r इकाई त्रिज्या वाले दो वृत्तों के केंद्रों के बीच की दूरी 6 इकाई है। यदि सीधी उभयनिष्ठ स्पर्शरेखा की लंबाई √35 इकाई है, तो r का मान ........ इकाई है।",
+    "q_en": "Q523. The centres of two circles of radii 3 units and r units are 6 units apart. If the length of the direct common tangent is √35 units, find r.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 6", "(b) 4", "(c) 5", "(d) 3"],
+    "o_en": ["(a) 6", "(b) 4", "(c) 5", "(d) 3"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q524. भिन्न त्रिज्याओं वाले दो प्रतिच्छेदी वृत्तों के मामले में, कितनी बाह्य उभयनिष्ठ स्पर्श रेखाएं होती हैं?",
+    "q_en": "Q524. In the case of two intersecting circles of different radii, how many external common tangents are there?",
+    "tag": "SSC CHSL 21/11/2025 (Shift-03)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 0", "(b) 2", "(c) 3", "(d) 4"],
+    "o_en": ["(a) 0", "(b) 2", "(c) 3", "(d) 4"],
+    "a": 1,
+    "e_hi": "",
+    "e_en": ""
+  }, {
+    "q_hi": "Q525. 5 इकाई की बराबर त्रिज्या वाले दो वृत्तों की उभयनिष्ठ बाह्य स्पर्शरेखा की लंबाई, वृत्त के व्यास के बराबर है। वृत्तों के केंद्रों के बीच की दूरी कितनी इकाई की होगी?",
+    "q_en": "Q525. Two circles have equal radii of 5 units. The length of their common external tangent is equal to the diameter of a circle. Find the distance between their centres.",
+    "tag": "SSC CHSL 08/07/2024 (Shift-02)",
+    "type_tag": "Type V (B) (Circle)",
+    "o_hi": ["(a) 10", "(b) 12", "(c) 9", "(d) 8"],
+    "o_en": ["(a) 10", "(b) 12", "(c) 9", "(d) 8"],
+    "a": 0,
+    "e_hi": "",
+    "e_en": ""
+  }];

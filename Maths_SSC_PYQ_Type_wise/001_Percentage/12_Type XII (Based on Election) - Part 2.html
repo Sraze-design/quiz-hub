@@ -1,0 +1,373 @@
+
+
+const data = [{
+    "q_hi": "Q267. एक गांव के चुनाव में तीन उम्मीदवारों के बीच 80% वोट पड़े, जिनमें से 3% वोट अवैध घोषित कर दिए गए। विजयी उम्मीदवार को 42,680 वोट मिले जो कुल वैध वोटों का 55% थे। तीसरे स्थान पर रहने वाले उम्मीदवार को प्राप्त वैध मतों की संख्या ज्ञात कीजिए, यह देखते हुए कि उसे कुल वैध मतों का केवल 10% प्राप्त हुआ।",
+    "q_en": "Q267. In a village election among three candidates, 80% votes were cast, out of which 3% votes were declared invalid. The winning candidate received 42,680 votes which was 55% of the total valid votes. Find the number of valid votes received by the candidate who finished third, given that he received only 10% of the total valid votes.",
+    "tag": "SSC CHSL 03/08/2023 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 7760", "(b) 7700", "(c) 7670", "(d) 7680"],
+    "o_en": ["(a) 7760", "(b) 7700", "(c) 7670", "(d) 7680"],
+    "a": 0,
+    "e_hi": "कुल वैध मत = 42,680 × 100/55 = 77,600<br>तीसरे उम्मीदवार के वैध मत = 77,600 × 10/100 = 7,760",
+    "e_en": "Total valid votes = 42,680 × 100/55 = 77,600<br>Valid votes of third candidate = 77,600 × 10/100 = 7,760"
+  }, {
+    "q_hi": "Q268. दो उम्मीदवारों के बीच हुए एक चुनाव में, मतदाता सूची के 10% मतदाताओं ने अपना मत नहीं डाला, जबकि डाले गए मतों में से 10% मत अवैध पाए गए। जीतने वाले उम्मीदवार को वैध मतों के 56% मत प्राप्त हुए और वह 1,458 मतों के अंतर से चुनाव जीत गया। मतदाता सूची में नामांकित मतदाताओं की कुल संख्या क्या है?",
+    "q_en": "Q268. In an election between two candidates, 10% of voters on the voter list did not cast their vote, while 10% of the votes cast were found to be invalid. The winning candidate received 56% of the valid votes and won the election by a margin of 1,458 votes. What is the total number of voters enrolled in the voter list?",
+    "tag": "SSC CGL 24/07/2023 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 14,000", "(b) 15,000", "(c) 16,000", "(d) 13,000"],
+    "o_en": ["(a) 14,000", "(b) 15,000", "(c) 16,000", "(d) 13,000"],
+    "a": 1,
+    "e_hi": "विजेता = 56%<br>दूसरा उम्मीदवार = 44%<br>अंतर = 12% वैध मत<br>वैध मत = 1,458 × 100/12 = 12,150<br>डाले गए मत = 12,150 × 100/90 = 13,500<br>कुल मतदाता = 13,500 × 100/90 = 15,000",
+    "e_en": "Winner = 56%<br>Second candidate = 44%<br>Difference = 12% valid votes<br>Valid votes = 1,458 × 100/12 = 12,150<br>Votes cast = 12,150 × 100/90 = 13,500<br>Total voters = 13,500 × 100/90 = 15,000"
+  }, {
+    "q_hi": "Q269. दो उम्मीदवारों के बीच चुनाव में, पंजीकृत मतदाताओं में से 20% ने अपना मत नहीं दिया और 40 मत अवैध घोषित कर दिए गए। विजेता को पंजीकृत मतों का 42% प्राप्त हुआ और उसे 112 मतों से विजेता घोषित किया गया। पंजीकृत मतदाताओं की संख्या कितनी थी?",
+    "q_en": "Q269. In an election between two candidates, 20% of registered voters did not vote and 40 votes were declared invalid. The winner received 42% of the registered votes and was declared winner by 112 votes. What was the number of registered voters?",
+    "tag": "SSC CHSL TIER-II 26/06/2023",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 1200", "(b) 1500", "(c) 1800", "(d) 3800"],
+    "o_en": ["(a) 1200", "(b) 1500", "(c) 1800", "(d) 3800"],
+    "a": 2,
+    "e_hi": "डाले गए मत = 80%<br>वैध मत = 80% - 40<br>विजेता = 42%<br>दूसरे उम्मीदवार के मत = 80% - 40 - 42% = 38% - 40<br>अंतर = 42% - (38% - 40) = 4% + 40<br>4% + 40 = 112<br>4% = 72<br>कुल पंजीकृत मतदाता = 72 × 100/4 = 1,800",
+    "e_en": "Votes cast = 80%<br>Valid votes = 80% - 40<br>Winner = 42%<br>Second candidate's votes = 80% - 40 - 42% = 38% - 40<br>Difference = 42% - (38% - 40) = 4% + 40<br>4% + 40 = 112<br>4% = 72<br>Total registered voters = 72 × 100/4 = 1,800"
+  }, {
+    "q_hi": "Q270. दो उम्मीदवारों के बीच हुए एक चुनाव में, y% मतदाताओं ने मत नहीं डाला। डाले गए मतों में से 10% मत अवैध घोषित कर दिए गए, जबकि सभी वैध मत दोनों उम्मीदवारों में से किसी एक के पक्ष में पड़े। जिस उम्मीदवार को कुल वैध मतों में से 59.375% मत मिले, उसे 2484 मतों से निर्वाचित घोषित किया गया। यदि उस चुनाव में मतदान करने के पात्र लोगों की संख्या 16,000 थी, तो y का मान ज्ञात करें।",
+    "q_en": "Q270. In an election between two candidates, y% of voters did not cast their votes. 10% of the votes cast were declared invalid, while all valid votes were cast in favor of one of the two candidates. The candidate who got 59.375% of the total valid votes was declared elected by 2484 votes. If the number of eligible voters in that election was 16,000, find the value of y.",
+    "tag": "SSC CGL 09/09/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 7.2", "(b) 8.4", "(c) 8", "(d) 7.5"],
+    "o_en": ["(a) 7.2", "(b) 8.4", "(c) 8", "(d) 7.5"],
+    "a": 2,
+    "e_hi": "दोनों उम्मीदवारों के मतों का अंतर = 100% - 2 × 59.375% = 18.75%<br>18.75% वैध मत = 2,484<br>वैध मत = 2,484 × 100/18.75 = 13,248<br>डाले गए मत = 13,248 × 100/90 = 14,720<br>मतदान न करने वाले = 16,000 - 14,720 = 1,280<br>y = 1,280/16,000 × 100 = 8%",
+    "e_en": "Difference between votes of both candidates = 100% - 2 × 59.375% = 18.75%<br>18.75% valid votes = 2,484<br>Valid votes = 2,484 × 100/18.75 = 13,248<br>Votes cast = 13,248 × 100/90 = 14,720<br>Non-voters = 16,000 - 14,720 = 1,280<br>y = 1,280/16,000 × 100 = 8%"
+  }, {
+    "q_hi": "Q271. एक चुनाव में, मतदाता सूची में नामांकित 2% व्यक्तियों ने भाग नहीं लिया और 500 मत अवैध थे। दो उम्मीदवार A और B ने चुनाव लड़ा और A ने B को 200 मत से हरा दिया। यदि मतदाता सूची में नामांकित व्यक्तियों में से 43% ने A के पक्ष में अपना मत डाला, तो डाले गए कुल मतों की संख्या कितनी है?",
+    "q_en": "Q271. In an election, 2% of persons enrolled in the voter list did not participate and 500 votes were invalid. Two candidates A and B contested the election and A defeated B by 200 votes. If 43% of the persons enrolled in the voter list cast their votes in favor of A, what is the total number of votes cast?",
+    "tag": "SSC CGL 14/07/2023 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 2450", "(b) 2800", "(c) 3000", "(d) 3250"],
+    "o_en": ["(a) 2450", "(b) 2800", "(c) 3000", "(d) 3250"],
+    "a": 0,
+    "e_hi": "कुल मतदाता = N<br>डाले गए मत = 98% N<br>वैध मत = 98% N - 500<br>A के मत = 43% N<br>B के मत = 98% N - 500 - 43% N = 55% N - 500<br>A की जीत का अंतर = 43% N - 55% N + 500 = 200<br>12% N = 300<br>N = 2,500<br>डाले गए मत = 2,500 × 98/100 = 2,450",
+    "e_en": "Total voters = N<br>Votes cast = 98% N<br>Valid votes = 98% N - 500<br>A's votes = 43% N<br>B's votes = 98% N - 500 - 43% N = 55% N - 500<br>A's margin of victory = 43% N - 55% N + 500 = 200<br>12% N = 300<br>N = 2,500<br>Votes cast = 2,500 × 98/100 = 2,450"
+  }, {
+    "q_hi": "Q272. दो उम्मीदवारों P और Q के बीच हुए एक चुनाव में, P को कुल वैध मतों के 78% मत प्राप्त हुए। यदि निर्वाचन क्षेत्र में कुल मतों की संख्या 75,60,000 थी और 10% मतदाताओं ने अपने मत नहीं डाले और डाले गए 15% मत अवैध घोषित कर दिए गए, तो Q को प्राप्त वैध मतों की संख्या क्या थी?",
+    "q_en": "Q272. In an election between two candidates P and Q, P received 78% of the total valid votes. If the total number of votes in the constituency was 75,60,000 and 10% of the voters did not cast their votes and 15% of the votes cast were declared invalid, what was the number of valid votes received by Q?",
+    "tag": "SSC CGL 11/09/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 1,41,372", "(b) 1,41,732", "(c) 12,72,348", "(d) 1,47,312"],
+    "o_en": ["(a) 1,41,372", "(b) 1,41,732", "(c) 12,72,348", "(d) 1,47,312"],
+    "a": 2,
+    "e_hi": "डाले गए मत = 75,60,000 × 90/100 = 68,04,000<br>वैध मत = 68,04,000 × 85/100 = 57,83,400<br>Q के मत = 57,83,400 × 22/100 = 12,72,348",
+    "e_en": "Votes cast = 75,60,000 × 90/100 = 68,04,000<br>Valid votes = 68,04,000 × 85/100 = 57,83,400<br>Q's votes = 57,83,400 × 22/100 = 12,72,348"
+  }, {
+    "q_hi": "Q273. एक पंचायत चुनाव में, तीन प्रतियोगी A, B और C चुनाव लड़ रहे हैं। 8000 की कुल जनसंख्या में से 75% ने मतदान किया। चुनाव में कोई अमान्य या नोटा मत नहीं था। A को सबसे कम केवल 300 मत मिले। B को कुल मतों का 66% प्राप्त हुआ और वह चुनाव जीत गया। B को कितने मत मिले?",
+    "q_en": "Q273. In a Panchayat election, three contestants A, B and C are contesting. Out of a total population of 8000, 75% voted. There were no invalid or NOTA votes in the election. A got the lowest, only 300 votes. B received 66% of the total votes cast and won the election. How many votes did B receive?",
+    "tag": "SSC Phase XII 20/06/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 3960", "(b) 5280", "(c) 3660", "(d) 4060"],
+    "o_en": ["(a) 3960", "(b) 5280", "(c) 3660", "(d) 4060"],
+    "a": 0,
+    "e_hi": "डाले गए मत = 8,000 × 75/100 = 6,000<br>B के मत = 6,000 × 66/100 = 3,960",
+    "e_en": "Votes cast = 8,000 × 75/100 = 6,000<br>B's votes = 6,000 × 66/100 = 3,960"
+  }, {
+    "q_hi": "Q274. राजू, रवि और अशोक में चुनावी मुकाबला हुआ। डाले गए 5% मत अवैध मिले। राजू को कुल मतों का 30% मिला। रवि को कुल मतों में 32% मत मिले। विजेता को सबसे कम मत प्राप्त करने वाले व्यक्ति से 5136 मत अधिक प्राप्त हुए। डाले गए मतों की कुल संख्या ज्ञात कीजिए।",
+    "q_en": "Q274. There was an electoral contest among Raju, Ravi and Ashok. 5% of the votes cast were found invalid. Raju got 30% of the total votes. Ravi got 32% of the total votes. The winner got 5136 votes more than the person who got the lowest votes. Find the total number of votes cast.",
+    "tag": "SSC CGL 01/12/2022 (Shift-04)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 171200", "(b) 64200", "(c) 171220", "(d) 172100"],
+    "o_en": ["(a) 171200", "(b) 64200", "(c) 171220", "(d) 172100"],
+    "a": 0,
+    "e_hi": "वैध मत = 95%<br>राजू = 30% और रवि = 32%<br>अशोक के मत = 95% - 30% - 32% = 33%<br>विजेता अशोक है और सबसे कम मत राजू को मिले।<br>अंतर = 33% - 30% = 3%<br>3% = 5,136<br>कुल डाले गए मत = 5,136 × 100/3 = 1,71,200",
+    "e_en": "Valid votes = 95%<br>Raju = 30% and Ravi = 32%<br>Ashok's votes = 95% - 30% - 32% = 33%<br>The winner is Ashok and Raju received the lowest votes.<br>Difference = 33% - 30% = 3%<br>3% = 5,136<br>Total votes cast = 5,136 × 100/3 = 1,71,200"
+  }, {
+    "q_hi": "Q275. एक चुनाव में तीन उम्मीदवार A, B और C थे। 10% पात्र मतदाताओं ने मतदान नहीं किया। मतदान करने वाले लोगों में से, 45% ने A को, 35% ने B को और शेष 20% ने C को मतदान किया। A को डाले गए मतों में से 30% और B को डाले गए मतों में से 20% मतों को बाद में अवैध माना गया, जबकि C को डाले गए सभी मतों को वैध माना गया। यदि A को B से 882 अधिक वैध मत प्राप्त हुए, तो C को कितने वैध मत प्राप्त हुए?",
+    "q_en": "Q275. In an election, there were three candidates A, B, and C. 10% of eligible voters did not vote. Of the people who voted, 45% voted for A, 35% voted for B, and the remaining 20% voted for C. 30% of the votes cast for A and 20% of the votes cast for B were later considered invalid, while all votes cast for C were considered valid. If A received 882 more valid votes than B, how many valid votes did C receive?",
+    "tag": "SSC CHSL 27/05/2022 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 5020", "(b) 5040", "(c) 5050", "(d) 5060"],
+    "o_en": ["(a) 5020", "(b) 5040", "(c) 5050", "(d) 5060"],
+    "a": 1,
+    "e_hi": "A के वैध मत = 45% × 70% = 31.5%<br>B के वैध मत = 35% × 80% = 28%<br>A और B का अंतर = 31.5% - 28% = 3.5%<br>3.5% = 882<br>कुल डाले गए मत = 25,200<br>C के वैध मत = 25,200 × 20/100 = 5,040",
+    "e_en": "A's valid votes = 45% × 70% = 31.5%<br>B's valid votes = 35% × 80% = 28%<br>Difference between A and B = 31.5% - 28% = 3.5%<br>3.5% = 882<br>Total votes cast = 25,200<br>C's valid votes = 25,200 × 20/100 = 5,040"
+  }, {
+    "q_hi": "Q276. चमनलाल, असरार और जगजीत सिंह ने कोई चुनाव लड़ा था। मतदान के सभी वोट वैध थे। असरार को कुल वोटों के 35% वोट मिले थे। चमनलाल को प्रत्येक 35 वोट में से 14 वोट मिले थे। विजेता को सबसे कम वोट पाने वाले व्यक्ति की तुलना में 4950 वोट अधिक मिले थे। मतदान हुए सभी वोटों की कुल संख्या ज्ञात करें।",
+    "q_en": "Q276. Chamanlal, Asrar, and Jagjit Singh contested an election. All votes polled were valid. Asrar got 35% of the total votes. Chamanlal got 14 votes out of every 35 votes. The winner got 4950 votes more than the person who got the lowest votes. Find the total number of all votes polled.",
+    "tag": "SSC CGL 16/08/2021 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 13378", "(b) 38000", "(c) 99000", "(d) 33000"],
+    "o_en": ["(a) 13378", "(b) 38000", "(c) 99000", "(d) 33000"],
+    "a": 3,
+    "e_hi": "चमनलाल के मत = 14/35 = 40%<br>असरार के मत = 35%<br>जगजीत सिंह के मत = 100% - 40% - 35% = 25%<br>विजेता चमनलाल है।<br>अंतर = 40% - 25% = 15%<br>15% = 4,950<br>कुल मत = 4,950 × 100/15 = 33,000",
+    "e_en": "Chamanlal's votes = 14/35 = 40%<br>Asrar's votes = 35%<br>Jagjit Singh's votes = 100% - 40% - 35% = 25%<br>Winner is Chamanlal.<br>Difference = 40% - 25% = 15%<br>15% = 4,950<br>Total votes = 4,950 × 100/15 = 33,000"
+  }, {
+    "q_hi": "Q277. तीन उम्मीदवारों X, Y और Z ने एक चुनाव में भाग लिया। X को Y से 30% अधिक वोट मिले, जबकि Z को Y से 25% अधिक वोट मिले। X ने Z को भी 5000 वोटों से पीछे छोड़ दिया। यदि 71% मतदाताओं ने मतदान किया और कोई अवैध वोट नहीं डाला गया, तो मतदान सूची में मतदाताओं की कुल संख्या क्या थी?",
+    "q_en": "Q277. Three candidates X, Y and Z participated in an election. X got 30% more votes than Y, while Z got 25% more votes than Y. X also beat Z by 5000 votes. If 71% of voters voted and no invalid votes were cast, what was the total number of voters in the polling list?",
+    "tag": "SSC CGL 19/09/2024 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 5,00,000", "(b) 4,05,000", "(c) 3,55,000", "(d) 4,50,000"],
+    "o_en": ["(a) 5,00,000", "(b) 4,05,000", "(c) 3,55,000", "(d) 4,50,000"],
+    "a": 0,
+    "e_hi": "मान लेते हैं Y के मत = 100x<br>X के मत = 130x<br>Z के मत = 125x<br>X और Z का अंतर = 5x = 5,000<br>x = 1,000<br>कुल डाले गए मत = 130,000 + 100,000 + 125,000 = 3,55,000<br>71% मतदाता = 3,55,000<br>कुल मतदाता = 3,55,000 × 100/71 = 5,00,000",
+    "e_en": "Let Y's votes = 100x<br>X's votes = 130x<br>Z's votes = 125x<br>Difference between X and Z = 5x = 5,000<br>x = 1,000<br>Total votes cast = 130,000 + 100,000 + 125,000 = 3,55,000<br>71% voters = 3,55,000<br>Total voters = 3,55,000 × 100/71 = 5,00,000"
+  }, {
+    "q_hi": "Q278. एक चुनाव में दो उम्मीदवारों के बीच, 30% मतदाताओं ने अपना मत नहीं डाला और 200 मतों को अवैध घोषित कर दिया गया। विजेता को वैध मतों का 65% मत प्राप्त हुए। यदि वह 1200 मतों से जीता, तो कुल मत ज्ञात कीजिए।",
+    "q_en": "Q278. In an election between two candidates, 30% of voters did not cast their vote and 200 votes were declared invalid. The winner received 65% of the valid votes. If he won by 1200 votes, find the total number of votes.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 9000", "(b) 6000", "(c) 7000", "(d) 8000"],
+    "o_en": ["(a) 9000", "(b) 6000", "(c) 7000", "(d) 8000"],
+    "a": 1,
+    "e_hi": "विजेता = 65% वैध मत<br>दूसरा उम्मीदवार = 35% वैध मत<br>अंतर = 30% वैध मत<br>30% वैध मत = 1,200<br>वैध मत = 4,000<br>डाले गए मत = 4,000 + 200 = 4,200<br>कुल मतदाता = 4,200 × 100/70 = 6,000",
+    "e_en": "Winner = 65% valid votes<br>Second candidate = 35% valid votes<br>Difference = 30% valid votes<br>30% valid votes = 1,200<br>Valid votes = 4,000<br>Votes cast = 4,000 + 200 = 4,200<br>Total voters = 4,200 × 100/70 = 6,000"
+  }, {
+    "q_hi": "Q279. दो उम्मीदवारों के चुनाव में 68 मत अवैध घोषित किए गए। जीतने वाले उम्मीदवार को वैध मतों का 52% प्राप्त होता है, और वह 98 मतों से जीता जाता है। डाले गए मतों की कुल संख्या है:",
+    "q_en": "Q279. In an election between two candidates, 68 votes were declared invalid. The winning candidate gets 52% of the valid votes and wins by 98 votes. The total number of votes cast is:",
+    "tag": "SSC CHSL 08/07/2024 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 2475", "(b) 2518", "(c) 2500", "(d) 2250"],
+    "o_en": ["(a) 2475", "(b) 2518", "(c) 2500", "(d) 2250"],
+    "a": 1,
+    "e_hi": "विजेता = 52% वैध मत<br>दूसरा उम्मीदवार = 48% वैध मत<br>अंतर = 4% वैध मत<br>4% = 98<br>वैध मत = 98 × 100/4 = 2,450<br>कुल डाले गए मत = 2,450 + 68 = 2,518",
+    "e_en": "Winner = 52% valid votes<br>Second candidate = 48% valid votes<br>Difference = 4% valid votes<br>4% = 98<br>Valid votes = 98 × 100/4 = 2,450<br>Total votes cast = 2,450 + 68 = 2,518"
+  }, {
+    "q_hi": "Q280. दो उम्मीदवारों के बीच एक चुनाव होता है। जीतने वाला उम्मीदवार वैध मतों के 54% मत प्राप्त करता है और 88 मतों से विजयी होता है। यदि 58 मत अवैध घोषित किए जाते हैं, तो चुनाव में डाले गए मतों की कुल संख्या ज्ञात कीजिए।",
+    "q_en": "Q280. An election takes place between two candidates. The winning candidate receives 54% of the valid votes and wins by 88 votes. If 58 votes are declared invalid, find the total number of votes cast in the election.",
+    "tag": "SSC CHSL 11/07/2024 (Shift-04)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 1850", "(b) 1158", "(c) 1156", "(d) 2000"],
+    "o_en": ["(a) 1850", "(b) 1158", "(c) 1156", "(d) 2000"],
+    "a": 1,
+    "e_hi": "विजेता = 54% वैध मत<br>दूसरा उम्मीदवार = 46% वैध मत<br>अंतर = 8% वैध मत<br>8% = 88<br>वैध मत = 88 × 100/8 = 1,100<br>कुल डाले गए मत = 1,100 + 58 = 1,158",
+    "e_en": "Winner = 54% valid votes<br>Second candidate = 46% valid votes<br>Difference = 8% valid votes<br>8% = 88<br>Valid votes = 88 × 100/8 = 1,100<br>Total votes cast = 1,100 + 58 = 1,158"
+  }, {
+    "q_hi": "Q281. दो उम्मीदवारों के बीच एक चुनाव में, पराजित उम्मीदवार ने डाले गए वैध मतों का 42% हासिल किया और 2545800 मतों से चुनाव हार गया। यदि 365500 मतों को अवैध घोषित कर दिया गया और 30% लोगों ने अपना मत नहीं डाला, तो मतदाताओं में मत न डालने वाले लोगों की लगभग संख्या (मिलियन में) कितनी थी?",
+    "q_en": "Q281. In an election between two candidates, the defeated candidate secured 42% of the valid votes polled and lost the election by 2545800 votes. If 365500 votes were declared invalid and 30% of people did not cast their vote, then what was the approximate number of people (in millions) who did not cast their vote among the voters?",
+    "tag": "SSC CHSL 03/07/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 5", "(b) 7", "(c) 6", "(d) 8"],
+    "o_en": ["(a) 5", "(b) 7", "(c) 6", "(d) 8"],
+    "a": 1,
+    "e_hi": "जीत का अंतर = 58% - 42% = 16%<br>16% वैध मत = 2545800<br>वैध मत = 15911250<br>कुल डाले गए मत = 15911250 + 365500 = 16276750<br>कुल मतदाता = 16276750 × 100/70 = 23252500<br>मत न डालने वाले = 30% of 23252500 = 6975750<br>लगभग = 7 मिलियन",
+    "e_en": "Winning margin = 58% - 42% = 16%<br>16% valid votes = 2545800<br>Valid votes = 15911250<br>Total votes polled = 15911250 + 365500 = 16276750<br>Total voters = 16276750 × 100/70 = 23252500<br>Non-voters = 30% of 23252500 = 6975750<br>Approximately = 7 million"
+  }, {
+    "q_hi": "Q282. एक चुनाव में सूची में सभी मतदाताओं के 46% द्वारा विजेता का समर्थन किया गया था और उसे अपने एकमात्र प्रतिद्वंद्वी से 410 वोट अधिक मिले। मतदाता सूची के 10% मतदाताओं ने वोट नहीं डाले और 60 मतदाताओं ने अपने मतपत्र खाली डाल दिए। सूची में कितने मतदाता थे?",
+    "q_en": "Q282. In an election, 46% of all voters in the list supported the winner, and he received 410 votes more than his only opponent. 10% of voters in the voter list did not cast their votes, and 60 voters cast blank ballots. How many voters were in the list?",
+    "tag": "SSC CPO 27/06/2024 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 17445", "(b) 16550", "(c) 17500", "(d) 15750"],
+    "o_en": ["(a) 17445", "(b) 16550", "(c) 17500", "(d) 15750"],
+    "a": 2,
+    "e_hi": "मान लेते हैं कुल मतदाता = x<br>विजेता के मत = 46%x<br>डाले गए मत = 90%x<br>प्रतिद्वंद्वी के मत = 90%x - 46%x - 60 = 44%x - 60<br>अंतर = 46%x - (44%x - 60) = 410<br>2%x + 60 = 410<br>x = 17500",
+    "e_en": "Let total voters = x<br>Winner's votes = 46%x<br>Votes polled = 90%x<br>Opponent's votes = 90%x - 46%x - 60 = 44%x - 60<br>Difference = 46%x - (44%x - 60) = 410<br>2%x + 60 = 410<br>x = 17500"
+  }, {
+    "q_hi": "Q283. एक चुनाव में, मतदाता सूची में शामिल 12% मतदाताओं ने अपना वोट नहीं डाला, जबकि 84 मतदाताओं ने अपने मतपत्र खाली डाले। केवल दो उम्मीदवार, रामाज्ञा और श्रवण थे। विजेता रामाज्ञा को सूची के सभी मतदाताओं में से 54% का समर्थन प्राप्त हुआ। उसे अपने प्रतिद्वंदी श्रवण से 1456 वोट अधिक मिले। सूची में मतदाताओं की कुल संख्या ज्ञात कीजिए।",
+    "q_en": "Q283. In an election, 12% of voters on the voter list did not cast their vote, while 84 voters cast blank ballots. There were only two candidates, Ramagya and Shravan. The winner Ramagya received the support of 54% of all voters on the list. He received 1456 votes more than his opponent Shravan. Find the total number of voters on the list.",
+    "tag": "SSC CPO 27/06/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 5690", "(b) 6670", "(c) 7860", "(d) 6860"],
+    "o_en": ["(a) 5690", "(b) 6670", "(c) 7860", "(d) 6860"],
+    "a": 3,
+    "e_hi": "मान लेते हैं कुल मतदाता = x<br>मतदान करने वाले = 88%x<br>रामाज्ञा के मत = 54%x<br>श्रवण के मत = 88%x - 54%x - 84 = 34%x - 84<br>अंतर = 54%x - (34%x - 84) = 1456<br>20%x + 84 = 1456<br>x = 6860",
+    "e_en": "Let total voters = x<br>Voters who polled = 88%x<br>Ramagya's votes = 54%x<br>Shravan's votes = 88%x - 54%x - 84 = 34%x - 84<br>Difference = 54%x - (34%x - 84) = 1456<br>20%x + 84 = 1456<br>x = 6860"
+  }, {
+    "q_hi": "Q284. दो उम्मीदवारों के बीच एक चुनाव में 10% मतदाताओं ने वोट नहीं डाले और 75 वोट अमान्य पाए गए। विजेता को अपेक्षित कुल वोटों के 50% वोट मिले और वह 170 वोटों से जीत गया। मतदाता सूची में कितने मतदाताओं का नाम दर्ज हैं?",
+    "q_en": "Q284. In an election between two candidates, 10% of voters did not cast their votes and 75 votes were found invalid. The winner got 50% of the total expected votes and won by 170 votes. How many voters are registered in the voter list?",
+    "tag": "SSC CPO 27/06/2024 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 800", "(b) 855", "(c) 850", "(d) 950"],
+    "o_en": ["(a) 800", "(b) 855", "(c) 850", "(d) 950"],
+    "a": 3,
+    "e_hi": "मान लेते हैं कुल मतदाता = x<br>डाले गए मत = 90%x<br>विजेता के मत = 50%x<br>प्रतिद्वंद्वी के मत = 40%x - 75<br>अंतर = 50%x - (40%x - 75) = 170<br>10%x + 75 = 170<br>x = 950",
+    "e_en": "Let total voters = x<br>Votes polled = 90%x<br>Winner's votes = 50%x<br>Opponent's votes = 40%x - 75<br>Difference = 50%x - (40%x - 75) = 170<br>10%x + 75 = 170<br>x = 950"
+  }, {
+    "q_hi": "Q285. दो उम्मीदवारों के बीच हुए एक चुनाव में, मतदाता सूची के 20% मतदाताओं ने मतदान नहीं किया, और 80 मतदाताओं ने अपने मतपत्र खाली छोड़ दिए। विजेता उम्मीदवार ने मतदाता सूची में दर्ज कुल मतदाताओं के 45% मत प्राप्त किए, और उसे अपने विरोधी उम्मीदवार से 280 मत अधिक मिले। सूची में मतदाताओं की संख्या कितनी थी?",
+    "q_en": "Q285. In an election held between two candidates, 20% of voters on the voter list did not vote, and 80 voters left their ballot papers blank. The winning candidate secured 45% of total voters registered in the voter list, and received 280 votes more than his opposing candidate. What was the number of voters in the list?",
+    "tag": "SSC CPO 05/10/2023 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 2000", "(b) 2800", "(c) 2500", "(d) 1500"],
+    "o_en": ["(a) 2000", "(b) 2800", "(c) 2500", "(d) 1500"],
+    "a": 0,
+    "e_hi": "मान लेते हैं कुल मतदाता = x<br>मतदान करने वाले = 80%x<br>विजेता के मत = 45%x<br>प्रतिद्वंद्वी के मत = 80%x - 45%x - 80 = 35%x - 80<br>अंतर = 45%x - (35%x - 80) = 280<br>10%x + 80 = 280<br>x = 2000",
+    "e_en": "Let total voters = x<br>Voters who polled = 80%x<br>Winner's votes = 45%x<br>Opponent's votes = 80%x - 45%x - 80 = 35%x - 80<br>Difference = 45%x - (35%x - 80) = 280<br>10%x + 80 = 280<br>x = 2000"
+  }, {
+    "q_hi": "Q286. A और B के बीच एक चुनाव में, डाले गए प्रत्येक पांचवें मत को मशीन द्वारा अमान्य के रूप में चिह्नित किया गया। शेष मतों में, A, 2500 मतों के अंतर से या डाले गए कुल मतों के 10% के अंतर से B से चुनाव जीत जाता है। यदि अमान्य मतों में से 90%, B के पक्ष में होते, तो निम्नलिखित में से कौन सा विकल्प चुनाव का नतीजा होता?",
+    "q_en": "Q286. In an election between A and B, every fifth vote cast was marked as invalid by the machine. Out of the remaining votes, A wins the election against B by a margin of 2500 votes or by a margin of 10% of total votes cast. If 90% of the invalid votes were in favour of B, which of the following options would be the result of the election?",
+    "tag": "SSC CPO 28/06/2024 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) A, 3% से जीत जाता", "(b) A, 8% से जीत जाता", "(c) B, 8% से जीत जाता", "(d) B, 3% से जीत जाता"],
+    "o_en": ["(a) A wins by 3%", "(b) A wins by 8%", "(c) B wins by 8%", "(d) B wins by 3%"],
+    "a": 2,
+    "e_hi": "कुल डाले गए मत = 2500 × 100/10 = 25000<br>अमान्य मत = 20% of 25000 = 5000<br>वैध मत = 25000 - 5000 = 20000<br>A के वैध मत = 55% of 20000 = 11000<br>B के वैध मत = 45% of 20000 = 9000<br>अमान्य मतों में B के मत = 90% of 5000 = 4500<br>अमान्य मतों में A के मत = 500<br>अंतिम A के मत = 11000 + 500 = 11500<br>अंतिम B के मत = 9000 + 4500 = 13500<br>B की बढ़त = 2000<br>2000/25000 × 100 = 8%",
+    "e_en": "Total votes polled = 2500 × 100/10 = 25000<br>Invalid votes = 20% of 25000 = 5000<br>Valid votes = 25000 - 5000 = 20000<br>A's valid votes = 55% of 20000 = 11000<br>B's valid votes = 45% of 20000 = 9000<br>B's share in invalid votes = 90% of 5000 = 4500<br>A's share in invalid votes = 500<br>Final votes of A = 11000 + 500 = 11500<br>Final votes of B = 9000 + 4500 = 13500<br>Lead for B = 2000<br>2000/25000 × 100 = 8%"
+  }, {
+    "q_hi": "Q287. दो उम्मीदवारों के बीच हुए चुनाव में 64% मतदाताओं ने मत डाले, जिनमें से 4% मत अवैध घोषित कर दिए गए। एक उम्मीदवार को 12288 मत मिले जो कुल वैध मतों का 64% हैं। उस चुनाव में नामांकित मतों की कुल संख्या ज्ञात कीजिए।",
+    "q_en": "Q287. In an election between two candidates, 64% of voters cast their votes, out of which 4% votes were declared invalid. A candidate got 12288 votes which is 64% of the total valid votes. Find the total number of enrolled voters in that election.",
+    "tag": "SSC CHSL TIER-II 02/11/2023",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 31,250", "(b) 30,250", "(c) 32,152", "(d) 20,152"],
+    "o_en": ["(a) 31,250", "(b) 30,250", "(c) 32,152", "(d) 20,152"],
+    "a": 0,
+    "e_hi": "वैध मत = 12288 × 100/64 = 19200<br>डाले गए मत = 19200 × 100/96 = 20000<br>कुल मतदाता = 20000 × 100/64 = 31250",
+    "e_en": "Valid votes = 12288 × 100/64 = 19200<br>Votes polled = 19200 × 100/96 = 20000<br>Total voters = 20000 × 100/64 = 31250"
+  }, {
+    "q_hi": "Q288. एक चुनाव में, मतदाता सूची के 15% मतदाताओं ने अपना मत नहीं डाला और 100 मतदाताओं ने अपना मतपत्र खाली छोड़ दिया। राम और श्याम केवल दो ही प्रत्याशी थे। विजेता राम को सूची के सभी मतदाताओं के 69% का समर्थन प्राप्त हुआ और उसे श्याम से 630 मत अधिक मिले। सूची में मतदाताओं की संख्या ज्ञात कीजिए।",
+    "q_en": "Q288. In an election, 15% of voters on the voter list did not cast their vote and 100 voters left their ballot papers blank. Ram and Shyam were the only two candidates. The winner Ram received support of 69% of all voters on the list and got 630 votes more than Shyam. Find the number of voters on the list.",
+    "tag": "SSC Phase-XI 30/06/2023 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 1200", "(b) 1000", "(c) 1100", "(d) 1300"],
+    "o_en": ["(a) 1200", "(b) 1000", "(c) 1100", "(d) 1300"],
+    "a": 1,
+    "e_hi": "मान लेते हैं कुल मतदाता = x<br>मतदान करने वाले = 85%x<br>राम के मत = 69%x<br>श्याम के मत = 85%x - 69%x - 100 = 16%x - 100<br>अंतर = 69%x - (16%x - 100) = 630<br>53%x + 100 = 630<br>x = 1000",
+    "e_en": "Let total voters = x<br>Voters who polled = 85%x<br>Ram's votes = 69%x<br>Shyam's votes = 85%x - 69%x - 100 = 16%x - 100<br>Difference = 69%x - (16%x - 100) = 630<br>53%x + 100 = 630<br>x = 1000"
+  }, {
+    "q_hi": "Q289. दो उम्मीदवारों के बीच एक चुनाव में, पराजित उम्मीदवार ने पड़े हुए वैध मतों का 42% हासिल किया और वह 768400 मतों से चुनाव हार गया। यदि 82560 मतों को अमान्य घोषित कर दिया गया था और 20% लोगों ने अपना मत नहीं डाला, तो अमान्य मत, लोगों द्वारा नहीं डाले गए मतों के कितने प्रतिशत (दशमलव के बाद एक अंक तक) थे?",
+    "q_en": "Q289. In an election between two candidates, the defeated candidate obtained 42% of the valid votes polled and lost the election by 768400 votes. If 82560 votes were declared invalid and 20% of people did not cast their vote, then invalid votes were what percentage (correct to one decimal place) of the votes not cast by people?",
+    "tag": "SSC CGL 02/12/2022 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 10.6%", "(b) 9.8%", "(c) 12.9%", "(d) 6.7%"],
+    "o_en": ["(a) 10.6%", "(b) 9.8%", "(c) 12.9%", "(d) 6.7%"],
+    "a": 3,
+    "e_hi": "विजेता और पराजित के वैध मतों का अंतर = 58% - 42% = 16%<br>16% वैध मत = 768400<br>वैध मत = 4802500<br>कुल डाले गए मत = 4802500 + 82560 = 4885060<br>कुल मतदाता = 4885060 × 100/80 = 6106325<br>मत न डालने वाले = 20% of 6106325 = 1221265<br>प्रतिशत = 82560/1221265 × 100 ≈ 6.7%",
+    "e_en": "Difference between winner and defeated in valid votes = 58% - 42% = 16%<br>16% valid votes = 768400<br>Valid votes = 4802500<br>Total votes polled = 4802500 + 82560 = 4885060<br>Total voters = 4885060 × 100/80 = 6106325<br>Non-voters = 20% of 6106325 = 1221265<br>Percentage = 82560/1221265 × 100 ≈ 6.7%"
+  }, {
+    "q_hi": "Q290. दो उम्मीदवारों के बीच लड़े गए चुनाव में, कुल मतदाताओं में से 15% ने मत नहीं डाला और 100 मत अयोग्य हो गए। चुनाव जीतने वाले उम्मीदवार ने कुल मतों का 45% प्राप्त किया और 400 मतों के अंतर से जीता। मतदाताओं की कुल संख्या ज्ञात कीजिए।",
+    "q_en": "Q290. In an election contested between two candidates, 15% of total voters did not cast their vote and 100 votes became invalid. The candidate who won the election obtained 45% of the total votes and won by a margin of 400 votes. Find the total number of voters.",
+    "tag": "SSC CGL 09/12/2022 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 6,000", "(b) 3,600", "(c) 10,000", "(d) 3,500"],
+    "o_en": ["(a) 6,000", "(b) 3,600", "(c) 10,000", "(d) 3,500"],
+    "a": 0,
+    "e_hi": "मान लेते हैं कुल मतदाता = x<br>डाले गए मत = 85%x<br>विजेता के मत = 45%x<br>पराजित के मत = 40%x - 100<br>अंतर = 45%x - (40%x - 100) = 400<br>5%x + 100 = 400<br>x = 6000",
+    "e_en": "Let total voters = x<br>Votes polled = 85%x<br>Winner's votes = 45%x<br>Defeated candidate's votes = 40%x - 100<br>Difference = 45%x - (40%x - 100) = 400<br>5%x + 100 = 400<br>x = 6000"
+  }, {
+    "q_hi": "Q291. रजत, पूजा और आभा चुनाव में भाग लेते हैं। रजत को वैध मतों का 36% और पूजा को वैध मतों का 40% प्राप्त होता है। यदि डाले गए कुल मत 40,000 हैं और 10% मत अवैध हैं, तो आभा को प्राप्त मतों की संख्या ज्ञात कीजिए।",
+    "q_en": "Q291. Rajat, Pooja and Aabha participate in an election. Rajat receives 36% of the valid votes and Pooja receives 40% of the valid votes. If total votes polled are 40,000 and 10% votes are invalid, find the number of votes received by Aabha.",
+    "tag": "SSC CHSL 14/08/2023 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 9245", "(b) 1024", "(c) 8640", "(d) 5760"],
+    "o_en": ["(a) 9245", "(b) 1024", "(c) 8640", "(d) 5760"],
+    "a": 2,
+    "e_hi": "वैध मत = 90% of 40000 = 36000<br>रजत और पूजा के मत = 36% + 40% = 76% of 36000<br>आभा के मत = 24% of 36000 = 8640",
+    "e_en": "Valid votes = 90% of 40000 = 36000<br>Votes of Rajat and Pooja = 36% + 40% = 76% of 36000<br>Votes of Aabha = 24% of 36000 = 8640"
+  }, {
+    "q_hi": "Q292. दो दलों के बीच एक राज्य के चुनाव में, 83% मतदाताओं ने अपने मत डाले, जिनमें से 4% मतों को अवैध घोषित कर दिया गया। दल A को 156611 मत मिले जो कुल वैध मतों का 83% था। उस चुनाव में नामांकित मतों की कुल संख्या ज्ञात कीजिए। (केवल पूर्णांक भाग पर विचार कीजिए)",
+    "q_en": "Q292. In a state election between two parties, 83% of voters cast their votes, out of which 4% votes were declared invalid. Party A got 156611 votes which was 83% of total valid votes. Find the total number of enrolled voters in that election. (Consider integer part only)",
+    "tag": "SSC CHSL 04/07/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 23,46,807", "(b) 2,58,233", "(c) 2,34,888", "(d) 2,36,807"],
+    "o_en": ["(a) 23,46,807", "(b) 2,58,233", "(c) 2,34,888", "(d) 2,36,807"],
+    "a": 3,
+    "e_hi": "वैध मत = 156611 × 100/83 = 188688<br>डाले गए मत = 188688 × 100/96 = 196550<br>कुल मतदाता = 196550 × 100/83 ≈ 236807",
+    "e_en": "Valid votes = 156611 × 100/83 = 188688<br>Votes polled = 188688 × 100/96 = 196550<br>Total voters = 196550 × 100/83 ≈ 236807"
+  }, {
+    "q_hi": "Q293. P, R और S के बीच एक चुनाव में डाले गए कुल मतों में से 10% मत अमान्य हैं। R और S के पक्ष में डाले गए मत कुल डाले गए मतों के आधे हैं, और उन्हें बराबर मत मिलते हैं। मशीन में खराबी के कारण, S के आधे मत और अमान्य मतों के आधे अतिरिक्त रूप से R के पक्ष में गिने जाते हैं। गलती के कारण R द्वारा प्राप्त मतों का कुल प्रतिशत कितना है?",
+    "q_en": "Q293. In an election among P, R and S, 10% of total votes polled are invalid. The votes polled in favour of R and S are half of the total votes polled, and they get equal votes. Due to a machine fault, half of S's votes and half of the invalid votes are additionally counted in favour of R. What is the total percentage of votes received by R due to the error?",
+    "tag": "SSC CPO 28/06/2024 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 37.55%", "(b) 41.55%", "(c) 42.5%", "(d) 38.5%"],
+    "o_en": ["(a) 37.55%", "(b) 41.55%", "(c) 42.5%", "(d) 38.5%"],
+    "a": 2,
+    "e_hi": "मान लेते हैं कुल मत = 100<br>अमान्य मत = 10<br>R और S के कुल मत = 50<br>R के मूल मत = 25<br>S के मूल मत = 25<br>S के आधे मत R को = 12.5<br>अमान्य मतों के आधे मत R को = 5<br>R के अंतिम मत = 25 + 12.5 + 5 = 42.5<br>कुल प्रतिशत = 42.5%",
+    "e_en": "Let total votes = 100<br>Invalid votes = 10<br>Total votes for R and S = 50<br>Original votes for R = 25<br>Original votes for S = 25<br>Half of S's votes to R = 12.5<br>Half of invalid votes to R = 5<br>Final votes for R = 25 + 12.5 + 5 = 42.5<br>Total percentage = 42.5%"
+  }, {
+    "q_hi": "Q294. हरि, कमल और ललित ने एक चुनाव लड़ा जिसमें 6050 वोट पड़े और कोई भी वोट अवैध नहीं था। कमल को हरि और ललित द्वारा प्राप्त कुल वोटों से 42% अधिक वोट प्राप्त हुए। यदि ललित को डाले गए कुल वोटों में से केवल 8% वोट प्राप्त हुए, तो हरि को प्राप्त वोटों की संख्या ज्ञात कीजिए।",
+    "q_en": "Q294. Hari, Kamal and Lalit contested an election in which 6050 votes were cast and no vote was invalid. Kamal received 42% more votes than the total votes received by Hari and Lalit. If Lalit received only 8% of total votes cast, find the number of votes received by Hari.",
+    "tag": "SSC CGL TIER-II 26/10/2023",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 2016", "(b) 1556", "(c) 1912", "(d) 1668"],
+    "o_en": ["(a) 2016", "(b) 1556", "(c) 1912", "(d) 1668"],
+    "a": 0,
+    "e_hi": "ललित के मत = 8% of 6050 = 484<br>हरि और ललित के कुल मत = 6050/2.42 = 2500<br>हरि के मत = 2500 - 484 = 2016",
+    "e_en": "Lalit's votes = 8% of 6050 = 484<br>Total votes of Hari and Lalit = 6050/2.42 = 2500<br>Hari's votes = 2500 - 484 = 2016"
+  }, {
+    "q_hi": "Q295. तीन प्रत्याशियों के बीच हुए चुनाव में, अर्जुन, भास्कर और सरल ने एक पद के लिए चुनाव लड़ा। अर्जुन को सरल से 50% अधिक वोट मिले, और सरल को भास्कर से 2% कम वोट मिले। भास्कर और सरल के मतों के बीच का अंतर 1296 है। अर्जुन और भास्कर के मतों के बीच के अंतर का आधा कितना है?",
+    "q_en": "Q295. In an election held among three candidates, Arjun, Bhaskar and Saral contested for a post. Arjun got 50% more votes than Saral, and Saral got 2% less votes than Bhaskar. The difference between votes of Bhaskar and Saral is 1296. What is half of the difference between votes of Arjun and Bhaskar?",
+    "tag": "SSC CGL 14/07/2023 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 3888", "(b) 13988", "(c) 7766", "(d) 15228"],
+    "o_en": ["(a) 3888", "(b) 13988", "(c) 7766", "(d) 15228"],
+    "a": 3,
+    "e_hi": "मान लेते हैं भास्कर के मत = 100x<br>सरल के मत = 98x<br>2x = 1296<br>x = 648<br>अर्जुन के मत = 147x<br>अर्जुन और भास्कर का अंतर = 47x = 30456<br>आधा = 15228",
+    "e_en": "Let Bhaskar's votes = 100x<br>Saral's votes = 98x<br>2x = 1296<br>x = 648<br>Arjun's votes = 147x<br>Difference between Arjun and Bhaskar = 47x = 30456<br>Half = 15228"
+  }, {
+    "q_hi": "Q296. दो उम्मीदवार P और Q ने एक चुनाव लड़ा। पंजीकृत मतदाताओं में से 70% मतदाता P के समर्थक हैं। यदि P के 60% समर्थकों और Q के 30% समर्थकों से उम्मीद की जाती है कि वे उम्मीदवार P को वोट देंगे, तो कितने प्रतिशत पंजीकृत मतदाताओं से उम्मीदवार P को वोट देने की उम्मीद है?",
+    "q_en": "Q296. Two candidates P and Q contested an election. 70% of registered voters are supporters of P. If 60% of P's supporters and 30% of Q's supporters are expected to vote for candidate P, what percentage of registered voters are expected to vote for candidate P?",
+    "tag": "SSC CGL 06/12/2022 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 30%", "(b) 51%", "(c) 26%", "(d) 47%"],
+    "o_en": ["(a) 30%", "(b) 51%", "(c) 26%", "(d) 47%"],
+    "a": 1,
+    "e_hi": "P के समर्थक = 70%<br>P को इनके मत = 60% of 70% = 42%<br>Q के समर्थक = 30%<br>P को इनके मत = 30% of 30% = 9%<br>कुल अपेक्षित मत = 42% + 9% = 51%",
+    "e_en": "Supporters of P = 70%<br>Votes for P from them = 60% of 70% = 42%<br>Supporters of Q = 30%<br>Votes for P from them = 30% of 30% = 9%<br>Total expected votes = 42% + 9% = 51%"
+  }, {
+    "q_hi": "Q297. एक चुनाव में, मतदाताओं के पास तीन उम्मीदवारों में से एक उम्मीदवार को वोट देने का विकल्प है। उनके पास सभी उम्मीदवारों को अस्वीकार करने के लिए 'उपरोक्त में से कोई नहीं' (नोटा) के चयन का भी विकल्प है। तीनों उम्मीदवारों को नोटा के 6 गुना वोट मिलते हैं। विजेता को दूसरे उपविजेता के वोटों के दोगुने वोट मिलते हैं। पहले उपविजेता को नोटा से 900 वोट अधिक मिलते हैं और वह दूसरे उपविजेता को 150 वोट से हरा देता है। डाले गए मतों की कुल संख्या ज्ञात करें।",
+    "q_en": "Q297. In an election, voters have the option to vote for one of the three candidates. They also have the option to select 'None of the Above' (NOTA) to reject all candidates. All three candidates together receive 6 times the NOTA votes. The winner gets twice the votes of the second runner-up. The first runner-up receives 900 votes more than NOTA and defeats the second runner-up by 150 votes. Find the total number of votes polled.",
+    "tag": "SSC CHSL 05/07/2024 (Shift-04)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 17715", "(b) 15177", "(c) 11025", "(d) 11577"],
+    "o_en": ["(a) 17715", "(b) 15177", "(c) 11025", "(d) 11577"],
+    "a": 2,
+    "e_hi": "मान लेते हैं नोटा के मत = x<br>तीनों उम्मीदवारों के कुल मत = 6x<br>पहले उपविजेता के मत = x + 900<br>दूसरे उपविजेता के मत = x + 750<br>विजेता के मत = 2x + 1500<br>तीनों उम्मीदवारों के कुल मत = 4x + 3150<br>4x + 3150 = 6x<br>x = 1575<br>डाले गए कुल मत = 6x + x = 7x = 11025",
+    "e_en": "Let NOTA votes = x<br>Total votes of three candidates = 6x<br>First runner-up votes = x + 900<br>Second runner-up votes = x + 750<br>Winner votes = 2x + 1500<br>Total votes of three candidates = 4x + 3150<br>4x + 3150 = 6x<br>x = 1575<br>Total votes polled = 6x + x = 7x = 11025"
+  }, {
+    "q_hi": "Q298. तीन प्रत्याशियों P, Q और R ने एक चुनाव में भाग लिया। P ने Q से 35% अधिक मत प्राप्त किए और R को Q से 15% अधिक मत प्राप्त हुए। P ने R को 2412 मतों से पीछे छोड़ दिया। यदि 90% मतदाताओं ने मतदान किया हो और कोई अमान्य या अवैध मत न डाला गया हो, तो मतदान सूची में मतदाताओं की संख्या कितनी थी?",
+    "q_en": "Q298. Three candidates P, Q and R participated in an election. P received 35% more votes than Q and R received 15% more votes than Q. P left R behind by 2412 votes. If 90% of voters voted and no invalid or illegal votes were cast, what was the number of voters in the polling list?",
+    "tag": "SSC CGL 09/12/2022 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 46,900", "(b) 42,800", "(c) 42,210", "(d) 48,500"],
+    "o_en": ["(a) 46,900", "(b) 42,800", "(c) 42,210", "(d) 48,500"],
+    "a": 0,
+    "e_hi": "मान लेते हैं Q के मत = x<br>P के मत = 1.35x<br>R के मत = 1.15x<br>P और R का अंतर = 0.20x = 2412<br>x = 12060<br>कुल डाले गए मत = 3.5x = 42210<br>कुल मतदाता = 42210 × 100/90 = 46900",
+    "e_en": "Let Q's votes = x<br>P's votes = 1.35x<br>R's votes = 1.15x<br>Difference between P and R = 0.20x = 2412<br>x = 12060<br>Total votes polled = 3.5x = 42210<br>Total voters = 42210 × 100/90 = 46900"
+  }, {
+    "q_hi": "Q299. मतदान करने के लिए पर्याप्त लोगों में से 28% लोग 20 से 25 वर्ष के बीच के हैं। एक चुनाव में मतदान करने के लिए पात्र 20 से 25 वर्ष की उम्र वाले लोगों में से 75% ने वास्तव में मतदान किया। उस चुनाव में 20 से 25 वर्ष के बीच के व्यक्तियों की संख्या, जिन्होंने वास्तव में मतदान किया था, मतदान हेतु पात्र लोगों की संख्या का कितना प्रतिशत थी?",
+    "q_en": "Q299. Out of the eligible voters, 28% are between 20 and 25 years of age. In an election, 75% of eligible voters aged between 20 and 25 years actually voted. What percentage of the total eligible voters were the persons aged between 20 and 25 who actually voted in that election?",
+    "tag": "SSC Phase-X 01/08/2022 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 25%", "(b) 21%", "(c) 28%", "(d) 22%"],
+    "o_en": ["(a) 25%", "(b) 21%", "(c) 28%", "(d) 22%"],
+    "a": 1,
+    "e_hi": "20 से 25 वर्ष के पात्र लोग = 28%<br>इनमें मतदान करने वाले = 75% of 28% = 21%<br>अतः उत्तर = 21%",
+    "e_en": "Eligible people between 20 and 25 years = 28%<br>Voters among them = 75% of 28% = 21%<br>Hence answer = 21%"
+  }, {
+    "q_hi": "Q300. एक चुनाव में, 35% मतदाताओं ने उम्मीदवार P के लिए मतदान किया जबकि शेष में से 50% मतदाताओं ने उम्मीदवार Q के लिए मतदान किया। शेष मतदाताओं ने मतदान नहीं किया। यदि उम्मीदवार P को मत देने वालों और मत न देने वालों के बीच का अंतर 1000 था, तो उस चुनाव में मतदान करने के लिए योग्य व्यक्तियों की संख्या कितनी थी?",
+    "q_en": "Q300. In an election, 35% of voters voted for candidate P while 50% of the remaining voters voted for candidate Q. The remaining voters did not vote. If the difference between voters who voted for candidate P and those who did not vote was 1000, what was the number of persons eligible to vote in that election?",
+    "tag": "SSC Phase-X 01/08/2022 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 40000", "(b) 60000", "(c) 75000", "(d) 55000"],
+    "o_en": ["(a) 40000", "(b) 60000", "(c) 75000", "(d) 55000"],
+    "a": 0,
+    "e_hi": "P को मत = 35%<br>शेष = 65%<br>Q को मत = 50% of 65% = 32.5%<br>मत न देने वाले = 32.5%<br>अंतर = 35% - 32.5% = 2.5%<br>2.5% = 1000<br>कुल मतदाता = 40000",
+    "e_en": "Votes for P = 35%<br>Remaining = 65%<br>Votes for Q = 50% of 65% = 32.5%<br>Non-voters = 32.5%<br>Difference = 35% - 32.5% = 2.5%<br>2.5% = 1000<br>Total voters = 40000"
+  }, {
+    "q_hi": "Q301. किसी सर्वेक्षण में यह पाया गया कि किसी निर्वाचन क्षेत्र में, 55% मतदाता पुरुष हैं और शेष महिलाएं हैं। 40% पुरुष मतदाता शिक्षित हैं और 33\\frac{1}{3}% महिला मतदाता अशिक्षित हैं। कितने प्रतिशत मतदाता शिक्षित हैं?",
+    "q_en": "Q301. In a survey, it was found that in a constituency, 55% of voters are male and the rest are female. 40% of male voters are educated and 33\\frac{1}{3}% of female voters are uneducated. What percentage of voters are educated?",
+    "tag": "SSC CHSL 13/04/2021 (Shift-02)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 52%", "(b) 48%", "(c) 54%", "(d) 37%"],
+    "o_en": ["(a) 52%", "(b) 48%", "(c) 54%", "(d) 37%"],
+    "a": 0,
+    "e_hi": "शिक्षित पुरुष = 40% of 55% = 22%<br>अशिक्षित महिला = 33\\frac{1}{3}% of 45% = 15%<br>शिक्षित महिला = 45% - 15% = 30%<br>कुल शिक्षित = 22% + 30% = 52%",
+    "e_en": "Educated males = 40% of 55% = 22%<br>Uneducated females = 33\\frac{1}{3}% of 45% = 15%<br>Educated females = 45% - 15% = 30%<br>Total educated = 22% + 30% = 52%"
+  }, {
+    "q_hi": "Q302. एक निर्वाचन क्षेत्र में, कुल मतदाताओं में से 55% पुरुष और शेष महिलाएं हैं। यदि 40% पुरुष अशिक्षित तथा 40% महिलाएं शिक्षित हैं, तो अशिक्षित महिलाओं की संख्या, अशिक्षित पुरुषों की संख्या से कितने प्रतिशत (दशमलव के एक स्थान तक सही) अधिक है?",
+    "q_en": "Q302. In a constituency, 55% of the total voters are male and the rest are female. If 40% of males are uneducated and 40% of females are educated, then the number of uneducated females is what percentage (correct to one decimal place) more than the number of uneducated males?",
+    "tag": "SSC CHSL 04/08/2021 (Shift-03)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 21.5%", "(b) 20.8%", "(c) 16.4%", "(d) 22.7%"],
+    "o_en": ["(a) 21.5%", "(b) 20.8%", "(c) 16.4%", "(d) 22.7%"],
+    "a": 3,
+    "e_hi": "अशिक्षित पुरुष = 40% of 55% = 22%<br>अशिक्षित महिला = 60% of 45% = 27%<br>अधिकता = 5%<br>प्रतिशत अधिकता = 5/22 × 100 = 22.7%",
+    "e_en": "Uneducated males = 40% of 55% = 22%<br>Uneducated females = 60% of 45% = 27%<br>Excess = 5%<br>Percentage excess = 5/22 × 100 = 22.7%"
+  }, {
+    "q_hi": "Q303. एक निर्वाचन क्षेत्र में कुल मतदाताओं में से 45% पुरुष हैं और शेष महिलाएं हैं। यदि 60% पुरुष निरक्षर हैं और 60% महिलाएं साक्षर हैं, तो निरक्षर महिलाओं की संख्या साक्षर पुरुषों की तुलना में कितने प्रतिशत अधिक है? (दशमलव के दो स्थानों तक पूर्णांकित)",
+    "q_en": "Q303. In a constituency, 45% of total voters are male and the rest are female. If 60% of males are illiterate and 60% of females are literate, then by what percentage is the number of illiterate females more than literate males? (rounded to two decimal places)",
+    "tag": "SSC CGL 18/09/2024 (Shift-01)",
+    "type_tag": "Type XII (Based on Election)",
+    "o_hi": ["(a) 19.11%", "(b) 27.23%", "(c) 30.24%", "(d) 22.22%"],
+    "o_en": ["(a) 19.11%", "(b) 27.23%", "(c) 30.24%", "(d) 22.22%"],
+    "a": 3,
+    "e_hi": "निरक्षर महिलाएं = 40% of 55% = 22%<br>साक्षर पुरुष = 40% of 45% = 18%<br>अधिकता = 4%<br>प्रतिशत अधिकता = 4/18 × 100 = 22.22%",
+    "e_en": "Illiterate females = 40% of 55% = 22%<br>Literate males = 40% of 45% = 18%<br>Excess = 4%<br>Percentage excess = 4/18 × 100 = 22.22%"
+  }];
