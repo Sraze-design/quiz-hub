@@ -2418,6 +2418,13 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .result-download-menu button{display:block;width:100%;border:0;border-radius:8px;padding:12px;text-align:left;background:transparent;color:var(--text,#111827);font-size:14px;font-weight:700;cursor:pointer}
 .result-download-menu button:hover,.result-download-menu button:focus-visible{background:var(--bg-soft,#eff6ff)}
 .result-download[aria-busy="true"]{opacity:.65;pointer-events:none}
+.result-share-ready{display:flex;align-items:center;gap:10px;margin:-2px 0 14px;padding:10px 12px;border:1px solid var(--border,#e2e8f0);border-radius:12px;background:var(--card-bg,#fff);color:var(--text,#111827)}
+.result-share-ready[hidden]{display:none}
+.result-share-info{flex:1;min-width:0;font-size:12px;line-height:1.4}
+.result-share-name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:700}
+.result-share-status{display:block;margin-top:3px;opacity:.8}
+.result-share-button{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;border:0;border-radius:9px;background:#2563eb;color:#fff;font:700 13px system-ui,sans-serif;padding:10px 12px;cursor:pointer}
+.result-share-button:disabled{opacity:.6;cursor:default}
 .result-analysis-btn{border:0;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;font-size:14px;padding:10px 15px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 8px 20px rgba(37,99,235,.22);cursor:pointer}
 .result-analysis-btn:active{transform:scale(.97)}
 #resultAnalysisModal{position:fixed;inset:0;z-index:13000;background:var(--card-bg,#fff);display:none;flex-direction:column;color:var(--text,#111827)}
@@ -2953,6 +2960,16 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
             <button type="button" class="result-analysis-btn" onclick="openResultAnalysis('all')" aria-label="Open result analysis">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19V3"/></svg>
               <span>Analysis</span>
+            </button>
+          </div>
+          <div class="result-share-ready" id="resultShareReady" hidden>
+            <div class="result-share-info">
+              <span class="result-share-name" id="resultShareName"></span>
+              <span class="result-share-status" id="resultShareStatus" role="status" aria-live="polite"></span>
+            </div>
+            <button type="button" class="result-share-button" id="resultShareButton" onclick="shareResultData()" aria-label="Share downloaded result file">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>
+              <span id="resultShareLabel">Share</span>
             </button>
           </div>
           <!-- ALL TIME BEST Leaderboard Card (added) -->
@@ -5863,6 +5880,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
   if (typeof hideQuestionReportUI === 'function') hideQuestionReportUI();
   reportHistoryPushed = false;
   if (typeof resultAnalysisSnapshot !== 'undefined') resultAnalysisSnapshot = null;
+  resetResultShare();
   if (typeof resultAnalysisPosition !== 'undefined') resultAnalysisPosition = 0;
   if (typeof resultAnalysisFilter !== 'undefined') resultAnalysisFilter = 'all';
   isBookmarkOnlyQuiz = false;
@@ -6205,6 +6223,7 @@ function resultAnalysisStorageKey(){
 }
 
 function captureResultAnalysis(){
+  resetResultShare();
   const items=data.map((item,index)=>{
     const selected=selectedAnswers[index];
     const multi=isMultiPartQuestion(item);
@@ -6379,9 +6398,66 @@ function renderResultExportHTML(report){
     '</main><script type="application/json" id="quiz-result-data">'+json+'</scr'+'ipt></body></html>';
 }
 
+let preparedResultShare=null;
+
+function resetResultShare(){
+  preparedResultShare=null;
+  const panel=document.getElementById('resultShareReady');
+  if(panel)panel.hidden=true;
+}
+
+function prepareResultShare(blob,filename){
+  const panel=document.getElementById('resultShareReady');
+  if(!panel)return;
+  let file=null,plainCopy=false;
+  const supported=candidate=>{
+    try{return typeof navigator.share==='function'&&typeof navigator.canShare==='function'&&navigator.canShare({files:[candidate]});}
+    catch(_){return false;}
+  };
+  if(typeof File==='function'){
+    const original=new File([blob],filename,{type:blob.type.split(';')[0]});
+    if(supported(original))file=original;
+    else{
+      // Some browsers restrict HTML/JSON attachment types. Keep the original
+      // download and share an explicitly labelled TXT copy with identical bytes.
+      const textCopy=new File([blob],filename+'.txt',{type:'text/plain'});
+      if(supported(textCopy)){file=textCopy;plainCopy=true;}
+    }
+  }
+  preparedResultShare={file,plainCopy};
+  document.getElementById('resultShareName').textContent=filename;
+  document.getElementById('resultShareName').title=filename;
+  document.getElementById('resultShareStatus').textContent=file
+    ?(plainCopy?'Download started · Share a TXT copy of the same data':'Download started · Ready to share')
+    :'Download started · Share from your Downloads folder';
+  document.getElementById('resultShareLabel').textContent=plainCopy?'Share TXT':'Share';
+  const button=document.getElementById('resultShareButton');
+  button.disabled=!file;
+  button.setAttribute('aria-label',plainCopy?'Share result data as a TXT copy':'Share downloaded result file');
+  panel.hidden=false;
+}
+
+async function shareResultData(){
+  const prepared=preparedResultShare;
+  const button=document.getElementById('resultShareButton');
+  if(!prepared?.file||button.disabled)return;
+  button.disabled=true;
+  try{
+    // Call directly from the tap: file preparation must not consume activation.
+    await navigator.share({files:[prepared.file]});
+    if(preparedResultShare===prepared)document.getElementById('resultShareStatus').textContent='Shared · Your download is also available';
+  }catch(error){
+    if(preparedResultShare===prepared&&error.name!=='AbortError')
+      document.getElementById('resultShareStatus').textContent='Could not share · Try again or share from Downloads';
+  }finally{
+    if(preparedResultShare===prepared)button.disabled=false;
+  }
+}
+
 async function downloadResultData(format){
   const menu=document.getElementById('resultDownload');
   if(menu?.getAttribute('aria-busy')==='true')return;
+  resetResultShare();
   if(menu){menu.open=false;menu.setAttribute('aria-busy','true');}
   try{
     if(!resultAnalysisSnapshot)captureResultAnalysis();
@@ -6436,6 +6512,7 @@ async function downloadResultData(format){
     link.href=url;link.download=name+'_Result_'+report.completedAt.replace(/[:.]/g,'-')+(isJSON?'.json':'.html');
     document.body.appendChild(link);link.click();link.remove();
     setTimeout(()=>URL.revokeObjectURL(url),60000);
+    prepareResultShare(blob,link.download);
   }catch(error){console.error('Result export failed:',error);alert('Download could not be prepared. Please try again.');}
   finally{menu?.removeAttribute('aria-busy');}
 }
@@ -10414,3 +10491,4 @@ function stopExamOnExit(){
 </body>
 
 </html>
+
