@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'index.json'
   workflow_dispatch:
 
 concurrency:
@@ -45,7 +47,7 @@ jobs:
               exit 0
             fi
 
-            git commit -m "Auto update index.json [skip ci]"
+            git commit -m "Auto update index.json"
 
             if git push origin HEAD:main; then
               echo "index.json updated successfully."
