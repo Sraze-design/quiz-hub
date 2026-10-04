@@ -6880,7 +6880,7 @@ if(typeLabel){
   // Keep the exam tag separate. Quiz files can provide type_tag (or type),
   // with optional _hi/_en versions for the existing language switch.
   const typeText=T(item,'type_tag') || T(item,'type');
-  const label=typeof typeText==='string' ? typeText.trim() : '';
+  const label=quizMode!=='test' && typeof typeText==='string' ? typeText.trim() : '';
   typeLabel.textContent=label;
   typeLabel.style.display=label ? 'block' : 'none';
 }
