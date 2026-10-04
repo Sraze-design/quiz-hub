@@ -6367,10 +6367,11 @@ function renderResultExportHTML(report){
     const langs=['hi','en'].map(lang=>{
       if(lang==='en'&&!['q_en','o_en','direction_en','e_en'].some(k=>item[k]!=null)&&!item.subparts?.some(p=>p.o_en!=null))return '';
       const direction=get(item,'direction',lang);
-      const image=item.image?content('<img src="'+esc(item.image)+'" alt="Question diagram">'):'';
+      const imageSource=getQuestionImageSource(item);
+      const image=imageSource?content('<img src="'+esc(imageSource)+'" alt="Question diagram">'):'';
       const question=get(item,'q',lang);
       const questionHTML=content(question);
-      const figure=String(question).includes(item.image||'\u0000')?'':image;
+      const figure=String(question).includes(imageSource||'\u0000')?'':image;
       const options=(part,selected,correct)=>{
         const choices=get(part,'o',lang);
         return '<ol class="options" type="A">'+(Array.isArray(choices)?choices:[]).map((o,i)=>
@@ -6890,10 +6891,19 @@ function renderResultAnalysis(){
 
 document.addEventListener('keydown',event=>{if(event.key==='Escape')closeResultAnalysis();});
 
+function getQuestionImageSource(item) {
+  if (!item || typeof item !== 'object') return '';
+  if (typeof item.image === 'string' && item.image.trim()) return item.image.trim();
+  if (typeof item.img === 'string' && item.img.trim()) return item.img.trim();
+  return '';
+}
+
+
+
 // Accept both inline <img> questions and questions with a shared image field.
 function renderQuestionContent(container, item) {
   container.innerHTML = formatContent(T(item, 'q'));
-  const source = typeof item.image === 'string' ? item.image.trim() : '';
+  const source = getQuestionImageSource(item);
   if (!source) return;
   // The same figure may already be embedded in the selected language's HTML.
   const alreadyEmbedded = Array.from(container.querySelectorAll('img')).some(img =>
@@ -8225,10 +8235,8 @@ function getCurrentQuestionContext() {
   }
 
   const qHtml = T(item, 'q') || '';
-  let imageSource = null;
-  if (typeof item.image === 'string' && item.image.trim()) {
-    imageSource = item.image.trim();
-  } else {
+  let imageSource = getQuestionImageSource(item) || null;
+  if (!imageSource) {
     const imgMatch = qHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
     if (imgMatch) imageSource = imgMatch[1].trim();
   }
