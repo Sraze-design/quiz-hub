@@ -6414,17 +6414,18 @@ function prepareResultShare(blob,filename){
     try{return typeof navigator.share==='function'&&typeof navigator.canShare==='function'&&navigator.canShare({files:[candidate]});}
     catch(_){return false;}
   };
+  let fallbackFile=null;
   if(typeof File==='function'){
     const original=new File([blob],filename,{type:blob.type.split(';')[0]});
-    if(supported(original))file=original;
-    else{
-      // Some browsers restrict HTML/JSON attachment types. Keep the original
-      // download and share an explicitly labelled TXT copy with identical bytes.
-      const textCopy=new File([blob],filename+'.txt',{type:'text/plain'});
-      if(supported(textCopy)){file=textCopy;plainCopy=true;}
-    }
+    const textCopy=new File([blob],filename+'.txt',{type:'text/plain'});
+    const originalSupported=supported(original),textSupported=supported(textCopy);
+    // JSON attachment delivery can fail even when canShare() accepts it.
+    // Prefer its portable TXT copy, retaining every byte of the JSON download.
+    if(/\.json$/i.test(filename)&&textSupported){file=textCopy;plainCopy=true;}
+    else if(originalSupported){file=original;if(textSupported)fallbackFile=textCopy;}
+    else if(textSupported){file=textCopy;plainCopy=true;}
   }
-  preparedResultShare={file,plainCopy};
+  preparedResultShare={file,plainCopy,fallbackFile};
   document.getElementById('resultShareName').textContent=filename;
   document.getElementById('resultShareName').title=filename;
   document.getElementById('resultShareStatus').textContent=file
@@ -6447,8 +6448,17 @@ async function shareResultData(){
     await navigator.share({files:[prepared.file]});
     if(preparedResultShare===prepared)document.getElementById('resultShareStatus').textContent='Shared · Your download is also available';
   }catch(error){
-    if(preparedResultShare===prepared&&error.name!=='AbortError')
-      document.getElementById('resultShareStatus').textContent='Could not share · Try again or share from Downloads';
+    if(preparedResultShare===prepared&&error.name!=='AbortError'){
+      if(prepared.fallbackFile){
+        prepared.file=prepared.fallbackFile;
+        prepared.fallbackFile=null;
+        prepared.plainCopy=true;
+        document.getElementById('resultShareLabel').textContent='Share TXT';
+        button.setAttribute('aria-label','Share result data as a TXT copy');
+        document.getElementById('resultShareStatus').textContent='Tap Share TXT to send the same data';
+        // A rejected share may consume activation. Retry only on a fresh tap.
+      }else document.getElementById('resultShareStatus').textContent='Could not share · Try again or share from Downloads';
+    }
   }finally{
     if(preparedResultShare===prepared)button.disabled=false;
   }
@@ -10491,4 +10501,5 @@ function stopExamOnExit(){
 </body>
 
 </html>
+
 
