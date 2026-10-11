@@ -7068,7 +7068,6 @@ if(isMultiPartQuestion(item)&&quizMode==='test'){
           answered[currentQ]=true;
           applyCompletedAnswerStreak(allCorrect);
           if(typeof updateQBadge==='function') updateQBadge();
-          timerRunning=false;
           const feedback=document.getElementById("feedback");
           const explanation=T(item,'e');
           if(explanation){
@@ -7141,7 +7140,6 @@ if(isMultiPartQuestion(item)&&quizMode==='test'){
       answerCorrect[currentQ]=(idx===item.a);
       answered[currentQ] = true;
       if(typeof updateQBadge==='function') updateQBadge();
-      timerRunning=false;
       document.getElementById("feedback").innerHTML=explanationLabel+formatContent(T(item, 'e'));
       document.getElementById('feedback').style.display = "block";
     };
