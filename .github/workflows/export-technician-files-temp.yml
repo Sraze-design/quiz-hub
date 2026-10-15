@@ -1,0 +1,42 @@
+name: Temporary Export Technician Grade III Files
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/export-technician-files-temp.yml"
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Collect the 10 Technician Grade III HTML files
+        run: |
+          set -euo pipefail
+          mkdir -p technician-grade-iii-restored
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_06-10-2026_Shift-01.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_06-10-2026_Shift-02.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_06-10-2026_Shift-03.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_07-10-2026_Shift-01.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_07-10-2026_Shift-02.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_07-10-2026_Shift-03.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_08-10-2026_Shift-01.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_08-10-2026_Shift-02.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_08-10-2026_Shift-03.html technician-grade-iii-restored/
+          cp Previous_year_exam/TECHNICIAN_GRADE_IIIrd/RRB_Technician_09-10-2026_Shift-01.html technician-grade-iii-restored/
+          test "$(find technician-grade-iii-restored -maxdepth 1 -type f -name '*.html' | wc -l)" -eq 10
+          zip -j technician-grade-iii-restored-files.zip technician-grade-iii-restored/*.html
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: technician-grade-iii-restored-files
+          path: technician-grade-iii-restored-files.zip
+          if-no-files-found: error
+          retention-days: 1
