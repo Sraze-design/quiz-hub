@@ -1,0 +1,112 @@
+const data = [
+  {
+    "q_hi": "Q231. सात व्यक्ति L, M, N, O, P, Q और R उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। M और O के बीच केवल एक व्यक्ति बैठा है। Q, R के ठीक दाई ओर पड़ोस में बैठा है। P, L के बाईं ओर तीसरे स्थान पर बैठा है। M और P के बीच केवल दो व्यक्ति बैठे हैं। N, O के ठीक बाई ओर पड़ोस में बैठा है। यदि पंक्ति के ठीक बीच में बैठा व्यक्ति, दाएं छोर पर बैठे व्यक्ति के साथ अपना स्थान बदल लेता है, तो अब दाएं छोर पर निम्नलिखित में से कौन बैठा है?",
+    "q_en": "Q231. Seven persons L, M, N, O, P, Q, and R are sitting in a row facing North. Only one person sits between M and O. Q sits to the immediate right of R. P sits 3rd to the left of L. Only two persons sit between M and P. N sits to the immediate left of O. If the person sitting exactly in the middle of the row interchanges his position with the person sitting at the right end, who among the following now sits at the right end?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Linear Facing North - Position Interchanging",
+    "o_hi": ["(a) N", "(b) L", "(c) O", "(d) P"],
+    "o_en": ["(a) N", "(b) L", "(c) O", "(d) P"],
+    "a": 3,
+    "e_hi": "स्थान निर्धारण (बाएं से दाएं 1 से 7):<br>1. P, L के बाईं ओर तीसरा है (L - P = 3) तथा M और P के बीच 2 व्यक्ति हैं (|M - P| = 3)। यदि M = 1, तो P = 4 और L = 7।<br>2. M(1) और O के बीच केवल एक व्यक्ति है तथा N, O के ठीक बाएं है ⇒ N = 2, O = 3।<br>3. Q, R के ठीक दाएं है ⇒ R = 5, Q = 6।<br>बैठने का क्रम: M(1), N(2), O(3), P(4), R(5), Q(6), L(7)।<br>पंक्ति के ठीक बीच में P (स्थान 4) है तथा दाएं छोर पर L (स्थान 7) है।<br>स्थान बदलने के बाद दाएं छोर पर P आ जाएगा।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7 from left to right):<br>1. P sits 3rd to the left of L (L - P = 3) and two persons sit between M and P (|M - P| = 3). Setting M = 1 gives P = 4 and L = 7.<br>2. Only one person sits between M(1) and O, and N is immediate left of O ⇒ N = 2, O = 3.<br>3. Q sits immediate right of R ⇒ R = 5, Q = 6.<br>Arrangement: M(1), N(2), O(3), P(4), R(5), Q(6), L(7).<br>The person exactly in the middle is P (position 4) and at the right end is L (position 7).<br>After swapping positions, P will sit at the right end."
+  },
+  {
+    "q_hi": "Q232. सात व्यक्ति P, Q, R, S, T, U और V उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। Q और S के बीच केवल दो व्यक्ति बैठे हैं। T, U के ठीक बाई ओर बैठा है। R, Q के दाई ओर तीसरे स्थान पर बैठा है। S तथा P दोनों का निकटतम पड़ोसी V है। यदि बाएं छोर पर बैठा व्यक्ति, V के साथ अपना स्थान बदल लेता है, तो अब निम्नलिखित से कौन V का निकटतम पड़ोसी होगा?",
+    "q_en": "Q232. Seven persons P, Q, R, S, T, U, and V are sitting in a row facing North. Only two persons sit between Q and S. T sits to the immediate left of U. R sits 3rd to the right of Q. V is the immediate neighbour of both S and P. If the person sitting at the left end interchanges his position with V, who among the following will now be the immediate neighbour of V?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Linear Facing North - End Swap & Neighbour",
+    "o_hi": ["(a) Q", "(b) S", "(c) T", "(d) P"],
+    "o_en": ["(a) Q", "(b) S", "(c) T", "(d) P"],
+    "a": 1,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. R, Q के दाईं ओर तीसरा है (R = Q + 3) तथा Q और S के बीच 2 व्यक्ति हैं (Q - S = 3)। 7 स्थानों में S = 1, Q = 4, R = 7 निश्चित होता है।<br>2. V, S(1) और P दोनों का पड़ोसी है ⇒ V = 2, P = 3।<br>3. T, U के ठीक बाएं है ⇒ T = 5, U = 6।<br>क्रम: S(1), V(2), P(3), Q(4), T(5), U(6), R(7)।<br>बाएं छोर पर बैठा व्यक्ति S(1) है। जब S और V परस्पर स्थान बदलते हैं, तो V स्थान 1 पर और S स्थान 2 पर आ जाता है।<br>अब V (स्थान 1) का एकमात्र निकटतम पड़ोसी S (स्थान 2) होगा।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. R sits 3rd to the right of Q (R = Q + 3) and two persons sit between Q and S (Q - S = 3). Spanning 7 seats fixes S = 1, Q = 4, R = 7.<br>2. V is the neighbour of both S(1) and P ⇒ V = 2, P = 3.<br>3. T sits immediate left of U ⇒ T = 5, U = 6.<br>Arrangement: S(1), V(2), P(3), Q(4), T(5), U(6), R(7).<br>The person at the left end is S(1). When S and V swap places, V moves to position 1 and S to position 2.<br>Thus, the immediate neighbour of V (position 1) is S."
+  },
+  {
+    "q_hi": "Q233. A, B, C, D, E, F और G उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। B, F के दाई ओर तीसरे स्थान पर बैठा है। E, B के दाई ओर दूसरे स्थान पर बैठा है। E और A के बीच केवल दो व्यक्ति बैठे हैं। D, G के बाई ओर तीसरे स्थान पर बैठा है। C, G के बाई ओर किसी स्थान पर बैठा है। C और G के बीच कितने व्यक्ति बैठे हैं?",
+    "q_en": "Q233. A, B, C, D, E, F, and G are sitting in a row facing North. B sits 3rd to the right of F. E sits 2nd to the right of B. Only two persons sit between E and A. D sits 3rd to the left of G. C sits somewhere to the left of G. How many persons sit between C and G?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Linear Facing North - Count Between Elements",
+    "o_hi": ["(a) एक", "(b) दो", "(c) तीन", "(d) तीन से अधिक"],
+    "o_en": ["(a) One", "(b) Two", "(c) Three", "(d) More than three"],
+    "a": 3,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. B, F के दाईं ओर तीसरा है तथा E, B के दाईं ओर दूसरा है ⇒ F _ _ B _ E। यदि F = 2, तो B = 5, E = 7।<br>2. E(7) और A के बीच 2 व्यक्ति हैं ⇒ A = 4।<br>3. D, G के बाईं ओर तीसरा है (G - D = 3) तथा C, G के बाईं ओर है ⇒ खाली स्थान {1, 3, 6} में D = 3, G = 6, तथा C = 1।<br>पूर्ण क्रम: C(1), F(2), D(3), A(4), B(5), G(6), E(7)।<br>C (स्थान 1) और G (स्थान 6) के बीच 4 व्यक्ति (F, D, A, B) बैठे हैं, जो 'तीन से अधिक' हैं।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. B is 3rd to the right of F and E is 2nd to the right of B ⇒ F _ _ B _ E. Placing F = 2 gives B = 5, E = 7.<br>2. Two persons sit between E(7) and A ⇒ A = 4.<br>3. D sits 3rd to the left of G (G - D = 3) and C is to the left of G ⇒ from remaining seats {1, 3, 6}, D = 3, G = 6, and C = 1.<br>Arrangement: C(1), F(2), D(3), A(4), B(5), G(6), E(7).<br>Between C (pos 1) and G (pos 6), there are 4 persons (F, D, A, B), which is 'More than three'."
+  },
+  {
+    "q_hi": "Q234. सात व्यक्ति L, M, N, O, X, Y तथा Z उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। N, Y के बाईं ओर तीसरे स्थान पर बैठा है। O, N के बाई ओर दूसरे स्थान पर बैठा है। X, Z के ठीक दाई ओर पड़ोस में बैठा है। X और L के बीच तीन से अधिक व्यक्ति बैठे हैं। O और N के ठीक बीच में कौन बैठा है?",
+    "q_en": "Q234. Seven persons L, M, N, O, X, Y, and Z are sitting in a row facing North. N sits 3rd to the left of Y. O sits 2nd to the left of N. X sits to the immediate right of Z. More than three persons sit between X and L. Who sits exactly between O and N?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Linear Facing North - Exact Middle Person",
+    "o_hi": ["(a) Z", "(b) L", "(c) M", "(d) X"],
+    "o_en": ["(a) Z", "(b) L", "(c) M", "(d) X"],
+    "a": 2,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. N, Y के बाईं ओर तीसरा है तथा O, N के बाईं ओर दूसरा है ⇒ O _ N _ _ Y। यदि O = 2, तो N = 4, Y = 7।<br>2. X, Z के ठीक दाईं ओर है ⇒ Z = 5, X = 6।<br>3. X(6) और L के बीच 3 से अधिक व्यक्ति हैं ⇒ L = 1 (बीच में 4 व्यक्ति), अतः M = 3।<br>पूर्ण क्रम: L(1), O(2), M(3), N(4), Z(5), X(6), Y(7)।<br>O (स्थान 2) और N (स्थान 4) के ठीक बीच में स्थान 3 पर M बैठा है।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. N sits 3rd to the left of Y and O sits 2nd to the left of N ⇒ O _ N _ _ Y. Setting O = 2 gives N = 4, Y = 7.<br>2. X sits immediate right of Z ⇒ Z = 5, X = 6.<br>3. More than three persons sit between X(6) and L ⇒ L = 1 (4 persons between them), leaving M = 3.<br>Arrangement: L(1), O(2), M(3), N(4), Z(5), X(6), Y(7).<br>The person sitting exactly between O (position 2) and N (position 4) is M (position 3)."
+  },
+  {
+    "q_hi": "Q235. सात व्यक्ति Q, B, M, L, R, K और G एक पंक्ति में उत्तर की ओर अभिमुख होकर बैठे हैं। पंक्ति के बाएं छोर से पांचवें स्थान पर K बैठा है। R के दाई ओर केवल चार व्यक्ति बैठे हैं। Q, B और K का निकटतम पड़ोसी है। G, M के ठीक दाएं पड़ोस में बैठा है। L और G के बीच कितने व्यक्ति बैठे हैं?",
+    "q_en": "Q235. Seven persons Q, B, M, L, R, K, and G are sitting in a row facing North. K sits 5th from the left end of the row. Only four persons sit to the right of R. Q is the immediate neighbour of both B and K. G sits to the immediate right of M. How many persons sit between L and G?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Linear Facing North - Specific Element Gap",
+    "o_hi": ["(a) तीन", "(b) दो", "(c) एक", "(d) चार"],
+    "o_en": ["(a) Three", "(b) Two", "(c) One", "(d) Four"],
+    "a": 2,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. बाएं से 5वें स्थान पर K है ⇒ K = 5।<br>2. R के दाईं ओर केवल 4 व्यक्ति हैं ⇒ R = 3 (7 - 4 = 3)।<br>3. Q, B और K का निकटतम पड़ोसी है ⇒ Q, K(5) और B(7) के बीच स्थान 6 पर है (Q = 6, B = 7)।<br>4. G, M के ठीक दाएं है ⇒ M = 1, G = 2। शेष स्थान 4 पर L आएगा।<br>पूर्ण क्रम: M(1), G(2), R(3), L(4), K(5), Q(6), B(7)।<br>L (स्थान 4) और G (स्थान 2) के बीच केवल R (स्थान 3) बैठा है (कुल 1 व्यक्ति)।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. K sits 5th from left end ⇒ K = 5.<br>2. Only four persons sit to the right of R ⇒ R = 3 (7 - 4 = 3).<br>3. Q is immediate neighbour of both B and K ⇒ Q = 6, B = 7.<br>4. G sits immediate right of M ⇒ M = 1, G = 2. The remaining seat 4 is occupied by L.<br>Arrangement: M(1), G(2), R(3), L(4), K(5), Q(6), B(7).<br>Between L (position 4) and G (position 2), only R (position 3) sits (total 1 person)."
+  },
+  {
+    "q_hi": "Q236. सात व्यक्ति H, L, J, D, E, V और R उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। H के दाईं ओर केवल पांच व्यक्ति बैठे हैं। L और H के बीच केवल एक व्यक्ति बैठा है। J और L दोनों का निकटतम पड़ोसी R है। D, V के दाई ओर बैठा है लेकिन L के बाई ओर बैठा है। E और D के बीच कितने व्यक्ति बैठे हैं?",
+    "q_en": "Q236. Seven persons H, L, J, D, E, V, and R are sitting in a row facing North. Only five persons sit to the right of H. Only one person sits between L and H. R is the immediate neighbour of both J and L. D sits to the right of V but to the left of L. How many persons sit between E and D?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Linear Facing North - Intermediate Count",
+    "o_hi": ["(a) दो", "(b) चार", "(c) एक", "(d) तीन"],
+    "o_en": ["(a) Two", "(b) Four", "(c) One", "(d) Three"],
+    "a": 3,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. H के दाईं ओर केवल 5 व्यक्ति हैं ⇒ H = 2।<br>2. L और H के बीच केवल 1 व्यक्ति है ⇒ L = 4।<br>3. D, V के दाईं ओर तथा L(4) के बाईं ओर है ⇒ V = 1, D = 3।<br>4. R, J और L(4) दोनों का पड़ोसी है ⇒ R = 5, J = 6।<br>5. शेष व्यक्ति E स्थान 7 पर आएगा।<br>पूर्ण क्रम: V(1), H(2), D(3), L(4), R(5), J(6), E(7)।<br>E (स्थान 7) और D (स्थान 3) के बीच स्थान 4, 5, 6 पर L, R, J बैठे हैं (कुल 3 व्यक्ति)।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. Only five persons sit to the right of H ⇒ H = 2.<br>2. Only one person sits between L and H ⇒ L = 4.<br>3. D sits to the right of V but to the left of L ⇒ V = 1, D = 3.<br>4. R is the immediate neighbour of both J and L(4) ⇒ R = 5, J = 6.<br>5. The remaining person E takes position 7.<br>Arrangement: V(1), H(2), D(3), L(4), R(5), J(6), E(7).<br>Between E (position 7) and D (position 3), there are 3 persons (L, R, J)."
+  },
+  {
+    "q_hi": "Q237. A, B, C, D, E, F, G उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। E बाएं छोर पर बैठा है। A और C के बीच केवल दो व्यक्ति हैं। C, F और D के बीच बैठा है। B, E और F के बीच बैठा है। G, A के ठीक बाएं पड़ोस में बैठा है। पंक्ति के दाएं छोर पर कौन बैठा है?",
+    "q_en": "Q237. A, B, C, D, E, F, and G are sitting in a row facing North. E sits at the left end. Only two persons sit between A and C. C sits between F and D. B sits between E and F. G sits to the immediate left of A. Who sits at the right end of the row?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Linear Facing North - Extreme End Person",
+    "o_hi": ["(a) E", "(b) D", "(c) C", "(d) A"],
+    "o_en": ["(a) E", "(b) D", "(c) C", "(d) A"],
+    "a": 3,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. E बाएं छोर पर है ⇒ E = 1।<br>2. B, E और F के बीच है ⇒ B = 2, F = 3।<br>3. C, F और D के बीच है ⇒ C = 4, D = 5।<br>4. G, A के ठीक बाएं है ⇒ G = 6, A = 7।<br>5. A(7) और C(4) के बीच दो व्यक्ति (D, G) हैं, जो शर्त को संतुष्ट करता है।<br>पूर्ण क्रम: E(1), B(2), F(3), C(4), D(5), G(6), A(7)।<br>पंक्ति के दाएं छोर (स्थान 7) पर A बैठा है।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. E sits at the left end ⇒ E = 1.<br>2. B sits between E and F ⇒ B = 2, F = 3.<br>3. C sits between F and D ⇒ C = 4, D = 5.<br>4. G sits immediate left of A ⇒ G = 6, A = 7.<br>5. Exactly two persons (D, G) are between A(7) and C(4), satisfying all conditions.<br>Arrangement: E(1), B(2), F(3), C(4), D(5), G(6), A(7).<br>The person sitting at the right end (position 7) is A."
+  },
+  {
+    "q_hi": "Q238. सात व्यक्ति, A, B, C, D, X, Y तथा Z उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। C के दाई ओर केवल X बैठा है। C तथा D के बीच केवल तीन व्यक्ति बैठे हैं। A, Y के बाई ओर तीसरे स्थान पर बैठा है। B, C का निकटतम पड़ोसी नहीं है। D के दाई ओर तीसरे स्थान पर कौन बैठा है?",
+    "q_en": "Q238. Seven persons A, B, C, D, X, Y, and Z are sitting in a row facing North. Only X sits to the right of C. Only three persons sit between C and D. A sits 3rd to the left of Y. B is not an immediate neighbour of C. Who sits 3rd to the right of D?",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Linear Facing North - Relative Position",
+    "o_hi": ["(a) B", "(b) A", "(c) X", "(d) Z"],
+    "o_en": ["(a) B", "(b) A", "(c) X", "(d) Z"],
+    "a": 3,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. C के दाईं ओर केवल X है ⇒ C = 6, X = 7।<br>2. C(6) और D के बीच 3 व्यक्ति हैं ⇒ D = 2 (6 - 4 = 2)।<br>3. A, Y के बाईं ओर तीसरा है (Y - A = 3) ⇒ A = 1, Y = 4।<br>4. B, C(6) का पड़ोसी नहीं है (B ≠ 5) ⇒ B = 3 तथा शेष Z = 5।<br>पूर्ण क्रम: A(1), D(2), B(3), Y(4), Z(5), C(6), X(7)।<br>D (स्थान 2) के दाईं ओर तीसरे स्थान (2 + 3 = 5) पर Z बैठा है।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. Only X sits to the right of C ⇒ C = 6, X = 7.<br>2. Three persons sit between C(6) and D ⇒ D = 2.<br>3. A sits 3rd to the left of Y (Y - A = 3) ⇒ A = 1, Y = 4.<br>4. B is not a neighbour of C(6) (B ≠ 5) ⇒ B = 3, leaving Z = 5.<br>Arrangement: A(1), D(2), B(3), Y(4), Z(5), C(6), X(7).<br>The person sitting 3rd to the right of D(2) is at position 5, which is Z."
+  },
+  {
+    "q_hi": "Q239. सात व्यक्ति P, Q, R, S, T, U और V उत्तर दिशा की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। P के बाई ओर केवल एक व्यक्ति बैठा है। S, P के ठीक दाई ओर पड़ोस में बैठा है। S और Q के बीच केवल दो व्यक्ति बैठे हैं। R, V के ठीक बाई ओर पड़ोस में बैठा है। U और V के ठीक बीच में केवल Q बैठा है। पंक्ति के दाएं छोर पर कौन बैठा है?",
+    "q_en": "Q239. Seven persons P, Q, R, S, T, U, and V are sitting in a row facing North. Only one person sits to the left of P. S sits to the immediate right of P. Only two persons sit between S and Q. R sits to the immediate left of V. Only Q sits exactly between U and V. Who sits at the right end of the row?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Linear Facing North - Extreme Right End",
+    "o_hi": ["(a) V", "(b) R", "(c) Q", "(d) U"],
+    "o_en": ["(a) V", "(b) R", "(c) Q", "(d) U"],
+    "a": 3,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. P के बाईं ओर केवल एक व्यक्ति है ⇒ P = 2।<br>2. S, P के ठीक दाएं है ⇒ S = 3।<br>3. S(3) और Q के बीच दो व्यक्ति हैं ⇒ Q = 6।<br>4. U और V के ठीक बीच में केवल Q(6) है तथा R, V के ठीक बाएं है ⇒ R = 4, V = 5, U = 7। शेष व्यक्ति T = 1।<br>पूर्ण क्रम: T(1), P(2), S(3), R(4), V(5), Q(6), U(7)।<br>पंक्ति के दाएं छोर (स्थान 7) पर U बैठा है।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. Only one person sits to the left of P ⇒ P = 2.<br>2. S sits immediate right of P ⇒ S = 3.<br>3. Two persons sit between S(3) and Q ⇒ Q = 6.<br>4. Only Q(6) sits between U and V, and R is immediate left of V ⇒ R = 4, V = 5, U = 7. Remaining T = 1.<br>Arrangement: T(1), P(2), S(3), R(4), V(5), Q(6), U(7).<br>The person sitting at the right end (position 7) is U."
+  },
+  {
+    "q_hi": "Q240. सात व्यक्ति C, F, G, M, N, Q और X उत्तर की ओर अभिमुख होकर एक पंक्ति में बैठे हैं। F के बाईं ओर एक भी व्यक्ति नहीं बैठा है। F और C के बीच केवल चार व्यक्ति बैठे हैं। N के दाई ओर केवल तीन व्यक्ति बैठे हैं। X, M के ठीक बाई ओर पड़ोस में बैठा है। G, N का निकटतम पड़ोसी नहीं है। N के दाई ओर कितने व्यक्ति बैठे हैं?",
+    "q_en": "Q240. Seven persons C, F, G, M, N, Q, and X are sitting in a row facing North. No person sits to the left of F. Only four persons sit between F and C. Only three persons sit to the right of N. X sits to the immediate left of M. G is not an immediate neighbour of N. How many persons sit to the right of N?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Linear Facing North - Direct Condition Count",
+    "o_hi": ["(a) 4", "(b) 1", "(c) 3", "(d) 2"],
+    "o_en": ["(a) 4", "(b) 1", "(c) 3", "(d) 2"],
+    "a": 2,
+    "e_hi": "स्थान निर्धारण (1 से 7):<br>1. F के बाईं ओर कोई नहीं है ⇒ F = 1।<br>2. F और C के बीच 4 व्यक्ति हैं ⇒ C = 6।<br>3. N के दाईं ओर केवल 3 व्यक्ति हैं ⇒ N = 4।<br>4. X, M के ठीक बाएं है ⇒ X = 2, M = 3।<br>5. G, N(4) का पड़ोसी नहीं है ⇒ G = 7 तथा Q = 5।<br>पूर्ण क्रम: F(1), X(2), M(3), N(4), Q(5), C(6), G(7)।<br>N (स्थान 4) के दाईं ओर 3 व्यक्ति (Q, C, G) बैठे हैं (जैसा कि प्रश्न के कथन में भी सीधे दिया गया है)।",
+    "e_en": "Step-by-step arrangement (positions 1 to 7):<br>1. No person sits to the left of F ⇒ F = 1.<br>2. Four persons sit between F and C ⇒ C = 6.<br>3. Only three persons sit to the right of N ⇒ N = 4.<br>4. X sits immediate left of M ⇒ X = 2, M = 3.<br>5. G is not a neighbour of N(4) ⇒ G = 7, Q = 5.<br>Arrangement: F(1), X(2), M(3), N(4), Q(5), C(6), G(7).<br>To the right of N (position 4), exactly 3 persons (Q, C, G) are sitting."
+  }
+];

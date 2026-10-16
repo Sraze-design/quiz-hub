@@ -1,0 +1,212 @@
+const data = [
+  {
+    "q_hi": "Q241. L, Y का भाई है। Y, V का पिता है। E, Q का पिता है। Q, V का पुत्र है। L का Q से क्या संबंध है?",
+    "q_en": "Q241. L is the brother of Y. Y is the father of V. E is the father of Q. Q is the son of V. How is L related to Q?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Family Tree - Maternal Relations",
+    "o_hi": [
+      "(a) पिता का भाई",
+      "(b) पत्नी के पिता का भाई",
+      "(c) माता के पिता का भाई",
+      "(d) भाई"
+    ],
+    "o_en": [
+      "(a) Father's brother",
+      "(b) Wife's father's brother",
+      "(c) Mother's father's brother",
+      "(d) Brother"
+    ],
+    "a": 2,
+    "e_hi": "संबंध विश्लेषण:<br>1. Q, V का पुत्र है तथा E, Q का पिता है ⇒ V, Q की माता है और E, Q का पिता है।<br>2. Y, V का पिता है ⇒ Y, Q की माता (V) का पिता (नाना) है।<br>3. L, Y का भाई है ⇒ L, Q की माता के पिता का भाई है।<br>अतः L का Q से संबंध 'माता के पिता का भाई' है।",
+    "e_en": "Relationship Analysis:<br>1. Q is the son of V and E is the father of Q ⇒ V is the mother of Q and E is the father.<br>2. Y is the father of V ⇒ Y is the mother's father (maternal grandfather) of Q.<br>3. L is the brother of Y ⇒ L is the brother of Q's mother's father.<br>Hence, L is related to Q as 'Mother's father's brother'."
+  },
+  {
+    "q_hi": "Q242. S, G का भाई है। G, U का पिता है। H, M का पिता है। M, U का पुत्र है। H का S से क्या संबंध है?",
+    "q_en": "Q242. S is the brother of G. G is the father of U. H is the father of M. M is the son of U. How is H related to S?",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Family Tree - In-Law Generation Shift",
+    "o_hi": [
+      "(a) बहन का पति",
+      "(b) भाई की पत्नी का भाई",
+      "(c) पति",
+      "(d) भाई की पुत्री का पति"
+    ],
+    "o_en": [
+      "(a) Sister's husband",
+      "(b) Brother's wife's brother",
+      "(c) Husband",
+      "(d) Brother's daughter's husband"
+    ],
+    "a": 3,
+    "e_hi": "संबंध विश्लेषण:<br>1. M, U का पुत्र है तथा H, M का पिता है ⇒ U, M की माता है और H उसका पति है (H और U दंपत्ति हैं)।<br>2. G, U का पिता है ⇒ U, G की पुत्री है।<br>3. S, G का भाई है ⇒ U, S के भाई (G) की पुत्री है।<br>4. चूँकि H, U का पति है, इसलिए H, S के भाई की पुत्री का पति (दामाद सदृश) है।<br>अतः H का S से संबंध 'भाई की पुत्री का पति' है।",
+    "e_en": "Relationship Analysis:<br>1. M is the son of U and H is the father of M ⇒ U is M's mother and H is her husband (H and U are married).<br>2. G is the father of U ⇒ U is G's daughter.<br>3. S is the brother of G ⇒ U is the daughter of S's brother (G).<br>4. Since H is married to U, H is the husband of S's brother's daughter.<br>Thus, H is related to S as 'Brother's daughter's husband'."
+  },
+  {
+    "q_hi": "Q243. करण, निशा का भाई है। निशा, राकेश का पुत्र है। राकेश, विक्रम का पिता है। विक्रम, पूजा की पत्नी है। करण का पूजा से क्या संबंध है?\n(नाम, जेंडर रूप से तटस्थ हैं)",
+    "q_en": "Q243. Karan is the brother of Nisha. Nisha is the son of Rakesh. Rakesh is the father of Vikram. Vikram is the wife of Pooja. How is Karan related to Pooja?\n(Names are gender neutral)",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Gender Neutral Puzzle - In-Law Relations",
+    "o_hi": [
+      "(a) भाई",
+      "(b) पत्नी का भाई",
+      "(c) पत्नी का पिता",
+      "(d) पिता"
+    ],
+    "o_en": [
+      "(a) Brother",
+      "(b) Wife's brother",
+      "(c) Wife's father",
+      "(d) Father"
+    ],
+    "a": 1,
+    "e_hi": "संबंध विश्लेषण:<br>1. विक्रम, पूजा की पत्नी है (विक्रम = स्त्री, पूजा = पति/जीवनसाथी)।<br>2. राकेश, विक्रम का पिता है तथा निशा, राकेश का पुत्र है ⇒ निशा और विक्रम भाई-बहन हैं।<br>3. करण, निशा का भाई है ⇒ करण, निशा और विक्रम तीनों राकेश की संतानें हैं, अतः करण, विक्रम का भाई है।<br>4. चूँकि विक्रम, पूजा की पत्नी है, अतः करण पूजा की पत्नी का भाई (साला) है।",
+    "e_en": "Relationship Analysis:<br>1. Vikram is the wife of Pooja (Vikram = female/wife, Pooja = spouse).<br>2. Rakesh is the father of Vikram and Nisha is the son of Rakesh ⇒ Nisha and Vikram are siblings.<br>3. Karan is the brother of Nisha ⇒ Karan, Nisha, and Vikram are children of Rakesh, so Karan is Vikram's brother.<br>4. Since Vikram is Pooja's wife, Karan is Pooja's wife's brother (brother-in-law)."
+  },
+  {
+    "q_hi": "Q244. C, T का पिता है। T, N का भाई है। M, X का पिता है। X, N का पुत्र है। M का C से क्या संबंध है?",
+    "q_en": "Q244. C is the father of T. T is the brother of N. M is the father of X. X is the son of N. How is M related to C?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Family Tree - Daughter's Husband",
+    "o_hi": [
+      "(a) पुत्री का पति",
+      "(b) बहन का पति",
+      "(c) पत्नी का भाई",
+      "(d) पति"
+    ],
+    "o_en": [
+      "(a) Daughter's husband",
+      "(b) Sister's husband",
+      "(c) Wife's brother",
+      "(d) Husband"
+    ],
+    "a": 0,
+    "e_hi": "संबंध विश्लेषण:<br>1. X, N का पुत्र है तथा M, X का पिता है ⇒ N, X की माता है और M उसका पति है (M और N दंपत्ति हैं)।<br>2. C, T का पिता है तथा T, N का भाई है ⇒ C, N का भी पिता है (N, C की पुत्री है)।<br>3. M, N का पति है, इसलिए M, C की पुत्री का पति (दामाद) है।",
+    "e_en": "Relationship Analysis:<br>1. X is the son of N and M is the father of X ⇒ N is X's mother and M is her husband (M and N are spouses).<br>2. C is the father of T and T is the brother of N ⇒ C is also the father of N (N is C's daughter).<br>3. Since M is N's husband, M is the husband of C's daughter (son-in-law)."
+  },
+  {
+    "q_hi": "Q245. D, H का पिता है। H, C का भाई है। Y, T का पिता है। T, C का पुत्र है। D का Y से क्या संबंध है?",
+    "q_en": "Q245. D is the father of H. H is the brother of C. Y is the father of T. T is the son of C. How is D related to Y?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Family Tree - Wife's Father (Father-in-law)",
+    "o_hi": [
+      "(a) भाई",
+      "(b) पत्नी का भाई",
+      "(c) पिता",
+      "(d) पत्नी का पिता"
+    ],
+    "o_en": [
+      "(a) Brother",
+      "(b) Wife's brother",
+      "(c) Father",
+      "(d) Wife's father"
+    ],
+    "a": 3,
+    "e_hi": "संबंध विश्लेषण:<br>1. T, C का पुत्र है तथा Y, T का पिता है ⇒ C, T की माता है और Y उसका पति है (C, Y की पत्नी है)।<br>2. D, H का पिता है तथा H, C का भाई है ⇒ D, C का भी पिता है।<br>3. चूँकि C, Y की पत्नी है, अतः D, Y की पत्नी का पिता (ससुर) है।",
+    "e_en": "Relationship Analysis:<br>1. T is the son of C and Y is the father of T ⇒ C is T's mother and Y is her husband (C is Y's wife).<br>2. D is the father of H and H is the brother of C ⇒ D is also the father of C.<br>3. Since C is Y's wife, D is Y's wife's father (father-in-law)."
+  },
+  {
+    "q_hi": "Q246. D, L की माता है। L, U की बहन है। V, O का पिता है। O, U का पति है। D का O से क्या संबंध है?",
+    "q_en": "Q246. D is the mother of L. L is the sister of U. V is the father of O. O is the husband of U. How is D related to O?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Family Tree - Wife's Mother (Mother-in-law)",
+    "o_hi": [
+      "(a) पत्नी की माता",
+      "(b) माता",
+      "(c) पत्नी",
+      "(d) माता की माता"
+    ],
+    "o_en": [
+      "(a) Wife's mother",
+      "(b) Mother",
+      "(c) Wife",
+      "(d) Mother's mother"
+    ],
+    "a": 0,
+    "e_hi": "संबंध विश्लेषण:<br>1. O, U का पति है ⇒ U, O की पत्नी है।<br>2. L, U की बहन है तथा D, L की माता है ⇒ D, U की भी माता है।<br>3. चूँकि U, O की पत्नी है, अतः D, O की पत्नी की माता (सास) है।",
+    "e_en": "Relationship Analysis:<br>1. O is the husband of U ⇒ U is O's wife.<br>2. L is the sister of U and D is the mother of L ⇒ D is also the mother of U.<br>3. Since U is O's wife, D is O's wife's mother (mother-in-law)."
+  },
+  {
+    "q_hi": "Q247. N, C का भाई है। Q, Z की बहन है। T, Z का पुत्र है। Z, C की पत्नी है। N का Q से क्या संबंध है?",
+    "q_en": "Q247. N is the brother of C. Q is the sister of Z. T is the son of Z. Z is the wife of C. How is N related to Q?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Family Tree - Sister's Husband's Brother",
+    "o_hi": [
+      "(a) भाई",
+      "(b) बहन के पति का भाई",
+      "(c) बहन का पति",
+      "(d) पति का भाई"
+    ],
+    "o_en": [
+      "(a) Brother",
+      "(b) Sister's husband's brother",
+      "(c) Sister's husband",
+      "(d) Husband's brother"
+    ],
+    "a": 1,
+    "e_hi": "संबंध विश्लेषण:<br>1. Q, Z की बहन है।<br>2. Z, C की पत्नी है ⇒ C, Z का पति है (अर्थात Q की बहन का पति)।<br>3. N, C का भाई है ⇒ N, C (बहन के पति) का भाई है।<br>अतः N का Q से संबंध 'बहन के पति का भाई' है।",
+    "e_en": "Relationship Analysis:<br>1. Q is the sister of Z.<br>2. Z is the wife of C ⇒ C is the husband of Z (i.e., Q's sister's husband).<br>3. N is the brother of C ⇒ N is the brother of sister's husband.<br>Thus, N is related to Q as 'Sister's husband's brother'."
+  },
+  {
+    "q_hi": "Q248. सुनीता, मोहन की पत्नी है। मोहन, राजेश का पुत्र है। राजेश, करण का पिता है। करण, नेहा का भाई है। सुनीता का नेहा से क्या संबंध है?",
+    "q_en": "Q248. Sunita is the wife of Mohan. Mohan is the son of Rajesh. Rajesh is the father of Karan. Karan is the brother of Neha. How is Sunita related to Neha?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Family Tree - Brother's Wife (Sister-in-law)",
+    "o_hi": [
+      "(a) भाई की पत्नी",
+      "(b) पुत्री",
+      "(c) भाई की पुत्री",
+      "(d) पत्नी"
+    ],
+    "o_en": [
+      "(a) Brother's wife",
+      "(b) Daughter",
+      "(c) Brother's daughter",
+      "(d) Wife"
+    ],
+    "a": 0,
+    "e_hi": "संबंध विश्लेषण:<br>1. राजेश, मोहन, करण और नेहा का पिता है ⇒ मोहन, करण और नेहा आपस में सहोदर (भाई-बहन) हैं।<br>2. मोहन, नेहा का भाई है।<br>3. सुनीता, मोहन की पत्नी है ⇒ सुनीता, नेहा के भाई की पत्नी (भाभी) है।",
+    "e_en": "Relationship Analysis:<br>1. Rajesh is the father of Mohan, Karan, and Neha ⇒ Mohan, Karan, and Neha are siblings.<br>2. Mohan is the brother of Neha.<br>3. Sunita is the wife of Mohan ⇒ Sunita is Neha's brother's wife (sister-in-law)."
+  },
+  {
+    "q_hi": "Q249. अनीता, सुरेश की पत्नी है। सुरेश, महेश का भाई है। महेश, हरीश का पुत्र है। हरीश, काव्या का पिता है। अनीता का काव्या से क्या संबंध है?",
+    "q_en": "Q249. Anita is the wife of Suresh. Suresh is the brother of Mahesh. Mahesh is the son of Harish. Harish is the father of Kavya. How is Anita related to Kavya?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Family Tree - Brother's Wife (Sister-in-law)",
+    "o_hi": [
+      "(a) भाई की पत्नी",
+      "(b) पुत्री",
+      "(c) भाई की पुत्री",
+      "(d) पत्नी"
+    ],
+    "o_en": [
+      "(a) Brother's wife",
+      "(b) Daughter",
+      "(c) Brother's daughter",
+      "(d) Wife"
+    ],
+    "a": 0,
+    "e_hi": "संबंध विश्लेषण:<br>1. हरीश, महेश, सुरेश और काव्या का पिता है ⇒ सुरेश, काव्या का भाई है।<br>2. अनीता, सुरेश की पत्नी है ⇒ अनीता, काव्या के भाई की पत्नी (भाभी) है।",
+    "e_en": "Relationship Analysis:<br>1. Harish is the father of Mahesh, Suresh, and Kavya ⇒ Suresh is Kavya's brother.<br>2. Anita is the wife of Suresh ⇒ Anita is Kavya's brother's wife (sister-in-law)."
+  },
+  {
+    "q_hi": "Q250. Z, N की माता है। N, T की बहन है। O, U का पिता है। U, T का पति है। Z का O से क्या संबंध है?",
+    "q_en": "Q250. Z is the mother of N. N is the sister of T. O is the father of U. U is the husband of T. How is Z related to O?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Family Tree - Son's Wife's Mother",
+    "o_hi": [
+      "(a) माता",
+      "(b) पत्नी की बहन",
+      "(c) पुत्र की पत्नी की माता",
+      "(d) बहन"
+    ],
+    "o_en": [
+      "(a) Mother",
+      "(b) Wife's sister",
+      "(c) Son's wife's mother",
+      "(d) Sister"
+    ],
+    "a": 2,
+    "e_hi": "संबंध विश्लेषण:<br>1. Z, N और T की माता है (चूँकि N, T की बहन है)।<br>2. U, T का पति है तथा O, U का पिता है ⇒ U, O का पुत्र है और T, O के पुत्र की पत्नी (पुत्रवधू) है।<br>3. Z, T की माता है, अतः Z, O के पुत्र की पत्नी की माता (समधन) है।",
+    "e_en": "Relationship Analysis:<br>1. Z is the mother of N and T (as N is the sister of T).<br>2. U is the husband of T and O is the father of U ⇒ U is O's son and T is the wife of O's son (daughter-in-law).<br>3. Z is the mother of T, so Z is the mother of O's son's wife.<br>Hence, Z is related to O as 'Son's wife's mother'."
+  }
+];

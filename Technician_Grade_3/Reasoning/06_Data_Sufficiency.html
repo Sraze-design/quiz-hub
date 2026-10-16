@@ -1,0 +1,422 @@
+const data = [
+  {
+    "q_hi": "Q161. एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और सर्वाधिक उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 खंभों W, O, K, G और Y में से प्रत्येक की लंबाई अलग-अलग है, किस खंभे की लंबाई सबसे कम है?<br><br><b>कथन:</b><br>I. Y की लंबाई, K की लंबाई से अधिक है।<br>II. G की लंबाई, Y की लंबाई से अधिक है। W की लंबाई केवल एक खंभे की लंबाई से कम है।",
+    "q_en": "Q161. A question is followed by two statements numbered (I) and (II). You have to decide whether the data provided in the statements are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars W, O, K, G, and Y each of different lengths, which pillar has the shortest length?<br><br><b>Statements:</b><br>I. The length of Y is greater than the length of K.<br>II. The length of G is greater than the length of Y. The length of W is less than the length of only one pillar.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Order & Ranking (Shortest Element)",
+    "o_hi": [
+      "(a) प्रश्न का उत्तर देने के लिए, अकेले कथन II में दी जानकारी पर्याप्त है, जबकि कथन I में दी जानकारी पर्याप्त नहीं है।",
+      "(b) प्रश्न का उत्तर देने के लिए, अकेले कथन I में दी जानकारी पर्याप्त है, जबकि कथन II में दी जानकारी पर्याप्त नहीं है।",
+      "(c) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+      "(d) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।"
+    ],
+    "o_en": [
+      "(a) Data in Statement II alone is sufficient, while data in Statement I alone is not sufficient.",
+      "(b) Data in Statement I alone is sufficient, while data in Statement II alone is not sufficient.",
+      "(c) Data in both Statements I and II together are not sufficient.",
+      "(d) Data in both Statements I and II together are sufficient."
+    ],
+    "a": 2,
+    "e_hi": "कथन I से: Y > K।<br>कथन II से: G > Y तथा W दूसरा सबसे लंबा खंभा है (_ > W > _ > _ > _)।<br>दोनों को मिलाने पर: G > Y > K तथा W दूसरा सबसे लंबा है। लेकिन खंभे O की स्थिति स्पष्ट नहीं है (O सबसे लंबा भी हो सकता है और K से छोटा भी)। अतः सबसे छोटा खंभा K है या O, यह निर्धारित नहीं किया जा सकता।<br>अतः कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+    "e_en": "From I: Y > K.<br>From II: G > Y and W is the 2nd tallest (_ > W > _ > _ > _).<br>Combining I and II: G > Y > K and W is 2nd tallest. However, the position of pillar O relative to K is unknown (O could be the tallest or the shortest). Hence, whether K or O is the shortest cannot be determined.<br>Thus, both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q162. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना होगा कि कथन में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथन का अध्ययन करें और उपयुक्त उत्तर का चयन करें।<br><br><b>प्रश्न:</b> 5 स्तंभों, E, H, N, O और Y, में से प्रत्येक की ऊंचाई अलग-अलग है, इनमें से सबसे छोटा स्तंभ कौन-सा है?<br><br><b>कथन:</b><br>(I) Y, N से ऊंचा है।<br>(II) O, Y से ऊंचा है। E केवल एक स्तंभ से छोटा है।",
+    "q_en": "Q162. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars E, H, N, O, and Y each of different heights, which is the shortest pillar?<br><br><b>Statements:</b><br>(I) Y is taller than N.<br>(II) O is taller than Y. E is shorter than only one pillar.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Order & Ranking (Shortest Element)",
+    "o_hi": [
+      "(a) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है",
+      "(b) कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं",
+      "(c) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं",
+      "(d) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है"
+    ],
+    "o_en": [
+      "(a) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(b) Data in both Statements I and II together are sufficient.",
+      "(c) Data in both Statements I and II together are not sufficient.",
+      "(d) Data in Statement I alone is sufficient, while data in Statement II is not."
+    ],
+    "a": 2,
+    "e_hi": "कथन I से: Y > N।<br>कथन II से: O > Y तथा E दूसरा सबसे ऊंचा स्तंभ है (_ > E > _ > _ > _)।<br>दोनों को मिलाने पर: O > Y > N तथा E दूसरा सबसे ऊंचा है। परंतु स्तंभ H की स्थिति अज्ञात है (H सबसे ऊंचा भी हो सकता है अथवा सबसे छोटा भी)। अतः सबसे छोटा स्तंभ निश्चित नहीं किया जा सकता।<br>अतः कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+    "e_en": "From I: Y > N.<br>From II: O > Y and E is 2nd tallest (_ > E > _ > _ > _).<br>Combining I and II: O > Y > N and E is 2nd tallest. However, the position of pillar H is unknown (it could be tallest or shortest). Thus, the shortest pillar cannot be uniquely identified.<br>Hence, both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q163. इस प्रश्न में, एक प्रश्न के बाद दो कथन (I) और (II) दिए गए हैं। आपको यह तय करना है कि कथनों में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और सबसे उपयुक्त उत्तर चुनिए।<br><br><b>प्रश्न:</b> पांच व्यक्ति - अबीर, चरित, ध्रुव, एशिका और फारिस उत्तर की ओर अभिमुख होकर सीधी पंक्ति में बैठे हैं। बाएं छोर पर कौन बैठा है?<br><br><b>कथन:</b><br>(I) अबीर, चरित के ठीक बाएं पड़ोस में बैठा है, और ध्रुव, एशिका के ठीक बाएं पड़ोस में बैठा है।<br>(II) फारिस, एशिका के ठीक दाएं पड़ोस में बैठा है।",
+    "q_en": "Q163. In this question, a question is followed by two statements (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Five persons - Abir, Charit, Dhruv, Eshika, and Faris are sitting in a straight line facing North. Who sits at the left end?<br><br><b>Statements:</b><br>(I) Abir sits immediate left of Charit, and Dhruv sits immediate left of Eshika.<br>(II) Faris sits immediate right of Eshika.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Linear Seating Arrangement",
+    "o_hi": [
+      "(a) कथन I और II दोनों मिलकर प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+      "(b) कथन I और II दोनों (और अकेले कथन I या कथन II नहीं) मिलकर प्रश्न का उत्तर देने के लिए पर्याप्त हैं।",
+      "(c) कथन II का डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है जबकि कथन I का डेटा पर्याप्त नहीं है।",
+      "(d) कथन I का डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है जबकि कथन II का डेटा पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in both Statements I and II together are not sufficient to answer the question.",
+      "(b) Data in both Statements I and II together are sufficient to answer the question.",
+      "(c) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(d) Data in Statement I alone is sufficient, while data in Statement II is not."
+    ],
+    "a": 0,
+    "e_hi": "कथन (I) से दो समूह बनते हैं: [अबीर, चरित] और [ध्रुव, एशिका]।<br>कथन (II) से: [एशिका, फारिस], जिससे दूसरा समूह [ध्रुव, एशिका, फारिस] बन जाता है।<br>दोनों कथनों को मिलाने पर 5 व्यक्तियों के बैठने की दो वैध व्यवस्थाएं संभव हैं:<br>1. [अबीर, चरित, ध्रुव, एशिका, फारिस] → बाएं छोर पर अबीर होगा।<br>2. [ध्रुव, एशिका, फारिस, अबीर, चरित] → बाएं छोर पर ध्रुव होगा।<br>अतः बाएं छोर पर बैठने वाले व्यक्ति का विशिष्ट निर्धारण नहीं हो सकता। कथन I और II दोनों मिलकर पर्याप्त नहीं हैं।",
+    "e_en": "From statement (I): blocks [Abir, Charit] and [Dhruv, Eshika].<br>From statement (II): [Eshika, Faris], which gives the block [Dhruv, Eshika, Faris].<br>Combining both, two linear arrangements are possible:<br>1. [Abir, Charit, Dhruv, Eshika, Faris] → Abir is at the left end.<br>2. [Dhruv, Eshika, Faris, Abir, Charit] → Dhruv is at the left end.<br>Since unique left end cannot be determined, both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q164. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना होगा कि कथन में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथन का अध्ययन करें और उपयुक्त उत्तर का चयन करें।<br><br><b>प्रश्न:</b> 5 स्तंभों B, F, R, T और X में से प्रत्येक की ऊंचाई अलग-अलग है, इनमें से कौन-सा स्तंभ सबसे ऊंचा है?<br><br><b>कथन:</b><br>(I) B, T से ऊंचा है लेकिन X से छोटा है। B केवल एक स्तंभ से छोटा है।<br>(II) T, F से ऊंचा है।",
+    "q_en": "Q164. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars B, F, R, T, and X each of different heights, which is the tallest pillar?<br><br><b>Statements:</b><br>(I) B is taller than T but shorter than X. B is shorter than only one pillar.<br>(II) T is taller than F.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Order & Ranking (Tallest Element)",
+    "o_hi": [
+      "(a) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है",
+      "(b) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं",
+      "(c) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है",
+      "(d) कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient to answer the question, while data in Statement II is not.",
+      "(b) Data in both Statements I and II together are not sufficient.",
+      "(c) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(d) Data in both Statements I and II together are sufficient."
+    ],
+    "a": 0,
+    "e_hi": "कथन (I) से: 'B केवल एक स्तंभ से छोटा है' अर्थात B दूसरे स्थान पर है (_ > B > _ > _ > _)। साथ ही B, X से छोटा है (X > B)। चूंकि B से ऊंचा केवल एक ही स्तंभ हो सकता है और वह X है, अतः X ही सबसे ऊंचा स्तंभ है।<br>अतः अकेले कथन I से उत्तर प्राप्त हो जाता है।",
+    "e_en": "From Statement (I): 'B is shorter than only one pillar' means B is in the 2nd position (_ > B > _ > _ > _). Also, B is shorter than X (X > B). Since only one pillar can be taller than B, that pillar must be X, meaning X is the tallest.<br>Thus, Statement I alone is sufficient."
+  },
+  {
+    "q_hi": "Q165. एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और सर्वाधिक उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 खंभों W, O, K, G और Y में से प्रत्येक की लंबाई अलग-अलग है, किस खंभे की लंबाई सबसे कम है?<br><br><b>कथन:</b><br>I. Y की लंबाई, O की लंबाई से कम है। G की लंबाई, W की लंबाई से कम है।<br>II. G की लंबाई, Y की लंबाई से अधिक है।",
+    "q_en": "Q165. A question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars W, O, K, G, and Y each of different lengths, which pillar has the shortest length?<br><br><b>Statements:</b><br>I. The length of Y is less than the length of O. The length of G is less than the length of W.<br>II. The length of G is greater than the length of Y.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking (Missing Element)",
+    "o_hi": [
+      "(a) प्रश्न का उत्तर देने के लिए, अकेले कथन II में दी जानकारी पर्याप्त है, जबकि कथन I में दी जानकारी पर्याप्त नहीं है।",
+      "(b) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।",
+      "(c) प्रश्न का उत्तर देने के लिए, अकेले कथन I में दी जानकारी पर्याप्त है, जबकि कथन II में दी जानकारी पर्याप्त नहीं है।",
+      "(d) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।"
+    ],
+    "o_en": [
+      "(a) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(b) Data in both Statements I and II together are sufficient.",
+      "(c) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(d) Data in both Statements I and II together are not sufficient."
+    ],
+    "a": 3,
+    "e_hi": "कथन I से: O > Y तथा W > G।<br>कथन II से: G > Y।<br>दोनों को मिलाने पर: W > G > Y तथा O > Y प्राप्त होता है। परंतु पाँचवें खंभे K का उल्लेख दोनों में से किसी भी कथन में नहीं है। खंभा K सबसे छोटा भी हो सकता है अथवा अन्य किसी स्थान पर भी हो सकता है।<br>अतः कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+    "e_en": "From Statement I: O > Y and W > G.<br>From Statement II: G > Y.<br>Combining both gives: W > G > Y and O > Y. However, pillar K is not mentioned in either statement. Pillar K could be the shortest or anywhere else.<br>Thus, both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q166. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) रूप में क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और उचित उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> पाँच व्यक्ति - M, N, O, P और Q- एक गोल मेज के परितः उसके केंद्र की ओर अभिमुख होकर बैठे हैं। M और Q के ठीक बीच में कौन बैठा है?<br><br><b>कथन:</b><br>(I) O, M के ठीक दाएं पड़ोस में बैठा है। N, Q के ठीक बाएं पड़ोस में बैठा है।<br>(II) P, O के ठीक बाएं पड़ोस में बैठा है। M, Q के आसन्न नहीं बैठा है।",
+    "q_en": "Q166. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the information provided is sufficient to answer the question.<br><br><b>Question:</b> Five persons - M, N, O, P, and Q are sitting around a circular table facing the centre. Who sits exactly between M and Q?<br><br><b>Statements:</b><br>(I) O sits immediate right of M. N sits immediate left of Q.<br>(II) P sits immediate left of O. M does not sit adjacent to Q.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Circular Seating Arrangement",
+    "o_hi": [
+      "(a) अकेले कथन II में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त हैं, जबकि कथन I में दी गई जानकारी पर्याप्त नहीं हैं।",
+      "(b) कथन I और II दोनों संयुक्त रूप से प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+      "(c) कथन I और II दोनों संयुक्त रूप से (अकेले कथन I या अकेले कथन II नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं।",
+      "(d) अकेले कथन I में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त हैं, जबकि कथन II में दी गई जानकारी पर्याप्त नहीं हैं।"
+    ],
+    "o_en": [
+      "(a) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(b) Data in both Statements I and II together are not sufficient.",
+      "(c) Data in both Statements I and II together are sufficient.",
+      "(d) Data in Statement I alone is sufficient, while data in Statement II is not."
+    ],
+    "a": 1,
+    "e_hi": "कथन (I) के अनुसार, O, M के ठीक दाएं है (अर्थात O के ठीक बाएं M होना चाहिए)। परंतु कथन (II) कहता है कि O के ठीक बाएं P बैठा है, जो कथन (I) का खंडन करता है। अतः दोनों कथनों से एक मान्य और सुसंगत वृत्ताकार व्यवस्था नहीं बनाई जा सकती।<br>अतः कथन I और II दोनों संयुक्त रूप से प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+    "e_en": "According to statement (I), O is immediate right of M (so M is to the immediate left of O). However, statement (II) states that P is to the immediate left of O, creating a contradiction between the statements. Hence, a consistent circular seating arrangement cannot be formed.<br>Thus, both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q167. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना होगा कि कथनों में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथन का अध्ययन करें और उपयुक्त उत्तर का चयन करें।<br><br><b>प्रश्न:</b> 5 स्तंभों, G, H, I, S और W में से प्रत्येक की ऊंचाई अलग-अलग है, इनमें से कौन-सा स्तंभ सबसे ऊंचा है?<br><br><b>कथन:</b><br>(I) G केवल दो स्तंभों से ऊंचा है। H, W से ऊंचा है तथा किसी भी स्तंभ की ऊंचाई H और W के बीच नहीं है।<br>(II) S, W से ऊंचा है।",
+    "q_en": "Q167. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars G, H, I, S, and W each of different heights, which is the tallest pillar?<br><br><b>Statements:</b><br>(I) G is taller than only two pillars. H is taller than W and no pillar is between H and W.<br>(II) S is taller than W.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Order & Ranking (Adjacent Heights)",
+    "o_hi": [
+      "(a) कथन I और II दोनों एक साथ (और केवल कथन I या कथन II अकेले नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं",
+      "(b) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है",
+      "(c) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं",
+      "(d) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है"
+    ],
+    "o_en": [
+      "(a) Data in both Statements I and II together are sufficient.",
+      "(b) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(c) Data in both Statements I and II together are not sufficient.",
+      "(d) Data in Statement II alone is sufficient, while data in Statement I is not."
+    ],
+    "a": 2,
+    "e_hi": "कथन (I) से: G तीसरे स्थान पर है (_ > _ > G > _ > _) तथा H और W की ऊँचाई क्रमागत (HW) है।<br>कथन (II) से: S > W।<br>दोनों को मिलाने पर: HW चौथे और पाँचवें स्थान पर हो सकते हैं (H=4, W=5) और पहले दो स्थानों पर S और I में से कोई भी आ सकता है (S > I > G > H > W अथवा I > S > G > H > W)।<br>अतः सबसे ऊंचा स्तंभ S है या I, यह निश्चित नहीं किया जा सकता। कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+    "e_en": "From Statement (I): G is in 3rd position (_ > _ > G > _ > _) and HW are adjacent. <br>From Statement (II): S > W.<br>Combining both: HW can occupy ranks 4 and 5 (H=4, W=5), leaving ranks 1 and 2 for S and I. Either S or I could be the tallest (S > I > G > H > W or I > S > G > H > W).<br>Thus, the tallest pillar cannot be uniquely determined, so both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q168. एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और सर्वाधिक उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 खंभों W, O, K, G और Y में से प्रत्येक की लंबाई अलग-अलग है, किस खंभे की लंबाई सबसे अधिक है?<br><br><b>कथन:</b><br>I. K की लंबाई केवल एक खंभे की लंबाई से अधिक है। G की लंबाई, O की लंबाई से कम है लेकिन W की लंबाई से अधिक है।<br>II. G की लंबाई, Y की लंबाई से अधिक है।",
+    "q_en": "Q168. A question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars W, O, K, G, and Y each of different lengths, which pillar has the greatest length?<br><br><b>Statements:</b><br>I. The length of K is greater than the length of only one pillar. The length of G is less than the length of O but greater than the length of W.<br>II. The length of G is greater than the length of Y.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Order & Ranking (Tallest Element)",
+    "o_hi": [
+      "(a) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।",
+      "(b) प्रश्न का उत्तर देने के लिए, अकेले कथन I में दी जानकारी पर्याप्त है, जबकि कथन II में दी जानकारी पर्याप्त नहीं है।",
+      "(c) प्रश्न का उत्तर देने के लिए, अकेले कथन II में दी जानकारी पर्याप्त है, जबकि कथन I में दी जानकारी पर्याप्त नहीं है।",
+      "(d) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।"
+    ],
+    "o_en": [
+      "(a) Data in both Statements I and II together are sufficient to answer the question.",
+      "(b) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(c) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(d) Data in both Statements I and II together are not sufficient."
+    ],
+    "a": 0,
+    "e_hi": "कथन I से: K चौथे स्थान पर है (_ > _ > _ > K > _) तथा O > G > W।<br>कथन II से: G > Y।<br>दोनों कथनों को मिलाकर देखने पर पांचों खंभों की स्थिति स्पष्ट हो जाती है: O सबसे ऊपर (1), G दूसरे पर (2), W तीसरे पर (3), K चौथे पर (4) तथा Y सबसे नीचे (5) पर आता है। इस प्रकार खंभा O सबसे अधिक लंबा सिद्ध होता है।<br>अतः प्रश्न का उत्तर देने के लिए कथन I और II दोनों एक साथ पर्याप्त हैं।",
+    "e_en": "From I: K is in 4th position (_ > _ > _ > K > _) and O > G > W.<br>From II: G > Y.<br>Combining both statements determines the complete order: O(1) > G(2) > W(3) > K(4) > Y(5). Thus, pillar O has the greatest length.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q169. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना होगा कि कथन में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथन का अध्ययन करें और उपयुक्त उत्तर का चयन करें।<br><br><b>प्रश्न:</b> 5 स्तंभों, A, B, D, I और Y में से प्रत्येक की ऊंचाई अलग-अलग है, इनमें से कौन-सा स्तंभ सबसे ऊंचा है?<br><br><b>कथन:</b><br>(I) D केवल एक स्तंभ से ऊंचा है। I, B से छोटा है लेकिन A से ऊंचा है।<br>(II) I, Y से ऊंचा है।",
+    "q_en": "Q169. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars A, B, D, I, and Y each of different heights, which is the tallest pillar?<br><br><b>Statements:</b><br>(I) D is taller than only one pillar. I is shorter than B but taller than A.<br>(II) I is taller than Y.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking (Tallest Element)",
+    "o_hi": [
+      "(a) कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं",
+      "(b) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है",
+      "(c) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है",
+      "(d) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं"
+    ],
+    "o_en": [
+      "(a) Data in both Statements I and II together are sufficient to answer the question.",
+      "(b) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(c) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(d) Data in both Statements I and II together are not sufficient."
+    ],
+    "a": 0,
+    "e_hi": "कथन (I) से: D चौथे स्थान पर है (_ > _ > _ > D > _) तथा B > I > A।<br>कथन (II) से: I > Y।<br>दोनों कथनों को मिलाने पर B शीर्ष स्थान (1) पर, I दूसरे स्थान (2) पर और A तथा Y निचले स्थानों पर आ जाते हैं, जिससे यह स्पष्ट रूप से निर्धारित होता है कि स्तंभ B सबसे ऊंचा है।<br>अतः कथन I और II दोनों एक साथ पर्याप्त हैं।",
+    "e_en": "From Statement (I): D is in 4th position (_ > _ > _ > D > _) and B > I > A.<br>From Statement (II): I > Y.<br>Combining both statements confirms that B occupies the top position (1), I occupies position (2), and A, Y are in lower positions, proving B is the tallest.<br>Thus, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q170. एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और सर्वाधिक उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 खंभों W, O, K, G और Y में से प्रत्येक की लंबाई अलग-अलग है, किस खंभे की लंबाई सबसे कम है?<br><br><b>कथन:</b><br>I. G की लंबाई केवल एक खंभे की लंबाई से अधिक है। W की लंबाई, O की लंबाई से अधिक है।<br>II. G की लंबाई, Y की लंबाई से अधिक है।",
+    "q_en": "Q170. A question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars W, O, K, G, and Y each of different lengths, which pillar has the shortest length?<br><br><b>Statements:</b><br>I. The length of G is greater than the length of only one pillar. The length of W is greater than the length of O.<br>II. The length of G is greater than the length of Y.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Order & Ranking (Shortest Element)",
+    "o_hi": [
+      "(a) प्रश्न का उत्तर देने के लिए, अकेले कथन I में दी जानकारी पर्याप्त है, जबकि कथन II में दी जानकारी पर्याप्त नहीं है।",
+      "(b) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+      "(c) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।",
+      "(d) प्रश्न का उत्तर देने के लिए, अकेले कथन II में दी जानकारी पर्याप्त है, जबकि कथन I में दी जानकारी पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(b) Data in both Statements I and II together are not sufficient.",
+      "(c) Data in both Statements I and II together are sufficient to answer the question.",
+      "(d) Data in Statement II alone is sufficient, while data in Statement I is not."
+    ],
+    "a": 2,
+    "e_hi": "कथन I से: 'G की लंबाई केवल एक खंभे से अधिक है', अर्थात G चौथे स्थान पर है (_ > _ > _ > G > _)।<br>कथन II से: G > Y।<br>चूंकि G केवल एक ही खंभे से बड़ा है और वह Y से बड़ा है, अतः Y ही वह एकमात्र खंभा है जो सबसे छोटा है (5वें स्थान पर)।<br>अतः प्रश्न का उत्तर देने के लिए कथन I और II दोनों एक साथ पर्याप्त हैं।",
+    "e_en": "From Statement I: 'G is greater than only one pillar' means G is in 4th position (_ > _ > _ > G > _).<br>From Statement II: G > Y.<br>Since G is taller than only one pillar and G is taller than Y, Y must be that single shortest pillar (rank 5).<br>Thus, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q171. एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दिए गए डेटा प्रश्न का उत्तर देने के लिए पर्याप्त हैं या नहीं। दोनों कथनों को पढ़ें और उचित उत्तर तय करें।<br><br><b>प्रश्न:</b> A, B, C, D और E एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। A के दाई ओर दूसरे स्थान पर कौन बैठा है?<br><br><b>कथन:</b><br>(I) C, E के ठीक बाएं पड़ोस में बैठा है। D, A के ठीक दाएं पड़ोस में बैठा है।<br>(II) A और B का निकटतम पड़ोसी D है। E, D के बाई ओर दूसरे स्थान पर बैठा है।",
+    "q_en": "Q171. A question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> A, B, C, D, and E are sitting around a circular table facing the centre. Who sits second to the right of A?<br><br><b>Statements:</b><br>(I) C sits immediate left of E. D sits immediate right of A.<br>(II) D is the immediate neighbour of A and B. E sits second to the left of D.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Circular Seating Arrangement",
+    "o_hi": [
+      "(a) कथन I और II में दी गई जानकारी एकसाथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है।",
+      "(b) कथन I और II में दी गई जानकारी एकसाथ प्रश्न का उत्तर देने के लिए पर्याप्त है।",
+      "(c) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है।",
+      "(d) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in Statements I and II together are not sufficient.",
+      "(b) Data in Statements I and II together are sufficient to answer the question.",
+      "(c) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(d) Data in Statement II alone is sufficient, while data in Statement I is not."
+    ],
+    "a": 1,
+    "e_hi": "कथन (II) से D, A और B के बीच में है (A-D-B या B-D-A)। कथन (I) से D, A के ठीक दाएं है, जिससे क्रम A → D → B (दक्षिणावर्त) निश्चित हो जाता है। साथ ही C, E के ठीक बाएं है, जिससे पूरी वृत्ताकार व्यवस्था: A → D → B → E → C (वामावर्त) निर्धारित हो जाती है। अतः A के दाईं ओर दूसरे स्थान पर B बैठा है।<br>अतः कथन I और II दोनों एकसाथ पर्याप्त हैं।",
+    "e_en": "From statement (II), D is between A and B. From statement (I), D is immediate right of A, fixing the relative order A → D → B. Adding the condition that C is immediate left of E completes the entire circular arrangement uniquely: A → D → B → E → C. Thus, B sits 2nd to the right of A.<br>Hence, Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q172. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि क्या कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है। दोनों कथनों को पढ़िए और उचित उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> T, U, V, W और X में से सबसे छोटा कौन है?<br><br><b>कथन:</b><br>(I) U, T और W से छोटा है, लेकिन X से बड़ा है।<br>(II) V, U से छोटा है। X सबसे छोटा नहीं है।",
+    "q_en": "Q172. A question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among T, U, V, W, and X, who is the shortest?<br><br><b>Statements:</b><br>(I) U is shorter than T and W, but taller than X.<br>(II) V is shorter than U. X is not the shortest.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Order & Ranking (Shortest Element)",
+    "o_hi": [
+      "(a) कथन I में दी गई जानकारी ही प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दी गई जानकारी पर्याप्त नहीं है।",
+      "(b) कथन I और II दोनों संयुक्त रूप से भी प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+      "(c) प्रश्न का उत्तर देने के लिए कथन I और II दोनों संयुक्त रूप से (अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।",
+      "(d) कथन II में दी गई जानकारी ही प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दी गई जानकारी पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(b) Data in both Statements I and II together are not sufficient.",
+      "(c) Data in both Statements I and II together are sufficient to answer the question.",
+      "(d) Data in Statement II alone is sufficient, while data in Statement I is not."
+    ],
+    "a": 2,
+    "e_hi": "कथन (I) से: T, W > U > X।<br>कथन (II) से: V < U तथा X सबसे छोटा नहीं है।<br>चूंकि T, W और U सभी X से बड़े हैं, और X सबसे छोटा नहीं है, अतः V ही X से भी छोटा होकर सबसे छोटा व्यक्ति होगा (क्रम: T, W > U > X > V)।<br>अतः प्रश्न का उत्तर देने के लिए कथन I और II दोनों संयुक्त रूप से पर्याप्त हैं।",
+    "e_en": "From Statement (I): T, W > U > X.<br>From Statement (II): V < U and X is not the shortest.<br>Since T, W, and U are taller than X, and X is not the shortest, V must be shorter than X (order: T, W > U > X > V). Thus, V is the shortest.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q173. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथन का अध्ययन कीजिए और उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 वृक्षों B, F, G, I और L में से प्रत्येक की लंबाई अलग-अलग है, इनमें से कौन-सा वृक्ष सबसे लंबा है?<br><br><b>कथन:</b><br>(I) G, L से छोटा है<br>(II) I, L से लंबा है",
+    "q_en": "Q173. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 trees B, F, G, I, and L each of different heights, which tree is the tallest?<br><br><b>Statements:</b><br>(I) G is shorter than L.<br>(II) I is taller than L.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Order & Ranking (Tallest Element)",
+    "o_hi": [
+      "(a) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है",
+      "(b) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं",
+      "(c) कथन I और II दोनों एक साथ (और न तो अकेले कथन I या न ही अकेले कथन II) प्रश्न का उत्तर देने के लिए पर्याप्त हैं",
+      "(d) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(b) Data in both Statements I and II together are not sufficient.",
+      "(c) Data in both Statements I and II together are sufficient.",
+      "(d) Data in Statement II alone is sufficient, while data in Statement I is not."
+    ],
+    "a": 1,
+    "e_hi": "कथन (I) से: L > G।<br>कथन (II) से: I > L।<br>दोनों को मिलाने पर: I > L > G। परंतु शेष दो वृक्षों B और F की ऊँचाई के संबंध में कोई जानकारी नहीं दी गई है। B या F, I से भी लंबे हो सकते हैं।<br>अतः कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+    "e_en": "From Statement (I): L > G.<br>From Statement (II): I > L.<br>Combining gives: I > L > G. However, no information is provided regarding trees B and F, which could be taller than I.<br>Thus, both Statements I and II together are not sufficient."
+  },
+  {
+    "q_hi": "Q174. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको तय करना है कि कथनों में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त हैं या नहीं। दोनों कथनों को पढ़िए और उचित उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> पाँच परियोजनाएं - ओरियन, निंबस, वर्टेक्स, पल्स और जेनिथ एक ही सप्ताह के सोमवार से शुक्रवार के बीच अलग-अलग दिन पूरी की गई हैं। पल्स किस दिन पूरी हुई थी?<br><br><b>कथन:</b><br>(I) पल्स, जेनिथ से ठीक एक दिन पहले पूरी हुई थी।<br>(II) जेनिथ शुक्रवार को पूरी हुई थी।",
+    "q_en": "Q174. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Five projects - Orion, Nimbus, Vertex, Pulse, and Zenith were completed on different days from Monday to Friday of the same week. On which day was Pulse completed?<br><br><b>Statements:</b><br>(I) Pulse was completed exactly one day before Zenith.<br>(II) Zenith was completed on Friday.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Schedule / Days of the Week",
+    "o_hi": [
+      "(a) कथन I और II दोनों मिलकर प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं",
+      "(b) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है",
+      "(c) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है",
+      "(d) कथन I और II दोनों मिलकर (और न अकेले कथन I या न अकेले कथन II) प्रश्न का उत्तर देने के लिए पर्याप्त हैं"
+    ],
+    "o_en": [
+      "(a) Data in both Statements I and II together are not sufficient.",
+      "(b) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(c) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(d) Data in both Statements I and II together are sufficient to answer the question."
+    ],
+    "a": 3,
+    "e_hi": "कथन (II) से स्पष्ट है कि जेनिथ शुक्रवार को पूरी हुई।<br>कथन (I) से पल्स, जेनिथ से ठीक एक दिन पहले पूरी हुई थी।<br>अतः शुक्रवार से ठीक एक दिन पहले गुरुवार (Thursday) को पल्स पूरी हुई थी। दोनों कथनों को मिलाकर निश्चित दिन ज्ञात हो जाता है।<br>अतः कथन I और II दोनों मिलकर पर्याप्त हैं।",
+    "e_en": "From Statement (II), Zenith was completed on Friday.<br>From Statement (I), Pulse was completed exactly one day before Zenith.<br>Thus, Pulse was completed on Thursday (one day before Friday). Combining both statements uniquely answers the question.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q175. एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और सर्वाधिक उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 खंभों W, O, K, G और Y में से प्रत्येक की लंबाई अलग-अलग है, किस खंभे की लंबाई सबसे कम है?<br><br><b>कथन:</b><br>I. Y की लंबाई केवल दो खंभों की लंबाई से अधिक है। G की लंबाई, Y की लंबाई से अधिक है लेकिन K की लंबाई से कम है।<br>II. W की लंबाई, O की लंबाई से अधिक है।",
+    "q_en": "Q175. A question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars W, O, K, G, and Y each of different lengths, which pillar has the shortest length?<br><br><b>Statements:</b><br>I. The length of Y is greater than the length of only two pillars. The length of G is greater than Y but less than K.<br>II. The length of W is greater than the length of O.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking (Shortest Element)",
+    "o_hi": [
+      "(a) प्रश्न का उत्तर देने के लिए, अकेले कथन II में दी जानकारी पर्याप्त है, जबकि कथन I में दी जानकारी पर्याप्त नहीं है।",
+      "(b) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।",
+      "(c) प्रश्न का उत्तर देने के लिए, कथन I और II दोनों एक साथ पर्याप्त नहीं हैं।",
+      "(d) प्रश्न का उत्तर देने के लिए, अकेले कथन I में दी जानकारी पर्याप्त है, जबकि कथन II में दी जानकारी पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(b) Data in both Statements I and II together are sufficient to answer the question.",
+      "(c) Data in both Statements I and II together are not sufficient.",
+      "(d) Data in Statement I alone is sufficient, while data in Statement II is not."
+    ],
+    "a": 1,
+    "e_hi": "कथन I से: Y केवल दो खंभों से बड़ा है अर्थात Y तीसरे स्थान पर है (_ > _ > Y > _ > _)। साथ ही K > G > Y, जिससे शीर्ष 3 स्थान निश्चित हो जाते हैं: K(1) > G(2) > Y(3)। शेष दो स्थान 4 और 5 खंभे W और O के लिए बचते हैं।<br>कथन II से: W > O, जिससे W चौथे (4) और O पांचवें (5) स्थान पर आ जाता है। इस प्रकार O सबसे छोटा खंभा सिद्ध होता है।<br>अतः कथन I और II दोनों एक साथ पर्याप्त हैं।",
+    "e_en": "From Statement I: Y is taller than only two pillars, placing Y in 3rd position (_ > _ > Y > _ > _). Also K > G > Y, fixing the top three: K(1) > G(2) > Y(3). Positions 4 and 5 remain for W and O.<br>From Statement II: W > O, which places W in 4th and O in 5th position. Thus, O is uniquely identified as the shortest.<br>Hence, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q176. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि कथनों में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों का अध्ययन कीजिए और उपयुक्त उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> 5 वृक्षों H, K, T, W और X में से प्रत्येक की लंबाई अलग-अलग है, इनमें से कौन-सा वृक्ष सबसे लंबा है?<br><br><b>कथन:</b><br>(I) T केवल दो वृक्षों से छोटा है। X, T से लंबा है।<br>(II) W, X से लंबा है।",
+    "q_en": "Q176. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 trees H, K, T, W, and X each of different heights, which tree is the tallest?<br><br><b>Statements:</b><br>(I) T is shorter than only two trees. X is taller than T.<br>(II) W is taller than X.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking (Tallest Element)",
+    "o_hi": [
+      "(a) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है",
+      "(b) कथन I और II दोनों एक साथ (और न तो अकेले कथन I और न ही अकेले कथन II) प्रश्न का उत्तर देने के लिए पर्याप्त हैं",
+      "(c) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है",
+      "(d) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(b) Data in both Statements I and II together are sufficient to answer the question.",
+      "(c) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(d) Data in both Statements I and II together are not sufficient."
+    ],
+    "a": 1,
+    "e_hi": "कथन (I) से: 'T केवल दो वृक्षों से छोटा है' अर्थात T तीसरे स्थान पर है (_ > _ > T > _ > _)। X, T से लंबा है, अतः X पहले या दूसरे स्थान पर होगा।<br>कथन (II) से: W, X से लंबा है (W > X)।<br>चूंकि T से लंबे केवल दो ही वृक्ष हैं और W > X है, अतः W को पहले स्थान पर और X को दूसरे स्थान पर होना पड़ेगा (क्रम: W > X > T > _ > _)। इससे स्पष्ट है कि W सबसे लंबा वृक्ष है।<br>अतः कथन I और II दोनों एक साथ पर्याप्त हैं।",
+    "e_en": "From Statement (I): T is shorter than only two trees, placing T in 3rd position (_ > _ > T > _ > _). X is taller than T, so X is in position 1 or 2.<br>From Statement (II): W is taller than X (W > X).<br>Since only two trees are taller than T and W > X, W must occupy 1st place and X must occupy 2nd place (W > X > T > _ > _). Thus, W is uniquely the tallest.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q177. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना होगा कि कथन में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों का अध्ययन करें और उपयुक्त उत्तर का चयन करें।<br><br><b>प्रश्न:</b> 5 स्तंभों, B, E, G, O और P में से, प्रत्येक की ऊंचाई भिन्न है, इनमें से सबसे छोटा स्तंभ कौन-सा है?<br><br><b>कथन:</b><br>(I) P केवल दो स्तंभों से ऊंचा है। O, P से ऊंचा है लेकिन G से छोटा है।<br>(II) B, E से ऊंचा है।",
+    "q_en": "Q177. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Among 5 pillars B, E, G, O, and P each of different heights, which is the shortest pillar?<br><br><b>Statements:</b><br>(I) P is taller than only two pillars. O is taller than P but shorter than G.<br>(II) B is taller than E.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking (Shortest Element)",
+    "o_hi": [
+      "(a) कथन I और II दोनों एक साथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं",
+      "(b) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा पर्याप्त नहीं है",
+      "(c) कथन I और II दोनों एक साथ (और अकेले कथन I या अकेले कथन II नहीं) प्रश्न का उत्तर देने के लिए पर्याप्त हैं",
+      "(d) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा पर्याप्त नहीं है"
+    ],
+    "o_en": [
+      "(a) Data in both Statements I and II together are not sufficient.",
+      "(b) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(c) Data in both Statements I and II together are sufficient to answer the question.",
+      "(d) Data in Statement I alone is sufficient, while data in Statement II is not."
+    ],
+    "a": 2,
+    "e_hi": "कथन (I) से: P तीसरे स्थान पर है (_ > _ > P > _ > _) तथा G > O > P, जिससे शीर्ष 3 स्थान G(1) > O(2) > P(3) निश्चित हो जाते हैं। शेष दो स्थान B और E के लिए बचते हैं।<br>कथन (II) से: B > E, जिससे B चौथे और E पांचवें (सबसे निचले) स्थान पर आ जाता है (क्रम: G > O > P > B > E)। अतः सबसे छोटा स्तंभ E है।<br>अतः कथन I और II दोनों एक साथ पर्याप्त हैं।",
+    "e_en": "From Statement (I): P is taller than only two pillars, placing P in 3rd position (_ > _ > P > _ > _). Also G > O > P, fixing the top three: G(1) > O(2) > P(3). Positions 4 and 5 remain for B and E.<br>From Statement (II): B > E, which places B in 4th and E in 5th position (G > O > P > B > E). Thus, E is the shortest pillar.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q178. इस प्रश्न में, एक प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन आते हैं। आपको यह तय करना होगा कि कथनों में दिया गया डेटा प्रश्न का उत्तर देने के लिए पर्याप्त है या नहीं। दोनों कथनों को पढ़िए और उचित उत्तर तय कीजिए।<br><br><b>प्रश्न:</b> पाँच मित्र - गौतम, हिरल, इवान, जीविका और केशव अलग-अलग आयु के हैं। सबसे छोटा कौन है?<br><br><b>कथन:</b><br>(I) गौतम, हिरल से बड़ा है लेकिन जीविका से छोटा है।<br>(II) हिरल, इवान से बड़ा है, और केशव, गौतम से बड़ा है।",
+    "q_en": "Q178. In this question, a question is followed by two statements numbered (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> Five friends - Gautam, Hiral, Ivan, Jeevika, and Keshav are of different ages. Who is the youngest?<br><br><b>Statements:</b><br>(I) Gautam is older than Hiral but younger than Jeevika.<br>(II) Hiral is older than Ivan, and Keshav is older than Gautam.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking / Age Comparison",
+    "o_hi": [
+      "(a) कथन I का डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है जबकि कथन II का डेटा पर्याप्त नहीं है।",
+      "(b) कथन I और II दोनों (और अकेले कथन I या कथन II नहीं) मिलकर प्रश्न का उत्तर देने के लिए पर्याप्त हैं।",
+      "(c) कथन I और II दोनों मिलकर प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।",
+      "(d) कथन II का डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है जबकि कथन I का डेटा पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(b) Data in both Statements I and II together are sufficient to answer the question.",
+      "(c) Data in both Statements I and II together are not sufficient.",
+      "(d) Data in Statement II alone is sufficient, while data in Statement I is not."
+    ],
+    "a": 1,
+    "e_hi": "कथन (I) से: जीविका > गौतम > हिरल।<br>कथन (II) से: हिरल > इवान तथा केशव > गौतम।<br>दोनों कथनों को मिलाने पर: जीविका और केशव दोनों गौतम से बड़े हैं, गौतम हिरल से बड़ा है, और हिरल इवान से बड़ा है। अतः इवान अन्य सभी चार मित्रों से छोटा है, जिससे यह सिद्ध होता है कि इवान सबसे छोटा है।<br>अतः कथन I और II दोनों मिलकर पर्याप्त हैं।",
+    "e_en": "From Statement (I): Jeevika > Gautam > Hiral.<br>From Statement (II): Hiral > Ivan, and Keshav > Gautam.<br>Combining both: Both Jeevika and Keshav are older than Gautam, Gautam is older than Hiral, and Hiral is older than Ivan. Thus, Ivan is younger than all other four friends, uniquely proving Ivan is the youngest.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q179. इस प्रश्न में, प्रश्न के बाद (I) और (II) से क्रमांकित दो कथन दिए गए हैं। आपको यह तय करना है कि क्या कथनों में दी गई जानकारी प्रश्न का उत्तर देने के लिए पर्याप्त है। दोनों कथनों को पढ़िए और उचित उत्तर का चयन कीजिए।<br><br><b>प्रश्न:</b> L, M, N, O और P में से दूसरा सबसे लंबा कौन है?<br><br><b>कथन:</b><br>(I) M, L और N से लंबा है, लेकिन O से छोटा है।<br>(II) P, O से लंबा है।",
+    "q_en": "Q179. A question is followed by two statements numbered (I) and (II). Decide whether the information provided is sufficient to answer the question.<br><br><b>Question:</b> Among L, M, N, O, and P, who is the second tallest?<br><br><b>Statements:</b><br>(I) M is taller than L and N, but shorter than O.<br>(II) P is taller than O.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Order & Ranking (2nd Tallest Element)",
+    "o_hi": [
+      "(a) कथन I में दी गई जानकारी ही प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दी गई जानकारी पर्याप्त नहीं है।",
+      "(b) कथन II में दी गई जानकारी ही प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दी गई जानकारी पर्याप्त नहीं है।",
+      "(c) प्रश्न का उत्तर देने के लिए कथन I और II दोनों संयुक्त रूप से (अकेले कथन I या अकेले कथन II नहीं) पर्याप्त हैं।",
+      "(d) कथन I और II दोनों संयुक्त रूप से भी प्रश्न का उत्तर देने के लिए पर्याप्त नहीं हैं।"
+    ],
+    "o_en": [
+      "(a) Data in Statement I alone is sufficient, while data in Statement II is not.",
+      "(b) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(c) Data in both Statements I and II together are sufficient to answer the question.",
+      "(d) Data in both Statements I and II together are not sufficient."
+    ],
+    "a": 2,
+    "e_hi": "कथन (I) से: O > M > (L, N)।<br>कथन (II) से: P > O।<br>दोनों कथनों को मिलाने पर: P > O > M > (L, N)। पांचों व्यक्तियों में सबसे लंबा व्यक्ति P है और दूसरा सबसे लंबा व्यक्ति O है।<br>अतः प्रश्न का उत्तर देने के लिए कथन I और II दोनों संयुक्त रूप से पर्याप्त हैं।",
+    "e_en": "From Statement (I): O > M > (L, N).<br>From Statement (II): P > O.<br>Combining both statements: P > O > M > (L, N). P is the tallest and O is uniquely the second tallest.<br>Therefore, both Statements I and II together are sufficient."
+  },
+  {
+    "q_hi": "Q180. एक प्रश्न के बाद दो कथन (I) और (II) दिए गए हैं। आपको यह तय करना है कि कथनों में दिए गए डेटा प्रश्न का उत्तर देने के लिए पर्याप्त हैं या नहीं। दोनों कथनों को पढ़ें और उचित उत्तर तय करें।<br><br><b>प्रश्न:</b> A, B, C, D और E एक गोल मेज के परितः केंद्र की ओर अभिमुख होकर बैठे हैं। B के ठीक दाएं पड़ोस में कौन बैठा है?<br><br><b>कथन:</b><br>(I) B, A के ठीक दाएं पड़ोस में बैठा है। C, E के ठीक बाएं पड़ोस में बैठा है।<br>(II) D, A के दाई ओर दूसरे स्थान पर बैठा है। C, D के ठीक दाएं पड़ोस में बैठा है।",
+    "q_en": "Q180. A question is followed by two statements (I) and (II). Decide whether the data provided are sufficient to answer the question.<br><br><b>Question:</b> A, B, C, D, and E are sitting around a circular table facing the centre. Who sits to the immediate right of B?<br><br><b>Statements:</b><br>(I) B sits immediate right of A. C sits immediate left of E.<br>(II) D sits second to the right of A. C sits immediate right of D.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Circular Seating Arrangement",
+    "o_hi": [
+      "(a) कथन I और II में दी गई जानकारी एकसाथ प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है।",
+      "(b) कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है।",
+      "(c) कथन I और II में दी गई जानकारी एकसाथ प्रश्न का उत्तर देने के लिए पर्याप्त है।",
+      "(d) कथन I में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त है, जबकि कथन II में दिया गया डेटा अकेले प्रश्न का उत्तर देने के लिए पर्याप्त नहीं है।"
+    ],
+    "o_en": [
+      "(a) Data in Statements I and II together are not sufficient.",
+      "(b) Data in Statement II alone is sufficient, while data in Statement I is not.",
+      "(c) Data in Statements I and II together are sufficient to answer the question.",
+      "(d) Data in Statement I alone is sufficient, while data in Statement II is not."
+    ],
+    "a": 2,
+    "e_hi": "कथन (I) से B, A के ठीक दाएं है (क्रम: A → B)।<br>कथन (II) से D, A के दाईं ओर दूसरे स्थान पर है (A → B → D) तथा C, D के ठीक दाएं है (A → B → D → C)।<br>शेष पांचवें स्थान पर E आएगा (A → B → D → C → E)। इससे स्पष्ट रूप से ज्ञात होता है कि B के ठीक दाएं D बैठा है।<br>अतः कथन I और II दोनों में दी गई जानकारी एकसाथ पर्याप्त है।",
+    "e_en": "From Statement (I), B is immediate right of A (A → B).<br>From Statement (II), D is 2nd to the right of A (A → B → D) and C is immediate right of D (A → B → D → C).<br>The remaining 5th seat is filled by E (A → B → D → C → E). This uniquely determines that D sits to the immediate right of B.<br>Therefore, data in Statements I and II together are sufficient."
+  }
+];

@@ -1,0 +1,222 @@
+const data = [
+  {
+    "q_hi": "Q201. सात डिब्बे M, N, O, P, Q, R और S एक के ऊपर एक रखे गए हैं, लेकिन जरूरी नहीं कि इसी क्रम में हों।\nM के ऊपर केवल R रखा गया है। M और P के बीच केवल दो डिब्बे रखे गए हैं। केवल N को S के नीचे रखा गया है। O को P के ठीक ऊपर नहीं रखा गया है।\nQ और N के बीच कितने डिब्बे रखे गए हैं?",
+    "q_en": "Q201. Seven boxes M, N, O, P, Q, R, and S are kept one above another, but not necessarily in the same order.\nOnly R is kept above M. Only two boxes are kept between M and P. Only N is kept below S. O is not kept immediately above P.\nHow many boxes are kept between Q and N?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Box Stack Puzzle (7 Boxes)",
+    "o_hi": ["(a) चार", "(b) तीन", "(c) एक", "(d) दो"],
+    "o_en": ["(a) Four", "(b) Three", "(c) One", "(d) Two"],
+    "a": 3,
+    "e_hi": "स्थान (7 सबसे ऊपर से 1 सबसे नीचे):\n1. 'M के ऊपर केवल R रखा है' ⇒ R = 7, M = 6।\n2. 'M और P के बीच केवल दो डिब्बे हैं' ⇒ P = 3।\n3. 'केवल N को S के नीचे रखा गया है' ⇒ S = 2, N = 1।\n4. खाली स्थान 5 और 4 हैं। 'O को P के ठीक ऊपर (स्थान 4) नहीं रखा गया है' ⇒ O = 5, Q = 4।\nपूर्ण क्रम (7 से 1): R, M, O, Q, P, S, N।\nQ (स्थान 4) और N (स्थान 1) के बीच P और S रखे हैं (कुल 2 डिब्बे)।",
+    "e_en": "Positions (7 top to 1 bottom):\n1. 'Only R is kept above M' ⇒ R = 7, M = 6.\n2. 'Only two boxes between M and P' ⇒ P = 3.\n3. 'Only N is kept below S' ⇒ S = 2, N = 1.\n4. Positions 5 and 4 remain. 'O is not immediately above P (pos 4)' ⇒ O = 5, Q = 4.\nComplete order (7 to 1): R, M, O, Q, P, S, N.\nBetween Q (pos 4) and N (pos 1), boxes P and S are placed (total 2 boxes)."
+  },
+  {
+    "q_hi": "Q202. P, Q, R, S, T, U और V एक ही इमारत के सात अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 7 है। R, सम क्रमांक वाले किसी तल पर रहता है। R और U के बीच केवल तीन व्यक्ति रहते हैं। T, V के ठीक ऊपर वाले तल पर लेकिन Q के ठीक नीचे वाले तल पर रहता है। R और S के तल क्रमांकों का योगफल 10 से अधिक है। एक निश्चित तर्क का अनुसरण करते हुए, दिए गए विन्यास में S का संबंध तल क्रमांक 5 से उसी प्रकार है, जिस प्रकार Q का संबंध तल क्रमांक 3 से है। उसी तर्क का अनुसरण करते हुए, T का संबंध निम्नलिखित में से किस तल क्रमांक से है?",
+    "q_en": "Q202. P, Q, R, S, T, U, and V live on seven different floors of the same building (floors 1 to 7). R lives on an even-numbered floor. Only three persons live between R and U. T lives immediately above V but immediately below Q. The sum of floor numbers of R and S is greater than 10. Following a certain logic, S is related to floor 5 in the same way as Q is related to floor 3. Following the same logic, T is related to which floor number?",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Floor Puzzle with Relation Logic (7 Floors)",
+    "o_hi": ["(a) 1", "(b) 4", "(c) 6", "(d) 2"],
+    "o_en": ["(a) 1", "(b) 4", "(c) 6", "(d) 2"],
+    "a": 3,
+    "e_hi": "1. R सम तल पर है और |R - U| = 4, अतः R = 6, U = 2।\n2. Q, T, V लगातार तीन तलों पर हैं ⇒ Q = 5, T = 4, V = 3।\n3. शेष तल 7 और 1 हैं। R + S > 10 होने के कारण S = 7, P = 1।\nक्रम (7 से 1): S(7), R(6), Q(5), T(4), V(3), U(2), P(1)।\nसंबंध तर्क: किसी व्यक्ति का संबंध उससे 2 तल नीचे वाले तल से है (S तल 7 पर है → तल 5; Q तल 5 पर है → तल 3)।\nअतः T तल 4 पर है, इसलिए उसका संबंध तल 4 - 2 = तल 2 से होगा।",
+    "e_en": "1. R is on an even floor and |R - U| = 4 ⇒ R = 6, U = 2.\n2. Q, T, V occupy three consecutive floors ⇒ Q = 5, T = 4, V = 3.\n3. Remaining floors: 7 and 1. Since R + S > 10, S = 7, P = 1.\nOrder (7 to 1): S(7), R(6), Q(5), T(4), V(3), U(2), P(1).\nLogic of relation: An element is related to the floor 2 levels below it (S on floor 7 → floor 5; Q on floor 5 → floor 3).\nThus, T on floor 4 is related to floor 4 - 2 = floor 2."
+  },
+  {
+    "q_hi": "Q203. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 6 है।\nE, ऐसे किसी तल पर रहता है जिसका क्रमांक एक अभाज्य संख्या है। E और A के तलों के क्रमांकों का गुणनफल 8 है। B, F के ठीक ऊपर वाले तल पर रहता है। A और C के तलों के क्रमांकों का योगफल 7 है।\nA और B के तलों के क्रमांकों का योगफल ज्ञात कीजिए।",
+    "q_en": "Q203. A, B, C, D, E, and F live on six different floors of the same building (floors 1 to 6).\nE lives on a floor whose number is a prime number. The product of floor numbers of E and A is 8. B lives immediately above F. The sum of floor numbers of A and C is 7.\nFind the sum of the floor numbers of A and B.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Floor Puzzle with Number Properties (6 Floors)",
+    "o_hi": ["(a) 10", "(b) 11", "(c) 9", "(d) 8"],
+    "o_en": ["(a) 10", "(b) 11", "(c) 9", "(d) 8"],
+    "a": 0,
+    "e_hi": "1. E अभाज्य संख्या है और E × A = 8 ⇒ E = 2 तथा A = 4।\n2. A + C = 7 ⇒ C = 7 - 4 = 3।\n3. B, F के ठीक ऊपर है तथा खाली तल 6, 5, 1 हैं ⇒ B = 6, F = 5, और D = 1।\nक्रम (6 से 1): B(6), F(5), A(4), C(3), E(2), D(1)।\nA और B के तलों का योग = 4 + 6 = 10।",
+    "e_en": "1. E is prime and E × A = 8 ⇒ E = 2 and A = 4.\n2. A + C = 7 ⇒ C = 7 - 4 = 3.\n3. B is immediately above F and empty floors are 6, 5, 1 ⇒ B = 6, F = 5, and D = 1.\nOrder (6 to 1): B(6), F(5), A(4), C(3), E(2), D(1).\nSum of floors of A and B = 4 + 6 = 10."
+  },
+  {
+    "q_hi": "Q204. P, Q, R, S, T, U और V एक ही इमारत के सात अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 7 है। T और V के बीच केवल चार व्यक्ति रहते हैं। T किसी विषम क्रमांक वाले तल पर रहता है। V और R के बीच केवल दो व्यक्ति रहते हैं। S, Q के ठीक नीचे विषम क्रमांक वाले तल पर रहता है। P किसी सम क्रमांक वाले तल पर रहता है। U किस क्रमांक वाले तल पर रहता है?",
+    "q_en": "Q204. P, Q, R, S, T, U, and V live on seven different floors (1 to 7). Only four persons live between T and V. T lives on an odd-numbered floor. Only two persons live between V and R. S lives immediately below Q on an odd-numbered floor. P lives on an even-numbered floor. On which floor number does U live?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Floor Puzzle (7 Floors - Odd/Even Logic)",
+    "o_hi": ["(a) 1", "(b) 3", "(c) 5", "(d) 4"],
+    "o_en": ["(a) 1", "(b) 3", "(c) 5", "(d) 4"],
+    "a": 0,
+    "e_hi": "1. T विषम पर है और |T - V| = 5 ⇒ T = 7, V = 2।\n2. V और R के बीच दो व्यक्ति हैं ⇒ R = 5।\n3. S विषम पर है और Q के ठीक नीचे है ⇒ Q = 4, S = 3।\n4. खाली तल 6 और 1 हैं। P सम तल पर रहता है ⇒ P = 6।\n5. अतः U तल 1 पर रहता है।\nक्रम (7 से 1): T(7), P(6), R(5), Q(4), S(3), V(2), U(1)।",
+    "e_en": "1. T is on odd floor and |T - V| = 5 ⇒ T = 7, V = 2.\n2. Two persons between V and R ⇒ R = 5.\n3. S is on an odd floor immediately below Q ⇒ Q = 4, S = 3.\n4. Remaining floors are 6 and 1. P is on an even floor ⇒ P = 6.\n5. Hence, U lives on floor 1.\nOrder (7 to 1): T(7), P(6), R(5), Q(4), S(3), V(2), U(1)."
+  },
+  {
+    "q_hi": "Q205. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 6 है।\nF, एक सम क्रमांक वाले किसी तल पर रहता है लेकिन तल क्रमांक 6 पर नहीं रहता है। D और F के तलों के क्रमांकों का योगफल 7 है। A, E के ठीक ऊपर वाले तल पर रहता है। F और C के तलों के क्रमांकों का योगफल 3 है।\nC और E के बीच कितने व्यक्ति रहते हैं?",
+    "q_en": "Q205. A, B, C, D, E, and F live on six different floors (1 to 6).\nF lives on an even-numbered floor but not on floor 6. The sum of floor numbers of D and F is 7. A lives immediately above E. The sum of floor numbers of F and C is 3.\nHow many persons live between C and E?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Floor Puzzle with Sum Conditions (6 Floors)",
+    "o_hi": ["(a) 2", "(b) 1", "(c) 4", "(d) 3"],
+    "o_en": ["(a) 2", "(b) 1", "(c) 4", "(d) 3"],
+    "a": 1,
+    "e_hi": "1. F सम तल पर है (F ≠ 6) तथा F + C = 3 ⇒ F = 2, C = 1।\n2. D + F = 7 ⇒ D = 7 - 2 = 5।\n3. खाली तल 6, 4, 3 हैं। A, E के ठीक ऊपर है ⇒ A = 4, E = 3 तथा B = 6।\nक्रम (6 से 1): B(6), D(5), A(4), E(3), F(2), C(1)।\nC (तल 1) और E (तल 3) के बीच केवल F (तल 2) रहता है (कुल 1 व्यक्ति)।",
+    "e_en": "1. F is on an even floor (F ≠ 6) and F + C = 3 ⇒ F = 2, C = 1.\n2. D + F = 7 ⇒ D = 7 - 2 = 5.\n3. Available floors: 6, 4, 3. A is immediately above E ⇒ A = 4, E = 3, and B = 6.\nOrder (6 to 1): B(6), D(5), A(4), E(3), F(2), C(1).\nBetween C (floor 1) and E (floor 3), only F (floor 2) lives (total 1 person)."
+  },
+  {
+    "q_hi": "Q206. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत के सबसे निचले तल का क्रमांक 1 है, उसके ठीक ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार सबसे ऊपरी तल का क्रमांक 6 है। E किसी सम क्रमांक वाले तल पर रहता है, लेकिन तल क्रमांक 4 पर नहीं रहता है। जिन तलों पर E और F रहते हैं, उनका योगफल 9 है। A और D के बीच केवल 3 लोग रहते हैं। जिन तलों पर C और D रहते हैं, उनका योगफल 3 है। D और E के बीच कितने लोग रहते हैं?",
+    "q_en": "Q206. A, B, C, D, E, and F live on six different floors (1 to 6). E lives on an even-numbered floor but not on floor 4. The sum of floors of E and F is 9. Only 3 people live between A and D. The sum of floors of C and D is 3. How many people live between D and E?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Floor Puzzle with Sum & Gap Conditions (6 Floors)",
+    "o_hi": ["(a) 2", "(b) 4", "(c) 3", "(d) 1"],
+    "o_en": ["(a) 2", "(b) 4", "(c) 3", "(d) 1"],
+    "a": 1,
+    "e_hi": "1. E सम तल पर है (E ≠ 4) तथा E + F = 9 ⇒ E = 6, F = 3।\n2. C + D = 3 ⇒ {C, D} = {1, 2}।\n3. |A - D| = 4 ⇒ यदि D = 2 तो A = 6 (जो E से घिरा है), अतः D = 1, A = 5, तथा C = 2।\n4. शेष तल 4 पर B रहता है।\nक्रम (6 से 1): E(6), A(5), B(4), F(3), C(2), D(1)।\nD (तल 1) और E (तल 6) के बीच 4 व्यक्ति (C, F, B, A) रहते हैं।",
+    "e_en": "1. E is on an even floor (E ≠ 4) and E + F = 9 ⇒ E = 6, F = 3.\n2. C + D = 3 ⇒ {C, D} = {1, 2}.\n3. |A - D| = 4 ⇒ If D = 2, A = 6 (occupied by E), so D = 1, A = 5, and C = 2.\n4. B occupies the remaining floor 4.\nOrder (6 to 1): E(6), A(5), B(4), F(3), C(2), D(1).\nBetween D (floor 1) and E (floor 6), 4 people (C, F, B, A) live."
+  },
+  {
+    "q_hi": "Q207. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 6 है।\nA और B के तलों के क्रमांकों का गुणनफल 10 है। E, C के ठीक ऊपर वाले तल पर रहता है। D और A के तलों के क्रमांकों का योगफल 11 है।\nB और E के तलों के क्रमांकों का योगफल ज्ञात कीजिए।",
+    "q_en": "Q207. A, B, C, D, E, and F live on six different floors (1 to 6).\nThe product of floor numbers of A and B is 10. E lives immediately above C. The sum of floor numbers of D and A is 11.\nFind the sum of the floor numbers of B and E.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Floor Puzzle with Product & Sum Conditions (6 Floors)",
+    "o_hi": ["(a) 7", "(b) 6", "(c) 5", "(d) 8"],
+    "o_en": ["(a) 7", "(b) 6", "(c) 5", "(d) 8"],
+    "a": 1,
+    "e_hi": "1. A × B = 10 ⇒ {A, B} = {2, 5}।\n2. D + A = 11 ⇒ A = 5, D = 6 (यदि A = 2 तो D = 9 असंभव)। अतः B = 2।\n3. खाली तल 4, 3, 1 हैं। E, C के ठीक ऊपर है ⇒ E = 4, C = 3, तथा F = 1।\nक्रम (6 से 1): D(6), A(5), E(4), C(3), B(2), F(1)।\nB और E के तलों का योगफल = 2 + 4 = 6।",
+    "e_en": "1. A × B = 10 ⇒ {A, B} = {2, 5}.\n2. D + A = 11 ⇒ A = 5, D = 6 (if A = 2, D = 9 impossible). Thus, B = 2.\n3. Available floors: 4, 3, 1. E is immediately above C ⇒ E = 4, C = 3, and F = 1.\nOrder (6 to 1): D(6), A(5), E(4), C(3), B(2), F(1).\nSum of floor numbers of B and E = 2 + 4 = 6."
+  },
+  {
+    "q_hi": "Q208. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 6 है।\nD और C के तलों के क्रमांकों का गुणनफल 10 है। A, E के ठीक ऊपर वाले तल पर रहता है। B और D के तलों के क्रमांकों का योगफल 11 है।\nA और C के तलों के क्रमांकों का गुणनफल ज्ञात कीजिए।",
+    "q_en": "Q208. A, B, C, D, E, and F live on six different floors (1 to 6).\nThe product of floor numbers of D and C is 10. A lives immediately above E. The sum of floor numbers of B and D is 11.\nFind the product of the floor numbers of A and C.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Floor Puzzle with Product & Sum Conditions (6 Floors)",
+    "o_hi": ["(a) 8", "(b) 4", "(c) 6", "(d) 2"],
+    "o_en": ["(a) 8", "(b) 4", "(c) 6", "(d) 2"],
+    "a": 0,
+    "e_hi": "1. D × C = 10 ⇒ {D, C} = {2, 5}।\n2. B + D = 11 ⇒ D = 5, B = 6, तथा C = 2।\n3. खाली तल 4, 3, 1 हैं। A, E के ठीक ऊपर है ⇒ A = 4, E = 3, तथा F = 1।\nक्रम (6 से 1): B(6), D(5), A(4), E(3), C(2), F(1)।\nA और C के तलों का गुणनफल = 4 × 2 = 8।",
+    "e_en": "1. D × C = 10 ⇒ {D, C} = {2, 5}.\n2. B + D = 11 ⇒ D = 5, B = 6, and C = 2.\n3. Available floors: 4, 3, 1. A is immediately above E ⇒ A = 4, E = 3, and F = 1.\nOrder (6 to 1): B(6), D(5), A(4), E(3), C(2), F(1).\nProduct of floor numbers of A and C = 4 × 2 = 8."
+  },
+  {
+    "q_hi": "Q209. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 6 है।\nD विषम क्रमांक वाले किसी तल पर रहता है लेकिन तल क्रमांक 3 पर नहीं रहता है। A और D के तलों के क्रमांकों का योगफल 4 है। C और E के बीच केवल 3 व्यक्ति रहते हैं। F, B के ठीक ऊपर वाले तल पर रहता है। B और C के तलों के क्रमांकों का योगफल 10 है।\nA और E के तलों के क्रमांकों का योगफल ज्ञात कीजिए।",
+    "q_en": "Q209. A, B, C, D, E, and F live on six different floors (1 to 6).\nD lives on an odd-numbered floor but not on floor 3. The sum of floor numbers of A and D is 4. Only 3 people live between C and E. F lives immediately above B. The sum of floor numbers of B and C is 10.\nFind the sum of the floor numbers of A and E.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Floor Puzzle with Multi-Condition Arithmetic (6 Floors)",
+    "o_hi": ["(a) 6", "(b) 8", "(c) 5", "(d) 7"],
+    "o_en": ["(a) 6", "(b) 8", "(c) 5", "(d) 7"],
+    "a": 2,
+    "e_hi": "1. D विषम तल पर है (D ≠ 3) तथा A + D = 4 ⇒ D = 1, A = 3।\n2. B + C = 10 ⇒ {B, C} = {4, 6}।\n3. |C - E| = 4 ⇒ C = 6, E = 2 (C = 4 होने पर E = 0/8 संभव नहीं)।\n4. C = 6 होने से B = 4 तथा F = 5 (F, B के ठीक ऊपर है)।\nक्रम (6 से 1): C(6), F(5), B(4), A(3), E(2), D(1)।\nA और E के तलों का योगफल = 3 + 2 = 5।",
+    "e_en": "1. D is on odd floor (D ≠ 3) and A + D = 4 ⇒ D = 1, A = 3.\n2. B + C = 10 ⇒ {B, C} = {4, 6}.\n3. |C - E| = 4 ⇒ C = 6, E = 2 (C = 4 gives invalid E).\n4. Since C = 6, B = 4 and F = 5 (F immediately above B).\nOrder (6 to 1): C(6), F(5), B(4), A(3), E(2), D(1).\nSum of floor numbers of A and E = 3 + 2 = 5."
+  },
+  {
+    "q_hi": "Q210. P, Q, R, S, T, U और V एक ही इमारत के सात अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 7 है। U के नीचे केवल P रहता है। U और R के बीच केवल चार व्यक्ति रहते हैं। T, S के ठीक ऊपर एक विषम क्रमांक वाले तल पर रहता है। Q किसी सम क्रमांक वाले तल पर नहीं रहता है।\nतल क्रमांक 6 पर कौन रहता है?",
+    "q_en": "Q210. P, Q, R, S, T, U, and V live on seven different floors (1 to 7). Only P lives below U. Only four persons live between U and R. T lives immediately above S on an odd-numbered floor. Q does not live on an even-numbered floor.\nWho lives on floor number 6?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Floor Puzzle (7 Floors - Positional Constraints)",
+    "o_hi": ["(a) U", "(b) R", "(c) V", "(d) S"],
+    "o_en": ["(a) U", "(b) R", "(c) V", "(d) S"],
+    "a": 2,
+    "e_hi": "1. U के नीचे केवल P है ⇒ P = 1, U = 2।\n2. U और R के बीच चार व्यक्ति हैं ⇒ R = 7।\n3. T विषम तल पर है तथा S के ठीक ऊपर है ⇒ T = 5, S = 4।\n4. खाली तल 6 और 3 हैं। Q सम तल पर नहीं रहता ⇒ Q = 3।\n5. अतः तल 6 पर V रहता है।\nक्रम (7 से 1): R(7), V(6), T(5), S(4), Q(3), U(2), P(1)।",
+    "e_en": "1. Only P lives below U ⇒ P = 1, U = 2.\n2. Four persons between U and R ⇒ R = 7.\n3. T lives on odd floor immediately above S ⇒ T = 5, S = 4.\n4. Available floors are 6 and 3. Q is not on an even floor ⇒ Q = 3.\n5. Therefore, V lives on floor 6.\nOrder (7 to 1): R(7), V(6), T(5), S(4), Q(3), U(2), P(1)."
+  },
+  {
+    "q_hi": "Q211. सात बॉक्स A, B, C, D, E, F और G को एक के ऊपर एक रखा गया है, परंतु उनका इसी क्रम में होना आवश्यक नहीं है। F के नीचे केवल तीन बॉक्स रखे गए हैं। F और D के बीच केवल दो बॉक्स रखे गए हैं। B के ऊपर केवल A को रखा गया है। E को G के नीचे किसी स्थान पर और C के ऊपर किसी स्थान पर रखा गया है। E के ऊपर कितने बॉक्स रखे गए हैं?",
+    "q_en": "Q211. Seven boxes A, B, C, D, E, F, and G are kept one above another. Only three boxes are kept below F. Only two boxes are kept between F and D. Only A is kept above B. E is kept somewhere below G and somewhere above C. How many boxes are kept above E?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Order of Placement)",
+    "o_hi": ["(a) 1", "(b) 4", "(c) 3", "(d) 2"],
+    "o_en": ["(a) 1", "(b) 4", "(c) 3", "(d) 2"],
+    "a": 1,
+    "e_hi": "1. F के नीचे केवल तीन बॉक्स हैं ⇒ F = 4।\n2. 'B के ऊपर केवल A है' ⇒ A = 7, B = 6।\n3. F और D के बीच दो बॉक्स हैं ⇒ D = 1 (क्योंकि 7 पर A है)।\n4. खाली स्थान 5, 3, 2 हैं। G > E > C होने के कारण G = 5, E = 3, C = 2।\nक्रम (7 से 1): A(7), B(6), G(5), F(4), E(3), C(2), D(1)।\nE (स्थान 3) के ऊपर कुल 4 बॉक्स (F, G, B, A) रखे गए हैं।",
+    "e_en": "1. Only three boxes below F ⇒ F = 4.\n2. 'Only A is kept above B' ⇒ A = 7, B = 6.\n3. Two boxes between F and D ⇒ D = 1 (as pos 7 is A).\n4. Empty positions: 5, 3, 2. Since G > E > C ⇒ G = 5, E = 3, C = 2.\nOrder (7 to 1): A(7), B(6), G(5), F(4), E(3), C(2), D(1).\nAbove E (pos 3), exactly 4 boxes (F, G, B, A) are kept."
+  },
+  {
+    "q_hi": "Q212. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार सबसे ऊपर वाले तल का क्रमांक 6 है।\nD, विषम क्रमांक वाले किसी तल पर रहता है लेकिन तल क्रमांक 5 पर नहीं रहता है। D और F के तलों के क्रमांकों का योगफल 5 है। F और B के बीच केवल 3 व्यक्ति रहते हैं। C, A के ठीक ऊपर वाले तल पर रहता है।\nC और D के बीच कितने व्यक्ति रहते हैं?",
+    "q_en": "Q212. A, B, C, D, E, and F live on six different floors (1 to 6).\nD lives on an odd-numbered floor but not on floor 5. The sum of floor numbers of D and F is 5. Only 3 people live between F and B. C lives immediately above A.\nHow many people live between C and D?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Floor Puzzle with Consecutive Floor Conditions (6 Floors)",
+    "o_hi": ["(a) 2", "(b) 1", "(c) 4", "(d) 3"],
+    "o_en": ["(a) 2", "(b) 1", "(c) 4", "(d) 3"],
+    "a": 1,
+    "e_hi": "1. D विषम तल पर है (D ≠ 5) तथा D + F = 5 ⇒ D = 3, F = 2 (D = 1 होने पर F = 4 होता जिससे |F - B| = 4 असंभव होता)।\n2. |F - B| = 4 ⇒ B = 2 + 4 = 6।\n3. खाली तल 5, 4, 1 हैं। C, A के ठीक ऊपर है ⇒ C = 5, A = 4, तथा E = 1।\nक्रम (6 से 1): B(6), C(5), A(4), D(3), F(2), E(1)।\nC (तल 5) और D (तल 3) के बीच केवल A (तल 4) रहता है (कुल 1 व्यक्ति)।",
+    "e_en": "1. D is on odd floor (D ≠ 5) and D + F = 5 ⇒ D = 3, F = 2 (if D = 1, F = 4 makes |F - B| = 4 impossible).\n2. |F - B| = 4 ⇒ B = 2 + 4 = 6.\n3. Available floors: 5, 4, 1. C is immediately above A ⇒ C = 5, A = 4, and E = 1.\nOrder (6 to 1): B(6), C(5), A(4), D(3), F(2), E(1).\nBetween C (floor 5) and D (floor 3), only A (floor 4) lives (total 1 person)."
+  },
+  {
+    "q_hi": "Q213. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत में सबसे नीचे वाले तल का क्रमांक 1 है, उसके ऊपर वाले तल का क्रमांक 2 है और इसी तरह सबसे ऊपर वाले तल का क्रमांक 6 है।\nE, एक सम क्रमांक वाले तल पर रहता है लेकिन तल क्रमांक 6 पर नहीं रहता है। F और E जिन तलों पर रहते हैं उनके तल क्रमांकों का योगफल 7 है। C, D के ठीक ऊपर वाले तल पर रहता है। E और A जिन तलों पर रहते हैं उनके तल क्रमांकों का योगफल 3 है।\nD और F जिन तलों पर रहते हैं उनके तल क्रमांकों का योगफल ज्ञात कीजिए।",
+    "q_en": "Q213. A, B, C, D, E, and F live on six different floors (1 to 6).\nE lives on an even-numbered floor but not on floor 6. The sum of floor numbers of F and E is 7. C lives immediately above D. The sum of floor numbers of E and A is 3.\nFind the sum of the floor numbers of D and F.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Floor Puzzle with Sum Equations (6 Floors)",
+    "o_hi": ["(a) 7", "(b) 6", "(c) 8", "(d) 5"],
+    "o_en": ["(a) 7", "(b) 6", "(c) 8", "(d) 5"],
+    "a": 2,
+    "e_hi": "1. E सम तल पर है (E ≠ 6) तथा E + A = 3 ⇒ E = 2, A = 1।\n2. F + E = 7 ⇒ F = 7 - 2 = 5।\n3. खाली तल 6, 4, 3 हैं। C, D के ठीक ऊपर है ⇒ C = 4, D = 3, तथा B = 6।\nक्रम (6 से 1): B(6), F(5), C(4), D(3), E(2), A(1)।\nD और F के तलों का योगफल = 3 + 5 = 8।",
+    "e_en": "1. E is on an even floor (E ≠ 6) and E + A = 3 ⇒ E = 2, A = 1.\n2. F + E = 7 ⇒ F = 7 - 2 = 5.\n3. Available floors: 6, 4, 3. C is immediately above D ⇒ C = 4, D = 3, and B = 6.\nOrder (6 to 1): B(6), F(5), C(4), D(3), E(2), A(1).\nSum of floor numbers of D and F = 3 + 5 = 8."
+  },
+  {
+    "q_hi": "Q214. सात डिब्बे M, N, O, P, Q, R और S एक के ऊपर एक रखे गए हैं, लेकिन ज़रूरी नहीं कि इसी क्रम में हों। Q और O के बीच केवल दो डिब्बे रखे गए हैं। P के ऊपर केवल N रखा है। O के नीचे कोई डिब्बा नहीं रखा है। S को R के नीचे किसी स्थान पर लेकिन M के ऊपर किसी स्थान पर रखा गया है। M के ऊपर तीसरे स्थान पर कौन-सा डिब्बा रखा गया है?",
+    "q_en": "Q214. Seven boxes M, N, O, P, Q, R, and S are kept one above another. Only two boxes are kept between Q and O. Only N is kept above P. No box is kept below O. S is kept somewhere below R but somewhere above M. Which box is kept 3rd above M?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Specific Rank Position)",
+    "o_hi": ["(a) P", "(b) R", "(c) N", "(d) O"],
+    "o_en": ["(a) P", "(b) R", "(c) N", "(d) O"],
+    "a": 1,
+    "e_hi": "1. 'P के ऊपर केवल N रखा है' ⇒ N = 7, P = 6।\n2. 'O के नीचे कोई डिब्बा नहीं है' ⇒ O = 1।\n3. 'Q और O के बीच दो डिब्बे हैं' ⇒ Q = 4।\n4. खाली स्थान 5, 3, 2 हैं। R > S > M होने के कारण R = 5, S = 3, M = 2।\nक्रम (7 से 1): N(7), P(6), R(5), Q(4), S(3), M(2), O(1)।\nM (स्थान 2) के ऊपर तीसरा स्थान = स्थान 5 है, जहाँ R रखा गया है।",
+    "e_en": "1. 'Only N is kept above P' ⇒ N = 7, P = 6.\n2. 'No box is kept below O' ⇒ O = 1.\n3. 'Two boxes between Q and O' ⇒ Q = 4.\n4. Available positions: 5, 3, 2. Since R > S > M ⇒ R = 5, S = 3, M = 2.\nOrder (7 to 1): N(7), P(6), R(5), Q(4), S(3), M(2), O(1).\n3rd position above M (pos 2) is pos 5, where box R is kept."
+  },
+  {
+    "q_hi": "Q215. सात बॉक्स, A, B, C, D, E, F और G को एक के ऊपर एक रखा गया है, परंतु उनका इसी क्रम में होना आवश्यक नहीं है। B और A के बीच केवल चार बॉक्स रखे गए हैं। B के ऊपर केवल F को रखा गया है। G और C के बीच केवल दो बॉक्स रखे गए हैं। D को E के ठीक ऊपर रखा गया है। C को D के ठीक ऊपर नहीं रखा गया है। E के नीचे कितने बॉक्स रखे गए हैं?",
+    "q_en": "Q215. Seven boxes A, B, C, D, E, F, and G are kept one above another. Only four boxes are kept between B and A. Only F is kept above B. Only two boxes are kept between G and C. D is kept immediately above E. C is not kept immediately above D. How many boxes are kept below E?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Adjacent & Gap Rules)",
+    "o_hi": ["(a) 4", "(b) 1", "(c) 3", "(d) 2"],
+    "o_en": ["(a) 4", "(b) 1", "(c) 3", "(d) 2"],
+    "a": 3,
+    "e_hi": "1. B के ऊपर केवल F है ⇒ F = 7, B = 6।\n2. B और A के बीच 4 बॉक्स हैं ⇒ A = 1।\n3. खाली स्थान 5, 4, 3, 2 हैं। |G - C| = 3 होने से {G, C} = {5, 2}।\n4. D, E के ठीक ऊपर है ⇒ D = 4, E = 3।\n5. C, D के ठीक ऊपर नहीं है (C ≠ 5) ⇒ G = 5, C = 2।\nक्रम (7 से 1): F(7), B(6), G(5), D(4), E(3), C(2), A(1)।\nE (स्थान 3) के नीचे C और A रखे हैं (कुल 2 बॉक्स)।",
+    "e_en": "1. Only F is kept above B ⇒ F = 7, B = 6.\n2. Four boxes between B and A ⇒ A = 1.\n3. Available positions: 5, 4, 3, 2. |G - C| = 3 ⇒ {G, C} = {5, 2}.\n4. D is immediately above E ⇒ D = 4, E = 3.\n5. C is not immediately above D (C ≠ 5) ⇒ G = 5, C = 2.\nOrder (7 to 1): F(7), B(6), G(5), D(4), E(3), C(2), A(1).\nBelow E (pos 3), boxes C and A are kept (total 2 boxes)."
+  },
+  {
+    "q_hi": "Q216. A, B, C, D, E और F एक ही इमारत के छह अलग-अलग तलों पर रहते हैं। इमारत के सबसे निचले तल का क्रमांक 1 है, उसके ठीक ऊपर वाले तल का क्रमांक 2 है और इसी प्रकार सबसे ऊपरी तल का क्रमांक 6 है। B किसी विषम क्रमांक वाले तल पर रहता है लेकिन तल क्रमांक 3 पर नहीं रहता है। B और F जिन तलों पर रहते हैं उनका योगफल 7 है। C, E के ठीक नीचे रहता है। A सबसे ऊपरी तल पर रहता है। B और D के बीच कितने लोग रहते हैं?",
+    "q_en": "Q216. A, B, C, D, E, and F live on six different floors (1 to 6). B lives on an odd-numbered floor but not on floor 3. The sum of floors of B and F is 7. C lives immediately below E. A lives on the topmost floor. How many people live between B and D?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Floor Puzzle (6 Floors - Top Floor & Sum Rules)",
+    "o_hi": ["(a) 1", "(b) 2", "(c) 4", "(d) 3"],
+    "o_en": ["(a) 1", "(b) 2", "(c) 4", "(d) 3"],
+    "a": 3,
+    "e_hi": "1. A सबसे ऊपर है ⇒ A = 6।\n2. B विषम पर है (B ≠ 3) तथा B + F = 7 ⇒ B = 5, F = 2 (यदि B = 1 तो F = 6 जो A से भरा है)।\n3. खाली तल 4, 3, 1 हैं। C, E के ठीक नीचे है ⇒ E = 4, C = 3, तथा D = 1।\nक्रम (6 से 1): A(6), B(5), E(4), C(3), F(2), D(1)।\nB (तल 5) और D (तल 1) के बीच 3 लोग (E, C, F) रहते हैं।",
+    "e_en": "1. A is on the top floor ⇒ A = 6.\n2. B is on odd floor (B ≠ 3) and B + F = 7 ⇒ B = 5, F = 2 (if B = 1, F = 6 occupied by A).\n3. Available floors: 4, 3, 1. C is immediately below E ⇒ E = 4, C = 3, and D = 1.\nOrder (6 to 1): A(6), B(5), E(4), C(3), F(2), D(1).\nBetween B (floor 5) and D (floor 1), 3 people (E, C, F) live."
+  },
+  {
+    "q_hi": "Q217. सात डिब्बे M, N, O, P, Q, R और S एक के ऊपर एक रखे गए हैं, लेकिन जरूरी नहीं कि इसी क्रम में हों। केवल Q को O के ऊपर रखा है। O और P के बीच केवल S रखा है। R के नीचे केवल M रखा है। N और M के बीच कितने डिब्बे रखे हैं?",
+    "q_en": "Q217. Seven boxes M, N, O, P, Q, R, and S are kept one above another. Only Q is kept above O. Only S is kept between O and P. Only M is kept below R. How many boxes are kept between N and M?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Single Between Conditions)",
+    "o_hi": ["(a) चार", "(b) दो", "(c) तीन", "(d) एक"],
+    "o_en": ["(a) Four", "(b) Two", "(c) Three", "(d) One"],
+    "a": 3,
+    "e_hi": "1. 'केवल Q को O के ऊपर रखा है' ⇒ Q = 7, O = 6।\n2. 'O और P के बीच केवल S है' ⇒ S = 5, P = 4।\n3. 'R के नीचे केवल M है' ⇒ R = 2, M = 1।\n4. शेष स्थान 3 पर N आएगा।\nक्रम (7 से 1): Q(7), O(6), S(5), P(4), N(3), R(2), M(1)।\nN (स्थान 3) और M (स्थान 1) के बीच केवल R (स्थान 2) रखा है (कुल 1 डिब्बा)।",
+    "e_en": "1. 'Only Q is kept above O' ⇒ Q = 7, O = 6.\n2. 'Only S is kept between O and P' ⇒ S = 5, P = 4.\n3. 'Only M is kept below R' ⇒ R = 2, M = 1.\n4. N occupies the remaining position 3.\nOrder (7 to 1): Q(7), O(6), S(5), P(4), N(3), R(2), M(1).\nBetween N (pos 3) and M (pos 1), only R (pos 2) is kept (total 1 box)."
+  },
+  {
+    "q_hi": "Q218. सात बक्से M, N, O, P, S, T और U एक-दूसरे के ऊपर रखे गए हैं लेकिन जरूरी नहीं कि वे इसी क्रम में रखे हों।\nU के नीचे केवल दो बक्से रखे गए हैं। M के ऊपर केवल एक बक्सा रखा गया है। M और N के बीच केवल एक बक्सा रखा गया है। S को P के ठीक ऊपर रखा गया है। T को O के नीचे किसी स्थान पर रखा गया है।\nO और S के बीच कितने बक्से रखे गए हैं?",
+    "q_en": "Q218. Seven boxes M, N, O, P, S, T, and U are kept one above another.\nOnly two boxes are kept below U. Only one box is kept above M. Only one box is kept between M and N. S is kept immediately above P. T is kept somewhere below O.\nHow many boxes are kept between O and S?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Intermediate Counts)",
+    "o_hi": ["(a) चार", "(b) एक", "(c) दो", "(d) तीन"],
+    "o_en": ["(a) Four", "(b) One", "(c) Two", "(d) Three"],
+    "a": 0,
+    "e_hi": "1. U के नीचे केवल दो बक्से हैं ⇒ U = 3।\n2. M के ऊपर केवल एक बक्सा है ⇒ M = 6।\n3. M और N के बीच एक बक्सा है ⇒ N = 4।\n4. खाली स्थान 7, 5, 2, 1 हैं। S, P के ठीक ऊपर है ⇒ S = 2, P = 1।\n5. T, O के नीचे है ⇒ O = 7, T = 5।\nक्रम (7 से 1): O(7), M(6), T(5), N(4), U(3), S(2), P(1)।\nO (स्थान 7) और S (स्थान 2) के बीच M, T, N, U रखे हैं (कुल 4 बक्से)।",
+    "e_en": "1. Only two boxes below U ⇒ U = 3.\n2. Only one box above M ⇒ M = 6.\n3. One box between M and N ⇒ N = 4.\n4. Available positions: 7, 5, 2, 1. S is immediately above P ⇒ S = 2, P = 1.\n5. T is below O ⇒ O = 7, T = 5.\nOrder (7 to 1): O(7), M(6), T(5), N(4), U(3), S(2), P(1).\nBetween O (pos 7) and S (pos 2), boxes M, T, N, U are placed (total 4 boxes)."
+  },
+  {
+    "q_hi": "Q219. सात बॉक्स A, B, C, D, E, F और G को एक के ऊपर एक रखा गया है, परंतु उनका इसी क्रम में होना आवश्यक नहीं है।\nF के ऊपर एक भी बॉक्स नहीं रखा गया है। F और E के बीच केवल तीन बॉक्स रखे गए हैं। C और D के बीच केवल एक बॉक्स रखा गया है। D को E के ठीक ऊपर रखा गया है। C और G के बीच केवल चार बॉक्स रखे गए हैं। A को B के ऊपर किसी स्थान पर रखा गया है।\nऊपर से तीसरे स्थान पर कौन-सा बॉक्स रखा गया है?",
+    "q_en": "Q219. Seven boxes A, B, C, D, E, F, and G are kept one above another.\nNo box is kept above F. Only three boxes are kept between F and E. Only one box is kept between C and D. D is kept immediately above E. Only four boxes are kept between C and G. A is kept somewhere above B.\nWhich box is kept in the 3rd position from the top?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Position from Top)",
+    "o_hi": ["(a) A", "(b) D", "(c) F", "(d) B"],
+    "o_en": ["(a) A", "(b) D", "(c) F", "(d) B"],
+    "a": 0,
+    "e_hi": "1. F के ऊपर कोई नहीं है ⇒ F = 7।\n2. F और E के बीच तीन बॉक्स हैं ⇒ E = 3।\n3. D, E के ठीक ऊपर है ⇒ D = 4।\n4. C और D के बीच एक बॉक्स है तथा |C - G| = 4 ⇒ C = 6, G = 1।\n5. खाली स्थान 5 और 2 हैं। A, B के ऊपर है ⇒ A = 5, B = 2।\nक्रम (7 से 1): F(7), C(6), A(5), D(4), E(3), B(2), G(1)।\nऊपर से तीसरा बॉक्स = स्थान 5 पर रखा बॉक्स A है।",
+    "e_en": "1. No box above F ⇒ F = 7.\n2. Three boxes between F and E ⇒ E = 3.\n3. D is immediately above E ⇒ D = 4.\n4. One box between C and D, and |C - G| = 4 ⇒ C = 6, G = 1.\n5. Remaining positions: 5 and 2. A is above B ⇒ A = 5, B = 2.\nOrder (7 to 1): F(7), C(6), A(5), D(4), E(3), B(2), G(1).\n3rd box from the top is box A at position 5."
+  },
+  {
+    "q_hi": "Q220. सात बक्से, A, B, C, D, G, H और I, एक के ऊपर एक रखे गए हैं, लेकिन आवश्यक नहीं कि इसी क्रम में रखे गए हों।\nD को नीचे से दूसरे स्थान पर रखा गया है। D और C के बीच केवल तीन बक्से रखे गए हैं। I को D के नीचे किसी स्थान पर रखा गया है। C और B के बीच केवल H को रखा गया है। A को C के ऊपर किसी स्थान पर रखा गया है।\nG और C के बीच कितने बक्से रखे गए हैं?",
+    "q_en": "Q220. Seven boxes A, B, C, D, G, H, and I are kept one above another.\nD is kept 2nd from the bottom. Only three boxes are kept between D and C. I is kept somewhere below D. Only H is kept between C and B. A is kept somewhere above C.\nHow many boxes are kept between G and C?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Box Stack Puzzle (7 Boxes - Bottom-Up Numbering)",
+    "o_hi": ["(a) दो", "(b) चार", "(c) तीन", "(d) एक"],
+    "o_en": ["(a) Two", "(b) Four", "(c) Three", "(d) One"],
+    "a": 0,
+    "e_hi": "1. D नीचे से दूसरा है ⇒ D = 2 तथा I, D के नीचे है ⇒ I = 1।\n2. D और C के बीच तीन बक्से हैं ⇒ C = 6।\n3. A, C के ऊपर है ⇒ A = 7।\n4. C और B के बीच केवल H है ⇒ H = 5, B = 4।\n5. शेष स्थान 3 पर G आएगा।\nक्रम (7 से 1): A(7), C(6), H(5), B(4), G(3), D(2), I(1)।\nG (स्थान 3) और C (स्थान 6) के बीच H और B रखे हैं (कुल 2 बक्से)।",
+    "e_en": "1. D is 2nd from bottom ⇒ D = 2 and I is below D ⇒ I = 1.\n2. Three boxes between D and C ⇒ C = 6.\n3. A is above C ⇒ A = 7.\n4. Only H is between C and B ⇒ H = 5, B = 4.\n5. G occupies the remaining position 3.\nOrder (7 to 1): A(7), C(6), H(5), B(4), G(3), D(2), I(1).\nBetween G (pos 3) and C (pos 6), boxes H and B are kept (total 2 boxes)."
+  }
+];

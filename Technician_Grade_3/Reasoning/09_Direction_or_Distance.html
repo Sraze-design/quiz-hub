@@ -1,0 +1,212 @@
+const data = [
+  {
+    "q_hi": "Q221. अमित बिंदु A से ड्राइव करना शुरू करता है और दक्षिण की ओर 9 km ड्राइव करता है। फिर वह दाएं मुड़कर 14 km ड्राइव करता है, फिर से दाएं मुड़कर 12 km ड्राइव करता है। फिर वह दाएं मुड़कर 18 km ड्राइव करता है। अंत में वह दाएँ मुड़ता है, 3 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर दोबारा पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90-डिग्री के मोड़ हैं।)",
+    "q_en": "Q221. Amit starts driving from point A and drives 9 km towards South. Then he turns right and drives 14 km, turns right again and drives 12 km. Then he turns right and drives 18 km. Finally, he turns right, drives 3 km and stops at point P. How far (minimum distance) and in which direction should he drive to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Consecutive Right Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 5 km पूर्व की ओर",
+      "(b) 4 km पूर्व की ओर",
+      "(c) 5 km पश्चिम की ओर",
+      "(d) 4 km पश्चिम की ओर"
+    ],
+    "o_en": [
+      "(a) 5 km towards East",
+      "(b) 4 km towards East",
+      "(c) 5 km towards West",
+      "(d) 4 km towards West"
+    ],
+    "a": 3,
+    "e_hi": "माना बिंदु A मूल बिंदु (0, 0) है:<br>1. दक्षिण की ओर 9 km → (0, -9)<br>2. दाएँ मुड़कर (पश्चिम) 14 km → (-14, -9)<br>3. दाएँ मुड़कर (उत्तर) 12 km → (-14, 3)<br>4. दाएँ मुड़कर (पूर्व) 18 km → (4, 3)<br>5. दाएँ मुड़कर (दक्षिण) 3 km → (4, 0), जो बिंदु P है।<br>बिंदु P (4, 0) से वापस A (0, 0) पर पहुँचने के लिए: 4 km पश्चिम की ओर चलना होगा।",
+    "e_en": "Let point A be the origin (0, 0):<br>1. 9 km South → (0, -9)<br>2. Turn right (West) 14 km → (-14, -9)<br>3. Turn right (North) 12 km → (-14, 3)<br>4. Turn right (East) 18 km → (4, 3)<br>5. Turn right (South) 3 km → (4, 0), which is point P.<br>To reach A (0, 0) from P (4, 0): Drive 4 km towards West."
+  },
+  {
+    "q_hi": "Q222. नितिन बिंदु A से ड्राइव करना शुरू करता है और दक्षिण की ओर 12 km ड्राइव करता है। फिर वह बाएँ मुड़कर 15 km ड्राइव करता है, फिर से बाएँ मुड़कर 14 km ड्राइव करता है। इसके बाद वह बाएँ मुड़कर 19 km ड्राइव करता है। अंत में वह बाएँ मुड़कर 2 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90-डिग्री के हैं।)",
+    "q_en": "Q222. Nitin starts driving from point A and drives 12 km towards South. Then he turns left and drives 15 km, turns left again and drives 14 km. After this, he turns left and drives 19 km. Finally, he turns left, drives 2 km and stops at point P. How far (minimum distance) and in which direction should he drive to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Consecutive Left Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 6 km पश्चिम की ओर",
+      "(b) 4 km पश्चिम की ओर",
+      "(c) 6 km पूर्व की ओर",
+      "(d) 4 km पूर्व की ओर"
+    ],
+    "o_en": [
+      "(a) 6 km towards West",
+      "(b) 4 km towards West",
+      "(c) 6 km towards East",
+      "(d) 4 km towards East"
+    ],
+    "a": 3,
+    "e_hi": "माना बिंदु A = (0, 0):<br>1. दक्षिण में 12 km → (0, -12)<br>2. बाएँ मुड़कर (पूर्व) 15 km → (15, -12)<br>3. बाएँ मुड़कर (उत्तर) 14 km → (15, 2)<br>4. बाएँ मुड़कर (पश्चिम) 19 km → (-4, 2)<br>5. बाएँ मुड़कर (दक्षिण) 2 km → (-4, 0) = बिंदु P।<br>P (-4, 0) से A (0, 0) पहुँचने के लिए: 4 km पूर्व की ओर ड्राइव करना होगा।",
+    "e_en": "Let point A = (0, 0):<br>1. 12 km South → (0, -12)<br>2. Turn left (East) 15 km → (15, -12)<br>3. Turn left (North) 14 km → (15, 2)<br>4. Turn left (West) 19 km → (-4, 2)<br>5. Turn left (South) 2 km → (-4, 0) = point P.<br>To reach A (0, 0) from P (-4, 0): Drive 4 km towards East."
+  },
+  {
+    "q_hi": "Q223. रोहित बिंदु A से ड्राइव करना शुरू करता है और उत्तर की ओर 10 km ड्राइव करता है। फिर वह बाएं मुड़कर 12 km ड्राइव करता है, फिर से बाएं मुड़कर 11 km ड्राइव करता है। फिर वह बाएं मुड़कर 15 km ड्राइव करता है। अंत में वह बाएं मुड़कर 1 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर फिर से पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक कि निर्दिष्ट न किया जाए, सभी मोड़ केवल 90 डिग्री के हैं।)",
+    "q_en": "Q223. Rohit starts driving from point A and drives 10 km towards North. Then he turns left and drives 12 km, turns left again and drives 11 km. Then he turns left and drives 15 km. Finally, he turns left, drives 1 km and stops at point P. How far (minimum distance) and in which direction should he drive to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Consecutive Left Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 3 km पूर्व की ओर",
+      "(b) 4 km पश्चिम की ओर",
+      "(c) 4 km पूर्व की ओर",
+      "(d) 3 km पश्चिम की ओर"
+    ],
+    "o_en": [
+      "(a) 3 km towards East",
+      "(b) 4 km towards West",
+      "(c) 4 km towards East",
+      "(d) 3 km towards West"
+    ],
+    "a": 3,
+    "e_hi": "माना A = (0, 0):<br>1. उत्तर में 10 km → (0, 10)<br>2. बाएँ मुड़कर (पश्चिम) 12 km → (-12, 10)<br>3. बाएँ मुड़कर (दक्षिण) 11 km → (-12, -1)<br>4. बाएँ मुड़कर (पूर्व) 15 km → (3, -1)<br>5. बाएँ मुड़कर (उत्तर) 1 km → (3, 0) = बिंदु P।<br>P (3, 0) से A (0, 0) पहुँचने के लिए: 3 km पश्चिम की ओर ड्राइव करना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 10 km North → (0, 10)<br>2. Turn left (West) 12 km → (-12, 10)<br>3. Turn left (South) 11 km → (-12, -1)<br>4. Turn left (East) 15 km → (3, -1)<br>5. Turn left (North) 1 km → (3, 0) = point P.<br>To reach A (0, 0) from P (3, 0): Drive 3 km towards West."
+  },
+  {
+    "q_hi": "Q224. विकास, बिंदु A से चलना प्रारंभ करके उत्तर की ओर 11 km ड्राइव करता है। इसके बाद वह दाएँ मुड़ता है और 13 km ड्राइव करता है, वह फिर दाएँ मुड़ता है और 12 km ड्राइव करता है। फिर वह दाएँ मुड़ता है और 17 km ड्राइव करता है। अंत में वह दाएँ मुड़ता है और 1 km ड्राइव करके बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुँचने के लिए उसे कितनी दूरी (न्यूनतम दूरी) तक और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया जाए, सभी मोड़ केवल 90-डिग्री के मोड़ हैं।)",
+    "q_en": "Q224. Vikas starts from point A and drives 11 km towards North. Then he turns right and drives 13 km, turns right again and drives 12 km. Then he turns right and drives 17 km. Finally, he turns right, drives 1 km and stops at point P. How far (minimum distance) and in which direction should he drive to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Consecutive Right Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 7 km, पूर्व की ओर",
+      "(b) 7 km, पश्चिम की ओर",
+      "(c) 4 km, पूर्व की ओर",
+      "(d) 4 km, पश्चिम की ओर"
+    ],
+    "o_en": [
+      "(a) 7 km, towards East",
+      "(b) 7 km, towards West",
+      "(c) 4 km, towards East",
+      "(d) 4 km, towards West"
+    ],
+    "a": 2,
+    "e_hi": "माना A = (0, 0):<br>1. उत्तर में 11 km → (0, 11)<br>2. दाएँ मुड़कर (पूर्व) 13 km → (13, 11)<br>3. दाएँ मुड़कर (दक्षिण) 12 km → (13, -1)<br>4. दाएँ मुड़कर (पश्चिम) 17 km → (-4, -1)<br>5. दाएँ मुड़कर (उत्तर) 1 km → (-4, 0) = बिंदु P।<br>P (-4, 0) से A (0, 0) पहुँचने के लिए: 4 km, पूर्व की ओर ड्राइव करना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 11 km North → (0, 11)<br>2. Turn right (East) 13 km → (13, 11)<br>3. Turn right (South) 12 km → (13, -1)<br>4. Turn right (West) 17 km → (-4, -1)<br>5. Turn right (North) 1 km → (-4, 0) = point P.<br>To reach A (0, 0) from P (-4, 0): Drive 4 km, towards East."
+  },
+  {
+    "q_hi": "Q225. मनोज बिंदु A से ड्राइव करना शुरू करता है और पूर्व की ओर 14 km ड्राइव करता है। फिर वह दाएँ मुड़कर 12 km ड्राइव करता है, फिर से दाएँ मुड़कर 17 km ड्राइव करता है। इसके बाद वह दाएँ मुड़कर 21 km ड्राइव करता है। अंत में वह दाएँ मुड़कर 3 km ड्राइव करता है और बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुँचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90-डिग्री के हैं।)",
+    "q_en": "Q225. Manoj starts driving from point A and drives 14 km towards East. Then he turns right and drives 12 km, turns right again and drives 17 km. After this, he turns right and drives 21 km. Finally, he turns right, drives 3 km and stops at point P. How far (minimum distance) and in which direction should he drive to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Consecutive Right Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 10 km दक्षिण की ओर",
+      "(b) 10 km उत्तर की ओर",
+      "(c) 9 km दक्षिण की ओर",
+      "(d) 9 km उत्तर की ओर"
+    ],
+    "o_en": [
+      "(a) 10 km towards South",
+      "(b) 10 km towards North",
+      "(c) 9 km towards South",
+      "(d) 9 km towards North"
+    ],
+    "a": 2,
+    "e_hi": "माना A = (0, 0):<br>1. पूर्व में 14 km → (14, 0)<br>2. दाएँ मुड़कर (दक्षिण) 12 km → (14, -12)<br>3. दाएँ मुड़कर (पश्चिम) 17 km → (-3, -12)<br>4. दाएँ मुड़कर (उत्तर) 21 km → (-3, 9)<br>5. दाएँ मुड़कर (पूर्व) 3 km → (0, 9) = बिंदु P।<br>P (0, 9) से A (0, 0) पहुँचने के लिए: 9 km दक्षिण की ओर ड्राइव करना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 14 km East → (14, 0)<br>2. Turn right (South) 12 km → (14, -12)<br>3. Turn right (West) 17 km → (-3, -12)<br>4. Turn right (North) 21 km → (-3, 9)<br>5. Turn right (East) 3 km → (0, 9) = point P.<br>To reach A (0, 0) from P (0, 9): Drive 9 km towards South."
+  },
+  {
+    "q_hi": "Q226. Ghr बिंदु A से ड्राइव करना प्रारंभ करता है और पश्चिम दिशा की ओर 7 km ड्राइव करता है। इसके बाद वह बाएं मुड़ता है और 4 km ड्राइव करता है, तथा वह फिर दाएं मुड़ता है और 3 km ड्राइव करता है। फिर वह दाएं मुड़ता है और 7 km ड्राइव करता है। अंत में वह दाएं मुड़ता है 10 km ड्राइव करके बिंदु P पर रुक जाता है। पुनः बिंदु A तक पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में गाड़ी चलानी चाहिए? (जब तक अन्यथा विनिर्दिष्ट न किया गया हो, सभी मोड़ केवल 90-डिग्री के मोड़ हैं)",
+    "q_en": "Q226. Ghr starts driving from point A and drives 7 km towards West. Then he turns left and drives 4 km, turns right and drives 3 km. Then he turns right and drives 7 km. Finally, he turns right, drives 10 km and stops at point P. How far (minimum distance) and in which direction should he drive to reach point A again? (Unless specified otherwise, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Mixed Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 5 km उत्तर की ओर",
+      "(b) 2 km पूर्व की ओर",
+      "(c) 3 km दक्षिण की ओर",
+      "(d) 6 km पश्चिम की ओर"
+    ],
+    "o_en": [
+      "(a) 5 km towards North",
+      "(b) 2 km towards East",
+      "(c) 3 km towards South",
+      "(d) 6 km towards West"
+    ],
+    "a": 2,
+    "e_hi": "माना A = (0, 0):<br>1. पश्चिम में 7 km → (-7, 0)<br>2. बाएँ मुड़कर (दक्षिण) 4 km → (-7, -4)<br>3. दाएँ मुड़कर (पश्चिम) 3 km → (-10, -4)<br>4. दाएँ मुड़कर (उत्तर) 7 km → (-10, 3)<br>5. दाएँ मुड़कर (पूर्व) 10 km → (0, 3) = बिंदु P।<br>P (0, 3) से A (0, 0) पहुँचने के लिए: 3 km दक्षिण की ओर चलना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 7 km West → (-7, 0)<br>2. Turn left (South) 4 km → (-7, -4)<br>3. Turn right (West) 3 km → (-10, -4)<br>4. Turn right (North) 7 km → (-10, 3)<br>5. Turn right (East) 10 km → (0, 3) = point P.<br>To reach A (0, 0) from P (0, 3): Drive 3 km towards South."
+  },
+  {
+    "q_hi": "Q227. रीक बिंदु A से चलना प्रारंभ करता है और दक्षिण की ओर 6 km चलता है। फिर वह बाएं मुड़ता है और 9 km चलता है, फिर वह बाएं मुड़ता है और 16 km चलता है। फिर वह बाएं मुड़ता है और 18 km चलता है। अंत में वह बाएं मुड़ता है और 10 km चलकर बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में चलना चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    "q_en": "Q227. Reek starts walking from point A and walks 6 km towards South. Then he turns left and walks 9 km, turns left again and walks 16 km. Then he turns left and walks 18 km. Finally, he turns left, walks 10 km and stops at point P. How far (minimum distance) and in which direction should he walk to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Consecutive Left Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 8 km, उत्तर की ओर",
+      "(b) 10 km, पश्चिम की ओर",
+      "(c) 7 km, दक्षिण की ओर",
+      "(d) 9 km, पूर्व की ओर"
+    ],
+    "o_en": [
+      "(a) 8 km, towards North",
+      "(b) 10 km, towards West",
+      "(c) 7 km, towards South",
+      "(d) 9 km, towards East"
+    ],
+    "a": 3,
+    "e_hi": "माना A = (0, 0):<br>1. दक्षिण में 6 km → (0, -6)<br>2. बाएँ मुड़कर (पूर्व) 9 km → (9, -6)<br>3. बाएँ मुड़कर (उत्तर) 16 km → (9, 10)<br>4. बाएँ मुड़कर (पश्चिम) 18 km → (-9, 10)<br>5. बाएँ मुड़कर (दक्षिण) 10 km → (-9, 0) = बिंदु P।<br>P (-9, 0) से A (0, 0) पहुँचने के लिए: 9 km, पूर्व की ओर चलना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 6 km South → (0, -6)<br>2. Turn left (East) 9 km → (9, -6)<br>3. Turn left (North) 16 km → (9, 10)<br>4. Turn left (West) 18 km → (-9, 10)<br>5. Turn left (South) 10 km → (-9, 0) = point P.<br>To reach A (0, 0) from P (-9, 0): Walk 9 km, towards East."
+  },
+  {
+    "q_hi": "Q228. रीक बिंदु A से चलना प्रारंभ करता है और उत्तर की ओर 22 km चलता है। फिर वह बाएं मुड़ता है और 30 km चलता है, फिर वह बाएं मुड़ता है और 28 km चलता है। फिर वह बाएं मुड़ता है और 39 km चलता है। अंत में वह बाएं मुड़ता है और 6 km चलकर बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में चलना चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    "q_en": "Q228. Reek starts walking from point A and walks 22 km towards North. Then he turns left and walks 30 km, turns left again and walks 28 km. Then he turns left and walks 39 km. Finally, he turns left, walks 6 km and stops at point P. How far (minimum distance) and in which direction should he walk to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Consecutive Left Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 9 km, पश्चिम की ओर",
+      "(b) 11 km, दक्षिण की ओर",
+      "(c) 7 km, पूर्व की ओर",
+      "(d) 10 km, उत्तर की ओर"
+    ],
+    "o_en": [
+      "(a) 9 km, towards West",
+      "(b) 11 km, towards South",
+      "(c) 7 km, towards East",
+      "(d) 10 km, towards North"
+    ],
+    "a": 0,
+    "e_hi": "माना A = (0, 0):<br>1. उत्तर में 22 km → (0, 22)<br>2. बाएँ मुड़कर (पश्चिम) 30 km → (-30, 22)<br>3. बाएँ मुड़कर (दक्षिण) 28 km → (-30, -6)<br>4. बाएँ मुड़कर (पूर्व) 39 km → (9, -6)<br>5. बाएँ मुड़कर (उत्तर) 6 km → (9, 0) = बिंदु P।<br>P (9, 0) से A (0, 0) पहुँचने के लिए: 9 km, पश्चिम की ओर चलना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 22 km North → (0, 22)<br>2. Turn left (West) 30 km → (-30, 22)<br>3. Turn left (South) 28 km → (-30, -6)<br>4. Turn left (East) 39 km → (9, -6)<br>5. Turn left (North) 6 km → (9, 0) = point P.<br>To reach A (0, 0) from P (9, 0): Walk 9 km, towards West."
+  },
+  {
+    "q_hi": "Q229. मिस्टर जेड, बिंदु Y से ड्राइव करना प्रारंभ करता है और दक्षिण की ओर 3 km ड्राइव करता है। वह फिर बाएं मुड़ता है और 6 km ड्राइव करता है, फिर बाएं मुड़ता है और 9 km ड्राइव करता है। फिर वह बाएं मुड़ता है और 15 km ड्राइव करता है। अंत में वह बाएं मुड़ता है और 6 km ड्राइव करके बिंदु Z पर रुक जाता है। पुनः बिंदु Y पर पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में ड्राइव करना चाहिए? (जब तक निर्दिष्ट न हो, सभी मोड़ केवल 90-डिग्री के मोड़ हैं।)",
+    "q_en": "Q229. Mr. Z starts driving from point Y and drives 3 km towards South. Then he turns left and drives 6 km, turns left again and drives 9 km. Then he turns left and drives 15 km. Finally, he turns left, drives 6 km and stops at point Z. How far (minimum distance) and in which direction should he drive to reach point Y again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Consecutive Left Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 9 km, पूर्व की ओर",
+      "(b) 7 km, दक्षिण की ओर",
+      "(c) 2 km, उत्तर की ओर",
+      "(d) 5 km, पूर्व की ओर"
+    ],
+    "o_en": [
+      "(a) 9 km, towards East",
+      "(b) 7 km, towards South",
+      "(c) 2 km, towards North",
+      "(d) 5 km, towards East"
+    ],
+    "a": 0,
+    "e_hi": "माना बिंदु Y = (0, 0):<br>1. दक्षिण में 3 km → (0, -3)<br>2. बाएँ मुड़कर (पूर्व) 6 km → (6, -3)<br>3. बाएँ मुड़कर (उत्तर) 9 km → (6, 6)<br>4. बाएँ मुड़कर (पश्चिम) 15 km → (-9, 6)<br>5. बाएँ मुड़कर (दक्षिण) 6 km → (-9, 0) = बिंदु Z।<br>Z (-9, 0) से Y (0, 0) पहुँचने के लिए: 9 km, पूर्व की ओर ड्राइव करना चाहिए।",
+    "e_en": "Let point Y = (0, 0):<br>1. 3 km South → (0, -3)<br>2. Turn left (East) 6 km → (6, -3)<br>3. Turn left (North) 9 km → (6, 6)<br>4. Turn left (West) 15 km → (-9, 6)<br>5. Turn left (South) 6 km → (-9, 0) = point Z.<br>To reach Y (0, 0) from Z (-9, 0): Drive 9 km, towards East."
+  },
+  {
+    "q_hi": "Q230. रीक बिंदु A से चलना प्रारंभ करता है और उत्तर की ओर 18 km चलता है। फिर वह दाएं मुड़ता है और 9 km चलता है, फिर वह दाएं मुड़ता है और 23 km चलता है। फिर वह दाएं मुड़ता है और 14 km चलता है। अंत में वह दाएं मुड़ता है और 5 km चलकर बिंदु P पर रुक जाता है। बिंदु A पर वापस पहुंचने के लिए उसे कितनी दूर (न्यूनतम दूरी) और किस दिशा में चलना चाहिए? (जब तक निर्दिष्ट न किया गया हो, सभी मोड़ केवल 90 डिग्री के मोड़ हैं।)",
+    "q_en": "Q230. Reek starts walking from point A and walks 18 km towards North. Then he turns right and walks 9 km, turns right again and walks 23 km. Then he turns right and walks 14 km. Finally, he turns right, walks 5 km and stops at point P. How far (minimum distance) and in which direction should he walk to reach point A again? (Unless specified, all turns are 90-degree turns only.)",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Consecutive Right Turns (Direction & Distance)",
+    "o_hi": [
+      "(a) 7 km, पश्चिम की ओर",
+      "(b) 8 km, उत्तर की ओर",
+      "(c) 4 km, दक्षिण की ओर",
+      "(d) 5 km, पूर्व की ओर"
+    ],
+    "o_en": [
+      "(a) 7 km, towards West",
+      "(b) 8 km, towards North",
+      "(c) 4 km, towards South",
+      "(d) 5 km, towards East"
+    ],
+    "a": 3,
+    "e_hi": "माना A = (0, 0):<br>1. उत्तर में 18 km → (0, 18)<br>2. दाएँ मुड़कर (पूर्व) 9 km → (9, 18)<br>3. दाएँ मुड़कर (दक्षिण) 23 km → (9, -5)<br>4. दाएँ मुड़कर (पश्चिम) 14 km → (-5, -5)<br>5. दाएँ मुड़कर (उत्तर) 5 km → (-5, 0) = बिंदु P।<br>P (-5, 0) से A (0, 0) पहुँचने के लिए: 5 km, पूर्व की ओर चलना चाहिए।",
+    "e_en": "Let A = (0, 0):<br>1. 18 km North → (0, 18)<br>2. Turn right (East) 9 km → (9, 18)<br>3. Turn right (South) 23 km → (9, -5)<br>4. Turn right (West) 14 km → (-5, -5)<br>5. Turn right (North) 5 km → (-5, 0) = point P.<br>To reach A (0, 0) from P (-5, 0): Walk 5 km, towards East."
+  }
+];
