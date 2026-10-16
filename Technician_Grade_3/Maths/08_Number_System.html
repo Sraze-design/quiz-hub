@@ -1,0 +1,296 @@
+const Data = [
+  {
+    "q_hi": "Q137. मान लीजिए कि p, 3 से बड़ी एक अभाज्य संख्या है। निम्नलिखित में से कौन-सा व्यंजक सदैव 24 से विभाज्य है और अनिवार्य रूप से 48 से विभाज्य है?",
+    "q_en": "Q137. Let p be a prime number greater than 3. Which of the following expressions is always divisible by 24 and essentially divisible by 48?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Type I (Properties of Prime Numbers)",
+    "o_hi": [
+      "(a) p² - 1",
+      "(b) p² + 1",
+      "(c) p² - p",
+      "(d) p⁴ - 1"
+    ],
+    "o_en": [
+      "(a) p² - 1",
+      "(b) p² + 1",
+      "(c) p² - p",
+      "(d) p⁴ - 1"
+    ],
+    "a": 3,
+    "e_hi": "3 से बड़ी किसी भी अभाज्य संख्या p के लिए $p^2 - 1$ सदैव 24 से विभाज्य होता है।\\nव्यंजक $p^4 - 1 = (p^2 - 1)(p^2 + 1)$\\nचूँकि p एक विषम संख्या है, $p^2$ भी विषम होगा, अतः $(p^2 + 1)$ एक सम संख्या (2 का गुणज) होगी।\\nअतः $(p^2 - 1)(p^2 + 1)$ अनिवार्य रूप से $24 \\times 2 = 48$ से विभाज्य होगा।",
+    "e_en": "For any prime number $p > 3$, $p^2 - 1$ is always divisible by 24.\\nThe expression $p^4 - 1 = (p^2 - 1)(p^2 + 1)$.\\nSince p is odd, $p^2$ is odd, so $(p^2 + 1)$ is an even integer (multiple of 2).\\nTherefore, $(p^2 - 1)(p^2 + 1)$ is essentially divisible by $24 \\times 2 = 48$."
+  },
+  {
+    "q_hi": "Q138. 75 तक की अभाज्य संख्याओं का योगफल ज्ञात कीजिए।",
+    "q_en": "Q138. Find the sum of all prime numbers up to 75.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Type II (Sum of Prime Numbers)",
+    "o_hi": [
+      "(a) 711",
+      "(b) 712",
+      "(c) 714",
+      "(d) 713"
+    ],
+    "o_en": [
+      "(a) 711",
+      "(b) 712",
+      "(c) 714",
+      "(d) 713"
+    ],
+    "a": 1,
+    "e_hi": "75 तक की अभाज्य संख्याएँ:\\n2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73\\nकुल योगफल = 2 + 3 + 5 + 7 + 11 + 13 + 17 + 19 + 23 + 29 + 31 + 37 + 41 + 43 + 47 + 53 + 59 + 61 + 67 + 71 + 73 = 712",
+    "e_en": "Prime numbers up to 75:\\n2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73\\nTotal sum = 2 + 3 + 5 + 7 + 11 + 13 + 17 + 19 + 23 + 29 + 31 + 37 + 41 + 43 + 47 + 53 + 59 + 61 + 67 + 71 + 73 = 712"
+  },
+  {
+    "q_hi": "Q139. 1 से 30 तक की कितनी संख्याएं 30 के साथ सह-अभाज्य हैं?",
+    "q_en": "Q139. How many numbers from 1 to 30 are co-prime with 30?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Type III (Co-prime Numbers & Euler Totient)",
+    "o_hi": [
+      "(a) 10",
+      "(b) 6",
+      "(c) 8",
+      "(d) 12"
+    ],
+    "o_en": [
+      "(a) 10",
+      "(b) 6",
+      "(c) 8",
+      "(d) 12"
+    ],
+    "a": 2,
+    "e_hi": "ऑयलर टोटिएंट फलन $\\phi(n)$:\\n30 के अभाज्य गुणनखंड = $2 \\times 3 \\times 5$\\n$\\phi(30) = 30 \\times (1 - 1/2) \\times (1 - 1/3) \\times (1 - 1/5)$\\n$= 30 \\times \\frac{1}{2} \\times \\frac{2}{3} \\times \\frac{4}{5} = 8$\\n(वे संख्याएँ 1, 7, 11, 13, 17, 19, 23, 29 हैं)",
+    "e_en": "Euler's totient function $\\phi(n)$:\\nPrime factorization of 30 = $2 \\times 3 \\times 5$\\n$\\phi(30) = 30 \\times (1 - 1/2) \\times (1 - 1/3) \\times (1 - 1/5)$\\n$= 30 \\times \\frac{1}{2} \\times \\frac{2}{3} \\times \\frac{4}{5} = 8$\\n(The numbers are 1, 7, 11, 13, 17, 19, 23, 29)"
+  },
+  {
+    "q_hi": "Q140. 91 में कौन-सी सबसे छोटी संख्या जोड़ने पर परिणामी संख्या, 60 के साथ सह-अभाज्य होगी?",
+    "q_en": "Q140. What smallest number added to 91 makes the resulting number co-prime to 60?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type III (Co-prime Numbers)",
+    "o_hi": [
+      "(a) 5",
+      "(b) 4",
+      "(c) 6",
+      "(d) 3"
+    ],
+    "o_en": [
+      "(a) 5",
+      "(b) 4",
+      "(c) 6",
+      "(d) 3"
+    ],
+    "a": 2,
+    "e_hi": "60 के अभाज्य गुणनखंड 2, 3 और 5 हैं। अतः परिणामी संख्या 2, 3 या 5 से विभाज्य नहीं होनी चाहिए।\\nविकल्पों की जाँच:\\n(d) 91 + 3 = 94 (2 से विभाज्य)\\n(b) 91 + 4 = 95 (5 से विभाज्य)\\n(a) 91 + 5 = 96 (2 व 3 से विभाज्य)\\n(c) 91 + 6 = 97 (97 एक अभाज्य संख्या है जो 2, 3, 5 किसी से विभाज्य नहीं है)\\nअतः न्यूनतम संख्या 6 है।",
+    "e_en": "Prime factors of 60 are 2, 3, and 5. The resulting number must not be divisible by 2, 3, or 5.\\nTesting options:\\n(d) 91 + 3 = 94 (divisible by 2)\\n(b) 91 + 4 = 95 (divisible by 5)\\n(a) 91 + 5 = 96 (divisible by 2 and 3)\\n(c) 91 + 6 = 97 (97 is a prime number, co-prime to 60)\\nTherefore, the smallest number is 6."
+  },
+  {
+    "q_hi": "Q141. 7 अंकों की संख्या 5A931B6, 3 से विभाज्य है। (A + B) का न्यूनतम संभव मान ज्ञात कीजिए।",
+    "q_en": "Q141. The 7-digit number 5A931B6 is divisible by 3. Find the minimum possible value of (A + B).",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Type IV (Divisibility Rule of 3)",
+    "o_hi": [
+      "(a) 0",
+      "(b) 5",
+      "(c) 2",
+      "(d) 3"
+    ],
+    "o_en": [
+      "(a) 0",
+      "(b) 5",
+      "(c) 2",
+      "(d) 3"
+    ],
+    "a": 0,
+    "e_hi": "3 से विभाज्यता का नियम: अंकों का योग 3 का गुणज होना चाहिए।\\nअंकों का योग = 5 + A + 9 + 3 + 1 + B + 6 = 24 + (A + B)\\nचूँकि 24 पहले से ही 3 से पूर्णतः विभाज्य है, अतः (A + B) भी 3 से विभाज्य होना चाहिए।\\nA और B दोनों गैर-ऋणात्मक अंक हैं (A प्रथम अंक नहीं है, अतः A = 0 और B = 0 संभव है)।\\nअतः (A + B) का न्यूनतम संभव मान 0 है।",
+    "e_en": "Divisibility rule of 3: Sum of digits must be a multiple of 3.\\nSum of digits = 5 + A + 9 + 3 + 1 + B + 6 = 24 + (A + B)\\nSince 24 is already divisible by 3, (A + B) must be divisible by 3.\\nSince A is not the leading digit, A = 0 and B = 0 is valid.\\nThus, minimum possible value of (A + B) = 0."
+  },
+  {
+    "q_hi": "Q142. दो क्रमागत अभाज्य संख्याओं का गुणनफल 437 है। इन दोनों अभाज्य संख्याओं के बीच का अंतर ज्ञात कीजिए।",
+    "q_en": "Q142. The product of two consecutive prime numbers is 437. Find the difference between these two prime numbers.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Type I (Properties of Prime Numbers)",
+    "o_hi": [
+      "(a) 8",
+      "(b) 6",
+      "(c) 4",
+      "(d) 2"
+    ],
+    "o_en": [
+      "(a) 8",
+      "(b) 6",
+      "(c) 4",
+      "(d) 2"
+    ],
+    "a": 2,
+    "e_hi": "$\\sqrt{437} \\approx 20.9$\\n20 के निकटवर्ती अभाज्य संख्याएँ 19 और 23 हैं।\\n19 × 23 = 437\\nदोनों के बीच का अंतर = 23 - 19 = 4",
+    "e_en": "$\\sqrt{437} \\approx 20.9$\\nPrime numbers near 20 are 19 and 23.\\n19 × 23 = 437\\nDifference between them = 23 - 19 = 4"
+  },
+  {
+    "q_hi": "Q143. किसी लंब वृत्तीय शंकु का वक्र पृष्ठीय क्षेत्रफल 3960 cm² है। यदि शंकु की ऊँचाई $9\\sqrt{39}$ cm और इसकी तिर्यक ऊँचाई 60 cm है, तो शंकु का आयतन कितना होगा? ($\\pi = \\frac{22}{7}$ का उपयोग कीजिए)",
+    "q_en": "Q143. The curved surface area of a right circular cone is 3960 cm². If the height of the cone is $9\\sqrt{39}$ cm and its slant height is 60 cm, what will be the volume of the cone? (Use $\\pi = \\frac{22}{7}$)",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Type V (Mensuration/Number System Application)",
+    "o_hi": [
+      "(a) $4158\\sqrt{39} \\text{ cm}^3$",
+      "(b) $4134\\sqrt{39} \\text{ cm}^3$",
+      "(c) $4194\\sqrt{39} \\text{ cm}^3$",
+      "(d) $4112\\sqrt{39} \\text{ cm}^3$"
+    ],
+    "o_en": [
+      "(a) $4158\\sqrt{39} \\text{ cm}^3$",
+      "(b) $4134\\sqrt{39} \\text{ cm}^3$",
+      "(c) $4194\\sqrt{39} \\text{ cm}^3$",
+      "(d) $4112\\sqrt{39} \\text{ cm}^3$"
+    ],
+    "a": 0,
+    "e_hi": "वक्र पृष्ठीय क्षेत्रफल = $\\pi r l$\\n$3960 = \\frac{22}{7} \\times r \\times 60$\\n$r = \\frac{3960 \\times 7}{22 \\times 60} = 21 \\text{ cm}$\\nशंकु का आयतन = $\\frac{1}{3} \\pi r^2 h = \\frac{1}{3} \\times \\frac{22}{7} \\times 21^2 \\times 9\\sqrt{39}$\\n$= \\frac{1}{3} \\times 22 \\times 63 \\times 9\\sqrt{39} = 22 \\times 21 \\times 9\\sqrt{39} = 4158\\sqrt{39} \\text{ cm}^3$",
+    "e_en": "Curved surface area = $\\pi r l$\\n$3960 = \\frac{22}{7} \\times r \\times 60$\\n$r = \\frac{3960 \\times 7}{22 \\times 60} = 21 \\text{ cm}$\\nVolume of cone = $\\frac{1}{3} \\pi r^2 h = \\frac{1}{3} \\times \\frac{22}{7} \\times 21^2 \\times 9\\sqrt{39}$\\n$= \\frac{1}{3} \\times 22 \\times 63 \\times 9\\sqrt{39} = 4158\\sqrt{39} \\text{ cm}^3$"
+  },
+  {
+    "q_hi": "Q144. 7 अंकों की संख्या 236A3B9, 3 से विभाज्य है। (A + B) का न्यूनतम संभव मान ज्ञात कीजिए।",
+    "q_en": "Q144. The 7-digit number 236A3B9 is divisible by 3. Find the minimum possible value of (A + B).",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Type IV (Divisibility Rule of 3)",
+    "o_hi": [
+      "(a) 4",
+      "(b) 1",
+      "(c) 10",
+      "(d) 7"
+    ],
+    "o_en": [
+      "(a) 4",
+      "(b) 1",
+      "(c) 10",
+      "(d) 7"
+    ],
+    "a": 1,
+    "e_hi": "अंकों का योग = 2 + 3 + 6 + A + 3 + B + 9 = 23 + (A + B)\\n23 से बड़ा 3 का निकटतम गुणज 24 है।\\n23 + (A + B) = 24 ⇒ (A + B) = 1\\nअतः न्यूनतम मान 1 है।",
+    "e_en": "Sum of digits = 2 + 3 + 6 + A + 3 + B + 9 = 23 + (A + B)\\nThe next multiple of 3 after 23 is 24.\\n23 + (A + B) = 24 ⇒ (A + B) = 1\\nThus, the minimum value is 1."
+  },
+  {
+    "q_hi": "Q145. 7 अंकों की संख्या A67856B, 3 से विभाज्य है। (A + B) का न्यूनतम संभव मान ज्ञात कीजिए।",
+    "q_en": "Q145. The 7-digit number A67856B is divisible by 3. Find the minimum possible value of (A + B).",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Type IV (Divisibility Rule of 3)",
+    "o_hi": [
+      "(a) 0",
+      "(b) 3",
+      "(c) 4",
+      "(d) 1"
+    ],
+    "o_en": [
+      "(a) 0",
+      "(b) 3",
+      "(c) 4",
+      "(d) 1"
+    ],
+    "a": 3,
+    "e_hi": "A प्रथम अंक है, अतः A ≥ 1।\\nअंकों का योग = A + 6 + 7 + 8 + 5 + 6 + B = 32 + (A + B)\\n32 को 3 से भाग देने पर शेषफल 2 बचता है, अतः (A + B) को 3 से भाग देने पर शेषफल 1 बचना चाहिए।\\nचूँकि A ≥ 1 और B ≥ 0, (A + B) का न्यूनतम संभव मान 1 है (जैसे A = 1, B = 0)।",
+    "e_en": "A is the leading digit, so A ≥ 1.\\nSum of digits = A + 6 + 7 + 8 + 5 + 6 + B = 32 + (A + B)\\nSince 32 leaves a remainder of 2 when divided by 3, (A + B) must leave a remainder of 1.\\nSince A ≥ 1 and B ≥ 0, the minimum possible value of (A + B) is 1 (e.g., A = 1, B = 0)."
+  },
+  {
+    "q_hi": "Q146. 7 अंकों की संख्या 6A9317B, 3 से विभाज्य है। (A + B) का न्यूनतम संभव मान ज्ञात कीजिए।",
+    "q_en": "Q146. The 7-digit number 6A9317B is divisible by 3. Find the minimum possible value of (A + B).",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Type IV (Divisibility Rule of 3)",
+    "o_hi": [
+      "(a) 1",
+      "(b) 4",
+      "(c) 0",
+      "(d) 3"
+    ],
+    "o_en": [
+      "(a) 1",
+      "(b) 4",
+      "(c) 0",
+      "(d) 3"
+    ],
+    "a": 0,
+    "e_hi": "अंकों का योग = 6 + A + 9 + 3 + 1 + 7 + B = 26 + (A + B)\\n26 से बड़ा 3 का निकटतम गुणज 27 है।\\n26 + (A + B) = 27 ⇒ (A + B) = 1\\nअतः न्यूनतम मान 1 है।",
+    "e_en": "Sum of digits = 6 + A + 9 + 3 + 1 + 7 + B = 26 + (A + B)\\nThe next multiple of 3 after 26 is 27.\\n26 + (A + B) = 27 ⇒ (A + B) = 1\\nThus, the minimum value is 1."
+  },
+  {
+    "q_hi": "Q147. (4K² - 3) का वह न्यूनतम मान ज्ञात कीजिए, जिसके लिए छह अंकों की संख्या 8768K6, 4 से विभाज्य होनी चाहिए।",
+    "q_en": "Q147. Find the minimum value of (4K² - 3) for which the six-digit number 8768K6 must be divisible by 4.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Type VI (Divisibility Rule of 4)",
+    "o_hi": [
+      "(a) 13",
+      "(b) 33",
+      "(c) 1",
+      "(d) 24"
+    ],
+    "o_en": [
+      "(a) 13",
+      "(b) 33",
+      "(c) 1",
+      "(d) 24"
+    ],
+    "a": 2,
+    "e_hi": "4 से विभाज्यता के लिए अंतिम दो अंक 'K6' 4 से विभाज्य होने चाहिए।\\nसंभावित मान: K = 1 (16), 3 (36), 5 (56), 7 (76), 9 (96)\\nन्यूनतम मान के लिए K = 1 होगा।\\nअभीष्ट मान = 4(1)² - 3 = 4 - 3 = 1",
+    "e_en": "For divisibility by 4, the last two digits 'K6' must be divisible by 4.\\nPossible values: K = 1 (16), 3 (36), 5 (56), 7 (76), 9 (96)\\nFor minimum value, K = 1.\\nRequired value = 4(1)² - 3 = 4 - 3 = 1"
+  },
+  {
+    "q_hi": "Q148. 6-अंकीय संख्या 2A683B, 3 से विभाज्य है। (A + B) का न्यूनतम संभव मान ज्ञात कीजिए।",
+    "q_en": "Q148. The 6-digit number 2A683B is divisible by 3. Find the minimum possible value of (A + B).",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Type IV (Divisibility Rule of 3)",
+    "o_hi": [
+      "(a) 11",
+      "(b) 2",
+      "(c) 5",
+      "(d) 8"
+    ],
+    "o_en": [
+      "(a) 11",
+      "(b) 2",
+      "(c) 5",
+      "(d) 8"
+    ],
+    "a": 1,
+    "e_hi": "अंकों का योग = 2 + A + 6 + 8 + 3 + B = 19 + (A + B)\\n19 से बड़ा 3 का निकटतम गुणज 21 है।\\n19 + (A + B) = 21 ⇒ (A + B) = 2\\nअतः न्यूनतम मान 2 है।",
+    "e_en": "Sum of digits = 2 + A + 6 + 8 + 3 + B = 19 + (A + B)\\nThe next multiple of 3 after 19 is 21.\\n19 + (A + B) = 21 ⇒ (A + B) = 2\\nThus, the minimum value is 2."
+  },
+  {
+    "q_hi": "Q149. 6-अंकीय संख्या A678B3, 3 से विभाज्य है। (A + B) का न्यूनतम संभव मान ज्ञात कीजिए।",
+    "q_en": "Q149. The 6-digit number A678B3 is divisible by 3. Find the minimum possible value of (A + B).",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type IV (Divisibility Rule of 3)",
+    "o_hi": [
+      "(a) 1",
+      "(b) 4",
+      "(c) 7",
+      "(d) 3"
+    ],
+    "o_en": [
+      "(a) 1",
+      "(b) 4",
+      "(c) 7",
+      "(d) 3"
+    ],
+    "a": 3,
+    "e_hi": "A प्रथम अंक है, अतः A ≥ 1।\\nअंकों का योग = A + 6 + 7 + 8 + B + 3 = 24 + (A + B)\\nचूँकि 24 पहले से 3 से विभाज्य है, (A + B) भी 3 से विभाज्य होना चाहिए।\\nA ≥ 1 होने के कारण (A + B) का मान 0 नहीं हो सकता।\\nअतः (A + B) का न्यूनतम संभव मान 3 होगा।",
+    "e_en": "A is the leading digit, so A ≥ 1.\\nSum of digits = A + 6 + 7 + 8 + B + 3 = 24 + (A + B)\\nSince 24 is divisible by 3, (A + B) must also be a multiple of 3.\\nSince A ≥ 1, (A + B) cannot be 0.\\nTherefore, the minimum possible value of (A + B) is 3."
+  },
+  {
+    "q_hi": "Q150. निम्नलिखित में से कौन-सी संख्या 11 से विभाज्य है?",
+    "q_en": "Q150. Which of the following numbers is divisible by 11?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Type VII (Divisibility Rule of 11)",
+    "o_hi": [
+      "(a) 2143",
+      "(b) 2356",
+      "(c) 2880",
+      "(d) 2728"
+    ],
+    "o_en": [
+      "(a) 2143",
+      "(b) 2356",
+      "(c) 2880",
+      "(d) 2728"
+    ],
+    "a": 3,
+    "e_hi": "11 से विभाज्यता नियम (विषम और सम स्थानों के अंकों के योग का अंतर):\\nसंख्या 2728 में:\\nविषम स्थान (1st, 3rd): 8 + 7 = 15\\nसम स्थान (2nd, 4th): 2 + 2 = 4\\nअंतर = 15 - 4 = 11, जो 11 से पूर्णतः विभाज्य है।\\nअतः 2728 संख्या 11 से विभाज्य है।",
+    "e_en": "Divisibility rule of 11 (Difference of alternate digits):\\nFor 2728:\\nSum of odd place digits: 8 + 7 = 15\\nSum of even place digits: 2 + 2 = 4\\nDifference = 15 - 4 = 11, which is divisible by 11.\\nTherefore, 2728 is divisible by 11."
+  }
+];

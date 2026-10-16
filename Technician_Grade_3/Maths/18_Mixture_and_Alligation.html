@@ -1,0 +1,86 @@
+const data = [
+  {
+    "q_hi": "Q239. किसी विद्यालय ने एक विज्ञान प्रदर्शनी का आयोजन किया जिसमें प्रोजेक्ट्स का मूल्यांकन 50 के पूर्णांक में से किया गया था। भौतिकी के प्रोजेक्ट्स के प्राप्तांकों का औसत 42 था और कंप्यूटर विज्ञान के प्रोजेक्ट्स के प्राप्तांकों का औसत 46 था। यदि सभी 40 प्रोजेक्ट्स के प्राप्तांकों का समग्र औसत 44.5 था, तो प्रदर्शनी में प्रस्तुत किए गए भौतिकी के प्रोजेक्ट्स की संख्या ज्ञात कीजिए।",
+    "q_en": "Q239. A school organized a science exhibition where projects were evaluated out of 50 marks. The average score of physics projects was 42 and the average score of computer science projects was 46. If the overall average score of all 40 projects was 44.5, find the number of physics projects presented in the exhibition.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type I (Rule of Alligation)",
+    "o_hi": [
+      "(a) 14",
+      "(b) 18",
+      "(c) 15",
+      "(d) 12"
+    ],
+    "o_en": [
+      "(a) 14",
+      "(b) 18",
+      "(c) 15",
+      "(d) 12"
+    ],
+    "a": 2,
+    "e_hi": "पृथक्करण नियम (Rule of Alligation) द्वारा:\nभौतिकी (Physics) औसत = 42\nकंप्यूटर विज्ञान (CS) औसत = 46\nसमग्र (Mean) औसत = 44.5\nअनुपात (भौतिकी : कंप्यूटर विज्ञान) = (46 - 44.5) : (44.5 - 42) = 1.5 : 2.5 = 3 : 5\nकुल अनुपाती योग = 3 + 5 = 8 इकाई\n8 इकाई = 40 प्रोजेक्ट्स ⇒ 1 इकाई = 5\nभौतिकी के प्रोजेक्ट्स की संख्या = 3 × 5 = 15",
+    "e_en": "By Rule of Alligation:\nPhysics average = 42\nComputer Science (CS) average = 46\nOverall mean average = 44.5\nRatio (Physics : CS) = (46 - 44.5) : (44.5 - 42) = 1.5 : 2.5 = 3 : 5\nTotal ratio units = 3 + 5 = 8 units\n8 units = 40 projects ⇒ 1 unit = 5\nNumber of Physics projects = 3 × 5 = 15"
+  },
+  {
+    "q_hi": "Q240. एक स्कूल में तीन कक्षाएं X, Y और Z हैं। कक्षा X में 25 छात्र हैं जिनका औसत स्कोर 70 है, कक्षा Y में 35 छात्र हैं जिनका औसत स्कोर 80 है, और कक्षा Z में M छात्र हैं जिनका औसत स्कोर 90 है। यदि सभी छात्रों का औसत स्कोर 80 है, तो M का मान ज्ञात कीजिए।",
+    "q_en": "Q240. There are three classes X, Y and Z in a school. Class X has 25 students with an average score of 70, Class Y has 35 students with an average score of 80, and Class Z has M students with an average score of 90. If the average score of all students is 80, find the value of M.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Type II (Weighted Average / Balance Method)",
+    "o_hi": [
+      "(a) 15",
+      "(b) 20",
+      "(c) 10",
+      "(d) 25"
+    ],
+    "o_en": [
+      "(a) 15",
+      "(b) 20",
+      "(c) 10",
+      "(d) 25"
+    ],
+    "a": 3,
+    "e_hi": "औसत 80 से विचलन (Deviation Method) द्वारा:\nकक्षा X का विचलन = 25 × (70 - 80) = 25 × (-10) = -250\nकक्षा Y का विचलन = 35 × (80 - 80) = 0\nकक्षा Z का विचलन = M × (90 - 80) = +10M\nऔसत 80 होने के कारण कुल विचलन शून्य होना चाहिए:\n-250 + 0 + 10M = 0\n10M = 250 ⇒ M = 25",
+    "e_en": "Using Deviation Method from mean 80:\nDeviation of Class X = 25 × (70 - 80) = 25 × (-10) = -250\nDeviation of Class Y = 35 × (80 - 80) = 0\nDeviation of Class Z = M × (90 - 80) = +10M\nNet deviation must be zero:\n-250 + 0 + 10M = 0\n10M = 250 ⇒ M = 25"
+  },
+  {
+    "q_hi": "Q241. किसी कक्षा को तीन वर्गों A, B और C में विभाजित किया गया है।\nवर्ग A में 25 छात्र हैं, जिनके औसत अंक 70 है।\nवर्ग B में 35 छात्र हैं, जिनके औसत अंक 60 है।\nवर्ग C में 40 छात्र हैं।\nयदि सभी 100 छात्रों के संयुक्त औसत अंक 63 है, तो वर्ग C के लिए औसत अंक ज्ञात कीजिए।",
+    "q_en": "Q241. A class is divided into three sections A, B, and C.\nSection A has 25 students with an average score of 70.\nSection B has 35 students with an average score of 60.\nSection C has 40 students.\nIf the combined average score of all 100 students is 63, find the average score for Section C.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Type II (Weighted Average / Group Mean)",
+    "o_hi": [
+      "(a) 58.25",
+      "(b) 61.25",
+      "(c) 67.25",
+      "(d) 64.25"
+    ],
+    "o_en": [
+      "(a) 58.25",
+      "(b) 61.25",
+      "(c) 67.25",
+      "(d) 64.25"
+    ],
+    "a": 1,
+    "e_hi": "सभी 100 छात्रों के कुल अंक = 100 × 63 = 6300\nवर्ग A के कुल अंक = 25 × 70 = 1750\nवर्ग B के कुल अंक = 35 × 60 = 2100\nवर्ग A और B के कुल अंक = 1750 + 2100 = 3850\nवर्ग C के 40 छात्रों के कुल अंक = 6300 - 3850 = 2450\nवर्ग C का औसत अंक = 2450 / 40 = 245 / 4 = 61.25",
+    "e_en": "Total marks of all 100 students = 100 × 63 = 6300\nTotal marks of Section A = 25 × 70 = 1750\nTotal marks of Section B = 35 × 60 = 2100\nTotal marks of Sections A and B = 1750 + 2100 = 3850\nTotal marks of Section C = 6300 - 3850 = 2450\nAverage score of Section C = 2450 / 40 = 245 / 4 = 61.25"
+  },
+  {
+    "q_hi": "Q242. 15, 20 और 25 का भारित माध्य ज्ञात कीजिए, जिनके भार क्रमशः 2, 3 और 5 हैं।",
+    "q_en": "Q242. Find the weighted mean of 15, 20 and 25, having weights 2, 3 and 5 respectively.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Type III (Direct Weighted Mean Calculation)",
+    "o_hi": [
+      "(a) 22",
+      "(b) 21",
+      "(c) 22.5",
+      "(d) 21.5"
+    ],
+    "o_en": [
+      "(a) 22",
+      "(b) 21",
+      "(c) 22.5",
+      "(d) 21.5"
+    ],
+    "a": 3,
+    "e_hi": "भारित माध्य सूत्र: W = Σ(w × x) / Σw\nΣ(w × x) = (15 × 2) + (20 × 3) + (25 × 5)\n= 30 + 60 + 125 = 215\nΣw = 2 + 3 + 5 = 10\nभारित माध्य = 215 / 10 = 21.5",
+    "e_en": "Weighted Mean formula: W = Σ(w × x) / Σw\nΣ(w × x) = (15 × 2) + (20 × 3) + (25 × 5)\n= 30 + 60 + 125 = 215\nΣw = 2 + 3 + 5 = 10\nWeighted Mean = 215 / 10 = 21.5"
+  }
+];

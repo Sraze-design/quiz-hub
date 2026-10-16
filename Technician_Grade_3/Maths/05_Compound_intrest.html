@@ -1,0 +1,380 @@
+const data = [
+  {
+    "q_hi": "Q84. किसी मूलधन को एक निश्चित वार्षिक ब्याज दर पर 3 वर्षों के लिए निवेश किया जाता है, जहां ब्याज वार्षिक रूप से संयोजित होता है। (चक्रवृद्धि ब्याज - साधारण ब्याज) और साधारण ब्याज का अनुपात 7:12 है। वार्षिक ब्याज दर ज्ञात कीजिए।",
+    "q_en": "Q84. A principal is invested at a certain annual rate of interest for 3 years, compounded annually. The ratio of (Compound Interest - Simple Interest) to Simple Interest is 7:12. Find the annual rate of interest.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Type I (Difference of CI and SI - 3 Years)",
+    "o_hi": [
+      "(a) 50%",
+      "(b) 40%",
+      "(c) 60%",
+      "(d) 30%"
+    ],
+    "o_en": [
+      "(a) 50%",
+      "(b) 40%",
+      "(c) 60%",
+      "(d) 30%"
+    ],
+    "a": 0,
+    "e_hi": "3 वर्षों के लिए साधारण ब्याज SI = 3 × P × r\\n3 वर्षों के लिए (CI - SI) = P × r² × (3 + r)\\nअनुपात: (CI - SI) / SI = [P × r² × (3 + r)] / [3 × P × r] = [r(3 + r)] / 3 = 7 / 12\\n4r(3 + r) = 7\\n4r² + 12r - 7 = 0\\n4r² + 14r - 2r - 7 = 0\\n2r(2r + 7) - 1(2r + 7) = 0\\n(2r - 1)(2r + 7) = 0 ⇒ r = 1/2 = 0.5\\nअतः ब्याज दर = 0.5 × 100% = 50%",
+    "e_en": "For 3 years, SI = 3 × P × r\\nFor 3 years, (CI - SI) = P × r² × (3 + r)\\nRatio: (CI - SI) / SI = [P × r² × (3 + r)] / [3 × P × r] = [r(3 + r)] / 3 = 7 / 12\\n4r(3 + r) = 7\\n4r² + 12r - 7 = 0\\n4r² + 14r - 2r - 7 = 0\\n2r(2r + 7) - 1(2r + 7) = 0\\n(2r - 1)(2r + 7) = 0 ⇒ r = 1/2 = 0.5\\nTherefore, interest rate = 0.5 × 100% = 50%"
+  },
+  {
+    "q_hi": "Q85. दो व्यक्ति X तथा Y समान मूलधन ₹P को समान ब्याज दर पर क्रमशः दो वर्ष के लिए वार्षिक रूप से संयोजित चक्रवृद्धि ब्याज, तथा एक वर्ष के लिए अर्धवार्षिक रूप से संयोजित चक्रवृद्धि ब्याज पर जमा करते हैं। यदि उनके ब्याजों का अंतर ₹0.1075P है, तो ब्याज दर ज्ञात कीजिए।",
+    "q_en": "Q85. Two persons X and Y deposit the same principal ₹P at the same rate of interest for two years compounded annually, and for one year compounded semi-annually, respectively. If the difference between their interests is ₹0.1075P, find the rate of interest.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Type II (Annual vs Semi-Annual Compounding)",
+    "o_hi": [
+      "(a) 12.5%",
+      "(b) 8%",
+      "(c) 10%",
+      "(d) 12%"
+    ],
+    "o_en": [
+      "(a) 12.5%",
+      "(b) 8%",
+      "(c) 10%",
+      "(d) 12%"
+    ],
+    "a": 2,
+    "e_hi": "माना वार्षिक ब्याज दर r (दशमलव में) है।\\nX का 2 वर्ष का ब्याज = P[(1 + r)² - 1] = P(2r + r²)\\nY का 1 वर्ष का अर्धवार्षिक ब्याज = P[(1 + r/2)² - 1] = P(r + r²/4)\\nअंतर = P[(2r + r²) - (r + r²/4)] = P[r + 3r²/4]\\nदिया गया अंतर = 0.1075P\\nr + 0.75r² = 0.1075\\n0.75r² + r - 0.1075 = 0\\nr = 0.1 रखने पर: 0.1 + 0.75(0.01) = 0.1 + 0.0075 = 0.1075 (संतुष्ट होता है)\\nअतः वार्षिक ब्याज दर = 0.1 × 100% = 10%",
+    "e_en": "Let the annual interest rate be r (in decimals).\\nInterest for X (2 years, annual compounding) = P[(1 + r)² - 1] = P(2r + r²)\\nInterest for Y (1 year, semi-annual compounding) = P[(1 + r/2)² - 1] = P(r + r²/4)\\nDifference = P[(2r + r²) - (r + r²/4)] = P[r + 3r²/4]\\nGiven difference = 0.1075P\\nr + 0.75r² = 0.1075\\n0.75r² + r - 0.1075 = 0\\nTesting r = 0.1: 0.1 + 0.75(0.01) = 0.1 + 0.0075 = 0.1075 (satisfied)\\nTherefore, the rate of interest = 0.1 × 100% = 10%"
+  },
+  {
+    "q_hi": "Q86. किसी निश्चित मूलधन और वार्षिक ब्याज दर के लिए, 2 वर्षों के पश्चात चक्रवृद्धि ब्याज (वार्षिक रूप से संयोजित) और साधारण ब्याज के बीच का अंतर ₹720 है। यदि मूलधन और वार्षिक ब्याज दर दोनों को दोगुना कर दिया जाए, तो 2 वर्षों के पश्चात चक्रवृद्धि ब्याज और साधारण ब्याज के बीच नया अंतर कितना होगा?",
+    "q_en": "Q86. For a certain principal and annual interest rate, the difference between compound interest (compounded annually) and simple interest after 2 years is ₹720. If both the principal and the annual rate of interest are doubled, what will be the new difference between compound interest and simple interest after 2 years?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Type I (Difference of CI and SI - 2 Years)",
+    "o_hi": [
+      "(a) ₹2,880",
+      "(b) ₹5,760",
+      "(c) ₹4,320",
+      "(d) ₹5,040"
+    ],
+    "o_en": [
+      "(a) ₹2,880",
+      "(b) ₹5,760",
+      "(c) ₹4,320",
+      "(d) ₹5,040"
+    ],
+    "a": 1,
+    "e_hi": "2 वर्षों के लिए (CI - SI) का सूत्र:\\nD = P × (R / 100)² = ₹720\\nजब मूलधन 2P और दर 2R कर दी जाती है:\\nनया अंतर D' = (2P) × (2R / 100)² = 2P × 4 × (R / 100)² = 8 × [P × (R / 100)²]\\nD' = 8 × 720 = ₹5,760",
+    "e_en": "Formula for (CI - SI) for 2 years:\\nD = P × (R / 100)² = ₹720\\nWhen principal is doubled to 2P and rate to 2R:\\nNew difference D' = (2P) × (2R / 100)² = 2P × 4 × (R / 100)² = 8 × [P × (R / 100)²]\\nD' = 8 × 720 = ₹5,760"
+  },
+  {
+    "q_hi": "Q87. ₹25,000 मूलधन 16% वार्षिक दर पर निवेश किया जाता है। यदि ब्याज क्रमशः वार्षिक और अर्ध-वार्षिक रूप से संयोजित किया जाए, तो दोनों स्थितियों में 1\\frac{1}{2} वर्ष के पश्चात अर्जित चक्रवृद्धि ब्याजों के बीच का अंतर ज्ञात कीजिए।",
+    "q_en": "Q87. A principal of ₹25,000 is invested at 16% per annum. If interest is compounded annually and semi-annually respectively, find the difference between the compound interests earned in the two cases after 1\\frac{1}{2} years.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type II (Annual vs Semi-Annual Compounding)",
+    "o_hi": [
+      "(a) 164.80",
+      "(b) 178.80",
+      "(c) 172.80",
+      "(d) 168.80"
+    ],
+    "o_en": [
+      "(a) 164.80",
+      "(b) 178.80",
+      "(c) 172.80",
+      "(d) 168.80"
+    ],
+    "a": 2,
+    "e_hi": "स्थिति 1: वार्षिक संयोजन में 1\\frac{1}{2} वर्ष का मिश्रधन:\\nA1 = 25000 × (1 + 0.16) × (1 + 0.08) = 25000 × 1.16 × 1.08 = ₹31,320\\nस्थिति 2: अर्ध-वार्षिक संयोजन में (दर = 8%, अवधि = 3 छमाही):\\nA2 = 25000 × (1.08)³ = 25000 × 1.259712 = ₹31,492.80\\nब्याजों का अंतर = A2 - A1 = 31492.80 - 31320 = ₹172.80",
+    "e_en": "Case 1: Compounded annually for 1\\frac{1}{2} years:\\nA1 = 25000 × (1 + 0.16) × (1 + 0.08) = 25000 × 1.16 × 1.08 = ₹31,320\\nCase 2: Compounded semi-annually (rate = 8%, n = 3 half-years):\\nA2 = 25000 × (1.08)³ = 25000 × 1.259712 = ₹31,492.80\\nDifference in interests = A2 - A1 = 31492.80 - 31320 = ₹172.80"
+  },
+  {
+    "q_hi": "Q88. एक धनराशि 20% वार्षिक चक्रवृद्धि ब्याज दर पर 2 वर्षों के लिए निवेश की जाती है, जहाँ ब्याज अर्ध-वार्षिक रूप से संयोजित होता है। यदि केवल अंतिम छमाही में अर्जित ब्याज ₹5,324 है, तो मूलधन कितना था?",
+    "q_en": "Q88. A sum of money is invested for 2 years at 20% per annum compound interest, compounded semi-annually. If the interest earned in the last half-year alone is ₹5,324, what was the principal?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Type III (Interest for Specific Period)",
+    "o_hi": [
+      "(a) ₹45,000",
+      "(b) ₹55,000",
+      "(c) ₹50,000",
+      "(d) ₹40,000"
+    ],
+    "o_en": [
+      "(a) ₹45,000",
+      "(b) ₹55,000",
+      "(c) ₹50,000",
+      "(d) ₹40,000"
+    ],
+    "a": 3,
+    "e_hi": "अर्धवार्षिक दर r = 20% / 2 = 10% = 0.10\\n2 वर्ष = 4 छमाही।\\n3 छमाही बाद मिश्रधन A3 = P × (1.10)³ = 1.331 P\\n4 छमाही बाद मिश्रधन A4 = P × (1.10)⁴ = 1.4641 P\\nकेवल चौथी छमाही का ब्याज = A4 - A3 = 1.4641 P - 1.331 P = 0.1331 P\\n0.1331 P = 5324\\nP = 5324 / 0.1331 = ₹40,000",
+    "e_en": "Semi-annual rate r = 20% / 2 = 10% = 0.10\\n2 years = 4 half-years.\\nAmount after 3 half-years A3 = P × (1.10)³ = 1.331 P\\nAmount after 4 half-years A4 = P × (1.10)⁴ = 1.4641 P\\nInterest for the 4th half-year alone = A4 - A3 = 1.4641 P - 1.331 P = 0.1331 P\\n0.1331 P = 5324\\nP = 5324 / 0.1331 = ₹40,000"
+  },
+  {
+    "q_hi": "Q89. एक धनराशि को 2 वर्षों के लिए वार्षिक रूप से संयोजित होने वाले चक्रवृद्धि ब्याज पर निवेश किया जाता है। x% की वार्षिक ब्याज दर पर, मिश्रधन ₹24,200 हो जाता है। यदि वार्षिक ब्याज दर (x + 10)% है, तो मिश्रधन ₹28,800 हो जाता है। x का मान ज्ञात कीजिए।",
+    "q_en": "Q89. A sum of money is invested for 2 years at compound interest compounded annually. At an annual rate of x%, the amount becomes ₹24,200. If the annual rate is (x + 10)%, the amount becomes ₹28,800. Find the value of x.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Type IV (Finding Rate of Interest)",
+    "o_hi": [
+      "(a) 5",
+      "(b) 10",
+      "(c) 20",
+      "(d) 15"
+    ],
+    "o_en": [
+      "(a) 5",
+      "(b) 10",
+      "(c) 20",
+      "(d) 15"
+    ],
+    "a": 1,
+    "e_hi": "P × [1 + (x + 10)/100]² = 28800\\nP × [1 + x/100]² = 24200\\nदोनों समीकरणों को भाग देने पर:\\n[(110 + x) / (100 + x)]² = 28800 / 24200 = 144 / 121\\nदोनों पक्षों का वर्गमूल लेने पर:\\n(110 + x) / (100 + x) = 12 / 11\\n11(110 + x) = 12(100 + x)\\n1210 + 11x = 1200 + 12x ⇒ x = 10",
+    "e_en": "P × [1 + (x + 10)/100]² = 28800\\nP × [1 + x/100]² = 24200\\nDividing the two equations:\\n[(110 + x) / (100 + x)]² = 28800 / 24200 = 144 / 121\\nTaking square root on both sides:\\n(110 + x) / (100 + x) = 12 / 11\\n11(110 + x) = 12(100 + x)\\n1210 + 11x = 1200 + 12x ⇒ x = 10"
+  },
+  {
+    "q_hi": "Q90. रुचि ने एक निश्चित धनराशि अर्धवार्षिक रूप से चक्रवृद्धित होने वाली 32% वार्षिक चक्रवृद्धि ब्याज दर पर 1 वर्ष और 6 माह की अवधि के लिए निवेश की। यदि इस अवधि के अंत में रुचि को प्राप्त कुल धनराशि ₹48,778 थी, तो प्रारंभिक निवेश (₹ में) ज्ञात कीजिए।",
+    "q_en": "Q90. Ruchi invested a certain sum of money for a period of 1 year and 6 months at an annual compound interest rate of 32%, compounded semi-annually. If the total amount received by Ruchi at the end of this period was ₹48,778, find the initial investment (in ₹).",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Type V (Calculation of Principal)",
+    "o_hi": [
+      "(a) 30,000",
+      "(b) 31,000",
+      "(c) 30,250",
+      "(d) 31,250"
+    ],
+    "o_en": [
+      "(a) 30,000",
+      "(b) 31,000",
+      "(c) 30,250",
+      "(d) 31,250"
+    ],
+    "a": 3,
+    "e_hi": "अर्धवार्षिक दर = 32% / 2 = 16%\\nसमय = 1 वर्ष 6 माह = 3 छमाही\\nA = P × (1 + 16/100)³ = P × (1.16)³\\n48778 = P × 1.560896\\nP = 48778 / 1.560896 = ₹31,250",
+    "e_en": "Semi-annual rate = 32% / 2 = 16%\\nTime = 1 year 6 months = 3 half-years\\nA = P × (1 + 16/100)³ = P × (1.16)³\\n48778 = P × 1.560896\\nP = 48778 / 1.560896 = ₹31,250"
+  },
+  {
+    "q_hi": "Q91. ₹6,600 की आरंभिक राशि, अर्ध-वार्षिक रूप से संयोजित होने पर X वर्षों में 6% की वार्षिक ब्याज दर से बढ़कर ₹6,798 हो जाती है। X का मान ज्ञात कीजिए।",
+    "q_en": "Q91. An initial amount of ₹6,600 grows to ₹6,798 in X years at 6% annual interest rate compounded semi-annually. Find the value of X.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Type VI (Calculation of Time)",
+    "o_hi": [
+      "(a) 1",
+      "(b) 1.25",
+      "(c) 0.5",
+      "(d) 0.75"
+    ],
+    "o_en": [
+      "(a) 1",
+      "(b) 1.25",
+      "(c) 0.5",
+      "(d) 0.75"
+    ],
+    "a": 2,
+    "e_hi": "अर्धवार्षिक दर = 6% / 2 = 3%\\nछमाही की संख्या n = 2X\\nA = P × (1 + 3/100)ⁿ\\n6798 = 6600 × (1.03)ⁿ\\n(1.03)ⁿ = 6798 / 6600 = 1.03 = (1.03)¹\\nn = 1 ছमाही ⇒ 2X = 1 ⇒ X = 0.5 वर्ष",
+    "e_en": "Semi-annual rate = 6% / 2 = 3%\\nNumber of half-years n = 2X\\nA = P × (1 + 3/100)ⁿ\\n6798 = 6600 × (1.03)ⁿ\\n(1.03)ⁿ = 6798 / 6600 = 1.03 = (1.03)¹\\nn = 1 half-year ⇒ 2X = 1 ⇒ X = 0.5 years"
+  },
+  {
+    "q_hi": "Q92. नेहा 10% वार्षिक ब्याज दर पर ₹10,000 का ऋण लेती है, जबकि ब्याज अर्धवार्षिक रूप से संयोजित होता है। यदि उसे कुल ₹11,025 की राशि चुकानी है, तो उसने कितने समय के लिए ऋण लिया था?",
+    "q_en": "Q92. Neha takes a loan of ₹10,000 at 10% annual interest rate, compounded semi-annually. If she has to repay a total amount of ₹11,025, for what duration did she take the loan?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Type VI (Calculation of Time)",
+    "o_hi": [
+      "(a) 2 वर्ष",
+      "(b) 6 महीने",
+      "(c) 1 वर्ष",
+      "(d) 1.5 वर्ष"
+    ],
+    "o_en": [
+      "(a) 2 years",
+      "(b) 6 months",
+      "(c) 1 year",
+      "(d) 1.5 years"
+    ],
+    "a": 2,
+    "e_hi": "अर्धवार्षिक दर = 10% / 2 = 5%\\n11025 = 10000 × (1 + 5/100)ⁿ\\n(1.05)ⁿ = 11025 / 10000 = 1.1025 = (1.05)²\\nn = 2 छमाही = 1 वर्ष",
+    "e_en": "Semi-annual rate = 10% / 2 = 5%\\n11025 = 10000 × (1 + 5/100)ⁿ\\n(1.05)ⁿ = 11025 / 10000 = 1.1025 = (1.05)²\\nn = 2 half-years = 1 year"
+  },
+  {
+    "q_hi": "Q93. ₹2,70,000 की राशि पर 8% वार्षिक ब्याज दर से चक्रवृद्धि ब्याज ₹70,122.24 है, जबकि ब्याज वार्षिक रूप से संयोजित होता है। अवधि (वर्ष में) ज्ञात कीजिए।",
+    "q_en": "Q93. The compound interest on an amount of ₹2,70,000 at 8% per annum is ₹70,122.24, compounded annually. Find the duration (in years).",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Type VI (Calculation of Time)",
+    "o_hi": [
+      "(a) 3",
+      "(b) 5",
+      "(c) 4",
+      "(d) 2"
+    ],
+    "o_en": [
+      "(a) 3",
+      "(b) 5",
+      "(c) 4",
+      "(d) 2"
+    ],
+    "a": 0,
+    "e_hi": "मिश्रधन A = मूलधन + ब्याज = 270000 + 70122.24 = ₹3,40,122.24\\nA = P × (1 + R/100)ᵗ\\n340122.24 = 270000 × (1.08)ᵗ\\n(1.08)ᵗ = 340122.24 / 270000 = 1.259712\\nचूँकि (1.08)³ = 1.259712\\nअतः t = 3 वर्ष",
+    "e_en": "Amount A = Principal + Interest = 270000 + 70122.24 = ₹3,40,122.24\\nA = P × (1 + R/100)ᵗ\\n340122.24 = 270000 × (1.08)ᵗ\\n(1.08)ᵗ = 340122.24 / 270000 = 1.259712\\nSince (1.08)³ = 1.259712\\nTherefore, t = 3 years"
+  },
+  {
+    "q_hi": "Q94. एक निश्चित धनराशि 10% वार्षिक ब्याज दर पर 12 महीने में ₹24255 हो जाती है, जबकि ब्याज अर्धवार्षिक रूप से संयोजित होता है। वह धनराशि ज्ञात कीजिए।",
+    "q_en": "Q94. A certain sum becomes ₹24255 in 12 months at 10% annual interest rate, compounded semi-annually. Find the sum.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Type V (Calculation of Principal)",
+    "o_hi": [
+      "(a) 22000",
+      "(b) 33000",
+      "(c) 24000",
+      "(d) 21000"
+    ],
+    "o_en": [
+      "(a) 22000",
+      "(b) 33000",
+      "(c) 24000",
+      "(d) 21000"
+    ],
+    "a": 0,
+    "e_hi": "अर्धवार्षिक दर = 10% / 2 = 5%\\n12 महीने = 2 छमाही\\nA = P × (1 + 5/100)² = P × (1.05)² = 1.1025 P\\n24255 = 1.1025 P\\nP = 24255 / 1.1025 = ₹22,000",
+    "e_en": "Semi-annual rate = 10% / 2 = 5%\\n12 months = 2 half-years\\nA = P × (1 + 5/100)² = P × (1.05)² = 1.1025 P\\n24255 = 1.1025 P\\nP = 24255 / 1.1025 = ₹22,000"
+  },
+  {
+    "q_hi": "Q95. यदि ₹52,400 को 8% वार्षिक ब्याज दर पर 2 वर्षों के लिए जमा किया जाता है, तो चक्रवृद्धि ब्याज (जबकि ब्याज वार्षिक रूप से संयोजित होता है) और साधारण ब्याज के बीच का अंतर कितना होगा?",
+    "q_en": "Q95. If ₹52,400 is deposited at 8% annual interest rate for 2 years, what will be the difference between compound interest (compounded annually) and simple interest?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Type I (Difference of CI and SI - 2 Years)",
+    "o_hi": [
+      "(a) 330.86",
+      "(b) 329.25",
+      "(c) 335.36",
+      "(d) 344.55"
+    ],
+    "o_en": [
+      "(a) 330.86",
+      "(b) 329.25",
+      "(c) 335.36",
+      "(d) 344.55"
+    ],
+    "a": 2,
+    "e_hi": "2 वर्षों के लिए (CI - SI) = P × (R / 100)²\\nअंतर = 52400 × (8 / 100)² = 52400 × 0.0064 = ₹335.36",
+    "e_en": "For 2 years, (CI - SI) = P × (R / 100)²\\nDifference = 52400 × (8 / 100)² = 52400 × 0.0064 = ₹335.36"
+  },
+  {
+    "q_hi": "Q96. यदि ब्याज अर्धवार्षिक रूप से संयोजित होता है, तो ₹2,000 की राशि पर 20% वार्षिक दर से 18 महीने का चक्रवृद्धि ब्याज ज्ञात कीजिए।",
+    "q_en": "Q96. If interest is compounded semi-annually, find the compound interest on an amount of ₹2,000 at 20% per annum for 18 months.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type VII (Calculation of CI)",
+    "o_hi": [
+      "(a) ₹679",
+      "(b) ₹662",
+      "(c) ₹670",
+      "(d) ₹650"
+    ],
+    "o_en": [
+      "(a) ₹679",
+      "(b) ₹662",
+      "(c) ₹670",
+      "(d) ₹650"
+    ],
+    "a": 1,
+    "e_hi": "अर्धवार्षिक दर = 20% / 2 = 10%\\n18 महीने = 3 छमाही\\nमिश्रधन A = 2000 × (1 + 10/100)³ = 2000 × (1.10)³ = 2000 × 1.331 = ₹2,662\\nचक्रवृद्धि ब्याज = A - P = 2662 - 2000 = ₹662",
+    "e_en": "Semi-annual rate = 20% / 2 = 10%\\n18 months = 3 half-years\\nAmount A = 2000 × (1 + 10/100)³ = 2000 × (1.10)³ = 2000 × 1.331 = ₹2,662\\nCompound Interest = A - P = 2662 - 2000 = ₹662"
+  },
+  {
+    "q_hi": "Q97. चक्रवृद्धि ब्याज पर निवेश की गई एक धनराशि 15 वर्षों में तीन गुनी हो जाती है। ब्याज की समान वार्षिक दर पर, वह धनराशि कितने वर्षों में अपनी मूल राशि की 27 गुनी हो जाएगी?",
+    "q_en": "Q97. A sum of money invested at compound interest triples itself in 15 years. At the same annual rate of interest, in how many years will it become 27 times its original amount?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Type VIII (Multiple Times Growth)",
+    "o_hi": [
+      "(a) 60 वर्ष",
+      "(b) 30 वर्ष",
+      "(c) 75 वर्ष",
+      "(d) 45 वर्ष"
+    ],
+    "o_en": [
+      "(a) 60 years",
+      "(b) 30 years",
+      "(c) 75 years",
+      "(d) 45 years"
+    ],
+    "a": 3,
+    "e_hi": "यदि राशि t वर्षों में 'a' गुनी होती है, तो aⁿ गुनी होने में (n × t) वर्ष लगेंगे।\\nयहाँ 3 गुनी होने में समय = 15 वर्ष\\n27 गुनी = 3³ गुनी\\nअभीष्ट समय = 3 × 15 = 45 वर्ष",
+    "e_en": "If a sum becomes 'a' times in t years, it will become aⁿ times in (n × t) years.\\nHere, time to become 3 times = 15 years\\n27 times = 3³ times\\nRequired time = 3 × 15 = 45 years"
+  },
+  {
+    "q_hi": "Q98. ₹2500 की राशि पर 18% वार्षिक चक्रवृद्धि ब्याज दर से, 2 वर्ष में प्राप्त मिश्रधन ज्ञात कीजिए, जबकि ब्याज वार्षिक रूप से संयोजित होता है।",
+    "q_en": "Q98. Find the amount received in 2 years on an amount of ₹2500 at 18% annual compound interest rate, compounded annually.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Type IX (Calculation of Amount)",
+    "o_hi": [
+      "(a) ₹3365",
+      "(b) ₹3481",
+      "(c) ₹4116",
+      "(d) ₹4198"
+    ],
+    "o_en": [
+      "(a) ₹3365",
+      "(b) ₹3481",
+      "(c) ₹4116",
+      "(d) ₹4198"
+    ],
+    "a": 1,
+    "e_hi": "मिश्रधन A = P × (1 + R/100)²\\nA = 2500 × (1 + 18/100)² = 2500 × (1.18)² = 2500 × 1.3924 = ₹3,481",
+    "e_en": "Amount A = P × (1 + R/100)²\\nA = 2500 × (1 + 18/100)² = 2500 × (1.18)² = 2500 × 1.3924 = ₹3,481"
+  },
+  {
+    "q_hi": "Q99. यदि ₹5,000 की राशि को 8% वार्षिक ब्याज दर पर 2 वर्षों के लिए निवेश किया जाता है जबकि ब्याज वार्षिक रूप से संयोजित होता है, तो अर्जित चक्रवृद्धि ब्याज कितना होगा?",
+    "q_en": "Q99. If an amount of ₹5,000 is invested at 8% annual interest rate for 2 years compounded annually, what will be the compound interest earned?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Type VII (Calculation of CI)",
+    "o_hi": [
+      "(a) ₹780",
+      "(b) ₹924",
+      "(c) ₹837",
+      "(d) ₹832"
+    ],
+    "o_en": [
+      "(a) ₹780",
+      "(b) ₹924",
+      "(c) ₹837",
+      "(d) ₹832"
+    ],
+    "a": 3,
+    "e_hi": "मिश्रधन A = 5000 × (1 + 8/100)² = 5000 × (1.08)² = 5000 × 1.1664 = ₹5,832\\nचक्रवृद्धि ब्याज = A - P = 5832 - 5000 = ₹832",
+    "e_en": "Amount A = 5000 × (1 + 8/100)² = 5000 × (1.08)² = 5000 × 1.1664 = ₹5,832\\nCompound Interest = A - P = 5832 - 5000 = ₹832"
+  },
+  {
+    "q_hi": "Q100. एक व्यक्ति 5% वार्षिक चक्रवृद्धि ब्याज दर पर ₹10,000 निवेश करता है। 3 वर्ष बाद मिश्रधन ज्ञात कीजिए।",
+    "q_en": "Q100. A person invests ₹10,000 at 5% annual compound interest rate. Find the amount after 3 years.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Type IX (Calculation of Amount)",
+    "o_hi": [
+      "(a) ₹11,000",
+      "(b) ₹11,576.25",
+      "(c) ₹11,200.50",
+      "(d) ₹12,000"
+    ],
+    "o_en": [
+      "(a) ₹11,000",
+      "(b) ₹11,576.25",
+      "(c) ₹11,200.50",
+      "(d) ₹12,000"
+    ],
+    "a": 1,
+    "e_hi": "मिश्रधन A = P × (1 + R/100)³\\nA = 10000 × (1 + 5/100)³ = 10000 × (1.05)³ = 10000 × 1.157625 = ₹11,576.25",
+    "e_en": "Amount A = P × (1 + R/100)³\\nA = 10000 × (1 + 5/100)³ = 10000 × (1.05)³ = 10000 × 1.157625 = ₹11,576.25"
+  },
+  {
+    "q_hi": "Q101. ₹6300 की राशि पर 20% वार्षिक चक्रवृद्धि ब्याज दर से, 2 वर्ष में प्राप्त मिश्रधन ज्ञात कीजिए, जबकि ब्याज वार्षिक रूप से संयोजित होता है।",
+    "q_en": "Q101. Find the amount received on a sum of ₹6300 at 20% annual compound interest rate in 2 years, compounded annually.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Type IX (Calculation of Amount)",
+    "o_hi": [
+      "(a) ₹9072",
+      "(b) ₹8769",
+      "(c) ₹8564",
+      "(d) ₹8675"
+    ],
+    "o_en": [
+      "(a) ₹9072",
+      "(b) ₹8769",
+      "(c) ₹8564",
+      "(d) ₹8675"
+    ],
+    "a": 0,
+    "e_hi": "मिश्रधन A = P × (1 + R/100)²\\nA = 6300 × (1 + 20/100)² = 6300 × (1.20)² = 6300 × 1.44 = ₹9,072",
+    "e_en": "Amount A = P × (1 + R/100)²\\nA = 6300 × (1 + 20/100)² = 6300 × (1.20)² = 6300 × 1.44 = ₹9,072"
+  }
+];

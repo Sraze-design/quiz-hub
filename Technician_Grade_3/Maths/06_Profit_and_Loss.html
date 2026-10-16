@@ -1,0 +1,380 @@
+const data = [
+  {
+    "q_hi": "Q102. नितिन प्रति वस्तु ₹6,314 की दर से दो वस्तुएं बेचता है और पूरे सौदे में न तो लाभ होता है और न ही हानि होती है। यदि एक वस्तु 75% के लाभ पर बेची गई, तो दूसरी वस्तु कितने प्रतिशत हानि पर बेची गई?",
+    "q_en": "Q102. Nitin sells two items at the rate of ₹6,314 per item and gains neither profit nor loss in the entire transaction. If one item was sold at a profit of 75%, at what percentage loss was the other item sold?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-02)",
+    "type_tag": "Type I (No Profit No Loss on Same SP)",
+    "o_hi": [
+      "(a) 29%",
+      "(b) 27%",
+      "(c) 32%",
+      "(d) 30%"
+    ],
+    "o_en": [
+      "(a) 29%",
+      "(b) 27%",
+      "(c) 32%",
+      "(d) 30%"
+    ],
+    "a": 3,
+    "e_hi": "प्रत्येक वस्तु का विक्रय मूल्य (SP) समान है।\\nमाना SP = ₹7 (गणना को सरल करने के लिए)\\nपहली वस्तु 75% लाभ पर बेची गई: CP1 = SP / 1.75 = 7 / (7/4) = ₹4\\nपहली वस्तु पर लाभ = 7 - 4 = ₹3\\nचूँकि पूरे सौदे में न लाभ हुआ न हानि, अतः दूसरी वस्तु पर ₹3 की हानि हुई होगी।\\nदूसरी वस्तु का क्रय मूल्य CP2 = SP + हानि = 7 + 3 = ₹10\\nदूसरी वस्तु का हानि प्रतिशत = (हानि / CP2) × 100 = (3 / 10) × 100 = 30%",
+    "e_en": "Selling price (SP) of each item is equal.\\nLet SP = ₹7 for ease of calculation.\\nFirst item is sold at 75% profit: CP1 = SP / 1.75 = 7 / (7/4) = ₹4\\nProfit on first item = 7 - 4 = ₹3\\nSince there is no overall profit or loss, loss on second item must be ₹3.\\nCost price of second item CP2 = SP + Loss = 7 + 3 = ₹10\\nLoss percentage on second item = (Loss / CP2) × 100 = (3 / 10) × 100 = 30%"
+  },
+  {
+    "q_hi": "Q103. किसी व्यक्ति ने ₹900 में एक स्वेटर बेचा जिससे उसे 4% की हानि हुई। उसने ₹860 में एक ट्राउजर भी बेचा जिससे उसे 25% का लाभ हुआ। उसका नेट लाभ ज्ञात कीजिए।",
+    "q_en": "Q103. A person sold a sweater for ₹900, incurring a loss of 4%. He also sold a trouser for ₹860, making a profit of 25%. Find his net profit.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Type II (Net Profit/Loss on Multiple Items)",
+    "o_hi": [
+      "(a) 129.50",
+      "(b) 134.50",
+      "(c) 149.50",
+      "(d) 139.50"
+    ],
+    "o_en": [
+      "(a) 129.50",
+      "(b) 134.50",
+      "(c) 149.50",
+      "(d) 139.50"
+    ],
+    "a": 1,
+    "e_hi": "स्वेटर का क्रय मूल्य = 900 / (1 - 0.04) = 900 / 0.96 = ₹937.50\\nस्वेटर पर हानि = 937.50 - 900 = ₹37.50\\nट्राउजर का क्रय मूल्य = 860 / (1 + 0.25) = 860 / 1.25 = ₹688\\nट्राउजर पर लाभ = 860 - 688 = ₹172\\nकुल शुद्ध (नेट) लाभ = 172 - 37.50 = ₹134.50",
+    "e_en": "Cost price of sweater = 900 / (1 - 0.04) = 900 / 0.96 = ₹937.50\\nLoss on sweater = 937.50 - 900 = ₹37.50\\nCost price of trouser = 860 / (1 + 0.25) = 860 / 1.25 = ₹688\\nProfit on trouser = 860 - 688 = ₹172\\nNet profit = 172 - 37.50 = ₹134.50"
+  },
+  {
+    "q_hi": "Q104. एक वस्तु को 20% लाभ पर बेचा जाता है। इसका विक्रय मूल्य ₹40 कम कर देने पर विक्रेता को 10% की हानि होती है। वस्तु का क्रय मूल्य (दशमलव के 2 स्थानों तक पूर्णांकित) ज्ञात कीजिए।",
+    "q_en": "Q104. An article is sold at a profit of 20%. By reducing its selling price by ₹40, the seller incurs a loss of 10%. Find the cost price of the article (rounded to 2 decimal places).",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Type III (Change in SP & Resulting Profit/Loss)",
+    "o_hi": [
+      "(a) ₹100.24",
+      "(b) 124.63",
+      "(c) 133.33",
+      "(d) 80.44"
+    ],
+    "o_en": [
+      "(a) ₹100.24",
+      "(b) 124.63",
+      "(c) 133.33",
+      "(d) 80.44"
+    ],
+    "a": 2,
+    "e_hi": "माना क्रय मूल्य = CP\\nप्रारंभिक SP = 120% of CP\\nनया SP = 90% of CP\\nप्रतिशत अंतर = 120% - 90% = 30% of CP\\n30% of CP = ₹40\\nCP = 40 × (100 / 30) = 400 / 3 = ₹133.33",
+    "e_en": "Let cost price = CP\\nInitial SP = 120% of CP\\nNew SP = 90% of CP\\nPercentage difference = 120% - 90% = 30% of CP\\n30% of CP = ₹40\\nCP = 40 × (100 / 30) = 400 / 3 = ₹133.33"
+  },
+  {
+    "q_hi": "Q105. मोहित, रमन को 8% के लाभ पर एक घड़ी बेचता है और रमन इसे करण को 5% की हानि पर बेचता है। यदि करण इसके लिए ₹1,710 का भुगतान करता है, तो मोहित ने इसे कितने मूल्य पर खरीदा था? (अपने उत्तर को निकटतम पूर्णांक तक पूर्णांकित कीजिए।)",
+    "q_en": "Q105. Mohit sells a watch to Raman at a profit of 8% and Raman sells it to Karan at a loss of 5%. If Karan pays ₹1,710 for it, at what price did Mohit purchase it? (Round your answer to the nearest integer.)",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Type IV (Successive Transactions / Chain Sale)",
+    "o_hi": [
+      "(a) 1,617",
+      "(b) ₹1,667",
+      "(c) ₹1,697",
+      "(d) 1,637"
+    ],
+    "o_en": [
+      "(a) 1,617",
+      "(b) ₹1,667",
+      "(c) ₹1,697",
+      "(d) 1,637"
+    ],
+    "a": 1,
+    "e_hi": "माना मोहित का क्रय मूल्य = P\\nP × (108 / 100) × (95 / 100) = 1710\\nP × 1.08 × 0.95 = 1710\\nP × 1.026 = 1710\\nP = 1710 / 1.026 = 1710000 / 1026 ≈ ₹1,666.67 ≈ ₹1,667",
+    "e_en": "Let Mohit's cost price = P\\nP × (108 / 100) × (95 / 100) = 1710\\nP × 1.08 × 0.95 = 1710\\nP × 1.026 = 1710\\nP = 1710 / 1.026 = 1710000 / 1026 ≈ ₹1,666.67 ≈ ₹1,667"
+  },
+  {
+    "q_hi": "Q106. एक दुकानदार ₹40 में 5 पेन की दर से 240 पेन खरीदता है और उन्हें ₹44 में 4 पेन की दर से बेचता है। दुकानदार द्वारा अर्जित लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q106. A shopkeeper buys 240 pens at the rate of 5 pens for ₹40 and sells them at the rate of 4 pens for ₹44. Find the profit percentage earned by the shopkeeper.",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-03)",
+    "type_tag": "Type V (Article & Price Based Profit %)",
+    "o_hi": [
+      "(a) 30%",
+      "(b) 37.5%",
+      "(c) 32.5%",
+      "(d) 35%"
+    ],
+    "o_en": [
+      "(a) 30%",
+      "(b) 37.5%",
+      "(c) 32.5%",
+      "(d) 35%"
+    ],
+    "a": 1,
+    "e_hi": "1 पेन का क्रय मूल्य (CP) = 40 / 5 = ₹8\\n1 पेन का विक्रय मूल्य (SP) = 44 / 4 = ₹11\\nलाभ = SP - CP = 11 - 8 = ₹3\\nलाभ प्रतिशत = (3 / 8) × 100 = 37.5%",
+    "e_en": "Cost price (CP) of 1 pen = 40 / 5 = ₹8\\nSelling price (SP) of 1 pen = 44 / 4 = ₹11\\nProfit = SP - CP = 11 - 8 = ₹3\\nProfit percentage = (3 / 8) × 100 = 37.5%"
+  },
+  {
+    "q_hi": "Q107. किसी वस्तु के क्रय मूल्य में 10% की वृद्धि होती है, और दुकानदार वस्तु को बेचकर इस बढ़े हुए क्रय मूल्य पर 15% का लाभ अर्जित करता है। यदि मूल क्रय मूल्य ₹400 था, तो नया विक्रय मूल्य (₹ में) ज्ञात कीजिए।",
+    "q_en": "Q107. The cost price of an article increases by 10%, and the shopkeeper earns a profit of 15% on this increased cost price by selling the article. If the original cost price was ₹400, find the new selling price (in ₹).",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Type VI (Increased CP and New SP)",
+    "o_hi": [
+      "(a) 512",
+      "(b) 482",
+      "(c) 506",
+      "(d) 498"
+    ],
+    "o_en": [
+      "(a) 512",
+      "(b) 482",
+      "(c) 506",
+      "(d) 498"
+    ],
+    "a": 2,
+    "e_hi": "मूल क्रय मूल्य = ₹400\\nबढ़ा हुआ क्रय मूल्य = 400 × 1.10 = ₹440\\nनया विक्रय मूल्य = 440 × 1.15 = 440 + 66 = ₹506",
+    "e_en": "Original cost price = ₹400\\nIncreased cost price = 400 × 1.10 = ₹440\\nNew selling price = 440 × 1.15 = 440 + 66 = ₹506"
+  },
+  {
+    "q_hi": "Q108. आनंद ₹600 में एक वस्तु खरीदता है और उसे चरण को 25% लाभ पर बेचता है। फिर चरण उसे राकेश को बेचता है, और आनंद को भुगतान की गई राशि पर 20% लाभ अर्जित करता है। राकेश, चरण को कितनी राशि का भुगतान करता है?",
+    "q_en": "Q108. Anand buys an article for ₹600 and sells it to Charan at 25% profit. Then Charan sells it to Rakesh, earning a profit of 20% on the amount paid to Anand. How much amount does Rakesh pay to Charan?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-02)",
+    "type_tag": "Type IV (Successive Transactions / Chain Sale)",
+    "o_hi": [
+      "(a) ₹900",
+      "(b) 850",
+      "(c) ₹800",
+      "(d) 910"
+    ],
+    "o_en": [
+      "(a) ₹900",
+      "(b) 850",
+      "(c) ₹800",
+      "(d) 910"
+    ],
+    "a": 0,
+    "e_hi": "आनंद का क्रय मूल्य = ₹600\\nचरण का क्रय मूल्य = 600 × 1.25 = ₹750\\nराकेश द्वारा किया गया भुगतान = 750 × 1.20 = ₹900",
+    "e_en": "Anand's cost price = ₹600\\nCharan's purchase price = 600 × 1.25 = ₹750\\nAmount paid by Rakesh = 750 × 1.20 = ₹900"
+  },
+  {
+    "q_hi": "Q109. किसी वस्तु को ₹113 में बेचने पर एक व्यक्ति को 30% की हानि होती है। 40% का लाभ प्राप्त करने के लिए उसे वस्तु को किस मूल्य (₹ में) पर बेचना चाहिए?",
+    "q_en": "Q109. By selling an article for ₹113, a person incurs a loss of 30%. At what price (in ₹) should he sell the article to gain a profit of 40%?",
+    "tag": "RRB Tech G-III, 07/10/2026 (Shift-01)",
+    "type_tag": "Type VII (Finding Desired SP for Given Profit)",
+    "o_hi": [
+      "(a) 246",
+      "(b) 216",
+      "(c) 236",
+      "(d) 226"
+    ],
+    "o_en": [
+      "(a) 246",
+      "(b) 216",
+      "(c) 236",
+      "(d) 226"
+    ],
+    "a": 3,
+    "e_hi": "30% हानि पर SP = (100 - 30)% = 70% of CP\\n70% of CP = ₹113\\n40% लाभ के लिए नया SP = 140% of CP\\nनया SP = 113 × (140 / 70) = 113 × 2 = ₹226",
+    "e_en": "SP at 30% loss = (100 - 30)% = 70% of CP\\n70% of CP = ₹113\\nNew SP for 40% profit = 140% of CP\\nNew SP = 113 × (140 / 70) = 113 × 2 = ₹226"
+  },
+  {
+    "q_hi": "Q110. राहुल ₹2,100 में एक कलाई घड़ी बेचता है जिससे उसे 25% की हानि होती है। 30% का लाभ अर्जित करने के लिए राहुल को इसे किस मूल्य पर बेचना चाहिए?",
+    "q_en": "Q110. Rahul sells a wrist watch for ₹2,100, incurring a loss of 25%. At what price should Rahul sell it to earn a profit of 30%?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Type VII (Finding Desired SP for Given Profit)",
+    "o_hi": [
+      "(a) ₹3,240",
+      "(b) ₹3,040",
+      "(c) ₹3,640",
+      "(d) ₹3,540"
+    ],
+    "o_en": [
+      "(a) ₹3,240",
+      "(b) ₹3,040",
+      "(c) ₹3,640",
+      "(d) ₹3,540"
+    ],
+    "a": 2,
+    "e_hi": "75% of CP = ₹2100\\nCP = 2100 / 0.75 = ₹2800\\n30% लाभ पर नया SP = 2800 × 1.30 = ₹3,640",
+    "e_en": "75% of CP = ₹2100\\nCP = 2100 / 0.75 = ₹2800\\nNew SP at 30% profit = 2800 × 1.30 = ₹3,640"
+  },
+  {
+    "q_hi": "Q111. एक दुकानदार कुल ₹12,000 में 6 एकसमान मोबाइल फोन खरीदता है। इसके पश्चात वह उनमें से 2 मोबाइल फोन को कुल ₹10,000 में बेच देता है। बेचे गए फोनों पर उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q111. A shopkeeper buys 6 identical mobile phones for a total of ₹12,000. Thereafter, he sells 2 of those mobile phones for a total of ₹10,000. Find his profit percentage on the phones sold.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Type VIII (Group Purchases & Partial Sales)",
+    "o_hi": [
+      "(a) 150%",
+      "(b) 152%",
+      "(c) 153%",
+      "(d) 148%"
+    ],
+    "o_en": [
+      "(a) 150%",
+      "(b) 152%",
+      "(c) 153%",
+      "(d) 148%"
+    ],
+    "a": 0,
+    "e_hi": "6 मोबाइलों का क्रय मूल्य = ₹12,000 ⇒ 1 मोबाइल का CP = ₹2,000\\n2 मोबाइलों का क्रय मूल्य = 2 × 2000 = ₹4,000\\n2 मोबाइलों का विक्रय मूल्य = ₹10,000\\nलाभ = 10000 - 4000 = ₹6,000\\nलाभ प्रतिशत = (6000 / 4000) × 100 = 150%",
+    "e_en": "Cost price of 6 mobile phones = ₹12,000 ⇒ CP of 1 mobile = ₹2,000\\nCost price of 2 mobile phones = 2 × 2000 = ₹4,000\\nSelling price of 2 mobile phones = ₹10,000\\nProfit = 10000 - 4000 = ₹6,000\\nProfit percentage = (6000 / 4000) × 100 = 150%"
+  },
+  {
+    "q_hi": "Q112. जाह्नवी, ₹374 में एक खिलौना खरीदती है, उसकी सजावट पर ₹11 व्यय करती है और खिलौने को ₹140 में बेच देती है। उसका हानि या लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q112. Jahnvi buys a toy for ₹374, spends ₹11 on its decoration, and sells the toy for ₹140. Find her loss or profit percentage.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type IX (Overhead Expenses & Loss %)",
+    "o_hi": [
+      "(a) 700% हानि",
+      "(b) $\\frac{710}{11}\\%$ लाभ",
+      "(c) $\\frac{700}{11}\\%$ हानि",
+      "(d) $\\frac{700}{11}\\%$ लाभ"
+    ],
+    "o_en": [
+      "(a) 700% Loss",
+      "(b) $\\frac{710}{11}\\%$ Profit",
+      "(c) $\\frac{700}{11}\\%$ Loss",
+      "(d) $\\frac{700}{11}\\%$ Profit"
+    ],
+    "a": 2,
+    "e_hi": "कुल क्रय मूल्य = 374 + 11 = ₹385\\nविक्रय मूल्य = ₹140\\nहानि = 385 - 140 = ₹245\\nहानि प्रतिशत = (245 / 385) × 100 = (35 / 55) × 100 = (7 / 11) × 100 = $\\frac{700}{11}\\%$ हानि",
+    "e_en": "Total cost price = 374 + 11 = ₹385\\nSelling price = ₹140\\nLoss = 385 - 140 = ₹245\\nLoss percentage = (245 / 385) × 100 = (35 / 55) × 100 = (7 / 11) × 100 = $\\frac{700}{11}\\%$ Loss"
+  },
+  {
+    "q_hi": "Q113. एक दुकानदार कुल ₹30,000 में 6 एकसमान मोबाइल फोन खरीदता है। इसके पश्चात वह उनमें से 2 मोबाइल फोनों को कुल ₹19,000 में बेच देता है। बेचे गए फोनों पर उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q113. A shopkeeper buys 6 identical mobile phones for a total of ₹30,000. Thereafter, he sells 2 of those mobile phones for a total of ₹19,000. Find his profit percentage on the phones sold.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Type VIII (Group Purchases & Partial Sales)",
+    "o_hi": [
+      "(a) 88%",
+      "(b) 90%",
+      "(c) 91%",
+      "(d) 89%"
+    ],
+    "o_en": [
+      "(a) 88%",
+      "(b) 90%",
+      "(c) 91%",
+      "(d) 89%"
+    ],
+    "a": 1,
+    "e_hi": "6 मोबाइलों का क्रय मूल्य = ₹30,000 ⇒ 2 मोबाइलों का CP = ₹10,000\\n2 मोबाइलों का विक्रय मूल्य = ₹19,000\\nलाभ = 19000 - 10000 = ₹9,000\\nलाभ प्रतिशत = (9000 / 10000) × 100 = 90%",
+    "e_en": "Cost price of 6 mobile phones = ₹30,000 ⇒ CP of 2 mobile phones = ₹10,000\\nSelling price of 2 mobile phones = ₹19,000\\nProfit = 19000 - 10000 = ₹9,000\\nProfit percentage = (9000 / 10000) × 100 = 90%"
+  },
+  {
+    "q_hi": "Q114. किसी दुकानदार ने ₹3600 में एक शर्ट बेचकर 20% का लाभ अर्जित किया। शर्ट का क्रय मूल्य कितना था?",
+    "q_en": "Q114. A shopkeeper earned a profit of 20% by selling a shirt for ₹3600. What was the cost price of the shirt?",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-03)",
+    "type_tag": "Type X (Basic Cost Price Calculation)",
+    "o_hi": [
+      "(a) ₹3000",
+      "(b) 2800",
+      "(c) 3200",
+      "(d) 2880"
+    ],
+    "o_en": [
+      "(a) ₹3000",
+      "(b) 2800",
+      "(c) 3200",
+      "(d) 2880"
+    ],
+    "a": 0,
+    "e_hi": "क्रय मूल्य CP = SP / (1 + Profit%) = 3600 / 1.20 = ₹3,000",
+    "e_en": "Cost price CP = SP / (1 + Profit%) = 3600 / 1.20 = ₹3,000"
+  },
+  {
+    "q_hi": "Q115. रोहित ने ₹30,000 में एक लैपटॉप खरीदा। उसने इसे अमन को 20% लाभ पर बेच दिया। अमन ने इसे सुरेश को 10% हानि पर बेच दिया। सुरेश ने लैपटॉप किस मूल्य पर खरीदा?",
+    "q_en": "Q115. Rohit bought a laptop for ₹30,000. He sold it to Aman at 20% profit. Aman sold it to Suresh at 10% loss. At what price did Suresh buy the laptop?",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-01)",
+    "type_tag": "Type IV (Successive Transactions / Chain Sale)",
+    "o_hi": [
+      "(a) 33,500",
+      "(b) ₹30,000",
+      "(c) 32,400",
+      "(d) ₹31,600"
+    ],
+    "o_en": [
+      "(a) 33,500",
+      "(b) ₹30,000",
+      "(c) 32,400",
+      "(d) ₹31,600"
+    ],
+    "a": 2,
+    "e_hi": "रोहित का क्रय मूल्य = ₹30,000\\nअमन का क्रय मूल्य = 30000 × 1.20 = ₹36,000\\nसुरेश का क्रय मूल्य = 36000 × 0.90 = ₹32,400",
+    "e_en": "Rohit's cost price = ₹30,000\\nAman's purchase price = 30000 × 1.20 = ₹36,000\\nSuresh's purchase price = 36000 × 0.90 = ₹32,400"
+  },
+  {
+    "q_hi": "Q116. एक दुकानदार ₹20 प्रति नोटबुक की दर से 15 नोटबुक खरीदता है और उन सभी को कुल ₹360 में बेचता है। उसका लाभ या हानि प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q116. A shopkeeper buys 15 notebooks at ₹20 per notebook and sells all of them for a total of ₹360. Find his profit or loss percentage.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-03)",
+    "type_tag": "Type XI (Total Profit/Loss Percentage)",
+    "o_hi": [
+      "(a) 20% की हानि",
+      "(b) 25% का लाभ",
+      "(c) 15% की हानि",
+      "(d) 20% का लाभ"
+    ],
+    "o_en": [
+      "(a) 20% Loss",
+      "(b) 25% Profit",
+      "(c) 15% Loss",
+      "(d) 20% Profit"
+    ],
+    "a": 3,
+    "e_hi": "कुल क्रय मूल्य CP = 15 × 20 = ₹300\\nकुल विक्रय मूल्य SP = ₹360\\nलाभ = 360 - 300 = ₹60\\nलाभ प्रतिशत = (60 / 300) × 100 = 20% का लाभ",
+    "e_en": "Total cost price CP = 15 × 20 = ₹300\\nTotal selling price SP = ₹360\\nProfit = 360 - 300 = ₹60\\nProfit percentage = (60 / 300) × 100 = 20% Profit"
+  },
+  {
+    "q_hi": "Q117. राम ₹2,850 में एक घड़ी खरीदता है और उसे 5% लाभ पर बेच देता है। घड़ी का विक्रय मूल्य ज्ञात कीजिए।",
+    "q_en": "Q117. Ram buys a watch for ₹2,850 and sells it at a profit of 5%. Find the selling price of the watch.",
+    "tag": "RRB Tech G-III, 06/10/2026 (Shift-01)",
+    "type_tag": "Type XII (Basic Selling Price Calculation)",
+    "o_hi": [
+      "(a) 2,938.80",
+      "(b) ₹2,992.50",
+      "(c) ₹2,924.60",
+      "(d) ₹2,982.70"
+    ],
+    "o_en": [
+      "(a) 2,938.80",
+      "(b) ₹2,992.50",
+      "(c) ₹2,924.60",
+      "(d) ₹2,982.70"
+    ],
+    "a": 1,
+    "e_hi": "विक्रय मूल्य SP = CP × (1 + Profit%) = 2850 × 1.05 = ₹2,992.50",
+    "e_en": "Selling price SP = CP × (1 + Profit%) = 2850 × 1.05 = ₹2,992.50"
+  },
+  {
+    "q_hi": "Q118. अली ने किसी वस्तु को ₹6400 में बेचा। यदि वस्तु का क्रय मूल्य ₹5600 था, तो अली द्वारा अर्जित लाभ प्रतिशत ज्ञात कीजिए।",
+    "q_en": "Q118. Ali sold an article for ₹6400. If the cost price of the article was ₹5600, find the profit percentage earned by Ali.",
+    "tag": "RRB Tech G-III, 08/10/2026 (Shift-02)",
+    "type_tag": "Type XI (Total Profit/Loss Percentage)",
+    "o_hi": [
+      "(a) 14%",
+      "(b) $15\\frac{1}{7}\\%$",
+      "(c) $14\\frac{2}{7}\\%$",
+      "(d) 15%"
+    ],
+    "o_en": [
+      "(a) 14%",
+      "(b) $15\\frac{1}{7}\\%$",
+      "(c) $14\\frac{2}{7}\\%$",
+      "(d) 15%"
+    ],
+    "a": 2,
+    "e_hi": "लाभ = 6400 - 5600 = ₹800\\nलाभ प्रतिशत = (800 / 5600) × 100 = (1 / 7) × 100 = $14\\frac{2}{7}\\%$",
+    "e_en": "Profit = 6400 - 5600 = ₹800\\nProfit percentage = (800 / 5600) × 100 = (1 / 7) × 100 = $14\\frac{2}{7}\\%$ "
+  },
+  {
+    "q_hi": "Q119. एक वस्तु का क्रय मूल्य ₹800 है। इसे 15% के लाभ पर बेचा जाता है। वस्तु का विक्रय मूल्य ज्ञात कीजिए।",
+    "q_en": "Q119. The cost price of an article is ₹800. It is sold at a profit of 15%. Find the selling price of the article.",
+    "tag": "RRB Tech G-III, 09/10/2026 (Shift-01)",
+    "type_tag": "Type XII (Basic Selling Price Calculation)",
+    "o_hi": [
+      "(a) 900",
+      "(b) ₹880",
+      "(c) 920",
+      "(d) 850"
+    ],
+    "o_en": [
+      "(a) 900",
+      "(b) ₹880",
+      "(c) 920",
+      "(d) 850"
+    ],
+    "a": 2,
+    "e_hi": "विक्रय मूल्य SP = 800 × 1.15 = ₹920",
+    "e_en": "Selling price SP = 800 × 1.15 = ₹920"
+  }
+];
