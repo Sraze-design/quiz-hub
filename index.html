@@ -608,6 +608,34 @@ body {
   line-height: 1.25;
   color: rgba(255,255,255,0.55);
   overflow-wrap: anywhere;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: width .16s ease, background-color .16s ease;
+}
+.quiz-type-label:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.72);
+  outline-offset: 2px;
+}
+.quiz-type-label.is-collapsed {
+  width: 44px;
+  height: 20px;
+  min-height: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  white-space: nowrap;
+}
+.quiz-type-label.is-collapsed::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 4px;
+  margin: 8px 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.62);
 }
 .quiz-top-bar-right {
   display: flex;
@@ -2518,6 +2546,7 @@ body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay
 </style>
 <script>
 let quizMode = 'practice';
+let quizTypeCollapsed = false;
 let examActive = false, examDuration = 0, examElapsedMs = 0, examLastTick = 0;
 let examQuestionMs = [], examVisited = [], examReview = [];
 let modePickerResolve = null, modePickerChoice = null, modePickerClosing = false, modePickerUsesHistory = true;
@@ -3976,6 +4005,7 @@ async function openBookmarkedQuestion(bookmark){
       item = JSON.parse(JSON.stringify(quizQuestions[bookmark.questionIndex]));
     }
     if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
+    quizTypeCollapsed=false;
     data=[item];
     ORIGINAL_DATA=data.slice();
     appLang='hi';
@@ -4071,6 +4101,7 @@ async function startBookmarkedTestQuiz(bookmarks){
     if(!items.length) throw new Error('Saved questions not found');
 
     if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
+    quizTypeCollapsed=false;
     data=items;
     ORIGINAL_DATA=items.slice();
     appLang='hi';
@@ -5902,6 +5933,7 @@ async function loadQuizData(quizPath, requestedQuestionIndex) {
     isRetestAttempt=false;
     
     if(typeof resetAIForNewTest === 'function') resetAIForNewTest();
+    quizTypeCollapsed=false;
     data=quizQuestions;
     ORIGINAL_DATA=quizQuestions.slice();
 
@@ -6961,6 +6993,20 @@ function applyCompletedAnswerStreak(isCorrect){
   }
 }
 
+function toggleQuizTypeLabel(){
+  if(quizMode!=='practice' || !data.length) return;
+  const typeLabel=document.getElementById('quizTypeLabel');
+  if(!typeLabel || !typeLabel.textContent.trim()) return;
+  quizTypeCollapsed=!quizTypeCollapsed;
+  typeLabel.classList.toggle('is-collapsed',quizTypeCollapsed);
+  typeLabel.setAttribute('aria-expanded',String(!quizTypeCollapsed));
+  const toggleLabel=quizTypeCollapsed
+    ? (appLang==='en'?'Show question type':'प्रश्न का टाइप दिखाएँ')
+    : (appLang==='en'?'Hide question type':'प्रश्न का टाइप छिपाएँ');
+  typeLabel.setAttribute('aria-label',toggleLabel);
+  typeLabel.title=toggleLabel;
+}
+
 function showQ() {
 if(data.length === 0) return;
 
@@ -6975,12 +7021,33 @@ if(quizMainScroller){
 const item = data[currentQ];
 const typeLabel=document.getElementById('quizTypeLabel');
 if(typeLabel){
+  // Bind the toggle once; its collapsed state persists across questions in this test.
+  if(!typeLabel.dataset.typeToggleBound){
+    typeLabel.dataset.typeToggleBound='true';
+    typeLabel.addEventListener('click',toggleQuizTypeLabel);
+    typeLabel.addEventListener('keydown',event=>{
+      if(event.key==='Enter'||event.key===' '){
+        event.preventDefault();
+        toggleQuizTypeLabel();
+      }
+    });
+  }
   // Keep the exam tag separate. Quiz files can provide type_tag (or type),
   // with optional _hi/_en versions for the existing language switch.
   const typeText=T(item,'type_tag') || T(item,'type');
-  const label=quizMode!=='test' && typeof typeText==='string' ? typeText.trim() : '';
+  const label=quizMode==='practice' && typeof typeText==='string' ? typeText.trim() : '';
+  const canToggle=quizMode==='practice' && !!label;
   typeLabel.textContent=label;
   typeLabel.style.display=label ? 'block' : 'none';
+  typeLabel.classList.toggle('is-collapsed',canToggle && quizTypeCollapsed);
+  typeLabel.setAttribute('role',canToggle?'button':'text');
+  typeLabel.tabIndex=canToggle?0:-1;
+  typeLabel.setAttribute('aria-expanded',canToggle?String(!quizTypeCollapsed):'false');
+  const toggleLabel=quizTypeCollapsed
+    ? (appLang==='en'?'Show question type':'प्रश्न का टाइप दिखाएँ')
+    : (appLang==='en'?'Hide question type':'प्रश्न का टाइप छिपाएँ');
+  typeLabel.setAttribute('aria-label',canToggle?toggleLabel:'');
+  typeLabel.title=canToggle?toggleLabel:'';
 }
 updateBookmarkButton();
 const explanationLabel = (appLang === 'en') ? "<b>Explanation:</b> " : "<b>व्याख्या:</b> ";
