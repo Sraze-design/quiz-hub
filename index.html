@@ -893,37 +893,6 @@ body.pencil-mode{
   margin-bottom: 8px;
 }
 
-/* Compact, wrapping source metadata chips for Technician Grade 3 GA only. */
-.exam-tag-badge.exam-tag-badge-ga {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  margin: 6px 0 8px;
-  padding: 0;
-  background: transparent;
-}
-.exam-tag-badge-ga .exam-tag-chip {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  padding: 4px 8px;
-  border: 1px solid #e2e8f0;
-  border-radius: 7px;
-  background: #f1f5f9;
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.35;
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-
 .ai-mixed-frac {
   display: inline-flex;
   flex-direction: column;
@@ -7169,28 +7138,7 @@ if(directionBox){
 renderQuestionContent(document.getElementById('q-text'), item);
 const tagBox=document.getElementById('exam-tag');
 const tagText = T(item, 'tag');
-const isTechnicianGATest=/(^|\/)Technician_Grade_3\/GA(\/|$)/i.test(String(currentQuizPath||''));
-if(tagBox && tagText){
-  if(isTechnicianGATest){
-    tagBox.className='exam-tag-badge exam-tag-badge-ga';
-    const tagParts=String(tagText).split('|').map(part=>part.trim()).filter(Boolean);
-    tagBox.replaceChildren();
-    tagParts.forEach(part=>{
-      const chip=document.createElement('span');
-      chip.className='exam-tag-chip';
-      chip.textContent=part;
-      tagBox.appendChild(chip);
-    });
-  }else{
-    tagBox.className='exam-tag-badge';
-    tagBox.innerHTML=formatContent(tagText);
-  }
-  tagBox.style.display='block';
-}else if(tagBox){
-  tagBox.className='exam-tag-badge';
-  tagBox.innerText='';
-  tagBox.style.display='none';
-}
+if(tagText){tagBox.innerHTML=formatContent(tagText);tagBox.style.display='block';}else{tagBox.innerText='';tagBox.style.display='none';}
 let oBox = document.getElementById('options');
 oBox.innerHTML = "";
 document.getElementById('feedback').style.display = "none";
