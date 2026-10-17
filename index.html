@@ -3451,6 +3451,7 @@ let allFlattenedQuizzes = [];
 let currentSubject = null;
 let currentCategory = null;
 let currentChapter = null;
+let currentScienceGroup = null;
 let currentQuizTitle = "";
 /* Leaderboard API integration (added) */
 const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
@@ -4564,7 +4565,7 @@ window.addEventListener('popstate', (e) => {
         renderCategories(state.subject);
         break;
       case 'chapters':
-        renderChapters(state.subject, state.category);
+        renderChapters(state.subject, state.category, state.scienceGroup);
         break;
       case 'quizlist':
       case 'quiz':
@@ -4662,6 +4663,7 @@ function renderCategories(subjectName) {
   currentSubject = subjectName;
   currentCategory = null;
   currentChapter = null;
+  currentScienceGroup = null;
   pushExplorerHistory({ screen: 'categories', subject: subjectName });
 
   showLoader(false);
@@ -4717,12 +4719,18 @@ function renderCategories(subjectName) {
   });
 }
 
-function renderChapters(subjectName, categoryName) {
+function renderChapters(subjectName, categoryName, scienceGroup = null) {
   restoreNormalExplorerSearch();
   currentSubject = subjectName;
   currentCategory = categoryName || null;
   currentChapter = null;
-  pushExplorerHistory({ screen: 'chapters', subject: subjectName, category: categoryName || null });
+  currentScienceGroup = scienceGroup || null;
+  pushExplorerHistory({
+    screen: 'chapters',
+    subject: subjectName,
+    category: categoryName || null,
+    scienceGroup: scienceGroup || null
+  });
 
   showLoader(false);
   hideError();
@@ -4735,18 +4743,6 @@ function renderChapters(subjectName, categoryName) {
   listEl.innerHTML = "";
   dynamicHeaderArea.style.display = "none";
   actionBar.style.display = "flex";
-  explorerTitle.innerText = cleanHumanReadableTitle(categoryName || subjectName);
-
-  const heroBanner = document.createElement('div');
-  heroBanner.className = 'subject-hero-banner';
-  heroBanner.innerHTML = `
-    <div class="hero-icon-container">📚</div>
-    <div class="hero-text-container">
-      <h4>${cleanHumanReadableTitle(categoryName || subjectName)} Dashboard</h4>
-      <p>Prepare efficiently with systematically curated mock exams.</p>
-    </div>
-  `;
-  listEl.appendChild(heroBanner);
 
   let subjectQuizzes = allFlattenedQuizzes.filter(q => q.subject === subjectName);
   if (categoryName) {
@@ -4754,6 +4750,73 @@ function renderChapters(subjectName, categoryName) {
   } else {
     subjectQuizzes = subjectQuizzes.filter(q => q.category === null || q.category === undefined);
   }
+
+  // Technician Grade 3 Science has one extra folder level (Biology/Chemistry).
+  // Show that level as folders instead of mixing every chapter into one long list.
+  const isTechnicianScience = subjectName === "Technician_Grade_3" && categoryName === "Science";
+  if (isTechnicianScience && !scienceGroup) {
+    const scienceGroups = [...new Set(subjectQuizzes
+      .filter(q => String(q.path || "").startsWith("Technician_Grade_3/Science/"))
+      .map(q => String(q.path).split("/")[2])
+      .filter(Boolean))];
+
+    if (scienceGroups.length > 0) {
+      explorerTitle.innerText = cleanHumanReadableTitle(categoryName);
+
+      const heroBanner = document.createElement('div');
+      heroBanner.className = 'subject-hero-banner';
+      heroBanner.innerHTML =
+        '<div class="hero-icon-container">📚</div>' +
+        '<div class="hero-text-container">' +
+          '<h4>Science Categories</h4>' +
+          '<p>Select Biology or Chemistry to explore chapters and tests.</p>' +
+        '</div>';
+      listEl.appendChild(heroBanner);
+
+      scienceGroups.forEach(groupName => {
+        const groupQuizzes = subjectQuizzes.filter(q =>
+          String(q.path || "").split("/")[2] === groupName
+        );
+        const chapterCount = new Set(groupQuizzes.map(q => q.chapter)).size;
+
+        const card = document.createElement('div');
+        card.className = 'premium-card';
+        card.innerHTML =
+          '<div class="card-meta-box">' +
+            '<div class="card-icon-wrapper" style="background-color: var(--primary-light); color: var(--primary);">📁</div>' +
+            '<div class="card-details">' +
+              '<span class="card-main-title">' + cleanHumanReadableTitle(groupName) + '</span>' +
+              '<span class="card-subtitle-stats">' + chapterCount + ' Chapters • ' + groupQuizzes.length + ' Tests</span>' +
+            '</div>' +
+          '</div>' +
+          '<span class="premium-arrow-action">➜</span>';
+        card.onclick = () => renderChapters(subjectName, categoryName, groupName);
+        listEl.appendChild(card);
+      });
+      return;
+    }
+  }
+
+  if (scienceGroup) {
+    subjectQuizzes = subjectQuizzes.filter(q =>
+      String(q.path || "").startsWith("Technician_Grade_3/Science/" + scienceGroup + "/")
+    );
+  }
+
+  const displayHeading = scienceGroup || categoryName || subjectName;
+  explorerTitle.innerText = cleanHumanReadableTitle(displayHeading);
+
+  const heroBanner = document.createElement('div');
+  heroBanner.className = 'subject-hero-banner';
+  heroBanner.innerHTML =
+    '<div class="hero-icon-container">📚</div>' +
+    '<div class="hero-text-container">' +
+      '<h4>' + cleanHumanReadableTitle(displayHeading) + ' Dashboard</h4>' +
+      '<p>' + (scienceGroup
+        ? 'Select a chapter to explore topic-wise tests.'
+        : 'Prepare efficiently with systematically curated mock exams.') + '</p>' +
+    '</div>';
+  listEl.appendChild(heroBanner);
 
   const chapters = [...new Set(subjectQuizzes.map(q => q.chapter))];
 
@@ -4764,19 +4827,30 @@ function renderChapters(subjectName, categoryName) {
 
   chapters.forEach(chapterName => {
     const chapterQuizzes = subjectQuizzes.filter(q => q.chapter === chapterName);
+    let displayChapterTitle = cleanHumanReadableTitle(chapterName);
+
+    if (scienceGroup) {
+      const prefix = scienceGroup + " - ";
+      const chapterLabel = chapterName.startsWith(prefix)
+        ? chapterName.slice(prefix.length)
+        : chapterName;
+      const numberedTitle = chapterLabel.match(/^(\d+)[_.\s-]+(.+)$/);
+      displayChapterTitle = numberedTitle
+        ? numberedTitle[1] + " " + cleanHumanReadableTitle(numberedTitle[2])
+        : cleanHumanReadableTitle(chapterLabel);
+    }
 
     const card = document.createElement('div');
     card.className = 'premium-card';
-    card.innerHTML = `
-      <div class="card-meta-box">
-        <div class="card-icon-wrapper" style="background-color: var(--success-light); color: var(--success);">📁</div>
-        <div class="card-details">
-          <span class="card-main-title">${cleanHumanReadableTitle(chapterName)}</span>
-          <span class="card-subtitle-stats">${chapterQuizzes.length} Available Tests Series</span>
-        </div>
-      </div>
-      <span class="premium-arrow-action">➜</span>
-    `;
+    card.innerHTML =
+      '<div class="card-meta-box">' +
+        '<div class="card-icon-wrapper" style="background-color: var(--success-light); color: var(--success);">📁</div>' +
+        '<div class="card-details">' +
+          '<span class="card-main-title">' + displayChapterTitle + '</span>' +
+          '<span class="card-subtitle-stats">' + chapterQuizzes.length + ' Available Tests Series</span>' +
+        '</div>' +
+      '</div>' +
+      '<span class="premium-arrow-action">➜</span>';
     card.onclick = () => renderQuizList(subjectName, categoryName, chapterName);
     listEl.appendChild(card);
   });
@@ -4843,7 +4917,7 @@ function handleSearch(query) {
     if (currentChapter && currentSubject) {
       renderQuizList(currentSubject, currentCategory, currentChapter);
     } else if (currentCategory && currentSubject) {
-      renderChapters(currentSubject, currentCategory);
+      renderChapters(currentSubject, currentCategory, currentScienceGroup);
     } else if (currentSubject) {
       const subjectQuizzes = allFlattenedQuizzes.filter(q => q.subject === currentSubject);
       const hasCategories = subjectQuizzes.some(q => q.category !== null && q.category !== undefined);
