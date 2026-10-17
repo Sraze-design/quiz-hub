@@ -4834,10 +4834,8 @@ function renderChapters(subjectName, categoryName, scienceGroup = null) {
       const chapterLabel = chapterName.startsWith(prefix)
         ? chapterName.slice(prefix.length)
         : chapterName;
-      const numberedTitle = chapterLabel.match(/^(\d+)[_.\s-]+(.+)$/);
-      displayChapterTitle = numberedTitle
-        ? numberedTitle[1] + " " + cleanHumanReadableTitle(numberedTitle[2])
-        : cleanHumanReadableTitle(chapterLabel);
+      // Match the existing quiz title behavior: hide the leading chapter number.
+      displayChapterTitle = cleanHumanReadableTitle(chapterLabel);
     }
 
     const card = document.createElement('div');
