@@ -47,6 +47,18 @@ function walk(dir) {
         chapter = parts[2];
       }
 
+      // Technician Grade 3 के Science folders में Biology/Chemistry के अतिरिक्त
+      // folder level को chapter label में जोड़ें, ताकि सभी Science quizzes index हों.
+      else if (
+        parts.length >= 5 &&
+        parts[0] === "Technician_Grade_3" &&
+        parts[1] === "Science"
+      ) {
+        subject = parts[0];
+        category = parts[1];
+        chapter = parts.slice(2, -1).join(" - ");
+      }
+
       // बाकी Structure Ignore
       else {
         continue;
