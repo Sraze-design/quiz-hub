@@ -8335,6 +8335,50 @@ function appendAIErrorWithRescan(message) {
   addAIRescanButton(chatBody?.lastElementChild);
 }
 
+// Normalize math-style HTML tags to readable text before sending question data to the AI
+// and before displaying AI replies. Never render model-provided HTML directly.
+function aiSuperscriptText(value) {
+  const source = String(value ?? '').replace(/<[^>]*>/g, '').trim();
+  const map = { '0':'⁰', '1':'¹', '2':'²', '3':'³', '4':'⁴', '5':'⁵', '6':'⁶', '7':'⁷', '8':'⁸', '9':'⁹', '.':'·', '+':'⁺', '-':'⁻', '−':'⁻', '(':'⁽', ')':'⁾', '=':'⁼' };
+  const chars = Array.from(source);
+  if (!chars.length) return '';
+  if (chars.every(ch => Object.prototype.hasOwnProperty.call(map, ch))) return chars.map(ch => map[ch]).join('');
+  return '^(' + source + ')';
+}
+
+function aiSubscriptText(value) {
+  const source = String(value ?? '').replace(/<[^>]*>/g, '').trim();
+  const map = { '0':'₀', '1':'₁', '2':'₂', '3':'₃', '4':'₄', '5':'₅', '6':'₆', '7':'₇', '8':'₈', '9':'₉', '+':'₊', '-':'₋', '−':'₋', '(':'₍', ')':'₎', '=':'₌' };
+  const chars = Array.from(source);
+  if (!chars.length) return '';
+  if (chars.every(ch => Object.prototype.hasOwnProperty.call(map, ch))) return chars.map(ch => map[ch]).join('');
+  return '_(' + source + ')';
+}
+
+function normalizeAIFormulaMarkup(value) {
+  return String(value ?? '')
+    // Also accept escaped sup/sub tag names if an upstream source encoded them.
+    .replace(/&lt;(\/?)sup\s*&gt;/gi, '<$1sup>')
+    .replace(/&lt;(\/?)sub\s*&gt;/gi, '<$1sub>')
+    .replace(/<sup\b[^>]*>([\s\S]*?)<\/sup\s*>/gi, (_, inner) => aiSuperscriptText(inner))
+    .replace(/<sub\b[^>]*>([\s\S]*?)<\/sub\s*>/gi, (_, inner) => aiSubscriptText(inner));
+}
+
+function aiPlainTextFromHTML(value) {
+  let html = normalizeAIFormulaMarkup(value)
+    .replace(/<br\s*\/?\s*>/gi, '\n')
+    .replace(/<\/(?:p|div|li|tr|h[1-6])\s*>/gi, '\n');
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  doc.querySelectorAll('script,style,iframe,object,embed').forEach(el => el.remove());
+  doc.querySelectorAll('img').forEach(el => el.replaceWith(el.getAttribute('alt') || ''));
+  return String(doc.body?.textContent || '')
+    .replace(/\u00a0/g, ' ')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n[ \t]+/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 function getCurrentQuestionContext() {
   const analysisRecord=typeof getCurrentAnalysisRecord==='function'?getCurrentAnalysisRecord():null;
   if (!analysisRecord && (!data || !data[currentQ])) return null;
@@ -8382,12 +8426,12 @@ function getCurrentQuestionContext() {
   return {
     questionNumber: analysisRecord?analysisRecord.originalIndex+1:currentQ+1,
     totalQuestions: analysisRecord?(resultAnalysisSnapshot?.items?.length||data.length):data.length,
-    questionText: qHtml,
-    options: opts,
-    examTag: T(item, 'tag') || "",
-    correctAnswer: correctOptText,
-    explanation: T(item, 'e') || "",
-    userSelected: selectedOptText,
+    questionText: aiPlainTextFromHTML(qHtml),
+    options: Array.isArray(opts) ? opts.map(aiPlainTextFromHTML) : [],
+    examTag: aiPlainTextFromHTML(T(item, 'tag') || ""),
+    correctAnswer: aiPlainTextFromHTML(correctOptText),
+    explanation: aiPlainTextFromHTML(T(item, 'e') || ''),
+    userSelected: aiPlainTextFromHTML(selectedOptText),
     imageData: (typeof imageSource === 'string' && imageSource.startsWith('data:image/')) ? imageSource : null,
     imageSource: imageSource
   };
@@ -8459,10 +8503,7 @@ ${imageProtocol}5. MIND METHOD (Maths/Reasoning only): Purely mental calculation
 6. SIRF EK solution do, dono ek saath mat dikhao. "Vistrit/Basic Method" sirf explicitly maange jaane par. Response crisp rakho, extra verification steps mat dikhao.
 7. Solution ke end mein 1-2 lines: a) Trick ka naam (jaise "Ye Unitary Method Trick hai") b) General Formula/Shortcut (agar possible ho) is TYPE ke sabhi similar questions ke liye. YE RULE MATHS/REASONING KE LIYE PEHLE KI TARAH HI APPLY HOGA. GK par is Rule ka "Trick ka naam" wala hissa APPLY NAHI HOGA.
 8. GK/Current Affairs/English/Science/History/Polity: Expert GS Teacher ki tarah direct, factual, exam-focused jawab do. Core answer chhota (Rule 3). GK mein "Trick ka naam", "Formula" ya "Shortcut" NAHI dena hai. Sahi answer ki short explanation do aur **baaki sabhi options ko bhi alag-alag 1 chhoti line mein batao ki ve kyun sahi nahi hain/ve kis se sambandhit hain.** Explanation ke poore reply mein sirf important, exam-useful facts, keywords, names, dates, numbers, definitions aur distinctions ko context ke anusaar **bold** karke clearly highlight karo; poore paragraph ya normal text ko bold mat karo. Explanation ke end mein sirf 1 closely-related, exam-useful additional fact do aur use explanation se alag nayi line mein exactly **"👉 रोचक तथ्य:"** label ke saath clearly highlight karo; "रोचक तथ्य" ke andar bhi important information ko **bold** karo. Ye fact question ke main topic se directly related aur exam ke liye useful ho. GK mein koi mnemonic/trick section na jodo. बाकी subjects ke existing behavior ko change mat karo.
-9. Har answer ke SABSE UPAR question+options ${appLang === 'en' ? 'English' : 'Hindi'} mein repeat karo:
-   **${appLang === 'en' ? 'Question:' : 'प्रश्न:'}** [question]
-   (A) [opt1]  (B) [opt2]  (C) [opt3]  (D) [opt4]
-   Uske turant baad solution shuru karo. Ye SABHI subjects pe apply hoga.
+9. सीधे solution से शुरू करो; question aur options ko dobara repeat mat karo. Agar kisi wajah se question ka koi hissa likhna zaroori ho, to raw HTML tags (jaise <sup>, </sup>, <sub>) kabhi output mat karo. Powers ko Unicode superscript mein likho (jaise 113⁰·⁹⁹); agar suitable superscript available na ho to plain caret notation use karo (jaise 113^(0.99)).
 
 Current Question:
 - Q${qContext.questionNumber}/${qContext.totalQuestions} | Tag: ${qContext.examTag}
@@ -8612,14 +8653,14 @@ MATHS/REASONING PRIORITY: For a maths or reasoning question, show the shortest c
       selectedThinking: (document.getElementById("aiThinkingSelect")?.value || AI_DEFAULT_THINKING),
       systemInstruction: {
         parts: [{
-          text: `Reply ONLY in plain Unicode text.
+          text: `Use plain Unicode text for all mathematical expressions; do not use LaTeX math or raw HTML/XML tags.
 
-Never use LaTeX or Markdown math. Use plain Unicode symbols such as × ÷ √ π ≤ ≥ ≠ ± °. Standalone fractions stay like 3/4. Percent uses %.
+Write symbols with Unicode where possible: × ÷ √ π ≤ ≥ ≠ ± °, and use plain-text standalone fractions such as 3/4. Percent uses %. Use Unicode superscripts where practical (for example 113⁰·⁹⁹); if a superscript cannot be written clearly, use plain caret notation such as 113^(0.99). NEVER output raw tags such as <sup>, </sup>, <sub>, or <b>.
 
-MIXED FRACTION EXCEPTION: Only when a whole number is combined with a fraction, e.g. 16 and two-thirds, write the fractional part as \frac{2}{3} immediately after the whole number. Do not use \frac anywhere else.
+MIXED FRACTION EXCEPTION: The ONLY permitted LaTeX command is \\frac, and ONLY for the fractional part of a mixed fraction: e.g. 16\\frac{2}{3}. Keep standalone fractions as plain text (2/3). Do not use any other LaTeX command or use \\frac anywhere else.
 
 FORMATTING:
-- Use Markdown; bold only important words, concepts, formulas, definitions, dates, names, rules, tricks, keywords and the final answer.
+- Selective Markdown bold is allowed only for important words, concepts, formulas, definitions, dates, names, rules, tricks, keywords and the final answer; do not use Markdown math.
 - Keep replies clean, concise, mobile-friendly and exam-focused.
 - Hindi replies must use Devanagari only; never Urdu/Arabic/Persian script.
 
@@ -8645,7 +8686,7 @@ For automatic question explanations, independently solve first, then reconcile w
       const autoExamIndex = data[currentQ].a;
       const autoOptions = T(data[currentQ], 'o') || [];
       if (Number.isInteger(autoExamIndex) && autoExamIndex >= 0 && autoExamIndex < 4) {
-        payload.examExpectedAnswer = autoOptions[autoExamIndex] || '';
+        payload.examExpectedAnswer = aiPlainTextFromHTML(autoOptions[autoExamIndex] || '');
       }
     }
 
@@ -9060,22 +9101,22 @@ function normalizeHindiMixedScript(txt) {
 function formatAIResponseText(txt) {
   if (!txt) return "";
   txt = normalizeHindiMixedScript(txt);
+  // If the model echoes HTML-like math tags, convert known sup/sub tags to Unicode
+  // before escaping all remaining angle brackets for safe display.
+  txt = normalizeAIFormulaMarkup(txt);
   let formatted = txt
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // Mixed-fraction rendering: the model is instructed to write ONLY mixed
-  // fractions (whole number + fraction, e.g. "16" + "2/3") using \frac{a}{b}
-  // right after the whole number — everything else stays plain Unicode text
-  // per the system prompt. Render that specific pattern as a small stacked
-  // fraction (numerator over denominator) instead of showing raw "\frac{2}{3}".
-  // This intentionally only matches \frac{..}{..} — plain "2/3" text and any
-  // other LaTeX the model wasn't supposed to use are left untouched as text.
+  // Render only the permitted mixed-fraction form: whole number immediately
+  // followed by \frac{numerator}{denominator}. A standalone \frac is converted
+  // to plain numerator/denominator text instead of being rendered as LaTeX.
   formatted = formatted.replace(
-    /\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
-    '<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$1</span><span class="ai-mixed-frac-den">$2</span></span>'
+    /(\d+)\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
+    '$1<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$2</span><span class="ai-mixed-frac-den">$3</span></span>'
   );
+  formatted = formatted.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2');
 
   // Safety net: the model sometimes ignores the "plain text only" instruction
   // and wraps things in LaTeX-style "$...$" math delimiters, or writes "\%"
