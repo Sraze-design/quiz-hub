@@ -9161,6 +9161,14 @@ function formatAIResponseText(txt) {
   formatted = formatted.replace(/\\%/g, "%");
   formatted = formatted.replace(/\$\$?([^$]*)\$\$?/g, "$1");
 
+  // Powers written as plain text by the model -> real superscripts on screen.
+  // 113^(0.99) -> 113<sup>0.99</sup>, (a^(m))^(n) -> (a<sup>m</sup>)<sup>n</sup>,
+  // x^{z} and simple x^2 / 2^n / a^-1 are handled too. Input is already HTML-escaped.
+  formatted = formatted.replace(/\^\(([^()]*)\)/g, '<sup>$1</sup>');
+  formatted = formatted.replace(/\^\{([^{}]*)\}/g, '<sup>$1</sup>');
+  formatted = formatted.replace(/([A-Za-z0-9\)\]])\^(-?[A-Za-z0-9]+(?:\.[0-9]+)?)/g, '$1<sup>$2</sup>');
+  formatted = formatted.replace(/([A-Za-z0-9\)\]])_\(([^()]*)\)/g, '$1<sub>$2</sub>');
+
   formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
   formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
