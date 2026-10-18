@@ -8335,48 +8335,80 @@ function appendAIErrorWithRescan(message) {
   addAIRescanButton(chatBody?.lastElementChild);
 }
 
-// Normalize math-style HTML tags to readable text before sending question data to the AI
-// and before displaying AI replies. Never render model-provided HTML directly.
-function aiSuperscriptText(value) {
-  const source = String(value ?? '').replace(/<[^>]*>/g, '').trim();
-  const map = { '0':'⁰', '1':'¹', '2':'²', '3':'³', '4':'⁴', '5':'⁵', '6':'⁶', '7':'⁷', '8':'⁸', '9':'⁹', '.':'·', '+':'⁺', '-':'⁻', '−':'⁻', '(':'⁽', ')':'⁾', '=':'⁼' };
-  const chars = Array.from(source);
-  if (!chars.length) return '';
-  if (chars.every(ch => Object.prototype.hasOwnProperty.call(map, ch))) return chars.map(ch => map[ch]).join('');
-  return '^(' + source + ')';
+// ===== AI plain-Unicode helpers =====
+// Question HTML (<sup>, <sub>, <br>, <img>) -> plain Unicode text for the AI.
+// Integer/sign exponents become real Unicode superscripts (x², 10⁻³);
+// anything Unicode can't show (decimals like 0.99, fractions, letters)
+// becomes ^(...) so 113<sup>0.99</sup> -> 113^(0.99), never raw tags.
+const AI_SUP_MAP = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','+':'⁺','-':'⁻','−':'⁻','=':'⁼','(':'⁽',')':'⁾','n':'ⁿ','i':'ⁱ'};
+const AI_SUB_MAP = {'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉','+':'₊','-':'₋','−':'₋','=':'₌','(':'₍',')':'₎'};
+function aiConvertSupSub(txt) {
+  if (!txt) return "";
+  const conv = (inner, map, sym) => {
+    const t = String(inner).replace(/<[^>]*>/g, '').trim();
+    if (!t) return '';
+    const chars = Array.from(t);
+    if (chars.every(ch => map[ch] !== undefined)) return chars.map(ch => map[ch]).join('');
+    return sym + '(' + t + ')';
+  };
+  return String(txt)
+    .replace(/<sup[^>]*>([\s\S]*?)<\/sup>/gi, (_, x) => conv(x, AI_SUP_MAP, '^'))
+    .replace(/<sub[^>]*>([\s\S]*?)<\/sub>/gi, (_, x) => conv(x, AI_SUB_MAP, '_'));
+}
+function aiHtmlToPlainUnicode(html) {
+  if (html == null) return "";
+  const withSupSub = aiConvertSupSub(html).replace(/<br\s*\/?>/gi, ' ');
+  try {
+    const doc = new DOMParser().parseFromString(withSupSub, 'text/html');
+    doc.querySelectorAll('img,script,style').forEach(n => n.remove());
+    return (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+  } catch (e) {
+    return withSupSub.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  }
 }
 
-function aiSubscriptText(value) {
-  const source = String(value ?? '').replace(/<[^>]*>/g, '').trim();
-  const map = { '0':'₀', '1':'₁', '2':'₂', '3':'₃', '4':'₄', '5':'₅', '6':'₆', '7':'₇', '8':'₈', '9':'₉', '+':'₊', '-':'₋', '−':'₋', '(':'₍', ')':'₎', '=':'₌' };
-  const chars = Array.from(source);
-  if (!chars.length) return '';
-  if (chars.every(ch => Object.prototype.hasOwnProperty.call(map, ch))) return chars.map(ch => map[ch]).join('');
-  return '_(' + source + ')';
+// Fixes LaTeX that got mangled into control characters, e.g. "\times" ->
+// TAB+"imes" (shows as "imes"), "\frac" -> FORMFEED+"rac". Also turns stray
+// LaTeX commands into Unicode. \frac{a}{b} is left alone (mixed fractions).
+const AI_LATEX_WORDS = 'times|text|theta|tan|tau|frac|tfrac|neq|nabla|beta|bar|right|rightarrow|Rightarrow|rho|div|cdot|sqrt|pm|approx|leq|geq|circ|pi|left|sin|cos|infty|therefore|because|implies|Delta|alpha|gamma|lambda|mu|sigma|omega|phi|Omega';
+const AI_LATEX_WORD_RE = new RegExp('(\\\\+)(' + AI_LATEX_WORDS + ')(?![A-Za-z])', 'g');
+// Run on raw JSON text BEFORE JSON.parse: a single "\times" would otherwise be
+// read as TAB+"imes", and "\div" would make JSON.parse fail completely.
+function aiRepairLatexEscapes(raw) {
+  return String(raw || '').replace(AI_LATEX_WORD_RE, (m, bs, w) => (bs.length % 2 === 1 ? bs + '\\' + w : m));
 }
-
-function normalizeAIFormulaMarkup(value) {
-  return String(value ?? '')
-    // Also accept escaped sup/sub tag names if an upstream source encoded them.
-    .replace(/&lt;(\/?)sup\s*&gt;/gi, '<$1sup>')
-    .replace(/&lt;(\/?)sub\s*&gt;/gi, '<$1sub>')
-    .replace(/<sup\b[^>]*>([\s\S]*?)<\/sup\s*>/gi, (_, inner) => aiSuperscriptText(inner))
-    .replace(/<sub\b[^>]*>([\s\S]*?)<\/sub\s*>/gi, (_, inner) => aiSubscriptText(inner));
-}
-
-function aiPlainTextFromHTML(value) {
-  let html = normalizeAIFormulaMarkup(value)
-    .replace(/<br\s*\/?\s*>/gi, '\n')
-    .replace(/<\/(?:p|div|li|tr|h[1-6])\s*>/gi, '\n');
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  doc.querySelectorAll('script,style,iframe,object,embed').forEach(el => el.remove());
-  doc.querySelectorAll('img').forEach(el => el.replaceWith(el.getAttribute('alt') || ''));
-  return String(doc.body?.textContent || '')
-    .replace(/\u00a0/g, ' ')
-    .replace(/[ \t]+\n/g, '\n')
-    .replace(/\n[ \t]+/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
+function aiCleanMathText(txt) {
+  if (!txt) return "";
+  let s = String(txt);
+  // already-corrupted control characters
+  s = s.replace(/\times(?![A-Za-z])/g, '×')
+       .replace(/\text\{([^{}]*)\}/g, '$1')
+       .replace(/\theta(?![A-Za-z])/g, 'θ')
+       .replace(/\x0crac(?=\{)/g, '\\frac')
+       .replace(/\x08eta(?![A-Za-z])/g, 'β')
+       .replace(/\neq(?![A-Za-z])/g, '≠');
+  // literal LaTeX commands
+  s = s.replace(/\\text\{([^{}]*)\}/g, '$1')
+       .replace(/\\sqrt\{([^{}]*)\}/g, '√($1)')
+       .replace(/\\(?:left|right)(?![A-Za-z])\s?/g, '')
+       .replace(/\\times(?![A-Za-z])/g, '×')
+       .replace(/\\div(?![A-Za-z])/g, '÷')
+       .replace(/\\cdot(?![A-Za-z])/g, '·')
+       .replace(/\\pm(?![A-Za-z])/g, '±')
+       .replace(/\\leq?(?![A-Za-z])/g, '≤')
+       .replace(/\\geq?(?![A-Za-z])/g, '≥')
+       .replace(/\\neq?(?![A-Za-z])/g, '≠')
+       .replace(/\\approx(?![A-Za-z])/g, '≈')
+       .replace(/\\circ(?![A-Za-z])/g, '°')
+       .replace(/\\pi(?![A-Za-z])/g, 'π')
+       .replace(/\\theta(?![A-Za-z])/g, 'θ')
+       .replace(/\\(?:rightarrow|to)(?![A-Za-z])/g, '→')
+       .replace(/\\Rightarrow(?![A-Za-z])/g, '⇒')
+       .replace(/\\therefore(?![A-Za-z])/g, '∴')
+       .replace(/\\because(?![A-Za-z])/g, '∵')
+       .replace(/\\infty(?![A-Za-z])/g, '∞')
+       .replace(/\\(sin|cos|tan)(?![A-Za-z])/g, '$1');
+  return s;
 }
 
 function getCurrentQuestionContext() {
@@ -8426,12 +8458,12 @@ function getCurrentQuestionContext() {
   return {
     questionNumber: analysisRecord?analysisRecord.originalIndex+1:currentQ+1,
     totalQuestions: analysisRecord?(resultAnalysisSnapshot?.items?.length||data.length):data.length,
-    questionText: aiPlainTextFromHTML(qHtml),
-    options: Array.isArray(opts) ? opts.map(aiPlainTextFromHTML) : [],
-    examTag: aiPlainTextFromHTML(T(item, 'tag') || ""),
-    correctAnswer: aiPlainTextFromHTML(correctOptText),
-    explanation: aiPlainTextFromHTML(T(item, 'e') || ''),
-    userSelected: aiPlainTextFromHTML(selectedOptText),
+    questionText: aiHtmlToPlainUnicode(qHtml),
+    options: opts,
+    examTag: T(item, 'tag') || "",
+    correctAnswer: correctOptText,
+    explanation: T(item, 'e') || "",
+    userSelected: selectedOptText,
     imageData: (typeof imageSource === 'string' && imageSource.startsWith('data:image/')) ? imageSource : null,
     imageSource: imageSource
   };
@@ -8503,7 +8535,12 @@ ${imageProtocol}5. MIND METHOD (Maths/Reasoning only): Purely mental calculation
 6. SIRF EK solution do, dono ek saath mat dikhao. "Vistrit/Basic Method" sirf explicitly maange jaane par. Response crisp rakho, extra verification steps mat dikhao.
 7. Solution ke end mein 1-2 lines: a) Trick ka naam (jaise "Ye Unitary Method Trick hai") b) General Formula/Shortcut (agar possible ho) is TYPE ke sabhi similar questions ke liye. YE RULE MATHS/REASONING KE LIYE PEHLE KI TARAH HI APPLY HOGA. GK par is Rule ka "Trick ka naam" wala hissa APPLY NAHI HOGA.
 8. GK/Current Affairs/English/Science/History/Polity: Expert GS Teacher ki tarah direct, factual, exam-focused jawab do. Core answer chhota (Rule 3). GK mein "Trick ka naam", "Formula" ya "Shortcut" NAHI dena hai. Sahi answer ki short explanation do aur **baaki sabhi options ko bhi alag-alag 1 chhoti line mein batao ki ve kyun sahi nahi hain/ve kis se sambandhit hain.** Explanation ke poore reply mein sirf important, exam-useful facts, keywords, names, dates, numbers, definitions aur distinctions ko context ke anusaar **bold** karke clearly highlight karo; poore paragraph ya normal text ko bold mat karo. Explanation ke end mein sirf 1 closely-related, exam-useful additional fact do aur use explanation se alag nayi line mein exactly **"👉 रोचक तथ्य:"** label ke saath clearly highlight karo; "रोचक तथ्य" ke andar bhi important information ko **bold** karo. Ye fact question ke main topic se directly related aur exam ke liye useful ho. GK mein koi mnemonic/trick section na jodo. बाकी subjects ke existing behavior ko change mat karo.
-9. सीधे solution से शुरू करो; question aur options ko dobara repeat mat karo. Agar kisi wajah se question ka koi hissa likhna zaroori ho, to raw HTML tags (jaise <sup>, </sup>, <sub>) kabhi output mat karo. Powers ko Unicode superscript mein likho (jaise 113⁰·⁹⁹); agar suitable superscript available na ho to plain caret notation use karo (jaise 113^(0.99)).
+9. Har answer ke SABSE UPAR question+options ${appLang === 'en' ? 'English' : 'Hindi'} mein repeat karo:
+   **${appLang === 'en' ? 'Question:' : 'प्रश्न:'}** [question]
+   (A) [opt1]  (B) [opt2]  (C) [opt3]  (D) [opt4]
+   Uske turant baad solution shuru karo. Ye SABHI subjects pe apply hoga.
+
+10. OUTPUT FORMAT (MANDATORY): Reply sirf plain Unicode text me do. HTML tags (<sup>, <sub>, <br> etc.), LaTeX, $...$, \\( \\), \\sqrt, \\times, \\div, \\% kabhi mat likho. Powers/indices Unicode superscript me likho (x², 10⁻³, aⁿ); agar power decimal/fraction ho (jaise 0.99 ya 2/3) to ^( ) me likho: 113^(0.99). Symbols: × ÷ √ π ≤ ≥ ≠ ± ° → use karo. Fraction plain 3/4 ya 1/√2 likho. EXCEPTION: sirf MIXED FRACTION (whole number + fraction) me fractional part ko \\frac{a}{b} me whole number ke turant baad bina space ke likho, jaise 16\\frac{2}{3}% ya 14\\frac{2}{7}%; standalone fraction (2/3) me \\frac kabhi nahi. Ye rule question+options repeat karte waqt bhi apply hoga.
 
 Current Question:
 - Q${qContext.questionNumber}/${qContext.totalQuestions} | Tag: ${qContext.examTag}
@@ -8653,14 +8690,14 @@ MATHS/REASONING PRIORITY: For a maths or reasoning question, show the shortest c
       selectedThinking: (document.getElementById("aiThinkingSelect")?.value || AI_DEFAULT_THINKING),
       systemInstruction: {
         parts: [{
-          text: `Use plain Unicode text for all mathematical expressions; do not use LaTeX math or raw HTML/XML tags.
+          text: `Reply ONLY in plain Unicode text.
 
-Write symbols with Unicode where possible: × ÷ √ π ≤ ≥ ≠ ± °, and use plain-text standalone fractions such as 3/4. Percent uses %. Use Unicode superscripts where practical (for example 113⁰·⁹⁹); if a superscript cannot be written clearly, use plain caret notation such as 113^(0.99). NEVER output raw tags such as <sup>, </sup>, <sub>, or <b>.
+Never use LaTeX or Markdown math. Use plain Unicode symbols such as × ÷ √ π ≤ ≥ ≠ ± °. Standalone fractions stay like 3/4. Percent uses %.
 
-MIXED FRACTION EXCEPTION: The ONLY permitted LaTeX command is \\frac, and ONLY for the fractional part of a mixed fraction: e.g. 16\\frac{2}{3}. Keep standalone fractions as plain text (2/3). Do not use any other LaTeX command or use \\frac anywhere else.
+MIXED FRACTION EXCEPTION: Only when a whole number is combined with a fraction, e.g. 16 and two-thirds, write the fractional part as \frac{2}{3} immediately after the whole number. Do not use \frac anywhere else.
 
 FORMATTING:
-- Selective Markdown bold is allowed only for important words, concepts, formulas, definitions, dates, names, rules, tricks, keywords and the final answer; do not use Markdown math.
+- Use Markdown; bold only important words, concepts, formulas, definitions, dates, names, rules, tricks, keywords and the final answer.
 - Keep replies clean, concise, mobile-friendly and exam-focused.
 - Hindi replies must use Devanagari only; never Urdu/Arabic/Persian script.
 
@@ -8686,7 +8723,7 @@ For automatic question explanations, independently solve first, then reconcile w
       const autoExamIndex = data[currentQ].a;
       const autoOptions = T(data[currentQ], 'o') || [];
       if (Number.isInteger(autoExamIndex) && autoExamIndex >= 0 && autoExamIndex < 4) {
-        payload.examExpectedAnswer = aiPlainTextFromHTML(autoOptions[autoExamIndex] || '');
+        payload.examExpectedAnswer = autoOptions[autoExamIndex] || '';
       }
     }
 
@@ -8791,14 +8828,14 @@ function parseVerifyResult(text) {
   const match = raw.match(/\{[\s\S]*\}/);
   if (!match) return null;
   try {
-    const parsed = JSON.parse(match[0]);
+    const parsed = JSON.parse(aiRepairLatexEscapes(match[0]));
     if (!parsed || !Number.isInteger(parsed.answerIndex) || parsed.answerIndex < 0 || parsed.answerIndex > 3) return null;
     const confidence = String(parsed.confidence || '').toLowerCase();
     if (!['high','medium','low'].includes(confidence)) return null;
     return {
       answerIndex: parsed.answerIndex,
       confidence,
-      reason: typeof parsed.reason === 'string' ? parsed.reason.trim() : ''
+      reason: typeof parsed.reason === 'string' ? aiCleanMathText(parsed.reason).trim() : ''
     };
   } catch (_) {
     return null;
@@ -8858,7 +8895,7 @@ function renderVerifyResult(container, result, qContext, modelUsed) {
   if (result.reason) {
     const reasonEl = document.createElement('div');
     reasonEl.style.marginTop = '4px';
-    reasonEl.textContent = result.reason;
+    reasonEl.innerHTML = formatAIResponseText(result.reason); // escapes HTML, renders mixed fractions
     box.appendChild(reasonEl);
   }
 
@@ -8890,12 +8927,8 @@ async function verifyCurrentAnswer(btn, messageContainer) {
     // The question HTML can contain an <img> tag. Verify should not rely on
     // the HTML itself; when a real Base64 image exists, send the image as a
     // native Gemini inline image input as well.
-    const verifyQuestionText = (() => {
-      const tmp = document.createElement('div');
-      tmp.innerHTML = qContext.questionText || '';
-      tmp.querySelectorAll('img').forEach(img => img.remove());
-      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
-    })();
+    // questionText is already plain Unicode (superscripts preserved).
+    const verifyQuestionText = (qContext.questionText || '').trim();
 
     const visualExists = !!qContext.imageSource;
     if (visualExists && !qContext.imageData) {
@@ -9101,22 +9134,24 @@ function normalizeHindiMixedScript(txt) {
 function formatAIResponseText(txt) {
   if (!txt) return "";
   txt = normalizeHindiMixedScript(txt);
-  // If the model echoes HTML-like math tags, convert known sup/sub tags to Unicode
-  // before escaping all remaining angle brackets for safe display.
-  txt = normalizeAIFormulaMarkup(txt);
+  txt = aiCleanMathText(txt); // fixes "imes"/"\times" leftovers
+  txt = aiConvertSupSub(txt); // model slipped <sup>/<sub>? -> Unicode, before escaping
   let formatted = txt
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // Render only the permitted mixed-fraction form: whole number immediately
-  // followed by \frac{numerator}{denominator}. A standalone \frac is converted
-  // to plain numerator/denominator text instead of being rendered as LaTeX.
+  // Mixed-fraction rendering: the model is instructed to write ONLY mixed
+  // fractions (whole number + fraction, e.g. "16" + "2/3") using \frac{a}{b}
+  // right after the whole number — everything else stays plain Unicode text
+  // per the system prompt. Render that specific pattern as a small stacked
+  // fraction (numerator over denominator) instead of showing raw "\frac{2}{3}".
+  // This intentionally only matches \frac{..}{..} — plain "2/3" text and any
+  // other LaTeX the model wasn't supposed to use are left untouched as text.
   formatted = formatted.replace(
-    /(\d+)\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
-    '$1<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$2</span><span class="ai-mixed-frac-den">$3</span></span>'
+    /\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
+    '<span class="ai-mixed-frac"><span class="ai-mixed-frac-num">$1</span><span class="ai-mixed-frac-den">$2</span></span>'
   );
-  formatted = formatted.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2');
 
   // Safety net: the model sometimes ignores the "plain text only" instruction
   // and wraps things in LaTeX-style "$...$" math delimiters, or writes "\%"
@@ -9169,7 +9204,7 @@ function parseQuizCardData(rawReplyText) {
     if (!rawReplyText) return null;
     const match = rawReplyText.match(/<<<QUIZDATA>>>([\s\S]*?)<<<END>>>/);
     if (!match) return null;
-    const parsed = JSON.parse(match[1]);
+    const parsed = JSON.parse(aiRepairLatexEscapes(match[1]));
     if (
       parsed &&
       typeof parsed.question === "string" && parsed.question.trim().length > 0 &&
