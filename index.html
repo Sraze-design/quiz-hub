@@ -2117,10 +2117,12 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 .ai-msg.bot.ai-scan-status { font-size: 13px; }
 .ai-msg.bot a{color:#2563eb;text-decoration:underline;word-break:break-all}
-.ai-wimg-wrap{display:flex;gap:8px;overflow-x:auto;margin:2px 0 4px;-webkit-overflow-scrolling:touch}
-.ai-wimg{flex:0 0 auto;width:min(300px,80vw);background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px}
-.ai-wimg img{width:100%;max-height:240px;object-fit:contain;display:block;border-radius:8px;background:#fff}
-.ai-wimg-cap{font-size:11.5px;color:#475569;margin-top:5px;line-height:1.35;word-break:break-word}
+.ai-msg.ai-img-msg{width:96%;max-width:900px;padding:8px}
+.ai-wimg-wrap{display:flex;gap:8px;overflow-x:auto;margin:2px 0 4px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+.ai-wimg{flex:0 0 100%;width:100%;scroll-snap-align:start;box-sizing:border-box;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px}
+.ai-wimg-wrap.multi .ai-wimg{flex-basis:92%;width:92%}
+.ai-wimg img{width:100%;max-height:75vh;object-fit:contain;display:block;border-radius:8px;background:#fff}
+.ai-wimg-cap{font-size:14px;color:#334155;margin-top:6px;padding:0 4px;line-height:1.5;word-break:break-word;white-space:pre-line}
 .ai-wimg-cap a{color:#2563eb;text-decoration:underline}
 .ai-msg.bot pre {
   background: #f1f5f9;
@@ -8756,6 +8758,31 @@ function aiImgQuestionLang() {
   return (typeof appLang !== 'undefined' && appLang === 'en') ? 'en' : 'hi';
 }
 
+// Caption/note ki bhasha = app ki chuni hui language (hi / en). Hinglish nahi.
+function aiImgUiLang() {
+  return (typeof appLang !== 'undefined' && appLang === 'en') ? 'en' : 'hi';
+}
+function aiImgNote(key) {
+  const T = {
+    noHindi:     { hi: 'ℹ️ हिंदी लेबल वाली इमेज नहीं मिली, इसलिए अंग्रेज़ी वाली दिखा रहा हूँ।',
+                   en: 'ℹ️ No image with Hindi labels was found, so an English one is shown.' },
+    closest:     { hi: 'ℹ️ बिल्कुल सही मैच नहीं मिला, इसलिए सबसे नज़दीकी इमेज दिखा रहा हूँ।',
+                   en: 'ℹ️ No perfect match was found, so the closest image is shown.' },
+    noCheck:     { hi: 'ℹ️ AI इमेज की जाँच नहीं कर पाया, इसलिए सर्च की सबसे पहली इमेज दिखा रहा हूँ।',
+                   en: 'ℹ️ AI could not check the images, so the first search result is shown.' },
+    noCheckNext: { hi: 'ℹ️ AI इमेज की जाँच नहीं कर पाया, इसलिए सर्च की अगली इमेज दिखा रहा हूँ।',
+                   en: 'ℹ️ AI could not check the images, so the next search result is shown.' }
+  };
+  return T[key][aiImgUiLang()];
+}
+// "Image mein kya dikhna chahiye" wali line: Hindi mode mein sirf Devanagari wali line dikhegi, English nahi
+function aiImgNeedText(plan) {
+  if (!plan) return '';
+  const t = String(plan.needLocal || '').trim();
+  if (aiImgUiLang() === 'hi') return /[\u0900-\u097F]/.test(t) ? t : '';
+  return t || String(plan.need || '').trim();
+}
+
 function aiImgSubject(text) {
   const toks = String(text).replace(/[?!.,;:()"“”]/g, ' ').split(/\s+/).filter(Boolean);
   return toks.filter((t) => !AIIMG_STOP.has(t.toLowerCase()));
@@ -8902,7 +8929,7 @@ function aiImgIsOtherLang(rawTitle, cats) {
 async function aiImgFiles(host, q, limit, offset, strict) {
   const url = 'https://' + host + '/w/api.php?action=query&format=json&origin=*' +
     '&generator=search&gsrnamespace=6&gsrlimit=' + (strict ? 20 : 12) + '&gsroffset=' + (offset || 0) + '&gsrsearch=' + encodeURIComponent(q) +
-    '&prop=imageinfo' + (strict ? '|categories&cllimit=max&clshow=!hidden' : '') + '&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName|ImageDescription';
+    '&prop=imageinfo' + (strict ? '|categories&cllimit=max&clshow=!hidden' : '') + '&iiprop=url|mime|extmetadata&iiurlwidth=1200&iiextmetadatafilter=LicenseShortName|ImageDescription';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
   pages.sort((a, b) => (a.index || 0) - (b.index || 0));
@@ -8935,7 +8962,7 @@ async function aiImgFiles(host, q, limit, offset, strict) {
 async function aiImgWikipedia(q, lang) {
   const url = 'https://' + lang + '.wikipedia.org/w/api.php?action=query&format=json&origin=*' +
     '&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=' + encodeURIComponent(q) +
-    '&prop=pageimages|info|langlinks&piprop=thumbnail|original|name&pithumbsize=800&inprop=url&lllang=hi&lllimit=20';
+    '&prop=pageimages|info|langlinks&piprop=thumbnail|original|name&pithumbsize=1200&inprop=url&lllang=hi&lllimit=20';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
   pages.sort((a, b) => (a.index || 0) - (b.index || 0));
@@ -8997,7 +9024,7 @@ async function aiImgSearch(subject, wantDiagram) {
   const items = uniq.slice(0, 3);
   uniq.forEach((r) => { r.isHindi = r.hiScore >= 3; });
   const anyHindi = items.some((r) => r.isHindi);
-  return { items: items, pool: uniq, note: (items.length && !anyHindi && aiImgPrefLang !== 'en') ? 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.' : '' };
+  return { items: items, pool: uniq, note: (items.length && !anyHindi && aiImgPrefLang !== 'en') ? aiImgNote('noHindi') : '' };
 }
 
 function aiImgRender(subject, results, note, retryFn, nextFn) {
@@ -9005,9 +9032,9 @@ function aiImgRender(subject, results, note, retryFn, nextFn) {
   if (!chatBody) return;
   aiImgLast = { subject: subject, items: results.slice(), sent: false, epoch: aiChatEpoch };
   const msg = document.createElement('div');
-  msg.className = 'ai-msg bot';
+  msg.className = 'ai-msg bot ai-img-msg';
   const wrap = document.createElement('div');
-  wrap.className = 'ai-wimg-wrap notranslate';
+  wrap.className = 'ai-wimg-wrap notranslate' + (results.length > 1 ? ' multi' : '');
   wrap.setAttribute('translate', 'no');
   results.forEach((r) => {
     const card = document.createElement('div');
@@ -9115,11 +9142,11 @@ async function aiImgNext() {
     let picks = [];
     let note = '';
     if (verdict && verdict.judged) {
-      if (verdict.none) { picks = [verdict.shown[0]]; note = 'ℹ️ Bilkul perfect match nahi mili, sabse close image dikha raha hoon.'; }
+      if (verdict.none) { picks = [verdict.shown[0]]; note = aiImgNote('closest'); }
       else picks = [verdict.shown[verdict.best[0]]];
     } else {
       picks = [((verdict && verdict.shown && verdict.shown[0]) || cands[0])];
-      note = 'ℹ️ AI image check nahi kar paya, isliye search ki agli image dikha raha hoon.';
+      note = aiImgNote('noCheckNext');
     }
     picks = picks.filter(Boolean);
     drop();
@@ -9177,7 +9204,7 @@ async function aiImgPlan(userText, wantDiagram, ctxText) {
     'Read the request carefully, including any special requirement (which part, labels, language, style, a specific person, place, event or year). ' +
     'Reply with JSON only: {\"type\":\"diagram\" or \"photo\" or \"none\",\"title\":\"exact English Wikipedia article title of the main subject\",' +
     '\"queries\":[1 to 3 short English Wikimedia Commons file-search queries (2-6 words each) most likely to find a file matching the requirement, most specific first],' +
-    '\"need\":\"one short English sentence describing exactly what the image must show\"}. ' +
+    '\"need\":\"one short English sentence describing exactly what the image must show\",\"need_local\":\"the same sentence written in ' + (aiImgUiLang() === 'en' ? 'simple English' : 'simple Hindi in Devanagari script (NOT Hinglish, NOT Roman letters; keep only formulas or unavoidable symbols as they are)') + '\"}. ' +
     'Use type diagram for labelled figures, charts, maps, anatomy, processes and drawn illustrations; photo for real photographs of people, places and objects. ' +
     'Use type none only if the message is not really asking to be shown an image.' +
     (ctxText ? (
@@ -9201,7 +9228,8 @@ async function aiImgPlan(userText, wantDiagram, ctxText) {
     type: (type === 'diagram' || type === 'photo') ? type : (wantDiagram ? 'diagram' : 'photo'),
     title: title.length <= 60 ? title : '',
     queries: queries,
-    need: clean(j.need).slice(0, 200)
+    need: clean(j.need).slice(0, 200),
+    needLocal: clean(j.need_local).slice(0, 200)
   };
 }
 
@@ -9300,18 +9328,19 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl, ctxText) {
   let picks = [];
   let note = '';
   if (verdict && verdict.judged) {
-    if (verdict.none) { picks = [verdict.shown[0]]; note = 'ℹ️ Bilkul perfect match nahi mili, sabse close image dikha raha hoon.'; }
+    if (verdict.none) { picks = [verdict.shown[0]]; note = aiImgNote('closest'); }
     else picks = verdict.best.map((i) => verdict.shown[i]);
   } else {
     // AI judge na chal paye to sirf ek image, saaf note ke saath
     const pool = (verdict && verdict.shown && verdict.shown.length) ? verdict.shown : cands;
     picks = pool.slice(0, 1);
-    note = 'ℹ️ AI image check nahi kar paya, isliye search ki sabse pehli image dikha raha hoon.';
+    note = aiImgNote('noCheck');
   }
   picks = picks.filter(Boolean);
   if (!picks.length) picks = cands.slice(0, 1);
-  if (!note && wd && aiImgPrefLang !== 'en' && !picks.some((r) => r.hiScore >= 3)) note = 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.';
-  if (ctxText && plan.need) note = '🎯 ' + plan.need + (note ? '  ' + note : '');
+  if (!note && wd && aiImgPrefLang !== 'en' && !picks.some((r) => r.hiScore >= 3)) note = aiImgNote('noHindi');
+  const needTxt = aiImgNeedText(plan);
+  if (ctxText && needTxt) note = '🎯 ' + needTxt + (note ? '\n' + note : '');
 
   dropLoading();
   // Chat history: image dikh jaane ke baad hi (user + model ek saath, taaki order na bigde)
