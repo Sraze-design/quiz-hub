@@ -8606,10 +8606,10 @@ Task: पहले स्वतंत्र रूप से हल करो, �
   requestGeminiResponse(true);
 }
 
-function sendUserMessage() {
+async function sendUserMessage() {
   const inputEl = document.getElementById('aiInput');
   const text = inputEl.value.trim();
-  if ((!text && !selectedAIImage) || isAIGenerating) return;
+  if ((!text && !selectedAIImage) || isAIGenerating || aiImgAttaching) return;
 
   inputEl.value = '';
 
@@ -8619,8 +8619,20 @@ function sendUserMessage() {
 
   appendAIMessage("user", text, false, imageForDisplay);
 
-  // "mitochondria ka diagram", "Kalam ki photo" jaise image requests AI ko bheje bina Wikipedia se.
+  // "mitochondria ka diagram", "Kalam ki photo" jaise image requests pehle AI ke paas jaati hain (AI hi best image chunta hai).
   if (!selectedAIImageBase64 && aiWikiImageIntercept(text)) return;
+
+  // Pichli Wikipedia image ke baare mein puch raha hai to wo image AI ko bhi bhejo
+  let wikiParts = [];
+  if (!selectedAIImageBase64 && aiImgShouldAttach(text)) {
+    const epochNow = aiChatEpoch;
+    aiImgAttaching = true;
+    const ld = aiImgShowLoading('🔍 Image dekh raha hoon...');
+    try { wikiParts = await aiImgAttachParts(); } catch (e) { wikiParts = []; }
+    aiImgAttaching = false;
+    if (ld && ld.parentNode) ld.parentNode.removeChild(ld);
+    if (epochNow !== aiChatEpoch) return;
+  }
 
 // Quiz Card Mode only activates for this exact manually-sent special prompt.
 const isQuizCardTriggerMessage = (text === QUIZ_CARD_TRIGGER_PROMPT);
@@ -8638,6 +8650,8 @@ if (selectedAIImageBase64) {
         }
     });
 }
+
+wikiParts.forEach((p) => parts.push(p));
 
 if (text) {
     parts.push({
@@ -8673,8 +8687,8 @@ function sendQuickPrompt(promptText) {
 
 // ===== 🖼️ Wikipedia / Wikimedia image finder =====
 // Chat mein "mitochondria ka diagram", "APJ Abdul Kalam ki photo", "heart image de do" jaisa
-// likhne par request AI ko bheje bina seedha Wikipedia / Wikimedia Commons se image uthakar
-// chat mein dikhayi jaati hai (free, no API key, bahut tez).
+// likhne par request pehle AI ke paas jaati hai: AI requirement samajhta hai -> Wikipedia / Commons se
+// candidates -> AI khud images dekhkar best chunta hai -> wahi chat mein dikhti hai. Direct search nahi.
 const AIIMG_WORD_RE = /(^|[^a-z])(image|images|img|photo|photos|foto|pic|pics|picture|pictures|diagram|diagrams|figure|fig|chitra|chitr|tasveer|tasvir)(?![a-z])|चित्र|तस्वीर|फोटो|इमेज|डायग्राम|आकृति|फिगर/i;
 const AIIMG_DIAGRAM_RE = /(^|[^a-z])(diagram|diagrams|figure|fig|chitra|chitr)(?![a-z])|डायग्राम|आकृति|फिगर|चित्र/i;
 // Agar user current question/figure ke baare mein pooch raha hai to ye normal AI chat hi rahega.
@@ -8732,6 +8746,54 @@ function aiImgHindiScore(rawTitle, desc) {
 // (agar SVG mein Hindi nahi hai to Commons default bhasha hi dikhata hai).
 function aiImgHiThumb(url) {
   return String(url || '').replace(/\/(\d+px-[^\/]+)$/, '/langhi-$1');
+}
+
+// ---- Dikhayi gayi image ko AI ko bhi dikhao ----
+// Student \"isko samjhao / explain this diagram\" bole to pichli dikhayi gayi image(s) us message ke saath
+// Gemini ko jaati hain (sirf ek baar; baad mein history mein rehti hain).
+let aiImgLast = { subject: '', items: [], sent: true, epoch: -1 };
+let aiImgAttaching = false;
+const AIIMG_REF_RE = /explain|samjh|samajh|bata|btao|batana|btana|describe|detail|label|part|matlab|meaning|kya (hai|h|dikh)|dikh|(^|[^a-z])(iss?|isko|isse|ise|ye|yeh|this|these|it)([^a-z]|$)|समझ|बता|मतलब|इस|ये|यह|चित्र|डायग्राम|आकृति/i;
+function aiImgShouldAttach(text) {
+  return !!(aiImgLast && !aiImgLast.sent && aiImgLast.epoch === aiChatEpoch && aiImgLast.items.length && AIIMG_REF_RE.test(String(text || '')));
+}
+async function aiImgToInline(url) {
+  if (!url) return null;
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 9000);
+  try {
+    const r = await fetch(url, { mode: 'cors', signal: ctl.signal });
+    if (!r.ok) return null;
+    const b = await r.blob();
+    const mime = String(b.type || '').toLowerCase();
+    if (!/^image\/(png|jpeg|webp)$/.test(mime) || b.size > 4 * 1024 * 1024) return null;
+    const data = await new Promise((res, rej) => {
+      const fr = new FileReader();
+      fr.onload = () => res(String(fr.result).split(',')[1] || '');
+      fr.onerror = rej;
+      fr.readAsDataURL(b);
+    });
+    return data ? { mimeType: mime, data: data } : null;
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+// returns parts[] (inlineData + chhota context text); [] agar image load na ho paye
+async function aiImgAttachParts() {
+  const st = aiImgLast;
+  st.sent = true;
+  const items = st.items.slice(0, 3);
+  const got = await Promise.all(items.map(async (r) => (await aiImgToInline(r.src)) || (await aiImgToInline(r.srcFallback)) || (await aiImgToInline(r.full))));
+  const parts = [];
+  const titles = [];
+  got.forEach((g, i) => {
+    if (g) { parts.push({ inlineData: g }); titles.push((titles.length + 1) + '. ' + (items[i].title || st.subject)); }
+  });
+  if (!parts.length) return [];
+  parts.push({ text: '[Context from the app: the student was just shown ' + parts.length + ' image(s) from Wikipedia/Wikimedia for \"' + st.subject + '\", attached above in the same order. Titles: ' + titles.join(' | ') + '. If the student is asking about them, look at the actual image(s) and explain what is shown (parts/labels for a diagram, who/what for a photo, using the title for names - never identify a person from the face). Answer in the usual style.]' });
+  return parts;
 }
 
 // ---- Sirf Hindi + English diagrams: baaki languages (Telugu, Toki Pona, Tamil, ...) hata do ----
@@ -8889,6 +8951,7 @@ async function aiImgSearch(subject, wantDiagram) {
 function aiImgRender(subject, results, note, retryFn, nextFn) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
+  aiImgLast = { subject: subject, items: results.slice(), sent: false, epoch: aiChatEpoch };
   const msg = document.createElement('div');
   msg.className = 'ai-msg bot';
   const wrap = document.createElement('div');
@@ -8912,17 +8975,6 @@ function aiImgRender(subject, results, note, retryFn, nextFn) {
     };
     link.appendChild(img);
     card.appendChild(link);
-    const cap = document.createElement('div');
-    cap.className = 'ai-wimg-cap';
-    cap.appendChild(document.createTextNode((r.title || subject) + ' · '));
-    const src = document.createElement('a');
-    src.href = r.page || r.full || r.src;
-    src.target = '_blank';
-    src.rel = 'noopener noreferrer';
-    src.textContent = r.source + (r.license ? ' (' + r.license + ')' : '');
-    if (r.isHindi) cap.insertBefore(document.createTextNode('🇮🇳 हिंदी · '), cap.firstChild);
-    cap.appendChild(src);
-    card.appendChild(cap);
     wrap.appendChild(card);
   });
   msg.appendChild(wrap);
@@ -8956,41 +9008,6 @@ function aiImgRender(subject, results, note, retryFn, nextFn) {
   chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// AI sirf naam samajhne ke liye (Hinglish/Hindi -> English Wikipedia title). Image AI nahi banata.
-async function aiImgAiName(subject, wantDiagram) {
-  const ctl = new AbortController();
-  const timer = setTimeout(() => ctl.abort(), 12000);
-  try {
-    const res = await fetch(GEMINI_WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        subject: '',
-        selectedModel: AI_DEFAULT_MODEL,
-        selectedThinking: 'low',
-        systemInstruction: { parts: [{ text: "You convert a student's Hindi/Hinglish/English image request into the exact English Wikipedia article title of the thing asked. Reply with ONLY that title (1-5 words), no quotes, no explanation. For a person give the full common name. If it is not a real thing, person or concept, reply NONE." }] },
-        contents: [{ role: 'user', parts: [{ text: 'Request: ' + subject + (wantDiagram ? ' (diagram)' : ' (photo)') }] }]
-      }),
-      signal: ctl.signal
-    });
-    if (!res.ok) return '';
-    const j = await res.json();
-    let t = '';
-    if (j && j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) {
-      t = j.candidates[0].content.parts.map((x) => x.text || '').join('');
-    } else if (j && j.text) {
-      t = j.text;
-    }
-    t = String(t).split('\n')[0].replace(/["'`*]/g, '').trim();
-    if (!t || /^none$/i.test(t) || t.length > 60) return '';
-    return t;
-  } catch (e) {
-    return '';
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 function aiImgShowLoading(text) {
   appendAIMessage('bot', text, false);
   const cb = document.getElementById('aiChatBody');
@@ -9011,66 +9028,232 @@ function aiImgIsFollowUp(text) {
   return t.split(/\s+/).some((w) => AIIMG_FOLLOW.has(w.replace(/[?!.,]/g, '').toLowerCase())) ||
     /(^|\s)(ek aur|aur ek|aur do|एक और|और एक)(\s|$)/i.test(low);
 }
+// "Dusri image": direct search nahi — bachi hui candidates ko AI dekhkar sabse sahi image chunta hai.
 async function aiImgNext() {
   const st = aiImgState;
-  if (!st.subject) return;
+  if (!st.subject || aiImgAttaching) return;
   const epoch = aiChatEpoch;
-  const loadingEl = aiImgShowLoading('🔍 Dusri image dhoondh raha hoon...');
-  const want = st.wantDiagram ? 3 : 2;
-  let fresh = st.pool.filter((r) => !st.shown.has(aiImgKey(r)));
-  if (fresh.length < want) {
-    try {
-      const more = await aiImgFiles('commons.wikimedia.org', st.wantDiagram ? st.subject + ' diagram' : st.subject, 8, st.offset, st.wantDiagram);
+  aiImgAttaching = true;
+  const loadingEl = aiImgShowLoading('👀 AI dusri sahi image dhoondh raha hoon...');
+  const drop = () => { if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl); };
+  try {
+    const fresh = st.pool.filter((r) => !st.shown.has(aiImgKey(r)));
+    if (fresh.length < 4) {
+      // AI ki di hui queries se aur candidates (agla page)
+      const qs = (st.plan && st.plan.queries && st.plan.queries.length)
+        ? st.plan.queries
+        : [st.subject + (st.wantDiagram ? ' diagram' : '')];
+      const more = await Promise.all(qs.map((q) => aiImgFiles('commons.wikimedia.org', q, 8, st.offset, st.wantDiagram).catch(() => [])));
       st.offset += 12;
-      more.forEach((r) => {
+      aiImgInterleave(more).forEach((r) => {
         const k = aiImgKey(r);
         if (!st.shown.has(k) && !st.pool.some((x) => aiImgKey(x) === k)) { st.pool.push(r); fresh.push(r); }
       });
-    } catch (e) {}
+    }
+    if (epoch !== aiChatEpoch) { drop(); return; }
+    if (!fresh.length) {
+      drop();
+      appendAIMessage('bot', '😕 Aur images nahi mili. Request thodi alag likhkar try karo (jaise: Human female anatomy diagram).', false);
+      return;
+    }
+    const cands = fresh.slice(0, 6);
+    let verdict = null;
+    try { verdict = await aiImgJudge((st.userText || st.subject) + ' (a DIFFERENT image from the one already shown)', st.plan, cands); } catch (e) { verdict = null; }
+    if (epoch !== aiChatEpoch) { drop(); return; }
+    let picks = [];
+    let note = '';
+    if (verdict && verdict.judged) {
+      if (verdict.none) { picks = [verdict.shown[0]]; note = 'ℹ️ Bilkul perfect match nahi mili, sabse close image dikha raha hoon.'; }
+      else picks = [verdict.shown[verdict.best[0]]];
+    } else {
+      picks = [((verdict && verdict.shown && verdict.shown[0]) || cands[0])];
+      note = 'ℹ️ AI image check nahi kar paya, isliye search ki agli image dikha raha hoon.';
+    }
+    picks = picks.filter(Boolean);
+    drop();
+    picks.forEach((r) => st.shown.add(aiImgKey(r)));
+    aiImgRender(st.subject, picks, note, null, () => aiImgNext());
+  } catch (e) {
+    drop();
+    if (epoch === aiChatEpoch) appendAIMessage('bot', '⚠️ Image laane mein dikkat aayi — dobara try karo.', false);
+  } finally {
+    aiImgAttaching = false;
   }
-  if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
-  if (epoch !== aiChatEpoch) return;
-  const take = fresh.slice(0, want);
-  if (!take.length) {
-    appendAIMessage('bot', '😕 Aur images nahi mili. Dusre naam se try karo (jaise: Human female anatomy diagram).', false);
+}
+
+// ===== 🤖 AI-routed image finder =====
+// Flow: student ki request -> AI samajhta hai (kya chahiye) -> Wikipedia/Commons se candidates ->
+// AI candidates ko khud dekhkar sabse sahi image chunta hai -> chat mein wahi dikhti hai.
+// Direct search nahi: AI fail ho to saaf error dikhta hai (search kabhi AI ke bina nahi chalti).
+async function aiImgCallJSON(systemText, parts, ms) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), ms || 15000);
+  try {
+    const res = await fetch(GEMINI_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: '',
+        selectedModel: AI_DEFAULT_MODEL,
+        selectedThinking: 'low',
+        systemInstruction: { parts: [{ text: systemText }] },
+        contents: [{ role: 'user', parts: parts }],
+        generationConfig: { temperature: 0.2, responseMimeType: 'application/json' }
+      }),
+      signal: ctl.signal
+    });
+    if (!res.ok) return null;
+    const j = await res.json();
+    let t = '';
+    if (j && j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) {
+      t = j.candidates[0].content.parts.map((x) => x.text || '').join('');
+    } else if (j && j.text) {
+      t = j.text;
+    }
+    const m = String(t).replace(/```json|```/gi, '').match(/\{[\s\S]*\}/);
+    return m ? JSON.parse(m[0]) : null;
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Step 1: AI request samajhta hai -> type, English title, Commons search queries, need
+async function aiImgPlan(userText, wantDiagram) {
+  const sys = 'You help an Indian SSC/RRB exam-prep student (writes Hindi, Hinglish or English) get the right image from Wikipedia / Wikimedia Commons. ' +
+    'Read the request carefully, including any special requirement (which part, labels, language, style, a specific person, place, event or year). ' +
+    'Reply with JSON only: {\"type\":\"diagram\" or \"photo\" or \"none\",\"title\":\"exact English Wikipedia article title of the main subject\",' +
+    '\"queries\":[1 to 3 short English Wikimedia Commons file-search queries (2-6 words each) most likely to find a file matching the requirement, most specific first],' +
+    '\"need\":\"one short English sentence describing exactly what the image must show\"}. ' +
+    'Use type diagram for labelled figures, charts, maps, anatomy, processes and drawn illustrations; photo for real photographs of people, places and objects. ' +
+    'Use type none only if the message is not really asking to be shown an image.';
+  const j = await aiImgCallJSON(sys, [{ text: 'Request: ' + userText }], 12000);
+  if (!j || typeof j !== 'object') return null;
+  const type = String(j.type || '').toLowerCase();
+  if (type === 'none') return { type: 'none' };
+  const clean = (v) => String(v || '').replace(/[\"'`*]/g, '').trim();
+  const queries = (Array.isArray(j.queries) ? j.queries : []).map(clean).filter((q) => q && q.length <= 80).slice(0, 3);
+  const title = clean(j.title);
+  return {
+    type: (type === 'diagram' || type === 'photo') ? type : (wantDiagram ? 'diagram' : 'photo'),
+    title: title.length <= 60 ? title : '',
+    queries: queries,
+    need: clean(j.need).slice(0, 200)
+  };
+}
+
+// Step 3: AI candidate images ko dekhkar best chunta hai
+async function aiImgJudge(userText, plan, cands) {
+  const got = await Promise.all(cands.map(async (r) => (await aiImgToInline(r.src)) || (await aiImgToInline(r.srcFallback))));
+  const shown = [];
+  const parts = [];
+  got.forEach((g, i) => {
+    if (!g) return;
+    shown.push(cands[i]);
+    parts.push({ text: 'Image ' + shown.length + ' (file title: ' + (cands[i].title || 'unknown') + '):' });
+    parts.push({ inlineData: g });
+  });
+  if (shown.length < 2) return { judged: false, shown: shown, best: [], none: false };
+  const sys = 'You are the image picker of an Indian exam-prep app. You are shown numbered candidate images from Wikipedia / Wikimedia Commons and the student\'s request. ' +
+    'Choose the image that best satisfies the request: correct subject and the exact part/requirement asked, clear, large and readable, not cropped, blank or low quality. ' +
+    'For diagrams prefer labels in Hindi, otherwise English. NEVER pick an image whose text/labels are in any other language (Telugu, Tamil, Toki Pona, etc.). ' +
+    'For a photo of a person pick a clear portrait of exactly that person (use the file titles for who it is; never identify anyone from the face). ' +
+    'Reply with JSON only: {\"best\":[image numbers, best first],\"none\":false}. Give 1 number; give a 2nd only if it is also clearly good and adds something different. ' +
+    'If no candidate fits at all reply {\"best\":[],\"none\":true}.';
+  parts.push({ text: 'Student request: ' + userText + (plan && plan.need ? '\nThe image must show: ' + plan.need : '') + '\nPick the best.' });
+  const j = await aiImgCallJSON(sys, parts, 25000);
+  if (!j || typeof j !== 'object') return { judged: false, shown: shown, best: [], none: false };
+  const best = [];
+  (Array.isArray(j.best) ? j.best : []).forEach((n) => {
+    const k = parseInt(n, 10) - 1;
+    if (k >= 0 && k < shown.length && best.indexOf(k) < 0) best.push(k);
+  });
+  return { judged: true, shown: shown, best: best.slice(0, 2), none: !!j.none || !best.length };
+}
+
+function aiImgInterleave(lists) {
+  const out = [];
+  const max = Math.max.apply(null, [0].concat(lists.map((l) => l.length)));
+  for (let i = 0; i < max; i++) lists.forEach((l) => { if (l[i]) out.push(l[i]); });
+  return out;
+}
+
+async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl) {
+  const setStatus = (t) => { if (loadingEl && loadingEl.parentNode) loadingEl.textContent = t; };
+  const dropLoading = () => { if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl); };
+
+  // Step 1: AI request + requirement samajhta hai. (Koi direct search is se pehle nahi chalti.)
+  setStatus('🤖 AI aapki requirement samajh raha hoon...');
+  let plan = await aiImgPlan(userText, wantDiagram);
+  if (!plan && epoch === aiChatEpoch) plan = await aiImgPlan(userText, wantDiagram); // ek baar retry
+  if (epoch !== aiChatEpoch) { dropLoading(); return; }
+
+  // AI ne kaha ye image request nahi hai -> normal AI chat
+  if (plan && plan.type === 'none') {
+    dropLoading();
+    aiChatHistory.push({ role: 'user', parts: [{ text: userText }] });
+    lastAIRequestWasAutoScan = false;
+    requestGeminiResponse(false);
     return;
   }
-  take.forEach((r) => st.shown.add(aiImgKey(r)));
-  aiImgRender(st.subject, take, '', null, () => aiImgNext());
-}
+  if (!plan || (!plan.title && !(plan.queries && plan.queries.length))) {
+    dropLoading();
+    appendAIMessage('bot', '⚠️ AI abhi request samajh nahi paya. Thodi der baad dobara try karo, ya request saaf likho (jaise: Human heart diagram Hindi labels ke saath).', false);
+    return;
+  }
 
-// mode 'auto': seedha search -> kuch na mile to AI se naam -> dobara search
-// mode 'ai'  : seedha AI se naam samajhkar search ("Galat image?" button)
-async function aiImgRun(subject, wantDiagram, mode, epoch, loadingEl) {
-  let out = null;
-  let usedAI = false;
-  if (mode === 'auto') {
-    try { out = await aiImgSearch(subject, wantDiagram); } catch (e) { out = null; }
+  // Step 2: sirf AI ke diye title/queries se candidates dhoondho
+  const wd = plan.type === 'diagram';
+  setStatus('🔍 Wikipedia / Commons mein dhoondh raha hoon...');
+  const res = await Promise.all([
+    plan.title ? aiImgSearch(plan.title, wd).catch(() => null) : Promise.resolve(null)
+  ].concat(plan.queries.map((q) => aiImgFiles('commons.wikimedia.org', q, 8, 0, wd).catch(() => []))));
+  if (epoch !== aiChatEpoch) { dropLoading(); return; }
+  const base = res[0];
+  const lists = res.slice(1).concat([(base && (base.pool || base.items)) || []]);
+  const seen = new Set();
+  const all = aiImgInterleave(lists).filter((r) => { const k = aiImgKey(r); if (seen.has(k)) return false; seen.add(k); return true; });
+  const finalSubject = plan.title || plan.queries[0] || 'image';
+  if (!all.length) {
+    dropLoading();
+    appendAIMessage('bot', '😕 Is requirement ki image nahi mili. Request thodi alag likhkar try karo (jaise: Mitochondria diagram, Human heart diagram).', false);
+    return;
   }
-  if (!out || !out.items || !out.items.length) {
-    if (loadingEl && loadingEl.parentNode) loadingEl.textContent = '🤖 Naam samajh raha hoon...';
-    const en = await aiImgAiName(subject, wantDiagram);
-    usedAI = true;
-    if (en) {
-      try { out = await aiImgSearch(en, wantDiagram); } catch (e) { out = null; }
-      if (out && out.items && out.items.length) subject = en;
-    }
-  }
-  if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
-  if (epoch !== aiChatEpoch) return;
-  if (out && out.items && out.items.length) {
-    const retry = (mode === 'auto' && !usedAI) ? function () {
-      const el = aiImgShowLoading('🤖 AI se sahi naam dhoondh raha hoon...');
-      aiImgRun(subject, wantDiagram, 'ai', epoch, el);
-    } : null;
-    aiImgState = { subject: subject, wantDiagram: wantDiagram, pool: (out.pool || out.items).slice(), shown: new Set(out.items.map(aiImgKey)), offset: 12, active: true };
-    aiImgRender(subject, out.items, out.note, retry, () => aiImgNext());
+
+  // Step 3: AI candidate images ko khud dekhkar requirement ke hisaab se best chunta hai
+  setStatus('👀 AI images dekhkar sabse sahi chun raha hoon...');
+  const cands = all.slice(0, 6);
+  let verdict = null;
+  try { verdict = await aiImgJudge(userText, plan, cands); } catch (e) { verdict = null; }
+  if (epoch !== aiChatEpoch) { dropLoading(); return; }
+
+  let picks = [];
+  let note = '';
+  if (verdict && verdict.judged) {
+    if (verdict.none) { picks = [verdict.shown[0]]; note = 'ℹ️ Bilkul perfect match nahi mili, sabse close image dikha raha hoon.'; }
+    else picks = verdict.best.map((i) => verdict.shown[i]);
   } else {
-    appendAIMessage('bot', '😕 "' + subject + '" ki image nahi mili. Kisi aur naam/spelling se try karo (jaise: Mitochondria diagram, Human heart diagram).', false);
+    // AI judge na chal paye to sirf ek image, saaf note ke saath
+    const pool = (verdict && verdict.shown && verdict.shown.length) ? verdict.shown : cands;
+    picks = pool.slice(0, 1);
+    note = 'ℹ️ AI image check nahi kar paya, isliye search ki sabse pehli image dikha raha hoon.';
   }
+  picks = picks.filter(Boolean);
+  if (!picks.length) picks = cands.slice(0, 1);
+  if (!note && wd && !picks.some((r) => r.hiScore >= 3)) note = 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.';
+
+  dropLoading();
+  // Chat history: image dikh jaane ke baad hi (user + model ek saath, taaki order na bigde)
+  aiChatHistory.push({ role: 'user', parts: [{ text: userText }] });
+  aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed an image from Wikipedia/Wikimedia, chosen by AI, for: ' + finalSubject + ']' }] });
+  const rest = all.filter((r) => picks.indexOf(r) < 0);
+  aiImgState = { subject: finalSubject, wantDiagram: wd, pool: picks.concat(rest), shown: new Set(picks.map(aiImgKey)), offset: 12, active: true, plan: plan, userText: userText };
+  aiImgRender(finalSubject, picks, note, null, () => aiImgNext());
 }
 
-// true = request handle ho gayi (AI ko nahi bhejni); false = normal AI chat
+// true = request handle ho gayi (ya AI ke paas gayi); false = normal AI chat
+// Sirf ek halka pre-filter hai (message mein image/photo/diagram jaisa shabd ho); asli faisla AI karta hai.
 function aiWikiImageIntercept(text) {
   text = String(text || '').trim();
   if (aiImgIsFollowUp(text)) {
@@ -9079,28 +9262,25 @@ function aiWikiImageIntercept(text) {
     aiImgNext();
     return true;
   }
-  if (!text || text.length > 160 || /QUIZDATA/.test(text) || !AIIMG_WORD_RE.test(text) || AIIMG_EXCLUDE_RE.test(text)) {
+  if (!text || text.length > 240 || /QUIZDATA/.test(text) || !AIIMG_WORD_RE.test(text) || AIIMG_EXCLUDE_RE.test(text)) {
     aiImgState.active = false;
     return false;
   }
   const toks = aiImgSubject(text);
-  if (toks.length > 8) { aiImgState.active = false; return false; }
-  const subject = toks.join(' ').trim();
-  if (!subject) {
+  if (toks.length > 14) { aiImgState.active = false; return false; }
+  if (!toks.join(' ').trim()) {
     appendAIMessage('bot', '🖼️ Kiski image chahiye? Naam ke saath likho, jaise: Mitochondria diagram, Human heart diagram, APJ Abdul Kalam photo.', false);
     return true;
   }
   const epoch = aiChatEpoch;
   const wantDiagram = AIIMG_DIAGRAM_RE.test(text);
-  // Context ke liye history mein ek chhota note (user + model ek saath, taaki order na bigde).
-  aiChatHistory.push({ role: 'user', parts: [{ text: text }] });
-  aiChatHistory.push({ role: 'model', parts: [{ text: '[The app fetched an image from Wikipedia/Wikimedia for: ' + subject + ']' }] });
-  const loadingEl = aiImgShowLoading('🔍 Image dhoondh raha hoon...');
-  aiImgRun(subject, wantDiagram, 'auto', epoch, loadingEl).catch(() => {
+  aiImgAttaching = true; // AI kaam kar raha hai — tab tak naya message block
+  const loadingEl = aiImgShowLoading('🤖 AI se image dhoondh raha hoon...');
+  aiImgSmartRun(text, wantDiagram, epoch, loadingEl).catch(() => {
     if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
     if (epoch !== aiChatEpoch) return;
     appendAIMessage('bot', '⚠️ Image laane mein dikkat aayi (internet check karo) — dobara try karo.', false);
-  });
+  }).finally(() => { aiImgAttaching = false; });
   return true;
 }
 
@@ -9235,7 +9415,7 @@ TEACHING RULES:
 ${flashMindRule}
 5. GK/Current Affairs/English/Science/History/Polity: direct, factual and exam-focused. Explain the correct answer briefly; for GK, briefly state why the other options are not correct/what they refer to, and end with exactly one closely related exam-useful fact labeled **👉 रोचक तथ्य:**. Do not add a maths-style trick/formula.
 6. Do not repeat the full question and all options at the top unless the user explicitly asks for them. Start directly with the answer/solution.
-7. IMAGE/DIAGRAM RULE: The app itself fetches real images/diagrams from Wikipedia when the user asks for one. NEVER draw ASCII art and NEVER invent coordinates or a figure; if a figure would help, just describe it in words.
+7. IMAGE/DIAGRAM RULE: The app itself fetches real images/diagrams from Wikipedia when the user asks for one. NEVER draw ASCII art and NEVER invent coordinates or a figure; if a figure would help, just describe it in words. If the student asks you to explain an image/diagram/photo that the app just showed, that image is attached to their message: look at it and explain it properly (for a photo use the name given in the context, never identify anyone from the face).
 8. VIDEO RULE: If the user asks for a video solution / YouTube link, use Google Search (if available) and give ONLY real links that the search actually returned. NEVER invent or guess a YouTube URL. Give a timestamp only if the search result clearly shows it; otherwise say the exact timing could not be confirmed and suggest one short YouTube search phrase. Do not say you are "only a text-based teacher".
 9. SYMBOLS: never write LaTeX like \\angle, \\circ, \\triangle, and never use ^ for degrees. Write the real symbols directly: ∠ABC, 90°, △ABC, ⊥.
 
