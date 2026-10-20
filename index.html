@@ -8706,7 +8706,7 @@ async function findVideoTime() {
     msg = String((j && j.text) || '').trim();
   } catch (err) {
     if (requestEpoch !== aiChatEpoch) return;
-    msg = 'Video + timing nahi mil payi (' + ((err && err.name === 'AbortError') ? 'time out' : 'error') +
+    msg = 'Video + timing nahi mil payi (' + ((err && err.name === 'AbortError') ? 'time out' : 'error: ' + String((err && err.message) || err).slice(0, 120)) +
       '). Seedha YouTube search kholo: ' + searchUrl;
   } finally {
     clearTimeout(tid);
