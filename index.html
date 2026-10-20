@@ -8834,12 +8834,39 @@ const AIIMG_REF_RE = /explain|samjh|samajh|bata|btao|batana|btana|describe|detai
 function aiImgShouldAttach(text) {
   return !!(aiImgLast && !aiImgLast.sent && aiImgLast.epoch === aiChatEpoch && aiImgLast.items.length && AIIMG_REF_RE.test(String(text || '')));
 }
+function aiImgIsWikiHost(u) {
+  try { return /(^|\.)(wikimedia|wikipedia)\.org$/i.test(new URL(u).hostname); } catch (e) { return false; }
+}
+// Baaki websites CORS nahi deti, isliye unki image Worker ke imageProxy se aati hai.
+function aiImgProxyFetch(url, signal) {
+  return fetch(GEMINI_WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mode: 'imageProxy', url: url }),
+    signal: signal
+  });
+}
+async function aiImgProxyBlobUrl(url) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 12000);
+  try {
+    const r = await aiImgProxyFetch(url, ctl.signal);
+    if (!r.ok) return '';
+    return URL.createObjectURL(await r.blob());
+  } catch (e) {
+    return '';
+  } finally {
+    clearTimeout(timer);
+  }
+}
 async function aiImgToInline(url) {
   if (!url) return null;
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 9000);
   try {
-    const r = await fetch(url, { mode: 'cors', signal: ctl.signal });
+    const r = aiImgIsWikiHost(url)
+      ? await fetch(url, { mode: 'cors', signal: ctl.signal })
+      : await aiImgProxyFetch(url, ctl.signal);
     if (!r.ok) return null;
     const b = await r.blob();
     const mime = String(b.type || '').toLowerCase();
@@ -8869,7 +8896,7 @@ async function aiImgAttachParts() {
     if (g) { parts.push({ inlineData: g }); titles.push((titles.length + 1) + '. ' + (items[i].title || st.subject)); }
   });
   if (!parts.length) return [];
-  parts.push({ text: '[Context from the app: the student was just shown ' + parts.length + ' image(s) from Wikipedia/Wikimedia for \"' + st.subject + '\", attached above in the same order. Titles: ' + titles.join(' | ') + '. If the student is asking about them, look at the actual image(s) and explain what is shown (parts/labels for a diagram, who/what for a photo, using the title for names - never identify a person from the face). Answer in the usual style.]' });
+  parts.push({ text: '[Context from the app: the student was just shown ' + parts.length + ' image(s) from the web for \"' + st.subject + '\", attached above in the same order. Titles: ' + titles.join(' | ') + '. If the student is asking about them, look at the actual image(s) and explain what is shown (parts/labels for a diagram, who/what for a photo, using the title for names - never identify a person from the face). Answer in the usual style.]' });
   return parts;
 }
 
@@ -8953,6 +8980,45 @@ async function aiImgFiles(host, q, limit, offset, strict) {
     if (out.length >= limit) break;
   }
   return out;
+}
+
+// 🌐 Poora internet: Worker ke imageSearch (Google / Brave / Openverse) se images.
+// Key na ho ya error aaye to [] — tab app sirf Wikipedia/Commons se chalta rehta hai.
+async function aiImgWeb(q, limit, strict, page) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 14000);
+  try {
+    const res = await fetch(GEMINI_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode: 'imageSearch', query: q, page: page || 1 }),
+      signal: ctl.signal
+    });
+    if (!res.ok) return [];
+    const j = await res.json();
+    const out = [];
+    ((j && j.items) || []).forEach((it) => {
+      if (!it || !it.full) return;
+      if (strict && aiImgIsOtherLang(it.title)) return; // dusri language wale title skip
+      out.push({
+        src: it.full,
+        srcFallback: it.thumb || '',
+        judgeSrc: it.thumb || it.full,
+        full: it.full,
+        page: it.page || it.full,
+        title: String(it.title || '').replace(/\s+/g, ' ').trim().slice(0, 140),
+        license: it.license || '',
+        source: it.source || '',
+        isWeb: true,
+        hiScore: aiImgHindiScore(it.title, '')
+      });
+    });
+    return out.slice(0, limit || 10);
+  } catch (e) {
+    return [];
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 // Wikipedia: sirf TOP search result ka main image (galat insaan/cheez ki photo na aaye).
@@ -9045,13 +9111,30 @@ function aiImgRender(subject, results, note, retryFn, nextFn) {
     img.src = r.src;
     img.alt = r.title || subject;
     img.loading = 'lazy';
+    img.referrerPolicy = 'no-referrer'; // kai sites hotlink par Referer dekhkar image rok deti hain
     img.onload = () => { chatBody.scrollTop = chatBody.scrollHeight; };
     img.onerror = () => {
       if (r.srcFallback && img.src !== r.srcFallback) { img.src = r.srcFallback; return; }
+      if (r.isWeb && !img.dataset.viaProxy) {
+        img.dataset.viaProxy = '1';
+        aiImgProxyBlobUrl(r.full || r.src).then((u) => { if (u) img.src = u; else card.style.display = 'none'; });
+        return;
+      }
       card.style.display = 'none';
     };
     link.appendChild(img);
     card.appendChild(link);
+    if (r.isWeb && r.source) {
+      const cap = document.createElement('a');
+      cap.className = 'ai-wimg-cap notranslate';
+      cap.setAttribute('translate', 'no');
+      cap.href = r.page || r.full || r.src;
+      cap.target = '_blank';
+      cap.rel = 'noopener noreferrer';
+      cap.style.display = 'block';
+      cap.textContent = '🌐 ' + r.source + (r.license ? ' · ' + r.license : '');
+      card.appendChild(cap);
+    }
     wrap.appendChild(card);
   });
   msg.appendChild(wrap);
@@ -9092,7 +9175,7 @@ function aiImgShowLoading(text) {
 }
 
 // "Dusri do / another / next" follow-up ke liye pichle image-result ki yaad
-let aiImgState = { subject: '', wantDiagram: false, pool: [], shown: new Set(), offset: 12, active: false };
+let aiImgState = { subject: '', wantDiagram: false, pool: [], shown: new Set(), offset: 12, webPage: 2, active: false };
 const AIIMG_FOLLOW = new Set('dusri dusra dusre doosri doosra doosre another next more different alag agli agla other one दूसरी दूसरा दूसरे अगली अगला'.split(' '));
 function aiImgKey(r) { return r.full || r.src; }
 function aiImgIsFollowUp(text) {
@@ -9120,8 +9203,13 @@ async function aiImgNext() {
       const qs = (st.plan && st.plan.queries && st.plan.queries.length)
         ? st.plan.queries
         : [st.subject + (st.wantDiagram ? ' diagram' : '')];
-      const more = await Promise.all(qs.map((q) => aiImgFiles('commons.wikimedia.org', q, 8, st.offset, st.wantDiagram).catch(() => [])));
+      const wq = ((st.plan && st.plan.webQueries && st.plan.webQueries.length) ? st.plan.webQueries : qs).slice(0, 2);
+      const more = await Promise.all(
+        qs.map((q) => aiImgFiles('commons.wikimedia.org', q, 8, st.offset, st.wantDiagram).catch(() => []))
+          .concat(wq.map((q) => aiImgWeb(q, 10, st.wantDiagram, st.webPage || 2).catch(() => [])))
+      );
       st.offset += 12;
+      st.webPage = (st.webPage || 2) + 1;
       aiImgInterleave(more).forEach((r) => {
         const k = aiImgKey(r);
         if (!st.shown.has(k) && !st.pool.some((x) => aiImgKey(x) === k)) { st.pool.push(r); fresh.push(r); }
@@ -9133,7 +9221,7 @@ async function aiImgNext() {
       appendAIMessage('bot', '😕 Aur images nahi mili. Request thodi alag likhkar try karo (jaise: Human female anatomy diagram).', false);
       return;
     }
-    const cands = fresh.slice(0, 6);
+    const cands = fresh.slice(0, 8);
     let verdict = null;
     try { verdict = await aiImgJudge((st.userText || st.subject) + ' (a DIFFERENT image from the one already shown)', st.plan, cands, st.ctxText); } catch (e) { verdict = null; }
     if (epoch !== aiChatEpoch) { drop(); return; }
@@ -9198,10 +9286,11 @@ async function aiImgCallJSON(systemText, parts, ms, useSelectedModel) {
 
 // Step 1: AI request samajhta hai -> type, English title, Commons search queries, need
 async function aiImgPlan(userText, wantDiagram, ctxText) {
-  const sys = 'You help an Indian SSC/RRB exam-prep student (writes Hindi, Hinglish or English) get the right image from Wikipedia / Wikimedia Commons. ' +
+  const sys = 'You help an Indian SSC/RRB exam-prep student (writes Hindi, Hinglish or English) get the right image from the WHOLE INTERNET (Wikipedia / Wikimedia Commons plus a general web image search such as Google Images). ' +
     'Read the request carefully, including any special requirement (which part, labels, language, style, a specific person, place, event or year). ' +
     'Reply with JSON only: {\"type\":\"diagram\" or \"photo\" or \"none\",\"title\":\"exact English Wikipedia article title of the main subject\",' +
     '\"queries\":[1 to 3 short English Wikimedia Commons file-search queries (2-6 words each) most likely to find a file matching the requirement, most specific first],' +
+    '\"web_queries\":[1 to 2 short web image-search queries (3-8 words each) written the way you would type them in Google Images to find the best, clearest, most relevant image for the requirement - add words like labeled diagram, portrait, map, hd when useful; for a person include the full name],' +
     '\"need\":\"one short English sentence describing exactly what the image must show\",\"need_local\":\"the same sentence written in ' + (aiImgUiLang() === 'en' ? 'simple English' : 'simple Hindi in Devanagari script (NOT Hinglish, NOT Roman letters; keep only formulas or unavoidable symbols as they are)') + '\"}. ' +
     'Use type diagram for labelled figures, charts, maps, anatomy, processes and drawn illustrations; photo for real photographs of people, places and objects. ' +
     'Use type none only if the message is not really asking to be shown an image.' +
@@ -9226,6 +9315,7 @@ async function aiImgPlan(userText, wantDiagram, ctxText) {
     type: (type === 'diagram' || type === 'photo') ? type : (wantDiagram ? 'diagram' : 'photo'),
     title: title.length <= 60 ? title : '',
     queries: queries,
+    webQueries: (Array.isArray(j.web_queries) ? j.web_queries : []).map(clean).filter((q) => q && q.length <= 100).slice(0, 2),
     need: clean(j.need).slice(0, 200),
     needLocal: clean(j.need_local).slice(0, 200)
   };
@@ -9233,18 +9323,19 @@ async function aiImgPlan(userText, wantDiagram, ctxText) {
 
 // Step 3: AI candidate images ko dekhkar best chunta hai
 async function aiImgJudge(userText, plan, cands, ctxText) {
-  const got = await Promise.all(cands.map(async (r) => (await aiImgToInline(r.src)) || (await aiImgToInline(r.srcFallback))));
+  const got = await Promise.all(cands.map(async (r) => (await aiImgToInline(r.judgeSrc || r.src)) || (await aiImgToInline(r.srcFallback)) || (r.judgeSrc ? await aiImgToInline(r.src) : null)));
   const shown = [];
   const parts = [];
   got.forEach((g, i) => {
     if (!g) return;
     shown.push(cands[i]);
-    parts.push({ text: 'Image ' + shown.length + ' (file title: ' + (cands[i].title || 'unknown') + '):' });
+    parts.push({ text: 'Image ' + shown.length + ' (file title: ' + (cands[i].title || 'unknown') + '; source: ' + (cands[i].source || 'Wikimedia') + '):' });
     parts.push({ inlineData: g });
   });
   if (shown.length < 2) return { judged: false, shown: shown, best: [], none: false };
-  const sys = 'You are the image picker of an Indian exam-prep app. You are shown numbered candidate images from Wikipedia / Wikimedia Commons and the student\'s request. ' +
+  const sys = 'You are the image picker of an Indian exam-prep app. You are shown numbered candidate images from the whole internet (Wikipedia, Wikimedia Commons and other websites) and the student\'s request. ' +
     'Choose the image that best satisfies the request: correct subject and the exact part/requirement asked, clear, large and readable, not cropped, blank or low quality. ' +
+    'Strongly prefer clean images WITHOUT watermarks, logos, ads, stock-photo overlays (Shutterstock, Alamy, Getty, Dreamstime etc.), memes, screenshots of web pages or heavy text overlays; prefer reliable educational / official / news / encyclopedia sources. ' +
     (aiImgPrefLang === 'en' ? 'For diagrams prefer labels in English (the question is in English); avoid Hindi-label images unless nothing else fits. ' : 'For diagrams prefer labels in Hindi, otherwise English. ') + 'NEVER pick an image whose text/labels are in any other language (Telugu, Tamil, Toki Pona, etc.). ' +
     'For a photo of a person pick a clear portrait of exactly that person (use the file titles for who it is; never identify anyone from the face). ' +
     'Reply with JSON only: {\"best\":[image numbers, best first],\"none\":false}. Give 1 number; give a 2nd only if it is also clearly good and adds something different. ' +
@@ -9300,13 +9391,19 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl, ctxText) {
 
   // Step 2: sirf AI ke diye title/queries se candidates dhoondho
   const wd = plan.type === 'diagram';
-  setStatus('🔍 Wikipedia / Commons mein dhoondh raha hoon...');
-  const res = await Promise.all([
-    plan.title ? aiImgSearch(plan.title, wd).catch(() => null) : Promise.resolve(null)
-  ].concat(plan.queries.map((q) => aiImgFiles('commons.wikimedia.org', q, 8, 0, wd).catch(() => []))));
+  setStatus('🌐 Poore internet (Google / Wikipedia / Commons) mein dhoondh raha hoon...');
+  const webQs = ((plan.webQueries && plan.webQueries.length) ? plan.webQueries : (plan.queries.length ? plan.queries : [plan.title])).filter(Boolean).slice(0, 2);
+  const both = await Promise.all([
+    Promise.all([
+      plan.title ? aiImgSearch(plan.title, wd).catch(() => null) : Promise.resolve(null)
+    ].concat(plan.queries.map((q) => aiImgFiles('commons.wikimedia.org', q, 8, 0, wd).catch(() => [])))),
+    Promise.all(webQs.map((q) => aiImgWeb(q, 10, wd, 1).catch(() => [])))
+  ]);
+  const res = both[0];
+  const webLists = both[1];
   if (epoch !== aiChatEpoch) { dropLoading(); return; }
   const base = res[0];
-  const lists = res.slice(1).concat([(base && (base.pool || base.items)) || []]);
+  const lists = res.slice(1).concat([(base && (base.pool || base.items)) || []]).concat(webLists);
   const seen = new Set();
   const all = aiImgInterleave(lists).filter((r) => { const k = aiImgKey(r); if (seen.has(k)) return false; seen.add(k); return true; });
   const finalSubject = plan.title || plan.queries[0] || 'image';
@@ -9318,7 +9415,7 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl, ctxText) {
 
   // Step 3: AI candidate images ko khud dekhkar requirement ke hisaab se best chunta hai
   setStatus('👀 AI images dekhkar sabse sahi chun raha hoon...');
-  const cands = all.slice(0, 6);
+  const cands = all.slice(0, 8);
   let verdict = null;
   try { verdict = await aiImgJudge(userText, plan, cands, ctxText); } catch (e) { verdict = null; }
   if (epoch !== aiChatEpoch) { dropLoading(); return; }
@@ -9342,9 +9439,9 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl, ctxText) {
   dropLoading();
   // Chat history: image dikh jaane ke baad hi (user + model ek saath, taaki order na bigde)
   aiChatHistory.push({ role: 'user', parts: [{ text: userText }] });
-  aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed an image from Wikipedia/Wikimedia, chosen by AI, for: ' + finalSubject + ']' }] });
+  aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed an image from the web (Wikipedia/Commons/other sites), chosen by AI, for: ' + finalSubject + ']' }] });
   const rest = all.filter((r) => picks.indexOf(r) < 0);
-  aiImgState = { subject: finalSubject, wantDiagram: wd, pool: picks.concat(rest), shown: new Set(picks.map(aiImgKey)), offset: 12, active: true, plan: plan, userText: userText, ctxText: ctxText || '' };
+  aiImgState = { subject: finalSubject, wantDiagram: wd, pool: picks.concat(rest), shown: new Set(picks.map(aiImgKey)), offset: 12, webPage: 2, active: true, plan: plan, userText: userText, ctxText: ctxText || '' };
   aiImgRender(finalSubject, picks, note, null, () => aiImgNext());
 }
 
@@ -9354,7 +9451,7 @@ function aiWikiImageIntercept(text) {
   text = String(text || '').trim();
   if (aiImgIsFollowUp(text)) {
     aiChatHistory.push({ role: 'user', parts: [{ text: text }] });
-    aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed another image from Wikipedia/Wikimedia]' }] });
+    aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed another image from the web]' }] });
     aiImgNext();
     return true;
   }
@@ -9523,7 +9620,7 @@ TEACHING RULES:
 ${flashMindRule}
 5. GK/Current Affairs/English/Science/History/Polity: direct, factual and exam-focused. Explain the correct answer briefly; for GK, briefly state why the other options are not correct/what they refer to, and end with exactly one closely related exam-useful fact labeled **👉 रोचक तथ्य:**. Do not add a maths-style trick/formula.
 6. Do not repeat the full question and all options at the top unless the user explicitly asks for them. Start directly with the answer/solution.
-7. IMAGE/DIAGRAM RULE: The app itself fetches real images/diagrams from Wikipedia when the user asks for one. NEVER draw ASCII art and NEVER invent coordinates or a figure; if a figure would help, just describe it in words. If the student asks you to explain an image/diagram/photo that the app just showed, that image is attached to their message: look at it and explain it properly (for a photo use the name given in the context, never identify anyone from the face).
+7. IMAGE/DIAGRAM RULE: The app itself fetches real images/diagrams from the internet (Wikipedia, Commons and web image search) when the user asks for one. NEVER draw ASCII art and NEVER invent coordinates or a figure; if a figure would help, just describe it in words. If the student asks you to explain an image/diagram/photo that the app just showed, that image is attached to their message: look at it and explain it properly (for a photo use the name given in the context, never identify anyone from the face).
 8. VIDEO RULE: If the user asks for a video solution / YouTube link, use Google Search (if available) and give ONLY real links that the search actually returned. NEVER invent or guess a YouTube URL. Give a timestamp only if the search result clearly shows it; otherwise say the exact timing could not be confirmed and suggest one short YouTube search phrase. Do not say you are "only a text-based teacher".
 9. SYMBOLS: never write LaTeX like \\angle, \\circ, \\triangle, and never use ^ for degrees. Write the real symbols directly: ∠ABC, 90°, △ABC, ⊥.
 
