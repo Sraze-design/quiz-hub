@@ -3373,6 +3373,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
 
 <button class="ai-chip" onclick="sendQuickPrompt('केवल 2-3 लाइन में बताओ कि बाकी विकल्प गलत क्यों हैं।')">🔍 Options</button>
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
+    <button class="ai-chip" onclick="sendQuickPrompt('Is question se related best diagram do')">🖼️ Diagram</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
     <button class="ai-chip" onclick="openVideoSolution()">▶ Video</button>
   </div>
@@ -8704,6 +8705,57 @@ const AIIMG_STOP = new Set((
   'चित्र तस्वीर फोटो इमेज डायग्राम आकृति फिगर मुझे चाहिए चाहिये प्लीज़ बताओ कर करो दें से में'
 ).split(/\s+/).filter(Boolean));
 
+// ===== 🎯 "Question se related" diagram/image requests =====
+// "isse related diagram do", "is question ka diagram", "answer ka photo" jaisi request mein koi subject
+// nahi hota — subject current question + uske sahi answer (+ AI ka pichla analysis) se nikalna padta hai.
+const AIIMG_CTX_RE = /related|relevant|sambandh|sambandit|sambandhit|matching|according|मुताबिक|संबंधित|सम्बंधित|सम्बन्धित|(^|[^a-z])(isse|iss?ko|iska|iski|iske|ise|uska|uski|uske|is\s+(question|ques|prashn|sawal|topic|concept)|question|ques|prashn|sawal|answer|ans|correct|sahi|topic|concept)([^a-z]|$)|इससे|इसको|इसका|इसकी|इसके|उसका|उसकी|उसके|प्रश्न|सवाल|उत्तर|जवाब|सही|टॉपिक|कॉन्सेप्ट/i;
+// "explain this diagram" jaisi requests (jo dikhayi gayi image ke baare mein hain) normal AI chat mein hi jaati hain.
+const AIIMG_CTX_BLOCK_RE = /explain|samjh|samajh|solve|(^|[^a-z])hal([^a-z]|$)|calculate|why|kyun|kyu([^a-z]|$)|समझ|हल |क्यों|(^|[^a-z])iss? (figure|fig|diagram|image|photo|chitra)|this (figure|diagram|image|photo)|इस (चित्र|आकृति|फिगर|डायग्राम|इमेज|फोटो)/i;
+function aiImgIsContextual(text) {
+  const t = String(text || '').trim();
+  if (!t || t.length > 160 || /QUIZDATA/.test(t)) return false;
+  if (!AIIMG_WORD_RE.test(t) || AIIMG_CTX_BLOCK_RE.test(t)) return false;
+  return AIIMG_CTX_RE.test(t);
+}
+// Current question + options + stored key + AI ka pichla solved answer -> ek chhota text block
+function aiImgBuildContext() {
+  let q = null;
+  try { q = getCurrentQuestionContext(); } catch (e) { q = null; }
+  const clip = (v, n) => aiHtmlToPlainUnicode(String(v == null ? '' : v)).replace(/\s+/g, ' ').trim().slice(0, n);
+  const lines = [];
+  if (q) {
+    if (q.questionText) lines.push('QUESTION: ' + clip(q.questionText, 900));
+    const opts = Array.isArray(q.options) ? q.options : [];
+    if (opts.length) lines.push('OPTIONS: ' + opts.map((o, i) => String.fromCharCode(65 + i) + ') ' + clip(o, 160)).join(' | ').slice(0, 800));
+    if (q.correctAnswer && q.correctAnswer !== 'Unknown') lines.push('STORED ANSWER KEY (may be wrong): ' + clip(q.correctAnswer, 200));
+  }
+  // AI ne is chat mein jo answer/analysis diya tha wo sabse bharosemand hai
+  let lastModel = '';
+  for (let i = aiChatHistory.length - 1; i >= 0 && !lastModel; i--) {
+    const h = aiChatHistory[i];
+    if (h && h.role === 'model') {
+      const t = (h.parts || []).map((x) => (typeof x.text === 'string' ? x.text : '')).join(' ').trim();
+      if (t && t.charAt(0) !== '[') lastModel = t;
+    }
+  }
+  if (lastModel) lines.push("AI'S SOLVED ANSWER + EXPLANATION (from this chat): " + clip(lastModel, 1500));
+  else if (q && q.explanation) lines.push('STORED EXPLANATION: ' + clip(q.explanation, 500));
+  return lines.join('\n');
+}
+
+// Image ki bhasha: question jis language mein hai wahi (Hindi / English). Normal (non-context) request mein '' = purana behaviour.
+let aiImgPrefLang = '';
+function aiImgQuestionLang() {
+  try {
+    const q = getCurrentQuestionContext();
+    const t = q ? String(q.questionText || '') + ' ' + (Array.isArray(q.options) ? q.options.join(' ') : '') : '';
+    const dev = (t.match(/[\u0900-\u097F]/g) || []).length;
+    const lat = (t.match(/[A-Za-z]/g) || []).length;
+    if (dev + lat >= 8) return dev >= lat ? 'hi' : 'en';
+  } catch (e) {}
+  return (typeof appLang !== 'undefined' && appLang === 'en') ? 'en' : 'hi';
+}
+
 function aiImgSubject(text) {
   const toks = String(text).replace(/[?!.,;:()"“”]/g, ' ').split(/\s+/).filter(Boolean);
   return toks.filter((t) => !AIIMG_STOP.has(t.toLowerCase()));
@@ -8913,7 +8965,7 @@ async function aiImgSearch(subject, wantDiagram) {
   const r1 = await Promise.all([
     subjIsHindi ? Promise.resolve({ items: [], hiTitle: subject }) : aiImgWikipedia(subject, 'en'),
     subjIsHindi ? aiImgWikipedia(subject, 'hi') : Promise.resolve({ items: [], hiTitle: '' }),
-    wantDiagram ? aiImgFiles('commons.wikimedia.org', subject + ' diagram hindi', 4, 0, true) : Promise.resolve([]),
+    (wantDiagram && aiImgPrefLang !== 'en') ? aiImgFiles('commons.wikimedia.org', subject + ' diagram hindi', 4, 0, true) : Promise.resolve([]),
     aiImgFiles('commons.wikimedia.org', wantDiagram ? subject + ' diagram' : subject, 12, 0, wantDiagram)
   ]);
   const enWiki = r1[0], hiWikiDirect = r1[1];
@@ -8941,11 +8993,11 @@ async function aiImgSearch(subject, wantDiagram) {
   }
   // diagram: Hindi score ke hisaab se (stable sort => relevance order bachta hai)
   const idx = new Map(uniq.map((r, i) => [r, i]));
-  uniq.sort((a, b) => (b.hiScore - a.hiScore) || (idx.get(a) - idx.get(b)));
+  uniq.sort((a, b) => (aiImgPrefLang === 'en' ? (a.hiScore - b.hiScore) : (b.hiScore - a.hiScore)) || (idx.get(a) - idx.get(b)));
   const items = uniq.slice(0, 3);
   uniq.forEach((r) => { r.isHindi = r.hiScore >= 3; });
   const anyHindi = items.some((r) => r.isHindi);
-  return { items: items, pool: uniq, note: (items.length && !anyHindi) ? 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.' : '' };
+  return { items: items, pool: uniq, note: (items.length && !anyHindi && aiImgPrefLang !== 'en') ? 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.' : '' };
 }
 
 function aiImgRender(subject, results, note, retryFn, nextFn) {
@@ -9058,7 +9110,7 @@ async function aiImgNext() {
     }
     const cands = fresh.slice(0, 6);
     let verdict = null;
-    try { verdict = await aiImgJudge((st.userText || st.subject) + ' (a DIFFERENT image from the one already shown)', st.plan, cands); } catch (e) { verdict = null; }
+    try { verdict = await aiImgJudge((st.userText || st.subject) + ' (a DIFFERENT image from the one already shown)', st.plan, cands, st.ctxText); } catch (e) { verdict = null; }
     if (epoch !== aiChatEpoch) { drop(); return; }
     let picks = [];
     let note = '';
@@ -9085,7 +9137,7 @@ async function aiImgNext() {
 // Flow: student ki request -> AI samajhta hai (kya chahiye) -> Wikipedia/Commons se candidates ->
 // AI candidates ko khud dekhkar sabse sahi image chunta hai -> chat mein wahi dikhti hai.
 // Direct search nahi: AI fail ho to saaf error dikhta hai (search kabhi AI ke bina nahi chalti).
-async function aiImgCallJSON(systemText, parts, ms) {
+async function aiImgCallJSON(systemText, parts, ms, useSelectedModel) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), ms || 15000);
   try {
@@ -9094,7 +9146,7 @@ async function aiImgCallJSON(systemText, parts, ms) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         subject: '',
-        selectedModel: AI_DEFAULT_MODEL,
+        selectedModel: (useSelectedModel && document.getElementById('aiModelSelect')?.value) || AI_DEFAULT_MODEL,
         selectedThinking: 'low',
         systemInstruction: { parts: [{ text: systemText }] },
         contents: [{ role: 'user', parts: parts }],
@@ -9120,15 +9172,25 @@ async function aiImgCallJSON(systemText, parts, ms) {
 }
 
 // Step 1: AI request samajhta hai -> type, English title, Commons search queries, need
-async function aiImgPlan(userText, wantDiagram) {
+async function aiImgPlan(userText, wantDiagram, ctxText) {
   const sys = 'You help an Indian SSC/RRB exam-prep student (writes Hindi, Hinglish or English) get the right image from Wikipedia / Wikimedia Commons. ' +
     'Read the request carefully, including any special requirement (which part, labels, language, style, a specific person, place, event or year). ' +
     'Reply with JSON only: {\"type\":\"diagram\" or \"photo\" or \"none\",\"title\":\"exact English Wikipedia article title of the main subject\",' +
     '\"queries\":[1 to 3 short English Wikimedia Commons file-search queries (2-6 words each) most likely to find a file matching the requirement, most specific first],' +
     '\"need\":\"one short English sentence describing exactly what the image must show\"}. ' +
     'Use type diagram for labelled figures, charts, maps, anatomy, processes and drawn illustrations; photo for real photographs of people, places and objects. ' +
-    'Use type none only if the message is not really asking to be shown an image.';
-  const j = await aiImgCallJSON(sys, [{ text: 'Request: ' + userText }], 12000);
+    'Use type none only if the message is not really asking to be shown an image.' +
+    (ctxText ? (
+      ' CONTEXT MODE: the student is solving the MCQ given under CURRENT QUESTION CONTEXT and asks for a diagram/image/photo RELATED TO THAT QUESTION (the request itself has no subject, so never answer type none for that reason). ' +
+      'Do this: (1) understand what concept the question is really testing; (2) work out the CORRECT answer yourself (the stored key may be wrong; if an AI solved answer is given, trust it); ' +
+      '(3) choose the ONE concept/structure/process/person/place/map that best visualises the CORRECT answer and the idea needed to understand this question ' +
+      '(example: question asks which organelle makes lipids/detoxifies drugs -> smooth endoplasmic reticulum, ideally a diagram that also shows rough vs smooth ER; NOT mitochondria or any wrong option). ' +
+      'If the request itself names a specific subject, that subject wins. For science/GK topics prefer type diagram (labelled) unless a real photo clearly fits better or the student asked for a photo. ' +
+      '"title" = exact English Wikipedia article of that concept. "queries" must target labelled diagrams/charts/maps (include words like diagram, labeled, structure, anatomy, map, cycle as suitable). ' +
+      '"need" = one sentence saying what the image must show, mentioning the correct-answer part. ' +
+      'Use type none in CONTEXT MODE ONLY if nothing in the question can be shown as a real diagram, photo, map or chart (e.g. pure arithmetic).'
+    ) : '');
+  const j = await aiImgCallJSON(sys, [{ text: (ctxText ? 'CURRENT QUESTION CONTEXT:\n' + ctxText + '\n\n' : '') + 'Request: ' + userText }], ctxText ? 20000 : 12000, !!ctxText);
   if (!j || typeof j !== 'object') return null;
   const type = String(j.type || '').toLowerCase();
   if (type === 'none') return { type: 'none' };
@@ -9144,7 +9206,7 @@ async function aiImgPlan(userText, wantDiagram) {
 }
 
 // Step 3: AI candidate images ko dekhkar best chunta hai
-async function aiImgJudge(userText, plan, cands) {
+async function aiImgJudge(userText, plan, cands, ctxText) {
   const got = await Promise.all(cands.map(async (r) => (await aiImgToInline(r.src)) || (await aiImgToInline(r.srcFallback))));
   const shown = [];
   const parts = [];
@@ -9157,12 +9219,13 @@ async function aiImgJudge(userText, plan, cands) {
   if (shown.length < 2) return { judged: false, shown: shown, best: [], none: false };
   const sys = 'You are the image picker of an Indian exam-prep app. You are shown numbered candidate images from Wikipedia / Wikimedia Commons and the student\'s request. ' +
     'Choose the image that best satisfies the request: correct subject and the exact part/requirement asked, clear, large and readable, not cropped, blank or low quality. ' +
-    'For diagrams prefer labels in Hindi, otherwise English. NEVER pick an image whose text/labels are in any other language (Telugu, Tamil, Toki Pona, etc.). ' +
+    (aiImgPrefLang === 'en' ? 'For diagrams prefer labels in English (the question is in English); avoid Hindi-label images unless nothing else fits. ' : 'For diagrams prefer labels in Hindi, otherwise English. ') + 'NEVER pick an image whose text/labels are in any other language (Telugu, Tamil, Toki Pona, etc.). ' +
     'For a photo of a person pick a clear portrait of exactly that person (use the file titles for who it is; never identify anyone from the face). ' +
     'Reply with JSON only: {\"best\":[image numbers, best first],\"none\":false}. Give 1 number; give a 2nd only if it is also clearly good and adds something different. ' +
-    'If no candidate fits at all reply {\"best\":[],\"none\":true}.';
-  parts.push({ text: 'Student request: ' + userText + (plan && plan.need ? '\nThe image must show: ' + plan.need : '') + '\nPick the best.' });
-  const j = await aiImgCallJSON(sys, parts, 25000);
+    'If no candidate fits at all reply {\"best\":[],\"none\":true}.' +
+    (ctxText ? ' The student wants an image RELATED TO THE QUESTION given below: prefer the image that best illustrates the concept of the CORRECT answer (clearly labelled, readable, not cropped); an image of a wrong option or an unrelated topic is a bad pick.' : '');
+  parts.push({ text: (ctxText ? 'QUESTION CONTEXT:\n' + ctxText + '\n\n' : '') + 'Student request: ' + userText + (plan && plan.need ? '\nThe image must show: ' + plan.need : '') + '\nPick the best.' });
+  const j = await aiImgCallJSON(sys, parts, 25000, !!ctxText);
   if (!j || typeof j !== 'object') return { judged: false, shown: shown, best: [], none: false };
   const best = [];
   (Array.isArray(j.best) ? j.best : []).forEach((n) => {
@@ -9179,16 +9242,22 @@ function aiImgInterleave(lists) {
   return out;
 }
 
-async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl) {
+async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl, ctxText) {
   const setStatus = (t) => { if (loadingEl && loadingEl.parentNode) loadingEl.textContent = t; };
   const dropLoading = () => { if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl); };
 
   // Step 1: AI request + requirement samajhta hai. (Koi direct search is se pehle nahi chalti.)
-  setStatus('🤖 AI aapki requirement samajh raha hoon...');
-  let plan = await aiImgPlan(userText, wantDiagram);
-  if (!plan && epoch === aiChatEpoch) plan = await aiImgPlan(userText, wantDiagram); // ek baar retry
+  setStatus(ctxText ? '🧠 Question aur uska sahi answer analyse kar raha hoon...' : '🤖 AI aapki requirement samajh raha hoon...');
+  let plan = await aiImgPlan(userText, wantDiagram, ctxText);
+  if (!plan && epoch === aiChatEpoch) plan = await aiImgPlan(userText, wantDiagram, ctxText); // ek baar retry
   if (epoch !== aiChatEpoch) { dropLoading(); return; }
 
+  // Question-context mode mein koi diagram ban hi nahi sakta (jaise pure calculation)
+  if (ctxText && plan && plan.type === 'none') {
+    dropLoading();
+    appendAIMessage('bot', '😕 Is question ka koi sahi diagram/image nahi mil sakta (ye zyada tar calculation/concept wala question hai). Aap kisi topic ka naam likhkar maang sakte ho, jaise: Smooth ER diagram.', false);
+    return;
+  }
   // AI ne kaha ye image request nahi hai -> normal AI chat
   if (plan && plan.type === 'none') {
     dropLoading();
@@ -9225,7 +9294,7 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl) {
   setStatus('👀 AI images dekhkar sabse sahi chun raha hoon...');
   const cands = all.slice(0, 6);
   let verdict = null;
-  try { verdict = await aiImgJudge(userText, plan, cands); } catch (e) { verdict = null; }
+  try { verdict = await aiImgJudge(userText, plan, cands, ctxText); } catch (e) { verdict = null; }
   if (epoch !== aiChatEpoch) { dropLoading(); return; }
 
   let picks = [];
@@ -9241,14 +9310,15 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl) {
   }
   picks = picks.filter(Boolean);
   if (!picks.length) picks = cands.slice(0, 1);
-  if (!note && wd && !picks.some((r) => r.hiScore >= 3)) note = 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.';
+  if (!note && wd && aiImgPrefLang !== 'en' && !picks.some((r) => r.hiScore >= 3)) note = 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.';
+  if (ctxText && plan.need) note = '🎯 ' + plan.need + (note ? '  ' + note : '');
 
   dropLoading();
   // Chat history: image dikh jaane ke baad hi (user + model ek saath, taaki order na bigde)
   aiChatHistory.push({ role: 'user', parts: [{ text: userText }] });
   aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed an image from Wikipedia/Wikimedia, chosen by AI, for: ' + finalSubject + ']' }] });
   const rest = all.filter((r) => picks.indexOf(r) < 0);
-  aiImgState = { subject: finalSubject, wantDiagram: wd, pool: picks.concat(rest), shown: new Set(picks.map(aiImgKey)), offset: 12, active: true, plan: plan, userText: userText };
+  aiImgState = { subject: finalSubject, wantDiagram: wd, pool: picks.concat(rest), shown: new Set(picks.map(aiImgKey)), offset: 12, active: true, plan: plan, userText: userText, ctxText: ctxText || '' };
   aiImgRender(finalSubject, picks, note, null, () => aiImgNext());
 }
 
@@ -9262,21 +9332,33 @@ function aiWikiImageIntercept(text) {
     aiImgNext();
     return true;
   }
-  if (!text || text.length > 240 || /QUIZDATA/.test(text) || !AIIMG_WORD_RE.test(text) || AIIMG_EXCLUDE_RE.test(text)) {
+  // "isse/question se related diagram do" => subject question + uske sahi answer se aayega
+  const ctxMode = aiImgIsContextual(text);
+  if (!text || text.length > 240 || /QUIZDATA/.test(text) || !AIIMG_WORD_RE.test(text) || (!ctxMode && AIIMG_EXCLUDE_RE.test(text))) {
     aiImgState.active = false;
     return false;
   }
-  const toks = aiImgSubject(text);
-  if (toks.length > 14) { aiImgState.active = false; return false; }
-  if (!toks.join(' ').trim()) {
-    appendAIMessage('bot', '🖼️ Kiski image chahiye? Naam ke saath likho, jaise: Mitochondria diagram, Human heart diagram, APJ Abdul Kalam photo.', false);
-    return true;
+  let ctxText = '';
+  if (ctxMode) {
+    ctxText = aiImgBuildContext();
+    if (!ctxText) {
+      appendAIMessage('bot', '🖼️ Pehle koi question kholo (ya topic ka naam likho, jaise: Smooth ER diagram) — tabhi main question se related image de paunga.', false);
+      return true;
+    }
+  } else {
+    const toks = aiImgSubject(text);
+    if (toks.length > 14) { aiImgState.active = false; return false; }
+    if (!toks.join(' ').trim()) {
+      appendAIMessage('bot', '🖼️ Kiski image chahiye? Naam ke saath likho, jaise: Mitochondria diagram, Human heart diagram, APJ Abdul Kalam photo.', false);
+      return true;
+    }
   }
+  aiImgPrefLang = ctxMode ? aiImgQuestionLang() : '';
   const epoch = aiChatEpoch;
   const wantDiagram = AIIMG_DIAGRAM_RE.test(text);
   aiImgAttaching = true; // AI kaam kar raha hai — tab tak naya message block
-  const loadingEl = aiImgShowLoading('🤖 AI se image dhoondh raha hoon...');
-  aiImgSmartRun(text, wantDiagram, epoch, loadingEl).catch(() => {
+  const loadingEl = aiImgShowLoading(ctxMode ? '🧠 Question analyse karke best image dhoondh raha hoon...' : '🤖 AI se image dhoondh raha hoon...');
+  aiImgSmartRun(text, wantDiagram, epoch, loadingEl, ctxText).catch(() => {
     if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
     if (epoch !== aiChatEpoch) return;
     appendAIMessage('bot', '⚠️ Image laane mein dikkat aayi (internet check karo) — dobara try karo.', false);
