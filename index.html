@@ -8678,7 +8678,7 @@ async function findVideoTime() {
   const searchUrl = 'https://www.youtube.com/results?search_query=' +
     encodeURIComponent((tag || ((currentSubject ? currentSubject + ' ' : '') + words)) + ' solution');
 
-  appendAIMessage('user', '\u25B6 Is question ka video + timing dhundo');
+  appendAIMessage('user', '\u25B6 Is shift ka video dhundo');
   const requestEpoch = aiChatEpoch;
   isAIGenerating = true;
   showAITyping(true);
@@ -8706,7 +8706,7 @@ async function findVideoTime() {
     msg = String((j && j.text) || '').trim();
   } catch (err) {
     if (requestEpoch !== aiChatEpoch) return;
-    msg = 'Video + timing nahi mil payi (' + ((err && err.name === 'AbortError') ? 'time out' : 'error: ' + String((err && err.message) || err).slice(0, 120)) +
+    msg = 'Video nahi mil paya (' + ((err && err.name === 'AbortError') ? 'time out' : 'error: ' + String((err && err.message) || err).slice(0, 120)) +
       '). Seedha YouTube search kholo: ' + searchUrl;
   } finally {
     clearTimeout(tid);
