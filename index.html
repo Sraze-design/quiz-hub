@@ -2117,9 +2117,11 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 .ai-msg.bot.ai-scan-status { font-size: 13px; }
 .ai-msg.bot a{color:#2563eb;text-decoration:underline;word-break:break-all}
-.ai-diagram{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px;margin:8px 0;max-width:340px}
-.ai-diagram-svg{width:100%;height:auto;display:block}
-.ai-diagram-note{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:8px 10px;margin:8px 0;font-size:12.5px;line-height:1.45;max-width:340px}
+.ai-wimg-wrap{display:flex;gap:8px;overflow-x:auto;margin:2px 0 4px;-webkit-overflow-scrolling:touch}
+.ai-wimg{flex:0 0 auto;width:min(300px,80vw);background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px}
+.ai-wimg img{width:100%;max-height:240px;object-fit:contain;display:block;border-radius:8px;background:#fff}
+.ai-wimg-cap{font-size:11.5px;color:#475569;margin-top:5px;line-height:1.35;word-break:break-word}
+.ai-wimg-cap a{color:#2563eb;text-decoration:underline}
 .ai-msg.bot pre {
   background: #f1f5f9;
   padding: 8px 12px;
@@ -8617,6 +8619,9 @@ function sendUserMessage() {
 
   appendAIMessage("user", text, false, imageForDisplay);
 
+  // "mitochondria ka diagram", "Kalam ki photo" jaise image requests AI ko bheje bina Wikipedia se.
+  if (!selectedAIImageBase64 && aiWikiImageIntercept(text)) return;
+
 // Quiz Card Mode only activates for this exact manually-sent special prompt.
 const isQuizCardTriggerMessage = (text === QUIZ_CARD_TRIGGER_PROMPT);
 if (isQuizCardTriggerMessage) {
@@ -8638,7 +8643,7 @@ if (text) {
     parts.push({
         // The hidden formatting instruction is appended only to the payload sent to Gemini,
         // never to what's shown in the chat bubble, so normal AI chat stays exactly the same.
-        text: isQuizCardTriggerMessage ? (text + QUIZ_CARD_FORMAT_INSTRUCTION) : (text + takeDiagramInstruction())
+        text: isQuizCardTriggerMessage ? (text + QUIZ_CARD_FORMAT_INSTRUCTION) : text
     });
 }
 
@@ -8666,63 +8671,181 @@ function sendQuickPrompt(promptText) {
   sendUserMessage();
 }
 
-// ===== 📐 Diagram button =====
-// Click = ek hi tap mein figure. Input box mein kuch likha hai to usi ka diagram banta hai
-// (jaise "triangle ABC, ∠B = 90°, ∠A = 40°"); khali hai to current question (text + figure image)
-// ka diagram banta hai. Hidden instruction sirf API payload mein jaati hai, chat bubble mein nahi.
-const DIAGRAM_MODE_MARKER = '[DIAGRAM MODE]';
-let diagramInstructionNext = '';
-let diagramButtonBusy = false;
-function takeDiagramInstruction() {
-  const s = diagramInstructionNext;
-  diagramInstructionNext = '';
-  return s;
+// ===== 🖼️ Wikipedia / Wikimedia image finder =====
+// Chat mein "mitochondria ka diagram", "APJ Abdul Kalam ki photo", "heart image de do" jaisa
+// likhne par request AI ko bheje bina seedha Wikipedia / Wikimedia Commons se image uthakar
+// chat mein dikhayi jaati hai (free, no API key, bahut tez).
+const AIIMG_WORD_RE = /(^|[^a-z])(image|images|img|photo|photos|foto|pic|pics|picture|pictures|diagram|diagrams|figure|fig|chitra|chitr|tasveer|tasvir)(?![a-z])|चित्र|तस्वीर|फोटो|इमेज|डायग्राम|आकृति|फिगर/i;
+const AIIMG_DIAGRAM_RE = /(^|[^a-z])(diagram|diagrams|figure|fig|chitra|chitr)(?![a-z])|डायग्राम|आकृति|फिगर|चित्र/i;
+// Agar user current question/figure ke baare mein pooch raha hai to ye normal AI chat hi rahega.
+const AIIMG_EXCLUDE_RE = /explain|samjh|samajh|solve|(^|[^a-z])hal([^a-z]|$)|kitn[aei]|kaun|kyun|kyu([^a-z]|$)|why|how many|calculate|answer|option|(^|[^a-z])iss? (figure|fig|diagram|image|photo|chitra)|this (figure|diagram|image|photo)|इस (चित्र|आकृति|फिगर|डायग्राम|इमेज|फोटो)|समझ|हल |कितन|कौन|क्यों/i;
+const AIIMG_STOP = new Set((
+  'image images img photo photos foto pic pics picture pictures diagram diagrams figure fig chitra chitr tasveer tasvir ' +
+  'ka ki ke ko ek aur ya ye yeh wo woh hai h hain bhi kisi koi ' +
+  'de do dena dedo dijiye dijie dijiyega dikha dikhao dikhaiye dikhana dikhado bhej bhejo bhejiye bhejna bhejdo ' +
+  'show send give get find search need want me mujhe mujhko mereko muje chahiye chaiye chahie please plz pls ' +
+  'of the a an for to and with label labels labeled labelled wala wali wale se mein ' +
+  'laga lagao lga la na zara jaldi fast quick quickly sakte sakta sakti ho kar karo kr kro bata batao btao ' +
+  'का की के को एक और या यह ये वह वो है हैं भी कोई दो दे दीजिए दीजिये दिखाओ दिखाइए दिखा भेजो भेजिए भेज ' +
+  'चित्र तस्वीर फोटो इमेज डायग्राम आकृति फिगर मुझे चाहिए चाहिये प्लीज़ बताओ कर करो दें से में'
+).split(/\s+/).filter(Boolean));
+
+function aiImgSubject(text) {
+  const toks = String(text).replace(/[?!.,;:()"“”]/g, ' ').split(/\s+/).filter(Boolean);
+  return toks.filter((t) => !AIIMG_STOP.has(t.toLowerCase()));
 }
-function buildDiagramInstruction() {
-  const fence = '\u0060\u0060\u0060';
-  return '\n\n' + DIAGRAM_MODE_MARKER + ' Draw the figure for the above as EXACTLY ONE ' + fence + 'diagram block (JSON), then 1-2 short lines of explanation. ' +
-    'Use the FACTS-ONLY format: do NOT write "steps" and do NOT give coordinates - the app solves the exact figure from your facts. ' +
-    'Format (example for a DIFFERENT question): {"lines":[["A","B"],["B","C"],["A","C"],["A","D"]],"dashed":[],"between":[["D","B","C"]],"rightAngles":[["D","A","B"]],"angles":[["B","A","C","50\u00B0"],["C","A","B","60\u00B0"],["A","D","B","?"]],"equal":[],"parallel":[],"equalAngles":[],"collinear":[],"lengths":[["B","C","8 cm"]]}. ' +
-    'Rules: (1) lines/dashed = every segment to draw. ' +
-    '(2) EVERY point that the question says lies ON a side/segment (D on AC, E on BC, midpoint, foot of perpendicular, intersection of two segments...) MUST be listed in "between" as [point,end1,end2] - re-read the question and check each such statement; a point on an extension (produced line) goes in "collinear" [point,end1,end2] and the extra piece must be drawn too. ' +
-    '(3) angles = [vertex,arm1,arm2,"label"] with the numeric label exactly as GIVEN, and "?" for the unknown angle. ' +
-    '(4) perpendicular = "rightAngles" [vertex,arm1,arm2]. ' +
-    '(5) equal sides = "equal" groups e.g. [[["A","B"],["A","C"]]]; equal angles (bisector etc.) = "equalAngles" groups of [vertex,arm1,arm2]; parallel sides = "parallel" groups; given side lengths = "lengths". ' +
-    '(6) Use only GIVEN numbers. Do NOT solve the question and do NOT reveal the answer. (7) Valid JSON only. ' +
-    'If the given facts contradict each other, say so in words with no diagram block.';
-}
-async function requestDiagram() {
-  if (isAIGenerating || diagramButtonBusy) return;
-  diagramButtonBusy = true;
+
+async function aiImgFetchJSON(url, ms) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), ms || 7000);
   try {
-    const inputEl = document.getElementById('aiInput');
-    const typed = inputEl.value.trim();
-    let shown = typed;
-    let extra = '';
-    if (!typed && !selectedAIImageBase64) {
-      let q = null;
-      try { q = getCurrentQuestionContext(); } catch (e) {}
-      if (!q) {
-        appendAIMessage('bot', '📐 Diagram ke liye input box mein likho kya banana hai (jaise: triangle ABC, ∠B = 90°, ∠A = 40°), ya koi question kholo.', false);
-        return;
-      }
-      shown = '📐 Is question ka diagram banao';
-      const opts = (q.options || []).map((o, i) => String.fromCharCode(65 + i) + '. ' + aiHtmlToPlainUnicode(String(o))).join('  ');
-      extra = '\n\nQuestion: ' + String(q.questionText || '').trim() + (opts ? '\nOptions: ' + opts : '');
-      if (q.imageSource) {
-        q = await hydrateQuestionImageData(q);
-        const m = q && q.imageData ? String(q.imageData).match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/) : null;
-        if (m) { selectedAIImageMime = m[1].toLowerCase(); selectedAIImageBase64 = m[2].replace(/\s+/g, ''); }
-      }
-      if (isAIGenerating) return;
-    }
-    inputEl.value = shown;
-    diagramInstructionNext = extra + buildDiagramInstruction();
-    sendUserMessage();
-    diagramInstructionNext = '';
+    const r = await fetch(url, { signal: ctl.signal });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch (e) {
+    return null;
   } finally {
-    diagramButtonBusy = false;
+    clearTimeout(timer);
   }
+}
+
+function aiImgClean(h) {
+  return String(h || '').replace(/<[^>]*>/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#039;/g, "'")
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+}
+
+// Wikimedia Commons file search (diagrams, labelled figures, photos)
+async function aiImgCommons(q, limit) {
+  const url = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*' +
+    '&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch=' + encodeURIComponent(q) +
+    '&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName';
+  const j = await aiImgFetchJSON(url);
+  const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
+  pages.sort((a, b) => (a.index || 0) - (b.index || 0));
+  const out = [];
+  for (const pg of pages) {
+    const ii = pg.imageinfo && pg.imageinfo[0];
+    if (!ii || !/^image\/(svg\+xml|png|jpeg|gif|webp)$/.test(ii.mime || '')) continue;
+    const em = ii.extmetadata || {};
+    out.push({
+      src: ii.thumburl || ii.url,
+      full: ii.url,
+      page: ii.descriptionurl,
+      title: String(pg.title || '').replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
+      license: em.LicenseShortName ? aiImgClean(em.LicenseShortName.value) : '',
+      source: 'Wikimedia Commons'
+    });
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
+// Wikipedia: sirf TOP search result ka main image (galat insaan/cheez ki photo na aaye)
+async function aiImgWikipedia(q, lang) {
+  const url = 'https://' + lang + '.wikipedia.org/w/api.php?action=query&format=json&origin=*' +
+    '&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=' + encodeURIComponent(q) +
+    '&prop=pageimages|info&piprop=thumbnail|original&pithumbsize=800&inprop=url';
+  const j = await aiImgFetchJSON(url);
+  const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
+  pages.sort((a, b) => (a.index || 0) - (b.index || 0));
+  const top = pages[0];
+  if (!top || !top.thumbnail || !top.thumbnail.source) return [];
+  return [{
+    src: top.thumbnail.source,
+    full: (top.original && top.original.source) || top.thumbnail.source,
+    page: top.fullurl,
+    title: top.title,
+    license: '',
+    source: (lang === 'hi' ? 'Hindi ' : '') + 'Wikipedia'
+  }];
+}
+
+async function aiImgSearch(subject, wantDiagram) {
+  const hasDev = /[\u0900-\u097F]/.test(subject);
+  const langs = hasDev ? ['hi', 'en'] : ['en'];
+  // Sab requests ek saath chalti hain (tez); phir intent ke hisaab se best result chunte hain.
+  const wikiP = Promise.all(langs.map((l) => aiImgWikipedia(subject, l)));
+  const comP = aiImgCommons(wantDiagram ? subject + ' diagram' : subject, 3);
+  const [wikiAll, com] = await Promise.all([wikiP, comP]);
+  const wiki = [].concat.apply([], wikiAll);
+  return wantDiagram ? (com.length ? com : wiki) : (wiki.length ? wiki : com);
+}
+
+function aiImgRender(subject, results) {
+  const chatBody = document.getElementById('aiChatBody');
+  if (!chatBody) return;
+  const msg = document.createElement('div');
+  msg.className = 'ai-msg bot';
+  const wrap = document.createElement('div');
+  wrap.className = 'ai-wimg-wrap notranslate';
+  wrap.setAttribute('translate', 'no');
+  results.forEach((r) => {
+    const card = document.createElement('div');
+    card.className = 'ai-wimg';
+    const link = document.createElement('a');
+    link.href = r.full || r.src;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    const img = document.createElement('img');
+    img.src = r.src;
+    img.alt = r.title || subject;
+    img.loading = 'lazy';
+    img.onload = () => { chatBody.scrollTop = chatBody.scrollHeight; };
+    img.onerror = () => { card.style.display = 'none'; };
+    link.appendChild(img);
+    card.appendChild(link);
+    const cap = document.createElement('div');
+    cap.className = 'ai-wimg-cap';
+    cap.appendChild(document.createTextNode((r.title || subject) + ' · '));
+    const src = document.createElement('a');
+    src.href = r.page || r.full || r.src;
+    src.target = '_blank';
+    src.rel = 'noopener noreferrer';
+    src.textContent = r.source + (r.license ? ' (' + r.license + ')' : '');
+    cap.appendChild(src);
+    card.appendChild(cap);
+    wrap.appendChild(card);
+  });
+  msg.appendChild(wrap);
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// true = request handle ho gayi (AI ko nahi bhejni); false = normal AI chat
+function aiWikiImageIntercept(text) {
+  text = String(text || '').trim();
+  if (!text || text.length > 160 || /QUIZDATA/.test(text)) return false;
+  if (!AIIMG_WORD_RE.test(text) || AIIMG_EXCLUDE_RE.test(text)) return false;
+  const toks = aiImgSubject(text);
+  if (toks.length > 8) return false;
+  const subject = toks.join(' ').trim();
+  if (!subject) {
+    appendAIMessage('bot', '🖼️ Kiski image chahiye? Naam ke saath likho, jaise: Mitochondria diagram, Human heart diagram, APJ Abdul Kalam photo.', false);
+    return true;
+  }
+  const epoch = aiChatEpoch;
+  const wantDiagram = AIIMG_DIAGRAM_RE.test(text);
+  // Context ke liye history mein ek chhota note (user + model ek saath, taaki order na bigde).
+  aiChatHistory.push({ role: 'user', parts: [{ text: text }] });
+  aiChatHistory.push({ role: 'model', parts: [{ text: '[The app fetched an image from Wikipedia/Wikimedia for: ' + subject + ']' }] });
+  appendAIMessage('bot', '🔍 Image dhoondh raha hoon...', false);
+  const chatBody = document.getElementById('aiChatBody');
+  const loadingEl = chatBody && chatBody.lastElementChild;
+  aiImgSearch(subject, wantDiagram).then((results) => {
+    if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
+    if (epoch !== aiChatEpoch) return;
+    if (results && results.length) {
+      aiImgRender(subject, results);
+    } else {
+      appendAIMessage('bot', '😕 "' + subject + '" ki image nahi mili. English naam se try karo (jaise: Mitochondria diagram, Human heart diagram, Kidney nephron diagram).', false);
+    }
+  }).catch(() => {
+    if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
+    if (epoch !== aiChatEpoch) return;
+    appendAIMessage('bot', '⚠️ Image laane mein dikkat aayi (internet check karo) — dobara try karo.', false);
+  });
+  return true;
 }
 
 // Video + timing: asks the Worker to find the shift's solution video and the minute where
@@ -8856,13 +8979,7 @@ TEACHING RULES:
 ${flashMindRule}
 5. GK/Current Affairs/English/Science/History/Polity: direct, factual and exam-focused. Explain the correct answer briefly; for GK, briefly state why the other options are not correct/what they refer to, and end with exactly one closely related exam-useful fact labeled **👉 रोचक तथ्य:**. Do not add a maths-style trick/formula.
 6. Do not repeat the full question and all options at the top unless the user explicitly asks for them. Start directly with the answer/solution.
-7. DIAGRAM RULE (exception to "plain text only"): When the user asks for a diagram/figure/drawing/chitra, NEVER draw ASCII art and NEVER guess coordinates. Output exactly ONE block, then 1-2 lines of explanation. You describe HOW TO CONSTRUCT the figure (like ruler + protractor steps); the app computes the exact points with trigonometry and VERIFIES every fact you list. If any fact is wrong or impossible, NO figure is shown, so be precise. Format sample (build your own for the actual question):
-\`\`\`diagram
-{"steps":[["P","A",0,0],["P","C",10,0],["L","AC","A","C"],["on","D","A","C","?"],["perp","BD","D","AC"],["rot","CB","C","A",19],["X","B","BD","CB"],["rot","AE","A","C",57],["X","E","AE","CB"]],"lines":[["A","B"],["B","C"],["A","C"],["A","E"]],"dashed":[["B","D"]],"rightAngles":[["D","B","A"]],"angles":[["B","D","C","71°"],["A","C","E","57°"],["C","A","B","19°"],["E","A","B","?"]],"between":[["D","A","C"],["E","B","C"]]}
-\`\`\`
-STEPS (each is an array; points are single letters; y axis points UP): ["P","A",0,0] fixed point (start with two such points, base horizontal). ["L","l1","A","C"] line through 2 points. ["perp","l2","P","l1"] line through P perpendicular to line l1. ["par","l2","P","l1"] parallel to l1. ["rot","l2","V","T",deg] line through V making deg degrees with direction V->T (both turn directions are tried automatically). ["abs","l","V",deg] line through V with absolute direction. ["bis","l","V","A","B"] bisector of angle AVB. ["X","P","l1","l2"] intersection point of two lines. ["foot","H","P","l1"] foot of perpendicular from P. ["on","D","A","C","?"] point on segment AC ("?" = app picks the best-looking position; or give a fixed fraction like 0.5). ["mid","M","A","C"] midpoint. ["ext","E","A","B",1.5] point on ray AB at 1.5 x AB from A. ["polar","P","V",dist,deg] absolute direction. ["polarRel","P","V","T",dist,deg] at distance dist from V, deg degrees from direction V->T. ["dd","A","B",5,"C",6] point at distance 5 from B and 6 from C (use for triangles with given sides, with the REAL side lengths).
-FACTS (all verified by the app): lines = solid segments, dashed = dashed segments, rightAngles = [vertex,arm1,arm2], angles = [vertex,arm1,arm2,"label"] (a numeric label like "71°" is checked exactly; use "?" or "x" for an unknown angle), between = [P,A,B] (P lies strictly inside segment AB; list it for EVERY point on a side), equal = [[["A","B"],["C","D"]]] groups of equal sides, parallel = [[["A","B"],["C","D"]]], lengths = [["A","B","5 cm"]] (numeric ones must be in proportion).
-RULES: build the figure from the GIVEN data only (given angles via rot/polarRel, given sides via dd/polar); never use an unknown value as a number; every point used anywhere must be created by a step. If the data is inconsistent or you cannot construct it, answer in words WITHOUT a diagram block. Valid JSON only, no comments.
+7. IMAGE/DIAGRAM RULE: The app itself fetches real images/diagrams from Wikipedia when the user asks for one. NEVER draw ASCII art and NEVER invent coordinates or a figure; if a figure would help, just describe it in words.
 8. VIDEO RULE: If the user asks for a video solution / YouTube link, use Google Search (if available) and give ONLY real links that the search actually returned. NEVER invent or guess a YouTube URL. Give a timestamp only if the search result clearly shows it; otherwise say the exact timing could not be confirmed and suggest one short YouTube search phrase. Do not say you are "only a text-based teacher".
 9. SYMBOLS: never write LaTeX like \\angle, \\circ, \\triangle, and never use ^ for degrees. Write the real symbols directly: ∠ABC, 90°, △ABC, ⊥.
 
@@ -8872,13 +8989,6 @@ For automatic question explanations, independently solve first, then reconcile w
       },
       contents: aiChatHistory
     };
-
-    // Diagram button / diagram request: the Worker gives these a longer per-call limit.
-    try {
-      const lastU = [...aiChatHistory].reverse().find((c) => c && c.role === 'user');
-      const lastT = ((lastU && lastU.parts) || []).map((p) => (typeof p.text === 'string' ? p.text : '')).join(' ');
-      if (lastT.indexOf(DIAGRAM_MODE_MARKER) !== -1) payload.diagramMode = true;
-    } catch (e) {}
 
     // Exam/PYQ reconciliation is available only for the automatic question
     // explanation. Manual AI chat remains fully independent of quiz answer keys.
@@ -9296,741 +9406,8 @@ function normalizeHindiMixedScript(txt) {
 
 
 
-// ===== Exact diagram engine (construction based) =====
-// The model does NOT give coordinates. It gives CONSTRUCTION STEPS (like a ruler+protractor
-// recipe) and the facts that must hold. Code computes exact points with trigonometry and
-// line intersections, then VERIFIES every given fact (angles, right angles, equal sides,
-// parallel, point-on-segment, side-length ratios). If anything fails -> no figure (never a wrong one).
-var DG_EPS = 1e-9;
-var DG_POINT_OPS = { P: 1, on: 1, X: 1, foot: 1, ext: 1, mid: 1, polar: 1, polarRel: 1, dd: 1 };
-var DG_LINE_OPS = { L: 1, rot: 1, abs: 1, perp: 1, par: 1, bis: 1 };
-var DG_SIGN_OPS = { rot: 1, polarRel: 1, dd: 1 };
-
-function dgSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
-function dgDot(a, b) { return a[0] * b[0] + a[1] * b[1]; }
-function dgLen(v) { return Math.hypot(v[0], v[1]); }
-function dgUnit(v) { var l = dgLen(v); return l < DG_EPS ? null : [v[0] / l, v[1] / l]; }
-function dgRot(v, deg) {
-  var r = deg * Math.PI / 180, c = Math.cos(r), s = Math.sin(r);
-  return [v[0] * c - v[1] * s, v[0] * s + v[1] * c];
-}
-function dgInter(l1, l2) {
-  var det = l1.d[0] * l2.d[1] - l1.d[1] * l2.d[0];
-  if (Math.abs(det) < 1e-9) return null;
-  var dx = l2.p[0] - l1.p[0], dy = l2.p[1] - l1.p[1];
-  var t = (dx * l2.d[1] - dy * l2.d[0]) / det;
-  return [l1.p[0] + t * l1.d[0], l1.p[1] + t * l1.d[1]];
-}
-function dgAngleAt(v, a, b) {
-  var u = dgUnit(dgSub(a, v)), w = dgUnit(dgSub(b, v));
-  if (!u || !w) return NaN;
-  return Math.acos(Math.max(-1, Math.min(1, dgDot(u, w)))) * 180 / Math.PI;
-}
-function dgLabelNum(s) {
-  var m = String(s == null ? '' : s).match(/^\s*(\d+(?:\.\d+)?)\s*(°|deg|degrees?)?\s*$/i);
-  return m ? +m[1] : null;
-}
-function dgLenNum(s) {
-  var m = String(s == null ? '' : s).match(/^\s*(\d+(?:\.\d+)?)\s*([a-zA-Z]{0,3})\s*$/);
-  return m ? +m[1] : null;
-}
-
-function dgCountParams(steps) {
-  var k = 0, m = 0;
-  steps.forEach(function (s) {
-    if (DG_SIGN_OPS[s[0]]) k++;
-    if (s[0] === 'on' && !(typeof s[4] === 'number')) m++;
-  });
-  return { k: k, m: m };
-}
-
-function dgConstruct(steps, signs, tvals) {
-  var pts = {}, lines = {}, si = 0, ti = 0;
-  function P(n) { var p = pts[n]; if (!p) throw new Error('unknown point ' + n); return p; }
-  function Lg(n) { var l = lines[n]; if (!l) throw new Error('unknown line ' + n); return l; }
-  function num(v) { v = +v; if (!isFinite(v)) throw new Error('bad number'); return v; }
-  function put(n, p) {
-    if (!p || !isFinite(p[0]) || !isFinite(p[1])) throw new Error('degenerate construction at ' + n);
-    pts[n] = p;
-  }
-  steps.forEach(function (s) {
-    var op = s[0], a, b, d, l, sg;
-    switch (op) {
-      case 'P': put(s[1], [num(s[2]), num(s[3])]); break;
-      case 'L':
-        a = P(s[2]); b = P(s[3]); d = dgUnit(dgSub(b, a));
-        if (!d) throw new Error('line of equal points');
-        lines[s[1]] = { p: a, d: d }; break;
-      case 'rot':
-        a = P(s[2]); b = P(s[3]); d = dgUnit(dgSub(b, a)); sg = signs[si++];
-        if (!d) throw new Error('rot base');
-        lines[s[1]] = { p: a, d: dgRot(d, sg * num(s[4])) }; break;
-      case 'abs':
-        a = P(s[2]); lines[s[1]] = { p: a, d: dgRot([1, 0], num(s[3])) }; break;
-      case 'perp':
-        l = Lg(s[3]); lines[s[1]] = { p: P(s[2]), d: [-l.d[1], l.d[0]] }; break;
-      case 'par':
-        l = Lg(s[3]); lines[s[1]] = { p: P(s[2]), d: l.d }; break;
-      case 'bis': {
-        var v = P(s[2]), u1 = dgUnit(dgSub(P(s[3]), v)), u2 = dgUnit(dgSub(P(s[4]), v));
-        if (!u1 || !u2) throw new Error('bis');
-        d = dgUnit([u1[0] + u2[0], u1[1] + u2[1]]) || [-u1[1], u1[0]];
-        lines[s[1]] = { p: v, d: d }; break;
-      }
-      case 'X': put(s[1], dgInter(Lg(s[2]), Lg(s[3]))); break;
-      case 'foot':
-        a = P(s[2]); l = Lg(s[3]);
-        var tt = dgDot(dgSub(a, l.p), l.d);
-        put(s[1], [l.p[0] + tt * l.d[0], l.p[1] + tt * l.d[1]]); break;
-      case 'on': {
-        a = P(s[2]); b = P(s[3]);
-        var t = (typeof s[4] === 'number') ? s[4] : tvals[ti++];
-        put(s[1], [a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])]); break;
-      }
-      case 'ext': {
-        a = P(s[2]); b = P(s[3]); var k = num(s[4]);
-        put(s[1], [a[0] + k * (b[0] - a[0]), a[1] + k * (b[1] - a[1])]); break;
-      }
-      case 'mid':
-        a = P(s[2]); b = P(s[3]); put(s[1], [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]); break;
-      case 'polar':
-        a = P(s[2]); d = dgRot([1, 0], num(s[4]));
-        put(s[1], [a[0] + num(s[3]) * d[0], a[1] + num(s[3]) * d[1]]); break;
-      case 'polarRel':
-        a = P(s[2]); b = P(s[3]); d = dgUnit(dgSub(b, a)); sg = signs[si++];
-        if (!d) throw new Error('polarRel base');
-        d = dgRot(d, sg * num(s[5]));
-        put(s[1], [a[0] + num(s[4]) * d[0], a[1] + num(s[4]) * d[1]]); break;
-      case 'dd': {
-        a = P(s[2]); var da = num(s[3]); b = P(s[4]); var db = num(s[5]); sg = signs[si++];
-        var dd = dgLen(dgSub(b, a)), u = dgUnit(dgSub(b, a));
-        if (!u || da <= 0 || db <= 0) throw new Error('dd');
-        var aa = (da * da - db * db + dd * dd) / (2 * dd), h2 = da * da - aa * aa;
-        if (h2 < -1e-9 * dd * dd) throw new Error('triangle inequality fails');
-        var h = Math.sqrt(Math.max(0, h2));
-        put(s[1], [a[0] + aa * u[0] - sg * h * u[1], a[1] + aa * u[1] + sg * h * u[0]]); break;
-      }
-      default: throw new Error('unknown step ' + op);
-    }
-  });
-  return pts;
-}
-
-// returns list of failed-fact strings (empty = everything verified)
-function dgCheck(spec, pts) {
-  var f = [], names = Object.keys(pts), i, j;
-  var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
-  names.forEach(function (n) {
-    minx = Math.min(minx, pts[n][0]); maxx = Math.max(maxx, pts[n][0]);
-    miny = Math.min(miny, pts[n][1]); maxy = Math.max(maxy, pts[n][1]);
-  });
-  var diag = Math.hypot(maxx - minx, maxy - miny) || 1;
-  for (i = 0; i < names.length; i++) for (j = i + 1; j < names.length; j++) {
-    if (dgLen(dgSub(pts[names[i]], pts[names[j]])) < 1e-3 * diag) f.push('points ' + names[i] + ',' + names[j] + ' coincide');
-  }
-  var arr = function (x) { return Array.isArray(x) ? x : []; };
-  arr(spec.angles).forEach(function (a) {
-    var want = dgLabelNum(a[3]);
-    if (want == null) return;
-    var got = dgAngleAt(pts[a[0]], pts[a[1]], pts[a[2]]);
-    if (!(Math.abs(got - want) <= 0.3)) f.push('angle ' + a[1] + a[0] + a[2] + ' is ' + (isNaN(got) ? '?' : got.toFixed(1)) + ' not ' + want);
-  });
-  arr(spec.rightAngles).forEach(function (a) {
-    var got = dgAngleAt(pts[a[0]], pts[a[1]], pts[a[2]]);
-    if (!(Math.abs(got - 90) <= 0.3)) f.push('right angle at ' + a[0] + ' is ' + (isNaN(got) ? '?' : got.toFixed(1)));
-  });
-  arr(spec.between).forEach(function (b) {
-    var p = pts[b[0]], a = pts[b[1]], c = pts[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) || 1;
-    var t = dgDot(dgSub(p, a), ac) / L2;
-    var cross = Math.abs((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2);
-    if (cross > 1e-4 * diag) f.push(b[0] + ' not on line ' + b[1] + b[2]);
-    else if (!(t > 0.02 && t < 0.98)) f.push(b[0] + ' not inside segment ' + b[1] + b[2]);
-  });
-  arr(spec.equal).forEach(function (g) {
-    var ref = null;
-    arr(g).forEach(function (s) {
-      var L = dgLen(dgSub(pts[s[0]], pts[s[1]]));
-      if (ref == null) ref = L; else if (!(Math.abs(L - ref) <= 0.005 * Math.max(L, ref))) f.push('unequal ' + s[0] + s[1]);
-    });
-  });
-  arr(spec.parallel).forEach(function (g) {
-    var d0 = null;
-    arr(g).forEach(function (s) {
-      var d = dgUnit(dgSub(pts[s[1]], pts[s[0]]));
-      if (!d) { f.push('parallel degenerate'); return; }
-      if (!d0) d0 = d; else if (Math.abs(d0[0] * d[1] - d0[1] * d[0]) > 0.005) f.push('not parallel ' + s[0] + s[1]);
-    });
-  });
-  arr(spec.collinear).forEach(function (b) {
-    if (!Array.isArray(b) || !pts[b[0]] || !pts[b[1]] || !pts[b[2]]) return;
-    var p = pts[b[0]], a = pts[b[1]], c = pts[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) || 1;
-    var cross = Math.abs((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2);
-    if (cross > 1e-4 * diag) f.push(b[0] + ' not on line ' + b[1] + b[2]);
-  });
-  arr(spec.equalAngles).forEach(function (g) {
-    var ref = null;
-    arr(g).forEach(function (t) {
-      if (!Array.isArray(t) || !pts[t[0]] || !pts[t[1]] || !pts[t[2]]) return;
-      var v = dgAngleAt(pts[t[0]], pts[t[1]], pts[t[2]]);
-      if (ref == null) ref = v; else if (!(Math.abs(v - ref) <= 0.3)) f.push('angle ' + t[1] + t[0] + t[2] + ' not equal to the others in its group');
-    });
-  });
-  // Collinearity sanity: a point that is an endpoint of a DRAWN segment and lies on the line of
-  // another DRAWN segment, but OUTSIDE it, must be joined to it by drawn segments. Otherwise the
-  // figure shows a point floating off the line it is supposed to be on (e.g. "E is on BC" but E
-  // sits beyond B with no E-B segment). Candidates failing this are rejected, so the search picks
-  // a configuration where such a point really lies on the segment.
-  (function () {
-    var drawn = [].concat(arr(spec.lines), arr(spec.dashed)).filter(function (s) {
-      return Array.isArray(s) && pts[s[0]] && pts[s[1]] && s[0] !== s[1];
-    });
-    var ends = {};
-    drawn.forEach(function (s) { ends[s[0]] = 1; ends[s[1]] = 1; });
-    function segDist(p, a, b) {
-      var ab = dgSub(b, a), L2 = dgDot(ab, ab) || 1;
-      var t = Math.max(0, Math.min(1, dgDot(dgSub(p, a), ab) / L2));
-      return dgLen(dgSub(p, [a[0] + t * ab[0], a[1] + t * ab[1]]));
-    }
-    function gapCovered(p, w) {
-      for (var k = 1; k < 8; k++) {
-        var q = [p[0] + (w[0] - p[0]) * k / 8, p[1] + (w[1] - p[1]) * k / 8], ok = false;
-        for (var m = 0; m < drawn.length && !ok; m++) {
-          if (segDist(q, pts[drawn[m][0]], pts[drawn[m][1]]) < 1e-4 * diag) ok = true;
-        }
-        if (!ok) return false;
-      }
-      return true;
-    }
-    Object.keys(ends).forEach(function (n) {
-      var P = pts[n];
-      drawn.forEach(function (s) {
-        if (s[0] === n || s[1] === n) return;
-        var U = pts[s[0]], V = pts[s[1]], uv = dgSub(V, U), L2 = dgDot(uv, uv);
-        if (L2 < 1e-12) return;
-        var cross = Math.abs((P[0] - U[0]) * uv[1] - (P[1] - U[1]) * uv[0]) / Math.sqrt(L2);
-        if (cross > 1e-6 * diag) return;
-        var t = dgDot(dgSub(P, U), uv) / L2;
-        if (t >= -1e-9 && t <= 1 + 1e-9) return;
-        var wn = t < 0 ? s[0] : s[1];
-        if (!gapCovered(P, pts[wn])) {
-          f.push(n + ' is on line ' + s[0] + s[1] + ' but outside it and ' + n + wn + ' is not drawn (if ' + n + ' must lie ON ' + s[0] + s[1] + ', list it in between and construct it so it falls inside; if the line is extended, draw ' + n + wn + ')');
-        }
-      });
-    });
-  })();
-  var ratio = null;
-  arr(spec.lengths).forEach(function (a) {
-    var want = dgLenNum(a[2]);
-    if (want == null || want <= 0) return;
-    var r = dgLen(dgSub(pts[a[0]], pts[a[1]])) / want;
-    if (ratio == null) ratio = r; else if (!(Math.abs(r - ratio) <= 0.015 * ratio)) f.push('length ' + a[0] + a[1] + ' not to scale');
-  });
-  return f;
-}
-
-function dgScore(spec, pts) {
-  var names = Object.keys(pts), i, j;
-  var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
-  names.forEach(function (n) {
-    minx = Math.min(minx, pts[n][0]); maxx = Math.max(maxx, pts[n][0]);
-    miny = Math.min(miny, pts[n][1]); maxy = Math.max(maxy, pts[n][1]);
-  });
-  var w = maxx - minx, h = maxy - miny, big = Math.max(w, h) || 1;
-  var minD = Infinity;
-  for (i = 0; i < names.length; i++) for (j = i + 1; j < names.length; j++) {
-    minD = Math.min(minD, dgLen(dgSub(pts[names[i]], pts[names[j]])));
-  }
-  var segs = [].concat(Array.isArray(spec.lines) ? spec.lines : [], Array.isArray(spec.dashed) ? spec.dashed : []);
-  var minAng = 180;
-  for (i = 0; i < segs.length; i++) for (j = i + 1; j < segs.length; j++) {
-    var s = segs[i], t = segs[j], v = null, a, b;
-    if (s[0] === t[0]) { v = s[0]; a = s[1]; b = t[1]; }
-    else if (s[0] === t[1]) { v = s[0]; a = s[1]; b = t[0]; }
-    else if (s[1] === t[0]) { v = s[1]; a = s[0]; b = t[1]; }
-    else if (s[1] === t[1]) { v = s[1]; a = s[0]; b = t[0]; }
-    if (v && pts[v] && pts[a] && pts[b]) {
-      var g = dgAngleAt(pts[v], pts[a], pts[b]);
-      if (g < minAng) minAng = g;
-    }
-  }
-  var aspect = Math.min(w, h) / big;
-  return Math.min(minD / big * 6, 1) * 1.6 + Math.min(minAng / 25, 1) + aspect * 0.4;
-}
-
-// Build: search sign combinations + free parameters, keep only candidates where ALL facts verify.
-function dgBuildSteps(spec) {
-  try {
-    if (!spec || !Array.isArray(spec.steps) || spec.steps.length < 2 || spec.steps.length > 60) return { ok: false, err: 'no steps' };
-    var steps = spec.steps, defined = {}, i;
-    for (i = 0; i < steps.length; i++) {
-      if (!Array.isArray(steps[i])) return { ok: false, err: 'bad step' };
-      var op = steps[i][0];
-      if (DG_POINT_OPS[op]) defined[steps[i][1]] = 1;
-      else if (!DG_LINE_OPS[op]) return { ok: false, err: 'unknown step ' + op };
-    }
-    var refs = [];
-    var take = function (arrs, from, to) {
-      (Array.isArray(arrs) ? arrs : []).forEach(function (a) {
-        if (!Array.isArray(a)) { refs.push('?'); return; }
-        for (var q = from; q < Math.min(to, a.length); q++) refs.push(a[q]);
-      });
-    };
-    take(spec.lines, 0, 2); take(spec.dashed, 0, 2); take(spec.angles, 0, 3);
-    take(spec.rightAngles, 0, 3); take(spec.between, 0, 3); take(spec.lengths, 0, 2);
-    ['equal', 'parallel'].forEach(function (key) {
-      (Array.isArray(spec[key]) ? spec[key] : []).forEach(function (g) {
-        (Array.isArray(g) ? g : []).forEach(function (s) { if (Array.isArray(s)) refs.push(s[0], s[1]); else refs.push('?'); });
-      });
-    });
-    for (i = 0; i < refs.length; i++) if (!defined[refs[i]]) return { ok: false, err: 'unknown point ' + refs[i] };
-
-    var cnt = dgCountParams(steps);
-    if (cnt.k > 11 || cnt.m > 4) return { ok: false, err: 'too complex' };
-    var grid = cnt.m <= 1 ? [0.04, 0.06, 0.08, 0.1, 0.13, 0.17, 0.22, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-      : cnt.m === 2 ? [0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 0.9] : [0.2, 0.4, 0.6, 0.8];
-    var tcombos = [[]];
-    for (i = 0; i < cnt.m; i++) {
-      var nt = [];
-      tcombos.forEach(function (c) { grid.forEach(function (g) { nt.push(c.concat([g])); }); });
-      tcombos = nt;
-    }
-    var nMask = cnt.k === 0 ? 1 : (1 << (cnt.k - 1)); // first sign fixed (+) : mirror symmetry
-    var best = null, bestFail = null;
-    for (var mask = 0; mask < nMask; mask++) {
-      var signs = [];
-      for (i = 0; i < cnt.k; i++) signs.push(i === 0 ? 1 : (((mask >> (i - 1)) & 1) ? -1 : 1));
-      for (var ci = 0; ci < tcombos.length; ci++) {
-        var pts, fails;
-        try { pts = dgConstruct(steps, signs, tcombos[ci]); } catch (e) { if (!bestFail) bestFail = { n: 99, msg: String(e.message || e) }; continue; }
-        fails = dgCheck(spec, pts);
-        if (fails.length) { if (!bestFail || fails.length < bestFail.n) bestFail = { n: fails.length, msg: fails.join('; ') }; continue; }
-        var sc = dgScore(spec, pts);
-        if (!best || sc > best.score) best = { pts: pts, score: sc };
-      }
-    }
-    if (!best) return { ok: false, err: bestFail ? bestFail.msg : 'no valid construction' };
-    // mirror so that the first defined point sits on the left side
-    var pts2 = best.pts, nm = Object.keys(pts2), cx = 0;
-    nm.forEach(function (n) { cx += pts2[n][0]; });
-    cx /= nm.length;
-    if (pts2[nm[0]][0] > cx + 1e-9) nm.forEach(function (n) { pts2[n] = [-pts2[n][0], pts2[n][1]]; });
-    // and so that most of the figure stands ABOVE the first two points (base at the bottom)
-    var cyAll = 0;
-    nm.forEach(function (n) { cyAll += pts2[n][1]; });
-    cyAll /= nm.length;
-    var baseY = nm.length > 1 ? (pts2[nm[0]][1] + pts2[nm[1]][1]) / 2 : pts2[nm[0]][1];
-    if (cyAll < baseY - 1e-9) nm.forEach(function (n) { pts2[n] = [pts2[n][0], -pts2[n][1]]; });
-    return { ok: true, pts: pts2, score: best.score };
-  } catch (e) {
-    return { ok: false, err: String(e && e.message || e) };
-  }
-}
-
-// pull every ```diagram block out of a reply and validate; true = no block or all blocks exact
-function dgReplyIsValid(text) {
-  var re = /```diagram\s*([\s\S]*?)```/g, m, any = false;
-  text = String(text || '');
-  while ((m = re.exec(text))) {
-    any = true;
-    try {
-      var spec = JSON.parse(m[1].trim().replace(/^json\s*/i, ''));
-      if (!dgBuild(spec).ok) return false;
-    } catch (e) { return false; }
-  }
-  return true;
-}
-
-// ===== Facts-only solver (no construction steps needed) =====
-// The model only lists WHAT is in the figure (segments, points on sides, angles, right angles,
-// equal / parallel sides, lengths). The app finds exact coordinates with a numeric solver
-// (Levenberg-Marquardt, many seeded restarts), then verifies every fact with dgCheck.
-function dgRng(seed) {
-  var a = seed >>> 0;
-  return function () {
-    a = (a + 0x6D2B79F5) >>> 0;
-    var t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-function dgAng(v, a, b) {
-  var ux = a[0] - v[0], uy = a[1] - v[1], wx = b[0] - v[0], wy = b[1] - v[1];
-  return Math.atan2(Math.abs(ux * wy - uy * wx), ux * wx + uy * wy);
-}
-function dgSolveLin(A, b, n) {
-  var M = [], i, j, k;
-  for (i = 0; i < n; i++) M.push(A[i].slice().concat([b[i]]));
-  for (i = 0; i < n; i++) {
-    var piv = i;
-    for (k = i + 1; k < n; k++) if (Math.abs(M[k][i]) > Math.abs(M[piv][i])) piv = k;
-    if (Math.abs(M[piv][i]) < 1e-14) return null;
-    var tmp = M[i]; M[i] = M[piv]; M[piv] = tmp;
-    for (k = i + 1; k < n; k++) {
-      var fct = M[k][i] / M[i][i];
-      for (j = i; j <= n; j++) M[k][j] -= fct * M[i][j];
-    }
-  }
-  var x = new Array(n);
-  for (i = n - 1; i >= 0; i--) {
-    var s = M[i][n];
-    for (j = i + 1; j < n; j++) s -= M[i][j] * x[j];
-    x[i] = s / M[i][i];
-  }
-  return x;
-}
-function dgLM(resf, z0, maxIter) {
-  var n = z0.length, z = z0.slice(), r = resf(z), m = r.length, j, i, k;
-  var sq = function (v) { var s = 0; for (var q = 0; q < v.length; q++) s += v[q] * v[q]; return s; };
-  var cost = sq(r), lam = 1e-2;
-  for (var it = 0; it < maxIter; it++) {
-    if (cost < 1e-20) break;
-    var J = [];
-    for (j = 0; j < n; j++) {
-      var h = 1e-6 * (1 + Math.abs(z[j])), old = z[j];
-      z[j] = old + h; var rj = resf(z); z[j] = old;
-      var col = new Array(m);
-      for (i = 0; i < m; i++) col[i] = (rj[i] - r[i]) / h;
-      J.push(col);
-    }
-    var A = [], g = new Array(n);
-    for (j = 0; j < n; j++) {
-      A.push(new Array(n));
-      var gs = 0;
-      for (i = 0; i < m; i++) gs += J[j][i] * r[i];
-      g[j] = -gs;
-    }
-    for (j = 0; j < n; j++) for (k = j; k < n; k++) {
-      var d = 0;
-      for (i = 0; i < m; i++) d += J[j][i] * J[k][i];
-      A[j][k] = d; A[k][j] = d;
-    }
-    var accepted = false;
-    for (var tr = 0; tr < 8; tr++) {
-      var Ad = A.map(function (row) { return row.slice(); });
-      for (j = 0; j < n; j++) Ad[j][j] += lam * (A[j][j] + 1e-9);
-      var dz = dgSolveLin(Ad, g, n);
-      if (!dz) { lam *= 10; continue; }
-      var zn = z.map(function (v, q) { return v + dz[q]; });
-      var rn = resf(zn), cn = sq(rn);
-      if (isFinite(cn) && cn < cost) { z = zn; r = rn; cost = cn; lam = Math.max(lam / 3, 1e-10); accepted = true; break; }
-      lam *= 4;
-    }
-    if (!accepted) break;
-  }
-  return { z: z, cost: cost };
-}
-
-// rotate/flip a solved figure so it looks like a textbook drawing: base horizontal at the bottom
-function dgOrient(spec, pts) {
-  var arr = function (x) { return Array.isArray(x) ? x : []; };
-  var ok = function (s) { return Array.isArray(s) && pts[s[0]] && pts[s[1]] && s[0] !== s[1]; };
-  var base = null;
-  // a point with a right angle that lies on a segment: that segment is the natural base (altitude figures)
-  arr(spec.rightAngles).forEach(function (r) {
-    if (base || !Array.isArray(r)) return;
-    arr(spec.between).forEach(function (b) {
-      if (!base && Array.isArray(b) && b[0] === r[0] && pts[b[1]] && pts[b[2]]) base = [b[1], b[2]];
-    });
-  });
-  if (!base) {
-    var bl = -1;
-    arr(spec.lines).concat(arr(spec.dashed)).forEach(function (s) {
-      if (!ok(s)) return;
-      var L = dgLen(dgSub(pts[s[1]], pts[s[0]]));
-      if (L > bl) { bl = L; base = [s[0], s[1]]; }
-    });
-  }
-  if (!base) return pts;
-  var a = pts[base[0]], b = pts[base[1]], ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
-  var out = {}, sumY = 0, names = Object.keys(pts);
-  names.forEach(function (n) {
-    var v = dgRot(dgSub(pts[n], a), -ang * 180 / Math.PI);
-    out[n] = v; sumY += v[1];
-  });
-  if (sumY < 0) names.forEach(function (n) { out[n] = [out[n][0], -out[n][1]]; });
-  return out;
-}
-
-function dgSolveBuild(spec) {
-  try {
-    if (!spec || typeof spec !== 'object') return { ok: false, err: 'no figure data' };
-    var arr = function (x) { return Array.isArray(x) ? x : []; };
-    var idx = {}, names = [], i, j, k;
-    var reg = function (nm) {
-      if (typeof nm !== 'string' || !nm) throw new Error('bad point name');
-      if (!Object.prototype.hasOwnProperty.call(idx, nm)) { idx[nm] = names.length; names.push(nm); }
-      return idx[nm];
-    };
-    var pairs = function (list) {
-      return arr(list).filter(function (s) { return Array.isArray(s) && s.length >= 2; }).map(function (s) { return [reg(s[0]), reg(s[1])]; });
-    };
-    var triples = function (list) {
-      return arr(list).filter(function (t) { return Array.isArray(t) && t.length >= 3; }).map(function (t) { return [reg(t[0]), reg(t[1]), reg(t[2]), t[3]]; });
-    };
-    var groups = function (list) {
-      return arr(list).map(function (g) { return pairs(g); }).filter(function (g) { return g.length >= 2; });
-    };
-    pairs(spec.lines); pairs(spec.dashed);
-    var angs = triples(spec.angles), rights = triples(spec.rightAngles), betw = triples(spec.between), colin = triples(spec.collinear);
-    var eqs = groups(spec.equal), pars = groups(spec.parallel);
-    var eqAngs = arr(spec.equalAngles).map(function (g) { return triples(g); }).filter(function (g) { return g.length >= 2; });
-    var lens = arr(spec.lengths).filter(function (l) { return Array.isArray(l) && l.length >= 3; })
-      .map(function (l) { return [reg(l[0]), reg(l[1]), dgLenNum(l[2])]; })
-      .filter(function (l) { return l[2] != null && l[2] > 0; });
-    var n = names.length;
-    if (n < 3) return { ok: false, err: 'figure needs at least 3 points' };
-    if (n > 12) return { ok: false, err: 'too many points (max 12)' };
-
-    var hasLen = lens.length > 0, D0 = 10;
-    var nfree = 2 * (n - 2) + (hasLen ? 1 : 0);
-    var build = function (z) {
-      var P = [[0, 0], [D0, 0]];
-      for (var q = 2; q < n; q++) P.push([z[2 * (q - 2)], z[2 * (q - 2) + 1]]);
-      return P;
-    };
-    var ln = function (a, b) { return Math.hypot(a[0] - b[0], a[1] - b[1]); };
-    var resid = function (z) {
-      var P = build(z), r = [], q, g, t;
-      angs.forEach(function (a) {
-        var want = dgLabelNum(a[3]);
-        r.push(want == null ? 0 : dgAng(P[a[0]], P[a[1]], P[a[2]]) - want * Math.PI / 180);
-      });
-      rights.forEach(function (a) { r.push(dgAng(P[a[0]], P[a[1]], P[a[2]]) - Math.PI / 2); });
-      eqAngs.forEach(function (gp) {
-        var a0 = dgAng(P[gp[0][0]], P[gp[0][1]], P[gp[0][2]]);
-        for (var q2 = 1; q2 < gp.length; q2++) r.push(dgAng(P[gp[q2][0]], P[gp[q2][1]], P[gp[q2][2]]) - a0);
-      });
-      betw.forEach(function (b) {
-        var p = P[b[0]], a = P[b[1]], c = P[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) + 1e-9;
-        r.push(((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2) / D0);
-        t = dgDot(dgSub(p, a), ac) / L2;
-        r.push(2 * Math.max(0, 0.07 - t)); r.push(2 * Math.max(0, t - 0.93));
-      });
-      colin.forEach(function (b) {
-        var p = P[b[0]], a = P[b[1]], c = P[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) + 1e-9;
-        r.push(((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2) / D0);
-      });
-      eqs.forEach(function (gp) {
-        var L0 = ln(P[gp[0][0]], P[gp[0][1]]) + 1e-9;
-        for (var q2 = 1; q2 < gp.length; q2++) r.push(Math.log((ln(P[gp[q2][0]], P[gp[q2][1]]) + 1e-9) / L0));
-      });
-      pars.forEach(function (gp) {
-        var d0 = dgSub(P[gp[0][1]], P[gp[0][0]]), l0 = Math.hypot(d0[0], d0[1]) + 1e-9;
-        for (var q2 = 1; q2 < gp.length; q2++) {
-          var d1 = dgSub(P[gp[q2][1]], P[gp[q2][0]]), l1 = Math.hypot(d1[0], d1[1]) + 1e-9;
-          r.push((d0[0] * d1[1] - d0[1] * d1[0]) / (l0 * l1));
-        }
-      });
-      lens.forEach(function (l) { r.push(Math.log(ln(P[l[0]], P[l[1]]) + 1e-9) - Math.log(l[2]) - z[nfree - 1]); });
-      for (q = 0; q < n; q++) for (g = q + 1; g < n; g++) r.push(Math.max(0, 0.5 - ln(P[q], P[g])) / D0 * 3);
-      for (q = 2; q < n; q++) { r.push(Math.max(0, Math.abs(P[q][0] - 5) - 35) / D0); r.push(Math.max(0, Math.abs(P[q][1]) - 30) / D0); }
-      return r;
-    };
-
-    var rnd = dgRng(20260101), best = null, bestFail = null, lowest = Infinity, found = 0;
-    for (var attempt = 0; attempt < 48 && found < 5; attempt++) {
-      var z0 = [];
-      for (i = 0; i < nfree; i++) z0.push(i >= 2 * (n - 2) ? 0 : (i % 2 === 0 ? -3 + 16 * rnd() : -9 + 18 * rnd()));
-      var P0 = build(z0);
-      betw.forEach(function (b) {
-        var tt = 0.2 + 0.6 * rnd(), a = P0[b[1]], c = P0[b[2]];
-        if (b[0] >= 2) { z0[2 * (b[0] - 2)] = a[0] + tt * (c[0] - a[0]); z0[2 * (b[0] - 2) + 1] = a[1] + tt * (c[1] - a[1]); P0 = build(z0); }
-      });
-      var sol = dgLM(resid, z0, 70);
-      if (sol.cost < lowest) lowest = sol.cost;
-      if (!(sol.cost < 1e-12)) continue;
-      var PP = build(sol.z), pts = {};
-      for (i = 0; i < n; i++) pts[names[i]] = PP[i];
-      var fails = dgCheck(spec, pts);
-      if (fails.length) { if (!bestFail || fails.length < bestFail.n) bestFail = { n: fails.length, msg: fails.join('; ') }; continue; }
-      pts = dgOrient(spec, pts);
-      var sc = dgScore(spec, pts);
-      found++;
-      if (!best || sc > best.score) best = { pts: pts, score: sc };
-    }
-    if (!best) {
-      if (bestFail) return { ok: false, err: bestFail.msg };
-      return { ok: false, err: 'the given facts cannot all be true together (check the angles / sides / which point lies on which line)' };
-    }
-    return { ok: true, pts: best.pts, score: best.score };
-  } catch (e) {
-    return { ok: false, err: String(e && e.message || e) };
-  }
-}
-
-// steps given -> try the construction first; if it fails, fall back to solving the listed facts.
-// no steps -> solve the facts directly.
-function dgBuild(spec) {
-  var hasSteps = spec && Array.isArray(spec.steps) && spec.steps.length >= 2;
-  if (hasSteps) {
-    var r = dgBuildSteps(spec);
-    if (r.ok) return r;
-    var s = dgSolveBuild(spec);
-    if (s.ok) return s;
-    return { ok: false, err: String(s.err || r.err).slice(0, 250) + ' | construction: ' + String(r.err).slice(0, 120) };
-  }
-  return dgSolveBuild(spec);
-}
-
-// ===== AI Diagram renderer (draws only verified-exact figures) =====
-function dgRenderSVG(spec, P) {
-  var names = Object.keys(P), i;
-  var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
-  names.forEach(function (k) {
-    minx = Math.min(minx, P[k][0]); maxx = Math.max(maxx, P[k][0]);
-    miny = Math.min(miny, P[k][1]); maxy = Math.max(maxy, P[k][1]);
-  });
-  var bw = (maxx - minx) || 1, bh = (maxy - miny) || 1;
-  var pad = 46, sc = 260 / Math.max(bw, bh);
-  var W = Math.max(230, Math.round(bw * sc + 2 * pad)), H = Math.max(190, Math.round(bh * sc + 2 * pad));
-  var ox = (W - bw * sc) / 2, oy = (H - bh * sc) / 2;
-  var pt = {};
-  names.forEach(function (k) { pt[k] = { x: ox + (P[k][0] - minx) * sc, y: oy + (maxy - P[k][1]) * sc }; });
-  var arr = function (x) { return Array.isArray(x) ? x : []; };
-  var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
-  var f = function (n) { return Math.round(n * 10) / 10; };
-  var cx = 0, cy = 0;
-  names.forEach(function (k) { cx += pt[k].x; cy += pt[k].y; });
-  cx /= names.length; cy /= names.length;
-
-  var segs = [];
-  arr(spec.lines).concat(arr(spec.dashed)).forEach(function (s) { if (pt[s[0]] && pt[s[1]]) segs.push([pt[s[0]], pt[s[1]]]); });
-  var placed = [];
-  var segDist = function (x, y, a, b) {
-    var dx = b.x - a.x, dy = b.y - a.y, L2 = dx * dx + dy * dy || 1;
-    var t = Math.max(0, Math.min(1, ((x - a.x) * dx + (y - a.y) * dy) / L2));
-    return Math.hypot(x - (a.x + t * dx), y - (a.y + t * dy));
-  };
-  // choose a label position near `base`, around direction `ang`, avoiding lines, points and other labels
-  var place = function (base, ang, radii, rad, own) {
-    var best = null, das = [0, 0.4, -0.4, 0.8, -0.8, 1.25, -1.25, 1.7, -1.7, 2.3, -2.3, Math.PI];
-    radii.forEach(function (r, ri) {
-      das.forEach(function (da) {
-        var x = base.x + r * Math.cos(ang + da), y = base.y + r * Math.sin(ang + da), pen = Math.abs(da) * 2 + ri * 4;
-        if (x < rad || y < rad || x > W - rad || y > H - rad) pen += 60;
-        placed.forEach(function (q) { var d = Math.hypot(q.x - x, q.y - y), need = q.r + rad + 1; if (d < need) pen += (need - d) * 6; });
-        segs.forEach(function (s) { var d = segDist(x, y, s[0], s[1]); if (d < rad - 1) pen += (rad - 1 - d) * 5; });
-        names.forEach(function (k) { if (k === own) return; var d = Math.hypot(pt[k].x - x, pt[k].y - y); if (d < rad + 4) pen += (rad + 4 - d) * 6; });
-        if (!best || pen < best.pen) best = { x: x, y: y, pen: pen };
-      });
-    });
-    placed.push({ x: best.x, y: best.y, r: rad });
-    return best;
-  };
-
-  var out = '';
-  var seg = function (list, dash) {
-    arr(list).forEach(function (s) {
-      if (!pt[s[0]] || !pt[s[1]]) return;
-      out += '<line x1="' + f(pt[s[0]].x) + '" y1="' + f(pt[s[0]].y) + '" x2="' + f(pt[s[1]].x) + '" y2="' + f(pt[s[1]].y) +
-        '" stroke="#1e293b" stroke-width="2" stroke-linecap="round"' + (dash ? ' stroke-dasharray="6 5"' : '') + '/>';
-    });
-  };
-  seg(spec.lines, false);
-  seg(spec.dashed, true);
-
-  // equal-length tick marks (group 1 = one tick, group 2 = two ticks ...)
-  arr(spec.equal).forEach(function (g, gi) {
-    arr(g).forEach(function (s) {
-      if (!pt[s[0]] || !pt[s[1]]) return;
-      var a = pt[s[0]], b = pt[s[1]], L = Math.hypot(b.x - a.x, b.y - a.y) || 1;
-      var ux = (b.x - a.x) / L, uy = (b.y - a.y) / L, mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      for (var t = 0; t <= gi; t++) {
-        var off = (t - gi / 2) * 4;
-        var px = mx + ux * off, py = my + uy * off;
-        out += '<line x1="' + f(px - uy * 5) + '" y1="' + f(py + ux * 5) + '" x2="' + f(px + uy * 5) + '" y2="' + f(py - ux * 5) +
-          '" stroke="#dc2626" stroke-width="1.8"/>';
-      }
-    });
-  });
-
-  // right-angle marks: [vertex, arm1, arm2]
-  arr(spec.rightAngles).forEach(function (r) {
-    if (!pt[r[0]] || !pt[r[1]] || !pt[r[2]]) return;
-    var v = pt[r[0]], a = pt[r[1]], b = pt[r[2]];
-    var l1 = Math.hypot(a.x - v.x, a.y - v.y) || 1, l2 = Math.hypot(b.x - v.x, b.y - v.y) || 1;
-    var s = Math.max(5, Math.min(11, 0.32 * Math.min(l1, l2)));
-    var u1 = { x: (a.x - v.x) / l1 * s, y: (a.y - v.y) / l1 * s }, u2 = { x: (b.x - v.x) / l2 * s, y: (b.y - v.y) / l2 * s };
-    out += '<polyline points="' + f(v.x + u1.x) + ',' + f(v.y + u1.y) + ' ' + f(v.x + u1.x + u2.x) + ',' + f(v.y + u1.y + u2.y) +
-      ' ' + f(v.x + u2.x) + ',' + f(v.y + u2.y) + '" fill="none" stroke="#dc2626" stroke-width="1.8"/>';
-  });
-
-  // point labels first (they matter most): push away from the lines meeting at the point
-  var plabels = '';
-  names.forEach(function (k) {
-    var p = pt[k], sx = 0, sy = 0, n = 0;
-    segs.forEach(function (s) {
-      var o = s[0] === p ? s[1] : (s[1] === p ? s[0] : null);
-      if (!o) return;
-      var L = Math.hypot(o.x - p.x, o.y - p.y) || 1;
-      sx += (o.x - p.x) / L; sy += (o.y - p.y) / L; n++;
-    });
-    var dx = -sx, dy = -sy;
-    if (n === 0 || Math.hypot(dx, dy) < 0.25) { dx = p.x - cx; dy = p.y - cy; }
-    var ang = Math.atan2(dy, dx);
-    var pos = place(p, ang, [14, 19], 9, k);
-    plabels += '<circle cx="' + f(p.x) + '" cy="' + f(p.y) + '" r="2.6" fill="#1e293b"/>' +
-      '<text x="' + f(pos.x) + '" y="' + f(pos.y) + '" font-size="15" font-weight="800" fill="#0f172a" text-anchor="middle" dominant-baseline="middle">' + esc(k) + '</text>';
-  });
-
-  // angle arcs: [vertex, arm1, arm2, label]
-  arr(spec.angles).forEach(function (an) {
-    if (!pt[an[0]] || !pt[an[1]] || !pt[an[2]]) return;
-    var v = pt[an[0]];
-    var a1 = Math.atan2(pt[an[1]].y - v.y, pt[an[1]].x - v.x), a2 = Math.atan2(pt[an[2]].y - v.y, pt[an[2]].x - v.x);
-    var d = a2 - a1;
-    while (d > Math.PI) d -= 2 * Math.PI;
-    while (d <= -Math.PI) d += 2 * Math.PI;
-    var l1 = Math.hypot(pt[an[1]].x - v.x, pt[an[1]].y - v.y), l2 = Math.hypot(pt[an[2]].x - v.x, pt[an[2]].y - v.y);
-    var r = Math.max(13, Math.min(26, 0.4 * Math.min(l1, l2)));
-    var sx = v.x + r * Math.cos(a1), sy = v.y + r * Math.sin(a1), ex = v.x + r * Math.cos(a2), ey = v.y + r * Math.sin(a2);
-    out += '<path d="M' + f(sx) + ' ' + f(sy) + ' A' + f(r) + ' ' + f(r) + ' 0 0 ' + (d > 0 ? 1 : 0) + ' ' + f(ex) + ' ' + f(ey) +
-      '" fill="none" stroke="#2563eb" stroke-width="1.8"/>';
-    if (an[3] !== undefined && String(an[3]) !== '') {
-      var txt = String(an[3]), rad = Math.max(9, txt.length * 3.6 + 3);
-      var pos = place(v, a1 + d / 2, [r + 12, r + 20, r + 30, r + 42, r + 56], rad, an[0]);
-      out += '<text x="' + f(pos.x) + '" y="' + f(pos.y) + '" font-size="12" font-weight="700" fill="#2563eb" text-anchor="middle" dominant-baseline="middle">' + esc(txt) + '</text>';
-    }
-  });
-
-  // side-length labels: [A, B, "5 cm"]
-  arr(spec.lengths).forEach(function (l) {
-    if (!pt[l[0]] || !pt[l[1]] || l[2] === undefined) return;
-    var a = pt[l[0]], b = pt[l[1]], mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-    var nx = -(b.y - a.y), ny = b.x - a.x;
-    if (nx * (mx - cx) + ny * (my - cy) < 0) { nx = -nx; ny = -ny; }
-    var txt = String(l[2]), rad = Math.max(9, txt.length * 3.4 + 3);
-    var pos = place({ x: mx, y: my }, Math.atan2(ny, nx), [rad + 3, rad + 10, rad + 18], rad, '');
-    out += '<text x="' + f(pos.x) + '" y="' + f(pos.y) + '" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">' + esc(txt) + '</text>';
-  });
-
-  out += plabels;
-  return '<svg class="ai-diagram-svg" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">' + out + '</svg>';
-}
-
-// raw = text of a ```diagram block. Returns SVG string, or '' when the figure cannot be proven exact.
-function aiBuildDiagramSVG(raw) {
-  try {
-    raw = String(raw || '').trim().replace(/^json\s*/i, '');
-    var spec = JSON.parse(raw);
-    var res = dgBuild(spec);
-    if (!res.ok) return '';
-    return dgRenderSVG(spec, res.pts);
-  } catch (e) {
-    return '';
-  }
-}
-
 function formatAIResponseText(txt) {
   if (!txt) return "";
-  // Pull ```diagram blocks out FIRST (before any text cleanup touches the JSON)
-  // and put them back as real SVG at the very end.
-  const aiDiagrams = [];
-  txt = String(txt).replace(/```\s*diagram\s*([\s\S]*?)```/gi, function (m, body) {
-    aiDiagrams.push(aiBuildDiagramSVG(body));
-    return "\n\uE000" + (aiDiagrams.length - 1) + "\uE001\n";
-  });
   txt = normalizeHindiMixedScript(txt);
   txt = aiCleanMathText(txt); // fixes "imes"/"\times" leftovers
   txt = aiConvertSupSub(txt); // model slipped <sup>/<sub>? -> Unicode, before escaping
@@ -10076,13 +9453,6 @@ function formatAIResponseText(txt) {
   formatted = formatted.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,
     '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
   formatted = formatted.replace(/\n/g, '<br>');
-
-  if (aiDiagrams.length) {
-    formatted = formatted.replace(/(?:<br>)*\uE000(\d+)\uE001(?:<br>)*/g, function (m, i) {
-      const svg = aiDiagrams[+i];
-      return svg ? '<div class="ai-diagram">' + svg + '</div>' : '<div class="ai-diagram-note">⚠️ Figure exact verify nahi ho paayi (kuch given fact match nahi hua), isliye galat figure nahi dikhayi. Dobara try karo. / The figure could not be verified as exact, so it was not drawn. Please retry.</div>';
-    });
-  }
 
   return formatted;
 }
