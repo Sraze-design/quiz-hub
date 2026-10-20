@@ -3372,7 +3372,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
 <button class="ai-chip" onclick="sendQuickPrompt('केवल 2-3 लाइन में बताओ कि बाकी विकल्प गलत क्यों हैं।')">🔍 Options</button>
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
-    <button class="ai-chip" onclick="findVideoTime()">▶ Video</button>
+    <button class="ai-chip" onclick="openVideoSolution()">▶ Video</button>
   </div>
   <div id="ai-image-preview">
     <button id="remove-ai-image" type="button">✕</button>
@@ -8678,7 +8678,7 @@ async function findVideoTime() {
   const searchUrl = 'https://www.youtube.com/results?search_query=' +
     encodeURIComponent((tag || ((currentSubject ? currentSubject + ' ' : '') + words)) + ' solution');
 
-  appendAIMessage('user', '\u25B6 Is shift ka video dhundo');
+  appendAIMessage('user', '\u25B6 Is question ka video + timing dhundo');
   const requestEpoch = aiChatEpoch;
   isAIGenerating = true;
   showAITyping(true);
@@ -8706,7 +8706,7 @@ async function findVideoTime() {
     msg = String((j && j.text) || '').trim();
   } catch (err) {
     if (requestEpoch !== aiChatEpoch) return;
-    msg = 'Video nahi mil paya (' + ((err && err.name === 'AbortError') ? 'time out' : 'error: ' + String((err && err.message) || err).slice(0, 120)) +
+    msg = 'Video + timing nahi mil payi (' + ((err && err.name === 'AbortError') ? 'time out' : 'error') +
       '). Seedha YouTube search kholo: ' + searchUrl;
   } finally {
     clearTimeout(tid);
@@ -8724,20 +8724,20 @@ async function findVideoTime() {
 // tag (e.g. "RRB NTPC 5 Jan 2025 Shift 2") and opens it, since solution videos are
 // uploaded under exactly that kind of name.
 function openVideoSolution() {
+  // Opens a YouTube search with the question's exam/shift tag + subject. You pick the video yourself.
+  let query = 'SSC maths solution';
   try {
     const q = getCurrentQuestionContext();
-    let tag = aiHtmlToPlainUnicode(String(q.examTag || '')).replace(/\s+/g, ' ').trim();
-    let query;
+    const tag = aiHtmlToPlainUnicode(String(q.examTag || '')).replace(/\s+/g, ' ').trim();
+    const subj = String(currentSubject || '').trim();
     if (tag) {
-      query = tag + ' solution';
+      query = tag + (subj ? ' ' + subj : '') + ' solution';
     } else {
       const words = String(q.questionText || '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 10).join(' ');
-      query = (currentSubject ? currentSubject + ' ' : '') + words + ' solution';
+      query = (subj ? subj + ' ' : '') + words + ' solution';
     }
-    window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank', 'noopener');
-  } catch (e) {
-    window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent('SSC maths solution'), '_blank', 'noopener');
-  }
+  } catch (e) {}
+  window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank', 'noopener');
 }
 
 document.addEventListener("click", (event) => {
