@@ -8734,11 +8734,61 @@ function aiImgHiThumb(url) {
   return String(url || '').replace(/\/(\d+px-[^\/]+)$/, '/langhi-$1');
 }
 
+// ---- Sirf Hindi + English diagrams: baaki languages (Telugu, Toki Pona, Tamil, ...) hata do ----
+const AIIMG_OTHER_NAMES = ('telugu tamil kannada malayalam bengali bangla gujarati marathi punjabi panjabi odia oriya assamese urdu nepali sanskrit sinhala sinhalese sindhi kashmiri konkani maithili bhojpuri ' +
+  'toki_pona arabic persian farsi hebrew turkish russian ukrainian belarusian polish czech slovak slovene slovenian croatian serbian bosnian bulgarian macedonian romanian hungarian greek german french spanish portuguese italian dutch swedish norwegian danish finnish icelandic catalan basque galician ' +
+  'chinese japanese korean vietnamese thai indonesian malay filipino tagalog burmese khmer lao mongolian tibetan swahili afrikaans zulu esperanto estonian latvian lithuanian albanian armenian georgian azerbaijani kazakh uzbek welsh irish hausa yoruba amharic pashto kurdish').split(' ');
+const AIIMG_NM = '(' + AIIMG_OTHER_NAMES.join('|').replace(/_/g, '\\s+') + ')';
+const AIIMG_NAME_RES = [
+  new RegExp('(?:^|[\\s\\-(\\[])' + AIIMG_NM + '\\s*[)\\]]?$', 'i'),            // "... Telugu"
+  new RegExp('[(\\[]\\s*' + AIIMG_NM + '\\s*[)\\]]', 'i'),                      // "(Telugu)"
+  new RegExp('\\b(?:in|with)\\s+' + AIIMG_NM + '\\b', 'i'),                     // "in Tamil"
+  new RegExp('\\b' + AIIMG_NM + '\\s+(?:labels?|version|text|translation|language|script)\\b', 'i')
+];
+// language codes (lowercase, jaise "heart-te.svg", "Heart (fr).svg")
+const AIIMG_CODES = new Set('ar bg bn cy da de el es fa fi fr ga gl gu hu hy ja ka kk ko ku lv mk mn nb nl nn pl pt ro ru sk sl sr sv ta te th tl tr uk ur uz zh ne tok fil ceb mai kok sd ks'.split(' '));
+// English words / units se takrate hain => sirf (code) ya -code form mein reject
+const AIIMG_CODES_AMBIG = new Set('it is no as or he be me my id do to so us an am si pa mr ml kn sa ca la hr km sw sq lt et vi az bs cs eu'.split(' '));
+const AIIMG_HI_EN_RE = /(^|[\s\-(\[,+])(hindi|english|hi|en)([\s\-.,)\]+]|$)/i;
+const AIIMG_CAT_RES = [
+  new RegExp('\\b(?:in|with)\\s+' + AIIMG_NM + '\\b', 'i'),
+  new RegExp('\\b' + AIIMG_NM + '[\\s\\-]+(?:language|labels?|text|version|translation)\\b', 'i')
+];
+// true = image kisi aur language (Hindi/English ke alawa) ki lag rahi hai
+function aiImgIsOtherLang(rawTitle, cats) {
+  const t = String(rawTitle || '').replace(/^File:/i, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' ').trim();
+  if (!t) return false;
+  // 1) Koi aur script (Telugu, Tamil, Arabic, Chinese, Cyrillic...) => reject. Latin / Devanagari / numbers / Greek letters allowed.
+  if (/[^\p{Script=Latin}\p{Script=Devanagari}\p{Script=Greek}\p{Script=Common}\p{Script=Inherited}]/u.test(t)) return true;
+  // 2) Title mein Hindi/English ka saaf nishan ho to rakho
+  const hasHiEn = AIIMG_HI_EN_RE.test(t) || AIIMG_DEV_RE.test(t);
+  if (!hasHiEn) {
+    if (AIIMG_NAME_RES.some((re) => re.test(t))) return true;
+    const m = t.match(/(^|[\s\-(\[])([a-z]{2,3})(?:-[a-z]{2,4})?[)\]]?$/);
+    if (m) {
+      const bracketed = /[)\]]$/.test(t) || m[1] === '(' || m[1] === '[' || m[1] === '-';
+      if (AIIMG_CODES.has(m[2])) return true;
+      if (AIIMG_CODES_AMBIG.has(m[2]) && bracketed) return true;
+    }
+    const reP = /[(\[]\s*([a-z]{2,3})(?:-[a-z]{2,4})?\s*[)\]]/g;
+    let mm;
+    while ((mm = reP.exec(t))) { if (AIIMG_CODES.has(mm[1]) || AIIMG_CODES_AMBIG.has(mm[1])) return true; }
+  }
+  // 3) Commons categories (jaise "Human body diagrams in Telugu")
+  if (Array.isArray(cats) && cats.length) {
+    const names = cats.map((c) => String((c && c.title) || '').replace(/^Category:/i, ''));
+    const catHiEn = names.some((n) => /\b(hindi|english)\b/i.test(n));
+    if (!catHiEn && names.some((n) => AIIMG_CAT_RES.some((re) => re.test(n)))) return true;
+  }
+  return false;
+}
+
 // Commons / hi.wikipedia file search (diagrams, labelled figures, photos)
-async function aiImgFiles(host, q, limit, offset) {
+// strict=true (diagram mode) => sirf Hindi/English wali images
+async function aiImgFiles(host, q, limit, offset, strict) {
   const url = 'https://' + host + '/w/api.php?action=query&format=json&origin=*' +
-    '&generator=search&gsrnamespace=6&gsrlimit=12&gsroffset=' + (offset || 0) + '&gsrsearch=' + encodeURIComponent(q) +
-    '&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName|ImageDescription';
+    '&generator=search&gsrnamespace=6&gsrlimit=' + (strict ? 20 : 12) + '&gsroffset=' + (offset || 0) + '&gsrsearch=' + encodeURIComponent(q) +
+    '&prop=imageinfo' + (strict ? '|categories&cllimit=max&clshow=!hidden' : '') + '&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName|ImageDescription';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
   pages.sort((a, b) => (a.index || 0) - (b.index || 0));
@@ -8746,6 +8796,7 @@ async function aiImgFiles(host, q, limit, offset) {
   for (const pg of pages) {
     const ii = pg.imageinfo && pg.imageinfo[0];
     if (!ii || !/^image\/(svg\+xml|png|jpeg|gif|webp)$/.test(ii.mime || '')) continue;
+    if (strict && aiImgIsOtherLang(pg.title, pg.categories)) continue; // Telugu / Toki Pona / etc. skip
     const em = ii.extmetadata || {};
     const desc = em.ImageDescription ? aiImgClean(em.ImageDescription.value) : '';
     const thumb = ii.thumburl || ii.url;
@@ -8770,7 +8821,7 @@ async function aiImgFiles(host, q, limit, offset) {
 async function aiImgWikipedia(q, lang) {
   const url = 'https://' + lang + '.wikipedia.org/w/api.php?action=query&format=json&origin=*' +
     '&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=' + encodeURIComponent(q) +
-    '&prop=pageimages|info|langlinks&piprop=thumbnail|original&pithumbsize=800&inprop=url&lllang=hi&lllimit=20';
+    '&prop=pageimages|info|langlinks&piprop=thumbnail|original|name&pithumbsize=800&inprop=url&lllang=hi&lllimit=20';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
   pages.sort((a, b) => (a.index || 0) - (b.index || 0));
@@ -8778,7 +8829,7 @@ async function aiImgWikipedia(q, lang) {
   if (!top) return { items: [], hiTitle: '' };
   const ll = top.langlinks && top.langlinks[0];
   const hiTitle = ll ? String(ll['*'] || ll.title || '') : '';
-  if (!top.thumbnail || !top.thumbnail.source) return { items: [], hiTitle: hiTitle };
+  if (!top.thumbnail || !top.thumbnail.source || (top.pageimage && aiImgIsOtherLang(top.pageimage))) return { items: [], hiTitle: hiTitle };
   return {
     hiTitle: hiTitle,
     items: [{
@@ -8800,8 +8851,8 @@ async function aiImgSearch(subject, wantDiagram) {
   const r1 = await Promise.all([
     subjIsHindi ? Promise.resolve({ items: [], hiTitle: subject }) : aiImgWikipedia(subject, 'en'),
     subjIsHindi ? aiImgWikipedia(subject, 'hi') : Promise.resolve({ items: [], hiTitle: '' }),
-    wantDiagram ? aiImgFiles('commons.wikimedia.org', subject + ' diagram hindi', 4) : Promise.resolve([]),
-    aiImgFiles('commons.wikimedia.org', wantDiagram ? subject + ' diagram' : subject, 12)
+    wantDiagram ? aiImgFiles('commons.wikimedia.org', subject + ' diagram hindi', 4, 0, true) : Promise.resolve([]),
+    aiImgFiles('commons.wikimedia.org', wantDiagram ? subject + ' diagram' : subject, 12, 0, wantDiagram)
   ]);
   const enWiki = r1[0], hiWikiDirect = r1[1];
   let hiTitle = (enWiki.hiTitle || hiWikiDirect.hiTitle || '').trim();
@@ -8809,8 +8860,8 @@ async function aiImgSearch(subject, wantDiagram) {
   let r2 = [[], [], { items: [] }];
   if (hiTitle) {
     r2 = await Promise.all([
-      aiImgFiles('hi.wikipedia.org', hiTitle, 5),
-      aiImgFiles('commons.wikimedia.org', hiTitle + (wantDiagram ? ' आरेख' : ''), 5),
+      aiImgFiles('hi.wikipedia.org', hiTitle, 5, 0, wantDiagram),
+      aiImgFiles('commons.wikimedia.org', hiTitle + (wantDiagram ? ' आरेख' : ''), 5, 0, wantDiagram),
       aiImgWikipedia(hiTitle, 'hi')
     ]);
   }
@@ -8969,7 +9020,7 @@ async function aiImgNext() {
   let fresh = st.pool.filter((r) => !st.shown.has(aiImgKey(r)));
   if (fresh.length < want) {
     try {
-      const more = await aiImgFiles('commons.wikimedia.org', st.wantDiagram ? st.subject + ' diagram' : st.subject, 8, st.offset);
+      const more = await aiImgFiles('commons.wikimedia.org', st.wantDiagram ? st.subject + ' diagram' : st.subject, 8, st.offset, st.wantDiagram);
       st.offset += 12;
       more.forEach((r) => {
         const k = aiImgKey(r);
