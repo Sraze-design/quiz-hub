@@ -2117,11 +2117,11 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 }
 .ai-msg.bot.ai-scan-status { font-size: 13px; }
 .ai-msg.bot a{color:#2563eb;text-decoration:underline;word-break:break-all}
-.ai-msg.ai-img-msg{width:96%;max-width:900px;padding:8px}
+.ai-msg.ai-img-msg{width:96%;max-width:760px;padding:8px}
 .ai-wimg-wrap{display:flex;gap:8px;overflow-x:auto;margin:2px 0 4px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
 .ai-wimg{flex:0 0 100%;width:100%;scroll-snap-align:start;box-sizing:border-box;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px}
 .ai-wimg-wrap.multi .ai-wimg{flex-basis:92%;width:92%}
-.ai-wimg img{width:100%;max-height:75vh;object-fit:contain;display:block;border-radius:8px;background:#fff}
+.ai-wimg img{width:100%;max-height:48vh;object-fit:contain;display:block;border-radius:8px;background:#fff}
 .ai-wimg-cap{font-size:14px;color:#334155;margin-top:6px;padding:0 4px;line-height:1.5;word-break:break-word;white-space:pre-line}
 .ai-wimg-cap a{color:#2563eb;text-decoration:underline}
 .ai-msg.bot pre {
@@ -8764,8 +8764,6 @@ function aiImgUiLang() {
 }
 function aiImgNote(key) {
   const T = {
-    noHindi:     { hi: 'ℹ️ हिंदी लेबल वाली इमेज नहीं मिली, इसलिए अंग्रेज़ी वाली दिखा रहा हूँ।',
-                   en: 'ℹ️ No image with Hindi labels was found, so an English one is shown.' },
     closest:     { hi: 'ℹ️ बिल्कुल सही मैच नहीं मिला, इसलिए सबसे नज़दीकी इमेज दिखा रहा हूँ।',
                    en: 'ℹ️ No perfect match was found, so the closest image is shown.' },
     noCheck:     { hi: 'ℹ️ AI इमेज की जाँच नहीं कर पाया, इसलिए सर्च की सबसे पहली इमेज दिखा रहा हूँ।',
@@ -9024,7 +9022,7 @@ async function aiImgSearch(subject, wantDiagram) {
   const items = uniq.slice(0, 3);
   uniq.forEach((r) => { r.isHindi = r.hiScore >= 3; });
   const anyHindi = items.some((r) => r.isHindi);
-  return { items: items, pool: uniq, note: (items.length && !anyHindi && aiImgPrefLang !== 'en') ? aiImgNote('noHindi') : '' };
+  return { items: items, pool: uniq, note: '' };
 }
 
 function aiImgRender(subject, results, note, retryFn, nextFn) {
@@ -9338,7 +9336,6 @@ async function aiImgSmartRun(userText, wantDiagram, epoch, loadingEl, ctxText) {
   }
   picks = picks.filter(Boolean);
   if (!picks.length) picks = cands.slice(0, 1);
-  if (!note && wd && aiImgPrefLang !== 'en' && !picks.some((r) => r.hiScore >= 3)) note = aiImgNote('noHindi');
   const needTxt = aiImgNeedText(plan);
   if (ctxText && needTxt) note = '🎯 ' + needTxt + (note ? '\n' + note : '');
 
