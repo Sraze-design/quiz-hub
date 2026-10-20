@@ -8681,13 +8681,16 @@ function takeDiagramInstruction() {
 }
 function buildDiagramInstruction() {
   const fence = '\u0060\u0060\u0060';
-  return '\n\n' + DIAGRAM_MODE_MARKER + ' Draw the figure for the above as EXACTLY ONE ' + fence + 'diagram block (follow DIAGRAM RULE 7), then 1-2 short lines of explanation. ' +
-    'Method: (1) First list ONLY the GIVEN data: angles, sides, right angles, parallel/perpendicular lines, points lying on sides, equal sides. ' +
-    '(2) Start with two fixed points (base horizontal, y axis UP). ' +
-    '(3) Build every given angle with rot/polarRel and every given side with dd/polar; a free point on a side uses ["on","P","A","B","?"]. ' +
-    '(4) Put EVERY given fact in the fact arrays (lines, dashed, between, rightAngles, angles, equal, parallel, lengths). ' +
-    '(5) Unknown angle/side labels must be "x" or "?", never a number. Keep it short (max about 20 steps), valid JSON only. ' +
-    'Do NOT solve the question and do NOT reveal the answer. If the given data is inconsistent, say so in words with no diagram block.';
+  return '\n\n' + DIAGRAM_MODE_MARKER + ' Draw the figure for the above as EXACTLY ONE ' + fence + 'diagram block (JSON), then 1-2 short lines of explanation. ' +
+    'Use the FACTS-ONLY format: do NOT write "steps" and do NOT give coordinates - the app solves the exact figure from your facts. ' +
+    'Format (example for a DIFFERENT question): {"lines":[["A","B"],["B","C"],["A","C"],["A","D"]],"dashed":[],"between":[["D","B","C"]],"rightAngles":[["D","A","B"]],"angles":[["B","A","C","50\u00B0"],["C","A","B","60\u00B0"],["A","D","B","?"]],"equal":[],"parallel":[],"equalAngles":[],"collinear":[],"lengths":[["B","C","8 cm"]]}. ' +
+    'Rules: (1) lines/dashed = every segment to draw. ' +
+    '(2) EVERY point that the question says lies ON a side/segment (D on AC, E on BC, midpoint, foot of perpendicular, intersection of two segments...) MUST be listed in "between" as [point,end1,end2] - re-read the question and check each such statement; a point on an extension (produced line) goes in "collinear" [point,end1,end2] and the extra piece must be drawn too. ' +
+    '(3) angles = [vertex,arm1,arm2,"label"] with the numeric label exactly as GIVEN, and "?" for the unknown angle. ' +
+    '(4) perpendicular = "rightAngles" [vertex,arm1,arm2]. ' +
+    '(5) equal sides = "equal" groups e.g. [[["A","B"],["A","C"]]]; equal angles (bisector etc.) = "equalAngles" groups of [vertex,arm1,arm2]; parallel sides = "parallel" groups; given side lengths = "lengths". ' +
+    '(6) Use only GIVEN numbers. Do NOT solve the question and do NOT reveal the answer. (7) Valid JSON only. ' +
+    'If the given facts contradict each other, say so in words with no diagram block.';
 }
 async function requestDiagram() {
   if (isAIGenerating || diagramButtonBusy) return;
@@ -9459,6 +9462,20 @@ function dgCheck(spec, pts) {
       if (!d0) d0 = d; else if (Math.abs(d0[0] * d[1] - d0[1] * d[0]) > 0.005) f.push('not parallel ' + s[0] + s[1]);
     });
   });
+  arr(spec.collinear).forEach(function (b) {
+    if (!Array.isArray(b) || !pts[b[0]] || !pts[b[1]] || !pts[b[2]]) return;
+    var p = pts[b[0]], a = pts[b[1]], c = pts[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) || 1;
+    var cross = Math.abs((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2);
+    if (cross > 1e-4 * diag) f.push(b[0] + ' not on line ' + b[1] + b[2]);
+  });
+  arr(spec.equalAngles).forEach(function (g) {
+    var ref = null;
+    arr(g).forEach(function (t) {
+      if (!Array.isArray(t) || !pts[t[0]] || !pts[t[1]] || !pts[t[2]]) return;
+      var v = dgAngleAt(pts[t[0]], pts[t[1]], pts[t[2]]);
+      if (ref == null) ref = v; else if (!(Math.abs(v - ref) <= 0.3)) f.push('angle ' + t[1] + t[0] + t[2] + ' not equal to the others in its group');
+    });
+  });
   // Collinearity sanity: a point that is an endpoint of a DRAWN segment and lies on the line of
   // another DRAWN segment, but OUTSIDE it, must be joined to it by drawn segments. Otherwise the
   // figure shows a point floating off the line it is supposed to be on (e.g. "E is on BC" but E
@@ -9542,7 +9559,7 @@ function dgScore(spec, pts) {
 }
 
 // Build: search sign combinations + free parameters, keep only candidates where ALL facts verify.
-function dgBuild(spec) {
+function dgBuildSteps(spec) {
   try {
     if (!spec || !Array.isArray(spec.steps) || spec.steps.length < 2 || spec.steps.length > 60) return { ok: false, err: 'no steps' };
     var steps = spec.steps, defined = {}, i;
@@ -9622,6 +9639,239 @@ function dgReplyIsValid(text) {
     } catch (e) { return false; }
   }
   return true;
+}
+
+// ===== Facts-only solver (no construction steps needed) =====
+// The model only lists WHAT is in the figure (segments, points on sides, angles, right angles,
+// equal / parallel sides, lengths). The app finds exact coordinates with a numeric solver
+// (Levenberg-Marquardt, many seeded restarts), then verifies every fact with dgCheck.
+function dgRng(seed) {
+  var a = seed >>> 0;
+  return function () {
+    a = (a + 0x6D2B79F5) >>> 0;
+    var t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function dgAng(v, a, b) {
+  var ux = a[0] - v[0], uy = a[1] - v[1], wx = b[0] - v[0], wy = b[1] - v[1];
+  return Math.atan2(Math.abs(ux * wy - uy * wx), ux * wx + uy * wy);
+}
+function dgSolveLin(A, b, n) {
+  var M = [], i, j, k;
+  for (i = 0; i < n; i++) M.push(A[i].slice().concat([b[i]]));
+  for (i = 0; i < n; i++) {
+    var piv = i;
+    for (k = i + 1; k < n; k++) if (Math.abs(M[k][i]) > Math.abs(M[piv][i])) piv = k;
+    if (Math.abs(M[piv][i]) < 1e-14) return null;
+    var tmp = M[i]; M[i] = M[piv]; M[piv] = tmp;
+    for (k = i + 1; k < n; k++) {
+      var fct = M[k][i] / M[i][i];
+      for (j = i; j <= n; j++) M[k][j] -= fct * M[i][j];
+    }
+  }
+  var x = new Array(n);
+  for (i = n - 1; i >= 0; i--) {
+    var s = M[i][n];
+    for (j = i + 1; j < n; j++) s -= M[i][j] * x[j];
+    x[i] = s / M[i][i];
+  }
+  return x;
+}
+function dgLM(resf, z0, maxIter) {
+  var n = z0.length, z = z0.slice(), r = resf(z), m = r.length, j, i, k;
+  var sq = function (v) { var s = 0; for (var q = 0; q < v.length; q++) s += v[q] * v[q]; return s; };
+  var cost = sq(r), lam = 1e-2;
+  for (var it = 0; it < maxIter; it++) {
+    if (cost < 1e-20) break;
+    var J = [];
+    for (j = 0; j < n; j++) {
+      var h = 1e-6 * (1 + Math.abs(z[j])), old = z[j];
+      z[j] = old + h; var rj = resf(z); z[j] = old;
+      var col = new Array(m);
+      for (i = 0; i < m; i++) col[i] = (rj[i] - r[i]) / h;
+      J.push(col);
+    }
+    var A = [], g = new Array(n);
+    for (j = 0; j < n; j++) {
+      A.push(new Array(n));
+      var gs = 0;
+      for (i = 0; i < m; i++) gs += J[j][i] * r[i];
+      g[j] = -gs;
+    }
+    for (j = 0; j < n; j++) for (k = j; k < n; k++) {
+      var d = 0;
+      for (i = 0; i < m; i++) d += J[j][i] * J[k][i];
+      A[j][k] = d; A[k][j] = d;
+    }
+    var accepted = false;
+    for (var tr = 0; tr < 8; tr++) {
+      var Ad = A.map(function (row) { return row.slice(); });
+      for (j = 0; j < n; j++) Ad[j][j] += lam * (A[j][j] + 1e-9);
+      var dz = dgSolveLin(Ad, g, n);
+      if (!dz) { lam *= 10; continue; }
+      var zn = z.map(function (v, q) { return v + dz[q]; });
+      var rn = resf(zn), cn = sq(rn);
+      if (isFinite(cn) && cn < cost) { z = zn; r = rn; cost = cn; lam = Math.max(lam / 3, 1e-10); accepted = true; break; }
+      lam *= 4;
+    }
+    if (!accepted) break;
+  }
+  return { z: z, cost: cost };
+}
+
+// rotate/flip a solved figure so it looks like a textbook drawing: base horizontal at the bottom
+function dgOrient(spec, pts) {
+  var arr = function (x) { return Array.isArray(x) ? x : []; };
+  var ok = function (s) { return Array.isArray(s) && pts[s[0]] && pts[s[1]] && s[0] !== s[1]; };
+  var base = null;
+  // a point with a right angle that lies on a segment: that segment is the natural base (altitude figures)
+  arr(spec.rightAngles).forEach(function (r) {
+    if (base || !Array.isArray(r)) return;
+    arr(spec.between).forEach(function (b) {
+      if (!base && Array.isArray(b) && b[0] === r[0] && pts[b[1]] && pts[b[2]]) base = [b[1], b[2]];
+    });
+  });
+  if (!base) {
+    var bl = -1;
+    arr(spec.lines).concat(arr(spec.dashed)).forEach(function (s) {
+      if (!ok(s)) return;
+      var L = dgLen(dgSub(pts[s[1]], pts[s[0]]));
+      if (L > bl) { bl = L; base = [s[0], s[1]]; }
+    });
+  }
+  if (!base) return pts;
+  var a = pts[base[0]], b = pts[base[1]], ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+  var out = {}, sumY = 0, names = Object.keys(pts);
+  names.forEach(function (n) {
+    var v = dgRot(dgSub(pts[n], a), -ang * 180 / Math.PI);
+    out[n] = v; sumY += v[1];
+  });
+  if (sumY < 0) names.forEach(function (n) { out[n] = [out[n][0], -out[n][1]]; });
+  return out;
+}
+
+function dgSolveBuild(spec) {
+  try {
+    if (!spec || typeof spec !== 'object') return { ok: false, err: 'no figure data' };
+    var arr = function (x) { return Array.isArray(x) ? x : []; };
+    var idx = {}, names = [], i, j, k;
+    var reg = function (nm) {
+      if (typeof nm !== 'string' || !nm) throw new Error('bad point name');
+      if (!Object.prototype.hasOwnProperty.call(idx, nm)) { idx[nm] = names.length; names.push(nm); }
+      return idx[nm];
+    };
+    var pairs = function (list) {
+      return arr(list).filter(function (s) { return Array.isArray(s) && s.length >= 2; }).map(function (s) { return [reg(s[0]), reg(s[1])]; });
+    };
+    var triples = function (list) {
+      return arr(list).filter(function (t) { return Array.isArray(t) && t.length >= 3; }).map(function (t) { return [reg(t[0]), reg(t[1]), reg(t[2]), t[3]]; });
+    };
+    var groups = function (list) {
+      return arr(list).map(function (g) { return pairs(g); }).filter(function (g) { return g.length >= 2; });
+    };
+    pairs(spec.lines); pairs(spec.dashed);
+    var angs = triples(spec.angles), rights = triples(spec.rightAngles), betw = triples(spec.between), colin = triples(spec.collinear);
+    var eqs = groups(spec.equal), pars = groups(spec.parallel);
+    var eqAngs = arr(spec.equalAngles).map(function (g) { return triples(g); }).filter(function (g) { return g.length >= 2; });
+    var lens = arr(spec.lengths).filter(function (l) { return Array.isArray(l) && l.length >= 3; })
+      .map(function (l) { return [reg(l[0]), reg(l[1]), dgLenNum(l[2])]; })
+      .filter(function (l) { return l[2] != null && l[2] > 0; });
+    var n = names.length;
+    if (n < 3) return { ok: false, err: 'figure needs at least 3 points' };
+    if (n > 12) return { ok: false, err: 'too many points (max 12)' };
+
+    var hasLen = lens.length > 0, D0 = 10;
+    var nfree = 2 * (n - 2) + (hasLen ? 1 : 0);
+    var build = function (z) {
+      var P = [[0, 0], [D0, 0]];
+      for (var q = 2; q < n; q++) P.push([z[2 * (q - 2)], z[2 * (q - 2) + 1]]);
+      return P;
+    };
+    var ln = function (a, b) { return Math.hypot(a[0] - b[0], a[1] - b[1]); };
+    var resid = function (z) {
+      var P = build(z), r = [], q, g, t;
+      angs.forEach(function (a) {
+        var want = dgLabelNum(a[3]);
+        r.push(want == null ? 0 : dgAng(P[a[0]], P[a[1]], P[a[2]]) - want * Math.PI / 180);
+      });
+      rights.forEach(function (a) { r.push(dgAng(P[a[0]], P[a[1]], P[a[2]]) - Math.PI / 2); });
+      eqAngs.forEach(function (gp) {
+        var a0 = dgAng(P[gp[0][0]], P[gp[0][1]], P[gp[0][2]]);
+        for (var q2 = 1; q2 < gp.length; q2++) r.push(dgAng(P[gp[q2][0]], P[gp[q2][1]], P[gp[q2][2]]) - a0);
+      });
+      betw.forEach(function (b) {
+        var p = P[b[0]], a = P[b[1]], c = P[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) + 1e-9;
+        r.push(((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2) / D0);
+        t = dgDot(dgSub(p, a), ac) / L2;
+        r.push(2 * Math.max(0, 0.07 - t)); r.push(2 * Math.max(0, t - 0.93));
+      });
+      colin.forEach(function (b) {
+        var p = P[b[0]], a = P[b[1]], c = P[b[2]], ac = dgSub(c, a), L2 = dgDot(ac, ac) + 1e-9;
+        r.push(((p[0] - a[0]) * ac[1] - (p[1] - a[1]) * ac[0]) / Math.sqrt(L2) / D0);
+      });
+      eqs.forEach(function (gp) {
+        var L0 = ln(P[gp[0][0]], P[gp[0][1]]) + 1e-9;
+        for (var q2 = 1; q2 < gp.length; q2++) r.push(Math.log((ln(P[gp[q2][0]], P[gp[q2][1]]) + 1e-9) / L0));
+      });
+      pars.forEach(function (gp) {
+        var d0 = dgSub(P[gp[0][1]], P[gp[0][0]]), l0 = Math.hypot(d0[0], d0[1]) + 1e-9;
+        for (var q2 = 1; q2 < gp.length; q2++) {
+          var d1 = dgSub(P[gp[q2][1]], P[gp[q2][0]]), l1 = Math.hypot(d1[0], d1[1]) + 1e-9;
+          r.push((d0[0] * d1[1] - d0[1] * d1[0]) / (l0 * l1));
+        }
+      });
+      lens.forEach(function (l) { r.push(Math.log(ln(P[l[0]], P[l[1]]) + 1e-9) - Math.log(l[2]) - z[nfree - 1]); });
+      for (q = 0; q < n; q++) for (g = q + 1; g < n; g++) r.push(Math.max(0, 0.5 - ln(P[q], P[g])) / D0 * 3);
+      for (q = 2; q < n; q++) { r.push(Math.max(0, Math.abs(P[q][0] - 5) - 35) / D0); r.push(Math.max(0, Math.abs(P[q][1]) - 30) / D0); }
+      return r;
+    };
+
+    var rnd = dgRng(20260101), best = null, bestFail = null, lowest = Infinity, found = 0;
+    for (var attempt = 0; attempt < 48 && found < 5; attempt++) {
+      var z0 = [];
+      for (i = 0; i < nfree; i++) z0.push(i >= 2 * (n - 2) ? 0 : (i % 2 === 0 ? -3 + 16 * rnd() : -9 + 18 * rnd()));
+      var P0 = build(z0);
+      betw.forEach(function (b) {
+        var tt = 0.2 + 0.6 * rnd(), a = P0[b[1]], c = P0[b[2]];
+        if (b[0] >= 2) { z0[2 * (b[0] - 2)] = a[0] + tt * (c[0] - a[0]); z0[2 * (b[0] - 2) + 1] = a[1] + tt * (c[1] - a[1]); P0 = build(z0); }
+      });
+      var sol = dgLM(resid, z0, 70);
+      if (sol.cost < lowest) lowest = sol.cost;
+      if (!(sol.cost < 1e-12)) continue;
+      var PP = build(sol.z), pts = {};
+      for (i = 0; i < n; i++) pts[names[i]] = PP[i];
+      var fails = dgCheck(spec, pts);
+      if (fails.length) { if (!bestFail || fails.length < bestFail.n) bestFail = { n: fails.length, msg: fails.join('; ') }; continue; }
+      pts = dgOrient(spec, pts);
+      var sc = dgScore(spec, pts);
+      found++;
+      if (!best || sc > best.score) best = { pts: pts, score: sc };
+    }
+    if (!best) {
+      if (bestFail) return { ok: false, err: bestFail.msg };
+      return { ok: false, err: 'the given facts cannot all be true together (check the angles / sides / which point lies on which line)' };
+    }
+    return { ok: true, pts: best.pts, score: best.score };
+  } catch (e) {
+    return { ok: false, err: String(e && e.message || e) };
+  }
+}
+
+// steps given -> try the construction first; if it fails, fall back to solving the listed facts.
+// no steps -> solve the facts directly.
+function dgBuild(spec) {
+  var hasSteps = spec && Array.isArray(spec.steps) && spec.steps.length >= 2;
+  if (hasSteps) {
+    var r = dgBuildSteps(spec);
+    if (r.ok) return r;
+    var s = dgSolveBuild(spec);
+    if (s.ok) return s;
+    return { ok: false, err: String(s.err || r.err).slice(0, 250) + ' | construction: ' + String(r.err).slice(0, 120) };
+  }
+  return dgSolveBuild(spec);
 }
 
 // ===== AI Diagram renderer (draws only verified-exact figures) =====
