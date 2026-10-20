@@ -2116,6 +2116,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .ai-msg.bot.ai-scan-status { font-size: 13px; }
+.ai-msg.bot a{color:#2563eb;text-decoration:underline;word-break:break-all}
+.ai-diagram{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px;margin:8px 0;max-width:340px}
+.ai-diagram-svg{width:100%;height:auto;display:block}
 .ai-msg.bot pre {
   background: #f1f5f9;
   padding: 8px 12px;
@@ -3368,6 +3371,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
 <button class="ai-chip" onclick="sendQuickPrompt('केवल 2-3 लाइन में बताओ कि बाकी विकल्प गलत क्यों हैं।')">🔍 Options</button>
     <button class="ai-chip" onclick="sendQuickPrompt('easy language me explain karo')">Explain</button>
     <button class="ai-chip" onclick="sendQuickPrompt('Formula kya hai?')">Formula</button>
+    <button class="ai-chip" onclick="openVideoSolution()">▶ Video</button>
   </div>
   <div id="ai-image-preview">
     <button id="remove-ai-image" type="button">✕</button>
@@ -8387,6 +8391,14 @@ function aiCleanMathText(txt) {
        .replace(/\x0crac(?=\{)/g, '\\frac')
        .replace(/\x08eta(?![A-Za-z])/g, 'β')
        .replace(/\neq(?![A-Za-z])/g, '≠');
+  // degree/geometry LaTeX the model slips in: 90^\circ, 90^{\circ}, 90^^deg, \angle ABC ...
+  s = s.replace(/\^+\s*\{?\s*(?:\\+circ|\\+degree|\u00B0)(?:\s*\})?/g, '\u00B0')
+       .replace(/\\+angle(?![A-Za-z])\s*/g, '\u2220')
+       .replace(/\\+triangle(?![A-Za-z])\s*/g, '\u25B3')
+       .replace(/\\+perp(?![A-Za-z])/g, '\u22A5')
+       .replace(/\\+parallel(?![A-Za-z])/g, '\u2225')
+       .replace(/\\+cong(?![A-Za-z])/g, '\u2245')
+       .replace(/\\+sim(?![A-Za-z])/g, '\u223C');
   // literal LaTeX commands
   s = s.replace(/\\text\{([^{}]*)\}/g, '$1')
        .replace(/\\sqrt\{([^{}]*)\}/g, '√($1)')
@@ -8653,6 +8665,26 @@ function sendQuickPrompt(promptText) {
   sendUserMessage();
 }
 
+// Video button: no AI needed. Builds a YouTube search from the question's exam/shift
+// tag (e.g. "RRB NTPC 5 Jan 2025 Shift 2") and opens it, since solution videos are
+// uploaded under exactly that kind of name.
+function openVideoSolution() {
+  try {
+    const q = getCurrentQuestionContext();
+    let tag = aiHtmlToPlainUnicode(String(q.examTag || '')).replace(/\s+/g, ' ').trim();
+    let query;
+    if (tag) {
+      query = tag + ' solution';
+    } else {
+      const words = String(q.questionText || '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 10).join(' ');
+      query = (currentSubject ? currentSubject + ' ' : '') + words + ' solution';
+    }
+    window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank', 'noopener');
+  } catch (e) {
+    window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent('SSC maths solution'), '_blank', 'noopener');
+  }
+}
+
 document.addEventListener("click", (event) => {
   const pop = document.getElementById("aiSettingsPopover");
   const btn = document.getElementById("aiSettingsBtn");
@@ -8710,6 +8742,13 @@ TEACHING RULES:
 ${flashMindRule}
 5. GK/Current Affairs/English/Science/History/Polity: direct, factual and exam-focused. Explain the correct answer briefly; for GK, briefly state why the other options are not correct/what they refer to, and end with exactly one closely related exam-useful fact labeled **👉 रोचक तथ्य:**. Do not add a maths-style trick/formula.
 6. Do not repeat the full question and all options at the top unless the user explicitly asks for them. Start directly with the answer/solution.
+7. DIAGRAM RULE (exception to "plain text only"): When the user asks for a diagram/figure/drawing/chitra, NEVER draw ASCII art (no / \\ | - characters). Output exactly ONE block like this and then 1-2 lines of explanation:
+\`\`\`diagram
+{"points":{"A":[8,88],"B":[34,8],"C":[96,88],"D":[34,88],"E":[62,44]},"lines":[["A","B"],["B","C"],["A","C"],["A","E"]],"dashed":[["B","D"]],"rightAngles":[["D","B","A"]],"angles":[["B","D","C","71\u00b0"],["A","C","E","57\u00b0"]]}
+\`\`\`
+Format: points = name -> [x,y] on a 0-100 grid, y grows DOWNWARD (top = 0), keep the figure roughly to scale with the given angles. lines = solid segments, dashed = dashed segments (altitudes/construction), rightAngles = [vertex, armPoint1, armPoint2], angles = [vertex, armPoint1, armPoint2, "label"]. Every point used in lines/angles must exist in points; a point lying on a line must have coordinates exactly on that segment. Valid JSON only, no comments. The example above is only a format sample - compute your own coordinates for the actual question.
+8. VIDEO RULE: If the user asks for a video solution / YouTube link, use Google Search (if available) and give ONLY real links that the search actually returned. NEVER invent or guess a YouTube URL. Give a timestamp only if the search result clearly shows it; otherwise say the exact timing could not be confirmed and suggest one short YouTube search phrase. Do not say you are "only a text-based teacher".
+9. SYMBOLS: never write LaTeX like \\angle, \\circ, \\triangle, and never use ^ for degrees. Write the real symbols directly: ∠ABC, 90°, △ABC, ⊥.
 
 For automatic question explanations, independently solve first, then reconcile with the supplied Exam Expected Answer. If they agree, use the result. If they differ, re-check wording, diagram, direction, units, notation and calculation; switch to the stored answer only when there is a specific, concrete reason. Otherwise keep your independent answer and briefly state the mismatch. Never blindly copy the stored key.
 `
@@ -9132,8 +9171,109 @@ function normalizeHindiMixedScript(txt) {
   return out;
 }
 
+
+// ===== AI Diagram renderer =====
+// The model returns a small JSON spec inside a ```diagram block (points + lines +
+// angle marks). We draw clean SVG from it instead of showing ASCII art.
+function aiBuildDiagramSVG(raw) {
+  try {
+    raw = String(raw || '').trim().replace(/^json\s*/i, '');
+    const spec = JSON.parse(raw);
+    const P = spec.points || {};
+    const names = Object.keys(P).filter(function (k) {
+      return Array.isArray(P[k]) && isFinite(P[k][0]) && isFinite(P[k][1]);
+    });
+    if (names.length < 2) return '';
+    const W = 320, H = 260, pad = 34;
+    let minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
+    names.forEach(function (k) {
+      minx = Math.min(minx, +P[k][0]); maxx = Math.max(maxx, +P[k][0]);
+      miny = Math.min(miny, +P[k][1]); maxy = Math.max(maxy, +P[k][1]);
+    });
+    const bw = (maxx - minx) || 1, bh = (maxy - miny) || 1;
+    const sc = Math.min((W - 2 * pad) / bw, (H - 2 * pad) / bh);
+    const ox = (W - bw * sc) / 2, oy = (H - bh * sc) / 2;
+    const pt = {};
+    names.forEach(function (k) {
+      pt[k] = { x: ox + (P[k][0] - minx) * sc, y: oy + (P[k][1] - miny) * sc };
+    });
+    let cx = 0, cy = 0;
+    names.forEach(function (k) { cx += pt[k].x; cy += pt[k].y; });
+    cx /= names.length; cy /= names.length;
+    const esc = function (s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    };
+    const f = function (n) { return Math.round(n * 10) / 10; };
+    let out = '';
+
+    const seg = function (list, dash) {
+      (Array.isArray(list) ? list : []).forEach(function (s) {
+        if (!Array.isArray(s) || !pt[s[0]] || !pt[s[1]]) return;
+        out += '<line x1="' + f(pt[s[0]].x) + '" y1="' + f(pt[s[0]].y) + '" x2="' + f(pt[s[1]].x) + '" y2="' + f(pt[s[1]].y) +
+          '" stroke="#1e293b" stroke-width="2" stroke-linecap="round"' + (dash ? ' stroke-dasharray="6 5"' : '') + '/>';
+      });
+    };
+    seg(spec.lines, false);
+    seg(spec.dashed, true);
+
+    // right-angle marks: ["D","B","A"] = vertex D, arms toward B and A
+    (Array.isArray(spec.rightAngles) ? spec.rightAngles : []).forEach(function (r) {
+      if (!Array.isArray(r) || !pt[r[0]] || !pt[r[1]] || !pt[r[2]]) return;
+      const v = pt[r[0]], a = pt[r[1]], b = pt[r[2]], s = 11;
+      const l1 = Math.hypot(a.x - v.x, a.y - v.y) || 1, l2 = Math.hypot(b.x - v.x, b.y - v.y) || 1;
+      const u1 = { x: (a.x - v.x) / l1 * s, y: (a.y - v.y) / l1 * s };
+      const u2 = { x: (b.x - v.x) / l2 * s, y: (b.y - v.y) / l2 * s };
+      out += '<polyline points="' + f(v.x + u1.x) + ',' + f(v.y + u1.y) + ' ' + f(v.x + u1.x + u2.x) + ',' + f(v.y + u1.y + u2.y) +
+        ' ' + f(v.x + u2.x) + ',' + f(v.y + u2.y) + '" fill="none" stroke="#dc2626" stroke-width="1.8"/>';
+    });
+
+    // angle arcs: ["B","D","C","71°"] = vertex B, between rays BD and BC, label
+    (Array.isArray(spec.angles) ? spec.angles : []).forEach(function (an) {
+      if (!Array.isArray(an) || !pt[an[0]] || !pt[an[1]] || !pt[an[2]]) return;
+      const v = pt[an[0]];
+      const a1 = Math.atan2(pt[an[1]].y - v.y, pt[an[1]].x - v.x);
+      const a2 = Math.atan2(pt[an[2]].y - v.y, pt[an[2]].x - v.x);
+      let d = a2 - a1;
+      while (d > Math.PI) d -= 2 * Math.PI;
+      while (d <= -Math.PI) d += 2 * Math.PI;
+      const r = 26;
+      const sx = v.x + r * Math.cos(a1), sy = v.y + r * Math.sin(a1);
+      const ex = v.x + r * Math.cos(a2), ey = v.y + r * Math.sin(a2);
+      out += '<path d="M' + f(sx) + ' ' + f(sy) + ' A' + r + ' ' + r + ' 0 0 ' + (d > 0 ? 1 : 0) + ' ' + f(ex) + ' ' + f(ey) +
+        '" fill="none" stroke="#2563eb" stroke-width="1.8"/>';
+      if (an[3] !== undefined) {
+        const mid = a1 + d / 2, lr = r + 17;
+        out += '<text x="' + f(v.x + lr * Math.cos(mid)) + '" y="' + f(v.y + lr * Math.sin(mid)) +
+          '" font-size="12" font-weight="700" fill="#2563eb" text-anchor="middle" dominant-baseline="middle">' + esc(an[3]) + '</text>';
+      }
+    });
+
+    // point dots + labels (pushed away from the centre of the figure)
+    names.forEach(function (k) {
+      const p = pt[k];
+      let dx = p.x - cx, dy = p.y - cy;
+      const L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      out += '<circle cx="' + f(p.x) + '" cy="' + f(p.y) + '" r="2.6" fill="#1e293b"/>' +
+        '<text x="' + f(p.x + dx * 15) + '" y="' + f(p.y + dy * 15) +
+        '" font-size="15" font-weight="800" fill="#0f172a" text-anchor="middle" dominant-baseline="middle">' + esc(k) + '</text>';
+    });
+
+    return '<svg class="ai-diagram-svg" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">' + out + '</svg>';
+  } catch (e) {
+    return '';
+  }
+}
+
 function formatAIResponseText(txt) {
   if (!txt) return "";
+  // Pull ```diagram blocks out FIRST (before any text cleanup touches the JSON)
+  // and put them back as real SVG at the very end.
+  const aiDiagrams = [];
+  txt = String(txt).replace(/```\s*diagram\s*([\s\S]*?)```/gi, function (m, body) {
+    aiDiagrams.push(aiBuildDiagramSVG(body));
+    return "\n\uE000" + (aiDiagrams.length - 1) + "\uE001\n";
+  });
   txt = normalizeHindiMixedScript(txt);
   txt = aiCleanMathText(txt); // fixes "imes"/"\times" leftovers
   txt = aiConvertSupSub(txt); // model slipped <sup>/<sub>? -> Unicode, before escaping
@@ -9173,7 +9313,19 @@ function formatAIResponseText(txt) {
   formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
   formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Clickable links: [text](https://...) and bare https://... URLs
+  formatted = formatted.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  formatted = formatted.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,
+    '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
   formatted = formatted.replace(/\n/g, '<br>');
+
+  if (aiDiagrams.length) {
+    formatted = formatted.replace(/(?:<br>)*\uE000(\d+)\uE001(?:<br>)*/g, function (m, i) {
+      const svg = aiDiagrams[+i];
+      return svg ? '<div class="ai-diagram">' + svg + '</div>' : '';
+    });
+  }
 
   return formatted;
 }
