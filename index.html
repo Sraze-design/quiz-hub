@@ -3361,7 +3361,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
 
   <div class="ai-quick-prompts">
     <button class="ai-chip" onclick="sendQuickPrompt('Give One more similar question. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option, and place the correct option at a randomly varying position (A, B, C, or D) each time — do not always keep it as option A. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.')">One more</button>
-    <button class="ai-chip" id="aiDiagramBtn" style="background:var(--primary);color:#fff" onclick="requestDiagram()">📐 Diagram</button>
+    <button class="ai-chip" id="aiDiagramBtn" onclick="requestDiagram()">📐 Diagram</button>
     <button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में Hint दो, उत्तर मत बताओ।')">💡 Hint</button>
 
 <button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में शॉर्ट ट्रिक बताओ।')">⚡ Trick</button>
@@ -9459,6 +9459,49 @@ function dgCheck(spec, pts) {
       if (!d0) d0 = d; else if (Math.abs(d0[0] * d[1] - d0[1] * d[0]) > 0.005) f.push('not parallel ' + s[0] + s[1]);
     });
   });
+  // Collinearity sanity: a point that is an endpoint of a DRAWN segment and lies on the line of
+  // another DRAWN segment, but OUTSIDE it, must be joined to it by drawn segments. Otherwise the
+  // figure shows a point floating off the line it is supposed to be on (e.g. "E is on BC" but E
+  // sits beyond B with no E-B segment). Candidates failing this are rejected, so the search picks
+  // a configuration where such a point really lies on the segment.
+  (function () {
+    var drawn = [].concat(arr(spec.lines), arr(spec.dashed)).filter(function (s) {
+      return Array.isArray(s) && pts[s[0]] && pts[s[1]] && s[0] !== s[1];
+    });
+    var ends = {};
+    drawn.forEach(function (s) { ends[s[0]] = 1; ends[s[1]] = 1; });
+    function segDist(p, a, b) {
+      var ab = dgSub(b, a), L2 = dgDot(ab, ab) || 1;
+      var t = Math.max(0, Math.min(1, dgDot(dgSub(p, a), ab) / L2));
+      return dgLen(dgSub(p, [a[0] + t * ab[0], a[1] + t * ab[1]]));
+    }
+    function gapCovered(p, w) {
+      for (var k = 1; k < 8; k++) {
+        var q = [p[0] + (w[0] - p[0]) * k / 8, p[1] + (w[1] - p[1]) * k / 8], ok = false;
+        for (var m = 0; m < drawn.length && !ok; m++) {
+          if (segDist(q, pts[drawn[m][0]], pts[drawn[m][1]]) < 1e-4 * diag) ok = true;
+        }
+        if (!ok) return false;
+      }
+      return true;
+    }
+    Object.keys(ends).forEach(function (n) {
+      var P = pts[n];
+      drawn.forEach(function (s) {
+        if (s[0] === n || s[1] === n) return;
+        var U = pts[s[0]], V = pts[s[1]], uv = dgSub(V, U), L2 = dgDot(uv, uv);
+        if (L2 < 1e-12) return;
+        var cross = Math.abs((P[0] - U[0]) * uv[1] - (P[1] - U[1]) * uv[0]) / Math.sqrt(L2);
+        if (cross > 1e-6 * diag) return;
+        var t = dgDot(dgSub(P, U), uv) / L2;
+        if (t >= -1e-9 && t <= 1 + 1e-9) return;
+        var wn = t < 0 ? s[0] : s[1];
+        if (!gapCovered(P, pts[wn])) {
+          f.push(n + ' is on line ' + s[0] + s[1] + ' but outside it and ' + n + wn + ' is not drawn (if ' + n + ' must lie ON ' + s[0] + s[1] + ', list it in between and construct it so it falls inside; if the line is extended, draw ' + n + wn + ')');
+        }
+      });
+    });
+  })();
   var ratio = null;
   arr(spec.lengths).forEach(function (a) {
     var want = dgLenNum(a[2]);
