@@ -3361,6 +3361,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
 
   <div class="ai-quick-prompts">
     <button class="ai-chip" onclick="sendQuickPrompt('Give One more similar question. Same exam level & more difficulty. First decide the correct answer, then create exactly 4 options with only 1 matching correct option, and place the correct option at a randomly varying position (A, B, C, or D) each time — do not always keep it as option A. Do not reveal the correct answer or explanation until I answer. Treat my next A/B/C/D as final answer. After I answer, immediately reply with: ✅ Correct/❌ Wrong, Correct Answer, and a brief explanation.')">One more</button>
+    <button class="ai-chip" id="aiDiagramBtn" style="background:var(--primary);color:#fff" onclick="requestDiagram()">📐 Diagram</button>
     <button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में Hint दो, उत्तर मत बताओ।')">💡 Hint</button>
 
 <button class="ai-chip" onclick="sendQuickPrompt('केवल 1-2 लाइन में शॉर्ट ट्रिक बताओ।')">⚡ Trick</button>
@@ -8638,7 +8639,7 @@ if (text) {
     parts.push({
         // The hidden formatting instruction is appended only to the payload sent to Gemini,
         // never to what's shown in the chat bubble, so normal AI chat stays exactly the same.
-        text: isQuizCardTriggerMessage ? (text + QUIZ_CARD_FORMAT_INSTRUCTION) : text
+        text: isQuizCardTriggerMessage ? (text + QUIZ_CARD_FORMAT_INSTRUCTION) : (text + takeDiagramInstruction())
     });
 }
 
@@ -8664,6 +8665,62 @@ function sendQuickPrompt(promptText) {
   const inputEl = document.getElementById('aiInput');
   inputEl.value = promptText;
   sendUserMessage();
+}
+
+// ===== 📐 Diagram button =====
+// Click = ek hi tap mein figure. Input box mein kuch likha hai to usi ka diagram banta hai
+// (jaise "triangle ABC, ∠B = 90°, ∠A = 40°"); khali hai to current question (text + figure image)
+// ka diagram banta hai. Hidden instruction sirf API payload mein jaati hai, chat bubble mein nahi.
+const DIAGRAM_MODE_MARKER = '[DIAGRAM MODE]';
+let diagramInstructionNext = '';
+let diagramButtonBusy = false;
+function takeDiagramInstruction() {
+  const s = diagramInstructionNext;
+  diagramInstructionNext = '';
+  return s;
+}
+function buildDiagramInstruction() {
+  const fence = '\u0060\u0060\u0060';
+  return '\n\n' + DIAGRAM_MODE_MARKER + ' Draw the figure for the above as EXACTLY ONE ' + fence + 'diagram block (follow DIAGRAM RULE 7), then 1-2 short lines of explanation. ' +
+    'Method: (1) First list ONLY the GIVEN data: angles, sides, right angles, parallel/perpendicular lines, points lying on sides, equal sides. ' +
+    '(2) Start with two fixed points (base horizontal, y axis UP). ' +
+    '(3) Build every given angle with rot/polarRel and every given side with dd/polar; a free point on a side uses ["on","P","A","B","?"]. ' +
+    '(4) Put EVERY given fact in the fact arrays (lines, dashed, between, rightAngles, angles, equal, parallel, lengths). ' +
+    '(5) Unknown angle/side labels must be "x" or "?", never a number. Keep it short (max about 20 steps), valid JSON only. ' +
+    'Do NOT solve the question and do NOT reveal the answer. If the given data is inconsistent, say so in words with no diagram block.';
+}
+async function requestDiagram() {
+  if (isAIGenerating || diagramButtonBusy) return;
+  diagramButtonBusy = true;
+  try {
+    const inputEl = document.getElementById('aiInput');
+    const typed = inputEl.value.trim();
+    let shown = typed;
+    let extra = '';
+    if (!typed && !selectedAIImageBase64) {
+      let q = null;
+      try { q = getCurrentQuestionContext(); } catch (e) {}
+      if (!q) {
+        appendAIMessage('bot', '📐 Diagram ke liye input box mein likho kya banana hai (jaise: triangle ABC, ∠B = 90°, ∠A = 40°), ya koi question kholo.', false);
+        return;
+      }
+      shown = '📐 Is question ka diagram banao';
+      const opts = (q.options || []).map((o, i) => String.fromCharCode(65 + i) + '. ' + aiHtmlToPlainUnicode(String(o))).join('  ');
+      extra = '\n\nQuestion: ' + String(q.questionText || '').trim() + (opts ? '\nOptions: ' + opts : '');
+      if (q.imageSource) {
+        q = await hydrateQuestionImageData(q);
+        const m = q && q.imageData ? String(q.imageData).match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/) : null;
+        if (m) { selectedAIImageMime = m[1].toLowerCase(); selectedAIImageBase64 = m[2].replace(/\s+/g, ''); }
+      }
+      if (isAIGenerating) return;
+    }
+    inputEl.value = shown;
+    diagramInstructionNext = extra + buildDiagramInstruction();
+    sendUserMessage();
+    diagramInstructionNext = '';
+  } finally {
+    diagramButtonBusy = false;
+  }
 }
 
 // Video + timing: asks the Worker to find the shift's solution video and the minute where
@@ -8758,7 +8815,7 @@ async function requestGeminiResponse(isAutoScanRequest = false) {
     if (requestEpoch !== aiChatEpoch) return;
     didTimeout = true;
     if (currentAbortController) currentAbortController.abort();
-  }, 75000); // matches worker's OVERALL_TIMEOUT (75s)
+  }, 100000); // must stay ABOVE the worker's OVERALL_TIMEOUT (90s)
 
   try {
     // Thinking is left at Gemini's default for ALL subjects (including
@@ -8813,6 +8870,13 @@ For automatic question explanations, independently solve first, then reconcile w
       },
       contents: aiChatHistory
     };
+
+    // Diagram button / diagram request: the Worker gives these a longer per-call limit.
+    try {
+      const lastU = [...aiChatHistory].reverse().find((c) => c && c.role === 'user');
+      const lastT = ((lastU && lastU.parts) || []).map((p) => (typeof p.text === 'string' ? p.text : '')).join(' ');
+      if (lastT.indexOf(DIAGRAM_MODE_MARKER) !== -1) payload.diagramMode = true;
+    } catch (e) {}
 
     // Exam/PYQ reconciliation is available only for the automatic question
     // explanation. Manual AI chat remains fully independent of quiz answer keys.
