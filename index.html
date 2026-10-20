@@ -8715,11 +8715,30 @@ function aiImgClean(h) {
     .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
 }
 
-// Wikimedia Commons file search (diagrams, labelled figures, photos)
-async function aiImgCommons(q, limit) {
-  const url = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*' +
+// ---- Hindi priority helpers ----
+const AIIMG_DEV_RE = /[\u0900-\u097F]/;
+const AIIMG_HI_FILE_RE = /(^|[\s_\-(\[])(hi|hin|hindi)([\s_\-.)\]]|$)/i;
+const AIIMG_HI_WORD_RE = /hindi|हिन्दी|हिंदी/i;
+function aiImgHindiScore(rawTitle, desc) {
+  const t = String(rawTitle || '').replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '');
+  let sc = 0;
+  if (AIIMG_DEV_RE.test(t)) sc += 3;
+  if (AIIMG_HI_FILE_RE.test(t)) sc += 3;
+  if (AIIMG_HI_WORD_RE.test(t)) sc += 3;
+  if (desc && AIIMG_DEV_RE.test(desc)) sc += 1.5;
+  return sc;
+}
+// Translatable SVG ko Hindi mein render karne ke liye thumb URL mein "langhi-" lagta hai
+// (agar SVG mein Hindi nahi hai to Commons default bhasha hi dikhata hai).
+function aiImgHiThumb(url) {
+  return String(url || '').replace(/\/(\d+px-[^\/]+)$/, '/langhi-$1');
+}
+
+// Commons / hi.wikipedia file search (diagrams, labelled figures, photos)
+async function aiImgFiles(host, q, limit) {
+  const url = 'https://' + host + '/w/api.php?action=query&format=json&origin=*' +
     '&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch=' + encodeURIComponent(q) +
-    '&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName';
+    '&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName|ImageDescription';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
   pages.sort((a, b) => (a.index || 0) - (b.index || 0));
@@ -8728,51 +8747,92 @@ async function aiImgCommons(q, limit) {
     const ii = pg.imageinfo && pg.imageinfo[0];
     if (!ii || !/^image\/(svg\+xml|png|jpeg|gif|webp)$/.test(ii.mime || '')) continue;
     const em = ii.extmetadata || {};
+    const desc = em.ImageDescription ? aiImgClean(em.ImageDescription.value) : '';
+    const thumb = ii.thumburl || ii.url;
+    const isSvg = /svg/.test(ii.mime);
     out.push({
-      src: ii.thumburl || ii.url,
+      src: isSvg ? aiImgHiThumb(thumb) : thumb,
+      srcFallback: isSvg ? thumb : '',
       full: ii.url,
       page: ii.descriptionurl,
       title: String(pg.title || '').replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
       license: em.LicenseShortName ? aiImgClean(em.LicenseShortName.value) : '',
-      source: 'Wikimedia Commons'
+      source: host.indexOf('commons') === 0 ? 'Wikimedia Commons' : 'Hindi Wikipedia',
+      hiScore: aiImgHindiScore(pg.title, desc) + (host.indexOf('hi.') === 0 ? 2 : 0)
     });
     if (out.length >= limit) break;
   }
   return out;
 }
 
-// Wikipedia: sirf TOP search result ka main image (galat insaan/cheez ki photo na aaye)
+// Wikipedia: sirf TOP search result ka main image (galat insaan/cheez ki photo na aaye).
+// English page ke saath uska Hindi title (langlink) bhi lautata hai.
 async function aiImgWikipedia(q, lang) {
   const url = 'https://' + lang + '.wikipedia.org/w/api.php?action=query&format=json&origin=*' +
     '&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=' + encodeURIComponent(q) +
-    '&prop=pageimages|info&piprop=thumbnail|original&pithumbsize=800&inprop=url';
+    '&prop=pageimages|info|langlinks&piprop=thumbnail|original&pithumbsize=800&inprop=url&lllang=hi&lllimit=20';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
   pages.sort((a, b) => (a.index || 0) - (b.index || 0));
   const top = pages[0];
-  if (!top || !top.thumbnail || !top.thumbnail.source) return [];
-  return [{
-    src: top.thumbnail.source,
-    full: (top.original && top.original.source) || top.thumbnail.source,
-    page: top.fullurl,
-    title: top.title,
-    license: '',
-    source: (lang === 'hi' ? 'Hindi ' : '') + 'Wikipedia'
-  }];
+  if (!top) return { items: [], hiTitle: '' };
+  const ll = top.langlinks && top.langlinks[0];
+  const hiTitle = ll ? String(ll['*'] || ll.title || '') : '';
+  if (!top.thumbnail || !top.thumbnail.source) return { items: [], hiTitle: hiTitle };
+  return {
+    hiTitle: hiTitle,
+    items: [{
+      src: top.thumbnail.source,
+      full: (top.original && top.original.source) || top.thumbnail.source,
+      page: top.fullurl,
+      title: top.title,
+      license: '',
+      source: (lang === 'hi' ? 'Hindi ' : '') + 'Wikipedia',
+      hiScore: lang === 'hi' ? 1 : 0
+    }]
+  };
 }
 
+// Returns { items, note }. Hindi (labels/naam) wali images ko pehle rakhta hai.
 async function aiImgSearch(subject, wantDiagram) {
-  const hasDev = /[\u0900-\u097F]/.test(subject);
-  const langs = hasDev ? ['hi', 'en'] : ['en'];
-  // Sab requests ek saath chalti hain (tez); phir intent ke hisaab se best result chunte hain.
-  const wikiP = Promise.all(langs.map((l) => aiImgWikipedia(subject, l)));
-  const comP = aiImgCommons(wantDiagram ? subject + ' diagram' : subject, 3);
-  const [wikiAll, com] = await Promise.all([wikiP, comP]);
-  const wiki = [].concat.apply([], wikiAll);
-  return wantDiagram ? (com.length ? com : wiki) : (wiki.length ? wiki : com);
+  const subjIsHindi = AIIMG_DEV_RE.test(subject);
+  // Round 1 (sab ek saath): English Wikipedia (+ Hindi title) aur Commons ki Hindi/English diagram search
+  const r1 = await Promise.all([
+    subjIsHindi ? Promise.resolve({ items: [], hiTitle: subject }) : aiImgWikipedia(subject, 'en'),
+    subjIsHindi ? aiImgWikipedia(subject, 'hi') : Promise.resolve({ items: [], hiTitle: '' }),
+    wantDiagram ? aiImgFiles('commons.wikimedia.org', subject + ' diagram hindi', 4) : Promise.resolve([]),
+    aiImgFiles('commons.wikimedia.org', wantDiagram ? subject + ' diagram' : subject, 6)
+  ]);
+  const enWiki = r1[0], hiWikiDirect = r1[1];
+  let hiTitle = (enWiki.hiTitle || hiWikiDirect.hiTitle || '').trim();
+  // Round 2: Hindi naam mil gaya to Hindi Wikipedia + Commons mein Hindi naam se dhoondho
+  let r2 = [[], [], { items: [] }];
+  if (hiTitle) {
+    r2 = await Promise.all([
+      aiImgFiles('hi.wikipedia.org', hiTitle, 5),
+      aiImgFiles('commons.wikimedia.org', hiTitle + (wantDiagram ? ' आरेख' : ''), 5),
+      aiImgWikipedia(hiTitle, 'hi')
+    ]);
+  }
+  const pool = [].concat(r2[0], r2[1], hiWikiDirect.items, r2[2].items || [], r1[2], r1[3], enWiki.items);
+  // dedupe (same image)
+  const seen = new Set();
+  let uniq = pool.filter((r) => { const k = r.full || r.src; if (seen.has(k)) return false; seen.add(k); return true; });
+  if (!wantDiagram) {
+    // photo/image: top Wikipedia page ki main photo (sahi insaan/cheez); na mile to Commons files
+    const mainPick = subjIsHindi ? [].concat(hiWikiDirect.items, enWiki.items) : [].concat(enWiki.items, r2[2].items || []);
+    return { items: mainPick.length ? mainPick.slice(0, 1) : r1[3].slice(0, 3), note: '' };
+  }
+  // diagram: Hindi score ke hisaab se (stable sort => relevance order bachta hai)
+  const idx = new Map(uniq.map((r, i) => [r, i]));
+  uniq.sort((a, b) => (b.hiScore - a.hiScore) || (idx.get(a) - idx.get(b)));
+  const items = uniq.slice(0, 3);
+  items.forEach((r) => { r.isHindi = r.hiScore >= 3; });
+  const anyHindi = items.some((r) => r.isHindi);
+  return { items: items, note: (items.length && !anyHindi) ? 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.' : '' };
 }
 
-function aiImgRender(subject, results) {
+function aiImgRender(subject, results, note, retryFn) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
   const msg = document.createElement('div');
@@ -8792,7 +8852,10 @@ function aiImgRender(subject, results) {
     img.alt = r.title || subject;
     img.loading = 'lazy';
     img.onload = () => { chatBody.scrollTop = chatBody.scrollHeight; };
-    img.onerror = () => { card.style.display = 'none'; };
+    img.onerror = () => {
+      if (r.srcFallback && img.src !== r.srcFallback) { img.src = r.srcFallback; return; }
+      card.style.display = 'none';
+    };
     link.appendChild(img);
     card.appendChild(link);
     const cap = document.createElement('div');
@@ -8803,13 +8866,102 @@ function aiImgRender(subject, results) {
     src.target = '_blank';
     src.rel = 'noopener noreferrer';
     src.textContent = r.source + (r.license ? ' (' + r.license + ')' : '');
+    if (r.isHindi) cap.insertBefore(document.createTextNode('🇮🇳 हिंदी · '), cap.firstChild);
     cap.appendChild(src);
     card.appendChild(cap);
     wrap.appendChild(card);
   });
   msg.appendChild(wrap);
+  if (note) {
+    const n = document.createElement('div');
+    n.className = 'ai-wimg-cap notranslate';
+    n.setAttribute('translate', 'no');
+    n.textContent = note;
+    msg.appendChild(n);
+  }
+  if (retryFn) {
+    const acts = document.createElement('div');
+    acts.className = 'ai-msg-actions';
+    const rb = document.createElement('button');
+    rb.className = 'ai-action-btn';
+    rb.textContent = '🤖 Galat image? AI se dhoondho';
+    rb.onclick = () => { rb.disabled = true; retryFn(); };
+    acts.appendChild(rb);
+    msg.appendChild(acts);
+  }
   chatBody.appendChild(msg);
   chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// AI sirf naam samajhne ke liye (Hinglish/Hindi -> English Wikipedia title). Image AI nahi banata.
+async function aiImgAiName(subject, wantDiagram) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 12000);
+  try {
+    const res = await fetch(GEMINI_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: '',
+        selectedModel: AI_DEFAULT_MODEL,
+        selectedThinking: 'low',
+        systemInstruction: { parts: [{ text: "You convert a student's Hindi/Hinglish/English image request into the exact English Wikipedia article title of the thing asked. Reply with ONLY that title (1-5 words), no quotes, no explanation. For a person give the full common name. If it is not a real thing, person or concept, reply NONE." }] },
+        contents: [{ role: 'user', parts: [{ text: 'Request: ' + subject + (wantDiagram ? ' (diagram)' : ' (photo)') }] }]
+      }),
+      signal: ctl.signal
+    });
+    if (!res.ok) return '';
+    const j = await res.json();
+    let t = '';
+    if (j && j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) {
+      t = j.candidates[0].content.parts.map((x) => x.text || '').join('');
+    } else if (j && j.text) {
+      t = j.text;
+    }
+    t = String(t).split('\n')[0].replace(/["'`*]/g, '').trim();
+    if (!t || /^none$/i.test(t) || t.length > 60) return '';
+    return t;
+  } catch (e) {
+    return '';
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function aiImgShowLoading(text) {
+  appendAIMessage('bot', text, false);
+  const cb = document.getElementById('aiChatBody');
+  return cb && cb.lastElementChild;
+}
+
+// mode 'auto': seedha search -> kuch na mile to AI se naam -> dobara search
+// mode 'ai'  : seedha AI se naam samajhkar search ("Galat image?" button)
+async function aiImgRun(subject, wantDiagram, mode, epoch, loadingEl) {
+  let out = null;
+  let usedAI = false;
+  if (mode === 'auto') {
+    try { out = await aiImgSearch(subject, wantDiagram); } catch (e) { out = null; }
+  }
+  if (!out || !out.items || !out.items.length) {
+    if (loadingEl && loadingEl.parentNode) loadingEl.textContent = '🤖 Naam samajh raha hoon...';
+    const en = await aiImgAiName(subject, wantDiagram);
+    usedAI = true;
+    if (en) {
+      try { out = await aiImgSearch(en, wantDiagram); } catch (e) { out = null; }
+      if (out && out.items && out.items.length) subject = en;
+    }
+  }
+  if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
+  if (epoch !== aiChatEpoch) return;
+  if (out && out.items && out.items.length) {
+    const retry = (mode === 'auto' && !usedAI) ? function () {
+      const el = aiImgShowLoading('🤖 AI se sahi naam dhoondh raha hoon...');
+      aiImgRun(subject, wantDiagram, 'ai', epoch, el);
+    } : null;
+    aiImgRender(subject, out.items, out.note, retry);
+  } else {
+    appendAIMessage('bot', '😕 "' + subject + '" ki image nahi mili. Kisi aur naam/spelling se try karo (jaise: Mitochondria diagram, Human heart diagram).', false);
+  }
 }
 
 // true = request handle ho gayi (AI ko nahi bhejni); false = normal AI chat
@@ -8829,18 +8981,8 @@ function aiWikiImageIntercept(text) {
   // Context ke liye history mein ek chhota note (user + model ek saath, taaki order na bigde).
   aiChatHistory.push({ role: 'user', parts: [{ text: text }] });
   aiChatHistory.push({ role: 'model', parts: [{ text: '[The app fetched an image from Wikipedia/Wikimedia for: ' + subject + ']' }] });
-  appendAIMessage('bot', '🔍 Image dhoondh raha hoon...', false);
-  const chatBody = document.getElementById('aiChatBody');
-  const loadingEl = chatBody && chatBody.lastElementChild;
-  aiImgSearch(subject, wantDiagram).then((results) => {
-    if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
-    if (epoch !== aiChatEpoch) return;
-    if (results && results.length) {
-      aiImgRender(subject, results);
-    } else {
-      appendAIMessage('bot', '😕 "' + subject + '" ki image nahi mili. English naam se try karo (jaise: Mitochondria diagram, Human heart diagram, Kidney nephron diagram).', false);
-    }
-  }).catch(() => {
+  const loadingEl = aiImgShowLoading('🔍 Image dhoondh raha hoon...');
+  aiImgRun(subject, wantDiagram, 'auto', epoch, loadingEl).catch(() => {
     if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
     if (epoch !== aiChatEpoch) return;
     appendAIMessage('bot', '⚠️ Image laane mein dikkat aayi (internet check karo) — dobara try karo.', false);
