@@ -8735,9 +8735,9 @@ function aiImgHiThumb(url) {
 }
 
 // Commons / hi.wikipedia file search (diagrams, labelled figures, photos)
-async function aiImgFiles(host, q, limit) {
+async function aiImgFiles(host, q, limit, offset) {
   const url = 'https://' + host + '/w/api.php?action=query&format=json&origin=*' +
-    '&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch=' + encodeURIComponent(q) +
+    '&generator=search&gsrnamespace=6&gsrlimit=12&gsroffset=' + (offset || 0) + '&gsrsearch=' + encodeURIComponent(q) +
     '&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=800&iiextmetadatafilter=LicenseShortName|ImageDescription';
   const j = await aiImgFetchJSON(url);
   const pages = j && j.query && j.query.pages ? Object.values(j.query.pages) : [];
@@ -8801,7 +8801,7 @@ async function aiImgSearch(subject, wantDiagram) {
     subjIsHindi ? Promise.resolve({ items: [], hiTitle: subject }) : aiImgWikipedia(subject, 'en'),
     subjIsHindi ? aiImgWikipedia(subject, 'hi') : Promise.resolve({ items: [], hiTitle: '' }),
     wantDiagram ? aiImgFiles('commons.wikimedia.org', subject + ' diagram hindi', 4) : Promise.resolve([]),
-    aiImgFiles('commons.wikimedia.org', wantDiagram ? subject + ' diagram' : subject, 6)
+    aiImgFiles('commons.wikimedia.org', wantDiagram ? subject + ' diagram' : subject, 12)
   ]);
   const enWiki = r1[0], hiWikiDirect = r1[1];
   let hiTitle = (enWiki.hiTitle || hiWikiDirect.hiTitle || '').trim();
@@ -8819,20 +8819,23 @@ async function aiImgSearch(subject, wantDiagram) {
   const seen = new Set();
   let uniq = pool.filter((r) => { const k = r.full || r.src; if (seen.has(k)) return false; seen.add(k); return true; });
   if (!wantDiagram) {
-    // photo/image: top Wikipedia page ki main photo (sahi insaan/cheez); na mile to Commons files
+    // photo/image: top Wikipedia page ki main photo pehle (sahi insaan/cheez), phir Commons ki 2 aur
     const mainPick = subjIsHindi ? [].concat(hiWikiDirect.items, enWiki.items) : [].concat(enWiki.items, r2[2].items || []);
-    return { items: mainPick.length ? mainPick.slice(0, 1) : r1[3].slice(0, 3), note: '' };
+    const ordered = [].concat(mainPick.slice(0, 1), r1[3]);
+    const seenP = new Set();
+    const poolP = ordered.filter((r) => { const k = r.full || r.src; if (seenP.has(k)) return false; seenP.add(k); return true; });
+    return { items: poolP.slice(0, 3), note: '', pool: poolP };
   }
   // diagram: Hindi score ke hisaab se (stable sort => relevance order bachta hai)
   const idx = new Map(uniq.map((r, i) => [r, i]));
   uniq.sort((a, b) => (b.hiScore - a.hiScore) || (idx.get(a) - idx.get(b)));
   const items = uniq.slice(0, 3);
-  items.forEach((r) => { r.isHindi = r.hiScore >= 3; });
+  uniq.forEach((r) => { r.isHindi = r.hiScore >= 3; });
   const anyHindi = items.some((r) => r.isHindi);
-  return { items: items, note: (items.length && !anyHindi) ? 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.' : '' };
+  return { items: items, pool: uniq, note: (items.length && !anyHindi) ? 'ℹ️ Hindi labels wali image nahi mili, isliye English wali dikha raha hoon.' : '' };
 }
 
-function aiImgRender(subject, results, note, retryFn) {
+function aiImgRender(subject, results, note, retryFn, nextFn) {
   const chatBody = document.getElementById('aiChatBody');
   if (!chatBody) return;
   const msg = document.createElement('div');
@@ -8879,14 +8882,23 @@ function aiImgRender(subject, results, note, retryFn) {
     n.textContent = note;
     msg.appendChild(n);
   }
-  if (retryFn) {
+  if (retryFn || nextFn) {
     const acts = document.createElement('div');
     acts.className = 'ai-msg-actions';
+    if (nextFn) {
+      const nb = document.createElement('button');
+      nb.className = 'ai-action-btn';
+      nb.textContent = '➡️ Dusri image';
+      nb.onclick = () => { nb.disabled = true; nextFn(); };
+      acts.appendChild(nb);
+    }
+    if (retryFn) {
     const rb = document.createElement('button');
     rb.className = 'ai-action-btn';
     rb.textContent = '🤖 Galat image? AI se dhoondho';
     rb.onclick = () => { rb.disabled = true; retryFn(); };
     acts.appendChild(rb);
+    }
     msg.appendChild(acts);
   }
   chatBody.appendChild(msg);
@@ -8934,6 +8946,48 @@ function aiImgShowLoading(text) {
   return cb && cb.lastElementChild;
 }
 
+// "Dusri do / another / next" follow-up ke liye pichle image-result ki yaad
+let aiImgState = { subject: '', wantDiagram: false, pool: [], shown: new Set(), offset: 12, active: false };
+const AIIMG_FOLLOW = new Set('dusri dusra dusre doosri doosra doosre another next more different alag agli agla other one दूसरी दूसरा दूसरे अगली अगला'.split(' '));
+function aiImgKey(r) { return r.full || r.src; }
+function aiImgIsFollowUp(text) {
+  if (!aiImgState.active) return false;
+  const t = String(text || '').trim();
+  if (!t || t.length > 40) return false;
+  const left = aiImgSubject(t).filter((w) => !AIIMG_FOLLOW.has(w.toLowerCase()));
+  if (left.length) return false;
+  const low = t.toLowerCase();
+  return t.split(/\s+/).some((w) => AIIMG_FOLLOW.has(w.replace(/[?!.,]/g, '').toLowerCase())) ||
+    /(^|\s)(ek aur|aur ek|aur do|एक और|और एक)(\s|$)/i.test(low);
+}
+async function aiImgNext() {
+  const st = aiImgState;
+  if (!st.subject) return;
+  const epoch = aiChatEpoch;
+  const loadingEl = aiImgShowLoading('🔍 Dusri image dhoondh raha hoon...');
+  const want = st.wantDiagram ? 3 : 2;
+  let fresh = st.pool.filter((r) => !st.shown.has(aiImgKey(r)));
+  if (fresh.length < want) {
+    try {
+      const more = await aiImgFiles('commons.wikimedia.org', st.wantDiagram ? st.subject + ' diagram' : st.subject, 8, st.offset);
+      st.offset += 12;
+      more.forEach((r) => {
+        const k = aiImgKey(r);
+        if (!st.shown.has(k) && !st.pool.some((x) => aiImgKey(x) === k)) { st.pool.push(r); fresh.push(r); }
+      });
+    } catch (e) {}
+  }
+  if (loadingEl && loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
+  if (epoch !== aiChatEpoch) return;
+  const take = fresh.slice(0, want);
+  if (!take.length) {
+    appendAIMessage('bot', '😕 Aur images nahi mili. Dusre naam se try karo (jaise: Human female anatomy diagram).', false);
+    return;
+  }
+  take.forEach((r) => st.shown.add(aiImgKey(r)));
+  aiImgRender(st.subject, take, '', null, () => aiImgNext());
+}
+
 // mode 'auto': seedha search -> kuch na mile to AI se naam -> dobara search
 // mode 'ai'  : seedha AI se naam samajhkar search ("Galat image?" button)
 async function aiImgRun(subject, wantDiagram, mode, epoch, loadingEl) {
@@ -8958,7 +9012,8 @@ async function aiImgRun(subject, wantDiagram, mode, epoch, loadingEl) {
       const el = aiImgShowLoading('🤖 AI se sahi naam dhoondh raha hoon...');
       aiImgRun(subject, wantDiagram, 'ai', epoch, el);
     } : null;
-    aiImgRender(subject, out.items, out.note, retry);
+    aiImgState = { subject: subject, wantDiagram: wantDiagram, pool: (out.pool || out.items).slice(), shown: new Set(out.items.map(aiImgKey)), offset: 12, active: true };
+    aiImgRender(subject, out.items, out.note, retry, () => aiImgNext());
   } else {
     appendAIMessage('bot', '😕 "' + subject + '" ki image nahi mili. Kisi aur naam/spelling se try karo (jaise: Mitochondria diagram, Human heart diagram).', false);
   }
@@ -8967,10 +9022,18 @@ async function aiImgRun(subject, wantDiagram, mode, epoch, loadingEl) {
 // true = request handle ho gayi (AI ko nahi bhejni); false = normal AI chat
 function aiWikiImageIntercept(text) {
   text = String(text || '').trim();
-  if (!text || text.length > 160 || /QUIZDATA/.test(text)) return false;
-  if (!AIIMG_WORD_RE.test(text) || AIIMG_EXCLUDE_RE.test(text)) return false;
+  if (aiImgIsFollowUp(text)) {
+    aiChatHistory.push({ role: 'user', parts: [{ text: text }] });
+    aiChatHistory.push({ role: 'model', parts: [{ text: '[The app showed another image from Wikipedia/Wikimedia]' }] });
+    aiImgNext();
+    return true;
+  }
+  if (!text || text.length > 160 || /QUIZDATA/.test(text) || !AIIMG_WORD_RE.test(text) || AIIMG_EXCLUDE_RE.test(text)) {
+    aiImgState.active = false;
+    return false;
+  }
   const toks = aiImgSubject(text);
-  if (toks.length > 8) return false;
+  if (toks.length > 8) { aiImgState.active = false; return false; }
   const subject = toks.join(' ').trim();
   if (!subject) {
     appendAIMessage('bot', '🖼️ Kiski image chahiye? Naam ke saath likho, jaise: Mitochondria diagram, Human heart diagram, APJ Abdul Kalam photo.', false);
