@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<style>html,body{touch-action:manipulation;overscroll-behavior:none;}
+<style>html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
+html,body{touch-action:manipulation;overscroll-behavior:none;}
 /* ===== Universal Pull-to-Refresh (iPhone/iPad/Android/touch devices) ===== */
 #pullToRefreshIndicator{
   position:fixed;
@@ -229,7 +230,7 @@ body {
 @media(min-width:700px){.mp-wrap{padding-top:8px}}
 /* ===== My Progress: iPad / tablet landscape = 2-column dashboard ===== */
 @media(min-width:900px) and (min-height:560px) and (orientation:landscape){
-.mp-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-rows:auto 1fr auto;grid-template-areas:"hero card" "tiles card" "reset reset";gap:20px;max-width:1060px;min-height:0;align-content:start;padding-top:6px}
+.mp-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-rows:auto 1fr auto;grid-template-areas:"hero card" "tiles card" "reset reset";gap:20px;max-width:none;padding-top:6px}
 .mp-hero{grid-area:hero;padding:28px 30px}
 .mp-hero-label{font-size:14px}
 .mp-hero-num{font-size:76px;margin:6px 0 4px}
@@ -241,7 +242,7 @@ body {
 .mp-card-title{font-size:21px}
 .mp-chip{font-size:14px;padding:5px 12px}
 .mp-acc{gap:22px;padding:10px 0 2px}
-.mp-ring{--mp-ring:clamp(200px,min(30vw,calc(100vh - 380px)),320px);--mp-ring:clamp(200px,min(30vw,calc(100dvh - 380px)),320px)}
+.mp-ring{--mp-ring:clamp(200px,min(30vw,calc(100vh - 330px)),380px);--mp-ring:clamp(200px,min(30vw,calc(100dvh - 330px)),380px)}
 .mp-ring-sub{display:block;font-size:calc(var(--mp-ring)*.065)}
 .mp-legend{gap:12px 56px}
 .mp-legend-text strong{font-size:28px}
@@ -252,6 +253,48 @@ body {
 .mp-tile-num{font-size:48px}
 .mp-tile-pct{font-size:16px}
 .mp-reset{grid-area:reset;justify-self:center;margin-top:4px}
+}
+/* ===== My Progress: iPad / tablet portrait = phone-style, full width, compact ===== */
+@media(min-width:700px) and (orientation:portrait){
+.mp-wrap{max-width:none;min-height:0;gap:16px;padding-top:4px}
+.mp-hero{padding:26px 28px}
+.mp-hero-label{font-size:14px}
+.mp-hero-num{font-size:64px}
+.mp-hero-msg{display:block;font-size:18px}
+.mp-goal-row{font-size:15px}
+.mp-card{flex:0 0 auto;padding:22px 26px}
+.mp-card-title{font-size:20px}
+.mp-chip{font-size:14px;padding:5px 12px}
+.mp-acc{flex:0 0 auto;gap:20px;padding:14px 0 6px}
+.mp-ring{--mp-ring:clamp(200px,34vw,300px)}
+.mp-ring-sub{display:block}
+.mp-legend{gap:12px 56px}
+.mp-legend-text strong{font-size:26px}
+.mp-legend-text span{font-size:15px}
+.mp-tiles{gap:16px;margin-top:0}
+.mp-tile{padding:20px 22px}
+.mp-tile-label{font-size:15px}
+.mp-tile-num{font-size:40px}
+.mp-tile-pct{font-size:16px}
+.mp-reset{margin-top:6px}
+}
+/* ===== Wrong Questions: iPad / tablet = full width, no wasted side space ===== */
+@media(min-width:700px){
+.wb-wrap{max-width:none;gap:16px}
+.wb-summary{padding:24px 28px}
+.wb-sum-num{font-size:56px}
+.wb-sum-label{font-size:16px}
+.wb-practice-all{padding:14px 22px;font-size:15px}
+.wb-group{padding:18px}
+.wb-group-title strong{font-size:17px}
+.wb-group-title small{font-size:13px}
+.wb-group-btn{padding:10px 18px;font-size:14px}
+.wb-qtext{font-size:15px}
+.wb-qno{font-size:13px}
+}
+@media(min-width:900px) and (orientation:landscape){
+.wb-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:18px}
+.wb-summary{grid-column:1 / -1}
 }
 .premium-card.report-history-card{display:block;width:100%;min-width:0;box-sizing:border-box;cursor:default;user-select:text;-webkit-user-select:text;touch-action:auto;background:#fff7ed;border-color:#fed7aa;padding-right:58px}
 .report-history-card:active{transform:none;box-shadow:var(--shadow-sm);border-color:#fdba74}
