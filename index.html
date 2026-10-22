@@ -3402,6 +3402,12 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
         <span class="qp-stats-label">Unanswered Qs</span>
         <span class="qp-stats-value" id="qpUnansweredCount">0</span>
       </div>
+      <div class="qp-stats-sep"></div>
+      <div class="qp-stats-row">
+        <svg viewBox="0 0 18 20" width="12" height="14" aria-hidden="true" focusable="false" style="flex:0 0 auto;overflow:visible"><path d="M4 1.5 V18.5" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round"/><path d="M5 2.5 H16 L12.8 6.7 L16 11 H5 Z" fill="#8b5cf6"/></svg>
+        <span class="qp-stats-label">Marked for Review</span>
+        <span class="qp-stats-value" id="qpReviewCount">0</span>
+      </div>
     </div>
 
     <div id="qpGrid" class="qp-grid"></div>
@@ -8144,6 +8150,8 @@ function renderQuestionPalette(){
   if(unansEl) unansEl.textContent = (data.length - answeredCount);
   if(corrEl) corrEl.textContent = correctCount;
   if(wrongEl) wrongEl.textContent = wrongCount;
+  const reviewEl = document.getElementById('qpReviewCount');
+  if(reviewEl) reviewEl.textContent = data.reduce((n,_,i)=>n+(examReview[i]?1:0),0);
   const titleEl = document.getElementById('qpSectionTitle');
   if(titleEl){
     const catLabel = document.getElementById('quizCategoryLabel');
