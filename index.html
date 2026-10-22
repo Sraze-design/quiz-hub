@@ -3914,16 +3914,16 @@ function updateProgressDrawerCount(){
 }
 const PROGRESS_MILESTONES=[50,100,250,500,1000,2500,5000,10000,25000,50000];
 function progressMessage(n){
-  if(n<=0) return 'Aaj se shuruaat karo, pehla quiz solve karke dekho! 💪';
-  if(n<50) return 'Achhi shuruaat! Isi tarah lage raho 🔥';
-  if(n<250) return 'Badhiya! Ab rhythm ban rahi hai 🚀';
-  if(n<1000) return 'Shaandaar! Consistency hi jeet ki chabi hai 🏆';
-  if(n<5000) return 'Kamaal ki mehnat! Manzil ab door nahi ⭐';
-  return 'Tum sachche yoddha ho, ruko mat! ⚔️';
+  if(n<=0) return 'Start today: solve your first quiz! 💪';
+  if(n<50) return 'Great start! Keep going 🔥';
+  if(n<250) return 'Nice work! You are building a rhythm 🚀';
+  if(n<1000) return 'Excellent! Consistency is the key to success 🏆';
+  if(n<5000) return 'Amazing effort! Your goal is within reach ⭐';
+  return 'You are a true warrior. Do not stop! ⚔️';
 }
 function openMyProgressFromMenu(){closeAppSideDrawer();renderMyProgress()}
 function resetMyProgress(){
-  if(!confirm('Progress reset karna hai? Ye wapas nahi aayega.')) return;
+  if(!confirm('Reset your progress? This cannot be undone.')) return;
   try{localStorage.removeItem(PROGRESS_STORAGE_KEY)}catch(_){}
   updateProgressDrawerCount();
   renderMyProgress(true);
@@ -3948,7 +3948,7 @@ function renderMyProgress(skipHistory){
         '<div class="mp-hero-label">Questions Solved</div>'+
         '<div class="mp-hero-num">'+solved.toLocaleString('en-IN')+'</div>'+
         '<div class="mp-hero-msg">'+progressMessage(solved)+'</div>'+
-        '<div class="mp-goal"><div class="mp-goal-row"><span>Next goal: '+nextGoal.toLocaleString('en-IN')+'</span><span>'+Math.max(0,nextGoal-solved).toLocaleString('en-IN')+' baaki</span></div>'+
+        '<div class="mp-goal"><div class="mp-goal-row"><span>Next goal: '+nextGoal.toLocaleString('en-IN')+'</span><span>'+Math.max(0,nextGoal-solved).toLocaleString('en-IN')+' to go</span></div>'+
         '<div class="mp-goal-bar"><div class="mp-goal-fill" id="mpGoalFill"></div></div></div>'+
       '</div>'+
       '<div class="mp-card">'+
@@ -3967,7 +3967,7 @@ function renderMyProgress(skipHistory){
             '<div class="mp-legend-row"><span class="mp-dot" style="background:#ef4444"></span><div class="mp-legend-text"><strong>'+wrongPct+'%</strong><span>Wrong</span></div></div>'+
           '</div>'+
         '</div>'+
-        (solved?'':'<div class="mp-empty-note">Quiz solve karoge to right/wrong aur accuracy yahan dikhne lagegi.</div>')+
+        (solved?'':'<div class="mp-empty-note">Solve a quiz and your right/wrong counts and accuracy will show up here.</div>')+
       '</div>'+
       '<div class="mp-tiles">'+
         '<div class="mp-tile right"><span class="mp-tile-label">Right</span><span class="mp-tile-num">'+right.toLocaleString('en-IN')+'</span><span class="mp-tile-pct">'+rightPct+'% of solved</span></div>'+
