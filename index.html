@@ -7524,6 +7524,17 @@ if(quizMainScroller){
 }
 
 const item = data[currentQ];
+/* Wrong-questions practice across several tests: show the real chapter / test
+   of the question on screen in the header instead of a generic title. */
+if(item && item._wbSrc){
+  const __wbLbl=document.getElementById('quizCategoryLabel');
+  if(__wbLbl){
+    const __w=item._wbSrc;
+    const __ch=__w.chapter?cleanHumanReadableTitle(__w.chapter):(__w.subject?cleanHumanReadableTitle(__w.subject):'');
+    const __tt=__w.testTitle||'';
+    __wbLbl.textContent=__ch?(__tt?`${__ch} (${__tt})`:__ch):(__tt||'Wrong Questions');
+  }
+}
 const typeLabel=document.getElementById('quizTypeLabel');
 if(typeLabel){
   // Bind the toggle once; its collapsed state persists across questions in this test.
