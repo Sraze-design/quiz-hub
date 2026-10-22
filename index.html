@@ -4178,8 +4178,8 @@ function renderMyProgress(skipHistory){
   const rLen=solved?C*right/solved:0,wLen=solved?C*wrong/solved:0;
   const nextGoal=PROGRESS_MILESTONES.find(m=>m>solved)||solved;
   const prevGoal=[0].concat(PROGRESS_MILESTONES).filter(m=>m<=solved).pop()||0;
-  const goalPct=nextGoal>prevGoal?Math.min(100,Math.round((solved-prevGoal)/(nextGoal-prevGoal)*100)):100;
-  const tier=!solved?['none','No data yet']:rightPct>=80?['good','Excellent 🎯']:rightPct>=60?['mid','Good, keep going']:['low','Needs practice'];
+  const goalPct=nextGoal>0?Math.min(100,Math.round(solved/nextGoal*100)):100;
+  const tier=!solved?['none','No data yet']:rightPct>=90?['good','Excellent 🎯']:rightPct>=80?['good','Very Good 👏']:rightPct>=60?['mid','Good, keep going']:['low','Needs practice'];
   list.innerHTML=
     '<div class="mp-wrap">'+
       '<div class="mp-hero">'+
