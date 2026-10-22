@@ -160,6 +160,48 @@ body {
 .bookmark-question-card .bookmark-toggle-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;min-width:30px;border-radius:9px;box-shadow:0 1px 4px rgba(15,23,42,.08)}
 .bookmark-question-card .bookmark-toggle-btn svg{width:15px;height:15px}
 .side-drawer-item-icon.reports-icon{background:#fff1f2;color:#e11d48}
+.side-drawer-item-icon.progress-icon{background:#ecfdf5;color:#059669}
+/* ===== My Progress ===== */
+.mp-wrap{display:flex;flex-direction:column;gap:14px;padding:2px 0 28px;width:100%;box-sizing:border-box}
+.mp-hero{position:relative;overflow:hidden;border-radius:22px;padding:20px 20px 18px;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);box-shadow:0 12px 26px rgba(37,99,235,.26)}
+.mp-hero::before,.mp-hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.09);pointer-events:none}
+.mp-hero::before{width:150px;height:150px;right:-44px;top:-52px}
+.mp-hero::after{width:96px;height:96px;right:42px;bottom:-54px}
+.mp-hero>*{position:relative;z-index:1}
+.mp-hero-label{font-size:12px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;opacity:.85}
+.mp-hero-num{font-size:52px;line-height:1.05;font-weight:900;margin:6px 0 4px;letter-spacing:-1px}
+.mp-hero-msg{font-size:14px;font-weight:650;line-height:1.45;opacity:.95}
+.mp-goal{margin-top:16px}
+.mp-goal-row{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:750;opacity:.92;margin-bottom:7px}
+.mp-goal-bar{height:9px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden}
+.mp-goal-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#fde68a,#fbbf24);transition:width .9s cubic-bezier(.22,1,.36,1)}
+.mp-card{background:var(--card-bg,#fff);border:1px solid var(--border,#e2e8f0);border-radius:22px;padding:18px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
+.mp-card-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:15px;font-weight:850;color:var(--dark,#0f172a);margin-bottom:14px}
+.mp-chip{font-size:11px;font-weight:850;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.mp-chip.good{background:#dcfce7;color:#15803d}.mp-chip.mid{background:#fef3c7;color:#b45309}.mp-chip.low{background:#fee2e2;color:#b91c1c}.mp-chip.none{background:#f1f5f9;color:#64748b}
+.mp-acc{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}
+.mp-ring{position:relative;width:156px;height:156px;flex:0 0 auto}
+.mp-ring svg{width:100%;height:100%;display:block}
+.mp-arc{transition:stroke-dasharray 1s cubic-bezier(.22,1,.36,1)}
+.mp-ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.mp-ring-pct{font-size:31px;font-weight:900;line-height:1;color:var(--dark,#0f172a)}
+.mp-ring-sub{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#64748b;margin-top:5px}
+.mp-legend{display:flex;flex-direction:column;gap:12px;min-width:132px}
+.mp-legend-row{display:flex;align-items:center;gap:10px}
+.mp-dot{width:12px;height:12px;border-radius:50%;flex:0 0 auto}
+.mp-legend-text{display:flex;flex-direction:column;line-height:1.25}
+.mp-legend-text strong{font-size:17px;font-weight:900;color:var(--dark,#0f172a)}
+.mp-legend-text span{font-size:12px;font-weight:700;color:#64748b}
+.mp-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mp-tile{border-radius:20px;padding:15px 16px;display:flex;flex-direction:column;gap:3px}
+.mp-tile.right{background:#ecfdf5;border:1px solid #bbf7d0;color:#047857}
+.mp-tile.wrong{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c}
+.mp-tile-label{font-size:12px;font-weight:850;letter-spacing:.5px;text-transform:uppercase;opacity:.9}
+.mp-tile-num{font-size:30px;font-weight:900;line-height:1.1}
+.mp-tile-pct{font-size:12.5px;font-weight:750;opacity:.85}
+.mp-empty-note{text-align:center;font-size:13px;font-weight:650;color:#64748b;margin-top:14px;line-height:1.5}
+.mp-reset{align-self:center;border:0;background:transparent;color:#94a3b8;font-size:12.5px;font-weight:800;padding:8px 14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:360px){.mp-hero-num{font-size:44px}.mp-ring{width:140px;height:140px}.mp-tile-num{font-size:26px}}
 .premium-card.report-history-card{display:block;width:100%;min-width:0;box-sizing:border-box;cursor:default;user-select:text;-webkit-user-select:text;touch-action:auto;background:#fff7ed;border-color:#fed7aa;padding-right:58px}
 .report-history-card:active{transform:none;box-shadow:var(--shadow-sm);border-color:#fdba74}
 .report-history-remove-btn{position:absolute;top:12px;right:12px;width:30px;height:30px;min-width:30px;border:0;border-radius:9px;background:#fff1f2;color:#e11d48;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 1px 4px rgba(15,23,42,.08);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -2837,6 +2879,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
       <div class="side-drawer-label">Library</div>
       <button class="side-drawer-item" type="button" onclick="openBookmarksFromMenu()"><span class="side-drawer-item-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></span><span class="side-drawer-item-text"><span>Bookmarks</span><small id="drawerBookmarkCount">Saved Questions</small></span></button>
       <button class="side-drawer-item" type="button" onclick="openMyReportsFromMenu()"><span class="side-drawer-item-icon reports-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span><span class="side-drawer-item-text"><span>My Reports</span><small id="drawerReportCount">No reports sent</small></span></button>
+      <button class="side-drawer-item" type="button" onclick="openMyProgressFromMenu()"><span class="side-drawer-item-icon progress-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 3a9 9 0 0 1 9 9h-9Z" fill="currentColor" stroke="none"/></svg></span><span class="side-drawer-item-text"><span>My Progress</span><small id="drawerProgressCount">No questions solved yet</small></span></button>
     </div>
   </aside>
 
@@ -3829,10 +3872,118 @@ function toggleAICardBookmark(quizCardData,btn){
   updateAICardBookmarkButton(btn,quizCardData);
 }
 function updateBookmarkDrawerCount(){const e=document.getElementById('drawerBookmarkCount');if(e){const n=getBookmarks().length;e.textContent=n?`${n} Saved Question${n===1?'':'s'}`:'No saved questions'}}
-function openAppSideDrawer(){updateBookmarkDrawerCount();updateLocalReportDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
+function openAppSideDrawer(){updateBookmarkDrawerCount();updateLocalReportDrawerCount();updateProgressDrawerCount();document.getElementById('appSideDrawerOverlay')?.classList.add('active');document.getElementById('appSideDrawer')?.classList.add('active')}
 function closeAppSideDrawer(){document.getElementById('appSideDrawerOverlay')?.classList.remove('active');document.getElementById('appSideDrawer')?.classList.remove('active')}
 function openBookmarksFromMenu(){closeAppSideDrawer();renderBookmarkSubjects()}
 function openMyReportsFromMenu(){closeAppSideDrawer();renderMyReports()}
+/* ===== My Progress (localStorage only) ===== */
+const PROGRESS_STORAGE_KEY='devssc:progress:v1';
+let progressCountedAnswered=null; // the `answered` array of the last attempt already counted
+function getProgress(){
+  const base={solved:0,right:0,wrong:0,attempts:0,updatedAt:0};
+  try{
+    const x=JSON.parse(localStorage.getItem(PROGRESS_STORAGE_KEY)||'null');
+    if(x&&typeof x==='object'){
+      const n=v=>Math.max(0,Math.floor(Number(v)||0));
+      base.right=n(x.right);base.wrong=n(x.wrong);base.attempts=n(x.attempts);base.updatedAt=n(x.updatedAt);
+      base.solved=base.right+base.wrong;
+    }
+  }catch(_){}
+  return base;
+}
+function saveProgress(p){try{localStorage.setItem(PROGRESS_STORAGE_KEY,JSON.stringify(p))}catch(_){}}
+/* Called once per finished attempt. Skipped questions are not counted. */
+function recordQuizProgress(){
+  try{
+    if(progressCountedAnswered===answered) return;
+    progressCountedAnswered=answered;
+    const items=(resultAnalysisSnapshot&&resultAnalysisSnapshot.items)||[];
+    let r=0,w=0;
+    items.forEach(x=>{if(x.status==='correct')r++;else if(x.status==='wrong')w++;});
+    if(!r&&!w) return;
+    const p=getProgress();
+    p.right+=r;p.wrong+=w;p.solved=p.right+p.wrong;p.attempts+=1;p.updatedAt=Date.now();
+    saveProgress(p);
+    updateProgressDrawerCount();
+  }catch(_){}
+}
+function updateProgressDrawerCount(){
+  const e=document.getElementById('drawerProgressCount');if(!e)return;
+  const p=getProgress();
+  e.textContent=p.solved?(p.solved+' solved · '+Math.round(p.right/p.solved*100)+'% accuracy'):'No questions solved yet';
+}
+const PROGRESS_MILESTONES=[50,100,250,500,1000,2500,5000,10000,25000,50000];
+function progressMessage(n){
+  if(n<=0) return 'Aaj se shuruaat karo, pehla quiz solve karke dekho! 💪';
+  if(n<50) return 'Achhi shuruaat! Isi tarah lage raho 🔥';
+  if(n<250) return 'Badhiya! Ab rhythm ban rahi hai 🚀';
+  if(n<1000) return 'Shaandaar! Consistency hi jeet ki chabi hai 🏆';
+  if(n<5000) return 'Kamaal ki mehnat! Manzil ab door nahi ⭐';
+  return 'Tum sachche yoddha ho, ruko mat! ⚔️';
+}
+function openMyProgressFromMenu(){closeAppSideDrawer();renderMyProgress()}
+function resetMyProgress(){
+  if(!confirm('Progress reset karna hai? Ye wapas nahi aayega.')) return;
+  try{localStorage.removeItem(PROGRESS_STORAGE_KEY)}catch(_){}
+  updateProgressDrawerCount();
+  renderMyProgress(true);
+}
+function renderMyProgress(skipHistory){
+  if(!skipHistory) pushExplorerHistory({screen:'myProgress'});
+  prepareBookmarkExplorer('My Progress');
+  const list=document.getElementById('explorerList');
+  const p=getProgress();
+  const solved=p.solved,right=p.right,wrong=p.wrong;
+  const rightPct=solved?Math.round(right/solved*100):0;
+  const wrongPct=solved?100-rightPct:0;
+  const R=50,C=2*Math.PI*R;
+  const rLen=solved?C*right/solved:0,wLen=solved?C*wrong/solved:0;
+  const nextGoal=PROGRESS_MILESTONES.find(m=>m>solved)||solved;
+  const prevGoal=[0].concat(PROGRESS_MILESTONES).filter(m=>m<=solved).pop()||0;
+  const goalPct=nextGoal>prevGoal?Math.min(100,Math.round((solved-prevGoal)/(nextGoal-prevGoal)*100)):100;
+  const tier=!solved?['none','No data yet']:rightPct>=80?['good','Excellent 🎯']:rightPct>=60?['mid','Good, keep going']:['low','Needs practice'];
+  list.innerHTML=
+    '<div class="mp-wrap">'+
+      '<div class="mp-hero">'+
+        '<div class="mp-hero-label">Questions Solved</div>'+
+        '<div class="mp-hero-num">'+solved.toLocaleString('en-IN')+'</div>'+
+        '<div class="mp-hero-msg">'+progressMessage(solved)+'</div>'+
+        '<div class="mp-goal"><div class="mp-goal-row"><span>Next goal: '+nextGoal.toLocaleString('en-IN')+'</span><span>'+Math.max(0,nextGoal-solved).toLocaleString('en-IN')+' baaki</span></div>'+
+        '<div class="mp-goal-bar"><div class="mp-goal-fill" id="mpGoalFill"></div></div></div>'+
+      '</div>'+
+      '<div class="mp-card">'+
+        '<div class="mp-card-title"><span>Accuracy</span><span class="mp-chip '+tier[0]+'">'+tier[1]+'</span></div>'+
+        '<div class="mp-acc">'+
+          '<div class="mp-ring"><svg viewBox="0 0 140 140" aria-hidden="true">'+
+            '<circle cx="70" cy="70" r="'+R+'" fill="none" stroke="#e2e8f0" stroke-width="16"/>'+
+            '<g transform="rotate(-90 70 70)">'+
+              '<circle class="mp-arc" id="mpArcWrong" cx="70" cy="70" r="'+R+'" fill="none" stroke="#ef4444" stroke-width="16" stroke-dasharray="0 '+C+'" stroke-dashoffset="'+(-rLen)+'" data-len="'+wLen+'"/>'+
+              '<circle class="mp-arc" id="mpArcRight" cx="70" cy="70" r="'+R+'" fill="none" stroke="#10b981" stroke-width="16" stroke-dasharray="0 '+C+'" data-len="'+rLen+'"/>'+
+            '</g></svg>'+
+            '<div class="mp-ring-center"><div class="mp-ring-pct">'+rightPct+'%</div><div class="mp-ring-sub">Accuracy</div></div>'+
+          '</div>'+
+          '<div class="mp-legend">'+
+            '<div class="mp-legend-row"><span class="mp-dot" style="background:#10b981"></span><div class="mp-legend-text"><strong>'+rightPct+'%</strong><span>Right</span></div></div>'+
+            '<div class="mp-legend-row"><span class="mp-dot" style="background:#ef4444"></span><div class="mp-legend-text"><strong>'+wrongPct+'%</strong><span>Wrong</span></div></div>'+
+          '</div>'+
+        '</div>'+
+        (solved?'':'<div class="mp-empty-note">Quiz solve karoge to right/wrong aur accuracy yahan dikhne lagegi.</div>')+
+      '</div>'+
+      '<div class="mp-tiles">'+
+        '<div class="mp-tile right"><span class="mp-tile-label">Right</span><span class="mp-tile-num">'+right.toLocaleString('en-IN')+'</span><span class="mp-tile-pct">'+rightPct+'% of solved</span></div>'+
+        '<div class="mp-tile wrong"><span class="mp-tile-label">Wrong</span><span class="mp-tile-num">'+wrong.toLocaleString('en-IN')+'</span><span class="mp-tile-pct">'+wrongPct+'% of solved</span></div>'+
+      '</div>'+
+      (solved?'<button type="button" class="mp-reset" onclick="resetMyProgress()">Reset progress</button>':'')+
+    '</div>';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    ['mpArcRight','mpArcWrong'].forEach(id=>{
+      const el=document.getElementById(id);if(!el)return;
+      const len=Number(el.dataset.len)||0;
+      el.style.strokeDasharray=len+' '+(C-len);
+    });
+    const fill=document.getElementById('mpGoalFill');if(fill)fill.style.width=goalPct+'%';
+  }));
+}
 function prepareBookmarkExplorer(title){document.getElementById('dynamicHeaderArea').style.display='none';document.getElementById('explorerActionBar').style.display='flex';document.getElementById('explorerTitle').innerText=title;document.querySelector('.search-container').style.display='none';showLoader(false);hideError();const __playBtn=document.getElementById('playBookmarkedTestBtn');if(__playBtn){__playBtn.style.display='none';__playBtn.dataset.subject='';__playBtn.dataset.path='';}}
 function restoreNormalExplorerSearch(){const e=document.querySelector('.search-container');if(e)e.style.display='block'}
 function renderMyReports(){
@@ -4573,6 +4724,7 @@ window.addEventListener('popstate', (e) => {
   try {
     switch (state.screen) {
       case 'myReports': renderMyReports(); break;
+      case 'myProgress': renderMyProgress(); break;
       case 'bookmarks': renderBookmarkSubjects(); break;
       case 'bookmarkLevel2': renderBookmarkLevel2(state.subject); break;
       case 'bookmarkChapters': renderBookmarkChapters(state.subject,state.category); break;
@@ -7378,6 +7530,7 @@ const __fade=document.getElementById('pauseFade');
 if(__fade){__fade.classList.remove('show');}
 timerRunning=quizMode!=='test';
 captureResultAnalysis();
+recordQuizProgress();
 
 document.getElementById('quiz-box').style.display='none';
 document.getElementById('controls').style.display='none';
