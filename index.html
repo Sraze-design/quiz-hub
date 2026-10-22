@@ -2474,6 +2474,9 @@ to{transform:translate(var(--x),var(--y)) scale(0) rotate(360deg);opacity:0;}
 .analysis-tabs{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;border-bottom:1px solid var(--border,#e5e7eb);background:var(--card-bg,#fff)}
 .analysis-tab{border:1px solid var(--border,#dbe2ea);background:var(--card-bg,#fff);color:inherit;border-radius:999px;padding:8px 12px;font-weight:800;font-size:13px;white-space:nowrap;cursor:pointer}
 .analysis-tab.active{background:#1d4ed8;border-color:#1d4ed8;color:#fff}
+.analysis-tab-review.active{background:#7c3aed;border-color:#7c3aed;color:#fff}
+.analysis-review-chip{position:absolute;top:3px;right:16px;display:inline-flex;align-items:center;gap:3px;font-size:8px;line-height:1.1;font-weight:900;text-transform:uppercase;padding:1px 5px;border-radius:999px;background:#ede9fe;color:#6d28d9;z-index:1}
+.analysis-review-chip svg{width:8px;height:9px;flex:0 0 auto}
 .analysis-list{flex:1;overflow:auto;padding:14px 14px 92px;background:var(--bg,#f8fafc)}
 .analysis-card{position:relative;max-width:900px;margin:0 auto 14px;background:var(--card-bg,#fff);border:1px solid var(--border,#e2e8f0);border-radius:18px;padding:16px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
 .analysis-card.correct{border-left:5px solid #10b981}.analysis-card.wrong{border-left:5px solid #ef4444}.analysis-card.skipped{border-left:5px solid #f59e0b}
@@ -2513,6 +2516,9 @@ body.exam-live #practiceReviewBtn{display:none!important}
 .analysis-palette-head{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border,#e2e8f0);font-size:18px;font-weight:900}.analysis-palette-head button{border:0;background:var(--bg-soft,#f1f5f9);border-radius:10px;width:38px;height:38px;font-size:22px;color:inherit}
 .analysis-palette-grid{padding:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;overflow:auto}.analysis-palette-q{aspect-ratio:1;border:2px solid transparent;border-radius:12px;font-weight:900;color:#fff;cursor:pointer}.analysis-palette-q.correct{background:#10b981}.analysis-palette-q.wrong{background:#ef4444}.analysis-palette-q.skipped{background:#f59e0b}.analysis-palette-q.current{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
 .analysis-palette-q.reviewed{position:relative}
+.palette-type-heading{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding:0 2px 6px;border-bottom:1px solid var(--border,#e2e8f0);font-size:13px;font-weight:850;line-height:1.3;color:var(--text-secondary,#475569);overflow-wrap:anywhere}
+.palette-type-heading:first-child{margin-top:0}
+.palette-type-heading small{flex:0 0 auto;min-width:22px;text-align:center;padding:1px 7px;border-radius:999px;background:#e8efff;color:#1d4ed8;font-size:11px;font-weight:900}
 body.analysis-open #ai-floating-btn{z-index:13999}body.analysis-open #ai-overlay{z-index:14000}body.analysis-open #ai-bottom-sheet{z-index:14001}
 @media(max-width:600px){.analysis-list{padding:10px 10px 92px}.analysis-card{padding:13px;border-radius:15px}.analysis-question{font-size:17px;line-height:1.52}.result-analysis-btn{font-size:13px;padding:9px 12px}.analysis-actions{gap:5px}.analysis-action-btn{height:36px;border-radius:10px}.analysis-report-btn,.analysis-bookmark-btn{width:36px}.analysis-lang-btn{width:62px;padding:0 6px}.analysis-type-label{font-size:10.5px}}
 @media(max-width:340px){.analysis-card{padding:11px}.analysis-qno{font-size:14px}.analysis-actions{gap:4px}.analysis-action-btn{height:34px}.analysis-report-btn,.analysis-bookmark-btn{width:34px}.analysis-lang-btn{width:58px}.analysis-question{font-size:16px}}
@@ -3172,6 +3178,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
             <button type="button" class="analysis-tab" data-filter="correct" onclick="setAnalysisFilter('correct')">Correct <span id="analysisCountCorrect">0</span></button>
             <button type="button" class="analysis-tab" data-filter="wrong" onclick="setAnalysisFilter('wrong')">Wrong <span id="analysisCountWrong">0</span></button>
             <button type="button" class="analysis-tab" data-filter="skipped" onclick="setAnalysisFilter('skipped')">Skipped <span id="analysisCountSkipped">0</span></button>
+            <button type="button" class="analysis-tab analysis-tab-review" data-filter="review" onclick="setAnalysisFilter('review')">Review <span id="analysisCountReview">0</span></button>
           </div>
           <div class="analysis-list" id="analysisList"></div>
           <div class="analysis-review-nav" id="analysisReviewNav">
@@ -6651,7 +6658,8 @@ function analysisCounts(){
     all:items.length,
     correct:items.filter(x=>x.status==='correct').length,
     wrong:items.filter(x=>x.status==='wrong').length,
-    skipped:items.filter(x=>x.status==='skipped').length
+    skipped:items.filter(x=>x.status==='skipped').length,
+    review:items.filter(x=>x.reviewed).length
   };
 }
 
@@ -6689,10 +6697,10 @@ function closeResultAnalysis(){
 }
 
 function setAnalysisFilter(filter){
-  resultAnalysisFilter=['all','correct','wrong','skipped'].includes(filter)?filter:'all';
+  resultAnalysisFilter=['all','correct','wrong','skipped','review'].includes(filter)?filter:'all';
   resultAnalysisPosition=0;
   const counts=analysisCounts();
-  const countIds={all:'analysisCountAll',correct:'analysisCountCorrect',wrong:'analysisCountWrong',skipped:'analysisCountSkipped'};
+  const countIds={all:'analysisCountAll',correct:'analysisCountCorrect',wrong:'analysisCountWrong',skipped:'analysisCountSkipped',review:'analysisCountReview'};
   Object.keys(countIds).forEach(key=>{const el=document.getElementById(countIds[key]);if(el)el.textContent=counts[key];});
   document.querySelectorAll('#analysisTabs .analysis-tab').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===resultAnalysisFilter));
   renderResultAnalysis();
@@ -6701,7 +6709,7 @@ function setAnalysisFilter(filter){
 
 function getFilteredAnalysisItems(){
   const items=resultAnalysisSnapshot?.items||[];
-  return items.filter(x=>resultAnalysisFilter==='all'||x.status===resultAnalysisFilter);
+  return items.filter(x=>resultAnalysisFilter==='all'||(resultAnalysisFilter==='review'?!!x.reviewed:x.status===resultAnalysisFilter));
 }
 
 function moveAnalysisQuestion(step){
@@ -6767,6 +6775,7 @@ function renderAnalysisPalette(){
   const grid=document.getElementById('analysisPaletteGrid');
   if(!grid) return;
   grid.innerHTML='';
+  const paletteEntries=[];
   getFilteredAnalysisItems().forEach((record,index)=>{
     const button=document.createElement('button');
     button.type='button';
@@ -6780,8 +6789,9 @@ function renderAnalysisPalette(){
       renderResultAnalysis();
       refreshAnalysisAI();
     };
-    grid.appendChild(button);
+    paletteEntries.push({item:record.item,btn:button});
   });
+  appendPaletteSections(grid,paletteEntries);
 }
 
 function openAnalysisPalette(){
@@ -6852,6 +6862,12 @@ function renderResultAnalysis(){
   status.className='analysis-status analysis-status-corner '+record.status;
   status.textContent=statusLabel[record.status];
   card.appendChild(status);
+  if(record.reviewed){
+    const reviewChip=document.createElement('span');
+    reviewChip.className='analysis-review-chip';
+    reviewChip.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M5 5c3-2 5-2 8 0s5 2 8 0v10c-3 2-5 2-8 0s-5-2-8 0V5Z" fill="currentColor"/></svg><span>Review</span>';
+    card.appendChild(reviewChip);
+  }
   const qLine=document.createElement('div');
   qLine.className='analysis-q-line';
   const qno=document.createElement('span');
@@ -7629,11 +7645,47 @@ function appendReviewFlagMarker(target,variant){
   target.appendChild(svg);
 }
 
+/* Palette sections: group palette buttons by question type (type_tag / type).
+   If no question in the list has a type, buttons are added flat exactly as before. */
+function paletteTypeLabel(item){
+  const t=(typeof T==='function')?(T(item,'type_tag')||T(item,'type')):(item&&(item.type_tag||item.type));
+  return typeof t==='string'?t.replace(/<[^>]*>/g,'').trim():'';
+}
+function appendPaletteSections(grid,entries){
+  if(!grid) return;
+  const labels=entries.map(e=>paletteTypeLabel(e.item));
+  if(!labels.some(Boolean)){
+    entries.forEach(e=>grid.appendChild(e.btn));
+    return;
+  }
+  const order=[],groups=new Map();
+  entries.forEach((e,i)=>{
+    const label=labels[i]||'Other';
+    if(!groups.has(label)){groups.set(label,[]);order.push(label);}
+    groups.get(label).push(e);
+  });
+  // keep "Other" (questions without a type) at the end
+  if(order.includes('Other')&&order[order.length-1]!=='Other'){order.splice(order.indexOf('Other'),1);order.push('Other');}
+  order.forEach(label=>{
+    const list=groups.get(label);
+    const heading=document.createElement('div');
+    heading.className='palette-type-heading';
+    const name=document.createElement('span');
+    name.textContent=label;
+    const count=document.createElement('small');
+    count.textContent=list.length;
+    heading.append(name,count);
+    grid.appendChild(heading);
+    list.forEach(e=>grid.appendChild(e.btn));
+  });
+}
+
 function renderQuestionPalette(){
   if(examActive) { renderExamPalette(); return; }
   const grid = document.getElementById('qpGrid');
   if(!grid || typeof data === 'undefined' || !data) return;
   grid.innerHTML = '';
+  const paletteEntries = [];
   let answeredCount = 0;
   let correctCount = 0;
   let wrongCount = 0;
@@ -7661,8 +7713,9 @@ function renderQuestionPalette(){
       goToQuestion(i + 1);
       closeQuestionPalette();
     };
-    grid.appendChild(btn);
+    paletteEntries.push({item:data[i],btn});
   }
+  appendPaletteSections(grid, paletteEntries);
   const ansEl = document.getElementById('qpAnsweredCount');
   const unansEl = document.getElementById('qpUnansweredCount');
   const corrEl = document.getElementById('qpCorrectCount');
@@ -11490,8 +11543,9 @@ function examStatusCounts(){
 function renderExamPalette(){
   const grid=document.getElementById('qpGrid');
   grid.innerHTML='';
+  const paletteEntries=[];
   const names={unvisited:'Not visited',unanswered:'Not answered',answered:'Answered',review:'Marked for review',reviewAnswered:'Answered & marked for review'};
-  data.forEach((_,index)=>{
+  data.forEach((qItem,index)=>{
     const button=document.createElement('button');
     const isAnswered=!!answered[index];
     const baseStatus=isAnswered?'answered':examVisited[index]?'unanswered':'unvisited';
@@ -11502,8 +11556,9 @@ function renderExamPalette(){
     if(index===currentQ){button.classList.add('exam-current');button.setAttribute('aria-current','true');}
     button.setAttribute('aria-label','Question '+(index+1)+': '+names[status]);
     button.onclick=()=>{goToQuestion(index+1);closeQuestionPalette();};
-    grid.appendChild(button);
+    paletteEntries.push({item:qItem,btn:button});
   });
+  appendPaletteSections(grid,paletteEntries);
   const counts=examStatusCounts(),colors={unvisited:'#94a3b8',unanswered:'#ef4444',answered:'#10b981',review:'#ef4444',reviewAnswered:'#10b981'};
   const legend=document.getElementById('examLegend');legend.innerHTML='';
   Object.keys(names).forEach(key=>{
