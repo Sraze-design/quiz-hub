@@ -227,6 +227,32 @@ body {
 @media(max-height:700px){.mp-hero-msg{display:none}.mp-hero-num{margin:2px 0 0}.mp-goal{margin-top:8px}.mp-ring-sub{display:none}.mp-reset{margin-top:8px;padding:6px 14px}}
 @media(max-height:520px) and (orientation:landscape){.mp-ring{--mp-ring:150px}.mp-wrap{min-height:0}}
 @media(min-width:700px){.mp-wrap{padding-top:8px}}
+/* ===== My Progress: iPad / tablet landscape = 2-column dashboard ===== */
+@media(min-width:900px) and (min-height:560px) and (orientation:landscape){
+.mp-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-rows:auto 1fr auto;grid-template-areas:"hero card" "tiles card" "reset reset";gap:20px;max-width:1060px;min-height:0;align-content:start;padding-top:6px}
+.mp-hero{grid-area:hero;padding:28px 30px}
+.mp-hero-label{font-size:14px}
+.mp-hero-num{font-size:76px;margin:6px 0 4px}
+.mp-hero-msg{display:block;font-size:18px}
+.mp-goal{margin-top:18px}
+.mp-goal-row{font-size:15px}
+.mp-goal-bar{height:11px}
+.mp-card{grid-area:card;padding:24px 26px}
+.mp-card-title{font-size:21px}
+.mp-chip{font-size:14px;padding:5px 12px}
+.mp-acc{gap:22px;padding:10px 0 2px}
+.mp-ring{--mp-ring:clamp(200px,min(30vw,calc(100vh - 380px)),320px);--mp-ring:clamp(200px,min(30vw,calc(100dvh - 380px)),320px)}
+.mp-ring-sub{display:block;font-size:calc(var(--mp-ring)*.065)}
+.mp-legend{gap:12px 56px}
+.mp-legend-text strong{font-size:28px}
+.mp-legend-text span{font-size:15px}
+.mp-tiles{grid-area:tiles;margin-top:0;gap:20px;align-items:stretch}
+.mp-tile{padding:22px 24px;gap:6px;justify-content:center}
+.mp-tile-label{font-size:15px}
+.mp-tile-num{font-size:48px}
+.mp-tile-pct{font-size:16px}
+.mp-reset{grid-area:reset;justify-self:center;margin-top:4px}
+}
 .premium-card.report-history-card{display:block;width:100%;min-width:0;box-sizing:border-box;cursor:default;user-select:text;-webkit-user-select:text;touch-action:auto;background:#fff7ed;border-color:#fed7aa;padding-right:58px}
 .report-history-card:active{transform:none;box-shadow:var(--shadow-sm);border-color:#fdba74}
 .report-history-remove-btn{position:absolute;top:12px;right:12px;width:30px;height:30px;min-width:30px;border:0;border-radius:9px;background:#fff1f2;color:#e11d48;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 1px 4px rgba(15,23,42,.08);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
