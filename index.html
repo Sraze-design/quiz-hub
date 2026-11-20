@@ -12093,6 +12093,22 @@ function stopExamOnExit(){
 .st-entry{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;transition:background .15s}
 .st-entry.pressing{background:#eef2ff}
 .st-hint{font-size:12px;font-weight:600;color:#94a3b8;margin:-6px 0 10px}
+.st-chip.t{background:#fffbeb;color:#b45309}
+.st-chip.done{background:#dcfce7;color:#15803d}
+.st-chip.miss{background:#f1f5f9;color:#94a3b8}
+.st-tgt-note{font-size:12px;font-weight:700;color:#b45309}
+.st-tgt-note:empty{display:none}
+.st-done-btn{flex:none;display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:800;color:#fff;background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 6px 14px rgba(16,185,129,.35);cursor:pointer;-webkit-tap-highlight-color:transparent;animation:stPulse 1.8s ease-in-out infinite}
+.st-done-btn:active{transform:scale(.93)}
+@keyframes stPulse{0%,100%{box-shadow:0 6px 14px rgba(16,185,129,.35)}50%{box-shadow:0 6px 24px rgba(16,185,129,.75)}}
+.st-entry.is-done{background:linear-gradient(90deg,rgba(16,185,129,.10),transparent)}
+.st-entry.just-done{animation:stPop .7s ease}
+@keyframes stPop{0%{transform:scale(1)}30%{transform:scale(1.04);background:#dcfce7}100%{transform:scale(1)}}
+.st-hero-num b.bump{display:inline-block;transform-origin:left center;animation:stBump .7s ease}
+@keyframes stBump{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
+.st-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#0f172a;color:#fff;font-weight:800;font-size:14px;padding:12px 18px;border-radius:16px;z-index:100000;box-shadow:0 10px 30px rgba(15,23,42,.35);max-width:90vw;text-align:center;transition:opacity .4s;animation:stToastIn .35s ease}
+@keyframes stToastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(prefers-reduced-motion:reduce){.st-done-btn,.st-hero-num b.bump,.st-entry.just-done{animation:none}}
 .st-sheet-back{position:fixed;left:0;right:0;top:0;bottom:0;z-index:99999;background:rgba(15,23,42,.45);display:flex;align-items:flex-end;justify-content:center;animation:stFade .18s ease}
 .st-sheet{width:100%;max-width:520px;max-height:92vh;max-height:92dvh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom,0px));box-sizing:border-box;animation:stUp .22s cubic-bezier(.2,.8,.2,1)}
 .st-sheet-grab{width:40px;height:4px;border-radius:99px;background:#cbd5e1;margin:0 auto 14px}
@@ -12163,6 +12179,10 @@ function stopExamOnExit(){
   function pad(n){return n<10?'0'+n:''+n}
   function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
   function today(){return iso(new Date())}
+  function tomorrow(){var d=new Date();d.setDate(d.getDate()+1);return iso(d)}
+  function editable(ds){return ds===today()||ds===tomorrow()}
+  function counted(e){return !e.target||!!e.done}
+  function clampDate(v){var a=today(),b=tomorrow();if(!v||v<a)return a;if(v>b)return b;return v}
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
   function fmtDate(s){
     var p=s.split('-');var d=new Date(+p[0],+p[1]-1,+p[2]);
@@ -12170,6 +12190,7 @@ function stopExamOnExit(){
     var y=new Date();y.setDate(y.getDate()-1);
     var label=d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
     if(s===t)return 'Today · '+label;
+    if(s===tomorrow())return 'Tomorrow · '+label;
     if(s===iso(y))return 'Yesterday · '+label;
     return d.toLocaleDateString('en-IN',{weekday:'short'})+' · '+label;
   }
@@ -12178,7 +12199,7 @@ function stopExamOnExit(){
 
   function updateDrawer(){
     var el=document.getElementById('drawerStudyCount');if(!el)return;
-    var s=sum(load().filter(function(e){return e.date===today()}));
+    var s=sum(load().filter(function(e){return e.date===today()&&counted(e)}));
     el.textContent=(s.l||s.q)?('Today: '+s.l+' lectures · '+s.q+' questions'):'Log daily lectures & questions';
   }
   window.updateStudyDrawerCount=updateDrawer;
@@ -12213,27 +12234,89 @@ function stopExamOnExit(){
     document.body.appendChild(b);
     return b;
   }
+  function chime(){
+    var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+    var c=new AC(),t0=c.currentTime;
+    [659.25,783.99,1046.5].forEach(function(f,i){
+      var o=c.createOscillator(),g=c.createGain(),a=t0+i*0.1;
+      o.type='sine';o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001,a);g.gain.exponentialRampToValueAtTime(0.12,a+0.02);g.gain.exponentialRampToValueAtTime(0.0001,a+0.35);
+      o.connect(g);g.connect(c.destination);o.start(a);o.stop(a+0.4);
+    });
+    setTimeout(function(){try{c.close()}catch(_){}},1200);
+  }
+  function celebrate(cx,cy,e){
+    try{if(navigator.vibrate)navigator.vibrate([25,40,25,40,70])}catch(_){}
+    try{chime()}catch(_){}
+    var reduce=false;try{reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches}catch(_){}
+    if(!reduce){
+      var cols=['#10b981','#4f46e5','#f59e0b','#ec4899','#06b6d4','#a855f7'];
+      for(var i=0;i<36;i++){
+        var p=document.createElement('span');
+        var sz=6+Math.random()*7;
+        p.style.cssText='position:fixed;left:'+cx+'px;top:'+cy+'px;width:'+sz+'px;height:'+(sz*(Math.random()<0.5?1:0.5))+'px;background:'+cols[i%cols.length]+';border-radius:'+(Math.random()<0.4?'50%':'2px')+';z-index:100001;pointer-events:none';
+        document.body.appendChild(p);
+        if(!p.animate){if(p.parentNode)p.parentNode.removeChild(p);continue}
+        var ang=Math.random()*Math.PI*2,dist=90+Math.random()*170;
+        var dx=Math.cos(ang)*dist,dy=Math.sin(ang)*dist-80;
+        var an=p.animate([
+          {transform:'translate(0,0) rotate(0deg)',opacity:1},
+          {transform:'translate('+dx+'px,'+dy+'px) rotate('+Math.round(Math.random()*720-360)+'deg)',opacity:1,offset:0.6},
+          {transform:'translate('+dx+'px,'+(dy+170)+'px) rotate('+Math.round(Math.random()*720)+'deg)',opacity:0}
+        ],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.7,.3,1)'});
+        an.onfinish=(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el)}})(p);
+      }
+    }
+    var old=document.getElementById('stToast');if(old&&old.parentNode)old.parentNode.removeChild(old);
+    var tt=document.createElement('div');tt.id='stToast';tt.className='st-toast';
+    tt.textContent='🎉 Target done! +'+(+e.lectures||0)+' lectures · +'+(+e.questions||0)+' questions';
+    document.body.appendChild(tt);
+    setTimeout(function(){tt.style.opacity='0'},2300);
+    setTimeout(function(){if(tt.parentNode)tt.parentNode.removeChild(tt)},2800);
+  }
+  function markDone(id,btn){
+    var arr=load(),e=null;
+    for(var i=0;i<arr.length;i++){if(arr[i].id===id){e=arr[i];break}}
+    if(!e||!e.target||e.done||e.date!==today())return;
+    var r=btn.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    e.done=true;e.doneAt=Date.now();
+    if(!save(arr))return;
+    updateDrawer();
+    renderStudyTracker(true);
+    var row=document.querySelector('.st-entry[data-id="'+id+'"]');
+    if(row)row.classList.add('just-done');
+    document.querySelectorAll('.st-hero-num b').forEach(function(b){b.classList.add('bump')});
+    celebrate(cx,cy,e);
+  }
   function entryActions(id){
-    var e=findEntry(id);if(!e||e.date!==today())return;
+    var e=findEntry(id);if(!e||!editable(e.date))return;
     try{if(navigator.vibrate)navigator.vibrate(15)}catch(_){}
     var b=openSheet('<div class="st-sheet-title">'+esc(fmtDate(e.date))+'</div>'+
       '<div class="st-sheet-sub">'+(+e.lectures||0)+' lectures · '+(+e.questions||0)+' questions'+(e.note?' · '+esc(e.note):'')+'</div>'+
+      (e.target&&e.done&&e.date===today()?'<button type="button" class="st-sheet-btn" data-act="undo">↩️ Mark as not done</button>':'')+
       '<button type="button" class="st-sheet-btn" data-act="edit">✏️ Edit</button>'+
       '<button type="button" class="st-sheet-btn del" data-act="del">🗑️ Delete</button>'+
       '<button type="button" class="st-sheet-btn cancel" data-act="x">Cancel</button>');
     b.querySelector('[data-act="edit"]').addEventListener('click',function(){editEntry(id)});
     b.querySelector('[data-act="del"]').addEventListener('click',function(){
       closeSheet();
-      if(findEntry(id)&&findEntry(id).date!==today()){renderStudyTracker(true);return}
+      if(findEntry(id)&&!editable(findEntry(id).date)){renderStudyTracker(true);return}
       if(!confirm('Delete this entry?'))return;
       save(load().filter(function(x){return x.id!==id}));
       updateDrawer();
       renderStudyTracker(true);
     });
+    var ub=b.querySelector('[data-act="undo"]');
+    if(ub)ub.addEventListener('click',function(){
+      closeSheet();
+      var arr=load();
+      for(var i=0;i<arr.length;i++){if(arr[i].id===id&&arr[i].target&&arr[i].date===today()){arr[i].done=false;delete arr[i].doneAt;break}}
+      save(arr);updateDrawer();renderStudyTracker(true);
+    });
     b.querySelector('[data-act="x"]').addEventListener('click',closeSheet);
   }
   function editEntry(id){
-    var e=findEntry(id);if(!e||e.date!==today()){closeSheet();return}
+    var e=findEntry(id);if(!e||!editable(e.date)){closeSheet();return}
     var t=today();
     var b=openSheet('<div class="st-sheet-title" style="margin-bottom:14px">Edit entry</div><div class="st-form">'+
             '<div class="st-field"><label for="stELec">📖 Lectures</label><input class="st-input" id="stELec" type="number" inputmode="numeric" min="0" value="'+(+e.lectures||0)+'"></div>'+
@@ -12252,7 +12335,7 @@ function stopExamOnExit(){
       var note=b.querySelector('#stENote').value.trim();
       lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
       if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
-      if(e.date!==today()){closeSheet();renderStudyTracker(true);return}
+      if(!editable(e.date)){closeSheet();renderStudyTracker(true);return}
       var arr=load();
       for(var i=0;i<arr.length;i++){
         if(arr[i].id===id){arr[i].date=date;arr[i].lectures=lec;arr[i].questions=ques;arr[i].note=note;break}
@@ -12269,21 +12352,28 @@ function stopExamOnExit(){
     prepareBookmarkExplorer('Study Tracker');
     var list=document.getElementById('explorerList');
     var all=load();
-    var t=today(), wk=weekDates();
-    var sToday=sum(all.filter(function(e){return e.date===t}));
-    var sWeek=sum(all.filter(function(e){return wk.indexOf(e.date)>-1}));
-    var sAll=sum(all);
+    var t=today(), tm=tomorrow(), wk=weekDates();
+    var cAll=all.filter(counted);
+    var sToday=sum(cAll.filter(function(e){return e.date===t}));
+    var sWeek=sum(cAll.filter(function(e){return wk.indexOf(e.date)>-1}));
+    var sAll=sum(cAll);
     var byDate={};all.forEach(function(e){(byDate[e.date]=byDate[e.date]||[]).push(e)});
+    var cByDate={};cAll.forEach(function(e){(cByDate[e.date]=cByDate[e.date]||[]).push(e)});
     var dates=Object.keys(byDate).sort().reverse();
-    var perDay=wk.map(function(d){return sum(byDate[d]||[])});
-    var best=0,bestL=0;dates.forEach(function(d){var x=sum(byDate[d]);if(x.q>best)best=x.q;if(x.l>bestL)bestL=x.l});
-    var st=streak(byDate);
+    var perDay=wk.map(function(d){return sum(cByDate[d]||[])});
+    var best=0,bestL=0;Object.keys(cByDate).forEach(function(d){var x=sum(cByDate[d]);if(x.q>best)best=x.q;if(x.l>bestL)bestL=x.l});
+    var st=streak(cByDate);
 
     var history=dates.length?dates.map(function(d){
-      var s=sum(byDate[d]);
-      return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-chips"><span class="st-chip l">📖 '+s.l+'</span><span class="st-chip q">✍️ '+s.q+'</span></span></div>'+
+      var cs=sum(cByDate[d]||[]);
+      var head=(cByDate[d]&&cByDate[d].length)?'<span class="st-chip l">📖 '+cs.l+'</span><span class="st-chip q">✍️ '+cs.q+'</span>':'<span class="st-chip t">🎯 Target</span>';
+      return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-chips">'+head+'</span></div>'+
         byDate[d].map(function(e){
-          return '<div class="st-entry'+(d===t?' st-editable':'')+'" data-id="'+esc(e.id)+'"><div class="st-entry-main"><span class="st-chips"><span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div></div>';
+          var isT=!!e.target,isDone=isT&&!!e.done,pend=isT&&!e.done;
+          var cls='st-entry'+((d===t||d===tm)?' st-editable':'')+(isDone?' is-done':'');
+          var tag=isDone?'<span class="st-chip done">✅ Done</span>':(pend?'<span class="st-chip t">🎯 Target</span>':'');
+          var act=pend?(d===t?'<button type="button" class="st-done-btn" data-done="'+esc(e.id)+'">✓ Done</button>':(d<t?'<span class="st-chip miss">Not done</span>':'')):'';
+          return '<div class="'+cls+'" data-id="'+esc(e.id)+'"><div class="st-entry-main"><span class="st-chips">'+tag+'<span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div>'+act+'</div>';
         }).join('')+'</div>';
     }).join(''):'<div class="st-empty">No entries yet. Add your first one 👆</div>';
 
@@ -12300,7 +12390,7 @@ function stopExamOnExit(){
             '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+bestL.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>questions</div></div>'+
           '</div>'+
           '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
-            '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" min="'+t+'" max="'+t+'"></div>'+
+            '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" min="'+t+'" max="'+tm+'"><div class="st-tgt-note" id="stTgtNote"></div></div>'+
             '<div class="st-field"><label for="stLec">📖 Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field"><label for="stQues">✍️ Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
@@ -12313,27 +12403,31 @@ function stopExamOnExit(){
             '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#4f46e5"></span>Lectures</div><div class="st-bars">'+bars(wk,perDay,'l','#4f46e5',t)+'</div></div>'+
             '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#10b981"></span>Questions</div><div class="st-bars">'+bars(wk,perDay,'q','#10b981',t)+'</div></div>'+
           '</div>'+
-          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div>'+(byDate[t]?'<div class="st-hint">Today&#39;s entries: long press to edit or delete</div>':'')+'<div class="st-right-history">'+history+'</div></div>'+
+          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div>'+((byDate[t]||byDate[tm])?'<div class="st-hint">Today&#39;s &amp; tomorrow&#39;s entries: long press to edit or delete</div>':'')+'<div class="st-right-history">'+history+'</div></div>'+
         '</div>'+
       '</div>';
 
     var dEl=document.getElementById('stDate');
-    function lockDate(){dEl.value=today()}
+    function lockDate(){var c=clampDate(dEl.value);if(dEl.value!==c)dEl.value=c;var n=document.getElementById('stTgtNote');if(n)n.textContent=(dEl.value>today())?'🎯 Target — tap it on that day when done':''}
     dEl.addEventListener('change',lockDate);dEl.addEventListener('input',lockDate);
     document.getElementById('stAddBtn').addEventListener('click',function(){
       var msg=document.getElementById('stMsg');
-      var date=today();
+      var date=clampDate(dEl.value);
       var lec=parseInt(document.getElementById('stLec').value,10);
       var ques=parseInt(document.getElementById('stQues').value,10);
       var note=document.getElementById('stNote').value.trim();
       lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
       if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
       var arr=load();
-      arr.push({id:'s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:date,lectures:lec,questions:ques,note:note,addedAt:Date.now()});
+      arr.push({id:'s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:date,target:(date>today()),done:false,lectures:lec,questions:ques,note:note,addedAt:Date.now()});
       if(!save(arr)){msg.className='st-msg err';msg.textContent='Could not save on this device.';return}
       updateDrawer();
       renderStudyTracker(true);
-      var m2=document.getElementById('stMsg');if(m2){m2.className='st-msg';m2.textContent='Saved ✓'}
+      var m2=document.getElementById('stMsg');if(m2){m2.className='st-msg';m2.textContent=(date>today())?'Target set 🎯 — tap it on that day when done':'Saved ✓'}
+    });
+    list.querySelectorAll('.st-done-btn').forEach(function(btn){
+      btn.addEventListener('pointerdown',function(ev){ev.stopPropagation()});
+      btn.addEventListener('click',function(ev){ev.stopPropagation();markDone(btn.getAttribute('data-done'),btn)});
     });
     list.querySelectorAll('.st-entry.st-editable').forEach(function(row){
       var timer=null,sx=0,sy=0;
