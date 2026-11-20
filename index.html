@@ -12370,8 +12370,8 @@ function stopExamOnExit(){
       return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-chips">'+head+'</span></div>'+
         byDate[d].map(function(e){
           var isT=!!e.target,isDone=isT&&!!e.done,pend=isT&&!e.done;
-          var cls='st-entry'+((d===t||d===tm)?' st-editable':'')+(isDone?' is-done':'');
-          var tag=isDone?'<span class="st-chip done">✅ Done</span>':(pend?'<span class="st-chip t">🎯 Target</span>':'');
+          var cls='st-entry'+((d===t||d===tm)?' st-editable':'');
+          var tag=pend?'<span class="st-chip t">🎯 Target</span>':'';
           var act=pend?(d===t?'<button type="button" class="st-done-btn" data-done="'+esc(e.id)+'">✓ Done</button>':(d<t?'<span class="st-chip miss">Not done</span>':'')):'';
           return '<div class="'+cls+'" data-id="'+esc(e.id)+'"><div class="st-entry-main"><span class="st-chips">'+tag+'<span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div>'+act+'</div>';
         }).join('')+'</div>';
