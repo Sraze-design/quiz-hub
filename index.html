@@ -12189,7 +12189,7 @@ function stopExamOnExit(){
     var max=Math.max.apply(null,perDay.map(function(x){return x[key]}).concat([1]));
     return wk.map(function(d,i){
       var v=perDay[i][key],h=Math.round(v/max*74)+(v?0:0);
-      var dn=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).toLocaleDateString('en-IN',{weekday:'short'}).slice(0,2);
+      var dn=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).toLocaleDateString('en-IN',{weekday:'short'}).slice(0,3);
       return '<div class="st-bar-col'+(d===t?' on':'')+'"><span class="st-bar-num">'+v+'</span><div class="st-bar" style="height:'+h+'px;background:'+color+(d===t?'':';opacity:.55')+'"></div><span class="st-bar-day">'+dn+'</span></div>';
     }).join('');
   }
