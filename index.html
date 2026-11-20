@@ -12039,42 +12039,104 @@ function stopExamOnExit(){
 
 <style id="study-tracker-styles">
 .side-drawer-item-icon.study-icon{background:#eff6ff;color:#2563eb}
-.st-wrap{display:flex;flex-direction:column;gap:14px;width:100%;max-width:640px;margin:0 auto;padding:2px 0 calc(24px + env(safe-area-inset-bottom,0px))}
-.st-card{background:var(--card-bg,#fff);border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 5px 16px rgba(15,23,42,.05)}
-.st-title{font-size:16px;font-weight:800;color:var(--dark,#0f172a);margin-bottom:12px}
-.st-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.st-sum{border-radius:18px;padding:12px 8px;text-align:center;color:#fff}
-.st-sum.today{background:linear-gradient(135deg,#1d4ed8,#4f46e5)}
-.st-sum.week{background:linear-gradient(135deg,#059669,#10b981)}
-.st-sum.total{background:linear-gradient(135deg,#d97706,#f59e0b)}
-.st-sum-label{font-size:11px;font-weight:800;opacity:.9;letter-spacing:.4px;text-transform:uppercase}
-.st-sum-row{margin-top:6px;font-size:12px;font-weight:700;opacity:.95}
-.st-sum-row b{font-size:20px;font-weight:800;margin-right:3px}
-.st-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.st-field{display:flex;flex-direction:column;gap:5px;min-width:0}
+/* ===== Study Tracker ===== (phone = 1 column) */
+.st-wrap{display:flex;flex-direction:column;gap:14px;width:100%;max-width:none;margin:0 auto;box-sizing:border-box;padding:2px 0 calc(28px + env(safe-area-inset-bottom,0px))}
+.st-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.st-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 58%,#7c3aed 100%);box-shadow:0 14px 30px rgba(37,99,235,.28)}
+.st-hero::before{content:'';position:absolute;right:-46px;top:-46px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.12)}
+.st-hero::after{content:'';position:absolute;left:-30px;bottom:-60px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.07)}
+.st-hero-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.st-hero-label{font-size:12px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;opacity:.92}
+.st-streak{font-size:12px;font-weight:800;background:rgba(255,255,255,.2);padding:5px 11px;border-radius:999px;white-space:nowrap}
+.st-hero-nums{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.st-hero-num{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:12px 14px}
+.st-hero-num b{display:block;font-size:40px;line-height:1.05;font-weight:800;letter-spacing:-.5px}
+.st-hero-num span{display:block;margin-top:2px;font-size:13px;font-weight:700;opacity:.92}
+.st-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.st-stat{background:var(--card-bg,#fff);border:1px solid #e2e8f0;border-radius:18px;padding:12px;box-shadow:0 4px 14px rgba(15,23,42,.04)}
+.st-stat-label{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#64748b}
+.st-stat-line{margin-top:6px;font-size:12px;font-weight:700;color:#64748b}
+.st-stat-line b{font-size:20px;font-weight:800;color:#0f172a;margin-right:3px}
+.st-stat.week{border-top:3px solid #10b981}.st-stat.total{border-top:3px solid #f59e0b}.st-stat.best{border-top:3px solid #ec4899}
+.st-card{background:var(--card-bg,#fff);border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 6px 18px rgba(15,23,42,.05)}
+.st-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:16px;font-weight:800;color:var(--dark,#0f172a);margin-bottom:12px}
+.st-title small{font-size:12px;font-weight:700;color:#94a3b8}
+.st-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.st-field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .st-field.full{grid-column:1/-1}
 .st-field label{font-size:12px;font-weight:700;color:#475569}
-.st-input{width:100%;border:1.5px solid #e2e8f0;border-radius:12px;padding:11px 12px;font-size:16px;font-weight:600;color:#0f172a;background:#f8fafc;outline:none;box-sizing:border-box}
-.st-input:focus{border-color:#2563eb;background:#fff}
-.st-add{grid-column:1/-1;border:0;border-radius:14px;padding:13px;font-size:15px;font-weight:800;color:#fff;background:#2563eb;cursor:pointer}
+.st-input{width:100%;border:1.5px solid #e2e8f0;border-radius:14px;padding:12px 13px;font-size:16px;font-weight:600;color:#0f172a;background:#f8fafc;outline:none;box-sizing:border-box;transition:border-color .2s,background .2s,box-shadow .2s;-webkit-appearance:none;appearance:none;min-height:48px}
+.st-input:focus{border-color:#2563eb;background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.st-add{grid-column:1/-1;border:0;border-radius:16px;padding:15px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2563eb,#4f46e5);box-shadow:0 8px 18px rgba(37,99,235,.28);cursor:pointer}
 .st-add:active{transform:scale(.98)}
-.st-msg{grid-column:1/-1;font-size:12px;font-weight:700;color:#059669;min-height:16px;text-align:center}
+.st-msg{grid-column:1/-1;font-size:13px;font-weight:700;color:#059669;min-height:16px;text-align:center}
 .st-msg.err{color:#ef4444}
-.st-day{border:1px solid #e2e8f0;border-radius:16px;padding:12px;margin-bottom:10px;background:#fff}
-.st-day-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
-.st-day-date{font-size:14px;font-weight:800;color:#0f172a}
-.st-day-tot{font-size:12px;font-weight:800;color:#2563eb;background:#eff6ff;border-radius:999px;padding:4px 10px;white-space:nowrap}
-.st-entry{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px dashed #e2e8f0;font-size:13px;color:#334155;font-weight:600}
-.st-entry-main{min-width:0;flex:1}
-.st-entry-sub{font-size:11px;color:#94a3b8;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.st-del{border:0;background:#fff1f2;color:#e11d48;border-radius:10px;width:32px;height:32px;font-size:16px;font-weight:800;cursor:pointer;flex:0 0 auto}
-.st-empty{text-align:center;color:#94a3b8;font-size:13px;font-weight:700;padding:14px 0}
-.st-bars{display:flex;align-items:flex-end;gap:8px;height:110px;padding-top:6px}
-.st-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;min-width:0}
-.st-bar{width:100%;max-width:26px;border-radius:7px 7px 3px 3px;background:#c7d2fe;min-height:3px}
-.st-bar.on{background:#4f46e5}
-.st-bar-num{font-size:10px;font-weight:800;color:#475569}
+.st-chart{margin-bottom:12px}.st-chart:last-child{margin-bottom:0}
+.st-chart-label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;color:#475569;margin-bottom:4px}
+.st-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.st-bars{display:flex;align-items:flex-end;gap:8px;height:104px}
+.st-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
+.st-bar{width:100%;max-width:34px;border-radius:8px 8px 4px 4px;min-height:3px;transition:height .5s cubic-bezier(.4,0,.2,1)}
+.st-bar-num{font-size:11px;font-weight:800;color:#475569}
 .st-bar-day{font-size:10px;font-weight:700;color:#94a3b8}
+.st-bar-col.on .st-bar-day{color:#0f172a}
+.st-day{border:1px solid #e2e8f0;border-radius:18px;padding:12px 14px;margin-bottom:10px;background:#fff}
+.st-day:last-child{margin-bottom:0}
+.st-day-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px}
+.st-day-date{font-size:14px;font-weight:800;color:#0f172a}
+.st-chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.st-chip.l{background:#eef2ff;color:#4f46e5}.st-chip.q{background:#ecfdf5;color:#059669}
+.st-chips{display:flex;gap:6px;flex-wrap:wrap}
+.st-entry{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px dashed #e2e8f0}
+.st-entry-main{min-width:0;flex:1}
+.st-entry-sub{margin-top:4px;font-size:12px;color:#64748b;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st-del{border:0;background:#fff1f2;color:#e11d48;border-radius:11px;width:36px;height:36px;font-size:18px;font-weight:800;cursor:pointer;flex:0 0 auto}
+.st-empty{text-align:center;color:#94a3b8;font-size:14px;font-weight:700;padding:18px 0}
+@media(max-width:360px){.st-hero-num b{font-size:32px}.st-stat-line b{font-size:17px}}
+
+/* iPad / tablet PORTRAIT: full width, roomier, form in one row */
+@media(min-width:700px) and (orientation:portrait){
+.st-wrap{gap:20px;padding-top:6px}.st-col{gap:20px}
+.st-hero{padding:26px 28px;border-radius:28px}
+.st-hero-label{font-size:14px}.st-streak{font-size:14px;padding:7px 14px}
+.st-hero-nums{gap:18px;margin-top:18px}
+.st-hero-num{padding:18px 22px;border-radius:22px}
+.st-hero-num b{font-size:64px}.st-hero-num span{font-size:16px}
+.st-stats{gap:16px}.st-stat{padding:18px 20px;border-radius:22px}
+.st-stat-label{font-size:13px}.st-stat-line{font-size:15px;margin-top:8px}.st-stat-line b{font-size:30px}
+.st-card{padding:24px 26px;border-radius:28px}.st-title{font-size:20px;margin-bottom:16px}
+.st-form{grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.st-field.full{grid-column:1/-1}
+.st-field.date{grid-column:auto}
+.st-field label{font-size:14px}
+.st-input{font-size:18px;padding:14px 16px;min-height:56px;border-radius:16px}
+.st-add{padding:18px;font-size:18px;border-radius:18px}
+.st-bars{height:130px}.st-bar{max-width:48px}.st-bar-num{font-size:13px}.st-bar-day{font-size:12px}
+.st-day{padding:16px 20px}.st-day-date{font-size:16px}.st-chip{font-size:14px;padding:5px 12px}.st-entry-sub{font-size:14px}
+.st-del{width:42px;height:42px}
+}
+/* iPad / tablet LANDSCAPE: 2-column dashboard (left = hero + stats + form, right = charts + history) */
+@media(min-width:900px) and (min-height:560px) and (orientation:landscape){
+.st-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start;padding-top:6px}
+.st-col{gap:20px}
+.st-hero{padding:26px 28px;border-radius:28px}
+.st-hero-label{font-size:14px}.st-streak{font-size:14px;padding:7px 14px}
+.st-hero-nums{gap:16px;margin-top:18px}
+.st-hero-num{padding:16px 20px;border-radius:22px}
+.st-hero-num b{font-size:60px}.st-hero-num span{font-size:16px}
+.st-stats{gap:14px}.st-stat{padding:16px 18px;border-radius:22px}
+.st-stat-label{font-size:12px}.st-stat-line{font-size:14px}.st-stat-line b{font-size:26px}
+.st-card{padding:22px 24px;border-radius:26px}.st-title{font-size:19px}
+.st-form{gap:14px}
+.st-field label{font-size:13px}
+.st-input{font-size:17px;padding:13px 15px;min-height:54px}
+.st-add{padding:17px;font-size:17px}
+.st-bars{height:100px}.st-bar{max-width:44px}.st-bar-num{font-size:12px}.st-bar-day{font-size:11px}
+.st-right-history{max-height:calc(100vh - 120px);max-height:calc(100dvh - 120px);overflow:auto;-webkit-overflow-scrolling:touch}
+.st-day{padding:14px 18px}.st-chip{font-size:13px}
+}
+/* short landscape phones: keep single column but compact */
+@media(max-height:520px) and (orientation:landscape){.st-hero-num b{font-size:30px}.st-bars{height:80px}}
 </style>
 
 <script id="study-tracker-engine">
@@ -12111,6 +12173,22 @@ function stopExamOnExit(){
 
   window.openStudyTrackerFromMenu=function(){closeAppSideDrawer();renderStudyTracker()};
 
+  function bars(wk,perDay,key,color,t){
+    var max=Math.max.apply(null,perDay.map(function(x){return x[key]}).concat([1]));
+    return wk.map(function(d,i){
+      var v=perDay[i][key],h=Math.round(v/max*74)+(v?0:0);
+      var dn=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).toLocaleDateString('en-IN',{weekday:'short'}).slice(0,2);
+      return '<div class="st-bar-col'+(d===t?' on':'')+'"><span class="st-bar-num">'+v+'</span><div class="st-bar" style="height:'+h+'px;background:'+color+(d===t?'':';opacity:.55')+'"></div><span class="st-bar-day">'+dn+'</span></div>';
+    }).join('');
+  }
+  function streak(byDate){
+    var d=new Date();
+    if(!byDate[iso(d)])d.setDate(d.getDate()-1);
+    var n=0;
+    while(byDate[iso(d)]){n++;d.setDate(d.getDate()-1)}
+    return n;
+  }
+
   window.renderStudyTracker=function(skipHistory){
     if(!skipHistory)pushExplorerHistory({screen:'studyTracker'});
     prepareBookmarkExplorer('Study Tracker');
@@ -12120,44 +12198,48 @@ function stopExamOnExit(){
     var sToday=sum(all.filter(function(e){return e.date===t}));
     var sWeek=sum(all.filter(function(e){return wk.indexOf(e.date)>-1}));
     var sAll=sum(all);
-
-    // last 7 days bars (lectures + questions combined shown as questions count with lectures in title)
-    var perDay=wk.map(function(d){return sum(all.filter(function(e){return e.date===d}))});
-    var maxQ=Math.max.apply(null,perDay.map(function(x){return x.q}).concat([1]));
-    var bars=wk.map(function(d,i){
-      var q=perDay[i].q,h=Math.round(q/maxQ*80);
-      var dn=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).toLocaleDateString('en-IN',{weekday:'short'}).slice(0,2);
-      return '<div class="st-bar-col" title="'+esc(d)+': '+perDay[i].l+' lectures, '+q+' questions"><span class="st-bar-num">'+q+'</span><div class="st-bar'+(d===t?' on':'')+'" style="height:'+h+'px"></div><span class="st-bar-day">'+dn+'</span></div>';
-    }).join('');
-
-    // group entries by date, latest first
     var byDate={};all.forEach(function(e){(byDate[e.date]=byDate[e.date]||[]).push(e)});
     var dates=Object.keys(byDate).sort().reverse();
+    var perDay=wk.map(function(d){return sum(byDate[d]||[])});
+    var best=0;dates.forEach(function(d){var q=sum(byDate[d]).q;if(q>best)best=q});
+    var st=streak(byDate);
+
     var history=dates.length?dates.map(function(d){
       var s=sum(byDate[d]);
-      return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-day-tot">'+s.l+' lec · '+s.q+' ques</span></div>'+
+      return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-chips"><span class="st-chip l">📖 '+s.l+'</span><span class="st-chip q">✍️ '+s.q+'</span></span></div>'+
         byDate[d].map(function(e){
-          return '<div class="st-entry"><div class="st-entry-main">'+(+e.lectures||0)+' lectures · '+(+e.questions||0)+' questions'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div><button type="button" class="st-del" data-id="'+esc(e.id)+'" aria-label="Delete entry">×</button></div>';
+          return '<div class="st-entry"><div class="st-entry-main"><span class="st-chips"><span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div><button type="button" class="st-del" data-id="'+esc(e.id)+'" aria-label="Delete entry">×</button></div>';
         }).join('')+'</div>';
-    }).join(''):'<div class="st-empty">No entries yet. Add your first one above 👆</div>';
+    }).join(''):'<div class="st-empty">No entries yet. Add your first one 👆</div>';
 
     list.innerHTML=
       '<div class="st-wrap">'+
-        '<div class="st-summary">'+
-          '<div class="st-sum today"><div class="st-sum-label">Today</div><div class="st-sum-row"><b>'+sToday.l+'</b>lec</div><div class="st-sum-row"><b>'+sToday.q+'</b>ques</div></div>'+
-          '<div class="st-sum week"><div class="st-sum-label">Last 7 days</div><div class="st-sum-row"><b>'+sWeek.l+'</b>lec</div><div class="st-sum-row"><b>'+sWeek.q+'</b>ques</div></div>'+
-          '<div class="st-sum total"><div class="st-sum-label">Total</div><div class="st-sum-row"><b>'+sAll.l.toLocaleString('en-IN')+'</b>lec</div><div class="st-sum-row"><b>'+sAll.q.toLocaleString('en-IN')+'</b>ques</div></div>'+
+        '<div class="st-col st-left">'+
+          '<div class="st-hero">'+
+            '<div class="st-hero-top"><span class="st-hero-label">Today</span><span class="st-streak">'+(st?('🔥 '+st+(st===1?' day':' days')+' streak'):'Start your streak')+'</span></div>'+
+            '<div class="st-hero-nums"><div class="st-hero-num"><b>'+sToday.l+'</b><span>📖 Lectures</span></div><div class="st-hero-num"><b>'+sToday.q+'</b><span>✍️ Questions</span></div></div>'+
+          '</div>'+
+          '<div class="st-stats">'+
+            '<div class="st-stat week"><div class="st-stat-label">Last 7 days</div><div class="st-stat-line"><b>'+sWeek.l+'</b>lec</div><div class="st-stat-line"><b>'+sWeek.q+'</b>ques</div></div>'+
+            '<div class="st-stat total"><div class="st-stat-label">Total</div><div class="st-stat-line"><b>'+sAll.l.toLocaleString('en-IN')+'</b>lec</div><div class="st-stat-line"><b>'+sAll.q.toLocaleString('en-IN')+'</b>ques</div></div>'+
+            '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>ques</div><div class="st-stat-line">'+dates.length+' active '+(dates.length===1?'day':'days')+'</div></div>'+
+          '</div>'+
+          '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
+            '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" max="'+t+'"></div>'+
+            '<div class="st-field"><label for="stLec">📖 Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
+            '<div class="st-field"><label for="stQues">✍️ Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
+            '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
+            '<button type="button" class="st-add" id="stAddBtn">Add entry</button>'+
+            '<div class="st-msg" id="stMsg"></div>'+
+          '</div></div>'+
         '</div>'+
-        '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
-          '<div class="st-field full"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" max="'+t+'"></div>'+
-          '<div class="st-field"><label for="stLec">Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
-          '<div class="st-field"><label for="stQues">Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
-          '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
-          '<button type="button" class="st-add" id="stAddBtn">Add entry</button>'+
-          '<div class="st-msg" id="stMsg"></div>'+
-        '</div></div>'+
-        '<div class="st-card"><div class="st-title">Last 7 days · questions</div><div class="st-bars">'+bars+'</div></div>'+
-        '<div class="st-card"><div class="st-title">History</div>'+history+'</div>'+
+        '<div class="st-col st-right">'+
+          '<div class="st-card"><div class="st-title">Last 7 days</div>'+
+            '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#4f46e5"></span>Lectures</div><div class="st-bars">'+bars(wk,perDay,'l','#4f46e5',t)+'</div></div>'+
+            '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#10b981"></span>Questions</div><div class="st-bars">'+bars(wk,perDay,'q','#10b981',t)+'</div></div>'+
+          '</div>'+
+          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div><div class="st-right-history">'+history+'</div></div>'+
+        '</div>'+
       '</div>';
 
     document.getElementById('stAddBtn').addEventListener('click',function(){
