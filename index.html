@@ -2971,6 +2971,7 @@ body.exam-paused #quizEngineBox .floating-quiz-header,body.exam-paused #controls
       <button class="side-drawer-item" type="button" onclick="openBookmarksFromMenu()"><span class="side-drawer-item-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></svg></span><span class="side-drawer-item-text"><span>Bookmarks</span><small id="drawerBookmarkCount">Saved Questions</small></span></button>
       <button class="side-drawer-item" type="button" onclick="openMyReportsFromMenu()"><span class="side-drawer-item-icon reports-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span><span class="side-drawer-item-text"><span>My Reports</span><small id="drawerReportCount">No reports sent</small></span></button>
       <button class="side-drawer-item" type="button" onclick="openMyProgressFromMenu()"><span class="side-drawer-item-icon progress-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 3a9 9 0 0 1 9 9h-9Z" fill="currentColor" stroke="none"/></svg></span><span class="side-drawer-item-text"><span>My Progress</span><small id="drawerProgressCount">No questions solved yet</small></span></button>
+      <button class="side-drawer-item" type="button" onclick="openStudyTrackerFromMenu()"><span class="side-drawer-item-icon study-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8.5 15l2.2 2.2 4.3-4.4"/></svg></span><span class="side-drawer-item-text"><span>Study Tracker</span><small id="drawerStudyCount">Log daily lectures &amp; questions</small></span></button>
     </div>
   </aside>
 
@@ -4983,6 +4984,7 @@ window.addEventListener('popstate', (e) => {
     switch (state.screen) {
       case 'myReports': renderMyReports(); break;
       case 'myProgress': renderMyProgress(); break;
+      case 'studyTracker': renderStudyTracker(true); break;
       case 'wrongBank': renderWrongBank(); break;
       case 'bookmarks': renderBookmarkSubjects(); break;
       case 'bookmarkLevel2': renderBookmarkLevel2(state.subject); break;
@@ -12033,6 +12035,164 @@ function stopExamOnExit(){
   examActive=false;
   document.body.classList.remove('exam-live','exam-paused');
 }
+</script>
+
+<style id="study-tracker-styles">
+.side-drawer-item-icon.study-icon{background:#eff6ff;color:#2563eb}
+.st-wrap{display:flex;flex-direction:column;gap:14px;width:100%;max-width:640px;margin:0 auto;padding:2px 0 calc(24px + env(safe-area-inset-bottom,0px))}
+.st-card{background:var(--card-bg,#fff);border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 5px 16px rgba(15,23,42,.05)}
+.st-title{font-size:16px;font-weight:800;color:var(--dark,#0f172a);margin-bottom:12px}
+.st-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.st-sum{border-radius:18px;padding:12px 8px;text-align:center;color:#fff}
+.st-sum.today{background:linear-gradient(135deg,#1d4ed8,#4f46e5)}
+.st-sum.week{background:linear-gradient(135deg,#059669,#10b981)}
+.st-sum.total{background:linear-gradient(135deg,#d97706,#f59e0b)}
+.st-sum-label{font-size:11px;font-weight:800;opacity:.9;letter-spacing:.4px;text-transform:uppercase}
+.st-sum-row{margin-top:6px;font-size:12px;font-weight:700;opacity:.95}
+.st-sum-row b{font-size:20px;font-weight:800;margin-right:3px}
+.st-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.st-field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.st-field.full{grid-column:1/-1}
+.st-field label{font-size:12px;font-weight:700;color:#475569}
+.st-input{width:100%;border:1.5px solid #e2e8f0;border-radius:12px;padding:11px 12px;font-size:16px;font-weight:600;color:#0f172a;background:#f8fafc;outline:none;box-sizing:border-box}
+.st-input:focus{border-color:#2563eb;background:#fff}
+.st-add{grid-column:1/-1;border:0;border-radius:14px;padding:13px;font-size:15px;font-weight:800;color:#fff;background:#2563eb;cursor:pointer}
+.st-add:active{transform:scale(.98)}
+.st-msg{grid-column:1/-1;font-size:12px;font-weight:700;color:#059669;min-height:16px;text-align:center}
+.st-msg.err{color:#ef4444}
+.st-day{border:1px solid #e2e8f0;border-radius:16px;padding:12px;margin-bottom:10px;background:#fff}
+.st-day-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.st-day-date{font-size:14px;font-weight:800;color:#0f172a}
+.st-day-tot{font-size:12px;font-weight:800;color:#2563eb;background:#eff6ff;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.st-entry{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px dashed #e2e8f0;font-size:13px;color:#334155;font-weight:600}
+.st-entry-main{min-width:0;flex:1}
+.st-entry-sub{font-size:11px;color:#94a3b8;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st-del{border:0;background:#fff1f2;color:#e11d48;border-radius:10px;width:32px;height:32px;font-size:16px;font-weight:800;cursor:pointer;flex:0 0 auto}
+.st-empty{text-align:center;color:#94a3b8;font-size:13px;font-weight:700;padding:14px 0}
+.st-bars{display:flex;align-items:flex-end;gap:8px;height:110px;padding-top:6px}
+.st-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;min-width:0}
+.st-bar{width:100%;max-width:26px;border-radius:7px 7px 3px 3px;background:#c7d2fe;min-height:3px}
+.st-bar.on{background:#4f46e5}
+.st-bar-num{font-size:10px;font-weight:800;color:#475569}
+.st-bar-day{font-size:10px;font-weight:700;color:#94a3b8}
+</style>
+
+<script id="study-tracker-engine">
+/* ===== Study Tracker (additive feature) =====
+   Own storage key + own functions only. Does not touch quiz / progress / reports code. */
+(function(){
+  var KEY='devssc:studytracker:v1';
+  function load(){
+    try{var a=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(a)?a.filter(function(e){return e&&typeof e==='object'}):[]}catch(_){return []}
+  }
+  function save(a){try{localStorage.setItem(KEY,JSON.stringify(a));return true}catch(_){return false}}
+  function pad(n){return n<10?'0'+n:''+n}
+  function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+  function today(){return iso(new Date())}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
+  function fmtDate(s){
+    var p=s.split('-');var d=new Date(+p[0],+p[1]-1,+p[2]);
+    var t=today();
+    var y=new Date();y.setDate(y.getDate()-1);
+    var label=d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+    if(s===t)return 'Today · '+label;
+    if(s===iso(y))return 'Yesterday · '+label;
+    return d.toLocaleDateString('en-IN',{weekday:'short'})+' · '+label;
+  }
+  function sum(arr){return arr.reduce(function(a,e){a.l+=(+e.lectures||0);a.q+=(+e.questions||0);return a},{l:0,q:0})}
+  function weekDates(){var out=[];for(var i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);out.push(iso(d))}return out}
+
+  function updateDrawer(){
+    var el=document.getElementById('drawerStudyCount');if(!el)return;
+    var s=sum(load().filter(function(e){return e.date===today()}));
+    el.textContent=(s.l||s.q)?('Today: '+s.l+' lectures · '+s.q+' questions'):'Log daily lectures & questions';
+  }
+  window.updateStudyDrawerCount=updateDrawer;
+
+  window.openStudyTrackerFromMenu=function(){closeAppSideDrawer();renderStudyTracker()};
+
+  window.renderStudyTracker=function(skipHistory){
+    if(!skipHistory)pushExplorerHistory({screen:'studyTracker'});
+    prepareBookmarkExplorer('Study Tracker');
+    var list=document.getElementById('explorerList');
+    var all=load();
+    var t=today(), wk=weekDates();
+    var sToday=sum(all.filter(function(e){return e.date===t}));
+    var sWeek=sum(all.filter(function(e){return wk.indexOf(e.date)>-1}));
+    var sAll=sum(all);
+
+    // last 7 days bars (lectures + questions combined shown as questions count with lectures in title)
+    var perDay=wk.map(function(d){return sum(all.filter(function(e){return e.date===d}))});
+    var maxQ=Math.max.apply(null,perDay.map(function(x){return x.q}).concat([1]));
+    var bars=wk.map(function(d,i){
+      var q=perDay[i].q,h=Math.round(q/maxQ*80);
+      var dn=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).toLocaleDateString('en-IN',{weekday:'short'}).slice(0,2);
+      return '<div class="st-bar-col" title="'+esc(d)+': '+perDay[i].l+' lectures, '+q+' questions"><span class="st-bar-num">'+q+'</span><div class="st-bar'+(d===t?' on':'')+'" style="height:'+h+'px"></div><span class="st-bar-day">'+dn+'</span></div>';
+    }).join('');
+
+    // group entries by date, latest first
+    var byDate={};all.forEach(function(e){(byDate[e.date]=byDate[e.date]||[]).push(e)});
+    var dates=Object.keys(byDate).sort().reverse();
+    var history=dates.length?dates.map(function(d){
+      var s=sum(byDate[d]);
+      return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-day-tot">'+s.l+' lec · '+s.q+' ques</span></div>'+
+        byDate[d].map(function(e){
+          return '<div class="st-entry"><div class="st-entry-main">'+(+e.lectures||0)+' lectures · '+(+e.questions||0)+' questions'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div><button type="button" class="st-del" data-id="'+esc(e.id)+'" aria-label="Delete entry">×</button></div>';
+        }).join('')+'</div>';
+    }).join(''):'<div class="st-empty">No entries yet. Add your first one above 👆</div>';
+
+    list.innerHTML=
+      '<div class="st-wrap">'+
+        '<div class="st-summary">'+
+          '<div class="st-sum today"><div class="st-sum-label">Today</div><div class="st-sum-row"><b>'+sToday.l+'</b>lec</div><div class="st-sum-row"><b>'+sToday.q+'</b>ques</div></div>'+
+          '<div class="st-sum week"><div class="st-sum-label">Last 7 days</div><div class="st-sum-row"><b>'+sWeek.l+'</b>lec</div><div class="st-sum-row"><b>'+sWeek.q+'</b>ques</div></div>'+
+          '<div class="st-sum total"><div class="st-sum-label">Total</div><div class="st-sum-row"><b>'+sAll.l.toLocaleString('en-IN')+'</b>lec</div><div class="st-sum-row"><b>'+sAll.q.toLocaleString('en-IN')+'</b>ques</div></div>'+
+        '</div>'+
+        '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
+          '<div class="st-field full"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" max="'+t+'"></div>'+
+          '<div class="st-field"><label for="stLec">Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
+          '<div class="st-field"><label for="stQues">Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
+          '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
+          '<button type="button" class="st-add" id="stAddBtn">Add entry</button>'+
+          '<div class="st-msg" id="stMsg"></div>'+
+        '</div></div>'+
+        '<div class="st-card"><div class="st-title">Last 7 days · questions</div><div class="st-bars">'+bars+'</div></div>'+
+        '<div class="st-card"><div class="st-title">History</div>'+history+'</div>'+
+      '</div>';
+
+    document.getElementById('stAddBtn').addEventListener('click',function(){
+      var msg=document.getElementById('stMsg');
+      var date=document.getElementById('stDate').value||today();
+      var lec=parseInt(document.getElementById('stLec').value,10);
+      var ques=parseInt(document.getElementById('stQues').value,10);
+      var note=document.getElementById('stNote').value.trim();
+      lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
+      if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
+      var arr=load();
+      arr.push({id:'s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:date,lectures:lec,questions:ques,note:note,addedAt:Date.now()});
+      if(!save(arr)){msg.className='st-msg err';msg.textContent='Could not save on this device.';return}
+      updateDrawer();
+      renderStudyTracker(true);
+      var m2=document.getElementById('stMsg');if(m2){m2.className='st-msg';m2.textContent='Saved ✓'}
+    });
+    list.querySelectorAll('.st-del').forEach(function(b){
+      b.addEventListener('click',function(){
+        if(!confirm('Delete this entry?'))return;
+        var id=b.getAttribute('data-id');
+        save(load().filter(function(e){return e.id!==id}));
+        updateDrawer();
+        renderStudyTracker(true);
+      });
+    });
+  };
+
+  // Keep the drawer subtitle fresh every time the menu opens (wraps, does not replace behaviour)
+  var _open=window.openAppSideDrawer;
+  if(typeof _open==='function'){
+    window.openAppSideDrawer=function(){try{updateDrawer()}catch(_){}return _open.apply(this,arguments)};
+  }
+  updateDrawer();
+})();
 </script>
 
 </body>
