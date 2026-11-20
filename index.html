@@ -12297,10 +12297,11 @@ function stopExamOnExit(){
           '<div class="st-stats">'+
             '<div class="st-stat week"><div class="st-stat-label">Last 7 days</div><div class="st-stat-line"><b>'+sWeek.l+'</b>lectures</div><div class="st-stat-line"><b>'+sWeek.q+'</b>questions</div></div>'+
             '<div class="st-stat total"><div class="st-stat-label">Total</div><div class="st-stat-line"><b>'+sAll.l.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+sAll.q.toLocaleString('en-IN')+'</b>questions</div></div>'+
-            '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+bestL.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>questions</div></div>'+
+            '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+bestL.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>questions</div><div class="st-stat-line">'+dates.length+' active '+(dates.length===1?'day':'days')+'</div></div>'+
           '</div>'+
           '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
-                        '<div class="st-field"><label for="stLec">📖 Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
+            '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" min="'+t+'" max="'+t+'"></div>'+
+            '<div class="st-field"><label for="stLec">📖 Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field"><label for="stQues">✍️ Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
             '<button type="button" class="st-add" id="stAddBtn">Add entry</button>'+
@@ -12316,6 +12317,9 @@ function stopExamOnExit(){
         '</div>'+
       '</div>';
 
+    var dEl=document.getElementById('stDate');
+    function lockDate(){dEl.value=today()}
+    dEl.addEventListener('change',lockDate);dEl.addEventListener('input',lockDate);
     document.getElementById('stAddBtn').addEventListener('click',function(){
       var msg=document.getElementById('stMsg');
       var date=today();
