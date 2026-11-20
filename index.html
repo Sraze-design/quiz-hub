@@ -12066,6 +12066,9 @@ function stopExamOnExit(){
 .st-field.full{grid-column:1/-1}
 .st-field label{font-size:12px;font-weight:700;color:#475569}
 .st-input{width:100%;border:1.5px solid #e2e8f0;border-radius:14px;padding:12px 13px;font-size:16px;font-weight:600;color:#0f172a;background:#f8fafc;outline:none;box-sizing:border-box;transition:border-color .2s,background .2s,box-shadow .2s;-webkit-appearance:none;appearance:none;min-height:48px}
+.st-select{cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:18px}
+.st-note-other{display:none;margin-top:8px}
+.st-note-other.show{display:block}
 .st-input:focus{border-color:#2563eb;background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
 .st-add{grid-column:1/-1;border:0;border-radius:16px;padding:15px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2563eb,#4f46e5);box-shadow:0 8px 18px rgba(37,99,235,.28);cursor:pointer}
 .st-add:active{transform:scale(.98)}
@@ -12191,6 +12194,30 @@ function stopExamOnExit(){
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
   function icoL(){return '<svg class="st-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8.2 16.2 12 10 15.8z" fill="currentColor"/></svg>'}
   function icoQ(){return '<svg class="st-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-2.9 2.6-2.9 4"/><path d="M12 17.2h.01"/></svg>'}
+  var ST_SUBJECTS=['Maths','Reasoning','Science','Electrician Theory','Basic Science and Engineering','General Knowledge'];
+  function subjectField(base,cur){
+    cur=cur||'';
+    var known=ST_SUBJECTS.indexOf(cur)>-1,other=!!cur&&!known;
+    var opts='<option value="">Select subject (optional)</option>'+ST_SUBJECTS.map(function(x){return '<option value="'+esc(x)+'"'+(cur===x?' selected':'')+'>'+esc(x)+'</option>'}).join('')+'<option value="__other"'+(other?' selected':'')+'>Others</option>';
+    return '<div class="st-field full"><label for="'+base+'Sel">Subject</label>'+
+      '<select class="st-input st-select" id="'+base+'Sel">'+opts+'</select>'+
+      '<input class="st-input st-note-other'+(other?' show':'')+'" id="'+base+'" type="text" maxlength="80" value="'+(other?esc(cur):'')+'" placeholder="Write subject / note"></div>';
+  }
+  function wireSubject(root,base){
+    var sel=root.querySelector('#'+base+'Sel'),inp=root.querySelector('#'+base);
+    if(!sel||!inp)return;
+    sel.addEventListener('change',function(){
+      var o=sel.value==='__other';
+      inp.classList.toggle('show',o);
+      if(o){inp.focus()}else{inp.value=''}
+    });
+  }
+  function readSubject(root,base){
+    var sel=root.querySelector('#'+base+'Sel'),inp=root.querySelector('#'+base);
+    if(!sel)return inp?inp.value.trim():'';
+    if(sel.value==='__other')return inp?inp.value.trim():'';
+    return sel.value||'';
+  }
   function fmtDate(s){
     var p=s.split('-');var d=new Date(+p[0],+p[1]-1,+p[2]);
     var t=today();
@@ -12328,18 +12355,19 @@ function stopExamOnExit(){
     var b=openSheet('<div class="st-sheet-title" style="margin-bottom:14px">Edit entry</div><div class="st-form">'+
             '<div class="st-field"><label for="stELec">'+icoL()+' Lectures</label><input class="st-input" id="stELec" type="number" inputmode="numeric" min="0" value="'+(+e.lectures||0)+'"></div>'+
       '<div class="st-field"><label for="stEQues">'+icoQ()+' Questions</label><input class="st-input" id="stEQues" type="number" inputmode="numeric" min="0" value="'+(+e.questions||0)+'"></div>'+
-      '<div class="st-field full"><label for="stENote">Subject / note (optional)</label><input class="st-input" id="stENote" type="text" maxlength="80" value="'+esc(e.note||'')+'" placeholder="e.g. Maths – Algebra"></div>'+
+      subjectField('stENote',e.note||'')+
       '<div class="st-msg" id="stEMsg"></div>'+
       '<button type="button" class="st-add" id="stESave">Save changes</button>'+
       '<button type="button" class="st-sheet-btn cancel" id="stECancel" style="grid-column:1/-1">Cancel</button>'+
     '</div>');
     b.querySelector('#stECancel').addEventListener('click',closeSheet);
+    wireSubject(b,'stENote');
     b.querySelector('#stESave').addEventListener('click',function(){
       var msg=b.querySelector('#stEMsg');
       var date=e.date;
       var lec=parseInt(b.querySelector('#stELec').value,10);
       var ques=parseInt(b.querySelector('#stEQues').value,10);
-      var note=b.querySelector('#stENote').value.trim();
+      var note=readSubject(b,'stENote');
       lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
       if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
       if(!editable(e.date)){closeSheet();renderStudyTracker(true);return}
@@ -12400,7 +12428,7 @@ function stopExamOnExit(){
             '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" min="'+t+'" max="'+tm+'"><div class="st-tgt-note" id="stTgtNote"></div></div>'+
             '<div class="st-field"><label for="stLec">'+icoL()+' Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field"><label for="stQues">'+icoQ()+' Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
-            '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
+            subjectField('stNote','')+
             '<button type="button" class="st-add" id="stAddBtn">Add entry</button>'+
             '<div class="st-msg" id="stMsg"></div>'+
           '</div></div>'+
@@ -12417,12 +12445,13 @@ function stopExamOnExit(){
     var dEl=document.getElementById('stDate');
     function lockDate(){var c=clampDate(dEl.value);if(dEl.value!==c)dEl.value=c;var n=document.getElementById('stTgtNote');if(n)n.textContent=(dEl.value>today())?'🎯 Target — tap it on that day when done':''}
     dEl.addEventListener('change',lockDate);dEl.addEventListener('input',lockDate);
+    wireSubject(document,'stNote');
     document.getElementById('stAddBtn').addEventListener('click',function(){
       var msg=document.getElementById('stMsg');
       var date=clampDate(dEl.value);
       var lec=parseInt(document.getElementById('stLec').value,10);
       var ques=parseInt(document.getElementById('stQues').value,10);
-      var note=document.getElementById('stNote').value.trim();
+      var note=readSubject(document,'stNote');
       lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
       if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
       var arr=load();
