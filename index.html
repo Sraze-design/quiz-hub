@@ -12055,8 +12055,8 @@ function stopExamOnExit(){
 .st-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .st-stat{background:var(--card-bg,#fff);border:1px solid #e2e8f0;border-radius:18px;padding:12px;box-shadow:0 4px 14px rgba(15,23,42,.04)}
 .st-stat-label{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#64748b}
-.st-stat-line{margin-top:6px;font-size:12px;font-weight:700;color:#64748b}
-.st-stat-line b{font-size:20px;font-weight:800;color:#0f172a;margin-right:3px}
+.st-stat-line{margin-top:6px;font-size:12px;font-weight:700;color:#64748b;display:flex;align-items:baseline;flex-wrap:wrap;column-gap:3px}
+.st-stat-line b{font-size:20px;font-weight:800;color:#0f172a}
 .st-stat.week{border-top:3px solid #10b981}.st-stat.total{border-top:3px solid #f59e0b}.st-stat.best{border-top:3px solid #ec4899}
 .st-card{background:var(--card-bg,#fff);border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 6px 18px rgba(15,23,42,.05)}
 .st-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:16px;font-weight:800;color:var(--dark,#0f172a);margin-bottom:12px}
@@ -12090,9 +12090,22 @@ function stopExamOnExit(){
 .st-entry{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px dashed #e2e8f0}
 .st-entry-main{min-width:0;flex:1}
 .st-entry-sub{margin-top:4px;font-size:12px;color:#64748b;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.st-del{border:0;background:#fff1f2;color:#e11d48;border-radius:11px;width:36px;height:36px;font-size:18px;font-weight:800;cursor:pointer;flex:0 0 auto}
+.st-entry{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;transition:background .15s}
+.st-entry.pressing{background:#eef2ff}
+.st-hint{font-size:12px;font-weight:600;color:#94a3b8;margin:-6px 0 10px}
+.st-sheet-back{position:fixed;left:0;right:0;top:0;bottom:0;z-index:99999;background:rgba(15,23,42,.45);display:flex;align-items:flex-end;justify-content:center;animation:stFade .18s ease}
+.st-sheet{width:100%;max-width:520px;max-height:92vh;max-height:92dvh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom,0px));box-sizing:border-box;animation:stUp .22s cubic-bezier(.2,.8,.2,1)}
+.st-sheet-grab{width:40px;height:4px;border-radius:99px;background:#cbd5e1;margin:0 auto 14px}
+.st-sheet-title{font-size:16px;font-weight:800;color:#0f172a}
+.st-sheet-sub{font-size:13px;font-weight:600;color:#64748b;margin:2px 0 14px;word-break:break-word}
+.st-sheet-btn{display:flex;align-items:center;gap:12px;width:100%;border:0;background:#f1f5f9;border-radius:16px;padding:15px 16px;font-size:16px;font-weight:800;color:#0f172a;margin-bottom:8px;cursor:pointer;text-align:left;box-sizing:border-box}
+.st-sheet-btn.del{background:#fff1f2;color:#e11d48}
+.st-sheet-btn.cancel{background:transparent;justify-content:center;color:#64748b;margin-bottom:0}
+.st-sheet-btn:active{transform:scale(.98)}
+@keyframes stFade{from{opacity:0}to{opacity:1}}
+@keyframes stUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .st-empty{text-align:center;color:#94a3b8;font-size:14px;font-weight:700;padding:18px 0}
-@media(max-width:360px){.st-hero-num b{font-size:32px}.st-stat-line b{font-size:17px}}
+@media(max-width:360px){.st-hero-num b{font-size:32px}.st-stat-line b{font-size:17px}.st-stat-line{font-size:11px}}
 
 /* iPad / tablet PORTRAIT: full width, roomier, form in one row */
 @media(min-width:700px) and (orientation:portrait){
@@ -12113,7 +12126,6 @@ function stopExamOnExit(){
 .st-add{padding:18px;font-size:18px;border-radius:18px}
 .st-bars{height:130px}.st-bar{max-width:48px}.st-bar-num{font-size:13px}.st-bar-day{font-size:12px}
 .st-day{padding:16px 20px}.st-day-date{font-size:16px}.st-chip{font-size:14px;padding:5px 12px}.st-entry-sub{font-size:14px}
-.st-del{width:42px;height:42px}
 }
 /* iPad / tablet LANDSCAPE: 2-column dashboard (left = hero + stats + form, right = charts + history) */
 @media(min-width:900px) and (min-height:560px) and (orientation:landscape){
@@ -12189,6 +12201,68 @@ function stopExamOnExit(){
     return n;
   }
 
+  function findEntry(id){return load().filter(function(x){return x.id===id})[0]}
+  function closeSheet(){var o=document.getElementById('stSheet');if(o&&o.parentNode)o.parentNode.removeChild(o)}
+  function openSheet(inner){
+    closeSheet();
+    var b=document.createElement('div');b.id='stSheet';b.className='st-sheet-back';
+    b.innerHTML='<div class="st-sheet" role="dialog" aria-modal="true"><div class="st-sheet-grab"></div>'+inner+'</div>';
+    b.addEventListener('click',function(ev){if(ev.target===b)closeSheet()});
+    b.style.pointerEvents='none';
+    setTimeout(function(){b.style.pointerEvents=''},350); /* ignore the finger-lift right after long press */
+    document.body.appendChild(b);
+    return b;
+  }
+  function entryActions(id){
+    var e=findEntry(id);if(!e)return;
+    try{if(navigator.vibrate)navigator.vibrate(15)}catch(_){}
+    var b=openSheet('<div class="st-sheet-title">'+esc(fmtDate(e.date))+'</div>'+
+      '<div class="st-sheet-sub">'+(+e.lectures||0)+' lectures · '+(+e.questions||0)+' questions'+(e.note?' · '+esc(e.note):'')+'</div>'+
+      '<button type="button" class="st-sheet-btn" data-act="edit">✏️ Edit</button>'+
+      '<button type="button" class="st-sheet-btn del" data-act="del">🗑️ Delete</button>'+
+      '<button type="button" class="st-sheet-btn cancel" data-act="x">Cancel</button>');
+    b.querySelector('[data-act="edit"]').addEventListener('click',function(){editEntry(id)});
+    b.querySelector('[data-act="del"]').addEventListener('click',function(){
+      closeSheet();
+      if(!confirm('Delete this entry?'))return;
+      save(load().filter(function(x){return x.id!==id}));
+      updateDrawer();
+      renderStudyTracker(true);
+    });
+    b.querySelector('[data-act="x"]').addEventListener('click',closeSheet);
+  }
+  function editEntry(id){
+    var e=findEntry(id);if(!e){closeSheet();return}
+    var t=today();
+    var b=openSheet('<div class="st-sheet-title" style="margin-bottom:14px">Edit entry</div><div class="st-form">'+
+      '<div class="st-field full"><label for="stEDate">Date</label><input class="st-input" id="stEDate" type="date" value="'+esc(e.date)+'" max="'+t+'"></div>'+
+      '<div class="st-field"><label for="stELec">📖 Lectures</label><input class="st-input" id="stELec" type="number" inputmode="numeric" min="0" value="'+(+e.lectures||0)+'"></div>'+
+      '<div class="st-field"><label for="stEQues">✍️ Questions</label><input class="st-input" id="stEQues" type="number" inputmode="numeric" min="0" value="'+(+e.questions||0)+'"></div>'+
+      '<div class="st-field full"><label for="stENote">Subject / note (optional)</label><input class="st-input" id="stENote" type="text" maxlength="80" value="'+esc(e.note||'')+'" placeholder="e.g. Maths – Algebra"></div>'+
+      '<div class="st-msg" id="stEMsg"></div>'+
+      '<button type="button" class="st-add" id="stESave">Save changes</button>'+
+      '<button type="button" class="st-sheet-btn cancel" id="stECancel" style="grid-column:1/-1">Cancel</button>'+
+    '</div>');
+    b.querySelector('#stECancel').addEventListener('click',closeSheet);
+    b.querySelector('#stESave').addEventListener('click',function(){
+      var msg=b.querySelector('#stEMsg');
+      var date=b.querySelector('#stEDate').value||e.date;
+      var lec=parseInt(b.querySelector('#stELec').value,10);
+      var ques=parseInt(b.querySelector('#stEQues').value,10);
+      var note=b.querySelector('#stENote').value.trim();
+      lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
+      if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
+      var arr=load();
+      for(var i=0;i<arr.length;i++){
+        if(arr[i].id===id){arr[i].date=date;arr[i].lectures=lec;arr[i].questions=ques;arr[i].note=note;break}
+      }
+      if(!save(arr)){msg.className='st-msg err';msg.textContent='Could not save on this device.';return}
+      closeSheet();
+      updateDrawer();
+      renderStudyTracker(true);
+    });
+  }
+
   window.renderStudyTracker=function(skipHistory){
     if(!skipHistory)pushExplorerHistory({screen:'studyTracker'});
     prepareBookmarkExplorer('Study Tracker');
@@ -12201,14 +12275,14 @@ function stopExamOnExit(){
     var byDate={};all.forEach(function(e){(byDate[e.date]=byDate[e.date]||[]).push(e)});
     var dates=Object.keys(byDate).sort().reverse();
     var perDay=wk.map(function(d){return sum(byDate[d]||[])});
-    var best=0;dates.forEach(function(d){var q=sum(byDate[d]).q;if(q>best)best=q});
+    var best=0,bestL=0;dates.forEach(function(d){var x=sum(byDate[d]);if(x.q>best)best=x.q;if(x.l>bestL)bestL=x.l});
     var st=streak(byDate);
 
     var history=dates.length?dates.map(function(d){
       var s=sum(byDate[d]);
       return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-chips"><span class="st-chip l">📖 '+s.l+'</span><span class="st-chip q">✍️ '+s.q+'</span></span></div>'+
         byDate[d].map(function(e){
-          return '<div class="st-entry"><div class="st-entry-main"><span class="st-chips"><span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div><button type="button" class="st-del" data-id="'+esc(e.id)+'" aria-label="Delete entry">×</button></div>';
+          return '<div class="st-entry" data-id="'+esc(e.id)+'"><div class="st-entry-main"><span class="st-chips"><span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div></div>';
         }).join('')+'</div>';
     }).join(''):'<div class="st-empty">No entries yet. Add your first one 👆</div>';
 
@@ -12220,9 +12294,9 @@ function stopExamOnExit(){
             '<div class="st-hero-nums"><div class="st-hero-num"><b>'+sToday.l+'</b><span>📖 Lectures</span></div><div class="st-hero-num"><b>'+sToday.q+'</b><span>✍️ Questions</span></div></div>'+
           '</div>'+
           '<div class="st-stats">'+
-            '<div class="st-stat week"><div class="st-stat-label">Last 7 days</div><div class="st-stat-line"><b>'+sWeek.l+'</b>lec</div><div class="st-stat-line"><b>'+sWeek.q+'</b>ques</div></div>'+
-            '<div class="st-stat total"><div class="st-stat-label">Total</div><div class="st-stat-line"><b>'+sAll.l.toLocaleString('en-IN')+'</b>lec</div><div class="st-stat-line"><b>'+sAll.q.toLocaleString('en-IN')+'</b>ques</div></div>'+
-            '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>ques</div><div class="st-stat-line">'+dates.length+' active '+(dates.length===1?'day':'days')+'</div></div>'+
+            '<div class="st-stat week"><div class="st-stat-label">Last 7 days</div><div class="st-stat-line"><b>'+sWeek.l+'</b>lectures</div><div class="st-stat-line"><b>'+sWeek.q+'</b>questions</div></div>'+
+            '<div class="st-stat total"><div class="st-stat-label">Total</div><div class="st-stat-line"><b>'+sAll.l.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+sAll.q.toLocaleString('en-IN')+'</b>questions</div></div>'+
+            '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+bestL.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>questions</div><div class="st-stat-line">'+dates.length+' active '+(dates.length===1?'day':'days')+'</div></div>'+
           '</div>'+
           '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
             '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" max="'+t+'"></div>'+
@@ -12238,7 +12312,7 @@ function stopExamOnExit(){
             '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#4f46e5"></span>Lectures</div><div class="st-bars">'+bars(wk,perDay,'l','#4f46e5',t)+'</div></div>'+
             '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#10b981"></span>Questions</div><div class="st-bars">'+bars(wk,perDay,'q','#10b981',t)+'</div></div>'+
           '</div>'+
-          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div><div class="st-right-history">'+history+'</div></div>'+
+          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div>'+(all.length?'<div class="st-hint">Long press an entry to edit or delete</div>':'')+'<div class="st-right-history">'+history+'</div></div>'+
         '</div>'+
       '</div>';
 
@@ -12257,14 +12331,20 @@ function stopExamOnExit(){
       renderStudyTracker(true);
       var m2=document.getElementById('stMsg');if(m2){m2.className='st-msg';m2.textContent='Saved ✓'}
     });
-    list.querySelectorAll('.st-del').forEach(function(b){
-      b.addEventListener('click',function(){
-        if(!confirm('Delete this entry?'))return;
-        var id=b.getAttribute('data-id');
-        save(load().filter(function(e){return e.id!==id}));
-        updateDrawer();
-        renderStudyTracker(true);
+    list.querySelectorAll('.st-entry').forEach(function(row){
+      var timer=null,sx=0,sy=0;
+      function cancel(){if(timer){clearTimeout(timer);timer=null}row.classList.remove('pressing')}
+      function fire(){cancel();if(!document.getElementById('stSheet'))entryActions(row.getAttribute('data-id'))}
+      row.addEventListener('pointerdown',function(ev){
+        if(ev.pointerType==='mouse'&&ev.button!==0)return;
+        sx=ev.clientX;sy=ev.clientY;row.classList.add('pressing');
+        timer=setTimeout(fire,480);
       });
+      row.addEventListener('pointermove',function(ev){
+        if(timer&&(Math.abs(ev.clientX-sx)>10||Math.abs(ev.clientY-sy)>10))cancel();
+      });
+      ['pointerup','pointercancel','pointerleave'].forEach(function(n){row.addEventListener(n,cancel)});
+      row.addEventListener('contextmenu',function(ev){ev.preventDefault();fire()});
     });
   };
 
