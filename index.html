@@ -12214,7 +12214,7 @@ function stopExamOnExit(){
     return b;
   }
   function entryActions(id){
-    var e=findEntry(id);if(!e)return;
+    var e=findEntry(id);if(!e||e.date!==today())return;
     try{if(navigator.vibrate)navigator.vibrate(15)}catch(_){}
     var b=openSheet('<div class="st-sheet-title">'+esc(fmtDate(e.date))+'</div>'+
       '<div class="st-sheet-sub">'+(+e.lectures||0)+' lectures · '+(+e.questions||0)+' questions'+(e.note?' · '+esc(e.note):'')+'</div>'+
@@ -12224,6 +12224,7 @@ function stopExamOnExit(){
     b.querySelector('[data-act="edit"]').addEventListener('click',function(){editEntry(id)});
     b.querySelector('[data-act="del"]').addEventListener('click',function(){
       closeSheet();
+      if(findEntry(id)&&findEntry(id).date!==today()){renderStudyTracker(true);return}
       if(!confirm('Delete this entry?'))return;
       save(load().filter(function(x){return x.id!==id}));
       updateDrawer();
@@ -12232,11 +12233,10 @@ function stopExamOnExit(){
     b.querySelector('[data-act="x"]').addEventListener('click',closeSheet);
   }
   function editEntry(id){
-    var e=findEntry(id);if(!e){closeSheet();return}
+    var e=findEntry(id);if(!e||e.date!==today()){closeSheet();return}
     var t=today();
     var b=openSheet('<div class="st-sheet-title" style="margin-bottom:14px">Edit entry</div><div class="st-form">'+
-      '<div class="st-field full"><label for="stEDate">Date</label><input class="st-input" id="stEDate" type="date" value="'+esc(e.date)+'" max="'+t+'"></div>'+
-      '<div class="st-field"><label for="stELec">📖 Lectures</label><input class="st-input" id="stELec" type="number" inputmode="numeric" min="0" value="'+(+e.lectures||0)+'"></div>'+
+            '<div class="st-field"><label for="stELec">📖 Lectures</label><input class="st-input" id="stELec" type="number" inputmode="numeric" min="0" value="'+(+e.lectures||0)+'"></div>'+
       '<div class="st-field"><label for="stEQues">✍️ Questions</label><input class="st-input" id="stEQues" type="number" inputmode="numeric" min="0" value="'+(+e.questions||0)+'"></div>'+
       '<div class="st-field full"><label for="stENote">Subject / note (optional)</label><input class="st-input" id="stENote" type="text" maxlength="80" value="'+esc(e.note||'')+'" placeholder="e.g. Maths – Algebra"></div>'+
       '<div class="st-msg" id="stEMsg"></div>'+
@@ -12246,12 +12246,13 @@ function stopExamOnExit(){
     b.querySelector('#stECancel').addEventListener('click',closeSheet);
     b.querySelector('#stESave').addEventListener('click',function(){
       var msg=b.querySelector('#stEMsg');
-      var date=b.querySelector('#stEDate').value||e.date;
+      var date=e.date;
       var lec=parseInt(b.querySelector('#stELec').value,10);
       var ques=parseInt(b.querySelector('#stEQues').value,10);
       var note=b.querySelector('#stENote').value.trim();
       lec=isNaN(lec)?0:lec;ques=isNaN(ques)?0:ques;
       if(lec<0||ques<0||(lec===0&&ques===0)){msg.className='st-msg err';msg.textContent='Enter lectures or questions (1 or more).';return}
+      if(e.date!==today()){closeSheet();renderStudyTracker(true);return}
       var arr=load();
       for(var i=0;i<arr.length;i++){
         if(arr[i].id===id){arr[i].date=date;arr[i].lectures=lec;arr[i].questions=ques;arr[i].note=note;break}
@@ -12282,7 +12283,7 @@ function stopExamOnExit(){
       var s=sum(byDate[d]);
       return '<div class="st-day"><div class="st-day-head"><span class="st-day-date">'+esc(fmtDate(d))+'</span><span class="st-chips"><span class="st-chip l">📖 '+s.l+'</span><span class="st-chip q">✍️ '+s.q+'</span></span></div>'+
         byDate[d].map(function(e){
-          return '<div class="st-entry" data-id="'+esc(e.id)+'"><div class="st-entry-main"><span class="st-chips"><span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div></div>';
+          return '<div class="st-entry'+(d===t?' st-editable':'')+'" data-id="'+esc(e.id)+'"><div class="st-entry-main"><span class="st-chips"><span class="st-chip l">'+(+e.lectures||0)+' lectures</span><span class="st-chip q">'+(+e.questions||0)+' questions</span></span>'+(e.note?'<div class="st-entry-sub">'+esc(e.note)+'</div>':'')+'</div></div>';
         }).join('')+'</div>';
     }).join(''):'<div class="st-empty">No entries yet. Add your first one 👆</div>';
 
@@ -12299,7 +12300,7 @@ function stopExamOnExit(){
             '<div class="st-stat best"><div class="st-stat-label">Best day</div><div class="st-stat-line"><b>'+bestL.toLocaleString('en-IN')+'</b>lectures</div><div class="st-stat-line"><b>'+best.toLocaleString('en-IN')+'</b>questions</div><div class="st-stat-line">'+dates.length+' active '+(dates.length===1?'day':'days')+'</div></div>'+
           '</div>'+
           '<div class="st-card"><div class="st-title">Add entry</div><div class="st-form">'+
-            '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" max="'+t+'"></div>'+
+            '<div class="st-field full date"><label for="stDate">Date</label><input class="st-input" id="stDate" type="date" value="'+t+'" min="'+t+'" max="'+t+'"></div>'+
             '<div class="st-field"><label for="stLec">📖 Lectures</label><input class="st-input" id="stLec" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field"><label for="stQues">✍️ Questions</label><input class="st-input" id="stQues" type="number" inputmode="numeric" min="0" placeholder="0"></div>'+
             '<div class="st-field full"><label for="stNote">Subject / note (optional)</label><input class="st-input" id="stNote" type="text" maxlength="80" placeholder="e.g. Maths – Algebra"></div>'+
@@ -12312,13 +12313,16 @@ function stopExamOnExit(){
             '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#4f46e5"></span>Lectures</div><div class="st-bars">'+bars(wk,perDay,'l','#4f46e5',t)+'</div></div>'+
             '<div class="st-chart"><div class="st-chart-label"><span class="st-dot" style="background:#10b981"></span>Questions</div><div class="st-bars">'+bars(wk,perDay,'q','#10b981',t)+'</div></div>'+
           '</div>'+
-          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div>'+(all.length?'<div class="st-hint">Long press an entry to edit or delete</div>':'')+'<div class="st-right-history">'+history+'</div></div>'+
+          '<div class="st-card"><div class="st-title">History<small>'+all.length+' '+(all.length===1?'entry':'entries')+'</small></div>'+(byDate[t]?'<div class="st-hint">Today&#39;s entries: long press to edit or delete</div>':'')+'<div class="st-right-history">'+history+'</div></div>'+
         '</div>'+
       '</div>';
 
+    var dEl=document.getElementById('stDate');
+    function lockDate(){dEl.value=today()}
+    dEl.addEventListener('change',lockDate);dEl.addEventListener('input',lockDate);
     document.getElementById('stAddBtn').addEventListener('click',function(){
       var msg=document.getElementById('stMsg');
-      var date=document.getElementById('stDate').value||today();
+      var date=today();
       var lec=parseInt(document.getElementById('stLec').value,10);
       var ques=parseInt(document.getElementById('stQues').value,10);
       var note=document.getElementById('stNote').value.trim();
@@ -12331,7 +12335,7 @@ function stopExamOnExit(){
       renderStudyTracker(true);
       var m2=document.getElementById('stMsg');if(m2){m2.className='st-msg';m2.textContent='Saved ✓'}
     });
-    list.querySelectorAll('.st-entry').forEach(function(row){
+    list.querySelectorAll('.st-entry.st-editable').forEach(function(row){
       var timer=null,sx=0,sy=0;
       function cancel(){if(timer){clearTimeout(timer);timer=null}row.classList.remove('pressing')}
       function fire(){cancel();if(!document.getElementById('stSheet'))entryActions(row.getAttribute('data-id'))}
