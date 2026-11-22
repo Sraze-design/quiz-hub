@@ -4847,12 +4847,26 @@ function pushExplorerHistory(state) {
 }
 
 window.addEventListener('popstate', (e) => {
+  // A retest is starting: this pop only consumes the Restart modal's own
+  // history entry, so do nothing else.
+  if (retestPopSwallow) {
+    const fin = retestPopSwallow;
+    retestPopSwallow = null;
+    fin();
+    return;
+  }
   if(modePickerResolve){
     const pickerHadHistoryEntry = modePickerUsesHistory;
     finishModePicker();
     // The normal test picker does not own a history entry. A device Back
     // gesture closes it and continues to the explorer's previous screen.
     if (pickerHadHistoryEntry) return;
+  }
+  // Restart Test modal (Result page): Back closes only the modal.
+  if (retestHistoryPushed) {
+    retestHistoryPushed = false;
+    hideRetestModalUI();
+    return;
   }
   const d=document.getElementById('appSideDrawer');if(d&&d.classList.contains('active')){closeAppSideDrawer();return}
   // If the AI assistant panel is open, this back-navigation exists only to
@@ -8298,8 +8312,46 @@ e.style.opacity=x[1]?1:.45;
 e.style.pointerEvents=x[1]?'auto':'none';
 });
 document.getElementById('retestModal').style.display='flex';
+// Restart modal owns one temporary history entry, so device Back closes only
+// this modal and leaves the Result page exactly where it is.
+if(!retestHistoryPushed){
+  history.pushState({ retestOpen: true, screen: 'quiz' }, '');
+  retestHistoryPushed = true;
+}
 if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
 return;
+}
+
+let retestHistoryPushed = false;
+let retestPopSwallow = null;
+
+// Hides the modal only (no history side effects). Used by popstate handler.
+function hideRetestModalUI(){
+  const m = document.getElementById('retestModal');
+  if(m) m.style.display = 'none';
+  if(typeof updateAIButtonVisibility === 'function') updateAIButtonVisibility();
+}
+
+// Public close (Cancel button). Goes through history.back() so the entry
+// pushed in restartOptions() is consumed instead of left as a dead entry.
+function closeRetestModal(){
+  if(retestHistoryPushed) history.back();
+  else hideRetestModalUI();
+}
+
+// Used when a retest actually starts: hide the modal and silently consume its
+// history entry (popstate handler swallows this one pop) before continuing.
+function consumeRetestHistoryEntry(){
+  hideRetestModalUI();
+  if(!retestHistoryPushed) return Promise.resolve();
+  retestHistoryPushed = false;
+  return new Promise(resolve => {
+    let done = false;
+    const fin = () => { if(done) return; done = true; retestPopSwallow = null; resolve(); };
+    retestPopSwallow = fin;
+    history.back();
+    setTimeout(fin, 1000);
+  });
 }
 
 async function startRetest(mode){
@@ -8309,7 +8361,7 @@ const retestCount=mode===1 ? ORIGINAL_DATA.length : data.filter((_,i)=>
 if(!retestCount) return;
 const selectedMode=await chooseQuizMode(retestCount);
 if(!selectedMode) return;
-document.getElementById('retestModal').style.display='none';
+await consumeRetestHistoryEntry();
 // Mode 1 = full original test; modes 2-4 = reduced-question retests.
 isRetestAttempt = (mode !== 1);
 
@@ -8541,7 +8593,7 @@ showQ=function(){
       </div>
     </div>
 
-    <button id="cancelRetest" onclick="document.getElementById('retestModal').style.display='none'">Cancel</button>
+    <button id="cancelRetest" onclick="closeRetestModal()">Cancel</button>
   </div>
 </div>
 
