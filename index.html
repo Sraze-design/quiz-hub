@@ -3611,8 +3611,8 @@ let currentCategory = null;
 let currentChapter = null;
 let currentScienceGroup = null;
 let currentQuizTitle = "";
-/* Leaderboard API integration (added) */
-const API_URL = "https://leaderboard-api.trevoraxgaming9720.workers.dev";
+/* All Time Best leaderboard: ab localStorage me save hota hai (online API hata di gayi) */
+const ALL_TIME_BEST_STORAGE_KEY = 'devssc:alltimebest:v1';
 const QUESTION_REPORT_API_URL = "https://wrong-question-report.dev724827.workers.dev/";
 let currentQuizPath = "";
 let currentBookmarkQuestionIndex = null;
@@ -7893,7 +7893,7 @@ if(langBtnOnResult){
 appLang = 'hi';
 updateAIButtonVisibility();
 
-/* Leaderboard API integration (added) - uses only existing finalScore, avgSec, elapsed, currentQuizPath */
+/* All Time Best (localStorage) - uses only existing finalScore, avgSec, elapsed, currentQuizPath */
 if(currentQuizPath){
   fetchAllTimeBest(currentQuizPath);
   // Only a full/original test can establish a new All Time Best.
@@ -7903,16 +7903,29 @@ if(currentQuizPath){
 }
 }
 
-/* Leaderboard API helper functions (added) */
-async function fetchAllTimeBest(quizPath){
+/* All Time Best helper functions (localStorage) */
+function loadAllTimeBestMap(){
   try{
-    const res=await fetch(`${API_URL}/best?quiz=${encodeURIComponent(quizPath)}`);
-    if(!res.ok) throw new Error("Failed to fetch all-time best");
-    const record=await res.json();
-    renderAllTimeBest(record);
+    const x=JSON.parse(localStorage.getItem(ALL_TIME_BEST_STORAGE_KEY)||'{}');
+    return (x&&typeof x==='object'&&!Array.isArray(x))?x:{};
   }catch(e){
-    console.error("All Time Best fetch failed:",e);
+    return {};
   }
+}
+
+function saveAllTimeBestMap(map){
+  try{
+    localStorage.setItem(ALL_TIME_BEST_STORAGE_KEY,JSON.stringify(map));
+    return true;
+  }catch(e){
+    console.error("All Time Best save failed:",e);
+    return false;
+  }
+}
+
+function fetchAllTimeBest(quizPath){
+  const record=loadAllTimeBestMap()[quizPath];
+  if(record) renderAllTimeBest(record);
 }
 
 function renderAllTimeBest(record){
@@ -7956,17 +7969,28 @@ function formatUpdatedAt(iso){
   }
 }
 
-async function postQuizResultToLeaderboard(quizPath,finalScoreVal,avgTimeVal,totalTimeVal){
+function postQuizResultToLeaderboard(quizPath,finalScoreVal,avgTimeVal,totalTimeVal){
   try{
-    const res=await fetch(`${API_URL}/update`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({quiz:quizPath,score:finalScoreVal,avgTime:avgTimeVal,totalTime:totalTimeVal})
-    });
-    if(!res.ok) throw new Error("Failed to update leaderboard");
-    const result=await res.json();
-    if(result&&result.updated&&result.record){
-      renderAllTimeBest(result.record);
+    const score=Number(finalScoreVal);
+    const avgTime=Number(avgTimeVal)||0;
+    const totalTime=Number(totalTimeVal)||0;
+    if(!quizPath||!isFinite(score)) return;
+    const map=loadAllTimeBestMap();
+    const old=map[quizPath];
+    // Naya best: pehli attempt, ya zyada score, ya same score me kam total time
+    const isBetter=!old
+      || score>Number(old.bestScore)
+      || (score===Number(old.bestScore) && totalTime<Number(old.bestTotalTime));
+    if(!isBetter) return;
+    const record={
+      bestScore:score,
+      bestAvgTime:avgTime,
+      bestTotalTime:totalTime,
+      updatedAt:new Date().toISOString()
+    };
+    map[quizPath]=record;
+    if(saveAllTimeBestMap(map)){
+      renderAllTimeBest(record);
       showNewBestAnimation();
     }
   }catch(e){
